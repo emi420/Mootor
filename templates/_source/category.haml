@@ -1,0 +1,18 @@
+{% extends 'templates/base.html' %}
+{% load thumbnail %}
+  
+{% block content %}
+.content
+    %ul.breadcrumb
+        %li
+            %a{:href=>"/"}
+    %h2 Portfolio
+    .product-list
+        {% for product in products %}
+        %a.item{:href=>"/{{ product.category.name }}/{{ product.name }}.html",:rel=>"gallery"}
+            %img{:src=>"{% thumbnail product.image 145x145 box=product.list_page_cropping crop detail %}"}       
+
+        {% endfor %}
+        //%a.item{:href=>"item.html",:rel=>"gallery"}
+        //    %img{:src=>"img/tmp/product-list-item.jpg"}                                 
+{% endblock %}

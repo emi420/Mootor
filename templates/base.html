@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<head>
+  <title>Merlina Textil, arte en macram&eacute;</title>
+  <!-- %base{:href=>"http://50.116.1.212/merlinatextil/"} -->
+  <link href='static/css/styles.css' media='screen' rel='stylesheet' />
+  <link href='static/css/jquery.fancybox-1.3.4.css' media='all' rel='stylesheet' />
+  <script src='static/js/jquery.min.1.6.js' type='text/javascript'></script>
+  <script src='static/js/jquery.fancybox-1.3.4.pack.js' type='text/javascript'></script>
+  <script type='text/javascript'>
+    //<![CDATA[
+      $(document).ready(function() {
+          $(".product-list .item").click(function() {
+                $.fancybox({
+                    'titlePosition'   : 'inside',
+                    'transitionIn'    : 'none',
+                    'transitionOut'   : 'none',
+                    'autoDimensions'  : true,
+                    'overlayColor'      : '#000',
+                    'overlayOpacity'  : 0.5,
+                    'href'              : this.href
+                });
+                return false ;
+          });
+      });
+    //]]>
+  </script>
+</head>
+<body class='main'>
+  {% if is_home %}
+  <div class='container home'>
+    {% else %}
+  </div>
+  <div class='container inner'>
+    {% endif %}
+    <div class='header'>
+      <h1 class='logo'>
+        <a href='/' title='Catalogo'>Catalogo</a>
+      </h1>
+      <ul class='nav main'>
+        <li>
+          <a href='/catalog/test' title='Catalogo'>Catalogo</a>
+        </li>
+      </ul>
+    </div>
+    {% block content %}
+    {% endblock %}
+    <div class='footer'>
+      <ul class='copy'>
+        <li>
+          <a href='http://www.proyecto83.com' title='Proyecto 83'>Proyecto 83</a>
+        </li>
+      </ul>
+      <ul class='nav links'>
+        <li class='fb'>
+          <a href='https://www.facebook.com/pages/Merlina-Textil-macrame/184697121619099' title='Facebook de Merlina Textil'>Mi Facebook</a>
+        </li>
+        <li class='tw'>
+          <a href='https://twitter.com/merlina420' title='Twitter de Merlina Textil'>Mi Twitter</a>
+        </li>
+        <li class='flickr'>
+          <a href='http://www.flickr.com/people/artetextilmerlina/' title='Flickr de Merlina Textil'>Mi Flickr</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>

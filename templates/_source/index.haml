@@ -1,0 +1,9 @@
+{% extends 'templates/base.html' %}
+
+{% block content %}
+.content
+    .home-slide{:onclick=>"javascript: window.location='/portfolio'"}
+        %h2 Imaginando un nuevo mundo de macrame!
+    .avatar-bio
+        %a{:href=>"/bio", :title=>"Mini Biografia sobre Merlina Textil"}
+{% endblock %}

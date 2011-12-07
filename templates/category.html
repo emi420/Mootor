@@ -1,0 +1,10 @@
+<div class='content'>
+  <h2>Category</h2>
+  <div class='product-list'>
+    {% for product in products %}
+    	<h3>Product {{ product.fields.title }}</h3>
+    	<p>{{ product.fields.description }}</p>
+    	<img src="http://localhost:8000/uploads/{{ product.fields.image }}" />
+    {% endfor %}
+  </div>
+</div>
