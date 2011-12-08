@@ -32,7 +32,7 @@ def category(request, category_name = ''):
 
      # FIXME: Pasar a parametros de configuracion y un handler para
      #        las consultas al webservice (json-rpc)
-     url = 'http://50.116.1.212:8000/api/rpc/catalog/'
+     url = 'http://50.116.1.212:9000/api/rpc/catalog/'
      d = '{"method":"getCategory","params": ["test"], "id": 1}'
      request = urllib2.Request(url, 
                         headers = {"Content-Type": "application/json",},
