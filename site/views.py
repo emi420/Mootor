@@ -32,7 +32,7 @@ def category(request, category_name = ''):
      #        las consultas al webservice (json-rpc)
      url = 'http://50.116.1.212:9000/api/rpc/catalog/'
      d = '{"method":"getCategory","params": ["test"], "id": 1}'
-     response = 0
+   
      try:
         request = urllib2.Request(url, 
                         headers = {"Content-Type": "application/json",},
