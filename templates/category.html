@@ -1,10 +1,20 @@
+{% extends 'templates/base.html' %}
+{% block content %}
 <div class='content'>
-  <h2>Category</h2>
+  <ul class='breadcrumb'>
+    <li>
+      <a href='/'></a>
+    </li>
+  </ul>
+  <h2>Portfolio</h2>
   <div class='product-list'>
     {% for product in products %}
-    	<h3>Product {{ product.fields.title }}</h3>
-    	<p>{{ product.fields.description }}</p>
-    	<img src="http://50.116.1.212:9000/uploads/{{ product.fields.image }}" />
+    <a class='item' href='/{{ product.fields.category }}/{{ product.fields.name }}.html' rel='gallery'>
+      <img src='http://50.116.1.212:9000/uploads/{{ product.fields.image }}' width='145' />
+    </a>
     {% endfor %}
+    <!-- /%a.item{:href=>"item.html",:rel=>"gallery"} -->
+    <!-- /    %img{:src=>"img/tmp/product-list-item.jpg"} -->
   </div>
 </div>
+{% endblock %}
