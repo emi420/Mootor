@@ -11,13 +11,11 @@ from django.core import serializers
 
 
 #
-#    Este cliente hace la consulta, pero todavia falla al deserializar la respuesta.
-#
-#    > Tener en cuenta la deserializacion de claves naturales: 
+#    TODO: Tener en cuenta la deserializacion de claves naturales: 
 #      https://docs.djangoproject.com/en/dev/topics/serialization/#natural-keys
 #      y el encoding
 #      https://docs.djangoproject.com/en/dev/topics/serialization/#notes-for-specific-serialization-formats
-#
+
 
 # Static content
 
@@ -34,13 +32,20 @@ def category(request, category_name = ''):
      #        las consultas al webservice (json-rpc)
      url = 'http://50.116.1.212:9000/api/rpc/catalog/'
      d = '{"method":"getCategory","params": ["test"], "id": 1}'
-     request = urllib2.Request(url, 
+     response = 0
+     try:
+        request = urllib2.Request(url, 
                         headers = {"Content-Type": "application/json",},
                         data = d)
-     response = urllib2.urlopen(request).read()
+        response = urllib2.urlopen(request).read()
+     except urllibr2.HTTPError, e:
+        return HttpResponse(e.read())
+    
      json_string = simplejson.loads(response)['result']
      products = simplejson.loads(json_string)
-     return render_to_response('templates/category.html', {'products': products})
+     return render_to_response('templates/category.html', {'products': products}
+    
+)
 
 def product(request, category_name = '', product_name = ''):
      return HttpResponse('product')
