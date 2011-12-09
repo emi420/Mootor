@@ -3,7 +3,7 @@
 $base-line-height: 140% ; 
 
 body {
-     font-family: Georgia ;
+     font-family: Arial ;
 }
 
 @mixin foreground0 {
@@ -23,38 +23,6 @@ body {
   color: $text3 ;
   font-size: 1.6em ;
   letter-spacing: -0.6pt ;
-}
-
-@mixin foreground3 { 
-   font-family: 'FiveMinutesRegular' ;
-   font-size: 2.1em;
-   text-decoration: none;
-   text-transform: lowercase;
-   text-shadow: 0px 0px 1px $text2;
-   color: $text2 ;
-}
-
-@mixin foreground4 { 
-   font-family: Arial ;
-   font-size: 1em;
-   color: $text3 ;
-}
-
-@mixin foreground5 {
-  font-family: 'HelveticaLTStdBlackCondensed' ;
-  color: $text3 ;
-  font-size: 1.1em ;
-  letter-spacing: -0.6pt ;
-  line-height: $base-line-height ; 
-}
-
-@mixin foreground6 {
-  font-family: 'HelveticaLTStdBlackCondensed' ;
-  font-size: .9em ;
-  letter-spacing: 1pt ;
-  line-height: $base-line-height ; 
-  text-transform: uppercase;
-  color: $light ;
 }
 
 @font-face {
