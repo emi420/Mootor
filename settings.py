@@ -1,5 +1,6 @@
 # Django settings for ufront (Universal Front-end) project.
 
+JSON_RPC_URL = 'http://50.116.1.212:9000/api/catalog/rpc/'
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -119,6 +120,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ufront.site',
+    'ufront.core',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
