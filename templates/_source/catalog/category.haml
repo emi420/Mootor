@@ -1,0 +1,12 @@
+{% extends 'templates/base/base.html' %}
+
+{% block content %}
+.content.catalog
+    .product-listing
+    {% for product in products %}
+    .item
+        %h2 {{ product.fields.title }}
+        %p {{ product.fields.description }}
+        %img{:src=>"{{ product.fields.image }}"}
+    {% endfor %}
+{% endblock %}
