@@ -6,7 +6,7 @@
   <div class='item'>
     <h2>{{ product.fields.title }}</h2>
     <p>{{ product.fields.description }}</p>
-    <img src='{{ product.fields.image }}' />
+    <img src='{{ context.media_url }}{{ product.fields.image }}' />
   </div>
   {% endfor %}
 </div>
