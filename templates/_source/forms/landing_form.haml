@@ -1,6 +1,33 @@
-%form.form
+%form.form#suscribeForm
     .field.text
-        %input{:type=>"text"}
+        %input#fieldEmail{:type=>"text"}
             .action.subscribe
-                %input{:type=>"submit"}
+                %input#suscribeBtn{:type=>"submit"}
 
+:javascript
+    var gel = function (eid){ return document.getElementById(eid) };
+
+    var form = gel("suscribeForm");
+    var url = "http://localhost:9000/api/core/rpc/";
+    var xmlhttp = new XMLHttpRequest();
+
+    function handleResponse() {
+      console.log("readystatechange!")
+        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+            console.log('response: "' + xmlhttp.responseText + '"');
+            eval('var r=' + xmlhttp.responseText);
+            eval('var res =' + r.result);
+            console.log(res[0].fields.email);
+        }    
+    }
+
+    form.onsubmit = function() {
+      var jsonstr = '{"method":"addUser","params":["' + gel("fieldEmail").value + '"],"id":1}' ;
+      xmlhttp.open("POST", url, true);
+      xmlhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+      xmlhttp.onreadystatechange = handleResponse;
+      xmlhttp.send(email=jsonstr);
+      return false;
+    }
+    
+    
