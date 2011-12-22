@@ -1,3 +1,18 @@
-@import "grid" ;
-@import "compass/typography/lists/horizontal-list" ;
-@import "compass/css3/transform" ;
+$base-padding: 1em;
+$base-margin: 1em;
+
+body {
+}
+
+h2 {
+  margin: ($base-margin / 8) 0 ;  
+}
+h3 {
+  margin: ($base-margin / 4) 0 ;
+}
+
+.container {
+    max-width: 960px ;
+    margin: 0 auto ;
+    width: 90%;
+}

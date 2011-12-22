@@ -4,4 +4,18 @@
     %title Titulo
     %base{:href=>"/"}
     %link{:href=>"static/css/styles.css", :media=>"screen", :rel=>"stylesheet"}
-
+    %meta{:name=>"viewport",:content=>"width=device-width, initial-scale = 1.0,maximum-scale = 1.0"}
+    :javascript
+        var updatevp = function(){
+            /*
+             *  TODO: revisar y optimizar el calculo 
+             */
+            var fontSize = window.innerWidth / 10 + (window.innerHeight / 40);
+            if( typeof(document.body) != null) {
+                if(fontSize < 105 && fontSize > 20) {
+                  document.body.style.fontSize=fontSize + "%";
+                }
+            }
+        }       
+        window.onload=updatevp;
+        window.onresize=updatevp;

@@ -1,2 +1,45 @@
-@import "main" ;
+/*
+ * El mixin stdform deberaa tener parametros (ej: compact, normal, extended)
+ * que modifiquen la estructura o estilos del mismo.
+ */
+
+@import "compass/css3" ;
+
+@mixin stdform {
+    overflow: hidden ;  
+    margin: ($base-margin * 2) auto ;  
+    .field.text input[type=text],
+    .action input {
+        padding: $base-padding/2;
+        @include domType1;
+        width: 100% ;
+    }
+    .field.text input[type=text] {
+        background: $subColor1;
+        border: 1px solid $empColor2;
+        color: darken($subColor1,20%);
+        &.alert {
+            color: darken($subColor1,40%);
+        }
+    }
+    .field.text input[type=text].changed {
+        color: $domColor1;
+    }
+    .action {
+        width: 38% ;
+        float: left ;
+        input {
+            @include linear-gradient($empColor2, $empColor2B); 
+            border: 1px solid $empColor2B;
+            color: $subColor1;
+        }
+    }
+    .field.text {
+        float: left ;
+        width: 62% ;
+    }    
+}
+
+
+
 

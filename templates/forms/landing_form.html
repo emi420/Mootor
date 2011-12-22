@@ -1,36 +1,85 @@
 <form class='form' id='suscribeForm'>
   <div class='field text'>
-    <input id='fieldEmail' type='text'>
-      <div class='action subscribe'>
-        <input id='suscribeBtn' type='submit' />
-      </div>
-    </input>
+    <input id='fieldEmail' type='text' value='correo electrónico' />
+  </div>
+  <div class='action subscribe'>
+    <input id='suscribeBtn' type='submit' value='Suscribirse' />
   </div>
 </form>
 <script type='text/javascript'>
   //<![CDATA[
+    
+    /*
+     *  TODO: mover todo el javascript a una libreria de clases
+     */
+    
     var gel = function (eid){ return document.getElementById(eid) };
-    
     var form = gel("suscribeForm");
-    var url = "http://localhost:9000/api/core/rpc/";
+    var url = "http://192.168.1.11:9000/api/core/rpc/";
     var xmlhttp = new XMLHttpRequest();
+    var suscribeBtn = gel("suscribeBtn");
+    var fieldEmail = gel("fieldEmail");
+       
+    /*
+     *  Field & actions events
+     */
+    fieldEmail.title=fieldEmail.value;
+    fieldEmail.onkeypress = function() {
+      if (this.className.indexOf(" changed") < 0) {
+        this.value = "";
+        this.className += " changed";
+      }
+    }
+    fieldEmail.onblur = function() {
+      if(this.value == "") {
+        this.value = this.title;
+        this.className = this.className.replace(" changed","");
+      }
+    }    
+    fieldEmail.ontouchstart = function() {
+        this.focus();
+    }
     
+    
+    /*
+     *  Action button
+     */
+    var fireAction = function() {
+        if ( fieldEmail.value == "" || fieldEmail.value == fieldEmail.title ) {
+            fieldEmail.className += " alert";
+            var s = setTimeout("fieldEmail.className=fieldEmail.className.replace(' alert','')",500);
+            return false;
+        }
+    }    
+    suscribeBtn.onclick = fireAction;
+    suscribeBtn.ontouchstart = fireAction;
+    
+    /*
+     *  Handle AJAX response
+     */
     function handleResponse() {
-      console.log("readystatechange!")
         if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-            console.log('response: "' + xmlhttp.responseText + '"');
             eval('var r=' + xmlhttp.responseText);
             eval('var res =' + r.result);
-            console.log(res[0].fields.email);
+            suscribeBtn.value = "Enviar";
+            suscribeBtn.disabled = "";
+            alert("Gracias! " + res[0].fields.email);
+            fieldEmail.value = fieldEmail.title;
+            fieldEmail.className = fieldEmail.className.replace(" changed","");
         }    
     }
     
+    /*
+     *  On submit form
+     */
     form.onsubmit = function() {
       var jsonstr = '{"method":"addUser","params":["' + gel("fieldEmail").value + '"],"id":1}' ;
       xmlhttp.open("POST", url, true);
       xmlhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
       xmlhttp.onreadystatechange = handleResponse;
       xmlhttp.send(email=jsonstr);
+      suscribeBtn.value = "Enviando...";
+      suscribeBtn.disabled = "disabled";
       return false;
     }
   //]]>
