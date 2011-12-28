@@ -1,9 +1,15 @@
 /*
  *  Mootor (coded by emi420@gmail.com)
  *
- *  Usage:
+ *  Examples:
  *
- *  < define usage here >
+ *  1. Subscribe Form
+ * 
+ *  $("#suscribeForm").Form({
+ *      type: "Subscribe",
+ *      fields: $("#fieldEmail"),
+ *      actions: $("#suscribeBtn"),
+ *  });
  *
  */
 
@@ -122,7 +128,7 @@
                     xmlhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
                     xmlhttp.onreadystatechange = ajaxResponse;
                     xmlhttp.send(email=jsonstr);
-                    options.button.value = "Enviando...";
+                    options.button.value = "Enviando..."; // FIXME: lang
                     options.button.disabled = "disabled";
                 }
                 obj.submit(function() { 
@@ -140,11 +146,13 @@
                     eval('var res =' + r.result);
                     options.button.value = "Enviar";
                     options.button.disabled = "";
-                    alert("Gracias! " + res[0].fields.email);
+                    alert("Gracias! " + res[0].fields.email); // FIXME: lang
                     fieldEmail.value = fieldEmail.title;
                     fieldEmail.className = fieldEmail.className.replace(" changed","");
                 }    
-            }        
+            }  
+            
+            // Initialize elements (form, text input, action button)      
 	        initFormSubmit();
 	        initTextInput(options.input);
 	        initButton(options.button);
