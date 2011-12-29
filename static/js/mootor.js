@@ -15,16 +15,16 @@
 
 
 /*
- * Mootor Forms
+ * Forms
  */
- 
-(function( $ ){
 
 var API_HOST = "http://192.168.1.12:9000";
 var API_CORE_URI = "/api/core/rpc/";
+var API_CATALOG_URI = "/api/catalog/rpc/";
+ 
+(function( $ ){
 
-var methods = {
-  	
+var methods = { 	
 	/*
 	 *  Forms
 	 */
@@ -41,8 +41,8 @@ var methods = {
             // Store data in a jQuery data object
             data = $(this).data('Form', {
                options : options
-            });   
-            
+            });               
+
 			// Select and initialize Form (Subscription, Contact, etc..)                
             switch(options.type) {
             	case "Subscribe":
@@ -56,7 +56,6 @@ var methods = {
             }
         });                                            
     },
-
     clear : function() {
 		/*
 		 * Clear Form fields
@@ -73,7 +72,6 @@ var methods = {
         return undefined;
     },
     
-
     Subscribe: function(options) {
 	/*
 	 *  Subscribe Form
@@ -167,6 +165,89 @@ $.fn.Form = function( method ) {
       return methods.init.apply( this, arguments );
     } else {
       $.error( 'Method ' +  method + ' does not exist on jQuery.Form' );
+    }    
+    
+};
+
+})( jQuery );
+
+/*
+ * Catalog
+ */
+ 
+(function( $ ){
+
+var methods = { 	
+	/*
+	 *  Catalog
+	 */
+	obj: undefined,
+	xmlhttp: undefined,
+    init: function( options ) {
+    	/*
+    	 *  Initialize Catalog plugin
+    	 */
+
+        return this.each(function(){
+
+            obj = $(this);
+
+            // Store data in a jQuery data object
+            data = $(this).data('Catalog', {
+               options : options
+            });               
+
+			// Select and initialize Catalog (Gallery, ProductCard, etc..)                
+            switch(options.type) {
+            	case "Gallery":            		
+            		api_url =  "/catalog/rpc/"
+					$(this).Catalog("Gallery",{category:options.category});							
+            	break;                	
+            }
+        });                                            
+    },
+    
+    Gallery: function(options) {
+	/*
+	 *  Product Gallery
+	 */
+
+		// API query 
+        xmlhttp = new XMLHttpRequest();
+        var jsonstr = '{"method":"getProducts","params":["' + options.category + '"],"id":1}' ;
+        xmlhttp.open("POST", API_HOST + API_CATALOG_URI, true);
+        xmlhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        xmlhttp.onreadystatechange = function() {
+        	if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+		    	console.log("it works! this is the AJAX callback")
+        	}
+        } 
+        xmlhttp.send(category=jsonstr);
+		
+		// Show image, with event listeners
+		/*
+		 * 1) preloading de 4,5 imagenes
+		 * 2) ocupar toda la pantalla con la primer imagen
+		 * 3) mostrar siguiente imagen y rotar infinitamente (al hacer click)
+		 * 4) idem anterior, pero con eventos swipe y anterior/siguiente
+		 * 5) revisar aceleracion 3D y performance en Android, iOS3, iOS4 ..
+		 * 6) que el ultimo "slide" sea el formulario de subscripcion
+		 * 7) optimizar imagenes en el admin (ver personalizacion x sitio)
+		 * 
+		 */
+		debugger;
+    },
+    
+};
+   
+$.fn.Catalog = function( method ) {   
+    // Method calling logic
+    if ( methods[method] ) {
+      return methods[ method ].apply( this, Array.prototype.slice.call( arguments, 1 ));
+    } else if ( typeof method === 'object' || ! method ) {
+      return methods.init.apply( this, arguments );
+    } else {
+      $.error( 'Method ' +  method + ' does not exist on jQuery.Catalog' );
     }    
     
 };
