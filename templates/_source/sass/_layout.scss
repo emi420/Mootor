@@ -1,9 +1,6 @@
 $base-padding: 1em;
 $base-margin: 1em;
 
-body {
-}
-
 h2 {
   margin: ($base-margin / 8) 0 ;  
 }
@@ -12,7 +9,13 @@ h3 {
 }
 
 .container {
-    max-width: 960px ;
+    max-width: 960px ; // FIXME: agregar media query para resoluciones mayores a 960
     margin: 0 auto ;
     width: 90%;
+}
+
+// Catalog.Gallery
+
+.catalog .item {
+    width: 100% ;
 }

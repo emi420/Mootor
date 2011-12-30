@@ -29,7 +29,7 @@
         width: 38% ;
         float: left ;
         input {
-            @include linear-gradient($empColor2, $empColor2B); 
+            @include background(linear-gradient($empColor2, $empColor2B)); 
             border: 1px solid $empColor2B;
             color: $subColor1;
         }

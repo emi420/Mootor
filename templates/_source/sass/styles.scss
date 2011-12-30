@@ -8,7 +8,6 @@
 @import "colors" ;
 @import "text" ;
 @import "layout" ;
-@import "content" ;
 @import "forms" ;
 
 @mixin base-anchor {
@@ -28,4 +27,11 @@ body {
   .action input {
       text-transform: lowercase ; 
   }
+}
+
+h2 {
+  @include empType1;
+}
+h3 {
+  @include subType1;
 }

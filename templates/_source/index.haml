@@ -1,0 +1,20 @@
+{% extends 'templates/base/default.html' %}
+{% block content %}
+.content
+    #panel1
+        {% include "templates/catalog/gallery.html" %}
+    #panel2
+        {% include "templates/content/cms_content_header.html" %}
+        {% include "templates/forms/landing_form.html" %}
+    :javascript
+        $(document).ready(function(){
+            $(document).Mootor({
+              Panels: 
+              [
+                  $("#panel1"),
+                  $("#panel2"),
+              ]
+            });
+        });
+{% endblock %}
+
