@@ -9,9 +9,15 @@ h3 {
 }
 
 .container {
-    max-width: 960px ; // FIXME: agregar media query para resoluciones mayores a 960
+    width: 100%;
+}
+
+@media (min-width:1240px) {
+  .container {
+    max-width: 960px ; 
+    width: auto ;
     margin: 0 auto ;
-    width: 90%;
+  }
 }
 
 // Catalog.Gallery
@@ -19,3 +25,4 @@ h3 {
 .catalog .item {
     width: 100% ;
 }
+

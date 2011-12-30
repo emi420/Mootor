@@ -19,7 +19,12 @@ body {
   text-align: center ;
 }
 
-// forms
+// Subscribe
+
+.subscribe {
+  width: 90% ;
+  margin: 0 auto ;
+}
 
 .form { 
   @include stdform ; 

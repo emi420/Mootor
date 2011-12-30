@@ -101,12 +101,18 @@ h3 {
 
 /* line 11, ../../templates/_source/sass/_layout.scss */
 .container {
-  max-width: 960px;
-  margin: 0 auto;
-  width: 90%;
+  width: 100%;
 }
 
-/* line 19, ../../templates/_source/sass/_layout.scss */
+@media (min-width:1240px) {
+  /* line 16, ../../templates/_source/sass/_layout.scss */
+  .container {
+    max-width: 960px;
+    width: auto;
+    margin: 0 auto;
+  }
+}
+/* line 25, ../../templates/_source/sass/_layout.scss */
 .catalog .item {
   width: 100%;
 }
@@ -122,6 +128,12 @@ body {
 }
 
 /* line 24, ../../templates/_source/sass/styles.scss */
+.subscribe {
+  width: 90%;
+  margin: 0 auto;
+}
+
+/* line 29, ../../templates/_source/sass/styles.scss */
 .form {
   overflow: hidden;
   margin: 2em auto;
@@ -170,13 +182,13 @@ body {
   float: left;
   width: 62%;
 }
-/* line 27, ../../templates/_source/sass/styles.scss */
+/* line 32, ../../templates/_source/sass/styles.scss */
 .form .field.text input[type=text],
 .form .action input {
   text-transform: lowercase;
 }
 
-/* line 32, ../../templates/_source/sass/styles.scss */
+/* line 37, ../../templates/_source/sass/styles.scss */
 h2 {
   line-height: 140%;
   font-family: 'HelveticaLTStdBlackCondensed';
@@ -184,7 +196,7 @@ h2 {
   letter-spacing: -0.075em;
 }
 
-/* line 35, ../../templates/_source/sass/styles.scss */
+/* line 40, ../../templates/_source/sass/styles.scss */
 h3 {
   line-height: 140%;
   font-size: 3em;

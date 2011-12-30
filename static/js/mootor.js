@@ -23,6 +23,7 @@
  *
  */
 
+
 /*
  * TODO: - optimizar el diseño de las clases
  * 		 - compartir un metodo para AJAX (ver HTML5)
@@ -38,6 +39,9 @@ var MEDIA_UPLOAD = "http://192.168.1.12:9000/uploads/";
  */
 
 (function( $ ){
+
+// Overrides jQuery Mobile methods
+$.mobile.showPageLoadingMsg = function() {;};
 
 var methods = { 	
 	/*
@@ -237,7 +241,6 @@ $.fn.Form = function( method ) {
 /*
  * Catalog
  */
- 
 (function( $ ){
 
 var methods = { 	
@@ -297,17 +300,33 @@ var methods = {
                 	if( i > 0) {
                 		div.style.display = "none";
                 	}
+
+                	/*$(img).swipe(function() {
+                		console.log("swipe!");
+                	});*/
+                	
+                	$(div).bind('swipeleft',function(event, ui){
+				       console.log("swipeleft!");
+				    })
+
+                	$(div).bind('swiperight',function(event, ui){
+				       console.log("swiperight!");
+				    })
+                	
+                	/*img.onclick = function() {
+                		console.log("click!");
+                	}*/
                 	$(div).append(img);
                 	catalog.append(div);
                 } 
 				
 				/*
 				 * 1) ocupar toda la pantalla con la primer imagen
-				 * 2) preloading de 4,5 imagenes
-				 * 3) mostrar siguiente imagen y rotar infinitamente (al hacer click)
-				 * 4) idem anterior, pero con eventos swipe y anterior/siguiente
-				 * 5) revisar aceleracion 3D y performance en Android, iOS3, iOS4 ..
-				 * 6) que el ultimo "slide" sea el formulario de subscripcion
+				 * 2) mostrar siguiente imagen y rotar infinitamente (al hacer click)
+				 * 3) idem anterior, pero con eventos swipe y anterior/siguiente
+				 * 4) revisar aceleracion 3D y performance en Android, iOS3, iOS4 ..
+				 * 5) que el ultimo "slide" sea el formulario de subscripcion
+				 * 6) preloading
 				 * 7) optimizar imagenes en el admin (ver personalizacion x sitio)
 				 * 
 				 */
@@ -333,4 +352,5 @@ $.fn.Catalog = function( method ) {
 };
 
 })( jQuery );
+
 
