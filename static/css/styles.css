@@ -191,7 +191,7 @@ body {
 /* line 37, ../../templates/_source/sass/styles.scss */
 h2 {
   line-height: 140%;
-  font-family: 'HelveticaLTStdBlackCondensed';
+  font-family: 'HelveticaLTStdBlackCondensed', arial;
   font-size: 7em;
   letter-spacing: -0.075em;
 }

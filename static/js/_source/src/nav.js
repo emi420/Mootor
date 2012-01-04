@@ -3,31 +3,28 @@
     Mootor.namespace('Mootor.Nav');
     Mootor.Nav = (function() {
         // Dependencies
-        // Ex: var ajax = Mootor.utils.init ;
-        
-        // Private properties
-        // ...
-        
-        // Private methods
-        // ... (end var)
-        
-        // One-time init properties
-        // ...
-        console.log("Nav one-time init.");
-        
-        // Public API
+        var Fx = Mootor.Fx;
+
         return {            
             Panels: function(panels) {
-                console.log("Nav.Panels instance init.");
-                var i = 1;
-                for(; i < panels.length ; i += 1) {
-                    panels[i].style.display = "none";
-                }
-            }
-            // ,...
-        };
-        
-    }());   
+                var Event = Mootor.Event,
+                i = 0,
+                clientHeight = document.documentElement.clientHeight,
+                eventHandler = function() {
+                    console.log("Next panel!");
+                };
+                
+                Event.addEventListener(document.body, "swipe", eventHandler);
 
+                for(; i < panels.length ; i += 1) {
+                    Fx.hide(panels[i]);
+                    if(clientHeight > panels[i].style.height) {
+                        panels[i].style.height = clientHeight + "px";
+                    }
+                }
+                Fx.show(panels[0]);                
+            }        
+        };
+    }());   
 
 }(Mootor, window));

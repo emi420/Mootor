@@ -1,42 +1,36 @@
 /*
- *  Mootor (coded by emi420@gmail.com)
+ * Mootor (coded by emi420@gmail.com)
  *
- *  Examples:
- *
- *  // Initialize Mootor
- *  $(document).Nav.Panels([
- *      $("#panel1"),
- *      $("#panel2"),
- *  ]);
+ * "Another responsive web framework"
  * 
+ * Compatibility:
+ * 
+ * - Desktop: Chrome, Firefox, Safari
+ * - Mobile: iOS 3+, Android 2.2+
+ *  
+ * Usage:
+ * 
+ *     // Dynamic font size
+ *     $(document).Fx.dynamicType();
  */
 
-/*
- * TODO: 
- *  + codigo independiente de jQuery
- *  + codigo valido en JSLint
- *  + revision de patrones de diseño
- *  - revision de performance
- *  - implementacion de paneles, etc
- */
-
-
-// Anonymous function for local scope
+// Anonymous function, local scope
 (function(window) {
 
     var Mootor = Mootor || {};
 
+    // Namespacing
     Mootor.namespace = function(ns_str) {
 
-        var mods = ns_str.split('.'),   // namespace modules string, ex: Mootor.Core
+        var mods = ns_str.split('.'),  
         parent = Mootor,
-        i;
+        i=0;
         
         if(mods[0] === "Mootor") {
             mods = mods.slice(1);
         }
         
-        for( i = 0; i < mods.length; i+=1) {
+        for(; i < mods.length; i += 1) {
           if(typeof parent[mods[i]] === "undefined") {
               parent[mods[i]] = {};
           } 
@@ -57,55 +51,67 @@
         API_CORE_URI = "/api/core/rpc/",
         API_CATALOG_URI = "/api/catalog/rpc/",
         MEDIA_UPLOAD_URL = "http://192.168.1.12:9000/uploads/",
-        VERSION = 0.1;       
+        VERSION = 0.1,
+        init_styles;
 
         /* Private methods */       
         var onReady = function(fn) {
-        // On document ready
-            var ready = false; 
+        /*
+         * Checks if document is full loaded and call a function
+         */
+            var ready = false;
             
             // Handler to check if the dom is full loaded
-            function handler(e) {
+            function handler(e) {                
                 if (ready) {return;}
                 if (e.type === "readystatechange" && document.readyState !== "complete") {return;}
-                fn.call(document);
-                ready = true;                            
+                    fn.call(document);
+                    showBody();
+                    ready = true;                            
             }
             
             // Add listeners for common load events
-            if (document.addEventListener) {
-                document.addEventListener("DOM-ContentLoaded", handler, false);
-                document.addEventListener("readystatechange", handler, false);
-                document.addEventListener("load", handler, false);                            
+            if (window.addEventListener) {
+                window.addEventListener("DOM-ContentLoaded", handler, false);
+                window.addEventListener("readystatechange", handler, false);
+                window.addEventListener("load", handler, false);                            
             } // FIXME check: for IE8 adds attachEvent() support
-            
+                        
             return function onReady(f) {
                 if (ready) {
                     f.call(document);
                 }
             };
+        },
+        hideBody = function() {
+            init_styles = document.createElement("style");
+            init_styles.innerHTML = "body * {display: none}";
+            document.head.appendChild(init_styles);     
+        },
+        showBody = function() {
+            document.head.removeChild(init_styles);                  
         };
         
         /* One-time init properties */
-        console.log("Core one-time init.");        
+
+        // Hide document body while loading
+        hideBody();         
+
+        // On document ready
         Mootor.ready = function(fn) {
             onReady(fn);
         };
-        
+               
         /* Public API */
         return {            
             init: function(e) {
                 // Instance init
-                //console.log("Core instance init.");
                 if( typeof e === "string" && e.indexOf("#") >= 0) {
+                    // $("#id_element") returns an element
                     return document.getElementById(e.replace("#",""));                    
                 } else {
                     return Mootor;
                 }
-            },
-            getById: function(eid) {
-                var el = document.getElementById(eid);
-                return el;                
             },
             getApiHost: function() {
                 return API_HOST;
@@ -129,7 +135,7 @@
             
     window.Mootor = Mootor;
     window.$ = Mootor.Core.init;
-
+    
 
 }(window));
 // Inmediate Object Initialization

@@ -1,20 +1,31 @@
 {% extends 'templates/base/default.html' %}
 {% block content %}
-.content
-    #panel1
-        panel1
-        {#% include "templates/catalog/gallery.html" %#}
-    #panel2.subscribe
-        panel2
-        {% include "templates/content/cms_content_header.html" %}
-        {#% include "templates/forms/landing_form.html" %#}
-    :javascript
-        $(document).ready(function(){
-           console.log("doc ready!");
-           $(document).Nav.Panels([
-              $("#panel1"),
-              $("#panel2"),
-           ]);
-        });
+
+#panel1.subscribe
+    %h2 Subscripción
+    %h3 Te enviaremos novedades una vez por mes, no molestamos :)
+    {% include "templates/forms/landing_form.html" %}
+
+#panel2
+    {#% include "templates/catalog/gallery.html" %#}
+    / Demo output HTML
+    .catalog
+        %div
+            %img.item{:src=>"http://192.168.1.12:9000/uploads/products/joey-ramone_1.jpg"}
+
+:javascript
+    
+    $(document).ready(function(){
+
+       // Dynamic font size
+       $(document).Fx.dynamicType();
+
+       // Navigation panels
+       $(document).Nav.Panels([
+          $("#panel1"),
+          $("#panel2"),
+       ]);
+
+    });
 {% endblock %}
 

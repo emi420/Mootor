@@ -1,27 +1,13 @@
 /*
- *  Mootor (coded by emi420@gmail.com)
- *
- *  Examples:
- *
- *  // Initialize Mootor
- *  $(document).Nav.Panels([
- *      $("#panel1"),
- *      $("#panel2"),
- *  ]);
+ * Mootor (coded by emi420@gmail.com)
  * 
+ * Usage:
+ * 
+ *     // Dynamic font size
+ *     $(document).Fx.dynamicType();
  */
 
-/*
- * TODO: 
- *  + codigo independiente de jQuery
- *  + codigo valido en JSLint
- *  + revision de patrones de diseño
- *  - revision de performance
- *  - implementacion de paneles, etc
- */
-
-
-// Anonymous function for local scope
+// Anonymous function, local scope
 (function(window) {
 
     var Mootor = Mootor || {};
@@ -30,13 +16,13 @@
 
         var mods = ns_str.split('.'),   // namespace modules string, ex: Mootor.Core
         parent = Mootor,
-        i;
+        i=0;
         
         if(mods[0] === "Mootor") {
             mods = mods.slice(1);
         }
         
-        for( i = 0; i < mods.length; i+=1) {
+        for(; i < mods.length; i += 1) {
           if(typeof parent[mods[i]] === "undefined") {
               parent[mods[i]] = {};
           } 
@@ -87,7 +73,6 @@
         };
         
         /* One-time init properties */
-        console.log("Core one-time init.");        
         Mootor.ready = function(fn) {
             onReady(fn);
         };
@@ -96,7 +81,7 @@
         return {            
             init: function(e) {
                 // Instance init
-                //console.log("Core instance init.");
+
                 if( typeof e === "string" && e.indexOf("#") >= 0) {
                     return document.getElementById(e.replace("#",""));                    
                 } else {
@@ -135,62 +120,66 @@
 // Inmediate Object Initialization
 (function(Mootor, window) {
 
+    Mootor.namespace('Mootor.Fx');
+    Mootor.Fx = (function() {
+        return {            
+            show: function() {
+                console.log("show!");
+            },
+            hide: function(e) {
+                e.style.display = "none";
+            },
+            dynamicType: function() {
+                /*
+                 *  FIXME check: optimize calc 
+                 */
+                var updateSize = function() {
+                    var font_size = window.innerWidth / 10 + (window.innerHeight / 40);
+                    if( typeof(document.body) !== null) {
+                        if(font_size < 105 && font_size > 20) {
+                          document.body.style.fontSize=font_size + "%";                  
+                        } else if(font_size >= 105) {
+                          document.body.style.fontSize=105 + "%";                  
+                        } else if(font_size <= 20) {
+                          document.body.style.fontSize=20 + "%";                  
+                        }
+                    }
+                };
+                window.addEventListener( "resize", updateSize, false);
+                updateSize();
+            }       
+        };        
+    }());   
+
+}(Mootor, window));
+(function(Mootor, window) {
+
     Mootor.namespace('Mootor.Nav');
     Mootor.Nav = (function() {
         // Dependencies
-        // Ex: var ajax = Mootor.utils.init ;
+        var Fx = Mootor.Fx ;
         
-        // Private properties
-        // ...
-        
-        // Private methods
-        // ... (end var)
-        
-        // One-time init properties
-        // ...
-        console.log("Nav one-time init.");
-        
-        // Public API
         return {            
             Panels: function(panels) {
-                console.log("Nav.Panels instance init.");
                 var i = 1;
+                //debugger; 
                 for(; i < panels.length ; i += 1) {
-                    panels[i].style.display = "none";
+                    Fx.hide(panels[i]);
                 }
             }
-            // ,...
         };
         
     }());   
-
 
 }(Mootor, window));
 (function(Mootor, window) {
 
     Mootor.namespace('Mootor.Form');
-    Mootor.Form = (function() {
-        // Dependencies
-        // Ex: var ajax = Mootor.utils.init ;
-        
-        // Private properties
-        // ...
-        
-        // Private methods
-        // ... (end var)
-        
-        // One-time init properties
-        // ...
-        console.log("Form one-time init.");
-        
-        // Public API
+    Mootor.Form = (function() {        
         return {            
             init: function() {
-                console.log("Form instance init.");
             }
-            // ,...
-        };
-        
+        };        
     }());   
 
 }(Mootor, window));
@@ -198,27 +187,10 @@
 
     Mootor.namespace('Mootor.Catalog');
     Mootor.Catalog = (function() {
-        // Dependencies
-        // Ex: var ajax = Mootor.utils.init ;
-        
-        // Private properties
-        // ...
-        
-        // Private methods
-        // ... (end var)
-        
-        // One-time init properties
-        // ...
-        console.log("Catalog one-time init.");
-        
-        // Public API
         return {            
             init: function() {
-                console.log("Catalog instance init.");
             }
-            // ,...
-        };
-        
+        };        
     }());   
 
 }(Mootor, window));
