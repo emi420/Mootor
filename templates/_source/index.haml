@@ -2,19 +2,19 @@
 {% block content %}
 .content
     #panel1
-        {% include "templates/catalog/gallery.html" %}
+        panel1
+        {#% include "templates/catalog/gallery.html" %#}
     #panel2.subscribe
+        panel2
         {% include "templates/content/cms_content_header.html" %}
-        {% include "templates/forms/landing_form.html" %}
+        {#% include "templates/forms/landing_form.html" %#}
     :javascript
         $(document).ready(function(){
-            $(document).Mootor({
-              Panels: 
-              [
-                  $("#panel1"),
-                  $("#panel2"),
-              ]
-            });
+           console.log("doc ready!");
+           $(document).Nav.Panels([
+              $("#panel1"),
+              $("#panel2"),
+           ]);
         });
 {% endblock %}
 
