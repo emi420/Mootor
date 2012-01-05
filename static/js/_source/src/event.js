@@ -2,44 +2,65 @@
 
     Mootor.namespace('Mootor.Event');
     Mootor.Event = (function() {
-        var pointStartX,
-        pointLastX, 
-        fn,
-        distance;
-        swipeHandler = function() {
-            switch( event.type ) {
-            case "touchstart":
-                pointStartX = event.touches[0].pageX;                
-                break;
-            case "touchmove":
-                pointLastX = event.touches[0].pageX;
-                distance = event.touches[0].pageX - pointStartX;
-                
-                if( distance > 10 || distance < 10) {
-                    // Swaping
-                    // Desplazar paneles (3D transform, etc)
-                }
-                break;
-                case "touchend":
-                    console.log("swipe! " + distance);
-                    fn.call();
-                    pointStartX = 0;
-                break;
+        var Fx = Mootor.Fx;
+
+        var pointStartX=0,
+        pointLastX=0;
+
+        var dragHandler = function(fn) {
+            
+            var distance=0,
+            pageX,
+            eventType;
+
+            eventType = event.type;
+            
+            if ( eventType === "touchmove" || eventType === "touchstart") {
+                pageX = event.touches[0].pageX;
+                distance =  pageX - pointLastX;
             }
-            //fn.call();
+
+            switch( eventType ) {
+
+            case "touchstart":
+
+                // Initialize previus and start points
+                pointLastX = pointStartX = pageX;    
+                break;
+
+            case "touchmove":
+            
+                // Prevents default handlers took over event
+                event.preventDefault();
+                // Previuos X point
+                pointLastX = pageX;                
+                // Callback function
+                fn(distance);                
+                break;
+                
+            case "touchend":
+            
+                // Distance from start to last points
+                distance = pointStartX - pointLastX;
+                fn(distance);
+                break;
+
+            }
         };
         
         return {            
-            addEventListener: function(el ,event, callback ) {
-                if( event === "swipe") {
-                    /*
-                     * TODO: swipe event
-                     */
-                    fn = callback;
-                    el.addEventListener("touchstart", swipeHandler, false);
-                    el.addEventListener("touchmove", swipeHandler, false);
-                    el.addEventListener("touchend", swipeHandler, false);
-                    el.addEventListener("click", swipeHandler, false);
+            bind: function(el ,event, callback ) {                
+                var fn = function() { dragHandler(callback) };
+                // Drag
+                switch( event ) {
+                case "drag": 
+                    el.addEventListener("touchstart", fn, false);
+                    el.addEventListener("touchmove", fn, false);                    
+                    //el.addEventListener("touchend", fn, false);
+                    break;
+                case "dragEnd": 
+                    el.addEventListener("touchend", fn, false);
+                    break;
                 }
             }
         };        

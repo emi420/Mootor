@@ -4,12 +4,21 @@ $base-margin: 1em;
 h2 {
   margin: ($base-margin / 8) 0 ;  
 }
+.subscribe h2 {
+  margin: 0 ;
+}
 h3 {
   margin: ($base-margin / 4) 0 ;
 }
 
-.container {
-    width: 100%;
+#panels,
+#blank_panel,
+.panel {
+    position: absolute;
+    left: 0;
+    top: 0;
+    @include box-shadow(0px 5px 5px rgba(0,0,0,.5));
+    //@include border-radius(5px);
 }
 
 @media (min-width:1240px) {

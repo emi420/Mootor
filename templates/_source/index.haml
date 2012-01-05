@@ -1,12 +1,11 @@
 {% extends 'templates/base/default.html' %}
 {% block content %}
-
-#panel1.subscribe
-    %h2 Subscripción
-    %h3 Te enviaremos novedades una vez por mes, no molestamos :)
-    {% include "templates/forms/landing_form.html" %}
-
-#panel2
+.panel
+    .subscribe
+        %h2 Subscripción
+        %h3 Te enviaremos novedades una vez por mes, no molestamos :)
+        {% include "templates/forms/landing_form.html" %}   
+.panel
     {#% include "templates/catalog/gallery.html" %#}
     / Demo output HTML
     .catalog
@@ -15,16 +14,17 @@
 
 :javascript
     
-    $(document).ready(function(){
+    $().ready(function(){
 
        // Dynamic font size
-       $(document).Fx.dynamicType();
+       //$("#panels").Fx.dynamicType();
 
        // Navigation panels
-       $(document).Nav.Panels([
-          $("#panel1"),
-          $("#panel2"),
-       ]);
+       $("#panels").Nav.Panels();
+       
+       // FIXME: al cambiar la forma de cargar el modulo Nav.Panels 
+       //        hay que revisar todos los modulos para ver su
+       //        compatibilidad.
 
     });
 {% endblock %}

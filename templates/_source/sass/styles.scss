@@ -15,8 +15,16 @@
 }
 
 body {
-  background: $subColor1B;
   text-align: center ;
+}
+
+#panels,
+body {
+  background: $bodyColor; 
+}
+#blank_panel,
+.panel {
+  background: $subColor1B;  
 }
 
 // Subscribe

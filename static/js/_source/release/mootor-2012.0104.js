@@ -55,20 +55,34 @@
         init_styles;
 
         /* Private methods */       
-        var onReady = function(fn) {
+        var hideBody = function() {
+            init_styles = document.createElement("style");
+            init_styles.innerHTML = "body * {display: none}";
+            document.head.appendChild(init_styles);     
+        },
+        showBody = function() {
+            document.head.removeChild(init_styles);                  
+        },
+        onReady = function(fn) {
         /*
          * Checks if document is full loaded and call a function
          */
             var ready = false;
+
+            // One-time functions on document init
+            var documentInit = function() {
+                document.body.style.overflow = "hidden";
+                showBody();
+            },
             
             // Handler to check if the dom is full loaded
-            function handler(e) {                
+            handler = function(e) {                
                 if (ready) {return;}
                 if (e.type === "readystatechange" && document.readyState !== "complete") {return;}
                     fn.call(document);
-                    showBody();
+                    documentInit();
                     ready = true;                            
-            }
+            };
             
             // Add listeners for common load events
             if (window.addEventListener) {
@@ -82,14 +96,6 @@
                     f.call(document);
                 }
             };
-        },
-        hideBody = function() {
-            init_styles = document.createElement("style");
-            init_styles.innerHTML = "body * {display: none}";
-            document.head.appendChild(init_styles);     
-        },
-        showBody = function() {
-            document.head.removeChild(init_styles);                  
         };
         
         /* One-time init properties */
@@ -141,54 +147,6 @@
 // Inmediate Object Initialization
 (function(Mootor, window) {
 
-    Mootor.namespace('Mootor.Event');
-    Mootor.Event = (function() {
-        var pointStartX,
-        pointLastX, 
-        fn,
-        distance;
-        swipeHandler = function() {
-            switch( event.type ) {
-            case "touchstart":
-                pointStartX = event.touches[0].pageX;                
-                break;
-            case "touchmove":
-                pointLastX = event.touches[0].pageX;
-                distance = event.touches[0].pageX - pointStartX;
-                
-                if( distance > 10 || distance < 10) {
-                    // Swaping
-                    // Desplazar paneles (3D transform, etc)
-                }
-                break;
-                case "touchend":
-                    console.log("swipe! " + distance);
-                    fn.call();
-                    pointStartX = 0;
-                break;
-            }
-            //fn.call();
-        };
-        
-        return {            
-            addEventListener: function(el ,event, callback ) {
-                if( event === "swipe") {
-                    /*
-                     * TODO: swipe event
-                     */
-                    fn = callback;
-                    el.addEventListener("touchstart", swipeHandler, false);
-                    el.addEventListener("touchmove", swipeHandler, false);
-                    el.addEventListener("touchend", swipeHandler, false);
-                    el.addEventListener("click", swipeHandler, false);
-                }
-            }
-        };        
-    }());   
-
-}(Mootor, window));
-(function(Mootor, window) {
-
     Mootor.namespace('Mootor.Fx');
     Mootor.Fx = (function() {
         var max_font_size=105,
@@ -208,6 +166,7 @@
                  */
                 var updateSize = function() {
                     var font_size = window.innerWidth / 10 + (window.innerHeight / 40);
+                    //console.log("update size!");
                     if( typeof(document.body) !== null) {
                         if(font_size < max_font_size && font_size > min_font_size) {
                           document.body.style.fontSize=font_size + "%";                  
@@ -216,6 +175,10 @@
                         } else if(font_size <= min_font_size) {
                           document.body.style.fontSize=min_font_size + "%";                  
                         }
+                    }
+                    if( panels = $("#panels")) {
+                        //console.log("update panels width to " + document.documentElement.clientWidth + "px");
+                        panels.style.width = document.documentElement.clientWidth + "px";
                     }
                 },                
                 eventHandler = function(fn) {
@@ -244,7 +207,71 @@
                     window.addEventListener( "resize", eventHandler, false);                    
                 }
                 updateSize();
-            }       
+            },
+            moveScreenH: function(distance) {
+                /*
+                 *  Move screen horizontally
+                 */                                  
+                 var panels,
+                 currentX;
+                 
+                 panels = $("#panels");
+                 currentX = Number(panels.style.left.replace("px","")); 
+                 console.log("currentX:" + currentX);
+                 distance = Number(distance)/2;
+                                  
+                 panels.style.webkitTransform = "translate3d(" + (currentX + distance) + "px,0, 0)";                 
+                 panels.style.left = (currentX + distance) + "px";
+                 
+            }               
+        };        
+    }());   
+
+}(Mootor, window));
+(function(Mootor, window) {
+
+    Mootor.namespace('Mootor.Event');
+    Mootor.Event = (function() {
+        var Fx = Mootor.Fx;
+
+        var pointStartX=0,
+        pointLastX=0, 
+        fn,
+        distance=0;
+
+        var swipeHandler = function() {
+            switch( event.type ) {
+            case "touchstart":
+                pointLastX = pointStartX = event.touches[0].pageX;    
+                break;
+            case "touchmove":
+                distance = event.touches[0].pageX - pointLastX;
+                pointLastX = event.touches[0].pageX;
+
+                event.preventDefault();
+                
+                // Swaping
+                // Desplazar paneles (3D transform, etc)
+                Fx.moveScreenH(distance);
+                break;
+            case "touchend":
+                //distance = pointStartX + pointLastX;
+                fn.call(this);
+                pointStartX = 0;
+                break;
+            }
+            //fn.call();
+        };
+        
+        return {            
+            addEventListener: function(el ,event, callback ) {
+                if( event === "swipe") {
+                    fn = callback;
+                    el.addEventListener("touchstart", swipeHandler, false);
+                    el.addEventListener("touchmove", swipeHandler, false);
+                    el.addEventListener("touchend", swipeHandler, false);
+                }
+            }
         };        
     }());   
 
@@ -254,27 +281,64 @@
     Mootor.namespace('Mootor.Nav');
     Mootor.Nav = (function() {
         // Dependencies
-        var Fx = Mootor.Fx;
+        var Fx = Mootor.Fx,
+        Event = Mootor.Event;
 
         return {            
             Panels: function(panels) {
-                var Event = Mootor.Event,
-                i = 0,
-                clientHeight = document.documentElement.clientHeight,
-                eventHandler = function() {
-                    console.log("Next panel!");
-                };
+                /*
+                 * Navigation panels
+                 * 
+                 * TODO: - resize things onorientationchange
+                 *       - limit and bounce back panels move with swipe
+                 *       - if swipe reach certain limit, load new content 
+                 *         in blank panel
+                 *       - check panels initial position on swipe
+                 */
+                var i = 0,
+                clientHeight,
+                blankPanel,
+                panelCount=0,
+                clientWidth=0;
                 
+                clientHeight = document.documentElement.clientHeight,
+                clientWidth = document.documentElement.clientWidth,
+                
+                // Handler for events (swipe, tap, etc)
+                eventHandler = function() {
+                    console.log("Change panel!");
+                };                
                 Event.addEventListener(document.body, "swipe", eventHandler);
+    
+                // Append a blank panel for load content
+                blankPanel = document.createElement('div');
+                blankPanel.id = "blank_panel";
+                blankPanel.style.width = document.documentElement.clientWidth + "px";
+                blankPanel.style.height = document.documentElement.clientHeight + "px";               
+                panels.push(blankPanel);
+                $("#panels").appendChild(blankPanel);
+                
+                // Resize and move first panel
+                panels[0].style.left = (clientWidth + 40) + "px";
+                panels[0].style.width = clientWidth + "px";
 
-                for(; i < panels.length ; i += 1) {
+                // Resize and move panels container
+                $("#panels").style.width = (clientWidth * 2) + "px"; 
+                $("#panels").style.left = (clientWidth * (-1) - 40) + "px";
+                $("#panels").style.height = clientHeight + "px";
+                
+                // Hide all panels
+                panelCount = panels.length - 1 ;
+                for(; i < panelCount ; i += 1) {
                     Fx.hide(panels[i]);
                     if(clientHeight > panels[i].style.height) {
                         panels[i].style.height = clientHeight + "px";
                     }
                 }
+                
+                // Show active panel
                 Fx.show(panels[0]);                
-            }        
+            }
         };
     }());   
 
