@@ -1,11 +1,26 @@
-(function(Mootor, window) {
+/*
+ * Mootor Forms (coded by emi420@gmail.com)
+ */
 
-    Mootor.namespace('Mootor.Form');
-    Mootor.Form = (function() {        
-        return {            
-            init: function() {
-            }
-        };        
-    }());   
+(function(Mootor, window, $) {
 
-}(Mootor, window));
+    Mootor.modules.Form = function(box){
+    
+        /*
+         * Private
+         */ 
+       
+        var a = 0,
+        b = 0;
+        
+        /*
+         * Public
+         */  
+        
+        // Show element
+        box.test = function(e) {
+            console.log("test!");
+        };
+    };
+
+}(Mootor, window, $));

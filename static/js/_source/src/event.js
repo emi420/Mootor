@@ -1,8 +1,8 @@
-(function(Mootor, window) {
+(function(Mootor, window, $) {
 
-    Mootor.namespace('Mootor.Event');
-    Mootor.Event = (function() {
-        var Fx = Mootor.Fx;
+    Mootor.modules.Event = function(box) {
+
+        var Fx = Mootor.modules.Fx;
 
         var pointStartX=0,
         pointLastX=0;
@@ -48,9 +48,8 @@
             }
         };
         
-        return {            
-            bind: function(el ,event, callback ) {                
-                var fn = function() { dragHandler(callback) };
+        box.bind = function(el ,event, callback ) {                
+                var fn = function() { dragHandler(callback) };                
                 // Drag
                 switch( event ) {
                 case "drag": 
@@ -61,9 +60,8 @@
                 case "dragEnd": 
                     el.addEventListener("touchend", fn, false);
                     break;
-                }
             }
-        };        
-    }());   
+        };
+    };   
 
-}(Mootor, window));
+}(Mootor, window, $));

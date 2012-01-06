@@ -14,18 +14,16 @@
  
 :javascript
     
-       //$(document).ext.ready(function(){
-
-       // Dynamic font size
-       //$("#panels").Fx.dynamicType();
-
-       // Navigation panels
-       //$("#panels").ext.Nav.Panels();
+       $(document).pageInit();
        
-       // FIXME: al cambiar la forma de cargar el modulo Nav.Panels 
-       //        hay que revisar todos los modulos para ver su
-       //        compatibilidad.
+       $(document).ready(function(){
 
-    //});
+           // Dynamic font size
+           $("#panels").Fx().dynamicType();
+
+           // Navigation panels
+           $("#panels").Nav().Panels();
+       
+       });
 {% endblock %}
 

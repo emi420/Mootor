@@ -4,22 +4,20 @@
 
 (function(Mootor, window, $) {
 
-    Mootor.namespace('Mootor.Nav');
-    Mootor.Nav = (function() {
-
+    Mootor.modules.Nav = function(box) {
+        
         /*
          * Dependencies
          */ 
 
-        var Fx = Mootor.Fx,
-        Event = Mootor.Event;
-
+        var Fx = $().Fx(),        
+        Event = $().Event();
+       
         /*
          * Public 
          */ 
 
-        return {            
-            Panels: function() {
+        box.Panels = function() {
 
                 /*
                  * Navigation panels
@@ -43,7 +41,7 @@
                 divPanels;
                 
                 // All panels
-                divPanels = Mootor.Core.getCurrentObj();                
+                divPanels = this.obj;                
                 panels = divPanels.getElementsByClassName("panel");
                 
                 // First panel
@@ -166,8 +164,9 @@
 
                 // Show first panel
                 Fx.show(panels[0]);                
-            }
+                
+                
         };
-    }());   
+    };   
 
 }(Mootor, window, $));

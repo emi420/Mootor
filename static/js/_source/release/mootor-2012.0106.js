@@ -6,199 +6,12 @@
  * - Desktop: Chrome, Firefox, Safari
  * - Mobile: iOS 3+, Android 2.2+
  *  
- * Usage:
- * 
- *     // Dynamic font size
- *     $(document).Fx.dynamicType();
  */
 
-
-/*
- *  Instances pattern
- */
-
-/*
-// Anonymous function for local scope
 (function(window) {
     
-   // Main function to call
-   function Moot (query) {
-       
-        // Auto-init function
-        var Moo = (function(){
-            
-            // Temporary object
-            return {
-                obj: query,
-                check: function() {
-                    console.log(this)
-                }               
-            }
-
-        }());
-       
-        // Return instance
-        return Moo;
-    }
-    
-    // Make public!
-    window.$$ = window.Moo = Moot;
-
-}(window));
-  */  
-    
-
-// *** codigo original ***/
-
-(function(window) {
-
-    var Mootor = Mootor || {};
-
-    /*
-     * Namespacing function
-     */ 
-
-    Mootor.namespace = function(ns_str) {
-
-        var mods = ns_str.split('.'),  
-        parent = Mootor,
-        i=0;
-        
-        // Ommit parent module
-        if(mods[0] === "Mootor") {
-            mods = mods.slice(1);
-        }
-        
-        // Add modules to parent object
-        for(; i < mods.length; i += 1) {
-          if(typeof parent[mods[i]] === "undefined") {
-              parent[mods[i]] = {};
-          } 
-          parent = parent[mods[i]];
-        }          
-
-        return parent;
-    };
-        
-    /*
-     * Core
-     */
-    Mootor.namespace('Mootor.Core');
-    
-    Mootor.Core = (function() {
-        
-        /*
-         * Private properties
-         */
-
-        var API_HOST = "http://192.168.1.12:9000",
-        API_CORE_URI = "/api/core/rpc/",
-        API_CATALOG_URI = "/api/catalog/rpc/",
-        MEDIA_UPLOAD_URL = "http://192.168.1.12:9000/uploads/",
-        VERSION = 0.1,
-        init_styles,
-        obj;
-        
-
-        /*
-         * Initializing document
-         */       
-         
-        // Hide/show document body 
-        var hideBody = function() {
-            init_styles = document.createElement("style");
-            init_styles.innerHTML = "body * {display: none}";
-            document.head.appendChild(init_styles);     
-        },
-        showBody = function() {
-            document.head.removeChild(init_styles);                  
-        },
-        
-        // When document ready
-        onReady = function(fn) {
-            var ready = false;
-
-            // One-time functions
-            var documentInit = function() {
-                document.body.style.overflow = "hidden";
-                showBody();
-            },
-            
-            // Handler to check if the dom is full loaded
-            handler = function(e) {                
-                if (ready) {return;}
-                if (e.type === "readystatechange" && document.readyState !== "complete") {return;}
-                    fn.call(document);
-                    documentInit();
-                    ready = true;                            
-            };
-            
-            // Add listeners for all common load events
-            if (window.addEventListener) {
-                window.addEventListener("DOM-ContentLoaded", handler, false);
-                window.addEventListener("readystatechange", handler, false);
-                window.addEventListener("load", handler, false);                            
-            } // IE8 needs attachEvent() support
-                        
-            // Return listener function
-            return function onReady(f) {
-                if (ready) {
-                    f.call(document);
-                }
-            };
-        };
-        
-        /* 
-         * Warm up 
-         */
-
-        // Hide document body while loading
-        hideBody();         
-
-        // On document ready
-        Mootor.ready = function(fn) {
-            onReady(fn);
-        };
-               
-        /* 
-         * Public 
-        */
-       
-        return {            
-            
-            // Returns Mootor API hostname
-            getApiHost: function() {
-                return API_HOST;
-            },
-
-            // Returns current object
-            getCurrentObj: function() {
-                return obj;
-            },
-            
-            // Returns Mootor API Uri, by module (Core, Catalog, etc)
-            getApiUri: function(mod) {
-                switch( mod ) {
-                case "core":
-                    return API_CORE_URI;
-                case "catalog":
-                    return API_CATALOG_URI;
-                default:
-                    return undefined;
-                }
-            },
-
-            // Returns Mootor current version
-            version: function() {
-                return VERSION;
-            }
-        };
-        
-    }());   
-    
-    
-    // Sandbox for modules
-    function Sandbox() {
+    // Mootor sandbox
+    function Mootor() {
  
         var args = Array.prototype.slice.call(arguments),
         callback = args.pop(),
@@ -208,26 +21,27 @@
         modules = (args[0] && typeof args[0] === "string") ? args : args[0];
         
         // Called as a constructor       
-        if (!(this instanceof Sandbox)) {
-            console.log("New instance!");
-            return new Sandbox(modules, callback);
+        if (!(this instanceof Mootor)) {
+            return new Mootor(modules, callback);
         }
 
+        /*
         // Add properties to 'this' instance
-        /*this.a = 1,
+        this.a = 1,
         this.b = 2,
         this.getA = function() {
             return this.a;
-        };*/
+        };
+        */
         
         // Load all modules
         if (!modules || modules === '*') {
 
             modules = [];
 
-            for (i in Sandbox.modules)
+            for (i in Mootor.modules)
             {
-                if (Sandbox.modules.hasOwnProperty(i)) {
+                if (Mootor.modules.hasOwnProperty(i)) {
                     modules.push(i);
                 }
             } 
@@ -235,15 +49,14 @@
         
         // Add modules to 'this' instance
         for( i = 0; i < modules.length; i += 1) {
-            Sandbox.modules[modules[i]](this);
+            Mootor.modules[modules[i]](this);
         } 
         
         // Returns instance
         callback(this);
         
         // Add properties to prototype
-        Sandbox.prototype = {
-            name: "Mootor",
+        Mootor.prototype = {
             version: "0.1",
             getVersion: function() {
                 return this.version;
@@ -252,9 +65,40 @@
         
     }
         
-    Sandbox.modules = {};    
+    Mootor.modules = {};    
     
-    Sandbox.modules.core = function(box){
+    Mootor.modules.core = function(box){
+        
+        // Hide/show document body 
+
+        var init_styles = "",
+
+        hideBody = function() {
+            init_styles = document.createElement("style");
+            init_styles.innerHTML = "body * {display: none}";
+            // Hiding styles...
+            document.head.appendChild(init_styles);     
+        },
+        showBody = function() {
+            // Showing styles...
+            document.head.removeChild(init_styles);                  
+        },
+    
+        documentInit = function() {
+            document.body.style.overflow = "hidden";
+            // document ready! show body
+            showBody();
+        },
+        
+        extend = function(instance, module) {
+            var i;
+            for( i in module ) {
+                if ( module.hasOwnProperty(i)) {
+                    instance[i] = module[i];                      
+                }  
+            }            
+        }
+
         box.init = function(query) {
             
             var el;
@@ -263,187 +107,186 @@
                 query = query.replace("#","");
                 el = document.getElementById(query);
             } 
-
+            
             return {
+
                 obj: el,
-                ajax: function() {
-                    return new Sandbox("ajax",function(){});
+                ready: function(fn) {
+                    Moo.ready(fn);
                 },
                 dom: function() {
-                    return new Sandbox("dom",function(){});
+                    this.dom = new Mootor("dom",function(){});
+                    return this;
                 },
                 event: function() {
-                    return new Sandbox("event",function(){});
+                    this.event = new Mootor("event",function(){});
+                    return this;
+                },
+                pageInit: function() {
+                    Moo.pageInit();
+                },
+
+                Fx: function() {
+                    Fx = new Mootor("Fx",function(){});
+                    extend(this, Fx);                    
+                    return this; 
+                },
+                Nav: function() {
+                    Nav = new Mootor("Nav",function(){});
+                    extend(this, Nav);                    
+                    return this;
+                },
+                Event: function() {
+                    Event = new Mootor("Event",function(){});
+                    extend(this, Event);                    
+                    return this;
                 }
+
             };
+        },
+        box.ready = function(fn) {
+            var ready = false;
+            
+            // Handler to check if the dom is full loaded
+            handler = function(e) {                
+                if (ready) {return;}
+                if (e.type === "readystatechange" && document.readyState !== "complete") {return;}
+                    fn.call(document);
+                    ready = true;                        
+            };
+
+            // Add listeners for all common load events
+            if (window.addEventListener) {
+                window.addEventListener("DOM-ContentLoaded", handler, false);
+                window.addEventListener("readystatechange", handler, false);
+                window.addEventListener("load", handler, false);                            
+            } // IE8 needs attachEvent() support
+        },
+        box.pageInit = function() {
+            hideBody();
+            Moo.ready(documentInit);
         }
     };
 
-    Sandbox.modules.dom = function(box){
+    Mootor.modules.dom = function(box){
         box.getElement = function(eid) {
             eid = eid.replace("#","");
             var el = document.getElementById(eid);
             return el;
-        };
+        },
         box.getDivs = function() {
             console.log(obj);
-        };
+        }
     };
     
-    Sandbox.modules.event = function(box){
+    Mootor.modules.event = function(box){
         box.bind = function() {
             console.log("bind!");
         }
     };    
-
-    Sandbox.modules.ajax = function(box){
-        box.sendRequest = function() {
-            console.log("send ajax request!!");
-        }
-        box.getResponse = function() {
-            console.log("get ajax response!");
-        }
-    }; 
-    
-    var Moo = Sandbox("core",function(){});            
-    window.$ = Moo.init;
-    
-    /* Main function to call
-    function Moot (query) {
        
-        // Auto-init function
-        var Moo = (function(){
-            
-            // Temporary object
-            console.log(typeof Mootor.Core);
-            return {
-                obj: query,
-                ext: `Mootor,
-                getInstance: function() {
-                    console.log(this)
-                }               
-            }
+    // An instance of Mootor core
+    var Moo = Mootor("core",function(){});            
 
-        }());
+    // Let's go public!
+    window.$ = Moo.init;
+    window.Mootor = Mootor;
         
-        if( typeof query === "string" && query.indexOf("#") > -1 ) {
-            Moo.obj = document.getElementById(query.replace("#",""));
-        }
-              
-        return Moo;
-    }
-    
-    // Let's go!
-    window.$ = window.Moo = Moot; 
-    */
-    
-    window.Mootor = Mootor;   
-
-
 }(window));
 /*
  * Mootor Effects (coded by emi420@gmail.com)
  */
 
-(function(Mootor, window) {
+(function(Mootor, window, $) {
 
-    Mootor.namespace('Mootor.Fx');
-    Mootor.Fx = (function() {
-
+    Mootor.modules.Fx = function(box){
+    
         var max_font_size,
-        min_font_size,
+        min_font_size, 
         init_client_width,
         divPanels;
         
         max_font_size=105;
         min_font_size=20;
         init_client_width=document.documentElement.clientWidth;
-        divPanels = Mootor.Core.getCurrentObj();
-                
-        /*
-         * Public
-         */ 
-         
-        return {            
+        
+        // Show element
+        box.show = function(e) {
+            e.style.display = "block";
+        };
+        
+        // Hide element
+        box.hide = function(e) {
+            e.style.display = "none";
+        };
+                        
+        // Adjust font size relative to viewport size
+        box.dynamicType = function() {
+           var divPanels = this.obj;
+            // Update viewport font-size
+           var updateSize = function() {
+                var font_size = window.innerWidth / 10 + (window.innerHeight / 40);
 
-            // Show element
-            show: function(e) {
-                e.style.display = "block";
-            },
-            
-            // Hide element
-            hide: function(e) {
-                e.style.display = "none";
-            },
-            
-            // Adjust font size relative to viewport size
-            dynamicType: function() {
-
-                // Update viewport font-size
-                var updateSize = function() {
-                    var font_size = window.innerWidth / 10 + (window.innerHeight / 40);
-
-                    if( typeof(document.body) !== null) {
-                        if(font_size < max_font_size && font_size > min_font_size) {
-                          document.body.style.fontSize=font_size + "%";                  
-                        } else if(font_size >= max_font_size) {
-                          document.body.style.fontSize=max_font_size + "%";                  
-                        } else if(font_size <= min_font_size) {
-                          document.body.style.fontSize=min_font_size + "%";                  
-                        }
+                if( typeof(document.body) !== null) {
+                    if(font_size < max_font_size && font_size > min_font_size) {
+                      document.body.style.fontSize=font_size + "%";                  
+                    } else if(font_size >= max_font_size) {
+                      document.body.style.fontSize=max_font_size + "%";                  
+                    } else if(font_size <= min_font_size) {
+                      document.body.style.fontSize=min_font_size + "%";                  
                     }
+                }
+                divPanels.style.width = document.documentElement.clientWidth + "px";
+            };    
 
-                    divPanels.style.width = document.documentElement.clientWidth + "px";
-                },                
+            // Handler to capture orientationchange event when is not present
+            // or resize on desktop browsers
 
-                // Handler to capture orientationchange event when is not present
-                // or resize on desktop browsers
+            var eventHandler = function(fn) {
 
-                eventHandler = function(fn) {
-
-                   /*
-                    *  FIXME: - use callback function (fn)
-                    */
-                   
-                   // Viewport width size
+               /*
+                *  FIXME: - use callback function (fn)
+                *           updateSize() is hardoded function
+                */
+               
+               // Viewport width size
                    var clientWidth = document.documentElement.clientWidth;                   
  
                    if( clientWidth != init_client_width) {
 
                       // Check if new width is equal to screen size (orientationchange)
-                      // or different (window resize)
+                  // or different (window resize)
 
-                      if (( clientWidth == screen.width || clientWidth == screen.height ) ||
-                          ( clientWidth != screen.width && clientWidth != screen.height)) {
-                          updateSize();
-                      }
-                       
-                       // Set new init client width
-                       init_client_width = clientWidth;
-                   }
-                };
+                  if (( clientWidth == screen.width || clientWidth == screen.height ) ||
+                      ( clientWidth != screen.width && clientWidth != screen.height)) {
+                      updateSize();
+                  }
+                   
+                   // Set new init client width
+                   init_client_width = clientWidth;
+               }
+            };
 
-                // Add event listeners to update font size when user 
-                // rotate a device or resize a window
-                if( window.onorientationchange ) {
-                    window.addEventListener( "onorientationchange", updateSize, false);
-                } else {
-                    window.addEventListener( "resize", eventHandler, false);                    
-                }
-                
-                // Update current font-size
+            // Add event listeners to update font size when user 
+            // rotate a device or resize a window
+            if( window.onorientationchange ) {
+                window.addEventListener( "onorientationchange", updateSize, false);
+            } else {
+                window.addEventListener( "resize", eventHandler, false);                    
+            }
+            
+            // Update current font-size
                 updateSize();
  
-            }            
-        };        
-    }());   
+            };           
+    };
 
-}(Mootor, window));
-(function(Mootor, window) {
+}(Mootor, window, $));
+(function(Mootor, window, $) {
 
-    Mootor.namespace('Mootor.Event');
-    Mootor.Event = (function() {
-        var Fx = Mootor.Fx;
+    Mootor.modules.Event = function(box) {
+
+        var Fx = Mootor.modules.Fx;
 
         var pointStartX=0,
         pointLastX=0;
@@ -489,9 +332,8 @@
             }
         };
         
-        return {            
-            bind: function(el ,event, callback ) {                
-                var fn = function() { dragHandler(callback) };
+        box.bind = function(el ,event, callback ) {                
+                var fn = function() { dragHandler(callback) };                
                 // Drag
                 switch( event ) {
                 case "drag": 
@@ -502,34 +344,31 @@
                 case "dragEnd": 
                     el.addEventListener("touchend", fn, false);
                     break;
-                }
             }
-        };        
-    }());   
+        };
+    };   
 
-}(Mootor, window));
+}(Mootor, window, $));
 /*
  * Mootor Navigation (coded by emi420@gmail.com)
  */
 
 (function(Mootor, window, $) {
 
-    Mootor.namespace('Mootor.Nav');
-    Mootor.Nav = (function() {
-
+    Mootor.modules.Nav = function(box) {
+        
         /*
          * Dependencies
          */ 
 
-        var Fx = Mootor.Fx,
-        Event = Mootor.Event;
-
+        var Fx = $().Fx(),        
+        Event = $().Event();
+       
         /*
          * Public 
          */ 
 
-        return {            
-            Panels: function() {
+        box.Panels = function() {
 
                 /*
                  * Navigation panels
@@ -553,7 +392,7 @@
                 divPanels;
                 
                 // All panels
-                divPanels = Mootor.Core.getCurrentObj();                
+                divPanels = this.obj;                
                 panels = divPanels.getElementsByClassName("panel");
                 
                 // First panel
@@ -676,30 +515,9 @@
 
                 // Show first panel
                 Fx.show(panels[0]);                
-            }
+                
+                
         };
-    }());   
+    };   
 
 }(Mootor, window, $));
-(function(Mootor, window) {
-
-    Mootor.namespace('Mootor.Form');
-    Mootor.Form = (function() {        
-        return {            
-            init: function() {
-            }
-        };        
-    }());   
-
-}(Mootor, window));
-(function(Mootor, window) {
-
-    Mootor.namespace('Mootor.Catalog');
-    Mootor.Catalog = (function() {
-        return {            
-            init: function() {
-            }
-        };        
-    }());   
-
-}(Mootor, window));
