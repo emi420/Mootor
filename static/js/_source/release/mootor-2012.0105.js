@@ -12,6 +12,44 @@
  *     $(document).Fx.dynamicType();
  */
 
+
+/*
+ *  Instances pattern
+ */
+
+/*
+// Anonymous function for local scope
+(function(window) {
+    
+   // Main function to call
+   function Moot (query) {
+       
+        // Auto-init function
+        var Moo = (function(){
+            
+            // Temporary object
+            return {
+                obj: query,
+                check: function() {
+                    console.log(this)
+                }               
+            }
+
+        }());
+       
+        // Return instance
+        return Moo;
+    }
+    
+    // Make public!
+    window.$$ = window.Moo = Moot;
+
+}(window));
+  */  
+    
+
+// *** codigo original ***/
+
 (function(window) {
 
     var Mootor = Mootor || {};
@@ -46,6 +84,7 @@
      * Core
      */
     Mootor.namespace('Mootor.Core');
+    
     Mootor.Core = (function() {
         
         /*
@@ -59,6 +98,7 @@
         VERSION = 0.1,
         init_styles,
         obj;
+        
 
         /*
          * Initializing document
@@ -126,18 +166,6 @@
        
         return {            
             
-            // Instance init
-            // FIXME: no arma bien las instancias
-            init: function(e) {
-                if( typeof e === "string" && e.indexOf("#") >= 0) {
-                    obj = document.getElementById(e.replace("#",""));                    
-                    return Mootor;
-                } else {
-                    // Instance init, usage: $().Core.getApiHost()
-                    return Mootor;
-                }
-            },
-            
             // Returns Mootor API hostname
             getApiHost: function() {
                 return API_HOST;
@@ -168,12 +196,30 @@
         
     }());   
     
-    // Mootor go public        
-    window.Mootor = Mootor;    
+    // Main function to call
+    function Moot (query) {
+       
+        // Auto-init function
+        var Moo = (function(){
+            
+            // Temporary object
+            return {
+                obj: query,
+                check: function() {
+                    console.log(this)
+                }               
+            }
+
+        }());
+       
+        console.log(mootor.obj)
+        // Return instance
+        return Moo;
+    }
     
-    // Alias for convenience
-    window.$ = Mootor.Core.init;
-    
+    // Let's go!
+    window.$ = window.Moo = Moot;    
+
 
 }(window));
 /*

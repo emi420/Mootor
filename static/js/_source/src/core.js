@@ -12,6 +12,44 @@
  *     $(document).Fx.dynamicType();
  */
 
+
+/*
+ *  Instances pattern
+ */
+
+/*
+// Anonymous function for local scope
+(function(window) {
+    
+   // Main function to call
+   function Moot (query) {
+       
+        // Auto-init function
+        var Moo = (function(){
+            
+            // Temporary object
+            return {
+                obj: query,
+                check: function() {
+                    console.log(this)
+                }               
+            }
+
+        }());
+       
+        // Return instance
+        return Moo;
+    }
+    
+    // Make public!
+    window.$$ = window.Moo = Moot;
+
+}(window));
+  */  
+    
+
+// *** codigo original ***/
+
 (function(window) {
 
     var Mootor = Mootor || {};
@@ -46,6 +84,7 @@
      * Core
      */
     Mootor.namespace('Mootor.Core');
+    
     Mootor.Core = (function() {
         
         /*
@@ -59,6 +98,7 @@
         VERSION = 0.1,
         init_styles,
         obj;
+        
 
         /*
          * Initializing document
@@ -126,18 +166,6 @@
        
         return {            
             
-            // Instance init
-            // FIXME: no arma bien las instancias
-            init: function(e) {
-                if( typeof e === "string" && e.indexOf("#") >= 0) {
-                    obj = document.getElementById(e.replace("#",""));                    
-                    return Mootor;
-                } else {
-                    // Instance init, usage: $().Core.getApiHost()
-                    return Mootor;
-                }
-            },
-            
             // Returns Mootor API hostname
             getApiHost: function() {
                 return API_HOST;
@@ -168,11 +196,148 @@
         
     }());   
     
-    // Mootor go public        
-    window.Mootor = Mootor;    
     
-    // Alias for convenience
-    window.$ = Mootor.Core.init;
+    // Sandbox for modules
+    function Sandbox() {
+ 
+        var args = Array.prototype.slice.call(arguments),
+        callback = args.pop(),
+        i;
+        
+        // Get modules from parameters
+        modules = (args[0] && typeof args[0] === "string") ? args : args[0];
+        
+        // Called as a constructor       
+        if (!(this instanceof Sandbox)) {
+            console.log("New instance!");
+            return new Sandbox(modules, callback);
+        }
+
+        // Add properties to 'this' instance
+        /*this.a = 1,
+        this.b = 2,
+        this.getA = function() {
+            return this.a;
+        };*/
+        
+        // Load all modules
+        if (!modules || modules === '*') {
+
+            modules = [];
+
+            for (i in Sandbox.modules)
+            {
+                if (Sandbox.modules.hasOwnProperty(i)) {
+                    modules.push(i);
+                }
+            } 
+        }            
+        
+        // Add modules to 'this' instance
+        for( i = 0; i < modules.length; i += 1) {
+            Sandbox.modules[modules[i]](this);
+        } 
+        
+        // Returns instance
+        callback(this);
+        
+        // Add properties to prototype
+        Sandbox.prototype = {
+            name: "Mootor",
+            version: "0.1",
+            getVersion: function() {
+                return this.version;
+            }
+        };            
+        
+    }
+        
+    Sandbox.modules = {};    
     
+    Sandbox.modules.core = function(box){
+        box.init = function(query) {
+            
+            var el;
+
+            if( typeof query === "string" && query.indexOf("#") > -1) {
+                query = query.replace("#","");
+                el = document.getElementById(query);
+            } 
+
+            return {
+                obj: el,
+                ajax: function() {
+                    return new Sandbox("ajax",function(){});
+                },
+                dom: function() {
+                    return new Sandbox("dom",function(){});
+                },
+                event: function() {
+                    return new Sandbox("event",function(){});
+                }
+            };
+        }
+    };
+
+    Sandbox.modules.dom = function(box){
+        box.getElement = function(eid) {
+            eid = eid.replace("#","");
+            var el = document.getElementById(eid);
+            return el;
+        };
+        box.getDivs = function() {
+            console.log(obj);
+        };
+    };
+    
+    Sandbox.modules.event = function(box){
+        box.bind = function() {
+            console.log("bind!");
+        }
+    };    
+
+    Sandbox.modules.ajax = function(box){
+        box.sendRequest = function() {
+            console.log("send ajax request!!");
+        }
+        box.getResponse = function() {
+            console.log("get ajax response!");
+        }
+    }; 
+    
+    var Moo = Sandbox("core",function(){});            
+    window.$ = Moo.init;
+    
+    /* Main function to call
+    function Moot (query) {
+       
+        // Auto-init function
+        var Moo = (function(){
+            
+            // Temporary object
+            console.log(typeof Mootor.Core);
+            return {
+                obj: query,
+                ext: `Mootor,
+                getInstance: function() {
+                    console.log(this)
+                }               
+            }
+
+        }());
+        
+        if( typeof query === "string" && query.indexOf("#") > -1 ) {
+            Moo.obj = document.getElementById(query.replace("#",""));
+        }
+              
+        return Moo;
+    }
+    
+    // Let's go!
+    window.$ = window.Moo = Moot; 
+    */
+    
+    window.Mootor = Mootor;   
+
 
 }(window));
