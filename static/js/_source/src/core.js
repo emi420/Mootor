@@ -17,7 +17,7 @@
         callback = args.pop(),
         i;
         
-        // Get modules from parameters
+        // Get modules from parameters, ex: new Mootor("*",function(){});
         modules = (args[0] && typeof args[0] === "string") ? args : args[0];
         
         // Called as a constructor       
@@ -64,7 +64,11 @@
         };            
         
     }
-        
+    
+    /*
+     *  Core modules
+     */    
+     
     Mootor.modules = {};    
     
     Mootor.modules.core = function(box){
@@ -73,23 +77,25 @@
 
         var init_styles = "",
 
+        // Hide document body
         hideBody = function() {
             init_styles = document.createElement("style");
             init_styles.innerHTML = "body * {display: none}";
-            // Hiding styles...
             document.head.appendChild(init_styles);     
         },
+        
+        // Show document body
         showBody = function() {
-            // Showing styles...
             document.head.removeChild(init_styles);                  
         },
     
+        // On document ready
         documentInit = function() {
             document.body.style.overflow = "hidden";
-            // document ready! show body
             showBody();
         },
         
+        // Util function for extend instance object
         extend = function(instance, module) {
             var i;
             for( i in module ) {
@@ -99,6 +105,11 @@
             }            
         }
 
+        /*
+         *  Public
+         */ 
+        
+        // Main method for create Mootor instances        
         box.init = function(query) {
             
             var el;
@@ -144,6 +155,8 @@
 
             };
         },
+        
+        // On document ready
         box.ready = function(fn) {
             var ready = false;
             
@@ -162,30 +175,15 @@
                 window.addEventListener("load", handler, false);                            
             } // IE8 needs attachEvent() support
         },
+        
+        // Initialize page
         box.pageInit = function() {
             hideBody();
             Moo.ready(documentInit);
         }
     };
-
-    Mootor.modules.dom = function(box){
-        box.getElement = function(eid) {
-            eid = eid.replace("#","");
-            var el = document.getElementById(eid);
-            return el;
-        },
-        box.getDivs = function() {
-            console.log(obj);
-        }
-    };
-    
-    Mootor.modules.event = function(box){
-        box.bind = function() {
-            console.log("bind!");
-        }
-    };    
        
-    // An instance of Mootor core
+    // Main instance
     var Moo = Mootor("core",function(){});            
 
     // Let's go public!

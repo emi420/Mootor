@@ -17,7 +17,7 @@
         callback = args.pop(),
         i;
         
-        // Get modules from parameters
+        // Get modules from parameters, ex: new Mootor("*",function(){});
         modules = (args[0] && typeof args[0] === "string") ? args : args[0];
         
         // Called as a constructor       
@@ -64,7 +64,11 @@
         };            
         
     }
-        
+    
+    /*
+     *  Core modules
+     */    
+     
     Mootor.modules = {};    
     
     Mootor.modules.core = function(box){
@@ -73,23 +77,25 @@
 
         var init_styles = "",
 
+        // Hide document body
         hideBody = function() {
             init_styles = document.createElement("style");
             init_styles.innerHTML = "body * {display: none}";
-            // Hiding styles...
             document.head.appendChild(init_styles);     
         },
+        
+        // Show document body
         showBody = function() {
-            // Showing styles...
             document.head.removeChild(init_styles);                  
         },
     
+        // On document ready
         documentInit = function() {
             document.body.style.overflow = "hidden";
-            // document ready! show body
             showBody();
         },
         
+        // Util function for extend instance object
         extend = function(instance, module) {
             var i;
             for( i in module ) {
@@ -99,6 +105,11 @@
             }            
         }
 
+        /*
+         *  Public
+         */ 
+        
+        // Main method for create Mootor instances        
         box.init = function(query) {
             
             var el;
@@ -144,6 +155,8 @@
 
             };
         },
+        
+        // On document ready
         box.ready = function(fn) {
             var ready = false;
             
@@ -162,30 +175,15 @@
                 window.addEventListener("load", handler, false);                            
             } // IE8 needs attachEvent() support
         },
+        
+        // Initialize page
         box.pageInit = function() {
             hideBody();
             Moo.ready(documentInit);
         }
     };
-
-    Mootor.modules.dom = function(box){
-        box.getElement = function(eid) {
-            eid = eid.replace("#","");
-            var el = document.getElementById(eid);
-            return el;
-        },
-        box.getDivs = function() {
-            console.log(obj);
-        }
-    };
-    
-    Mootor.modules.event = function(box){
-        box.bind = function() {
-            console.log("bind!");
-        }
-    };    
        
-    // An instance of Mootor core
+    // Main instance
     var Moo = Mootor("core",function(){});            
 
     // Let's go public!
@@ -198,35 +196,38 @@
  */
 
 (function(Mootor, window, $) {
-
+    
     Mootor.modules.Fx = function(box){
+ 
+        // Module dependences
+        var Event = $().Event();
     
         var max_font_size,
-        min_font_size, 
-        init_client_width,
-        divPanels;
+        min_font_size;
         
+        // Max and Min font sizes
         max_font_size=105;
         min_font_size=20;
-        init_client_width=document.documentElement.clientWidth;
         
-        // Show element
+        // Show an element
         box.show = function(e) {
             e.style.display = "block";
         };
         
-        // Hide element
+        // Hide an element
         box.hide = function(e) {
             e.style.display = "none";
         };
                         
         // Adjust font size relative to viewport size
         box.dynamicType = function() {
-           var divPanels = this.obj;
-            // Update viewport font-size
-           var updateSize = function() {
-                var font_size = window.innerWidth / 10 + (window.innerHeight / 40);
 
+            // Update viewport font-size
+           var updateSize = function() {               
+
+                // This calc can be optimized
+                var font_size = window.innerWidth / 10 + (window.innerHeight / 40);
+                
                 if( typeof(document.body) !== null) {
                     if(font_size < max_font_size && font_size > min_font_size) {
                       document.body.style.fontSize=font_size + "%";                  
@@ -236,69 +237,53 @@
                       document.body.style.fontSize=min_font_size + "%";                  
                     }
                 }
-                divPanels.style.width = document.documentElement.clientWidth + "px";
+
             };    
 
-            // Handler to capture orientationchange event when is not present
-            // or resize on desktop browsers
-
-            var eventHandler = function(fn) {
-
-               /*
-                *  FIXME: - use callback function (fn)
-                *           updateSize() is hardoded function
-                */
-               
-               // Viewport width size
-                   var clientWidth = document.documentElement.clientWidth;                   
- 
-                   if( clientWidth != init_client_width) {
-
-                      // Check if new width is equal to screen size (orientationchange)
-                  // or different (window resize)
-
-                  if (( clientWidth == screen.width || clientWidth == screen.height ) ||
-                      ( clientWidth != screen.width && clientWidth != screen.height)) {
-                      updateSize();
-                  }
-                   
-                   // Set new init client width
-                   init_client_width = clientWidth;
-               }
-            };
-
             // Add event listeners to update font size when user 
-            // rotate a device or resize a window
-            if( window.onorientationchange ) {
-                window.addEventListener( "onorientationchange", updateSize, false);
-            } else {
-                window.addEventListener( "resize", eventHandler, false);                    
-            }
+            // rotate device (or resize window)
+            Event.bind(window, "orientationChange", updateSize);
             
-            // Update current font-size
-                updateSize();
+            // Initialize font-size
+            updateSize();
  
-            };           
+         };           
     };
 
 }(Mootor, window, $));
+/*
+ * Mootor Events (coded by emi420@gmail.com)
+ */
+
 (function(Mootor, window, $) {
 
     Mootor.modules.Event = function(box) {
 
+        /*
+         * Module dependencies
+         */ 
+
         var Fx = Mootor.modules.Fx;
 
         var pointStartX=0,
-        pointLastX=0;
+        pointLastX=0,
+        init_client_width;        
+    
+        // Initial viewport width
+        init_client_width=document.documentElement.clientWidth;
 
+        // Handler for drag events
         var dragHandler = function(fn) {
             
             var distance=0,
             pageX,
             eventType;
 
-            eventType = event.type;
-            
+            eventType = event.type;            
+
+            // If touch start or move, update X position and distance            
+            // from previous X point
+
             if ( eventType === "touchmove" || eventType === "touchstart") {
                 pageX = event.touches[0].pageX;
                 distance =  pageX - pointLastX;
@@ -308,7 +293,8 @@
 
             case "touchstart":
 
-                // Initialize previus and start points
+                // Initialize previous and start points
+
                 pointLastX = pointStartX = pageX;    
                 break;
 
@@ -316,15 +302,19 @@
             
                 // Prevents default handlers took over event
                 event.preventDefault();
-                // Previuos X point
+
+                // Update previuos X point
                 pointLastX = pageX;                
-                // Callback function
+
+                // Call callback function
                 fn(distance);                
                 break;
                 
             case "touchend":
             
-                // Distance from start to last points
+                // Update distance from start to last point
+                // and call callback function
+                
                 distance = pointStartX - pointLastX;
                 fn(distance);
                 break;
@@ -332,18 +322,60 @@
             }
         };
         
+        // Handler to capture orientationchange event when is not present
+        // (ex: Android 2.2) or resize window on desktop browsers
+        var viewportHandler = function(fn) {
+
+            // Viewport width size
+            var clientWidth = document.documentElement.clientWidth;                   
+ 
+            if( clientWidth != init_client_width) {
+
+                 // Check if new width is equal to screen size (orientationchange)
+                 // or different (window resize) and call callback function
+
+                 if (( clientWidth == screen.width || clientWidth == screen.height ) ||
+                     ( clientWidth != screen.width && clientWidth != screen.height)) {
+                     fn.call();
+                 }
+                   
+                 // Set new init client width
+                 init_client_width = clientWidth;
+            }
+        };   
+                       
+        /*
+         * Public 
+         */ 
+         
         box.bind = function(el ,event, callback ) {                
-                var fn = function() { dragHandler(callback) };                
-                // Drag
-                switch( event ) {
-                case "drag": 
-                    el.addEventListener("touchstart", fn, false);
-                    el.addEventListener("touchmove", fn, false);                    
-                    //el.addEventListener("touchend", fn, false);
-                    break;
-                case "dragEnd": 
-                    el.addEventListener("touchend", fn, false);
-                    break;
+            var fn;
+            
+            switch( event ) {
+
+            case "drag": 
+
+                fn = function() { dragHandler(callback); };                
+                el.addEventListener("touchstart", fn, false);
+                el.addEventListener("touchmove", fn, false);                    
+                break;
+
+            case "dragEnd": 
+
+                fn = function() { dragHandler(callback); };                
+                el.addEventListener("touchend", fn, false);
+                break;
+
+            case "orientationChange": 
+            
+                fn = function() { viewportHandler(callback); };                
+                if( typeof el.onorientationchange != "undefined" ) {
+                    el.addEventListener("orientationchange", fn, false);
+                } else {
+                    el.addEventListener("resize", fn, false);                    
+                }
+                break;
+
             }
         };
     };   
@@ -358,7 +390,7 @@
     Mootor.modules.Nav = function(box) {
         
         /*
-         * Dependencies
+         * Module dependencies
          */ 
 
         var Fx = $().Fx(),        
@@ -370,153 +402,176 @@
 
         box.Panels = function() {
 
-                /*
-                 * Navigation panels
-                 * 
-                 * TODO: - resize things onorientationchange
-                 *       - limit and bounce back panels move with swipe
-                 *       - if swipe reach certain limit, load new content 
-                 *         in blank panel
-                 */
+            /*
+             * Navigation panels
+             * 
+             * TODO: 
+             *       - if onDragEnd reach certain limit, load new content 
+             *         in blank panel
+             */
 
-                var i = 0,
-                panelCount = 0,
-                clientWidth = 0,
-                panelsX = 0,
-                clientHeight,
-                blankPanel,
-                panels_container,
-                first,
-                current,
-                panels,
-                divPanels;
+            var i = 0,
+            clientWidth = 0,
+            clientHeight = 0,
+            panelCount = 0,
+            panelsX = 0,
+            blankPanel,
+            first,
+            current,
+            panels,
+            divPanels;
+            
+            // All panels
+            divPanels = this.obj;                
+            panels = divPanels.getElementsByClassName("panel");
+            
+            // First panel
+            first = panels[0];
+            current = 0;
+            
+            // Viewport sizes
+            clientHeight = document.documentElement.clientHeight;
+            clientWidth = document.documentElement.clientWidth;
+            
+            // Create new panel
+            var create = function(options) {
+
+                var panel;                    
+                var id = options.id;
+                                    
+                // Create a div
+                panel = document.createElement('div');
+                panel.id = id;
                 
-                // All panels
-                divPanels = this.obj;                
-                panels = divPanels.getElementsByClassName("panel");
+                // Add viewport size to div
+                panel.style.width = clientWidth + "px";
+                panel.style.height = clientHeight + "px";               
                 
-                // First panel
-                first = panels[0];
-                current = 0;
-                
-                // Viewport sizes
+                // Add panel to panels div
+                divPanels.appendChild(panel);
+                return panel;                    
+            },
+            
+            // Hide all panels
+            hideAll = function() {
+                panelCount = panels.length;
+                for(; i < panelCount ; i += 1) {
+                    Fx.hide(panels[i]);
+                    if(clientHeight > panels[i].style.height) {
+                        panels[i].style.height = clientHeight + "px";
+                    }
+                }
+            },
+            
+            // Reset panel width size 
+            resetWidth = function(panel) {
+                panel.style.width = clientWidth + "px";                    
+            },
+
+            // Reset panel height size 
+            resetHeight = function(panel) {
+                panel.style.height = clientHeight + "px";                    
+            },
+
+            // Reset panel left position 
+            resetLeft = function(panel) {
+                panel.style.left = (clientWidth + 40) + "px";
+            },
+
+            // Reset panels container size and position
+            resetContainer = function() {
+                divPanels.style.width = (clientWidth * 2) + "px"; 
+                divPanels.style.height = clientHeight + "px";
+                divPanels.style.left = (clientWidth * (-1) - 40) + "px";                    
+            },
+            
+            // Reset panel size and position
+            resetPanel = function(panel) {
+
+                var width = clientWidth,
+                height = resetHeight;
+
+                resetWidth( panel );
+                resetHeight( panel );
+
+                if( panel === blankPanel) {
+                    panel.style.left = "0px";              
+                } else {
+                    panel.style.left = (clientWidth + 40) + "px";
+                }
+            },
+            
+            // Move screen horizontally 
+            moveScreenH = function(distance) {
+
+                 // New horizontal position
+                 panelsX = panelsX + distance;  
+                                
+                 // Apply 3d transform when its available
+                 // or use default CSS 'left' property
+                 divPanels.style.transitionProperty = "webkit-transform";
+                 if( divPanels.style.webkitTransform != "undefined" ) {
+                     divPanels.style.webkitTransform = "translate3d(" + panelsX + "px,0, 0)";    
+                 } else {
+                     divPanels.style.left = panelsX + "px";                                                      
+                 }
+            },
+
+            // Load panel
+            load = function(index) {
+                console.log("load " + index);                    
+            },              
+
+            // DragEnd event handler
+            eventHandler = function(distance) {
+                var maxdist = ( clientHeight / 4 ) * 3;
+                if( distance > maxdist ) {
+                    load(current + 1 );
+                } else if (distance < -maxdist ) {
+                    if( current > 0 ) {
+                        load( current - 1 );                        
+                    }
+                }
+                moveScreenH(distance);                                            
+            },
+            
+            // Reset panels sizes and positions
+            resetAll = function() {                    
+                                    
+                // Current viewport
                 clientHeight = document.documentElement.clientHeight;
                 clientWidth = document.documentElement.clientWidth;
                 
-                // Handler for gestures (swipe, tap, etc)
-                var eventHandler = function() {
-                    //console.log("Change panel!");
-                    console.log(event);
-                },
+                // Reset current and blank panels
+                resetPanel(panels[current]);
+                resetPanel(blankPanel);                 
 
-                // Create new panel
-                create = function(options) {
-
-                    var panel;                    
-                    var id = options.id;
-                                        
-                    // Create a div
-                    panel = document.createElement('div');
-                    panel.id = id;
-                    
-                    // Add viewport size to div
-                    panel.style.width = clientWidth + "px";
-                    panel.style.height = clientHeight + "px";               
-                    
-                    // Add panel to panels div
-                    divPanels.appendChild(panel);
-                    return panel;                    
-                },
-                
-                // Hide all panels
-                hideAll = function() {
-                    panelCount = panels.length - 1 ;
-                    for(; i < panelCount ; i += 1) {
-                        Fx.hide(panels[i]);
-                        if(clientHeight > panels[i].style.height) {
-                            panels[i].style.height = clientHeight + "px";
-                        }
-                    }
-                },
-                
-                // Reset panel width size 
-                resetWidth = function(panel) {
-                    panel.style.width = clientWidth + "px";                    
-                },
-
-                // Reset panel left position 
-                resetLeft = function(panel) {
-                    panel.style.left = (clientWidth + 40) + "px";
-                },
-
-                // Reset panels container size and position
-                resetContainer = function() {
-                    divPanels.style.width = (clientWidth * 2) + "px"; 
-                    divPanels.style.height = clientHeight + "px";
-                    divPanels.style.left = (clientWidth * (-1) - 40) + "px";                    
-                },
-                
-                // Move screen horizontally 
-                moveScreenH = function(distance) {
-    
-                     // New horizontal position
-                     panelsX = panelsX + distance;  
-                                    
-                     // Apply 3d transform when its available
-                     // or use default CSS 
-                     divPanels.style.transitionProperty = "webkit-transform";
-                     if( divPanels.style.webkitTransform != "undefined" ) {
-                         divPanels.style.webkitTransform = "translate3d(" + panelsX + "px,0, 0)";    
-                     } else {
-                         divPanels.style.left = panelsX + "px";                                                      
-                     }
-                },
-
-                // Load
-                load = function(index) {
-                    console.log("load " + index);                    
-                },              
-
-                // Drag end event handler
-                eventHandler = function(distance) {
-                    var maxdist = ( clientHeight / 4 ) * 3;
-                    if( distance > maxdist ) {
-                        load(current + 1 );
-                    } else if (distance < -maxdist ) {
-                        if( current > 0 ) {
-                            load( current - 1 );                        
-                        }
-                    }
-                    moveScreenH(distance);                                            
-                };
-                
-                /*
-                 *  Initialize panels
-                 */
-                
-                // Drag and drag-end custom events listener
-                Event.bind(document.body, "drag", moveScreenH);
-                Event.bind(document.body, "dragEnd", eventHandler);
-    
-                // Create a blank panel for load content
-                blankPanel = create({
-                    id: "blank_panel"                    
-                });
-                
-                // Resize and move first panel
-                resetLeft( first );
-                resetWidth( first );
-
-                // Resize and move panels container
+                // Reset panels container
                 resetContainer();
-                
-                // Hide all panels
-                hideAll();                
 
-                // Show first panel
-                Fx.show(panels[0]);                
+            };
+            
+            /*
+             *  Initialize panels
+             */
                 
-                
+            // Create a blank panel for load content
+            blankPanel = create({
+                id: "blank_panel"                    
+            });
+            
+            // Reset and hide all panels
+            resetAll();
+            hideAll();                
+            
+            // Custom events listeners
+            Event.bind(document.body, "drag", moveScreenH);
+            Event.bind(document.body, "dragEnd", eventHandler);
+            Event.bind(window, "orientationChange", resetAll);
+            
+            // Show first panel   
+            Fx.show(first);  
+               
         };
     };   
 

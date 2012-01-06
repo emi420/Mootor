@@ -3,35 +3,38 @@
  */
 
 (function(Mootor, window, $) {
-
+    
     Mootor.modules.Fx = function(box){
+ 
+        // Module dependences
+        var Event = $().Event();
     
         var max_font_size,
-        min_font_size, 
-        init_client_width,
-        divPanels;
+        min_font_size;
         
+        // Max and Min font sizes
         max_font_size=105;
         min_font_size=20;
-        init_client_width=document.documentElement.clientWidth;
         
-        // Show element
+        // Show an element
         box.show = function(e) {
             e.style.display = "block";
         };
         
-        // Hide element
+        // Hide an element
         box.hide = function(e) {
             e.style.display = "none";
         };
                         
         // Adjust font size relative to viewport size
         box.dynamicType = function() {
-           var divPanels = this.obj;
-            // Update viewport font-size
-           var updateSize = function() {
-                var font_size = window.innerWidth / 10 + (window.innerHeight / 40);
 
+            // Update viewport font-size
+           var updateSize = function() {               
+
+                // This calc can be optimized
+                var font_size = window.innerWidth / 10 + (window.innerHeight / 40);
+                
                 if( typeof(document.body) !== null) {
                     if(font_size < max_font_size && font_size > min_font_size) {
                       document.body.style.fontSize=font_size + "%";                  
@@ -41,49 +44,17 @@
                       document.body.style.fontSize=min_font_size + "%";                  
                     }
                 }
-                divPanels.style.width = document.documentElement.clientWidth + "px";
+
             };    
 
-            // Handler to capture orientationchange event when is not present
-            // or resize on desktop browsers
-
-            var eventHandler = function(fn) {
-
-               /*
-                *  FIXME: - use callback function (fn)
-                *           updateSize() is hardoded function
-                */
-               
-               // Viewport width size
-                   var clientWidth = document.documentElement.clientWidth;                   
- 
-                   if( clientWidth != init_client_width) {
-
-                      // Check if new width is equal to screen size (orientationchange)
-                  // or different (window resize)
-
-                  if (( clientWidth == screen.width || clientWidth == screen.height ) ||
-                      ( clientWidth != screen.width && clientWidth != screen.height)) {
-                      updateSize();
-                  }
-                   
-                   // Set new init client width
-                   init_client_width = clientWidth;
-               }
-            };
-
             // Add event listeners to update font size when user 
-            // rotate a device or resize a window
-            if( window.onorientationchange ) {
-                window.addEventListener( "onorientationchange", updateSize, false);
-            } else {
-                window.addEventListener( "resize", eventHandler, false);                    
-            }
+            // rotate device (or resize window)
+            Event.bind(window, "orientationChange", updateSize);
             
-            // Update current font-size
-                updateSize();
+            // Initialize font-size
+            updateSize();
  
-            };           
+         };           
     };
 
 }(Mootor, window, $));
