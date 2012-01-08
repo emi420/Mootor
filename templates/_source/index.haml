@@ -8,23 +8,21 @@
 .panel
     {#% include "templates/catalog/gallery.html" %#}
     / Demo output HTML
-    .catalog
-        %div
-            %img.item{:src=>"http://192.168.1.12:9000/uploads/products/joey-ramone_1.jpg"}
+    /.catalog
+    /    %div
+    /        %img.item{:src=>"http://192.168.1.12:9000/uploads/products/joey-ramone_1.jpg"}
  
 :javascript
     
-       // Initialize page    
-       $(document).pageInit();       
-       
-       $(document).ready(function(){
+       /*$(document).ready(function(){
 
            // Dynamic font size
            $("#panels").Fx().dynamicType();
 
            // Navigation panels
-           $("#panels").Nav().Panels();
+           $("#panels").Nav().panels();
+
        
-       });
+       });*/
 {% endblock %}
 

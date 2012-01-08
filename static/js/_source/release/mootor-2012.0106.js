@@ -15,7 +15,7 @@
  
         var args = Array.prototype.slice.call(arguments),
         callback = args.pop(),
-        i;
+        i; 
         
         // Get modules from parameters, ex: new Mootor("*",function(){});
         modules = (args[0] && typeof args[0] === "string") ? args : args[0];
