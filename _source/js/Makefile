@@ -1,0 +1,20 @@
+PACKAGE=mootor
+SRC_DIR=src
+VERSION=` date "+%Y.%m%d" `
+RELEASE_DIR=release
+COPY_DIR=../../js
+RELEASE_FILE= $(PACKAGE)-$(VERSION).js
+RELEASE_FILE_MIN= $(PACKAGE)-$(VERSION).min.js
+COPY_FILE=$(PACKAGE).js
+
+all:
+	@@echo "Building..."
+	#@@cat $(SRC_DIR)/core.js $(SRC_DIR)/fx.js $(SRC_DIR)/event.js $(SRC_DIR)/nav.js $(SRC_DIR)/form.js $(SRC_DIR)/catalog.js > $(RELEASE_DIR)/$(RELEASE_FILE)
+	@@cat $(SRC_DIR)/header.js $(SRC_DIR)/core.js $(SRC_DIR)/fx.js $(SRC_DIR)/event.js $(SRC_DIR)/nav.js $(SRC_DIR)/footer.js  > $(RELEASE_DIR)/$(RELEASE_FILE)
+	@@echo "Build completed."
+	@@cp $(RELEASE_DIR)/$(RELEASE_FILE) $(COPY_DIR)/$(COPY_FILE)
+	#@@java -jar tools/compiler.jar --js $(RELEASE_DIR)/$(RELEASE_FILE) --js_output_file $(RELEASE_DIR)/$(RELEASE_FILE_MIN)  
+	#@@echo "Minifying..."
+	#@@cp $(RELEASE_DIR)/$(RELEASE_FILE_MIN) $(COPY_DIR)/$(COPY_FILE)
+
+
