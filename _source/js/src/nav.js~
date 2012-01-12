@@ -182,7 +182,9 @@ Mootor.Nav = {
         // Reset and hide all panels
         resetAll();
         hideAll();                
-                      
+              
+		console.log("adding listeners ..."); 
+        
         // Custom events listeners
         Event.bind(document.body, "drag", moveScreenH);
         Event.bind(document.body, "dragEnd", eventHandler);

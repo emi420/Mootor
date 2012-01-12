@@ -4,25 +4,23 @@
 
 (function(Mootor, window, $) {
 
-    /*
-     * Private
-     */ 
-   
-    var a = 0,
-    b = 0;
-
-    var Form = {
+    Mootor.modules.Catalog = function(box){
+    
+        /*
+         * Private
+         */ 
+       
+        var a = 0,
+        b = 0;
         
         /*
          * Public
          */  
         
         // Show element
-        subscribeForm = function(e) {
+        box.test = function(e) {
             console.log("test!");
         };
     };
-    
-    Mootor.extend(Form);
 
-}(Mootor, window));
+}(Mootor, window, $));
