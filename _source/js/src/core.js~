@@ -1,34 +1,47 @@
 
 var Mootor = (function(){  
-  
-    // Inherits Moo constructor prototype 
-    // and return new instance
-    Mootor = function(query) {
-        var Moo = Mootor.object(Mootor.prototype);
-        Moo.get = function() {
-            return query;    
-        }
-        return Moo;
-    }
-    
-    // Prototypal inheritance
-    Mootor.object = function(obj) {
-        function fn() {}
-        fn.prototype = obj;
-        return new fn();
-    }
-    
-    // All reusable methods must be in the
-    // prototype
-    
-    Mootor.prototype.get = function() {
-        return this.get();
-    }
-    
-    return Mootor;
 
+	Mootor = function(query) {
+		return new Mootor.prototype.fn(query);	
+	}
+	
+	Mootor.prototype = {
+
+		fn: function(query) {
+						
+			this.query = (function() { 
+				return query 
+			}()) ;
+
+			return this;		
+
+		}	
+
+	}
+	
+	Mootor.extend = function(obj) {
+		console.log("extending...");
+		for( i in obj ) {
+			if( obj.hasOwnProperty(i) ) {
+				Mootor.prototype[i] = obj[i];				
+			}			
+		}
+	}
+		
+	Mootor.prototype.fn.prototype = Mootor.prototype;
+		
+	return Mootor
+	
 }());
 
-// Go public!
-window.$ = Mootor;
+// All reusable methods must be in the
+// prototype
+/*
+Mootor.prototype.Fx = function() {
+	console.log("Fx.test!");
+	console.log(this.query);
+}
+*/
+
+
 
