@@ -216,7 +216,7 @@ Mootor.Nav = {
 
         // Create a blank panel for load content
         blankPanel = create({
-            id: "blank_panel",                    
+            id: "blank_panel"                    
         });
                 
         // Reset and hide all panels

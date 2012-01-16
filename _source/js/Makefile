@@ -13,8 +13,8 @@ all:
 	@@cat $(SRC_DIR)/header.js $(SRC_DIR)/core.js $(SRC_DIR)/event.js $(SRC_DIR)/fx.js $(SRC_DIR)/nav.js $(SRC_DIR)/footer.js  > $(RELEASE_DIR)/$(RELEASE_FILE)
 	@@echo "Build completed."
 	@@cp $(RELEASE_DIR)/$(RELEASE_FILE) $(COPY_DIR)/$(COPY_FILE)
-	#@@java -jar tools/compiler.jar --js $(RELEASE_DIR)/$(RELEASE_FILE) --js_output_file $(RELEASE_DIR)/$(RELEASE_FILE_MIN)  
-	#@@echo "Minifying..."
-	#@@cp $(RELEASE_DIR)/$(RELEASE_FILE_MIN) $(COPY_DIR)/$(COPY_FILE)
+	@@java -jar tools/compiler.jar --js $(RELEASE_DIR)/$(RELEASE_FILE) --js_output_file $(RELEASE_DIR)/$(RELEASE_FILE_MIN)  
+	@@echo "Minifying..."
+	@@cp $(RELEASE_DIR)/$(RELEASE_FILE_MIN) $(COPY_DIR)/$(COPY_FILE)
 
 
