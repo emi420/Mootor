@@ -4,14 +4,15 @@
  *  Mootor Core (coded by emi420@gmail.com)
  */
  
+var Mootor = function() {};
 
 // Main function, re-defines itself
-var Mootor = (function(){  
+Mootor = (function(){  
 
 	// Return new Mootor instance
 	Mootor = function(query) {
 		return new Mootor.fn(query);	
-	}
+	};
 	
 	// All reusable functions must be in
 	// the prototype
@@ -20,17 +21,20 @@ var Mootor = (function(){
 		// On element ready
         ready: function(callback) {
             Mootor.ready(callback, this.el);
-        },
+        }
 
-	}
+	};
 
 	// On element ready
 	Mootor.ready = function(fn, el) {
+		if( el === document ) {
+			el = window;		
+		}
         if(el === window || el === window.document ) { 
             var ready = false;
             
             // Handler to check if the dom is full loaded
-            handler = function(e) {                
+            var handler = function(e) {                
                 if (ready) {return;}
                 if (e.type === "readystatechange" && window.document.readyState !== "complete") {return;}
                     fn.call(window.document);
@@ -46,16 +50,28 @@ var Mootor = (function(){
         } else {
             el.onload = fn;        
         }	
-	}
+	};
+
+    // Hide document body
+    Mootor.hideBody = function() {
+        var init_styles = document.createElement("style");
+        init_styles.innerHTML = "body * {display: none}";
+        Mootor.init_styles = init_styles;        
+        document.head.appendChild(init_styles);     
+    };
+    
+    // Show document body
+    Mootor.showBody = function() {
+        document.head.removeChild(Mootor.init_styles);                  
+    };
 
 	// Main constructor
     Mootor.fn = function(query) {
 					
-	        var q_type = typeof query;                    
+	        var q_type = typeof query,
+	        el;                    
 	
 	        if( q_type === "string" || q_type === "object" ) {
-	        
-	            var el; 
 	            
 	            // Get object from query
 	                
@@ -83,31 +99,53 @@ var Mootor = (function(){
 			// Private element & query properties
 
 			this.el = (function() { 
-				return el 
+				return el ;
 			}()) ;
 
 			this.query = (function() { 
-				return query 
+				return query;
 			}()) ;
 
 
 			return this;		
 
-		}	
+		};	
 	
 	// Inheritance by copying properties
 	Mootor.extend = function(obj) {
+	    var i ;
 		for( i in obj ) {
 			if( obj.hasOwnProperty(i) ) {
 				Mootor.prototype[i] = obj[i];				
 			}			
 		}
-	}
+	};
 	
 	// Prototypal inheritance	
 	Mootor.fn.prototype = Mootor.prototype;
-		
-	return Mootor
+    
+    Mootor.ready(function() {
+        
+        // Initial screen size
+        var init_client_width = document.documentElement.clientWidth,
+        init_client_height = document.documentElement.clientHeight;
+        
+        Mootor.init_client_height = (function() { 
+            return init_client_height;    
+        }());
+
+        Mootor.init_client_width = (function() { 
+            return init_client_width;    
+        }());
+        
+        Mootor.showBody();
+
+	}, document);
+	
+	Mootor.init_styles = undefined;
+    Mootor.hideBody();
+
+    return Mootor;
 	
 }());
 
@@ -120,6 +158,8 @@ var Mootor = (function(){
 
 // Drag 
 
+var Mootor = Mootor || function() {};
+
 var Drag = function(element, callback, eventtype) {
     this.element = this;      
     this.startTouchX = 0;
@@ -129,7 +169,7 @@ var Drag = function(element, callback, eventtype) {
     element.addEventListener('touchstart', this, false);   
     element.addEventListener('touchmove', this, false);   
     element.addEventListener('touchend', this, false);   
-}
+};
 
 Drag.prototype.handleEvent = function(e) {
     switch (e.type) {
@@ -143,22 +183,27 @@ Drag.prototype.handleEvent = function(e) {
             this.onTouchEnd(e);
             break;
     }
-}
+};
 
 Drag.prototype.onTouchStart = function(e) {
     this.lastTouchX = this.startTouchX = e.touches[0].clientX;
-}
+};
 
 Drag.prototype.onTouchMove = function(e) {
-    var distance = e.touches[0].clientX- this.lastTouchX; 
+    var distance = e.touches[0].clientX- this.lastTouchX,
+    distanceFromOrigin = this.startTouchX - this.lastTouchX;
+
     this.lastTouchX = e.touches[0].clientX ;
-    this.callback(distance);
-}
+    this.callback({
+    	distance: distance,
+    	distanceFromOrigin: distanceFromOrigin
+    });
+};
 
 Drag.prototype.onTouchEnd = function(e) {
     var distance = this.startTouchX - this.lastTouchX; 
     this.onDragEnd(distance);
-}
+};
 
 // Orientation
 
@@ -166,19 +211,20 @@ var Orientation = function(element, callback) {
     this.callback = callback;
     this.element = this;
     element.addEventListener("orientationchange", this, false);    
-}
+};
 
 Orientation.prototype.handleEvent = function(e) {
-    switch (e.type) {
-        case 'orientationchange':
+    //switch (e.type) {
+    //    case 'orientationchange':
+    if( e.type === 'orientationchange') {
             this.onOrientationChange(e);
-            break;
+    //        break;
     }
-}
+};
 
 Orientation.prototype.onOrientationChange = function() {
     this.callback();
-}
+};
 
 Mootor.Event = {
     bind: function(el, eventtype, callback) {
@@ -186,7 +232,7 @@ Mootor.Event = {
         switch( eventtype ) {
 
             case 'drag':
-                el.addEventListener('touchmove', function(e) { e.preventDefault() }, false);
+                el.addEventListener('touchmove', function(e) { e.preventDefault(); }, false);
                 Mootor.listeners[el] = new Drag(el, callback) ;
                 break;
 
@@ -196,11 +242,11 @@ Mootor.Event = {
                 break;
 
             case "orientationChange":
-                new Orientation(el, callback);
+                Mootor.listeners.orientationchange = new Orientation(el, callback);
                 break;
         }
     }
-}
+};
 
 Mootor.extend(Mootor.Event);
 
@@ -210,14 +256,12 @@ Mootor.extend(Mootor.Event);
  
 Mootor.listeners = [];
 
-Mootor.init_client_width = (function() { 
-    return document.documentElement.clientWidth;    
-}());
-
 /* 
  *  Mootor Visual FX (coded by emi420@gmail.com)
  */
  
+var Mootor = Mootor || function() {};
+
 // Module dependencies
 var Event = Mootor.Event;
 
@@ -241,7 +285,7 @@ Mootor.Fx = {
     hide: function(e) {
         //console.log(this)
         if( typeof e === "object") {
-            e.style.display = "block";
+            e.style.display = "none";
         } else {
             this.el.style.display = "none";
         }
@@ -286,12 +330,7 @@ Mootor.extend(Mootor.Fx);
  * Mootor Navigation (coded by emi420@gmail.com)
  */
 
-/*
- *  TODO: despues de actualizar Event tambien hay que
- *  actualizar Nav con el disenio de 
- *  http://code.google.com/intl/es-419/mobile/articles/webapp_fixed_ui.html
- */
-
+var Mootor = Mootor || function() {};
 
 /*
  * Module dependencies
@@ -307,9 +346,6 @@ Mootor.Nav = {
         /*
          * Navigation panels
          * 
-         * TODO: 
-         *       - if onDragEnd reach certain limit, load new content 
-         *         in blank panel
          */
 
         var i = 0,
@@ -335,8 +371,8 @@ Mootor.Nav = {
         current = 0;
         
         // Viewport sizes
-        clientHeight = document.documentElement.clientHeight;
-        clientWidth = document.documentElement.clientWidth;
+        clientHeight = Mootor.init_client_height;
+        clientWidth = Mootor.init_client_width;
         
         document.body.style.overflow = "hidden";
 
@@ -356,6 +392,7 @@ Mootor.Nav = {
             
             // Add panel to panels div
             divPanels.appendChild(panel);
+
             return panel;                    
         },
         
@@ -397,21 +434,31 @@ Mootor.Nav = {
 
             var width = clientWidth,
             height = resetHeight;
-
+            
             resetWidth( panel );
             resetHeight( panel );
 
             if( panel === blankPanel) {
-                panel.style.left = "0px";              
+
+                // right
+                //panel.style.left = 0 + "px";              
+                // left
+                panel.style.left = clientWidth * 2 + 80 + "px";              
+
             } else {
-                panel.style.left = (clientWidth + 40) + "px";
+                panel.style.left = clientWidth + 40 + "px";
             }
         },
         
         // Move screen horizontally 
-        moveScreenH = function(distance) {
-            
-             //console.log(distance);
+        moveScreenH = function(e) {
+        	
+        	 var distance = e.distance;
+        	 
+        	/* if( e.hasOwnProperty('distanceFromOrigin')) {
+        	 	 var distanceFromOrigin = e.distanceFromOrigin;
+        	 	 checkMove(distanceFromOrigin);   	 	
+      	 	 }*/
 
              // New horizontal position
              panelsX = panelsX + distance;  
@@ -428,21 +475,47 @@ Mootor.Nav = {
 
         // Load panel
         load = function(index) {
-            console.log("load " + index);                    
+
+            var panel = panels[current];
+
+			if( index < panels.length && index > -1) {
+
+	            // hide current and set new current            
+	            Fx.hide(panel);
+	            current = index;
+				panel = panels[current];
+				
+				// reset size, position
+				resetWidth(panel);
+	            resetLeft(panel);
+
+				// and show panel
+	            Fx.show(panel);
+
+			}
         },              
+
+		showLoading = function() {
+            blankPanel.style.left = clientWidth + 40 + "px";
+    		blankPanel.innerHTML = '<b>Loading ...</b>';        
+		},
 
         // DragEnd event handler
         checkMove = function(distance) {
             
             var maxdist = ( clientHeight / 4 ) * 3;
+            
             if( distance > maxdist ) {
                 load(current + 1 );
-            } else if (distance < -maxdist ) {
+            } else if (distance < (- maxdist) ) {
                 if( current > 0 ) {
-                    load( current - 1 );                        
+                    load(current - 1);                        
                 }
             }
-            moveScreenH(distance);                                            
+            
+            moveScreenH({
+            	distance: distance
+            });                                            
             
         },
         
@@ -471,9 +544,9 @@ Mootor.Nav = {
 
         // Create a blank panel for load content
         blankPanel = create({
-            id: "blank_panel"                    
+            id: "blank_panel",                    
         });
-        
+                
         // Reset and hide all panels
         resetAll();
         hideAll();                

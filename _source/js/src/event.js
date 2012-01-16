@@ -4,6 +4,8 @@
 
 // Drag 
 
+var Mootor = Mootor || function() {};
+
 var Drag = function(element, callback, eventtype) {
     this.element = this;      
     this.startTouchX = 0;
@@ -13,7 +15,7 @@ var Drag = function(element, callback, eventtype) {
     element.addEventListener('touchstart', this, false);   
     element.addEventListener('touchmove', this, false);   
     element.addEventListener('touchend', this, false);   
-}
+};
 
 Drag.prototype.handleEvent = function(e) {
     switch (e.type) {
@@ -27,22 +29,27 @@ Drag.prototype.handleEvent = function(e) {
             this.onTouchEnd(e);
             break;
     }
-}
+};
 
 Drag.prototype.onTouchStart = function(e) {
     this.lastTouchX = this.startTouchX = e.touches[0].clientX;
-}
+};
 
 Drag.prototype.onTouchMove = function(e) {
-    var distance = e.touches[0].clientX- this.lastTouchX; 
+    var distance = e.touches[0].clientX- this.lastTouchX,
+    distanceFromOrigin = this.startTouchX - this.lastTouchX;
+
     this.lastTouchX = e.touches[0].clientX ;
-    this.callback(distance);
-}
+    this.callback({
+    	distance: distance,
+    	distanceFromOrigin: distanceFromOrigin
+    });
+};
 
 Drag.prototype.onTouchEnd = function(e) {
     var distance = this.startTouchX - this.lastTouchX; 
     this.onDragEnd(distance);
-}
+};
 
 // Orientation
 
@@ -50,19 +57,20 @@ var Orientation = function(element, callback) {
     this.callback = callback;
     this.element = this;
     element.addEventListener("orientationchange", this, false);    
-}
+};
 
 Orientation.prototype.handleEvent = function(e) {
-    switch (e.type) {
-        case 'orientationchange':
+    //switch (e.type) {
+    //    case 'orientationchange':
+    if( e.type === 'orientationchange') {
             this.onOrientationChange(e);
-            break;
+    //        break;
     }
-}
+};
 
 Orientation.prototype.onOrientationChange = function() {
     this.callback();
-}
+};
 
 Mootor.Event = {
     bind: function(el, eventtype, callback) {
@@ -70,7 +78,7 @@ Mootor.Event = {
         switch( eventtype ) {
 
             case 'drag':
-                el.addEventListener('touchmove', function(e) { e.preventDefault() }, false);
+                el.addEventListener('touchmove', function(e) { e.preventDefault(); }, false);
                 Mootor.listeners[el] = new Drag(el, callback) ;
                 break;
 
@@ -80,11 +88,11 @@ Mootor.Event = {
                 break;
 
             case "orientationChange":
-                new Orientation(el, callback);
+                Mootor.listeners.orientationchange = new Orientation(el, callback);
                 break;
         }
     }
-}
+};
 
 Mootor.extend(Mootor.Event);
 
@@ -93,8 +101,4 @@ Mootor.extend(Mootor.Event);
  */
  
 Mootor.listeners = [];
-
-Mootor.init_client_width = (function() { 
-    return document.documentElement.clientWidth;    
-}());
 

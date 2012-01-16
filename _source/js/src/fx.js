@@ -2,6 +2,8 @@
  *  Mootor Visual FX (coded by emi420@gmail.com)
  */
  
+var Mootor = Mootor || function() {};
+
 // Module dependencies
 var Event = Mootor.Event;
 
@@ -25,7 +27,7 @@ Mootor.Fx = {
     hide: function(e) {
         //console.log(this)
         if( typeof e === "object") {
-            e.style.display = "block";
+            e.style.display = "none";
         } else {
             this.el.style.display = "none";
         }

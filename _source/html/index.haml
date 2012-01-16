@@ -8,30 +8,51 @@
     %script{:src=>"js/mootor.js",:type=>"text/javascript"}
 %body.main 
     #panels
+
+        .panel
+            .content
+                %h2 Pink Floyd
+                %h3 1965 - 1995
+
+        .panel
+            %div
+                %img{:src=>"http://192.168.1.11/ucore/uploads/products/1.jpg"}
+
+        .panel
+            %div
+                %img{:src=>"http://192.168.1.11/ucore/uploads/products/2.jpg"}
+
+        .panel
+            %div
+                %img{:src=>"http://192.168.1.11/ucore/uploads/products/3.jpg"}
+
+        .panel
+            %div
+                %img{:src=>"http://192.168.1.11/ucore/uploads/products/4.jpg"}
+
+
         .panel
             .subscribe
-                %h2 Subscripción
-                %h3 Te enviaremos novedades una vez por mes, no molestamos :)
+                %h2 &iexcl;Subscribite! 
+                %h3 y te enviaremos novedades una vez por mes, no molestamos :)
                 %form.form#suscribeForm
                     .field.text
                         %input#fieldEmail{:type=>"text",:value=>"correo electrónico"}
                     .action.subscribe
                         %input#suscribeBtn{:type=>"submit",:value=>"Suscribirse"} 
-        .panel
-            / Demo output HTML
-            .catalog
-                %div
-                    //%img.item{:src=>"http://192.168.1.12:9000/uploads/products/joey-ramone_1.jpg"}
  
 :javascript    
 
        $(document).ready(function(){
+       
+           // Cache query for performance
+           var panels = $("#panels");
 
            // Dynamic font size
-           $("#panels").dynamicType();
+           panels.dynamicType();
 
            // Navigation panels
-           $("#panels").panels();
+           panels.panels();
        
        });
 

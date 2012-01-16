@@ -2,12 +2,7 @@
  * Mootor Navigation (coded by emi420@gmail.com)
  */
 
-/*
- *  TODO: despues de actualizar Event tambien hay que
- *  actualizar Nav con el disenio de 
- *  http://code.google.com/intl/es-419/mobile/articles/webapp_fixed_ui.html
- */
-
+var Mootor = Mootor || function() {};
 
 /*
  * Module dependencies
@@ -23,9 +18,6 @@ Mootor.Nav = {
         /*
          * Navigation panels
          * 
-         * TODO: 
-         *       - if onDragEnd reach certain limit, load new content 
-         *         in blank panel
          */
 
         var i = 0,
@@ -51,8 +43,8 @@ Mootor.Nav = {
         current = 0;
         
         // Viewport sizes
-        clientHeight = document.documentElement.clientHeight;
-        clientWidth = document.documentElement.clientWidth;
+        clientHeight = Mootor.init_client_height;
+        clientWidth = Mootor.init_client_width;
         
         document.body.style.overflow = "hidden";
 
@@ -72,6 +64,7 @@ Mootor.Nav = {
             
             // Add panel to panels div
             divPanels.appendChild(panel);
+
             return panel;                    
         },
         
@@ -113,21 +106,31 @@ Mootor.Nav = {
 
             var width = clientWidth,
             height = resetHeight;
-
+            
             resetWidth( panel );
             resetHeight( panel );
 
             if( panel === blankPanel) {
-                panel.style.left = "0px";              
+
+                // right
+                //panel.style.left = 0 + "px";              
+                // left
+                panel.style.left = clientWidth * 2 + 80 + "px";              
+
             } else {
-                panel.style.left = (clientWidth + 40) + "px";
+                panel.style.left = clientWidth + 40 + "px";
             }
         },
         
         // Move screen horizontally 
-        moveScreenH = function(distance) {
-            
-             //console.log(distance);
+        moveScreenH = function(e) {
+        	
+        	 var distance = e.distance;
+        	 
+        	/* if( e.hasOwnProperty('distanceFromOrigin')) {
+        	 	 var distanceFromOrigin = e.distanceFromOrigin;
+        	 	 checkMove(distanceFromOrigin);   	 	
+      	 	 }*/
 
              // New horizontal position
              panelsX = panelsX + distance;  
@@ -144,21 +147,47 @@ Mootor.Nav = {
 
         // Load panel
         load = function(index) {
-            console.log("load " + index);                    
+
+            var panel = panels[current];
+
+			if( index < panels.length && index > -1) {
+
+	            // hide current and set new current            
+	            Fx.hide(panel);
+	            current = index;
+				panel = panels[current];
+				
+				// reset size, position
+				resetWidth(panel);
+	            resetLeft(panel);
+
+				// and show panel
+	            Fx.show(panel);
+
+			}
         },              
+
+		showLoading = function() {
+            blankPanel.style.left = clientWidth + 40 + "px";
+    		blankPanel.innerHTML = '<b>Loading ...</b>';        
+		},
 
         // DragEnd event handler
         checkMove = function(distance) {
             
             var maxdist = ( clientHeight / 4 ) * 3;
+            
             if( distance > maxdist ) {
                 load(current + 1 );
-            } else if (distance < -maxdist ) {
+            } else if (distance < (- maxdist) ) {
                 if( current > 0 ) {
-                    load( current - 1 );                        
+                    load(current - 1);                        
                 }
             }
-            moveScreenH(distance);                                            
+            
+            moveScreenH({
+            	distance: distance
+            });                                            
             
         },
         
@@ -187,9 +216,9 @@ Mootor.Nav = {
 
         // Create a blank panel for load content
         blankPanel = create({
-            id: "blank_panel"                    
+            id: "blank_panel",                    
         });
-        
+                
         // Reset and hide all panels
         resetAll();
         hideAll();                
