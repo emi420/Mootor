@@ -119,6 +119,11 @@ var Mootor = (function(){
  */
 
 /*
+ *  TODO: rehacer siguiendo el disenio de  
+ *  http://code.google.com/intl/es-419/mobile/articles/webapp_fixed_ui.html
+ */
+
+/*
  *  Private
  */
 
@@ -308,6 +313,13 @@ Mootor.extend(Mootor.Fx);
 /*
  * Mootor Navigation (coded by emi420@gmail.com)
  */
+
+/*
+ *  TODO: despues de actualizar Event tambien hay que
+ *  actualizar Nav con el disenio de 
+ *  http://code.google.com/intl/es-419/mobile/articles/webapp_fixed_ui.html
+ */
+
 
 /*
  * Module dependencies

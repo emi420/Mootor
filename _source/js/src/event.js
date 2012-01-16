@@ -2,123 +2,99 @@
  * Mootor Events (coded by emi420@gmail.com)
  */
 
-/*
- *  Private
- */
+// Drag 
 
-var pointStartX = 0, pointLastX = 0, init_client_width;
+var Drag = function(element, callback, eventtype) {
+    this.element = this;      
+    this.startTouchX = 0;
+    this.endTouchX = 0;
+    this.lastTouchX = 0;
+    this.callback = callback;
+    element.addEventListener('touchstart', this, false);   
+    element.addEventListener('touchmove', this, false);   
+    element.addEventListener('touchend', this, false);   
+}
 
-// Initial viewport width
-init_client_width = document.documentElement.clientWidth;
-
-
-// Handler for drag events
-var dragHandler = function(fn) {
-
-    var distance = 0, pageX, eventType;
-    eventType = event.type;
-
-    // If touch start or move, update X position and distance
-    // from previous X point
-
-    if(eventType === "touchmove" || eventType === "touchstart") {
-        pageX = event.touches[0].pageX;
-        distance = pageX - pointLastX;
-    }
-
-    switch( eventType ) {
-
-        case "touchstart":
-
-            // Initialize previous and start points
-
-            pointLastX = pointStartX = pageX;
+Drag.prototype.handleEvent = function(e) {
+    switch (e.type) {
+        case 'touchstart':
+            this.onTouchStart(e);
             break;
-
-        case "touchmove":
-
-            // Prevents default handlers took over event
-            event.preventDefault();
-
-            // Update previuos X point
-            pointLastX = pageX;
-
-            // Call callback function
-            fn(distance);
+        case 'touchmove':
+            this.onTouchMove(e);
             break;
-
-        case "touchend":
-
-            // Update distance from start to last point
-            // and call callback function
-
-            distance = pointStartX - pointLastX;
-            fn(distance);
+        case 'touchend':
+            this.onTouchEnd(e);
             break;
-
     }
-};
-// Handler to capture orientationchange event when is not present
-// (ex: Android 2.2) or resize window on desktop browsers
-var viewportHandler = function(fn) {
+}
 
-    // Viewport width size
-    var clientWidth = document.documentElement.clientWidth;
+Drag.prototype.onTouchStart = function(e) {
+    this.lastTouchX = this.startTouchX = e.touches[0].clientX;
+}
 
-    if(clientWidth != init_client_width) {
+Drag.prototype.onTouchMove = function(e) {
+    var distance = e.touches[0].clientX- this.lastTouchX; 
+    this.lastTouchX = e.touches[0].clientX ;
+    this.callback(distance);
+}
 
-        // Check if new width is equal to screen size (orientationchange)
-        // or different (window resize) and call callback function
+Drag.prototype.onTouchEnd = function(e) {
+    var distance = this.startTouchX - this.lastTouchX; 
+    this.onDragEnd(distance);
+}
 
-        if((clientWidth == screen.width || clientWidth == screen.height ) || (clientWidth != screen.width && clientWidth != screen.height)) {
-            fn.call();
-        }
+// Orientation
 
-        // Set new init client width
-        init_client_width = clientWidth;
+var Orientation = function(element, callback) {    
+    this.callback = callback;
+    this.element = this;
+    element.addEventListener("orientationchange", this, false);    
+}
+
+Orientation.prototype.handleEvent = function(e) {
+    switch (e.type) {
+        case 'orientationchange':
+            this.onOrientationChange(e);
+            break;
     }
-};
+}
 
-/*
- *  Public
- */
-    
+Orientation.prototype.onOrientationChange = function() {
+    this.callback();
+}
+
 Mootor.Event = {
+    bind: function(el, eventtype, callback) {
+        var fn = function() {};
+        switch( eventtype ) {
 
-    bind: function(el, event, callback) {
-        var fn;
-
-        switch( event ) {
-
-            case "drag":
-                fn = function() {
-                    dragHandler(callback);
-                };
-                el.addEventListener("touchstart", fn, false);
-                el.addEventListener("touchmove", fn, false);
+            case 'drag':
+                el.addEventListener('touchmove', function(e) { e.preventDefault() }, false);
+                Mootor.listeners[el] = new Drag(el, callback) ;
                 break;
 
-            case "dragEnd":
-                fn = function() {
-                    dragHandler(callback);
-                };
-                el.addEventListener("touchend", fn, false);
+            case 'dragEnd':
+                Mootor.listeners[el].onDragEnd = callback;                
+                //el.addEventListener('touchend', callback, false);
                 break;
 
             case "orientationChange":
-                fn = function() {
-                    viewportHandler(callback);
-                };
-                if( typeof el.onorientationchange != "undefined") {
-                    el.addEventListener("orientationchange", fn, false);
-                } else {
-                    el.addEventListener("resize", fn, false);
-                }
+                new Orientation(el, callback);
                 break;
-
         }
     }
-};
-    
+}
+
 Mootor.extend(Mootor.Event);
-    
+
+/*
+ * Private
+ */
+ 
+Mootor.listeners = [];
+
+Mootor.init_client_width = (function() { 
+    return document.documentElement.clientWidth;    
+}());
+

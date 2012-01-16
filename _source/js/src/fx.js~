@@ -2,7 +2,7 @@
  *  Mootor Visual FX (coded by emi420@gmail.com)
  */
  
-// Dependences
+// Module dependencies
 var Event = Mootor.Event;
 
 // Max and Min font sizes

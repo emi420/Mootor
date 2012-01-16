@@ -3,6 +3,13 @@
  */
 
 /*
+ *  TODO: despues de actualizar Event tambien hay que
+ *  actualizar Nav con el disenio de 
+ *  http://code.google.com/intl/es-419/mobile/articles/webapp_fixed_ui.html
+ */
+
+
+/*
  * Module dependencies
  */ 
 
@@ -119,6 +126,8 @@ Mootor.Nav = {
         
         // Move screen horizontally 
         moveScreenH = function(distance) {
+            
+             //console.log(distance);
 
              // New horizontal position
              panelsX = panelsX + distance;  
@@ -139,7 +148,8 @@ Mootor.Nav = {
         },              
 
         // DragEnd event handler
-        eventHandler = function(distance) {
+        checkMove = function(distance) {
+            
             var maxdist = ( clientHeight / 4 ) * 3;
             if( distance > maxdist ) {
                 load(current + 1 );
@@ -149,6 +159,7 @@ Mootor.Nav = {
                 }
             }
             moveScreenH(distance);                                            
+            
         },
         
         // Reset panels sizes and positions
@@ -185,7 +196,7 @@ Mootor.Nav = {
                       
         // Custom events listeners
         Event.bind(document.body, "drag", moveScreenH);
-        Event.bind(document.body, "dragEnd", eventHandler);
+        Event.bind(document.body, "dragEnd", checkMove);
         Event.bind(window, "orientationChange", resetAll);
         
         // Show first panel   
