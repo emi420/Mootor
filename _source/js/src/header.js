@@ -1,2 +1,1 @@
-(function(window) {
-
+(function(window, document) {

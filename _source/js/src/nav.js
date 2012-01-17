@@ -2,236 +2,215 @@
  * Mootor Navigation (coded by emi420@gmail.com)
  */
 
-var Mootor = Mootor || function() {};
+(function (Mootor) {
 
-/*
- * Module dependencies
- */ 
+    "use strict";
 
-var Fx = Mootor.Fx,        
-Event = Mootor.Event;
+    /*
+     * Module dependencies
+     */
 
-Mootor.Nav = {        
-   
-    panels: function() {
+    var Fx = Mootor.Fx,
+        Event = Mootor.Event;
 
-        /*
-         * Navigation panels
-         * 
-         */
+    Mootor.Nav = {
 
-        var i = 0,
-        clientWidth = 0,
-        clientHeight = 0,
-        panelCount = 0,
-        panelsX = 0,
-        blankPanel,
-        first,
-        current,
-        panels,
-        divPanels;            
-        
-        // All panels
-        divPanels = this.el;        
-        
-        //console.log("FIXME CHECK: Query to the Dom *** EXPENSIVE");
-                
-        panels = divPanels.getElementsByClassName("panel");
-        
-        // First panel
-        first = panels[0];
-        current = 0;
-        
-        // Viewport sizes
-        clientHeight = Mootor.init_client_height;
-        clientWidth = Mootor.init_client_width;
-        
-        document.body.style.overflow = "hidden";
+        panels: function () {
 
-        // Create new panel
-        var create = function(options) {
+            /*
+             * Navigation panels
+             * 
+             */
 
-            var panel;                    
-            var id = options.id;
-                                
-            // Create a div
-            panel = document.createElement('div');
-            panel.id = id;
-            
-            // Add viewport size to div
-            panel.style.width = clientWidth + "px";
-            panel.style.height = clientHeight + "px";               
-            
-            // Add panel to panels div
-            divPanels.appendChild(panel);
+            var i = 0,
+                clientWidth = Mootor.init_client_width,
+                clientHeight =  Mootor.init_client_height,
+                panelCount = 0,
+                panelsX = 0,
+                blankPanel,
+                current = 0,
+                divPanels = this.el,
+                panels = divPanels.getElementsByClassName("panel"),
+                first = panels[0],
 
-            return panel;                    
-        },
-        
-        // Hide all panels
-        hideAll = function() {
-            panelCount = panels.length;
-            for(; i < panelCount ; i += 1) {
-                Fx.hide(panels[i]);
-                if(clientHeight > panels[i].style.height) {
-                    panels[i].style.height = clientHeight + "px";
-                }
-            }
-        },
-        
-        // Reset panel width size 
-        resetWidth = function(panel) {
-            panel.style.width = clientWidth + "px";                    
-        },
+                // Create new panel
+                create = function (options) {
 
-        // Reset panel height size 
-        resetHeight = function(panel) {
-            panel.style.height = clientHeight + "px";                    
-        },
+                    var panel,
+                        id = options.id;
 
-        // Reset panel left position 
-        resetLeft = function(panel) {
-            panel.style.left = (clientWidth + 40) + "px";
-        },
+                    // Create a div
+                    panel = document.createElement('div');
+                    panel.id = id;
 
-        // Reset panels container size and position
-        resetContainer = function() {
-            divPanels.style.width = (clientWidth * 2) + "px"; 
-            divPanels.style.height = clientHeight + "px";
-            divPanels.style.left = (clientWidth * (-1) - 40) + "px";                    
-        },
-        
-        // Reset panel size and position
-        resetPanel = function(panel) {
+                    // Add viewport size to div
+                    panel.style.width = clientWidth + "px";
+                    panel.style.height = clientHeight + "px";
 
-            var width = clientWidth,
-            height = resetHeight;
-            
-            resetWidth( panel );
-            resetHeight( panel );
+                    // Add panel to panels div
+                    divPanels.appendChild(panel);
 
-            if( panel === blankPanel) {
+                    return panel;
+                },
 
-                // right
-                //panel.style.left = 0 + "px";              
-                // left
-                panel.style.left = clientWidth * 2 + 80 + "px";              
+                // Hide all panels
+                hideAll = function () {
+                    panelCount = panels.length;
+                    for (; i < panelCount; i += 1) {
+                        Fx.hide(panels[i]);
+                        if (clientHeight > panels[i].style.height) {
+                            panels[i].style.height = clientHeight + "px";
+                        }
+                    }
+                },
 
-            } else {
-                panel.style.left = clientWidth + 40 + "px";
-            }
-        },
-        
-        // Move screen horizontally 
-        moveScreenH = function(e) {
-        	
-        	 var distance = e.distance;
-        	 
-        	/* if( e.hasOwnProperty('distanceFromOrigin')) {
-        	 	 var distanceFromOrigin = e.distanceFromOrigin;
-        	 	 checkMove(distanceFromOrigin);   	 	
-      	 	 }*/
+                // Reset panel width size 
+                resetWidth = function (panel) {
+                    panel.style.width = clientWidth + "px";
+                },
 
-             // New horizontal position
-             panelsX = panelsX + distance;  
-                            
-             // Apply 3d transform when its available
-             // or use default CSS 'left' property
-             divPanels.style.transitionProperty = "webkit-transform";
-             if( divPanels.style.webkitTransform != "undefined" ) {
-                 divPanels.style.webkitTransform = "translate3d(" + panelsX + "px,0, 0)";    
-             } else {
-                 divPanels.style.left = panelsX + "px";                                                      
-             }
-        },
+                // Reset panel height size 
+                resetHeight = function (panel) {
+                    panel.style.height = clientHeight + "px";
+                },
 
-        // Load panel
-        load = function(index) {
+                // Reset panel left position 
+                resetLeft = function (panel) {
+                    panel.style.left = (clientWidth + 40) + "px";
+                },
 
-            var panel = panels[current];
+                // Reset panels container size and position
+                resetContainer = function () {
+                    divPanels.style.width = (clientWidth * 2) + "px";
+                    divPanels.style.height = clientHeight + "px";
+                    divPanels.style.left = (clientWidth * (-1) - 40) + "px";
+                },
 
-			if( index < panels.length && index > -1) {
+                // Reset panel size and position
+                resetPanel = function (panel) {
 
-	            // hide current and set new current            
-	            Fx.hide(panel);
-	            current = index;
-				panel = panels[current];
-				
-				// reset size, position
-				resetWidth(panel);
-	            resetLeft(panel);
+                    resetWidth(panel);
+                    resetHeight(panel);
 
-				// and show panel
-	            Fx.show(panel);
+                    if (panel === blankPanel) {
 
-			}
-        },              
+                        // right
+                        //panel.style.left = 0 + "px";              
+                        // left
+                        panel.style.left = clientWidth * 2 + 80 + "px";
 
-		showLoading = function() {
-            blankPanel.style.left = clientWidth + 40 + "px";
-    		blankPanel.innerHTML = '<b>Loading ...</b>';        
-		},
+                    } else {
+                        panel.style.left = clientWidth + 40 + "px";
+                    }
+                },
 
-        // DragEnd event handler
-        checkMove = function(distance) {
-            
-            var maxdist = ( clientHeight / 4 ) * 3;
-            
-            if( distance > maxdist ) {
-                load(current + 1 );
-            } else if (distance < (- maxdist) ) {
-                if( current > 0 ) {
-                    load(current - 1);                        
-                }
-            }
-            
-            moveScreenH({
-            	distance: distance
-            });                                            
-            
-        },
-        
-        // Reset panels sizes and positions
-        resetAll = function() {                    
-                                
-            // Current viewport
-            clientHeight = document.documentElement.clientHeight;
-            clientWidth = document.documentElement.clientWidth;
-            
-            // Reset current and blank panels
-            resetPanel(panels[current]);
-            resetPanel(blankPanel);                 
+                // Move screen horizontally 
+                moveScreenH = function (e) {
 
-            // Reset panels container
-            resetContainer();
+                    var distance = e.distance;
 
-        };
-        
-        /*
-         *  Initialize panels
-         */
-           
-        // Set document styles    
-        document.body.style.overflow = "hidden";
+                    /* if( e.hasOwnProperty('distanceFromOrigin')) {
+                          var distanceFromOrigin = e.distanceFromOrigin;
+                          checkMove(distanceFromOrigin);            
+                        }*/
 
-        // Create a blank panel for load content
-        blankPanel = create({
-            id: "blank_panel"                    
-        });
-                
-        // Reset and hide all panels
-        resetAll();
-        hideAll();                
-                      
-        // Custom events listeners
-        Event.bind(document.body, "drag", moveScreenH);
-        Event.bind(document.body, "dragEnd", checkMove);
-        Event.bind(window, "orientationChange", resetAll);
-        
-        // Show first panel   
-        Fx.show(first);  
-           
-    }
-};   
+                     // New horizontal position
+                    panelsX = panelsX + distance;
 
-Mootor.extend(Mootor.Nav);
+                     // Apply 3d transform when its available
+                     // or use default CSS 'left' property
+                    divPanels.style.transitionProperty = "webkit-transform";
+                    if (divPanels.style.webkitTransform !== "undefined") {
+                        divPanels.style.webkitTransform = "translate3d(" + panelsX + "px,0, 0)";
+                    } else {
+                        divPanels.style.left = panelsX + "px";
+                    }
+                },
+
+                // Load panel
+                load = function (index) {
+
+                    var panel = panels[current];
+
+                    if (index < panels.length && index > -1) {
+
+                        // hide current and set new current            
+                        Fx.hide(panel);
+                        current = index;
+                        panel = panels[current];
+
+                        // reset size, position
+                        resetWidth(panel);
+                        resetLeft(panel);
+
+                        // and show panel
+                        Fx.show(panel);
+
+                    }
+                },
+
+                // DragEnd event handler
+                checkMove = function (distance) {
+
+                    var maxdist = (clientHeight / 4) * 3;
+
+                    if (distance > maxdist) {
+                        load(current + 1);
+                    } else if (distance < (-maxdist)) {
+                        if (current > 0) {
+                            load(current - 1);
+                        }
+                    }
+
+                    moveScreenH({
+                        distance: distance
+                    });
+
+                },
+
+                // Reset panels sizes and positions
+                resetAll = function () {
+
+                    // Current viewport
+                    clientHeight = document.documentElement.clientHeight;
+                    clientWidth = document.documentElement.clientWidth;
+
+                    // Reset current and blank panels
+                    resetPanel(panels[current]);
+                    resetPanel(blankPanel);
+
+                    // Reset panels container
+                    resetContainer();
+
+                };
+
+            /*
+             *  Initialize panels
+             */
+
+            // Set document styles    
+            document.body.style.overflow = "hidden";
+
+            // Create a blank panel for load content
+            blankPanel = create({
+                id: "blank_panel"
+            });
+
+            // Reset and hide all panels
+            resetAll();
+            hideAll();
+
+            // Custom events listeners
+            Event.bind(document.body, "drag", moveScreenH);
+            Event.bind(document.body, "dragEnd", checkMove);
+            Event.bind(window, "orientationChange", resetAll);
+
+            // Show first panel   
+            Fx.show(first);
+
+        }
+    };
+
+    Mootor.extend(Mootor.Nav);
+
+}(Mootor));

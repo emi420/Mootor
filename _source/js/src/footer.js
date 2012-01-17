@@ -2,4 +2,4 @@
 // Go public!
 window.$ = Mootor;
 
-}(window));
+}(window, document));
