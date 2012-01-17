@@ -2,13 +2,9 @@
  *  Mootor Core (coded by emi420@gmail.com)
  */
 
-
-"use strict";
-
-var Mootor = function () {};
-
 // Main function, re-defines itself
-Mootor = (function () {
+var Mootor = (function () {
+	"use strict";
 
 	// Return new Mootor instance
 	Mootor = function (query) {
@@ -31,7 +27,7 @@ Mootor = (function () {
 		if (el === document) {
 			el = window;
 		}
-		
+
 		if (el === window || el === window.document) {
 			var ready = false,
 
@@ -42,7 +38,7 @@ Mootor = (function () {
 					fn.call(window.document);
 					ready = true;
 				};
-				
+
 			// Add listeners for all common load events
 			if (el !== "undefined" && el.addEventListener) {
 				el.addEventListener("DOM-ContentLoaded", handler, false);

@@ -1,5 +1,5 @@
 /* 
- *  Mootor Visual FX (coded by emi420@gmail.com)
+ * Mootor Visual FX (coded by emi420@gmail.com)
  */
 
 (function (Mootor) {
