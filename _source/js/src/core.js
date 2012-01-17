@@ -2,8 +2,8 @@
  *  Mootor Core (coded by emi420@gmail.com)
  */
 
-// Main function, re-defines itself
 var Mootor = (function () {
+
 	"use strict";
 
 	// Return new Mootor instance
@@ -11,8 +11,6 @@ var Mootor = (function () {
 		return new Mootor.fn(query);
 	};
 
-	// All reusable functions must be in
-	// the prototype
 	Mootor.prototype = {
 
 		// On element ready
@@ -30,21 +28,22 @@ var Mootor = (function () {
 
 		if (el === window || el === window.document) {
 			var ready = false,
+                handler;
 
-				// Handler to check if the dom is full loaded
-				handler = function (e) {
-					if (ready) {return; }
-					if (e.type === "readystatechange" && window.document.readyState !== "complete") {return; }
-					fn.call(window.document);
-					ready = true;
-				};
+            // Handler to check if the dom is full loaded
+            handler = function (e) {
+                if (ready) {return; }
+                if (e.type === "readystatechange" && window.document.readyState !== "complete") {return; }
+                fn.call(window.document);
+                ready = true;
+            };
 
-			// Add listeners for all common load events
-			if (el !== "undefined" && el.addEventListener) {
-				el.addEventListener("DOM-ContentLoaded", handler, false);
-				el.addEventListener("readystatechange", handler, false);
-				el.addEventListener("load", handler, false);
-			} // IE8 needs attachEvent() support
+            // Add listeners for all common load events
+            if (el !== "undefined" && el.addEventListener) {
+                el.addEventListener("DOM-ContentLoaded", handler, false);
+                el.addEventListener("readystatechange", handler, false);
+                el.addEventListener("load", handler, false);
+            } // IE8 needs attachEvent() support
 		} else {
 			el.onload = fn;
 		}

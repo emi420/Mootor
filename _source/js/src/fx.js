@@ -16,22 +16,32 @@
     Mootor.Fx = {
 
         // Show an element
-        show: function (e) {
-            //console.log(this)
-            if (typeof e === "object") {
-                e.style.display = "block";
+        show: function (el) {
+            if (typeof el === "object") {
+                el.style.display = "block";
             } else {
                 this.el.style.display = "block";
             }
         },
 
         // Hide an element
-        hide: function (e) {
-            //console.log(this)
-            if (typeof e === "object") {
-                e.style.display = "none";
+        hide: function (el) {
+            if (typeof el === "object") {
+                el.style.display = "none";
             } else {
                 this.el.style.display = "none";
+            }
+        },
+
+        // Translate (move) an element on X axis
+        translateX: function (el, x_pos) {
+            // Apply 3d transform when its available
+            // or use default CSS 'left' property
+            el.style.transitionProperty = "webkit-transform";
+            if (el.style.webkitTransform !== "undefined") {
+                el.style.webkitTransform = "translate3d(" + x_pos + "px,0, 0)";
+            } else {
+                el.style.left = x_pos + "px";
             }
         },
 

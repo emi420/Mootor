@@ -25,6 +25,7 @@
             var i = 0,
                 clientWidth = Mootor.init_client_width,
                 clientHeight =  Mootor.init_client_height,
+                thresholdX =  (clientHeight / 4) * 3,
                 panelCount = 0,
                 panelsX = 0,
                 blankPanel,
@@ -107,24 +108,19 @@
                 // Move screen horizontally 
                 moveScreenH = function (e) {
 
-                    var distance = e.distance;
+                    var distance = e.distance,
+                        distanceFromOrigin = e.distanceFromOrigin;
 
-                    /* if( e.hasOwnProperty('distanceFromOrigin')) {
-                          var distanceFromOrigin = e.distanceFromOrigin;
-                          checkMove(distanceFromOrigin);            
-                        }*/
+                    // If position reach certain threshold,
+                    // load new panel
+                    if (distanceFromOrigin > thresholdX) {
+                        console.log("Load panel!");
+                    }
 
                      // New horizontal position
                     panelsX = panelsX + distance;
+                    Fx.translateX(divPanels, panelsX);
 
-                     // Apply 3d transform when its available
-                     // or use default CSS 'left' property
-                    divPanels.style.transitionProperty = "webkit-transform";
-                    if (divPanels.style.webkitTransform !== "undefined") {
-                        divPanels.style.webkitTransform = "translate3d(" + panelsX + "px,0, 0)";
-                    } else {
-                        divPanels.style.left = panelsX + "px";
-                    }
                 },
 
                 // Load panel
@@ -134,16 +130,18 @@
 
                     if (index < panels.length && index > -1) {
 
-                        // hide current and set new current            
+                        // hide current           
                         Fx.hide(panel);
                         current = index;
+
+                        // set new current 
                         panel = panels[current];
 
                         // reset size, position
                         resetWidth(panel);
                         resetLeft(panel);
 
-                        // and show panel
+                        // show panel
                         Fx.show(panel);
 
                     }
@@ -152,7 +150,7 @@
                 // DragEnd event handler
                 checkMove = function (distance) {
 
-                    var maxdist = (clientHeight / 4) * 3;
+                    var maxdist = thresholdX;
 
                     if (distance > maxdist) {
                         load(current + 1);
