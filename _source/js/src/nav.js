@@ -27,83 +27,15 @@
                 clientHeight =  Mootor.init_client_height,
                 thresholdX =  (clientHeight / 4) * 2.5,
                 panelsX = 0,
-                blankPanel,
                 current = 0,
                 divPanels = this.el,
                 panels = divPanels.getElementsByClassName("panel"),
                 panelCount = panels.length,
 
-                // Create new panel
-                create = function (options) {
-
-                    var panel,
-                        id = options.id;
-
-                    // Create a div
-                    panel = document.createElement('div');
-                    panel.id = id;
-
-                    // Add viewport size to div
-                    panel.style.width = clientWidth + "px";
-                    panel.style.height = clientHeight + "px";
-
-                    // Add panel to panels div
-                    divPanels.appendChild(panel);
-
-                    return panel;
-                },
-
-                // Hide all panels
-                hideAll = function () {
-                    for (; i < panelCount; i += 1) {
-                        Fx.hide(panels[i]);
-                    }
-                },
-
-                // Hide all panels
-                showAll = function () {
-                    for (; i < panelCount; i += 1) {
-                        Fx.show(panels[i]);
-                    }
-                },
-
-                // Reset panel width size 
-                resetWidth = function (panel) {
-                    panel.style.width = clientWidth + "px";
-                },
-
-                // Reset panel height size 
-                resetHeight = function (panel) {
-                    panel.style.height = clientHeight + "px";
-                },
-
-                // Reset panel left position 
-                resetLeft = function (panel) {
-                    panel.style.left = (clientWidth + 40) + "px";
-                },
-
                 // Reset panels container size and position
                 resetContainer = function () {
                     divPanels.style.width = (clientWidth * 2) + "px";
                     divPanels.style.height = clientHeight + "px";
-                },
-
-                // Reset panel size and position
-                resetPanel = function (panel) {
-
-                    resetWidth(panel);
-                    resetHeight(panel);
-
-                    if (panel === blankPanel) {
-
-                        // right
-                        //panel.style.left = 0 + "px";              
-                        // left
-                        panel.style.left = clientWidth * 2 + 80 + "px";
-
-                    } else {
-                        panel.style.left = clientWidth + 40 + "px";
-                    }
                 },
 
                 // Move screen horizontally 
