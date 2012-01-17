@@ -34,10 +34,24 @@
         },
 
         // Translate (move) an element on X axis
-        translateX: function (el, x_pos) {
+        translateX: function (el, x_pos, options) {
+
+            el.style.transitionProperty = "webkit-transform";
+
+            // Animation time
+            if (options.transitionDuration !== undefined) {
+                el.style.webkitTransitionDuration = ".2s";
+                el.style.webkitTransitionTimingFunction = "ease-out";
+                el.style.webkitTransitionTransitionDelay = ".2s";
+            } else {
+                el.style.webkitTransitionDuration = "";
+                el.style.webkitTransitionTimingFunction = "";
+                el.style.webkitTransitionTransitionDelay = "";
+            }
+
             // Apply 3d transform when its available
             // or use default CSS 'left' property
-            el.style.transitionProperty = "webkit-transform";
+
             if (el.style.webkitTransform !== "undefined") {
                 el.style.webkitTransform = "translate3d(" + x_pos + "px,0, 0)";
             } else {

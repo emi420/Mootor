@@ -296,10 +296,24 @@ var Mootor = (function () {
         },
 
         // Translate (move) an element on X axis
-        translateX: function (el, x_pos) {
+        translateX: function (el, x_pos, options) {
+
+            el.style.transitionProperty = "webkit-transform";
+
+            // Animation time
+            if (options.transitionDuration !== undefined) {
+                el.style.webkitTransitionDuration = ".2s";
+                el.style.webkitTransitionTimingFunction = "ease-out";
+                el.style.webkitTransitionTransitionDelay = ".2s";
+            } else {
+                el.style.webkitTransitionDuration = "";
+                el.style.webkitTransitionTimingFunction = "";
+                el.style.webkitTransitionTransitionDelay = "";
+            }
+
             // Apply 3d transform when its available
             // or use default CSS 'left' property
-            el.style.transitionProperty = "webkit-transform";
+
             if (el.style.webkitTransform !== "undefined") {
                 el.style.webkitTransform = "translate3d(" + x_pos + "px,0, 0)";
             } else {
@@ -370,7 +384,7 @@ var Mootor = (function () {
             var i = 0,
                 clientWidth = Mootor.init_client_width,
                 clientHeight =  Mootor.init_client_height,
-                thresholdX =  (clientHeight / 4) * 3,
+                thresholdX =  (clientHeight / 4) * 2.5,
                 panelsX = 0,
                 blankPanel,
                 current = 0,
@@ -459,29 +473,28 @@ var Mootor = (function () {
 
                      // New horizontal position                                          
                     panelsX = panelsX + distance;
-                    Fx.translateX(divPanels, panelsX);
 
+                    if (distanceFromOrigin === undefined) {
+
+                        // Large move
+                        Fx.translateX(divPanels, panelsX, {transitionDuration: 0.5});
+
+                    } else {
+
+                        // Short move
+                        Fx.translateX(divPanels, panelsX, {});
+
+                    }
                 },
 
                 // Load panel
                 load = function () {
-                
+
                     var distance;
 
+                    // Move panels
                     distance = (clientWidth + 40) * current;
-
-                    if (current > 2) {
-                        Fx.hide(panels[current - 2]);
-                        Fx.show(panels[current - 1]);
-                    } else if (current > 1) {
-                        Fx.show(panels[current - 1]);
-                    }
-                    if (current < (panelCount - 2)) {
-                        Fx.show(panels[current + 1]);
-                    }
-                                        
                     distance = distance > 0 ? -distance : distance;
-                                        
                     moveScreenH({
                         distance: distance - panelsX
                     });
@@ -499,21 +512,49 @@ var Mootor = (function () {
                     // Else, move panel back.
 
                     if (distance > maxdist && current < (panelCount - 1)) {
+
+                        // Swipe to left
+
+                        // Hide unreachable panels
+                        if (current > 2) {
+                            Fx.hide(panels[current - 2]);
+                        }
+                        if (current < panelCount - 2) {
+                            Fx.show(panels[current + 2]);
+                        }
+
                         current += 1;
                         is_momentum = true;
-                    } else if (distance < (-maxdist)) {
-                        if (current > 0) {
-                            current -= 1;
+
+                    } else if (distance < (-maxdist) && current > 0) {
+
+                        // Swipe to right
+
+                        // Hide unreachable panels
+                        if (current < panelCount - 2) {
+                            Fx.hide(panels[current + 2]);
                         }
+                        if (current > 2) {
+                            Fx.show(panels[current - 2]);
+                        }
+
+                        current -= 1;
                         is_momentum = true;
+
                     }
 
                     if (is_momentum === false) {
+
+                        // Bounce back
                         moveScreenH({
                             distance: distance
                         });
+
                     } else {
+
+                        // Load panel
                         load();
+
                     }
 
                 },
@@ -537,7 +578,7 @@ var Mootor = (function () {
 
                         // Hide all but first two panels
                         if (i > 1) {
-                        //    Fx.hide(panels[i]);
+                            Fx.hide(panels[i]);
                         }
                     }
 
