@@ -3,13 +3,9 @@
  *  Mootor Core (coded by emi420@gmail.com)
  */
 
-
-"use strict";
-
-var Mootor = function () {};
-
 // Main function, re-defines itself
-Mootor = (function () {
+var Mootor = (function () {
+	"use strict";
 
 	// Return new Mootor instance
 	Mootor = function (query) {
@@ -32,7 +28,7 @@ Mootor = (function () {
 		if (el === document) {
 			el = window;
 		}
-		
+
 		if (el === window || el === window.document) {
 			var ready = false,
 
@@ -43,7 +39,7 @@ Mootor = (function () {
 					fn.call(window.document);
 					ready = true;
 				};
-				
+
 			// Add listeners for all common load events
 			if (el !== "undefined" && el.addEventListener) {
 				el.addEventListener("DOM-ContentLoaded", handler, false);
@@ -82,7 +78,7 @@ Mootor = (function () {
 
 			case "string":
 
-				//console.log("FIXME CHECK: Query to the Dom *** EXPENSIVE")
+				//console.log("FIXME CHECK: Query to the Dom *** EXPENSIVE");
 
 				if (query.indexOf('#') > -1) {
 					query = query.replace("#", "");
@@ -260,7 +256,7 @@ Mootor = (function () {
     Mootor.listeners = [];
 
 }(Mootor));/* 
- *  Mootor Visual FX (coded by emi420@gmail.com)
+ * Mootor Visual FX (coded by emi420@gmail.com)
  */
 
 (function (Mootor) {

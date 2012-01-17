@@ -77,7 +77,7 @@ var Mootor = (function () {
 
 			case "string":
 
-				//console.log("FIXME CHECK: Query to the Dom *** EXPENSIVE")
+				//console.log("FIXME CHECK: Query to the Dom *** EXPENSIVE");
 
 				if (query.indexOf('#') > -1) {
 					query = query.replace("#", "");
