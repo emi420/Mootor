@@ -26,13 +26,12 @@
                 clientWidth = Mootor.init_client_width,
                 clientHeight =  Mootor.init_client_height,
                 thresholdX =  (clientHeight / 4) * 3,
-                panelCount = 0,
                 panelsX = 0,
                 blankPanel,
                 current = 0,
                 divPanels = this.el,
                 panels = divPanels.getElementsByClassName("panel"),
-                first = panels[0],
+                panelCount = panels.length,
 
                 // Create new panel
                 create = function (options) {
@@ -56,12 +55,15 @@
 
                 // Hide all panels
                 hideAll = function () {
-                    panelCount = panels.length;
                     for (; i < panelCount; i += 1) {
                         Fx.hide(panels[i]);
-                        if (clientHeight > panels[i].style.height) {
-                            panels[i].style.height = clientHeight + "px";
-                        }
+                    }
+                },
+
+                // Hide all panels
+                showAll = function () {
+                    for (; i < panelCount; i += 1) {
+                        Fx.show(panels[i]);
                     }
                 },
 
@@ -84,7 +86,6 @@
                 resetContainer = function () {
                     divPanels.style.width = (clientWidth * 2) + "px";
                     divPanels.style.height = clientHeight + "px";
-                    divPanels.style.left = (clientWidth * (-1) - 40) + "px";
                 },
 
                 // Reset panel size and position
@@ -111,71 +112,89 @@
                     var distance = e.distance,
                         distanceFromOrigin = e.distanceFromOrigin;
 
-                    // If position reach certain threshold,
-                    // load new panel
-                    if (distanceFromOrigin > thresholdX) {
-                        console.log("Load panel!");
-                    }
-
-                     // New horizontal position
+                     // New horizontal position                                          
                     panelsX = panelsX + distance;
                     Fx.translateX(divPanels, panelsX);
 
                 },
 
                 // Load panel
-                load = function (index) {
+                load = function () {
+                
+                    var distance;
 
-                    var panel = panels[current];
+                    distance = (clientWidth + 40) * current;
 
-                    if (index < panels.length && index > -1) {
-
-                        // hide current           
-                        Fx.hide(panel);
-                        current = index;
-
-                        // set new current 
-                        panel = panels[current];
-
-                        // reset size, position
-                        resetWidth(panel);
-                        resetLeft(panel);
-
-                        // show panel
-                        Fx.show(panel);
-
+                    if (current > 2) {
+                        Fx.hide(panels[current - 2]);
+                        Fx.show(panels[current - 1]);
+                    } else if (current > 1) {
+                        Fx.show(panels[current - 1]);
                     }
+                    if (current < (panelCount - 2)) {
+                        Fx.show(panels[current + 1]);
+                    }
+                                        
+                    distance = distance > 0 ? -distance : distance;
+                                        
+                    moveScreenH({
+                        distance: distance - panelsX
+                    });
+
                 },
 
                 // DragEnd event handler
                 checkMove = function (distance) {
 
-                    var maxdist = thresholdX;
+                    var maxdist = thresholdX,
+                        is_momentum = false;
 
-                    if (distance > maxdist) {
-                        load(current + 1);
+                    // If position reach certain threshold,
+                    // load new panel. 
+                    // Else, move panel back.
+
+                    if (distance > maxdist && current < (panelCount - 1)) {
+                        current += 1;
+                        is_momentum = true;
                     } else if (distance < (-maxdist)) {
                         if (current > 0) {
-                            load(current - 1);
+                            current -= 1;
                         }
+                        is_momentum = true;
                     }
 
-                    moveScreenH({
-                        distance: distance
-                    });
+                    if (is_momentum === false) {
+                        moveScreenH({
+                            distance: distance
+                        });
+                    } else {
+                        load();
+                    }
 
                 },
 
-                // Reset panels sizes and positions
+                // Reset panels
                 resetAll = function () {
 
-                    // Current viewport
-                    clientHeight = document.documentElement.clientHeight;
-                    clientWidth = document.documentElement.clientWidth;
+                    var panelstyle;
 
-                    // Reset current and blank panels
-                    resetPanel(panels[current]);
-                    resetPanel(blankPanel);
+                    for (; i < panelCount; i += 1) {
+
+                        panelstyle = panels[i].style;
+
+                        // Reset styles
+                        panelstyle.width = clientWidth + "px";
+                        panelstyle.left =  i > 0 ? (clientWidth * i + (40 * i)) + "px" : (clientWidth * i) + "px";
+                        if (clientHeight > panelstyle.height) {
+                            panelstyle.height = clientHeight + "px";
+                        }
+                        panelstyle.overflow = 'hidden';
+
+                        // Hide all but first two panels
+                        if (i > 1) {
+                        //    Fx.hide(panels[i]);
+                        }
+                    }
 
                     // Reset panels container
                     resetContainer();
@@ -189,22 +208,13 @@
             // Set document styles    
             document.body.style.overflow = "hidden";
 
-            // Create a blank panel for load content
-            blankPanel = create({
-                id: "blank_panel"
-            });
-
             // Reset and hide all panels
             resetAll();
-            hideAll();
 
             // Custom events listeners
             Event.bind(document.body, "drag", moveScreenH);
             Event.bind(document.body, "dragEnd", checkMove);
             Event.bind(window, "orientationChange", resetAll);
-
-            // Show first panel   
-            Fx.show(first);
 
         }
     };
