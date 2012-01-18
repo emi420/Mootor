@@ -6,11 +6,8 @@
 
     "use strict";
 
-    // Module dependencies
-    var Event = Mootor.Event,
-
-        // Max and Min font sizes
-        max_font_size = 105,
+    // Max and Min font sizes
+    var max_font_size = 105,
         min_font_size = 20;
 
     Mootor.Fx = {
@@ -36,13 +33,14 @@
         // Translate (move) an element on X axis
         translateX: function (el, x_pos, options) {
 
+            var tduration = options.transitionDuration;
             el.style.transitionProperty = "webkit-transform";
 
             // Animation time
-            if (options.transitionDuration !== undefined) {
-                el.style.webkitTransitionDuration = ".2s";
+            if (tduration !== undefined && tduration > 0) {
+                el.style.webkitTransitionDuration = tduration + "s";
                 el.style.webkitTransitionTimingFunction = "ease-out";
-                el.style.webkitTransitionTransitionDelay = ".2s";
+                el.style.webkitTransitionTransitionDelay = tduration + "s";
             } else {
                 el.style.webkitTransitionDuration = "";
                 el.style.webkitTransitionTimingFunction = "";
@@ -82,8 +80,8 @@
 
             // Add event listeners to update font size when user 
             // rotate device or resize window
-            Event.bind(window, "orientationChange", updateSize);
-            Event.bind(window, "resize", updateSize);
+            //Event.bind(window, "orientationChange", updateSize);
+            //Event.bind(window, "resize", updateSize);
 
             // Initialize font-size
             updateSize();

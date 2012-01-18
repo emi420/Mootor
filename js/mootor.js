@@ -268,11 +268,8 @@ var Mootor = (function () {
 
     "use strict";
 
-    // Module dependencies
-    var Event = Mootor.Event,
-
-        // Max and Min font sizes
-        max_font_size = 105,
+    // Max and Min font sizes
+    var max_font_size = 105,
         min_font_size = 20;
 
     Mootor.Fx = {
@@ -298,13 +295,14 @@ var Mootor = (function () {
         // Translate (move) an element on X axis
         translateX: function (el, x_pos, options) {
 
+            var tduration = options.transitionDuration;
             el.style.transitionProperty = "webkit-transform";
 
             // Animation time
-            if (options.transitionDuration !== undefined) {
-                el.style.webkitTransitionDuration = ".2s";
+            if (tduration !== undefined && tduration > 0) {
+                el.style.webkitTransitionDuration = tduration + "s";
                 el.style.webkitTransitionTimingFunction = "ease-out";
-                el.style.webkitTransitionTransitionDelay = ".2s";
+                el.style.webkitTransitionTransitionDelay = tduration + "s";
             } else {
                 el.style.webkitTransitionDuration = "";
                 el.style.webkitTransitionTimingFunction = "";
@@ -344,8 +342,8 @@ var Mootor = (function () {
 
             // Add event listeners to update font size when user 
             // rotate device or resize window
-            Event.bind(window, "orientationChange", updateSize);
-            Event.bind(window, "resize", updateSize);
+            //Event.bind(window, "orientationChange", updateSize);
+            //Event.bind(window, "resize", updateSize);
 
             // Initialize font-size
             updateSize();
@@ -381,8 +379,7 @@ var Mootor = (function () {
              * 
              */
 
-            var i = 0,
-                clientWidth = Mootor.init_client_width,
+            var clientWidth = Mootor.init_client_width,
                 clientHeight =  Mootor.init_client_height,
                 thresholdX =  clientWidth / 2,
                 panelsX = 0,
@@ -409,7 +406,11 @@ var Mootor = (function () {
                     if (distanceFromOrigin === undefined) {
 
                         // Large move
-                        Fx.translateX(divPanels, panelsX, {transitionDuration: 0.5});
+                        if (distance > 700 || distance < -700) {
+                            Fx.translateX(divPanels, panelsX, {transitionDuration: 0.5});
+                        } else {
+                            Fx.translateX(divPanels, panelsX, {transitionDuration: 0.2});
+                        }
 
                     } else {
 
@@ -427,6 +428,7 @@ var Mootor = (function () {
                     // Move panels
                     distance = (clientWidth + 40) * current;
                     distance = distance > 0 ? -distance : distance;
+
                     moveScreenH({
                         distance: distance - panelsX
                     });
@@ -448,12 +450,12 @@ var Mootor = (function () {
                         // Swipe to left
 
                         // Hide unreachable panels
-                        if (current > 2) {
+                        /*if (current > 2) {
                             Fx.hide(panels[current - 2]);
                         }
                         if (current < panelCount - 2) {
                             Fx.show(panels[current + 2]);
-                        }
+                        }*/
 
                         current += 1;
                         is_momentum = true;
@@ -463,12 +465,12 @@ var Mootor = (function () {
                         // Swipe to right
 
                         // Hide unreachable panels
-                        if (current < panelCount - 2) {
+                        /*if (current < panelCount - 2) {
                             Fx.hide(panels[current + 2]);
                         }
                         if (current > 2) {
                             Fx.show(panels[current - 2]);
-                        }
+                        }*/
 
                         current -= 1;
                         is_momentum = true;
@@ -491,27 +493,62 @@ var Mootor = (function () {
 
                 },
 
+                setCurrent = function (pid) {
+                    var i;
+                    for (i = panelCount; i--;) {
+                        if (panels[i].id === pid) {
+                            current = i;
+                            Fx.show(panels[i]);
+                            load();
+                        }
+                    }
+                },
+
                 // Reset panels
                 resetAll = function () {
 
-                    var panelstyle;
+                    var pstyle,
+                        panchors,
+                        pid,
+                        onAnchorClick,
+                        i,
+                        j;
 
-                    for (; i < panelCount; i += 1) {
+                    onAnchorClick = function (pid) {
+                        return function () {
+                            setCurrent(pid);
+                            return false;
+                        };
+                    };
 
-                        panelstyle = panels[i].style;
+                    for (i = panelCount; i--;) {
+
+                        pstyle = panels[i].style;
 
                         // Reset styles
-                        panelstyle.width = clientWidth + "px";
-                        panelstyle.left =  i > 0 ? (clientWidth * i + (40 * i)) + "px" : (clientWidth * i) + "px";
-                        if (clientHeight > panelstyle.height) {
-                            panelstyle.height = clientHeight + "px";
+                        pstyle.width = clientWidth + "px";
+                        pstyle.left =  i > 0 ? (clientWidth * i + (40 * i)) + "px" : (clientWidth * i) + "px";
+                        if (clientHeight > pstyle.height) {
+                            pstyle.height = clientHeight + "px";
                         }
-                        panelstyle.overflow = 'hidden';
+                        pstyle.overflow = 'hidden';
+
+                        // FIXME CHECK: expensive query (getElementsByTagName)
+                        panchors = panels[i].getElementsByTagName('a');
+
+                        for (j = panchors.length; j--;) {
+                            if (panchors[j].rel !== "") {
+                                pid = panchors[j].rel;
+                                panchors[j].ontouchstart = onAnchorClick(pid);
+                                panchors[j].onclick = onAnchorClick(pid);
+                            }
+                        }
 
                         // Hide all but first two panels
-                        if (i > 1) {
+                        /*if (i > 1) {
                             Fx.hide(panels[i]);
-                        }
+                        }*/
+
                     }
 
                     // Reset panels container

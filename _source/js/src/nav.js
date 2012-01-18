@@ -22,8 +22,7 @@
              * 
              */
 
-            var i = 0,
-                clientWidth = Mootor.init_client_width,
+            var clientWidth = Mootor.init_client_width,
                 clientHeight =  Mootor.init_client_height,
                 thresholdX =  clientWidth / 2,
                 panelsX = 0,
@@ -50,7 +49,11 @@
                     if (distanceFromOrigin === undefined) {
 
                         // Large move
-                        Fx.translateX(divPanels, panelsX, {transitionDuration: 0.5});
+                        if (distance > 700 || distance < -700) {
+                            Fx.translateX(divPanels, panelsX, {transitionDuration: 0.5});
+                        } else {
+                            Fx.translateX(divPanels, panelsX, {transitionDuration: 0.2});
+                        }
 
                     } else {
 
@@ -68,6 +71,7 @@
                     // Move panels
                     distance = (clientWidth + 40) * current;
                     distance = distance > 0 ? -distance : distance;
+
                     moveScreenH({
                         distance: distance - panelsX
                     });
@@ -89,12 +93,12 @@
                         // Swipe to left
 
                         // Hide unreachable panels
-                        if (current > 2) {
+                        /*if (current > 2) {
                             Fx.hide(panels[current - 2]);
                         }
                         if (current < panelCount - 2) {
                             Fx.show(panels[current + 2]);
-                        }
+                        }*/
 
                         current += 1;
                         is_momentum = true;
@@ -104,12 +108,12 @@
                         // Swipe to right
 
                         // Hide unreachable panels
-                        if (current < panelCount - 2) {
+                        /*if (current < panelCount - 2) {
                             Fx.hide(panels[current + 2]);
                         }
                         if (current > 2) {
                             Fx.show(panels[current - 2]);
-                        }
+                        }*/
 
                         current -= 1;
                         is_momentum = true;
@@ -132,27 +136,62 @@
 
                 },
 
+                setCurrent = function (pid) {
+                    var i;
+                    for (i = panelCount; i--;) {
+                        if (panels[i].id === pid) {
+                            current = i;
+                            Fx.show(panels[i]);
+                            load();
+                        }
+                    }
+                },
+
                 // Reset panels
                 resetAll = function () {
 
-                    var panelstyle;
+                    var pstyle,
+                        panchors,
+                        pid,
+                        onAnchorClick,
+                        i,
+                        j;
 
-                    for (; i < panelCount; i += 1) {
+                    onAnchorClick = function (pid) {
+                        return function () {
+                            setCurrent(pid);
+                            return false;
+                        };
+                    };
 
-                        panelstyle = panels[i].style;
+                    for (i = panelCount; i--;) {
+
+                        pstyle = panels[i].style;
 
                         // Reset styles
-                        panelstyle.width = clientWidth + "px";
-                        panelstyle.left =  i > 0 ? (clientWidth * i + (40 * i)) + "px" : (clientWidth * i) + "px";
-                        if (clientHeight > panelstyle.height) {
-                            panelstyle.height = clientHeight + "px";
+                        pstyle.width = clientWidth + "px";
+                        pstyle.left =  i > 0 ? (clientWidth * i + (40 * i)) + "px" : (clientWidth * i) + "px";
+                        if (clientHeight > pstyle.height) {
+                            pstyle.height = clientHeight + "px";
                         }
-                        panelstyle.overflow = 'hidden';
+                        pstyle.overflow = 'hidden';
+
+                        // FIXME CHECK: expensive query (getElementsByTagName)
+                        panchors = panels[i].getElementsByTagName('a');
+
+                        for (j = panchors.length; j--;) {
+                            if (panchors[j].rel !== "") {
+                                pid = panchors[j].rel;
+                                panchors[j].ontouchstart = onAnchorClick(pid);
+                                panchors[j].onclick = onAnchorClick(pid);
+                            }
+                        }
 
                         // Hide all but first two panels
-                        if (i > 1) {
+                        /*if (i > 1) {
                             Fx.hide(panels[i]);
-                        }
+                        }*/
+
                     }
 
                     // Reset panels container

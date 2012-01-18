@@ -9,29 +9,36 @@
 %body.main 
     #panels
 
-        .panel
+        .panel#home
             .content
                 %h2 Pink Floyd
                 %h3 1965 - 1995
+                %a{:href=>"", :rel=>"form"} Subscripcion
+                %a{:href=>"", :rel=>"panel1"} Siguiente
 
-        .panel
+        .panel#panel1
             %div
+                %a{:href=>"", :rel=>"panel2"} Siguiente
                 %img{:src=>"upload/products/1.jpg"}
 
-        .panel
+        .panel#panel2
             %div
+                %a{:href=>"", :rel=>"panel3"} Siguiente
                 %img{:src=>"upload/products/2.jpg"}
 
-        .panel
+        .panel#panel3
             %div
+                %a{:href=>"", :rel=>"panel4"} Siguiente
                 %img{:src=>"upload/products/3.jpg"}
 
-        .panel
+        .panel#panel4
             %div
+                %a{:href=>"", :rel=>"form"} Siguiente
                 %img{:src=>"upload/products/4.jpg"}
 
 
-        .panel
+        .panel#form
+            %a{:href=>"", :rel=>"home"} Inicio
             .subscribe
                 %h2 &iexcl;Subscribite! 
                 %h3 y te enviaremos novedades una vez por mes, no molestamos :)
