@@ -25,7 +25,7 @@
             var i = 0,
                 clientWidth = Mootor.init_client_width,
                 clientHeight =  Mootor.init_client_height,
-                thresholdX =  (clientHeight / 4) * 2.5,
+                thresholdX =  clientWidth / 2,
                 panelsX = 0,
                 current = 0,
                 divPanels = this.el,
