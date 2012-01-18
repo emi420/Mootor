@@ -7,7 +7,53 @@
     "use strict";
 
     var Drag,
+        Touch,
         Orientation;
+
+    // Touch
+
+    Touch = function (element, callback) {
+        this.element = this;
+        this.callback = callback;
+        
+        // Prevents default callback
+        element.addEventListener('click', function (e) { e.preventDefault(); }, false);
+        element.onclick = function () {return false; };
+
+        // Disable selection, copy, etc
+        element.style.webkitTouchCallout = "none";
+        element.style.webkitUserSelect = "none";
+        element.style.webkitUserDrag = "none";
+        element.style.webkitUserModify = "none";
+        element.style.webkitHighlight = "none";
+
+        element.addEventListener('touchstart', this, false);
+        element.addEventListener('touchend', this, false);
+    };
+
+    // Touch Handler
+    Touch.prototype.handleEvent = function (e) {
+        switch (e.type) {
+        case 'touchstart':
+            this.onTouchStart(e);
+            break;
+        case 'touchend':
+            this.onTouchEnd(e);
+            break;
+        }
+    };
+
+    // Touch Start
+    Touch.prototype.onTouchStart = function () {
+        //this.element.className += " active";
+        this.callback.call();
+    };
+
+    // Touch End
+    Touch.prototype.onTouchEnd = function () {
+        //this.element.className.replace(" active", "");
+        this.callback.call();
+    };
 
     // Drag 
     Drag = function (element, callback) {
@@ -21,7 +67,7 @@
         element.addEventListener('touchend', this, false);
     };
 
-    // Handler
+    // Dreag Handler
     Drag.prototype.handleEvent = function (e) {
         switch (e.type) {
         case 'touchstart':
@@ -36,12 +82,12 @@
         }
     };
 
-    // Start
+    // Drag Start
     Drag.prototype.onTouchStart = function (e) {
         this.lastTouchX = this.startTouchX = e.touches[0].clientX;
     };
 
-    // Move
+    // Drag Move
     Drag.prototype.onTouchMove = function (e) {
         var distance = e.touches[0].clientX - this.lastTouchX,
             distanceFromOrigin = this.startTouchX - this.lastTouchX;
@@ -53,7 +99,7 @@
         });
     };
 
-    // End
+    // Drag End
     Drag.prototype.onTouchEnd = function () {
         var distance = this.startTouchX - this.lastTouchX;
         if (this.onDragEnd !== 'undefined') {
@@ -79,6 +125,9 @@
     Orientation.prototype.onOrientationChange = function () {
         this.callback();
     };
+    
+    // TODO: mantener un flag "isDragging" para cancelar
+    //       eventos touch si se esta haciendo drag
 
     Mootor.Event = {
         bind: function (el, eventtype, callback) {
@@ -91,6 +140,15 @@
 
             case 'dragEnd':
                 Mootor.listeners[el].onDragEnd = callback;
+                break;
+
+            case 'touch':
+                Mootor.listeners[el] = new Touch(el, callback);
+                break;
+
+            case 'touchEnd':
+                Mootor.listeners[el.rel] = new Touch(el, function () {});
+                Mootor.listeners[el.rel].onTouchEnd = callback;
                 break;
 
             case "orientationChange":

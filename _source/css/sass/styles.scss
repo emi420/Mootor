@@ -48,3 +48,23 @@ h2 {
 h3 {
   @include subType1;
 }
+
+// Subscribe
+
+.subscribe h2 {
+  margin: 0 ;
+}
+
+// Navigation
+
+.nav a {
+    font-size: 3em;
+    color: $domColor1;
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #fff;
+}
+
+.nav a:hover {
+    background: transparent;
+}
+

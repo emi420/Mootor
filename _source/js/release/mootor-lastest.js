@@ -158,7 +158,53 @@ var Mootor = (function () {
     "use strict";
 
     var Drag,
+        Touch,
         Orientation;
+
+    // Touch
+
+    Touch = function (element, callback) {
+        this.element = this;
+        this.callback = callback;
+        
+        // Prevents default callback
+        element.addEventListener('click', function (e) { e.preventDefault(); }, false);
+        element.onclick = function () {return false; };
+
+        // Disable selection, copy, etc
+        element.style.webkitTouchCallout = "none";
+        element.style.webkitUserSelect = "none";
+        element.style.webkitUserDrag = "none";
+        element.style.webkitUserModify = "none";
+        element.style.webkitHighlight = "none";
+
+        element.addEventListener('touchstart', this, false);
+        element.addEventListener('touchend', this, false);
+    };
+
+    // Touch Handler
+    Touch.prototype.handleEvent = function (e) {
+        switch (e.type) {
+        case 'touchstart':
+            this.onTouchStart(e);
+            break;
+        case 'touchend':
+            this.onTouchEnd(e);
+            break;
+        }
+    };
+
+    // Touch Start
+    Touch.prototype.onTouchStart = function () {
+        //this.element.className += " active";
+        this.callback.call();
+    };
+
+    // Touch End
+    Touch.prototype.onTouchEnd = function () {
+        //this.element.className.replace(" active", "");
+        this.callback.call();
+    };
 
     // Drag 
     Drag = function (element, callback) {
@@ -172,7 +218,7 @@ var Mootor = (function () {
         element.addEventListener('touchend', this, false);
     };
 
-    // Handler
+    // Dreag Handler
     Drag.prototype.handleEvent = function (e) {
         switch (e.type) {
         case 'touchstart':
@@ -187,12 +233,12 @@ var Mootor = (function () {
         }
     };
 
-    // Start
+    // Drag Start
     Drag.prototype.onTouchStart = function (e) {
         this.lastTouchX = this.startTouchX = e.touches[0].clientX;
     };
 
-    // Move
+    // Drag Move
     Drag.prototype.onTouchMove = function (e) {
         var distance = e.touches[0].clientX - this.lastTouchX,
             distanceFromOrigin = this.startTouchX - this.lastTouchX;
@@ -204,7 +250,7 @@ var Mootor = (function () {
         });
     };
 
-    // End
+    // Drag End
     Drag.prototype.onTouchEnd = function () {
         var distance = this.startTouchX - this.lastTouchX;
         if (this.onDragEnd !== 'undefined') {
@@ -230,6 +276,9 @@ var Mootor = (function () {
     Orientation.prototype.onOrientationChange = function () {
         this.callback();
     };
+    
+    // TODO: mantener un flag "isDragging" para cancelar
+    //       eventos touch si se esta haciendo drag
 
     Mootor.Event = {
         bind: function (el, eventtype, callback) {
@@ -242,6 +291,15 @@ var Mootor = (function () {
 
             case 'dragEnd':
                 Mootor.listeners[el].onDragEnd = callback;
+                break;
+
+            case 'touch':
+                Mootor.listeners[el] = new Touch(el, callback);
+                break;
+
+            case 'touchEnd':
+                Mootor.listeners[el.rel] = new Touch(el, function () {});
+                Mootor.listeners[el.rel].onTouchEnd = callback;
                 break;
 
             case "orientationChange":
@@ -449,28 +507,12 @@ var Mootor = (function () {
 
                         // Swipe to left
 
-                        // Hide unreachable panels
-                        /*if (current > 2) {
-                            Fx.hide(panels[current - 2]);
-                        }
-                        if (current < panelCount - 2) {
-                            Fx.show(panels[current + 2]);
-                        }*/
-
                         current += 1;
                         is_momentum = true;
 
                     } else if (distance < (-maxdist) && current > 0) {
 
                         // Swipe to right
-
-                        // Hide unreachable panels
-                        /*if (current < panelCount - 2) {
-                            Fx.hide(panels[current + 2]);
-                        }
-                        if (current > 2) {
-                            Fx.show(panels[current - 2]);
-                        }*/
 
                         current -= 1;
                         is_momentum = true;
@@ -514,6 +556,7 @@ var Mootor = (function () {
                         i,
                         j;
 
+                    // Set anchor links
                     onAnchorClick = function (pid) {
                         return function () {
                             setCurrent(pid);
@@ -533,21 +576,16 @@ var Mootor = (function () {
                         }
                         pstyle.overflow = 'hidden';
 
+                        // Set anchor links
                         // FIXME CHECK: expensive query (getElementsByTagName)
                         panchors = panels[i].getElementsByTagName('a');
 
                         for (j = panchors.length; j--;) {
                             if (panchors[j].rel !== "") {
                                 pid = panchors[j].rel;
-                                panchors[j].ontouchstart = onAnchorClick(pid);
-                                panchors[j].onclick = onAnchorClick(pid);
+                                Event.bind(panchors[j], "touchEnd", onAnchorClick(pid));
                             }
                         }
-
-                        // Hide all but first two panels
-                        /*if (i > 1) {
-                            Fx.hide(panels[i]);
-                        }*/
 
                     }
 
@@ -567,8 +605,10 @@ var Mootor = (function () {
             resetAll();
 
             // Custom events listeners
-            Event.bind(document.body, "drag", moveScreenH);
-            Event.bind(document.body, "dragEnd", checkMove);
+            //Event.bind(document.body, "drag", moveScreenH);
+            //Event.bind(document.body, "dragEnd", checkMove);
+            Event.bind(document.body, "drag", function(){});
+            Event.bind(document.body, "dragEnd", function(){});
             Event.bind(window, "orientationChange", resetAll);
 
         }

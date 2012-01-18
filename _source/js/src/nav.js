@@ -92,28 +92,12 @@
 
                         // Swipe to left
 
-                        // Hide unreachable panels
-                        /*if (current > 2) {
-                            Fx.hide(panels[current - 2]);
-                        }
-                        if (current < panelCount - 2) {
-                            Fx.show(panels[current + 2]);
-                        }*/
-
                         current += 1;
                         is_momentum = true;
 
                     } else if (distance < (-maxdist) && current > 0) {
 
                         // Swipe to right
-
-                        // Hide unreachable panels
-                        /*if (current < panelCount - 2) {
-                            Fx.hide(panels[current + 2]);
-                        }
-                        if (current > 2) {
-                            Fx.show(panels[current - 2]);
-                        }*/
 
                         current -= 1;
                         is_momentum = true;
@@ -157,6 +141,7 @@
                         i,
                         j;
 
+                    // Set anchor links
                     onAnchorClick = function (pid) {
                         return function () {
                             setCurrent(pid);
@@ -176,21 +161,16 @@
                         }
                         pstyle.overflow = 'hidden';
 
+                        // Set anchor links
                         // FIXME CHECK: expensive query (getElementsByTagName)
                         panchors = panels[i].getElementsByTagName('a');
 
                         for (j = panchors.length; j--;) {
                             if (panchors[j].rel !== "") {
                                 pid = panchors[j].rel;
-                                panchors[j].ontouchstart = onAnchorClick(pid);
-                                panchors[j].onclick = onAnchorClick(pid);
+                                Event.bind(panchors[j], "touchEnd", onAnchorClick(pid));
                             }
                         }
-
-                        // Hide all but first two panels
-                        /*if (i > 1) {
-                            Fx.hide(panels[i]);
-                        }*/
 
                     }
 
@@ -210,8 +190,10 @@
             resetAll();
 
             // Custom events listeners
-            Event.bind(document.body, "drag", moveScreenH);
-            Event.bind(document.body, "dragEnd", checkMove);
+            //Event.bind(document.body, "drag", moveScreenH);
+            //Event.bind(document.body, "dragEnd", checkMove);
+            Event.bind(document.body, "drag", function(){});
+            Event.bind(document.body, "dragEnd", function(){});
             Event.bind(window, "orientationChange", resetAll);
 
         }

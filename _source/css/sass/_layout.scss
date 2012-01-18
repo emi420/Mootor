@@ -1,15 +1,16 @@
 $base-padding: 1em;
 $base-margin: 1em;
 
+// Content
+
 h2 {
   margin: ($base-margin / 8) 0 ;  
-}
-.subscribe h2 {
-  margin: 0 ;
 }
 h3 {
   margin: ($base-margin / 4) 0 ;
 }
+
+// Panels
 
 #panels,
 #blank_panel,
@@ -18,20 +19,22 @@ h3 {
     left: 0;
     top: 0;
     @include box-shadow(0px 5px 5px rgba(0,0,0,.5));
-    //@include border-radius(5px);
 }
 
-@media (min-width:1240px) {
-  .container {
-    max-width: 960px ; 
-    width: auto ;
-    margin: 0 auto ;
-  }
+// Navigation
+
+.nav {
+    list-style-type: none;
 }
 
-// Catalog.Gallery
-
-.catalog .item {
-    width: 100% ;
+.nav a {
+    text-decoration: none;
+    text-align: left;
+    display: block;
 }
+
+.panel a {
+    padding: 1em ;
+}
+
 

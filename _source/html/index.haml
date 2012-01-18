@@ -6,47 +6,74 @@
     %meta{:name=>"viewport", :content=>"initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"}
     %link{:href=>"css/styles.css", :media=>"screen",  :rel=>"stylesheet"}
     %script{:src=>"js/mootor.js",:type=>"text/javascript"}
-%body.main 
+%body.main
+
+    #header
+        / header content
+
     #panels
 
         .panel#home
-            .content
-                %h2 Pink Floyd
-                %h3 1965 - 1995
-                %a{:href=>"", :rel=>"form"} Subscripcion
-                %a{:href=>"", :rel=>"panel1"} Siguiente
+            .nav#nav
+                %li
+                    %a{:href=>"", :rel=>"carousel"} Carousel
+                %li
+                    %a{:href=>"", :rel=>"geo"} Geo
+                %li
+                    %a{:href=>"", :rel=>"video"} Video
+                %li
+                    %a{:href=>"", :rel=>"audio"} Audio
+                %li
+                    %a{:href=>"", :rel=>"form"} Form
+                %li
+                    %a{:href=>"", :rel=>"graph"} Graph
 
-        .panel#panel1
+        .panel#carousel
             %div
-                %a{:href=>"", :rel=>"panel2"} Siguiente
-                %img{:src=>"upload/products/1.jpg"}
+                %h2 Carousel
+                %h3 This module is not implemented yet.
+                %h3
+                    %a{:href=>"", :rel=>"home"} < Back
 
-        .panel#panel2
+        .panel#geo
             %div
-                %a{:href=>"", :rel=>"panel3"} Siguiente
-                %img{:src=>"upload/products/2.jpg"}
+                %h2 Geo
+                %h3 This module is not implemented yet.
+                %h3
+                    %a{:href=>"", :rel=>"home"} < Back
 
-        .panel#panel3
+        .panel#video
             %div
-                %a{:href=>"", :rel=>"panel4"} Siguiente
-                %img{:src=>"upload/products/3.jpg"}
-
-        .panel#panel4
+                %h2 Video
+                %h3 This module is not implemented yet.
+                %h3
+                    %a{:href=>"", :rel=>"home"} < Back
+                
+        .panel#audio
             %div
-                %a{:href=>"", :rel=>"form"} Siguiente
-                %img{:src=>"upload/products/4.jpg"}
-
+                %h2 Audio
+                %h3 This module is not implemented yet.
+                %h3
+                    %a{:href=>"", :rel=>"home"} < Back
 
         .panel#form
-            %a{:href=>"", :rel=>"home"} Inicio
+            %h3
+                %a{:href=>"", :rel=>"home"} < Back
             .subscribe
-                %h2 &iexcl;Subscribite! 
-                %h3 y te enviaremos novedades una vez por mes, no molestamos :)
+                %h2 Form
+                %h3 Subscribe to receive news about this product!
                 %form.form#suscribeForm
                     .field.text
-                        %input#fieldEmail{:type=>"text",:value=>"correo electrónico"}
+                        %input#fieldEmail{:type=>"text",:value=>"e-mail"}
                     .action.subscribe
-                        %input#suscribeBtn{:type=>"submit",:value=>"Suscribirse"} 
+                        %input#suscribeBtn{:type=>"submit",:value=>"Subscribe"} 
+
+        .panel#graph
+            %div
+                %h2 Graph
+                %h3 This module is not implemented yet.
+                %h3
+                    %a{:href=>"", :rel=>"home"} < Back
  
 :javascript    
 
