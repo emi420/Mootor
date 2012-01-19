@@ -173,15 +173,15 @@
         var distanceX = this.touch.startX - this.touch.lastX,
             distanceY = this.touch.startY - this.touch.lastY;
 
-        Mootor.listeners.isDraggingX = false;
-        Mootor.listeners.isDraggingY = false;
-
         if (this.onDragEnd.callback !== 'undefined') {
             this.onDragEnd.callback({
                 distanceX: distanceX,
                 distanceY: distanceY
             });
         }
+
+        Mootor.listeners.isDraggingX = false;
+        Mootor.listeners.isDraggingY = false;
 
     };
 

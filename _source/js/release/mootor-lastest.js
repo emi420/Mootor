@@ -324,15 +324,15 @@ var Mootor = (function () {
         var distanceX = this.touch.startX - this.touch.lastX,
             distanceY = this.touch.startY - this.touch.lastY;
 
-        Mootor.listeners.isDraggingX = false;
-        Mootor.listeners.isDraggingY = false;
-
         if (this.onDragEnd.callback !== 'undefined') {
             this.onDragEnd.callback({
                 distanceX: distanceX,
                 distanceY: distanceY
             });
         }
+
+        Mootor.listeners.isDraggingX = false;
+        Mootor.listeners.isDraggingY = false;
 
     };
 
@@ -467,9 +467,12 @@ window.Mootor = Mootor;/*
             }
         },
 
-        // Translate (move) an element on X axis
-        translateX: function (el, x_pos, options) {
-
+        // Translate (move) an element on X or Y axis
+        translate: function (el, positions, options) {
+        
+            var x_pos = positions.x,
+            y_pos = positions.y;
+                        
             var tduration = options.transitionDuration;
             el.style.transitionProperty = "webkit-transform";
 
@@ -486,12 +489,25 @@ window.Mootor = Mootor;/*
 
             // Apply 3d transform when its available
             // or use default CSS 'left' property
+            
+            // FIXME CHECK: optimize me
+            
+            if (!isNaN(x_pos) && x_pos !== undefined) {                
+                distance = x_pos + "px,0, 0";            
+            } else if (!isNaN(y_pos) && y_pos !== undefined) {
+                distance = "0," + y_pos + "px, 0";            
+            }
 
             if (el.style.webkitTransform !== "undefined") {
-                el.style.webkitTransform = "translate3d(" + x_pos + "px,0, 0)";
+                el.style.webkitTransform = "translate3d(" + distance + ")";
             } else {
-                el.style.left = x_pos + "px";
+                if (!isNaN(x_pos) && x_pos !== undefined) {                
+                    el.style.left = x_pos + "px";
+                }  else if (!isNaN(y_pos) && y_pos !== undefined) {
+                    el.style.top = y_pos + "px";    
+                }
             }
+                
         },
 
         // Adjust font size relative to viewport size
@@ -558,39 +574,57 @@ window.Mootor = Mootor;/*
                 clientHeight =  Mootor.init_client_height,
                 thresholdX =  clientWidth / 2,
                 panelsX = 0,
+                panelsY = 0,
                 current = 0,
                 divPanels = this.el,
                 panels = divPanels.getElementsByClassName("panel"),
                 panelCount = panels.length,
 
-
                 // Move screen horizontally 
-                moveScreenH = function (e) {
+                moveScreen = function (e) {
 
-                    var distance = e.distanceX,
-                        distanceFromOrigin = e.distanceFromOriginX;
+                    var distanceX = e.distanceX,
+                        distanceY = e.distanceY,
+                        distanceFromOriginY = e.distanceFromOriginY,
+                        distanceFromOriginX = e.distanceFromOriginX;
 
-                     // New horizontal position                                          
-                    panelsX = panelsX + distance;
+                    // FIXME CHECK: optimize me
+                    if (isNaN(panelsY)) {
+                        panelsY = 0;
+                    }
 
-                    if (Mootor.listeners.isDraggingY === false) {
-                    
-                        if (distanceFromOrigin === undefined) {
+                    // New horizontal position                                          
+                    panelsX = panelsX + distanceX;
+                    panelsY = panelsY + distanceY;                    
 
-                            // Large move
-                            if (distance > 700 || distance < -700) {
-                                Fx.translateX(divPanels, panelsX, {transitionDuration: 0.5});
+                    if (Mootor.listeners.isDraggingY === false ) {
+
+                        if (distanceFromOriginX === undefined) {
+
+                            // Large X move
+                            if (distanceX > 700 || distanceX < -700) {
+                                Fx.translate(divPanels, {x: panelsX}, {transitionDuration: 0.5});
                             } else {
-                                Fx.translateX(divPanels, panelsX, {transitionDuration: 0.2});
+                                Fx.translate(divPanels, {x: panelsX}, {transitionDuration: 0.2});
                             }
 
-                        } else {
+                        } else if (Mootor.listeners.isDraggingX === true) {
 
-                            // Short move
-                            Fx.translateX(divPanels, panelsX, {});
+                            // Short X move
+                            Fx.translate(divPanels, {x: panelsX}, {});
 
                         }
+
+                    }  else if (Mootor.listeners.isDraggingY === true) {
+
+                        // Short Y move                        
+                        if (distanceFromOriginY === undefined) {
+                            Fx.translate(divPanels, {y: panelsY}, {transitionDuration: 0.5});
+                        } else {
+                            Fx.translate(divPanels, {y: panelsY}, {});                        
+                        }
                     }
+
                 },
 
                 // Load panel
@@ -602,7 +636,7 @@ window.Mootor = Mootor;/*
                     distance = (clientWidth + 40) * current;
                     distance = distance > 0 ? -distance : distance;
 
-                    moveScreenH({
+                    moveScreen({
                         distanceX: distance - panelsX
                     });
 
@@ -613,20 +647,21 @@ window.Mootor = Mootor;/*
 
                     var maxdist = thresholdX,
                         is_momentum = false,
-                        distance = touch.distanceX;
+                        distanceX = touch.distanceX,
+                        distanceY = touch.distanceY;
 
                     // If position reach certain threshold,
                     // load new panel. 
                     // Else, move panel back.
 
-                    if (distance > maxdist && current < (panelCount - 1)) {
+                    if (distanceX > maxdist && current < (panelCount - 1)) {
 
                         // Swipe to left
 
                         current += 1;
                         is_momentum = true;
 
-                    } else if (distance < (-maxdist) && current > 0) {
+                    } else if (distanceX < (-maxdist) && current > 0) {
 
                         // Swipe to right
 
@@ -634,13 +669,39 @@ window.Mootor = Mootor;/*
                         is_momentum = true;
 
                     }
+                    
 
                     if (is_momentum === false) {
+                        
+                        if (Mootor.listeners.isDraggingX === true) {
+                            // Bounce back
+                            moveScreen({
+                                distanceX: distanceX
+                            });
+                            
+                        } else if (Mootor.listeners.isDraggingY === true) {
 
-                        // Bounce back
-                        moveScreenH({
-                            distanceX: distance
-                        });
+                            // FIXME: check this bounce
+                            if (panelsY > 0) {
+                            
+                                // Bounce back
+                                moveScreen({
+                                    distanceY: -panelsY
+                                });                            
+
+                            } else {
+
+                                maxdist = divPanels.getElementsByClassName('panel')[current].offsetHeight - clientHeight;
+                                if (panelsY < -maxdist) {
+                                    // Bounce back
+                                    moveScreen({
+                                        distanceY: -panelsY -maxdist
+                                    });                                                            
+                                }
+                                
+                            }
+
+                        }
 
                     } else {
 
@@ -690,7 +751,7 @@ window.Mootor = Mootor;/*
 
                         pstyle.width = clientWidth + "px";
                         pstyle.left =  i > 0 ? (clientWidth * i + (40 * i)) + "px" : (clientWidth * i) + "px";
-                        if (clientHeight > pstyle.height) {
+                        if (clientHeight > panels[i].offsetHeight) {
                             pstyle.height = clientHeight + "px";
                         }
                         pstyle.overflow = 'hidden';
@@ -711,6 +772,9 @@ window.Mootor = Mootor;/*
 
                 };
 
+
+
+
             /*
              *  Initialize panels
              */
@@ -722,7 +786,7 @@ window.Mootor = Mootor;/*
             resetAll();
 
             // Custom events listeners
-            Event.bind(document.body, "dragMove", moveScreenH);
+            Event.bind(document.body, "dragMove", moveScreen);
             Event.bind(document.body, "dragEnd", checkMove);
             Event.bind(window, "orientationChange", resetAll);
 

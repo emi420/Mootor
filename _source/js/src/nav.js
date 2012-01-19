@@ -26,39 +26,57 @@
                 clientHeight =  Mootor.init_client_height,
                 thresholdX =  clientWidth / 2,
                 panelsX = 0,
+                panelsY = 0,
                 current = 0,
                 divPanels = this.el,
                 panels = divPanels.getElementsByClassName("panel"),
                 panelCount = panels.length,
 
-
                 // Move screen horizontally 
-                moveScreenH = function (e) {
+                moveScreen = function (e) {
 
-                    var distance = e.distanceX,
-                        distanceFromOrigin = e.distanceFromOriginX;
+                    var distanceX = e.distanceX,
+                        distanceY = e.distanceY,
+                        distanceFromOriginY = e.distanceFromOriginY,
+                        distanceFromOriginX = e.distanceFromOriginX;
 
-                     // New horizontal position                                          
-                    panelsX = panelsX + distance;
+                    // FIXME CHECK: optimize me
+                    if (isNaN(panelsY)) {
+                        panelsY = 0;
+                    }
 
-                    if (Mootor.listeners.isDraggingY === false) {
-                    
-                        if (distanceFromOrigin === undefined) {
+                    // New horizontal position                                          
+                    panelsX = panelsX + distanceX;
+                    panelsY = panelsY + distanceY;                    
 
-                            // Large move
-                            if (distance > 700 || distance < -700) {
-                                Fx.translateX(divPanels, panelsX, {transitionDuration: 0.5});
+                    if (Mootor.listeners.isDraggingY === false ) {
+
+                        if (distanceFromOriginX === undefined) {
+
+                            // Large X move
+                            if (distanceX > 700 || distanceX < -700) {
+                                Fx.translate(divPanels, {x: panelsX}, {transitionDuration: 0.5});
                             } else {
-                                Fx.translateX(divPanels, panelsX, {transitionDuration: 0.2});
+                                Fx.translate(divPanels, {x: panelsX}, {transitionDuration: 0.2});
                             }
 
-                        } else {
+                        } else if (Mootor.listeners.isDraggingX === true) {
 
-                            // Short move
-                            Fx.translateX(divPanels, panelsX, {});
+                            // Short X move
+                            Fx.translate(divPanels, {x: panelsX}, {});
 
                         }
+
+                    }  else if (Mootor.listeners.isDraggingY === true) {
+
+                        // Short Y move                        
+                        if (distanceFromOriginY === undefined) {
+                            Fx.translate(divPanels, {y: panelsY}, {transitionDuration: 0.5});
+                        } else {
+                            Fx.translate(divPanels, {y: panelsY}, {});                        
+                        }
                     }
+
                 },
 
                 // Load panel
@@ -70,7 +88,7 @@
                     distance = (clientWidth + 40) * current;
                     distance = distance > 0 ? -distance : distance;
 
-                    moveScreenH({
+                    moveScreen({
                         distanceX: distance - panelsX
                     });
 
@@ -81,20 +99,21 @@
 
                     var maxdist = thresholdX,
                         is_momentum = false,
-                        distance = touch.distanceX;
+                        distanceX = touch.distanceX,
+                        distanceY = touch.distanceY;
 
                     // If position reach certain threshold,
                     // load new panel. 
                     // Else, move panel back.
 
-                    if (distance > maxdist && current < (panelCount - 1)) {
+                    if (distanceX > maxdist && current < (panelCount - 1)) {
 
                         // Swipe to left
 
                         current += 1;
                         is_momentum = true;
 
-                    } else if (distance < (-maxdist) && current > 0) {
+                    } else if (distanceX < (-maxdist) && current > 0) {
 
                         // Swipe to right
 
@@ -102,13 +121,39 @@
                         is_momentum = true;
 
                     }
+                    
 
                     if (is_momentum === false) {
+                        
+                        if (Mootor.listeners.isDraggingX === true) {
+                            // Bounce back
+                            moveScreen({
+                                distanceX: distanceX
+                            });
+                            
+                        } else if (Mootor.listeners.isDraggingY === true) {
 
-                        // Bounce back
-                        moveScreenH({
-                            distanceX: distance
-                        });
+                            // FIXME: check this bounce
+                            if (panelsY > 0) {
+                            
+                                // Bounce back
+                                moveScreen({
+                                    distanceY: -panelsY
+                                });                            
+
+                            } else {
+
+                                maxdist = divPanels.getElementsByClassName('panel')[current].offsetHeight - clientHeight;
+                                if (panelsY < -maxdist) {
+                                    // Bounce back
+                                    moveScreen({
+                                        distanceY: -panelsY -maxdist
+                                    });                                                            
+                                }
+                                
+                            }
+
+                        }
 
                     } else {
 
@@ -158,7 +203,7 @@
 
                         pstyle.width = clientWidth + "px";
                         pstyle.left =  i > 0 ? (clientWidth * i + (40 * i)) + "px" : (clientWidth * i) + "px";
-                        if (clientHeight > pstyle.height) {
+                        if (clientHeight > panels[i].offsetHeight) {
                             pstyle.height = clientHeight + "px";
                         }
                         pstyle.overflow = 'hidden';
@@ -179,6 +224,9 @@
 
                 };
 
+
+
+
             /*
              *  Initialize panels
              */
@@ -190,7 +238,7 @@
             resetAll();
 
             // Custom events listeners
-            Event.bind(document.body, "dragMove", moveScreenH);
+            Event.bind(document.body, "dragMove", moveScreen);
             Event.bind(document.body, "dragEnd", checkMove);
             Event.bind(window, "orientationChange", resetAll);
 
