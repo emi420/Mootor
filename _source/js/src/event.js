@@ -4,9 +4,7 @@
 
 /***
     TODO: 
-        - Mejorar el uso de swipe / touch
-        - Scroll vertical
-        - Clase "active" 
+        - Clase "active" y desactivar el fondo gris en iOS
 ***/
 
 

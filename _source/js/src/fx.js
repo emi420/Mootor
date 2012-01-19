@@ -55,20 +55,21 @@
             
             // FIXME CHECK: optimize me
             
-            if (!isNaN(x_pos) && x_pos !== undefined) {                
-                distance = x_pos + "px,0, 0";            
-            } else if (!isNaN(y_pos) && y_pos !== undefined) {
-                distance = "0," + y_pos + "px, 0";            
+            if (isNaN(x_pos) || x_pos === undefined) {
+                x_pos = 0;
             }
+            
+            if (isNaN(y_pos) || y_pos === undefined) {
+                y_pos = 0;
+            }
+
+            distance = x_pos + "px," + y_pos +"px, 0";            
 
             if (el.style.webkitTransform !== "undefined") {
                 el.style.webkitTransform = "translate3d(" + distance + ")";
             } else {
-                if (!isNaN(x_pos) && x_pos !== undefined) {                
-                    el.style.left = x_pos + "px";
-                }  else if (!isNaN(y_pos) && y_pos !== undefined) {
-                    el.style.top = y_pos + "px";    
-                }
+                el.style.left = x_pos + "px";
+                el.style.top = y_pos + "px";    
             }
                 
         },
@@ -79,7 +80,7 @@
             // Update viewport font-size
             var updateSize = function () {
 
-                // This calc can be optimized
+                // FIXME CHECK: This calc can be optimized
                 var font_size = window.innerWidth / 10 + (window.innerHeight / 40);
 
                 if (typeof (document.body) !== null) {

@@ -155,9 +155,7 @@ var Mootor = (function () {
 
 /***
     TODO: 
-        - Mejorar el uso de swipe / touch
-        - Scroll vertical
-        - Clase "active" 
+        - Clase "active" y desactivar el fondo gris en iOS
 ***/
 
 
@@ -492,20 +490,21 @@ window.Mootor = Mootor;/*
             
             // FIXME CHECK: optimize me
             
-            if (!isNaN(x_pos) && x_pos !== undefined) {                
-                distance = x_pos + "px,0, 0";            
-            } else if (!isNaN(y_pos) && y_pos !== undefined) {
-                distance = "0," + y_pos + "px, 0";            
+            if (isNaN(x_pos) || x_pos === undefined) {
+                x_pos = 0;
             }
+            
+            if (isNaN(y_pos) || y_pos === undefined) {
+                y_pos = 0;
+            }
+
+            distance = x_pos + "px," + y_pos +"px, 0";            
 
             if (el.style.webkitTransform !== "undefined") {
                 el.style.webkitTransform = "translate3d(" + distance + ")";
             } else {
-                if (!isNaN(x_pos) && x_pos !== undefined) {                
-                    el.style.left = x_pos + "px";
-                }  else if (!isNaN(y_pos) && y_pos !== undefined) {
-                    el.style.top = y_pos + "px";    
-                }
+                el.style.left = x_pos + "px";
+                el.style.top = y_pos + "px";    
             }
                 
         },
@@ -516,7 +515,7 @@ window.Mootor = Mootor;/*
             // Update viewport font-size
             var updateSize = function () {
 
-                // This calc can be optimized
+                // FIXME CHECK: This calc can be optimized
                 var font_size = window.innerWidth / 10 + (window.innerHeight / 40);
 
                 if (typeof (document.body) !== null) {
@@ -592,36 +591,55 @@ window.Mootor = Mootor;/*
                     if (isNaN(panelsY)) {
                         panelsY = 0;
                     }
+                    
+                    if (isNaN(panelsX)) {
+                        panelsX = 0;
+                    }
 
-                    // New horizontal position                                          
+                    // New positions                                          
+
                     panelsX = panelsX + distanceX;
                     panelsY = panelsY + distanceY;                    
-
+                    
+                    // Dragging X
+                    
                     if (Mootor.listeners.isDraggingY === false ) {
 
                         if (distanceFromOriginX === undefined) {
 
                             // Large X move
                             if (distanceX > 700 || distanceX < -700) {
-                                Fx.translate(divPanels, {x: panelsX}, {transitionDuration: 0.5});
+
+                                // Very large (change panel)
+                                Fx.translate(divPanels, {y: 0, x: panelsX}, {transitionDuration: 0.5});
+
                             } else {
-                                Fx.translate(divPanels, {x: panelsX}, {transitionDuration: 0.2});
+
+                                // Large (bounce back)
+                                Fx.translate(divPanels, {y: 0, x: panelsX}, {transitionDuration: 0.2});
+
                             }
 
                         } else if (Mootor.listeners.isDraggingX === true) {
-
-                            // Short X move
-                            Fx.translate(divPanels, {x: panelsX}, {});
+                            // Short X move (dragging)
+                            Fx.translate(divPanels, {y: 0, x: panelsX}, {});
 
                         }
 
+                    // Dragging Y
+                                        
                     }  else if (Mootor.listeners.isDraggingY === true) {
 
-                        // Short Y move                        
                         if (distanceFromOriginY === undefined) {
-                            Fx.translate(divPanels, {y: panelsY}, {transitionDuration: 0.5});
+
+                            // Large Y move (bounce back)
+                            Fx.translate(divPanels, {y: panelsY, x: panelsX}, {transitionDuration: 0.5});
+
                         } else {
-                            Fx.translate(divPanels, {y: panelsY}, {});                        
+
+                            // Short Y move (dragging)
+                            Fx.translate(divPanels, {y: panelsY, x: 0}, {});                        
+
                         }
                     }
 
@@ -681,19 +699,24 @@ window.Mootor = Mootor;/*
                             
                         } else if (Mootor.listeners.isDraggingY === true) {
 
-                            // FIXME: check this bounce
+                            // FIXME CHECK: 
+                            //       aveces se traban otros listeners
+                            //       ej: despues de hacer drag hacia abajo y bounce back
+                            //       dejan de funcionar otros listeners hasta hacer drag izq
+                        
                             if (panelsY > 0) {
                             
-                                // Bounce back
+                                // Bounce back from top
                                 moveScreen({
                                     distanceY: -panelsY
                                 });                            
 
                             } else {
 
-                                maxdist = divPanels.getElementsByClassName('panel')[current].offsetHeight - clientHeight;
+                                // FIXME CHECK: optimize me 
+                                var maxdist = divPanels.getElementsByClassName('panel')[current].offsetHeight - clientHeight;
                                 if (panelsY < -maxdist) {
-                                    // Bounce back
+                                    // Bounce from bottom
                                     moveScreen({
                                         distanceY: -panelsY -maxdist
                                     });                                                            
