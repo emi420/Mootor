@@ -31,35 +31,33 @@
                 panels = divPanels.getElementsByClassName("panel"),
                 panelCount = panels.length,
 
-                // Reset panels container size and position
-                resetContainer = function () {
-                    divPanels.style.width = (clientWidth * 2) + "px";
-                    divPanels.style.height = clientHeight + "px";
-                },
 
                 // Move screen horizontally 
                 moveScreenH = function (e) {
 
-                    var distance = e.distance,
-                        distanceFromOrigin = e.distanceFromOrigin;
+                    var distance = e.distanceX,
+                        distanceFromOrigin = e.distanceFromOriginX;
 
                      // New horizontal position                                          
                     panelsX = panelsX + distance;
 
-                    if (distanceFromOrigin === undefined) {
+                    if (Mootor.listeners.isDraggingY === false) {
+                    
+                        if (distanceFromOrigin === undefined) {
 
-                        // Large move
-                        if (distance > 700 || distance < -700) {
-                            Fx.translateX(divPanels, panelsX, {transitionDuration: 0.5});
+                            // Large move
+                            if (distance > 700 || distance < -700) {
+                                Fx.translateX(divPanels, panelsX, {transitionDuration: 0.5});
+                            } else {
+                                Fx.translateX(divPanels, panelsX, {transitionDuration: 0.2});
+                            }
+
                         } else {
-                            Fx.translateX(divPanels, panelsX, {transitionDuration: 0.2});
+
+                            // Short move
+                            Fx.translateX(divPanels, panelsX, {});
+
                         }
-
-                    } else {
-
-                        // Short move
-                        Fx.translateX(divPanels, panelsX, {});
-
                     }
                 },
 
@@ -73,16 +71,17 @@
                     distance = distance > 0 ? -distance : distance;
 
                     moveScreenH({
-                        distance: distance - panelsX
+                        distanceX: distance - panelsX
                     });
 
                 },
 
                 // DragEnd event handler
-                checkMove = function (distance) {
+                checkMove = function (touch) {
 
                     var maxdist = thresholdX,
-                        is_momentum = false;
+                        is_momentum = false,
+                        distance = touch.distanceX;
 
                     // If position reach certain threshold,
                     // load new panel. 
@@ -108,7 +107,7 @@
 
                         // Bounce back
                         moveScreenH({
-                            distance: distance
+                            distanceX: distance
                         });
 
                     } else {
@@ -142,9 +141,9 @@
                         j;
 
                     // Set anchor links
-                    onAnchorClick = function (pid) {
+                    onAnchorClick = function () {
                         return function (pid) {
-                            if (Mootor.listeners.isDragging === false) {
+                            if (Mootor.listeners.isDraggingX === false && Mootor.listeners.isDraggingY === false) {
                                 setCurrent(pid);
                             }
                             return false;
@@ -178,9 +177,6 @@
 
                     }
 
-                    // Reset panels container
-                    resetContainer();
-
                 };
 
             /*
@@ -192,11 +188,6 @@
 
             // Reset and hide all panels
             resetAll();
-            
-            // FIXME: El problema esta en que se mezclan los listeners.
-            // Hay que desmenuzar el proceso en que se forma el
-            // objeto Event.listeners y hacerlo funcionar
-            // correctamente
 
             // Custom events listeners
             Event.bind(document.body, "dragMove", moveScreenH);
