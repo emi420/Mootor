@@ -143,8 +143,10 @@
 
                     // Set anchor links
                     onAnchorClick = function (pid) {
-                        return function () {
-                            setCurrent(pid);
+                        return function (pid) {
+                            if (Mootor.listeners.isDragging === false) {
+                                setCurrent(pid);
+                            }
                             return false;
                         };
                     };
@@ -154,6 +156,7 @@
                         pstyle = panels[i].style;
 
                         // Reset styles
+
                         pstyle.width = clientWidth + "px";
                         pstyle.left =  i > 0 ? (clientWidth * i + (40 * i)) + "px" : (clientWidth * i) + "px";
                         if (clientHeight > pstyle.height) {
@@ -162,6 +165,7 @@
                         pstyle.overflow = 'hidden';
 
                         // Set anchor links
+
                         // FIXME CHECK: expensive query (getElementsByTagName)
                         panchors = panels[i].getElementsByTagName('a');
 
@@ -188,12 +192,15 @@
 
             // Reset and hide all panels
             resetAll();
+            
+            // FIXME: El problema esta en que se mezclan los listeners.
+            // Hay que desmenuzar el proceso en que se forma el
+            // objeto Event.listeners y hacerlo funcionar
+            // correctamente
 
             // Custom events listeners
-            //Event.bind(document.body, "drag", moveScreenH);
-            //Event.bind(document.body, "dragEnd", checkMove);
-            Event.bind(document.body, "drag", function(){});
-            Event.bind(document.body, "dragEnd", function(){});
+            Event.bind(document.body, "dragMove", moveScreenH);
+            Event.bind(document.body, "dragEnd", checkMove);
             Event.bind(window, "orientationChange", resetAll);
 
         }
