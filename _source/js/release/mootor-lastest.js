@@ -153,14 +153,14 @@ var Mootor = (function () {
  * Mootor Events (coded by emi420@gmail.com)
  */
 
-/***
-    TODO: 
-        - Mejorar el uso de swipe / touch
-        - Scroll vertical
-        - Clase "active" 
-***/
-
-
+ /*
+  *     TODO: 
+  *
+  *     - Event Delegation 
+  *     - Remove Mootor.listeners array
+  *     - In-time branching
+  */
+ 
 (function (Mootor) {
 
     "use strict";
@@ -168,7 +168,8 @@ var Mootor = (function () {
     var Drag,
         Touch,
         Orientation,
-        preventDefault;
+        preventDefault,
+        Click;
 
     // Utils
 
@@ -360,16 +361,80 @@ var Mootor = (function () {
         this.callback();
 
     };
+    
+    // *** EXPERIMENTAL ***
+    
+    // Click
+    
+    Click = function (element, callback) {
+
+        this.el = element;
+        this.callback = callback;
+        this.el.addEventListener('click', this, false);
+        this.initX = 0;
+        this.lastX = 0;
+
+    }
+    
+    Click.prototype.handleEvent = function(e) {
+
+        switch (e.type) {
+        case 'click':
+            this.onClick(e);
+            break;
+        }
+        //debugger;
+        
+    }
+        
+    // On Click
+    Click.prototype.onClick = function(e) {
+
+        // Instancia de Click
+        console.log("Click instance: " + this);
+        // Evento
+        console.log("Event: " + e);
+        // Elemento en donde ocurre el evento
+        console.log("Click on element: " + this.el);
+        // Callback
+        console.log("Callback: " + this.callback);
+                
+        var distance = e.clientX - this.lastX;
+        this.lastX = e.clientX;
+        var result = {
+            distance: distance,
+            callback: this.callback
+        }
+        
+        // Calling callback
+        if (typeof this.callback === "object") {
+            this.callback.callback(result)
+        } else {
+            this.callback(result);
+        }
+
+    }
+
+    // *** EXPERIMENTAL ***
 
     Mootor.Event = {
 
         bind: function (el, eventtype, callback) {
+
             var listenerId = Mootor.listeners.count,
                 listenerCount = 1,
                 listener,
                 i = 0;
 
             switch (eventtype) {
+
+            // *** EXPERIMENTAL ***
+            case 'clickEnd':
+                // New 'click' handler
+                return new Click(el, callback);
+                break;
+
+            // *** EXPERIMENTAL ***
 
             case 'dragMove':
                 el.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
@@ -400,7 +465,7 @@ var Mootor = (function () {
             case 'touchStart':
                 console.log("touch start");
                 break;
-
+                
             case 'touchEnd':
                 listener = Mootor.listeners[listenerId] = new Touch(el);
                 listener.onTouchEnd.callback = callback;
@@ -550,7 +615,13 @@ window.Mootor = Mootor;/*
  * Mootor Navigation (coded by emi420@gmail.com)
  */
 
-(function (Mootor) {
+ /* TODO:
+  *  
+  *  - Prototype inheritance
+  *  - event delegation 
+  */ 
+
+  (function (Mootor) {
 
     "use strict";
 
@@ -559,16 +630,43 @@ window.Mootor = Mootor;/*
      */
 
     var Fx = Mootor.Fx,
-        Event = Mootor.Event;
+        Event = Mootor.Event,
+        Panels;
+     
+    Panels = function(element) {
+
+        this.el = element;
+        this.msg = "hola!";
+        this.callback = this.move;
+
+        //Event.bind(this.el, "clickStart", this);
+        Event.bind(this.el, "clickEnd", this);
+
+    }
+
+
+    Panels.prototype.move = function(e) {       
+        console.log(this);
+        console.log(e.distance);
+    }
 
     Mootor.Nav = {
 
+        panels: function() {
+            return new Panels(this.el);
+        }
+
+    };
+
+    Mootor.extend(Mootor.Nav);
+
+}(Mootor));
+
+
+/*
         panels: function () {
 
-            /*
-             * Navigation panels
-             * 
-             */
+            // Navigation panels
 
             var clientWidth = Mootor.init_client_width,
                 clientHeight =  Mootor.init_client_height,
@@ -775,9 +873,7 @@ window.Mootor = Mootor;/*
 
 
 
-            /*
-             *  Initialize panels
-             */
+            //  Initialize panels
 
             // Set document styles    
             document.body.style.overflow = "hidden";
@@ -788,15 +884,8 @@ window.Mootor = Mootor;/*
             // Custom events listeners
             Event.bind(document.body, "dragMove", moveScreen);
             Event.bind(document.body, "dragEnd", checkMove);
-            Event.bind(window, "orientationChange", resetAll);
-
-        }
-    };
-
-    Mootor.extend(Mootor.Nav);
-
-}(Mootor));
-
+            Event.bind(window, "orientationChange", resetAll);            
+ */
 // Go public!
 window.$ = Mootor;
 

@@ -2,7 +2,13 @@
  * Mootor Navigation (coded by emi420@gmail.com)
  */
 
-(function (Mootor) {
+ /* TODO:
+  *  
+  *  - Prototype inheritance
+  *  - event delegation 
+  */ 
+
+  (function (Mootor) {
 
     "use strict";
 
@@ -11,16 +17,43 @@
      */
 
     var Fx = Mootor.Fx,
-        Event = Mootor.Event;
+        Event = Mootor.Event,
+        Panels;
+     
+    Panels = function(element) {
+
+        this.el = element;
+        this.msg = "hola!";
+        this.callback = this.move;
+
+        //Event.bind(this.el, "clickStart", this);
+        Event.bind(this.el, "clickEnd", this);
+
+    }
+
+
+    Panels.prototype.move = function(e) {       
+        console.log(this);
+        console.log(e.distance);
+    }
 
     Mootor.Nav = {
 
+        panels: function() {
+            return new Panels(this.el);
+        }
+
+    };
+
+    Mootor.extend(Mootor.Nav);
+
+}(Mootor));
+
+
+/*
         panels: function () {
 
-            /*
-             * Navigation panels
-             * 
-             */
+            // Navigation panels
 
             var clientWidth = Mootor.init_client_width,
                 clientHeight =  Mootor.init_client_height,
@@ -227,9 +260,7 @@
 
 
 
-            /*
-             *  Initialize panels
-             */
+            //  Initialize panels
 
             // Set document styles    
             document.body.style.overflow = "hidden";
@@ -240,11 +271,5 @@
             // Custom events listeners
             Event.bind(document.body, "dragMove", moveScreen);
             Event.bind(document.body, "dragEnd", checkMove);
-            Event.bind(window, "orientationChange", resetAll);
-
-        }
-    };
-
-    Mootor.extend(Mootor.Nav);
-
-}(Mootor));
+            Event.bind(window, "orientationChange", resetAll);            
+ */

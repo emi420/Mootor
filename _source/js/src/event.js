@@ -2,14 +2,14 @@
  * Mootor Events (coded by emi420@gmail.com)
  */
 
-/***
-    TODO: 
-        - Mejorar el uso de swipe / touch
-        - Scroll vertical
-        - Clase "active" 
-***/
-
-
+ /*
+  *     TODO: 
+  *
+  *     - Event Delegation 
+  *     - Remove Mootor.listeners array
+  *     - In-time branching
+  */
+ 
 (function (Mootor) {
 
     "use strict";
@@ -17,7 +17,8 @@
     var Drag,
         Touch,
         Orientation,
-        preventDefault;
+        preventDefault,
+        Click;
 
     // Utils
 
@@ -209,16 +210,80 @@
         this.callback();
 
     };
+    
+    // *** EXPERIMENTAL ***
+    
+    // Click
+    
+    Click = function (element, callback) {
+
+        this.el = element;
+        this.callback = callback;
+        this.el.addEventListener('click', this, false);
+        this.initX = 0;
+        this.lastX = 0;
+
+    }
+    
+    Click.prototype.handleEvent = function(e) {
+
+        switch (e.type) {
+        case 'click':
+            this.onClick(e);
+            break;
+        }
+        //debugger;
+        
+    }
+        
+    // On Click
+    Click.prototype.onClick = function(e) {
+
+        // Instancia de Click
+        console.log("Click instance: " + this);
+        // Evento
+        console.log("Event: " + e);
+        // Elemento en donde ocurre el evento
+        console.log("Click on element: " + this.el);
+        // Callback
+        console.log("Callback: " + this.callback);
+                
+        var distance = e.clientX - this.lastX;
+        this.lastX = e.clientX;
+        var result = {
+            distance: distance,
+            callback: this.callback
+        }
+        
+        // Calling callback
+        if (typeof this.callback === "object") {
+            this.callback.callback(result)
+        } else {
+            this.callback(result);
+        }
+
+    }
+
+    // *** EXPERIMENTAL ***
 
     Mootor.Event = {
 
         bind: function (el, eventtype, callback) {
+
             var listenerId = Mootor.listeners.count,
                 listenerCount = 1,
                 listener,
                 i = 0;
 
             switch (eventtype) {
+
+            // *** EXPERIMENTAL ***
+            case 'clickEnd':
+                // New 'click' handler
+                return new Click(el, callback);
+                break;
+
+            // *** EXPERIMENTAL ***
 
             case 'dragMove':
                 el.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
@@ -249,7 +314,7 @@
             case 'touchStart':
                 console.log("touch start");
                 break;
-
+                
             case 'touchEnd':
                 listener = Mootor.listeners[listenerId] = new Touch(el);
                 listener.onTouchEnd.callback = callback;
