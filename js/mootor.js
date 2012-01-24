@@ -367,51 +367,129 @@ var Mootor = (function () {
     // Click
     
     Click = function (element, callback) {
+    
+        console.log("creating new instance...");
 
         this.el = element;
         this.callback = callback;
-        this.el.addEventListener('click', this, false);
+
+        console.log("binding all events...");
+
+        this.el.addEventListener('mousedown', this, false);
+        this.el.addEventListener('mouseup', this, false);
+
         this.initX = 0;
         this.lastX = 0;
 
     }
     
+    // Click event handler
     Click.prototype.handleEvent = function(e) {
 
         switch (e.type) {
-        case 'click':
-            this.onClick(e);
+        case 'mousedown':
+            console.log("mouse down! calling onMouseDown");
+            this.onMouseDown(e);
+            break;
+        case 'mouseup':
+            console.log("mouse down! calling onMouseUp");
+            this.onMouseUp(e);
+            break;
+        case 'mousemove':
+            console.log("mouse down! calling onMouseMove");
+            this.onMouseMove(e);
             break;
         }
-        //debugger;
         
     }
-        
-    // On Click
-    Click.prototype.onClick = function(e) {
-
-        // Instancia de Click
-        console.log("Click instance: " + this);
-        // Evento
-        console.log("Event: " + e);
-        // Elemento en donde ocurre el evento
-        console.log("Click on element: " + this.el);
-        // Callback
-        console.log("Callback: " + this.callback);
-                
-        var distance = e.clientX - this.lastX;
+    
+    Click.prototype.onMouseDown = function(e) {
+        var result;
         this.lastX = e.clientX;
-        var result = {
-            distance: distance,
-            callback: this.callback
+        result = {
+            distance: 0
         }
+        this.el.addEventListener('mousemove', this, false);
+        this.callback.onDragStart(result);
+    }    
+
+    Click.prototype.onMouseUp = function(e) {
+        var distance = this.lastX - e.clientX,
+            result;
+        this.lastX = e.clientX;      
+        result = {
+            distance: distance
+        }
+        this.el.removeEventListener('mousemove', this, false);
+        this.callback.onDragEnd(result);
+    }    
+
+    Click.prototype.onMouseMove = function(e) {
+        var result,
+            distance = this.lastX - e.clientX;
         
-        // Calling callback
-        if (typeof this.callback === "object") {
-            this.callback.callback(result)
-        } else {
-            this.callback(result);
+        this.lastX = e.clientX;
+        result = {
+            distance: distance
         }
+        this.callback.onDragMove(result);
+    }    
+    
+    var createListener = function(eventtype, callback, el) {
+        var listenerId = Mootor.listeners.count,
+            listener,
+            i,
+            listenerCount = 1;
+        
+        console.log("we have " + listenerId + " listeners");
+        console.log("creating listener... (" + eventtype + ")");
+
+        for (i = 0; i < Mootor.listeners.count; i++) {
+            if (Mootor.listeners[i].el === el) {
+                console.log("this element has a listener (" + i + ")");
+                listenerId = i;
+                listenerCount = 0;
+            }
+        }
+
+        switch (eventtype) {
+
+        case "clickStart":
+
+            console.log("binding click start... " + listenerId);
+            listener = Mootor.listeners[listenerId] || new Click(el, callback);
+            if (!Mootor.listeners[listenerId]) {
+                Mootor.listeners[listenerId] = listener;
+                Mootor.listeners.count += 1;
+            }
+            listener.onClickStart = callback;
+            break;
+
+        case "clickEnd":
+ 
+            console.log("binding click end... " + listenerId);
+            listener = Mootor.listeners[listenerId] || new Click(el, callback);
+            if (!Mootor.listeners[listenerId]) {
+                Mootor.listeners[listenerId] = listener;
+                Mootor.listeners.count += 1;
+            }
+            listener.onClickEnd = callback;
+            break;
+
+        case "clickMove":
+ 
+            console.log("binding click move... " + listenerId);
+            listener = Mootor.listeners[listenerId] || new Click(el, callback);
+            if (!Mootor.listeners[listenerId]) {
+                Mootor.listeners[listenerId] = listener;
+                Mootor.listeners.count += 1;
+            }
+            listener.onClickMove = callback;
+            break;
+
+        }
+
+        listener.id = listenerId;
 
     }
 
@@ -429,9 +507,17 @@ var Mootor = (function () {
             switch (eventtype) {
 
             // *** EXPERIMENTAL ***
-            case 'clickEnd':
-                // New 'click' handler
-                return new Click(el, callback);
+
+            case 'cDragStart':                                
+                listener = createListener("clickStart", callback, el);                
+                break;
+
+            case 'cDrag':                                
+                listener = createListener("clickMove", callback, el);                
+                break;
+
+            case 'cDragEnd':
+                listener = createListener("clickEnd", callback, el);  
                 break;
 
             // *** EXPERIMENTAL ***
@@ -637,17 +723,40 @@ window.Mootor = Mootor;/*
 
         this.el = element;
         this.msg = "hola!";
-        this.callback = this.move;
+        
+        this.onDragStart = this.startMove;
+        this.onDragEnd = this.move;
+        this.onDragMove = this.checkMove;
 
-        //Event.bind(this.el, "clickStart", this);
-        Event.bind(this.el, "clickEnd", this);
+        Event.bind(this.el, "cDragStart", this);
+        Event.bind(this.el, "cDrag", this);
+        Event.bind(this.el, "cDragEnd", this);
 
     }
 
 
-    Panels.prototype.move = function(e) {       
+    Panels.prototype.startMove = function(e) {       
+        console.log("start move!");
         console.log(this);
         console.log(e.distance);
+        /*console.log(this);
+        console.log(e.distance);*/
+    }
+
+    Panels.prototype.move = function(e) {       
+        console.log("move!");
+        console.log(this);
+        console.log(e.distance);
+        /*console.log("activate");
+        console.log(e.distance);*/
+    }
+
+    Panels.prototype.checkMove = function(e) {       
+        console.log("check move!");
+        console.log(this);
+        console.log(e.distance);
+        /*console.log("activate");
+        console.log(e.distance);*/
     }
 
     Mootor.Nav = {

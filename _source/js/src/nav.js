@@ -24,17 +24,40 @@
 
         this.el = element;
         this.msg = "hola!";
-        this.callback = this.move;
+        
+        this.onDragStart = this.startMove;
+        this.onDragEnd = this.move;
+        this.onDragMove = this.checkMove;
 
-        //Event.bind(this.el, "clickStart", this);
-        Event.bind(this.el, "clickEnd", this);
+        Event.bind(this.el, "cDragStart", this);
+        Event.bind(this.el, "cDrag", this);
+        Event.bind(this.el, "cDragEnd", this);
 
     }
 
 
-    Panels.prototype.move = function(e) {       
+    Panels.prototype.startMove = function(e) {       
+        console.log("start move!");
         console.log(this);
         console.log(e.distance);
+        /*console.log(this);
+        console.log(e.distance);*/
+    }
+
+    Panels.prototype.move = function(e) {       
+        console.log("move!");
+        console.log(this);
+        console.log(e.distance);
+        /*console.log("activate");
+        console.log(e.distance);*/
+    }
+
+    Panels.prototype.checkMove = function(e) {       
+        console.log("check move!");
+        console.log(this);
+        console.log(e.distance);
+        /*console.log("activate");
+        console.log(e.distance);*/
     }
 
     Mootor.Nav = {
