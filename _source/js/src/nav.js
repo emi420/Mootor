@@ -4,7 +4,6 @@
 
  /* TODO:
   *  
-  *  - Prototype inheritance
   *  - event delegation 
   */ 
 
@@ -26,44 +25,47 @@
         this.msg = "hola!";
         
         this.onDragStart = this.startMove;
-        this.onDragEnd = this.move;
-        this.onDragMove = this.checkMove;
+        this.onDragEnd = this.checkMove;
+        this.onDragMove = this.move;
+        
+        this.el.onclick = function() { return false };
 
-        Event.bind(this.el, "cDragStart", this);
-        Event.bind(this.el, "cDrag", this);
-        Event.bind(this.el, "cDragEnd", this);
+        Event.bind(this.el, "onDragStart", this);
+        Event.bind(this.el, "onDragEnd", this);
+        Event.bind(this.el, "onDragMove", this);
 
     }
 
 
     Panels.prototype.startMove = function(e) {       
         console.log("start move!");
-        console.log(this);
         console.log(e.distance);
-        /*console.log(this);
-        console.log(e.distance);*/
     }
 
     Panels.prototype.move = function(e) {       
         console.log("move!");
-        console.log(this);
         console.log(e.distance);
-        /*console.log("activate");
-        console.log(e.distance);*/
     }
 
     Panels.prototype.checkMove = function(e) {       
         console.log("check move!");
-        console.log(this);
         console.log(e.distance);
-        /*console.log("activate");
-        console.log(e.distance);*/
+        console.log(this.el.id);
     }
 
     Mootor.Nav = {
 
         panels: function() {
-            return new Panels(this.el);
+            var home,
+                carousel
+                
+            home = document.getElementById("home");
+            carousel = document.getElementById("carousel");
+            
+            var a = new Panels(home);
+            var b = new Panels(carousel);
+            
+            //return new Panels(this.el);
         }
 
     };

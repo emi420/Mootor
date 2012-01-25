@@ -18,7 +18,7 @@
         Touch,
         Orientation,
         preventDefault,
-        Click;
+        ClickDrag;
 
     // Utils
 
@@ -211,11 +211,18 @@
 
     };
     
-    // *** EXPERIMENTAL ***
+    // *** EXPERIMENTAL BEGIN ***
     
-    // Click
+    /* TODO:
+     *
+     *  - En Click esta armado un modelo a seguir para implementar
+     *    los eventos Touch y crear el evento personalizado Swipe
+     *
+     */
     
-    Click = function (element, callback) {
+    // ClickDrag instance constructor
+    
+    ClickDrag = function (element, callback) {
     
         console.log("creating new instance...");
 
@@ -225,15 +232,13 @@
         console.log("binding all events...");
 
         this.el.addEventListener('mousedown', this, false);
-        this.el.addEventListener('mouseup', this, false);
 
-        this.initX = 0;
-        this.lastX = 0;
 
-    }
+    };
     
-    // Click event handler
-    Click.prototype.handleEvent = function(e) {
+    // Click Drag event handler
+    
+    ClickDrag.prototype.handleEvent = function (e) {
 
         switch (e.type) {
         case 'mousedown':
@@ -250,128 +255,110 @@
             break;
         }
         
-    }
+    };    
     
-    Click.prototype.onMouseDown = function(e) {
+    // On mouse down
+    ClickDrag.prototype.onMouseDown = function (e) {
         var result;
+        this.initX = 0;
         this.lastX = e.clientX;
         result = {
             distance: 0
-        }
+        };
         this.el.addEventListener('mousemove', this, false);
+        this.el.addEventListener('mouseup', this, false);
         this.callback.onDragStart(result);
-    }    
+    };    
 
-    Click.prototype.onMouseUp = function(e) {
-        var distance = this.lastX - e.clientX,
+    // On mouse up
+    ClickDrag.prototype.onMouseUp = function (e) {
+        var distance = this.initX - e.clientX,
             result;
         this.lastX = e.clientX;      
         result = {
             distance: distance
-        }
+        };
         this.el.removeEventListener('mousemove', this, false);
+        this.el.removeEventListener('mouseup', this, false);
         this.callback.onDragEnd(result);
-    }    
+    };   
 
-    Click.prototype.onMouseMove = function(e) {
+    // On mouse move
+    ClickDrag.prototype.onMouseMove = function (e) {
         var result,
             distance = this.lastX - e.clientX;
         
         this.lastX = e.clientX;
         result = {
             distance: distance
-        }
+        };
         this.callback.onDragMove(result);
-    }    
+
+    };    
     
-    var createListener = function(eventtype, callback, el) {
-        var listenerId = Mootor.listeners.count,
-            listener,
-            i,
-            listenerCount = 1;
-        
-        console.log("we have " + listenerId + " listeners");
-        console.log("creating listener... (" + eventtype + ")");
-
-        for (i = 0; i < Mootor.listeners.count; i++) {
-            if (Mootor.listeners[i].el === el) {
-                console.log("this element has a listener (" + i + ")");
-                listenerId = i;
-                listenerCount = 0;
-            }
-        }
-
-        switch (eventtype) {
-
-        case "clickStart":
-
-            console.log("binding click start... " + listenerId);
-            listener = Mootor.listeners[listenerId] || new Click(el, callback);
-            if (!Mootor.listeners[listenerId]) {
-                Mootor.listeners[listenerId] = listener;
-                Mootor.listeners.count += 1;
-            }
-            listener.onClickStart = callback;
-            break;
-
-        case "clickEnd":
- 
-            console.log("binding click end... " + listenerId);
-            listener = Mootor.listeners[listenerId] || new Click(el, callback);
-            if (!Mootor.listeners[listenerId]) {
-                Mootor.listeners[listenerId] = listener;
-                Mootor.listeners.count += 1;
-            }
-            listener.onClickEnd = callback;
-            break;
-
-        case "clickMove":
- 
-            console.log("binding click move... " + listenerId);
-            listener = Mootor.listeners[listenerId] || new Click(el, callback);
-            if (!Mootor.listeners[listenerId]) {
-                Mootor.listeners[listenerId] = listener;
-                Mootor.listeners.count += 1;
-            }
-            listener.onClickMove = callback;
-            break;
-
-        }
-
-        listener.id = listenerId;
-
-    }
-
-    // *** EXPERIMENTAL ***
-
     Mootor.Event = {
 
         bind: function (el, eventtype, callback) {
-
-            var listenerId = Mootor.listeners.count,
-                listenerCount = 1,
+                
+            var listeners = Mootor.Event.listeners,            
+                listenerId = listeners.count,
                 listener,
-                i = 0;
+                i,
+                listenerCount = 1;
+            
+            console.log("we have " + listenerId + " listeners");
+            console.log("creating listener... (" + eventtype + ")");
 
+            for (i = 0; i <  listeners.count; i++) {
+                if (listeners[i].el === el) {
+                    console.log("this element has a listener (" + i + ")");
+                    listenerId = i;
+                    listenerCount = 0;
+                }
+            }
+            
             switch (eventtype) {
-
-            // *** EXPERIMENTAL ***
-
-            case 'cDragStart':                                
-                listener = createListener("clickStart", callback, el);                
+            case "onDragStart":
+            case "onDragEnd":
+            case "onDragMove":
+                listener = new ClickDrag(el, callback);
                 break;
+            }
 
-            case 'cDrag':                                
-                listener = createListener("clickMove", callback, el);                
-                break;
+            if (!listeners[listenerId]) {
+                listeners[listenerId] = listener;
+                listeners.count += 1;
+            }
+ 
+            listener[eventtype] = callback;            
+            listener.id = listenerId;
 
-            case 'cDragEnd':
-                listener = createListener("clickEnd", callback, el);  
-                break;
+        }
+        // *** EXPERIMENTAL END***
 
-            // *** EXPERIMENTAL ***
+    };
 
-            case 'dragMove':
+    Mootor.extend(Mootor.Event);
+
+    /*
+     * Private
+     */
+
+    Mootor.Event.listeners = {
+        count: 0,
+        isDraggingX: false,
+        isDraggingY: false
+    };
+
+}(Mootor));
+
+window.Mootor = Mootor;
+
+
+
+
+
+/*            case 'dragMove':
                 el.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
                 listener = Mootor.listeners[listenerId] = new Drag(el);
                 listener.onDragMove.callback = callback;
@@ -416,23 +403,4 @@
                 Mootor.listeners.count += 1;
                 break;
 
-            }
-        }
-
-    };
-
-    Mootor.extend(Mootor.Event);
-
-    /*
-     * Private
-     */
-
-    Mootor.listeners = {
-        count: 0,
-        isDraggingX: false,
-        isDraggingY: false
-    };
-
-}(Mootor));
-
-window.Mootor = Mootor;
+            }*/
