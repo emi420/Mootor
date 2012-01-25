@@ -232,7 +232,6 @@
 
     Panels.prototype.setCurrent = function (pid) {
 
-        console.log(this);
         var i;
         for (i = this.panelsCount; i--;) {
             if (this.panels[i].id === pid) {

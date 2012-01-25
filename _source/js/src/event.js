@@ -67,20 +67,14 @@
 
         switch (e.type) {
         case 'mousedown':
-            this.start(e);
-            break;
-        case 'mouseup':
-            this.end(e);
-            break;
-        case 'mousemove':
-            this.move(e);
-            break;
         case 'touchstart':
             this.start(e);
             break;
         case 'touchend':
+        case 'mouseup':
             this.end(e);
             break;
+        case 'mousemove':
         case 'touchmove':
             this.move(e);
             break;
@@ -188,10 +182,7 @@
                 i,
                 listenerCount = 1;
 
-            //console.log(el);
-
             // Look if element has a listener instance
-            //debugger;
             for (i = 0; i <  listeners.count; i++) {
                 if (listeners[i].el === el) {
                     listenerId = i;
@@ -206,7 +197,6 @@
                 case "onDragStart":
                 case "onDragEnd":
                 case "onDragMove":
-                    //console.log("new instance! " + eventtype);
                     listener = new Drag(el, callback);
                     break;
                 case "onTap":
