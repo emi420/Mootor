@@ -32,11 +32,13 @@
 
         // Translate (move) an element on X or Y axis
         translate: function (el, positions, options) {
-        
+
             var x_pos = positions.x,
-            y_pos = positions.y;
-                        
-            var tduration = options.transitionDuration;
+                y_pos = positions.y,
+                distance,
+                tduration;
+
+            tduration = options.transitionDuration;
             el.style.transitionProperty = "webkit-transform";
 
             // Animation time
@@ -52,25 +54,32 @@
 
             // Apply 3d transform when its available
             // or use default CSS 'left' property
-            
+
             // FIXME CHECK: optimize me
-            
-            if (!isNaN(x_pos) && x_pos !== undefined) {                
-                distance = x_pos + "px,0, 0";            
+
+            // Check if move is on X or Y axis
+            if (!isNaN(x_pos) && x_pos !== undefined) {
+                distance = x_pos + "px,0, 0";
             } else if (!isNaN(y_pos) && y_pos !== undefined) {
-                distance = "0," + y_pos + "px, 0";            
+                distance = "0," + y_pos + "px, 0";
             }
 
             if (el.style.webkitTransform !== "undefined") {
+
+                // Use WebKit transform 3D
                 el.style.webkitTransform = "translate3d(" + distance + ")";
+
             } else {
-                if (!isNaN(x_pos) && x_pos !== undefined) {                
+
+                // Use left & top CSS styles
+                if (!isNaN(x_pos) && x_pos !== undefined) {
                     el.style.left = x_pos + "px";
-                }  else if (!isNaN(y_pos) && y_pos !== undefined) {
-                    el.style.top = y_pos + "px";    
+                } else if (!isNaN(y_pos) && y_pos !== undefined) {
+                    el.style.top = y_pos + "px";
                 }
+
             }
-                
+
         },
 
         // Adjust font size relative to viewport size

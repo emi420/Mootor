@@ -141,6 +141,7 @@ var Mootor = (function () {
 
 	Mootor.init_styles = undefined;
 	Mootor.hideBody();
+    Mootor.eventwrapper = window;
 
 	return Mootor;
 
@@ -160,86 +161,35 @@ var Mootor = (function () {
   *     - Remove Mootor.listeners array
   *     - In-time branching
   */
- 
+
 (function (Mootor) {
 
     "use strict";
 
     var Drag,
-        Touch,
-        Orientation,
-        preventDefault,
-        ClickDrag;
+        Tap;
 
-    // Utils
+    // Touch instance constructor
 
-    preventDefault = function (element) {
+    Tap = function (element, callback) {
 
-        // Prevents default callback
-        element.addEventListener('click', function (e) { e.preventDefault(); }, false);
-        element.onclick = function () {return false; };
-
-        // Disable selection, copy, etc
-        element.style.webkitTouchCallout = "none";
-        element.style.webkitUserSelect = "none";
-        element.style.webkitUserDrag = "none";
-        element.style.webkitUserModify = "none";
-        element.style.webkitHighlight = "none";
+        element.addEventListener("click", callback, false);
+        element.addEventListener("touchend", callback, false);
 
     };
 
-    // Touch
+    // Drag instance constructor
 
-    Touch = function (element) {
+    Drag = function (element, callback) {
 
-        this.element = this;
-        this.el = element;
-
-        // Prevent default listeners and styles
-        preventDefault(element);
-
-        element.addEventListener('touchstart', this, false);
-        element.addEventListener('touchend', this, false);
-
-    };
-
-    // Touch Handler
-    Touch.prototype.handleEvent = function (e) {
-
-        switch (e.type) {
-        case 'touchstart':
-            this.onTouchStart(e);
-            break;
-        case 'touchend':
-            this.onTouchEnd(e);
-            break;
-        }
-
-    };
-
-    // Touch Start
-    Touch.prototype.onTouchStart = function () {
-
-        if (this.onTouchStart.callback !== undefined) {
-            this.onTouchStart.callback.call();
-        }
-
-    };
-
-    // Touch End
-    Touch.prototype.onTouchEnd = function () {
-
-        if (this.onTouchEnd.callback !== undefined) {
-            this.onTouchEnd.callback(this.el.rel);
-        }
-
-    };
-
-    // Drag 
-    Drag = function (element) {
+        // Create new instance
 
         this.el = element;
-        this.touch = {
+        this.callback = callback;
+        this.thresholdY = 15;
+        this.thresholdX = 15;
+
+        this.drag = {
             startX: 0,
             endX: 0,
             lastX: 0,
@@ -248,253 +198,195 @@ var Mootor = (function () {
             lastY: 0
         };
 
-        // Prevent default listeners and styles
-        preventDefault(element);
+        // Bind initial events
+        
+        // Mouse
+        Mootor.eventwrapper.addEventListener('mousedown', this, false);
 
-        element.addEventListener('touchstart', this, false);
-        element.addEventListener('touchmove', this, false);
-        element.addEventListener('touchend', this, false);
+        // Touch
+        Mootor.eventwrapper.addEventListener('touchstart', this, false);
+
+        // Prevent default events
+        Mootor.eventwrapper.onclick = function () { return false; };
+        Mootor.eventwrapper.addEventListener('click', function (e) { e.preventDefault(); }, false);
+        Mootor.eventwrapper.addEventListener('touchstart', function (e) { e.preventDefault(); }, false);
 
     };
 
-    // Dreag Handler
+    // Drag event handler
+
     Drag.prototype.handleEvent = function (e) {
 
         switch (e.type) {
-        case 'touchstart':
-            this.onDragStart(e);
+        case 'mousedown':
+            this.start(e);
             break;
-        case 'touchmove':
-            this.onDragMove(e);
+        case 'mouseup':
+            this.end(e);
+            break;
+        case 'mousemove':
+            this.move(e);
+            break;
+        case 'touchstart':
+            this.start(e);
             break;
         case 'touchend':
-            this.onDragEnd(e);
+            this.end(e);
+            break;
+        case 'touchmove':
+            this.move(e);
             break;
         }
 
     };
 
-    // Drag Start
-    Drag.prototype.onDragStart = function (e) {
+    // On mouse down
 
-        var e_touch = e.touches[0];
-        this.touch.lastX = this.touch.startX = e_touch.clientX;
-        this.touch.lastY = this.touch.startY = e_touch.clientY;
+    Drag.prototype.start = function (e) {
+
+        // Initialize values
+        if (e.clientX || e.clientY) {
+            this.drag.startX = e.clientX;
+            this.drag.startY = e.clientY;
+        } else {
+            this.drag.startX = e.touches[0].clientX;
+            this.drag.startY = e.touches[0].clientY;        
+        }
+        this.drag.lastX = this.drag.startX;
+        this.drag.lastY = this.drag.startY;
+
+        // Add listeners
+        Mootor.eventwrapper.addEventListener('mousemove', this, false);
+        Mootor.eventwrapper.addEventListener('mouseup', this, false);
+        Mootor.eventwrapper.addEventListener('touchmove', this, false);
+        Mootor.eventwrapper.addEventListener('touchend', this, false);
+
+        // Prevent default listeners
+        Mootor.eventwrapper.addEventListener('mousemove', function (e) { e.preventDefault(); }, false);
+        Mootor.eventwrapper.addEventListener('mouseup', function (e) { e.preventDefault(); }, false);
+        Mootor.eventwrapper.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+        Mootor.eventwrapper.addEventListener('touchend', function (e) { e.preventDefault(); }, false);
+
+        // Callback
+        this.callback.onDragStart(this.drag);
 
     };
 
-    // Drag Move
-    Drag.prototype.onDragMove = function (e) {
+    // On mouse up
 
-        var e_touch = e.touches[0],
-            distanceX = e_touch.clientX - this.touch.lastX,
-            distanceY = e_touch.clientY - this.touch.lastY,
-            threshold = 15,
-            distanceFromOriginX,
-            distanceFromOriginY;
-        this.touch.lastX = e_touch.clientX;
-        this.touch.lastY = e_touch.clientY;
-        distanceFromOriginX = this.touch.startX - this.touch.lastX;
-        distanceFromOriginY = this.touch.startY - this.touch.lastY;
+    Drag.prototype.end = function (e) {
 
+        // Update values
+        this.lastX = e.clientX;
+        this.lastY = e.clientY;
+        this.distanceFromOriginX = this.initX - e.lastX;
+        this.distanceFromOriginY = this.initY - e.lastY;
+
+        // Remove listeners
+        Mootor.eventwrapper.removeEventListener('mousemove', this, false);
+        Mootor.eventwrapper.removeEventListener('mouseup', this, false);
+        Mootor.eventwrapper.removeEventListener('touchmove', this, false);
+        Mootor.eventwrapper.removeEventListener('touchend', this, false);
+
+        // Callback
+        this.callback.onDragEnd(this.drag);
+    };
+
+    // On mouse move
+
+    Drag.prototype.move = function (e) {
+
+        var listeners = Mootor.Event.listeners;
+        
+        this.drag.distanceFromOriginX = this.drag.startX - this.drag.lastX;
+        this.drag.distanceFromOriginY = this.drag.startY - this.drag.lastY;
+        
+        if (e.clientX || e.clientY) {
+            this.drag.distanceX = e.clientX - this.drag.lastX;
+            this.drag.distanceY = e.clientY - this.drag.lastY;
+            this.drag.lastX = e.clientX;
+            this.drag.lastY = e.clientY;        
+        } else {
+            this.drag.distanceX = e.touches[0].clientX - this.drag.lastX;
+            this.drag.distanceY = e.touches[0].clientY - this.drag.lastY;
+            this.drag.lastX = e.touches[0].clientX;
+            this.drag.lastY = e.touches[0].clientY;        
+        }
+        
         // Set isDragging flags
 
-        if (Math.abs(distanceFromOriginX) > threshold && Mootor.listeners.isDraggingY === false) {
-            Mootor.listeners.isDraggingX = true;
+        if (Math.abs(this.drag.distanceFromOriginX) > this.thresholdX && listeners.isDraggingY === false) {
+            listeners.isDraggingX = true;
         }
-        if (Math.abs(distanceFromOriginY) > threshold && Mootor.listeners.isDraggingX === false) {
-            Mootor.listeners.isDraggingY = true;
+        if (Math.abs(this.drag.distanceFromOriginY) > this.thresholdY && listeners.isDraggingX === false) {
+            listeners.isDraggingY = true;
         }
 
         // Callback
 
-        if (this.onDragMove.callback !== undefined) {
-            this.onDragMove.callback({
-                distanceX: distanceX,
-                distanceFromOriginX: distanceFromOriginX,
-                distanceY: distanceY,
-                distanceFromOriginY: distanceFromOriginY
-            });
+        if (this.callback.onDragMove !== undefined) {
+            this.callback.onDragMove(this.drag);
         }
 
     };
 
-    // Drag End
-    Drag.prototype.onDragEnd = function () {
-
-        var distanceX = this.touch.startX - this.touch.lastX,
-            distanceY = this.touch.startY - this.touch.lastY;
-
-        if (this.onDragEnd.callback !== 'undefined') {
-            this.onDragEnd.callback({
-                distanceX: distanceX,
-                distanceY: distanceY
-            });
-        }
-
-        Mootor.listeners.isDraggingX = false;
-        Mootor.listeners.isDraggingY = false;
-
-    };
-
-    // Orientation
-    Orientation = function (element, callback) {
-
-        this.callback = callback;
-        this.element = this;
-        element.addEventListener("orientationchange", this, false);
-
-    };
-
-    // Handler
-    Orientation.prototype.handleEvent = function (e) {
-
-        if (e.type === 'orientationchange') {
-            this.onOrientationChange(e);
-        }
-
-    };
-
-    // Change
-    Orientation.prototype.onOrientationChange = function () {
-
-        this.callback();
-
-    };
-    
-    // *** EXPERIMENTAL BEGIN ***
-    
-    /* TODO:
-     *
-     *  - En Click esta armado un modelo a seguir para implementar
-     *    los eventos Touch y crear el evento personalizado Swipe
-     *
-     */
-    
-    // ClickDrag instance constructor
-    
-    ClickDrag = function (element, callback) {
-    
-        console.log("creating new instance...");
-
-        this.el = element;
-        this.callback = callback;
-
-        console.log("binding all events...");
-
-        this.el.addEventListener('mousedown', this, false);
-
-
-    };
-    
-    // Click Drag event handler
-    
-    ClickDrag.prototype.handleEvent = function (e) {
-
-        switch (e.type) {
-        case 'mousedown':
-            console.log("mouse down! calling onMouseDown");
-            this.onMouseDown(e);
-            break;
-        case 'mouseup':
-            console.log("mouse down! calling onMouseUp");
-            this.onMouseUp(e);
-            break;
-        case 'mousemove':
-            console.log("mouse down! calling onMouseMove");
-            this.onMouseMove(e);
-            break;
-        }
-        
-    };    
-    
-    // On mouse down
-    ClickDrag.prototype.onMouseDown = function (e) {
-        var result;
-        this.initX = 0;
-        this.lastX = e.clientX;
-        result = {
-            distance: 0
-        };
-        this.el.addEventListener('mousemove', this, false);
-        this.el.addEventListener('mouseup', this, false);
-        this.callback.onDragStart(result);
-    };    
-
-    // On mouse up
-    ClickDrag.prototype.onMouseUp = function (e) {
-        var distance = this.initX - e.clientX,
-            result;
-        this.lastX = e.clientX;      
-        result = {
-            distance: distance
-        };
-        this.el.removeEventListener('mousemove', this, false);
-        this.el.removeEventListener('mouseup', this, false);
-        this.callback.onDragEnd(result);
-    };   
-
-    // On mouse move
-    ClickDrag.prototype.onMouseMove = function (e) {
-        var result,
-            distance = this.lastX - e.clientX;
-        
-        this.lastX = e.clientX;
-        result = {
-            distance: distance
-        };
-        this.callback.onDragMove(result);
-
-    };    
-    
     Mootor.Event = {
 
         bind: function (el, eventtype, callback) {
-                
-            var listeners = Mootor.Event.listeners,            
+
+            var listeners = Mootor.Event.listeners,
                 listenerId = listeners.count,
                 listener,
                 i,
                 listenerCount = 1;
-            
-            console.log("we have " + listenerId + " listeners");
-            console.log("creating listener... (" + eventtype + ")");
-
-            for (i = 0; i <  listeners.count; i++) {
+                
+            //console.log(el);
+             
+            // Look if element has a listener instance
+            //debugger;
+            for (i = 0; i <  listeners.count ; i++) {
                 if (listeners[i].el === el) {
-                    console.log("this element has a listener (" + i + ")");
                     listenerId = i;
                     listenerCount = 0;
                 }
             }
-            
-            switch (eventtype) {
-            case "onDragStart":
-            case "onDragEnd":
-            case "onDragMove":
-                listener = new ClickDrag(el, callback);
-                break;
+
+            // If element doesn't a listener, create
+            // a new listener instance
+            if (listenerCount > 0) {
+                switch (eventtype) {
+                case "onDragStart":
+                case "onDragEnd":
+                case "onDragMove":
+                    //console.log("new instance! " + eventtype);
+                    listener = new Drag(el, callback);
+                    break;
+                case "onTap":
+                    listener = new Tap(el, callback);
+                    break;
+                }
+                listeners.count += 1;
+                listeners[listenerId] = listener;
+            } else {
+                // If element has a listener, use
+                // that listener instance
+                listener = listeners[listenerId];
             }
 
-            if (!listeners[listenerId]) {
-                listeners[listenerId] = listener;
-                listeners.count += 1;
-            }
- 
-            listener[eventtype] = callback;            
-            listener.id = listenerId;
+            // Set listener callback
+            listener[eventtype] = callback;
 
         }
-        // *** EXPERIMENTAL END***
 
     };
 
     Mootor.extend(Mootor.Event);
 
     /*
-     * Private
+     * Private properties
      */
 
+    // Event listeners
     Mootor.Event.listeners = {
         count: 0,
         isDraggingX: false,
@@ -505,56 +397,7 @@ var Mootor = (function () {
 
 window.Mootor = Mootor;
 
-
-
-
-
-/*            case 'dragMove':
-                el.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
-                listener = Mootor.listeners[listenerId] = new Drag(el);
-                listener.onDragMove.callback = callback;
-                listener.id = listenerId;
-
-                Mootor.listeners.count += 1;
-                break;
-
-            case 'dragEnd':
-
-                for (i = 0; i < Mootor.listeners.count; i++) {
-                    if (Mootor.listeners[i].el === el) {
-                        listenerId = i;
-                        listenerCount = 0;
-                    }
-                }
-                if (listenerCount > 0) {
-                    Mootor.listeners[listenerId] = new Drag(el);
-                    Mootor.listeners.count += listenerCount;
-                }
-                listener = Mootor.listeners[listenerId];
-                listener.onDragEnd.callback = callback;
-                listener.id = listenerId;
-                break;
-
-            case 'touchStart':
-                console.log("touch start");
-                break;
-                
-            case 'touchEnd':
-                listener = Mootor.listeners[listenerId] = new Touch(el);
-                listener.onTouchEnd.callback = callback;
-                listener.id = listenerId;
-                Mootor.listeners.count += 1;
-                break;
-
-            // FIXME CHECK: orientation event support on Android 
-            // and other devices that lack of this event 
-            case "orientationChange":
-                listener = Mootor.listeners[listenerId] = new Orientation(el, callback);
-                listener.id = listenerId;
-                Mootor.listeners.count += 1;
-                break;
-
-            }*//* 
+/* 
  * Mootor Visual FX (coded by emi420@gmail.com)
  */
 
@@ -588,11 +431,13 @@ window.Mootor = Mootor;
 
         // Translate (move) an element on X or Y axis
         translate: function (el, positions, options) {
-        
+
             var x_pos = positions.x,
-            y_pos = positions.y;
-                        
-            var tduration = options.transitionDuration;
+                y_pos = positions.y,
+                distance,
+                tduration;
+
+            tduration = options.transitionDuration;
             el.style.transitionProperty = "webkit-transform";
 
             // Animation time
@@ -608,25 +453,32 @@ window.Mootor = Mootor;
 
             // Apply 3d transform when its available
             // or use default CSS 'left' property
-            
+
             // FIXME CHECK: optimize me
-            
-            if (!isNaN(x_pos) && x_pos !== undefined) {                
-                distance = x_pos + "px,0, 0";            
+
+            // Check if move is on X or Y axis
+            if (!isNaN(x_pos) && x_pos !== undefined) {
+                distance = x_pos + "px,0, 0";
             } else if (!isNaN(y_pos) && y_pos !== undefined) {
-                distance = "0," + y_pos + "px, 0";            
+                distance = "0," + y_pos + "px, 0";
             }
 
             if (el.style.webkitTransform !== "undefined") {
+
+                // Use WebKit transform 3D
                 el.style.webkitTransform = "translate3d(" + distance + ")";
+
             } else {
-                if (!isNaN(x_pos) && x_pos !== undefined) {                
+
+                // Use left & top CSS styles
+                if (!isNaN(x_pos) && x_pos !== undefined) {
                     el.style.left = x_pos + "px";
-                }  else if (!isNaN(y_pos) && y_pos !== undefined) {
-                    el.style.top = y_pos + "px";    
+                } else if (!isNaN(y_pos) && y_pos !== undefined) {
+                    el.style.top = y_pos + "px";
                 }
+
             }
-                
+
         },
 
         // Adjust font size relative to viewport size
@@ -674,7 +526,7 @@ window.Mootor = Mootor;
   *  - event delegation 
   */ 
 
-  (function (Mootor) {
+(function (Mootor) {
 
     "use strict";
 
@@ -684,55 +536,248 @@ window.Mootor = Mootor;
 
     var Fx = Mootor.Fx,
         Event = Mootor.Event,
+
         Panels;
      
     Panels = function(element) {
 
         this.el = element;
-        this.msg = "hola!";
-        
-        this.onDragStart = this.startMove;
-        this.onDragEnd = this.checkMove;
-        this.onDragMove = this.move;
-        
-        this.el.onclick = function() { return false };
+        this.panels = element.getElementsByClassName("panel");
+        this.panelsCount = this.panels.length;
+        this.clientHeight = Mootor.init_client_height;
+        this.clientWidth = Mootor.init_client_width;
+        this.panelsX = 0;
+        this.panelsY = 0;
+        this.current = 0;
+        this.thresholdX = this.clientWidth / 2;
 
+        // Prevent default actions
+        this.el.onclick = function() { return false; };
+
+        // Set event handlers
+        this.onDragStart = this.startMove;
+        this.onDragMove = this.move;
+        this.onDragEnd = this.checkMove;
+
+        // Event.bind(window, "orientationChange", resetAll);
+        
+        // Bind event listeners
         Event.bind(this.el, "onDragStart", this);
         Event.bind(this.el, "onDragEnd", this);
         Event.bind(this.el, "onDragMove", this);
+                
+        //  Initialize panels
 
-    }
+        // Set document styles    
+        document.body.style.overflow = "hidden";
 
+        // Reset and hide all panels
+        this.resetAll();
 
+    };
+    
+    // Reset all panels
+    Panels.prototype.resetAll = function() {
+
+        var pstyle,
+            panchors,
+            onAnchorTouch,
+            j,
+            i,
+            listeners = Mootor.Event.listeners,
+            instance = this;
+                        
+        // Set anchor links
+        onAnchorTouch = function () {
+
+            if (listeners.isDraggingX === false && listeners.isDraggingY === false) {
+                instance.setCurrent(this.rel);
+            }
+            return false;
+
+        };
+        
+
+        for (i = this.panelsCount; i--;) {
+
+            pstyle = this.panels[i].style;
+
+            // Reset styles
+
+            pstyle.width = this.clientWidth + "px";
+            pstyle.left =  i > 0 ? (this.clientWidth * i + (40 * i)) + "px" : (this.clientWidth * i) + "px";
+            if (this.clientHeight > this.panels[i].offsetHeight) {
+                pstyle.height = this.clientHeight + "px";
+            }
+            pstyle.overflow = 'hidden';
+            
+            // FIXME CHECK: expensive query (getElementsByTagName)
+            panchors = this.panels[i].getElementsByTagName('a');
+
+            for (j = panchors.length; j--;) {
+                if (panchors[j].rel !== "") {
+                    Event.bind(panchors[j], "onTap", onAnchorTouch);
+                }
+            }
+
+        }
+
+    };
+
+    // Start move
     Panels.prototype.startMove = function(e) {       
-        console.log("start move!");
-        console.log(e.distance);
-    }
 
+        // Do something on start move
+
+    };
+
+    // Move
     Panels.prototype.move = function(e) {       
-        console.log("move!");
-        console.log(e.distance);
-    }
 
+        var distanceX = e.distanceX,
+            distanceY = e.distanceY,
+            distanceFromOriginY = e.distanceFromOriginY,
+            distanceFromOriginX = e.distanceFromOriginX,
+            listeners = Mootor.Event.listeners;            
+        
+        // New horizontal position                                          
+        this.panelsX = this.panelsX + distanceX;
+        this.panelsY = this.panelsY + distanceY;                    
+
+
+        if (listeners.isDraggingY === false ) {
+
+            if (distanceFromOriginX === undefined) {
+            
+                // Large X move
+                if (distanceX > 700 || distanceX < -700) {
+                    Fx.translate(this.el, {x: this.panelsX}, {transitionDuration: 0.5});
+                } else {
+                    Fx.translate(this.el, {x: this.panelsX}, {transitionDuration: 0.2});
+                }
+
+            } else if (listeners.isDraggingX === true) {
+
+                // Short X move
+                Fx.translate(this.el, {x: this.panelsX}, {});
+
+            }
+
+        }  else if (listeners.isDraggingY === true) {
+
+            // Short Y move                        
+            if (distanceFromOriginY === undefined) {
+                Fx.translate(this.el, {y: this.panelsY}, {transitionDuration: 0.5});
+            } else {
+                Fx.translate(this.el, {y: this.panelsY}, {});                        
+            }
+        }
+
+    };
+
+    // Check move to take actions
     Panels.prototype.checkMove = function(e) {       
-        console.log("check move!");
-        console.log(e.distance);
-        console.log(this.el.id);
-    }
+    
+        var maxdist = this.thresholdX,
+            is_momentum = false,
+            listeners = Mootor.Event.listeners;
 
+        // If position reach certain threshold,
+        // load new panel. 
+        // Else, move panel back.
+                
+        if (e.distanceFromOriginX > maxdist && this.current < (this.panelsCount - 1)) {
+
+            // Move to left
+
+            this.current += 1;
+            is_momentum = true;
+
+        } else if (e.distanceFromOriginX < (-maxdist) && this.current > 0) {
+
+            // Move to right
+
+            this.current -= 1;
+            is_momentum = true;
+
+        }        
+
+        if (is_momentum === false) {
+            
+            if (listeners.isDraggingX === true) {
+
+                // Bounce back
+                this.move({
+                    distanceX: e.distanceFromOriginX
+                });
+                
+            } else if (listeners.isDraggingY === true) {
+
+                // FIXME: check this bounce
+                if (this.panelsY > 0) {
+                
+                    // Bounce back
+                    this.move({
+                        distanceY: -this.panelsY
+                    });                            
+
+                } else {
+
+                    // FIXME CHECK: 
+                    //  optimize me
+                    //  expensive query
+                    maxdist = this.el.getElementsByClassName('panel')[this.current].offsetHeight - this.clientHeight;
+                    
+                    if (this.panelsY < -maxdist) {
+                        // Bounce back
+                        this.move({
+                            distanceY: -this.panelsY -maxdist
+                        });                                                            
+                    }
+                    
+                }
+
+            }
+
+        } else {
+            console.log("is momentum! load " + this.current);
+            // Load current panel
+            this.load();
+
+        }
+    
+    };
+    
+    Panels.prototype.setCurrent = function(pid) {
+
+        console.log(this);
+        var i;
+        for (i = this.panelsCount; i--;) {
+            if (this.panels[i].id === pid) {
+                this.current = i;
+                Fx.show(this.panels[i]);
+                this.load();
+            }
+        }
+
+    };
+    
+    Panels.prototype.load = function() {
+        var distance;
+
+        // Move panels
+        distance = (this.clientWidth + 40) * this.current;
+        distance = distance > 0 ? -distance : distance;
+
+        this.move({
+            distanceX: distance - this.panelsX
+        });
+    }
+    
     Mootor.Nav = {
 
         panels: function() {
-            var home,
-                carousel
-                
-            home = document.getElementById("home");
-            carousel = document.getElementById("carousel");
-            
-            var a = new Panels(home);
-            var b = new Panels(carousel);
-            
-            //return new Panels(this.el);
+            return new Panels(this.el);
         }
 
     };
@@ -742,229 +787,6 @@ window.Mootor = Mootor;
 }(Mootor));
 
 
-/*
-        panels: function () {
-
-            // Navigation panels
-
-            var clientWidth = Mootor.init_client_width,
-                clientHeight =  Mootor.init_client_height,
-                thresholdX =  clientWidth / 2,
-                panelsX = 0,
-                panelsY = 0,
-                current = 0,
-                divPanels = this.el,
-                panels = divPanels.getElementsByClassName("panel"),
-                panelCount = panels.length,
-
-                // Move screen horizontally 
-                moveScreen = function (e) {
-
-                    var distanceX = e.distanceX,
-                        distanceY = e.distanceY,
-                        distanceFromOriginY = e.distanceFromOriginY,
-                        distanceFromOriginX = e.distanceFromOriginX;
-
-                    // FIXME CHECK: optimize me
-                    if (isNaN(panelsY)) {
-                        panelsY = 0;
-                    }
-
-                    // New horizontal position                                          
-                    panelsX = panelsX + distanceX;
-                    panelsY = panelsY + distanceY;                    
-
-                    if (Mootor.listeners.isDraggingY === false ) {
-
-                        if (distanceFromOriginX === undefined) {
-
-                            // Large X move
-                            if (distanceX > 700 || distanceX < -700) {
-                                Fx.translate(divPanels, {x: panelsX}, {transitionDuration: 0.5});
-                            } else {
-                                Fx.translate(divPanels, {x: panelsX}, {transitionDuration: 0.2});
-                            }
-
-                        } else if (Mootor.listeners.isDraggingX === true) {
-
-                            // Short X move
-                            Fx.translate(divPanels, {x: panelsX}, {});
-
-                        }
-
-                    }  else if (Mootor.listeners.isDraggingY === true) {
-
-                        // Short Y move                        
-                        if (distanceFromOriginY === undefined) {
-                            Fx.translate(divPanels, {y: panelsY}, {transitionDuration: 0.5});
-                        } else {
-                            Fx.translate(divPanels, {y: panelsY}, {});                        
-                        }
-                    }
-
-                },
-
-                // Load panel
-                load = function () {
-
-                    var distance;
-
-                    // Move panels
-                    distance = (clientWidth + 40) * current;
-                    distance = distance > 0 ? -distance : distance;
-
-                    moveScreen({
-                        distanceX: distance - panelsX
-                    });
-
-                },
-
-                // DragEnd event handler
-                checkMove = function (touch) {
-
-                    var maxdist = thresholdX,
-                        is_momentum = false,
-                        distanceX = touch.distanceX,
-                        distanceY = touch.distanceY;
-
-                    // If position reach certain threshold,
-                    // load new panel. 
-                    // Else, move panel back.
-
-                    if (distanceX > maxdist && current < (panelCount - 1)) {
-
-                        // Swipe to left
-
-                        current += 1;
-                        is_momentum = true;
-
-                    } else if (distanceX < (-maxdist) && current > 0) {
-
-                        // Swipe to right
-
-                        current -= 1;
-                        is_momentum = true;
-
-                    }
-                    
-
-                    if (is_momentum === false) {
-                        
-                        if (Mootor.listeners.isDraggingX === true) {
-                            // Bounce back
-                            moveScreen({
-                                distanceX: distanceX
-                            });
-                            
-                        } else if (Mootor.listeners.isDraggingY === true) {
-
-                            // FIXME: check this bounce
-                            if (panelsY > 0) {
-                            
-                                // Bounce back
-                                moveScreen({
-                                    distanceY: -panelsY
-                                });                            
-
-                            } else {
-
-                                maxdist = divPanels.getElementsByClassName('panel')[current].offsetHeight - clientHeight;
-                                if (panelsY < -maxdist) {
-                                    // Bounce back
-                                    moveScreen({
-                                        distanceY: -panelsY -maxdist
-                                    });                                                            
-                                }
-                                
-                            }
-
-                        }
-
-                    } else {
-
-                        // Load panel
-                        load();
-
-                    }
-
-                },
-
-                setCurrent = function (pid) {
-                    var i;
-                    for (i = panelCount; i--;) {
-                        if (panels[i].id === pid) {
-                            current = i;
-                            Fx.show(panels[i]);
-                            load();
-                        }
-                    }
-                },
-
-                // Reset panels
-                resetAll = function () {
-
-                    var pstyle,
-                        panchors,
-                        pid,
-                        onAnchorClick,
-                        i,
-                        j;
-
-                    // Set anchor links
-                    onAnchorClick = function () {
-                        return function (pid) {
-                            if (Mootor.listeners.isDraggingX === false && Mootor.listeners.isDraggingY === false) {
-                                setCurrent(pid);
-                            }
-                            return false;
-                        };
-                    };
-
-                    for (i = panelCount; i--;) {
-
-                        pstyle = panels[i].style;
-
-                        // Reset styles
-
-                        pstyle.width = clientWidth + "px";
-                        pstyle.left =  i > 0 ? (clientWidth * i + (40 * i)) + "px" : (clientWidth * i) + "px";
-                        if (clientHeight > panels[i].offsetHeight) {
-                            pstyle.height = clientHeight + "px";
-                        }
-                        pstyle.overflow = 'hidden';
-
-                        // Set anchor links
-
-                        // FIXME CHECK: expensive query (getElementsByTagName)
-                        panchors = panels[i].getElementsByTagName('a');
-
-                        for (j = panchors.length; j--;) {
-                            if (panchors[j].rel !== "") {
-                                pid = panchors[j].rel;
-                                Event.bind(panchors[j], "touchEnd", onAnchorClick(pid));
-                            }
-                        }
-
-                    }
-
-                };
-
-
-
-
-            //  Initialize panels
-
-            // Set document styles    
-            document.body.style.overflow = "hidden";
-
-            // Reset and hide all panels
-            resetAll();
-
-            // Custom events listeners
-            Event.bind(document.body, "dragMove", moveScreen);
-            Event.bind(document.body, "dragEnd", checkMove);
-            Event.bind(window, "orientationChange", resetAll);            
- */
 // Go public!
 window.$ = Mootor;
 

@@ -140,6 +140,7 @@ var Mootor = (function () {
 
 	Mootor.init_styles = undefined;
 	Mootor.hideBody();
+    Mootor.eventwrapper = window;
 
 	return Mootor;
 
