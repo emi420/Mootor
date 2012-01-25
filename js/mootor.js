@@ -617,7 +617,7 @@ window.Mootor = Mootor;
     Panels.prototype.startMove = function (e) {
 
         // Do something on start move
-        console.log(e);
+        //console.log(e);
 
     };
 
