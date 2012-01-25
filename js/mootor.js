@@ -199,7 +199,7 @@ var Mootor = (function () {
         };
 
         // Bind initial events
-        
+
         // Mouse
         Mootor.eventwrapper.addEventListener('mousedown', this, false);
 
@@ -250,7 +250,7 @@ var Mootor = (function () {
             this.drag.startY = e.clientY;
         } else {
             this.drag.startX = e.touches[0].clientX;
-            this.drag.startY = e.touches[0].clientY;        
+            this.drag.startY = e.touches[0].clientY;
         }
         this.drag.lastX = this.drag.startX;
         this.drag.lastY = this.drag.startY;
@@ -297,22 +297,22 @@ var Mootor = (function () {
     Drag.prototype.move = function (e) {
 
         var listeners = Mootor.Event.listeners;
-        
+
         this.drag.distanceFromOriginX = this.drag.startX - this.drag.lastX;
         this.drag.distanceFromOriginY = this.drag.startY - this.drag.lastY;
-        
+
         if (e.clientX || e.clientY) {
             this.drag.distanceX = e.clientX - this.drag.lastX;
             this.drag.distanceY = e.clientY - this.drag.lastY;
             this.drag.lastX = e.clientX;
-            this.drag.lastY = e.clientY;        
+            this.drag.lastY = e.clientY;
         } else {
             this.drag.distanceX = e.touches[0].clientX - this.drag.lastX;
             this.drag.distanceY = e.touches[0].clientY - this.drag.lastY;
             this.drag.lastX = e.touches[0].clientX;
-            this.drag.lastY = e.touches[0].clientY;        
+            this.drag.lastY = e.touches[0].clientY;
         }
-        
+
         // Set isDragging flags
 
         if (Math.abs(this.drag.distanceFromOriginX) > this.thresholdX && listeners.isDraggingY === false) {
@@ -339,12 +339,12 @@ var Mootor = (function () {
                 listener,
                 i,
                 listenerCount = 1;
-                
+
             //console.log(el);
-             
+
             // Look if element has a listener instance
             //debugger;
-            for (i = 0; i <  listeners.count ; i++) {
+            for (i = 0; i <  listeners.count; i++) {
                 if (listeners[i].el === el) {
                     listenerId = i;
                     listenerCount = 0;
@@ -469,14 +469,12 @@ window.Mootor = Mootor;
                 el.style.webkitTransform = "translate3d(" + distance + ")";
 
             } else {
-
                 // Use left & top CSS styles
                 if (!isNaN(x_pos) && x_pos !== undefined) {
                     el.style.left = x_pos + "px";
                 } else if (!isNaN(y_pos) && y_pos !== undefined) {
                     el.style.top = y_pos + "px";
                 }
-
             }
 
         },
@@ -487,7 +485,7 @@ window.Mootor = Mootor;
             // Update viewport font-size
             var updateSize = function () {
 
-                // This calc can be optimized
+                // FIXME CHECK: This calc can be optimized
                 var font_size = window.innerWidth / 10 + (window.innerHeight / 40);
 
                 if (typeof (document.body) !== null) {
@@ -524,7 +522,7 @@ window.Mootor = Mootor;
  /* TODO:
   *  
   *  - event delegation 
-  */ 
+  */
 
 (function (Mootor) {
 
@@ -538,8 +536,8 @@ window.Mootor = Mootor;
         Event = Mootor.Event,
 
         Panels;
-     
-    Panels = function(element) {
+
+    Panels = function (element) {
 
         this.el = element;
         this.panels = element.getElementsByClassName("panel");
@@ -552,7 +550,7 @@ window.Mootor = Mootor;
         this.thresholdX = this.clientWidth / 2;
 
         // Prevent default actions
-        this.el.onclick = function() { return false; };
+        this.el.onclick = function () { return false; };
 
         // Set event handlers
         this.onDragStart = this.startMove;
@@ -560,12 +558,12 @@ window.Mootor = Mootor;
         this.onDragEnd = this.checkMove;
 
         // Event.bind(window, "orientationChange", resetAll);
-        
+
         // Bind event listeners
         Event.bind(this.el, "onDragStart", this);
         Event.bind(this.el, "onDragEnd", this);
         Event.bind(this.el, "onDragMove", this);
-                
+
         //  Initialize panels
 
         // Set document styles    
@@ -575,9 +573,9 @@ window.Mootor = Mootor;
         this.resetAll();
 
     };
-    
+
     // Reset all panels
-    Panels.prototype.resetAll = function() {
+    Panels.prototype.resetAll = function () {
 
         var pstyle,
             panchors,
@@ -586,7 +584,7 @@ window.Mootor = Mootor;
             i,
             listeners = Mootor.Event.listeners,
             instance = this;
-                        
+
         // Set anchor links
         onAnchorTouch = function () {
 
@@ -596,7 +594,8 @@ window.Mootor = Mootor;
             return false;
 
         };
-        
+
+
 
         for (i = this.panelsCount; i--;) {
 
@@ -610,7 +609,7 @@ window.Mootor = Mootor;
                 pstyle.height = this.clientHeight + "px";
             }
             pstyle.overflow = 'hidden';
-            
+
             // FIXME CHECK: expensive query (getElementsByTagName)
             panchors = this.panels[i].getElementsByTagName('a');
 
@@ -625,30 +624,31 @@ window.Mootor = Mootor;
     };
 
     // Start move
-    Panels.prototype.startMove = function(e) {       
+    Panels.prototype.startMove = function (e) {
 
         // Do something on start move
+        console.log(e);
 
     };
 
     // Move
-    Panels.prototype.move = function(e) {       
+    Panels.prototype.move = function (e) {
 
         var distanceX = e.distanceX,
             distanceY = e.distanceY,
             distanceFromOriginY = e.distanceFromOriginY,
             distanceFromOriginX = e.distanceFromOriginX,
-            listeners = Mootor.Event.listeners;            
-        
+            listeners = Mootor.Event.listeners;
+
         // New horizontal position                                          
         this.panelsX = this.panelsX + distanceX;
-        this.panelsY = this.panelsY + distanceY;                    
+        this.panelsY = this.panelsY + distanceY;
 
 
-        if (listeners.isDraggingY === false ) {
+        if (listeners.isDraggingY === false) {
 
             if (distanceFromOriginX === undefined) {
-            
+
                 // Large X move
                 if (distanceX > 700 || distanceX < -700) {
                     Fx.translate(this.el, {x: this.panelsX}, {transitionDuration: 0.5});
@@ -663,21 +663,21 @@ window.Mootor = Mootor;
 
             }
 
-        }  else if (listeners.isDraggingY === true) {
+        } else if (listeners.isDraggingY === true) {
 
             // Short Y move                        
             if (distanceFromOriginY === undefined) {
                 Fx.translate(this.el, {y: this.panelsY}, {transitionDuration: 0.5});
             } else {
-                Fx.translate(this.el, {y: this.panelsY}, {});                        
+                Fx.translate(this.el, {y: this.panelsY}, {});
             }
         }
 
     };
 
     // Check move to take actions
-    Panels.prototype.checkMove = function(e) {       
-    
+    Panels.prototype.checkMove = function (e) {
+
         var maxdist = this.thresholdX,
             is_momentum = false,
             listeners = Mootor.Event.listeners;
@@ -685,7 +685,7 @@ window.Mootor = Mootor;
         // If position reach certain threshold,
         // load new panel. 
         // Else, move panel back.
-                
+
         if (e.distanceFromOriginX > maxdist && this.current < (this.panelsCount - 1)) {
 
             // Move to left
@@ -700,26 +700,26 @@ window.Mootor = Mootor;
             this.current -= 1;
             is_momentum = true;
 
-        }        
+        }
 
         if (is_momentum === false) {
-            
+
             if (listeners.isDraggingX === true) {
 
                 // Bounce back
                 this.move({
                     distanceX: e.distanceFromOriginX
                 });
-                
+
             } else if (listeners.isDraggingY === true) {
 
                 // FIXME: check this bounce
                 if (this.panelsY > 0) {
-                
+
                     // Bounce back
                     this.move({
                         distanceY: -this.panelsY
-                    });                            
+                    });
 
                 } else {
 
@@ -727,28 +727,27 @@ window.Mootor = Mootor;
                     //  optimize me
                     //  expensive query
                     maxdist = this.el.getElementsByClassName('panel')[this.current].offsetHeight - this.clientHeight;
-                    
+
                     if (this.panelsY < -maxdist) {
                         // Bounce back
                         this.move({
-                            distanceY: -this.panelsY -maxdist
-                        });                                                            
+                            distanceY: -this.panelsY - maxdist
+                        });
                     }
-                    
+
                 }
 
             }
 
         } else {
-            console.log("is momentum! load " + this.current);
             // Load current panel
             this.load();
 
         }
-    
+
     };
-    
-    Panels.prototype.setCurrent = function(pid) {
+
+    Panels.prototype.setCurrent = function (pid) {
 
         console.log(this);
         var i;
@@ -761,8 +760,8 @@ window.Mootor = Mootor;
         }
 
     };
-    
-    Panels.prototype.load = function() {
+
+    Panels.prototype.load = function () {
         var distance;
 
         // Move panels
@@ -772,11 +771,11 @@ window.Mootor = Mootor;
         this.move({
             distanceX: distance - this.panelsX
         });
-    }
-    
+    };
+
     Mootor.Nav = {
 
-        panels: function() {
+        panels: function () {
             return new Panels(this.el);
         }
 

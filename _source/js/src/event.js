@@ -47,7 +47,7 @@
         };
 
         // Bind initial events
-        
+
         // Mouse
         Mootor.eventwrapper.addEventListener('mousedown', this, false);
 
@@ -98,7 +98,7 @@
             this.drag.startY = e.clientY;
         } else {
             this.drag.startX = e.touches[0].clientX;
-            this.drag.startY = e.touches[0].clientY;        
+            this.drag.startY = e.touches[0].clientY;
         }
         this.drag.lastX = this.drag.startX;
         this.drag.lastY = this.drag.startY;
@@ -145,22 +145,22 @@
     Drag.prototype.move = function (e) {
 
         var listeners = Mootor.Event.listeners;
-        
+
         this.drag.distanceFromOriginX = this.drag.startX - this.drag.lastX;
         this.drag.distanceFromOriginY = this.drag.startY - this.drag.lastY;
-        
+
         if (e.clientX || e.clientY) {
             this.drag.distanceX = e.clientX - this.drag.lastX;
             this.drag.distanceY = e.clientY - this.drag.lastY;
             this.drag.lastX = e.clientX;
-            this.drag.lastY = e.clientY;        
+            this.drag.lastY = e.clientY;
         } else {
             this.drag.distanceX = e.touches[0].clientX - this.drag.lastX;
             this.drag.distanceY = e.touches[0].clientY - this.drag.lastY;
             this.drag.lastX = e.touches[0].clientX;
-            this.drag.lastY = e.touches[0].clientY;        
+            this.drag.lastY = e.touches[0].clientY;
         }
-        
+
         // Set isDragging flags
 
         if (Math.abs(this.drag.distanceFromOriginX) > this.thresholdX && listeners.isDraggingY === false) {
@@ -187,12 +187,12 @@
                 listener,
                 i,
                 listenerCount = 1;
-                
+
             //console.log(el);
-             
+
             // Look if element has a listener instance
             //debugger;
-            for (i = 0; i <  listeners.count ; i++) {
+            for (i = 0; i <  listeners.count; i++) {
                 if (listeners[i].el === el) {
                     listenerId = i;
                     listenerCount = 0;

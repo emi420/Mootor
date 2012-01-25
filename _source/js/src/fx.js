@@ -70,14 +70,12 @@
                 el.style.webkitTransform = "translate3d(" + distance + ")";
 
             } else {
-
                 // Use left & top CSS styles
                 if (!isNaN(x_pos) && x_pos !== undefined) {
                     el.style.left = x_pos + "px";
                 } else if (!isNaN(y_pos) && y_pos !== undefined) {
                     el.style.top = y_pos + "px";
                 }
-
             }
 
         },
@@ -88,7 +86,7 @@
             // Update viewport font-size
             var updateSize = function () {
 
-                // This calc can be optimized
+                // FIXME CHECK: This calc can be optimized
                 var font_size = window.innerWidth / 10 + (window.innerHeight / 40);
 
                 if (typeof (document.body) !== null) {
