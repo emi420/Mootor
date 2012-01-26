@@ -5,9 +5,8 @@
  /*
   *     FIXME: 
   *
-  *     - In-time branching
-  *     - Prevent bubbling in delegation pattern
-  *     - Optimize me
+  *     - Init-time branching
+  *     - Optimize me & micro-optimize
   */
 
 (function (Mootor) {
@@ -23,7 +22,7 @@
 
     Tap = function (element, callback) {
 
-        element.addEventListener("click", callback, false);
+        element.addEventListener("mouseup", callback, false);
         element.addEventListener("touchend", callback, false);
 
     };
@@ -96,6 +95,8 @@
         // On move start
 
         start: function (e) {
+        
+            var listeners = Mootor.Event.listeners;
 
             // Initialize values
             if (e.clientX || e.clientY) {
@@ -119,26 +120,6 @@
 
         },
 
-        // On move end
-
-        end: function (e) {
-
-            // Update values
-            this.lastX = e.clientX;
-            this.lastY = e.clientY;
-            this.distanceFromOriginX = this.initX - e.lastX;
-            this.distanceFromOriginY = this.initY - e.lastY;
-
-            // Remove listeners
-            Mootor.eventwrapper.removeEventListener('mousemove', this, false);
-            Mootor.eventwrapper.removeEventListener('mouseup', this, false);
-            Mootor.eventwrapper.removeEventListener('touchmove', this, false);
-            Mootor.eventwrapper.removeEventListener('touchend', this, false);
-
-            // Callback
-            this.callback.onDragEnd(this.drag);
-        },
-
         // On move
 
         move: function (e) {
@@ -149,18 +130,23 @@
             this.drag.distanceFromOriginY = this.drag.startY - this.drag.lastY;
 
             if (e.clientX || e.clientY) {
+            
+                // Mouse
                 this.drag.distanceX = e.clientX - this.drag.lastX;
                 this.drag.distanceY = e.clientY - this.drag.lastY;
                 this.drag.lastX = e.clientX;
                 this.drag.lastY = e.clientY;
+                
             } else {
+            
+                // Touch
                 this.drag.distanceX = e.touches[0].clientX - this.drag.lastX;
                 this.drag.distanceY = e.touches[0].clientY - this.drag.lastY;
                 this.drag.lastX = e.touches[0].clientX;
                 this.drag.lastY = e.touches[0].clientY;
             }
-
-            // Set isDragging flags
+            
+            // Set isDragging flags            
 
             if (Math.abs(this.drag.distanceFromOriginX) > this.thresholdX && listeners.isDraggingY === false) {
                 listeners.isDraggingX = true;
@@ -169,13 +155,41 @@
                 listeners.isDraggingY = true;
             }
 
+            //
             // Callback
 
             if (this.callback.onDragMove !== undefined) {
                 this.callback.onDragMove(this.drag);
             }
 
+        },
+        
+        // On move end
+
+        end: function (e) {
+
+            var listeners = Mootor.Event.listeners;
+
+            // Update values
+            this.lastX = e.clientX;
+            this.lastY = e.clientY;
+            this.distanceFromOriginX = this.initX - e.lastX;
+            this.distanceFromOriginY = this.initY - e.lastY;
+           
+            // Remove listeners
+            Mootor.eventwrapper.removeEventListener('mousemove', this, false);
+            Mootor.eventwrapper.removeEventListener('mouseup', this, false);
+            Mootor.eventwrapper.removeEventListener('touchmove', this, false);
+            Mootor.eventwrapper.removeEventListener('touchend', this, false);
+            
+            // Callback
+            this.callback.onDragEnd(this.drag);
+            
+            listeners.isDraggingY = false;
+            listeners.isDraggingX = false;
+                        
         }
+
     };
     
     /*
@@ -191,7 +205,7 @@
                 listener,
                 i,
                 listenerCount = 1;
-
+            
             // Look if element has a listener instance
             for (i = 0; i <  listeners.count; i++) {
                 if (listeners[i].el === el) {

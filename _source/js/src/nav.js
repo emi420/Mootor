@@ -3,9 +3,9 @@
  */
 
  /*      FIXME:
-  *          - Despues de usar swipe no funciona tap
-  *          - Despues de usa swipe en eje X no funciona en eje Y
-  *          - Optimize me
+  *          - After onDrag, onTap stop working
+  *          - After onDragMove X, onDragMove Y stop working and vice-versa
+  *          - Optimize me & micro-optimize
   */
 
 (function (Mootor) {
@@ -31,6 +31,14 @@
         this.current = 0;
         this.thresholdX = this.clientWidth / 2;
 
+        //  Initialize panels
+
+        // Set document styles    
+        document.body.style.overflow = "hidden";
+
+        // Reset and hide all panels
+        this.resetAll();
+
         // Prevent default actions
         this.el.onclick = function () { return false; };
 
@@ -45,14 +53,6 @@
         Event.bind(this.el, "onDragStart", this);
         Event.bind(this.el, "onDragEnd", this);
         Event.bind(this.el, "onDragMove", this);
-
-        //  Initialize panels
-
-        // Set document styles    
-        document.body.style.overflow = "hidden";
-
-        // Reset and hide all panels
-        this.resetAll();
 
     };
 
@@ -71,7 +71,7 @@
 
             // Set anchor links
             onAnchorTouch = function () {
-
+                
                 if (listeners.isDraggingX === false && listeners.isDraggingY === false) {
                     instance.setCurrent(this.rel);
                 }
@@ -121,11 +121,14 @@
                 distanceFromOriginY = e.distanceFromOriginY,
                 distanceFromOriginX = e.distanceFromOriginX,
                 listeners = Mootor.Event.listeners;
-
-            // New horizontal position                                          
-            this.panelsX = this.panelsX + distanceX;
-            this.panelsY = this.panelsY + distanceY;
-
+                
+            // New horizontal position                         
+            if (distanceX) {
+                this.panelsX = this.panelsX + distanceX;
+            }
+            if (distanceY) {
+                this.panelsY = this.panelsY + distanceY;
+            }
 
             if (listeners.isDraggingY === false) {
 
@@ -146,7 +149,7 @@
                 }
 
             } else if (listeners.isDraggingY === true) {
-
+            
                 // Short Y move                        
                 if (distanceFromOriginY === undefined) {
                     Fx.translate(this.el, {y: this.panelsY}, {transitionDuration: 0.5});
@@ -159,15 +162,15 @@
 
         // Check move to take actions
         checkMove: function (e) {
-
+       
             var maxdist = this.thresholdX,
                 is_momentum = false,
                 listeners = Mootor.Event.listeners;
-
+                
             // If position reach certain threshold,
             // load new panel. 
             // Else, move panel back.
-
+            
             if (e.distanceFromOriginX > maxdist && this.current < (this.panelsCount - 1)) {
 
                 // Move to left
@@ -183,6 +186,8 @@
                 is_momentum = true;
 
             }
+            
+            console.log(listeners.isDraggingY);
 
             if (is_momentum === false) {
 
@@ -194,7 +199,7 @@
                     });
 
                 } else if (listeners.isDraggingY === true) {
-
+                    
                     // FIXME: check this bounce
                     if (this.panelsY > 0) {
 
@@ -222,6 +227,7 @@
                 }
 
             } else {
+            
                 // Load current panel
                 this.load();
 
@@ -232,6 +238,7 @@
         setCurrent: function (pid) {
 
             var i;
+            
             for (i = this.panelsCount; i--;) {
                 if (this.panels[i].id === pid) {
                     this.current = i;
@@ -243,8 +250,9 @@
         },
 
         load: function () {
-            var distance;
 
+            var distance;
+            
             // Move panels
             distance = (this.clientWidth + 40) * this.current;
             distance = distance > 0 ? -distance : distance;
@@ -252,6 +260,7 @@
             this.move({
                 distanceX: distance - this.panelsX
             });
+
         }
 
     }
