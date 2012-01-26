@@ -147,17 +147,16 @@
             }
             
             // Set isDragging flags            
-
             if (Math.abs(this.drag.distanceFromOriginX) > this.thresholdX && listeners.isDraggingY === false) {
                 listeners.isDraggingX = true;
             }
             if (Math.abs(this.drag.distanceFromOriginY) > this.thresholdY && listeners.isDraggingX === false) {
                 listeners.isDraggingY = true;
             }
+            
+            this.drag.largeMove = false;
 
-            //
             // Callback
-
             if (this.callback.onDragMove !== undefined) {
                 this.callback.onDragMove(this.drag);
             }
@@ -181,10 +180,11 @@
             Mootor.eventwrapper.removeEventListener('mouseup', this, false);
             Mootor.eventwrapper.removeEventListener('touchmove', this, false);
             Mootor.eventwrapper.removeEventListener('touchend', this, false);
-            
+                        
             // Callback
             this.callback.onDragEnd(this.drag);
             
+            // Set isDragging flags
             listeners.isDraggingY = false;
             listeners.isDraggingX = false;
                         
