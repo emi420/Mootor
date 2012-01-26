@@ -109,8 +109,11 @@ var Mootor = (function () {
 	};
 
 	// Inheritance by copying properties
-	Mootor.extend = function (obj) {
+	Mootor.extend = function (obj, target) {
 		var i;
+        if (target === "undefined") {
+            target = Mootor.prototype;
+        } ;
 		for (i in obj) {
 			if (obj.hasOwnProperty(i)) {
 				Mootor.prototype[i] = obj[i];
@@ -155,11 +158,11 @@ var Mootor = (function () {
  */
 
  /*
-  *     TODO: 
+  *     FIXME: 
   *
-  *     - Event Delegation 
-  *     - Remove Mootor.listeners array
   *     - In-time branching
+  *     - Prevent bubbling in delegation pattern
+  *     - Optimize me
   */
 
 (function (Mootor) {
@@ -168,8 +171,10 @@ var Mootor = (function () {
 
     var Drag,
         Tap;
-
-    // Touch instance constructor
+        
+    /*
+     *      Tap
+     */
 
     Tap = function (element, callback) {
 
@@ -178,11 +183,16 @@ var Mootor = (function () {
 
     };
 
-    // Drag instance constructor
+    /*
+     *      Drag
+     */
 
     Drag = function (element, callback) {
-
-        // Create new instance
+    
+        var i,
+            events = [
+                'mousedown', 'touchstart'
+            ];
 
         this.el = element;
         this.callback = callback;
@@ -199,130 +209,133 @@ var Mootor = (function () {
         };
 
         // Bind initial events
-
-        // Mouse
-        Mootor.eventwrapper.addEventListener('mousedown', this, false);
-
-        // Touch
-        Mootor.eventwrapper.addEventListener('touchstart', this, false);
-
-        // Prevent default events
-        Mootor.eventwrapper.onclick = function () { return false; };
-        Mootor.eventwrapper.addEventListener('click', function (e) { e.preventDefault(); }, false);
-        Mootor.eventwrapper.addEventListener('touchstart', function (e) { e.preventDefault(); }, false);
+        
+        for (i = 0; i < events.length; i++) {
+            Mootor.eventwrapper.addEventListener(events[i], this, false);
+            Mootor.eventwrapper.addEventListener(events[i], this, false);
+        }
+        Mootor.eventwrapper.onclick = function() { return false; };
 
     };
 
-    // Drag event handler
+    // Event handler
+    
+    Drag.prototype = {
+    
+        handleEvent: function (e) {
+        
+            if (e.preventDefault) {
+                e.preventDefault();
+            };
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            };
 
-    Drag.prototype.handleEvent = function (e) {
+            switch (e.type) {
+            case 'mousedown':
+            case 'touchstart':
+                this.start(e);
+                break;
+            case 'touchend':
+            case 'mouseup':
+                this.end(e);
+                break;
+            case 'mousemove':
+            case 'touchmove':
+                this.move(e);
+                break;
+            }
 
-        switch (e.type) {
-        case 'mousedown':
-        case 'touchstart':
-            this.start(e);
-            break;
-        case 'touchend':
-        case 'mouseup':
-            this.end(e);
-            break;
-        case 'mousemove':
-        case 'touchmove':
-            this.move(e);
-            break;
+        },
+
+        // On move start
+
+        start: function (e) {
+
+            // Initialize values
+            if (e.clientX || e.clientY) {
+                this.drag.startX = e.clientX;
+                this.drag.startY = e.clientY;
+            } else {
+                this.drag.startX = e.touches[0].clientX;
+                this.drag.startY = e.touches[0].clientY;
+            }
+            this.drag.lastX = this.drag.startX;
+            this.drag.lastY = this.drag.startY;
+            
+            // Add listeners
+            Mootor.eventwrapper.addEventListener('mousemove', this, false);
+            Mootor.eventwrapper.addEventListener('mouseup', this, false);
+            Mootor.eventwrapper.addEventListener('touchmove', this, false);
+            Mootor.eventwrapper.addEventListener('touchend', this, false);
+
+            // Callback
+            this.callback.onDragStart(this.drag);
+
+        },
+
+        // On move end
+
+        end: function (e) {
+
+            // Update values
+            this.lastX = e.clientX;
+            this.lastY = e.clientY;
+            this.distanceFromOriginX = this.initX - e.lastX;
+            this.distanceFromOriginY = this.initY - e.lastY;
+
+            // Remove listeners
+            Mootor.eventwrapper.removeEventListener('mousemove', this, false);
+            Mootor.eventwrapper.removeEventListener('mouseup', this, false);
+            Mootor.eventwrapper.removeEventListener('touchmove', this, false);
+            Mootor.eventwrapper.removeEventListener('touchend', this, false);
+
+            // Callback
+            this.callback.onDragEnd(this.drag);
+        },
+
+        // On move
+
+        move: function (e) {
+
+            var listeners = Mootor.Event.listeners;
+
+            this.drag.distanceFromOriginX = this.drag.startX - this.drag.lastX;
+            this.drag.distanceFromOriginY = this.drag.startY - this.drag.lastY;
+
+            if (e.clientX || e.clientY) {
+                this.drag.distanceX = e.clientX - this.drag.lastX;
+                this.drag.distanceY = e.clientY - this.drag.lastY;
+                this.drag.lastX = e.clientX;
+                this.drag.lastY = e.clientY;
+            } else {
+                this.drag.distanceX = e.touches[0].clientX - this.drag.lastX;
+                this.drag.distanceY = e.touches[0].clientY - this.drag.lastY;
+                this.drag.lastX = e.touches[0].clientX;
+                this.drag.lastY = e.touches[0].clientY;
+            }
+
+            // Set isDragging flags
+
+            if (Math.abs(this.drag.distanceFromOriginX) > this.thresholdX && listeners.isDraggingY === false) {
+                listeners.isDraggingX = true;
+            }
+            if (Math.abs(this.drag.distanceFromOriginY) > this.thresholdY && listeners.isDraggingX === false) {
+                listeners.isDraggingY = true;
+            }
+
+            // Callback
+
+            if (this.callback.onDragMove !== undefined) {
+                this.callback.onDragMove(this.drag);
+            }
+
         }
-
     };
-
-    // On mouse down
-
-    Drag.prototype.start = function (e) {
-
-        // Initialize values
-        if (e.clientX || e.clientY) {
-            this.drag.startX = e.clientX;
-            this.drag.startY = e.clientY;
-        } else {
-            this.drag.startX = e.touches[0].clientX;
-            this.drag.startY = e.touches[0].clientY;
-        }
-        this.drag.lastX = this.drag.startX;
-        this.drag.lastY = this.drag.startY;
-
-        // Add listeners
-        Mootor.eventwrapper.addEventListener('mousemove', this, false);
-        Mootor.eventwrapper.addEventListener('mouseup', this, false);
-        Mootor.eventwrapper.addEventListener('touchmove', this, false);
-        Mootor.eventwrapper.addEventListener('touchend', this, false);
-
-        // Prevent default listeners
-        Mootor.eventwrapper.addEventListener('mousemove', function (e) { e.preventDefault(); }, false);
-        Mootor.eventwrapper.addEventListener('mouseup', function (e) { e.preventDefault(); }, false);
-        Mootor.eventwrapper.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
-        Mootor.eventwrapper.addEventListener('touchend', function (e) { e.preventDefault(); }, false);
-
-        // Callback
-        this.callback.onDragStart(this.drag);
-
-    };
-
-    // On mouse up
-
-    Drag.prototype.end = function (e) {
-
-        // Update values
-        this.lastX = e.clientX;
-        this.lastY = e.clientY;
-        this.distanceFromOriginX = this.initX - e.lastX;
-        this.distanceFromOriginY = this.initY - e.lastY;
-
-        // Remove listeners
-        Mootor.eventwrapper.removeEventListener('mousemove', this, false);
-        Mootor.eventwrapper.removeEventListener('mouseup', this, false);
-        Mootor.eventwrapper.removeEventListener('touchmove', this, false);
-        Mootor.eventwrapper.removeEventListener('touchend', this, false);
-
-        // Callback
-        this.callback.onDragEnd(this.drag);
-    };
-
-    // On mouse move
-
-    Drag.prototype.move = function (e) {
-
-        var listeners = Mootor.Event.listeners;
-
-        this.drag.distanceFromOriginX = this.drag.startX - this.drag.lastX;
-        this.drag.distanceFromOriginY = this.drag.startY - this.drag.lastY;
-
-        if (e.clientX || e.clientY) {
-            this.drag.distanceX = e.clientX - this.drag.lastX;
-            this.drag.distanceY = e.clientY - this.drag.lastY;
-            this.drag.lastX = e.clientX;
-            this.drag.lastY = e.clientY;
-        } else {
-            this.drag.distanceX = e.touches[0].clientX - this.drag.lastX;
-            this.drag.distanceY = e.touches[0].clientY - this.drag.lastY;
-            this.drag.lastX = e.touches[0].clientX;
-            this.drag.lastY = e.touches[0].clientY;
-        }
-
-        // Set isDragging flags
-
-        if (Math.abs(this.drag.distanceFromOriginX) > this.thresholdX && listeners.isDraggingY === false) {
-            listeners.isDraggingX = true;
-        }
-        if (Math.abs(this.drag.distanceFromOriginY) > this.thresholdY && listeners.isDraggingX === false) {
-            listeners.isDraggingY = true;
-        }
-
-        // Callback
-
-        if (this.callback.onDragMove !== undefined) {
-            this.callback.onDragMove(this.drag);
-        }
-
-    };
+    
+    /*
+     *      Public
+     */
 
     Mootor.Event = {
 
@@ -373,7 +386,7 @@ var Mootor = (function () {
     Mootor.extend(Mootor.Event);
 
     /*
-     * Private properties
+     *      Private
      */
 
     // Event listeners
@@ -509,9 +522,10 @@ window.Mootor = Mootor;
  * Mootor Navigation (coded by emi420@gmail.com)
  */
 
- /* TODO:
-  *  
-  *  - event delegation 
+ /*      FIXME:
+  *          - Despues de usar swipe no funciona tap
+  *          - Despues de usa swipe en eje X no funciona en eje Y
+  *          - Optimize me
   */
 
 (function (Mootor) {
@@ -519,13 +533,11 @@ window.Mootor = Mootor;
     "use strict";
 
     /*
-     * Module dependencies
+     *      Module dependencies
      */
 
     var Fx = Mootor.Fx,
         Event = Mootor.Event,
-
-        Panels;
 
     Panels = function (element) {
 
@@ -564,204 +576,209 @@ window.Mootor = Mootor;
 
     };
 
-    // Reset all panels
-    Panels.prototype.resetAll = function () {
+    Panels.prototype = {
 
-        var pstyle,
-            panchors,
-            onAnchorTouch,
-            j,
-            i,
-            listeners = Mootor.Event.listeners,
-            instance = this;
+        // Reset size, styles and link anchors to panels
+        resetAll: function () {
 
-        // Set anchor links
-        onAnchorTouch = function () {
+            var pstyle,
+                panchors,
+                onAnchorTouch,
+                j,
+                i,
+                listeners = Mootor.Event.listeners,
+                instance = this;
 
-            if (listeners.isDraggingX === false && listeners.isDraggingY === false) {
-                instance.setCurrent(this.rel);
-            }
-            return false;
+            // Set anchor links
+            onAnchorTouch = function () {
 
-        };
-
-
-
-        for (i = this.panelsCount; i--;) {
-
-            pstyle = this.panels[i].style;
-
-            // Reset styles
-
-            pstyle.width = this.clientWidth + "px";
-            pstyle.left =  i > 0 ? (this.clientWidth * i + (40 * i)) + "px" : (this.clientWidth * i) + "px";
-            if (this.clientHeight > this.panels[i].offsetHeight) {
-                pstyle.height = this.clientHeight + "px";
-            }
-            pstyle.overflow = 'hidden';
-
-            // FIXME CHECK: expensive query (getElementsByTagName)
-            panchors = this.panels[i].getElementsByTagName('a');
-
-            for (j = panchors.length; j--;) {
-                if (panchors[j].rel !== "") {
-                    Event.bind(panchors[j], "onTap", onAnchorTouch);
+                if (listeners.isDraggingX === false && listeners.isDraggingY === false) {
+                    instance.setCurrent(this.rel);
                 }
-            }
+                return false;
 
-        }
-
-    };
-
-    // Start move
-    Panels.prototype.startMove = function (e) {
-
-        // Do something on start move
-        //console.log(e);
-
-    };
-
-    // Move
-    Panels.prototype.move = function (e) {
-
-        var distanceX = e.distanceX,
-            distanceY = e.distanceY,
-            distanceFromOriginY = e.distanceFromOriginY,
-            distanceFromOriginX = e.distanceFromOriginX,
-            listeners = Mootor.Event.listeners;
-
-        // New horizontal position                                          
-        this.panelsX = this.panelsX + distanceX;
-        this.panelsY = this.panelsY + distanceY;
+            };
 
 
-        if (listeners.isDraggingY === false) {
+            for (i = this.panelsCount; i--;) {
 
-            if (distanceFromOriginX === undefined) {
+                pstyle = this.panels[i].style;
 
-                // Large X move
-                if (distanceX > 700 || distanceX < -700) {
-                    Fx.translate(this.el, {x: this.panelsX}, {transitionDuration: 0.5});
-                } else {
-                    Fx.translate(this.el, {x: this.panelsX}, {transitionDuration: 0.2});
+                // Reset styles
+
+                pstyle.width = this.clientWidth + "px";
+                pstyle.left =  i > 0 ? (this.clientWidth * i + (40 * i)) + "px" : (this.clientWidth * i) + "px";
+                if (this.clientHeight > this.panels[i].offsetHeight) {
+                    pstyle.height = this.clientHeight + "px";
+                }
+                pstyle.overflow = 'hidden';
+
+                // FIXME CHECK: expensive query (getElementsByTagName)
+                panchors = this.panels[i].getElementsByTagName('a');
+
+                for (j = panchors.length; j--;) {
+                    if (panchors[j].rel !== "") {
+                        Event.bind(panchors[j], "onTap", onAnchorTouch);
+                    }
                 }
 
-            } else if (listeners.isDraggingX === true) {
-
-                // Short X move
-                Fx.translate(this.el, {x: this.panelsX}, {});
-
             }
+        },
 
-        } else if (listeners.isDraggingY === true) {
+        // Start move
+        startMove: function (e) {
 
-            // Short Y move                        
-            if (distanceFromOriginY === undefined) {
-                Fx.translate(this.el, {y: this.panelsY}, {transitionDuration: 0.5});
-            } else {
-                Fx.translate(this.el, {y: this.panelsY}, {});
-            }
-        }
+            // Do something on start move
+            //console.log(e);
 
-    };
+        },
 
-    // Check move to take actions
-    Panels.prototype.checkMove = function (e) {
+        // Move
+        move: function (e) {
 
-        var maxdist = this.thresholdX,
-            is_momentum = false,
-            listeners = Mootor.Event.listeners;
+            var distanceX = e.distanceX,
+                distanceY = e.distanceY,
+                distanceFromOriginY = e.distanceFromOriginY,
+                distanceFromOriginX = e.distanceFromOriginX,
+                listeners = Mootor.Event.listeners;
 
-        // If position reach certain threshold,
-        // load new panel. 
-        // Else, move panel back.
+            // New horizontal position                                          
+            this.panelsX = this.panelsX + distanceX;
+            this.panelsY = this.panelsY + distanceY;
 
-        if (e.distanceFromOriginX > maxdist && this.current < (this.panelsCount - 1)) {
 
-            // Move to left
+            if (listeners.isDraggingY === false) {
 
-            this.current += 1;
-            is_momentum = true;
+                if (distanceFromOriginX === undefined) {
 
-        } else if (e.distanceFromOriginX < (-maxdist) && this.current > 0) {
+                    // Large X move
+                    if (distanceX > 700 || distanceX < -700) {
+                        Fx.translate(this.el, {x: this.panelsX}, {transitionDuration: 0.5});
+                    } else {
+                        Fx.translate(this.el, {x: this.panelsX}, {transitionDuration: 0.2});
+                    }
 
-            // Move to right
+                } else if (listeners.isDraggingX === true) {
 
-            this.current -= 1;
-            is_momentum = true;
+                    // Short X move
+                    Fx.translate(this.el, {x: this.panelsX}, {});
 
-        }
-
-        if (is_momentum === false) {
-
-            if (listeners.isDraggingX === true) {
-
-                // Bounce back
-                this.move({
-                    distanceX: e.distanceFromOriginX
-                });
+                }
 
             } else if (listeners.isDraggingY === true) {
 
-                // FIXME: check this bounce
-                if (this.panelsY > 0) {
+                // Short Y move                        
+                if (distanceFromOriginY === undefined) {
+                    Fx.translate(this.el, {y: this.panelsY}, {transitionDuration: 0.5});
+                } else {
+                    Fx.translate(this.el, {y: this.panelsY}, {});
+                }
+            }
+
+        },
+
+        // Check move to take actions
+        checkMove: function (e) {
+
+            var maxdist = this.thresholdX,
+                is_momentum = false,
+                listeners = Mootor.Event.listeners;
+
+            // If position reach certain threshold,
+            // load new panel. 
+            // Else, move panel back.
+
+            if (e.distanceFromOriginX > maxdist && this.current < (this.panelsCount - 1)) {
+
+                // Move to left
+
+                this.current += 1;
+                is_momentum = true;
+
+            } else if (e.distanceFromOriginX < (-maxdist) && this.current > 0) {
+
+                // Move to right
+
+                this.current -= 1;
+                is_momentum = true;
+
+            }
+
+            if (is_momentum === false) {
+
+                if (listeners.isDraggingX === true) {
 
                     // Bounce back
                     this.move({
-                        distanceY: -this.panelsY
+                        distanceX: e.distanceFromOriginX
                     });
 
-                } else {
+                } else if (listeners.isDraggingY === true) {
 
-                    // FIXME CHECK: 
-                    //  optimize me
-                    //  expensive query
-                    maxdist = this.el.getElementsByClassName('panel')[this.current].offsetHeight - this.clientHeight;
+                    // FIXME: check this bounce
+                    if (this.panelsY > 0) {
 
-                    if (this.panelsY < -maxdist) {
                         // Bounce back
                         this.move({
-                            distanceY: -this.panelsY - maxdist
+                            distanceY: -this.panelsY
                         });
+
+                    } else {
+
+                        // FIXME CHECK: 
+                        //  optimize me
+                        //  expensive query
+                        maxdist = this.el.getElementsByClassName('panel')[this.current].offsetHeight - this.clientHeight;
+
+                        if (this.panelsY < -maxdist) {
+                            // Bounce back
+                            this.move({
+                                distanceY: -this.panelsY - maxdist
+                            });
+                        }
+
                     }
 
                 }
 
-            }
-
-        } else {
-            // Load current panel
-            this.load();
-
-        }
-
-    };
-
-    Panels.prototype.setCurrent = function (pid) {
-
-        var i;
-        for (i = this.panelsCount; i--;) {
-            if (this.panels[i].id === pid) {
-                this.current = i;
-                Fx.show(this.panels[i]);
+            } else {
+                // Load current panel
                 this.load();
+
             }
+
+        },
+
+        setCurrent: function (pid) {
+
+            var i;
+            for (i = this.panelsCount; i--;) {
+                if (this.panels[i].id === pid) {
+                    this.current = i;
+                    Fx.show(this.panels[i]);
+                    this.load();
+                }
+            }
+
+        },
+
+        load: function () {
+            var distance;
+
+            // Move panels
+            distance = (this.clientWidth + 40) * this.current;
+            distance = distance > 0 ? -distance : distance;
+
+            this.move({
+                distanceX: distance - this.panelsX
+            });
         }
 
-    };
+    }
 
-    Panels.prototype.load = function () {
-        var distance;
-
-        // Move panels
-        distance = (this.clientWidth + 40) * this.current;
-        distance = distance > 0 ? -distance : distance;
-
-        this.move({
-            distanceX: distance - this.panelsX
-        });
-    };
-
+     /*
+      *     Public
+      */
     Mootor.Nav = {
 
         panels: function () {

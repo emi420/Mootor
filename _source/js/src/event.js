@@ -3,11 +3,11 @@
  */
 
  /*
-  *     TODO: 
+  *     FIXME: 
   *
-  *     - Event Delegation 
-  *     - Remove Mootor.listeners array
   *     - In-time branching
+  *     - Prevent bubbling in delegation pattern
+  *     - Optimize me
   */
 
 (function (Mootor) {
@@ -16,8 +16,10 @@
 
     var Drag,
         Tap;
-
-    // Touch instance constructor
+        
+    /*
+     *      Tap
+     */
 
     Tap = function (element, callback) {
 
@@ -26,11 +28,16 @@
 
     };
 
-    // Drag instance constructor
+    /*
+     *      Drag
+     */
 
     Drag = function (element, callback) {
-
-        // Create new instance
+    
+        var i,
+            events = [
+                'mousedown', 'touchstart'
+            ];
 
         this.el = element;
         this.callback = callback;
@@ -47,130 +54,133 @@
         };
 
         // Bind initial events
-
-        // Mouse
-        Mootor.eventwrapper.addEventListener('mousedown', this, false);
-
-        // Touch
-        Mootor.eventwrapper.addEventListener('touchstart', this, false);
-
-        // Prevent default events
-        Mootor.eventwrapper.onclick = function () { return false; };
-        Mootor.eventwrapper.addEventListener('click', function (e) { e.preventDefault(); }, false);
-        Mootor.eventwrapper.addEventListener('touchstart', function (e) { e.preventDefault(); }, false);
+        
+        for (i = 0; i < events.length; i++) {
+            Mootor.eventwrapper.addEventListener(events[i], this, false);
+            Mootor.eventwrapper.addEventListener(events[i], this, false);
+        }
+        Mootor.eventwrapper.onclick = function() { return false; };
 
     };
 
-    // Drag event handler
+    // Event handler
+    
+    Drag.prototype = {
+    
+        handleEvent: function (e) {
+        
+            if (e.preventDefault) {
+                e.preventDefault();
+            };
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            };
 
-    Drag.prototype.handleEvent = function (e) {
+            switch (e.type) {
+            case 'mousedown':
+            case 'touchstart':
+                this.start(e);
+                break;
+            case 'touchend':
+            case 'mouseup':
+                this.end(e);
+                break;
+            case 'mousemove':
+            case 'touchmove':
+                this.move(e);
+                break;
+            }
 
-        switch (e.type) {
-        case 'mousedown':
-        case 'touchstart':
-            this.start(e);
-            break;
-        case 'touchend':
-        case 'mouseup':
-            this.end(e);
-            break;
-        case 'mousemove':
-        case 'touchmove':
-            this.move(e);
-            break;
+        },
+
+        // On move start
+
+        start: function (e) {
+
+            // Initialize values
+            if (e.clientX || e.clientY) {
+                this.drag.startX = e.clientX;
+                this.drag.startY = e.clientY;
+            } else {
+                this.drag.startX = e.touches[0].clientX;
+                this.drag.startY = e.touches[0].clientY;
+            }
+            this.drag.lastX = this.drag.startX;
+            this.drag.lastY = this.drag.startY;
+            
+            // Add listeners
+            Mootor.eventwrapper.addEventListener('mousemove', this, false);
+            Mootor.eventwrapper.addEventListener('mouseup', this, false);
+            Mootor.eventwrapper.addEventListener('touchmove', this, false);
+            Mootor.eventwrapper.addEventListener('touchend', this, false);
+
+            // Callback
+            this.callback.onDragStart(this.drag);
+
+        },
+
+        // On move end
+
+        end: function (e) {
+
+            // Update values
+            this.lastX = e.clientX;
+            this.lastY = e.clientY;
+            this.distanceFromOriginX = this.initX - e.lastX;
+            this.distanceFromOriginY = this.initY - e.lastY;
+
+            // Remove listeners
+            Mootor.eventwrapper.removeEventListener('mousemove', this, false);
+            Mootor.eventwrapper.removeEventListener('mouseup', this, false);
+            Mootor.eventwrapper.removeEventListener('touchmove', this, false);
+            Mootor.eventwrapper.removeEventListener('touchend', this, false);
+
+            // Callback
+            this.callback.onDragEnd(this.drag);
+        },
+
+        // On move
+
+        move: function (e) {
+
+            var listeners = Mootor.Event.listeners;
+
+            this.drag.distanceFromOriginX = this.drag.startX - this.drag.lastX;
+            this.drag.distanceFromOriginY = this.drag.startY - this.drag.lastY;
+
+            if (e.clientX || e.clientY) {
+                this.drag.distanceX = e.clientX - this.drag.lastX;
+                this.drag.distanceY = e.clientY - this.drag.lastY;
+                this.drag.lastX = e.clientX;
+                this.drag.lastY = e.clientY;
+            } else {
+                this.drag.distanceX = e.touches[0].clientX - this.drag.lastX;
+                this.drag.distanceY = e.touches[0].clientY - this.drag.lastY;
+                this.drag.lastX = e.touches[0].clientX;
+                this.drag.lastY = e.touches[0].clientY;
+            }
+
+            // Set isDragging flags
+
+            if (Math.abs(this.drag.distanceFromOriginX) > this.thresholdX && listeners.isDraggingY === false) {
+                listeners.isDraggingX = true;
+            }
+            if (Math.abs(this.drag.distanceFromOriginY) > this.thresholdY && listeners.isDraggingX === false) {
+                listeners.isDraggingY = true;
+            }
+
+            // Callback
+
+            if (this.callback.onDragMove !== undefined) {
+                this.callback.onDragMove(this.drag);
+            }
+
         }
-
     };
-
-    // On mouse down
-
-    Drag.prototype.start = function (e) {
-
-        // Initialize values
-        if (e.clientX || e.clientY) {
-            this.drag.startX = e.clientX;
-            this.drag.startY = e.clientY;
-        } else {
-            this.drag.startX = e.touches[0].clientX;
-            this.drag.startY = e.touches[0].clientY;
-        }
-        this.drag.lastX = this.drag.startX;
-        this.drag.lastY = this.drag.startY;
-
-        // Add listeners
-        Mootor.eventwrapper.addEventListener('mousemove', this, false);
-        Mootor.eventwrapper.addEventListener('mouseup', this, false);
-        Mootor.eventwrapper.addEventListener('touchmove', this, false);
-        Mootor.eventwrapper.addEventListener('touchend', this, false);
-
-        // Prevent default listeners
-        Mootor.eventwrapper.addEventListener('mousemove', function (e) { e.preventDefault(); }, false);
-        Mootor.eventwrapper.addEventListener('mouseup', function (e) { e.preventDefault(); }, false);
-        Mootor.eventwrapper.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
-        Mootor.eventwrapper.addEventListener('touchend', function (e) { e.preventDefault(); }, false);
-
-        // Callback
-        this.callback.onDragStart(this.drag);
-
-    };
-
-    // On mouse up
-
-    Drag.prototype.end = function (e) {
-
-        // Update values
-        this.lastX = e.clientX;
-        this.lastY = e.clientY;
-        this.distanceFromOriginX = this.initX - e.lastX;
-        this.distanceFromOriginY = this.initY - e.lastY;
-
-        // Remove listeners
-        Mootor.eventwrapper.removeEventListener('mousemove', this, false);
-        Mootor.eventwrapper.removeEventListener('mouseup', this, false);
-        Mootor.eventwrapper.removeEventListener('touchmove', this, false);
-        Mootor.eventwrapper.removeEventListener('touchend', this, false);
-
-        // Callback
-        this.callback.onDragEnd(this.drag);
-    };
-
-    // On mouse move
-
-    Drag.prototype.move = function (e) {
-
-        var listeners = Mootor.Event.listeners;
-
-        this.drag.distanceFromOriginX = this.drag.startX - this.drag.lastX;
-        this.drag.distanceFromOriginY = this.drag.startY - this.drag.lastY;
-
-        if (e.clientX || e.clientY) {
-            this.drag.distanceX = e.clientX - this.drag.lastX;
-            this.drag.distanceY = e.clientY - this.drag.lastY;
-            this.drag.lastX = e.clientX;
-            this.drag.lastY = e.clientY;
-        } else {
-            this.drag.distanceX = e.touches[0].clientX - this.drag.lastX;
-            this.drag.distanceY = e.touches[0].clientY - this.drag.lastY;
-            this.drag.lastX = e.touches[0].clientX;
-            this.drag.lastY = e.touches[0].clientY;
-        }
-
-        // Set isDragging flags
-
-        if (Math.abs(this.drag.distanceFromOriginX) > this.thresholdX && listeners.isDraggingY === false) {
-            listeners.isDraggingX = true;
-        }
-        if (Math.abs(this.drag.distanceFromOriginY) > this.thresholdY && listeners.isDraggingX === false) {
-            listeners.isDraggingY = true;
-        }
-
-        // Callback
-
-        if (this.callback.onDragMove !== undefined) {
-            this.callback.onDragMove(this.drag);
-        }
-
-    };
+    
+    /*
+     *      Public
+     */
 
     Mootor.Event = {
 
@@ -221,7 +231,7 @@
     Mootor.extend(Mootor.Event);
 
     /*
-     * Private properties
+     *      Private
      */
 
     // Event listeners

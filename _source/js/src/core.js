@@ -108,8 +108,11 @@ var Mootor = (function () {
 	};
 
 	// Inheritance by copying properties
-	Mootor.extend = function (obj) {
+	Mootor.extend = function (obj, target) {
 		var i;
+        if (target === "undefined") {
+            target = Mootor.prototype;
+        } ;
 		for (i in obj) {
 			if (obj.hasOwnProperty(i)) {
 				Mootor.prototype[i] = obj[i];
