@@ -471,18 +471,10 @@ window.Mootor = Mootor;
             // Apply 3d transform when its available
             // or use default CSS 'left' property
 
-            // FIXME CHECK: optimize me
-
-            // Check if move is on X or Y axis
-            if (!isNaN(x_pos) && x_pos !== undefined) {
-                distance = x_pos + "px,0, 0";
-            } else if (!isNaN(y_pos) && y_pos !== undefined) {
-                distance = "0," + y_pos + "px, 0";
-            }
-
             if (el.style.webkitTransform !== "undefined") {
 
                 // Use WebKit transform 3D
+                distance = x_pos + "px," + y_pos + "px, 0";
                 el.style.webkitTransform = "translate3d(" + distance + ")";
 
             } else {
@@ -538,9 +530,7 @@ window.Mootor = Mootor;
 
  /*      FIXME:
   *          - Optimize me & micro-optimize
-  *          - Distance on move/bounce back is buggy
   *          - Links are buggy
-  *          - When a panel is active, drag Y is buggy
   */
 
 (function (Mootor) {
@@ -656,40 +646,40 @@ window.Mootor = Mootor;
                 distanceFromOriginY = e.distanceFromOriginY,
                 distanceFromOriginX = e.distanceFromOriginX,
                 listeners = Mootor.Event.listeners;
-                
-            // Update positions
-            if (distanceX) {
-                this.panelsX = this.panelsX + distanceX;
-            }
-            if (distanceY) {
-                this.panelsY = this.panelsY + distanceY;
-            }
-            
+                            
             if (listeners.isDraggingY === false) {
+
+                if (distanceX) {
+                    this.panelsX = this.panelsX + distanceX;
+                }
 
                 if (e.largeMove === true) {
 
                     // Large X move
                     if (distanceX > this.thresholdX || distanceX < -this.thresholdX) {
-                        Fx.translate(this.el, {x: this.panelsX}, {transitionDuration: 0.2});
+                        Fx.translate(this.el, {x: this.panelsX, y: this.panelsY}, {transitionDuration: 0.2});
                     } else {
-                        Fx.translate(this.el, {x: this.panelsX}, {transitionDuration: 0.5});
+                        Fx.translate(this.el, {x: this.panelsX, y: this.panelsY}, {transitionDuration: 0.5});
                     }
 
                 } else if (listeners.isDraggingX === true) {
 
                     // Short X move
-                    Fx.translate(this.el, {x: this.panelsX}, {});
+                    Fx.translate(this.el, {x: this.panelsX, y: this.panelsY}, {});
 
                 }
 
             } else if (listeners.isDraggingY === true) {
             
+                if (distanceY) {
+                    this.panelsY = this.panelsY + distanceY;
+                }
+
                 // Short Y move                        
                 if (e.largeMove === true) {
-                    Fx.translate(this.el, {y: this.panelsY}, {transitionDuration: 0.5});
+                    Fx.translate(this.el, {y: this.panelsY, x: this.panelsX}, {transitionDuration: 0.5});
                 } else {
-                    Fx.translate(this.el, {y: this.panelsY}, {});
+                    Fx.translate(this.el, {y: this.panelsY, x: this.panelsX}, {});
                 }
             }
 
@@ -697,7 +687,7 @@ window.Mootor = Mootor;
 
         // Check move to take actions
         checkMove: function (e) {
-       
+               
             var distanceX = e.distanceX,
                 distanceY = e.distanceY;
        

@@ -55,18 +55,10 @@
             // Apply 3d transform when its available
             // or use default CSS 'left' property
 
-            // FIXME CHECK: optimize me
-
-            // Check if move is on X or Y axis
-            if (!isNaN(x_pos) && x_pos !== undefined) {
-                distance = x_pos + "px,0, 0";
-            } else if (!isNaN(y_pos) && y_pos !== undefined) {
-                distance = "0," + y_pos + "px, 0";
-            }
-
             if (el.style.webkitTransform !== "undefined") {
 
                 // Use WebKit transform 3D
+                distance = x_pos + "px," + y_pos + "px, 0";
                 el.style.webkitTransform = "translate3d(" + distance + ")";
 
             } else {

@@ -4,9 +4,7 @@
 
  /*      FIXME:
   *          - Optimize me & micro-optimize
-  *          - Distance on move/bounce back is buggy
   *          - Links are buggy
-  *          - When a panel is active, drag Y is buggy
   */
 
 (function (Mootor) {
@@ -122,40 +120,40 @@
                 distanceFromOriginY = e.distanceFromOriginY,
                 distanceFromOriginX = e.distanceFromOriginX,
                 listeners = Mootor.Event.listeners;
-                
-            // Update positions
-            if (distanceX) {
-                this.panelsX = this.panelsX + distanceX;
-            }
-            if (distanceY) {
-                this.panelsY = this.panelsY + distanceY;
-            }
-            
+                            
             if (listeners.isDraggingY === false) {
+
+                if (distanceX) {
+                    this.panelsX = this.panelsX + distanceX;
+                }
 
                 if (e.largeMove === true) {
 
                     // Large X move
                     if (distanceX > this.thresholdX || distanceX < -this.thresholdX) {
-                        Fx.translate(this.el, {x: this.panelsX}, {transitionDuration: 0.2});
+                        Fx.translate(this.el, {x: this.panelsX, y: this.panelsY}, {transitionDuration: 0.2});
                     } else {
-                        Fx.translate(this.el, {x: this.panelsX}, {transitionDuration: 0.5});
+                        Fx.translate(this.el, {x: this.panelsX, y: this.panelsY}, {transitionDuration: 0.5});
                     }
 
                 } else if (listeners.isDraggingX === true) {
 
                     // Short X move
-                    Fx.translate(this.el, {x: this.panelsX}, {});
+                    Fx.translate(this.el, {x: this.panelsX, y: this.panelsY}, {});
 
                 }
 
             } else if (listeners.isDraggingY === true) {
             
+                if (distanceY) {
+                    this.panelsY = this.panelsY + distanceY;
+                }
+
                 // Short Y move                        
                 if (e.largeMove === true) {
-                    Fx.translate(this.el, {y: this.panelsY}, {transitionDuration: 0.5});
+                    Fx.translate(this.el, {y: this.panelsY, x: this.panelsX}, {transitionDuration: 0.5});
                 } else {
-                    Fx.translate(this.el, {y: this.panelsY}, {});
+                    Fx.translate(this.el, {y: this.panelsY, x: this.panelsX}, {});
                 }
             }
 
@@ -163,7 +161,7 @@
 
         // Check move to take actions
         checkMove: function (e) {
-       
+               
             var distanceX = e.distanceX,
                 distanceY = e.distanceY;
        
