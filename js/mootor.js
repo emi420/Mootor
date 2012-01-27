@@ -162,6 +162,7 @@ var Mootor = (function () {
   *
   *     - Init-time branching
   *     - Optimize me & micro-optimize
+  *     - Check event delegation (form is buggy)
   */
 
 (function (Mootor) {
@@ -195,8 +196,6 @@ var Mootor = (function () {
 
         this.el = element;
         this.callback = callback;
-        this.thresholdY = 15;
-        this.thresholdX = 15;
 
         this.drag = {
             startX: 0,
@@ -210,10 +209,10 @@ var Mootor = (function () {
         // Bind initial events
         
         for (i = 0; i < events.length; i++) {
-            Mootor.eventwrapper.addEventListener(events[i], this, false);
-            Mootor.eventwrapper.addEventListener(events[i], this, false);
+            element.addEventListener(events[i], this, false);
+            element.addEventListener(events[i], this, false);
         }
-        Mootor.eventwrapper.onclick = function() { return false; };
+        element.onclick = function() { return false; };
 
     };
 
@@ -222,7 +221,7 @@ var Mootor = (function () {
     Drag.prototype = {
     
         handleEvent: function (e) {
-        
+    
             if (e.preventDefault) {
                 e.preventDefault();
             };
@@ -265,10 +264,10 @@ var Mootor = (function () {
             this.drag.lastY = this.drag.startY;
             
             // Add listeners
-            Mootor.eventwrapper.addEventListener('mousemove', this, false);
-            Mootor.eventwrapper.addEventListener('mouseup', this, false);
-            Mootor.eventwrapper.addEventListener('touchmove', this, false);
-            Mootor.eventwrapper.addEventListener('touchend', this, false);
+            this.el.addEventListener('mousemove', this, false);
+            this.el.addEventListener('mouseup', this, false);
+            this.el.addEventListener('touchmove', this, false);
+            this.el.addEventListener('touchend', this, false);
 
             // Callback
             this.callback.onDragStart(this.drag);
@@ -279,7 +278,9 @@ var Mootor = (function () {
 
         move: function (e) {
 
-            var listeners = Mootor.Event.listeners;
+            var listeners = Mootor.Event.listeners,
+                distanceFromOriginX,
+                distanceFromOriginY;
 
             this.drag.distanceFromOriginX = this.drag.startX - this.drag.lastX;
             this.drag.distanceFromOriginY = this.drag.startY - this.drag.lastY;
@@ -301,12 +302,16 @@ var Mootor = (function () {
                 this.drag.lastY = e.touches[0].clientY;
             }
             
-            // Set isDragging flags            
-            if (Math.abs(this.drag.distanceFromOriginX) > this.thresholdX && listeners.isDraggingY === false) {
-                listeners.isDraggingX = true;
-            }
-            if (Math.abs(this.drag.distanceFromOriginY) > this.thresholdY && listeners.isDraggingX === false) {
+            // Set isDragging flags  
+
+            distanceFromOriginX = Math.abs(this.drag.distanceFromOriginX);
+            distanceFromOriginY = Math.abs(this.drag.distanceFromOriginY);
+            
+            // FIXME CHECK
+            if (distanceFromOriginY > 2 && distanceFromOriginY > distanceFromOriginX && listeners.isDraggingX === false) {
                 listeners.isDraggingY = true;
+            } else if (distanceFromOriginX > 2 && listeners.isDraggingY === false) {
+                listeners.isDraggingX = true;
             }
             
             this.drag.largeMove = false;
@@ -331,10 +336,10 @@ var Mootor = (function () {
             this.distanceFromOriginY = this.initY - e.lastY;
            
             // Remove listeners
-            Mootor.eventwrapper.removeEventListener('mousemove', this, false);
-            Mootor.eventwrapper.removeEventListener('mouseup', this, false);
-            Mootor.eventwrapper.removeEventListener('touchmove', this, false);
-            Mootor.eventwrapper.removeEventListener('touchend', this, false);
+            this.el.removeEventListener('mousemove', this, false);
+            this.el.removeEventListener('mouseup', this, false);
+            this.el.removeEventListener('touchmove', this, false);
+            this.el.removeEventListener('touchend', this, false);
                         
             // Callback
             this.callback.onDragEnd(this.drag);
@@ -373,9 +378,7 @@ var Mootor = (function () {
             // a new listener instance
             if (listenerCount > 0) {
                 switch (eventtype) {
-                case "onDragStart":
-                case "onDragEnd":
-                case "onDragMove":
+                case "onDrag":
                     listener = new Drag(el, callback);
                     break;
                 case "onTap":
@@ -575,9 +578,7 @@ window.Mootor = Mootor;
         // Event.bind(window, "orientationChange", resetAll);
 
         // Bind event listeners
-        Event.bind(this.el, "onDragStart", this);
-        Event.bind(this.el, "onDragEnd", this);
-        Event.bind(this.el, "onDragMove", this);
+        Event.bind(this.el, "onDrag", this);
 
     };
 
@@ -603,7 +604,6 @@ window.Mootor = Mootor;
                 return false;
 
             };
-
 
             for (i = this.panelsCount; i--;) {
 
@@ -646,7 +646,7 @@ window.Mootor = Mootor;
                 distanceFromOriginY = e.distanceFromOriginY,
                 distanceFromOriginX = e.distanceFromOriginX,
                 listeners = Mootor.Event.listeners;
-                            
+
             if (listeners.isDraggingY === false) {
 
                 if (distanceX) {
@@ -669,6 +669,7 @@ window.Mootor = Mootor;
 
                 }
 
+            //
             } else if (listeners.isDraggingY === true) {
             
                 if (distanceY) {
@@ -700,39 +701,43 @@ window.Mootor = Mootor;
             // load new panel. 
             // Else, move panel back.
             
-            if (e.distanceFromOriginX > maxdist && this.current < (this.panelsCount - 1)) {
+            // Check isDragging flags
+            if (listeners.isDraggingX || listeners.isDraggingY) {
 
-                // Move to left
-                this.current += 1;
-                is_momentum = true;
+                if (e.distanceFromOriginX > maxdist && this.current < (this.panelsCount - 1)) {
 
-            } else if (e.distanceFromOriginX < (-maxdist) && this.current > 0) {
+                    // Move to left
+                    this.current += 1;
+                    is_momentum = true;
 
-                // Move to right
-                this.current -= 1;
-                is_momentum = true;
+                } else if (e.distanceFromOriginX < (-maxdist) && this.current > 0) {
 
-            }
+                    // Move to right
+                    this.current -= 1;
+                    is_momentum = true;
 
-            if (is_momentum === true) {
+                }
 
-                // Load current panel
-                this.load();
+                if (is_momentum === true) {
 
-            } else {
-            
-                            
-                // Bounce back
-                
-                e.distanceX =  e.distanceFromOriginX - e.distanceX;
-                e.distanceY =  e.distanceFromOriginY - (this.panelsY + e.distanceFromOriginY);
-                e.largeMove = true;
-                this.move(e);
+                    // Load current panel
+                    this.load();
 
+                } else {            
+                                
+                    // Bounce back
+                    
+                    e.distanceX =  e.distanceFromOriginX - e.distanceX;
+                    e.distanceY =  e.distanceFromOriginY - (this.panelsY + e.distanceFromOriginY);
+                    e.largeMove = true;
+                    this.move(e);
+
+                }
             }
 
         },
 
+        // Set current panel
         setCurrent: function (pid) {
 
             var i;
@@ -747,6 +752,7 @@ window.Mootor = Mootor;
 
         },
 
+        // Load current panel
         load: function () {
 
             var distance;
@@ -754,7 +760,7 @@ window.Mootor = Mootor;
             // Move panels
             distance = (this.clientWidth + 40) * this.current;
             distance = distance > 0 ? -distance : distance;
-
+            
             this.move({
                 distanceX: distance - this.panelsX,
                 largeMove: true

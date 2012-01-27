@@ -49,9 +49,7 @@
         // Event.bind(window, "orientationChange", resetAll);
 
         // Bind event listeners
-        Event.bind(this.el, "onDragStart", this);
-        Event.bind(this.el, "onDragEnd", this);
-        Event.bind(this.el, "onDragMove", this);
+        Event.bind(this.el, "onDrag", this);
 
     };
 
@@ -77,7 +75,6 @@
                 return false;
 
             };
-
 
             for (i = this.panelsCount; i--;) {
 
@@ -120,7 +117,7 @@
                 distanceFromOriginY = e.distanceFromOriginY,
                 distanceFromOriginX = e.distanceFromOriginX,
                 listeners = Mootor.Event.listeners;
-                            
+
             if (listeners.isDraggingY === false) {
 
                 if (distanceX) {
@@ -143,6 +140,7 @@
 
                 }
 
+            //
             } else if (listeners.isDraggingY === true) {
             
                 if (distanceY) {
@@ -174,39 +172,43 @@
             // load new panel. 
             // Else, move panel back.
             
-            if (e.distanceFromOriginX > maxdist && this.current < (this.panelsCount - 1)) {
+            // Check isDragging flags
+            if (listeners.isDraggingX || listeners.isDraggingY) {
 
-                // Move to left
-                this.current += 1;
-                is_momentum = true;
+                if (e.distanceFromOriginX > maxdist && this.current < (this.panelsCount - 1)) {
 
-            } else if (e.distanceFromOriginX < (-maxdist) && this.current > 0) {
+                    // Move to left
+                    this.current += 1;
+                    is_momentum = true;
 
-                // Move to right
-                this.current -= 1;
-                is_momentum = true;
+                } else if (e.distanceFromOriginX < (-maxdist) && this.current > 0) {
 
-            }
+                    // Move to right
+                    this.current -= 1;
+                    is_momentum = true;
 
-            if (is_momentum === true) {
+                }
 
-                // Load current panel
-                this.load();
+                if (is_momentum === true) {
 
-            } else {
-            
-                            
-                // Bounce back
-                
-                e.distanceX =  e.distanceFromOriginX - e.distanceX;
-                e.distanceY =  e.distanceFromOriginY - (this.panelsY + e.distanceFromOriginY);
-                e.largeMove = true;
-                this.move(e);
+                    // Load current panel
+                    this.load();
 
+                } else {            
+                                
+                    // Bounce back
+                    
+                    e.distanceX =  e.distanceFromOriginX - e.distanceX;
+                    e.distanceY =  e.distanceFromOriginY - (this.panelsY + e.distanceFromOriginY);
+                    e.largeMove = true;
+                    this.move(e);
+
+                }
             }
 
         },
 
+        // Set current panel
         setCurrent: function (pid) {
 
             var i;
@@ -221,6 +223,7 @@
 
         },
 
+        // Load current panel
         load: function () {
 
             var distance;
@@ -228,7 +231,7 @@
             // Move panels
             distance = (this.clientWidth + 40) * this.current;
             distance = distance > 0 ? -distance : distance;
-
+            
             this.move({
                 distanceX: distance - this.panelsX,
                 largeMove: true
