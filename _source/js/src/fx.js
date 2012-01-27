@@ -12,7 +12,9 @@
 
     Mootor.Fx = {
 
-        // Show an element
+        /*
+         *       Show an element
+         */
         show: function (el) {
             if (typeof el === "object") {
                 el.style.display = "block";
@@ -21,7 +23,9 @@
             }
         },
 
-        // Hide an element
+        /*
+         *       Hide an element
+         */
         hide: function (el) {
             if (typeof el === "object") {
                 el.style.display = "none";
@@ -30,7 +34,9 @@
             }
         },
 
-        // Translate (move) an element on X or Y axis
+        /*
+         *       Translate (move) an element on X or Y axis
+         */
         translate: function (el, positions, options) {
 
             var x_pos = positions.x,
@@ -63,16 +69,15 @@
 
             } else {
                 // Use left & top CSS styles
-                if (!isNaN(x_pos) && x_pos !== undefined) {
-                    el.style.left = x_pos + "px";
-                } else if (!isNaN(y_pos) && y_pos !== undefined) {
-                    el.style.top = y_pos + "px";
-                }
+                el.style.left = x_pos + "px";
+                el.style.top = y_pos + "px";
             }
 
         },
 
-        // Adjust font size relative to viewport size
+        /*
+         *       Adjust font size relative to viewport size
+         */
         dynamicType: function () {
 
             // Update viewport font-size

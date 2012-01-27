@@ -4,7 +4,8 @@
 
  /*      FIXME:
   *          - Optimize me & micro-optimize
-  *          - Links are buggy
+  *          - Dont bounce back when are panel height > client height
+  *          - Bounce back is buggy
   */
 
 (function (Mootor) {
@@ -14,26 +15,35 @@
     /*
      *      Module dependencies
      */
-
     var Fx = Mootor.Fx,
         Event = Mootor.Event,
+        listeners = Event.listeners,
+        Panels;
 
+    /*
+     *      Panels
+     */
     Panels = function (element) {
 
+        // Panels instance properties
         this.el = element;
         this.panels = element.getElementsByClassName("panel");
         this.panelsCount = this.panels.length;
-        this.clientHeight = Mootor.init_client_height;
-        this.clientWidth = Mootor.init_client_width;
         this.panelsX = 0;
         this.panelsY = 0;
         this.current = 0;
+
+        // Client viewport sizes
+        this.clientHeight = Mootor.init_client_height;
+        this.clientWidth = Mootor.init_client_width;
+
+        // Threshold for change panels
         this.thresholdX = this.clientWidth / 2;
 
-        //  Initialize panels
-
         // Set document styles    
-        document.body.style.overflow = "hidden";
+        if (document.body.style.overflow !== "hidden") {
+            document.body.style.overflow = "hidden";
+        }
 
         // Reset and hide all panels
         this.resetAll();
@@ -46,132 +56,156 @@
         this.onDragMove = this.move;
         this.onDragEnd = this.checkMove;
 
-        // Event.bind(window, "orientationChange", resetAll);
-
-        // Bind event listeners
+        // Bind events
         Event.bind(this.el, "onDrag", this);
 
     };
 
     Panels.prototype = {
 
-        // Reset size, styles and link anchors to panels
+        /*      
+         *      Reset all panels
+         */
         resetAll: function () {
 
-            var pstyle,
-                panchors,
+            var styles,
+                anchors,
                 onAnchorTouch,
                 j,
                 i,
-                listeners = Mootor.Event.listeners,
-                instance = this;
+                panels = this;
 
-            // Set anchor links
+            // Callback for anchor links
             onAnchorTouch = function () {
-                
                 if (listeners.isDraggingX === false && listeners.isDraggingY === false) {
-                    instance.setCurrent(this.rel);
+                    panels.setCurrent(this.rel);
                 }
                 return false;
-
             };
 
+            // Reset styles and set anchor links
             for (i = this.panelsCount; i--;) {
 
-                pstyle = this.panels[i].style;
-
                 // Reset styles
+                styles = this.panels[i].style;
+                styles.width = this.clientWidth + "px";
+                styles.left =  i > 0 ? (this.clientWidth * i + (40 * i)) + "px" : (this.clientWidth * i) + "px";
+                styles.overflow = 'hidden';
 
-                pstyle.width = this.clientWidth + "px";
-                pstyle.left =  i > 0 ? (this.clientWidth * i + (40 * i)) + "px" : (this.clientWidth * i) + "px";
+                // Adjust panel height to viewport
                 if (this.clientHeight > this.panels[i].offsetHeight) {
-                    pstyle.height = this.clientHeight + "px";
+                    styles.height = this.clientHeight + "px";
                 }
-                pstyle.overflow = 'hidden';
 
-                // FIXME CHECK: expensive query (getElementsByTagName)
-                panchors = this.panels[i].getElementsByTagName('a');
+                // Set anchor links
 
-                for (j = panchors.length; j--;) {
-                    if (panchors[j].rel !== "") {
-                        Event.bind(panchors[j], "onTap", onAnchorTouch);
+                // FIXME CHECK: expensive query
+                anchors = this.panels[i].getElementsByTagName('a');
+
+                for (j = anchors.length; j--;) {
+                    if (anchors[j].rel !== "") {
+                        Event.bind(anchors[j], "onTap", onAnchorTouch);
                     }
                 }
 
             }
         },
 
-        // Start move
+        /*      
+         *      Start move
+         */
         startMove: function (e) {
 
             // Do something on start move
-            //console.log(e);
 
         },
 
-        // Move
+        /*      
+         *      Move
+         */
         move: function (e) {
 
             var distanceX = e.distanceX,
-                distanceY = e.distanceY,
-                distanceFromOriginY = e.distanceFromOriginY,
-                distanceFromOriginX = e.distanceFromOriginX,
-                listeners = Mootor.Event.listeners;
+                distanceY = e.distanceY;
 
-            if (listeners.isDraggingY === false) {
+            // If dragging X, changing panels, move or bouncing back
+            if (listeners.isDraggingX === true || (!e.distanceY && e.largeMove === true)) {
 
-                if (distanceX) {
+                if (distanceX && !e.bounceBack) {
+
+                    // Dragging, move or changing panels
                     this.panelsX = this.panelsX + distanceX;
+
+                } else if (e.bounceBack === true) {
+
+                    // Boucing back
+                    this.panelsX = (this.clientWidth + 40) * this.current;
+                    this.panelsX = this.panelsX > 0 ? -this.panelsX : this.panelsX;
+                    e.bounceBack = false;
+
                 }
 
+                // If large move, move slow, else move fast
                 if (e.largeMove === true) {
 
-                    // Large X move
+                    // Large X moves
                     if (distanceX > this.thresholdX || distanceX < -this.thresholdX) {
+                        // Move slow
                         Fx.translate(this.el, {x: this.panelsX, y: this.panelsY}, {transitionDuration: 0.2});
                     } else {
+                        // Move slowest
                         Fx.translate(this.el, {x: this.panelsX, y: this.panelsY}, {transitionDuration: 0.5});
                     }
 
                 } else if (listeners.isDraggingX === true) {
 
-                    // Short X move
+                    // Short X move, move fast
                     Fx.translate(this.el, {x: this.panelsX, y: this.panelsY}, {});
 
                 }
 
-            //
+            // If dragging Y, move or bouncing back
             } else if (listeners.isDraggingY === true) {
-            
-                if (distanceY) {
+
+                if (distanceY && !e.bounceBack && !e.largeMove) {
+
+                    // Move
                     this.panelsY = this.panelsY + distanceY;
+
+                } else if (e.bounceBack === true || e.largeMove === true) {
+
+                    // Bounce back
+                    this.panelsY += e.distanceFromOriginY - (e.distanceFromOriginY + this.panelsY);
+                    e.bounceBack = false;
+
                 }
 
-                // Short Y move                        
                 if (e.largeMove === true) {
+
+                    // Large Y move, move slow
                     Fx.translate(this.el, {y: this.panelsY, x: this.panelsX}, {transitionDuration: 0.5});
+
                 } else {
+
+                    // Short Y move, move fast
                     Fx.translate(this.el, {y: this.panelsY, x: this.panelsX}, {});
+
                 }
             }
 
         },
 
-        // Check move to take actions
+        /*      
+         *      Check move for change panels or bounce back
+         */
         checkMove: function (e) {
-               
-            var distanceX = e.distanceX,
-                distanceY = e.distanceY;
-       
+
             var maxdist = this.thresholdX,
-                is_momentum = false,
-                listeners = Mootor.Event.listeners;
-                
-                
-            // If position reach certain threshold,
-            // load new panel. 
-            // Else, move panel back.
-            
+                is_momentum = false;
+
+            // If position reach certain threshold, load new panel,
+            // else, move panel back.
+
             // Check isDragging flags
             if (listeners.isDraggingX || listeners.isDraggingY) {
 
@@ -194,13 +228,12 @@
                     // Load current panel
                     this.load();
 
-                } else {            
-                                
+                } else {
+
                     // Bounce back
-                    
-                    e.distanceX =  e.distanceFromOriginX - e.distanceX;
-                    e.distanceY =  e.distanceFromOriginY - (this.panelsY + e.distanceFromOriginY);
+                    e.distanceX =  e.startX;
                     e.largeMove = true;
+                    e.bounceBack = true;
                     this.move(e);
 
                 }
@@ -208,30 +241,37 @@
 
         },
 
-        // Set current panel
+        /*      
+         *      Set current panel
+         */
         setCurrent: function (pid) {
 
             var i;
-            
+
+            // Get panel by pid and load it
             for (i = this.panelsCount; i--;) {
                 if (this.panels[i].id === pid) {
+
                     this.current = i;
-                    Fx.show(this.panels[i]);
                     this.load();
+
                 }
             }
 
         },
 
-        // Load current panel
+        /*      
+         *      Load current panel
+         */
         load: function () {
 
             var distance;
-            
-            // Move panels
+
+            // Calc movement
             distance = (this.clientWidth + 40) * this.current;
             distance = distance > 0 ? -distance : distance;
-            
+
+            // Move panels
             this.move({
                 distanceX: distance - this.panelsX,
                 largeMove: true
@@ -239,13 +279,17 @@
 
         }
 
-    }
+    };
 
      /*
       *     Public
       */
     Mootor.Nav = {
 
+        /*          
+         *      Panels navigation
+         *      Usage: $("#panels").panels();
+         */
         panels: function () {
             return new Panels(this.el);
         }

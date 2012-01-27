@@ -112,7 +112,7 @@ var Mootor = (function () {
 		var i;
         if (target === "undefined") {
             target = Mootor.prototype;
-        } ;
+        }
 		for (i in obj) {
 			if (obj.hasOwnProperty(i)) {
 				Mootor.prototype[i] = obj[i];
@@ -143,7 +143,6 @@ var Mootor = (function () {
 
 	Mootor.init_styles = undefined;
 	Mootor.hideBody();
-    Mootor.eventwrapper = window;
 
 	return Mootor;
 
