@@ -124,74 +124,41 @@
          *      Move
          */
         move: function (e) {
-
-            var distanceX = e.distanceX,
-                distanceY = e.distanceY;
-
-            // If dragging X, changing panels, move or bouncing back
-            if (listeners.isDraggingX === true || (!e.distanceY && e.largeMove === true)) {
-
-                if (distanceX && !e.bounceBack) {
-
-                    // Dragging, move or changing panels
-                    this.panelsX = this.panelsX + distanceX;
-
-                } else if (e.bounceBack === true) {
-
-                    // Boucing back
-                    this.panelsX = (this.clientWidth + 40) * this.current;
-                    this.panelsX = this.panelsX > 0 ? -this.panelsX : this.panelsX;
-                    e.bounceBack = false;
-
-                }
-
-                // If large move, move slow, else move fast
-                if (e.largeMove === true) {
-
-                    // Large X moves
-                    if (distanceX > this.thresholdX || distanceX < -this.thresholdX) {
-                        // Move slow
-                        Fx.translate(this.el, {x: this.panelsX, y: this.panelsY}, {transitionDuration: 0.2});
-                    } else {
-                        // Move slowest
-                        Fx.translate(this.el, {x: this.panelsX, y: this.panelsY}, {transitionDuration: 0.5});
-                    }
-
-                } else if (listeners.isDraggingX === true) {
-
-                    // Short X move, move fast
-                    Fx.translate(this.el, {x: this.panelsX, y: this.panelsY}, {});
-
-                }
-
-            // If dragging Y, move or bouncing back
+        
+            e.moveDuration = 0.5;
+           
+            if (listeners.isDraggingX === true || e.isLoading === true) {
+            
+                 // Dragging X
+                 this.panelsX = this.panelsX + e.distanceX;
+                 
             } else if (listeners.isDraggingY === true) {
+            
+                 // Dragging Y
+                this.panelsY = this.panelsY + e.distanceY;
 
-                if (distanceY && !e.bounceBack && !e.largeMove) {
-
-                    // Move
-                    this.panelsY = this.panelsY + distanceY;
-
-                } else if (e.bounceBack === true || e.largeMove === true) {
-
-                    // Bounce back
-                    this.panelsY += e.distanceFromOriginY - (e.distanceFromOriginY + this.panelsY);
-                    e.bounceBack = false;
-
-                }
-
-                if (e.largeMove === true) {
-
-                    // Large Y move, move slow
-                    Fx.translate(this.el, {y: this.panelsY, x: this.panelsX}, {transitionDuration: 0.5});
-
-                } else {
-
-                    // Short Y move, move fast
-                    Fx.translate(this.el, {y: this.panelsY, x: this.panelsX}, {});
-
-                }
             }
+            
+            if ((listeners.isDraggingX || listeners.isDraggingY) && !e.largeMove) {           
+                // If dragging, move fast
+                e.moveDuration = 0;
+            }
+                            
+            if (e.bounceBack === true) {
+            
+                // Bouce back
+                this.panelsX = (this.clientWidth + 40) * this.current;
+                this.panelsX = this.panelsX > 0 ? -this.panelsX : this.panelsX;
+                this.panelsY += e.distanceFromOriginY - (e.distanceFromOriginY + this.panelsY);
+                e.bounceBack = false;
+                
+                // Move slow
+                e.moveDuration = 0.5;
+            
+            }                    
+                    
+            // Move
+            Fx.translate(this.el, {x: this.panelsX, y: this.panelsY}, {transitionDuration: e.moveDuration});
 
         },
 
@@ -270,11 +237,12 @@
             // Calc movement
             distance = (this.clientWidth + 40) * this.current;
             distance = distance > 0 ? -distance : distance;
-
+            
             // Move panels
             this.move({
                 distanceX: distance - this.panelsX,
-                largeMove: true
+                largeMove: true,
+                isLoading: true
             });
 
         }
