@@ -288,7 +288,7 @@ var Mootor = (function () {
 
             this.drag.distanceFromOriginX = this.drag.startX - this.drag.lastX;
             this.drag.distanceFromOriginY = this.drag.startY - this.drag.lastY;
-
+            
             if (e.clientX || e.clientY) {
 
                 // Mouse
@@ -553,8 +553,6 @@ window.Mootor = Mootor;
 
  /*      FIXME:
   *          - Optimize me & micro-optimize
-  *          - Dont bounce back when are panel height > client height
-  *          - Bounce back is buggy
   */
 
 (function (Mootor) {
@@ -673,39 +671,47 @@ window.Mootor = Mootor;
          *      Move
          */
         move: function (e) {
-        
+
             e.moveDuration = 0.5;
-           
+
             if (listeners.isDraggingX === true || e.isLoading === true) {
-            
-                 // Dragging X
-                 this.panelsX = this.panelsX + e.distanceX;
-                 
+
+                // Dragging X
+                this.panelsX = this.panelsX + e.distanceX;
+
             } else if (listeners.isDraggingY === true) {
-            
+
                  // Dragging Y
                 this.panelsY = this.panelsY + e.distanceY;
 
             }
-            
-            if ((listeners.isDraggingX || listeners.isDraggingY) && !e.largeMove) {           
+
+            if ((listeners.isDraggingX || listeners.isDraggingY) && !e.largeMove) {
                 // If dragging, move fast
                 e.moveDuration = 0;
             }
-                            
+
             if (e.bounceBack === true) {
-            
+
                 // Bouce back
                 this.panelsX = (this.clientWidth + 40) * this.current;
                 this.panelsX = this.panelsX > 0 ? -this.panelsX : this.panelsX;
-                this.panelsY += e.distanceFromOriginY - (e.distanceFromOriginY + this.panelsY);
-                e.bounceBack = false;
+
+                if (this.panelsY !== 0) {
+                    if (e.distanceFromOriginY < 0) {
+                         this.panelsY = 0;
+                    }  else {
+                         this.panelsY = -(this.panels[this.current].offsetHeight - this.clientHeight);
+                    }
+                }
                 
+                e.bounceBack = false;
+
                 // Move slow
                 e.moveDuration = 0.5;
-            
-            }                    
-                    
+
+            }
+
             // Move
             Fx.translate(this.el, {x: this.panelsX, y: this.panelsY}, {transitionDuration: e.moveDuration});
 
@@ -717,7 +723,8 @@ window.Mootor = Mootor;
         checkMove: function (e) {
 
             var maxdist = this.thresholdX,
-                is_momentum = false;
+                is_momentum = false,
+                bouncedist;
 
             // If position reach certain threshold, load new panel,
             // else, move panel back.
@@ -747,10 +754,12 @@ window.Mootor = Mootor;
                 } else {
 
                     // Bounce back
-                    e.distanceX =  e.startX;
-                    e.largeMove = true;
-                    e.bounceBack = true;
-                    this.move(e);
+                    bouncedist = this.clientHeight - this.panels[this.current].offsetHeight;
+                    if ( bouncedist > this.panelsY || this.panelsY >= 0 ) {
+                        e.largeMove = true;
+                        e.bounceBack = true;
+                        this.move(e);
+                    }
 
                 }
             }
@@ -764,11 +773,12 @@ window.Mootor = Mootor;
 
             var i;
 
-            // Get panel by pid and load it
+            // Get panel by id and load it
             for (i = this.panelsCount; i--;) {
                 if (this.panels[i].id === pid) {
 
                     this.current = i;
+                    this.panelsY = 0;
                     this.load();
 
                 }
@@ -786,7 +796,7 @@ window.Mootor = Mootor;
             // Calc movement
             distance = (this.clientWidth + 40) * this.current;
             distance = distance > 0 ? -distance : distance;
-            
+
             // Move panels
             this.move({
                 distanceX: distance - this.panelsX,
