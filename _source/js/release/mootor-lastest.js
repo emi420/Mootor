@@ -288,7 +288,7 @@ var Mootor = (function () {
 
             this.drag.distanceFromOriginX = this.drag.startX - this.drag.lastX;
             this.drag.distanceFromOriginY = this.drag.startY - this.drag.lastY;
-            
+
             if (e.clientX || e.clientY) {
 
                 // Mouse
@@ -699,12 +699,12 @@ window.Mootor = Mootor;
 
                 if (this.panelsY !== 0) {
                     if (e.distanceFromOriginY < 0) {
-                         this.panelsY = 0;
-                    }  else {
-                         this.panelsY = -(this.panels[this.current].offsetHeight - this.clientHeight);
+                        this.panelsY = 0;
+                    } else {
+                        this.panelsY = -(this.panels[this.current].offsetHeight - this.clientHeight);
                     }
                 }
-                
+
                 e.bounceBack = false;
 
                 // Move slow
@@ -755,7 +755,7 @@ window.Mootor = Mootor;
 
                     // Bounce back
                     bouncedist = this.clientHeight - this.panels[this.current].offsetHeight;
-                    if ( bouncedist > this.panelsY || this.panelsY >= 0 ) {
+                    if (bouncedist > this.panelsY || this.panelsY >= 0) {
                         e.largeMove = true;
                         e.bounceBack = true;
                         this.move(e);

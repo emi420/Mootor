@@ -134,7 +134,7 @@
 
             this.drag.distanceFromOriginX = this.drag.startX - this.drag.lastX;
             this.drag.distanceFromOriginY = this.drag.startY - this.drag.lastY;
-            
+
             if (e.clientX || e.clientY) {
 
                 // Mouse
