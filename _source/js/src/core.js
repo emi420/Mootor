@@ -19,21 +19,21 @@ var Mootor = (function () {
 		}
 
 	};
-    
+
     // Test browser compatibility
     Mootor.test = {
-    
-        addEventListener: false,
-        
-    }
-        
+
+        addEventListener: false
+
+    };
+
     // Init-time branching
-    if( window.addEventListener ) {
+    if (window.addEventListener) {
         Mootor.test.addEventListener = true;
     } else {
         Mootor.test.addEventListener = false;
     }
-    
+
     // Core
     Mootor.core = {
 
@@ -42,7 +42,7 @@ var Mootor = (function () {
 
         // On element ready
         ready: function (fn, el) {
-        
+
             if (el === document) {
                 el = window;
             }
@@ -64,11 +64,11 @@ var Mootor = (function () {
                     el.addEventListener("DOM-ContentLoaded", handler, false);
                     el.addEventListener("readystatechange", handler, false);
                     el.addEventListener("load", handler, false);
-                } 
+                }
             } else {
                 el.onload = fn;
             }
-            
+
         },
 
         // Hide document body
@@ -78,16 +78,16 @@ var Mootor = (function () {
             init_styles.innerHTML = "body * {display: none}";
             document.head.appendChild(init_styles);
             Mootor.core.init_styles = init_styles;
-            
+
         },
 
         // Show document body
         showBody: function () {
-        
+
             document.head.removeChild(Mootor.core.init_styles);
-            
+
         }
-    }
+    };
 
 	// Main constructor
 	Mootor.fn = function (query) {

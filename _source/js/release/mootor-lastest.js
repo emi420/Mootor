@@ -20,21 +20,21 @@ var Mootor = (function () {
 		}
 
 	};
-    
+
     // Test browser compatibility
     Mootor.test = {
-    
-        addEventListener: false,
-        
-    }
-        
+
+        addEventListener: false
+
+    };
+
     // Init-time branching
-    if( window.addEventListener ) {
+    if (window.addEventListener) {
         Mootor.test.addEventListener = true;
     } else {
         Mootor.test.addEventListener = false;
     }
-    
+
     // Core
     Mootor.core = {
 
@@ -43,7 +43,7 @@ var Mootor = (function () {
 
         // On element ready
         ready: function (fn, el) {
-        
+
             if (el === document) {
                 el = window;
             }
@@ -65,11 +65,11 @@ var Mootor = (function () {
                     el.addEventListener("DOM-ContentLoaded", handler, false);
                     el.addEventListener("readystatechange", handler, false);
                     el.addEventListener("load", handler, false);
-                } 
+                }
             } else {
                 el.onload = fn;
             }
-            
+
         },
 
         // Hide document body
@@ -79,16 +79,16 @@ var Mootor = (function () {
             init_styles.innerHTML = "body * {display: none}";
             document.head.appendChild(init_styles);
             Mootor.core.init_styles = init_styles;
-            
+
         },
 
         // Show document body
         showBody: function () {
-        
+
             document.head.removeChild(Mootor.core.init_styles);
-            
+
         }
-    }
+    };
 
 	// Main constructor
 	Mootor.fn = function (query) {
@@ -403,7 +403,7 @@ var Mootor = (function () {
                 listenerCount = 1;
 
             // Look if element has a listener instance
-            
+
             // FIXME CHECK: expensive query
             for (i = listeners.count; i--;) {
                 if (listeners[i].el === el) {
@@ -593,7 +593,7 @@ var Mootor = (function () {
      *      Panels
      */
     Panels = function (element) {
-    
+
         var i;
 
         // Panels instance properties
@@ -604,12 +604,11 @@ var Mootor = (function () {
         this.panelsX = 0;
         this.panelsY = 0;
         this.current = 0;
-        this.anchors = [];
-        
 
-        for(i = this.panelsCount; i--;) {
+        for (i = this.panelsCount; i--;) {
             // FIXME CHECK: expensive query
-            this.anchors[i] = this.panels[i].getElementsByTagName('a');
+            this.panels[i].anchors = this.panels[i].getElementsByTagName('a');
+            this.panels[i].panelHeight = this.panels[i].offsetHeight;
         }
 
         // Client viewport sizes
@@ -626,9 +625,6 @@ var Mootor = (function () {
 
         // Reset and hide all panels
         this.resetAll();
-
-        // Prevent default actions
-        this.el.onclick = function () { return false; };
 
         // Set event handlers
         this.onDragStart = this.startMove;
@@ -671,15 +667,15 @@ var Mootor = (function () {
                 styles.overflow = 'hidden';
 
                 // Adjust panel height to viewport
-                if (this.clientHeight > this.panels[i].offsetHeight) {
+                if (this.clientHeight > this.panels[i].panelHeight) {
                     styles.height = this.clientHeight + "px";
                 }
 
                 // Set anchor links
 
-                for (j = this.anchors[i].length; j--;) {
-                    if (this.anchors[j].rel !== "") {
-                        Event.bind(this.anchors[i][j], "onTap", onAnchorTouch);
+                for (j = this.panels[i].anchors.length; j--;) {
+                    if (this.panels[i].anchors[j].rel !== "") {
+                        Event.bind(this.panels[i].anchors[j], "onTap", onAnchorTouch);
                     }
                 }
 
@@ -730,7 +726,7 @@ var Mootor = (function () {
                         this.panelsY = 0;
                     } else {
                         // FIXME CHECK: expensive query
-                        this.panelsY = -(this.panels[this.current].offsetHeight - this.clientHeight);
+                        this.panelsY = -(this.panels[this.current].panelHeight - this.clientHeight);
                     }
                 }
 
@@ -784,7 +780,7 @@ var Mootor = (function () {
 
                     // Bounce back
                     // FIXME CHECK: expensive query
-                    bouncedist = this.clientHeight - this.panels[this.current].offsetHeight;
+                    bouncedist = this.clientHeight - this.panels[this.current].panelHeight;
                     if (bouncedist > this.panelsY || this.panelsY >= 0) {
                         e.largeMove = true;
                         e.bounceBack = true;
