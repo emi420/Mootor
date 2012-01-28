@@ -19,7 +19,7 @@ var Mootor = (function () {
 		}
 
 	};
-
+    
     // Core
     Mootor.core = {
 
@@ -153,7 +153,4 @@ var Mootor = (function () {
 	return Mootor;
 
 }());
-
-
-
 

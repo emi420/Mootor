@@ -277,5 +277,3 @@
 
 }(Mootor));
 
-window.Mootor = Mootor;
-

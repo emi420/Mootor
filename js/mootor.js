@@ -20,7 +20,7 @@ var Mootor = (function () {
 		}
 
 	};
-
+    
     // Core
     Mootor.core = {
 
@@ -154,9 +154,6 @@ var Mootor = (function () {
 	return Mootor;
 
 }());
-
-
-
 
 /*
  * Mootor Events
@@ -436,8 +433,6 @@ var Mootor = (function () {
     };
 
 }(Mootor));
-
-window.Mootor = Mootor;
 
 /* 
  * Mootor Visual FX
