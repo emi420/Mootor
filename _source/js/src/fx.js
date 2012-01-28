@@ -72,6 +72,10 @@
                 el.style.left = x_pos + "px";
                 el.style.top = y_pos + "px";
             }
+            
+            if (options.callback) {
+                options.callback.call();
+            }
 
         },
 

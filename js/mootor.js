@@ -531,6 +531,10 @@ var Mootor = (function () {
                 el.style.left = x_pos + "px";
                 el.style.top = y_pos + "px";
             }
+            
+            if (options.callback) {
+                options.callback.call();
+            }
 
         },
 
@@ -596,14 +600,23 @@ var Mootor = (function () {
 
         var i;
 
-        // Panels instance properties
+        this.el = element;
+
+        // Add blank panel to load content
+        this.create({
+            id: "blank"
+        });
+
         // FIXME CHECK: expensive query
         this.panels = element.getElementsByClassName("panel");
-        this.el = element;
+        
+
         this.panelsCount = this.panels.length;
+        this.blank = this.panels[this.panelsCount-1];
         this.panelsX = 0;
         this.panelsY = 0;
         this.current = 0;
+        this.back = 0;
 
         for (i = this.panelsCount; i--;) {
             // FIXME CHECK: expensive query
@@ -647,10 +660,12 @@ var Mootor = (function () {
                 onAnchorTouch,
                 j,
                 i,
-                panels = this;
+                panels = this,
+                panel;
 
             // Callback for anchor links
             onAnchorTouch = function () {
+                console.log("anchor touch!");
                 if (listeners.isDraggingX === false && listeners.isDraggingY === false) {
                     panels.setCurrent(this.rel);
                 }
@@ -659,27 +674,55 @@ var Mootor = (function () {
 
             // Reset styles and set anchor links
             for (i = this.panelsCount; i--;) {
-
+            
+                panel = this.panels[i];
+                
                 // Reset styles
-                styles = this.panels[i].style;
-                styles.width = this.clientWidth + "px";
-                styles.left =  i > 0 ? (this.clientWidth * i + (40 * i)) + "px" : (this.clientWidth * i) + "px";
-                styles.overflow = 'hidden';
-
+                panel.style.width = this.clientWidth + "px";
+                panel.style.overflow = 'hidden';
+                
+                if (panel.id === "blank") {
+                    // Positioning blank panel
+                    panel.style.left =  this.clientWidth + 40 + "px";
+                } else {
+                    // Positioning panels and hide all but first
+                    panel.style.left =  i > 0 ? (this.clientWidth * i + (40 * i)) + "px" : (this.clientWidth * i) + "px";
+                    Fx.hide(panel);
+                }
+                                
                 // Adjust panel height to viewport
-                if (this.clientHeight > this.panels[i].panelHeight) {
-                    styles.height = this.clientHeight + "px";
+                if (this.clientHeight > panel.panelHeight) {
+                    panel.style.height = this.clientHeight + "px";
                 }
 
                 // Set anchor links
-
-                for (j = this.panels[i].anchors.length; j--;) {
-                    if (this.panels[i].anchors[j].rel !== "") {
-                        Event.bind(this.panels[i].anchors[j], "onTap", onAnchorTouch);
+                for (j = panel.anchors.length; j--;) {
+                    if (panel.anchors[j].rel !== "") {
+                        console.log("binding " + panel.anchors[j].rel);
+                        Event.bind(panel.anchors[j], "onTap", onAnchorTouch);
                     }
                 }
 
             }
+            
+            // Show first panel
+            Fx.show(this.panels[0]);
+            Fx.show(this.blank);
+
+        },
+        
+        /*
+         *      Create new panel
+         */
+        create: function(options) {
+        
+            var div;
+            
+            div = document.createElement("div");
+            div.id = options.id;
+            div.className = "panel";
+            this.el.appendChild(div);
+            
         },
 
         /*      
@@ -738,7 +781,11 @@ var Mootor = (function () {
             }
 
             // Move
-            Fx.translate(this.el, {x: this.panelsX, y: this.panelsY}, {transitionDuration: e.moveDuration});
+            if (!e.callback) {
+                Fx.translate(this.el, {x: this.panelsX, y: this.panelsY}, {transitionDuration: e.moveDuration});
+            } else {
+                Fx.translate(this.el, {x: this.panelsX, y: this.panelsY}, {transitionDuration: e.moveDuration, callback: e.callback});
+            }
 
         },
 
@@ -802,11 +849,12 @@ var Mootor = (function () {
             // Get panel by id and load it
             for (i = this.panelsCount; i--;) {
                 if (this.panels[i].id === pid) {
-
+                    if (this.current > 0) {
+                        this.back = this.current;
+                    }
                     this.current = i;
                     this.panelsY = 0;
                     this.load();
-
                 }
             }
 
@@ -818,17 +866,31 @@ var Mootor = (function () {
         load: function () {
 
             var distance;
-
+            
             // Calc movement
-            distance = (this.clientWidth + 40) * this.current;
-            distance = distance > 0 ? -distance : distance;
+            
+            if (this.current === 0) {
+                // Left 
+                distance = 0;
+            } else {
+                // Right
+                console.log(this.back);
+                if (this.back) {
+                    Fx.hide(this.panels[this.back]);
+                }
+                distance = this.clientWidth + 40;
+                this.panels[this.current].style.left = distance + "px";
+                Fx.show(this.panels[this.current]);    
+                Fx.hide(this.blank);
+            }
 
-            // Move panels
+           // Move panels
             this.move({
-                distanceX: distance - this.panelsX,
+                distanceX: -distance - this.panelsX,
                 largeMove: true,
                 isLoading: true
             });
+
 
         }
 
