@@ -12,6 +12,7 @@
     var Fx = Mootor.Fx,
         Event = Mootor.Event,
         listeners = Event.listeners,
+
         Panels;
 
     /*
@@ -154,6 +155,7 @@
                     if (e.distanceFromOriginY < 0) {
                         this.panelsY = 0;
                     } else {
+                        // FIXME CHECK: expensive query
                         this.panelsY = -(this.panels[this.current].offsetHeight - this.clientHeight);
                     }
                 }
@@ -207,6 +209,7 @@
                 } else {
 
                     // Bounce back
+                    // FIXME CHECK: expensive query
                     bouncedist = this.clientHeight - this.panels[this.current].offsetHeight;
                     if (bouncedist > this.panelsY || this.panelsY >= 0) {
                         e.largeMove = true;

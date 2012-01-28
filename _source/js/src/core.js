@@ -20,6 +20,20 @@ var Mootor = (function () {
 
 	};
     
+    // Test browser compatibility
+    Mootor.test = {
+    
+        addEventListener: false,
+        
+    }
+        
+    // Init-time branching
+    if( window.addEventListener ) {
+        Mootor.test.addEventListener = true;
+    } else {
+        Mootor.test.addEventListener = false;
+    }
+    
     // Core
     Mootor.core = {
 
@@ -28,6 +42,7 @@ var Mootor = (function () {
 
         // On element ready
         ready: function (fn, el) {
+        
             if (el === document) {
                 el = window;
             }
@@ -45,7 +60,7 @@ var Mootor = (function () {
                 };
 
                 // Add listeners for all common load events
-                if (el !== "undefined" && el.addEventListener) {
+                if (el !== "undefined" && Mootor.test.addEventListener) {
                     el.addEventListener("DOM-ContentLoaded", handler, false);
                     el.addEventListener("readystatechange", handler, false);
                     el.addEventListener("load", handler, false);
@@ -53,19 +68,24 @@ var Mootor = (function () {
             } else {
                 el.onload = fn;
             }
+            
         },
 
         // Hide document body
         hideBody: function () {
+
             var init_styles = document.createElement("style");
             init_styles.innerHTML = "body * {display: none}";
             document.head.appendChild(init_styles);
             Mootor.core.init_styles = init_styles;
+            
         },
 
         // Show document body
         showBody: function () {
+        
             document.head.removeChild(Mootor.core.init_styles);
+            
         }
     }
 
@@ -101,10 +121,12 @@ var Mootor = (function () {
 
 		// Private properties
 
+        // Element selected
 		this.el = (function () {
 			return el;
 		}());
 
+        // Query passed
 		this.query = (function () {
 			return query;
 		}());
@@ -139,15 +161,16 @@ var Mootor = (function () {
 		Mootor.core.init_client_height = (function () {
 			return init_client_height;
 		}());
-
 		Mootor.core.init_client_width = (function () {
 			return init_client_width;
 		}());
 
+        // Show body
 		Mootor.core.showBody();
 
 	}, document);
 
+    // Hide body
 	Mootor.core.hideBody();
 
 	return Mootor;
