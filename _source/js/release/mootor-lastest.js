@@ -578,6 +578,8 @@ window.Mootor = Mootor;
         var i;
 
         // Panels instance properties
+        // FIXME CHECK: expensive query
+        this.panels = element.getElementsByClassName("panel");
         this.el = element;
         this.panelsCount = this.panels.length;
         this.panelsX = 0;
@@ -585,8 +587,6 @@ window.Mootor = Mootor;
         this.current = 0;
         this.anchors = [];
         
-        // FIXME CHECK: expensive query
-        this.panels = element.getElementsByClassName("panel");
 
         for(i = this.panelsCount; i--;) {
             // FIXME CHECK: expensive query
