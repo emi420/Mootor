@@ -5,10 +5,10 @@ Mootor is a Javascript library targeted at HTML5 browsers.
 
 Current modules:
 
-1) Mootor (core) - core functions and query selector
-2) Mootor.Fx - visual FX (ex: show, hide, translate, etc)
-3) Mootor.Event - events (ex: tap, drag, etc)
-4) Mootor.Nav - navigation (ex: panels)
+* Mootor (core) - core functions and query selector
+* Mootor.Fx - visual FX (ex: show, hide, translate, etc)
+* Mootor.Event - events (ex: tap, drag, etc)
+* Mootor.Nav - navigation (ex: panels)
 
 # About Mootor
 
@@ -17,9 +17,9 @@ it is time to build our own library that help us for the times to come.
 
 The key features are:
 
-1) Fast performance
-2) Easy to use
-3) Strongly considering design issues
+* Fast performance
+* Easy to use
+* Strongly considering design issues
 
 # How can I help?
 
