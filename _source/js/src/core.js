@@ -76,13 +76,13 @@ var Mootor = (function () {
 
 			case "string":
 
-				//console.log("FIXME CHECK: Query to the Dom *** EXPENSIVE");
 
 				if (query.indexOf('#') > -1) {
 					query = query.replace("#", "");
 					el = document.getElementById(query);
 				} else if (query.indexOf(".") > -1) {
 					query = query.replace(".", "");
+                    // FIXME CHECK: expensive query
 					el = document.getElementsByClassName(query);
 				}
 				break;

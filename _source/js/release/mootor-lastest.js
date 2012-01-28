@@ -77,13 +77,13 @@ var Mootor = (function () {
 
 			case "string":
 
-				//console.log("FIXME CHECK: Query to the Dom *** EXPENSIVE");
 
 				if (query.indexOf('#') > -1) {
 					query = query.replace("#", "");
 					el = document.getElementById(query);
 				} else if (query.indexOf(".") > -1) {
 					query = query.replace(".", "");
+                    // FIXME CHECK: expensive query
 					el = document.getElementsByClassName(query);
 				}
 				break;
@@ -379,6 +379,8 @@ var Mootor = (function () {
                 listenerCount = 1;
 
             // Look if element has a listener instance
+            
+            // FIXME CHECK: expensive query
             for (i = listeners.count; i--;) {
                 if (listeners[i].el === el) {
                     listenerId = i;
@@ -577,13 +579,15 @@ window.Mootor = Mootor;
 
         // Panels instance properties
         this.el = element;
-        this.panels = element.getElementsByClassName("panel");
         this.panelsCount = this.panels.length;
         this.panelsX = 0;
         this.panelsY = 0;
         this.current = 0;
         this.anchors = [];
         
+        // FIXME CHECK: expensive query
+        this.panels = element.getElementsByClassName("panel");
+
         for(i = this.panelsCount; i--;) {
             // FIXME CHECK: expensive query
             this.anchors[i] = this.panels[i].getElementsByTagName('a');

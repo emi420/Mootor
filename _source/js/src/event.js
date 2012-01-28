@@ -224,6 +224,8 @@
                 listenerCount = 1;
 
             // Look if element has a listener instance
+            
+            // FIXME CHECK: expensive query
             for (i = listeners.count; i--;) {
                 if (listeners[i].el === el) {
                     listenerId = i;

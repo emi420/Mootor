@@ -27,13 +27,15 @@
 
         // Panels instance properties
         this.el = element;
-        this.panels = element.getElementsByClassName("panel");
         this.panelsCount = this.panels.length;
         this.panelsX = 0;
         this.panelsY = 0;
         this.current = 0;
         this.anchors = [];
         
+        // FIXME CHECK: expensive query
+        this.panels = element.getElementsByClassName("panel");
+
         for(i = this.panelsCount; i--;) {
             // FIXME CHECK: expensive query
             this.anchors[i] = this.panels[i].getElementsByTagName('a');
