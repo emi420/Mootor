@@ -15,52 +15,59 @@ var Mootor = (function () {
 
 		// On element ready
 		ready: function (callback) {
-			Mootor.ready(callback, this.el);
+			Mootor.core.ready(callback, this.el);
 		}
 
 	};
 
-	// On element ready
-	Mootor.ready = function (fn, el) {
-		if (el === document) {
-			el = window;
-		}
+    // Core
+    Mootor.core = {
 
-		if (el === window || el === window.document) {
-			var ready = false,
-                handler;
+        // Initial styles
+        init_styles: undefined,
 
-            // Handler to check if the dom is full loaded
-            handler = function (e) {
-                if (ready) {return; }
-                if (e.type === "readystatechange" && window.document.readyState !== "complete") {return; }
-                fn.call(window.document);
-                ready = true;
-            };
+        // On element ready
+        ready: function (fn, el) {
+            if (el === document) {
+                el = window;
+            }
 
-            // Add listeners for all common load events
-            if (el !== "undefined" && el.addEventListener) {
-                el.addEventListener("DOM-ContentLoaded", handler, false);
-                el.addEventListener("readystatechange", handler, false);
-                el.addEventListener("load", handler, false);
-            } 
-		} else {
-			el.onload = fn;
-		}
-	};
+            if (el === window || el === window.document) {
+                var ready = false,
+                    handler;
 
-	// Hide document body
-	Mootor.hideBody = function () {
-		var init_styles = document.createElement("style");
-		init_styles.innerHTML = "body * {display: none}";
-		Mootor.init_styles = init_styles;
-		document.head.appendChild(init_styles);
-	};
+                // Handler to check if the dom is full loaded
+                handler = function (e) {
+                    if (ready) {return; }
+                    if (e.type === "readystatechange" && window.document.readyState !== "complete") {return; }
+                    fn.call(window.document);
+                    ready = true;
+                };
 
-	// Show document body
-	Mootor.showBody = function () {
-		document.head.removeChild(Mootor.init_styles);
-	};
+                // Add listeners for all common load events
+                if (el !== "undefined" && el.addEventListener) {
+                    el.addEventListener("DOM-ContentLoaded", handler, false);
+                    el.addEventListener("readystatechange", handler, false);
+                    el.addEventListener("load", handler, false);
+                } 
+            } else {
+                el.onload = fn;
+            }
+        },
+
+        // Hide document body
+        hideBody: function () {
+            var init_styles = document.createElement("style");
+            init_styles.innerHTML = "body * {display: none}";
+            document.head.appendChild(init_styles);
+            Mootor.core.init_styles = init_styles;
+        },
+
+        // Show document body
+        showBody: function () {
+            document.head.removeChild(Mootor.core.init_styles);
+        }
+    }
 
 	// Main constructor
 	Mootor.fn = function (query) {
@@ -70,12 +77,11 @@ var Mootor = (function () {
 
 		if (q_type === "string" || q_type === "object") {
 
-				// Get object from query
+			// Get element from query
 
 			switch (q_type) {
 
 			case "string":
-
 
 				if (query.indexOf('#') > -1) {
 					query = query.replace("#", "");
@@ -93,7 +99,7 @@ var Mootor = (function () {
 			}
 		}
 
-		// Private element & query properties
+		// Private properties
 
 		this.el = (function () {
 			return el;
@@ -120,30 +126,29 @@ var Mootor = (function () {
 		}
 	};
 
-	// Prototypal inheritance    
+	// Prototypal inheritance 
 	Mootor.fn.prototype = Mootor.prototype;
 
-	Mootor.ready(function () {
+	// On document ready, get viewport sizes and show body
+    Mootor.core.ready(function () {
 
 		// Initial screen size
 		var init_client_width = document.documentElement.clientWidth,
 			init_client_height = document.documentElement.clientHeight;
 
-		Mootor.init_client_height = (function () {
+		Mootor.core.init_client_height = (function () {
 			return init_client_height;
 		}());
 
-		Mootor.init_client_width = (function () {
+		Mootor.core.init_client_width = (function () {
 			return init_client_width;
 		}());
 
-		Mootor.showBody();
+		Mootor.core.showBody();
 
 	}, document);
 
-    // Initialize styles and hide body while loading
-	Mootor.init_styles = undefined;
-	Mootor.hideBody();
+	Mootor.core.hideBody();
 
 	return Mootor;
 

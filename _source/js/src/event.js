@@ -6,7 +6,6 @@
   *     TODO: 
   *
   *     - Init-time branching
-  *     - Optimize me
   *     - Event delegation
   */
 

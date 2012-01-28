@@ -2,10 +2,6 @@
  * Mootor Navigation
  */
 
- /*      TODO:
-  *          - Optimize me
-  */
-
 (function (Mootor) {
 
     "use strict";
@@ -42,8 +38,8 @@
         }
 
         // Client viewport sizes
-        this.clientHeight = Mootor.init_client_height;
-        this.clientWidth = Mootor.init_client_width;
+        this.clientHeight = Mootor.core.init_client_height;
+        this.clientWidth = Mootor.core.init_client_width;
 
         // Threshold for change panels
         this.thresholdX = this.clientWidth / 2;
