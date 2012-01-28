@@ -24,7 +24,7 @@ body {
 }
 @mixin empType1 {
   @include baseType;
-  font-family: 'HelveticaLTStdBlackCondensed', arial ;
+  font-family: helvetica, arial ;
   font-size: 7em ;
   letter-spacing: $base-letter-spacing*1.5;
 }
@@ -33,31 +33,10 @@ body {
 // Type 2
 @mixin empType2 { 
    @include baseType;
-   font-family: 'FiveMinutesRegular' ;
+   font-family: helvetica, arial ;
    font-size: 4em;
    text-decoration: none;
    text-shadow: 0px 0px 1px $text1;
 }
 
 
-// Font-face sources
-@font-face {
-    font-family: 'FiveMinutesRegular';
-    src: url('../fonts/five_minutes-webfont.eot');
-    src: url('../fonts/five_minutes-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/five_minutes-webfont.woff') format('woff'),
-         url('../fonts/five_minutes-webfont.ttf') format('truetype'),
-         url('../fonts/five_minutes-webfont.svg#FiveMinutesRegular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'HelveticaLTStdBlackCondensed';
-    src: url('../fonts/helveticaltstd-blkcond-webfont.eot');
-    src: url('../fonts/helveticaltstd-blkcond-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/helveticaltstd-blkcond-webfont.woff') format('woff'),
-         url('../fonts/helveticaltstd-blkcond-webfont.ttf') format('truetype'),
-         url('../fonts/helveticaltstd-blkcond-webfont.svg#HelveticaLTStdBlackCondensed') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}

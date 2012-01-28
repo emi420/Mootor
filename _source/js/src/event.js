@@ -52,7 +52,7 @@
 
         // Bind initial events
 
-        for (i = 0; i < events.length; i++) {
+        for (i = events.length; i--;) {
             element.addEventListener(events[i], this, false);
             element.addEventListener(events[i], this, false);
         }
@@ -224,7 +224,7 @@
                 listenerCount = 1;
 
             // Look if element has a listener instance
-            for (i = 0; i <  listeners.count; i++) {
+            for (i = listeners.count; i--;) {
                 if (listeners[i].el === el) {
                     listenerId = i;
                     listenerCount = 0;
