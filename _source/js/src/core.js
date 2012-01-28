@@ -1,5 +1,5 @@
 /* 
- *  Mootor Core (coded by emi420@gmail.com)
+ *  Mootor Core
  */
 
 var Mootor = (function () {
@@ -43,7 +43,7 @@ var Mootor = (function () {
                 el.addEventListener("DOM-ContentLoaded", handler, false);
                 el.addEventListener("readystatechange", handler, false);
                 el.addEventListener("load", handler, false);
-            } // IE8 needs attachEvent() support
+            } 
 		} else {
 			el.onload = fn;
 		}
@@ -141,6 +141,7 @@ var Mootor = (function () {
 
 	}, document);
 
+    // Initialize styles and hide body while loading
 	Mootor.init_styles = undefined;
 	Mootor.hideBody();
 

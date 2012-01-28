@@ -1,6 +1,6 @@
 (function(window, document) {
 /* 
- *  Mootor Core (coded by emi420@gmail.com)
+ *  Mootor Core
  */
 
 var Mootor = (function () {
@@ -44,7 +44,7 @@ var Mootor = (function () {
                 el.addEventListener("DOM-ContentLoaded", handler, false);
                 el.addEventListener("readystatechange", handler, false);
                 el.addEventListener("load", handler, false);
-            } // IE8 needs attachEvent() support
+            } 
 		} else {
 			el.onload = fn;
 		}
@@ -142,6 +142,7 @@ var Mootor = (function () {
 
 	}, document);
 
+    // Initialize styles and hide body while loading
 	Mootor.init_styles = undefined;
 	Mootor.hideBody();
 
@@ -153,14 +154,14 @@ var Mootor = (function () {
 
 
 /*
- * Mootor Events (coded by emi420@gmail.com)
+ * Mootor Events
  */
 
  /*
   *     TODO: 
   *
   *     - Init-time branching
-  *     - Optimize me & micro-optimize
+  *     - Optimize me
   *     - Event delegation
   */
 
@@ -206,7 +207,7 @@ var Mootor = (function () {
 
         // Bind initial events
 
-        for (i = 0; i < events.length; i++) {
+        for (i = events.length; i--;) {
             element.addEventListener(events[i], this, false);
             element.addEventListener(events[i], this, false);
         }
@@ -378,7 +379,7 @@ var Mootor = (function () {
                 listenerCount = 1;
 
             // Look if element has a listener instance
-            for (i = 0; i <  listeners.count; i++) {
+            for (i = listeners.count; i--;) {
                 if (listeners[i].el === el) {
                     listenerId = i;
                     listenerCount = 0;
@@ -433,7 +434,7 @@ var Mootor = (function () {
 window.Mootor = Mootor;
 
 /* 
- * Mootor Visual FX (coded by emi420@gmail.com)
+ * Mootor Visual FX
  */
 
 (function (Mootor) {
@@ -548,11 +549,11 @@ window.Mootor = Mootor;
 }(Mootor));
 
 /*
- * Mootor Navigation (coded by emi420@gmail.com)
+ * Mootor Navigation
  */
 
- /*      FIXME:
-  *          - Optimize me & micro-optimize
+ /*      TODO:
+  *          - Optimize me
   */
 
 (function (Mootor) {
@@ -571,6 +572,8 @@ window.Mootor = Mootor;
      *      Panels
      */
     Panels = function (element) {
+    
+        var i;
 
         // Panels instance properties
         this.el = element;
@@ -579,6 +582,12 @@ window.Mootor = Mootor;
         this.panelsX = 0;
         this.panelsY = 0;
         this.current = 0;
+        this.anchors = [];
+        
+        for(i = this.panelsCount; i--;) {
+            // FIXME CHECK: expensive query
+            this.anchors[i] = this.panels[i].getElementsByTagName('a');
+        }
 
         // Client viewport sizes
         this.clientHeight = Mootor.init_client_height;
@@ -616,7 +625,6 @@ window.Mootor = Mootor;
         resetAll: function () {
 
             var styles,
-                anchors,
                 onAnchorTouch,
                 j,
                 i,
@@ -646,12 +654,9 @@ window.Mootor = Mootor;
 
                 // Set anchor links
 
-                // FIXME CHECK: expensive query
-                anchors = this.panels[i].getElementsByTagName('a');
-
-                for (j = anchors.length; j--;) {
-                    if (anchors[j].rel !== "") {
-                        Event.bind(anchors[j], "onTap", onAnchorTouch);
+                for (j = this.anchors[i].length; j--;) {
+                    if (this.anchors[j].rel !== "") {
+                        Event.bind(this.anchors[i][j], "onTap", onAnchorTouch);
                     }
                 }
 

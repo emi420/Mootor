@@ -1,12 +1,12 @@
 /*
- * Mootor Events (coded by emi420@gmail.com)
+ * Mootor Events
  */
 
  /*
   *     TODO: 
   *
   *     - Init-time branching
-  *     - Optimize me & micro-optimize
+  *     - Optimize me
   *     - Event delegation
   */
 

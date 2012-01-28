@@ -1,9 +1,9 @@
 /*
- * Mootor Navigation (coded by emi420@gmail.com)
+ * Mootor Navigation
  */
 
- /*      FIXME:
-  *          - Optimize me & micro-optimize
+ /*      TODO:
+  *          - Optimize me
   */
 
 (function (Mootor) {
@@ -22,6 +22,8 @@
      *      Panels
      */
     Panels = function (element) {
+    
+        var i;
 
         // Panels instance properties
         this.el = element;
@@ -30,6 +32,12 @@
         this.panelsX = 0;
         this.panelsY = 0;
         this.current = 0;
+        this.anchors = [];
+        
+        for(i = this.panelsCount; i--;) {
+            // FIXME CHECK: expensive query
+            this.anchors[i] = this.panels[i].getElementsByTagName('a');
+        }
 
         // Client viewport sizes
         this.clientHeight = Mootor.init_client_height;
@@ -67,7 +75,6 @@
         resetAll: function () {
 
             var styles,
-                anchors,
                 onAnchorTouch,
                 j,
                 i,
@@ -97,12 +104,9 @@
 
                 // Set anchor links
 
-                // FIXME CHECK: expensive query
-                anchors = this.panels[i].getElementsByTagName('a');
-
-                for (j = anchors.length; j--;) {
-                    if (anchors[j].rel !== "") {
-                        Event.bind(anchors[j], "onTap", onAnchorTouch);
+                for (j = this.anchors[i].length; j--;) {
+                    if (this.anchors[j].rel !== "") {
+                        Event.bind(this.anchors[i][j], "onTap", onAnchorTouch);
                     }
                 }
 

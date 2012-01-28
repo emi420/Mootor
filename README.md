@@ -31,7 +31,7 @@ We are in a development stage, so you can help this way:
 
 # Useful info
 
-Currently compatibility is only Webkit based browsers:
+Currently compatibility is only WebKit based browsers:
 
 * Chrome
 * Safari (not tested)
