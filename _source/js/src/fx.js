@@ -124,6 +124,7 @@
                 var font_size;
 
                 // FIXME CHECK: This calc can be optimized
+                //                         using media queries
                 if (window.innerWidth < 768) {
                     font_size = window.innerWidth / 10 + (window.innerHeight / 40);
                 } else {                
