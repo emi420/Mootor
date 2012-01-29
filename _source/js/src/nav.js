@@ -241,7 +241,7 @@
             // else, move panel back.
 
             // Check isDragging flags
-            if (listeners.isDraggingX || listeners.isDraggingY) {
+            if ((listeners.isDraggingX && this.panelsY ===0) || listeners.isDraggingY) {
 
                 if (e.distanceFromOriginX > maxdist && this.current < (this.panelsCount - 1)) {
 
