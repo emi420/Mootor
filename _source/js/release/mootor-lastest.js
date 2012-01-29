@@ -813,20 +813,22 @@ var Mootor = (function () {
 
             var maxdist = this.thresholdX,
                 is_momentum = false,
-                bouncedist;
+                bouncedist,
+                tmpback;
 
             // If position reach certain threshold, load new panel,
             // else, move panel back.
 
             // Check isDragging flags
-            if ((listeners.isDraggingX && this.panelsY ===0) || listeners.isDraggingY) {
+            if ((listeners.isDraggingX && this.panelsY === 0) || listeners.isDraggingY) {
 
                 if (e.distanceFromOriginX > maxdist && this.current < (this.panelsCount - 1)) {
 
                     // Move to left
                     if (this.current === 0) {
+                        tmpback = this.back;
                         this.back = this.current;
-                        this.current = 1;
+                        this.current = tmpback;
                         is_momentum = true;
                     }
 
