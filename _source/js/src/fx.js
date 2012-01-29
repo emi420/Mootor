@@ -23,7 +23,7 @@
             } else {
                 element = this.el;
             }
-            
+
             element.style.transitionProperty = "webkit-transition";
             element.style.webkitTransitionDuration = "0.1s";
             element.style.webkitTransitionTimingFunction = "ease-out";

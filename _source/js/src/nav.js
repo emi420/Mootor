@@ -24,17 +24,10 @@
 
         this.el = element;
 
-        // Add blank panel to load content
-        /*this.create({
-            id: "blank",
-            z_index: -9999
-        });*/
-
         // FIXME CHECK: expensive query
         this.panels = element.getElementsByClassName("panel");
 
         this.panelsCount = this.panels.length;
-        //this.blank = this.panels[this.panelsCount - 1];
         this.panelsX = 0;
         this.panelsY = 0;
         this.current = 0;
@@ -102,9 +95,9 @@
                 panel.style.overflow = 'hidden';
 
                 // Positioning panels to hide all but first
-                if (i > 0 ){
+                if (i > 0) {
                     panel.style.left = -((this.clientWidth + 40) * 4) + "px";
-                } else {                
+                } else {
                     panel.style.left = "0px";
                 }
 
@@ -121,9 +114,6 @@
                 }
 
             }
-
-            // Show first panel
-            //Fx.show(this.blank);
 
         },
 
@@ -322,14 +312,16 @@
 
                 // Left 
                 distance = 0;
-                //Fx.show(this.blank);
+                if (this.back) {
+                    back.style.left =  this.clientWidth + 40 + "px";
+                }
 
             } else {
 
                 // Right
                 distance = this.clientWidth + 40;
                 panel.style.left = distance + "px";
-                if (this.back) {
+                if (this.back && this.back != this.current) {
                     back.style.left =  distance * 4 + "px";
                 }
 
