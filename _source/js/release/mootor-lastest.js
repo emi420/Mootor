@@ -822,13 +822,17 @@ var Mootor = (function () {
                 if (e.distanceFromOriginX > maxdist && this.current < (this.panelsCount - 1)) {
 
                     // Move to left
-                    //this.current += 1;
-                    is_momentum = true;
+                    if (this.current === 0) {
+                        this.back = this.current;
+                        this.current = 1;
+                        is_momentum = true;
+                    }
 
                 } else if (e.distanceFromOriginX < (-maxdist) && this.current > 0) {
 
                     // Move to right
-                    //this.current -= 1;
+                    this.back = this.current;
+                    this.current = 0;
                     is_momentum = true;
 
                 }
@@ -893,13 +897,17 @@ var Mootor = (function () {
             // Calc movement
 
             if (this.current === 0) {
+
                 // Left 
                 distance = 0;
+
                 hidden_elements =  back.getElementsByClassName("iframe")[0];
                 if (hidden_elements) {
                     Fx.hide(hidden_elements);
                 }
+
             } else {
+
                 // Right
                 if (this.back) {
                     Fx.hide(back);
@@ -908,12 +916,14 @@ var Mootor = (function () {
                 panel.style.left = distance + "px";
                 Fx.show(panel);
                 Fx.hide(this.blank);
+
                 hidden_elements =  panel.getElementsByClassName("iframe")[0];
                 if (hidden_elements) {
                     cb = function () {
                         Fx.show(hidden_elements);
                     };
                 }
+
             }
 
             // Move panels
