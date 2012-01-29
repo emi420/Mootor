@@ -165,7 +165,9 @@
             if (listeners.isDraggingX === true || e.isLoading === true) {
 
                 // Dragging X
-                this.panelsX = this.panelsX + e.distanceX;
+                if (this.panelsY === 0) {
+                    this.panelsX = this.panelsX + e.distanceX;
+                }
 
             } else if (listeners.isDraggingY === true) {
 
