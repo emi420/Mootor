@@ -839,15 +839,10 @@ var Mootor = (function () {
                     this.load();
 
                 } else {
-                
+
                     // Bounce back
                     // FIXME CHECK: expensive query
                     bouncedist = this.clientHeight - this.panels[this.current].panelHeight;
-
-                    console.log("bounce back, current: " + this.current);
-                    /*console.log("bouncedist :" + bouncedist);
-                    console.log("panelsY :" + this.panelsY);*/
-                    console.log("panelsX :" + this.panelsX);
 
                     if (this.panelsY >= 0 || this.panels[this.current].offsetHeight -  this.clientHeight < -this.panelsY) {
                         e.largeMove = true;
@@ -891,12 +886,12 @@ var Mootor = (function () {
                 cb,
                 hidden_elements,
                 back;
-                
+
             panel = this.panels[this.current];
             back = this.panels[this.back];
-            
+
             // Calc movement
-            
+
             if (this.current === 0) {
                 // Left 
                 distance = 0;
@@ -915,11 +910,11 @@ var Mootor = (function () {
                 Fx.hide(this.blank);
                 hidden_elements =  panel.getElementsByClassName("iframe")[0];
                 if (hidden_elements) {
-                    cb = function() {
+                    cb = function () {
                         Fx.show(hidden_elements);
-                    }
+                    };
                 }
-            }           
+            }
 
             // Move panels
             this.move({
