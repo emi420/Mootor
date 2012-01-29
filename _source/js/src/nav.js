@@ -157,9 +157,9 @@
          *      Move
          */
         move: function (e) {
-        
+
             var current = {};
-            
+
             e.moveDuration = 0.5;
 
             if (listeners.isDraggingX === true || e.isLoading === true) {
@@ -180,7 +180,7 @@
             }
 
             if (e.bounceBack === true) {
-            
+
                 // Bouce back
                 if (this.current > 0) {
                     this.panelsX = (this.clientWidth + 40);
@@ -188,26 +188,26 @@
                 } else {
                     this.panelsX = 0;
                 }
-                
+
                 if (this.panelsY !== 0) {
-                
+
                     if (e.distanceFromOriginY < 0) {
-                    
+
                         this.panelsY = 0;
-                        
+
                     } else {
-                    
+
                         current = {
                             // FIXME CHECK: expensive query
                             height: this.panels[this.current].offsetHeight
-                        }
+                        };
 
                         if (current.height >= this.clientHeight) {
                             this.panelsY = -(current.height - this.clientHeight);
                         }
-                        
+
                     }
-                    
+
                 }
 
                 e.bounceBack = false;
@@ -234,10 +234,10 @@
             var maxdist = this.thresholdX,
                 is_momentum = false,
                 bouncedist;
-                
+
             // If position reach certain threshold, load new panel,
             // else, move panel back.
-                       
+
             // Check isDragging flags
             if (listeners.isDraggingX || listeners.isDraggingY) {
 
@@ -245,13 +245,13 @@
 
                     // Move to left
                     //this.current += 1;
-                    //is_momentum = true;
+                    is_momentum = true;
 
                 } else if (e.distanceFromOriginX < (-maxdist) && this.current > 0) {
 
                     // Move to right
                     //this.current -= 1;
-                    //is_momentum = true;
+                    is_momentum = true;
 
                 }
 

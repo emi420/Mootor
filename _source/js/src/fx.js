@@ -72,9 +72,9 @@
                 el.style.left = x_pos + "px";
                 el.style.top = y_pos + "px";
             }
-            
+
             if (options.callback) {
-                setTimeout(options.callback, tduration * 1000);
+                window.setTimeout(options.callback, tduration * 1000);
             }
 
         },
