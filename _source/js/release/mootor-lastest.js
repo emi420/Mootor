@@ -482,7 +482,7 @@ var Mootor = (function () {
             } else {
                 element = this.el;
             }
-
+            
             element.style.transitionProperty = "webkit-transition";
             element.style.webkitTransitionDuration = "0.1s";
             element.style.webkitTransitionTimingFunction = "ease-out";
@@ -648,16 +648,16 @@ var Mootor = (function () {
         this.el = element;
 
         // Add blank panel to load content
-        this.create({
+        /*this.create({
             id: "blank",
             z_index: -9999
-        });
+        });*/
 
         // FIXME CHECK: expensive query
         this.panels = element.getElementsByClassName("panel");
 
         this.panelsCount = this.panels.length;
-        this.blank = this.panels[this.panelsCount - 1];
+        //this.blank = this.panels[this.panelsCount - 1];
         this.panelsX = 0;
         this.panelsY = 0;
         this.current = 0;
@@ -724,13 +724,13 @@ var Mootor = (function () {
                 panel.style.width = this.clientWidth + "px";
                 panel.style.overflow = 'hidden';
 
-                if (panel.id === "blank") {
-                    // Positioning blank panel
-                    panel.style.left =  this.clientWidth + 40 + "px";
-                } else {
-                    // Positioning panels and hide all but first
-                    panel.style.left =  i > 0 ? (this.clientWidth * i + (40 * i)) + "px" : (this.clientWidth * i) + "px";
-                    Fx.hide(panel);
+                // Positioning panels and hide all but first
+                if (i > 0 ){
+                    // FIXME CHECK: expensive query
+                    Fx.hide(panel.getElementsByTagName("div")[0]);
+                    panel.style.left = -((this.clientWidth + 40) * 2) + "px";
+                } else {                
+                    panel.style.left = "0px";
                 }
 
                 // Adjust panel height to viewport
@@ -748,8 +748,7 @@ var Mootor = (function () {
             }
 
             // Show first panel
-            Fx.show(this.panels[0]);
-            Fx.show(this.blank);
+            //Fx.show(this.blank);
 
         },
 
@@ -763,10 +762,6 @@ var Mootor = (function () {
             div = document.createElement("div");
             div.id = options.id;
             div.className = "panel";
-            if (options.z_index) {
-                div.style.position = "absolute";
-                div.style.zIndex = options.z_index;
-            }
             this.el.appendChild(div);
 
         },
@@ -952,7 +947,7 @@ var Mootor = (function () {
 
                 // Left 
                 distance = 0;
-                Fx.show(this.blank);
+                //Fx.show(this.blank);
 
             } else {
 
@@ -962,9 +957,10 @@ var Mootor = (function () {
                 }
                 distance = this.clientWidth + 40;
                 panel.style.left = distance + "px";
-
+                Fx.show(panel);
                 cb = function () {
-                    Fx.fadeIn(panel);
+                    // FIXME CHECK: expensive query
+                    Fx.fadeIn(panel.getElementsByTagName("div")[0]);
                 };
 
             }
