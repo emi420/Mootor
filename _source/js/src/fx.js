@@ -103,20 +103,9 @@
                 el.style.webkitTransitionTransitionDelay = "";
             }
 
-            // Apply 3d transform when its available
-            // or use default CSS 'left' property
-
-            if (el.style.webkitTransform !== "undefined") {
-
-                // Use WebKit transform 3D
-                distance = x_pos + "px," + y_pos + "px, 0";
-                el.style.webkitTransform = "translate3d(" + distance + ")";
-
-            } else {
-                // Use left & top CSS styles
-                el.style.left = x_pos + "px";
-                el.style.top = y_pos + "px";
-            }
+            // Use WebKit transform 3D
+            distance = x_pos + "px," + y_pos + "px, 0";
+            el.style.webkitTransform = "translate3d(" + distance + ")";
 
             if (options.callback) {
                 window.setTimeout(options.callback, tduration * 1000);

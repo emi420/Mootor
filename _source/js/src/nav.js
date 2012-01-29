@@ -101,11 +101,9 @@
                 panel.style.width = this.clientWidth + "px";
                 panel.style.overflow = 'hidden';
 
-                // Positioning panels and hide all but first
+                // Positioning panels to hide all but first
                 if (i > 0 ){
-                    // FIXME CHECK: expensive query
-                    Fx.hide(panel.getElementsByTagName("div")[0]);
-                    panel.style.left = -((this.clientWidth + 40) * 2) + "px";
+                    panel.style.left = -((this.clientWidth + 40) * 4) + "px";
                 } else {                
                     panel.style.left = "0px";
                 }
@@ -329,16 +327,11 @@
             } else {
 
                 // Right
-                if (this.back) {
-                    Fx.hide(back);
-                }
                 distance = this.clientWidth + 40;
                 panel.style.left = distance + "px";
-                Fx.show(panel);
-                cb = function () {
-                    // FIXME CHECK: expensive query
-                    Fx.fadeIn(panel.getElementsByTagName("div")[0]);
-                };
+                if (this.back) {
+                    back.style.left =  distance * 4 + "px";
+                }
 
             }
 
