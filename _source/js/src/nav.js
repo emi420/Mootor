@@ -26,12 +26,12 @@
 
         // Add blank panel to load content
         this.create({
-            id: "blank"
+            id: "blank",
+            z_index: -9999
         });
 
         // FIXME CHECK: expensive query
         this.panels = element.getElementsByClassName("panel");
-
 
         this.panelsCount = this.panels.length;
         this.blank = this.panels[this.panelsCount - 1];
@@ -140,6 +140,10 @@
             div = document.createElement("div");
             div.id = options.id;
             div.className = "panel";
+            if (options.z_index) {
+                div.style.position = "absolute";
+                div.style.zIndex = options.z_index;
+            }
             this.el.appendChild(div);
 
         },
@@ -314,7 +318,6 @@
             var distance,
                 panel,
                 cb,
-                hidden_elements,
                 back;
 
             panel = this.panels[this.current];
@@ -326,11 +329,7 @@
 
                 // Left 
                 distance = 0;
-
-                hidden_elements =  back.getElementsByClassName("iframe")[0];
-                if (hidden_elements) {
-                    Fx.hide(hidden_elements);
-                }
+                Fx.show(this.blank);
 
             } else {
 
@@ -340,15 +339,10 @@
                 }
                 distance = this.clientWidth + 40;
                 panel.style.left = distance + "px";
-                Fx.show(panel);
-                Fx.hide(this.blank);
 
-                hidden_elements =  panel.getElementsByClassName("iframe")[0];
-                if (hidden_elements) {
-                    cb = function () {
-                        Fx.show(hidden_elements);
-                    };
-                }
+                cb = function () {
+                    Fx.fadeIn(panel);
+                };
 
             }
 

@@ -13,25 +13,70 @@
     Mootor.Fx = {
 
         /*
+         *       fadeOut in an element
+         */
+        fadeOut: function (el) {
+            var element;
+
+            if (typeof el === "object") {
+                element = el;
+            } else {
+                element = this.el;
+            }
+
+            element.style.transitionProperty = "webkit-transition";
+            element.style.webkitTransitionDuration = "0.1s";
+            element.style.webkitTransitionTimingFunction = "ease-out";
+            element.style.opacity = 0;
+        },
+
+
+        /*
+         *       fadeIn an element
+         */
+        fadeIn: function (el) {
+            var element;
+
+            if (typeof el === "object") {
+                element = el;
+            } else {
+                element = this.el;
+            }
+
+            element.style.transitionProperty = "webkit-transition";
+            element.style.webkitTransitionDuration = "0.1s";
+            element.style.webkitTransitionTimingFunction = "ease-out";
+            element.style.opacity = 1;
+        },
+
+        /*
          *       Show an element
          */
         show: function (el) {
+            var element;
+
             if (typeof el === "object") {
-                el.style.display = "block";
+                element = el;
             } else {
-                this.el.style.display = "block";
+                element = this.el;
             }
+
+            element.style.opacity = 1;
         },
 
         /*
          *       Hide an element
          */
         hide: function (el) {
+            var element;
+
             if (typeof el === "object") {
-                el.style.display = "none";
+                element = el;
             } else {
-                this.el.style.display = "none";
+                element = this.el;
             }
+
+            element.style.opacity = 0;
         },
 
         /*

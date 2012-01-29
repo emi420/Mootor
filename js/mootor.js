@@ -472,25 +472,70 @@ var Mootor = (function () {
     Mootor.Fx = {
 
         /*
+         *       fadeOut in an element
+         */
+        fadeOut: function (el) {
+            var element;
+
+            if (typeof el === "object") {
+                element = el;
+            } else {
+                element = this.el;
+            }
+
+            element.style.transitionProperty = "webkit-transition";
+            element.style.webkitTransitionDuration = "0.1s";
+            element.style.webkitTransitionTimingFunction = "ease-out";
+            element.style.opacity = 0;
+        },
+
+
+        /*
+         *       fadeIn an element
+         */
+        fadeIn: function (el) {
+            var element;
+
+            if (typeof el === "object") {
+                element = el;
+            } else {
+                element = this.el;
+            }
+
+            element.style.transitionProperty = "webkit-transition";
+            element.style.webkitTransitionDuration = "0.1s";
+            element.style.webkitTransitionTimingFunction = "ease-out";
+            element.style.opacity = 1;
+        },
+
+        /*
          *       Show an element
          */
         show: function (el) {
+            var element;
+
             if (typeof el === "object") {
-                el.style.display = "block";
+                element = el;
             } else {
-                this.el.style.display = "block";
+                element = this.el;
             }
+
+            element.style.opacity = 1;
         },
 
         /*
          *       Hide an element
          */
         hide: function (el) {
+            var element;
+
             if (typeof el === "object") {
-                el.style.display = "none";
+                element = el;
             } else {
-                this.el.style.display = "none";
+                element = this.el;
             }
+
+            element.style.opacity = 0;
         },
 
         /*
@@ -604,12 +649,12 @@ var Mootor = (function () {
 
         // Add blank panel to load content
         this.create({
-            id: "blank"
+            id: "blank",
+            z_index: -9999
         });
 
         // FIXME CHECK: expensive query
         this.panels = element.getElementsByClassName("panel");
-
 
         this.panelsCount = this.panels.length;
         this.blank = this.panels[this.panelsCount - 1];
@@ -718,6 +763,10 @@ var Mootor = (function () {
             div = document.createElement("div");
             div.id = options.id;
             div.className = "panel";
+            if (options.z_index) {
+                div.style.position = "absolute";
+                div.style.zIndex = options.z_index;
+            }
             this.el.appendChild(div);
 
         },
@@ -892,7 +941,6 @@ var Mootor = (function () {
             var distance,
                 panel,
                 cb,
-                hidden_elements,
                 back;
 
             panel = this.panels[this.current];
@@ -904,11 +952,7 @@ var Mootor = (function () {
 
                 // Left 
                 distance = 0;
-
-                hidden_elements =  back.getElementsByClassName("iframe")[0];
-                if (hidden_elements) {
-                    Fx.hide(hidden_elements);
-                }
+                Fx.show(this.blank);
 
             } else {
 
@@ -918,15 +962,10 @@ var Mootor = (function () {
                 }
                 distance = this.clientWidth + 40;
                 panel.style.left = distance + "px";
-                Fx.show(panel);
-                Fx.hide(this.blank);
 
-                hidden_elements =  panel.getElementsByClassName("iframe")[0];
-                if (hidden_elements) {
-                    cb = function () {
-                        Fx.show(hidden_elements);
-                    };
-                }
+                cb = function () {
+                    Fx.fadeIn(panel);
+                };
 
             }
 
