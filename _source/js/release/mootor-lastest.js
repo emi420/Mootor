@@ -519,7 +519,7 @@ var Mootor = (function () {
             } else {
                 element = this.el;
             }
-
+            element.style.webkitTransitionDuration = "0";
             element.style.opacity = 1;
         },
 
@@ -534,7 +534,7 @@ var Mootor = (function () {
             } else {
                 element = this.el;
             }
-
+            element.style.webkitTransitionDuration = "0";
             element.style.opacity = 0;
         },
 

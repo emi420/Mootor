@@ -60,7 +60,7 @@
             } else {
                 element = this.el;
             }
-
+            element.style.webkitTransitionDuration = "0";
             element.style.opacity = 1;
         },
 
@@ -75,7 +75,7 @@
             } else {
                 element = this.el;
             }
-
+            element.style.webkitTransitionDuration = "0";
             element.style.opacity = 0;
         },
 
