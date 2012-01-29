@@ -186,6 +186,8 @@
 
             if (e.bounceBack === true) {
 
+                console.log("bounce back!");
+            
                 // Bouce back
                 this.panelsX = (this.clientWidth + 40) * this.current;
                 this.panelsX = this.panelsX > 0 ? -this.panelsX : this.panelsX;
