@@ -533,7 +533,7 @@ var Mootor = (function () {
             }
             
             if (options.callback) {
-                options.callback.call();
+                setTimeout(options.callback, tduration * 1000);
             }
 
         },
@@ -580,6 +580,13 @@ var Mootor = (function () {
  * Mootor Navigation
  */
 
+ /*
+  *     FIXME:
+  *         - Dragging is buggy
+  *         - Bounce back is buggy
+  *
+  */
+
 (function (Mootor) {
 
     "use strict";
@@ -609,10 +616,10 @@ var Mootor = (function () {
 
         // FIXME CHECK: expensive query
         this.panels = element.getElementsByClassName("panel");
-        
+
 
         this.panelsCount = this.panels.length;
-        this.blank = this.panels[this.panelsCount-1];
+        this.blank = this.panels[this.panelsCount - 1];
         this.panelsX = 0;
         this.panelsY = 0;
         this.current = 0;
@@ -656,8 +663,7 @@ var Mootor = (function () {
          */
         resetAll: function () {
 
-            var styles,
-                onAnchorTouch,
+            var onAnchorTouch,
                 j,
                 i,
                 panels = this,
@@ -665,7 +671,6 @@ var Mootor = (function () {
 
             // Callback for anchor links
             onAnchorTouch = function () {
-                console.log("anchor touch!");
                 if (listeners.isDraggingX === false && listeners.isDraggingY === false) {
                     panels.setCurrent(this.rel);
                 }
@@ -674,13 +679,13 @@ var Mootor = (function () {
 
             // Reset styles and set anchor links
             for (i = this.panelsCount; i--;) {
-            
+
                 panel = this.panels[i];
-                
+
                 // Reset styles
                 panel.style.width = this.clientWidth + "px";
                 panel.style.overflow = 'hidden';
-                
+
                 if (panel.id === "blank") {
                     // Positioning blank panel
                     panel.style.left =  this.clientWidth + 40 + "px";
@@ -689,7 +694,7 @@ var Mootor = (function () {
                     panel.style.left =  i > 0 ? (this.clientWidth * i + (40 * i)) + "px" : (this.clientWidth * i) + "px";
                     Fx.hide(panel);
                 }
-                                
+
                 // Adjust panel height to viewport
                 if (this.clientHeight > panel.panelHeight) {
                     panel.style.height = this.clientHeight + "px";
@@ -698,31 +703,30 @@ var Mootor = (function () {
                 // Set anchor links
                 for (j = panel.anchors.length; j--;) {
                     if (panel.anchors[j].rel !== "") {
-                        console.log("binding " + panel.anchors[j].rel);
                         Event.bind(panel.anchors[j], "onTap", onAnchorTouch);
                     }
                 }
 
             }
-            
+
             // Show first panel
             Fx.show(this.panels[0]);
             Fx.show(this.blank);
 
         },
-        
+
         /*
          *      Create new panel
          */
-        create: function(options) {
-        
+        create: function (options) {
+
             var div;
-            
+
             div = document.createElement("div");
             div.id = options.id;
             div.className = "panel";
             this.el.appendChild(div);
-            
+
         },
 
         /*      
@@ -865,30 +869,48 @@ var Mootor = (function () {
          */
         load: function () {
 
-            var distance;
+            var distance,
+                panel,
+                cb,
+                hidden_elements,
+                back;
+                
+            panel = this.panels[this.current];
+            back = this.panels[this.back];
             
             // Calc movement
             
             if (this.current === 0) {
                 // Left 
                 distance = 0;
+                hidden_elements =  back.getElementsByClassName("iframe")[0];
+                if (hidden_elements) {
+                    Fx.hide(hidden_elements);
+                }
             } else {
                 // Right
-                console.log(this.back);
                 if (this.back) {
-                    Fx.hide(this.panels[this.back]);
+                    Fx.hide(back);
                 }
                 distance = this.clientWidth + 40;
-                this.panels[this.current].style.left = distance + "px";
-                Fx.show(this.panels[this.current]);    
+                panel.style.left = distance + "px";
+                Fx.show(panel);
                 Fx.hide(this.blank);
+                hidden_elements =  panel.getElementsByClassName("iframe")[0];
+                if (hidden_elements) {
+                    cb = function() {
+                        Fx.show(hidden_elements);
+                    }
+                }
             }
+            
 
-           // Move panels
+            // Move panels
             this.move({
                 distanceX: -distance - this.panelsX,
                 largeMove: true,
-                isLoading: true
+                isLoading: true,
+                callback: cb
             });
 
 

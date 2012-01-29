@@ -48,6 +48,9 @@ h2 {
 h3 {
   @include subType1;
 }
+p {
+  @include readlyType;
+}
 
 // Subscribe
 

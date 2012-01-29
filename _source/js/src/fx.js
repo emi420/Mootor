@@ -74,7 +74,7 @@
             }
             
             if (options.callback) {
-                options.callback.call();
+                setTimeout(options.callback, tduration * 1000);
             }
 
         },

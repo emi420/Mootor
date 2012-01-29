@@ -28,7 +28,13 @@ body {
   font-size: 7em ;
   letter-spacing: $base-letter-spacing*1.5;
 }
-
+@mixin readlyType {
+  @include baseType;
+  font-size: 2em ;
+  padding: 1em ;
+  font-family: helvetica, arial ;
+  letter-spacing: $base-letter-spacing*1.5;
+}
 
 // Type 2
 @mixin empType2 { 
