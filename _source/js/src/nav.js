@@ -321,7 +321,7 @@
                 // Right
                 distance = this.clientWidth + 40;
                 panel.style.left = distance + "px";
-                if (this.back && this.back != this.current) {
+                if (this.back && this.back !== this.current) {
                     back.style.left =  distance * 4 + "px";
                 }
 
