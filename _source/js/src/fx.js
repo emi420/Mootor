@@ -121,8 +121,14 @@
             // Update viewport font-size
             var updateSize = function () {
 
+                var font_size;
+
                 // FIXME CHECK: This calc can be optimized
-                var font_size = window.innerWidth / 10 + (window.innerHeight / 40);
+                if (window.innerWidth < 768) {
+                    font_size = window.innerWidth / 10 + (window.innerHeight / 40);
+                } else {                
+                    font_size = window.innerWidth / 18 + (window.innerHeight / 100);
+                }
 
                 if (typeof (document.body) !== null) {
                     if (font_size < max_font_size && font_size > min_font_size) {

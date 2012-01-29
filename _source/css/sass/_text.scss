@@ -30,10 +30,12 @@ body {
 }
 @mixin readlyType {
   @include baseType;
-  font-size: 2em ;
+  font-size: 3em ;
+  text-align: justify;
   padding: 1em ;
-  font-family: helvetica, arial ;
-  letter-spacing: $base-letter-spacing*1.5;
+  line-height: 150%;
+  font-family: georgia, arial ;
+  letter-spacing: 0;
 }
 
 // Type 2
