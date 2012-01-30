@@ -279,7 +279,7 @@ var Mootor = (function () {
          *      On move start
          */
         start: function (e) {
-        
+
             var date = new Date();
 
             // Initialize values
@@ -294,7 +294,7 @@ var Mootor = (function () {
             }
             this.drag.lastX = this.drag.startX;
             this.drag.lastY = this.drag.startY;
-            
+
             // Time of last touch (for velocity calc)
             this.drag.time = date.getMilliseconds();
 
@@ -347,11 +347,11 @@ var Mootor = (function () {
 
             // Time of last touch (for velocity calc)
             this.drag.time = date.getMilliseconds() - this.drag.time;
-            
+
             // Velocity
             this.drag.velocity.x = this.drag.distanceX / this.drag.time * 100;
-            this.drag.velocity.y = this.drag.distanceY / this.drag.time *  100;
-            
+            this.drag.velocity.y = this.drag.distanceY / this.drag.time * 100;
+
             // Detect draggingY
             if (distanceFromOriginY > 0 && distanceFromOriginY > distanceFromOriginX && listeners.isDraggingX === false) {
 
@@ -384,10 +384,10 @@ var Mootor = (function () {
             this.el.removeEventListener('mouseup', this, false);
             this.el.removeEventListener('touchmove', this, false);
             this.el.removeEventListener('touchend', this, false);
-            
+
             // Callback
-            this.callback.onDragEnd(this.drag);            
-            
+            this.callback.onDragEnd(this.drag);
+
             // Set isDragging flags
             listeners.isDraggingY = false;
             listeners.isDraggingX = false;
@@ -596,7 +596,7 @@ var Mootor = (function () {
                 //                         using media queries
                 if (window.innerWidth < 768) {
                     font_size = window.innerWidth / 10 + (window.innerHeight / 40);
-                } else {                
+                } else {
                     font_size = window.innerWidth / 18 + (window.innerHeight / 100);
                 }
 

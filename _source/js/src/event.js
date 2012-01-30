@@ -99,7 +99,7 @@
          *      On move start
          */
         start: function (e) {
-        
+
             var date = new Date();
 
             // Initialize values
@@ -114,7 +114,7 @@
             }
             this.drag.lastX = this.drag.startX;
             this.drag.lastY = this.drag.startY;
-            
+
             // Time of last touch (for velocity calc)
             this.drag.time = date.getMilliseconds();
 
@@ -167,11 +167,11 @@
 
             // Time of last touch (for velocity calc)
             this.drag.time = date.getMilliseconds() - this.drag.time;
-            
+
             // Velocity
             this.drag.velocity.x = this.drag.distanceX / this.drag.time * 100;
-            this.drag.velocity.y = this.drag.distanceY / this.drag.time *  100;
-            
+            this.drag.velocity.y = this.drag.distanceY / this.drag.time * 100;
+
             // Detect draggingY
             if (distanceFromOriginY > 0 && distanceFromOriginY > distanceFromOriginX && listeners.isDraggingX === false) {
 
@@ -204,10 +204,10 @@
             this.el.removeEventListener('mouseup', this, false);
             this.el.removeEventListener('touchmove', this, false);
             this.el.removeEventListener('touchend', this, false);
-            
+
             // Callback
-            this.callback.onDragEnd(this.drag);            
-            
+            this.callback.onDragEnd(this.drag);
+
             // Set isDragging flags
             listeners.isDraggingY = false;
             listeners.isDraggingX = false;

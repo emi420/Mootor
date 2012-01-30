@@ -127,7 +127,7 @@
                 //                         using media queries
                 if (window.innerWidth < 768) {
                     font_size = window.innerWidth / 10 + (window.innerHeight / 40);
-                } else {                
+                } else {
                     font_size = window.innerWidth / 18 + (window.innerHeight / 100);
                 }
 
