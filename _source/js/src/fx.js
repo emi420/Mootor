@@ -56,8 +56,10 @@
             } else {
                 element = this.el;
             }
-            element.style.webkitTransitionDuration = "0";
-            element.style.opacity = 1;
+            if (element !== undefined) {
+                element.style.webkitTransitionDuration = "0";
+                element.style.opacity = 1;
+            }
         },
 
         /*
@@ -71,8 +73,10 @@
             } else {
                 element = this.el;
             }
-            element.style.webkitTransitionDuration = "0";
-            element.style.opacity = 0;
+            if (element !== undefined) {
+                element.style.webkitTransitionDuration = "0";
+                element.style.opacity = 0;
+            }
         },
 
         /*
