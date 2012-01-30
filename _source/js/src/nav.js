@@ -20,31 +20,33 @@
      */
     Panels = function (element) {
 
-        var i;
+        var i,
+            panel;
 
         this.el = element;
 
         // FIXME CHECK: expensive query
         this.panels = element.getElementsByClassName("panel");
 
-        this.panelsCount = this.panels.length;
-        this.panelsX = 0;
-        this.panelsY = 0;
+        this.count = this.panels.length;
+        this.x = 0;
+        this.y = 0;
         this.current = 0;
         this.back = 0;
 
-        for (i = this.panelsCount; i--;) {
+        for (i = this.count; i--;) {
             // FIXME CHECK: expensive query
-            this.panels[i].anchors = this.panels[i].getElementsByTagName('a');
-            this.panels[i].panelHeight = this.panels[i].offsetHeight;
+            panel = this.panels[i];
+            panel.anchors = panel.getElementsByTagName('a');
+            panel.height = panel.offsetHeight;
         }
 
         // Client viewport sizes
-        this.clientHeight = Mootor.core.init_client_height;
-        this.clientWidth = Mootor.core.init_client_width;
+        this.clientH = Mootor.clientH;
+        this.clientW = Mootor.clientW;
 
         // Threshold for change panels
-        this.thresholdX = this.clientWidth / 2;
+        this.thresholdX = this.clientW / 2;
 
         // Set document styles    
         if (document.body.style.overflow !== "hidden") {
@@ -52,12 +54,12 @@
         }
 
         // Reset and hide all panels
-        this.resetAll();
+        this.reset();
 
         // Set event handlers
         this.onDragStart = this.startMove;
         this.onDragMove = this.move;
-        this.onDragEnd = this.checkMove;
+        this.onDragEnd = this.check;
 
         // Bind events
         Event.bind(this.el, "onDrag", this);
@@ -69,65 +71,51 @@
         /*      
          *      Reset all panels
          */
-        resetAll: function () {
+        reset: function () {
 
-            var onAnchorTouch,
+            var onTouch,
                 j,
                 i,
                 panels = this,
                 panel;
 
             // Callback for anchor links
-            onAnchorTouch = function () {
+            onTouch = function () {
                 if (listeners.isDraggingX === false && listeners.isDraggingY === false) {
-                    panels.setCurrent(this.rel);
+                    panels.set(this.rel);
                 }
                 return false;
             };
 
             // Reset styles and set anchor links
-            for (i = this.panelsCount; i--;) {
+            for (i = this.count; i--;) {
 
                 panel = this.panels[i];
 
                 // Reset styles
-                panel.style.width = this.clientWidth + "px";
+                panel.style.width = this.clientW + "px";
                 panel.style.overflow = 'hidden';
 
                 // Positioning panels to hide all but first
                 if (i > 0) {
-                    panel.style.left = -((this.clientWidth + 40) * 4) + "px";
+                    panel.style.left = -((this.clientW + 40) * 4) + "px";
                 } else {
                     panel.style.left = "0px";
                 }
 
                 // Adjust panel height to viewport
-                if (this.clientHeight > panel.panelHeight) {
-                    panel.style.height = this.clientHeight + "px";
+                if (this.clientH > panel.height) {
+                    panel.style.height = this.clientH + "px";
                 }
 
                 // Set anchor links
                 for (j = panel.anchors.length; j--;) {
                     if (panel.anchors[j].rel !== "") {
-                        Event.bind(panel.anchors[j], "onTap", onAnchorTouch);
+                        Event.bind(panel.anchors[j], "onTap", onTouch);
                     }
                 }
 
             }
-
-        },
-
-        /*
-         *      Create new panel
-         */
-        create: function (options) {
-
-            var div;
-
-            div = document.createElement("div");
-            div.id = options.id;
-            div.className = "panel";
-            this.el.appendChild(div);
 
         },
 
@@ -146,44 +134,44 @@
         move: function (e) {
 
             var current = {},
-                transitionDuration = 0.5;
+                tDuration = 0.5;
 
-            transitionDuration = 0.5;
+            tDuration = 0.5;
 
             if (listeners.isDraggingX === true || e.isLoading === true) {
 
                 // Dragging X
-                if (this.panelsY === 0) {
-                    this.panelsX = this.panelsX + e.distanceX;
+                if (this.y === 0) {
+                    this.x = this.x + e.distanceX;
                 }
 
             } else if (listeners.isDraggingY === true) {
 
                  // Dragging Y
-                this.panelsY = this.panelsY + e.distanceY;
+                this.y = this.y + e.distanceY;
 
             }
 
             if ((listeners.isDraggingX || listeners.isDraggingY) && !e.largeMove) {
                 // If dragging, move fast
-                transitionDuration = 0;
+                tDuration = 0;
             }
 
             if (e.bounceBack === true) {
 
                 // Bouce back
                 if (this.current > 0) {
-                    this.panelsX = (this.clientWidth + 40);
-                    this.panelsX = this.panelsX > 0 ? -this.panelsX : this.panelsX;
+                    this.x = (this.clientW + 40);
+                    this.x = this.x > 0 ? -this.x : this.x;
                 } else {
-                    this.panelsX = 0;
+                    this.x = 0;
                 }
 
-                if (this.panelsY !== 0) {
+                if (this.y !== 0) {
 
                     if (e.distanceFromOriginY < 0) {
 
-                        this.panelsY = 0;
+                        this.y = 0;
 
                     } else {
 
@@ -192,8 +180,8 @@
                             height: this.panels[this.current].offsetHeight
                         };
 
-                        if (current.height >= this.clientHeight) {
-                            this.panelsY = -(current.height - this.clientHeight);
+                        if (current.height >= this.clientH) {
+                            this.y = -(current.height - this.clientH);
                         }
 
                     }
@@ -203,15 +191,15 @@
                 e.bounceBack = false;
 
                 // Move slow
-                transitionDuration = 0.5;
+                tDuration = 0.5;
 
             }
 
             // Move
             if (!e.callback) {
-                Fx.translate(this.el, {x: this.panelsX, y: this.panelsY}, {transitionDuration: transitionDuration});
+                Fx.translate(this.el, {x: this.x, y: this.y}, {transitionDuration: tDuration});
             } else {
-                Fx.translate(this.el, {x: this.panelsX, y: this.panelsY}, {transitionDuration: transitionDuration, callback: e.callback});
+                Fx.translate(this.el, {x: this.x, y: this.y}, {transitionDuration: tDuration, callback: e.callback});
             }
 
         },
@@ -219,7 +207,7 @@
         /*      
          *      Check move for change panels or bounce back
          */
-        checkMove: function (e) {
+        check: function (e) {
 
             var maxdist = this.thresholdX,
                 is_momentum = false,
@@ -231,7 +219,7 @@
             // else, move panel back.
 
             // Check isDragging flags
-            if ((listeners.isDraggingX && this.panelsY === 0) || listeners.isDraggingY) {
+            if ((listeners.isDraggingX && this.y === 0) || listeners.isDraggingY) {
 
                 // Velocity boost movement
                 if (e.velocity.y !== 0) {
@@ -241,11 +229,11 @@
                         distanceY: boostdist * 10,
                         largeMove: true,
                         isLoading: false,
-                        callback: this.checkMove(e)
+                        callback: this.check(e)
                     });
                 }
 
-                if (e.distanceFromOriginX > maxdist && this.current < (this.panelsCount - 1)) {
+                if (e.distanceFromOriginX > maxdist && this.current < (this.count - 1)) {
 
                     // Move to left
                     if (this.current === 0) {
@@ -273,9 +261,9 @@
 
                     // Bounce back
                     // FIXME CHECK: expensive query
-                    bouncedist = this.clientHeight - this.panels[this.current].panelHeight;
+                    bouncedist = this.clientH - this.panels[this.current].height;
 
-                    if (this.panelsY >= 0 || this.panels[this.current].offsetHeight -  this.clientHeight < -this.panelsY) {
+                    if (this.y >= 0 || this.panels[this.current].offsetHeight -  this.clientH < -this.y) {
                         e.largeMove = true;
                         e.bounceBack = true;
                         this.move(e);
@@ -289,18 +277,18 @@
         /*      
          *      Set current panel
          */
-        setCurrent: function (pid) {
+        set: function (pid) {
 
             var i;
 
             // Get panel by id and load it
-            for (i = this.panelsCount; i--;) {
+            for (i = this.count; i--;) {
                 if (this.panels[i].id === pid) {
                     if (this.current > 0) {
                         this.back = this.current;
                     }
                     this.current = i;
-                    this.panelsY = 0;
+                    this.y = 0;
                     this.load();
                 }
             }
@@ -327,13 +315,13 @@
                 // Left 
                 distance = 0;
                 if (this.back) {
-                    back.style.left =  this.clientWidth + 40 + "px";
+                    back.style.left =  this.clientW + 40 + "px";
                 }
 
             } else {
 
                 // Right
-                distance = this.clientWidth + 40;
+                distance = this.clientW + 40;
                 panel.style.left = distance + "px";
                 if (this.back && this.back !== this.current) {
                     back.style.left =  distance * 4 + "px";
@@ -343,7 +331,7 @@
 
             // Move panels
             this.move({
-                distanceX: -distance - this.panelsX,
+                distanceX: -distance - this.x,
                 largeMove: true,
                 isLoading: true,
                 callback: cb

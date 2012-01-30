@@ -15,30 +15,29 @@ var Mootor = (function () {
 
 		// On element ready
 		ready: function (callback) {
-			Mootor.core.ready(callback, this.el);
+			Mootor.ready(callback, this.el);
 		}
 
 	};
 
-    // Test browser compatibility
-    Mootor.test = {
-
-        addEventListener: false
-
+    // Inheritance by copying properties
+    Mootor.extend = function (obj, target) {
+        var i;
+        if (target === undefined) {
+            target = Mootor.prototype;
+        }
+        for (i in obj) {
+            if (obj.hasOwnProperty(i)) {
+                target[i] = obj[i];
+            }
+        }
     };
 
-    // Init-time branching
-    if (window.addEventListener) {
-        Mootor.test.addEventListener = true;
-    } else {
-        Mootor.test.addEventListener = false;
-    }
-
     // Core
-    Mootor.core = {
+    Mootor.extend({
 
         // Initial styles
-        init_styles: undefined,
+        styles: undefined,
 
         // On element ready
         ready: function (fn, el) {
@@ -72,22 +71,26 @@ var Mootor = (function () {
         },
 
         // Hide document body
-        hideBody: function () {
+        hide: function () {
 
-            var init_styles = document.createElement("style");
-            init_styles.innerHTML = "body * {display: none}";
-            document.head.appendChild(init_styles);
-            Mootor.core.init_styles = init_styles;
+            var styles = document.createElement("style");
+            styles.innerHTML = "body * {display: none}";
+            document.head.appendChild(styles);
+            Mootor.styles = styles;
 
         },
 
         // Show document body
-        showBody: function () {
+        show: function () {
+            document.head.removeChild(Mootor.styles);
+        },
 
-            document.head.removeChild(Mootor.core.init_styles);
-
+        // Test browser compatibility
+        test: {
+            addEventListener: false
         }
-    };
+
+    }, Mootor);
 
 	// Main constructor
 	Mootor.fn = function (query) {
@@ -135,43 +138,37 @@ var Mootor = (function () {
 
 	};
 
-	// Inheritance by copying properties
-	Mootor.extend = function (obj, target) {
-		var i;
-        if (target === "undefined") {
-            target = Mootor.prototype;
-        }
-		for (i in obj) {
-			if (obj.hasOwnProperty(i)) {
-				Mootor.prototype[i] = obj[i];
-			}
-		}
-	};
-
 	// Prototypal inheritance 
 	Mootor.fn.prototype = Mootor.prototype;
 
+    // Init-time branching
+    if (window.addEventListener) {
+        Mootor.test.addEventListener = true;
+    } else {
+        Mootor.test.addEventListener = false;
+    }
+
 	// On document ready, get viewport sizes and show body
-    Mootor.core.ready(function () {
+    Mootor.ready(function () {
 
 		// Initial screen size
-		var init_client_width = document.documentElement.clientWidth,
-			init_client_height = document.documentElement.clientHeight;
+		var clientW = document.documentElement.clientWidth,
+			clientH = document.documentElement.clientHeight;
 
-		Mootor.core.init_client_height = (function () {
-			return init_client_height;
+		Mootor.clientH = (function () {
+			return clientH;
 		}());
-		Mootor.core.init_client_width = (function () {
-			return init_client_width;
+		Mootor.clientW = (function () {
+			return clientW;
 		}());
 
         // Show body
-		Mootor.core.showBody();
+		Mootor.show();
 
 	}, document);
 
     // Hide body
-	Mootor.core.hideBody();
+	Mootor.hide();
 
 	return Mootor;
 

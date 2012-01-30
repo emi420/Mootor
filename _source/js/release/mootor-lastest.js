@@ -16,30 +16,29 @@ var Mootor = (function () {
 
 		// On element ready
 		ready: function (callback) {
-			Mootor.core.ready(callback, this.el);
+			Mootor.ready(callback, this.el);
 		}
 
 	};
 
-    // Test browser compatibility
-    Mootor.test = {
-
-        addEventListener: false
-
+    // Inheritance by copying properties
+    Mootor.extend = function (obj, target) {
+        var i;
+        if (target === undefined) {
+            target = Mootor.prototype;
+        }
+        for (i in obj) {
+            if (obj.hasOwnProperty(i)) {
+                target[i] = obj[i];
+            }
+        }
     };
 
-    // Init-time branching
-    if (window.addEventListener) {
-        Mootor.test.addEventListener = true;
-    } else {
-        Mootor.test.addEventListener = false;
-    }
-
     // Core
-    Mootor.core = {
+    Mootor.extend({
 
         // Initial styles
-        init_styles: undefined,
+        styles: undefined,
 
         // On element ready
         ready: function (fn, el) {
@@ -73,22 +72,26 @@ var Mootor = (function () {
         },
 
         // Hide document body
-        hideBody: function () {
+        hide: function () {
 
-            var init_styles = document.createElement("style");
-            init_styles.innerHTML = "body * {display: none}";
-            document.head.appendChild(init_styles);
-            Mootor.core.init_styles = init_styles;
+            var styles = document.createElement("style");
+            styles.innerHTML = "body * {display: none}";
+            document.head.appendChild(styles);
+            Mootor.styles = styles;
 
         },
 
         // Show document body
-        showBody: function () {
+        show: function () {
+            document.head.removeChild(Mootor.styles);
+        },
 
-            document.head.removeChild(Mootor.core.init_styles);
-
+        // Test browser compatibility
+        test: {
+            addEventListener: false
         }
-    };
+
+    }, Mootor);
 
 	// Main constructor
 	Mootor.fn = function (query) {
@@ -136,43 +139,37 @@ var Mootor = (function () {
 
 	};
 
-	// Inheritance by copying properties
-	Mootor.extend = function (obj, target) {
-		var i;
-        if (target === "undefined") {
-            target = Mootor.prototype;
-        }
-		for (i in obj) {
-			if (obj.hasOwnProperty(i)) {
-				Mootor.prototype[i] = obj[i];
-			}
-		}
-	};
-
 	// Prototypal inheritance 
 	Mootor.fn.prototype = Mootor.prototype;
 
+    // Init-time branching
+    if (window.addEventListener) {
+        Mootor.test.addEventListener = true;
+    } else {
+        Mootor.test.addEventListener = false;
+    }
+
 	// On document ready, get viewport sizes and show body
-    Mootor.core.ready(function () {
+    Mootor.ready(function () {
 
 		// Initial screen size
-		var init_client_width = document.documentElement.clientWidth,
-			init_client_height = document.documentElement.clientHeight;
+		var clientW = document.documentElement.clientWidth,
+			clientH = document.documentElement.clientHeight;
 
-		Mootor.core.init_client_height = (function () {
-			return init_client_height;
+		Mootor.clientH = (function () {
+			return clientH;
 		}());
-		Mootor.core.init_client_width = (function () {
-			return init_client_width;
+		Mootor.clientW = (function () {
+			return clientW;
 		}());
 
         // Show body
-		Mootor.core.showBody();
+		Mootor.show();
 
 	}, document);
 
     // Hide body
-	Mootor.core.hideBody();
+	Mootor.hide();
 
 	return Mootor;
 
@@ -475,10 +472,6 @@ var Mootor = (function () {
 
     "use strict";
 
-    // Max and Min font sizes
-    var max_font_size = 105,
-        min_font_size = 20;
-
     Mootor.Fx = {
 
         /*
@@ -580,47 +573,8 @@ var Mootor = (function () {
                 window.setTimeout(options.callback, tduration * 1000);
             }
 
-        },
-
-        /*
-         *       Adjust font size relative to viewport size
-         */
-        dynamicType: function () {
-
-            // Update viewport font-size
-            var updateSize = function () {
-
-                var font_size;
-
-                // FIXME CHECK: This calc can be optimized
-                //                         using media queries
-                if (window.innerWidth < 768) {
-                    font_size = window.innerWidth / 10 + (window.innerHeight / 40);
-                } else {
-                    font_size = window.innerWidth / 18 + (window.innerHeight / 100);
-                }
-
-                if (typeof (document.body) !== null) {
-                    if (font_size < max_font_size && font_size > min_font_size) {
-                        document.body.style.fontSize = font_size + "%";
-                    } else if (font_size >= max_font_size) {
-                        document.body.style.fontSize = max_font_size + "%";
-                    } else if (font_size <= min_font_size) {
-                        document.body.style.fontSize = min_font_size + "%";
-                    }
-                }
-
-            };
-
-            // Add event listeners to update font size when user 
-            // rotate device or resize window
-            //Event.bind(window, "orientationChange", updateSize);
-            //Event.bind(window, "resize", updateSize);
-
-            // Initialize font-size
-            updateSize();
-
         }
+
     };
 
     Mootor.extend(Mootor.Fx);
@@ -649,31 +603,33 @@ var Mootor = (function () {
      */
     Panels = function (element) {
 
-        var i;
+        var i,
+            panel;
 
         this.el = element;
 
         // FIXME CHECK: expensive query
         this.panels = element.getElementsByClassName("panel");
 
-        this.panelsCount = this.panels.length;
-        this.panelsX = 0;
-        this.panelsY = 0;
+        this.count = this.panels.length;
+        this.x = 0;
+        this.y = 0;
         this.current = 0;
         this.back = 0;
 
-        for (i = this.panelsCount; i--;) {
+        for (i = this.count; i--;) {
             // FIXME CHECK: expensive query
-            this.panels[i].anchors = this.panels[i].getElementsByTagName('a');
-            this.panels[i].panelHeight = this.panels[i].offsetHeight;
+            panel = this.panels[i];
+            panel.anchors = panel.getElementsByTagName('a');
+            panel.height = panel.offsetHeight;
         }
 
         // Client viewport sizes
-        this.clientHeight = Mootor.core.init_client_height;
-        this.clientWidth = Mootor.core.init_client_width;
+        this.clientH = Mootor.clientH;
+        this.clientW = Mootor.clientW;
 
         // Threshold for change panels
-        this.thresholdX = this.clientWidth / 2;
+        this.thresholdX = this.clientW / 2;
 
         // Set document styles    
         if (document.body.style.overflow !== "hidden") {
@@ -681,12 +637,12 @@ var Mootor = (function () {
         }
 
         // Reset and hide all panels
-        this.resetAll();
+        this.reset();
 
         // Set event handlers
         this.onDragStart = this.startMove;
         this.onDragMove = this.move;
-        this.onDragEnd = this.checkMove;
+        this.onDragEnd = this.check;
 
         // Bind events
         Event.bind(this.el, "onDrag", this);
@@ -698,65 +654,51 @@ var Mootor = (function () {
         /*      
          *      Reset all panels
          */
-        resetAll: function () {
+        reset: function () {
 
-            var onAnchorTouch,
+            var onTouch,
                 j,
                 i,
                 panels = this,
                 panel;
 
             // Callback for anchor links
-            onAnchorTouch = function () {
+            onTouch = function () {
                 if (listeners.isDraggingX === false && listeners.isDraggingY === false) {
-                    panels.setCurrent(this.rel);
+                    panels.set(this.rel);
                 }
                 return false;
             };
 
             // Reset styles and set anchor links
-            for (i = this.panelsCount; i--;) {
+            for (i = this.count; i--;) {
 
                 panel = this.panels[i];
 
                 // Reset styles
-                panel.style.width = this.clientWidth + "px";
+                panel.style.width = this.clientW + "px";
                 panel.style.overflow = 'hidden';
 
                 // Positioning panels to hide all but first
                 if (i > 0) {
-                    panel.style.left = -((this.clientWidth + 40) * 4) + "px";
+                    panel.style.left = -((this.clientW + 40) * 4) + "px";
                 } else {
                     panel.style.left = "0px";
                 }
 
                 // Adjust panel height to viewport
-                if (this.clientHeight > panel.panelHeight) {
-                    panel.style.height = this.clientHeight + "px";
+                if (this.clientH > panel.height) {
+                    panel.style.height = this.clientH + "px";
                 }
 
                 // Set anchor links
                 for (j = panel.anchors.length; j--;) {
                     if (panel.anchors[j].rel !== "") {
-                        Event.bind(panel.anchors[j], "onTap", onAnchorTouch);
+                        Event.bind(panel.anchors[j], "onTap", onTouch);
                     }
                 }
 
             }
-
-        },
-
-        /*
-         *      Create new panel
-         */
-        create: function (options) {
-
-            var div;
-
-            div = document.createElement("div");
-            div.id = options.id;
-            div.className = "panel";
-            this.el.appendChild(div);
 
         },
 
@@ -775,44 +717,44 @@ var Mootor = (function () {
         move: function (e) {
 
             var current = {},
-                transitionDuration = 0.5;
+                tDuration = 0.5;
 
-            transitionDuration = 0.5;
+            tDuration = 0.5;
 
             if (listeners.isDraggingX === true || e.isLoading === true) {
 
                 // Dragging X
-                if (this.panelsY === 0) {
-                    this.panelsX = this.panelsX + e.distanceX;
+                if (this.y === 0) {
+                    this.x = this.x + e.distanceX;
                 }
 
             } else if (listeners.isDraggingY === true) {
 
                  // Dragging Y
-                this.panelsY = this.panelsY + e.distanceY;
+                this.y = this.y + e.distanceY;
 
             }
 
             if ((listeners.isDraggingX || listeners.isDraggingY) && !e.largeMove) {
                 // If dragging, move fast
-                transitionDuration = 0;
+                tDuration = 0;
             }
 
             if (e.bounceBack === true) {
 
                 // Bouce back
                 if (this.current > 0) {
-                    this.panelsX = (this.clientWidth + 40);
-                    this.panelsX = this.panelsX > 0 ? -this.panelsX : this.panelsX;
+                    this.x = (this.clientW + 40);
+                    this.x = this.x > 0 ? -this.x : this.x;
                 } else {
-                    this.panelsX = 0;
+                    this.x = 0;
                 }
 
-                if (this.panelsY !== 0) {
+                if (this.y !== 0) {
 
                     if (e.distanceFromOriginY < 0) {
 
-                        this.panelsY = 0;
+                        this.y = 0;
 
                     } else {
 
@@ -821,8 +763,8 @@ var Mootor = (function () {
                             height: this.panels[this.current].offsetHeight
                         };
 
-                        if (current.height >= this.clientHeight) {
-                            this.panelsY = -(current.height - this.clientHeight);
+                        if (current.height >= this.clientH) {
+                            this.y = -(current.height - this.clientH);
                         }
 
                     }
@@ -832,15 +774,15 @@ var Mootor = (function () {
                 e.bounceBack = false;
 
                 // Move slow
-                transitionDuration = 0.5;
+                tDuration = 0.5;
 
             }
 
             // Move
             if (!e.callback) {
-                Fx.translate(this.el, {x: this.panelsX, y: this.panelsY}, {transitionDuration: transitionDuration});
+                Fx.translate(this.el, {x: this.x, y: this.y}, {transitionDuration: tDuration});
             } else {
-                Fx.translate(this.el, {x: this.panelsX, y: this.panelsY}, {transitionDuration: transitionDuration, callback: e.callback});
+                Fx.translate(this.el, {x: this.x, y: this.y}, {transitionDuration: tDuration, callback: e.callback});
             }
 
         },
@@ -848,7 +790,7 @@ var Mootor = (function () {
         /*      
          *      Check move for change panels or bounce back
          */
-        checkMove: function (e) {
+        check: function (e) {
 
             var maxdist = this.thresholdX,
                 is_momentum = false,
@@ -860,7 +802,7 @@ var Mootor = (function () {
             // else, move panel back.
 
             // Check isDragging flags
-            if ((listeners.isDraggingX && this.panelsY === 0) || listeners.isDraggingY) {
+            if ((listeners.isDraggingX && this.y === 0) || listeners.isDraggingY) {
 
                 // Velocity boost movement
                 if (e.velocity.y !== 0) {
@@ -870,11 +812,11 @@ var Mootor = (function () {
                         distanceY: boostdist * 10,
                         largeMove: true,
                         isLoading: false,
-                        callback: this.checkMove(e)
+                        callback: this.check(e)
                     });
                 }
 
-                if (e.distanceFromOriginX > maxdist && this.current < (this.panelsCount - 1)) {
+                if (e.distanceFromOriginX > maxdist && this.current < (this.count - 1)) {
 
                     // Move to left
                     if (this.current === 0) {
@@ -902,9 +844,9 @@ var Mootor = (function () {
 
                     // Bounce back
                     // FIXME CHECK: expensive query
-                    bouncedist = this.clientHeight - this.panels[this.current].panelHeight;
+                    bouncedist = this.clientH - this.panels[this.current].height;
 
-                    if (this.panelsY >= 0 || this.panels[this.current].offsetHeight -  this.clientHeight < -this.panelsY) {
+                    if (this.y >= 0 || this.panels[this.current].offsetHeight -  this.clientH < -this.y) {
                         e.largeMove = true;
                         e.bounceBack = true;
                         this.move(e);
@@ -918,18 +860,18 @@ var Mootor = (function () {
         /*      
          *      Set current panel
          */
-        setCurrent: function (pid) {
+        set: function (pid) {
 
             var i;
 
             // Get panel by id and load it
-            for (i = this.panelsCount; i--;) {
+            for (i = this.count; i--;) {
                 if (this.panels[i].id === pid) {
                     if (this.current > 0) {
                         this.back = this.current;
                     }
                     this.current = i;
-                    this.panelsY = 0;
+                    this.y = 0;
                     this.load();
                 }
             }
@@ -956,13 +898,13 @@ var Mootor = (function () {
                 // Left 
                 distance = 0;
                 if (this.back) {
-                    back.style.left =  this.clientWidth + 40 + "px";
+                    back.style.left =  this.clientW + 40 + "px";
                 }
 
             } else {
 
                 // Right
-                distance = this.clientWidth + 40;
+                distance = this.clientW + 40;
                 panel.style.left = distance + "px";
                 if (this.back && this.back !== this.current) {
                     back.style.left =  distance * 4 + "px";
@@ -972,7 +914,7 @@ var Mootor = (function () {
 
             // Move panels
             this.move({
-                distanceX: -distance - this.panelsX,
+                distanceX: -distance - this.x,
                 largeMove: true,
                 isLoading: true,
                 callback: cb

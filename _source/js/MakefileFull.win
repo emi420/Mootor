@@ -14,6 +14,6 @@ all:
 	@@cp $(RELEASE_DIR)/$(RELEASE_FILE) $(COPY_DIR)/$(COPY_FILE)
 	@@echo "Build completed."
 	@@echo "Minifying..."
-	@@java -jar tools/compiler.jar --js $(RELEASE_DIR)/$(RELEASE_FILE) --js_output_file $(RELEASE_DIR)/$(RELEASE_FILE_MIN)
+	@@java -jar tools/yuicompressor.jar $(RELEASE_DIR)/$(RELEASE_FILE) -o $(RELEASE_DIR)/$(RELEASE_FILE_MIN)
 
 
