@@ -10,6 +10,10 @@ Current modules:
 * Mootor.Event - events (ex: tap, drag, etc)
 * Mootor.Nav - navigation (ex: panels)
 
+Demo:
+
+http://50.116.1.212:8002/
+
 # About Mootor
 
 After work in UI and web-based applications development for many years using existing libraries and custom plugins,
