@@ -44,8 +44,8 @@ Currently compatibility is only WebKit based browsers:
 
 # Bugs
 
-Please use github to report any bugs found. 
+Please use GitHub Issues to report any bugs found. 
 
 # License
 
-Mootor is is licensed under the terms of the GNU General Public License.
+Mootor is licensed under the terms of the GNU General Public License.
