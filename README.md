@@ -10,9 +10,9 @@ Current modules:
 * Mootor.Event - events (ex: tap, drag, etc)
 * Mootor.Nav - navigation (ex: panels)
 
-Demo:
+## Demo
 
-http://50.116.1.212:8002/
+http://50.116.1.212:8002/ (open in a WebKit based browser)
 
 # About Mootor
 
