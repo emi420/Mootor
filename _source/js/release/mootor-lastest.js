@@ -198,7 +198,8 @@ var Mootor = (function () {
      *      Tap
      */
     Tap = function (element, callback) {
-
+    
+        element.onclick = function () { return false; };
         element.addEventListener("mouseup", callback, false);
         element.addEventListener("touchend", callback, false);
 
@@ -629,7 +630,7 @@ var Mootor = (function () {
             panel.anchors = panel.getElementsByTagName('a');
             panel.height = panel.offsetHeight;
         }
-
+        
         // Client viewport sizes
         this.clientH = Mootor.clientH;
         this.clientW = Mootor.clientW;
@@ -641,6 +642,12 @@ var Mootor = (function () {
         if (document.body.style.overflow !== "hidden") {
             document.body.style.overflow = "hidden";
         }
+        
+        // Header width
+        this.header = document.getElementById("header");
+        // FIXME CHECK: expensive query
+        this.header.anchors = this.header.getElementsByTagName('a');
+        this.header.style.width = Mootor.clientW + "px";
 
         // Reset and hide all panels
         this.reset();
@@ -669,7 +676,17 @@ var Mootor = (function () {
                 panel;
 
             // Callback for anchor links
-            onTouch = function () {
+            onTouch = function (e) {
+
+                // Prevent defaults on certain elements
+                // FIXME CHECK: this is a temporary patch
+                if (e.target.type !== "text" && e.target.type !== "input") {
+                    // Prevent default listeners
+                    if (e.preventDefault) {
+                        e.preventDefault();
+                    }
+                }
+
                 if (listeners.isDraggingX === false && listeners.isDraggingY === false) {
                     panels.set(this.rel);
                 }
@@ -705,6 +722,14 @@ var Mootor = (function () {
                 }
 
             }
+            
+            // Header links
+            for (i = this.header.anchors.length; i--;) {
+                if (this.header.anchors[i].rel !== "") {
+                    Event.bind(this.header.anchors[i], "onTap", onTouch);
+                }
+            }
+
 
         },
 

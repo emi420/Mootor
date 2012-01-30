@@ -10,6 +10,14 @@ h3 {
   margin: ($base-margin / 4) 0 ;
 }
 
+// Header
+
+#header {
+    position: absolute;
+    top: 0;
+    z-index: 9999;
+}
+
 // Panels
 
 #panels,
