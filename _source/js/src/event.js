@@ -68,14 +68,20 @@
 
         handleEvent: function (e) {
 
-            // Prevent default listeners
-            if (e.preventDefault) {
-                e.preventDefault();
-            }
+            // Prevent defaults on certain elements
+            // FIXME CHECK: this is a temporary patch
+            if (e.target.type !== "text" && e.target.type !== "input") {
 
-            // Stop event propagation
-            if (e.stopPropagation) {
-                e.stopPropagation();
+                // Prevent default listeners
+                if (e.preventDefault) {
+                    e.preventDefault();
+                }
+
+                // Stop event propagation
+                if (e.stopPropagation) {
+                    e.stopPropagation();
+                }
+
             }
 
             switch (e.type) {
