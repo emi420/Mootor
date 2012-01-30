@@ -53,11 +53,16 @@
             document.body.style.overflow = "hidden";
         }
         
-        // Header width
+        // Header
+        // FIXME CHECK
         this.header = document.getElementById("header");
-        // FIXME CHECK: expensive query
-        this.header.anchors = this.header.getElementsByTagName('a');
-        this.header.style.width = Mootor.clientW + "px";
+        if (this.header !== "undefined") {
+            this.header.anchors = this.header.getElementsByTagName('a');
+            this.header.style.width = Mootor.clientW + "px";
+            this.top = this.header.offsetHeight;
+            this.clientH = Mootor.clientH - this.top;
+            this.el.style.marginTop = this.top + "px";
+        }
 
         // Reset and hide all panels
         this.reset();
@@ -159,7 +164,7 @@
 
             var current = {},
                 tDuration = 0.5;
-
+                
             tDuration = 0.5;
 
             if (listeners.isDraggingX === true || e.isLoading === true) {
@@ -218,7 +223,7 @@
                 tDuration = 0.5;
 
             }
-
+            
             // Move
             if (!e.callback) {
                 Fx.translate(this.el, {x: this.x, y: this.y}, {transitionDuration: tDuration});
@@ -331,7 +336,15 @@
 
             panel = this.panels[this.current];
             back = this.panels[this.back];
+            
+            // Move panels
+            this.move({
+                distanceY: -this.y,
+                largeMove: false,
+                fastMove: true
+            });
 
+            
             // Calc movement
 
             if (this.current === 0) {
