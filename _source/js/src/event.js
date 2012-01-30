@@ -21,7 +21,7 @@
      *      Tap
      */
     Tap = function (element, callback) {
-    
+
         element.onclick = function () { return false; };
         element.addEventListener("mouseup", callback, false);
         element.addEventListener("touchend", callback, false);
