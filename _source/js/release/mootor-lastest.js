@@ -922,19 +922,34 @@ var Mootor = (function () {
             var distance,
                 panel,
                 cb,
-                back;
+                back,
+                hidden_tmp,
+                hidden = [],
+                i;
 
             panel = this.panels[this.current];
             back = this.panels[this.back];
+                        
+            // Hide sensible elements while move
+            // FIXME CHECK: expensive query
+            hidden_tmp = panel.getElementsByClassName("hidden");
+            hidden.push(Array.prototype.slice.call(hidden_tmp, 0)[0]);
             
-            // Move panels
-            this.move({
-                distanceY: -this.y,
-                largeMove: false,
-                fastMove: true
-            });
+            hidden_tmp = back.getElementsByClassName("hidden");
+            hidden.push(Array.prototype.slice.call(hidden_tmp, 0)[0]);
+            
+            for (i = hidden.length; i--;) {
+                if (hidden[i]) {
+                    Fx.hide(hidden[i]);
+                }
+            }
+            
+            cb = function() {            
+                for (i = hidden.length; i--;) {
+                    Fx.show(hidden[i]);
+                }
+            }
 
-            
             // Calc movement
 
             if (this.current === 0) {
@@ -955,7 +970,7 @@ var Mootor = (function () {
                 }
 
             }
-
+            
             // Move panels
             this.move({
                 distanceX: -distance - this.x,
