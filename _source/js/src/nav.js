@@ -195,7 +195,7 @@
 
                 if (this.y !== 0) {
 
-                    if (e.distanceFromOriginY < 0) {
+                    if (e.distanceOriginY < 0) {
 
                         this.y = 0;
 
@@ -259,7 +259,7 @@
                     });
                 }
 
-                if (e.distanceFromOriginX > maxdist && this.current < (this.count - 1)) {
+                if (e.distanceOriginX > maxdist && this.current < (this.count - 1)) {
 
                     // Move to left
                     if (this.current === 0) {
@@ -269,7 +269,7 @@
                         is_momentum = true;
                     }
 
-                } else if (e.distanceFromOriginX < (-maxdist) && this.current > 0) {
+                } else if (e.distanceOriginX < (-maxdist) && this.current > 0) {
 
                     // Move to right
                     this.back = this.current;
