@@ -630,7 +630,7 @@ var Mootor = (function () {
             panel.anchors = panel.getElementsByTagName('a');
             panel.height = panel.offsetHeight;
         }
-        
+
         // Client viewport sizes
         this.clientH = Mootor.clientH;
         this.clientW = Mootor.clientW;
@@ -642,7 +642,7 @@ var Mootor = (function () {
         if (document.body.style.overflow !== "hidden") {
             document.body.style.overflow = "hidden";
         }
-        
+
         // Header
         // FIXME CHECK
         this.header = document.getElementById("header");
@@ -727,14 +727,13 @@ var Mootor = (function () {
                 }
 
             }
-            
+
             // Header links
             for (i = this.header.anchors.length; i--;) {
                 if (this.header.anchors[i].rel !== "") {
                     Event.bind(this.header.anchors[i], "onTap", onTouch);
                 }
             }
-
 
         },
 
@@ -754,8 +753,6 @@ var Mootor = (function () {
 
             var current = {},
                 tDuration = 0.5;
-                
-            tDuration = 0.5;
 
             if (listeners.isDraggingX === true || e.isLoading === true) {
 
@@ -813,7 +810,7 @@ var Mootor = (function () {
                 tDuration = 0.5;
 
             }
-            
+
             // Move
             if (!e.callback) {
                 Fx.translate(this.el, {x: this.x, y: this.y}, {transitionDuration: tDuration});
@@ -929,26 +926,26 @@ var Mootor = (function () {
 
             panel = this.panels[this.current];
             back = this.panels[this.back];
-                        
+
             // Hide sensible elements while move
             // FIXME CHECK: expensive query
             hidden_tmp = panel.getElementsByClassName("hidden");
             hidden.push(Array.prototype.slice.call(hidden_tmp, 0)[0]);
-            
+
             hidden_tmp = back.getElementsByClassName("hidden");
             hidden.push(Array.prototype.slice.call(hidden_tmp, 0)[0]);
-            
+
             for (i = hidden.length; i--;) {
                 if (hidden[i]) {
                     Fx.hide(hidden[i]);
                 }
             }
-            
-            cb = function() {            
+
+            cb = function () {
                 for (i = hidden.length; i--;) {
                     Fx.show(hidden[i]);
                 }
-            }
+            };
 
             // Calc movement
 
@@ -970,7 +967,7 @@ var Mootor = (function () {
                 }
 
             }
-            
+
             // Move panels
             this.move({
                 distanceX: -distance - this.x,
