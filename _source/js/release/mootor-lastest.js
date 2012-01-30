@@ -226,7 +226,9 @@ var Mootor = (function () {
             lastX: 0,
             startY: 0,
             endY: 0,
-            lastY: 0
+            lastY: 0,
+            velocity: {x: 0, y: 0},
+            time: 0
         };
 
         // Bind initial events
@@ -277,6 +279,8 @@ var Mootor = (function () {
          *      On move start
          */
         start: function (e) {
+        
+            var date = new Date();
 
             // Initialize values
             if (e.clientX || e.clientY) {
@@ -290,6 +294,9 @@ var Mootor = (function () {
             }
             this.drag.lastX = this.drag.startX;
             this.drag.lastY = this.drag.startY;
+            
+            // Time of last touch (for velocity calc)
+            this.drag.time = date.getMilliseconds();
 
             // Add listeners
             this.el.addEventListener('mousemove', this, false);
@@ -309,7 +316,9 @@ var Mootor = (function () {
 
             var listeners = Mootor.Event.listeners,
                 distanceFromOriginX,
-                distanceFromOriginY;
+                distanceFromOriginY,
+                date = new Date();
+
 
             this.drag.distanceFromOriginX = this.drag.startX - this.drag.lastX;
             this.drag.distanceFromOriginY = this.drag.startY - this.drag.lastY;
@@ -336,6 +345,13 @@ var Mootor = (function () {
             distanceFromOriginX = Math.abs(this.drag.distanceFromOriginX);
             distanceFromOriginY = Math.abs(this.drag.distanceFromOriginY);
 
+            // Time of last touch (for velocity calc)
+            this.drag.time = date.getMilliseconds() - this.drag.time;
+            
+            // Velocity
+            this.drag.velocity.x = this.drag.distanceX / this.drag.time * 100;
+            this.drag.velocity.y = this.drag.distanceY / this.drag.time *  100;
+            
             // Detect draggingY
             if (distanceFromOriginY > 0 && distanceFromOriginY > distanceFromOriginX && listeners.isDraggingX === false) {
 
@@ -363,21 +379,15 @@ var Mootor = (function () {
          */
         end: function (e) {
 
-            // Update values
-            this.lastX = e.clientX;
-            this.lastY = e.clientY;
-            this.distanceFromOriginX = this.initX - e.lastX;
-            this.distanceFromOriginY = this.initY - e.lastY;
-
             // Remove listeners
             this.el.removeEventListener('mousemove', this, false);
             this.el.removeEventListener('mouseup', this, false);
             this.el.removeEventListener('touchmove', this, false);
             this.el.removeEventListener('touchend', this, false);
-
+            
             // Callback
-            this.callback.onDragEnd(this.drag);
-
+            this.callback.onDragEnd(this.drag);            
+            
             // Set isDragging flags
             listeners.isDraggingY = false;
             listeners.isDraggingX = false;
@@ -583,6 +593,7 @@ var Mootor = (function () {
                 var font_size;
 
                 // FIXME CHECK: This calc can be optimized
+                //                         using media queries
                 if (window.innerWidth < 768) {
                     font_size = window.innerWidth / 10 + (window.innerHeight / 40);
                 } else {                
@@ -763,9 +774,10 @@ var Mootor = (function () {
          */
         move: function (e) {
 
-            var current = {};
+            var current = {},
+                transitionDuration = 0.5;
 
-            e.moveDuration = 0.5;
+            transitionDuration = 0.5;
 
             if (listeners.isDraggingX === true || e.isLoading === true) {
 
@@ -783,7 +795,7 @@ var Mootor = (function () {
 
             if ((listeners.isDraggingX || listeners.isDraggingY) && !e.largeMove) {
                 // If dragging, move fast
-                e.moveDuration = 0;
+                transitionDuration = 0;
             }
 
             if (e.bounceBack === true) {
@@ -820,15 +832,15 @@ var Mootor = (function () {
                 e.bounceBack = false;
 
                 // Move slow
-                e.moveDuration = 0.5;
+                transitionDuration = 0.5;
 
             }
 
             // Move
             if (!e.callback) {
-                Fx.translate(this.el, {x: this.panelsX, y: this.panelsY}, {transitionDuration: e.moveDuration});
+                Fx.translate(this.el, {x: this.panelsX, y: this.panelsY}, {transitionDuration: transitionDuration});
             } else {
-                Fx.translate(this.el, {x: this.panelsX, y: this.panelsY}, {transitionDuration: e.moveDuration, callback: e.callback});
+                Fx.translate(this.el, {x: this.panelsX, y: this.panelsY}, {transitionDuration: transitionDuration, callback: e.callback});
             }
 
         },
@@ -841,13 +853,26 @@ var Mootor = (function () {
             var maxdist = this.thresholdX,
                 is_momentum = false,
                 bouncedist,
-                tmpback;
+                tmpback,
+                boostdist;
 
             // If position reach certain threshold, load new panel,
             // else, move panel back.
 
             // Check isDragging flags
             if ((listeners.isDraggingX && this.panelsY === 0) || listeners.isDraggingY) {
+
+                // Velocity boost movement
+                if (e.velocity.y !== 0) {
+                    boostdist = e.velocity.y;
+                    e.velocity.y = 0;
+                    this.move({
+                        distanceY: boostdist * 10,
+                        largeMove: true,
+                        isLoading: false,
+                        callback: this.checkMove(e)
+                    });
+                }
 
                 if (e.distanceFromOriginX > maxdist && this.current < (this.panelsCount - 1)) {
 

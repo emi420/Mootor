@@ -145,9 +145,10 @@
          */
         move: function (e) {
 
-            var current = {};
+            var current = {},
+                transitionDuration = 0.5;
 
-            e.moveDuration = 0.5;
+            transitionDuration = 0.5;
 
             if (listeners.isDraggingX === true || e.isLoading === true) {
 
@@ -165,7 +166,7 @@
 
             if ((listeners.isDraggingX || listeners.isDraggingY) && !e.largeMove) {
                 // If dragging, move fast
-                e.moveDuration = 0;
+                transitionDuration = 0;
             }
 
             if (e.bounceBack === true) {
@@ -202,15 +203,15 @@
                 e.bounceBack = false;
 
                 // Move slow
-                e.moveDuration = 0.5;
+                transitionDuration = 0.5;
 
             }
 
             // Move
             if (!e.callback) {
-                Fx.translate(this.el, {x: this.panelsX, y: this.panelsY}, {transitionDuration: e.moveDuration});
+                Fx.translate(this.el, {x: this.panelsX, y: this.panelsY}, {transitionDuration: transitionDuration});
             } else {
-                Fx.translate(this.el, {x: this.panelsX, y: this.panelsY}, {transitionDuration: e.moveDuration, callback: e.callback});
+                Fx.translate(this.el, {x: this.panelsX, y: this.panelsY}, {transitionDuration: transitionDuration, callback: e.callback});
             }
 
         },
@@ -223,13 +224,26 @@
             var maxdist = this.thresholdX,
                 is_momentum = false,
                 bouncedist,
-                tmpback;
+                tmpback,
+                boostdist;
 
             // If position reach certain threshold, load new panel,
             // else, move panel back.
 
             // Check isDragging flags
             if ((listeners.isDraggingX && this.panelsY === 0) || listeners.isDraggingY) {
+
+                // Velocity boost movement
+                if (e.velocity.y !== 0) {
+                    boostdist = e.velocity.y;
+                    e.velocity.y = 0;
+                    this.move({
+                        distanceY: boostdist * 10,
+                        largeMove: true,
+                        isLoading: false,
+                        callback: this.checkMove(e)
+                    });
+                }
 
                 if (e.distanceFromOriginX > maxdist && this.current < (this.panelsCount - 1)) {
 

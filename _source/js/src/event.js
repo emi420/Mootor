@@ -46,7 +46,9 @@
             lastX: 0,
             startY: 0,
             endY: 0,
-            lastY: 0
+            lastY: 0,
+            velocity: {x: 0, y: 0},
+            time: 0
         };
 
         // Bind initial events
@@ -97,6 +99,8 @@
          *      On move start
          */
         start: function (e) {
+        
+            var date = new Date();
 
             // Initialize values
             if (e.clientX || e.clientY) {
@@ -110,6 +114,9 @@
             }
             this.drag.lastX = this.drag.startX;
             this.drag.lastY = this.drag.startY;
+            
+            // Time of last touch (for velocity calc)
+            this.drag.time = date.getMilliseconds();
 
             // Add listeners
             this.el.addEventListener('mousemove', this, false);
@@ -129,7 +136,9 @@
 
             var listeners = Mootor.Event.listeners,
                 distanceFromOriginX,
-                distanceFromOriginY;
+                distanceFromOriginY,
+                date = new Date();
+
 
             this.drag.distanceFromOriginX = this.drag.startX - this.drag.lastX;
             this.drag.distanceFromOriginY = this.drag.startY - this.drag.lastY;
@@ -156,6 +165,13 @@
             distanceFromOriginX = Math.abs(this.drag.distanceFromOriginX);
             distanceFromOriginY = Math.abs(this.drag.distanceFromOriginY);
 
+            // Time of last touch (for velocity calc)
+            this.drag.time = date.getMilliseconds() - this.drag.time;
+            
+            // Velocity
+            this.drag.velocity.x = this.drag.distanceX / this.drag.time * 100;
+            this.drag.velocity.y = this.drag.distanceY / this.drag.time *  100;
+            
             // Detect draggingY
             if (distanceFromOriginY > 0 && distanceFromOriginY > distanceFromOriginX && listeners.isDraggingX === false) {
 
@@ -183,21 +199,15 @@
          */
         end: function (e) {
 
-            // Update values
-            this.lastX = e.clientX;
-            this.lastY = e.clientY;
-            this.distanceFromOriginX = this.initX - e.lastX;
-            this.distanceFromOriginY = this.initY - e.lastY;
-
             // Remove listeners
             this.el.removeEventListener('mousemove', this, false);
             this.el.removeEventListener('mouseup', this, false);
             this.el.removeEventListener('touchmove', this, false);
             this.el.removeEventListener('touchend', this, false);
-
+            
             // Callback
-            this.callback.onDragEnd(this.drag);
-
+            this.callback.onDragEnd(this.drag);            
+            
             // Set isDragging flags
             listeners.isDraggingY = false;
             listeners.isDraggingX = false;
