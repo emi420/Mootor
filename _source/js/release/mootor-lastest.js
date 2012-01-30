@@ -319,13 +319,13 @@ var Mootor = (function () {
         move: function (e) {
 
             var listeners = Mootor.Event.listeners,
-                distanceFromOriginX,
-                distanceFromOriginY,
+                distanceOriginX,
+                distanceOriginY,
                 date = new Date();
 
 
-            this.drag.distanceFromOriginX = this.drag.startX - this.drag.lastX;
-            this.drag.distanceFromOriginY = this.drag.startY - this.drag.lastY;
+            this.drag.distanceOriginX = this.drag.startX - this.drag.lastX;
+            this.drag.distanceOriginY = this.drag.startY - this.drag.lastY;
 
             if (e.clientX || e.clientY) {
 
@@ -346,8 +346,8 @@ var Mootor = (function () {
             }
 
             // Set isDragging flags  
-            distanceFromOriginX = Math.abs(this.drag.distanceFromOriginX);
-            distanceFromOriginY = Math.abs(this.drag.distanceFromOriginY);
+            distanceOriginX = Math.abs(this.drag.distanceOriginX);
+            distanceOriginY = Math.abs(this.drag.distanceOriginY);
 
             // Time of last touch (for velocity calc)
             this.drag.time = date.getMilliseconds() - this.drag.time;
@@ -357,12 +357,12 @@ var Mootor = (function () {
             this.drag.velocity.y = this.drag.distanceY / this.drag.time * 100;
 
             // Detect draggingY
-            if (distanceFromOriginY > 0 && distanceFromOriginY > distanceFromOriginX && listeners.isDraggingX === false) {
+            if (distanceOriginY > 0 && distanceOriginY > distanceOriginX && listeners.isDraggingX === false) {
 
                 listeners.isDraggingY = true;
 
             // Detect draggingX
-            } else if (distanceFromOriginX > 0 && listeners.isDraggingY === false) {
+            } else if (distanceOriginX > 0 && listeners.isDraggingY === false) {
 
                 listeners.isDraggingX = true;
 
@@ -785,7 +785,7 @@ var Mootor = (function () {
 
                 if (this.y !== 0) {
 
-                    if (e.distanceFromOriginY < 0) {
+                    if (e.distanceOriginY < 0) {
 
                         this.y = 0;
 
@@ -849,7 +849,7 @@ var Mootor = (function () {
                     });
                 }
 
-                if (e.distanceFromOriginX > maxdist && this.current < (this.count - 1)) {
+                if (e.distanceOriginX > maxdist && this.current < (this.count - 1)) {
 
                     // Move to left
                     if (this.current === 0) {
@@ -859,7 +859,7 @@ var Mootor = (function () {
                         is_momentum = true;
                     }
 
-                } else if (e.distanceFromOriginX < (-maxdist) && this.current > 0) {
+                } else if (e.distanceOriginX < (-maxdist) && this.current > 0) {
 
                     // Move to right
                     this.back = this.current;
