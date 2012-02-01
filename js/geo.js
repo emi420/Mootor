@@ -4,7 +4,7 @@
 
 var $ = window.$ || $;
 
-(function (Mootor) {
+(function (Moo) {
 
     "use strict";
 
@@ -77,7 +77,7 @@ var $ = window.$ || $;
      /*
       *     Public
       */
-    Mootor.Geo = {
+    Moo.Geo = {
 
         /*          
          *      Panels navigation
@@ -89,7 +89,7 @@ var $ = window.$ || $;
 
     };
 
-    Mootor.extend(Mootor.Geo);
+    Moo.extend(Moo.Geo);
 
 }($));
 

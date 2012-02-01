@@ -1,17 +1,18 @@
 ﻿/* 
  * Dynamic Type Mootor Fx Plugin
  */
+ 
+var $ = window.$ || $;
 
-(function (Mootor) {
+(function (Moo) {
 
     "use strict";
 
-
-    // Max and Min font sizes
+    // Max and min font sizes
     var max = 105,
         min = 20;
 
-    Mootor.Fx = {
+    Moo.Fx = {
         /*
          *       Adjust font size relative to viewport size
          */
@@ -42,18 +43,13 @@
 
             };
 
-            // Add event listeners to update font size when user 
-            // rotate device or resize window
-            //Event.bind(window, "orientationChange", updateSize);
-            //Event.bind(window, "resize", updateSize);
-
             // Initialize font-size
             updateSize();
 
         }
     };
 
-    Mootor.extend(Mootor.Fx);
+    Moo.extend(Moo.Fx);
 
 }($));
 

@@ -1,5 +1,5 @@
 
 // Go public!
-window.$ = Mootor;
+window.$ = Moo;
 
-}(window, document));
+}(window));
