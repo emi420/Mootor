@@ -11,34 +11,20 @@
 </head>
 <body class='main'>
   <div id='header'>
-    <div class='nav'>
-      <li>
-        <a href='' rel='home'>Home</a>
-      </li>
-    </div>
+    <nav>
+      <a class='nav' href='' rel='home'>Home</a>
+    </nav>
   </div>
   <div id='panels'>
     <div class='panel' id='home'>
-      <div class='nav'>
-        <li>
-          <a href='' rel='text'>Text</a>
-        </li>
-        <li>
-          <a href='' rel='geo'>Geo</a>
-        </li>
-        <li>
-          <a href='' rel='video'>Video</a>
-        </li>
-        <li>
-          <a href='' rel='carousel'>Carousel</a>
-        </li>
-        <li>
-          <a href='' rel='form'>Form</a>
-        </li>
-        <li>
-          <a href='' rel='graph'>Graph</a>
-        </li>
-      </div>
+      <nav>
+        <a class='nav' href='' rel='text'>Text</a>
+        <a class='nav' href='' rel='geo'>Geo</a>
+        <a class='nav' href='' rel='video'>Video</a>
+        <a class='nav' href='' rel='carousel'>Carousel</a>
+        <a class='nav' href='' rel='form'>Form</a>
+        <a class='nav' href='' rel='graph'>Graph</a>
+      </nav>
     </div>
     <div class='panel' id='text'>
       <h2>Text</h2>
@@ -127,8 +113,12 @@
            panels.dynamicType();
     
            // Navigation panels
-           panels.panels();
-           
+           panels.panels({
+                header_id: "header",
+                panel_class: "panel",
+                nav_class: "nav"
+           });
+                      
            // Show location map
            $("#map").map();
     

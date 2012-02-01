@@ -65,7 +65,7 @@ p {
     text-align: left;
     @include background(linear-gradient($domColor1C, $domColor1B)); 
     border: 1px solid $domColor1B;
-    li a {
+    nav a {
         color: $subColor1;
         border: 0;
         font-size: 1.9em;
@@ -86,14 +86,14 @@ p {
     -webkit-transform:translate3d(0,0,0);
 }
 
-.nav a {
+nav a {
     font-size: 3em;
     color: $domColor1;
     border-bottom: 1px solid #ddd;
     border-top: 1px solid #fff;
 }
 
-.nav a:hover {
+nav a:hover {
     background: transparent;
 }
 

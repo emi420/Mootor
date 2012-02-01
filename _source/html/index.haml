@@ -12,26 +12,19 @@
 
     #header
     
-        .nav
-            %li
-                %a{:href=>"", :rel=>"home"} Home
+        %nav
+            %a.nav{:href=>"", :rel=>"home"} Home
 
     #panels
 
         .panel#home
-            .nav
-                %li
-                    %a{:href=>"", :rel=>"text"} Text
-                %li
-                    %a{:href=>"", :rel=>"geo"} Geo
-                %li
-                    %a{:href=>"", :rel=>"video"} Video
-                %li
-                    %a{:href=>"", :rel=>"carousel"} Carousel
-                %li
-                    %a{:href=>"", :rel=>"form"} Form
-                %li
-                    %a{:href=>"", :rel=>"graph"} Graph
+            %nav
+                %a.nav{:href=>"", :rel=>"text"} Text
+                %a.nav{:href=>"", :rel=>"geo"} Geo
+                %a.nav{:href=>"", :rel=>"video"} Video
+                %a.nav{:href=>"", :rel=>"carousel"} Carousel
+                %a.nav{:href=>"", :rel=>"form"} Form
+                %a.nav{:href=>"", :rel=>"graph"} Graph
 
         .panel#text
             %h2 Text
@@ -100,8 +93,12 @@
            panels.dynamicType();
 
            // Navigation panels
-           panels.panels();
-           
+           panels.panels({
+                header_id: "header",
+                panel_class: "panel",
+                nav_class: "nav"
+           });
+                      
            // Show location map
            $("#map").map();
 

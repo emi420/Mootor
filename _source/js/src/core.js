@@ -1,7 +1,7 @@
 /* 
  *  Mootor Core
  */
- 
+
 var document = window.document;
 
 var Moo = (function () {
@@ -17,18 +17,18 @@ var Moo = (function () {
 
         // Get element from query
         if (qtype === "string") {
-        
+
             if (query.indexOf("#") > -1) {
                 query = query.replace("#", "");
                 el = document.getElementById(query);
-                
+
             } else if (query.indexOf(".") > -1) {
                 query = query.replace(".", "");
                 el = document.getElementsByClassName(query);
-                
-            }            
+
+            }
         } else if (qtype === "object") {
-            el = query;            
+            el = query;
         }
 
 		// Private
@@ -41,7 +41,7 @@ var Moo = (function () {
 
 		return this;
 	};
-    
+
     Moo.fn.prototype = Moo.prototype = {
 		ready: function (callback) {
 			Moo.ready(callback, this.el);
@@ -76,7 +76,7 @@ var Moo = (function () {
                     fn.call(window.document);
                     ready = true;
                 };
-                if (el !== "undefined" && Moo.test.addEventListener) {
+                if (el !== undefined && Moo.test.addEventListener) {
                     el.addEventListener("DOM-ContentLoaded", handler, false);
                     el.addEventListener("readystatechange", handler, false);
                     el.addEventListener("load", handler, false);
@@ -86,25 +86,27 @@ var Moo = (function () {
             }
 
         },
-        
+
         test: {
             addEventListener: false
         },
 
         view: {
-            styles: undefined,
+
             clientH: 0,
             clientW: 0,
+
             hide: function () {
                 var styles = document.createElement("style");
                 styles.innerHTML = "body * {display: none}";
                 document.head.appendChild(styles);
                 Moo.view.styles = styles;
             },
+
             show: function () {
                 document.head.removeChild(Moo.view.styles);
-            },
-         }
+            }
+        }
 
     }, Moo);
 
@@ -114,7 +116,7 @@ var Moo = (function () {
         Moo.test.addEventListener = false;
     }
 
-   Moo.ready(function () {
+    Moo.ready(function () {
 		var clientW = document.documentElement.clientWidth,
 			clientH = document.documentElement.clientHeight;
 
@@ -132,4 +134,8 @@ var Moo = (function () {
 	return Moo;
 
 }());
+
+// Go public!
+window.$ = Moo;
+
 

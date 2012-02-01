@@ -25,9 +25,9 @@ var $ = window.$ || $;
         success = function (position) {
             var options,
                 map,
-                google = window.google || "undefined";
+                google = window.google || undefined;
 
-            if (google !== "undefined") {
+            if (google !== undefined) {
 
                 latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
