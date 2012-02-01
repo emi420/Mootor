@@ -129,7 +129,9 @@
             this.el.addEventListener('touchend', this, false);
 
             // Callback
-            this.callback.onDragStart(this.drag);
+            if (this.callback.onDragStart !== undefined) {
+                this.callback.onDragStart(this.drag);
+            }
 
         },
 
