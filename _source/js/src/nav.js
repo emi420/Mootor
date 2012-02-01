@@ -119,7 +119,8 @@
 
                 // Positioning panels to hide all but first
                 if (i > 0) {
-                    panel.style.left = -((this.clientW + 40) * 4) + "px";
+                    panel.style.left = ((this.clientW + 40) * 4) + "px";
+                    panel.style.top = "0px";
                 } else {
                     panel.style.left = "0px";
                 }
@@ -160,22 +161,28 @@
          *      Move
          */
         move: function (e) {
+        
+            // FIXME CHECK: optimize me
 
             var current = {},
-                tDuration = 0.5;
+                tDuration = 0.5,
+                element = this.el,
+                panel =  this.panels[this.current],
+                positions = {};
 
             if (listeners.isDraggingX === true || e.isLoading === true) {
 
                 // Dragging X
-                if (this.y === 0) {
-                    this.x = this.x + e.distanceX;
-                }
+                this.x = this.x + e.distanceX;
 
             } else if (listeners.isDraggingY === true) {
 
                  // Dragging Y
                 this.y = this.y + e.distanceY;
-
+                
+                // Move current panel, not container
+                element = panel;
+                
             }
 
             if ((listeners.isDraggingX || listeners.isDraggingY) && !e.largeMove) {
@@ -195,6 +202,9 @@
 
                 if (this.y !== 0) {
 
+                    // Move current panel, not container
+                    element = panel;
+                    
                     if (e.distanceOriginY < 0) {
 
                         this.y = 0;
@@ -203,7 +213,7 @@
 
                         current = {
                             // FIXME CHECK: expensive query
-                            height: this.panels[this.current].offsetHeight
+                            height: panel.offsetHeight
                         };
 
                         if (current.height >= this.clientH) {
@@ -220,12 +230,22 @@
                 tDuration = 0.5;
 
             }
-
+            
+            if (element === panel) {
+                // If moving current panel, move on Y axis only
+                positions.x = 0;
+                positions.y = this.y;
+            } else {
+                // If moving panels container panel, move on X axis only
+                positions.x = this.x;
+                positions.y = 0;
+            }
+            
             // Move
             if (!e.callback) {
-                Fx.translate(this.el, {x: this.x, y: this.y}, {transitionDuration: tDuration});
+                Fx.translate(element, positions, {transitionDuration: tDuration});
             } else {
-                Fx.translate(this.el, {x: this.x, y: this.y}, {transitionDuration: tDuration, callback: e.callback});
+                Fx.translate(element, positions, {transitionDuration: tDuration, callback: e.callback});
             }
 
         },
@@ -333,9 +353,20 @@
                 hidden_tmp,
                 hidden = [],
                 i;
-
+                
+            // FIXME CHECK: temporary code to clean transitions
+            var clearTransform = function(el) {
+                el.style.webkitTransitionDuration = "";
+                el.style.webkitTransitionTimingFunction = "";
+                el.style.webkitTransitionTransitionDelay = "";
+            }
+            
             panel = this.panels[this.current];
             back = this.panels[this.back];
+
+            clearTransform(panel);
+            clearTransform(back);
+            
 
             // Hide sensible elements while move
             // FIXME CHECK: expensive query
@@ -363,8 +394,9 @@
 
                 // Left 
                 distance = 0;
-                if (this.back) {
+                if (this.back) {                    
                     back.style.left =  this.clientW + 40 + "px";
+                    panel.style.top = "0px";
                 }
 
             } else {
@@ -372,8 +404,9 @@
                 // Right
                 distance = this.clientW + 40;
                 panel.style.left = distance + "px";
+                
                 if (this.back && this.back !== this.current) {
-                    back.style.left =  distance * 4 + "px";
+                   back.style.left = distance * 4 + "px";
                 }
 
             }

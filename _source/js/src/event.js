@@ -146,7 +146,6 @@
                 distanceOriginY,
                 date = new Date();
 
-
             this.drag.distanceOriginX = this.drag.startX - this.drag.lastX;
             this.drag.distanceOriginY = this.drag.startY - this.drag.lastY;
 
