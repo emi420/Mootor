@@ -18,6 +18,7 @@
         this.el = options.el;
         this.panelClass = options.panel_class;
         this.navClass = options.nav_class;
+        this.hiddenClass = options.hidden_class;
         this.panels = this.el.getElementsByClassName(this.panelClass);
         this.count = this.panels.length;
         this.x = 0;
@@ -40,6 +41,7 @@
             panel = this.panels[i];
             panel.anchors = panel.getElementsByClassName(this.navClass);
             panel.height = panel.offsetHeight;
+            hidden = panel.getElementsByClassName(this.hidden_class);
         }
 
         this.onDragMove = this.move;
@@ -275,43 +277,27 @@
                 i,
                 clearTransform;
 
-            // FIXME CHECK: temporary code to clean transitions
-            clearTransform = function (el) {
-                el.style.webkitTransitionDuration = "";
-                el.style.webkitTransitionTimingFunction = "";
-                el.style.webkitTransitionTransitionDelay = "";
-            };
-
             panel = this.panels[this.current];
             back = this.panels[this.back];
 
-            clearTransform(panel);
-            clearTransform(back);
+            Fx.clean(panel)
+            Fx.clean(back);
 
-            // Hide sensible elements while move
-            // FIXME CHECK: expensive query
-            hidden_tmp = panel.getElementsByClassName("hidden");
-            hidden.push(Array.prototype.slice.call(hidden_tmp, 0)[0]);
-
-            hidden_tmp = back.getElementsByClassName("hidden");
-            hidden.push(Array.prototype.slice.call(hidden_tmp, 0)[0]);
-
-            for (i = hidden.length; i--;) {
-                if (hidden[i]) {
-                    Fx.hide(hidden[i]);
-                }
-            }
+            Fx.hide([
+                panel.hidden,
+                back.hidden
+            ]);
 
             cb = function () {
-                for (i = hidden.length; i--;) {
-                    Fx.show(hidden[i]);
-                }
+               Fx.show([
+                    panel.hidden,
+                    back.hidden
+                ]);
             };
 
             // Calc movement
 
             if (this.current === 0) {
-
                 // Left 
                 distance = 0;
                 if (this.back) {
@@ -319,7 +305,6 @@
                 }
 
             } else {
-
                 // Right
                 distance = this.width + 40;
                 panel.style.left = distance + "px";
@@ -330,7 +315,6 @@
 
             }
 
-            // Move panels
             this.move({
                 distanceX: -distance - this.x,
                 largeMove: true,
@@ -348,10 +332,6 @@
       */
     Moo.Nav = {
 
-        /*          
-         *      Panels navigation
-         *      Usage: $("#panels").panels();
-         */
         panels: function (options) {
             if (typeof options !== "object") {
                 options = {

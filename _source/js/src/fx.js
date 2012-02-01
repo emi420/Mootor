@@ -5,19 +5,29 @@
 (function (Moo) {
     Moo.Fx = {
         show: function (el) {
-            var element;
-
-            element = typeof el === "object" ? el : this.el;
-            if (element !== undefined) {
-                element.style.display = "block";
+            var element,
+                i;
+                
+            if (Array.isArray(el)) {
+                for (i = el.length; i--;) {
+                    this.show(el[i]);
+                }
+            } else if (element !== undefined) {
+                element = typeof el === "object" ? el : this.el;
+                element.style.display = "none";
             }
         },
 
         hide: function (el) {
-            var element;
-
-            element = typeof el === "object" ? el : this.el;
-            if (element !== undefined) {
+            var element,
+                i;
+                
+            if (Array.isArray(el)) {
+                for (i = el.length; i--;) {
+                    this.hide(el[i]);
+                }
+            } else if (element !== undefined) {
+                element = typeof el === "object" ? el : this.el;
                 element.style.display = "none";
             }
         },
@@ -35,15 +45,20 @@
                 el.style.webkitTransitionDuration = tduration + "s";
                 el.style.webkitTransitionTimingFunction = "ease-out";
             } else {
-                el.style.webkitTransitionDuration = "";
-                el.style.webkitTransitionTimingFunction = "";
+                this.clean(el);
             }
+                        
             el.style.webkitTransform = "translate3d(" + x_pos + "px," + y_pos + "px, 0)";
 
             if (options.callback) {
                 window.setTimeout(options.callback, tduration * 1000);
             }
 
+        },
+        
+        clean: function (el) {
+            el.style.webkitTransitionDuration = "";
+            el.style.webkitTransitionTimingFunction = "";        
         }
 
     };

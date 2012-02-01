@@ -440,19 +440,29 @@ window.$ = Moo;
 (function (Moo) {
     Moo.Fx = {
         show: function (el) {
-            var element;
-
-            element = typeof el === "object" ? el : this.el;
-            if (element !== undefined) {
-                element.style.display = "block";
+            var element,
+                i;
+                
+            if (Array.isArray(el)) {
+                for (i = el.length; i--;) {
+                    this.show(el[i]);
+                }
+            } else if (element !== undefined) {
+                element = typeof el === "object" ? el : this.el;
+                element.style.display = "none";
             }
         },
 
         hide: function (el) {
-            var element;
-
-            element = typeof el === "object" ? el : this.el;
-            if (element !== undefined) {
+            var element,
+                i;
+                
+            if (Array.isArray(el)) {
+                for (i = el.length; i--;) {
+                    this.hide(el[i]);
+                }
+            } else if (element !== undefined) {
+                element = typeof el === "object" ? el : this.el;
                 element.style.display = "none";
             }
         },
@@ -470,15 +480,20 @@ window.$ = Moo;
                 el.style.webkitTransitionDuration = tduration + "s";
                 el.style.webkitTransitionTimingFunction = "ease-out";
             } else {
-                el.style.webkitTransitionDuration = "";
-                el.style.webkitTransitionTimingFunction = "";
+                this.clean(el);
             }
+                        
             el.style.webkitTransform = "translate3d(" + x_pos + "px," + y_pos + "px, 0)";
 
             if (options.callback) {
                 window.setTimeout(options.callback, tduration * 1000);
             }
 
+        },
+        
+        clean: function (el) {
+            el.style.webkitTransitionDuration = "";
+            el.style.webkitTransitionTimingFunction = "";        
         }
 
     };
@@ -507,6 +522,7 @@ window.$ = Moo;
         this.el = options.el;
         this.panelClass = options.panel_class;
         this.navClass = options.nav_class;
+        this.hiddenClass = options.hidden_class;
         this.panels = this.el.getElementsByClassName(this.panelClass);
         this.count = this.panels.length;
         this.x = 0;
@@ -529,6 +545,7 @@ window.$ = Moo;
             panel = this.panels[i];
             panel.anchors = panel.getElementsByClassName(this.navClass);
             panel.height = panel.offsetHeight;
+            hidden = panel.getElementsByClassName(this.hidden_class);
         }
 
         this.onDragMove = this.move;
@@ -764,43 +781,27 @@ window.$ = Moo;
                 i,
                 clearTransform;
 
-            // FIXME CHECK: temporary code to clean transitions
-            clearTransform = function (el) {
-                el.style.webkitTransitionDuration = "";
-                el.style.webkitTransitionTimingFunction = "";
-                el.style.webkitTransitionTransitionDelay = "";
-            };
-
             panel = this.panels[this.current];
             back = this.panels[this.back];
 
-            clearTransform(panel);
-            clearTransform(back);
+            Fx.clean(panel)
+            Fx.clean(back);
 
-            // Hide sensible elements while move
-            // FIXME CHECK: expensive query
-            hidden_tmp = panel.getElementsByClassName("hidden");
-            hidden.push(Array.prototype.slice.call(hidden_tmp, 0)[0]);
-
-            hidden_tmp = back.getElementsByClassName("hidden");
-            hidden.push(Array.prototype.slice.call(hidden_tmp, 0)[0]);
-
-            for (i = hidden.length; i--;) {
-                if (hidden[i]) {
-                    Fx.hide(hidden[i]);
-                }
-            }
+            Fx.hide([
+                panel.hidden,
+                back.hidden
+            ]);
 
             cb = function () {
-                for (i = hidden.length; i--;) {
-                    Fx.show(hidden[i]);
-                }
+               Fx.show([
+                    panel.hidden,
+                    back.hidden
+                ]);
             };
 
             // Calc movement
 
             if (this.current === 0) {
-
                 // Left 
                 distance = 0;
                 if (this.back) {
@@ -808,7 +809,6 @@ window.$ = Moo;
                 }
 
             } else {
-
                 // Right
                 distance = this.width + 40;
                 panel.style.left = distance + "px";
@@ -819,7 +819,6 @@ window.$ = Moo;
 
             }
 
-            // Move panels
             this.move({
                 distanceX: -distance - this.x,
                 largeMove: true,
@@ -837,10 +836,6 @@ window.$ = Moo;
       */
     Moo.Nav = {
 
-        /*          
-         *      Panels navigation
-         *      Usage: $("#panels").panels();
-         */
         panels: function (options) {
             if (typeof options !== "object") {
                 options = {
