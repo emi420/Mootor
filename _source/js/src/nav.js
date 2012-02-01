@@ -13,14 +13,13 @@
     Panels = function (options) {
 
         var i,
-            panel;
+            panel,
+            panels;
 
         this.el = options.el;
         this.panelClass = options.panel_class;
         this.navClass = options.nav_class;
         this.hiddenClass = options.hidden_class;
-        this.panels = this.el.getElementsByClassName(this.panelClass);
-        this.count = this.panels.length;
         this.x = 0;
         this.y = 0;
         this.current = 0;
@@ -28,20 +27,25 @@
         this.height = Moo.view.clientH;
         this.width = Moo.view.clientW;
         this.thresholdX = this.width / 2;
-        this.header = document.getElementById(options.header_id);
+        this.header = {el: document.getElementById(options.header_id)};
+        this.panels = [];
+                
+        panels = this.el.getElementsByClassName(this.panelClass);
+        this.count = panels.length;
 
+        for (i = panels.length; i-- ;) {
+            this.panels[i] = {el: panels[i]}
+            panel =  this.panels[i];
+            panel.anchors = panel.el.getElementsByClassName(this.navClass);
+            panel.height = panel.el.offsetHeight;
+            panel.hidden = panel.el.getElementsByClassName(this.hiddenClass);
+        }
+                
         if (this.header !== undefined) {
             this.nav(this.header);
-            this.top = this.header.offsetHeight;
+            this.top = this.header.el.offsetHeight;
             this.height = Moo.view.clientH - this.top;
             this.el.style.marginTop = this.top + "px";
-        }
-
-        for (i = this.count; i--;) {
-            panel = this.panels[i];
-            panel.anchors = panel.getElementsByClassName(this.navClass);
-            panel.height = panel.offsetHeight;
-            hidden = panel.getElementsByClassName(this.hidden_class);
         }
 
         this.onDragMove = this.move;
@@ -57,9 +61,9 @@
 
     Panels.prototype = {
 
-        nav: function (el) {
-            el.style.width = Moo.view.clientW + "px";
-            el.anchors = el.getElementsByClassName(this.navClass);
+        nav: function (obj) {
+            obj.el.style.width = Moo.view.clientW + "px";
+            obj.anchors = obj.el.getElementsByClassName(this.navClass);
         },
 
         init: function () {
@@ -81,18 +85,18 @@
             for (i = this.count; i--;) {
 
                 panel = this.panels[i];
-                panel.style.width = this.width + "px";
-                panel.style.overflow = 'hidden';
+                panel.el.style.width = this.width + "px";
+                panel.el.style.overflow = 'hidden';
 
                 if (i > 0) {
-                    panel.style.left = ((this.width + 40) * 4) + "px";
-                    panel.style.top = "0px";
+                    panel.el.style.left = ((this.width + 40) * 4) + "px";
+                    panel.el.style.top = "0px";
                 } else {
-                    panel.style.left = "0px";
+                    panel.el.style.left = "0px";
                 }
 
                 if (this.height > panel.height) {
-                    panel.style.height = this.height + "px";
+                    panel.el.style.height = this.height + "px";
                     panel.height = this.height;
                 }
 
@@ -128,7 +132,7 @@
                 this.x = this.x + e.distanceX;
             } else if (listeners.isDraggingY === true) {
                 this.y = this.y + e.distanceY;
-                element = panel;
+                element = panel.el;
             }
 
             // Fast move
@@ -147,7 +151,7 @@
                 }
                 
                 if (this.y !== 0) {
-                    element = panel;
+                    element = panel.el;
                     if (e.distanceOriginY < 0) {
                         this.y = 0;
                     } else {
@@ -162,7 +166,7 @@
 
             }
 
-            if (element === panel) {
+            if (element === panel.el) {
                 positions.x = 0;
                 positions.y = this.y;
             } else {
@@ -231,7 +235,7 @@
                 } else {
                     // Bounce back
                     bouncedist = this.height - this.panels[this.current].height;
-                    if (this.y >= 0 || this.panels[this.current].offsetHeight -  this.height < -this.y) {
+                    if (this.y >= 0 || this.panels[this.current].height -  this.height < -this.y) {
                         e.largeMove = true;
                         e.bounceBack = true;
                         this.move(e);
@@ -251,7 +255,7 @@
 
             // Get panel by id and load it
             for (i = this.count; i--;) {
-                if (this.panels[i].id === pid) {
+                if (this.panels[i].el.id === pid) {
                     if (this.current > 0) {
                         this.back = this.current;
                     }
@@ -272,45 +276,43 @@
                 panel,
                 cb,
                 back,
-                hidden_tmp,
-                hidden = [],
                 i,
                 clearTransform;
 
             panel = this.panels[this.current];
             back = this.panels[this.back];
+            
+            for(i = panel.hidden.length; i--;) {
+                Fx.hide(panel.hidden[i]);
+            }
+            for(i = back.hidden.length; i--;) {
+                Fx.hide(back.hidden[i]);
+            }
 
-            Fx.clean(panel)
-            Fx.clean(back);
-
-            Fx.hide([
-                panel.hidden,
-                back.hidden
-            ]);
-
+            Fx.clean(panel.el)
+            Fx.clean(back.el);          
+                                     
             cb = function () {
-               Fx.show([
-                    panel.hidden,
-                    back.hidden
-                ]);
+                for(i = panel.hidden.length; i--;) {
+                    Fx.show(panel.hidden[i]);
+                }
             };
 
-            // Calc movement
 
             if (this.current === 0) {
                 // Left 
                 distance = 0;
                 if (this.back) {
-                    back.style.left =  this.width + 40 + "px";
+                    back.el.style.left =  this.width + 40 + "px";
                 }
 
             } else {
                 // Right
                 distance = this.width + 40;
-                panel.style.left = distance + "px";
+                panel.el.style.left = distance + "px";
 
                 if (this.back && this.back !== this.current) {
-                    back.style.left = distance * 4 + "px";
+                    back.el.style.left = distance * 4 + "px";
                 }
 
             }

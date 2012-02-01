@@ -5,29 +5,17 @@
 (function (Moo) {
     Moo.Fx = {
         show: function (el) {
-            var element,
-                i;
-                
-            if (Array.isArray(el)) {
-                for (i = el.length; i--;) {
-                    this.show(el[i]);
-                }
-            } else if (element !== undefined) {
-                element = typeof el === "object" ? el : this.el;
-                element.style.display = "none";
+            var element = typeof el === "object" ? el : this.el;
+            if (element !== undefined) {
+                console.log("show!");
+                element.style.display = "block";
             }
         },
 
         hide: function (el) {
-            var element,
-                i;
-                
-            if (Array.isArray(el)) {
-                for (i = el.length; i--;) {
-                    this.hide(el[i]);
-                }
-            } else if (element !== undefined) {
-                element = typeof el === "object" ? el : this.el;
+            var element = typeof el === "object" ? el : this.el;
+            if (element !== undefined) {
+                console.log("hide!");
                 element.style.display = "none";
             }
         },
