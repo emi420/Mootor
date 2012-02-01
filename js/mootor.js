@@ -521,18 +521,18 @@ window.$ = Moo;
         this.thresholdX = this.width / 2;
         this.header = {el: document.getElementById(options.header_id)};
         this.panels = [];
-                
+
         panels = this.el.getElementsByClassName(this.panelClass);
         this.count = panels.length;
 
-        for (i = panels.length; i-- ;) {
-            this.panels[i] = {el: panels[i]}
+        for (i = panels.length; i--;) {
+            this.panels[i] = {el: panels[i]};
             panel =  this.panels[i];
             panel.anchors = panel.el.getElementsByClassName(this.navClass);
             panel.height = panel.el.offsetHeight;
             panel.hidden = panel.el.getElementsByClassName(this.hiddenClass);
         }
-                
+
         if (this.header !== undefined) {
             this.nav(this.header);
             this.top = this.header.el.offsetHeight;
@@ -614,7 +614,7 @@ window.$ = Moo;
          *      Move
          */
         move: function (e) {
-                var duration = 0.5,
+            var duration = 0.5,
                 element = this.el,
                 panel =  this.panels[this.current],
                 positions = {};
@@ -641,7 +641,7 @@ window.$ = Moo;
                 } else {
                     this.x = 0;
                 }
-                
+
                 if (this.y !== 0) {
                     element = panel.el;
                     if (e.distanceOriginY < 0) {
@@ -768,24 +768,23 @@ window.$ = Moo;
                 panel,
                 cb,
                 back,
-                i,
-                clearTransform;
+                i;
 
             panel = this.panels[this.current];
             back = this.panels[this.back];
-            
-            for(i = panel.hidden.length; i--;) {
+
+            for (i = panel.hidden.length; i--;) {
                 Fx.hide(panel.hidden[i]);
             }
-            for(i = back.hidden.length; i--;) {
+            for (i = back.hidden.length; i--;) {
                 Fx.hide(back.hidden[i]);
             }
 
-            Fx.clean(panel.el)
-            Fx.clean(back.el);          
-                                     
+            Fx.clean(panel.el);
+            Fx.clean(back.el);
+
             cb = function () {
-                for(i = panel.hidden.length; i--;) {
+                for (i = panel.hidden.length; i--;) {
                     Fx.show(panel.hidden[i]);
                 }
             };
