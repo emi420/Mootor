@@ -577,7 +577,7 @@ var Mootor = (function () {
 
             // Use WebKit transform 3D
             distance = x_pos + "px," + y_pos + "px, 0";
-            
+
             el.style.webkitTransform = "translate3d(" + distance + ")";
 
             if (options.callback) {
@@ -595,6 +595,11 @@ var Mootor = (function () {
 /*
  * Mootor Navigation
  */
+ 
+ /*
+  *     TODO: 
+  *     - Optimization
+  */
 
 (function (Mootor) {
 
@@ -755,7 +760,7 @@ var Mootor = (function () {
          *      Move
          */
         move: function (e) {
-        
+
             // FIXME CHECK: optimize me
 
             var current = {},
@@ -773,10 +778,10 @@ var Mootor = (function () {
 
                  // Dragging Y
                 this.y = this.y + e.distanceY;
-                
+
                 // Move current panel, not container
                 element = panel;
-                
+
             }
 
             if ((listeners.isDraggingX || listeners.isDraggingY) && !e.largeMove) {
@@ -798,7 +803,7 @@ var Mootor = (function () {
 
                     // Move current panel, not container
                     element = panel;
-                    
+
                     if (e.distanceOriginY < 0) {
 
                         this.y = 0;
@@ -824,7 +829,7 @@ var Mootor = (function () {
                 tDuration = 0.5;
 
             }
-            
+
             if (element === panel) {
                 // If moving current panel, move on Y axis only
                 positions.x = 0;
@@ -834,7 +839,7 @@ var Mootor = (function () {
                 positions.x = this.x;
                 positions.y = 0;
             }
-            
+
             // Move
             if (!e.callback) {
                 Fx.translate(element, positions, {transitionDuration: tDuration});
@@ -946,21 +951,21 @@ var Mootor = (function () {
                 back,
                 hidden_tmp,
                 hidden = [],
-                i;
-                
+                i,
+                clearTransform;
+
             // FIXME CHECK: temporary code to clean transitions
-            var clearTransform = function(el) {
+            clearTransform = function (el) {
                 el.style.webkitTransitionDuration = "";
                 el.style.webkitTransitionTimingFunction = "";
                 el.style.webkitTransitionTransitionDelay = "";
-            }
-            
+            };
+
             panel = this.panels[this.current];
             back = this.panels[this.back];
 
             clearTransform(panel);
             clearTransform(back);
-            
 
             // Hide sensible elements while move
             // FIXME CHECK: expensive query
@@ -988,9 +993,8 @@ var Mootor = (function () {
 
                 // Left 
                 distance = 0;
-                if (this.back) {                    
+                if (this.back) {
                     back.style.left =  this.clientW + 40 + "px";
-                    panel.style.top = "0px";
                 }
 
             } else {
@@ -998,9 +1002,9 @@ var Mootor = (function () {
                 // Right
                 distance = this.clientW + 40;
                 panel.style.left = distance + "px";
-                
+
                 if (this.back && this.back !== this.current) {
-                   back.style.left = distance * 4 + "px";
+                    back.style.left = distance * 4 + "px";
                 }
 
             }

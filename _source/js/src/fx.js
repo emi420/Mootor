@@ -105,7 +105,7 @@
 
             // Use WebKit transform 3D
             distance = x_pos + "px," + y_pos + "px, 0";
-            
+
             el.style.webkitTransform = "translate3d(" + distance + ")";
 
             if (options.callback) {

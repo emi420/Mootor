@@ -1,6 +1,8 @@
 /*
- * Mootor Geo
+ * Mootor Geo plugin
  */
+
+var $ = window.$ || $;
 
 (function (Mootor) {
 
