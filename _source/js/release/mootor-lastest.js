@@ -432,15 +432,19 @@ Moo.Fx = {
     show: function (el) {
         var element;
 
-        typeof el === "object" ? element = el : element = this.el;        
-        element.style.display = "block";
+        typeof el === "object" ? element = el : element = this.el;    
+        if (element !== undefined) {
+            element.style.display = "block";
+        }
     },
 
     hide: function (el) {
         var element;
 
         typeof el === "object" ? element = el : element = this.el;        
-        element.style.display = "none";
+        if (element !== undefined) {
+            element.style.display = "none";
+        }
     },
 
     translate: function (el, positions, options) {
