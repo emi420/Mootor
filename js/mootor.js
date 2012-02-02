@@ -180,7 +180,6 @@ window.$ = Moo;
 
         this.el = element;
         this.callback = callback;
-
         this.drag = {
             x: 0,
             y: 0,
@@ -514,6 +513,7 @@ window.$ = Moo;
             panel.hidden = panel.el.getElementsByClassName(this.hiddenClass);
         }
 
+        this.onDragStart = this.start;
         this.onDragMove = this.move;
         this.onDragEnd = this.check;
         Event.bind(this.el, "onDrag", this);
@@ -597,6 +597,10 @@ window.$ = Moo;
             }
 
         },
+        
+        start: function(e) {
+            event.target.className += " active";
+        },
 
         /*      
          *      Move
@@ -653,6 +657,7 @@ window.$ = Moo;
             var bouncedist,
                 boostdist;
 
+            event.target.className = event.target.className.replace(" active","");
             if (listeners.isDraggingY) {
 
                 // Velocity boost movement

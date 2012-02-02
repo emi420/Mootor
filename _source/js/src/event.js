@@ -38,7 +38,6 @@
 
         this.el = element;
         this.callback = callback;
-
         this.drag = {
             x: 0,
             y: 0,
