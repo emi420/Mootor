@@ -32,21 +32,21 @@ var Moo = (function () {
             el = query;
         }
 
-		// Private
-		this.el = (function () {
-			return el;
-		}());
-		this.query = (function () {
-			return query;
-		}());
+        // Private
+        this.el = (function () {
+            return el;
+        }());
+        this.query = (function () {
+            return query;
+        }());
 
 		return this;
 	};
 
     Moo.fn.prototype = Moo.prototype = {
-		ready: function (callback) {
-			Moo.ready(callback, this.el);
-		}
+        ready: function (callback) {
+            Moo.ready(callback, this.el);
+        }
 	};
 
     Moo.extend = function (obj, target) {
@@ -144,13 +144,6 @@ window.$ = Moo;
  * Mootor Events
  */
 
- /*
-  *     TODO: 
-  *
-  *     - Init-time branching
-  *     - Event delegation
-  */
-
 (function (Moo) {
     var Drag,
         Tap,
@@ -189,17 +182,15 @@ window.$ = Moo;
         this.callback = callback;
 
         this.drag = {
+            x: 0,
+            y: 0,
             startX: 0,
-            endX: 0,
-            lastX: 0,
             startY: 0,
+            endX: 0,
             endY: 0,
-            lastY: 0,
-            velocity: {x: 0, y: 0},
-            time: 0
+            time: 0,
+            velocity: {x: 0, y: 0}
         };
-
-        // Bind initial events
 
         for (i = events.length; i--;) {
             element.addEventListener(events[i], this, false);
@@ -220,12 +211,9 @@ window.$ = Moo;
             // FIXME CHECK: this is a temporary patch
             if (e.target.type !== "text" && e.target.type !== "input") {
 
-                // Prevent default listeners
                 if (e.preventDefault) {
                     e.preventDefault();
                 }
-
-                // Stop event propagation
                 if (e.stopPropagation) {
                     e.stopPropagation();
                 }
@@ -256,7 +244,6 @@ window.$ = Moo;
 
             var date = new Date();
 
-            // Initialize values
             if (e.clientX || e.clientY) {
                 // Click
                 this.drag.startX = e.clientX;
@@ -266,19 +253,16 @@ window.$ = Moo;
                 this.drag.startX = e.touches[0].clientX;
                 this.drag.startY = e.touches[0].clientY;
             }
-            this.drag.lastX = this.drag.startX;
-            this.drag.lastY = this.drag.startY;
+            this.drag.x = this.drag.startX;
+            this.drag.y = this.drag.startY;
 
-            // Time of last touch (for velocity calc)
             this.drag.time = date.getMilliseconds();
 
-            // Add listeners
             this.el.addEventListener('mousemove', this, false);
             this.el.addEventListener('mouseup', this, false);
             this.el.addEventListener('touchmove', this, false);
             this.el.addEventListener('touchend', this, false);
 
-            // Callback
             if (this.callback.onDragStart !== undefined) {
                 this.callback.onDragStart(this.drag);
             }
@@ -295,24 +279,24 @@ window.$ = Moo;
                 distanceOriginY,
                 date = new Date();
 
-            this.drag.distanceOriginX = this.drag.startX - this.drag.lastX;
-            this.drag.distanceOriginY = this.drag.startY - this.drag.lastY;
+            this.drag.distanceOriginX = this.drag.startX - this.drag.x;
+            this.drag.distanceOriginY = this.drag.startY - this.drag.y;
 
             if (e.clientX || e.clientY) {
 
                 // Mouse
-                this.drag.distanceX = e.clientX - this.drag.lastX;
-                this.drag.distanceY = e.clientY - this.drag.lastY;
-                this.drag.lastX = e.clientX;
-                this.drag.lastY = e.clientY;
+                this.drag.distanceX = e.clientX - this.drag.x;
+                this.drag.distanceY = e.clientY - this.drag.y;
+                this.drag.x = e.clientX;
+                this.drag.y = e.clientY;
 
             } else {
 
                 // Touch
-                this.drag.distanceX = e.touches[0].clientX - this.drag.lastX;
-                this.drag.distanceY = e.touches[0].clientY - this.drag.lastY;
-                this.drag.lastX = e.touches[0].clientX;
-                this.drag.lastY = e.touches[0].clientY;
+                this.drag.distanceX = e.touches[0].clientX - this.drag.x;
+                this.drag.distanceY = e.touches[0].clientY - this.drag.y;
+                this.drag.x = e.touches[0].clientX;
+                this.drag.y = e.touches[0].clientY;
 
             }
 
@@ -342,7 +326,7 @@ window.$ = Moo;
         /*
          *     On move end
          */
-        end: function (e) {
+        end: function () {
 
             this.drag.velocity.x = this.drag.distanceX / this.drag.time * 100;
             this.drag.velocity.y = this.drag.distanceY / this.drag.time * 100;
@@ -505,6 +489,7 @@ window.$ = Moo;
             panels;
 
         this.el = options.el;
+        this.headerId = options.header_id !== undefined ? options.header_id : "header";
         this.panelClass = options.panel_class !== undefined ? options.panel_class : "panel";
         this.navClass = options.nav_class !== undefined ? options.nav_class : "nav";
         this.hiddenClass = options.hidden_class !== undefined ? options.hidden_class : "hidden";
@@ -515,8 +500,8 @@ window.$ = Moo;
         this.back = 0;
         this.height = Moo.view.clientH;
         this.width = Moo.view.clientW;
-        this.header = {el: document.getElementById(options.header_id)};
         this.panels = [];
+        this.header = this.header.init(this); 
 
         panels = this.el.getElementsByClassName(this.panelClass);
         this.count = panels.length;
@@ -529,13 +514,6 @@ window.$ = Moo;
             panel.hidden = panel.el.getElementsByClassName(this.hiddenClass);
         }
 
-        if (this.header !== undefined) {
-            this.nav(this.header);
-            this.top = this.header.el.offsetHeight;
-            this.height = Moo.view.clientH - this.top;
-            this.el.style.marginTop = this.top + "px";
-        }
-
         this.onDragMove = this.move;
         this.onDragEnd = this.check;
         Event.bind(this.el, "onDrag", this);
@@ -546,8 +524,22 @@ window.$ = Moo;
         this.init();
 
     };
+    
+    
 
     Panels.prototype = {
+    
+        header: {
+            init: function(panel) {                
+                var header = {};
+                header.el = document.getElementById(panel.headerId);
+                panel.nav(header);
+                panel.top = header.el.offsetHeight;
+                panel.height = Moo.view.clientH - panel.top;
+                panel.el.style.marginTop = panel.top + "px";        
+                return header;
+            }
+        },
 
         nav: function (obj) {
             obj.el.style.width = Moo.view.clientW + "px";

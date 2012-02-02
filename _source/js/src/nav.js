@@ -17,6 +17,7 @@
             panels;
 
         this.el = options.el;
+        this.headerId = options.header_id !== undefined ? options.header_id : "header";
         this.panelClass = options.panel_class !== undefined ? options.panel_class : "panel";
         this.navClass = options.nav_class !== undefined ? options.nav_class : "nav";
         this.hiddenClass = options.hidden_class !== undefined ? options.hidden_class : "hidden";
@@ -27,8 +28,8 @@
         this.back = 0;
         this.height = Moo.view.clientH;
         this.width = Moo.view.clientW;
-        this.header = {el: document.getElementById(options.header_id)};
         this.panels = [];
+        this.header = this.header.init(this); 
 
         panels = this.el.getElementsByClassName(this.panelClass);
         this.count = panels.length;
@@ -41,13 +42,6 @@
             panel.hidden = panel.el.getElementsByClassName(this.hiddenClass);
         }
 
-        if (this.header !== undefined) {
-            this.nav(this.header);
-            this.top = this.header.el.offsetHeight;
-            this.height = Moo.view.clientH - this.top;
-            this.el.style.marginTop = this.top + "px";
-        }
-
         this.onDragMove = this.move;
         this.onDragEnd = this.check;
         Event.bind(this.el, "onDrag", this);
@@ -58,8 +52,22 @@
         this.init();
 
     };
+    
+    
 
     Panels.prototype = {
+    
+        header: {
+            init: function(panel) {                
+                var header = {};
+                header.el = document.getElementById(panel.headerId);
+                panel.nav(header);
+                panel.top = header.el.offsetHeight;
+                panel.height = Moo.view.clientH - panel.top;
+                panel.el.style.marginTop = panel.top + "px";        
+                return header;
+            }
+        },
 
         nav: function (obj) {
             obj.el.style.width = Moo.view.clientW + "px";

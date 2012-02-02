@@ -2,13 +2,6 @@
  * Mootor Events
  */
 
- /*
-  *     TODO: 
-  *
-  *     - Init-time branching
-  *     - Event delegation
-  */
-
 (function (Moo) {
     var Drag,
         Tap,
@@ -47,17 +40,15 @@
         this.callback = callback;
 
         this.drag = {
+            x: 0,
+            y: 0,
             startX: 0,
-            endX: 0,
-            lastX: 0,
             startY: 0,
+            endX: 0,
             endY: 0,
-            lastY: 0,
-            velocity: {x: 0, y: 0},
-            time: 0
+            time: 0,
+            velocity: {x: 0, y: 0}
         };
-
-        // Bind initial events
 
         for (i = events.length; i--;) {
             element.addEventListener(events[i], this, false);
@@ -78,12 +69,9 @@
             // FIXME CHECK: this is a temporary patch
             if (e.target.type !== "text" && e.target.type !== "input") {
 
-                // Prevent default listeners
                 if (e.preventDefault) {
                     e.preventDefault();
                 }
-
-                // Stop event propagation
                 if (e.stopPropagation) {
                     e.stopPropagation();
                 }
@@ -114,7 +102,6 @@
 
             var date = new Date();
 
-            // Initialize values
             if (e.clientX || e.clientY) {
                 // Click
                 this.drag.startX = e.clientX;
@@ -124,19 +111,16 @@
                 this.drag.startX = e.touches[0].clientX;
                 this.drag.startY = e.touches[0].clientY;
             }
-            this.drag.lastX = this.drag.startX;
-            this.drag.lastY = this.drag.startY;
+            this.drag.x = this.drag.startX;
+            this.drag.y = this.drag.startY;
 
-            // Time of last touch (for velocity calc)
             this.drag.time = date.getMilliseconds();
 
-            // Add listeners
             this.el.addEventListener('mousemove', this, false);
             this.el.addEventListener('mouseup', this, false);
             this.el.addEventListener('touchmove', this, false);
             this.el.addEventListener('touchend', this, false);
 
-            // Callback
             if (this.callback.onDragStart !== undefined) {
                 this.callback.onDragStart(this.drag);
             }
@@ -153,24 +137,24 @@
                 distanceOriginY,
                 date = new Date();
 
-            this.drag.distanceOriginX = this.drag.startX - this.drag.lastX;
-            this.drag.distanceOriginY = this.drag.startY - this.drag.lastY;
+            this.drag.distanceOriginX = this.drag.startX - this.drag.x;
+            this.drag.distanceOriginY = this.drag.startY - this.drag.y;
 
             if (e.clientX || e.clientY) {
 
                 // Mouse
-                this.drag.distanceX = e.clientX - this.drag.lastX;
-                this.drag.distanceY = e.clientY - this.drag.lastY;
-                this.drag.lastX = e.clientX;
-                this.drag.lastY = e.clientY;
+                this.drag.distanceX = e.clientX - this.drag.x;
+                this.drag.distanceY = e.clientY - this.drag.y;
+                this.drag.x = e.clientX;
+                this.drag.y = e.clientY;
 
             } else {
 
                 // Touch
-                this.drag.distanceX = e.touches[0].clientX - this.drag.lastX;
-                this.drag.distanceY = e.touches[0].clientY - this.drag.lastY;
-                this.drag.lastX = e.touches[0].clientX;
-                this.drag.lastY = e.touches[0].clientY;
+                this.drag.distanceX = e.touches[0].clientX - this.drag.x;
+                this.drag.distanceY = e.touches[0].clientY - this.drag.y;
+                this.drag.x = e.touches[0].clientX;
+                this.drag.y = e.touches[0].clientY;
 
             }
 
@@ -200,7 +184,7 @@
         /*
          *     On move end
          */
-        end: function (e) {
+        end: function () {
 
             this.drag.velocity.x = this.drag.distanceX / this.drag.time * 100;
             this.drag.velocity.y = this.drag.distanceY / this.drag.time * 100;

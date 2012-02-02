@@ -31,21 +31,21 @@ var Moo = (function () {
             el = query;
         }
 
-		// Private
-		this.el = (function () {
-			return el;
-		}());
-		this.query = (function () {
-			return query;
-		}());
+        // Private
+        this.el = (function () {
+            return el;
+        }());
+        this.query = (function () {
+            return query;
+        }());
 
 		return this;
 	};
 
     Moo.fn.prototype = Moo.prototype = {
-		ready: function (callback) {
-			Moo.ready(callback, this.el);
-		}
+        ready: function (callback) {
+            Moo.ready(callback, this.el);
+        }
 	};
 
     Moo.extend = function (obj, target) {
