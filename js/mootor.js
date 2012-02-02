@@ -308,33 +308,23 @@ window.$ = Moo;
 
             }
 
-            // Set isDragging flags  
-            distanceOriginX = Math.abs(this.drag.distanceOriginX);
-            distanceOriginY = Math.abs(this.drag.distanceOriginY);
-
-            // Time of last touch (for velocity calc)
             this.drag.time = date.getMilliseconds() - this.drag.time;
 
-            // Velocity
-            this.drag.velocity.x = this.drag.distanceX / this.drag.time * 100;
-            this.drag.velocity.y = this.drag.distanceY / this.drag.time * 100;
+            if (listeners.isDraggingX === false && listeners.isDraggingY === false) {
+                distanceOriginX = Math.abs(this.drag.distanceOriginX);
+                distanceOriginY = Math.abs(this.drag.distanceOriginY);
 
-            // Detect draggingY
-            if (distanceOriginY > 0 && distanceOriginY > distanceOriginX && listeners.isDraggingX === false) {
+                if (distanceOriginY > 0 && distanceOriginY > distanceOriginX && listeners.isDraggingX === false) {
+                    listeners.isDraggingY = true;
 
-                listeners.isDraggingY = true;
+                } else if (distanceOriginX > 0 && listeners.isDraggingY === false) {
+                    listeners.isDraggingX = true;
 
-            // Detect draggingX
-            } else if (distanceOriginX > 0 && listeners.isDraggingY === false) {
-
-                listeners.isDraggingX = true;
-
+                }
             }
 
-            // Set largeMove flag
             this.drag.largeMove = false;
 
-            // Callback
             if (this.callback.onDragMove !== undefined) {
                 this.callback.onDragMove(this.drag);
             }
@@ -346,16 +336,16 @@ window.$ = Moo;
          */
         end: function (e) {
 
-            // Remove listeners
+            this.drag.velocity.x = this.drag.distanceX / this.drag.time * 100;
+            this.drag.velocity.y = this.drag.distanceY / this.drag.time * 100;
+
             this.el.removeEventListener('mousemove', this, false);
             this.el.removeEventListener('mouseup', this, false);
             this.el.removeEventListener('touchmove', this, false);
             this.el.removeEventListener('touchend', this, false);
 
-            // Callback
             this.callback.onDragEnd(this.drag);
 
-            // Set isDragging flags
             listeners.isDraggingY = false;
             listeners.isDraggingX = false;
 
