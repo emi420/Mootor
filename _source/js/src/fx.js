@@ -7,7 +7,6 @@
         show: function (el) {
             var element = typeof el === "object" ? el : this.el;
             if (element !== undefined) {
-                console.log("show!");
                 element.style.display = "block";
             }
         },
@@ -15,7 +14,6 @@
         hide: function (el) {
             var element = typeof el === "object" ? el : this.el;
             if (element !== undefined) {
-                console.log("hide!");
                 element.style.display = "none";
             }
         },
@@ -35,7 +33,7 @@
             } else {
                 this.clean(el);
             }
-                        
+
             el.style.webkitTransform = "translate3d(" + x_pos + "px," + y_pos + "px, 0)";
 
             if (options.callback) {
@@ -43,10 +41,10 @@
             }
 
         },
-        
+
         clean: function (el) {
             el.style.webkitTransitionDuration = "";
-            el.style.webkitTransitionTimingFunction = "";        
+            el.style.webkitTransitionTimingFunction = "";
         }
 
     };
