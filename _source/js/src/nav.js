@@ -139,6 +139,11 @@
                 element = this.el,
                 panel =  this.panels[this.current],
                 positions = {};
+                
+            // Compare with 0 is faster, the string is " active"
+            if(event.target.className.indexOf("active") !== 0) {
+                event.target.className = event.target.className.replace(" active","");
+            }
 
             if (e.bounceBack === true) {
 
