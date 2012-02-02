@@ -12,7 +12,7 @@ Current modules:
 
 ## Demo
 
-http://50.116.1.212:8002/ (open in a WebKit based browser)
+http://volks.co/mootor (open in a WebKit based browser)
 
 # About Mootor
 

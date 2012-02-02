@@ -193,8 +193,10 @@
             this.el.removeEventListener('touchmove', this, false);
             this.el.removeEventListener('touchend', this, false);
 
-            this.callback.onDragEnd(this.drag);
-
+            if (this.callback.onDragEnd !== undefined) {
+                this.callback.onDragEnd(this.drag);
+            }
+            
             listeners.isDraggingY = false;
             listeners.isDraggingX = false;
 

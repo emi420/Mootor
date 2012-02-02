@@ -71,6 +71,7 @@
         },
 
         nav: function (obj) {
+            var i;
             obj.el.style.width = Moo.view.clientW + "px";
             obj.anchors = obj.el.getElementsByClassName(this.navClass);
         },
@@ -128,7 +129,8 @@
         },
         
         start: function(e) {
-            event.target.className += " active";
+            var target = event.target;
+            window.setTimeout( function() { target.className += " active" }, 50);
         },
 
         /*      

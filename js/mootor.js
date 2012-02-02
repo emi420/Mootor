@@ -335,8 +335,10 @@ window.$ = Moo;
             this.el.removeEventListener('touchmove', this, false);
             this.el.removeEventListener('touchend', this, false);
 
-            this.callback.onDragEnd(this.drag);
-
+            if (this.callback.onDragEnd !== undefined) {
+                this.callback.onDragEnd(this.drag);
+            }
+            
             listeners.isDraggingY = false;
             listeners.isDraggingX = false;
 
@@ -542,6 +544,7 @@ window.$ = Moo;
         },
 
         nav: function (obj) {
+            var i;
             obj.el.style.width = Moo.view.clientW + "px";
             obj.anchors = obj.el.getElementsByClassName(this.navClass);
         },
@@ -599,7 +602,8 @@ window.$ = Moo;
         },
         
         start: function(e) {
-            event.target.className += " active";
+            var target = event.target;
+            window.setTimeout( function() { target.className += " active" }, 50);
         },
 
         /*      
