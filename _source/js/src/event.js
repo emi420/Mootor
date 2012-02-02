@@ -18,12 +18,20 @@
      *      Tap
      */
     Tap = function (element, callback) {
-
+        this.callback = callback;
+        this.el = element;
         element.onclick = function () { return false; };
-        element.addEventListener("mouseup", callback, false);
-        element.addEventListener("touchend", callback, false);
+        element.addEventListener("mouseup", this, false);
+        element.addEventListener("touchend", this, false);
 
-    };
+    }
+    
+    Tap.prototype = {
+        handleEvent: function (e) {
+           e.preventDefault();
+           this.callback();
+        }
+    }
 
     /*
      *      Drag
@@ -196,7 +204,7 @@
 
             this.drag.velocity.x = this.drag.distanceX / this.drag.time * 100;
             this.drag.velocity.y = this.drag.distanceY / this.drag.time * 100;
-
+            
             this.el.removeEventListener('mousemove', this, false);
             this.el.removeEventListener('mouseup', this, false);
             this.el.removeEventListener('touchmove', this, false);

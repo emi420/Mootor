@@ -160,12 +160,20 @@ window.$ = Moo;
      *      Tap
      */
     Tap = function (element, callback) {
-
+        this.callback = callback;
+        this.el = element;
         element.onclick = function () { return false; };
-        element.addEventListener("mouseup", callback, false);
-        element.addEventListener("touchend", callback, false);
+        element.addEventListener("mouseup", this, false);
+        element.addEventListener("touchend", this, false);
 
-    };
+    }
+    
+    Tap.prototype = {
+        handleEvent: function (e) {
+           e.preventDefault();
+           this.callback();
+        }
+    }
 
     /*
      *      Drag
@@ -338,7 +346,7 @@ window.$ = Moo;
 
             this.drag.velocity.x = this.drag.distanceX / this.drag.time * 100;
             this.drag.velocity.y = this.drag.distanceY / this.drag.time * 100;
-
+            
             this.el.removeEventListener('mousemove', this, false);
             this.el.removeEventListener('mouseup', this, false);
             this.el.removeEventListener('touchmove', this, false);
@@ -554,9 +562,9 @@ window.$ = Moo;
                 panels = this,
                 panel;
 
-            onTouch = function (e) {
+            onTouch = function () {
                 if (listeners.isDraggingX === false && listeners.isDraggingY === false) {
-                    panels.set(this.rel);
+                    panels.set(this.el.rel);
                 }
                 return false;
             };

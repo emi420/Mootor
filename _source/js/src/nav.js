@@ -74,9 +74,9 @@
                 panels = this,
                 panel;
 
-            onTouch = function (e) {
+            onTouch = function () {
                 if (listeners.isDraggingX === false && listeners.isDraggingY === false) {
-                    panels.set(this.rel);
+                    panels.set(this.el.rel);
                 }
                 return false;
             };

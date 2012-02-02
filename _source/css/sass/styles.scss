@@ -18,6 +18,12 @@ body {
   text-align: center ;
 }
 
+a,
+a:hover,
+a:focus {
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0); 
+}
+
 #panels,
 body {
   background: $bodyColor; 
@@ -68,7 +74,7 @@ p {
     nav a {
         color: $subColor1;
         border: 0;
-        font-size: 1.9em;
+        font-size: 2em;
         padding: .5em 1em;
         width: auto;
         display: inline;
