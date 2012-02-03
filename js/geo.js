@@ -39,7 +39,17 @@ var $ = window.$ || $;
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
 
-                map = new google.maps.Map(document.getElementById(element.id), options);
+                map = new google.maps.Map(element, options);
+                
+                Moo.Event.bind(element, "onDrag", {
+                    onDragMove: function() { 
+                            //if (event.target === element) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                                return false;
+                            //}
+                        }
+                });
 
                 marker = new google.maps.Marker({
                     position: latlng,

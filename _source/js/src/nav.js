@@ -42,6 +42,7 @@
             panel.hidden = panel.el.getElementsByClassName(this.hiddenClass);
         }
 
+        // FIXME CHECK
         this.onDragStart = this.start;
         this.onDragMove = this.move;
         this.onDragEnd = this.check;

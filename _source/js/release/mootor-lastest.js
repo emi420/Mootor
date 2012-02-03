@@ -137,8 +137,9 @@ var Moo = (function () {
 }());
 
 // Go public!
-window.$ = Moo;
-
+if (!window.$ || typeof ($) !== "function") {
+    window.$ = Moo;
+}
 
 /*
  * Mootor Events
@@ -146,8 +147,7 @@ window.$ = Moo;
 
 (function (Moo) {
     var Drag,
-        Tap,
-        listeners;
+        Tap;
 
     /*
      *      Tap
@@ -213,12 +213,9 @@ window.$ = Moo;
                 if (e.preventDefault) {
                     e.preventDefault();
                 }
-                if (e.stopPropagation) {
-                    e.stopPropagation();
-                }
 
             }
-
+            
             switch (e.type) {
             case 'mousedown':
             case 'touchstart':
@@ -356,8 +353,7 @@ window.$ = Moo;
          */
         bind: function (el, eventtype, callback) {
 
-            var listeners = Moo.Event.listeners,
-                listenerId = listeners.count,
+            var listenerId = listeners.count,
                 listener,
                 i,
                 listenerCount = 1;
@@ -374,8 +370,6 @@ window.$ = Moo;
 
             if (listenerCount > 0) {
 
-                // If element doesn't have a listener, 
-                // create a new listener instance
                 switch (eventtype) {
                 case "onDrag":
                     listener = new Drag(el, callback);
@@ -384,18 +378,14 @@ window.$ = Moo;
                     listener = new Tap(el, callback);
                     break;
                 }
+
                 listeners.count += 1;
                 listeners[listenerId] = listener;
 
             } else {
-
-                // If element has a listener, use
-                // that listener instance
                 listener = listeners[listenerId];
-
             }
 
-            // Set listener callback
             listener[eventtype] = callback;
 
         }
@@ -515,6 +505,7 @@ window.$ = Moo;
             panel.hidden = panel.el.getElementsByClassName(this.hiddenClass);
         }
 
+        // FIXME CHECK
         this.onDragStart = this.start;
         this.onDragMove = this.move;
         this.onDragEnd = this.check;

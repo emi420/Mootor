@@ -136,6 +136,7 @@ var Moo = (function () {
 }());
 
 // Go public!
-window.$ = Moo;
-
+if (!window.$ || typeof ($) !== "function") {
+    window.$ = Moo;
+}
 

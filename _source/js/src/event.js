@@ -4,8 +4,7 @@
 
 (function (Moo) {
     var Drag,
-        Tap,
-        listeners;
+        Tap;
 
     /*
      *      Tap
@@ -71,12 +70,9 @@
                 if (e.preventDefault) {
                     e.preventDefault();
                 }
-                if (e.stopPropagation) {
-                    e.stopPropagation();
-                }
 
             }
-
+            
             switch (e.type) {
             case 'mousedown':
             case 'touchstart':
@@ -214,8 +210,7 @@
          */
         bind: function (el, eventtype, callback) {
 
-            var listeners = Moo.Event.listeners,
-                listenerId = listeners.count,
+            var listenerId = listeners.count,
                 listener,
                 i,
                 listenerCount = 1;
@@ -232,8 +227,6 @@
 
             if (listenerCount > 0) {
 
-                // If element doesn't have a listener, 
-                // create a new listener instance
                 switch (eventtype) {
                 case "onDrag":
                     listener = new Drag(el, callback);
@@ -242,18 +235,14 @@
                     listener = new Tap(el, callback);
                     break;
                 }
+
                 listeners.count += 1;
                 listeners[listenerId] = listener;
 
             } else {
-
-                // If element has a listener, use
-                // that listener instance
                 listener = listeners[listenerId];
-
             }
 
-            // Set listener callback
             listener[eventtype] = callback;
 
         }
