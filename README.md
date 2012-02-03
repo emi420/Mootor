@@ -1,5 +1,5 @@
 ﻿
-# Mootor - HTML5 JavaScript libary for application development
+# Mootor - HTML5 JavaScript library for application development
 
 Mootor is a Javascript library targeted at HTML5 browsers.
 
