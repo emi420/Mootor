@@ -30,7 +30,7 @@
         this.width = Moo.view.clientW;
         this.panels = [];
         this.header = this.header.init(this); 
-
+ 
         panels = this.el.getElementsByClassName(this.panelClass);
         this.count = panels.length;
 
@@ -52,6 +52,8 @@
             document.body.style.overflow = "hidden";
         }
         this.init();
+        
+        return this;
 
     };
     
@@ -63,11 +65,14 @@
             init: function(panel) {                
                 var header = {};
                 header.el = document.getElementById(panel.headerId);
-                panel.nav(header);
-                panel.top = header.el.offsetHeight;
-                panel.height = Moo.view.clientH - panel.top;
-                panel.el.style.marginTop = panel.top + "px";        
-                return header;
+                if (header.el) {
+                    console.log("cabecita");
+                    panel.nav(header);
+                    panel.top = header.el.offsetHeight;
+                    panel.height = Moo.view.clientH - panel.top;
+                    panel.el.style.marginTop = panel.top + "px";        
+                    return header;
+                }
             }
         },
 
@@ -126,14 +131,14 @@
                     }
                 }
             }
-
+            
         },
         
         start: function(e) {
             var target = event.target;
             window.setTimeout( function() { target.className += " active" }, 50);
         },
-
+   
         /*      
          *      Move
          */

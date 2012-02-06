@@ -493,7 +493,7 @@ if (!window.$ || typeof ($) !== "function") {
         this.width = Moo.view.clientW;
         this.panels = [];
         this.header = this.header.init(this); 
-
+ 
         panels = this.el.getElementsByClassName(this.panelClass);
         this.count = panels.length;
 
@@ -515,6 +515,8 @@ if (!window.$ || typeof ($) !== "function") {
             document.body.style.overflow = "hidden";
         }
         this.init();
+        
+        return this;
 
     };
     
@@ -526,11 +528,14 @@ if (!window.$ || typeof ($) !== "function") {
             init: function(panel) {                
                 var header = {};
                 header.el = document.getElementById(panel.headerId);
-                panel.nav(header);
-                panel.top = header.el.offsetHeight;
-                panel.height = Moo.view.clientH - panel.top;
-                panel.el.style.marginTop = panel.top + "px";        
-                return header;
+                if (header.el) {
+                    console.log("cabecita");
+                    panel.nav(header);
+                    panel.top = header.el.offsetHeight;
+                    panel.height = Moo.view.clientH - panel.top;
+                    panel.el.style.marginTop = panel.top + "px";        
+                    return header;
+                }
             }
         },
 
@@ -589,12 +594,17 @@ if (!window.$ || typeof ($) !== "function") {
                     }
                 }
             }
-
+            
         },
         
         start: function(e) {
             var target = event.target;
             window.setTimeout( function() { target.className += " active" }, 50);
+        },
+        
+        setNav: function(options) {
+            console.log("set navigation area");
+            console.log(options.el);
         },
 
         /*      
