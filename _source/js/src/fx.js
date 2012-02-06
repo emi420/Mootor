@@ -45,6 +45,10 @@
         clean: function (el) {
             el.style.webkitTransitionDuration = "";
             el.style.webkitTransitionTimingFunction = "";
+        },
+        
+        fullWidth: function(el) {
+            el.style.width = Moo.view.clientW + "px";
         }
 
     };

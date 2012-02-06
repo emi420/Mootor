@@ -22,12 +22,12 @@
         this.navClass = options.nav_class !== undefined ? options.nav_class : "nav";
         this.hiddenClass = options.hidden_class !== undefined ? options.hidden_class : "hidden";
         this.margin = options.panel_margin !== undefined ? options.panel_margin : 40;
+        this.width = options.width !== undefined ? options.width : Moo.view.clientW;
+        this.height = options.height !== undefined ? options.height : Moo.view.clientH;
         this.x = 0;
         this.y = 0;
         this.current = 0;
         this.back = 0;
-        this.height = Moo.view.clientH;
-        this.width = Moo.view.clientW;
         this.panels = [];
         this.header = this.header.init(this); 
  
@@ -66,8 +66,8 @@
                 var header = {};
                 header.el = document.getElementById(panel.headerId);
                 if (header.el) {
-                    console.log("cabecita");
                     panel.nav(header);
+                    Fx.fullWidth(header.el);
                     panel.top = header.el.offsetHeight;
                     panel.height = Moo.view.clientH - panel.top;
                     panel.el.style.marginTop = panel.top + "px";        
@@ -78,10 +78,9 @@
 
         nav: function (obj) {
             var i;
-            obj.el.style.width = Moo.view.clientW + "px";
             obj.anchors = obj.el.getElementsByClassName(this.navClass);
         },
-
+        
         init: function () {
 
             var onTouch,
@@ -101,7 +100,13 @@
             for (i = this.count; i--;) {
 
                 panel = this.panels[i];
-                panel.el.style.width = this.width + "px";
+
+                if( this.width === undefined) {
+                    Fx.fullWidth(panel.el);
+                } else {
+                    panel.el.style.width = this.width + "px";
+                }
+                
                 panel.el.style.overflow = 'hidden';
 
                 if (i > 0) {
