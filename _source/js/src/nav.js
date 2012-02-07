@@ -17,9 +17,10 @@
             panels;
 
         this.el = options.el;
-        this.headerId = options.header_id !== undefined ? options.header_id : "header";
-        this.panelClass = options.panel_class !== undefined ? options.panel_class : "panel";
         this.navClass = options.nav_class !== undefined ? options.nav_class : "nav";
+        this.navmain = {el: options.navmain};
+        this.panelClass = options.panel_class !== undefined ? options.panel_class : "panel";
+        this.headerId = options.header_id !== undefined ? options.header_id : "header";
         this.hiddenClass = options.hidden_class !== undefined ? options.hidden_class : "hidden";
         this.margin = options.panel_margin !== undefined ? options.panel_margin : 40;
         this.width = options.width !== undefined ? options.width : Moo.view.clientW;
@@ -51,14 +52,13 @@
         if (document.body.style.overflow !== "hidden") {
             document.body.style.overflow = "hidden";
         }
+                
         this.init();
         
         return this;
 
-    };
+    };    
     
-    
-
     Panels.prototype = {
     
         header: {
@@ -136,6 +136,16 @@
                     }
                 }
             }
+            
+            if (this.navmain.el) {
+                this.navmain.anchors = this.navmain.el.getElementsByTagName("a");
+                for (i = this.navmain.anchors.length; i--;) {
+                    if (this.navmain.anchors[i].rel !== "") {
+                        Event.bind(this.navmain.anchors[i], "onTap", onTouch);
+                    }
+                }
+            }            
+
             
         },
         
@@ -262,10 +272,10 @@
                 cb,
                 back,
                 i;
-
+                                
             panel = this.panels[this.current];
             back = this.panels[this.back];
-
+            
             for (i = panel.hidden.length; i--;) {
                 Fx.hide(panel.hidden[i]);
             }
@@ -281,7 +291,7 @@
                     Fx.show(panel.hidden[i]);
                 }
             };
-
+            
             if (this.current === 0) {
                 // Left 
                 distance = 0;
@@ -292,6 +302,7 @@
             } else {
                 // Right
                 distance = this.width + this.margin;
+                console.log(distance);
                 panel.el.style.left = distance + "px";
 
                 if (this.back && this.back !== this.current) {
