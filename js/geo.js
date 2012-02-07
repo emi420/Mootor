@@ -43,12 +43,9 @@ var $ = window.$ || $;
                 
                 Moo.Event.bind(element, "onDrag", {
                     onDragMove: function() { 
-                            //if (event.target === element) {
-                                event.preventDefault();
-                                event.stopPropagation();
-                                return false;
-                            //}
-                        }
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
                 });
 
                 marker = new google.maps.Marker({
