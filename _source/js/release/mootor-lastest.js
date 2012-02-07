@@ -604,7 +604,7 @@ if (!window.$ || typeof ($) !== "function") {
                 }
             }
             
-            if (this.navmain.el) {
+            if (this.navmain.el !== undefined) {
                 this.navmain.anchors = this.navmain.el.getElementsByTagName("a");
                 for (i = this.navmain.anchors.length; i--;) {
                     if (this.navmain.anchors[i].rel !== "") {
@@ -739,6 +739,8 @@ if (!window.$ || typeof ($) !== "function") {
                 cb,
                 back,
                 i;
+                
+            console.log(this);
                                 
             panel = this.panels[this.current];
             back = this.panels[this.back];
@@ -753,13 +755,16 @@ if (!window.$ || typeof ($) !== "function") {
             Fx.clean(panel.el);
             Fx.clean(back.el);
 
-            cb = function () {
+            cb = function (width, margin,  navmain) {
                 for (i = panel.hidden.length; i--;) {
                     Fx.show(panel.hidden[i]);
                 }
-            };
+                if (navmain.el !== undefined) {
+                    back.el.style.left =  width * 2 + margin + "px";
+                }
+            }(this.width, this.margin, this.navmain);
             
-            if (this.current === 0) {
+            if (this.current === 0 && this.navmain.el === undefined) {
                 // Left 
                 distance = 0;
                 if (this.back) {
@@ -769,7 +774,6 @@ if (!window.$ || typeof ($) !== "function") {
             } else {
                 // Right
                 distance = this.width + this.margin;
-                console.log(distance);
                 panel.el.style.left = distance + "px";
 
                 if (this.back && this.back !== this.current) {
@@ -780,7 +784,6 @@ if (!window.$ || typeof ($) !== "function") {
 
             this.move({
                 distanceX: -distance - this.x,
-                largeMove: true,
                 isLoading: true,
                 callback: cb
             });
