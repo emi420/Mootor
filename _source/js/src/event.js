@@ -1,6 +1,20 @@
 /*
- * Mootor Events
+ * Mootor Gestures
  */
+ 
+/*    
+    - dragStart
+    - dragEnd
+    - dragMove
+    - tapStart
+    - tapEnd
+    - tapHold
+    - doubleTap
+    - swipe        
+    - pinch
+
+*/
+
 
 (function (Moo) {
     var Drag,
@@ -13,8 +27,8 @@
         this.callback = callback;
         this.el = element;
         element.onclick = function () { return false; };
-        element.addEventListener("mouseup", this, false);
-        element.addEventListener("touchend", this, false);
+        $(element).bind("mouseup", this);
+        $(element).bind("touchend", this);
 
     };
 
@@ -206,7 +220,7 @@
         /*
          *      bind
          */
-        bind: function (el, eventtype, callback) {
+        on: function (el, eventtype, callback) {
 
             var listenerId = listeners.count,
                 listener,

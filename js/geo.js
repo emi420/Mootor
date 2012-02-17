@@ -41,7 +41,7 @@ var $ = window.$ || $;
 
                 map = new google.maps.Map(element, options);
                 
-                Moo.Event.bind(element, "onDrag", {
+                Moo.Event.on(element, "onDrag", {
                     onDragMove: function() { 
                         event.preventDefault();
                         event.stopPropagation();

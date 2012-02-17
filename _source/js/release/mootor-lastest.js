@@ -2,16 +2,46 @@
 /* 
  *  Mootor Core
  */
+ 
+ /*
+    # Instance
+    
+        + el
+        + query
+
+    # Prototype
+    
+        + ready
+
+    # Static
+    
+        + context
+        + extend
+        + ready
+        + view
+        + show
+        + hide
+        + bind
+        + addClass
+        + removeClass
+        + hasClass
+        - unbind
+        - ajax
+        - html
+ 
+*/
 
 var document = window.document;
 
 var Moo = (function () {
 	"use strict";
 
+    // Return new instance
 	Moo = function (query) {
 		return new Moo.fn(query);
 	};
 
+    //  Selector
 	Moo.fn = function (query) {
 		var qtype = typeof query,
 			el;
@@ -32,7 +62,7 @@ var Moo = (function () {
             el = query;
         }
 
-        // Private
+        // Instance properties
         this.el = (function () {
             return el;
         }());
@@ -43,12 +73,54 @@ var Moo = (function () {
 		return this;
 	};
 
+    // Instance prototype
     Moo.fn.prototype = Moo.prototype = {
+
+        // On element ready
         ready: function (callback) {
             Moo.ready(callback, this.el);
+        },
+
+        // Show element
+        show: function (el) {
+            var element = typeof el === "object" ? el : this.el;
+            if (element !== undefined) {
+                element.style.display = "block";
+            }
+        },
+
+        // Hide element
+        hide: function (el) {
+            var element = typeof el === "object" ? el : this.el;
+            if (element !== undefined) {
+                element.style.display = "none";
+            }
+        },
+
+        // Bind event
+        bind: function (event, callback) {
+            this.el.addEventListener(event, callback, false);
+        },
+        
+        // Set class name
+        setClass: function(name) {
+            this.el.className += " " + name; 
+        },
+        
+        // Has class name
+        hasClass: function(name) {
+            return (this.el.className.indexOf(name) !== 0);
+        },
+        
+        // Remove class name
+        removeClass:  function(name) {
+            this.el.className = this.el.className.replace(" " + name, "");
         }
+
+
 	};
 
+    // Extend function
     Moo.extend = function (obj, target) {
         var i;
         if (target === undefined) {
@@ -61,8 +133,10 @@ var Moo = (function () {
         }
     };
 
+    // Core
     Moo.extend({
 
+        // On element ready
         ready: function (fn, el) {
             if (el === document) {
                 el = window;
@@ -77,7 +151,7 @@ var Moo = (function () {
                     fn.call(window.document);
                     ready = true;
                 };
-                if (el !== undefined && Moo.test.addEventListener) {
+                if (el !== undefined && Moo.context.addEventListener) {
                     el.addEventListener("DOM-ContentLoaded", handler, false);
                     el.addEventListener("readystatechange", handler, false);
                     el.addEventListener("load", handler, false);
@@ -88,10 +162,12 @@ var Moo = (function () {
 
         },
 
-        test: {
+        // Context features
+        context: {
             addEventListener: false
         },
 
+        // Viewport
         view: {
 
             clientH: 0,
@@ -107,16 +183,19 @@ var Moo = (function () {
             show: function () {
                 document.head.removeChild(Moo.view.styles);
             }
-        }
+        },
+        
 
     }, Moo);
-
+    
+    // Init-time branching
     if (window.addEventListener) {
-        Moo.test.addEventListener = true;
+        Moo.context.addEventListener = true;
     } else {
-        Moo.test.addEventListener = false;
+        Moo.context.addEventListener = false;
     }
 
+    // Initialize Mootor on document ready
     Moo.ready(function () {
 		var clientW = document.documentElement.clientWidth,
 			clientH = document.documentElement.clientHeight;
@@ -132,6 +211,7 @@ var Moo = (function () {
 	}, document);
 
 	Moo.view.hide();
+        
 	return Moo;
 
 }());
@@ -142,8 +222,22 @@ if (!window.$ || typeof ($) !== "function") {
 }
 
 /*
- * Mootor Events
+ * Mootor Gestures
  */
+ 
+/*    
+    - dragStart
+    - dragEnd
+    - dragMove
+    - tapStart
+    - tapEnd
+    - tapHold
+    - doubleTap
+    - swipe        
+    - pinch
+
+*/
+
 
 (function (Moo) {
     var Drag,
@@ -156,8 +250,8 @@ if (!window.$ || typeof ($) !== "function") {
         this.callback = callback;
         this.el = element;
         element.onclick = function () { return false; };
-        element.addEventListener("mouseup", this, false);
-        element.addEventListener("touchend", this, false);
+        $(element).bind("mouseup", this);
+        $(element).bind("touchend", this);
 
     };
 
@@ -349,7 +443,7 @@ if (!window.$ || typeof ($) !== "function") {
         /*
          *      bind
          */
-        bind: function (el, eventtype, callback) {
+        on: function (el, eventtype, callback) {
 
             var listenerId = listeners.count,
                 listener,
@@ -407,23 +501,16 @@ if (!window.$ || typeof ($) !== "function") {
 /* 
  * Mootor Visual FX
  */
+ 
+  
+/*    
+    - translate
+    - clean
+    
+*/
 
 (function (Moo) {
     Moo.Fx = {
-        show: function (el) {
-            var element = typeof el === "object" ? el : this.el;
-            if (element !== undefined) {
-                element.style.display = "block";
-            }
-        },
-
-        hide: function (el) {
-            var element = typeof el === "object" ? el : this.el;
-            if (element !== undefined) {
-                element.style.display = "none";
-            }
-        },
-
         translate: function (el, positions, options) {
 
             var x_pos = positions.x,
@@ -451,11 +538,7 @@ if (!window.$ || typeof ($) !== "function") {
         clean: function (el) {
             el.style.webkitTransitionDuration = "";
             el.style.webkitTransitionTimingFunction = "";
-        },
-        
-        fullWidth: function(el) {
-            el.style.width = Moo.view.clientW + "px";
-        }
+        }        
 
     };
 
@@ -466,6 +549,19 @@ if (!window.$ || typeof ($) !== "function") {
 /*
  * Mootor Navigation
  */
+ 
+/*    
+    - init
+    - back
+    - create
+    - remove
+    - load
+    - header
+    - loading
+    - anchors
+    - footer  
+    
+*/
 
 (function (Moo) {
     // Module dependencies
@@ -474,7 +570,7 @@ if (!window.$ || typeof ($) !== "function") {
         listeners = Event.listeners,
 
         Panels;
-
+        
     Panels = function (options) {
 
         var i,
@@ -512,7 +608,7 @@ if (!window.$ || typeof ($) !== "function") {
         this.onDragStart = this.start;
         this.onDragMove = this.move;
         this.onDragEnd = this.check;
-        Event.bind(this.el, "onDrag", this);
+        Event.on(this.el, "onDrag", this);
 
         if (document.body.style.overflow !== "hidden") {
             document.body.style.overflow = "hidden";
@@ -532,7 +628,7 @@ if (!window.$ || typeof ($) !== "function") {
                 header.el = document.getElementById(panel.headerId);
                 if (header.el) {
                     panel.nav(header);
-                    Fx.fullWidth(header.el);
+                    fullWidth(header.el);
                     panel.top = header.el.offsetHeight;
                     panel.height = Moo.view.clientH - panel.top;
                     panel.el.style.marginTop = panel.top + "px";
@@ -566,7 +662,7 @@ if (!window.$ || typeof ($) !== "function") {
                 panel = this.panels[i];
 
                 if (this.width === undefined) {
-                    Fx.fullWidth(panel.el);
+                    fullWidth(panel.el);
                 } else {
                     panel.el.style.width = this.width + "px";
                 }
@@ -588,7 +684,7 @@ if (!window.$ || typeof ($) !== "function") {
 
                 for (j = panel.anchors.length; j--;) {
                     if (panel.anchors[j].rel !== "") {
-                        Event.bind(panel.anchors[j], "onTap", onTouch);
+                        Event.on(panel.anchors[j], "onTap", onTouch);
                     }
                 }
 
@@ -597,7 +693,7 @@ if (!window.$ || typeof ($) !== "function") {
             if (this.header) {
                 for (i = this.header.anchors.length; i--;) {
                     if (this.header.anchors[i].rel !== "") {
-                        Event.bind(this.header.anchors[i], "onTap", onTouch);
+                        Event.on(this.header.anchors[i], "onTap", onTouch);
                     }
                 }
             }
@@ -606,7 +702,7 @@ if (!window.$ || typeof ($) !== "function") {
                 this.navmain.anchors = this.navmain.el.getElementsByTagName("a");
                 for (i = this.navmain.anchors.length; i--;) {
                     if (this.navmain.anchors[i].rel !== "") {
-                        Event.bind(this.navmain.anchors[i], "onTap", onTouch);
+                        Event.on(this.navmain.anchors[i], "onTap", onTouch);
                     }
                 }
             }
@@ -615,7 +711,9 @@ if (!window.$ || typeof ($) !== "function") {
 
         start: function (e) {
             var target = event.target;
-            window.setTimeout(function () { target.className += " active"; }, 50);
+            window.setTimeout(function () {
+                $(target).setClass("active");
+            }, 50);
         },
 
         /*      
@@ -628,8 +726,8 @@ if (!window.$ || typeof ($) !== "function") {
                 positions = {};
 
             // Compare with 0 is faster, the string is " active"
-            if (event.target.className.indexOf("active") !== 0) {
-                event.target.className = event.target.className.replace(" active", "");
+            if ($(event.target).hasClass("active")) {
+                $(event.target).removeClass("active");
             }
 
             if (e.bounceBack === true) {
@@ -732,10 +830,10 @@ if (!window.$ || typeof ($) !== "function") {
             back = this.panels[this.back];
 
             for (i = panel.hidden.length; i--;) {
-                Fx.hide(panel.hidden[i]);
+                $(panel.hidden[i]).hide();
             }
             for (i = back.hidden.length; i--;) {
-                Fx.hide(back.hidden[i]);
+                $(back.hidden[i]).hide();
             }
 
             Fx.clean(panel.el);
@@ -743,7 +841,7 @@ if (!window.$ || typeof ($) !== "function") {
 
             cb = (function (width, margin,  navmain) {
                 for (i = panel.hidden.length; i--;) {
-                    Fx.show(panel.hidden[i]);
+                    $(panel.hidden[i]).show();
                 }
                 if (navmain.el !== undefined) {
                     back.el.style.left =  width * 2 + margin + "px";
@@ -777,6 +875,10 @@ if (!window.$ || typeof ($) !== "function") {
 
         }
 
+    };
+    
+    var fullWidth = function(el) {
+        el.style.width = Moo.view.clientW + "px";
     };
 
      /*

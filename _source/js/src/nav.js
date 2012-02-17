@@ -1,6 +1,19 @@
 /*
  * Mootor Navigation
  */
+ 
+/*    
+    - init
+    - back
+    - create
+    - remove
+    - load
+    - header
+    - loading
+    - anchors
+    - footer  
+    
+*/
 
 (function (Moo) {
     // Module dependencies
@@ -9,7 +22,7 @@
         listeners = Event.listeners,
 
         Panels;
-
+        
     Panels = function (options) {
 
         var i,
@@ -47,7 +60,7 @@
         this.onDragStart = this.start;
         this.onDragMove = this.move;
         this.onDragEnd = this.check;
-        Event.bind(this.el, "onDrag", this);
+        Event.on(this.el, "onDrag", this);
 
         if (document.body.style.overflow !== "hidden") {
             document.body.style.overflow = "hidden";
@@ -67,7 +80,7 @@
                 header.el = document.getElementById(panel.headerId);
                 if (header.el) {
                     panel.nav(header);
-                    Fx.fullWidth(header.el);
+                    fullWidth(header.el);
                     panel.top = header.el.offsetHeight;
                     panel.height = Moo.view.clientH - panel.top;
                     panel.el.style.marginTop = panel.top + "px";
@@ -101,7 +114,7 @@
                 panel = this.panels[i];
 
                 if (this.width === undefined) {
-                    Fx.fullWidth(panel.el);
+                    fullWidth(panel.el);
                 } else {
                     panel.el.style.width = this.width + "px";
                 }
@@ -123,7 +136,7 @@
 
                 for (j = panel.anchors.length; j--;) {
                     if (panel.anchors[j].rel !== "") {
-                        Event.bind(panel.anchors[j], "onTap", onTouch);
+                        Event.on(panel.anchors[j], "onTap", onTouch);
                     }
                 }
 
@@ -132,7 +145,7 @@
             if (this.header) {
                 for (i = this.header.anchors.length; i--;) {
                     if (this.header.anchors[i].rel !== "") {
-                        Event.bind(this.header.anchors[i], "onTap", onTouch);
+                        Event.on(this.header.anchors[i], "onTap", onTouch);
                     }
                 }
             }
@@ -141,7 +154,7 @@
                 this.navmain.anchors = this.navmain.el.getElementsByTagName("a");
                 for (i = this.navmain.anchors.length; i--;) {
                     if (this.navmain.anchors[i].rel !== "") {
-                        Event.bind(this.navmain.anchors[i], "onTap", onTouch);
+                        Event.on(this.navmain.anchors[i], "onTap", onTouch);
                     }
                 }
             }
@@ -150,7 +163,9 @@
 
         start: function (e) {
             var target = event.target;
-            window.setTimeout(function () { target.className += " active"; }, 50);
+            window.setTimeout(function () {
+                $(target).setClass("active");
+            }, 50);
         },
 
         /*      
@@ -163,8 +178,8 @@
                 positions = {};
 
             // Compare with 0 is faster, the string is " active"
-            if (event.target.className.indexOf("active") !== 0) {
-                event.target.className = event.target.className.replace(" active", "");
+            if ($(event.target).hasClass("active")) {
+                $(event.target).removeClass("active");
             }
 
             if (e.bounceBack === true) {
@@ -267,10 +282,10 @@
             back = this.panels[this.back];
 
             for (i = panel.hidden.length; i--;) {
-                Fx.hide(panel.hidden[i]);
+                $(panel.hidden[i]).hide();
             }
             for (i = back.hidden.length; i--;) {
-                Fx.hide(back.hidden[i]);
+                $(back.hidden[i]).hide();
             }
 
             Fx.clean(panel.el);
@@ -278,7 +293,7 @@
 
             cb = (function (width, margin,  navmain) {
                 for (i = panel.hidden.length; i--;) {
-                    Fx.show(panel.hidden[i]);
+                    $(panel.hidden[i]).show();
                 }
                 if (navmain.el !== undefined) {
                     back.el.style.left =  width * 2 + margin + "px";
@@ -312,6 +327,10 @@
 
         }
 
+    };
+    
+    var fullWidth = function(el) {
+        el.style.width = Moo.view.clientW + "px";
     };
 
      /*

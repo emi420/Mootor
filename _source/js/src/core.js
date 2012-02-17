@@ -1,16 +1,46 @@
 /* 
  *  Mootor Core
  */
+ 
+ /*
+    # Instance
+    
+        + el
+        + query
+
+    # Prototype
+    
+        + ready
+
+    # Static
+    
+        + context
+        + extend
+        + ready
+        + view
+        + show
+        + hide
+        + bind
+        + addClass
+        + removeClass
+        + hasClass
+        - unbind
+        - ajax
+        - html
+ 
+*/
 
 var document = window.document;
 
 var Moo = (function () {
 	"use strict";
 
+    // Return new instance
 	Moo = function (query) {
 		return new Moo.fn(query);
 	};
 
+    //  Selector
 	Moo.fn = function (query) {
 		var qtype = typeof query,
 			el;
@@ -31,7 +61,7 @@ var Moo = (function () {
             el = query;
         }
 
-        // Private
+        // Instance properties
         this.el = (function () {
             return el;
         }());
@@ -42,12 +72,54 @@ var Moo = (function () {
 		return this;
 	};
 
+    // Instance prototype
     Moo.fn.prototype = Moo.prototype = {
+
+        // On element ready
         ready: function (callback) {
             Moo.ready(callback, this.el);
+        },
+
+        // Show element
+        show: function (el) {
+            var element = typeof el === "object" ? el : this.el;
+            if (element !== undefined) {
+                element.style.display = "block";
+            }
+        },
+
+        // Hide element
+        hide: function (el) {
+            var element = typeof el === "object" ? el : this.el;
+            if (element !== undefined) {
+                element.style.display = "none";
+            }
+        },
+
+        // Bind event
+        bind: function (event, callback) {
+            this.el.addEventListener(event, callback, false);
+        },
+        
+        // Set class name
+        setClass: function(name) {
+            this.el.className += " " + name; 
+        },
+        
+        // Has class name
+        hasClass: function(name) {
+            return (this.el.className.indexOf(name) !== 0);
+        },
+        
+        // Remove class name
+        removeClass:  function(name) {
+            this.el.className = this.el.className.replace(" " + name, "");
         }
+
+
 	};
 
+    // Extend function
     Moo.extend = function (obj, target) {
         var i;
         if (target === undefined) {
@@ -60,8 +132,10 @@ var Moo = (function () {
         }
     };
 
+    // Core
     Moo.extend({
 
+        // On element ready
         ready: function (fn, el) {
             if (el === document) {
                 el = window;
@@ -76,7 +150,7 @@ var Moo = (function () {
                     fn.call(window.document);
                     ready = true;
                 };
-                if (el !== undefined && Moo.test.addEventListener) {
+                if (el !== undefined && Moo.context.addEventListener) {
                     el.addEventListener("DOM-ContentLoaded", handler, false);
                     el.addEventListener("readystatechange", handler, false);
                     el.addEventListener("load", handler, false);
@@ -87,10 +161,12 @@ var Moo = (function () {
 
         },
 
-        test: {
+        // Context features
+        context: {
             addEventListener: false
         },
 
+        // Viewport
         view: {
 
             clientH: 0,
@@ -106,16 +182,19 @@ var Moo = (function () {
             show: function () {
                 document.head.removeChild(Moo.view.styles);
             }
-        }
+        },
+        
 
     }, Moo);
-
+    
+    // Init-time branching
     if (window.addEventListener) {
-        Moo.test.addEventListener = true;
+        Moo.context.addEventListener = true;
     } else {
-        Moo.test.addEventListener = false;
+        Moo.context.addEventListener = false;
     }
 
+    // Initialize Mootor on document ready
     Moo.ready(function () {
 		var clientW = document.documentElement.clientWidth,
 			clientH = document.documentElement.clientHeight;
@@ -131,6 +210,7 @@ var Moo = (function () {
 	}, document);
 
 	Moo.view.hide();
+        
 	return Moo;
 
 }());

@@ -1,23 +1,16 @@
 /* 
  * Mootor Visual FX
  */
+ 
+  
+/*    
+    - translate
+    - clean
+    
+*/
 
 (function (Moo) {
     Moo.Fx = {
-        show: function (el) {
-            var element = typeof el === "object" ? el : this.el;
-            if (element !== undefined) {
-                element.style.display = "block";
-            }
-        },
-
-        hide: function (el) {
-            var element = typeof el === "object" ? el : this.el;
-            if (element !== undefined) {
-                element.style.display = "none";
-            }
-        },
-
         translate: function (el, positions, options) {
 
             var x_pos = positions.x,
@@ -45,11 +38,7 @@
         clean: function (el) {
             el.style.webkitTransitionDuration = "";
             el.style.webkitTransitionTimingFunction = "";
-        },
-        
-        fullWidth: function(el) {
-            el.style.width = Moo.view.clientW + "px";
-        }
+        }        
 
     };
 
