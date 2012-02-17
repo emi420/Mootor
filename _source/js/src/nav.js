@@ -79,7 +79,7 @@
         nav: function (obj) {
             obj.anchors = obj.el.getElementsByClassName(this.navClass);
         },
-
+        
         init: function () {
 
             var onTouch,
@@ -262,7 +262,7 @@
                 cb,
                 back,
                 i;
-
+                
             panel = this.panels[this.current];
             back = this.panels[this.back];
 

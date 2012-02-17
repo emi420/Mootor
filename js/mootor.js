@@ -185,8 +185,6 @@ if (!window.$ || typeof ($) !== "function") {
             y: 0,
             startX: 0,
             startY: 0,
-            endX: 0,
-            endY: 0,
             time: 0,
             velocity: {x: 0, y: 0}
         };
@@ -546,7 +544,7 @@ if (!window.$ || typeof ($) !== "function") {
         nav: function (obj) {
             obj.anchors = obj.el.getElementsByClassName(this.navClass);
         },
-
+        
         init: function () {
 
             var onTouch,
@@ -729,7 +727,7 @@ if (!window.$ || typeof ($) !== "function") {
                 cb,
                 back,
                 i;
-
+                
             panel = this.panels[this.current];
             back = this.panels[this.back];
 
