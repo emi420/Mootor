@@ -24,7 +24,7 @@
         + addClass
         + removeClass
         + hasClass
-        - unbind
+        + unbind
         - ajax
         - html
  
@@ -98,9 +98,15 @@ var Moo = (function () {
 
         // Bind event
         bind: function (event, callback) {
+            this.el.onclick = function() { return false } ;
             this.el.addEventListener(event, callback, false);
         },
         
+        // Unbind event
+        unbind: function (event, callback) {
+            this.el.removeEventListener(event, callback, false);
+        },
+
         // Set class name
         setClass: function(name) {
             this.el.className += " " + name; 

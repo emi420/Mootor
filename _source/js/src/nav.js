@@ -18,8 +18,7 @@
 (function (Moo) {
     // Module dependencies
     var Fx = Moo.Fx,
-        Event = Moo.Event,
-        listeners = Event.listeners,
+        Gesture = Moo.Gesture,
 
         Panels;
         
@@ -55,13 +54,30 @@
             panel.anchors = panel.el.getElementsByClassName(this.navClass);
             panel.hidden = panel.el.getElementsByClassName(this.hiddenClass);
         }
+        
+        
+        // 1. Set gestures on element
+        
+        /*$(this.el).onTapEnd(function() {
+            console.log("tap end!! callback in nav.js");
+        });
 
-        // FIXME CHECK
-        this.onDragStart = this.start;
-        this.onDragMove = this.move;
-        this.onDragEnd = this.check;
-        Event.on(this.el, "onDrag", this);
+        $(this.el).onTapStart(function() {
+            console.log("tap start!! callback in nav.js");
+        });
 
+        $(this.el).onTapHold(function() {
+            console.log("tap hold!! callback in nav.js");
+        });
+        
+        $(this.el).onTapHold(function() {
+            console.log("tap hold 2 !! callback in nav.js");
+        });*/
+
+        //$(this.el).onDragStart(this.start);
+        //$(this.el).onDragMove(this.move)
+        //$(this.el).onDragEnd(this.check)
+        
         if (document.body.style.overflow !== "hidden") {
             document.body.style.overflow = "hidden";
         }
@@ -101,11 +117,10 @@
                 panels = this,
                 panel;
 
-            onTouch = function () {
-                if (listeners.isDraggingX === false && listeners.isDraggingY === false) {
-                    panels.set(this.el.rel);
-                }
-                return false;
+            anchorCallback = function (gesture) {
+                console.log(gesture.el.rel);
+                /*panels.set(this.rel);
+                return false;*/
             };
 
             // Reset styles and set anchor links
@@ -136,7 +151,12 @@
 
                 for (j = panel.anchors.length; j--;) {
                     if (panel.anchors[j].rel !== "") {
-                        Event.on(panel.anchors[j], "onTap", onTouch);
+                        $(panel.anchors[j]).onTapEnd(anchorCallback);
+                        if(j === 0) {
+                            $(panel.anchors[j]).onTapEnd(function(gesture) {
+                                console.log("doble callback!");
+                            });                        
+                        }
                     }
                 }
 
@@ -145,7 +165,7 @@
             if (this.header) {
                 for (i = this.header.anchors.length; i--;) {
                     if (this.header.anchors[i].rel !== "") {
-                        Event.on(this.header.anchors[i], "onTap", onTouch);
+                        //$(this.header.anchors[i]).onTapEnd(anchorCallback);
                     }
                 }
             }
@@ -154,7 +174,7 @@
                 this.navmain.anchors = this.navmain.el.getElementsByTagName("a");
                 for (i = this.navmain.anchors.length; i--;) {
                     if (this.navmain.anchors[i].rel !== "") {
-                        Event.on(this.navmain.anchors[i], "onTap", onTouch);
+                        //$(this.navmain.anchors[i]).onTapEnd(anchorCallback)
                     }
                 }
             }
@@ -162,10 +182,13 @@
         },
 
         start: function (e) {
-            var target = event.target;
+            console.log("start!");
+            
+            var target = Gesture.target;
             window.setTimeout(function () {
                 $(target).setClass("active");
             }, 50);
+            
         },
 
         /*      
@@ -178,8 +201,8 @@
                 positions = {};
 
             // Compare with 0 is faster, the string is " active"
-            if ($(event.target).hasClass("active")) {
-                $(event.target).removeClass("active");
+            if ($(Gesture.target).hasClass("active")) {
+                $(Gesture.target).removeClass("active");
             }
 
             if (e.bounceBack === true) {
@@ -228,7 +251,7 @@
             var current,
                 maxdist;
 
-            event.target.className = event.target.className.replace(" active", "");
+            Gesture.target.className = Gesture.target.className.replace(" active", "");
 
             if (listeners.isDraggingY) {
 

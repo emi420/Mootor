@@ -25,7 +25,7 @@
         + addClass
         + removeClass
         + hasClass
-        - unbind
+        + unbind
         - ajax
         - html
  
@@ -99,9 +99,15 @@ var Moo = (function () {
 
         // Bind event
         bind: function (event, callback) {
+            this.el.onclick = function() { return false } ;
             this.el.addEventListener(event, callback, false);
         },
         
+        // Unbind event
+        unbind: function (event, callback) {
+            this.el.removeEventListener(event, callback, false);
+        },
+
         // Set class name
         setClass: function(name) {
             this.el.className += " " + name; 
@@ -240,262 +246,97 @@ if (!window.$ || typeof ($) !== "function") {
 
 
 (function (Moo) {
-    var Drag,
-        Tap;
 
-    /*
-     *      Tap
-     */
-    Tap = function (element, callback) {
-        this.callback = callback;
-        this.el = element;
-        element.onclick = function () { return false; };
-        $(element).bind("mouseup", this);
-        $(element).bind("touchend", this);
-
-    };
-
-    Tap.prototype = {
-        handleEvent: function (e) {
-            e.preventDefault();
-            this.callback();
+    Moo.extend({
+        gestures: {
+            list: []
         }
-    };
+    }, Moo);
+    
+    var addGesture = function(options) {
+        var gestureList = Moo.gestures.list,
+            type = options.type,
+            fn = options.fn,
+            callback = options.callback,
+            key = createKey(fn.el);
 
-    /*
-     *      Drag
-     */
-    Drag = function (element, callback) {
-
-        var i,
-            events = [
-                'mousedown', 'touchstart'
-            ];
-
-        this.el = element;
-        this.callback = callback;
-        this.drag = {
-            x: 0,
-            y: 0,
-            startX: 0,
-            startY: 0,
-            time: 0,
-            velocity: {x: 0, y: 0}
-        };
-
-        for (i = events.length; i--;) {
-            element.addEventListener(events[i], this, false);
-            element.addEventListener(events[i], this, false);
+        if (gestureList[key] === undefined) {
+            gestureList[key] = [];
+            if (type === "onTapStart") {
+                fn.bind("mousedown", fn);        
+            } else if (type === "onTapEnd") {
+                fn.bind("mouseup", fn);        
+            }
+        }     
+        
+        if (gestureList[key][type] === undefined) {
+            gestureList[key][type] = [];
+        }     
+        gestureList[key][type].push(callback);
+           
+    },
+    
+    createKey = function(el) {
+        if(el.rel !== undefined) {
+            return el.rel;               
         }
-        element.onclick = function () { return false; };
-
-    };
-
-    /*
-     *      Event handler
-     */
-    Drag.prototype = {
-
-        handleEvent: function (e) {
-
-            // Prevent defaults on certain elements
-            // FIXME CHECK: this is a temporary patch
-            if (e.target.type !== "text" && e.target.type !== "input") {
-
-                if (e.preventDefault) {
-                    e.preventDefault();
-                }
-
-            }
-            
-            switch (e.type) {
-            case 'mousedown':
-            case 'touchstart':
-                this.start(e);
-                break;
-            case 'touchend':
-            case 'mouseup':
-                this.end(e);
-                break;
-            case 'mousemove':
-            case 'touchmove':
-                this.move(e);
-                break;
-            }
-
-        },
-
-        /*
-         *      On move start
-         */
-        start: function (e) {
-
-            var date = new Date();
-
-            if (e.clientX || e.clientY) {
-                // Click
-                this.drag.startX = e.clientX;
-                this.drag.startY = e.clientY;
-            } else {
-                // Touch
-                this.drag.startX = e.touches[0].clientX;
-                this.drag.startY = e.touches[0].clientY;
-            }
-            this.drag.x = this.drag.startX;
-            this.drag.y = this.drag.startY;
-
-            this.drag.time = date.getMilliseconds();
-
-            this.el.addEventListener('mousemove', this, false);
-            this.el.addEventListener('mouseup', this, false);
-            this.el.addEventListener('touchmove', this, false);
-            this.el.addEventListener('touchend', this, false);
-
-            if (this.callback.onDragStart !== undefined) {
-                this.callback.onDragStart(this.drag);
-            }
-
-        },
-
-        /*
-         *     On move
-         */
-        move: function (e) {
-
-            var listeners = Moo.Event.listeners,
-                distanceOriginX,
-                distanceOriginY,
-                date = new Date();
-
-            this.drag.distanceOriginX = this.drag.startX - this.drag.x;
-            this.drag.distanceOriginY = this.drag.startY - this.drag.y;
-
-            if (e.clientX || e.clientY) {
-
-                // Mouse
-                this.drag.distanceX = e.clientX - this.drag.x;
-                this.drag.distanceY = e.clientY - this.drag.y;
-                this.drag.x = e.clientX;
-                this.drag.y = e.clientY;
-
-            } else {
-
-                // Touch
-                this.drag.distanceX = e.touches[0].clientX - this.drag.x;
-                this.drag.distanceY = e.touches[0].clientY - this.drag.y;
-                this.drag.x = e.touches[0].clientX;
-                this.drag.y = e.touches[0].clientY;
-
-            }
-
-            this.drag.time = date.getMilliseconds() - this.drag.time;
-
-            if (listeners.isDraggingX === false && listeners.isDraggingY === false) {
-                distanceOriginX = Math.abs(this.drag.distanceOriginX);
-                distanceOriginY = Math.abs(this.drag.distanceOriginY);
-
-                if (distanceOriginY > 0 && distanceOriginY > distanceOriginX && listeners.isDraggingX === false) {
-                    listeners.isDraggingY = true;
-
-                } else if (distanceOriginX > 0 && listeners.isDraggingY === false) {
-                    listeners.isDraggingX = true;
-
-                }
-            }
-
-            this.drag.largeMove = false;
-
-            if (this.callback.onDragMove !== undefined) {
-                this.callback.onDragMove(this.drag);
-            }
-
-        },
-
-        /*
-         *     On move end
-         */
-        end: function () {
-
-            this.drag.velocity.x = this.drag.distanceX / this.drag.time * 100;
-            this.drag.velocity.y = this.drag.distanceY / this.drag.time * 100;
-
-            this.el.removeEventListener('mousemove', this, false);
-            this.el.removeEventListener('mouseup', this, false);
-            this.el.removeEventListener('touchmove', this, false);
-            this.el.removeEventListener('touchend', this, false);
-
-            if (this.callback.onDragEnd !== undefined) {
-                this.callback.onDragEnd(this.drag);
-            }
-            
-            listeners.isDraggingY = false;
-            listeners.isDraggingX = false;
-
+        if (typeof el === "object") {
+            return el;
         }
-
-    };
-
+    },
+    
+    fire = function(listeners, gesture) {
+        for(i = listeners.length; i-- ;) {
+            listeners[i](gesture);               
+        }
+    }
+        
     /*
      *      Public
      */
-    Moo.Event = {
+    Moo.Gesture = {    
 
-        /*
-         *      bind
-         */
-        on: function (el, eventtype, callback) {
+        onTapEnd: function(callback) {
+            addGesture({
+                fn: this,
+                callback: callback,                          
+                type: "onTapEnd"
+            })
+        },
+        onTapStart: function(callback) {
+            addGesture({
+                fn: this,
+                callback: callback,                            
+                type: "onTapStart"
+            })
+        },
+        onTapHold: function(callback) {
+            addGesture({
+                fn: this,
+                callback: callback,
+                type: "onTapHold"
+            })
+        },
 
-            var listenerId = listeners.count,
-                listener,
-                i,
-                listenerCount = 1;
-
-            // Look if element has a listener instance
-
-            // FIXME CHECK: expensive query
-            for (i = listeners.count; i--;) {
-                if (listeners[i].el === el) {
-                    listenerId = i;
-                    listenerCount = 0;
+        handleEvent: function(e) {
+            var i,
+                key = createKey(this.el),
+                gesture = {
+                    el: this.el                
                 }
+                                
+            if( e.type === "mousedown") {
+                fire(Moo.gestures.list[key].onTapStart, gesture);
             }
-
-            if (listenerCount > 0) {
-
-                switch (eventtype) {
-                case "onDrag":
-                    listener = new Drag(el, callback);
-                    break;
-                case "onTap":
-                    listener = new Tap(el, callback);
-                    break;
-                }
-
-                listeners.count += 1;
-                listeners[listenerId] = listener;
-
-            } else {
-                listener = listeners[listenerId];
+            if( e.type === "mouseup") {
+                fire(Moo.gestures.list[key].onTapEnd, gesture);
             }
-
-            listener[eventtype] = callback;
-
         }
+    }
+    
+    Moo.extend(Moo.Gesture);
+    
 
-    };
-
-    Moo.extend(Moo.Event);
-
-    /*
-     *      Private
-     */
-
-    // Event listeners
-    Moo.Event.listeners = listeners = {
-        count: 0,
-        isDraggingX: false,
-        isDraggingY: false
-    };
 }($));
 
 /* 
@@ -566,8 +407,7 @@ if (!window.$ || typeof ($) !== "function") {
 (function (Moo) {
     // Module dependencies
     var Fx = Moo.Fx,
-        Event = Moo.Event,
-        listeners = Event.listeners,
+        Gesture = Moo.Gesture,
 
         Panels;
         
@@ -603,13 +443,30 @@ if (!window.$ || typeof ($) !== "function") {
             panel.anchors = panel.el.getElementsByClassName(this.navClass);
             panel.hidden = panel.el.getElementsByClassName(this.hiddenClass);
         }
+        
+        
+        // 1. Set gestures on element
+        
+        /*$(this.el).onTapEnd(function() {
+            console.log("tap end!! callback in nav.js");
+        });
 
-        // FIXME CHECK
-        this.onDragStart = this.start;
-        this.onDragMove = this.move;
-        this.onDragEnd = this.check;
-        Event.on(this.el, "onDrag", this);
+        $(this.el).onTapStart(function() {
+            console.log("tap start!! callback in nav.js");
+        });
 
+        $(this.el).onTapHold(function() {
+            console.log("tap hold!! callback in nav.js");
+        });
+        
+        $(this.el).onTapHold(function() {
+            console.log("tap hold 2 !! callback in nav.js");
+        });*/
+
+        //$(this.el).onDragStart(this.start);
+        //$(this.el).onDragMove(this.move)
+        //$(this.el).onDragEnd(this.check)
+        
         if (document.body.style.overflow !== "hidden") {
             document.body.style.overflow = "hidden";
         }
@@ -649,11 +506,10 @@ if (!window.$ || typeof ($) !== "function") {
                 panels = this,
                 panel;
 
-            onTouch = function () {
-                if (listeners.isDraggingX === false && listeners.isDraggingY === false) {
-                    panels.set(this.el.rel);
-                }
-                return false;
+            anchorCallback = function (gesture) {
+                console.log(gesture.el.rel);
+                /*panels.set(this.rel);
+                return false;*/
             };
 
             // Reset styles and set anchor links
@@ -684,7 +540,12 @@ if (!window.$ || typeof ($) !== "function") {
 
                 for (j = panel.anchors.length; j--;) {
                     if (panel.anchors[j].rel !== "") {
-                        Event.on(panel.anchors[j], "onTap", onTouch);
+                        $(panel.anchors[j]).onTapEnd(anchorCallback);
+                        if(j === 0) {
+                            $(panel.anchors[j]).onTapEnd(function(gesture) {
+                                console.log("doble callback!");
+                            });                        
+                        }
                     }
                 }
 
@@ -693,7 +554,7 @@ if (!window.$ || typeof ($) !== "function") {
             if (this.header) {
                 for (i = this.header.anchors.length; i--;) {
                     if (this.header.anchors[i].rel !== "") {
-                        Event.on(this.header.anchors[i], "onTap", onTouch);
+                        //$(this.header.anchors[i]).onTapEnd(anchorCallback);
                     }
                 }
             }
@@ -702,7 +563,7 @@ if (!window.$ || typeof ($) !== "function") {
                 this.navmain.anchors = this.navmain.el.getElementsByTagName("a");
                 for (i = this.navmain.anchors.length; i--;) {
                     if (this.navmain.anchors[i].rel !== "") {
-                        Event.on(this.navmain.anchors[i], "onTap", onTouch);
+                        //$(this.navmain.anchors[i]).onTapEnd(anchorCallback)
                     }
                 }
             }
@@ -710,10 +571,13 @@ if (!window.$ || typeof ($) !== "function") {
         },
 
         start: function (e) {
-            var target = event.target;
+            console.log("start!");
+            
+            var target = Gesture.target;
             window.setTimeout(function () {
                 $(target).setClass("active");
             }, 50);
+            
         },
 
         /*      
@@ -726,8 +590,8 @@ if (!window.$ || typeof ($) !== "function") {
                 positions = {};
 
             // Compare with 0 is faster, the string is " active"
-            if ($(event.target).hasClass("active")) {
-                $(event.target).removeClass("active");
+            if ($(Gesture.target).hasClass("active")) {
+                $(Gesture.target).removeClass("active");
             }
 
             if (e.bounceBack === true) {
@@ -776,7 +640,7 @@ if (!window.$ || typeof ($) !== "function") {
             var current,
                 maxdist;
 
-            event.target.className = event.target.className.replace(" active", "");
+            Gesture.target.className = Gesture.target.className.replace(" active", "");
 
             if (listeners.isDraggingY) {
 
