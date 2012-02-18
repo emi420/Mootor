@@ -58,12 +58,17 @@
         
         // 1. Set gestures on element
         
-        /*$(this.el).onTapEnd(function() {
+        $(this.el).onTapEnd(function(gesture) {
             console.log("tap end!! callback in nav.js");
+            console.log(gesture.time);
         });
 
         $(this.el).onTapStart(function() {
             console.log("tap start!! callback in nav.js");
+        });
+
+        $(this.el).onTapStart(function() {
+            console.log("tap start 2!! callback in nav.js");
         });
 
         $(this.el).onTapHold(function() {
@@ -72,7 +77,7 @@
         
         $(this.el).onTapHold(function() {
             console.log("tap hold 2 !! callback in nav.js");
-        });*/
+        });
 
         //$(this.el).onDragStart(this.start);
         //$(this.el).onDragMove(this.move)
@@ -152,11 +157,6 @@
                 for (j = panel.anchors.length; j--;) {
                     if (panel.anchors[j].rel !== "") {
                         $(panel.anchors[j]).onTapEnd(anchorCallback);
-                        if(j === 0) {
-                            $(panel.anchors[j]).onTapEnd(function(gesture) {
-                                console.log("doble callback!");
-                            });                        
-                        }
                     }
                 }
 
@@ -165,7 +165,7 @@
             if (this.header) {
                 for (i = this.header.anchors.length; i--;) {
                     if (this.header.anchors[i].rel !== "") {
-                        //$(this.header.anchors[i]).onTapEnd(anchorCallback);
+                        $(this.header.anchors[i]).onTapEnd(anchorCallback);
                     }
                 }
             }
@@ -174,7 +174,7 @@
                 this.navmain.anchors = this.navmain.el.getElementsByTagName("a");
                 for (i = this.navmain.anchors.length; i--;) {
                     if (this.navmain.anchors[i].rel !== "") {
-                        //$(this.navmain.anchors[i]).onTapEnd(anchorCallback)
+                        $(this.navmain.anchors[i]).onTapEnd(anchorCallback)
                     }
                 }
             }

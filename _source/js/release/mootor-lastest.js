@@ -253,6 +253,7 @@ if (!window.$ || typeof ($) !== "function") {
         }
     }, Moo);
     
+    // Add gesture for element
     var addGesture = function(options) {
         var gestureList = Moo.gestures.list,
             type = options.type,
@@ -261,21 +262,30 @@ if (!window.$ || typeof ($) !== "function") {
             key = createKey(fn.el);
 
         if (gestureList[key] === undefined) {
-            gestureList[key] = [];
-            if (type === "onTapStart") {
+            gestureList[key] = {
+                handler: []
+            };
+        }     
+
+        // Bind listeners only once
+        if (type === "onTapStart" || type === "onTapHold") {
+            if(gestureList[key].handler["onTapStart"] === undefined && gestureList[key].handler["onTapStart"]  === undefined){
                 fn.bind("mousedown", fn);        
-            } else if (type === "onTapEnd") {
+            }
+        } else if (type === "onTapEnd" || type === "onTapHold") {
+            if(gestureList[key].handler["onTapEnd"] === undefined && gestureList[key].handler["onTapHold"]  === undefined){
                 fn.bind("mouseup", fn);        
             }
+        }
+            
+        if (gestureList[key].handler[type] === undefined) {
+            gestureList[key].handler[type] = [];
         }     
-        
-        if (gestureList[key][type] === undefined) {
-            gestureList[key][type] = [];
-        }     
-        gestureList[key][type].push(callback);
+        gestureList[key].handler[type].push(callback);
            
     },
     
+    // Create key for element
     createKey = function(el) {
         if(el.rel !== undefined) {
             return el.rel;               
@@ -285,12 +295,13 @@ if (!window.$ || typeof ($) !== "function") {
         }
     },
     
-    fire = function(listeners, gesture) {
-        for(i = listeners.length; i-- ;) {
-            listeners[i](gesture);               
+    // Fire callbacks
+    fire = function(info, callbacks) {
+        for(i = callbacks.length; i-- ;) {
+            callbacks[i](info);               
         }
     }
-        
+            
     /*
      *      Public
      */
@@ -318,18 +329,23 @@ if (!window.$ || typeof ($) !== "function") {
             })
         },
 
+        // Handler to detect gestures and fire callbacks        
         handleEvent: function(e) {
             var i,
                 key = createKey(this.el),
-                gesture = {
+                info = {
                     el: this.el                
-                }
-                                
+                },
+                gesture =  Moo.gestures.list[key],
+                date = new Date();
+               
             if( e.type === "mousedown") {
-                fire(Moo.gestures.list[key].onTapStart, gesture);
+                gesture.handler.time = date.getTime();
+                fire(info, gesture.handler.onTapStart);
             }
             if( e.type === "mouseup") {
-                fire(Moo.gestures.list[key].onTapEnd, gesture);
+                info.time = date.getTime() - gesture.handler.time;
+                fire(info, gesture.handler.onTapEnd);
             }
         }
     }
@@ -447,12 +463,17 @@ if (!window.$ || typeof ($) !== "function") {
         
         // 1. Set gestures on element
         
-        /*$(this.el).onTapEnd(function() {
+        $(this.el).onTapEnd(function(gesture) {
             console.log("tap end!! callback in nav.js");
+            console.log(gesture.time);
         });
 
         $(this.el).onTapStart(function() {
             console.log("tap start!! callback in nav.js");
+        });
+
+        $(this.el).onTapStart(function() {
+            console.log("tap start 2!! callback in nav.js");
         });
 
         $(this.el).onTapHold(function() {
@@ -461,7 +482,7 @@ if (!window.$ || typeof ($) !== "function") {
         
         $(this.el).onTapHold(function() {
             console.log("tap hold 2 !! callback in nav.js");
-        });*/
+        });
 
         //$(this.el).onDragStart(this.start);
         //$(this.el).onDragMove(this.move)
@@ -541,11 +562,6 @@ if (!window.$ || typeof ($) !== "function") {
                 for (j = panel.anchors.length; j--;) {
                     if (panel.anchors[j].rel !== "") {
                         $(panel.anchors[j]).onTapEnd(anchorCallback);
-                        if(j === 0) {
-                            $(panel.anchors[j]).onTapEnd(function(gesture) {
-                                console.log("doble callback!");
-                            });                        
-                        }
                     }
                 }
 
@@ -554,7 +570,7 @@ if (!window.$ || typeof ($) !== "function") {
             if (this.header) {
                 for (i = this.header.anchors.length; i--;) {
                     if (this.header.anchors[i].rel !== "") {
-                        //$(this.header.anchors[i]).onTapEnd(anchorCallback);
+                        $(this.header.anchors[i]).onTapEnd(anchorCallback);
                     }
                 }
             }
@@ -563,7 +579,7 @@ if (!window.$ || typeof ($) !== "function") {
                 this.navmain.anchors = this.navmain.el.getElementsByTagName("a");
                 for (i = this.navmain.anchors.length; i--;) {
                     if (this.navmain.anchors[i].rel !== "") {
-                        //$(this.navmain.anchors[i]).onTapEnd(anchorCallback)
+                        $(this.navmain.anchors[i]).onTapEnd(anchorCallback)
                     }
                 }
             }
