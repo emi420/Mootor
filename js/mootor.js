@@ -338,13 +338,24 @@ if (!window.$ || typeof ($) !== "function") {
                 },
                 gesture =  Moo.gestures.list[key],
                 date = new Date();
-               
+            
+            // TapStart
             if( e.type === "mousedown") {
-                gesture.handler.time = date.getTime();
+                gesture.handler.time = date.getTime();        
+                gesture.handler.mousedown = true;
+                // TapHold
+                window.setTimeout(function() { 
+                    if (gesture.handler.mousedown === true) {                        
+                         fire(info, gesture.handler.onTapHold);
+                    }                     
+                 }, 500);
                 fire(info, gesture.handler.onTapStart);
             }
+            
+            // TapEnd
             if( e.type === "mouseup") {
                 info.time = date.getTime() - gesture.handler.time;
+                gesture.handler.mousedown = false;
                 fire(info, gesture.handler.onTapEnd);
             }
         }
