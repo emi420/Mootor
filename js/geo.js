@@ -25,7 +25,8 @@ var $ = window.$ || $;
         success = function (position) {
             var options,
                 map,
-                google = window.google || undefined;
+                google = window.google || undefined,
+                stop;
 
             if (google !== undefined) {
 
@@ -38,16 +39,7 @@ var $ = window.$ || $;
                     navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
-
-                map = new google.maps.Map(element, options);
-                
-                Moo.Event.on(element, "onDrag", {
-                    onDragMove: function() { 
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                });
-
+                                
                 marker = new google.maps.Marker({
                     position: latlng,
                     map: map,

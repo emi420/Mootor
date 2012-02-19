@@ -407,7 +407,6 @@ if (!window.$ || typeof ($) !== "function") {
                 } else {
                     // TapEnd
                     info.type = "tapEnd";
-                    //gesture.event.tapped = true;
                     fire(info, gesture.event.onTapEnd);               
                 }
             }
