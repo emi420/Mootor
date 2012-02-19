@@ -403,14 +403,17 @@ if (!window.$ || typeof ($) !== "function") {
                 this.unbind("touchmove", this);
                 info.time = date.getTime() - gesture.event.time;
                 gesture.event.mousedown = false;
+
                 if (gesture.event.isDraggingY !== 0) {
                     // DragEnd
                     info.type = "dragEnd";
                     gesture.event.isDraggingY = 0;
                     fire(info, gesture.event.onDragEnd);
+
                 } else {
                     // TapEnd
                     info.type = "tapEnd";
+                    info.isDraggingY = gesture.event.isDraggingY;
                     fire(info, gesture.event.onTapEnd);
                 }
             }
@@ -501,6 +504,7 @@ if (!window.$ || typeof ($) !== "function") {
         this.back = 0;
         this.panels = [];
         this.header = this.header.init(this);
+        this.isMoving = false;
 
         panels = this.el.getElementsByClassName(this.panelClass);
 
@@ -569,7 +573,11 @@ if (!window.$ || typeof ($) !== "function") {
                 unsetActive;
 
             anchorCallback = function (gesture) {
-                panels.set(gesture.el.rel);
+                if (panels.isMoving === false) {
+                    panels.set(gesture.el.rel);
+                } else {
+                    $(gesture.el).removeClass("active");
+                }
                 return false;
             };
 
@@ -630,6 +638,7 @@ if (!window.$ || typeof ($) !== "function") {
          */
         move: function (gesture) {
             if (gesture.isDraggingY !== 0) {
+                this.isMoving = true;
                 this.y = this.y + (gesture.y - gesture.lastY);
                 this.translate({
                     el: this.panels[this.current].el,
@@ -648,6 +657,7 @@ if (!window.$ || typeof ($) !== "function") {
 
             if (gesture.isDraggingY !== 0) {
 
+                this.isMoving = false;
                 // Bounce back
                 if (this.y >= 0 || maxdist < -this.y) {
                     if (this.y > 0) {

@@ -202,14 +202,17 @@
                 this.unbind("touchmove", this);
                 info.time = date.getTime() - gesture.event.time;
                 gesture.event.mousedown = false;
+
                 if (gesture.event.isDraggingY !== 0) {
                     // DragEnd
                     info.type = "dragEnd";
                     gesture.event.isDraggingY = 0;
                     fire(info, gesture.event.onDragEnd);
+
                 } else {
                     // TapEnd
                     info.type = "tapEnd";
+                    info.isDraggingY = gesture.event.isDraggingY;
                     fire(info, gesture.event.onTapEnd);
                 }
             }
