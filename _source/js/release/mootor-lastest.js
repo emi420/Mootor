@@ -1,4 +1,4 @@
-(function(window) {
+(function() {
 /* 
  *  Mootor Core
  */
@@ -71,27 +71,27 @@ var Moo = (function () {
 
         // Bind event
         bind: function (event, callback) {
-            this.el.onclick = function() { return false } ;
+            this.el.onclick = function () { return false; };
             this.el.addEventListener(event, callback, false);
         },
-        
+
         // Unbind event
         unbind: function (event, callback) {
             this.el.removeEventListener(event, callback, false);
         },
 
         // Set class name
-        setClass: function(name) {
-            this.el.className += " " + name; 
+        setClass: function (name) {
+            this.el.className += " " + name;
         },
-        
+
         // Has class name
-        hasClass: function(name) {
+        hasClass: function (name) {
             return (this.el.className.indexOf(name) !== 0);
         },
-        
+
         // Remove class name
-        removeClass:  function(name) {
+        removeClass:  function (name) {
             this.el.className = this.el.className.replace(" " + name, "");
         }
 
@@ -161,11 +161,11 @@ var Moo = (function () {
             show: function () {
                 document.head.removeChild(Moo.view.styles);
             }
-        },
-        
+        }
+
 
     }, Moo);
-    
+
     // Init-time branching
     if (window.addEventListener) {
         Moo.context.addEventListener = true;
@@ -189,7 +189,7 @@ var Moo = (function () {
 	}, document);
 
 	Moo.view.hide();
-        
+
 	return Moo;
 
 }());
@@ -204,127 +204,131 @@ if (!window.$ || typeof ($) !== "function") {
  */
 
 (function (Moo) {
+    "use strict";
+
+    var createKey,
+        addGesture,
+        fire;
 
     Moo.extend({
         gestures: {
             list: []
         }
     }, Moo);
-    
-    // Add gesture for element
-    var addGesture = function(options) {
+
+    // Create key for element
+    createKey = function (el) {
+        if (el.rel !== undefined) {
+            return el.rel;
+        }
+        if (typeof el === "object") {
+            return el;
+        }
+    };
+
+    addGesture = function (options) {
         var gestureList = Moo.gestures.list,
             type = options.type,
             fn = options.fn,
             callback = options.callback,
             key = createKey(fn.el);
-             
+
         if (gestureList[key] === undefined) {
             gestureList[key] = {
                 event: []
             };
-        }     
+        }
 
         // Bind listeners only once
-        if(gestureList[key] !== undefined){
-            fn.bind("mousedown", fn);        
-            fn.bind("mouseup", fn);        
-            fn.bind("touchstart", fn);        
-            fn.bind("touchend", fn);        
+        if (gestureList[key] !== undefined) {
+            fn.bind("mousedown", fn);
+            fn.bind("mouseup", fn);
+            fn.bind("touchstart", fn);
+            fn.bind("touchend", fn);
         }
-        
+
         if (gestureList[key].event[type] === undefined) {
             gestureList[key].event[type] = [];
-        }     
+        }
         gestureList[key].event[type].push(callback);
-           
-    },
-    
-    // Create key for element
-    createKey = function(el) {
-        if(el.rel !== undefined) {
-            return el.rel;               
-        }
-        if (typeof el === "object") {
-            return el;
-        }
-    },
-    
+
+    };
+
     // Fire callbacks
-    fire = function(info, callbacks) {
+    fire = function (info, callbacks) {
+        var i;
         if (callbacks !== undefined) {
-            for(i = callbacks.length; i-- ;) {
+            for (i = callbacks.length; i--;) {
                 if (callbacks[i].handleGesture !== undefined) {
                     callbacks[i].handleGesture(info);
                 } else {
-                    callbacks[i](info);                               
+                    callbacks[i](info);
                 }
             }
         }
-    }
-            
+    };
+
     /*
      *      Public
      */
-    Moo.Gesture = {    
+    Moo.Gesture = {
 
         // Gestures
-        onTapEnd: function(callback) {
+        onTapEnd: function (callback) {
             addGesture({
                 fn: this,
-                callback: callback,                          
+                callback: callback,
                 type: "onTapEnd"
-            })
+            });
         },
-        onTapStart: function(callback) {
+        onTapStart: function (callback) {
             addGesture({
                 fn: this,
-                callback: callback,                            
+                callback: callback,
                 type: "onTapStart"
-            })
+            });
         },
-        onTapHold: function(callback) {
+        onTapHold: function (callback) {
             addGesture({
                 fn: this,
                 callback: callback,
                 type: "onTapHold"
-            })
+            });
         },
-        onDragStart: function(callback) {
+        onDragStart: function (callback) {
             addGesture({
                 fn: this,
                 callback: callback,
                 type: "onDragStart"
-            })
+            });
         },
-        onDragMove: function(callback) {
+        onDragMove: function (callback) {
             addGesture({
                 fn: this,
                 callback: callback,
                 type: "onDragMove"
-            })
+            });
         },
-        onDragEnd: function(callback) {
+        onDragEnd: function (callback) {
             addGesture({
                 fn: this,
                 callback: callback,
                 type: "onDragEnd"
-            })
+            });
         },
 
         // Handler to detect gestures and fire callbacks        
-        handleEvent: function(e) {
-            var i,
-                key = createKey(this.el),
+        handleEvent: function (e) {
+            var key = createKey(this.el),
                 info = {
-                    el: this.el                
+                    el: this.el
                 },
                 gesture =  Moo.gestures.list[key],
                 date = new Date(),
                 clientX,
                 clientY;
-                                                
-            e.preventDefault()
+
+            e.preventDefault();
 
             if (e.clientX || e.clientY) {
                 // Mouse
@@ -334,39 +338,39 @@ if (!window.$ || typeof ($) !== "function") {
                 // Touch
                 // FIXME CHECK
                 try {
-                clientX = e.touches[0].clientX;
-                clientY = e.touches[0].clientY;
-                } catch(e){};
-            } 
-                                        
+                    clientX = e.touches[0].clientX;
+                    clientY = e.touches[0].clientY;
+                } catch (error) {}
+            }
+
             // TapStart
             if (e.type === "mousedown" || e.type === "touchstart") {
 
-                this.bind("mousemove", this);    
-                this.bind("touchmove", this);                 
-                                
-                gesture.event.time = date.getTime();        
+                this.bind("mousemove", this);
+                this.bind("touchmove", this);
+
+                gesture.event.time = date.getTime();
                 gesture.event.isDraggingY = 0;
-                gesture.event.mousedown = true;         
+                gesture.event.mousedown = true;
                 gesture.event.tapped = false;
                 gesture.event.startX = clientX;
                 gesture.event.startY = clientY;
-                
-                window.setTimeout(function() { 
+
+                window.setTimeout(function () {
                     // TapHold
                     if (gesture.event.mousedown === true) {
                         info.type = "tapHold";
                         fire(info, gesture.event.onTapHold);
-                    }                     
-                 }, 500);
-                 
+                    }
+                }, 500);
+
                 if (gesture.event.onTapStart !== undefined) {
                     // TapStart
                     info.type = "tapStart";
                     fire(info, gesture.event.onTapStart);
                 }
             }
-            
+
             if (e.type === "mousemove" || e.type === "touchmove") {
 
                 info.lastY = gesture.event.y;
@@ -383,7 +387,7 @@ if (!window.$ || typeof ($) !== "function") {
                         info.type = "dragStart";
                         fire(info, gesture.event.onDragStart);
                     } else if ((clientY - gesture.event.startY) < -10) {
-                        gesture.event.isDraggingY = -1;                
+                        gesture.event.isDraggingY = -1;
                         info.type = "dragStart";
                         fire(info, gesture.event.onDragStart);
                     }
@@ -393,10 +397,10 @@ if (!window.$ || typeof ($) !== "function") {
                     fire(info, gesture.event.onDragMove);
                 }
             }
-                           
+
             if ((e.type === "mouseup" || e.type === "touchend") && gesture.event.tapped === false) {
-                this.unbind("mousemove", this);        
-                this.unbind("touchmove", this);        
+                this.unbind("mousemove", this);
+                this.unbind("touchmove", this);
                 info.time = date.getTime() - gesture.event.time;
                 gesture.event.mousedown = false;
                 if (gesture.event.isDraggingY !== 0) {
@@ -407,29 +411,31 @@ if (!window.$ || typeof ($) !== "function") {
                 } else {
                     // TapEnd
                     info.type = "tapEnd";
-                    fire(info, gesture.event.onTapEnd);               
+                    fire(info, gesture.event.onTapEnd);
                 }
             }
- 
+
         }
-    }
-    
+    };
+
     Moo.extend(Moo.Gesture);
 
-}($));
+}(Moo));
 
 /* 
  * Mootor Visual FX
  */
 
 (function (Moo) {
+    "use strict";
     Moo.Fx = {
+
         translate: function (el, positions, options) {
 
             var x_pos = positions.x,
                 y_pos = positions.y,
                 tduration;
-                
+
             tduration = options.transitionDuration;
             el.style.transitionProperty = "webkit-transform";
 
@@ -441,7 +447,7 @@ if (!window.$ || typeof ($) !== "function") {
             }
 
             el.style.webkitTransform = "translate3d(" + x_pos + "px," + y_pos + "px, 0)";
-            
+
             if (options.callback) {
                 window.setTimeout(options.callback, tduration * 1000);
             }
@@ -451,25 +457,30 @@ if (!window.$ || typeof ($) !== "function") {
         clean: function (el) {
             el.style.webkitTransitionDuration = "";
             el.style.webkitTransitionTimingFunction = "";
-        }        
+        }
 
     };
 
     Moo.extend(Moo.Fx);
 
-}($));
+}(Moo));
 
 /*
  * Mootor Navigation
  */
 
-(function (Moo) {
+(function (Moo, $) {
+    "use strict";
     // Module dependencies
     var Fx = Moo.Fx,
-        Gesture = Moo.Gesture,
 
+        fullWidth,
         Panels;
-        
+
+    fullWidth = function (el) {
+        el.style.width = Moo.view.clientW + "px";
+    };
+
     Panels = function (options) {
 
         var i,
@@ -502,10 +513,10 @@ if (!window.$ || typeof ($) !== "function") {
             panel.anchors = panel.el.getElementsByClassName(this.navClass);
             panel.hidden = panel.el.getElementsByClassName(this.hiddenClass);
         }
-               
+
         $(this.el).onDragMove(this);
         $(this.el).onDragEnd(this);
-        
+
         if (document.body.style.overflow !== "hidden") {
             document.body.style.overflow = "hidden";
         }
@@ -515,12 +526,12 @@ if (!window.$ || typeof ($) !== "function") {
         return this;
 
     };
-    
+
     Panels.prototype = {
-    
-        handleGesture: function(gesture) {
-            switch(gesture.type) {
-            case "dragMove": 
+
+        handleGesture: function (gesture) {
+            switch (gesture.type) {
+            case "dragMove":
                 this.move(gesture);
                 break;
             case "dragEnd":
@@ -547,10 +558,10 @@ if (!window.$ || typeof ($) !== "function") {
         nav: function (obj) {
             obj.anchors = obj.el.getElementsByClassName(this.navClass);
         },
-        
+
         init: function () {
 
-            var onTouch,
+            var anchorCallback,
                 j,
                 i,
                 panels = this,
@@ -607,7 +618,7 @@ if (!window.$ || typeof ($) !== "function") {
                 this.navmain.anchors = this.navmain.el.getElementsByTagName("a");
                 for (i = this.navmain.anchors.length; i--;) {
                     if (this.navmain.anchors[i].rel !== "") {
-                       $(this.navmain.anchors[i]).onTapEnd(anchorCallback)
+                        $(this.navmain.anchors[i]).onTapEnd(anchorCallback);
                     }
                 }
             }
@@ -617,25 +628,24 @@ if (!window.$ || typeof ($) !== "function") {
         /*      
          *      Move
          */
-        move: function (gesture) {            
+        move: function (gesture) {
             if (gesture.isDraggingY !== 0) {
                 this.y = this.y + (gesture.y - gesture.lastY);
                 this.translate({
                     el: this.panels[this.current].el,
                     y: this.y
-                })
+                });
             }
 
         },
-        
+
         /*      
          *      Check move
          */
         check: function (gesture) {
             var panel = this.panels[this.current],
-                maxdist = panel.height - this.height,
-                moveTo = 0;
-                
+                maxdist = panel.height - this.height;
+
             if (gesture.isDraggingY !== 0) {
 
                 // Bounce back
@@ -643,13 +653,13 @@ if (!window.$ || typeof ($) !== "function") {
                     if (this.y > 0) {
                         this.y = 0;
                     } else {
-                        this.y = -(panel.height - this.height);                                            
+                        this.y = -(panel.height - this.height);
                     }
                     this.translate({
                         y: this.y,
                         el: panel.el,
                         duration: 0.5
-                    })
+                    });
                 }
 
             }
@@ -676,7 +686,7 @@ if (!window.$ || typeof ($) !== "function") {
             }
 
         },
-        
+
         /*      
          *      Translate panels
          */
@@ -685,7 +695,7 @@ if (!window.$ || typeof ($) !== "function") {
                 options.duration = 0;
             }
             if (options.callback === undefined) {
-                options.callback = function() {};
+                options.callback = function () {};
             }
             if (options.y === undefined) {
                 options.y = 0;
@@ -713,11 +723,11 @@ if (!window.$ || typeof ($) !== "function") {
                 cb,
                 back,
                 i,
-                width = this.width, 
-                margin = this.margin, 
+                width = this.width,
+                margin = this.margin,
                 navmain = this.navmain,
                 translate = this.translate;
-                
+
             panel = this.panels[this.current];
             back = this.panels[this.back];
 
@@ -736,7 +746,7 @@ if (!window.$ || typeof ($) !== "function") {
                     back.el.style.left =  width * 2 + margin + "px";
                 }
                 translate({
-                    el: back.el,
+                    el: back.el
                 });
 
             };
@@ -758,20 +768,17 @@ if (!window.$ || typeof ($) !== "function") {
                 }
 
             }
-            
+
             this.translate({
                 el: this.el,
                 duration: 0.5,
                 x: -distance - this.x,
                 callback: cb
-            })
+            });
         }
 
     };
-    
-    var fullWidth = function(el) {
-        el.style.width = Moo.view.clientW + "px";
-    };
+
 
      /*
       *     Public
@@ -790,6 +797,6 @@ if (!window.$ || typeof ($) !== "function") {
 
     Moo.extend(Moo.Nav);
 
-}($));
+}(Moo, $));
 
 }(window));

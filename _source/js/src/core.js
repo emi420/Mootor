@@ -70,27 +70,27 @@ var Moo = (function () {
 
         // Bind event
         bind: function (event, callback) {
-            this.el.onclick = function() { return false } ;
+            this.el.onclick = function () { return false; };
             this.el.addEventListener(event, callback, false);
         },
-        
+
         // Unbind event
         unbind: function (event, callback) {
             this.el.removeEventListener(event, callback, false);
         },
 
         // Set class name
-        setClass: function(name) {
-            this.el.className += " " + name; 
+        setClass: function (name) {
+            this.el.className += " " + name;
         },
-        
+
         // Has class name
-        hasClass: function(name) {
+        hasClass: function (name) {
             return (this.el.className.indexOf(name) !== 0);
         },
-        
+
         // Remove class name
-        removeClass:  function(name) {
+        removeClass:  function (name) {
             this.el.className = this.el.className.replace(" " + name, "");
         }
 
@@ -160,11 +160,11 @@ var Moo = (function () {
             show: function () {
                 document.head.removeChild(Moo.view.styles);
             }
-        },
-        
+        }
+
 
     }, Moo);
-    
+
     // Init-time branching
     if (window.addEventListener) {
         Moo.context.addEventListener = true;
@@ -188,7 +188,7 @@ var Moo = (function () {
 	}, document);
 
 	Moo.view.hide();
-        
+
 	return Moo;
 
 }());

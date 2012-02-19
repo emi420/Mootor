@@ -2,13 +2,18 @@
  * Mootor Navigation
  */
 
-(function (Moo) {
+(function (Moo, $) {
+    "use strict";
     // Module dependencies
     var Fx = Moo.Fx,
-        Gesture = Moo.Gesture,
 
+        fullWidth,
         Panels;
-        
+
+    fullWidth = function (el) {
+        el.style.width = Moo.view.clientW + "px";
+    };
+
     Panels = function (options) {
 
         var i,
@@ -41,10 +46,10 @@
             panel.anchors = panel.el.getElementsByClassName(this.navClass);
             panel.hidden = panel.el.getElementsByClassName(this.hiddenClass);
         }
-               
+
         $(this.el).onDragMove(this);
         $(this.el).onDragEnd(this);
-        
+
         if (document.body.style.overflow !== "hidden") {
             document.body.style.overflow = "hidden";
         }
@@ -54,12 +59,12 @@
         return this;
 
     };
-    
+
     Panels.prototype = {
-    
-        handleGesture: function(gesture) {
-            switch(gesture.type) {
-            case "dragMove": 
+
+        handleGesture: function (gesture) {
+            switch (gesture.type) {
+            case "dragMove":
                 this.move(gesture);
                 break;
             case "dragEnd":
@@ -86,10 +91,10 @@
         nav: function (obj) {
             obj.anchors = obj.el.getElementsByClassName(this.navClass);
         },
-        
+
         init: function () {
 
-            var onTouch,
+            var anchorCallback,
                 j,
                 i,
                 panels = this,
@@ -146,7 +151,7 @@
                 this.navmain.anchors = this.navmain.el.getElementsByTagName("a");
                 for (i = this.navmain.anchors.length; i--;) {
                     if (this.navmain.anchors[i].rel !== "") {
-                       $(this.navmain.anchors[i]).onTapEnd(anchorCallback)
+                        $(this.navmain.anchors[i]).onTapEnd(anchorCallback);
                     }
                 }
             }
@@ -156,25 +161,24 @@
         /*      
          *      Move
          */
-        move: function (gesture) {            
+        move: function (gesture) {
             if (gesture.isDraggingY !== 0) {
                 this.y = this.y + (gesture.y - gesture.lastY);
                 this.translate({
                     el: this.panels[this.current].el,
                     y: this.y
-                })
+                });
             }
 
         },
-        
+
         /*      
          *      Check move
          */
         check: function (gesture) {
             var panel = this.panels[this.current],
-                maxdist = panel.height - this.height,
-                moveTo = 0;
-                
+                maxdist = panel.height - this.height;
+
             if (gesture.isDraggingY !== 0) {
 
                 // Bounce back
@@ -182,13 +186,13 @@
                     if (this.y > 0) {
                         this.y = 0;
                     } else {
-                        this.y = -(panel.height - this.height);                                            
+                        this.y = -(panel.height - this.height);
                     }
                     this.translate({
                         y: this.y,
                         el: panel.el,
                         duration: 0.5
-                    })
+                    });
                 }
 
             }
@@ -215,7 +219,7 @@
             }
 
         },
-        
+
         /*      
          *      Translate panels
          */
@@ -224,7 +228,7 @@
                 options.duration = 0;
             }
             if (options.callback === undefined) {
-                options.callback = function() {};
+                options.callback = function () {};
             }
             if (options.y === undefined) {
                 options.y = 0;
@@ -252,11 +256,11 @@
                 cb,
                 back,
                 i,
-                width = this.width, 
-                margin = this.margin, 
+                width = this.width,
+                margin = this.margin,
                 navmain = this.navmain,
                 translate = this.translate;
-                
+
             panel = this.panels[this.current];
             back = this.panels[this.back];
 
@@ -275,7 +279,7 @@
                     back.el.style.left =  width * 2 + margin + "px";
                 }
                 translate({
-                    el: back.el,
+                    el: back.el
                 });
 
             };
@@ -297,20 +301,17 @@
                 }
 
             }
-            
+
             this.translate({
                 el: this.el,
                 duration: 0.5,
                 x: -distance - this.x,
                 callback: cb
-            })
+            });
         }
 
     };
-    
-    var fullWidth = function(el) {
-        el.style.width = Moo.view.clientW + "px";
-    };
+
 
      /*
       *     Public
@@ -329,4 +330,4 @@
 
     Moo.extend(Moo.Nav);
 
-}($));
+}(Moo, $));
