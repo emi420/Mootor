@@ -1,13 +1,6 @@
 /* 
  * Mootor Visual FX
  */
- 
-  
-/*    
-    - translate
-    - clean
-    
-*/
 
 (function (Moo) {
     Moo.Fx = {
@@ -16,7 +9,7 @@
             var x_pos = positions.x,
                 y_pos = positions.y,
                 tduration;
-
+                
             tduration = options.transitionDuration;
             el.style.transitionProperty = "webkit-transform";
 
@@ -28,7 +21,7 @@
             }
 
             el.style.webkitTransform = "translate3d(" + x_pos + "px," + y_pos + "px, 0)";
-
+            
             if (options.callback) {
                 window.setTimeout(options.callback, tduration * 1000);
             }

@@ -1,19 +1,6 @@
 /*
  * Mootor Navigation
  */
- 
-/*    
-    - init
-    - back
-    - create
-    - remove
-    - load
-    - header
-    - loading
-    - anchors
-    - footer  
-    
-*/
 
 (function (Moo) {
     // Module dependencies
@@ -54,34 +41,9 @@
             panel.anchors = panel.el.getElementsByClassName(this.navClass);
             panel.hidden = panel.el.getElementsByClassName(this.hiddenClass);
         }
-        
-        
-        // 1. Set gestures on element
-        
-        $(this.el).onTapEnd(function(gesture) {
-            console.log("tap end!! callback in nav.js");
-            console.log(gesture.time);
-        });
-
-        $(this.el).onTapStart(function() {
-            console.log("tap start!! callback in nav.js");
-        });
-
-        $(this.el).onTapStart(function() {
-            console.log("tap start 2!! callback in nav.js");
-        });
-
-        $(this.el).onTapHold(function() {
-            console.log("tap hold!! callback in nav.js");
-        });
-        
-        $(this.el).onTapHold(function() {
-            console.log("tap hold 2 !! callback in nav.js");
-        });
-
-        //$(this.el).onDragStart(this.start);
-        //$(this.el).onDragMove(this.move)
-        //$(this.el).onDragEnd(this.check)
+               
+        $(this.el).onDragMove(this);
+        $(this.el).onDragEnd(this);
         
         if (document.body.style.overflow !== "hidden") {
             document.body.style.overflow = "hidden";
@@ -92,8 +54,19 @@
         return this;
 
     };
-
+    
     Panels.prototype = {
+    
+        handleGesture: function(gesture) {
+            switch(gesture.type) {
+            case "dragMove": 
+                this.move(gesture);
+                break;
+            case "dragEnd":
+                this.check(gesture);
+                break;
+            }
+        },
 
         header: {
             init: function (panel) {
@@ -123,9 +96,8 @@
                 panel;
 
             anchorCallback = function (gesture) {
-                console.log(gesture.el.rel);
-                /*panels.set(this.rel);
-                return false;*/
+                panels.set(gesture.el.rel);
+                return false;
             };
 
             // Reset styles and set anchor links
@@ -174,95 +146,49 @@
                 this.navmain.anchors = this.navmain.el.getElementsByTagName("a");
                 for (i = this.navmain.anchors.length; i--;) {
                     if (this.navmain.anchors[i].rel !== "") {
-                        $(this.navmain.anchors[i]).onTapEnd(anchorCallback)
+                       $(this.navmain.anchors[i]).onTapEnd(anchorCallback)
                     }
                 }
             }
 
-        },
-
-        start: function (e) {
-            console.log("start!");
-            
-            var target = Gesture.target;
-            window.setTimeout(function () {
-                $(target).setClass("active");
-            }, 50);
-            
         },
 
         /*      
          *      Move
          */
-        move: function (e) {
-            var duration = 0.5,
-                element = this.el,
-                panel =  this.panels[this.current],
-                positions = {};
-
-            // Compare with 0 is faster, the string is " active"
-            if ($(Gesture.target).hasClass("active")) {
-                $(Gesture.target).removeClass("active");
+        move: function (gesture) {            
+            if (gesture.isDraggingY !== 0) {
+                this.y = this.y + (gesture.y - gesture.lastY);
+                this.translate({
+                    el: this.panels[this.current].el,
+                    y: this.y
+                })
             }
-
-            if (e.bounceBack === true) {
-
-                if (this.y !== 0) {
-                    element = panel.el;
-                    if (e.distanceOriginY < 0) {
-                        this.y = 0;
-                    } else if (panel.height >= this.height) {
-                        this.y = -(panel.height - this.height);
-                    }
-                }
-                e.bounceBack = false;
-
-            } else {
-
-                if (e.isLoading === true) {
-                    this.x = this.x + e.distanceX;
-                } else if (listeners.isDraggingY === true) {
-                    this.y = this.y + e.distanceY;
-                    element = panel.el;
-                }
-
-                if ((listeners.isDraggingX || listeners.isDraggingY) && !e.largeMove) {
-                    duration = 0;
-                }
-            }
-
-            if (element === panel.el) {
-                positions.x = 0;
-                positions.y = this.y;
-            } else {
-                positions.x = this.x;
-                positions.y = 0;
-            }
-
-            Fx.translate(element, positions, {transitionDuration: duration, callback: e.callback});
 
         },
-
+        
         /*      
-         *      Check move for change panels or bounce back
+         *      Check move
          */
-        check: function (e) {
-
-            var current,
-                maxdist;
-
-            Gesture.target.className = Gesture.target.className.replace(" active", "");
-
-            if (listeners.isDraggingY) {
-
-                current = this.panels[this.current];
-                maxdist = current.height - this.height;
+        check: function (gesture) {
+            var panel = this.panels[this.current],
+                maxdist = panel.height - this.height,
+                moveTo = 0;
+                
+            if (gesture.isDraggingY !== 0) {
 
                 // Bounce back
                 if (this.y >= 0 || maxdist < -this.y) {
-                    e.largeMove = true;
-                    e.bounceBack = true;
-                    this.move(e);
+                    if (this.y > 0) {
+                        this.y = 0;
+                    } else {
+                        this.y = -(panel.height - this.height);                                            
+                    }
+                    this.translate({
+                        y: this.y,
+                        el: panel.el,
+                        duration: 0.5
+                    })
                 }
 
             }
@@ -289,6 +215,32 @@
             }
 
         },
+        
+        /*      
+         *      Translate panels
+         */
+        translate: function (options) {
+            if (options.duration === undefined) {
+                options.duration = 0;
+            }
+            if (options.callback === undefined) {
+                options.callback = function() {};
+            }
+            if (options.y === undefined) {
+                options.y = 0;
+            }
+            if (options.x === undefined) {
+                options.x = 0;
+            }
+            if (options.duration === undefined) {
+                options.duration = 0;
+            }
+            Fx.translate(
+                options.el,
+                {y: options.y, x: options.x},
+                {transitionDuration: options.duration, callback: options.callback}
+            );
+        },
 
         /*      
          *      Load current panel
@@ -299,7 +251,11 @@
                 panel,
                 cb,
                 back,
-                i;
+                i,
+                width = this.width, 
+                margin = this.margin, 
+                navmain = this.navmain,
+                translate = this.translate;
                 
             panel = this.panels[this.current];
             back = this.panels[this.back];
@@ -311,17 +267,18 @@
                 $(back.hidden[i]).hide();
             }
 
-            Fx.clean(panel.el);
-            Fx.clean(back.el);
-
-            cb = (function (width, margin,  navmain) {
+            cb = function () {
                 for (i = panel.hidden.length; i--;) {
                     $(panel.hidden[i]).show();
                 }
                 if (navmain.el !== undefined) {
                     back.el.style.left =  width * 2 + margin + "px";
                 }
-            }(this.width, this.margin, this.navmain));
+                translate({
+                    el: back.el,
+                });
+
+            };
 
             if (this.current === 0 && this.navmain.el === undefined) {
                 // Left 
@@ -340,14 +297,13 @@
                 }
 
             }
-
-            this.move({
-                distanceX: -distance - this.x,
-                isLoading: true,
+            
+            this.translate({
+                el: this.el,
+                duration: 0.5,
+                x: -distance - this.x,
                 callback: cb
-            });
-
-
+            })
         }
 
     };

@@ -2,34 +2,6 @@
 /* 
  *  Mootor Core
  */
- 
- /*
-    # Instance
-    
-        + el
-        + query
-
-    # Prototype
-    
-        + ready
-
-    # Static
-    
-        + context
-        + extend
-        + ready
-        + view
-        + show
-        + hide
-        + bind
-        + addClass
-        + removeClass
-        + hasClass
-        + unbind
-        - ajax
-        - html
- 
-*/
 
 var document = window.document;
 
@@ -230,20 +202,6 @@ if (!window.$ || typeof ($) !== "function") {
 /*
  * Mootor Gestures
  */
- 
-/*    
-    - dragStart
-    - dragEnd
-    - dragMove
-    - tapStart
-    - tapEnd
-    - tapHold
-    - doubleTap
-    - swipe        
-    - pinch
-
-*/
-
 
 (function (Moo) {
 
@@ -260,28 +218,25 @@ if (!window.$ || typeof ($) !== "function") {
             fn = options.fn,
             callback = options.callback,
             key = createKey(fn.el);
-
+             
         if (gestureList[key] === undefined) {
             gestureList[key] = {
-                handler: []
+                event: []
             };
         }     
 
         // Bind listeners only once
-        if (type === "onTapStart" || type === "onTapHold") {
-            if(gestureList[key].handler["onTapStart"] === undefined && gestureList[key].handler["onTapStart"]  === undefined){
-                fn.bind("mousedown", fn);        
-            }
-        } else if (type === "onTapEnd" || type === "onTapHold") {
-            if(gestureList[key].handler["onTapEnd"] === undefined && gestureList[key].handler["onTapHold"]  === undefined){
-                fn.bind("mouseup", fn);        
-            }
+        if(gestureList[key] !== undefined){
+            fn.bind("mousedown", fn);        
+            fn.bind("mouseup", fn);        
+            fn.bind("touchstart", fn);        
+            fn.bind("touchend", fn);        
         }
-            
-        if (gestureList[key].handler[type] === undefined) {
-            gestureList[key].handler[type] = [];
+        
+        if (gestureList[key].event[type] === undefined) {
+            gestureList[key].event[type] = [];
         }     
-        gestureList[key].handler[type].push(callback);
+        gestureList[key].event[type].push(callback);
            
     },
     
@@ -297,8 +252,14 @@ if (!window.$ || typeof ($) !== "function") {
     
     // Fire callbacks
     fire = function(info, callbacks) {
-        for(i = callbacks.length; i-- ;) {
-            callbacks[i](info);               
+        if (callbacks !== undefined) {
+            for(i = callbacks.length; i-- ;) {
+                if (callbacks[i].handleGesture !== undefined) {
+                    callbacks[i].handleGesture(info);
+                } else {
+                    callbacks[i](info);                               
+                }
+            }
         }
     }
             
@@ -307,6 +268,7 @@ if (!window.$ || typeof ($) !== "function") {
      */
     Moo.Gesture = {    
 
+        // Gestures
         onTapEnd: function(callback) {
             addGesture({
                 fn: this,
@@ -328,6 +290,27 @@ if (!window.$ || typeof ($) !== "function") {
                 type: "onTapHold"
             })
         },
+        onDragStart: function(callback) {
+            addGesture({
+                fn: this,
+                callback: callback,
+                type: "onDragStart"
+            })
+        },
+        onDragMove: function(callback) {
+            addGesture({
+                fn: this,
+                callback: callback,
+                type: "onDragMove"
+            })
+        },
+        onDragEnd: function(callback) {
+            addGesture({
+                fn: this,
+                callback: callback,
+                type: "onDragEnd"
+            })
+        },
 
         // Handler to detect gestures and fire callbacks        
         handleEvent: function(e) {
@@ -337,45 +320,108 @@ if (!window.$ || typeof ($) !== "function") {
                     el: this.el                
                 },
                 gesture =  Moo.gestures.list[key],
-                date = new Date();
-            
+                date = new Date(),
+                clientX,
+                clientY;
+                                                
+            e.preventDefault()
+
+            if (e.clientX || e.clientY) {
+                // Mouse
+                clientX = e.clientX;
+                clientY = e.clientY;
+            } else {
+                // Touch
+                // FIXME CHECK
+                try {
+                clientX = e.touches[0].clientX;
+                clientY = e.touches[0].clientY;
+                } catch(e){};
+            } 
+                                        
             // TapStart
-            if( e.type === "mousedown") {
-                gesture.handler.time = date.getTime();        
-                gesture.handler.mousedown = true;
-                // TapHold
+            if (e.type === "mousedown" || e.type === "touchstart") {
+
+                this.bind("mousemove", this);    
+                this.bind("touchmove", this);                 
+                                
+                gesture.event.time = date.getTime();        
+                gesture.event.isDraggingY = 0;
+                gesture.event.mousedown = true;         
+                gesture.event.tapped = false;
+                gesture.event.startX = clientX;
+                gesture.event.startY = clientY;
+                
                 window.setTimeout(function() { 
-                    if (gesture.handler.mousedown === true) {                        
-                         fire(info, gesture.handler.onTapHold);
+                    // TapHold
+                    if (gesture.event.mousedown === true) {
+                        info.type = "tapHold";
+                        fire(info, gesture.event.onTapHold);
                     }                     
                  }, 500);
-                fire(info, gesture.handler.onTapStart);
+                 
+                if (gesture.event.onTapStart !== undefined) {
+                    // TapStart
+                    info.type = "tapStart";
+                    fire(info, gesture.event.onTapStart);
+                }
             }
             
-            // TapEnd
-            if( e.type === "mouseup") {
-                info.time = date.getTime() - gesture.handler.time;
-                gesture.handler.mousedown = false;
-                fire(info, gesture.handler.onTapEnd);
+            if (e.type === "mousemove" || e.type === "touchmove") {
+
+                info.lastY = gesture.event.y;
+                info.lastX = gesture.event.x;
+                gesture.event.y = info.y = clientY;
+                gesture.event.x = info.x = clientX;
+                info.distanceFromOriginY = clientY - gesture.event.startY;
+                info.distanceFromOriginX = clientX - gesture.event.startX;
+
+                if (gesture.event.isDraggingY === 0) {
+                    // DragStart
+                    if ((clientY - gesture.event.startY) > 10) {
+                        gesture.event.isDraggingY = 1;
+                        info.type = "dragStart";
+                        fire(info, gesture.event.onDragStart);
+                    } else if ((clientY - gesture.event.startY) < -10) {
+                        gesture.event.isDraggingY = -1;                
+                        info.type = "dragStart";
+                        fire(info, gesture.event.onDragStart);
+                    }
+                } else {
+                    // DragMove
+                    info.type = "dragMove";
+                    fire(info, gesture.event.onDragMove);
+                }
             }
+                           
+            if ((e.type === "mouseup" || e.type === "touchend") && gesture.event.tapped === false) {
+                this.unbind("mousemove", this);        
+                this.unbind("touchmove", this);        
+                info.time = date.getTime() - gesture.event.time;
+                gesture.event.mousedown = false;
+                if (gesture.event.isDraggingY !== 0) {
+                    // DragEnd
+                    info.type = "dragEnd";
+                    gesture.event.isDraggingY = 0;
+                    fire(info, gesture.event.onDragEnd);
+                } else {
+                    // TapEnd
+                    info.type = "tapEnd";
+                    //gesture.event.tapped = true;
+                    fire(info, gesture.event.onTapEnd);               
+                }
+            }
+ 
         }
     }
     
     Moo.extend(Moo.Gesture);
-    
 
 }($));
 
 /* 
  * Mootor Visual FX
  */
- 
-  
-/*    
-    - translate
-    - clean
-    
-*/
 
 (function (Moo) {
     Moo.Fx = {
@@ -384,7 +430,7 @@ if (!window.$ || typeof ($) !== "function") {
             var x_pos = positions.x,
                 y_pos = positions.y,
                 tduration;
-
+                
             tduration = options.transitionDuration;
             el.style.transitionProperty = "webkit-transform";
 
@@ -396,7 +442,7 @@ if (!window.$ || typeof ($) !== "function") {
             }
 
             el.style.webkitTransform = "translate3d(" + x_pos + "px," + y_pos + "px, 0)";
-
+            
             if (options.callback) {
                 window.setTimeout(options.callback, tduration * 1000);
             }
@@ -417,19 +463,6 @@ if (!window.$ || typeof ($) !== "function") {
 /*
  * Mootor Navigation
  */
- 
-/*    
-    - init
-    - back
-    - create
-    - remove
-    - load
-    - header
-    - loading
-    - anchors
-    - footer  
-    
-*/
 
 (function (Moo) {
     // Module dependencies
@@ -470,34 +503,9 @@ if (!window.$ || typeof ($) !== "function") {
             panel.anchors = panel.el.getElementsByClassName(this.navClass);
             panel.hidden = panel.el.getElementsByClassName(this.hiddenClass);
         }
-        
-        
-        // 1. Set gestures on element
-        
-        $(this.el).onTapEnd(function(gesture) {
-            console.log("tap end!! callback in nav.js");
-            console.log(gesture.time);
-        });
-
-        $(this.el).onTapStart(function() {
-            console.log("tap start!! callback in nav.js");
-        });
-
-        $(this.el).onTapStart(function() {
-            console.log("tap start 2!! callback in nav.js");
-        });
-
-        $(this.el).onTapHold(function() {
-            console.log("tap hold!! callback in nav.js");
-        });
-        
-        $(this.el).onTapHold(function() {
-            console.log("tap hold 2 !! callback in nav.js");
-        });
-
-        //$(this.el).onDragStart(this.start);
-        //$(this.el).onDragMove(this.move)
-        //$(this.el).onDragEnd(this.check)
+               
+        $(this.el).onDragMove(this);
+        $(this.el).onDragEnd(this);
         
         if (document.body.style.overflow !== "hidden") {
             document.body.style.overflow = "hidden";
@@ -508,8 +516,19 @@ if (!window.$ || typeof ($) !== "function") {
         return this;
 
     };
-
+    
     Panels.prototype = {
+    
+        handleGesture: function(gesture) {
+            switch(gesture.type) {
+            case "dragMove": 
+                this.move(gesture);
+                break;
+            case "dragEnd":
+                this.check(gesture);
+                break;
+            }
+        },
 
         header: {
             init: function (panel) {
@@ -539,9 +558,8 @@ if (!window.$ || typeof ($) !== "function") {
                 panel;
 
             anchorCallback = function (gesture) {
-                console.log(gesture.el.rel);
-                /*panels.set(this.rel);
-                return false;*/
+                panels.set(gesture.el.rel);
+                return false;
             };
 
             // Reset styles and set anchor links
@@ -590,95 +608,49 @@ if (!window.$ || typeof ($) !== "function") {
                 this.navmain.anchors = this.navmain.el.getElementsByTagName("a");
                 for (i = this.navmain.anchors.length; i--;) {
                     if (this.navmain.anchors[i].rel !== "") {
-                        $(this.navmain.anchors[i]).onTapEnd(anchorCallback)
+                       $(this.navmain.anchors[i]).onTapEnd(anchorCallback)
                     }
                 }
             }
 
-        },
-
-        start: function (e) {
-            console.log("start!");
-            
-            var target = Gesture.target;
-            window.setTimeout(function () {
-                $(target).setClass("active");
-            }, 50);
-            
         },
 
         /*      
          *      Move
          */
-        move: function (e) {
-            var duration = 0.5,
-                element = this.el,
-                panel =  this.panels[this.current],
-                positions = {};
-
-            // Compare with 0 is faster, the string is " active"
-            if ($(Gesture.target).hasClass("active")) {
-                $(Gesture.target).removeClass("active");
+        move: function (gesture) {            
+            if (gesture.isDraggingY !== 0) {
+                this.y = this.y + (gesture.y - gesture.lastY);
+                this.translate({
+                    el: this.panels[this.current].el,
+                    y: this.y
+                })
             }
-
-            if (e.bounceBack === true) {
-
-                if (this.y !== 0) {
-                    element = panel.el;
-                    if (e.distanceOriginY < 0) {
-                        this.y = 0;
-                    } else if (panel.height >= this.height) {
-                        this.y = -(panel.height - this.height);
-                    }
-                }
-                e.bounceBack = false;
-
-            } else {
-
-                if (e.isLoading === true) {
-                    this.x = this.x + e.distanceX;
-                } else if (listeners.isDraggingY === true) {
-                    this.y = this.y + e.distanceY;
-                    element = panel.el;
-                }
-
-                if ((listeners.isDraggingX || listeners.isDraggingY) && !e.largeMove) {
-                    duration = 0;
-                }
-            }
-
-            if (element === panel.el) {
-                positions.x = 0;
-                positions.y = this.y;
-            } else {
-                positions.x = this.x;
-                positions.y = 0;
-            }
-
-            Fx.translate(element, positions, {transitionDuration: duration, callback: e.callback});
 
         },
-
+        
         /*      
-         *      Check move for change panels or bounce back
+         *      Check move
          */
-        check: function (e) {
-
-            var current,
-                maxdist;
-
-            Gesture.target.className = Gesture.target.className.replace(" active", "");
-
-            if (listeners.isDraggingY) {
-
-                current = this.panels[this.current];
-                maxdist = current.height - this.height;
+        check: function (gesture) {
+            var panel = this.panels[this.current],
+                maxdist = panel.height - this.height,
+                moveTo = 0;
+                
+            if (gesture.isDraggingY !== 0) {
 
                 // Bounce back
                 if (this.y >= 0 || maxdist < -this.y) {
-                    e.largeMove = true;
-                    e.bounceBack = true;
-                    this.move(e);
+                    if (this.y > 0) {
+                        this.y = 0;
+                    } else {
+                        this.y = -(panel.height - this.height);                                            
+                    }
+                    this.translate({
+                        y: this.y,
+                        el: panel.el,
+                        duration: 0.5
+                    })
                 }
 
             }
@@ -705,6 +677,32 @@ if (!window.$ || typeof ($) !== "function") {
             }
 
         },
+        
+        /*      
+         *      Translate panels
+         */
+        translate: function (options) {
+            if (options.duration === undefined) {
+                options.duration = 0;
+            }
+            if (options.callback === undefined) {
+                options.callback = function() {};
+            }
+            if (options.y === undefined) {
+                options.y = 0;
+            }
+            if (options.x === undefined) {
+                options.x = 0;
+            }
+            if (options.duration === undefined) {
+                options.duration = 0;
+            }
+            Fx.translate(
+                options.el,
+                {y: options.y, x: options.x},
+                {transitionDuration: options.duration, callback: options.callback}
+            );
+        },
 
         /*      
          *      Load current panel
@@ -715,7 +713,11 @@ if (!window.$ || typeof ($) !== "function") {
                 panel,
                 cb,
                 back,
-                i;
+                i,
+                width = this.width, 
+                margin = this.margin, 
+                navmain = this.navmain,
+                translate = this.translate;
                 
             panel = this.panels[this.current];
             back = this.panels[this.back];
@@ -727,17 +729,18 @@ if (!window.$ || typeof ($) !== "function") {
                 $(back.hidden[i]).hide();
             }
 
-            Fx.clean(panel.el);
-            Fx.clean(back.el);
-
-            cb = (function (width, margin,  navmain) {
+            cb = function () {
                 for (i = panel.hidden.length; i--;) {
                     $(panel.hidden[i]).show();
                 }
                 if (navmain.el !== undefined) {
                     back.el.style.left =  width * 2 + margin + "px";
                 }
-            }(this.width, this.margin, this.navmain));
+                translate({
+                    el: back.el,
+                });
+
+            };
 
             if (this.current === 0 && this.navmain.el === undefined) {
                 // Left 
@@ -756,14 +759,13 @@ if (!window.$ || typeof ($) !== "function") {
                 }
 
             }
-
-            this.move({
-                distanceX: -distance - this.x,
-                isLoading: true,
+            
+            this.translate({
+                el: this.el,
+                duration: 0.5,
+                x: -distance - this.x,
                 callback: cb
-            });
-
-
+            })
         }
 
     };

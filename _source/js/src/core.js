@@ -1,34 +1,6 @@
 /* 
  *  Mootor Core
  */
- 
- /*
-    # Instance
-    
-        + el
-        + query
-
-    # Prototype
-    
-        + ready
-
-    # Static
-    
-        + context
-        + extend
-        + ready
-        + view
-        + show
-        + hide
-        + bind
-        + addClass
-        + removeClass
-        + hasClass
-        + unbind
-        - ajax
-        - html
- 
-*/
 
 var document = window.document;
 
