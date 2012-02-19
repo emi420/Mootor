@@ -489,7 +489,6 @@ if (!window.$ || typeof ($) !== "function") {
 
         this.el = options.el;
         this.navClass = options.nav_class !== undefined ? options.nav_class : "nav";
-        this.navmain = {el: options.navmain};
         this.panelClass = options.panel_class !== undefined ? options.panel_class : "panel";
         this.headerId = options.header_id !== undefined ? options.header_id : "header";
         this.hiddenClass = options.hidden_class !== undefined ? options.hidden_class : "hidden";
@@ -565,11 +564,20 @@ if (!window.$ || typeof ($) !== "function") {
                 j,
                 i,
                 panels = this,
-                panel;
+                panel,
+                setActive,
+                unsetActive;
 
             anchorCallback = function (gesture) {
                 panels.set(gesture.el.rel);
                 return false;
+            };
+
+            setActive = function (gesture) {
+                $(gesture.el).setClass("active");
+            };
+            unsetActive = function (gesture) {
+                $(gesture.el).removeClass("active");
             };
 
             // Reset styles and set anchor links
@@ -600,25 +608,17 @@ if (!window.$ || typeof ($) !== "function") {
 
                 for (j = panel.anchors.length; j--;) {
                     if (panel.anchors[j].rel !== "") {
+                        $(panel.anchors[j]).onTapStart(setActive);
+                        $(panel.anchors[j]).onTapEnd(unsetActive);
                         $(panel.anchors[j]).onTapEnd(anchorCallback);
                     }
                 }
-
             }
 
             if (this.header) {
                 for (i = this.header.anchors.length; i--;) {
                     if (this.header.anchors[i].rel !== "") {
                         $(this.header.anchors[i]).onTapEnd(anchorCallback);
-                    }
-                }
-            }
-
-            if (this.navmain.el !== undefined) {
-                this.navmain.anchors = this.navmain.el.getElementsByTagName("a");
-                for (i = this.navmain.anchors.length; i--;) {
-                    if (this.navmain.anchors[i].rel !== "") {
-                        $(this.navmain.anchors[i]).onTapEnd(anchorCallback);
                     }
                 }
             }
@@ -723,9 +723,6 @@ if (!window.$ || typeof ($) !== "function") {
                 cb,
                 back,
                 i,
-                width = this.width,
-                margin = this.margin,
-                navmain = this.navmain,
                 translate = this.translate;
 
             panel = this.panels[this.current];
@@ -742,16 +739,13 @@ if (!window.$ || typeof ($) !== "function") {
                 for (i = panel.hidden.length; i--;) {
                     $(panel.hidden[i]).show();
                 }
-                if (navmain.el !== undefined) {
-                    back.el.style.left =  width * 2 + margin + "px";
-                }
                 translate({
                     el: back.el
                 });
 
             };
 
-            if (this.current === 0 && this.navmain.el === undefined) {
+            if (this.current === 0) {
                 // Left 
                 distance = 0;
                 if (this.back) {
