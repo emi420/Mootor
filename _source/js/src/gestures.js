@@ -212,7 +212,6 @@
                 } else {
                     // TapEnd
                     info.type = "tapEnd";
-                    info.isDraggingY = gesture.event.isDraggingY;
                     fire(info, gesture.event.onTapEnd);
                 }
             }
