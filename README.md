@@ -7,8 +7,13 @@ Current modules:
 
 * Mootor (core) - core functions and query selector
 * Mootor.Fx - visual FX (ex: show, hide, translate, etc)
-* Mootor.Event - events (ex: tap, drag, etc)
-* Mootor.Nav - navigation (ex: panels)
+* Mootor.Gestures - gestures (ex: tapStart, tapEnd, etc)
+* Mootor.Nav - navigation
+
+and plugins:
+
+* Mootor.Geo - geolocalization
+* Mootor.Type - type
 
 ## Demo
 
