@@ -48,7 +48,7 @@
         }
 
         $(this.el).onDragMove(this);
-        $(this.el).onDragEnd(this);
+        $(this.el).onDragEnd(this);       
 
         if (document.body.style.overflow !== "hidden") {
             document.body.style.overflow = "hidden";
@@ -100,7 +100,8 @@
                 panels = this,
                 panel,
                 setActive,
-                unsetActive;
+                unsetActive,
+                headerAnchor;
 
             anchorCallback = function (gesture) {
                 if (panels.isMoving === false) {
@@ -115,7 +116,9 @@
                 $(gesture.el).setClass("active");
             };
             unsetActive = function (gesture) {
-                $(gesture.el).removeClass("active");
+                for (i = panel.anchors.length; i--;) {
+                    $(panel.anchors[i]).removeClass("active");
+                }
             };
 
             // Reset styles and set anchor links
@@ -148,6 +151,7 @@
                     if (panel.anchors[j].rel !== "") {
                         $(panel.anchors[j]).onTapStart(setActive);
                         $(panel.anchors[j]).onTapEnd(unsetActive);
+                        $(panel.anchors[j]).onDragEnd(unsetActive);
                         $(panel.anchors[j]).onTapEnd(anchorCallback);
                     }
                 }
@@ -155,8 +159,11 @@
 
             if (this.header) {
                 for (i = this.header.anchors.length; i--;) {
-                    if (this.header.anchors[i].rel !== "") {
-                        $(this.header.anchors[i]).onTapEnd(anchorCallback);
+                    headerAnchor =  this.header.anchors[i];
+                    if (headerAnchor.rel === "back") {
+                        $(headerAnchor).onTapEnd(function(){
+                            panels.goBack();
+                        });
                     }
                 }
             }
@@ -212,12 +219,13 @@
         set: function (pid) {
 
             var i;
-
             // Get panel by id and load it
             for (i = this.count; i--;) {
                 if (this.panels[i].el.id === pid) {
                     if (this.current > 0) {
                         this.back = this.current;
+                    } else {
+                        this.back = 0;
                     }
                     this.current = i;
                     this.y = 0;
@@ -262,11 +270,12 @@
                 panel,
                 cb,
                 back,
+                backIndex = this.back,
                 i,
                 translate = this.translate;
-
+                
             panel = this.panels[this.current];
-            back = this.panels[this.back];
+            back = this.panels[this.back];           
 
             for (i = panel.hidden.length; i--;) {
                 $(panel.hidden[i]).hide();
@@ -279,16 +288,16 @@
                 for (i = panel.hidden.length; i--;) {
                     $(panel.hidden[i]).show();
                 }
-                translate({
-                    el: back.el
-                });
-
+                
+                if(backIndex !== 0) {
+                    $(back.el).hide();
+                }
             };
-
+            
             if (this.current === 0) {
                 // Left 
                 distance = 0;
-                if (this.back) {
+                if (this.back !== 0) {
                     back.el.style.left =  this.width + this.margin + "px";
                 }
 
@@ -297,11 +306,18 @@
                 distance = this.width + this.margin;
                 panel.el.style.left = distance + "px";
 
-                if (this.back && this.back !== this.current) {
+                if (this.back !== 0 && this.back !== this.current) {
                     back.el.style.left = -distance * 4 + "px";
                 }
 
             }
+
+            $(panel.el).show();
+            this.translate({
+                el: panel.el,
+                x: this.x,
+                y: 0
+             });
 
             this.translate({
                 el: this.el,
@@ -309,7 +325,12 @@
                 x: -distance - this.x,
                 callback: cb
             });
+        },
+        
+        goBack: function() {
+            this.set(this.panels[this.back].el.id);
         }
+        
 
     };
 
@@ -318,15 +339,14 @@
       *     Public
       */
     Moo.Nav = {
-
-        panels: function (options) {
+        nav: function (options) {
             if (typeof options !== "object") {
                 options = {};
             }
             options.el = this.el;
             return new Panels(options);
         }
-
+        
     };
 
     Moo.extend(Moo.Nav);

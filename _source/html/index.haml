@@ -13,7 +13,7 @@
     #header
     
         %nav
-            %a.nav{:href=>"", :rel=>"home"} Home
+            %a.nav{:href=>"", :rel=>"back"} Back
 
     #panels
 
@@ -90,10 +90,10 @@
            var panels = $("#panels");
 
            // Dynamic font size
-           panels.dynamicType();
+           panels.type.autoSize();
 
            // Navigation panels
-           panels.panels({
+           panels.nav({
                 header_id: "header",
                 panel_class: "panel",
                 nav_class: "nav",
@@ -102,7 +102,7 @@
                       
            // Show location map
            // $("#map").map();
-
+ 
        });
 
 

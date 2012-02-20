@@ -19,8 +19,7 @@
     createKey = function (el) {
         if (el.rel !== undefined) {
             return el.rel;
-        }
-        if (typeof el === "object") {
+        } else if (typeof el === "object") {
             return el;
         }
     };
@@ -30,16 +29,13 @@
             type = options.type,
             fn = options.fn,
             callback = options.callback,
-            key = createKey(fn.el);
+            key = createKey(fn.el);               
 
         if (gestureList[key] === undefined) {
             gestureList[key] = {
                 event: []
             };
-        }
-
-        // Bind listeners only once
-        if (gestureList[key] !== undefined) {
+            // Bind listeners only once
             fn.bind("mousedown", fn);
             fn.bind("mouseup", fn);
             fn.bind("touchstart", fn);
@@ -49,6 +45,7 @@
         if (gestureList[key].event[type] === undefined) {
             gestureList[key].event[type] = [];
         }
+        
         gestureList[key].event[type].push(callback);
 
     };
@@ -56,8 +53,9 @@
     // Fire callbacks
     fire = function (info, callbacks) {
         var i;
+                
         if (callbacks !== undefined) {
-            for (i = callbacks.length; i--;) {
+            for (i = 0; i < callbacks.length; i++) {
                 if (callbacks[i].handleGesture !== undefined) {
                     callbacks[i].handleGesture(info);
                 } else {
@@ -117,12 +115,13 @@
         },
 
         // Handler to detect gestures and fire callbacks        
+                
         handleEvent: function (e) {
             var key = createKey(this.el),
                 info = {
                     el: this.el
                 },
-                gesture =  Moo.gestures.list[key],
+                gesture = Moo.gestures.list[key],
                 date = new Date(),
                 clientX,
                 clientY;
@@ -197,12 +196,16 @@
                 }
             }
 
-            if ((e.type === "mouseup" || e.type === "touchend") && gesture.event.tapped === false) {
-                this.unbind("mousemove", this);
-                this.unbind("touchmove", this);
-                info.time = date.getTime() - gesture.event.time;
-                gesture.event.mousedown = false;
-
+            if (e.type === "mouseup" || e.type === "touchend") {
+            
+                if (gesture.event.tapped === false) {
+                    this.unbind("mousemove", this);
+                    this.unbind("touchmove", this);
+                    gesture.event.tapped = true;
+                    info.time = date.getTime() - gesture.event.time;
+                    gesture.event.mousedown = false;
+                }
+                
                 if (gesture.event.isDraggingY !== 0) {
                     // DragEnd
                     info.type = "dragEnd";

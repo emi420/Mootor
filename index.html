@@ -12,7 +12,7 @@
 <body class='main'>
   <div id='header'>
     <nav>
-      <a class='nav' href='' rel='home'>Home</a>
+      <a class='nav' href='' rel='back'>Back</a>
     </nav>
   </div>
   <div id='panels'>
@@ -111,10 +111,10 @@
            var panels = $("#panels");
     
            // Dynamic font size
-           panels.dynamicType();
+           panels.type.autoSize();
     
            // Navigation panels
-           panels.panels({
+           panels.nav({
                 header_id: "header",
                 panel_class: "panel",
                 nav_class: "nav",

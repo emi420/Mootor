@@ -220,8 +220,7 @@ if (!window.$ || typeof ($) !== "function") {
     createKey = function (el) {
         if (el.rel !== undefined) {
             return el.rel;
-        }
-        if (typeof el === "object") {
+        } else if (typeof el === "object") {
             return el;
         }
     };
@@ -231,16 +230,13 @@ if (!window.$ || typeof ($) !== "function") {
             type = options.type,
             fn = options.fn,
             callback = options.callback,
-            key = createKey(fn.el);
+            key = createKey(fn.el);               
 
         if (gestureList[key] === undefined) {
             gestureList[key] = {
                 event: []
             };
-        }
-
-        // Bind listeners only once
-        if (gestureList[key] !== undefined) {
+            // Bind listeners only once
             fn.bind("mousedown", fn);
             fn.bind("mouseup", fn);
             fn.bind("touchstart", fn);
@@ -250,6 +246,7 @@ if (!window.$ || typeof ($) !== "function") {
         if (gestureList[key].event[type] === undefined) {
             gestureList[key].event[type] = [];
         }
+        
         gestureList[key].event[type].push(callback);
 
     };
@@ -257,8 +254,9 @@ if (!window.$ || typeof ($) !== "function") {
     // Fire callbacks
     fire = function (info, callbacks) {
         var i;
+                
         if (callbacks !== undefined) {
-            for (i = callbacks.length; i--;) {
+            for (i = 0; i < callbacks.length; i++) {
                 if (callbacks[i].handleGesture !== undefined) {
                     callbacks[i].handleGesture(info);
                 } else {
@@ -318,12 +316,13 @@ if (!window.$ || typeof ($) !== "function") {
         },
 
         // Handler to detect gestures and fire callbacks        
+                
         handleEvent: function (e) {
             var key = createKey(this.el),
                 info = {
                     el: this.el
                 },
-                gesture =  Moo.gestures.list[key],
+                gesture = Moo.gestures.list[key],
                 date = new Date(),
                 clientX,
                 clientY;
@@ -398,12 +397,16 @@ if (!window.$ || typeof ($) !== "function") {
                 }
             }
 
-            if ((e.type === "mouseup" || e.type === "touchend") && gesture.event.tapped === false) {
-                this.unbind("mousemove", this);
-                this.unbind("touchmove", this);
-                info.time = date.getTime() - gesture.event.time;
-                gesture.event.mousedown = false;
-
+            if (e.type === "mouseup" || e.type === "touchend") {
+            
+                if (gesture.event.tapped === false) {
+                    this.unbind("mousemove", this);
+                    this.unbind("touchmove", this);
+                    gesture.event.tapped = true;
+                    info.time = date.getTime() - gesture.event.time;
+                    gesture.event.mousedown = false;
+                }
+                
                 if (gesture.event.isDraggingY !== 0) {
                     // DragEnd
                     info.type = "dragEnd";
@@ -517,7 +520,7 @@ if (!window.$ || typeof ($) !== "function") {
         }
 
         $(this.el).onDragMove(this);
-        $(this.el).onDragEnd(this);
+        $(this.el).onDragEnd(this);       
 
         if (document.body.style.overflow !== "hidden") {
             document.body.style.overflow = "hidden";
@@ -569,7 +572,8 @@ if (!window.$ || typeof ($) !== "function") {
                 panels = this,
                 panel,
                 setActive,
-                unsetActive;
+                unsetActive,
+                headerAnchor;
 
             anchorCallback = function (gesture) {
                 if (panels.isMoving === false) {
@@ -584,7 +588,9 @@ if (!window.$ || typeof ($) !== "function") {
                 $(gesture.el).setClass("active");
             };
             unsetActive = function (gesture) {
-                $(gesture.el).removeClass("active");
+                for (i = panel.anchors.length; i--;) {
+                    $(panel.anchors[i]).removeClass("active");
+                }
             };
 
             // Reset styles and set anchor links
@@ -617,6 +623,7 @@ if (!window.$ || typeof ($) !== "function") {
                     if (panel.anchors[j].rel !== "") {
                         $(panel.anchors[j]).onTapStart(setActive);
                         $(panel.anchors[j]).onTapEnd(unsetActive);
+                        $(panel.anchors[j]).onDragEnd(unsetActive);
                         $(panel.anchors[j]).onTapEnd(anchorCallback);
                     }
                 }
@@ -624,8 +631,11 @@ if (!window.$ || typeof ($) !== "function") {
 
             if (this.header) {
                 for (i = this.header.anchors.length; i--;) {
-                    if (this.header.anchors[i].rel !== "") {
-                        $(this.header.anchors[i]).onTapEnd(anchorCallback);
+                    headerAnchor =  this.header.anchors[i];
+                    if (headerAnchor.rel === "back") {
+                        $(headerAnchor).onTapEnd(function(){
+                            panels.goBack();
+                        });
                     }
                 }
             }
@@ -681,12 +691,13 @@ if (!window.$ || typeof ($) !== "function") {
         set: function (pid) {
 
             var i;
-
             // Get panel by id and load it
             for (i = this.count; i--;) {
                 if (this.panels[i].el.id === pid) {
                     if (this.current > 0) {
                         this.back = this.current;
+                    } else {
+                        this.back = 0;
                     }
                     this.current = i;
                     this.y = 0;
@@ -731,11 +742,12 @@ if (!window.$ || typeof ($) !== "function") {
                 panel,
                 cb,
                 back,
+                backIndex = this.back,
                 i,
                 translate = this.translate;
-
+                
             panel = this.panels[this.current];
-            back = this.panels[this.back];
+            back = this.panels[this.back];           
 
             for (i = panel.hidden.length; i--;) {
                 $(panel.hidden[i]).hide();
@@ -748,16 +760,16 @@ if (!window.$ || typeof ($) !== "function") {
                 for (i = panel.hidden.length; i--;) {
                     $(panel.hidden[i]).show();
                 }
-                translate({
-                    el: back.el
-                });
-
+                
+                if(backIndex !== 0) {
+                    $(back.el).hide();
+                }
             };
-
+            
             if (this.current === 0) {
                 // Left 
                 distance = 0;
-                if (this.back) {
+                if (this.back !== 0) {
                     back.el.style.left =  this.width + this.margin + "px";
                 }
 
@@ -766,11 +778,18 @@ if (!window.$ || typeof ($) !== "function") {
                 distance = this.width + this.margin;
                 panel.el.style.left = distance + "px";
 
-                if (this.back && this.back !== this.current) {
+                if (this.back !== 0 && this.back !== this.current) {
                     back.el.style.left = -distance * 4 + "px";
                 }
 
             }
+
+            $(panel.el).show();
+            this.translate({
+                el: panel.el,
+                x: this.x,
+                y: 0
+             });
 
             this.translate({
                 el: this.el,
@@ -778,7 +797,12 @@ if (!window.$ || typeof ($) !== "function") {
                 x: -distance - this.x,
                 callback: cb
             });
+        },
+        
+        goBack: function() {
+            this.set(this.panels[this.back].el.id);
         }
+        
 
     };
 
@@ -787,15 +811,14 @@ if (!window.$ || typeof ($) !== "function") {
       *     Public
       */
     Moo.Nav = {
-
-        panels: function (options) {
+        nav: function (options) {
             if (typeof options !== "object") {
                 options = {};
             }
             options.el = this.el;
             return new Panels(options);
         }
-
+        
     };
 
     Moo.extend(Moo.Nav);
