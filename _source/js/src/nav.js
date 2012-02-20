@@ -346,7 +346,7 @@
             options.el = this.el;
             return new Panels(options);
         }
-        
+
     };
 
     Moo.extend(Moo.Nav);

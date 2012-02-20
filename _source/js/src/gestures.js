@@ -29,7 +29,7 @@
             type = options.type,
             fn = options.fn,
             callback = options.callback,
-            key = createKey(fn.el);               
+            key = createKey(fn.el);
 
         if (gestureList[key] === undefined) {
             gestureList[key] = {
@@ -45,7 +45,7 @@
         if (gestureList[key].event[type] === undefined) {
             gestureList[key].event[type] = [];
         }
-        
+
         gestureList[key].event[type].push(callback);
 
     };
@@ -53,7 +53,7 @@
     // Fire callbacks
     fire = function (info, callbacks) {
         var i;
-                
+
         if (callbacks !== undefined) {
             for (i = 0; i < callbacks.length; i++) {
                 if (callbacks[i].handleGesture !== undefined) {
@@ -115,7 +115,7 @@
         },
 
         // Handler to detect gestures and fire callbacks        
-                
+
         handleEvent: function (e) {
             var key = createKey(this.el),
                 info = {
@@ -197,7 +197,7 @@
             }
 
             if (e.type === "mouseup" || e.type === "touchend") {
-            
+
                 if (gesture.event.tapped === false) {
                     this.unbind("mousemove", this);
                     this.unbind("touchmove", this);
@@ -205,7 +205,7 @@
                     info.time = date.getTime() - gesture.event.time;
                     gesture.event.mousedown = false;
                 }
-                
+
                 if (gesture.event.isDraggingY !== 0) {
                     // DragEnd
                     info.type = "dragEnd";
