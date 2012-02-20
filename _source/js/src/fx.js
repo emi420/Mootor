@@ -21,7 +21,7 @@
             } else {
                 this.clean(el);
             }
-
+            
             el.style.webkitTransform = "translate3d(" + x_pos + "px," + y_pos + "px, 0)";
 
             if (options.callback) {

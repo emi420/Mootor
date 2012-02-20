@@ -35,6 +35,7 @@
         this.panels = [];
         this.header = this.header.init(this);
         this.isMoving = false;
+        this.direction = 0;
 
         panels = this.el.getElementsByClassName(this.panelClass);
 
@@ -47,8 +48,8 @@
             panel.hidden = panel.el.getElementsByClassName(this.hiddenClass);
         }
 
-        //$(this.el).onDragMove(this);
-        //$(this.el).onDragEnd(this);
+        $(this.el).onDragMove(this);
+        $(this.el).onDragEnd(this);
 
         if (document.body.style.overflow !== "hidden") {
             document.body.style.overflow = "hidden";
@@ -105,10 +106,10 @@
                 goBack;
 
             anchorCallback = function (gesture) {
+                panels.direction = 0;
+                $(gesture.el).removeClass("active");
                 if (panels.isMoving === false) {
                     panels.set(gesture.el.rel);
-                } else {
-                    $(gesture.el).removeClass("active");
                 }
                 return false;
             };
@@ -222,15 +223,11 @@
 
             var i;
             // Get panel by id and load it
+            // FIXME CHECK
             for (i = this.count; i--;) {
                 if (this.panels[i].el.id === pid) {
-                    if (this.current > 0) {
-                        this.back = this.current;
-                    } else {
-                        this.back = 0;
-                    }
+                    this.back = this.current;
                     this.current = i;
-                    this.y = 0;
                     this.load();
                 }
             }
@@ -262,73 +259,78 @@
                 {transitionDuration: options.duration, callback: options.callback}
             );
         },
+        
+        hide: function(panel) {
+            var i;
+            for (i = panel.hidden.length; i--;) {
+                $(panel.hidden[i]).hide();
+            }        
+        },
 
+        show: function(panel) {
+            var i;
+            for (i = panel.hidden.length; i--;) {
+                $(panel.hidden[i]).show();
+            }        
+        },
         /*      
          *      Load current panel
          */
         load: function () {
 
-            var distance,
-                panel,
+            var panel,
                 cb,
                 back,
                 backIndex = this.back,
-                i;
+                show = this.show,
+                translate = this.translate,
+                move,
+                positionX,
+                container = this.el,
+                control = false;
 
             panel = this.panels[this.current];
             back = this.panels[this.back];
 
-            for (i = panel.hidden.length; i--;) {
-                $(panel.hidden[i]).hide();
-            }
-            for (i = back.hidden.length; i--;) {
-                $(back.hidden[i]).hide();
-            }
+            this.hide(panel);
+            this.hide(back);
+            $(panel.el).show();
 
             cb = function () {
-                for (i = panel.hidden.length; i--;) {
-                    $(panel.hidden[i]).show();
-                }
-
-                if (backIndex !== 0) {
-                    $(back.el).hide();
-                }
+                show(panel);
+                $(back.el).hide();
             };
+                        
+            positionX = this.width + this.margin;
 
-            if (this.current === 0) {
-                // Left 
-                distance = 0;
-                if (this.back !== 0) {
-                    back.el.style.left =  this.width + this.margin + "px";
+            if (this.current !== 0) {
+                if (this.back === 0) {
+                    panel.el.style.left = positionX + "px";
+                } else {
+                    translate({el: container});
+                    back.el.style.left = "0px";
+                    if (this.direction !== 0) {
+                        positionX = -positionX;
+                    }
+                    panel.el.style.left = positionX + "px";                   
                 }
-
-            } else {
-                // Right
-                distance = this.width + this.margin;
-                panel.el.style.left = distance + "px";
-
-                if (this.back !== 0 && this.back !== this.current) {
-                    back.el.style.left = -distance * 4 + "px";
-                }
-
-            }
-
-            $(panel.el).show();
-            this.translate({
-                el: panel.el,
-                x: this.x,
-                y: 0
-            });
-
-            this.translate({
-                el: this.el,
-                duration: 0.5,
-                x: -distance - this.x,
-                callback: cb
-            });
+            } else if (this.back !== 0) {
+                positionX = 0;            
+            } 
+       
+            this.side === 1 ? this.side = 0 : this.side = 1;            
+            window.setTimeout(function() {
+                translate({
+                    el: container,
+                    duration: 0.5,
+                    x: -positionX,
+                    callback: cb
+                });
+            },10);
         },
 
         goBack: function () {
+            this.direction = -1; 
             this.set(this.panels[this.back].el.id);
         }
 
