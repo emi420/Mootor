@@ -218,7 +218,10 @@ if (!window.$ || typeof ($) !== "function") {
 
     // Create key for element
     createKey = function (el) {
-        if (el.rel !== undefined) {
+        
+        if (el.id !== "" && el.rel !== undefined) {
+            return el.id;
+        } else if (el.rel !== undefined) {
             return el.rel;
         } else if (typeof el === "object") {
             return el;
@@ -519,8 +522,8 @@ if (!window.$ || typeof ($) !== "function") {
             panel.hidden = panel.el.getElementsByClassName(this.hiddenClass);
         }
 
-        $(this.el).onDragMove(this);
-        $(this.el).onDragEnd(this);
+        //$(this.el).onDragMove(this);
+        //$(this.el).onDragEnd(this);
 
         if (document.body.style.overflow !== "hidden") {
             document.body.style.overflow = "hidden";

@@ -47,8 +47,8 @@
             panel.hidden = panel.el.getElementsByClassName(this.hiddenClass);
         }
 
-        $(this.el).onDragMove(this);
-        $(this.el).onDragEnd(this);
+        //$(this.el).onDragMove(this);
+        //$(this.el).onDragEnd(this);
 
         if (document.body.style.overflow !== "hidden") {
             document.body.style.overflow = "hidden";

@@ -19,21 +19,26 @@
 
         .panel#home
             %nav
-                %a.nav{:href=>"", :rel=>"text"} Text
+                %a.nav{:href=>"", :rel=>"nav"} Nav
                 %a.nav{:href=>"", :rel=>"geo"} Geo
                 %a.nav{:href=>"", :rel=>"video"} Video
                 %a.nav{:href=>"", :rel=>"carousel"} Carousel
                 %a.nav{:href=>"", :rel=>"form"} Form
                 %a.nav{:href=>"", :rel=>"graph"} Graph
 
-        .panel#text
-            %h2 Text
+        .panel#nav
+            %nav
+                %a.nav#item1{:href=>"", :rel=>"item1"} Item 1
+                %a.nav#item2{:href=>"", :rel=>"item1"} Item 2
+                %a.nav#item3{:href=>"", :rel=>"item1"} Item 3
+                %a.nav#item4{:href=>"", :rel=>"item1"} Item 4
+                %a.nav#item5{:href=>"", :rel=>"item1"} Item 5
+                %a.nav#item6{:href=>"", :rel=>"item1"} Item 6
+
+        .panel#item1
+            %h2 Item 1
             %p
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dictum lobortis erat, vel facilisis massa facilisis non. Sed condimentum massa vitae augue tincidunt id ornare sapien congue. Maecenas pulvinar faucibus lorem. Sed tempus, sem gravida tempus malesuada, lacus lectus lacinia libero, id venenatis eros sapien et nunc. Cras quis urna mauris, non auctor risus. Suspendisse non magna augue, in elementum augue. Donec tincidunt sodales imperdiet. Ut pharetra, nunc in pretium rutrum, eros velit rhoncus est, nec faucibus ante arcu vitae enim. Nam sit amet nulla in risus blandit aliquet. Quisque rutrum accumsan volutpat.
-            %p
-                Duis vitae enim nunc. Praesent vitae porttitor enim. Nunc augue turpis, luctus id gravida vitae, eleifend ut sem. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce vitae dui scelerisque turpis bibendum placerat. Sed venenatis tincidunt ornare. Integer mauris velit, consectetur id fermentum nec, varius sed quam. Sed convallis tortor est, vel vehicula ipsum. Aliquam erat volutpat. Proin porttitor semper turpis. Phasellus turpis purus, tincidunt nec dignissim non, posuere id dui.
-            %p
-                Mauris feugiat aliquam erat vitae faucibus. Donec in semper felis. Nam aliquet fermentum porta. Morbi imperdiet orci at justo sagittis egestas. Phasellus vel pharetra quam. Vestibulum volutpat nisi sit amet mi blandit vitae commodo dui posuere. Mauris augue est, semper a tempus vitae, vulputate non odio. Quisque tincidunt, dolor at commodo ornare, nisl risus tristique dolor, non imperdiet libero ligula vel magna. Nullam id massa neque. Maecenas porttitor dignissim massa, nec euismod augue scelerisque nec. Nam commodo eleifend lacinia. Nullam at tincidunt est. Donec pellentesque convallis arcu et molestie. Cras ultrices sem non risus sagittis sed pellentesque quam sodales. Phasellus dui justo, lobortis eu hendrerit sit amet, faucibus non nisl. Ut non lectus metus, nec gravida orci.
 
         .panel#geo
             %h2 Geo
@@ -86,19 +91,14 @@
 
        $(document).ready(function(){
        
-           // Cache query for performance
+           // Cache query
            var panels = $("#panels");
 
            // Dynamic font size
            panels.type.autoSize();
 
            // Navigation panels
-           panels.nav({
-                header_id: "header",
-                panel_class: "panel",
-                nav_class: "nav",
-                hidden_class: "hidden"
-           });
+           panels.nav();
                       
            // Show location map
            // $("#map").map();
