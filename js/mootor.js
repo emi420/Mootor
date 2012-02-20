@@ -520,7 +520,7 @@ if (!window.$ || typeof ($) !== "function") {
         }
 
         $(this.el).onDragMove(this);
-        $(this.el).onDragEnd(this);       
+        $(this.el).onDragEnd(this);
 
         if (document.body.style.overflow !== "hidden") {
             document.body.style.overflow = "hidden";
@@ -573,7 +573,8 @@ if (!window.$ || typeof ($) !== "function") {
                 panel,
                 setActive,
                 unsetActive,
-                headerAnchor;
+                headerAnchor,
+                goBack;
 
             anchorCallback = function (gesture) {
                 if (panels.isMoving === false) {
@@ -587,7 +588,7 @@ if (!window.$ || typeof ($) !== "function") {
             setActive = function (gesture) {
                 $(gesture.el).setClass("active");
             };
-            unsetActive = function (gesture) {
+            unsetActive = function () {
                 for (i = panel.anchors.length; i--;) {
                     $(panel.anchors[i]).removeClass("active");
                 }
@@ -630,12 +631,13 @@ if (!window.$ || typeof ($) !== "function") {
             }
 
             if (this.header) {
+                goBack = function () {
+                    panels.goBack();
+                };
                 for (i = this.header.anchors.length; i--;) {
                     headerAnchor =  this.header.anchors[i];
                     if (headerAnchor.rel === "back") {
-                        $(headerAnchor).onTapEnd(function(){
-                            panels.goBack();
-                        });
+                        $(headerAnchor).onTapEnd(goBack);
                     }
                 }
             }
@@ -743,11 +745,10 @@ if (!window.$ || typeof ($) !== "function") {
                 cb,
                 back,
                 backIndex = this.back,
-                i,
-                translate = this.translate;
-                
+                i;
+
             panel = this.panels[this.current];
-            back = this.panels[this.back];           
+            back = this.panels[this.back];
 
             for (i = panel.hidden.length; i--;) {
                 $(panel.hidden[i]).hide();
@@ -760,12 +761,12 @@ if (!window.$ || typeof ($) !== "function") {
                 for (i = panel.hidden.length; i--;) {
                     $(panel.hidden[i]).show();
                 }
-                
-                if(backIndex !== 0) {
+
+                if (backIndex !== 0) {
                     $(back.el).hide();
                 }
             };
-            
+
             if (this.current === 0) {
                 // Left 
                 distance = 0;
@@ -789,7 +790,7 @@ if (!window.$ || typeof ($) !== "function") {
                 el: panel.el,
                 x: this.x,
                 y: 0
-             });
+            });
 
             this.translate({
                 el: this.el,
@@ -798,11 +799,10 @@ if (!window.$ || typeof ($) !== "function") {
                 callback: cb
             });
         },
-        
-        goBack: function() {
+
+        goBack: function () {
             this.set(this.panels[this.back].el.id);
         }
-        
 
     };
 

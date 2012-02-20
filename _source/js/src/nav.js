@@ -48,7 +48,7 @@
         }
 
         $(this.el).onDragMove(this);
-        $(this.el).onDragEnd(this);       
+        $(this.el).onDragEnd(this);
 
         if (document.body.style.overflow !== "hidden") {
             document.body.style.overflow = "hidden";
@@ -101,7 +101,8 @@
                 panel,
                 setActive,
                 unsetActive,
-                headerAnchor;
+                headerAnchor,
+                goBack;
 
             anchorCallback = function (gesture) {
                 if (panels.isMoving === false) {
@@ -115,7 +116,7 @@
             setActive = function (gesture) {
                 $(gesture.el).setClass("active");
             };
-            unsetActive = function (gesture) {
+            unsetActive = function () {
                 for (i = panel.anchors.length; i--;) {
                     $(panel.anchors[i]).removeClass("active");
                 }
@@ -158,12 +159,13 @@
             }
 
             if (this.header) {
+                goBack = function () {
+                    panels.goBack();
+                };
                 for (i = this.header.anchors.length; i--;) {
                     headerAnchor =  this.header.anchors[i];
                     if (headerAnchor.rel === "back") {
-                        $(headerAnchor).onTapEnd(function(){
-                            panels.goBack();
-                        });
+                        $(headerAnchor).onTapEnd(goBack);
                     }
                 }
             }
@@ -271,11 +273,10 @@
                 cb,
                 back,
                 backIndex = this.back,
-                i,
-                translate = this.translate;
-                
+                i;
+
             panel = this.panels[this.current];
-            back = this.panels[this.back];           
+            back = this.panels[this.back];
 
             for (i = panel.hidden.length; i--;) {
                 $(panel.hidden[i]).hide();
@@ -288,12 +289,12 @@
                 for (i = panel.hidden.length; i--;) {
                     $(panel.hidden[i]).show();
                 }
-                
-                if(backIndex !== 0) {
+
+                if (backIndex !== 0) {
                     $(back.el).hide();
                 }
             };
-            
+
             if (this.current === 0) {
                 // Left 
                 distance = 0;
@@ -317,7 +318,7 @@
                 el: panel.el,
                 x: this.x,
                 y: 0
-             });
+            });
 
             this.translate({
                 el: this.el,
@@ -326,11 +327,10 @@
                 callback: cb
             });
         },
-        
-        goBack: function() {
+
+        goBack: function () {
             this.set(this.panels[this.back].el.id);
         }
-        
 
     };
 
