@@ -47,10 +47,10 @@ var $ = window.$ || $;
                     map: map,
                     title: "You are here! (at least within a " + position.coords.accuracy + " meter radius)"
                 });
-                
-                
 
             }
+            
+            return this;
 
         };
 
@@ -72,7 +72,7 @@ var $ = window.$ || $;
          *     Refresh current location
          */
         refresh: function () {
-            // TODO: refresh map
+            
         }
 
     };
