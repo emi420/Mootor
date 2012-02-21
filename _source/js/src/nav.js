@@ -25,7 +25,7 @@
         this.panelClass = options.panel_class !== undefined ? options.panel_class : "panel";
         this.headerId = options.header_id !== undefined ? options.header_id : "header";
         this.hiddenClass = options.hidden_class !== undefined ? options.hidden_class : "hidden";
-        this.margin = options.panel_margin !== undefined ? options.panel_margin : 40;
+        this.margin = options.panel_margin !== undefined ? options.panel_margin : 5;
         this.width = options.width !== undefined ? options.width : Moo.view.clientW;
         this.height = options.height !== undefined ? options.height : Moo.view.clientH;
         this.x = 0;
