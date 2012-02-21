@@ -194,8 +194,12 @@
          */
         check: function (gesture) {
             var panel = this.panels[this.current],
-                maxdist = panel.height - this.height;
+                maxdist = panel.height - this.height,
+                cb;
 
+            cb = function() {
+                Fx.clean(panel.el);
+            }             
             if (gesture.isDraggingY !== 0) {
 
                 this.isMoving = false;
@@ -209,7 +213,8 @@
                     this.translate({
                         y: this.y,
                         el: panel.el,
-                        duration: 0.5
+                        duration: 0.5,
+                        callback: cb
                     });
                 }
 
