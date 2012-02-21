@@ -102,12 +102,15 @@
            // Navigation panels
            var nav = $("#panels").nav();
             
-           // Show location map
-           $("#map").map();
+           // Block panel movement
            nav.config({
                 panel: "geo",
                 movable: false
            });
+
+           // Show location map
+           $("#map").map();
+           
  
        });
 
