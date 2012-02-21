@@ -36,6 +36,7 @@
         this.header = this.header.init(this);
         this.isMoving = false;
         this.direction = 0;
+        this.history = [];
 
         panels = this.el.getElementsByClassName(this.panelClass);
 
@@ -222,11 +223,14 @@
         set: function (pid) {
 
             var i;
+
             // Get panel by id and load it
-            // FIXME CHECK
             for (i = this.count; i--;) {
                 if (this.panels[i].el.id === pid) {
                     this.back = this.current;
+                    if (this.direction === 0) {
+                        this.history.push(this.current);
+                    }
                     this.current = i;
                     this.load();
                 }
@@ -302,7 +306,7 @@
             };
                         
             positionX = this.width + this.margin;
-
+            
             if (this.current !== 0) {
                 if (this.back === 0) {
                     panel.el.style.left = positionX + "px";
@@ -315,6 +319,9 @@
                     panel.el.style.left = positionX + "px";                   
                 }
             } else if (this.back !== 0) {
+                translate({el: container, x: -positionX});
+                back.el.style.left = positionX + "px";
+                panel.el.style.left = "0px";                   
                 positionX = 0;            
             } 
        
@@ -331,6 +338,7 @@
 
         goBack: function () {
             this.direction = -1; 
+            this.back = this.history.pop();
             this.set(this.panels[this.back].el.id);
         }
 
