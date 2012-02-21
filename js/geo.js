@@ -21,15 +21,15 @@ var $ = window.$ || $;
             latlng;
 
         this.el = element;
-
+        
         success = function (position) {
             var options,
                 map,
                 google = window.google || undefined,
                 stop;
-
+                
             if (google !== undefined) {
-
+            
                 latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
                 options = {
@@ -39,12 +39,16 @@ var $ = window.$ || $;
                     navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
-                                
+                
+                map = new google.maps.Map(document.getElementById(element.id), options);
+
                 marker = new google.maps.Marker({
                     position: latlng,
                     map: map,
                     title: "You are here! (at least within a " + position.coords.accuracy + " meter radius)"
                 });
+                
+                
 
             }
 

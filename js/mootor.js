@@ -1,1 +1,873 @@
-(function(){var b=window.document;var a=(function(){a=function(c){return new a.fn(c)};a.fn=function(e){var c=typeof e,d;if(c==="string"){if(e.indexOf("#")>-1){e=e.replace("#","");d=b.getElementById(e)}else{if(e.indexOf(".")>-1){e=e.replace(".","");d=b.getElementsByClassName(e)}}}else{if(c==="object"){d=e}}this.el=(function(){return d}());this.query=(function(){return e}());return this};a.fn.prototype=a.prototype={ready:function(c){a.ready(c,this.el)},show:function(d){var c=typeof d==="object"?d:this.el;if(c!==undefined){c.style.display="block"}},hide:function(d){var c=typeof d==="object"?d:this.el;if(c!==undefined){c.style.display="none"}},bind:function(c,d){this.el.onclick=function(){return false};this.el.addEventListener(c,d,false)},unbind:function(c,d){this.el.removeEventListener(c,d,false)},setClass:function(c){this.el.className+=" "+c},hasClass:function(c){return(this.el.className.indexOf(c)!==0)},removeClass:function(c){this.el.className=this.el.className.replace(" "+c,"")}};a.extend=function(e,d){var c;if(d===undefined){d=a.prototype}for(c in e){if(e.hasOwnProperty(c)){d[c]=e[c]}}};a.extend({ready:function(f,e){if(e===b){e=window}if(e===window){var d=false,c;c=function(g){if(d){return}if(g.type==="readystatechange"&&window.document.readyState!=="complete"){return}f.call(window.document);d=true};if(e!==undefined&&a.context.addEventListener){e.addEventListener("DOM-ContentLoaded",c,false);e.addEventListener("readystatechange",c,false);e.addEventListener("load",c,false)}}else{e.onload=f}},context:{addEventListener:false},view:{clientH:0,clientW:0,hide:function(){var c=b.createElement("style");c.innerHTML="body * {display: none}";b.head.appendChild(c);a.view.styles=c},show:function(){b.head.removeChild(a.view.styles)}}},a);if(window.addEventListener){a.context.addEventListener=true}else{a.context.addEventListener=false}a.ready(function(){var d=b.documentElement.clientWidth,c=b.documentElement.clientHeight;a.view.clientH=(function(){return c}());a.view.clientW=(function(){return d}());a.view.show()},b);a.view.hide();return a}());if(!window.$||typeof($)!=="function"){window.$=a}(function(d){var c,f,e;d.extend({gestures:{list:[]}},d);c=function(g){if(g.id!==""&&g.rel!==undefined){return g.id}else{if(g.rel!==undefined){return g.rel}else{if(typeof g==="object"){return g}}}};f=function(g){var k=d.gestures.list,j=g.type,i=g.fn,l=g.callback,h=c(i.el);if(k[h]===undefined){k[h]={event:[]};i.bind("mousedown",i);i.bind("mouseup",i);i.bind("touchstart",i);i.bind("touchend",i)}if(k[h].event[j]===undefined){k[h].event[j]=[]}k[h].event[j].push(l)};e=function(j,h){var g;if(h!==undefined){for(g=0;g<h.length;g++){if(h[g].handleGesture!==undefined){h[g].handleGesture(j)}else{h[g](j)}}}};d.Gesture={onTapEnd:function(g){f({fn:this,callback:g,type:"onTapEnd"})},onTapStart:function(g){f({fn:this,callback:g,type:"onTapStart"})},onTapHold:function(g){f({fn:this,callback:g,type:"onTapHold"})},onDragStart:function(g){f({fn:this,callback:g,type:"onDragStart"})},onDragMove:function(g){f({fn:this,callback:g,type:"onDragMove"})},onDragEnd:function(g){f({fn:this,callback:g,type:"onDragEnd"})},handleEvent:function(n){var j=c(this.el),m={el:this.el},i=d.gestures.list[j],h=new Date(),l,k;n.preventDefault();if(n.clientX||n.clientY){l=n.clientX;k=n.clientY}else{try{l=n.touches[0].clientX;k=n.touches[0].clientY}catch(g){}}if(n.type==="mousedown"||n.type==="touchstart"){this.bind("mousemove",this);this.bind("touchmove",this);i.event.time=h.getTime();i.event.isDraggingY=0;i.event.mousedown=true;i.event.tapped=false;i.event.startX=l;i.event.startY=k;window.setTimeout(function(){if(i.event.mousedown===true){m.type="tapHold";e(m,i.event.onTapHold)}},500);if(i.event.onTapStart!==undefined){m.type="tapStart";e(m,i.event.onTapStart)}}if(n.type==="mousemove"||n.type==="touchmove"){m.lastY=i.event.y;m.lastX=i.event.x;i.event.y=m.y=k;i.event.x=m.x=l;m.distanceFromOriginY=k-i.event.startY;m.distanceFromOriginX=l-i.event.startX;if(i.event.isDraggingY===0){if((k-i.event.startY)>10){i.event.isDraggingY=1;m.type="dragStart";e(m,i.event.onDragStart)}else{if((k-i.event.startY)<-10){i.event.isDraggingY=-1;m.type="dragStart";e(m,i.event.onDragStart)}}}else{m.type="dragMove";e(m,i.event.onDragMove)}}if(n.type==="mouseup"||n.type==="touchend"){if(i.event.tapped===false){this.unbind("mousemove",this);this.unbind("touchmove",this);i.event.tapped=true;m.time=h.getTime()-i.event.time;i.event.mousedown=false}if(i.event.isDraggingY!==0){m.type="dragEnd";i.event.isDraggingY=0;e(m,i.event.onDragEnd)}else{m.type="tapEnd";e(m,i.event.onTapEnd)}}}};d.extend(d.Gesture)}(a));(function(c){c.Fx={translate:function(i,e,f){var h=e.x,d=e.y,g;g=f.transitionDuration;i.style.transitionProperty="webkit-transform";if(g!==undefined&&g>0){i.style.webkitTransitionDuration=g+"s";i.style.webkitTransitionTimingFunction="ease-out"}else{this.clean(i)}i.style.webkitTransform="translate3d("+h+"px,"+d+"px, 0)";if(f.callback){window.setTimeout(f.callback,g*1000)}},clean:function(d){d.style.webkitTransitionDuration="";d.style.webkitTransitionTimingFunction=""}};c.extend(c.Fx)}(a));(function(c,e){var f=c.Fx,g,d;g=function(h){h.style.width=c.view.clientW+"px"};d=function(k){var l,h,j;this.el=k.el;this.navClass=k.nav_class!==undefined?k.nav_class:"nav";this.panelClass=k.panel_class!==undefined?k.panel_class:"panel";this.headerId=k.header_id!==undefined?k.header_id:"header";this.hiddenClass=k.hidden_class!==undefined?k.hidden_class:"hidden";this.margin=k.panel_margin!==undefined?k.panel_margin:40;this.width=k.width!==undefined?k.width:c.view.clientW;this.height=k.height!==undefined?k.height:c.view.clientH;this.x=0;this.y=0;this.current=0;this.back=0;this.panels=[];this.header=this.header.init(this);this.isMoving=false;this.direction=0;this.history=[];j=this.el.getElementsByClassName(this.panelClass);this.count=j.length;for(l=j.length;l--;){this.panels[l]={el:j[l]};h=this.panels[l];h.anchors=h.el.getElementsByClassName(this.navClass);h.hidden=h.el.getElementsByClassName(this.hiddenClass)}e(this.el).onDragMove(this);e(this.el).onDragEnd(this);if(b.body.style.overflow!=="hidden"){b.body.style.overflow="hidden"}this.init();return this};d.prototype={handleGesture:function(h){switch(h.type){case"dragMove":this.move(h);break;case"dragEnd":this.check(h);break}},header:{init:function(h){var i={};i.el=b.getElementById(h.headerId);if(i.el){h.nav(i);g(i.el);h.top=i.el.offsetHeight;h.height=c.view.clientH-h.top;h.el.style.marginTop=h.top+"px";return i}}},nav:function(h){h.anchors=h.el.getElementsByClassName(this.navClass)},init:function(){var o,l,m,n=this,h,k,p,r,q;o=function(i){n.direction=0;e(i.el).removeClass("active");if(n.isMoving===false){n.set(i.el.rel)}return false};k=function(i){e(i.el).setClass("active")};p=function(){for(m=h.anchors.length;m--;){e(h.anchors[m]).removeClass("active")}};for(m=this.count;m--;){h=this.panels[m];if(this.width===undefined){g(h.el)}else{h.el.style.width=this.width+"px"}h.el.style.overflow="hidden";if(m>0){h.el.style.left=-((this.width+this.margin)*4)+"px";h.el.style.top="0px"}else{h.el.style.left="0px"}h.height=h.el.offsetHeight;if(this.height>h.height){h.el.style.height=this.height+"px";h.height=this.height}for(l=h.anchors.length;l--;){if(h.anchors[l].rel!==""){e(h.anchors[l]).onTapStart(k);e(h.anchors[l]).onTapEnd(p);e(h.anchors[l]).onDragEnd(p);e(h.anchors[l]).onTapEnd(o)}}}if(this.header){q=function(){n.goBack()};for(m=this.header.anchors.length;m--;){r=this.header.anchors[m];if(r.rel==="back"){e(r).onTapEnd(q)}}}},move:function(h){if(h.isDraggingY!==0){this.isMoving=true;this.y=this.y+(h.y-h.lastY);this.translate({el:this.panels[this.current].el,y:this.y})}},check:function(j){var i=this.panels[this.current],k=i.height-this.height,h;h=function(){f.clean(i.el)};if(j.isDraggingY!==0){this.isMoving=false;if(this.y>=0||k<-this.y){if(this.y>0){this.y=0}else{this.y=-(i.height-this.height)}this.translate({y:this.y,el:i.el,duration:0.5,callback:h})}}},set:function(h){var j;for(j=this.count;j--;){if(this.panels[j].el.id===h){this.back=this.current;if(this.direction===0){this.history.push(this.current)}this.current=j;this.load()}}},translate:function(h){if(h.duration===undefined){h.duration=0}if(h.callback===undefined){h.callback=function(){}}if(h.y===undefined){h.y=0}if(h.x===undefined){h.x=0}if(h.duration===undefined){h.duration=0}f.translate(h.el,{y:h.y,x:h.x},{transitionDuration:h.duration,callback:h.callback})},hide:function(h){var j;for(j=h.hidden.length;j--;){e(h.hidden[j]).hide()}},show:function(h){var j;for(j=h.hidden.length;j--;){e(h.hidden[j]).show()}},load:function(){var h,l,n,p=this.back,q=this.show,j=this.translate,k,o,i=this.el,m=false;h=this.panels[this.current];n=this.panels[this.back];this.hide(h);this.hide(n);e(h.el).show();l=function(){q(h);e(n.el).hide()};o=this.width+this.margin;if(this.current!==0){if(this.back===0){h.el.style.left=o+"px"}else{j({el:i});n.el.style.left="0px";if(this.direction!==0){o=-o}h.el.style.left=o+"px"}}else{if(this.back!==0){j({el:i,x:-o});n.el.style.left=o+"px";h.el.style.left="0px";o=0}}this.side===1?this.side=0:this.side=1;window.setTimeout(function(){j({el:i,duration:0.5,x:-o,callback:l})},10)},goBack:function(){this.direction=-1;this.back=this.history.pop();this.set(this.panels[this.back].el.id)}};c.Nav={nav:function(h){if(typeof h!=="object"){h={}}h.el=this.el;return new d(h)}};c.extend(c.Nav)}(a,$))}(window));
+(function() {
+/* 
+ *  Mootor Core
+ */
+
+var document = window.document;
+
+var Moo = (function () {
+	"use strict";
+
+    // Return new instance
+	Moo = function (query) {
+		return new Moo.fn(query);
+	};
+
+    //  Selector
+	Moo.fn = function (query) {
+		var qtype = typeof query,
+			el;
+
+        // Get element from query
+        if (qtype === "string") {
+
+            if (query.indexOf("#") > -1) {
+                query = query.replace("#", "");
+                el = document.getElementById(query);
+
+            } else if (query.indexOf(".") > -1) {
+                query = query.replace(".", "");
+                el = document.getElementsByClassName(query);
+
+            }
+        } else if (qtype === "object") {
+            el = query;
+        }
+
+        // Instance properties
+        this.el = (function () {
+            return el;
+        }());
+        this.query = (function () {
+            return query;
+        }());
+
+		return this;
+	};
+
+    // Instance prototype
+    Moo.fn.prototype = Moo.prototype = {
+
+        // On element ready
+        ready: function (callback) {
+            Moo.ready(callback, this.el);
+        },
+
+        // Show element
+        show: function (el) {
+            var element = typeof el === "object" ? el : this.el;
+            if (element !== undefined) {
+                element.style.display = "block";
+            }
+        },
+
+        // Hide element
+        hide: function (el) {
+            var element = typeof el === "object" ? el : this.el;
+            if (element !== undefined) {
+                element.style.display = "none";
+            }
+        },
+
+        // Bind event
+        bind: function (event, callback) {
+            this.el.onclick = function () { return false; };
+            this.el.addEventListener(event, callback, false);
+        },
+
+        // Unbind event
+        unbind: function (event, callback) {
+            this.el.removeEventListener(event, callback, false);
+        },
+
+        // Set class name
+        setClass: function (name) {
+            this.el.className += " " + name;
+        },
+
+        // Has class name
+        hasClass: function (name) {
+            return (this.el.className.indexOf(name) !== 0);
+        },
+
+        // Remove class name
+        removeClass:  function (name) {
+            this.el.className = this.el.className.replace(" " + name, "");
+        }
+
+
+	};
+
+    // Extend function
+    Moo.extend = function (obj, target) {
+        var i;
+        if (target === undefined) {
+            target = Moo.prototype;
+        }
+        for (i in obj) {
+            if (obj.hasOwnProperty(i)) {
+                target[i] = obj[i];
+            }
+        }
+    };
+
+    // Core
+    Moo.extend({
+
+        // On element ready
+        ready: function (fn, el) {
+            if (el === document) {
+                el = window;
+            }
+            if (el === window) {
+                var ready = false,
+                    handler;
+
+                handler = function (e) {
+                    if (ready) {return; }
+                    if (e.type === "readystatechange" && window.document.readyState !== "complete") {return; }
+                    fn.call(window.document);
+                    ready = true;
+                };
+                if (el !== undefined && Moo.context.addEventListener) {
+                    el.addEventListener("DOM-ContentLoaded", handler, false);
+                    el.addEventListener("readystatechange", handler, false);
+                    el.addEventListener("load", handler, false);
+                }
+            } else {
+                el.onload = fn;
+            }
+
+        },
+
+        // Context features
+        context: {
+            addEventListener: false
+        },
+
+        // Viewport
+        view: {
+
+            clientH: 0,
+            clientW: 0,
+
+            hide: function () {
+                var styles = document.createElement("style");
+                styles.innerHTML = "body * {display: none}";
+                document.head.appendChild(styles);
+                Moo.view.styles = styles;
+            },
+
+            show: function () {
+                document.head.removeChild(Moo.view.styles);
+            }
+        }
+
+
+    }, Moo);
+
+    // Init-time branching
+    if (window.addEventListener) {
+        Moo.context.addEventListener = true;
+    } else {
+        Moo.context.addEventListener = false;
+    }
+
+    // Initialize Mootor on document ready
+    Moo.ready(function () {
+		var clientW = document.documentElement.clientWidth,
+			clientH = document.documentElement.clientHeight;
+
+		Moo.view.clientH = (function () {
+			return clientH;
+		}());
+		Moo.view.clientW = (function () {
+			return clientW;
+		}());
+		Moo.view.show();
+
+	}, document);
+
+	Moo.view.hide();
+
+	return Moo;
+
+}());
+
+// Go public!
+if (!window.$ || typeof ($) !== "function") {
+    window.$ = Moo;
+}
+
+/*
+ * Mootor Gestures
+ */
+
+(function (Moo) {
+    "use strict";
+
+    var createKey,
+        addGesture,
+        fire;
+
+    Moo.extend({
+        gestures: {
+            list: []
+        }
+    }, Moo);
+
+    // Create key for element
+    createKey = function (el) {
+        
+        if (el.id !== "" && el.rel !== undefined) {
+            return el.id;
+        } else if (el.rel !== undefined) {
+            return el.rel;
+        } else if (typeof el === "object") {
+            return el;
+        }
+    };
+
+    addGesture = function (options) {
+        var gestureList = Moo.gestures.list,
+            type = options.type,
+            fn = options.fn,
+            callback = options.callback,
+            key = createKey(fn.el);
+
+        if (gestureList[key] === undefined) {
+            gestureList[key] = {
+                event: []
+            };
+            // Bind listeners only once
+            fn.bind("mousedown", fn);
+            fn.bind("mouseup", fn);
+            fn.bind("touchstart", fn);
+            fn.bind("touchend", fn);
+        }
+
+        if (gestureList[key].event[type] === undefined) {
+            gestureList[key].event[type] = [];
+        }
+
+        gestureList[key].event[type].push(callback);
+
+    };
+
+    // Fire callbacks
+    fire = function (info, callbacks) {
+        var i;
+
+        if (callbacks !== undefined) {
+            for (i = 0; i < callbacks.length; i++) {
+                if (callbacks[i].handleGesture !== undefined) {
+                    callbacks[i].handleGesture(info);
+                } else {
+                    callbacks[i](info);
+                }
+            }
+        }
+    };
+
+    /*
+     *      Public
+     */
+    Moo.Gesture = {
+
+        // Gestures
+        onTapEnd: function (callback) {
+            addGesture({
+                fn: this,
+                callback: callback,
+                type: "onTapEnd"
+            });
+        },
+        onTapStart: function (callback) {
+            addGesture({
+                fn: this,
+                callback: callback,
+                type: "onTapStart"
+            });
+        },
+        onTapHold: function (callback) {
+            addGesture({
+                fn: this,
+                callback: callback,
+                type: "onTapHold"
+            });
+        },
+        onDragStart: function (callback) {
+            addGesture({
+                fn: this,
+                callback: callback,
+                type: "onDragStart"
+            });
+        },
+        onDragMove: function (callback) {
+            addGesture({
+                fn: this,
+                callback: callback,
+                type: "onDragMove"
+            });
+        },
+        onDragEnd: function (callback) {
+            addGesture({
+                fn: this,
+                callback: callback,
+                type: "onDragEnd"
+            });
+        },
+
+        // Handler to detect gestures and fire callbacks        
+
+        handleEvent: function (e) {
+            var key = createKey(this.el),
+                info = {
+                    el: this.el
+                },
+                gesture = Moo.gestures.list[key],
+                date = new Date(),
+                clientX,
+                clientY;
+
+            e.preventDefault();
+
+            if (e.clientX || e.clientY) {
+                // Mouse
+                clientX = e.clientX;
+                clientY = e.clientY;
+            } else {
+                // Touch
+                // FIXME CHECK
+                try {
+                    clientX = e.touches[0].clientX;
+                    clientY = e.touches[0].clientY;
+                } catch (error) {}
+            }
+
+            // TapStart
+            if (e.type === "mousedown" || e.type === "touchstart") {
+
+                this.bind("mousemove", this);
+                this.bind("touchmove", this);
+
+                gesture.event.time = date.getTime();
+                gesture.event.isDraggingY = 0;
+                gesture.event.mousedown = true;
+                gesture.event.tapped = false;
+                gesture.event.startX = clientX;
+                gesture.event.startY = clientY;
+
+                window.setTimeout(function () {
+                    // TapHold
+                    if (gesture.event.mousedown === true) {
+                        info.type = "tapHold";
+                        fire(info, gesture.event.onTapHold);
+                    }
+                }, 500);
+
+                if (gesture.event.onTapStart !== undefined) {
+                    // TapStart
+                    info.type = "tapStart";
+                    fire(info, gesture.event.onTapStart);
+                }
+            }
+
+            if (e.type === "mousemove" || e.type === "touchmove") {
+
+                info.lastY = gesture.event.y;
+                info.lastX = gesture.event.x;
+                gesture.event.y = info.y = clientY;
+                gesture.event.x = info.x = clientX;
+                info.distanceFromOriginY = clientY - gesture.event.startY;
+                info.distanceFromOriginX = clientX - gesture.event.startX;
+
+                if (gesture.event.isDraggingY === 0) {
+                    // DragStart
+                    if ((clientY - gesture.event.startY) > 10) {
+                        gesture.event.isDraggingY = 1;
+                        info.type = "dragStart";
+                        fire(info, gesture.event.onDragStart);
+                    } else if ((clientY - gesture.event.startY) < -10) {
+                        gesture.event.isDraggingY = -1;
+                        info.type = "dragStart";
+                        fire(info, gesture.event.onDragStart);
+                    }
+                } else {
+                    // DragMove
+                    info.type = "dragMove";
+                    fire(info, gesture.event.onDragMove);
+                }
+            }
+
+            if (e.type === "mouseup" || e.type === "touchend") {
+
+                if (gesture.event.tapped === false) {
+                    this.unbind("mousemove", this);
+                    this.unbind("touchmove", this);
+                    gesture.event.tapped = true;
+                    info.time = date.getTime() - gesture.event.time;
+                    gesture.event.mousedown = false;
+                }
+
+                if (gesture.event.isDraggingY !== 0) {
+                    // DragEnd
+                    info.type = "dragEnd";
+                    gesture.event.isDraggingY = 0;
+                    fire(info, gesture.event.onDragEnd);
+
+                } else {
+                    // TapEnd
+                    info.type = "tapEnd";
+                    fire(info, gesture.event.onTapEnd);
+                }
+            }
+
+        }
+    };
+
+    Moo.extend(Moo.Gesture);
+
+}(Moo));
+
+/* 
+ * Mootor Visual FX
+ */
+
+(function (Moo) {
+    "use strict";
+    Moo.Fx = {
+
+        translate: function (el, positions, options) {
+
+            var x_pos = positions.x,
+                y_pos = positions.y,
+                tduration;
+
+            tduration = options.transitionDuration;
+            el.style.transitionProperty = "webkit-transform";
+
+            if (tduration !== undefined && tduration > 0) {
+                el.style.webkitTransitionDuration = tduration + "s";
+                el.style.webkitTransitionTimingFunction = "ease-out";
+            } else {
+                this.clean(el);
+            }
+            
+            el.style.webkitTransform = "translate3d(" + x_pos + "px," + y_pos + "px, 0)";
+
+            if (options.callback) {
+                window.setTimeout(options.callback, tduration * 1000);
+            }
+
+        },
+
+        clean: function (el) {
+            el.style.webkitTransitionDuration = "";
+            el.style.webkitTransitionTimingFunction = "";
+        }
+
+    };
+
+    Moo.extend(Moo.Fx);
+
+}(Moo));
+
+/*
+ * Mootor Navigation
+ */
+
+(function (Moo, $) {
+    "use strict";
+    // Module dependencies
+    var Fx = Moo.Fx,
+
+        fullWidth,
+        Panels;
+
+    fullWidth = function (el) {
+        el.style.width = Moo.view.clientW + "px";
+    };
+
+    Panels = function (options) {
+
+        var i,
+            panel,
+            panels;
+
+        this.el = options.el;
+        this.navClass = options.nav_class !== undefined ? options.nav_class : "nav";
+        this.panelClass = options.panel_class !== undefined ? options.panel_class : "panel";
+        this.headerId = options.header_id !== undefined ? options.header_id : "header";
+        this.hiddenClass = options.hidden_class !== undefined ? options.hidden_class : "hidden";
+        this.margin = options.panel_margin !== undefined ? options.panel_margin : 40;
+        this.width = options.width !== undefined ? options.width : Moo.view.clientW;
+        this.height = options.height !== undefined ? options.height : Moo.view.clientH;
+        this.x = 0;
+        this.y = 0;
+        this.current = 0;
+        this.back = 0;
+        this.panels = [];
+        this.header = this.header.init(this);
+        this.isMoving = false;
+        this.direction = 0;
+        this.history = [];
+
+        panels = this.el.getElementsByClassName(this.panelClass);
+
+        this.count = panels.length;
+
+        for (i = panels.length; i--;) {
+            this.panels[i] = {el: panels[i]};
+            panel =  this.panels[i];
+            panel.anchors = panel.el.getElementsByClassName(this.navClass);
+            panel.hidden = panel.el.getElementsByClassName(this.hiddenClass);
+        }
+
+        $(this.el).onDragMove(this);
+        $(this.el).onDragEnd(this);
+
+        if (document.body.style.overflow !== "hidden") {
+            document.body.style.overflow = "hidden";
+        }
+
+        this.init();
+
+        return this;
+
+    };
+
+    Panels.prototype = {
+
+        handleGesture: function (gesture) {
+            switch (gesture.type) {
+            case "dragMove":
+                this.move(gesture);
+                break;
+            case "dragEnd":
+                this.check(gesture);
+                break;
+            }
+        },
+
+        header: {
+            init: function (panel) {
+                var header = {};
+                header.el = document.getElementById(panel.headerId);
+                if (header.el) {
+                    panel.nav(header);
+                    fullWidth(header.el);
+                    panel.top = header.el.offsetHeight;
+                    panel.height = Moo.view.clientH - panel.top;
+                    panel.el.style.marginTop = panel.top + "px";
+                    return header;
+                }
+            }
+        },
+
+        nav: function (obj) {
+            obj.anchors = obj.el.getElementsByClassName(this.navClass);
+        },
+
+        init: function () {
+
+            var anchorCallback,
+                j,
+                i,
+                panels = this,
+                panel,
+                setActive,
+                unsetActive,
+                headerAnchor,
+                goBack;
+
+            anchorCallback = function (gesture) {
+                panels.direction = 0;
+                $(gesture.el).removeClass("active");
+                if (panels.isMoving === false) {
+                    panels.set(gesture.el.rel);
+                }
+                return false;
+            };
+
+            setActive = function (gesture) {
+                $(gesture.el).setClass("active");
+            };
+            unsetActive = function () {
+                for (i = panel.anchors.length; i--;) {
+                    $(panel.anchors[i]).removeClass("active");
+                }
+            };
+
+            // Reset styles and set anchor links
+            for (i = this.count; i--;) {
+
+                panel = this.panels[i];
+
+                if (this.width === undefined) {
+                    fullWidth(panel.el);
+                } else {
+                    panel.el.style.width = this.width + "px";
+                }
+
+                panel.el.style.overflow = 'hidden';
+
+                if (i > 0) {
+                    panel.el.style.left = -((this.width + this.margin) * 4) + "px";
+                    panel.el.style.top = "0px";
+                } else {
+                    panel.el.style.left = "0px";
+                }
+
+                panel.height = panel.el.offsetHeight;
+                if (this.height > panel.height) {
+                    panel.el.style.height = this.height + "px";
+                    panel.height = this.height;
+                }
+
+                for (j = panel.anchors.length; j--;) {
+                    if (panel.anchors[j].rel !== "") {
+                        $(panel.anchors[j]).onTapStart(setActive);
+                        $(panel.anchors[j]).onTapEnd(unsetActive);
+                        $(panel.anchors[j]).onDragEnd(unsetActive);
+                        $(panel.anchors[j]).onTapEnd(anchorCallback);
+                    }
+                }
+            }
+
+            if (this.header) {
+                goBack = function () {
+                    panels.goBack();
+                };
+                for (i = this.header.anchors.length; i--;) {
+                    headerAnchor =  this.header.anchors[i];
+                    if (headerAnchor.rel === "back") {
+                        $(headerAnchor).onTapEnd(goBack);
+                    }
+                }
+            }
+            
+            return this;
+
+        },
+
+        /*      
+         *      Move
+         */
+        move: function (gesture) {
+            var panel =  this.panels[this.current];
+            if (gesture.isDraggingY !== 0 && panel.movable !== false) {
+                this.isMoving = true;
+                this.y = this.y + (gesture.y - gesture.lastY);
+                this.translate({
+                    el: panel.el,
+                    y: this.y
+                });
+            }
+
+        },
+
+        /*      
+         *      Check move
+         */
+        check: function (gesture) {
+            var panel = this.panels[this.current],
+                maxdist = panel.height - this.height,
+                cb;
+
+            cb = function() {
+                Fx.clean(panel.el);
+            }             
+            if (gesture.isDraggingY !== 0) {
+
+                this.isMoving = false;
+                // Bounce back
+                if (this.y >= 0 || maxdist < -this.y) {
+                    if (this.y > 0) {
+                        this.y = 0;
+                    } else {
+                        this.y = -(panel.height - this.height);
+                    }
+                    this.translate({
+                        y: this.y,
+                        el: panel.el,
+                        duration: 0.5,
+                        callback: cb
+                    });
+                }
+
+            }
+
+        },
+
+        /*      
+         *      Set current panel
+         */
+        set: function (panelid) {
+
+            var i;
+
+            // Get panel by id and load it
+            for (i = this.count; i--;) {
+                if (this.panels[i].el.id === panelid) {
+                    this.back = this.current;
+                    if (this.direction === 0) {
+                        this.get(panelid);
+                        this.history.push(this.current);
+                    }
+                    this.current = i;
+                    this.load();
+                }
+            }
+
+        },
+        
+        /*
+         *      Get by id
+         */
+        get: function(id) {
+            var i;
+            // Get panel by id and load it
+            for (i = this.count; i--;) {
+                if (this.panels[i].el.id === id) {
+                    return this.panels[i];
+                }
+            }        
+        },
+
+        /*      
+         *      Translate panels
+         */
+        translate: function (options) {
+            if (options.duration === undefined) {
+                options.duration = 0;
+            }
+            if (options.callback === undefined) {
+                options.callback = function () {};
+            }
+            if (options.y === undefined) {
+                options.y = 0;
+            }
+            if (options.x === undefined) {
+                options.x = 0;
+            }
+            if (options.duration === undefined) {
+                options.duration = 0;
+            }
+            Fx.translate(
+                options.el,
+                {y: options.y, x: options.x},
+                {transitionDuration: options.duration, callback: options.callback}
+            );
+        },
+        
+        hide: function(panel) {
+            var i;
+            for (i = panel.hidden.length; i--;) {
+                $(panel.hidden[i]).hide();
+            }        
+        },
+
+        show: function(panel) {
+            var i;
+            for (i = panel.hidden.length; i--;) {
+                $(panel.hidden[i]).show();
+            }        
+        },
+        /*      
+         *      Load current panel
+         */
+        load: function () {
+
+            var panel,
+                cb,
+                back,
+                backIndex = this.back,
+                show = this.show,
+                translate = this.translate,
+                move,
+                positionX,
+                container = this.el,
+                control = false;
+
+            panel = this.panels[this.current];
+            back = this.panels[this.back];
+
+            this.hide(panel);
+            this.hide(back);
+            $(panel.el).show();
+
+            cb = function () {
+                show(panel);
+                $(back.el).hide();
+            };
+                        
+            positionX = this.width + this.margin;
+            
+            if (this.current !== 0) {
+                if (this.back === 0) {
+                    panel.el.style.left = positionX + "px";
+                } else {
+                    translate({el: container});
+                    back.el.style.left = "0px";
+                    if (this.direction !== 0) {
+                        positionX = -positionX;
+                    }
+                    panel.el.style.left = positionX + "px";                   
+                }
+            } else if (this.back !== 0) {
+                translate({el: container, x: -positionX});
+                back.el.style.left = positionX + "px";
+                panel.el.style.left = "0px";                   
+                positionX = 0;            
+            } 
+       
+            this.side === 1 ? this.side = 0 : this.side = 1;            
+            window.setTimeout(function() {
+                translate({
+                    el: container,
+                    duration: 0.5,
+                    x: -positionX,
+                    callback: cb
+                });
+            },10);
+        },
+
+        goBack: function () {
+            this.direction = -1; 
+            this.back = this.history.pop();
+            this.set(this.panels[this.back].el.id);
+        },
+        
+        config: function(options) {
+            var panel;
+            if (options.panel !== undefined) {
+                panel = this.get(options.panel);
+                if (options.movable !== undefined) {
+                    panel.movable = options.movable;
+                }
+            }
+        }
+
+    };
+
+
+     /*
+      *     Public
+      */
+    Moo.Nav = {
+        nav: function (options) {
+            if (typeof options !== "object") {
+                options = {};
+            }
+            options.el = this.el;
+            return new Panels(options);
+        },
+
+    };
+
+    Moo.extend(Moo.Nav);
+
+}(Moo, $));
+
+}(window));

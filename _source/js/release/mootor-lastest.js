@@ -646,6 +646,8 @@ if (!window.$ || typeof ($) !== "function") {
                     }
                 }
             }
+            
+            return this;
 
         },
 
@@ -653,11 +655,12 @@ if (!window.$ || typeof ($) !== "function") {
          *      Move
          */
         move: function (gesture) {
-            if (gesture.isDraggingY !== 0) {
+            var panel =  this.panels[this.current];
+            if (gesture.isDraggingY !== 0 && panel.movable !== false) {
                 this.isMoving = true;
                 this.y = this.y + (gesture.y - gesture.lastY);
                 this.translate({
-                    el: this.panels[this.current].el,
+                    el: panel.el,
                     y: this.y
                 });
             }
@@ -700,15 +703,16 @@ if (!window.$ || typeof ($) !== "function") {
         /*      
          *      Set current panel
          */
-        set: function (pid) {
+        set: function (panelid) {
 
             var i;
 
             // Get panel by id and load it
             for (i = this.count; i--;) {
-                if (this.panels[i].el.id === pid) {
+                if (this.panels[i].el.id === panelid) {
                     this.back = this.current;
                     if (this.direction === 0) {
+                        this.get(panelid);
                         this.history.push(this.current);
                     }
                     this.current = i;
@@ -716,6 +720,19 @@ if (!window.$ || typeof ($) !== "function") {
                 }
             }
 
+        },
+        
+        /*
+         *      Get by id
+         */
+        get: function(id) {
+            var i;
+            // Get panel by id and load it
+            for (i = this.count; i--;) {
+                if (this.panels[i].el.id === id) {
+                    return this.panels[i];
+                }
+            }        
         },
 
         /*      
@@ -820,6 +837,16 @@ if (!window.$ || typeof ($) !== "function") {
             this.direction = -1; 
             this.back = this.history.pop();
             this.set(this.panels[this.back].el.id);
+        },
+        
+        config: function(options) {
+            var panel;
+            if (options.panel !== undefined) {
+                panel = this.get(options.panel);
+                if (options.movable !== undefined) {
+                    panel.movable = options.movable;
+                }
+            }
         }
 
     };
@@ -835,7 +862,7 @@ if (!window.$ || typeof ($) !== "function") {
             }
             options.el = this.el;
             return new Panels(options);
-        }
+        },
 
     };
 
