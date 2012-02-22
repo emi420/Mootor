@@ -145,6 +145,7 @@
                 for (j = panel.anchors.length; j--;) {
                     if (panel.anchors[j].rel !== "") {
                         $(panel.anchors[j]).onTapStart(setActive);
+                        panel.anchors[j].onclick = function() { return false; };
                         $(panel.anchors[j]).onTapEnd(anchorCallback);
                     }
                 }
@@ -158,6 +159,7 @@
                     headerAnchor =  this.header.anchors[i];
                     if (headerAnchor.rel === "back") {
                         $(headerAnchor).onTapEnd(goBack);
+                        headerAnchor.onclick = function() { return false; };
                     }
                 }
             }

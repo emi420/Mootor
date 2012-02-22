@@ -70,7 +70,6 @@ var Moo = (function () {
 
         // Bind event
         bind: function (event, callback) {
-            this.el.onclick = function () { return false; };
             this.el.addEventListener(event, callback, false);
         },
 

@@ -81,7 +81,6 @@ var Moo = (function () {
 
         // Bind event
         bind: function (event, callback) {
-            this.el.onclick = function () { return false; };
             this.el.addEventListener(event, callback, false);
         },
 
@@ -630,6 +629,7 @@ if (!window.$ || typeof ($) !== "function") {
                 for (j = panel.anchors.length; j--;) {
                     if (panel.anchors[j].rel !== "") {
                         $(panel.anchors[j]).onTapStart(setActive);
+                        panel.anchors[j].onclick = function() { return false; };
                         $(panel.anchors[j]).onTapEnd(anchorCallback);
                     }
                 }
@@ -643,6 +643,7 @@ if (!window.$ || typeof ($) !== "function") {
                     headerAnchor =  this.header.anchors[i];
                     if (headerAnchor.rel === "back") {
                         $(headerAnchor).onTapEnd(goBack);
+                        headerAnchor.onclick = function() { return false; };
                     }
                 }
             }
