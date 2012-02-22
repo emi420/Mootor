@@ -3,7 +3,7 @@
 @import "colors" ;
 @import "text" ;
 @import "layout" ;
-@import "forms" ;
+@import "ui" ;
 
 @mixin base-anchor {
     text-decoration: none ;
@@ -19,35 +19,6 @@ a:focus {
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0); 
 }
 
-.nav.active {
-    @include background(linear-gradient($empColor2, $empColor2B)); 
-    color: $subColor1;
-}
-
-#panels,
-body {
-  background: $bodyColor; 
-}
-#blank_panel,
-.panel {
-  background: $subColor1B;  
-}
-
-// Subscribe
-
-.subscribe {
-  width: 90% ;
-  margin: 0 auto ;
-}
-
-.form { 
-  @include stdform ; 
-  .field.text input[type=text],
-  .action input {
-      text-transform: lowercase ; 
-  }
-}
-
 h2 {
   @include empType1;
 }
@@ -56,12 +27,6 @@ h3 {
 }
 p {
   @include readlyType;
-}
-
-// Subscribe
-
-.subscribe h2 {
-  margin: 0 ;
 }
 
 // Header
@@ -82,12 +47,17 @@ p {
         @include border-radius(.2em);
         @include box-shadow(0px 1px 1px rgba(0,0,0,.2));
     }
-    // @include box-shadow(0px 2px 2px rgba(0,0,0,.2));
 }
 
-// Navigation
+// Nav
+
+#panels,
+body {
+  background: $bodyColor; 
+}
 
 #panels .panel {
+    background: $subColor1B; 
     -webkit-ransition-duration:0;
     -webkit-transform:translate3d(0,0,0);
 }
@@ -96,12 +66,15 @@ nav a {
     font-size: 3em;
     color: $domColor1;
     border-bottom: 1px solid #ddd;
-    border-top: 1px solid #fff;
+    background: $subColor1B;
+    border-top: 1px solid $subColor1;
 }
 
-nav a:hover {
-    background: transparent;
+.nav.active {
+    @include background(linear-gradient($empColor2, $empColor2B)); 
+    color: $subColor1;
 }
+
 
 // Geo
 

@@ -4,32 +4,49 @@
 
 (function (Moo) {
     "use strict";
-        
-    var Checkbox = function(options) {
-        var html;
     
+    var Checkbox = function (options) {
+        var html,
+            check,
+            instance;
+
         this.el = options.el;
+
+        // FIXME CHECK: update core to support 'each'
         this.input = $(this.el.getElementsByTagName('input')[0]);
         this.label = $(this.el.getElementsByTagName('label')[0]);
-        this.value = this.input.value;
-                
-        // Hide original elements
-        // FIXME CHECK: update core to support each
-        this.input.hide()
-        this.label.hide()
+        this.value = 0
         
-        html = "<canvas id=\"moo_" + this.el.id + "\" width=\"200\" height=\"20\">undefined</canvas>";
-        this.el.innerHTML = html;
+        this.input.hide();
+        this.label.hide();        
+        this.el.innerHTML = "<b></b>";
+        
+        check = $(this.el);
+        check.setClass("moo_checkbox");
+        this.handleGesture = function(gesture) {
+            this.toggle();
+        }
+        check.onTapEnd(this);
         
         return this;
     };
-    
-    Checkbox.prototype.set = function(value) {
-        this.value = value;
-    }
+
+    Checkbox.prototype = { 
+        toggle: function () {
+            if (this.value === 0) {
+                this.value = 1;
+                $(this.el).removeClass("off");
+                $(this.el).setClass("on");
+            } else {
+                $(this.el).removeClass("on");
+                $(this.el).setClass("off");
+                this.value = 0;
+            }
+        },
+    };
 
     Moo.UI = {
-        checkbox: function(options) {
+        checkbox: function (options) {
             if (typeof options !== "object") {
                 options = {};
             }
@@ -37,7 +54,7 @@
             return new Checkbox(options);
         }
     };
-    
+
     Moo.extend(Moo.UI);
 
 }($));

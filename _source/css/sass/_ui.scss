@@ -1,0 +1,45 @@
+@import "compass/css3" ;
+
+.moo_checkbox {
+    display: block;
+    height: 52px;
+    width: 135px;
+    overflow: hidden;
+    @include border-radius(70px, 70px);
+    
+    b, b:after, b:before {
+        background: url(../img/ui/switch.png);
+    }
+    
+    b {
+        background-position: -4px -1px;
+        width: 250px;
+        height: 55px;
+        display: block;
+        float: left;
+    }
+
+    b:after {
+        background-position: -22px -85px;
+        width: 145px;
+        height: 55px;
+        content: "";
+        margin-left: 100px;
+        display: block;
+    }
+
+    b:before {
+        background-position: -104px -2px;
+        @include border-radius(100%);
+        width: 53px;
+        height: 52px;
+        content: "";
+        display: block;
+        position: absolute;
+        left: 81px;
+    }
+    
+}
+
+
+
