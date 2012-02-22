@@ -54,3 +54,5 @@ Please use GitHub Issues to report any bugs found.
 # License
 
 Mootor is licensed under the terms of the GNU General Public License.
+
+(c) 2012 Emilio Mariscal
