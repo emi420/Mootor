@@ -17,7 +17,7 @@
 
     // Create key for element
     createKey = function (el) {
-        
+
         if (el.id !== "" && el.rel !== undefined) {
             return el.id;
         } else if (el.rel !== undefined) {

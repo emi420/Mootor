@@ -1,4 +1,14 @@
-(function() {
+/*
+
+Mootor, a HTML5 JavaScript library for application development.
+
+Mootor is licensed under the terms of the GNU General Public License.
+
+(c) 2012 Emilio Mariscal
+
+*/
+
+(function () {
 /* 
  *  Mootor Core
  */
@@ -218,7 +228,7 @@ if (!window.$ || typeof ($) !== "function") {
 
     // Create key for element
     createKey = function (el) {
-        
+
         if (el.id !== "" && el.rel !== undefined) {
             return el.id;
         } else if (el.rel !== undefined) {
@@ -453,7 +463,7 @@ if (!window.$ || typeof ($) !== "function") {
             } else {
                 this.clean(el);
             }
-            
+
             el.style.webkitTransform = "translate3d(" + x_pos + "px," + y_pos + "px, 0)";
 
             if (options.callback) {
@@ -477,16 +487,14 @@ if (!window.$ || typeof ($) !== "function") {
  * Mootor Navigation
  */
 
-(function (Moo, $) {
+(function ($) {
     "use strict";
-    // Module dependencies
-    var Fx = Moo.Fx,
 
-        fullWidth,
+    var fullWidth,
         Panels;
 
     fullWidth = function (el) {
-        el.style.width = Moo.view.clientW + "px";
+        el.style.width = $.view.clientW + "px";
     };
 
     Panels = function (options) {
@@ -501,8 +509,8 @@ if (!window.$ || typeof ($) !== "function") {
         this.headerId = options.header_id !== undefined ? options.header_id : "header";
         this.hiddenClass = options.hidden_class !== undefined ? options.hidden_class : "hidden";
         this.margin = options.panel_margin !== undefined ? options.panel_margin : 5;
-        this.width = options.width !== undefined ? options.width : Moo.view.clientW;
-        this.height = options.height !== undefined ? options.height : Moo.view.clientH;
+        this.width = options.width !== undefined ? options.width : $.view.clientW;
+        this.height = options.height !== undefined ? options.height : $.view.clientH;
         this.x = 0;
         this.y = 0;
         this.current = 0;
@@ -558,7 +566,7 @@ if (!window.$ || typeof ($) !== "function") {
                     panel.nav(header);
                     fullWidth(header.el);
                     panel.top = header.el.offsetHeight;
-                    panel.height = Moo.view.clientH - panel.top;
+                    panel.height = $.view.clientH - panel.top;
                     panel.el.style.marginTop = panel.top + "px";
                     return header;
                 }
@@ -577,7 +585,6 @@ if (!window.$ || typeof ($) !== "function") {
                 panels = this,
                 panel,
                 setActive,
-                unsetActive,
                 headerAnchor,
                 goBack;
 
@@ -592,11 +599,6 @@ if (!window.$ || typeof ($) !== "function") {
 
             setActive = function (gesture) {
                 $(gesture.el).setClass("active");
-            };
-            unsetActive = function () {
-                for (i = panel.anchors.length; i--;) {
-                    $(panel.anchors[i]).removeClass("active");
-                }
             };
 
             // Reset styles and set anchor links
@@ -628,8 +630,6 @@ if (!window.$ || typeof ($) !== "function") {
                 for (j = panel.anchors.length; j--;) {
                     if (panel.anchors[j].rel !== "") {
                         $(panel.anchors[j]).onTapStart(setActive);
-                        $(panel.anchors[j]).onTapEnd(unsetActive);
-                        $(panel.anchors[j]).onDragEnd(unsetActive);
                         $(panel.anchors[j]).onTapEnd(anchorCallback);
                     }
                 }
@@ -646,7 +646,7 @@ if (!window.$ || typeof ($) !== "function") {
                     }
                 }
             }
-            
+
             return this;
 
         },
@@ -673,11 +673,12 @@ if (!window.$ || typeof ($) !== "function") {
         check: function (gesture) {
             var panel = this.panels[this.current],
                 maxdist = panel.height - this.height,
-                cb;
+                cb,
+                i;
 
-            cb = function() {
-                Fx.clean(panel.el);
-            }             
+            cb = function () {
+                $.Fx.clean(panel.el);
+            };
             if (gesture.isDraggingY !== 0) {
 
                 this.isMoving = false;
@@ -687,6 +688,9 @@ if (!window.$ || typeof ($) !== "function") {
                         this.y = 0;
                     } else {
                         this.y = -(panel.height - this.height);
+                    }
+                    for (i = panel.anchors.length; i--;) {
+                        $(panel.anchors[i]).removeClass("active");
                     }
                     this.translate({
                         y: this.y,
@@ -721,18 +725,18 @@ if (!window.$ || typeof ($) !== "function") {
             }
 
         },
-        
+
         /*
          *      Get by id
          */
-        get: function(id) {
+        get: function (id) {
             var i;
             // Get panel by id and load it
             for (i = this.count; i--;) {
                 if (this.panels[i].el.id === id) {
                     return this.panels[i];
                 }
-            }        
+            }
         },
 
         /*      
@@ -754,25 +758,25 @@ if (!window.$ || typeof ($) !== "function") {
             if (options.duration === undefined) {
                 options.duration = 0;
             }
-            Fx.translate(
+            $.Fx.translate(
                 options.el,
                 {y: options.y, x: options.x},
                 {transitionDuration: options.duration, callback: options.callback}
             );
         },
-        
-        hide: function(panel) {
+
+        hide: function (panel) {
             var i;
             for (i = panel.hidden.length; i--;) {
                 $(panel.hidden[i]).hide();
-            }        
+            }
         },
 
-        show: function(panel) {
+        show: function (panel) {
             var i;
             for (i = panel.hidden.length; i--;) {
                 $(panel.hidden[i]).show();
-            }        
+            }
         },
         /*      
          *      Load current panel
@@ -782,13 +786,10 @@ if (!window.$ || typeof ($) !== "function") {
             var panel,
                 cb,
                 back,
-                backIndex = this.back,
                 show = this.show,
                 translate = this.translate,
-                move,
                 positionX,
-                container = this.el,
-                control = false;
+                container = this.el;
 
             panel = this.panels[this.current];
             back = this.panels[this.back];
@@ -801,9 +802,9 @@ if (!window.$ || typeof ($) !== "function") {
                 show(panel);
                 $(back.el).hide();
             };
-                        
+
             positionX = this.width + this.margin;
-            
+
             if (this.current !== 0) {
                 if (this.back === 0) {
                     panel.el.style.left = positionX + "px";
@@ -813,33 +814,40 @@ if (!window.$ || typeof ($) !== "function") {
                     if (this.direction !== 0) {
                         positionX = -positionX;
                     }
-                    panel.el.style.left = positionX + "px";                   
+                    panel.el.style.left = positionX + "px";
                 }
             } else if (this.back !== 0) {
                 translate({el: container, x: -positionX});
                 back.el.style.left = positionX + "px";
-                panel.el.style.left = "0px";                   
-                positionX = 0;            
-            } 
-       
-            this.side === 1 ? this.side = 0 : this.side = 1;            
-            window.setTimeout(function() {
+                panel.el.style.left = "0px";
+                positionX = 0;
+            }
+
+            if (this.side === 1) {
+                this.side = 0;
+            } else {
+                this.side = 1;
+            }
+
+            window.setTimeout(function () {
                 translate({
                     el: container,
                     duration: 0.5,
                     x: -positionX,
                     callback: cb
                 });
-            },10);
+            }, 10);
         },
 
         goBack: function () {
-            this.direction = -1; 
-            this.back = this.history.pop();
-            this.set(this.panels[this.back].el.id);
+            if (this.history.length > 0) {
+                this.direction = -1;
+                this.back = this.history.pop();
+                this.set(this.panels[this.back].el.id);
+            }
         },
-        
-        config: function(options) {
+
+        config: function (options) {
             var panel;
             if (options.panel !== undefined) {
                 panel = this.get(options.panel);
@@ -855,19 +863,18 @@ if (!window.$ || typeof ($) !== "function") {
      /*
       *     Public
       */
-    Moo.Nav = {
+    $.Nav = {
         nav: function (options) {
             if (typeof options !== "object") {
                 options = {};
             }
             options.el = this.el;
             return new Panels(options);
-        },
-
+        }
     };
 
-    Moo.extend(Moo.Nav);
+    $.extend($.Nav);
 
-}(Moo, $));
+}($));
 
 }(window));

@@ -8,4 +8,4 @@ Mootor is licensed under the terms of the GNU General Public License.
 
 */
 
-(function() {
+(function () {
