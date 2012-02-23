@@ -20,9 +20,9 @@
 
         .panel#ui
             %h2 User Interface
-            %form#uiform{:action=>"", :method=>"post"}
+            %form#uiform.stdform{:action=>"", :method=>"post"}
                 .field#checkbox1
-                    %input{:type=>"checkbox", :value=>"0"}
+                    %input#check1{:type=>"checkbox", :name=>"checkbox1" ,:value=>"0", :checked=>"true"}
                     %label Input checkbox
 
         .panel#home

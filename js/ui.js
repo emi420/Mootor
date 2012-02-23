@@ -6,23 +6,23 @@
     "use strict";
     
     var Checkbox = function (options) {
-        var html,
-            check,
-            instance;
+        var check,
+            input;
 
         this.el = options.el;
 
         // FIXME CHECK: update core to support 'each'
-        this.input = $(this.el.getElementsByTagName('input')[0]);
-        this.label = $(this.el.getElementsByTagName('label')[0]);
-        this.value = 0
+        input = this.el.getElementsByTagName('input')[0];
+        // FIXME CHECK: temporary initial value
+        this.value = 1;        
         
-        this.input.hide();
-        this.label.hide();        
-        this.el.innerHTML = "<b></b>";
+        $(input).hide();
+        this.input = input;
+        this.el.innerHTML += "<b></b>";
         
         check = $(this.el);
         check.setClass("moo_checkbox");
+
         this.handleGesture = function(gesture) {
             this.toggle();
         }

@@ -2,44 +2,31 @@
 
 .moo_checkbox {
     display: block;
-    height: 52px;
-    width: 135px;
+    height: 28px;
+    width: 94px;
     overflow: hidden;
-    @include border-radius(70px, 70px);
-    
-    b, b:after, b:before {
-        background: url(../img/ui/switch.png);
-    }
+    float: right;
     
     b {
-        background-position: -4px -1px;
-        width: 250px;
-        height: 55px;
+        -webkit-transition-duration: .25s;
+        background: url(../img/ui/switch.png);
+        height: 28px;
+        width: 149px;
         display: block;
-        float: left;
+        -webkit-transform: translate3d(0, 0, 0);
+    }
+    
+    &.off b {
+        -webkit-transform: translate3d(-54px, 0, 0);
     }
 
-    b:after {
-        background-position: -22px -85px;
-        width: 145px;
-        height: 55px;
-        content: "";
-        margin-left: 100px;
-        display: block;
-    }
-
-    b:before {
-        background-position: -104px -2px;
-        @include border-radius(100%);
-        width: 53px;
-        height: 52px;
-        content: "";
-        display: block;
+    label {
         position: absolute;
-        left: 81px;
+        left: 5%;
+        font-weight: bold;
+        font-size: 17px;
+        margin-top: 5px;
     }
     
 }
-
-
 
