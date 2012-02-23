@@ -46,7 +46,7 @@ var Moo = (function () {
 
     // Instance prototype
     Moo.fn.prototype = Moo.prototype = {
-        
+
         // On element ready
         ready: function (callback) {
             Moo.ready(callback, this.el);

@@ -57,7 +57,7 @@ var Moo = (function () {
 
     // Instance prototype
     Moo.fn.prototype = Moo.prototype = {
-        
+
         // On element ready
         ready: function (callback) {
             Moo.ready(callback, this.el);
@@ -541,7 +541,7 @@ if (!window.$ || typeof ($) !== "function") {
         if (document.body.style.overflow !== "hidden") {
             document.body.style.overflow = "hidden";
         }
-        
+
         this.init();
 
         return this;
@@ -589,7 +589,8 @@ if (!window.$ || typeof ($) !== "function") {
                 panel,
                 setActive,
                 headerAnchor,
-                goBack;
+                goBack,
+                clickcb;
 
             anchorCallback = function (gesture) {
                 panels.direction = 0;
@@ -597,6 +598,10 @@ if (!window.$ || typeof ($) !== "function") {
                 if (panels.isMoving === false) {
                     panels.set(gesture.el.rel);
                 }
+                return false;
+            };
+
+            clickcb = function () {
                 return false;
             };
 
@@ -633,7 +638,7 @@ if (!window.$ || typeof ($) !== "function") {
                 for (j = panel.anchors.length; j--;) {
                     if (panel.anchors[j].rel !== "") {
                         $(panel.anchors[j]).onTapStart(setActive);
-                        panel.anchors[j].onclick = function() { return false; };
+                        panel.anchors[j].onclick = clickcb;
                         $(panel.anchors[j]).onTapEnd(anchorCallback);
                     }
                 }
@@ -647,7 +652,7 @@ if (!window.$ || typeof ($) !== "function") {
                     headerAnchor =  this.header.anchors[i];
                     if (headerAnchor.rel === "back") {
                         $(headerAnchor).onTapEnd(goBack);
-                        headerAnchor.onclick = function() { return false; };
+                        headerAnchor.onclick = clickcb;
                     }
                 }
             }

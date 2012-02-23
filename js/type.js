@@ -1,7 +1,7 @@
 ﻿/* 
  * Dynamic Type Mootor Fx Plugin
  */
- 
+
 var $ = window.$ || $;
 
 (function (Moo) {
@@ -16,40 +16,40 @@ var $ = window.$ || $;
         /*
          *       Adjust font size relative to viewport size
          */
-        type: 
-        {
-            autoSize: function () {
+        type:
+            {
+                autoSize: function () {
 
-                // Update viewport font-size
-                var updateSize = function () {
+                    // Update viewport font-size
+                    var updateSize = function () {
 
-                    var font_size;
+                        var font_size;
 
-                    // FIXME CHECK: This calc can be optimized
-                    //                         using media queries
-                    if (window.innerWidth < 768) {
-                        font_size = window.innerWidth / 10 + (window.innerHeight / 40);
-                    } else {
-                        font_size = window.innerWidth / 18 + (window.innerHeight / 100);
-                    }
-
-                    if (typeof (document.body) !== null) {
-                        if (font_size < max && font_size > min) {
-                            document.body.style.fontSize = font_size + "%";
-                        } else if (font_size >= max) {
-                            document.body.style.fontSize = max + "%";
-                        } else if (font_size <= min) {
-                            document.body.style.fontSize = min + "%";
+                        // FIXME CHECK: This calc can be optimized
+                        //                         using media queries
+                        if (window.innerWidth < 768) {
+                            font_size = window.innerWidth / 10 + (window.innerHeight / 40);
+                        } else {
+                            font_size = window.innerWidth / 18 + (window.innerHeight / 100);
                         }
-                    }
 
-                };
+                        if (typeof (document.body) !== null) {
+                            if (font_size < max && font_size > min) {
+                                document.body.style.fontSize = font_size + "%";
+                            } else if (font_size >= max) {
+                                document.body.style.fontSize = max + "%";
+                            } else if (font_size <= min) {
+                                document.body.style.fontSize = min + "%";
+                            }
+                        }
 
-                // Initialize font-size
-                updateSize();
+                    };
 
-            }        
-        }
+                    // Initialize font-size
+                    updateSize();
+
+                }
+            }
     };
 
     Moo.extend(Moo.Type);

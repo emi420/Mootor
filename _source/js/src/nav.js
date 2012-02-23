@@ -53,7 +53,7 @@
         if (document.body.style.overflow !== "hidden") {
             document.body.style.overflow = "hidden";
         }
-        
+
         this.init();
 
         return this;
@@ -101,7 +101,8 @@
                 panel,
                 setActive,
                 headerAnchor,
-                goBack;
+                goBack,
+                clickcb;
 
             anchorCallback = function (gesture) {
                 panels.direction = 0;
@@ -109,6 +110,10 @@
                 if (panels.isMoving === false) {
                     panels.set(gesture.el.rel);
                 }
+                return false;
+            };
+
+            clickcb = function () {
                 return false;
             };
 
@@ -145,7 +150,7 @@
                 for (j = panel.anchors.length; j--;) {
                     if (panel.anchors[j].rel !== "") {
                         $(panel.anchors[j]).onTapStart(setActive);
-                        panel.anchors[j].onclick = function() { return false; };
+                        panel.anchors[j].onclick = clickcb;
                         $(panel.anchors[j]).onTapEnd(anchorCallback);
                     }
                 }
@@ -159,7 +164,7 @@
                     headerAnchor =  this.header.anchors[i];
                     if (headerAnchor.rel === "back") {
                         $(headerAnchor).onTapEnd(goBack);
-                        headerAnchor.onclick = function() { return false; };
+                        headerAnchor.onclick = clickcb;
                     }
                 }
             }

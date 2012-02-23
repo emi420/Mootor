@@ -18,23 +18,23 @@
         $(input).hide();
         this.input = input;
         this.el.innerHTML += "<b></b>";
-        
+
         check = $(this.el);
         check.setClass("moo_checkbox");
 
         // FIXME CHECK: optimize me
-        if( input.checked === false) {
+        if (input.checked === false) {
             this.toggle();
         }
-        this.handleGesture = function(gesture) {
+        this.handleGesture = function (gesture) {
             this.toggle();
-        }
+        };
         check.onTapEnd(this);
-        
+
         return this;
     };
 
-    Checkbox.prototype = { 
+    Checkbox.prototype = {
         toggle: function () {
             var el = $(this.el);
             if (this.value === 0) {
@@ -48,7 +48,7 @@
                 el.setClass("off");
                 this.value = 0;
             }
-        },
+        }
     };
 
     Moo.UI = {
