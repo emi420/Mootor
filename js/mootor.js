@@ -247,7 +247,6 @@ if (!window.$ || typeof ($) !== "function") {
             fn = options.fn,
             callback = options.callback,
             key = createKey(fn.el);
-            console.log(key);
 
         if (gestureList[key] === undefined) {
             gestureList[key] = {
@@ -542,7 +541,7 @@ if (!window.$ || typeof ($) !== "function") {
         if (document.body.style.overflow !== "hidden") {
             document.body.style.overflow = "hidden";
         }
-
+        
         this.init();
 
         return this;

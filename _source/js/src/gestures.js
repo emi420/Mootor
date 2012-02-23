@@ -33,7 +33,6 @@
             fn = options.fn,
             callback = options.callback,
             key = createKey(fn.el);
-            console.log(key);
 
         if (gestureList[key] === undefined) {
             gestureList[key] = {
