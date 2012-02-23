@@ -232,7 +232,7 @@ if (!window.$ || typeof ($) !== "function") {
     // Create key for element
     createKey = function (el) {
 
-        if (el.id !== "" && el.rel !== undefined) {
+        if (el.id !== "") {
             return el.id;
         } else if (el.rel !== undefined) {
             return el.rel;
@@ -247,6 +247,7 @@ if (!window.$ || typeof ($) !== "function") {
             fn = options.fn,
             callback = options.callback,
             key = createKey(fn.el);
+            console.log(key);
 
         if (gestureList[key] === undefined) {
             gestureList[key] = {

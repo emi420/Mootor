@@ -18,13 +18,6 @@
 
     #panels
 
-        .panel#ui
-            %h2 User Interface
-            %form#uiform.stdform{:action=>"", :method=>"post"}
-                .field#checkbox1
-                    %input#check1{:type=>"checkbox", :name=>"checkbox1" ,:value=>"0", :checked=>"true"}
-                    %label Input checkbox
-
         .panel#home
             %nav
                 %a.nav{:href=>"", :rel=>"nav"} Nav
@@ -33,6 +26,14 @@
                 %a.nav{:href=>"", :rel=>"data"} Data
                 %a.nav{:href=>"", :rel=>"graph"} Graph
                 %a.nav{:href=>"", :rel=>"carousel"} Carousel
+
+        .panel#ui
+            %h2 User Interface
+            .hidden
+                %form#uiform.stdform{:action=>"", :method=>"post"}
+                    .field#checkbox1
+                        %input#check1{:type=>"checkbox", :name=>"checkbox1" ,:value=>"0", :checked=>"true"}
+                        %label Input checkbox
 
         .panel#nav
             %nav

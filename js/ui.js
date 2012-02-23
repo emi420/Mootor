@@ -24,6 +24,7 @@
         check.setClass("moo_checkbox");
 
         this.handleGesture = function(gesture) {
+            console.log(gesture.el.id);
             this.toggle();
         }
         check.onTapEnd(this);
