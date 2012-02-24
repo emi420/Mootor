@@ -63,6 +63,8 @@ http://volks.co/mootordoc/type/symbols/%24.html
 
 http://volks.co/mootordoc/geo/symbols/%24.html
 
+# Design
+
 Mootor **LOVES** design, and we aim to make delightful user interfaces. 
 We are working with the last tools like Haml and Compass, to provide maximum 
 efficiency and fully customization.
