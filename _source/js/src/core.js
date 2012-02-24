@@ -159,7 +159,6 @@ var $ = (function () {
 
     /**
      * Extend function
-     * @ignore
      * @param {object} obj Object with properties
      * @param {object} target Target object to be extended
      * @example $.extend(target, {id: 1});
@@ -179,14 +178,10 @@ var $ = (function () {
     // Core
     $.extend({
 
-        /**
-         * @lends $
-         */
          
          /**
-         * Extend
+         * @lends $
          */
-         extend: $.extend,
 
          /**
          * Mootor  version
