@@ -43,23 +43,23 @@ Currently compatibility is only WebKit based browsers:
 
 We are in a development stage, THIS SOFTWARE IS ONLY FOR TESTING.
 
-## Core
+### Core
 
 http://volks.co/mootordoc/core/symbols/%24.html
 
-## Navigation plugin
+### Navigation plugin
 
 http://volks.co/mootordoc/nav/symbols/%24.html
 
-## User Interface plugin
+### User Interface plugin
 
 http://volks.co/mootordoc/ui/symbols/%24.html
 
-## Dynamic Type plugin
+### Dynamic Type plugin
 
 http://volks.co/mootordoc/type/symbols/%24.html
 
-## Geolocalization plugin
+### Geolocalization plugin
 
 http://volks.co/mootordoc/geo/symbols/%24.html
 
