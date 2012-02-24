@@ -1,5 +1,10 @@
-/*
- * Mootor Geo plugin
+/**
+ * Maplocalization Mootor Fx Plugin
+ */
+ 
+ /** 
+ * @class
+ * @name $ 
  */
 
 var $ = window.$ || $;
@@ -8,12 +13,15 @@ var $ = window.$ || $;
 
     "use strict";
 
-    var Geo;
+    var Map;
 
-    /*
-     *      Geo
+    /**
+     * Map
+     * @class
+     * @param {element} element HTML container element
+     * @property {element} element HTML container element
      */
-    Geo = function (element) {
+    Map = function (element) {
 
         var success,
             error,
@@ -66,33 +74,20 @@ var $ = window.$ || $;
 
     };
 
-    Geo.prototype = {
-
-        /*      
-         *     Refresh current location
-         */
-        refresh: function () {
-
-        }
-
-    };
-
-     /*
-      *     Public
-      */
-    $.Geo = {
-
-        /*          
-         *      Panels navigation
-         *      Usage: $("#panels").panels();
+    $.extend({
+        /**          
+         * Map
+         * @name map
+         * @function
+         * @memberOf $.prototype
+         * @example $("#map").map();
+         * @return {Map} Geolocated map
          */
         map: function () {
-            return new Geo(this.el);
+            return new Map(this.el);
         }
 
-    };
-
-    $.extend($.Geo);
+    });
 
 }($));
 

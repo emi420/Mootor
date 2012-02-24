@@ -9,26 +9,25 @@
         addGesture,
         fire;
 
-    /**
-     * Gestures
-     *
-     * @class
-     * @name gestures
-     * @memberOf $
-     * @property {integer} x Position on X axis
-     * @property {integer} y Position on Y axis
-     * @property {integer} startX Position on X axis at the start of the gesture
-     * @property {integer} endX Position on X axis at the end of the gesture
-     * @property {integer} startY Position on Y axis at the start of the gesture
-     * @property {integer} endY Position on Y axis at the end of the gesture
-     * @property {boolean} isDraggingY Return true when is dragging on Y axis
-     * @property {boolean} mousedown Return true when mouse or touch is down
-     * @property {boolean} tapped Return true when a onTap was fired
-     * @property {integer} time Time between last 2 touchs
-     * @property {element} el Element binded to gesture
-     */
-
      $.extend({
+        /**
+         * Gestures
+         *
+         * @class
+         * @name gestures
+         * @memberOf $
+         * @property {integer} x Position on X axis
+         * @property {integer} y Position on Y axis
+         * @property {integer} startX Position on X axis at the start of the gesture
+         * @property {integer} endX Position on X axis at the end of the gesture
+         * @property {integer} startY Position on Y axis at the start of the gesture
+         * @property {integer} endY Position on Y axis at the end of the gesture
+         * @property {boolean} isDraggingY Return true when is dragging on Y axis
+         * @property {boolean} mousedown Return true when mouse or touch is down
+         * @property {boolean} tapped Return true when a onTap was fired
+         * @property {integer} time Time between last 2 touchs
+         * @property {element} el Element binded to gesture
+         */
         gestures: {
             list: []
         }
@@ -91,18 +90,15 @@
      * Gestures
      *
      * @class
-     * @name Gesture
-     * @memberOf $.fn
      * @see $.gestures
      */
-    $.Gesture = {
+    $.extend({
+
+        /** @lends $.prototype */
 
         /**
          * On Tap End
          *
-         * @function
-         * @name onTapEnd
-         * @memberOf $.fn.Gesture
          * @param {function} callback Callback function
          * @example $("#myDiv").onTapEnd(function() {
          *      console.log("Tap!")
@@ -118,9 +114,6 @@
         /**
          * On Tap Start
          *
-         * @function
-         * @name onTapStart
-         * @memberOf $.fn.Gesture
          * @param {function} callback Callback function
          * @example $("#myDiv").onTapStart(function() {
          *      console.log("Tap start!")
@@ -136,9 +129,6 @@
         /**
          * On Tap Hold (500 ms)
          *
-         * @function
-         * @name onTapHold
-         * @memberOf $.fn.Gesture
          * @param {function} callback Callback function
          * @example $("#myDiv").onTapHold(function() {
          *      console.log("Tap hold!")
@@ -154,9 +144,6 @@
         /**
          * On Drag Start
          *
-         * @function
-         * @name onDragStart
-         * @memberOf $.fn.Gesture
          * @param {function} callback Callback function
          * @example $("#myDiv").onDragStart(function() {
          *      console.log("Drag start!")
@@ -172,9 +159,6 @@
         /**
          * On Drag Move
          *
-         * @function
-         * @name onDragMove
-         * @memberOf $.fn.Gesture
          * @param {function} callback Callback function
          * @example $("#myDiv").onDragMove(function(gesture) {
          *      console.log(gesture.y)
@@ -196,9 +180,6 @@
         /**
          * On Drag End
          *
-         * @function
-         * @name onDragEnd
-         * @memberOf $.fn.Gesture
          * @param {function} callback Callback function
          * @example $("#myDiv").onDragEnd(function() {
          *      console.log("Drag end!")
@@ -317,9 +298,7 @@
             }
 
         }
-    };
-
-    $.extend($.Gesture);
+    });
 
 }($));
 

@@ -9,7 +9,7 @@ COPY_FILE=$(PACKAGE).js
 
 all:
 	@@echo "Building..."
-	@@cat $(SRC_DIR)/header.js $(SRC_DIR)/core.js $(SRC_DIR)/gestures.js $(SRC_DIR)/fx.js $(SRC_DIR)/nav.js $(SRC_DIR)/footer.js > $(RELEASE_DIR)/$(RELEASE_FILE)
+	@@cat $(SRC_DIR)/header.js $(SRC_DIR)/core.js $(SRC_DIR)/gestures.js $(SRC_DIR)/fx.js $(SRC_DIR)/footer.js > $(RELEASE_DIR)/$(RELEASE_FILE)
 	@@echo "Build completed."
 	@@cp $(RELEASE_DIR)/$(RELEASE_FILE) $(COPY_DIR)/$(COPY_FILE)
 	@@echo "Build completed."

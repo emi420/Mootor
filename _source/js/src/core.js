@@ -6,23 +6,23 @@ var document = window.document;
 
 var $ = (function () {
 	"use strict";
+    
+    var ready;
 
     /**
-     * Main constructor
+     * Main constructor 
      *
-     * @module Core
      * @constructor
-     * @name $
      * @param {string} query Query selector
-     * @return {$.fn} Mootor object
+     * @return {$} Mootor object
      */
 	$ = function (query) {
-		return new $.fn(query);
+		return new Moo(query);
 	};
     /**
-     * @private
+     * @ignore
      */
-	$.fn = function (query) {
+	var Moo = function (query) {
 		var qtype = typeof query,
 			el;
 
@@ -43,21 +43,9 @@ var $ = (function () {
         }
 
         // Instance properties
-        /**
-         * Element selected
-         * @name el
-         * @property
-         * @memberOf $.fn
-         */
         this.el = (function () {
             return el;
         }());
-        /**
-         * Query passed
-         * @name query
-         * @property
-         * @memberOf $.fn
-         */
         this.query = (function () {
             return query;
         }());
@@ -65,32 +53,33 @@ var $ = (function () {
 		return this;
 	};
 
-     /**
-     * Mootor object
-     * @class
-     * @name $.fn
-     */
-    $.fn.prototype = $.prototype = {
+     $.prototype = Moo.prototype = {
+     
+        /** @lends $.prototype */
+        
+        /**
+         * Element selected
+         */
+        el: undefined,
+
+        /**
+         * Query passed
+         */
+        query: "",
 
         /**
          * On element ready
-         * @name ready
-         * @function
-         * @memberOf $.fn
          * @example $(document).ready(function() {
          *      console.log("Im ready (The Document)"); 
          *  });
          * @param {function} callback Callback function
          */
         ready: function (callback) {
-            $.ready(callback, this.el);
+            ready(callback, this.el);
         },
 
         /**
          * Show element
-         * @name show
-         * @function
-         * @memberOf $.fn
          * @example $("#myDiv").show(); 
          */
         show: function (el) {
@@ -102,9 +91,6 @@ var $ = (function () {
 
         /**
          * Hide element
-         * @name hide
-         * @function
-         * @memberOf $.fn
          * @example $("#myDiv").hide(); 
          */
         hide: function (el) {
@@ -116,11 +102,8 @@ var $ = (function () {
 
         /**
          * Bind event listener
-         * @function
-         * @name bind
          * @param {string} event Event
          * @param {function} callback Callback function
-         * @memberOf $.fn
          * @example $("#myDiv").bind("touchstart", function() {
          *      console.log("Touch start!")
          * }); 
@@ -131,11 +114,8 @@ var $ = (function () {
 
         /**
          * Unbind event listener
-         * @function
-         * @name unbind
          * @param {string} event Event
          * @param {function} callback Callback function
-         * @memberOf $.fn
          * @example $("#myDiv").unbind("touchstart", function() {
          *      console.log("Touch start!")
          * }); 
@@ -146,10 +126,7 @@ var $ = (function () {
 
         /**
          * Set class name
-         * @function
-         * @name setClass
          * @param {string} name Class name
-         * @memberOf $.fn
          * @example $("#myDiv").setClass("featured");
          */
         setClass: function (name) {
@@ -158,10 +135,7 @@ var $ = (function () {
 
         /**
          * Check if has class name
-         * @function
-         * @name hasClass
          * @param {string} name Class name
-         * @memberOf $.fn
          * @return {boolean}
          * @example if ($("#myDiv").hasClass("featured") === true) { 
          *      console.log("this div is featured");
@@ -173,10 +147,7 @@ var $ = (function () {
 
         /**
          * Remove class name
-         * @function
-         * @name removeClass
          * @param {string} name Class name
-         * @memberOf $.fn
          * @example $("#myDiv").removeClass("featured");
          */
         removeClass:  function (name) {
@@ -188,11 +159,8 @@ var $ = (function () {
 
     /**
      * Extend function
-     * @function
-     * @name extend
      * @param {object} obj Object with properties
      * @param {object} target Target object to be extended
-     * @memberOf $
      * @example $.extend(target, {id: 1});
      */
     $.extend = function (obj, target) {
@@ -211,57 +179,19 @@ var $ = (function () {
     $.extend({
 
         /**
+         * @lends $
+         */
+
+         /**
          * Mootor  version
-         * @name version
-         * @property
-         * @memberOf $
          */
         version:  (function () {
             return "0.1";
         }()),
 
         /**
-         * On element ready
-         * @name ready
-         * @function
-         * @memberOf $
-         * @example $.ready(document, function() {
-         *      console.log("Im ready (The Document)"); 
-         *  });
-         * @param {element} element Element
-         * @param {function} callback Callback function
-         */
-        ready: function (fn, el) {
-            if (el === document) {
-                el = window;
-            }
-            if (el === window) {
-                var ready = false,
-                    handler;
-
-                handler = function (e) {
-                    if (ready) {return; }
-                    if (e.type === "readystatechange" && window.document.readyState !== "complete") {return; }
-                    fn.call(window.document);
-                    ready = true;
-                };
-                if (el !== undefined && $.context.addEventListener) {
-                    el.addEventListener("DOM-ContentLoaded", handler, false);
-                    el.addEventListener("readystatechange", handler, false);
-                    el.addEventListener("load", handler, false);
-                }
-            } else {
-                el.onload = fn;
-            }
-
-        },
-
-        /**
          * Context features
          * @example $.context.addEventListener
-         * @name context
-         * @property
-         * @memberOf $
          */
         context: {
             addEventListener: false
@@ -269,9 +199,6 @@ var $ = (function () {
 
         /**
          * Viewport configuration
-         * @name view
-         * @property
-         * @memberOf $
          * @example $.context.clientH - Client height
          * $.context.clientW - Client width
          * $.context.hide() - Hide viewport
@@ -294,8 +221,35 @@ var $ = (function () {
             }
         }
 
-
     }, $);
+    
+    /**
+     * On element ready
+     * @ignore
+     */
+    ready = function (fn, el) {
+        if (el === document) {
+            el = window;
+        }
+        if (el === window) {
+            var ready = false,
+                handler;
+
+            handler = function (e) {
+                if (ready) {return; }
+                if (e.type === "readystatechange" && window.document.readyState !== "complete") {return; }
+                fn.call(window.document);
+                ready = true;
+            };
+            if (el !== undefined && $.context.addEventListener) {
+                el.addEventListener("DOM-ContentLoaded", handler, false);
+                el.addEventListener("readystatechange", handler, false);
+                el.addEventListener("load", handler, false);
+            }
+        } else {
+            el.onload = Moo;
+        }
+    }
 
     // Init-time branching
     if (window.addEventListener) {
@@ -305,7 +259,7 @@ var $ = (function () {
     }
 
     // Initialize Mootor on document ready
-    $.ready(function () {
+    ready(function () {
 		var clientW = document.documentElement.clientWidth,
 			clientH = document.documentElement.clientHeight;
 
