@@ -3,16 +3,16 @@
 
 Current modules:
 
-* Mootor (core) - core functions and query selector
-* Mootor.Fx - visual FX (ex: show, hide, translate, etc)
-* Mootor.Gestures - gestures (ex: tapStart, tapEnd, etc)
-* Mootor.Nav - navigation
+* core.js - Core functions and query selector
+* fx.js - Visual FX (ex: show, hide, translate, ...)
+* gestures.js- Gestures (ex: tapStart, tapEnd, ...)
 
 and plugins:
 
-* Mootor.UI - user interface
-* Mootor.Geo - geolocalization
-* Mootor.Type - type
+* nav.js - Navigation
+* ui.js - User interface
+* geo.js - Geolocalization
+* type.js - Typography
 
 # About Mootor
 
