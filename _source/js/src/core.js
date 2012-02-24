@@ -39,7 +39,7 @@ var $ = (function () {
 
             }
         } else if (qtype === "object") {
-            el = query;
+        el = query;
         }
 
         // Instance properties
