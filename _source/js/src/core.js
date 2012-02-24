@@ -269,7 +269,7 @@ var $ = (function () {
 
         /**
          * Viewport configuration
-         * @name viewport
+         * @name view
          * @property
          * @memberOf $
          * @example $.context.clientH - Client height
