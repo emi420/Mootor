@@ -63,6 +63,14 @@ http://volks.co/mootordoc/type/symbols/%24.html
 
 http://volks.co/mootordoc/geo/symbols/%24.html
 
+Mootor **LOVES** design, and we aim to make delightful user interfaces. 
+We are working with the last tools like Haml and Compass, to provide maximum 
+efficiency and fully customization.
+
+Mootor was designed to follow a basic hierarchical color system,
+as you can see in this link:
+
+https://github.com/emi420/Mootor/wiki/Styling:-colors 
 
 # How can I help?
 
@@ -81,3 +89,11 @@ Please use GitHub to report any bugs found.
 Mootor is licensed under the terms of the GNU General Public License.
 
 (c) 2012 Emilio Mariscal
+
+# Hablas español?
+
+Mootor también; podés encontrar más información en tu idioma en este link:
+
+https://github.com/emi420/Mootor/wiki/Librer%C3%ADa-HTML5-para-desarrollar-aplicaciones
+
+Adios amigos!
