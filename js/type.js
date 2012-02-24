@@ -4,7 +4,7 @@
 
 var $ = window.$ || $;
 
-(function (Moo) {
+(function ($) {
 
     "use strict";
 
@@ -12,7 +12,7 @@ var $ = window.$ || $;
     var max = 105,
         min = 20;
 
-    Moo.Type = {
+    $.Type = {
         /*
          *       Adjust font size relative to viewport size
          */
@@ -52,7 +52,7 @@ var $ = window.$ || $;
             }
     };
 
-    Moo.extend(Moo.Type);
+    $.extend($.Type);
 
 }($));
 

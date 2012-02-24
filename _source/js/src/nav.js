@@ -12,6 +12,28 @@
         el.style.width = $.view.clientW + "px";
     };
 
+    /**
+     * Panels
+     *
+     * @class
+     * @name Panels
+     * @property {element} el Element
+     * @property {integer} x Position on X axis
+     * @property {integer} y Position on Y axis
+     * @property {integer} current Index of active panel
+     * @property {integer} back Index of previous active panel
+     * @property {string} navClass Navigation class name
+     * @property {string} panelClass Panels class name
+     * @property {string} hiddenClass Hidden content class name
+     * @property {string} headerId Header element id
+     * @property {integer} width Panels container width
+     * @property {integer} height Panels container height
+     * @property {boolean} isMoving Returns true if panels container is moving
+     * @property {integer} direction Direction for panels movement
+     * @property {array} [history] History of panels navigation
+     * @property {integer} count Panels count
+     */
+
     Panels = function (options) {
 
         var i,
@@ -198,6 +220,9 @@
                 cb,
                 i;
 
+            /**
+             * @ignore
+             */            
             cb = function () {
                 $.Fx.clean(panel.el);
             };
@@ -361,6 +386,13 @@
             }, 10);
         },
 
+
+        /**
+         * Go back on navigation history
+         * @memberOf $.fn.Nav
+         * @name goBack
+         * @example nav.goBack();
+         */
         goBack: function () {
             if (this.history.length > 0) {
                 this.direction = -1;
@@ -369,6 +401,16 @@
             }
         },
 
+        /**
+         * Panels configuration
+         * @memberOf $.fn.Nav
+         * @name config
+         * @param {object} options Configuration options
+         * @example nav.config({
+         *      panel: "geo",
+         *       movable: false
+         * });
+         */
         config: function (options) {
             var panel;
             if (options.panel !== undefined) {
@@ -382,10 +424,21 @@
     };
 
 
-     /*
-      *     Public
-      */
-    $.Nav = {
+    /**
+     * Navigation
+     *
+     * @class
+     * @name Nav
+     * @memberOf $.fn
+     * @param {object} options Configuration options
+     * @return {Panels} Panels object
+     * @config {string} navClass Navigation class name
+     * @config {string} panelClass Panels class name
+     * @config {string} hiddenClass Hidden content class name
+     * @config {string} headerId Header element id
+     * @example var nav = $("#panels").nav();
+     */
+     $.Nav = {
         nav: function (options) {
             if (typeof options !== "object") {
                 options = {};

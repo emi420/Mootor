@@ -1,19 +1,28 @@
-/* 
- *  Mootor Core
+/** 
+ * Mootor Core
  */
 
 var document = window.document;
 
-var Moo = (function () {
+var $ = (function () {
 	"use strict";
 
-    // Return new instance
-	Moo = function (query) {
-		return new Moo.fn(query);
+    /**
+     * Main constructor
+     *
+     * @module Core
+     * @constructor
+     * @name $
+     * @param {string} query Query selector
+     * @return {$.fn} Mootor object
+     */
+	$ = function (query) {
+		return new $.fn(query);
 	};
-
-    //  Selector
-	Moo.fn = function (query) {
+    /**
+     * @private
+     */
+	$.fn = function (query) {
 		var qtype = typeof query,
 			el;
 
@@ -34,9 +43,21 @@ var Moo = (function () {
         }
 
         // Instance properties
+        /**
+         * Element selected
+         * @name el
+         * @property
+         * @memberOf $.fn
+         */
         this.el = (function () {
             return el;
         }());
+        /**
+         * Query passed
+         * @name query
+         * @property
+         * @memberOf $.fn
+         */
         this.query = (function () {
             return query;
         }());
@@ -44,15 +65,34 @@ var Moo = (function () {
 		return this;
 	};
 
-    // Instance prototype
-    Moo.fn.prototype = Moo.prototype = {
+     /**
+     * Mootor object
+     * @class
+     * @name $.fn
+     */
+    $.fn.prototype = $.prototype = {
 
-        // On element ready
+        /**
+         * On element ready
+         * @name ready
+         * @function
+         * @memberOf $.fn
+         * @example $(document).ready(function() {
+         *      console.log("Im ready (The Document)"); 
+         *  });
+         * @param {function} callback Callback function
+         */
         ready: function (callback) {
-            Moo.ready(callback, this.el);
+            $.ready(callback, this.el);
         },
 
-        // Show element
+        /**
+         * Show element
+         * @name show
+         * @function
+         * @memberOf $.fn
+         * @example $("#myDiv").show(); 
+         */
         show: function (el) {
             var element = typeof el === "object" ? el : this.el;
             if (element !== undefined) {
@@ -60,7 +100,13 @@ var Moo = (function () {
             }
         },
 
-        // Hide element
+        /**
+         * Hide element
+         * @name hide
+         * @function
+         * @memberOf $.fn
+         * @example $("#myDiv").hide(); 
+         */
         hide: function (el) {
             var element = typeof el === "object" ? el : this.el;
             if (element !== undefined) {
@@ -68,27 +114,71 @@ var Moo = (function () {
             }
         },
 
-        // Bind event
+        /**
+         * Bind event listener
+         * @function
+         * @name bind
+         * @param {string} event Event
+         * @param {function} callback Callback function
+         * @memberOf $.fn
+         * @example $("#myDiv").bind("touchstart", function() {
+         *      console.log("Touch start!")
+         * }); 
+         */
         bind: function (event, callback) {
             this.el.addEventListener(event, callback, false);
         },
 
-        // Unbind event
+        /**
+         * Unbind event listener
+         * @function
+         * @name unbind
+         * @param {string} event Event
+         * @param {function} callback Callback function
+         * @memberOf $.fn
+         * @example $("#myDiv").unbind("touchstart", function() {
+         *      console.log("Touch start!")
+         * }); 
+         */
         unbind: function (event, callback) {
             this.el.removeEventListener(event, callback, false);
         },
 
-        // Set class name
+        /**
+         * Set class name
+         * @function
+         * @name setClass
+         * @param {string} name Class name
+         * @memberOf $.fn
+         * @example $("#myDiv").setClass("featured");
+         */
         setClass: function (name) {
             this.el.className += " " + name;
         },
 
-        // Has class name
+        /**
+         * Check if has class name
+         * @function
+         * @name hasClass
+         * @param {string} name Class name
+         * @memberOf $.fn
+         * @return {boolean}
+         * @example if ($("#myDiv").hasClass("featured") === true) { 
+         *      console.log("this div is featured");
+         * }
+         */
         hasClass: function (name) {
             return (this.el.className.indexOf(name) !== 0);
         },
 
-        // Remove class name
+        /**
+         * Remove class name
+         * @function
+         * @name removeClass
+         * @param {string} name Class name
+         * @memberOf $.fn
+         * @example $("#myDiv").removeClass("featured");
+         */
         removeClass:  function (name) {
             this.el.className = this.el.className.replace(" " + name, "");
         }
@@ -96,11 +186,19 @@ var Moo = (function () {
 
 	};
 
-    // Extend function
-    Moo.extend = function (obj, target) {
+    /**
+     * Extend function
+     * @function
+     * @name extend
+     * @param {object} obj Object with properties
+     * @param {object} target Target object to be extended
+     * @memberOf $
+     * @example $.extend(target, {id: 1});
+     */
+    $.extend = function (obj, target) {
         var i;
         if (target === undefined) {
-            target = Moo.prototype;
+            target = $.prototype;
         }
         for (i in obj) {
             if (obj.hasOwnProperty(i)) {
@@ -110,13 +208,29 @@ var Moo = (function () {
     };
 
     // Core
-    Moo.extend({
+    $.extend({
 
+        /**
+         * Mootor  version
+         * @name version
+         * @property
+         * @memberOf $
+         */
         version:  (function () {
             return "0.1";
         }()),
 
-        // On element ready
+        /**
+         * On element ready
+         * @name ready
+         * @function
+         * @memberOf $
+         * @example $.ready(document, function() {
+         *      console.log("Im ready (The Document)"); 
+         *  });
+         * @param {element} element Element
+         * @param {function} callback Callback function
+         */
         ready: function (fn, el) {
             if (el === document) {
                 el = window;
@@ -131,7 +245,7 @@ var Moo = (function () {
                     fn.call(window.document);
                     ready = true;
                 };
-                if (el !== undefined && Moo.context.addEventListener) {
+                if (el !== undefined && $.context.addEventListener) {
                     el.addEventListener("DOM-ContentLoaded", handler, false);
                     el.addEventListener("readystatechange", handler, false);
                     el.addEventListener("load", handler, false);
@@ -142,12 +256,27 @@ var Moo = (function () {
 
         },
 
-        // Context features
+        /**
+         * Context features
+         * @example $.context.addEventListener
+         * @name context
+         * @property
+         * @memberOf $
+         */
         context: {
             addEventListener: false
         },
 
-        // Viewport
+        /**
+         * Viewport configuration
+         * @name viewport
+         * @property
+         * @memberOf $
+         * @example $.context.clientH - Client height
+         * $.context.clientW - Client width
+         * $.context.hide() - Hide viewport
+         * $.context.show() - Show viewport
+         */
         view: {
 
             clientH: 0,
@@ -157,47 +286,47 @@ var Moo = (function () {
                 var styles = document.createElement("style");
                 styles.innerHTML = "body * {display: none}";
                 document.head.appendChild(styles);
-                Moo.view.styles = styles;
+                $.view.styles = styles;
             },
 
             show: function () {
-                document.head.removeChild(Moo.view.styles);
+                document.head.removeChild($.view.styles);
             }
         }
 
 
-    }, Moo);
+    }, $);
 
     // Init-time branching
     if (window.addEventListener) {
-        Moo.context.addEventListener = true;
+        $.context.addEventListener = true;
     } else {
-        Moo.context.addEventListener = false;
+        $.context.addEventListener = false;
     }
 
     // Initialize Mootor on document ready
-    Moo.ready(function () {
+    $.ready(function () {
 		var clientW = document.documentElement.clientWidth,
 			clientH = document.documentElement.clientHeight;
 
-		Moo.view.clientH = (function () {
+		$.view.clientH = (function () {
 			return clientH;
 		}());
-		Moo.view.clientW = (function () {
+		$.view.clientW = (function () {
 			return clientW;
 		}());
-		Moo.view.show();
+		$.view.show();
 
 	}, document);
 
-	Moo.view.hide();
+	$.view.hide();
 
-	return Moo;
+	return $;
 
 }());
 
 // Go public!
 if (!window.$ || typeof ($) !== "function") {
-    window.$ = Moo;
+    window.$ = $;
 }
 

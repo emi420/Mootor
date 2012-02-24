@@ -1,11 +1,11 @@
-/* 
- * Mootor User Interface
+/** 
+ * Mootor UI
  */
 
-(function (Moo) {
+(function ($) {
     "use strict";
 
-    var Checkbox = function (options) {
+     var Checkbox = function (options) {
         var check,
             input;
 
@@ -51,7 +51,7 @@
         }
     };
 
-    Moo.UI = {
+    $.UI = {
         checkbox: function (options) {
             if (typeof options !== "object") {
                 options = {};
@@ -61,7 +61,7 @@
         }
     };
 
-    Moo.extend(Moo.UI);
+    $.extend($.UI);
 
 }($));
 

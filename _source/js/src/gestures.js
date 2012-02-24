@@ -2,18 +2,37 @@
  * Mootor Gestures
  */
 
-(function (Moo) {
+(function ($) {
     "use strict";
 
     var createKey,
         addGesture,
         fire;
 
-    Moo.extend({
+    /**
+     * Gestures
+     *
+     * @class
+     * @name gestures
+     * @memberOf $
+     * @property {integer} x Position on X axis
+     * @property {integer} y Position on Y axis
+     * @property {integer} startX Position on X axis at the start of the gesture
+     * @property {integer} endX Position on X axis at the end of the gesture
+     * @property {integer} startY Position on Y axis at the start of the gesture
+     * @property {integer} endY Position on Y axis at the end of the gesture
+     * @property {boolean} isDraggingY Return true when is dragging on Y axis
+     * @property {boolean} mousedown Return true when mouse or touch is down
+     * @property {boolean} tapped Return true when a onTap was fired
+     * @property {integer} time Time between last 2 touchs
+     * @property {element} el Element binded to gesture
+     */
+
+     $.extend({
         gestures: {
             list: []
         }
-    }, Moo);
+    }, $);
 
     // Create key for element
     createKey = function (el) {
@@ -28,7 +47,7 @@
     };
 
     addGesture = function (options) {
-        var gestureList = Moo.gestures.list,
+        var gestureList = $.gestures.list,
             type = options.type,
             fn = options.fn,
             callback = options.callback,
@@ -68,12 +87,27 @@
         }
     };
 
-    /*
-     *      Public
+    /**
+     * Gestures
+     *
+     * @class
+     * @name Gesture
+     * @memberOf $.fn
+     * @see $.gestures
      */
-    Moo.Gesture = {
+    $.Gesture = {
 
-        // Gestures
+        /**
+         * On Tap End
+         *
+         * @function
+         * @name onTapEnd
+         * @memberOf $.fn.Gesture
+         * @param {function} callback Callback function
+         * @example $("#myDiv").onTapEnd(function() {
+         *      console.log("Tap!")
+         * }); 
+         */
         onTapEnd: function (callback) {
             addGesture({
                 fn: this,
@@ -81,6 +115,17 @@
                 type: "onTapEnd"
             });
         },
+        /**
+         * On Tap Start
+         *
+         * @function
+         * @name onTapStart
+         * @memberOf $.fn.Gesture
+         * @param {function} callback Callback function
+         * @example $("#myDiv").onTapStart(function() {
+         *      console.log("Tap start!")
+         * }); 
+         */
         onTapStart: function (callback) {
             addGesture({
                 fn: this,
@@ -88,6 +133,17 @@
                 type: "onTapStart"
             });
         },
+        /**
+         * On Tap Hold (500 ms)
+         *
+         * @function
+         * @name onTapHold
+         * @memberOf $.fn.Gesture
+         * @param {function} callback Callback function
+         * @example $("#myDiv").onTapHold(function() {
+         *      console.log("Tap hold!")
+         * }); 
+         */
         onTapHold: function (callback) {
             addGesture({
                 fn: this,
@@ -95,6 +151,17 @@
                 type: "onTapHold"
             });
         },
+        /**
+         * On Drag Start
+         *
+         * @function
+         * @name onDragStart
+         * @memberOf $.fn.Gesture
+         * @param {function} callback Callback function
+         * @example $("#myDiv").onDragStart(function() {
+         *      console.log("Drag start!")
+         * }); 
+         */
         onDragStart: function (callback) {
             addGesture({
                 fn: this,
@@ -102,6 +169,23 @@
                 type: "onDragStart"
             });
         },
+        /**
+         * On Drag Move
+         *
+         * @function
+         * @name onDragMove
+         * @memberOf $.fn.Gesture
+         * @param {function} callback Callback function
+         * @example $("#myDiv").onDragMove(function(gesture) {
+         *      console.log(gesture.y)
+         * }); 
+         * @example fn = this;
+         * $("#myDiv").onDragMove(fn);
+         * fn.handleGesture = function(gesture) {
+         *       console.log(gesture.x);
+         *       console.log(gesture.y);
+         * }
+         */
         onDragMove: function (callback) {
             addGesture({
                 fn: this,
@@ -109,6 +193,17 @@
                 type: "onDragMove"
             });
         },
+        /**
+         * On Drag End
+         *
+         * @function
+         * @name onDragEnd
+         * @memberOf $.fn.Gesture
+         * @param {function} callback Callback function
+         * @example $("#myDiv").onDragEnd(function() {
+         *      console.log("Drag end!")
+         * }); 
+         */
         onDragEnd: function (callback) {
             addGesture({
                 fn: this,
@@ -118,13 +213,12 @@
         },
 
         // Handler to detect gestures and fire callbacks        
-
         handleEvent: function (e) {
             var key = createKey(this.el),
                 info = {
                     el: this.el
                 },
-                gesture = Moo.gestures.list[key],
+                gesture = $.gestures.list[key],
                 date = new Date(),
                 clientX,
                 clientY;
@@ -225,7 +319,7 @@
         }
     };
 
-    Moo.extend(Moo.Gesture);
+    $.extend($.Gesture);
 
-}(Moo));
+}($));
 

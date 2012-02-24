@@ -4,7 +4,7 @@
 
 var $ = window.$ || $;
 
-(function (Moo) {
+(function ($) {
 
     "use strict";
 
@@ -21,15 +21,15 @@ var $ = window.$ || $;
             latlng;
 
         this.el = element;
-        
+
         success = function (position) {
             var options,
                 map,
                 google = window.google || undefined,
                 stop;
-                
+
             if (google !== undefined) {
-            
+
                 latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
                 options = {
@@ -39,7 +39,7 @@ var $ = window.$ || $;
                     navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
-                
+
                 map = new google.maps.Map(document.getElementById(element.id), options);
 
                 marker = new google.maps.Marker({
@@ -49,7 +49,7 @@ var $ = window.$ || $;
                 });
 
             }
-            
+
             return this;
 
         };
@@ -72,7 +72,7 @@ var $ = window.$ || $;
          *     Refresh current location
          */
         refresh: function () {
-            
+
         }
 
     };
@@ -80,7 +80,7 @@ var $ = window.$ || $;
      /*
       *     Public
       */
-    Moo.Geo = {
+    $.Geo = {
 
         /*          
          *      Panels navigation
@@ -92,7 +92,7 @@ var $ = window.$ || $;
 
     };
 
-    Moo.extend(Moo.Geo);
+    $.extend($.Geo);
 
 }($));
 
