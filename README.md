@@ -94,7 +94,7 @@ Mootor is licensed under the terms of the GNU General Public License.
 
 # Hablas español?
 
-Mootor también; podés encontrar más información en tu idioma en este link:
+Mootor también. Podés encontrar más información en tu idioma en este link:
 
 https://github.com/emi420/Mootor/wiki/Librer%C3%ADa-HTML5-para-desarrollar-aplicaciones
 
