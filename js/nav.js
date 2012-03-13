@@ -209,8 +209,10 @@
                     Nav.goBack();
                 };
                 for (i = this.header.anchors.length; i--;) {
-                    headerAnchor =  this.header.anchors[i];
-                    if (headerAnchor.rel === "back") {
+                    headerAnchor =this.header.anchors[i];
+                    if (headerAnchor.rel === "back") {i
+			this.anchorBack = headerAnchor.parentNode;
+			$(this.anchorBack).hide()
                         $(headerAnchor).onTapEnd(goBack);
                         headerAnchor.onclick = clickcb;
                     }
@@ -301,6 +303,7 @@
             positionX = this.width + this.margin;
 
             if (this.current !== 0) {
+	        $(this.anchorBack).show()
                 if (this.back === 0) {
                     panel.el.style.left = positionX + "px";
                 } else {
@@ -310,12 +313,13 @@
                         positionX = -positionX;
                     }
                     panel.el.style.left = positionX + "px";
-                }
+	        }
             } else if (this.back !== 0) {
                 translate({el: container, x: -positionX});
                 back.el.style.left = positionX + "px";
                 panel.el.style.left = "0px";
                 positionX = 0;
+		$(this.anchorBack).hide()
             }
 
             if (this.side === 1) {
@@ -352,6 +356,7 @@
                         this.history.push(this.current);
                     }
                     this.current = i;
+
                     this.load();
                 }
             }
@@ -439,7 +444,7 @@
                 this.direction = -1;
                 this.back = this.history.pop();
                 this.set(this.items[this.back].el.id);
-            }
+	    }
         },
 
         /**
