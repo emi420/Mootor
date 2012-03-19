@@ -231,10 +231,9 @@
                 };
                 for (i = this.header.anchors.length; i--;) {
                     headerAnchor =this.header.anchors[i];
-                    this.anchorBack = headerAnchor.parentNode;
-                    $(this.anchorBack).hide()
-                    headerAnchor.onclick = clickcb;
                     if (headerAnchor.rel === "back") {
+                        this.anchorBack = headerAnchor.parentNode;
+                        $(this.anchorBack).hide()
                         $(headerAnchor).onTapEnd(goBack);
                     } else {
                         $(headerAnchor).onTapEnd(anchorCallback);                        
