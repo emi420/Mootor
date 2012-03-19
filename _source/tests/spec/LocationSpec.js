@@ -12,7 +12,7 @@ describe("Location", function() {
             msgNearby: 'distancia: $distance info: $info',
             dataNearby:  "../../data/sample.xml",
         });  
-        waits(600) // Limit in milliseconds
+        waits(1000) // Limit in milliseconds
     });
 
     
