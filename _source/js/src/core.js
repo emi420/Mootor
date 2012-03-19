@@ -154,7 +154,6 @@ var $ = (function () {
             this.el.className = this.el.className.replace(" " + name, "");
         }
 
-
 	};
 
     /**
@@ -220,10 +219,29 @@ var $ = (function () {
             show: function () {
                 document.head.removeChild($.view.styles);
             }
+        },
+
+        /**
+         * Ajax request
+         * @param {object} options Options configuration
+         */
+        ajax:  function (options) {
+            var xmlhttp = new window.XMLHttpRequest(),
+                handler;
+
+            xmlhttp.onreadystatechange = function() {
+                if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+                    options.callback(xmlhttp.responseText);
+                }
+            };
+            xmlhttp.open("GET", options.url, true);
+            xmlhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            xmlhttp.send(null);
+
         }
 
     }, $);
-    
+
     /**
      * On element ready
      * @ignore

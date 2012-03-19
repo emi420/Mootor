@@ -7,12 +7,12 @@
     overflow: hidden;
     float: right;
     
-    b {
-        -webkit-transition-duration: .25s;
+    input b:after {
         background: url(../img/ui/switch.png);
         height: 28px;
         width: 149px;
         display: block;
+        -webkit-transition-duration: .25s;
         -webkit-transform: translate3d(0, 0, 0);
     }
     
@@ -29,4 +29,3 @@
     }
     
 }
-

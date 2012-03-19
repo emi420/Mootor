@@ -54,6 +54,7 @@
         this.navClass = options.nav_class !== undefined ? options.nav_class : "nav";
         this.itemClass = options.item_class !== undefined ? options.item_class : "panel";
         this.headerId = options.header_id !== undefined ? options.header_id : "header";
+        this.footerId = options.footer_id !== undefined ? options.footer_id : "footer";
         this.hiddenClass = options.hidden_class !== undefined ? options.hidden_class : "hidden";
         this.margin = options.item_margin !== undefined ? options.item_margin : 5;
         this.width = options.width !== undefined ? options.width : $.view.clientW;
@@ -64,6 +65,7 @@
         this.back = 0;
         this.items = [];
         this.header = this.header.init(this);
+        this.footer = this.footer.init(this);
         this.isMoving = false;
         this.direction = 0;
         this.history = [];
@@ -114,20 +116,38 @@
          * @private
          */
         header: {
-            init: function (panel) {
+            init: function (panels) {
                 var header = {};
-                header.el = document.getElementById(panel.headerId);
+                header.el = document.getElementById(panels.headerId);
                 if (header.el) {
-                    panel.nav(header);
+                    panels.nav(header);
                     fullWidth(header.el);
-                    panel.top = header.el.offsetHeight;
-                    panel.height = $.view.clientH - panel.top;
-                    panel.el.style.marginTop = panel.top + "px";
+                    panels.top = header.el.offsetHeight;
+                    panels.height = $.view.clientH - panels.top;
+                    panels.el.style.marginTop = panels.top + "px";
                     return header;
                 }
             }
         },
 
+        /**
+         * Initialize footer
+         * @private
+         */
+        footer: {
+            init: function (panels) {
+                var footer = {};
+                footer.el = document.getElementById(panels.footerId);
+                if (footer.el) {
+                    panels.nav(footer);
+                    fullWidth(footer.el);
+                    panels.height = panels.height - footer.el.offsetHeight;
+                    //panels.el.style.height = panels.height + "px";
+                    return footer;
+                }
+            }
+        },
+        
         /**
          * Initialize navigation area
          * @private
@@ -149,6 +169,7 @@
                 panel,
                 setActive,
                 headerAnchor,
+                footerAnchor,
                 goBack,
                 clickcb;
 
@@ -209,14 +230,29 @@
                     Nav.goBack();
                 };
                 for (i = this.header.anchors.length; i--;) {
-                    headerAnchor =  this.header.anchors[i];
+                    headerAnchor =this.header.anchors[i];
+                    this.anchorBack = headerAnchor.parentNode;
+                    $(this.anchorBack).hide()
+                    headerAnchor.onclick = clickcb;
                     if (headerAnchor.rel === "back") {
                         $(headerAnchor).onTapEnd(goBack);
-                        headerAnchor.onclick = clickcb;
+                    } else {
+                        $(headerAnchor).onTapEnd(anchorCallback);                        
                     }
                 }
             }
+            
 
+            if (this.footer) {
+                for (i = this.footer.anchors.length; i--;) {
+                    footerAnchor = this.footer.anchors[i];
+                    if (footerAnchor.rel !== "") {
+                        footerAnchor.onclick = clickcb;
+                        $(footerAnchor).onTapEnd(anchorCallback);
+                    }
+                }
+            }
+            
             return this;
 
         },
@@ -301,6 +337,7 @@
             positionX = this.width + this.margin;
 
             if (this.current !== 0) {
+	        $(this.anchorBack).show()
                 if (this.back === 0) {
                     panel.el.style.left = positionX + "px";
                 } else {
@@ -310,12 +347,13 @@
                         positionX = -positionX;
                     }
                     panel.el.style.left = positionX + "px";
-                }
+	        }
             } else if (this.back !== 0) {
                 translate({el: container, x: -positionX});
                 back.el.style.left = positionX + "px";
                 panel.el.style.left = "0px";
                 positionX = 0;
+		$(this.anchorBack).hide()
             }
 
             if (this.side === 1) {
@@ -352,6 +390,7 @@
                         this.history.push(this.current);
                     }
                     this.current = i;
+
                     this.load();
                 }
             }
@@ -399,6 +438,7 @@
             if (options.x === undefined) {
                 options.x = 0;
             }
+                        
             $(options.el).translate(
                 {y: options.y, x: options.x},
                 {transitionDuration: options.duration, callback: options.callback}
@@ -439,7 +479,7 @@
                 this.direction = -1;
                 this.back = this.history.pop();
                 this.set(this.items[this.back].el.id);
-            }
+	    }
         },
 
         /**
