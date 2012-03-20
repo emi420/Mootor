@@ -13,4 +13,9 @@ describe("Mootor", function() {
         expect(divMain.query).toEqual("main");
     });
 
+    /*
+    it("should be able to run code on document ready", function() {
+        expect(divMain.query).toEqual("main");
+    });
+    */
 });

@@ -13,17 +13,17 @@ var $ = window.$ || $;
 
     "use strict";
 
-    var Location;
+    var Geo;
 
     /**
-     * Location
+     * Geo
      * @class
      * @param {element} element HTML container element
      * @param {object} options Option parameters
      * @property {element} element HTML container element
      * @property {object} options Option parameters
      */
-    Location = function (element, options) {
+    Geo = function (element, options) {
 
         var success,
             error,
@@ -57,77 +57,6 @@ var $ = window.$ || $;
                     "$coords", "Lat: " + position.coords.latitude + " Lon: " + position.coords.longitude
                 );
                 options.msg.el.innerHTML = options.msgFound;
-                                
-                // Geocoding
-                instance.geocode({
-                    callback: function(response) {  
-                        var jsonData = {};
-                        
-                        jsonData = JSON.parse(response).results[0];
-                        
-                        // Show message
-                            
-                        instance.geocode = {
-                            address:  jsonData.address_components[1].short_name + 
-                                " " + jsonData.address_components[0].short_name +
-                                ", " + jsonData.address_components[2].short_name
-                        }
- 
-                        msg.el.innerHTML += options.msgFound.replace("$address", instance.geocode.address)
- 
-                        // Request markers xml
-                        $.ajax({
-                            url: instance.options.dataNearby, 
-                            callback: function(data) {
-                                var parser = new window.DOMParser(),
-                                msgNearby = "",
-                                tmpDiv,
-                                nearbyMarker,
-                                marker,
-                                distance,
-                                xml=parser.parseFromString(data,"text/xml"),
-                                markers = xml.documentElement.getElementsByTagName("marker");
-
-                                for (var i = 0; i < markers.length; i++) {
-                                    marker = {lat: markers[i].getAttribute("lat"), lng: markers[i].getAttribute("lng"), data: markers[i].childNodes[1].childNodes[1].data};
-                                    if (i === 0) {
-                                        nearbyMarker = marker;
-                                        nearbyMarker.distance = distanceP(marker, {lat: instance.lat, lng: instance.lon});
-                                    } else {
-                                        distance = distanceP(marker, {lat: instance.lat, lng: instance.lon});
-                                        if (distance < nearbyMarker.distance) {
-                                            nearbyMarker.lat = markers[i].getAttribute("lat");
-                                            nearbyMarker.lng = markers[i].getAttribute("lng")
-                                            nearbyMarker.data = marker.data;
-                                            nearbyMarker.distance = distance;
-                                        };
-                                    }
-                                }
-                                
-                                instance.nearbyMarker = nearbyMarker;
-
-                                tmpDiv = document.createElement("div");
-                                tmpDiv.innerHTML = nearbyMarker.data;
-                                
-                                options.msgNearby = options.msgNearby.replace("$distance",Math.round(nearbyMarker.distance * 100)/100);
-                                msg.el.innerHTML += options.msgNearby.replace("$info", tmpDiv.getElementsByClassName("divInfoTiendaMapa textoContenidosV2")[0].innerHTML);
-                                
-                                // Map image
-                                $("#" + options.map).el.innerHTML = '<img class="mapimg" src="http://maps.google.com/maps/api/staticmap?center=' +
-                                    nearbyMarker.lat + ',' + nearbyMarker.lng +'&zoom=15&size=' +
-                                    Math.round($.view.clientH  / 2) + 'x' + Math.round($.view.clientH / 1.75) +
-                                    '&maptype=roadmap&maptype=mapnik&markers=color:red%7Clabel:A%7C' +
-                                    nearbyMarker.lat + ',' + nearbyMarker.lng + '&sensor=true" />' +
-                                    element.innerHTML;
-                                   
-                                
-                            }
-                        });
-                    }
-                });
-
-            return this;
-
         };
 
         error = function () {
@@ -142,10 +71,11 @@ var $ = window.$ || $;
 
     };
     
-    Location.prototype = {
+    Geo.prototype = {
+        // Sample geocode function
         geocode: function(options) {
             var address,
-                apiURL = "http://ec2.volks.co:9001/maps/api/geocode/json",
+                apiURL = this.geocodeApi,
                 query = apiURL + "?address=" + this.lat + "," + this.lon + "&sensor=true";
             $.ajax({
                 url: query, 
@@ -155,41 +85,17 @@ var $ = window.$ || $;
         }
     }
     
-    if (typeof(Number.prototype.toRad) === "undefined") {
-        Number.prototype.toRad = function() {
-            return this * Math.PI / 180;
-        }
-    }
-    
-    var distanceP = function(a,b) {
-        a.lat = eval(a.lat);
-        a.lng = eval(a.lng);
-        var R = 6371, // km
-             dLat = (b.lat - a.lat).toRad(),
-             dLon = (b.lng - a.lng).toRad(),
-             c,
-             a;
-             
-             a.lat = a.lat.toRad(),
-             b.lat = b.lat.toRad(),
-             a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-                Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(a.lat) * Math.cos(b.lat),
-             c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-
-        return (R * c);
-    }
-
     $.extend({
         /**          
-         * Location
+         * geolocation
          * @name map
          * @function
          * @memberOf $.prototype
-         * @example $("#map").map();
-         * @return {Location} Geolocated map
+         * @example $("#location").geolocation();
+         * @return {Geo} Geolocation object
          */
-        location: function (options) {
-            return new Location(this.el, options);
+        geolocation: function (options) {
+            return new Geo(this.el, options);
         }
 
     });

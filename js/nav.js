@@ -177,11 +177,12 @@
                 Nav.direction = 0;
                 $(gesture.el).removeClass("active");
                 if (Nav.isMoving === false) {
+                    Nav.isMoving = true;
                     Nav.set(gesture.el.rel);
                 }
                 return false;
             };
-
+            
             clickcb = function () {
                 return false;
             };
@@ -190,6 +191,8 @@
                 $(gesture.el).setClass("active");
             };
 
+            // FIXME: optimize me, DRY!
+            
             // Reset styles and set anchor links
             for (i = this.count; i--;) {
 
@@ -224,6 +227,22 @@
                     }
                 }
             }
+            
+            // On window resize
+            $(window).bind("resize", function(){
+                var panel;
+                setTimeout( function() {
+                    //Nav.height 
+                    for (i = Nav.count; i--;) {
+                        panel = Nav.items[i];
+                        panel.el.style.width = $.view.clientW + "px";                    
+                    }
+                    Nav.y = 0;
+                    Nav.header.el.style.width = $.view.clientW + "px";
+                    Nav.footer.el.style.width = $.view.clientW + "px";
+                }, 10);
+            });
+
 
             if (this.header) {
                 goBack = function () {
@@ -231,9 +250,10 @@
                 };
                 for (i = this.header.anchors.length; i--;) {
                     headerAnchor =this.header.anchors[i];
+                    this.anchorBack = headerAnchor.parentNode;
+                    $(this.anchorBack).hide()
+                    headerAnchor.onclick = clickcb;
                     if (headerAnchor.rel === "back") {
-                        this.anchorBack = headerAnchor.parentNode;
-                        $(this.anchorBack).hide()
                         $(headerAnchor).onTapEnd(goBack);
                     } else {
                         $(headerAnchor).onTapEnd(anchorCallback);                        
@@ -263,7 +283,6 @@
         move: function (gesture) {
             var panel =  this.items[this.current];
             if (gesture.isDraggingY !== 0 && panel.movable !== false) {
-                this.isMoving = true;
                 this.y = this.y + (gesture.y - gesture.lastY);
                 this.translate({
                     el: panel.el,
@@ -282,6 +301,11 @@
                 maxdist = panel.height - this.height,
                 cb,
                 i;
+                
+            $(this.el).cleanFx();
+            $(panel.el).cleanFx();
+            $(this.items[this.back].el).cleanFx();
+
 
             if (gesture.isDraggingY !== 0) {
 
@@ -299,7 +323,7 @@
                     this.translate({
                         y: this.y,
                         el: panel.el,
-                        duration: 0.5
+                        duration: 0.25
                     });
                 }
 
@@ -319,11 +343,13 @@
                 show = this.show,
                 translate = this.translate,
                 positionX,
-                container = this.el;
-
+                container = this.el,
+                fn = this;
+   
             panel = this.items[this.current];
             back = this.items[this.back];
 
+            this.isMoving = true;
             this.hide(panel);
             this.hide(back);
             $(panel.el).show();
@@ -331,28 +357,30 @@
             cb = function () {
                 show(panel);
                 $(back.el).hide();
+                fn.isMoving = false;
             };
 
             positionX = this.width + this.margin;
 
             if (this.current !== 0) {
-	        $(this.anchorBack).show()
+                $(this.anchorBack).show()
                 if (this.back === 0) {
                     panel.el.style.left = positionX + "px";
                 } else {
-                    translate({el: container});
-                    back.el.style.left = "0px";
+                    translate({el: container, x: -(this.margin/2)});
+                    $(container).cleanFx();
+                    back.el.style.left = (this.margin/2) + "px";
                     if (this.direction !== 0) {
                         positionX = -positionX;
                     }
                     panel.el.style.left = positionX + "px";
-	        }
+                }
             } else if (this.back !== 0) {
                 translate({el: container, x: -positionX});
                 back.el.style.left = positionX + "px";
                 panel.el.style.left = "0px";
                 positionX = 0;
-		$(this.anchorBack).hide()
+                $(this.anchorBack).hide()
             }
 
             if (this.side === 1) {
@@ -361,10 +389,14 @@
                 this.side = 1;
             }
 
+            $(this.el).cleanFx();
+            $(panel.el).cleanFx();
+            $(back.el).cleanFx();
+
             window.setTimeout(function () {
                 translate({
                     el: container,
-                    duration: 0.5,
+                    duration: .25,
                     x: -positionX,
                     callback: cb
                 });
@@ -383,14 +415,16 @@
             // Get panel by id and load it
             for (i = this.count; i--;) {
                 if (this.items[i].el.id === id) {
-                    this.back = this.current;
-                    if (this.direction === 0) {
-                        this.get(id);
-                        this.history.push(this.current);
+                    if (this.current != i) {
+                        this.back = this.current;
+                        if (this.direction === 0) {
+                            this.history.push(this.current);
+                        }
+                        this.current = i;
+                        this.load();
+                    } else {
+                        this.isMoving = false;
                     }
-                    this.current = i;
-
-                    this.load();
                 }
             }
 

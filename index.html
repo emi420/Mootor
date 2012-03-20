@@ -8,10 +8,11 @@
   <script src='js/type.js' type='text/javascript'></script>
   <script src='js/ui.js' type='text/javascript'></script>
   <script src='js/nav.js' type='text/javascript'></script>
-  <script src='js/geo.js' type='text/javascript'></script>
+  <!-- %script{:src=>"js/geo.js",:type=>"text/javascript"} -->
 </head>
 <body class='main'>
   <div id='header'>
+    <h1>Mootor demo</h1>
     <nav>
       <a class='nav' href='' rel='back'>Back</a>
     </nav>
@@ -58,10 +59,9 @@
     </div>
     <div class='panel' id='geolocalization'>
       <h2>Geolocalization</h2>
-      <div id='location'></div>
+      <h3>This module is not activated. See $.geolocation</h3>
       <h3 id='msg'></h3>
       <div id='error'></div>
-      <div class='hidden' id='map'></div>
     </div>
     <div class='panel' id='data'>
       <h2>Data</h2>
@@ -120,17 +120,13 @@
            // Checkbox
            var check = $("#checkbox1").checkbox();
             
-           // Show location map
-           $("#location").location({
+           // Show location
+           /*$("#location").geolocation({
                 error: "error",
                 msg: "msg",
                 msgLoading: "<p>Wait please ...</p>",
-                msgFound: "",
-                map: "map",
-                // Sample data
-                dataNearby:  "data/sample.xml",
-                msgNearby: 'The near point is: $info ($distance km)'
-           });
+                msgFound: "$coords",
+           });*/
     
     
        });

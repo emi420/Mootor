@@ -290,15 +290,29 @@ var $ = (function () {
 
     // Initialize Mootor on document ready
     ready(function () {
-		var clientW = document.documentElement.clientWidth,
-			clientH = document.documentElement.clientHeight;
+        var clientW,
+                clientH,
 
-		$.view.clientH = (function () {
-			return clientH;
-		}());
-		$.view.clientW = (function () {
-			return clientW;
-		}());
+        updateClientSizes = function() {
+            clientW = document.documentElement.clientWidth,
+            clientH = document.documentElement.clientHeight;
+
+            $.view.clientH = (function () {
+                return clientH;
+            }());
+            $.view.clientW = (function () {
+                return clientW;
+            }());
+
+        }
+        
+        $(window).bind("resize", function(){
+            updateClientSizes();
+        });
+        
+        updateClientSizes();
+
+        document.body.style.width = clientW + "px";
 		$.view.show();
 
 	}, document);

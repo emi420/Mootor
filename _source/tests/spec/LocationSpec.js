@@ -3,14 +3,15 @@ describe("Location", function() {
     
     // Create a Location object
     runs(function() {
-        location = $("#location").location({
+        location = $("#location").geolocation({
             error: "error",
             msg: "msg",
-            msgLoading: "Cargando",
+            msgLoading: "Loading ...",
             msgFound: "$coords",
             map: "map",
             msgNearby: 'distancia: $distance info: $info',
             dataNearby:  "../../data/sample.xml",
+            geocodeApi:  "http://ec2.volks.co:9001/maps/api/geocode/json",
         });  
         waits(1000) // Limit in milliseconds
     });
