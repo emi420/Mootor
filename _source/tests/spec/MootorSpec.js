@@ -1,11 +1,15 @@
 describe("Mootor", function() {
-    var divMain;    
+    var divMain,
+        eventClick = document.createEvent("HTMLEvents");
+        eventClick.initEvent("click", false, true),
+        bindCallback = function() { document.testCallback = true;},
+        bindCallback2 = function() { document.testCallback2 = true;};
     
     beforeEach(function() {
         divMain = $("#main");
     });
     
-    it("should be able to select return an element by id", function() {
+    it("should be able to select and return an element by id", function() {
         expect($("#main").el).toEqual(document.getElementById("main"));
     });
 
@@ -42,31 +46,52 @@ describe("Mootor", function() {
         expect($("#main").hasClass("34uy98fh934h98f43")).toEqual(false);    
     });
 
-   /*****/
-
    it("should be able to bind events to an element and a callback function", function() {
-        expect(false).toEqual(true);    
+        $("#main").bind("click", bindCallback);
+        $("#main").el.dispatchEvent(eventClick);
+        expect(document.testCallback).toEqual(true);    
     });
 
     it("should be able to unbind events to an element and a callback function", function() {
-        expect(false).toEqual(true);    
+        document.testCallback = false;
+        $("#main").unbind("click", bindCallback);
+        $("#main").el.dispatchEvent(eventClick);
+        expect(document.testCallback).toEqual(false);    
     });
 
     it("should be able to bind events to an element and multiple callback functions", function() {
-        expect(false).toEqual(true);    
-    });
-
-    it("should be able to show elements", function() {
-        expect(false).toEqual(true);    
+        $("#main").bind("click", bindCallback);
+        $("#main").bind("click", bindCallback2);
+        $("#main").el.dispatchEvent(eventClick);
+        expect(document.testCallback && document.testCallback2).toEqual(true);    
     });
 
     it("should be able to hide elements", function() {
-        expect(false).toEqual(true);    
+        $("#main").hide();
+        expect($("#main").el.style.display).toEqual("none");    
+    });
+
+    it("should be able to show elements", function() {
+        $("#main").show();
+        expect($("#main").el.style.display).toEqual("block");    
     });
 
     it("should be able to do Ajax calls, obtain a result and run a callback function", function() {
-        expect(false).toEqual(true);    
+        runs(function() {
+            $.ajax({
+                url: "spec/MootorSpec.js", 
+                callback: function(result) { $.testAjaxCallback = true; $.testAjaxCallbackResult = result; }
+            });
+        });
+        waits(300) // Limit in milliseconds
+        runs(function() {
+            expect(
+                $.testAjaxCallback && $.testAjaxCallbackResult.indexOf("testAjaxCallbackResult") > -1
+            ).toEqual(true);    
+        });
     });
+
+    /**
 
     it("should be able to load HTML content into an element", function() {
         expect(false).toEqual(true);    
@@ -75,6 +100,6 @@ describe("Mootor", function() {
     it("should be able to store data client-side", function() {
         expect(false).toEqual(true);    
     });
-
+    ***/
 
 });
