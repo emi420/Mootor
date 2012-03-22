@@ -1,17 +1,23 @@
 describe("Nav", function() {
+    var testNav;
     
     it("should be able to initialize a navigation area and return a Nav object", function() {
-        expect(true).toEqual(false);
+        testNav = $("#panels").nav()
+        expect(typeof(testNav)).toEqual("object");
     });
 
     it("should be able to return panels count", function() {
-        expect(true).toEqual(false);
+        expect(testNav.count).toEqual(2);
     });
 
     it("should be able to return current panel", function() {
-        expect(true).toEqual(false);
+        expect(testNav.current).toEqual(0);
+        testNav.set(testNav.items[1].el.id);
+        testNav.load();
+        expect(testNav.current).toEqual(1);
     });
 
+/***
     it("should be able to return last or current navigation movement direction", function() {
         expect(true).toEqual(false);
     });
@@ -87,5 +93,6 @@ describe("Nav", function() {
     it("should be able to load a panel from URI", function() {
         expect(true).toEqual(false);
     });
+    ***/
 
 });

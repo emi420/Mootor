@@ -24,26 +24,37 @@
 
 </head>
 <body>
-<div class="main" id="main">
+<div style="display:none !important">
+    <div class="main" id="main">
 
-<script type="text/javascript">
-    $(document).ready( function (){
-        $.readyTest = true;
-    });
-</script>
+        <script type="text/javascript">
+            $(document).ready( function (){
+                $.readyTest = true;
+            });
+        </script>
 
-<script type="text/javascript">
-  jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
-  jasmine.getEnv().execute();
-</script>
+        <script type="text/javascript">
+            jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
+            jasmine.getEnv().execute();
+        </script>
 
-<div style="display: none">
-    <div id="location"></div>
-    <div id="map"></div>
-    <div id="msg"></div>
-</div>
+        <header id='header'>
+            <h1>Mootor demo</h1>
+            <nav>
+                <a class='nav' href='' rel='back'>Back</a>
+            </nav>
+        </header>
+        <div id='panels'>
+            <div class='panel' id='home'>
+                <div id="location"></div>
+                <div id="map"></div>
+                <div id="msg"></div>
+                </div>
+            <div class='panel' id='testPanel'>
+            </div>
+        </div>
 
-
+    </div>
 </div>
 </body>
 </html>
