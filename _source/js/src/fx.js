@@ -14,7 +14,7 @@
          * @param {object} positions Axis positions
          * @param {object} options Options
          * @config {integer} transitionDuration Duration of transition (in seconds)
-         * @example $.Fx.translate($("#myDiv", {10,20}, {tansitionDuration: .5}));
+         * @example $.Fx.translate($("#myDiv", {x:10,y:20}, {tansitionDuration: .5}));
          */
         translate: function (positions, options) {
 
@@ -48,6 +48,7 @@
          * @example $.Fx.clean($("#myDiv");
          */
         cleanFx: function () {
+            this.el.style.webkitTransform = "";
             this.el.style.webkitTransitionDuration = "";
             this.el.style.webkitTransitionTimingFunction = "";
         }
