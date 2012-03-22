@@ -18,7 +18,7 @@ describe("Location", function() {
 
     
     // Latitude and Longitude
-    it("should be able to return lat and lon", function() {
+    it("should be able to return lat and lon of user location", function() {
         runs(function() {
             expect(typeof(location.lat)).toEqual("number");
             expect(typeof(location.lon)).toEqual("number");
@@ -33,17 +33,52 @@ describe("Location", function() {
     });
 
     // Nearby marker
-    it("should be able to return the nearby marker", function() {
+    it("should be able to return the nearby point from one point to many", function() {
         runs(function() {
             expect(typeof(location.nearbyMarker)).toEqual("object");
         });
     });
 
-    // Nearby marker
-    it("should be able to return distance from my position to the nearby marker", function() {
+    it("should be able to return a list with nearby points from one point to many", function() {
         runs(function() {
-            expect(typeof(location.nearbyMarker.distance)).toEqual("number");
+            expect(true).toEqual(false);
         });
     });
 
+    it("should be able to show a static map image with one or more points", function() {
+        runs(function() {
+            expect(true).toEqual(false);
+        });
+    });
+
+    /*it("should be able to return directions from one point to another", function() {
+        runs(function() {
+            expect(true).toEqual(false);
+        });
+    });
+    
+    it("should be able to show google map with lines", function() {
+        runs(function() {
+            expect(true).toEqual(false);
+        });
+    });
+
+    it("should be able to show google map with polygons", function() {
+        runs(function() {
+            expect(true).toEqual(false);
+        });
+    });
+
+    it("should be able to show google map with custom tiles", function() {
+        runs(function() {
+            expect(true).toEqual(false);
+        });
+    });
+    
+    it("should be able to show google map with custom street tiles", function() {
+        runs(function() {
+            expect(true).toEqual(false);
+        });
+    });*/
+    
 });

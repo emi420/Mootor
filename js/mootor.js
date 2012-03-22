@@ -153,7 +153,7 @@ var $ = (function () {
          * }
          */
         hasClass: function (name) {
-            return (this.el.className.indexOf(name) !== 0);
+            return (this.el.className.indexOf(name) > -1);
         },
 
         /**

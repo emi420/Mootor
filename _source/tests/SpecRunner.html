@@ -8,7 +8,8 @@
 
   <!-- include source files here... -->
   <script type="text/javascript" src="../../js/mootor.js"></script>
-  <script type="text/javascript" src="../../js/geo.js"></script>
+ <!-- <script type="text/javascript" src="../../js/geo.js"></script> -->
+  <script type="text/javascript" src="../../js/nav.js"></script>
 
   <script type="text/javascript" src="lib/jasmine-1.0.2/jasmine.js"></script>
   <script type="text/javascript" src="lib/jasmine-1.0.2/jasmine-html.js"></script>
@@ -16,11 +17,20 @@
 
   <!-- include spec files here... -->
   <script type="text/javascript" src="spec/MootorSpec.js"></script>
-  <script type="text/javascript" src="spec/LocationSpec.js"></script>
+  <script type="text/javascript" src="spec/FxSpec.js"></script>
+  <script type="text/javascript" src="spec/GesturesSpec.js"></script>
+  <script type="text/javascript" src="spec/NavSpec.js"></script>
+  <!-- <script type="text/javascript" src="spec/LocationSpec.js"></script> -->
 
 </head>
 <body>
 <div class="main" id="main">
+
+<script type="text/javascript">
+    $(document).ready( function (){
+        $.readyTest = true;
+    });
+</script>
 
 <script type="text/javascript">
   jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
@@ -32,6 +42,7 @@
     <div id="map"></div>
     <div id="msg"></div>
 </div>
+
 
 </div>
 </body>
