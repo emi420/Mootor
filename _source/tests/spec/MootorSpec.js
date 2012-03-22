@@ -2,8 +2,8 @@ describe("Mootor", function() {
     var divMain,
         eventClick = document.createEvent("HTMLEvents");
         eventClick.initEvent("click", false, true),
-        bindCallback = function() { document.testCallback = true;},
-        bindCallback2 = function() { document.testCallback2 = true;};
+        bindCallback = function() { $.testCallback = true;},
+        bindCallback2 = function() { $.testCallback2 = true;};
     
     beforeEach(function() {
         divMain = $("#main");
@@ -49,21 +49,21 @@ describe("Mootor", function() {
    it("should be able to bind events to an element and a callback function", function() {
         $("#main").bind("click", bindCallback);
         $("#main").el.dispatchEvent(eventClick);
-        expect(document.testCallback).toEqual(true);    
+        expect($.testCallback).toEqual(true);    
     });
 
     it("should be able to unbind events to an element and a callback function", function() {
-        document.testCallback = false;
+        $.testCallback = false;
         $("#main").unbind("click", bindCallback);
         $("#main").el.dispatchEvent(eventClick);
-        expect(document.testCallback).toEqual(false);    
+        expect($.testCallback).toEqual(false);    
     });
 
     it("should be able to bind events to an element and multiple callback functions", function() {
         $("#main").bind("click", bindCallback);
         $("#main").bind("click", bindCallback2);
         $("#main").el.dispatchEvent(eventClick);
-        expect(document.testCallback && document.testCallback2).toEqual(true);    
+        expect($.testCallback && $.testCallback2).toEqual(true);    
     });
 
     it("should be able to hide elements", function() {
@@ -92,7 +92,6 @@ describe("Mootor", function() {
     });
 
     /**
-
     it("should be able to load HTML content into an element", function() {
         expect(false).toEqual(true);    
     });
