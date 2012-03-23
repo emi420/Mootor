@@ -46,9 +46,11 @@
                 anchors: [],
                 el: undefined,
                 height: 0,
+                x: 0,
+                y: 0,
                 hidden: []
-            }
-            Nav;
+            },
+            nav;
 
         this.el = options.el;
         this.navClass = options.nav_class !== undefined ? options.nav_class : "nav";
@@ -70,13 +72,15 @@
         this.direction = 0;
         this.history = [];
 
-        Nav = this.el.getElementsByClassName(this.itemClass);
+        nav = this.el.getElementsByClassName(this.itemClass);
 
-        this.count = Nav.length;
+        this.count = nav.length;
 
-        for (i = Nav.length; i--;) {
-            this.items[i] = {el: Nav[i]};
+        for (i = nav.length; i--;) {
+            this.items[i] = {el: nav[i]};
             item = this.items[i];
+            item.x = 0;
+            item.y = 0;
             item.anchors = item.el.getElementsByClassName(this.navClass);
             item.hidden = item.el.getElementsByClassName(this.hiddenClass);
         }
@@ -207,10 +211,9 @@
                 panel.el.style.overflow = 'hidden';
 
                 if (i > 0) {
-                    panel.el.style.left = -((this.width + this.margin) * 4) + "px";
-                    panel.el.style.top = "0px";
+                    this.translate({el: panel.el, x:  -((this.width + this.margin) * 4) , y:0});
                 } else {
-                    panel.el.style.left = "0px";
+                    this.translate({el: panel.el, x:0 });
                 }
 
                 panel.height = panel.el.offsetHeight;
@@ -286,7 +289,8 @@
                 this.y = this.y + (gesture.y - gesture.lastY);
                 this.translate({
                     el: panel.el,
-                    y: this.y
+                    y: this.y,
+                    x: panel.x
                 });
             }
 
@@ -302,11 +306,6 @@
                 cb,
                 i;
                 
-            $(this.el).cleanFx();
-            $(panel.el).cleanFx();
-            $(this.items[this.back].el).cleanFx();
-
-
             if (gesture.isDraggingY !== 0) {
 
                 this.isMoving = false;
@@ -320,6 +319,7 @@
                     for (i = panel.anchors.length; i--;) {
                         $(panel.anchors[i]).removeClass("active");
                     }
+                    console.log(panel.x);
                     this.translate({
                         y: this.y,
                         el: panel.el,
@@ -338,67 +338,71 @@
         load: function () {
 
             var panel,
-                cb,
+                callback,
                 back,
-                show = this.show,
-                translate = this.translate,
                 positionX,
-                container = this.el,
                 fn = this;
-   
+    
+            // Current panel
             panel = this.items[this.current];
+            // Back panel
             back = this.items[this.back];
-
-            this.isMoving = true;
-            this.hide(panel);
-            this.hide(back);
+            
             $(panel.el).show();
-
-            cb = function () {
-                show(panel);
+           
+            this.isMoving = true;
+            callback = function () {
                 $(back.el).hide();
                 fn.isMoving = false;
             };
 
+            // Initial position for translate
             positionX = this.width + this.margin;
 
             if (this.current !== 0) {
+
                 $(this.anchorBack).show()
+
                 if (this.back === 0) {
-                    panel.el.style.left = positionX + "px";
+                    this.translate({el: panel.el, x: positionX});
+                    panel.x = positionX;
+                    positionX = -positionX;
+
                 } else {
-                    translate({el: container, x: -(this.margin/2)});
-                    $(container).cleanFx();
-                    back.el.style.left = (this.margin/2) + "px";
-                    if (this.direction !== 0) {
+                                    
+                    if (this.direction === 0 ) {
+
+                        this.translate({el: this.el, x: 0});
+                        this.translate({el: panel.el, x: positionX});
+                        panel.x = positionX;
+                        this.translate({el: back.el, x: 0});
                         positionX = -positionX;
+                    
+                    } else {
+
+                        positionX = 0;
+                        panel.x = 0;
+    
                     }
-                    panel.el.style.left = positionX + "px";
+                    
                 }
             } else if (this.back !== 0) {
-                translate({el: container, x: -positionX});
-                back.el.style.left = positionX + "px";
-                panel.el.style.left = "0px";
-                positionX = 0;
-                $(this.anchorBack).hide()
+           
+                this.translate({el: this.el, x: -positionX});
+                this.translate({el: panel.el, x: 0});
+                panel.x = 0;
+                this.translate({el: back.el, x: positionX});
+                positionX = 0;                
+                $(this.anchorBack).hide();
+
             }
-
-            if (this.side === 1) {
-                this.side = 0;
-            } else {
-                this.side = 1;
-            }
-
-            $(this.el).cleanFx();
-            $(panel.el).cleanFx();
-            $(back.el).cleanFx();
-
+                        
             window.setTimeout(function () {
-                translate({
-                    el: container,
+                fn.translate({
+                    el: fn.el,
                     duration: .25,
-                    x: -positionX,
-                    callback: cb
+                    x: positionX,
+                    callback: callback
                 });
             }, 10);
         },
@@ -469,7 +473,7 @@
                 options.y = 0;
             }
             if (options.x === undefined) {
-                options.x = 0;
+                options.x = this.items[this.current].x;
             }
                         
             $(options.el).translate(

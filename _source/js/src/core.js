@@ -194,7 +194,8 @@ var $ = (function () {
          * @example $.context.addEventListener
          */
         context: {
-            addEventListener: false
+            addEventListener: false,
+            userAgent: "",
         },
 
         /**
@@ -270,11 +271,17 @@ var $ = (function () {
         }
     }
 
-    // Init-time branching
+    // Context features
     if (window.addEventListener) {
         $.context.addEventListener = true;
     } else {
         $.context.addEventListener = false;
+    }
+    
+    if (navigator.userAgent.toLowerCase().indexOf("android") > -1) {
+        $.context.render = "android"
+    } else if (navigator.userAgent.toLowerCase().indexOf("safari") > -1) {
+        $.context.render = "safari"
     }
 
     // Initialize Mootor on document ready
