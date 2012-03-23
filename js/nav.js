@@ -404,7 +404,7 @@
                     x: positionX,
                     callback: callback
                 });
-            }, 10);
+            }, 1);
         },
 
         /**
