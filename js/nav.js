@@ -242,8 +242,10 @@
                     }
                     Nav.y = 0;
                     Nav.header.el.style.width = $.view.clientW + "px";
-                    Nav.footer.el.style.width = $.view.clientW + "px";
-                }, 10);
+                    if (Nav.footer) {
+                        Nav.footer.el.style.width = $.view.clientW + "px";
+                    }
+                }, 1);
             });
 
 

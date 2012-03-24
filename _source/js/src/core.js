@@ -87,6 +87,7 @@ var $ = (function () {
             if (element !== undefined) {
                 element.style.display = "block";
             }
+            return this;
         },
 
         /**
@@ -98,6 +99,7 @@ var $ = (function () {
             if (element !== undefined) {
                 element.style.display = "none";
             }
+            return this;
         },
 
         /**
@@ -110,6 +112,7 @@ var $ = (function () {
          */
         bind: function (event, callback) {
             this.el.addEventListener(event, callback, false);
+            return this;
         },
 
         /**
@@ -122,6 +125,7 @@ var $ = (function () {
          */
         unbind: function (event, callback) {
             this.el.removeEventListener(event, callback, false);
+            return this;
         },
 
         /**
@@ -131,6 +135,7 @@ var $ = (function () {
          */
         setClass: function (name) {
             this.el.className += " " + name;
+            return this;
         },
 
         /**
@@ -152,8 +157,19 @@ var $ = (function () {
          */
         removeClass:  function (name) {
             this.el.className = this.el.className.replace(" " + name, "");
-        }
+            return this;
+        },
 
+        /**
+         * Load HTML content into an element
+         * @param {string} html HTML
+         * @example $("#myDiv").html("<b>I love Spectre.</b>");
+         */
+        html:  function (html) {
+            this.el.innerHTML = html;
+            return this;
+        }
+        
 	};
 
     /**
@@ -221,7 +237,7 @@ var $ = (function () {
                 document.head.removeChild($.view.styles);
             }
         },
-
+        
         /**
          * Ajax request
          * @param {object} options Options configuration
@@ -279,9 +295,11 @@ var $ = (function () {
     }
     
     if (navigator.userAgent.toLowerCase().indexOf("android") > -1) {
-        $.context.render = "android"
+        $.context.render = "android";
     } else if (navigator.userAgent.toLowerCase().indexOf("safari") > -1) {
-        $.context.render = "safari"
+        $.context.render = "safari";
+    } else {
+        $.context.render = "";    
     }
 
     // Initialize Mootor on document ready

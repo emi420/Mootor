@@ -90,15 +90,17 @@ describe("Mootor", function() {
             ).toEqual(true);    
         });
     });
+    
+    it("should be able to return context render info", function() {
+        expect($.context.render).toNotEqual(undefined);    
+    });
 
-    /**
     it("should be able to load HTML content into an element", function() {
-        expect(false).toEqual(true);    
+        expect($("#testPanel").html("<b>testHTML</b>").el.innerHTML).toEqual("<b>testHTML</b>");    
     });
 
-    it("should be able to store data client-side", function() {
+    /*it("should be able to store data client-side", function() {
         expect(false).toEqual(true);    
-    });
-    ***/
+    });*/
 
 });
