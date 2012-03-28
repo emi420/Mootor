@@ -6,6 +6,7 @@ $base-font-size: 62.5%;
 body { 
    font-family: $base-font ; 
    font-size: $base-font-size;
+   text-align: center ;
 }
 @mixin baseType { 
   line-height: $base-line-height ;  
@@ -45,6 +46,16 @@ body {
    font-size: 4em;
    text-decoration: none;
    text-shadow: 0px 0px 1px $text1;
+}
+
+h2 {
+  @include empType1;
+}
+h3 {
+  @include subType1;
+}
+p {
+  @include readlyType;
 }
 
 

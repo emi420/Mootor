@@ -7,13 +7,13 @@ require 'rubygems'
 require 'fssm'
 
 directory = ARGV.first
-FSSM.monitor(directory, '**/*.haml') do
+FSSM.monitor(directory, '*.haml') do
   update do |base, relative|
     input = "#{relative}"
     output = "#{relative.gsub!('.haml', '.html')}"
-    command = "haml #{input} ../../#{output}"
+    command = "haml #{input} #{output}"
     %x{#{command}}
-    puts "Regenerated #{input} to ../../#{output}"
+    puts "Regenerated #{input} to #{output}"
   end
 end
 

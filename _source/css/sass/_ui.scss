@@ -29,3 +29,22 @@
     }
     
 }
+
+// Standard form
+
+.stdform {
+    width: 100%;
+    text-align: center;
+    background: $subColor1;
+    border: 1px solid $subColor1C;
+    padding: 2%;
+    width: 90%;
+    margin: 0 auto;
+    border-radius: 5px;
+    overflow: hidden;
+    label {
+        display: block;
+    }
+}
+
+
