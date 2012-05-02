@@ -88,7 +88,7 @@ Please use GitHub to report any bugs found.
 
 # License
 
-Mootor is licensed under the terms of the GNU General Public License.
+You may use any Mootor project under the terms of either the MIT License or the GNU General Public License (GPL) Version 3.
 
 (c) 2012 Emilio Mariscal
 
