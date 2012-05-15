@@ -1,19 +1,7 @@
 @import "../../_source/css/sass/mootor.scss" ;
 
-#panels,
-body {
-  background: $bodyColor; 
-}
-
-body {
-}
-
-#panels .panel {
-    background: $subColor1B; 
-    @include box-shadow(0px 5px 5px rgba(0,0,0,.5));
-}
-
-nav a {
+.panel {
+    background: $subColor1B;
 }
 
 #header {
@@ -43,6 +31,7 @@ nav a {
     color: $domColor1;
     border-bottom: 1px solid  $subColor1B;
     background: $subColor1B;
+    padding: 1em;
     border-top: 1px solid $subColor1C;
 }
 
@@ -50,3 +39,5 @@ nav a {
     @include background(linear-gradient($empColor2, $empColor2B)); 
     color: $subColor1;
 }
+
+
