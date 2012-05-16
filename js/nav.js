@@ -90,7 +90,7 @@
                 anchor = anchors[j];
                 if ($(anchor).hasClass(this.navClass) === false) {
                     $(anchor).onTapEnd( function() {
-                        alert(anchor.getAttribute("href"));
+                        window.location = this.href;
                     });
                 }
             }
