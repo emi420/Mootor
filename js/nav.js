@@ -79,19 +79,20 @@
 
         this.count = nav.length;
 
-        // Navigation links
+        // Anchor links
         for (i = nav.length; i--;) {
             this.items[i] = {el: nav[i]};
             item = this.items[i];
             item.x = 0;
             item.y = 0;
+            
+            // External links
             anchors = item.el.getElementsByTagName("a");
             for (j = anchors.length; j--;) {
                 anchor = anchors[j];
                 if ($(anchor).hasClass(this.navClass) === false) {
-                    $(anchor).onTapStart( function() {
-                        alert(this);
-                        //alert(this.getAttribute("href"));
+                    $(anchor).onTapEnd( function(gesture) {
+                        window.location = gesture.el.href;
                     });
                 }
             }
