@@ -37,7 +37,7 @@ Currently compatibility is only WebKit based browsers:
 * Chrome
 * Safari (not tested)
 * iOS (tested in iPod / iOS 3.1, iPad 2)
-* Android (tested in a Motorola Defy / Android 2.3)
+* Android (tested in a Motorola Defy / Android 2.3, Samsung Galaxy Tab / Android 3.1)
 
 # Documentation
 
