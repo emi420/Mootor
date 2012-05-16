@@ -38,6 +38,9 @@
     Nav = function (options) {
 
         var i,
+            j,
+            anchors,
+            anchor,
             /**
              * Navigation item
              * @ignore
@@ -50,8 +53,7 @@
                 y: 0,
                 hidden: []
             },
-            nav,
-            anchors;
+            nav;
 
         this.el = options.el;
         this.navClass = options.nav_class !== undefined ? options.nav_class : "nav";
@@ -85,9 +87,10 @@
             item.y = 0;
             anchors = item.el.getElementsByTagName("a");
             for (j = anchors.length; j--;) {
-                if (anchors.className !== this.navClass) {
-                    anchors[j].onTapEnd( function() {
-                        alert(anchors[j].getAttribute("href"));
+                anchor = anchors[j];
+                if ($(anchor).hasClass(this.navClass) === false) {
+                    $(anchor).onTapEnd( function() {
+                        alert(anchor.getAttribute("href"));
                     });
                 }
             }
