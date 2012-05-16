@@ -50,7 +50,8 @@
                 y: 0,
                 hidden: []
             },
-            nav;
+            nav,
+            anchors;
 
         this.el = options.el;
         this.navClass = options.nav_class !== undefined ? options.nav_class : "nav";
@@ -76,15 +77,24 @@
 
         this.count = nav.length;
 
+        // Navigation links
         for (i = nav.length; i--;) {
             this.items[i] = {el: nav[i]};
             item = this.items[i];
             item.x = 0;
             item.y = 0;
+            anchors = item.el.getElementsByTagName("a");
+            for (j = anchors.length; j--;) {
+                if (anchors.className !== this.navClass) {
+                    anchors[j].onTapEnd( function() {
+                        alert(anchors[j].getAttribute("href"));
+                    });
+                }
+            }
             item.anchors = item.el.getElementsByClassName(this.navClass);
             item.hidden = item.el.getElementsByClassName(this.hiddenClass);
         }
-
+        
         $(this.el).onDragMove(this);
         $(this.el).onDragEnd(this);
 
