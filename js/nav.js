@@ -89,8 +89,9 @@
             for (j = anchors.length; j--;) {
                 anchor = anchors[j];
                 if ($(anchor).hasClass(this.navClass) === false) {
-                    $(anchor).onTapEnd( function() {
-                        window.location = this.href;
+                    $(anchor).onTapStart( function() {
+                        alert(this);
+                        //alert(this.getAttribute("href"));
                     });
                 }
             }
