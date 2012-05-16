@@ -1,4 +1,4 @@
-﻿
+
 # Mootor - HTML5 library for application development
 
 The main purpose of this project is to create a simple HTML5 library for application development, 
@@ -28,7 +28,7 @@ The key features are:
 
 ## Demo
 
-http://volks.co/mootor
+http://voolks.com/mootor
 
 # Useful info
 
@@ -45,23 +45,23 @@ We are in a development stage, THIS SOFTWARE IS ONLY FOR TESTING.
 
 ### Core
 
-http://volks.co/mootordoc/core/symbols/%24.html
+http://voolks.com/mootor/_source/js/doc//core/symbols/%24.html
 
 ### Navigation plugin
 
-http://volks.co/mootordoc/nav/symbols/%24.html
+http://voolks.com/mootor/_source/js/doc//nav/symbols/%24.html
 
 ### User Interface plugin
 
-http://volks.co/mootordoc/ui/symbols/%24.html
+http://voolks.com/mootor/_source/js/doc//ui/symbols/%24.html
 
 ### Dynamic Type plugin
 
-http://volks.co/mootordoc/type/symbols/%24.html
+http://voolks.com/mootor/_source/js/doc//type/symbols/%24.html
 
 ### Geolocalization plugin
 
-http://volks.co/mootordoc/geo/symbols/%24.html
+http://voolks.com/mootor/_source/js/doc//geo/symbols/%24.html
 
 # Design
 
@@ -94,8 +94,8 @@ You may use any Mootor project under the terms of either the MIT License or the 
 
 # Hablas español?
 
-Mootor también. Podés encontrar más información en tu idioma en este link:
+Mootor también! y estaríamos encantados de sumar colaboradores en nuestro idioma nativo.
 
-https://github.com/emi420/Mootor/wiki/Librer%C3%ADa-HTML5-para-desarrollar-aplicaciones
+Para más información podés escribir a emi420@voolks.com o solicitar un Pull Request.
 
 Adios amigos!
