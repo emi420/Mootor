@@ -244,16 +244,25 @@ var $ = (function () {
          */
         ajax:  function (options) {
             var xmlhttp = new window.XMLHttpRequest(),
-                handler;
-
+                handler,
+                data = null;
+			
             xmlhttp.onreadystatechange = function() {
                 if (xmlhttp.readyState==4 && xmlhttp.status==200) {
                     options.callback(xmlhttp.responseText);
                 }
             };
-            xmlhttp.open("GET", options.url, true);
+            
+            // TODO: testing POST method
+            if (options.method === undefined || options.method === "GET")
+            {
+	            xmlhttp.open("GET", options.url, true);
+            } else if (options.method === "POST") {
+            	xmlhttp.open("POST", options.url, true);
+            	data = options.data;
+            }
             xmlhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-            xmlhttp.send(null);
+            xmlhttp.send(data);
 
         }
 
@@ -293,7 +302,7 @@ var $ = (function () {
     } else {
         $.context.addEventListener = false;
     }
-    
+
     if (navigator.userAgent.toLowerCase().indexOf("android") > -1) {
         $.context.render = "android";
     } else if (navigator.userAgent.toLowerCase().indexOf("safari") > -1) {
