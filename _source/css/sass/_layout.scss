@@ -30,8 +30,9 @@ h3 {
 
 // Navigation
 
-nav {
-    list-style-type: none;
+nav ul, 
+nav ol {
+    list-style: none;
 }
 
 nav a {
