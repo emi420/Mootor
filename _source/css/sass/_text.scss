@@ -1,10 +1,10 @@
 $base-line-height: 140%;  
-$base-font: "Helvetica, Arial, sans-serif"; 
-$readable-font: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+$base-font: Helvetica, Arial, sans-serif; 
+$readable-font: 'Palatino Linotype', 'Book Antiqua', Palatino, 'Droid Serif', serif;
 $base-font-size: 62.5%;
-
+ 
 body { 
-   font-family: $base-font ; 
+   font-family: $base-font; 
    font-size: $base-font-size;
    text-align: center ;
 }
