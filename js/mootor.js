@@ -264,7 +264,7 @@ var $ = (function () {
                 }
             };
             
-            // FIXME CHECK
+            // TODO: testing POST method
             if (options.method === undefined || options.method === "GET")
             {
 	            xmlhttp.open("GET", options.url, true);
