@@ -346,7 +346,8 @@ var $ = (function () {
         
         updateClientSizes();
 
-        document.body.style.width = clientW + "px";
+        // FIXME CHECK: move this to Nav plugin
+        //document.body.style.width = clientW + "px";
 		$.view.show();
 
 	}, document);
