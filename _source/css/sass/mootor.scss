@@ -9,10 +9,8 @@
     text-decoration: none ;
 }
 
-a,
-a:hover,
-a:focus {
-    -webkit-tap-highlight-color: rgba(255, 255, 255, 0); 
+body {
+    background: #000;
 }
 
 // Header
@@ -34,17 +32,33 @@ a:focus {
         display: inline;
     }
     h1 {
-         @include domType1;
-         text-align: center;
-         font-size: 2.6em;
-         letter-spacing: -0.07em;
+        @include domType1;
+        text-align: center;
+        font-size: 2.6em;
+        letter-spacing: -0.07em;
     }
 }
 
-// Nav
+#panels .panel {
+    width: 100%;
+    max-width: 100%;
+}
+
+#panels {
+    width: 100%;
+}
+
+// Hacks
 
 #panels .panel {
+    // Prevents flicker on transform3d (iOS)    
     -webkit-transition-duration:0;
     -webkit-transform:translate3d(0,0,0);
 }
 
+a,
+a:hover,
+a:focus {
+    // No decorations on anchors (Android) 
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0); 
+}

@@ -140,7 +140,7 @@
                 header.el = document.getElementById(panels.headerId);
                 if (header.el) {
                     panels.nav(header);
-                    fullWidth(header.el);
+                    //fullWidth(header.el);
                     panels.top = header.el.offsetHeight;
                     panels.height = $.view.clientH - panels.top;
                     panels.el.style.marginTop = panels.top + "px";
@@ -159,7 +159,7 @@
                 footer.el = document.getElementById(panels.footerId);
                 if (footer.el) {
                     panels.nav(footer);
-                    fullWidth(footer.el);
+                    //fullWidth(footer.el);
                     panels.height = panels.height - footer.el.offsetHeight;
                     //panels.el.style.height = panels.height + "px";
                     return footer;
@@ -217,14 +217,14 @@
 
                 panel = this.items[i];
 
-                if (this.width === undefined) {
+                /*if (this.width === undefined) {
                     fullWidth(panel.el);
                 } else {
                     panel.el.style.width = this.width + "px";
                 }
 
                 panel.el.style.overflow = 'hidden';
-
+                */
                 if (i > 0) {
                     this.translate({el: panel.el, x:  -((this.width + this.margin) * 4) , y:0});
                 } else {
@@ -251,15 +251,15 @@
                 var panel;
                 setTimeout( function() {
                     //Nav.height 
-                    for (i = Nav.count; i--;) {
+                    /*for (i = Nav.count; i--;) {
                         panel = Nav.items[i];
                         panel.el.style.width = $.view.clientW + "px";                    
-                    }
+                    }*/
                     Nav.y = 0;
-                    Nav.header.el.style.width = $.view.clientW + "px";
+                    /*Nav.header.el.style.width = $.view.clientW + "px";
                     if (Nav.footer) {
                         Nav.footer.el.style.width = $.view.clientW + "px";
-                    }
+                    }*/
                 }, 1);
             });
 
