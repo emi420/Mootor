@@ -1,5 +1,4 @@
 // Mootor  added styles 
-
 @import "../../_source/css/sass/mootor.scss" ;
 
 .panel {
@@ -21,10 +20,10 @@
         @include box-shadow(0px 1px 1px rgba(0,0,0,.2));
     }
     h1 {
-         @include domType1;
-         text-align: center;
-         font-size: 2.6em;
-         letter-spacing: -0.07em;
+        @include domType1;
+        text-align: center;
+        font-size: 2.6em;
+        letter-spacing: -0.07em;
     }
 }
 
