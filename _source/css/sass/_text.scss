@@ -1,10 +1,10 @@
-$base-line-height: 140% ; 
-$base-letter-spacing: -0.05em ; 
-$base-font: arial ; 
+$base-line-height: 140%;  
+$base-font: Helvetica, Arial, sans-serif; 
+$readable-font: 'Palatino Linotype', 'Book Antiqua', Palatino, 'Droid Serif', serif;
 $base-font-size: 62.5%;
-
+ 
 body { 
-   font-family: $base-font ; 
+   font-family: $base-font; 
    font-size: $base-font-size;
    text-align: center ;
 }
@@ -16,33 +16,29 @@ body {
 @mixin domType1 {
   @include baseType;
   font-size: 2.3em ;
-  letter-spacing: $base-letter-spacing ;
 }
 @mixin subType1 {
   @include baseType;
   font-size: 3em ;
-  letter-spacing: $base-letter-spacing*1.5;
 }
+
 @mixin empType1 {
   @include baseType;
-  font-family: helvetica, arial ;
   font-size: 7em ;
-  letter-spacing: $base-letter-spacing*1.5;
 }
-@mixin readlyType {
+@mixin readableType {
   @include baseType;
   font-size: 3em ;
   text-align: justify;
   padding: 1em ;
   line-height: 150%;
-  font-family: georgia, arial ;
+  font-family: $readable-font;
   letter-spacing: 0;
 }
 
 // Type 2
 @mixin empType2 { 
    @include baseType;
-   font-family: helvetica, arial ;
    font-size: 4em;
    text-decoration: none;
    text-shadow: 0px 0px 1px $text1;
@@ -53,9 +49,10 @@ h2 {
 }
 h3 {
   @include subType1;
+
 }
 p {
-  @include readlyType;
+  @include readableType;
 }
 
 
