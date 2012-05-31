@@ -160,11 +160,12 @@ body {
 }
 
 #header {
-  padding: 1.8em 1em;
   text-align: left;
   z-index: 9999;
   position: fixed;
   top: 0;
+  height: 7.84em;
+  /* sqare root of h1 font-size */
 }
 #header nav {
   position: absolute;
@@ -182,15 +183,20 @@ body {
   text-align: center;
   font-size: 2.6em;
   letter-spacing: -0.07em;
+  line-height: 2.6em;
 }
 
 #panels .panel {
   width: 100%;
   max-width: 100%;
+  min-height: 100%;
+  margin-top: 7.84em;
+  /* equal to #header's height */
 }
 
 #panels {
   width: 100%;
+  min-height: 100%;
 }
 
 #panels .panel {
