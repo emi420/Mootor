@@ -161,7 +161,7 @@ var $ = (function () {
          * @param {string} name Class name
          * @example $("#myDiv").removeClass("featured");
          */
-        removeClass:  function (name) {
+        removeClass: function (name) {
             if (this.el.className.indexOf(" ") > -1) {
                 this.el.className = this.el.className.replace(" " + name, "");
             } else {
@@ -175,7 +175,7 @@ var $ = (function () {
          * @param {string} html HTML
          * @example $("#myDiv").html("<b>I love Spectre.</b>");
          */
-        html:  function (html) {
+        html: function (html) {
             this.el.innerHTML = html;
             return this;
         }
@@ -202,8 +202,7 @@ var $ = (function () {
 
     // Core
     $.extend({
-
-         
+    
          /**
          * @lends $
          */
@@ -212,7 +211,7 @@ var $ = (function () {
          * Mootor  version
          */
         version:  (function () {
-            return "0.1";
+            return "0.11";
         }()),
 
         /**
