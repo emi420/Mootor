@@ -5,6 +5,7 @@
 var document = window.document;
 
 var $ = (function () {
+
 	"use strict";
     
     var ready;
@@ -354,11 +355,7 @@ var $ = (function () {
         
         updateClientSizes();
 
-		//$.view.show();
-
 	}, document);
-
-	//$.view.hide();
 
 	return $;
 
