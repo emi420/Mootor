@@ -5,6 +5,7 @@
 var document = window.document;
 
 var $ = (function () {
+
 	"use strict";
     
     var ready;
@@ -134,7 +135,12 @@ var $ = (function () {
          * @example $("#myDiv").setClass("featured");
          */
         setClass: function (name) {
-            this.el.className += " " + name;
+            if (this.el.className.indexOf(" ") > -1) {
+                this.el.className += " " + name;
+            } else {
+                this.el.className = name;                
+            }
+            
             return this;
         },
 
@@ -155,8 +161,12 @@ var $ = (function () {
          * @param {string} name Class name
          * @example $("#myDiv").removeClass("featured");
          */
-        removeClass:  function (name) {
-            this.el.className = this.el.className.replace(" " + name, "");
+        removeClass: function (name) {
+            if (this.el.className.indexOf(" ") > -1) {
+                this.el.className = this.el.className.replace(" " + name, "");
+            } else {
+                this.el.className = this.el.className.replace(name, "");                
+            }
             return this;
         },
 
@@ -165,7 +175,7 @@ var $ = (function () {
          * @param {string} html HTML
          * @example $("#myDiv").html("<b>I love Spectre.</b>");
          */
-        html:  function (html) {
+        html: function (html) {
             this.el.innerHTML = html;
             return this;
         }
@@ -192,8 +202,7 @@ var $ = (function () {
 
     // Core
     $.extend({
-
-         
+    
          /**
          * @lends $
          */
@@ -202,7 +211,7 @@ var $ = (function () {
          * Mootor  version
          */
         version:  (function () {
-            return "0.1";
+            return "0.11";
         }()),
 
         /**
@@ -228,7 +237,7 @@ var $ = (function () {
 
             hide: function () {
                 var styles = document.createElement("style");
-                styles.innerHTML = "body * {display: none}";
+                //styles.innerHTML = "body * {display: none}";
                 document.head.appendChild(styles);
                 $.view.styles = styles;
             },
@@ -243,7 +252,7 @@ var $ = (function () {
          * @param {object} options Options configuration
          */
         ajax:  function (options) {
-            var xmlhttp = new window.XMLHttpRequest(),
+            var xmlhttp = new $.window.XMLHttpRequest(),
                 handler,
                 data = null;
 			
@@ -253,7 +262,6 @@ var $ = (function () {
                 }
             };
             
-            // TODO: testing POST method
             if (options.method === undefined || options.method === "GET")
             {
 	            xmlhttp.open("GET", options.url, true);
@@ -286,7 +294,8 @@ var $ = (function () {
                 fn.call(window.document);
                 ready = true;
             };
-            if (el !== undefined && $.context.addEventListener) {
+            if ($.window.addEventListener) {
+                el.addEventListener = $.window.addEventListener;
                 el.addEventListener("DOM-ContentLoaded", handler, false);
                 el.addEventListener("readystatechange", handler, false);
                 el.addEventListener("load", handler, false);
@@ -296,19 +305,29 @@ var $ = (function () {
         }
     }
 
-    // Context features
-    if (window.addEventListener) {
-        $.context.addEventListener = true;
-    } else {
-        $.context.addEventListener = false;
+    // Localise globals
+    $.window = {
+        XMLHttpRequest: window.XMLHttpRequest,
+        addEventListener: window.addEventListener
     }
 
+    // Cross-browser compatibility
+    if ($.window.addEventListener === undefined) {
+        $.window.attachEvent = window.attachEvent;
+        $.window.addEventListener = function(event, callback) {
+            $.window.attachEvent("on" + event, callback);
+        }
+    }
+    
+    // Context features
     if (navigator.userAgent.toLowerCase().indexOf("android") > -1) {
-        $.context.render = "android";
+        $.context.userAgent = "android";
     } else if (navigator.userAgent.toLowerCase().indexOf("safari") > -1) {
-        $.context.render = "safari";
+        $.context.userAgent = "safari";
+    } else if (navigator.userAgent.toLowerCase().indexOf("msie") > -1) {
+        $.context.userAgent = "msie";
     } else {
-        $.context.render = "";    
+        $.context.userAgent = "";    
     }
 
     // Initialize Mootor on document ready
@@ -335,11 +354,7 @@ var $ = (function () {
         
         updateClientSizes();
 
-		$.view.show();
-
 	}, document);
-
-	$.view.hide();
 
 	return $;
 

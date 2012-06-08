@@ -56,12 +56,12 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 
 #header {
-  padding: 1.8em 1em;
   text-align: left;
   z-index: 9999;
   position: fixed;
   top: 0;
   width: 100%;
+  padding: 1.8em 1em;
 }
 #header nav {
   position: absolute;
@@ -72,6 +72,12 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   padding: .5em 1em;
   width: auto;
   display: inline;
+}
+
+#panels .panel {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100%;
 }
 
 #panels {

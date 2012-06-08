@@ -12,8 +12,8 @@ $readable-font: 'Palatino Linotype', 'Book Antiqua', Palatino, 'Droid Serif', se
 @import "compass/css3" ;
 @import "text";
 @import "colors";
-@import "../../_source/css/sass/mootor.nav.scss";
-@import "../../_source/css/sass/mootor.ui.scss";
+@import "../../_source/css/sass/_mootor.nav.scss";
+@import "../../_source/css/sass/_mootor.ui.scss";
 
 // General
 
@@ -66,10 +66,10 @@ p {
         @include box-shadow(0px 1px 1px rgba(0,0,0,.2));
     }
     h1 {
-         @include domType1;
-         text-align: center;
-         font-size: 2.6em;
-         letter-spacing: -0.07em;
+        @include domType1;
+        text-align: center;
+        font-size: 2.6em;
+        letter-spacing: -0.07em;
     }
 }
 

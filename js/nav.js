@@ -8,7 +8,16 @@
  */
  
 (function ($) {
+
     "use strict";
+    
+	/*
+	 * Hide all while loading, show when ready
+	 */
+	$.view.hide();	
+	$(document).ready(function() {
+		$.view.show();
+	});
 
     var Nav,
      

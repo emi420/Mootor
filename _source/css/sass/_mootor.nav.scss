@@ -7,12 +7,13 @@
 // Header
 
 #header {
-    padding: 1.8em 1em;
+    // padding: 1.8em 1em;
     text-align: left;
     z-index: 9999;
     position: fixed;
     top:0;
     width: 100%;
+    padding: 1.8em 1em;
     nav {
         position: absolute;
         margin-top: 0;
@@ -26,6 +27,12 @@
 }
 
 // Panels 
+
+#panels .panel {
+    width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+}
 
 #panels {
     min-height: 100%;
@@ -57,7 +64,7 @@ nav {
 }
 
 // Hacks
-
+ 
 #panels .panel {
     // Prevents flicker on transform3d (iOS)    
     -webkit-transition-duration:0;
