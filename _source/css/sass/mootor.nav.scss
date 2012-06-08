@@ -1,16 +1,7 @@
-@import "compass/reset" ;
-@import "compass/css3" ;
-@import "colors" ;
-@import "text" ;
-@import "layout" ;
-@import "ui" ;
+// Navigation plugin
 
 @mixin base-anchor {
     text-decoration: none ;
-}
-
-body {
-    background: #000;
 }
 
 // Header
@@ -21,6 +12,7 @@ body {
     z-index: 9999;
     position: fixed;
     top:0;
+    width: 100%;
     nav {
         position: absolute;
         margin-top: 0;
@@ -31,21 +23,37 @@ body {
         width: auto;
         display: inline;
     }
-    h1 {
-        @include domType1;
-        text-align: center;
-        font-size: 2.6em;
-        letter-spacing: -0.07em;
+}
+
+// Panels 
+
+#panels {
+    min-height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    .panel {
+        width: 100%;
+        max-width: 100%;
+        min-height: 100%;
+        position: absolute;
     }
 }
 
-#panels .panel {
-    width: 100%;
-    max-width: 100%;
-}
 
-#panels {
-    width: 100%;
+// Navigation
+
+nav {
+    ul, 
+    ol {
+        list-style: none;
+    }
+    
+    a {
+        text-decoration: none;
+        text-align: left;
+        display: block;
+    }   
 }
 
 // Hacks
@@ -62,3 +70,4 @@ a:focus {
     // No decorations on anchors (Android) 
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0); 
 }
+

@@ -138,7 +138,7 @@
                     panels.nav(header);
                     panels.top = header.height;
                     panels.height = $.view.clientH - panels.top;
-                    //panels.el.style.marginTop = panels.top + "px";
+                    panels.el.style.marginTop = panels.top + "px";
                     return header;
                 } else {
                     return undefined;
@@ -221,7 +221,6 @@
 
                 panel.height = panel.el.offsetHeight;
                 if (this.height > panel.height) {
-                    //panel.el.style.height = this.height + "px";
                     panel.height = this.height;
                 }
 
@@ -241,11 +240,6 @@
                         Nav.height = $.view.clientH - Nav.header.height;
                         //debugger;
                     }
-                    // Update panels height 
-                    /*console.log(Nav.width);
-                    console.log(Nav.height);
-                    console.log($.view.clientH);
-                    console.log($.view.clientW);*/
                 }, 1);
             });
 

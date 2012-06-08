@@ -1,6 +1,51 @@
-// Mootor  added styles 
+//-- App styles
 
-@import "../../_source/css/sass/mootor.scss" ;
+// Settings
+
+$base-line-height: 140%;  
+$base-font: Helvetica, Arial, sans-serif; 
+$readable-font: 'Palatino Linotype', 'Book Antiqua', Palatino, 'Droid Serif', serif;
+
+// Imports
+
+@import "compass/reset" ;
+@import "compass/css3" ;
+@import "text";
+@import "colors";
+@import "../../_source/css/sass/mootor.nav.scss";
+@import "../../_source/css/sass/mootor.ui.scss";
+
+// General
+
+body { 
+   font-family: $base-font; 
+   font-size: $base-font-size;
+   text-align: center ;
+   background: #000;
+}
+
+h1 {
+    @include domType1;
+    text-align: center;
+    font-size: 2.6em;
+    letter-spacing: -0.07em;
+}
+
+h2 {
+  @include empType1;
+}
+
+h3 {
+  @include subType1;
+
+}
+
+p {
+  @include readableType;
+}
+
+
+// Navigation
 
 .panel {
     background: $subColor1B;
@@ -10,7 +55,7 @@
     box-shadow: 1px 2px 2px rgba(0, 0, 0, .1);    
     color: $subColor1;    
     font-weight: bold ;
-    @include background(linear-gradient($domColor1C, $domColor1B)); 
+    background: $domColor1B;
     border: 1px solid $domColor1B;
     nav a {
         color: $subColor1;
@@ -38,8 +83,7 @@ nav a {
 }
 
 .nav.active {
-    @include background(linear-gradient($empColor2, $empColor2B)); 
+    background: $empColor2B; 
     color: $subColor1;
 }
-
 

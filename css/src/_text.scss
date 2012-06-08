@@ -1,13 +1,7 @@
-$base-line-height: 140%;  
-$base-font: Helvetica, Arial, sans-serif; 
-$readable-font: 'Palatino Linotype', 'Book Antiqua', Palatino, 'Droid Serif', serif;
+// Text mixins and vars
+
 $base-font-size: 62.5%;
  
-body { 
-   font-family: $base-font; 
-   font-size: $base-font-size;
-   text-align: center ;
-}
 @mixin baseType { 
   line-height: $base-line-height ;  
 }
@@ -25,6 +19,7 @@ body {
 @mixin empType1 {
   @include baseType;
   font-size: 7em ;
+  letter-spacing: -0.1em;
 }
 @mixin readableType {
   @include baseType;
@@ -44,15 +39,6 @@ body {
    text-shadow: 0px 0px 1px $text1;
 }
 
-h2 {
-  @include empType1;
-}
-h3 {
-  @include subType1;
 
-}
-p {
-  @include readableType;
-}
 
 
