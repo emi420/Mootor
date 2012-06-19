@@ -55,41 +55,51 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
+/* 
+ * Apply a natural box layout model to all elements 
+ *
+ * Useful for the padding does not change the height of the elements
+ *
+ */
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100%;
+}
+
 #header {
   text-align: left;
   z-index: 9999;
   position: fixed;
   top: 0;
   width: 100%;
-  padding: 1.8em 1em;
+  padding: 1em 1em;
 }
 #header nav {
   position: absolute;
   margin-top: 0;
-  top: 2.3em;
+  top: 1.6em;
 }
 #header nav a {
   padding: .5em 1em;
   width: auto;
   display: inline;
-}
-
-#panels .panel {
-  width: 100%;
-  max-width: 100%;
-  min-height: 100%;
+  font-size: 1.5em;
 }
 
 #panels {
-  min-height: 100%;
-  width: 100%;
   position: absolute;
+  width: 100%;
   left: 0;
+  min-height: 100%;
 }
 #panels .panel {
-  width: 100%;
-  max-width: 100%;
   min-height: 100%;
+  width: 100%;
   position: absolute;
 }
 
@@ -101,6 +111,7 @@ nav a {
   text-decoration: none;
   text-align: left;
   display: block;
+  padding: 1em;
 }
 
 #panels .panel {
@@ -227,7 +238,6 @@ nav a {
   color: black;
   border-bottom: 1px solid #f7f7f7;
   background: #f7f7f7;
-  padding: 1em;
   border-top: 1px solid #dddddd;
 }
 

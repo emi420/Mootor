@@ -138,7 +138,7 @@ var $ = (function () {
             if (this.el.className.indexOf(" ") > -1) {
                 this.el.className += " " + name;
             } else {
-                this.el.className = name;                
+                this.el.className = name + " ";                
             }
             
             return this;
@@ -165,7 +165,7 @@ var $ = (function () {
             if (this.el.className.indexOf(" ") > -1) {
                 this.el.className = this.el.className.replace(" " + name, "");
             } else {
-                this.el.className = this.el.className.replace(name, "");                
+                this.el.className = this.el.className.replace(name + " ", "");                
             }
             return this;
         },
@@ -237,7 +237,7 @@ var $ = (function () {
 
             hide: function () {
                 var styles = document.createElement("style");
-                //styles.innerHTML = "body * {display: none}";
+                styles.innerHTML = "body {display: none}";
                 document.head.appendChild(styles);
                 $.view.styles = styles;
             },
@@ -348,11 +348,11 @@ var $ = (function () {
 
         }
         
+        updateClientSizes();
+    
         $(window).bind("resize", function(){
             updateClientSizes();
-        });
-        
-        updateClientSizes();
+        });       
 
 	}, document);
 

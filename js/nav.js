@@ -73,8 +73,6 @@
         this.current = 0;
         this.back = 0;
         this.items = [];
-        this.header = this.header.init(this);
-        this.footer = this.footer.init(this);
         this.isMoving = false;
         this.direction = 0;
         this.history = [];
@@ -111,6 +109,8 @@
             document.body.style.overflow = "hidden";
         }
 
+        this.footer = this.footer.init(this);
+        this.header = this.header.init(this);
         this.init();
 
         return this;
@@ -140,14 +140,15 @@
          */
         header: {
             init: function (panels) {
-                var header = {};
+                var header = {},
+                    i;
                 header.el = document.getElementById(panels.headerId);
                 header.height = header.el.offsetHeight;
                 if (header.el) {
                     panels.nav(header);
-                    panels.top = header.height;
-                    panels.height = $.view.clientH - panels.top;
-                    panels.el.style.marginTop = panels.top + "px";
+                    for (i = panels.count; i--;) {
+                        panels.items[i].el.style.paddingTop = header.height + "px";
+                    }
                     return header;
                 } else {
                     return undefined;
@@ -247,7 +248,6 @@
                 setTimeout( function() {
                     if (Nav.header !== undefined) {
                         Nav.height = $.view.clientH - Nav.header.height;
-                        //debugger;
                     }
                 }, 1);
             });
