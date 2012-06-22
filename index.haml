@@ -30,10 +30,25 @@
             %h2 User Interface
             .hidden
                 %form#uiform.stdform{:action=>"", :method=>"post"}
-                    .field#checkbox1
-                        %input#check1{:type=>"checkbox", :name=>"checkbox1" ,:value=>"0"}
+                    .field
                         %label Input checkbox
-
+                        #checkbox1
+                            %input#check1{:type=>"checkbox", :name=>"checkbox1" ,:value=>"0"}  
+                    .field
+                        %label Input de texto
+                        .txt-container
+                            %input#txt1{:type=>"text", :name=>"text1" ,:placeholder=>"Ingrese su texto aqui"}
+                            %a.cleanbox{:href=>""} &times;
+                       
+                    .field
+                        %label &Aacute;rea de texto
+                        .txt-container.area
+                            %textarea#txta1{:name=>"textarea1" ,:placeholder=>"Ingrese su texto aqui"}
+                    / 
+                        .field
+                            %label Input radio
+                            #radiobtn
+                                %input#radio1{:type=>"radio", :name=>"radiobutton1" ,:value=>"0"}
         .panel#nav
             %nav
                 %a.nav{:href=>"", :rel=>"item1"} Item 1
@@ -99,6 +114,9 @@
            
            // Checkbox
            var check = $("#checkbox1").checkbox();
+           
+           $("#txt1").onTapEnd(function(){ event.target.focus()});
+           $("#txta1").onTapEnd(function(){ event.target.focus()});
             
            // Show location
            /*$("#location").geolocation({
@@ -107,8 +125,5 @@
                 msgLoading: "<p>Wait please ...</p>",
                 msgFound: "$coords",
            });*/
-
  
        });
-
-

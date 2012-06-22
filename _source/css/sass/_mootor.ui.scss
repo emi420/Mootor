@@ -1,5 +1,46 @@
-// User Interface plugin
 
+// Standard form
+
+.stdform {
+    width: 100%;
+    text-align: left;
+    padding: 2%;
+    width: 90%;
+    margin: 0 auto;
+    border-radius: 5px;
+    overflow: hidden;
+    .field {
+        display:block;
+        overflow:hidden;
+        padding: 1em;
+    }
+    label {
+        @include float-left;
+        font-size: 2em;
+        font-weight: 700;
+    }
+    .txt-container {
+        @include float-right;
+        border: 1px solid #333;
+        background-color: #FFF;
+        position: relative;
+        padding: 0.25em 2.25em 0.25em 0.25em; 
+        input, textarea { border: none; background: none; font-size: 1.5em; line-height: 1.5em;}
+    }
+    .cleanbox {
+        display: block;
+        position: absolute;
+        top: 0.35em;
+        right: 0.35em;
+        color: #666;
+        font-size: 2em;
+        font-weight: 700;
+        text-decoration: none;
+    }
+}
+
+// User Interface plugin
+// checkbox
 .moo_checkbox {
     display: block;
     height: 28px;
@@ -19,29 +60,7 @@
     &.off b {
         -webkit-transform: translate3d(-54px, 0, 0);
     }
-    
     label {
-        position: absolute;
-        left: 5%;
-        font-weight: bold;
-        font-size: 17px;
-        margin-top: 5px;
+        line-height: 28px;
     }
 }
-
-// Standard form
-
-.stdform {
-    width: 100%;
-    text-align: center;
-    padding: 2%;
-    width: 90%;
-    margin: 0 auto;
-    border-radius: 5px;
-    overflow: hidden;
-    label {
-        display: block;
-    }
-}
-
-

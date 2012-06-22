@@ -31,10 +31,33 @@
       <h2>User Interface</h2>
       <div class='hidden'>
         <form action='' class='stdform' id='uiform' method='post'>
-          <div class='field' id='checkbox1'>
-            <input id='check1' name='checkbox1' type='checkbox' value='0' />
+          <div class='field'>
             <label>Input checkbox</label>
+            <div id='checkbox1'>
+              <input id='check1' name='checkbox1' type='checkbox' value='0' />
+            </div>
           </div>
+          <div class='field'>
+            <label>Input de texto</label>
+            <div class='txt-container'>
+              <input id='txt1' name='text1' placeholder='Ingrese su texto aqui' type='text' />
+              <a class='cleanbox' href=''>&times;</a>
+            </div>
+          </div>
+          <div class='field'>
+            <label>&Aacute;rea de texto</label>
+            <div class='txt-container area'>
+              <textarea id='txta1' name='textarea1' placeholder='Ingrese su texto aqui'></textarea>
+            </div>
+          </div>
+          <!--
+            <div class='field'>
+              <label>Input radio</label>
+              <div id='radiobtn'>
+                <input id='radio1' name='radiobutton1' type='radio' value='0' />
+              </div>
+            </div>
+          -->
         </form>
       </div>
     </div>
@@ -118,6 +141,9 @@
            
            // Checkbox
            var check = $("#checkbox1").checkbox();
+           
+           $("#txt1").onTapEnd(function(){ event.target.focus()});
+           $("#txta1").onTapEnd(function(){ event.target.focus()});
             
            // Show location
            /*$("#location").geolocation({
@@ -126,7 +152,6 @@
                 msgLoading: "<p>Wait please ...</p>",
                 msgFound: "$coords",
            });*/
-    
     
        });
   //]]>

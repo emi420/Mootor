@@ -1,4 +1,4 @@
-@charset "utf-8";
+/* line 17, ../../../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -15,42 +15,50 @@ time, mark, audio, video {
   margin: 0;
   padding: 0;
   border: 0;
-  font-size: 100%;
   font: inherit;
+  font-size: 100%;
   vertical-align: baseline;
 }
 
-body {
+/* line 22, ../../../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html {
   line-height: 1;
 }
 
+/* line 24, ../../../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
+/* line 26, ../../../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
+/* line 28, ../../../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
+/* line 30, ../../../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
+/* line 103, ../../../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
+/* line 32, ../../../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
+/* line 116, ../../../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
   display: block;
 }
@@ -61,16 +69,19 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
  * Useful for the padding does not change the height of the elements
  *
  */
+/* line 7, ../_source/css/sass/_mootor.nav.scss */
 * {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
+/* line 15, ../_source/css/sass/_mootor.nav.scss */
 body {
   height: 100%;
 }
 
+/* line 21, ../_source/css/sass/_mootor.nav.scss */
 #header {
   text-align: left;
   z-index: 9999;
@@ -79,11 +90,13 @@ body {
   width: 100%;
   padding: 1em 1em;
 }
+/* line 28, ../_source/css/sass/_mootor.nav.scss */
 #header nav {
   position: absolute;
   margin-top: 0;
   top: 1.6em;
 }
+/* line 33, ../_source/css/sass/_mootor.nav.scss */
 #header nav a {
   padding: .5em 1em;
   width: auto;
@@ -91,22 +104,26 @@ body {
   font-size: 1.5em;
 }
 
+/* line 43, ../_source/css/sass/_mootor.nav.scss */
 #panels {
   position: absolute;
   width: 100%;
   left: 0;
   min-height: 100%;
 }
+/* line 48, ../_source/css/sass/_mootor.nav.scss */
 #panels .panel {
   min-height: 100%;
   width: 100%;
   position: absolute;
 }
 
+/* line 60, ../_source/css/sass/_mootor.nav.scss */
 nav ul,
 nav ol {
   list-style: none;
 }
+/* line 64, ../_source/css/sass/_mootor.nav.scss */
 nav a {
   text-decoration: none;
   text-align: left;
@@ -114,17 +131,71 @@ nav a {
   padding: 1em;
 }
 
+/* line 74, ../_source/css/sass/_mootor.nav.scss */
 #panels .panel {
   -webkit-transition-duration: 0;
   -webkit-transform: translate3d(0, 0, 0);
 }
 
+/* line 82, ../_source/css/sass/_mootor.nav.scss */
 a,
 a:hover,
 a:focus {
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
 
+/* line 4, ../_source/css/sass/_mootor.ui.scss */
+.stdform {
+  width: 100%;
+  text-align: left;
+  padding: 2%;
+  width: 90%;
+  margin: 0 auto;
+  border-radius: 5px;
+  overflow: hidden;
+}
+/* line 12, ../_source/css/sass/_mootor.ui.scss */
+.stdform .field {
+  display: block;
+  overflow: hidden;
+  padding: 1em;
+}
+/* line 17, ../_source/css/sass/_mootor.ui.scss */
+.stdform label {
+  display: inline;
+  float: left;
+  font-size: 2em;
+  font-weight: 700;
+}
+/* line 22, ../_source/css/sass/_mootor.ui.scss */
+.stdform .txt-container {
+  display: inline;
+  float: right;
+  border: 1px solid #333;
+  background-color: #FFF;
+  position: relative;
+  padding: 0.25em 2.25em 0.25em 0.25em;
+}
+/* line 28, ../_source/css/sass/_mootor.ui.scss */
+.stdform .txt-container input, .stdform .txt-container textarea {
+  border: none;
+  background: none;
+  font-size: 1.5em;
+  line-height: 1.5em;
+}
+/* line 30, ../_source/css/sass/_mootor.ui.scss */
+.stdform .cleanbox {
+  display: block;
+  position: absolute;
+  top: 0.35em;
+  right: 0.35em;
+  color: #666;
+  font-size: 2em;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* line 44, ../_source/css/sass/_mootor.ui.scss */
 .moo_checkbox {
   display: block;
   height: 28px;
@@ -132,6 +203,7 @@ a:focus {
   overflow: hidden;
   float: right;
 }
+/* line 51, ../_source/css/sass/_mootor.ui.scss */
 .moo_checkbox b {
   -webkit-transition-duration: .25s;
   background: url(../img/ui/switch.png);
@@ -140,30 +212,16 @@ a:focus {
   display: block;
   -webkit-transform: translate3d(0, 0, 0);
 }
+/* line 60, ../_source/css/sass/_mootor.ui.scss */
 .moo_checkbox.off b {
   -webkit-transform: translate3d(-54px, 0, 0);
 }
+/* line 63, ../_source/css/sass/_mootor.ui.scss */
 .moo_checkbox label {
-  position: absolute;
-  left: 5%;
-  font-weight: bold;
-  font-size: 17px;
-  margin-top: 5px;
+  line-height: 28px;
 }
 
-.stdform {
-  width: 100%;
-  text-align: center;
-  padding: 2%;
-  width: 90%;
-  margin: 0 auto;
-  border-radius: 5px;
-  overflow: hidden;
-}
-.stdform label {
-  display: block;
-}
-
+/* line 21, src/styles.scss */
 body {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 62.5%;
@@ -171,6 +229,7 @@ body {
   background: #000;
 }
 
+/* line 28, src/styles.scss */
 h1 {
   line-height: 140%;
   font-size: 2.3em;
@@ -179,17 +238,20 @@ h1 {
   letter-spacing: -0.07em;
 }
 
+/* line 35, src/styles.scss */
 h2 {
   line-height: 140%;
   font-size: 7em;
   letter-spacing: -0.1em;
 }
 
+/* line 39, src/styles.scss */
 h3 {
   line-height: 140%;
   font-size: 3em;
 }
 
+/* line 44, src/styles.scss */
 p {
   line-height: 140%;
   font-size: 3em;
@@ -200,10 +262,12 @@ p {
   letter-spacing: 0;
 }
 
+/* line 51, src/styles.scss */
 .panel {
   background: #f7f7f7;
 }
 
+/* line 55, src/styles.scss */
 #header {
   box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.1);
   color: white;
@@ -211,6 +275,7 @@ p {
   background: #333333;
   border: 1px solid #333333;
 }
+/* line 61, src/styles.scss */
 #header nav a {
   color: white;
   border: 0;
@@ -225,6 +290,7 @@ p {
   -moz-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
 }
+/* line 69, src/styles.scss */
 #header h1 {
   line-height: 140%;
   font-size: 2.3em;
@@ -233,6 +299,7 @@ p {
   letter-spacing: -0.07em;
 }
 
+/* line 77, src/styles.scss */
 nav a {
   font-size: 3em;
   color: black;
@@ -241,6 +308,7 @@ nav a {
   border-top: 1px solid #dddddd;
 }
 
+/* line 85, src/styles.scss */
 .nav.active {
   background: #29a6f7;
   color: white;
