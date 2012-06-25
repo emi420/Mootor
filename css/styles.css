@@ -199,16 +199,17 @@ a:focus {
 /* line 44, ../_source/css/sass/_mootor.ui.scss */
 .stdform .cleanbox {
   display: block;
+  padding: 0.35em;
   position: absolute;
-  top: 0.35em;
-  right: 0.35em;
+  top: 0;
+  right: 0;
   color: #666;
   font-size: 2em;
   font-weight: 700;
   text-decoration: none;
 }
 
-/* line 58, ../_source/css/sass/_mootor.ui.scss */
+/* line 59, ../_source/css/sass/_mootor.ui.scss */
 .moo_checkbox {
   display: block;
   height: 28px;
@@ -216,7 +217,7 @@ a:focus {
   overflow: hidden;
   float: right;
 }
-/* line 65, ../_source/css/sass/_mootor.ui.scss */
+/* line 66, ../_source/css/sass/_mootor.ui.scss */
 .moo_checkbox b {
   -webkit-transition-duration: .25s;
   background: url(../img/ui/switch.png);
@@ -225,11 +226,11 @@ a:focus {
   display: block;
   -webkit-transform: translate3d(0, 0, 0);
 }
-/* line 74, ../_source/css/sass/_mootor.ui.scss */
+/* line 75, ../_source/css/sass/_mootor.ui.scss */
 .moo_checkbox.off b {
   -webkit-transform: translate3d(-54px, 0, 0);
 }
-/* line 77, ../_source/css/sass/_mootor.ui.scss */
+/* line 78, ../_source/css/sass/_mootor.ui.scss */
 .moo_checkbox label {
   line-height: 28px;
 }

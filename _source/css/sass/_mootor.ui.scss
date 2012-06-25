@@ -43,9 +43,10 @@
     }
     .cleanbox {
         display: block;
+        padding: 0.35em;
         position: absolute;
-        top: 0.35em;
-        right: 0.35em;
+        top: 0;
+        right: 0;
         color: #666;
         font-size: 2em;
         font-weight: 700;
