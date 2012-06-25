@@ -1,4 +1,4 @@
-/* line 17, ../../../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 17, C:/Ruby192/lib/ruby/gems/1.9.1/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -15,50 +15,50 @@ time, mark, audio, video {
   margin: 0;
   padding: 0;
   border: 0;
-  font: inherit;
   font-size: 100%;
+  font: inherit;
   vertical-align: baseline;
 }
 
-/* line 22, ../../../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-html {
+/* line 20, C:/Ruby192/lib/ruby/gems/1.9.1/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+body {
   line-height: 1;
 }
 
-/* line 24, ../../../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 22, C:/Ruby192/lib/ruby/gems/1.9.1/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
-/* line 26, ../../../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 24, C:/Ruby192/lib/ruby/gems/1.9.1/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 28, ../../../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 26, C:/Ruby192/lib/ruby/gems/1.9.1/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
-/* line 30, ../../../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 28, C:/Ruby192/lib/ruby/gems/1.9.1/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
-/* line 103, ../../../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 101, C:/Ruby192/lib/ruby/gems/1.9.1/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
-/* line 32, ../../../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 30, C:/Ruby192/lib/ruby/gems/1.9.1/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
-/* line 116, ../../../../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 114, C:/Ruby192/lib/ruby/gems/1.9.1/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
   display: block;
 }
@@ -146,11 +146,11 @@ a:focus {
 
 /* line 4, ../_source/css/sass/_mootor.ui.scss */
 .stdform {
-  width: 100%;
   text-align: left;
-  padding: 2%;
   width: 90%;
   margin: 0 auto;
+  background-color: #FFF;
+  border: 1px solid #CCC;
   border-radius: 5px;
   overflow: hidden;
 }
@@ -158,32 +158,45 @@ a:focus {
 .stdform .field {
   display: block;
   overflow: hidden;
-  padding: 1em;
+  padding: 1em 2em;
+  border-top: 1px solid #CCC;
 }
-/* line 17, ../_source/css/sass/_mootor.ui.scss */
+/* line 18, ../_source/css/sass/_mootor.ui.scss */
+.stdform .field:first-child {
+  border-top: none;
+}
+/* line 21, ../_source/css/sass/_mootor.ui.scss */
 .stdform label {
   display: inline;
   float: left;
   font-size: 2em;
   font-weight: 700;
+  width: 25%;
 }
-/* line 22, ../_source/css/sass/_mootor.ui.scss */
+/* line 27, ../_source/css/sass/_mootor.ui.scss */
 .stdform .txt-container {
   display: inline;
   float: right;
-  border: 1px solid #333;
+  border: 1px solid #666;
   background-color: #FFF;
   position: relative;
   padding: 0.25em 2.25em 0.25em 0.25em;
+  width: 75%;
 }
-/* line 28, ../_source/css/sass/_mootor.ui.scss */
-.stdform .txt-container input, .stdform .txt-container textarea {
+/* line 35, ../_source/css/sass/_mootor.ui.scss */
+.stdform .txt-container input,
+.stdform .txt-container textarea {
   border: none;
   background: none;
   font-size: 1.5em;
   line-height: 1.5em;
+  width: 100%;
 }
-/* line 30, ../_source/css/sass/_mootor.ui.scss */
+/* line 42, ../_source/css/sass/_mootor.ui.scss */
+.stdform .txt-container.area {
+  padding: 0.25em;
+}
+/* line 44, ../_source/css/sass/_mootor.ui.scss */
 .stdform .cleanbox {
   display: block;
   position: absolute;
@@ -195,7 +208,7 @@ a:focus {
   text-decoration: none;
 }
 
-/* line 44, ../_source/css/sass/_mootor.ui.scss */
+/* line 58, ../_source/css/sass/_mootor.ui.scss */
 .moo_checkbox {
   display: block;
   height: 28px;
@@ -203,7 +216,7 @@ a:focus {
   overflow: hidden;
   float: right;
 }
-/* line 51, ../_source/css/sass/_mootor.ui.scss */
+/* line 65, ../_source/css/sass/_mootor.ui.scss */
 .moo_checkbox b {
   -webkit-transition-duration: .25s;
   background: url(../img/ui/switch.png);
@@ -212,11 +225,11 @@ a:focus {
   display: block;
   -webkit-transform: translate3d(0, 0, 0);
 }
-/* line 60, ../_source/css/sass/_mootor.ui.scss */
+/* line 74, ../_source/css/sass/_mootor.ui.scss */
 .moo_checkbox.off b {
   -webkit-transform: translate3d(-54px, 0, 0);
 }
-/* line 63, ../_source/css/sass/_mootor.ui.scss */
+/* line 77, ../_source/css/sass/_mootor.ui.scss */
 .moo_checkbox label {
   line-height: 28px;
 }

@@ -2,30 +2,44 @@
 // Standard form
 
 .stdform {
-    width: 100%;
     text-align: left;
-    padding: 2%;
     width: 90%;
     margin: 0 auto;
+    background-color: #FFF;
+    border: 1px solid #CCC;
     border-radius: 5px;
     overflow: hidden;
     .field {
         display:block;
         overflow:hidden;
-        padding: 1em;
+        padding: 1em 2em;
+       //border-bottom: 1px solid #999;
+        border-top: 1px solid #CCC;
+        &:first-child {border-top: none}
+        //&:last-child {border-bottom: none}
     }
     label {
         @include float-left;
         font-size: 2em;
         font-weight: 700;
+        width: 25%;
     }
     .txt-container {
         @include float-right;
-        border: 1px solid #333;
+        border: 1px solid #666;
         background-color: #FFF;
         position: relative;
         padding: 0.25em 2.25em 0.25em 0.25em; 
-        input, textarea { border: none; background: none; font-size: 1.5em; line-height: 1.5em;}
+        width: 75%;
+        input, 
+        textarea { 
+            border: none; 
+            background: none; 
+            font-size: 1.5em; 
+            line-height: 1.5em;
+            width: 100%;
+        }
+        &.area{ padding: 0.25em; }
     }
     .cleanbox {
         display: block;
