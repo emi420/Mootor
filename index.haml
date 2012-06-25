@@ -106,18 +106,14 @@
 
        $(document).ready(function(){
        
-           // Dynamic font size
-           $("#panels").autoType();
-
            // Navigation panels
-           var nav = $("#panels").nav();
+           $("#panels").nav();
            
            // Checkbox
-           var check = $("#checkbox1").checkbox();
+           $("#checkbox1").ui({
+                type: "Checkbox"
+           });
            
-           $("#txt1").onTapEnd(function(){ event.target.focus()});
-           $("#txta1").onTapEnd(function(){ event.target.focus()});
-            
            // Show location
            /*$("#location").geolocation({
                 error: "error",

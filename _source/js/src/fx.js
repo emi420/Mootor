@@ -14,9 +14,8 @@
          * @param {object} positions Axis positions
          * @param {object} options Options
          * @config {integer} transitionDuration Duration of transition (in seconds)
-         * @example $.Fx.translate($("#myDiv", {x:10,y:20}, {tansitionDuration: .5}));
          */
-        translate: function (positions, options) {
+        translateFx: function (positions, options) {
 
             var x_pos = positions.x,
                 y_pos = positions.y,

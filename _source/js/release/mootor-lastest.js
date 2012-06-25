@@ -51,18 +51,18 @@ var $ = (function () {
 
             }
         } else if (qtype === "object") {
-        el = query;
+            el = query;
         }
 
-        // Instance properties
+         // Instance properties
         this.el = (function () {
             return el;
         }());
         this.query = (function () {
             return query;
-        }());
-
-		return this;
+        }());  
+         
+        return this;
 	};
 
      $.prototype = Moo.prototype = {
@@ -265,7 +265,8 @@ var $ = (function () {
         ajax:  function (options) {
             var xmlhttp = new $.window.XMLHttpRequest(),
                 handler,
-                data = null;
+                data = null,
+                i;
 			
             xmlhttp.onreadystatechange = function() {
                 if (xmlhttp.readyState==4 && xmlhttp.status==200) {
@@ -280,9 +281,15 @@ var $ = (function () {
             	xmlhttp.open("POST", options.url, true);
             	data = options.data;
             }
-            xmlhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            
+            if (options.headers === undefined) {
+                xmlhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            } else {
+                for (i in options.headers) {
+                    xmlhttp.setRequestHeader(i, options.headers[i]);                
+                }
+            }
             xmlhttp.send(data);
-
         }
 
     }, $);
@@ -453,6 +460,8 @@ if (!window.$ || typeof ($) !== "function") {
     fire = function (info, callbacks) {
         var i;
 
+        info.e.preventDefault();           
+
         if (callbacks !== undefined) {
             for (i = 0; i < callbacks.length; i++) {
                 if (callbacks[i].handleGesture !== undefined) {
@@ -575,14 +584,13 @@ if (!window.$ || typeof ($) !== "function") {
         handleEvent: function (e) {
             var key = createKey(this.el),
                 info = {
-                    el: this.el
+                    el: this.el,
+                    e: e
                 },
                 gesture = $.gestures.list[key],
                 date = new Date(),
                 clientX,
                 clientY;
-
-            e.preventDefault();
 
             if (e.clientX || e.clientY) {
                 // Mouse
@@ -626,7 +634,7 @@ if (!window.$ || typeof ($) !== "function") {
             }
 
             if (e.type === "mousemove" || e.type === "touchmove") {
-
+            
                 info.lastY = gesture.event.y;
                 info.lastX = gesture.event.x;
                 gesture.event.y = info.y = clientY;
@@ -696,9 +704,8 @@ if (!window.$ || typeof ($) !== "function") {
          * @param {object} positions Axis positions
          * @param {object} options Options
          * @config {integer} transitionDuration Duration of transition (in seconds)
-         * @example $.Fx.translate($("#myDiv", {x:10,y:20}, {tansitionDuration: .5}));
          */
-        translate: function (positions, options) {
+        translateFx: function (positions, options) {
 
             var x_pos = positions.x,
                 y_pos = positions.y,

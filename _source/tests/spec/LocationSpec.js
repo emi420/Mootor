@@ -93,7 +93,6 @@ describe("Geo", function() {
                 },
             ];
             
-        debugger;
         runs(function() {
             var result = $.geoNearby(marker, markers);
             expect({lat: result.lat, lng: result.lng}).toEqual(

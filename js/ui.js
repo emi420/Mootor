@@ -10,6 +10,24 @@
 (function ($) {
 
  "use strict";
+ 
+    var Overlay = function() {
+
+    },
+    
+    Tooltip = function(options) {
+        var self = this;
+        self.html = options.html;
+        self.el = options.el;
+        //self.div = document.createElement("div");
+        //$(self.div).setClass("moo-tooltip");
+        //$(self.div).html(this.html);
+        //document.appendChild(self.div)
+        $(self.el).onTapEnd(function() {
+            console.log(self.html);
+        })
+        return self;
+    },
 
      /**
      * Checkbox instance object
@@ -20,14 +38,13 @@
      * @param {object} options  Configuration options
      * @property {element} el Container element
      */
-    var Checkbox = function(options) {
+    Checkbox = function(options) {
         var check,
             input;
 
         this.el = options.el;
         this.el.innerHTML += "<b></b>";
 
-        // FIXME CHECK: update core to support 'each'
         input = this.el.getElementsByTagName('input')[0];
         // FIXME CHECK: temporary initial value
         this.value = 1;
@@ -72,31 +89,38 @@
             }
         }
     };
+    
+    
+    Tooltip.prototype = {
+        
+    }
+    
+    Overlay.prototype = {
+        show: function() {
+            $(this.el).show();
+        },
+        hide: function() {
+            $(this.el).hide();
+        },
+    }
+    
+    $.extend(Overlay.prototype, Tooltip.prototype);
 
     $.extend({
-
-         /**
-         * @param {object} options Configuration options
-         * @return {Checkbox} Checkbox instance
-         * @function
-         * @name checkbox
-         * @memberOf $.prototype 
-         * @config {element} el Container element
-         * @example #checkbox1
-         *      %input{:type=>"checkbox"}
-         *      %label Option 1
-         *
-         * :javascript
-         *      $("#checkbox1").checkbox();
-         */
-        checkbox: function (options) {
-            if (typeof options !== "object") {
-                options = {};
-            }
-            options.el = this.el;
-            return new Checkbox(options);
-        }
+    
+         ui: function(options) {
+             options.el = this.el;
+             switch (options.type) {
+                 case "Checkbox":
+                    return new Checkbox(options);
+                    break;
+                 case "Tooltip":
+                    return new Tooltip(options);
+                    break;
+             }
+         }
     });
+    
 
 }($));
 

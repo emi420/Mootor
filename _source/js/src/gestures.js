@@ -75,6 +75,8 @@
     fire = function (info, callbacks) {
         var i;
 
+        info.e.preventDefault();           
+
         if (callbacks !== undefined) {
             for (i = 0; i < callbacks.length; i++) {
                 if (callbacks[i].handleGesture !== undefined) {
@@ -197,14 +199,13 @@
         handleEvent: function (e) {
             var key = createKey(this.el),
                 info = {
-                    el: this.el
+                    el: this.el,
+                    e: e
                 },
                 gesture = $.gestures.list[key],
                 date = new Date(),
                 clientX,
                 clientY;
-
-            e.preventDefault();
 
             if (e.clientX || e.clientY) {
                 // Mouse
@@ -248,7 +249,7 @@
             }
 
             if (e.type === "mousemove" || e.type === "touchmove") {
-
+            
                 info.lastY = gesture.event.y;
                 info.lastX = gesture.event.x;
                 gesture.event.y = info.y = clientY;

@@ -222,7 +222,7 @@
             for (i = this.count; i--;) {
 
                 panel = this.items[i];
-
+                
                 if (i > 0) {
                     this.translate({el: panel.el, x:  -((this.width + this.margin) * 4) , y:0});
                 } else {
@@ -325,7 +325,6 @@
                     for (i = panel.anchors.length; i--;) {
                         $(panel.anchors[i]).removeClass("active");
                     }
-                    console.log(panel.x);
                     this.translate({
                         y: this.y,
                         el: panel.el,
@@ -466,7 +465,7 @@
          * @config {integer} x Active panel position on X axis
          * @config {integer} y Active panel position on Y axis
          * @config {integer} y Active panel position on Y axis
-         * @example item.translate({x: 100});
+         * @example item.translateFx({x: 100});
          */
         translate: function (options) {
             if (options.duration === undefined) {
@@ -482,7 +481,7 @@
                 options.x = this.items[this.current].x;
             }
                         
-            $(options.el).translate(
+            $(options.el).translateFx(
                 {y: options.y, x: options.x},
                 {transitionDuration: options.duration, callback: options.callback}
             );

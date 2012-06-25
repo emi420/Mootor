@@ -40,18 +40,18 @@ var $ = (function () {
 
             }
         } else if (qtype === "object") {
-        el = query;
+            el = query;
         }
 
-        // Instance properties
+         // Instance properties
         this.el = (function () {
             return el;
         }());
         this.query = (function () {
             return query;
-        }());
-
-		return this;
+        }());  
+         
+        return this;
 	};
 
      $.prototype = Moo.prototype = {
@@ -254,7 +254,8 @@ var $ = (function () {
         ajax:  function (options) {
             var xmlhttp = new $.window.XMLHttpRequest(),
                 handler,
-                data = null;
+                data = null,
+                i;
 			
             xmlhttp.onreadystatechange = function() {
                 if (xmlhttp.readyState==4 && xmlhttp.status==200) {
@@ -269,9 +270,15 @@ var $ = (function () {
             	xmlhttp.open("POST", options.url, true);
             	data = options.data;
             }
-            xmlhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            
+            if (options.headers === undefined) {
+                xmlhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            } else {
+                for (i in options.headers) {
+                    xmlhttp.setRequestHeader(i, options.headers[i]);                
+                }
+            }
             xmlhttp.send(data);
-
         }
 
     }, $);
