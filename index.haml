@@ -44,11 +44,17 @@
                         %label &Aacute;rea de texto
                         .txt-container.area
                             %textarea#txta1{:name=>"textarea1" ,:placeholder=>"Ingrese su texto aqui"}
-                    / 
-                        .field
-                            %label Input radio
-                            #radiobtn
-                                %input#radio1{:type=>"radio", :name=>"radiobutton1" ,:value=>"0"}
+
+                    .field
+                        %label Input radio
+                        #radiobtn
+                            %input#radio1{:type=>"radio", :name=>"radiobutton1" ,:value=>"0"}
+
+                    .field
+                        %label Tooltip
+                        #radiobtn
+                            %span#tooltipTest Show me the tooltip!
+
         .panel#nav
             %nav
                 %a.nav{:href=>"", :rel=>"item1"} Item 1
@@ -114,6 +120,12 @@
                 type: "Checkbox"
            });
            
+           // Checkbox
+           $("#tooltipTest").ui({
+                type: "Tooltip",
+                html: "Testing this tooltip"
+           });
+
            // Show location
            /*$("#location").geolocation({
                 error: "error",

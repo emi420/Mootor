@@ -55,7 +55,8 @@
 }
 
 // User Interface plugin
-// checkbox
+
+// Checkbox
 .moo_checkbox {
     display: block;
     height: 28px;
@@ -79,3 +80,15 @@
         line-height: 28px;
     }
 }
+
+// Tooltip
+.moo_tooltip {
+    position: absolute;
+    @include domType1;
+    background: $subColor1;
+    border: 1px solid $subColor1B;
+    padding: 1em;
+    text-align: center;
+}
+
+

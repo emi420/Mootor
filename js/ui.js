@@ -19,12 +19,20 @@
         var self = this;
         self.html = options.html;
         self.el = options.el;
-        //self.div = document.createElement("div");
-        //$(self.div).setClass("moo-tooltip");
-        //$(self.div).html(this.html);
-        //document.appendChild(self.div)
-        $(self.el).onTapEnd(function() {
-            console.log(self.html);
+
+        self.div = document.createElement("div");
+        $(self.div).hide();
+        $(self.div).setClass("moo_tooltip");
+        $(self.div).html(this.html);
+        
+        document.body.appendChild(self.div)
+
+        $(self.el).onTapEnd(function(event) {
+            $(self.div).translateFx({
+                x: event.e.clientX,
+                y: event.e.clientY,
+            }, {});
+            $(self.div).show();
         })
         return self;
     },

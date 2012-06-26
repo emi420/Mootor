@@ -50,14 +50,18 @@
               <textarea id='txta1' name='textarea1' placeholder='Ingrese su texto aqui'></textarea>
             </div>
           </div>
-          <!--
-            <div class='field'>
-              <label>Input radio</label>
-              <div id='radiobtn'>
-                <input id='radio1' name='radiobutton1' type='radio' value='0' />
-              </div>
+          <div class='field'>
+            <label>Input radio</label>
+            <div id='radiobtn'>
+              <input id='radio1' name='radiobutton1' type='radio' value='0' />
             </div>
-          -->
+          </div>
+          <div class='field'>
+            <label>Tooltip</label>
+            <div id='radiobtn'>
+              <span id='tooltipTest'>Show me the tooltip!</span>
+            </div>
+          </div>
         </form>
       </div>
     </div>
@@ -133,17 +137,20 @@
   //<![CDATA[
        $(document).ready(function(){
        
-           // Dynamic font size
-           $("#panels").autoType();
-    
            // Navigation panels
-           var nav = $("#panels").nav();
+           $("#panels").nav();
            
            // Checkbox
-           window.check = $("#checkbox1").ui({
+           $("#checkbox1").ui({
                 type: "Checkbox"
            });
            
+           // Checkbox
+           $("#tooltipTest").ui({
+                type: "Tooltip",
+                html: "Testing this tooltip"
+           });
+    
            // Show location
            /*$("#location").geolocation({
                 error: "error",

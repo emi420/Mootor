@@ -189,6 +189,15 @@ var $ = (function () {
         html: function (html) {
             this.el.innerHTML = html;
             return this;
+        },
+          
+        /**
+         * Selector useful for query chaining
+         * @param {string} query Query
+         * @example $("#myList").find(".item")
+         */
+        find: function(query) {
+            return $(query);
         }
         
 	};
