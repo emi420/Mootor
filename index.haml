@@ -44,7 +44,34 @@
                         %label &Aacute;rea de texto
                         .txt-container.area
                             %textarea#txta1{:name=>"textarea1" ,:placeholder=>"Ingrese su texto aqui"}
-
+                    .field
+                        %label Select menu
+                        .select-container.bottom
+                            .select-menu{:style=>'height: 217px;'}
+                                %ul.select-list{:style=>'height: 200px;'}
+                                    %li Item 1
+                                    %li This is some other item listed
+                                    %li Third item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                            %select#select1
+                                %option Text 1
+                                %option Text 2
+                                %option Text 3
+                                %option Text 4
+                                
                     .field
                         %label Input radio
                         #radiobtn
@@ -119,6 +146,10 @@
            $("#checkbox1").ui({
                 type: "Checkbox"
            });
+           
+           // focus on inputs
+           $("#txt1").onTapEnd(function(){ event.target.focus()});
+           $("#txta1").onTapEnd(function(){ event.target.focus()});
            
            // Checkbox
            $("#tooltipTest").ui({

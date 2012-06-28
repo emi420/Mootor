@@ -16,6 +16,19 @@ $readable-font: 'Palatino Linotype', 'Book Antiqua', Palatino, 'Droid Serif', se
 @import "../../_source/css/sass/_mootor.nav.scss";
 @import "../../_source/css/sass/_mootor.ui.scss";
 
+// Clearfix
+/* For modern browsers */
+.clearfix:before,
+.clearfix:after {
+    content:"";
+    display:table;
+}
+
+.clearfix:after {
+    clear:both;
+}
+
+
 // General
 
 body { 

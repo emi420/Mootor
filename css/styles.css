@@ -1,5 +1,4 @@
-@charset "utf-8";
-/* line 17, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 17, ../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -16,50 +15,50 @@ time, mark, audio, video {
   margin: 0;
   padding: 0;
   border: 0;
-  font-size: 100%;
   font: inherit;
+  font-size: 100%;
   vertical-align: baseline;
 }
 
-/* line 20, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-body {
+/* line 22, ../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html {
   line-height: 1;
 }
 
-/* line 22, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 24, ../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
-/* line 24, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 26, ../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 26, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 28, ../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
-/* line 28, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 30, ../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
-/* line 101, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 103, ../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
-/* line 30, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 32, ../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
-/* line 114, ../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.1/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 116, ../../../../Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.13.alpha.0/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
   display: block;
 }
@@ -153,12 +152,10 @@ a:focus {
   background-color: #FFF;
   border: 1px solid #CCC;
   border-radius: 5px;
-  overflow: hidden;
 }
-/* line 12, ../_source/css/sass/_mootor.ui.scss */
+/* line 13, ../_source/css/sass/_mootor.ui.scss */
 .stdform .field {
   display: block;
-  overflow: hidden;
   padding: 1em 2em;
   border-top: 1px solid #CCC;
 }
@@ -166,7 +163,7 @@ a:focus {
 .stdform .field:first-child {
   border-top: none;
 }
-/* line 21, ../_source/css/sass/_mootor.ui.scss */
+/* line 20, ../_source/css/sass/_mootor.ui.scss */
 .stdform label {
   display: inline;
   float: left;
@@ -174,7 +171,7 @@ a:focus {
   font-weight: 700;
   width: 25%;
 }
-/* line 27, ../_source/css/sass/_mootor.ui.scss */
+/* line 26, ../_source/css/sass/_mootor.ui.scss */
 .stdform .txt-container {
   display: inline;
   float: right;
@@ -184,9 +181,11 @@ a:focus {
   padding: 0.25em 2.25em 0.25em 0.25em;
   width: 75%;
 }
-/* line 35, ../_source/css/sass/_mootor.ui.scss */
+/* line 34, ../_source/css/sass/_mootor.ui.scss */
 .stdform .txt-container input,
 .stdform .txt-container textarea {
+  -webkit-appearance: none;
+  /* Remove default iOS shadow */
   border: none;
   background: none;
   font-size: 1.5em;
@@ -198,6 +197,72 @@ a:focus {
   padding: 0.25em;
 }
 /* line 44, ../_source/css/sass/_mootor.ui.scss */
+.stdform .select-container {
+  display: inline;
+  float: right;
+  border: 1px solid #666;
+  border-radius: 5px;
+  background-color: #FFF;
+  position: relative;
+  padding: 0.25em 2.25em 0.25em 0.25em;
+  width: 75%;
+}
+/* line 52, ../_source/css/sass/_mootor.ui.scss */
+.stdform .select-container .select-menu {
+  background-color: #999;
+  border-radius: 5px;
+  padding: 1em;
+  position: absolute;
+}
+/* line 58, ../_source/css/sass/_mootor.ui.scss */
+.stdform .select-container .select-list {
+  font-size: 2em;
+  background: #FFF;
+  border-radius: 5px;
+  overflow: auto;
+}
+/* line 63, ../_source/css/sass/_mootor.ui.scss */
+.stdform .select-container .select-list li {
+  padding: 1em;
+  border-bottom: 1px solid #CCC;
+}
+/* line 66, ../_source/css/sass/_mootor.ui.scss */
+.stdform .select-container .select-list li:last-child {
+  border: none;
+}
+/* line 70, ../_source/css/sass/_mootor.ui.scss */
+.stdform .select-container.bottom .select-menu {
+  top: 4.5em;
+}
+/* line 72, ../_source/css/sass/_mootor.ui.scss */
+.stdform .select-container.bottom .select-menu:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -3em;
+  left: 25%;
+  border-top: 1.5em solid transparent;
+  border-left: 2em solid transparent;
+  border-right: 2em solid transparent;
+  border-bottom: 1.5em solid #999;
+}
+/* line 86, ../_source/css/sass/_mootor.ui.scss */
+.stdform .select-container.top .select-menu {
+  bottom: 4.5em;
+}
+/* line 88, ../_source/css/sass/_mootor.ui.scss */
+.stdform .select-container.top .select-menu:after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -3em;
+  left: 25%;
+  border-bottom: 1.5em solid transparent;
+  border-left: 2em solid transparent;
+  border-right: 2em solid transparent;
+  border-top: 1.5em solid #999;
+}
+/* line 102, ../_source/css/sass/_mootor.ui.scss */
 .stdform .cleanbox {
   display: block;
   padding: 0.35em;
@@ -210,7 +275,7 @@ a:focus {
   text-decoration: none;
 }
 
-/* line 60, ../_source/css/sass/_mootor.ui.scss */
+/* line 118, ../_source/css/sass/_mootor.ui.scss */
 .moo_checkbox {
   display: block;
   height: 28px;
@@ -218,7 +283,7 @@ a:focus {
   overflow: hidden;
   float: right;
 }
-/* line 67, ../_source/css/sass/_mootor.ui.scss */
+/* line 125, ../_source/css/sass/_mootor.ui.scss */
 .moo_checkbox b {
   -webkit-transition-duration: .25s;
   background: url(../img/ui/switch.png);
@@ -227,16 +292,16 @@ a:focus {
   display: block;
   -webkit-transform: translate3d(0, 0, 0);
 }
-/* line 76, ../_source/css/sass/_mootor.ui.scss */
+/* line 134, ../_source/css/sass/_mootor.ui.scss */
 .moo_checkbox.off b {
   -webkit-transform: translate3d(-54px, 0, 0);
 }
-/* line 79, ../_source/css/sass/_mootor.ui.scss */
+/* line 137, ../_source/css/sass/_mootor.ui.scss */
 .moo_checkbox label {
   line-height: 28px;
 }
 
-/* line 85, ../_source/css/sass/_mootor.ui.scss */
+/* line 143, ../_source/css/sass/_mootor.ui.scss */
 .moo_tooltip {
   position: absolute;
   line-height: 140%;
@@ -247,7 +312,21 @@ a:focus {
   text-align: center;
 }
 
-/* line 21, src/styles.scss */
+/* For modern browsers */
+/* line 22, src/styles.scss */
+.clearfix:before, .stdform:before,
+.clearfix:after,
+.stdform:after {
+  content: "";
+  display: table;
+}
+
+/* line 27, src/styles.scss */
+.clearfix:after, .stdform:after {
+  clear: both;
+}
+
+/* line 34, src/styles.scss */
 body {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 62.5%;
@@ -255,7 +334,7 @@ body {
   background: #000;
 }
 
-/* line 28, src/styles.scss */
+/* line 41, src/styles.scss */
 h1 {
   line-height: 140%;
   font-size: 2.3em;
@@ -264,20 +343,20 @@ h1 {
   letter-spacing: -0.07em;
 }
 
-/* line 35, src/styles.scss */
+/* line 48, src/styles.scss */
 h2 {
   line-height: 140%;
   font-size: 7em;
   letter-spacing: -0.1em;
 }
 
-/* line 39, src/styles.scss */
+/* line 52, src/styles.scss */
 h3 {
   line-height: 140%;
   font-size: 3em;
 }
 
-/* line 44, src/styles.scss */
+/* line 57, src/styles.scss */
 p {
   line-height: 140%;
   font-size: 3em;
@@ -288,12 +367,12 @@ p {
   letter-spacing: 0;
 }
 
-/* line 51, src/styles.scss */
+/* line 64, src/styles.scss */
 .panel {
   background: #f7f7f7;
 }
 
-/* line 55, src/styles.scss */
+/* line 68, src/styles.scss */
 #header {
   box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.1);
   color: white;
@@ -301,7 +380,7 @@ p {
   background: #333333;
   border: 1px solid #333333;
 }
-/* line 61, src/styles.scss */
+/* line 74, src/styles.scss */
 #header nav a {
   color: white;
   border: 0;
@@ -316,7 +395,7 @@ p {
   -moz-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
 }
-/* line 69, src/styles.scss */
+/* line 82, src/styles.scss */
 #header h1 {
   line-height: 140%;
   font-size: 2.3em;
@@ -325,7 +404,7 @@ p {
   letter-spacing: -0.07em;
 }
 
-/* line 77, src/styles.scss */
+/* line 90, src/styles.scss */
 nav a {
   font-size: 3em;
   color: black;
@@ -334,7 +413,7 @@ nav a {
   border-top: 1px solid #dddddd;
 }
 
-/* line 85, src/styles.scss */
+/* line 98, src/styles.scss */
 .nav.active {
   background: #29a6f7;
   color: white;
