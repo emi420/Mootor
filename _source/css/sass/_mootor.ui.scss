@@ -1,7 +1,7 @@
 
 // Standard form
 
-.stdform {
+.moo-ui-form {
     text-align: left;
     width: 90%;
     margin: 0 auto;
@@ -12,6 +12,7 @@
     @extend .clearfix;
     .field {
         display:block;
+        @extend .clearfix;
         //overflow:hidden;
         padding: 1em 2em;
         border-top: 1px solid #CCC;
@@ -23,14 +24,31 @@
         font-weight: 700;
         width: 25%;
     }
-    .txt-container {
+    .moo-ui-text {
         @include float-right;
         border: 1px solid #666;
+        border-radius: 5px;
         background-color: #FFF;
         position: relative;
         padding: 0.25em 2.25em 0.25em 0.25em; 
         width: 75%;
-        input, 
+        input { 
+            -webkit-appearance:none;  /* Remove default iOS shadow */
+            border: none; 
+            background: none; 
+            font-size: 1.5em; 
+            line-height: 1.5em;
+            width: 100%;
+        }
+    }
+    .moo-ui-textarea {
+        @include float-right;
+        border: 1px solid #666;
+        border-radius: 5px;
+        background-color: #FFF;
+        position: relative;
+        padding: 0.25em; 
+        width: 75%;
         textarea { 
             -webkit-appearance:none;  /* Remove default iOS shadow */
             border: none; 
@@ -39,9 +57,9 @@
             line-height: 1.5em;
             width: 100%;
         }
-        &.area{ padding: 0.25em; }
+
     }
-    .select-container {
+    .moo-ui-select-container {
         @include float-right;
         border: 1px solid #666;
         border-radius: 5px;
@@ -49,17 +67,19 @@
         position: relative;
         padding: 0.25em 2.25em 0.25em 0.25em; 
         width: 75%;
-        .select-menu {
+        height: 3em;
+        .moo-ui-select-menu {
             background-color: #999;
             border-radius: 5px;
             padding: 1em;
             position: absolute;
         }
-        .select-list {
+        .moo-ui-select-list {
             font-size: 2em;
             background: #FFF;
             border-radius: 5px;
             overflow: auto;
+            
             li {
                 padding: 1em;
                 border-bottom: 1px solid #CCC;
@@ -67,7 +87,7 @@
             }
         }
         &.bottom {
-            .select-menu{
+            .moo-ui-select-menu{
                 top:4.5em;
                 &:before {
                     content: "";
@@ -75,15 +95,15 @@
                     position: absolute;
                     top: -3em;
                     left: 25%;
-                    border-top: 1.5em solid transparent;
-                    border-left: 2em solid transparent;
-                    border-right: 2em solid transparent;
-                    border-bottom: 1.5em solid #999;
+                    border-top: 15px solid transparent;
+                    border-left: 20px solid transparent;
+                    border-right: 20px solid transparent;
+                    border-bottom: 15px solid #999;
                 }
             }
         }
         &.top {
-            .select-menu{
+            .moo-ui-select-menu{
                 bottom: 4.5em;
                 &:after {
                     content: "";
