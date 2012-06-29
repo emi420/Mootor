@@ -10,15 +10,15 @@
   <!-- %script{:src=>"js/geo.js",:type=>"text/javascript"} -->
 </head>
 <body class='main'>
-  <header id='header'>
+  <header class='moo-header' id='header'>
     <h1>Mootor demo</h1>
     <nav>
-      <a class='nav' href='' rel='back'>Back</a>
+      <a class='moo-nav' href='' rel='back'>Back</a>
     </nav>
   </header>
   <div id='panels'>
     <!--
-      <div class='panel' id='home'>
+      <div class='moo-panel' id='home'>
         <nav>
           <a class='nav' href='' rel='nav'>Nav</a>
           <a class='nav' href='' rel='ui'>UI</a>
@@ -29,32 +29,33 @@
         </nav>
       </div>
     -->
-    <div class='panel' id='ui'>
+    <div class='moo-panel' id='ui'>
       <h2>User Interface</h2>
-      <div class='hidden'>
+      <div class='moo-hidden'>
         <form action='' class='moo-ui-form' id='uiform' method='post'>
-          <div class='field'>
+          <div class='moo-field'>
             <label>Input checkbox</label>
             <div class='moo-ui-switch' id='switch1'>
               <input id='check1' name='checkbox1' type='checkbox' value='0' />
             </div>
           </div>
-          <div class='field'>
+          <div class='moo-field'>
             <label>Input de texto</label>
             <div class='moo-ui-text'>
               <input id='txt1' name='text1' placeholder='Ingrese su texto aqui' type='text' />
               <a class='cleanbox' href=''>&times;</a>
             </div>
           </div>
-          <div class='field'>
+          <div class='moo-field'>
             <label>&Aacute;rea de texto</label>
             <div class='moo-ui-textarea'>
               <textarea id='txta1' name='textarea1' placeholder='Ingrese su texto aqui'></textarea>
             </div>
           </div>
-          <div class='field'>
+          <div class='moo-field'>
             <label>Select menu</label>
-            <div class='moo-ui-select-container bottom'>
+            <div class='moo-ui-select-container top'>
+              <a class='moo-ui-select-link' href=''>&#9660;</a>
               <div class='moo-ui-select-menu' style='height: 217px;'>
                 <ul class='moo-ui-select-list' style='height: 200px;'>
                   <li>Item 1</li>
@@ -84,19 +85,19 @@
               </select>
             </div>
           </div>
-          <div class='field'>
+          <div class='moo-field'>
             <label>Input radio</label>
             <div class='moo-ui-checkbox' id='radiobtn'>
               <input id='radio1' name='radiobutton1' type='radio' value='0' />
             </div>
           </div>
-          <div class='field'>
+          <div class='moo-field'>
             <label>Input radio</label>
             <div class='moo-ui-checkbox' id='radiobtn'>
               <input id='radio1' name='radiobutton1' type='radio' value='0' />
             </div>
           </div>
-          <div class='field'>
+          <div class='moo-field'>
             <label>Tooltip</label>
             <div id='radiobtn'>
               <span id='tooltipTest'>Show me the tooltip!</span>
@@ -106,35 +107,35 @@
       </div>
     </div>
     <!--
-      <div class='panel' id='nav'>
+      <div class='moo-panel' id='nav'>
         <nav>
           <a class='nav' href='' rel='item1'>Item 1</a>
           <a class='nav' href='' rel='item2'>Item 2</a>
         </nav>
       </div>
-      <div class='panel' id='item1'>
+      <div class='moo-panel' id='item1'>
         <h2>Item 1</h2>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dictum lobortis erat, vel facilisis massa facilisis non. Sed condimentum massa vitae augue tincidunt id ornare sapien congue. Maecenas pulvinar faucibus lorem. Sed tempus, sem gravida tempus malesuada, lacus lectus lacinia libero, id venenatis eros sapien et nunc. Cras quis urna mauris, non auctor risus. Suspendisse non magna augue, in elementum augue. Donec tincidunt sodales imperdiet. Ut pharetra, nunc in pretium rutrum, eros velit rhoncus est, nec faucibus ante arcu vitae enim. Nam sit amet nulla in risus blandit aliquet. Quisque rutrum accumsan volutpat.
         </p>
       </div>
-      <div class='panel' id='item2'>
+      <div class='moo-panel' id='item2'>
         <h2>Item 2</h2>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dictum lobortis erat, vel facilisis massa facilisis non. Sed condimentum massa vitae augue tincidunt id ornare sapien congue. Maecenas pulvinar faucibus lorem. Sed tempus, sem gravida tempus malesuada, lacus lectus lacinia libero, id venenatis eros sapien et nunc. Cras quis urna mauris, non auctor risus. Suspendisse non magna augue, in elementum augue. Donec tincidunt sodales imperdiet. Ut pharetra, nunc in pretium rutrum, eros velit rhoncus est, nec faucibus ante arcu vitae enim. Nam sit amet nulla in risus blandit aliquet. Quisque rutrum accumsan volutpat.
         </p>
       </div>
-      <div class='panel' id='geolocalization'>
+      <div class='moo-panel' id='geolocalization'>
         <h2>Geolocalization</h2>
         <h3>This module is not activated. See $.geolocation</h3>
         <h3 id='msg'></h3>
         <div id='error'></div>
       </div>
-      <div class='panel' id='data'>
+      <div class='moo-panel' id='data'>
         <h2>Data</h2>
         <h3>This module is not implemented yet.</h3>
       </div>
-      <div class='panel' id='graph'>
+      <div class='moo-panel' id='graph'>
         <h2>Graph</h2>
         <h3>This module is not implemented yet.</h3>
         <p>
@@ -153,7 +154,7 @@
           Mauris aliquam nunc a augue malesuada vel congue nunc cursus. Proin pellentesque diam iaculis sapien convallis ac sagittis sem feugiat. Ut ac iaculis neque. Curabitur vel felis non nisi rhoncus mollis suscipit quis nisi. Integer vitae augue at lorem pellentesque placerat. Donec ac nibh id massa malesuada adipiscing. Cras egestas, ligula eget tempor sagittis, metus arcu convallis orci, vehicula tempor arcu tortor quis dolor. Nullam facilisis iaculis magna sed suscipit.
         </p>
       </div>
-      <div class='panel' id='carousel'>
+      <div class='moo-panel' id='carousel'>
         <h2>Carousel</h2>
         <h3>This module is not implemented yet.</h3>
         <p>

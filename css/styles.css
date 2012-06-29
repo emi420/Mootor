@@ -82,7 +82,7 @@ body {
 }
 
 /* line 21, ../_source/css/sass/_mootor.nav.scss */
-#header {
+.moo-header {
   text-align: left;
   z-index: 9999;
   position: fixed;
@@ -91,13 +91,13 @@ body {
   padding: 1em 1em;
 }
 /* line 28, ../_source/css/sass/_mootor.nav.scss */
-#header nav {
+.moo-header nav {
   position: absolute;
   margin-top: 0;
   top: 1.6em;
 }
 /* line 33, ../_source/css/sass/_mootor.nav.scss */
-#header nav a {
+.moo-header nav a {
   padding: .5em 1em;
   width: auto;
   display: inline;
@@ -112,7 +112,7 @@ body {
   min-height: 100%;
 }
 /* line 48, ../_source/css/sass/_mootor.nav.scss */
-#panels .panel {
+#panels .moo-panel {
   min-height: 100%;
   width: 100%;
   position: absolute;
@@ -132,7 +132,7 @@ nav a {
 }
 
 /* line 74, ../_source/css/sass/_mootor.nav.scss */
-#panels .panel {
+#panels .moo-panel {
   -webkit-transition-duration: 0;
   -webkit-transform: translate3d(0, 0, 0);
 }
@@ -154,13 +154,13 @@ a:focus {
   border-radius: 5px;
 }
 /* line 13, ../_source/css/sass/_mootor.ui.scss */
-.moo-ui-form .field {
+.moo-ui-form .moo-field {
   display: block;
   padding: 1em 2em;
   border-top: 1px solid #CCC;
 }
 /* line 19, ../_source/css/sass/_mootor.ui.scss */
-.moo-ui-form .field:first-child {
+.moo-ui-form .moo-field:first-child {
   border-top: none;
 }
 /* line 21, ../_source/css/sass/_mootor.ui.scss */
@@ -221,38 +221,67 @@ a:focus {
   border-radius: 5px;
   background-color: #FFF;
   position: relative;
-  padding: 0.25em 2.25em 0.25em 0.25em;
+  padding: 0.25em 0.25em 0.25em 0.25em;
   width: 75%;
   height: 3em;
 }
 /* line 71, ../_source/css/sass/_mootor.ui.scss */
+.moo-ui-form .moo-ui-select-container .moo-ui-select-link {
+  color: #000;
+  font-size: 1.25em;
+  line-height: 2.25em;
+  text-align: right;
+  text-decoration: none;
+  display: block;
+  height: 100%;
+  padding: 0 1em;
+  position: relative;
+  right: 0;
+}
+/* line 82, ../_source/css/sass/_mootor.ui.scss */
+.moo-ui-form .moo-ui-select-container .moo-ui-select-link:before {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #cccccc));
+  background: -webkit-linear-gradient(top, #ffffff, #cccccc);
+  background: -moz-linear-gradient(top, #ffffff, #cccccc);
+  background: -o-linear-gradient(top, #ffffff, #cccccc);
+  background: -ms-linear-gradient(top, #ffffff, #cccccc);
+  background: linear-gradient(top, #ffffff, #cccccc);
+  content: " ";
+  display: block;
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: 2.5em;
+  height: 2.5em;
+}
+/* line 94, ../_source/css/sass/_mootor.ui.scss */
 .moo-ui-form .moo-ui-select-container .moo-ui-select-menu {
   background-color: #999;
   border-radius: 5px;
   padding: 1em;
   position: absolute;
 }
-/* line 77, ../_source/css/sass/_mootor.ui.scss */
+/* line 100, ../_source/css/sass/_mootor.ui.scss */
 .moo-ui-form .moo-ui-select-container .moo-ui-select-list {
   font-size: 2em;
   background: #FFF;
   border-radius: 5px;
   overflow: auto;
 }
-/* line 83, ../_source/css/sass/_mootor.ui.scss */
+/* line 106, ../_source/css/sass/_mootor.ui.scss */
 .moo-ui-form .moo-ui-select-container .moo-ui-select-list li {
   padding: 1em;
   border-bottom: 1px solid #CCC;
 }
-/* line 86, ../_source/css/sass/_mootor.ui.scss */
+/* line 109, ../_source/css/sass/_mootor.ui.scss */
 .moo-ui-form .moo-ui-select-container .moo-ui-select-list li:last-child {
   border: none;
 }
-/* line 90, ../_source/css/sass/_mootor.ui.scss */
+/* line 113, ../_source/css/sass/_mootor.ui.scss */
 .moo-ui-form .moo-ui-select-container.bottom .moo-ui-select-menu {
   top: 4.5em;
 }
-/* line 92, ../_source/css/sass/_mootor.ui.scss */
+/* line 115, ../_source/css/sass/_mootor.ui.scss */
 .moo-ui-form .moo-ui-select-container.bottom .moo-ui-select-menu:before {
   content: "";
   display: block;
@@ -264,11 +293,11 @@ a:focus {
   border-right: 20px solid transparent;
   border-bottom: 15px solid #999;
 }
-/* line 106, ../_source/css/sass/_mootor.ui.scss */
+/* line 129, ../_source/css/sass/_mootor.ui.scss */
 .moo-ui-form .moo-ui-select-container.top .moo-ui-select-menu {
   bottom: 4.5em;
 }
-/* line 108, ../_source/css/sass/_mootor.ui.scss */
+/* line 131, ../_source/css/sass/_mootor.ui.scss */
 .moo-ui-form .moo-ui-select-container.top .moo-ui-select-menu:after {
   content: "";
   display: block;
@@ -280,7 +309,7 @@ a:focus {
   border-right: 2em solid transparent;
   border-top: 1.5em solid #999;
 }
-/* line 122, ../_source/css/sass/_mootor.ui.scss */
+/* line 145, ../_source/css/sass/_mootor.ui.scss */
 .moo-ui-form .cleanbox {
   display: block;
   padding: 0.35em;
@@ -293,7 +322,7 @@ a:focus {
   text-decoration: none;
 }
 
-/* line 138, ../_source/css/sass/_mootor.ui.scss */
+/* line 161, ../_source/css/sass/_mootor.ui.scss */
 .moo_checkbox {
   display: block;
   height: 28px;
@@ -301,7 +330,7 @@ a:focus {
   overflow: hidden;
   float: right;
 }
-/* line 145, ../_source/css/sass/_mootor.ui.scss */
+/* line 168, ../_source/css/sass/_mootor.ui.scss */
 .moo_checkbox b {
   -webkit-transition-duration: .25s;
   background: url(../img/ui/switch.png);
@@ -310,16 +339,16 @@ a:focus {
   display: block;
   -webkit-transform: translate3d(0, 0, 0);
 }
-/* line 154, ../_source/css/sass/_mootor.ui.scss */
+/* line 177, ../_source/css/sass/_mootor.ui.scss */
 .moo_checkbox.off b {
   -webkit-transform: translate3d(-54px, 0, 0);
 }
-/* line 157, ../_source/css/sass/_mootor.ui.scss */
+/* line 180, ../_source/css/sass/_mootor.ui.scss */
 .moo_checkbox label {
   line-height: 28px;
 }
 
-/* line 163, ../_source/css/sass/_mootor.ui.scss */
+/* line 186, ../_source/css/sass/_mootor.ui.scss */
 .moo_tooltip {
   position: absolute;
   line-height: 140%;
@@ -332,16 +361,16 @@ a:focus {
 
 /* For modern browsers */
 /* line 22, src/styles.scss */
-.clearfix:before, .moo-ui-form:before, .moo-ui-form .field:before,
+.clearfix:before, .moo-ui-form:before, .moo-ui-form .moo-field:before,
 .clearfix:after,
 .moo-ui-form:after,
-.moo-ui-form .field:after {
+.moo-ui-form .moo-field:after {
   content: "";
   display: table;
 }
 
 /* line 27, src/styles.scss */
-.clearfix:after, .moo-ui-form:after, .moo-ui-form .field:after {
+.clearfix:after, .moo-ui-form:after, .moo-ui-form .moo-field:after {
   clear: both;
 }
 
@@ -387,12 +416,12 @@ p {
 }
 
 /* line 64, src/styles.scss */
-.panel {
+.moo-panel {
   background: #f7f7f7;
 }
 
 /* line 68, src/styles.scss */
-#header {
+.moo-header {
   box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.1);
   color: white;
   font-weight: bold;
@@ -400,7 +429,7 @@ p {
   border: 1px solid #333333;
 }
 /* line 74, src/styles.scss */
-#header nav a {
+.moo-header nav a {
   color: white;
   border: 0;
   font-size: 2em;
@@ -415,7 +444,7 @@ p {
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
 }
 /* line 82, src/styles.scss */
-#header h1 {
+.moo-header h1 {
   line-height: 140%;
   font-size: 2.3em;
   text-align: center;
@@ -433,7 +462,7 @@ nav a {
 }
 
 /* line 98, src/styles.scss */
-.nav.active {
+.moo-nav.active {
   background: #29a6f7;
   color: white;
 }

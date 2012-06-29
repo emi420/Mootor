@@ -60,11 +60,11 @@
             nav;
 
         this.el = options.el;
-        this.navClass = options.nav_class !== undefined ? options.nav_class : "nav";
-        this.itemClass = options.item_class !== undefined ? options.item_class : "panel";
+        this.navClass = options.nav_class !== undefined ? options.nav_class : "moo-nav";
+        this.itemClass = options.item_class !== undefined ? options.item_class : "moo-panel";
         this.headerId = options.header_id !== undefined ? options.header_id : "header";
         this.footerId = options.footer_id !== undefined ? options.footer_id : "footer";
-        this.hiddenClass = options.hidden_class !== undefined ? options.hidden_class : "hidden";
+        this.hiddenClass = options.hidden_class !== undefined ? options.hidden_class : "moo-hidden";
         this.margin = options.item_margin !== undefined ? options.item_margin : 5;
         this.width = options.width !== undefined ? options.width : $.view.clientW;
         this.height = options.height !== undefined ? options.height : $.view.clientH;

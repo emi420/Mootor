@@ -10,7 +10,7 @@
     border-radius: 5px;
     //overflow: hidden;
     @extend .clearfix;
-    .field {
+    .moo-field {
         display:block;
         @extend .clearfix;
         //overflow:hidden;
@@ -65,9 +65,32 @@
         border-radius: 5px;
         background-color: #FFF;
         position: relative;
-        padding: 0.25em 2.25em 0.25em 0.25em; 
+        padding: 0.25em 0.25em 0.25em 0.25em; 
         width: 75%;
         height: 3em;
+        .moo-ui-select-link {
+            color: #000;
+            font-size: 1.25em;
+            line-height: 2.25em;
+            text-align: right;
+            text-decoration: none;
+            display: block;
+            height: 100%;
+            padding: 0 1em;
+            position:relative;
+            right: 0;
+            &:before  {
+                @include background(linear-gradient(top, #FFF, #CCC));
+                content: " ";
+                display: block;
+                position: absolute;
+                top: -1px;
+                right: -1px;
+                width: 2.5em;
+                height: 2.5em;
+                
+            }
+        }
         .moo-ui-select-menu {
             background-color: #999;
             border-radius: 5px;
