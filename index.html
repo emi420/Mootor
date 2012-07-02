@@ -86,15 +86,51 @@
             </div>
           </div>
           <div class='moo-field'>
-            <label>Input radio</label>
-            <div class='moo-ui-checkbox' id='radiobtn'>
-              <input id='radio1' name='radiobutton1' type='radio' value='0' />
+            <legend>Input radio</legend>
+            <div class='moo-ui-radio'>
+              <input id='radio1' name='radios' type='radio' value='0' />
+              <label for='radio1'>
+                <span class='moo-ui-radio-label'>Option 1</span>
+                <span class='moo-ui-radio-icon'>&nbsp;</span>
+              </label>
+            </div>
+            <div class='moo-ui-radio'>
+              <input id='radio2' name='radios' type='radio' value='0' />
+              <label for='radio1'>
+                <span class='moo-ui-radio-label'>Option 2</span>
+                <span class='moo-ui-radio-icon'>&nbsp;</span>
+              </label>
+            </div>
+            <div class='moo-ui-radio'>
+              <input id='radio3' name='radios' type='radio' value='0' />
+              <label for='radio3'>
+                <span class='moo-ui-radio-label'>Option 3</span>
+                <span class='moo-ui-radio-icon moo-radio-active'>&nbsp;</span>
+              </label>
             </div>
           </div>
           <div class='moo-field'>
-            <label>Input radio</label>
-            <div class='moo-ui-checkbox' id='radiobtn'>
-              <input id='radio1' name='radiobutton1' type='radio' value='0' />
+            <legend>Input checkbox</legend>
+            <div class='moo-ui-checkbox'>
+              <input id='check1' name='checkboxes' type='checkbox' value='0' />
+              <label for='check1'>
+                <span class='moo-ui-checkbox-label'>Option 1</span>
+                <span class='moo-ui-checkbox-icon'>&nbsp;</span>
+              </label>
+            </div>
+            <div class='moo-ui-checkbox'>
+              <input id='check2' name='checkboxes' type='checkbox' value='0' />
+              <label for='check2'>
+                <span class='moo-ui-checkbox-label'>Option 2</span>
+                <span class='moo-ui-checkbox-icon'>&nbsp;</span>
+              </label>
+            </div>
+            <div class='moo-ui-checkbox'>
+              <input id='check3' name='checkboxes' type='checkbox' value='0' />
+              <label for='check3'>
+                <span class='moo-ui-checkbox-label'>Option 3</span>
+                <span class='moo-ui-checkbox-icon moo-checkbox-active'>&nbsp;</span>
+              </label>
             </div>
           </div>
           <div class='moo-field'>
@@ -192,7 +228,7 @@
            $("#txt1").onTapEnd(function(){ event.target.focus()});
            $("#txta1").onTapEnd(function(){ event.target.focus()});
            
-           // Checkbox
+           // Tooltip
            $("#tooltipTest").ui({
                 type: "Tooltip",
                 html: "Testing this tooltip"

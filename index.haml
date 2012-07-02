@@ -75,14 +75,42 @@
                                 %option Text 4
                                 
                     .moo-field
-                        %label Input radio
-                        .moo-ui-checkbox#radiobtn
-                            %input#radio1{:type=>"radio", :name=>"radiobutton1" ,:value=>"0"}
+                        %legend Input radio
+                        .moo-ui-radio
+                            %input{:type=>"radio", :name=>"radios", :id=>"radio1" ,:value=>"0"}
+                            %label{:for=>"radio1"} 
+                                %span.moo-ui-radio-label Option 1
+                                %span.moo-ui-radio-icon &nbsp;
+                        .moo-ui-radio
+                            %input{:type=>"radio", :name=>"radios", :id=>"radio2" ,:value=>"0"}
+                            %label{:for=>"radio1"} 
+                                %span.moo-ui-radio-label Option 2
+                                %span.moo-ui-radio-icon &nbsp;
+                        .moo-ui-radio
+                            %input{:type=>"radio", :name=>"radios", :id=>"radio3" ,:value=>"0"}
+                            %label{:for=>"radio3"} 
+                                %span.moo-ui-radio-label Option 3
+                                %span.moo-ui-radio-icon.moo-radio-active &nbsp;
+                    
+                    
                     .moo-field
-                        %label Input radio
-                        .moo-ui-checkbox#radiobtn
-                            %input#radio1{:type=>"radio", :name=>"radiobutton1" ,:value=>"0"}
-
+                        %legend Input checkbox
+                        .moo-ui-checkbox
+                            %input#check1{:type=>"checkbox", :name=>"checkboxes" ,:value=>"0"}
+                            %label{:for=>"check1"}
+                                %span.moo-ui-checkbox-label Option 1
+                                %span.moo-ui-checkbox-icon &nbsp;
+                        .moo-ui-checkbox
+                            %input#check2{:type=>"checkbox", :name=>"checkboxes" ,:value=>"0"}
+                            %label{:for=>"check2"}
+                                %span.moo-ui-checkbox-label Option 2
+                                %span.moo-ui-checkbox-icon &nbsp;
+                        .moo-ui-checkbox
+                            %input#check3{:type=>"checkbox", :name=>"checkboxes" ,:value=>"0"}
+                            %label{:for=>"check3"}
+                                %span.moo-ui-checkbox-label Option 3
+                                %span.moo-ui-checkbox-icon.moo-checkbox-active &nbsp;
+                    
                     .moo-field
                         %label Tooltip
                         #radiobtn
@@ -157,7 +185,7 @@
            $("#txt1").onTapEnd(function(){ event.target.focus()});
            $("#txta1").onTapEnd(function(){ event.target.focus()});
            
-           // Checkbox
+           // Tooltip
            $("#tooltipTest").ui({
                 type: "Tooltip",
                 html: "Testing this tooltip"

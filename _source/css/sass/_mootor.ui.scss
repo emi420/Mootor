@@ -17,12 +17,12 @@
         padding: 1em 2em;
         border-top: 1px solid #CCC;
         &:first-child {border-top: none}
-    }
-    label {
-        @include float-left;
-        font-size: 2em;
-        font-weight: 700;
-        width: 25%;
+        > label, legend {
+            @include float-left;
+            font-size: 2em;
+            font-weight: 700;
+            width: 25%;
+        }
     }
     .moo-ui-text {
         @include float-right;
@@ -76,18 +76,25 @@
             text-decoration: none;
             display: block;
             height: 100%;
-            padding: 0 1em;
+            padding: 0 0.5em;
             position:relative;
             right: 0;
-            &:before  {
+            z-index: 10;
+            &:after  {
                 @include background(linear-gradient(top, #FFF, #CCC));
+                border-top: 1px solid #666;
+                border-right: 1px solid #666;
+                border-bottom: 1px solid #666;
+                border-top-right-radius: 5px;
+                border-bottom-right-radius: 5px;
                 content: " ";
                 display: block;
                 position: absolute;
-                top: -1px;
-                right: -1px;
-                width: 2.5em;
-                height: 2.5em;
+                top: -0.25em;
+                right: -0.25em;
+                width: 2.25em;
+                height: 2.25em;
+                z-index: -1;
                 
             }
         }
@@ -152,6 +159,90 @@
         font-size: 2em;
         font-weight: 700;
         text-decoration: none;
+    }
+    .moo-ui-radio {
+        @include float-right;
+        position: relative;
+        width: 75%;
+        input{ 
+            position:absolute;
+            top: 0.5em;
+            left: 0.5em;
+        }
+        label {
+            position: relative;
+            display: block;
+            padding: 0.5em 0.5em 0.5em 2em;
+            background: #FFF;
+            font-size: 1.4em;
+            .moo-ui-radio-icon {
+                display: block;
+                position: absolute;
+                left: 0.5em;
+                top: 0.5em;
+                background-color: #CCC;
+                border: 1px solid #999;
+                border-radius: 8px;
+                width: 1em;
+                height: 1em;
+                &.moo-radio-active {
+                    background-color: #666;
+                    &:after {
+                         content: " ";
+                        display: block;
+                        position: absolute;
+                        top: 0.2em;
+                        left: 0.2em;
+                        @include background(radial-gradient(#FFF, #A6C9FD 6px));
+                        border-radius: 4px;
+                        @include single-box-shadow(#666, 0, 0, 2px, 2px);
+                        width:0.6em;
+                        height: 0.6em;
+                    }
+                }
+            }
+        }
+    }
+    .moo-ui-checkbox {
+        @include float-right;
+        position: relative;
+        width: 75%;
+        input{ 
+            position:absolute;
+            top: 0.5em;
+            left: 0.5em;
+        }
+        label {
+            position: relative;
+            display: block;
+            padding: 0.5em 0.5em 0.5em 2em;
+            background: #FFF;
+            font-size: 1.4em;
+            .moo-ui-checkbox-icon {
+                display: block;
+                position: absolute;
+                left: 0.5em;
+                top: 0.5em;
+                background-color: #CCC;
+                border: 1px solid #999;
+                width: 1em;
+                height: 1em;
+                &.moo-checkbox-active {
+                    background-color: #666;
+                    &:after {
+                         content: " ";
+                        display: block;
+                        position: absolute;
+                        top: 0.2em;
+                        left: 0.2em;
+                        @include background(linear-gradient(top, #FFF, #BDD7FD));
+                        @include single-box-shadow(#666, 0, 0, 2px, 2px);
+                        width:0.6em;
+                        height: 0.6em;
+                    }
+                }
+            }
+        }
     }
 }
 
