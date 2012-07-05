@@ -73,7 +73,34 @@
                                 %option Text 2
                                 %option Text 3
                                 %option Text 4
-                                
+                    .moo-field
+                        %label Multiple select menu
+                        .moo-ui-select-container.multiple.bottom 
+                            %a.moo-ui-select-link{:href=>""} &#9660; 
+                            .moo-ui-select-menu{:style=>'height: 217px;'}
+                                %ul.moo-ui-select-list{:style=>'height: 200px;'}
+                                    %li Item 1
+                                    %li This is some other item listed
+                                    %li.selected Third item
+                                    %li.selected some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                            %select#select1{:style=>"display: none", :multiple=>"multiple"}
+                                %option Text 1
+                                %option Text 2
+                                %option Text 3
+                                %option Text 4            
                     .moo-field
                         %legend Input radio
                         .moo-ui-radio
@@ -110,6 +137,7 @@
                             %label{:for=>"check3"}
                                 %span.moo-ui-checkbox-label Option 3
                                 %span.moo-ui-checkbox-icon.moo-checkbox-active &nbsp;
+                    
                     
                     .moo-field
                         %label Tooltip
