@@ -27,7 +27,6 @@
             anchor,
             /**
              * Navigation item
-             * @ignore
              */
             item = {
                 anchors: [],
@@ -328,6 +327,8 @@
                 $(back.el).hide();
                 fn.isMoving = false;
                 
+                panel.x = 0;
+                fn.x = 0;
                 fn.translate({el: fn.el, x: 0});
                 fn.translate({el: panel.el, x: 0});
             };

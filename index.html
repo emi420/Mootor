@@ -41,7 +41,7 @@
             <label>Input de texto</label>
             <div class='moo-ui-text'>
               <input id='txt1' name='text1' placeholder='Ingrese su texto aqui' type='text' />
-              <a class='cleanbox' href=''>&times;</a>
+              <span class='cleanbox' href=''>&times;</span>
             </div>
           </div>
           <div class='moo-field'>
@@ -53,9 +53,9 @@
           <div class='moo-field'>
             <label>Select menu</label>
             <div class='moo-ui-select-container top'>
-              <a class='moo-ui-select-link' href=''>&#9660;</a>
+              <span class='moo-ui-select-link' href=''>&#9660;</span>
               <div class='moo-ui-select-menu' style='height: 217px;'>
-                <ul class='moo-ui-select-list' style='height: 200px;'>
+                <ul class='moo-ui-select-list' id='moo-ui-select-1' style='height: 200px;'>
                   <li>Item 1</li>
                   <li>This is some other item listed</li>
                   <li>Third item</li>
@@ -225,7 +225,12 @@
                 type: "Tooltip",
                 html: "Testing this tooltip"
            });
-    
+           
+           // Select
+           $("#moo-ui-select-1").ui({
+                type: "Select",
+           });
+           
            // Show location
            /*$("#location").geolocation({
                 error: "error",

@@ -38,7 +38,7 @@
                         %label Input de texto
                         .moo-ui-text
                             %input#txt1{:type=>"text", :name=>"text1" ,:placeholder=>"Ingrese su texto aqui"}
-                            %a.cleanbox{:href=>""} &times;
+                            %span.cleanbox{:href=>""} &times;
                        
                     .moo-field
                         %label &Aacute;rea de texto
@@ -47,9 +47,9 @@
                     .moo-field
                         %label Select menu
                         .moo-ui-select-container.top
-                            %a.moo-ui-select-link{:href=>""} &#9660; 
+                            %span.moo-ui-select-link{:href=>""} &#9660; 
                             .moo-ui-select-menu{:style=>'height: 217px;'}
-                                %ul.moo-ui-select-list{:style=>'height: 200px;'}
+                                %ul#moo-ui-select-1.moo-ui-select-list{:style=>'height: 200px;'}
                                     %li Item 1
                                     %li This is some other item listed
                                     %li Third item
@@ -185,7 +185,12 @@
                 type: "Tooltip",
                 html: "Testing this tooltip"
            });
-
+           
+           // Select
+           $("#moo-ui-select-1").ui({
+                type: "Select",
+           });
+           
            // Show location
            /*$("#location").geolocation({
                 error: "error",

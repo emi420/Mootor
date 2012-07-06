@@ -72,7 +72,24 @@
         check.onTapEnd(this);
 
         return this;
-    };
+    },
+    
+    Select = function(options) {
+        var self = this,
+            callback;
+            
+        // TODO
+        
+        callback = function(gesture) {
+            if (gesture.e.cancelBubble) {
+              gesture.e.cancelBubble = true;
+            } else {
+              gesture.e.stopPropagation();
+            }
+        }
+        $(options.el).onDragMove(callback);
+        $(options.el).onDragEnd(callback);
+    }
 
     Checkbox.prototype = {
      /**
@@ -98,11 +115,6 @@
         }
     };
     
-    
-    Tooltip.prototype = {
-        
-    }
-    
     Overlay.prototype = {
         show: function() {
             $(this.el).show();
@@ -112,8 +124,9 @@
         },
     }
     
+    Tooltip.prototype = {}
     $.extend(Overlay.prototype, Tooltip.prototype);
-
+    
     $.extend({
     
          ui: function(options) {
@@ -124,6 +137,9 @@
                     break;
                  case "Tooltip":
                     return new Tooltip(options);
+                    break;
+                 case "Select":
+                    return new Select(options);
                     break;
              }
          }
