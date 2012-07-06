@@ -2,11 +2,6 @@
  * @summary Mootor Navigation
  */
 
-/** 
- * @class
- * @name $ 
- */
- 
 (function ($) {
 
     "use strict";
@@ -22,22 +17,7 @@
     var Nav,
      
      /**
-     * Navigation object
-     * @class
-     * @return {Nav} Nav object
-     * @param {object} options  Configuration options
-     * @property {element} el Container element
-     * @property {integer} height Container height
-     * @property {integer} x Current position on X axis
-     * @property {integer} y Current position on Y axis
-     * @property {integer} current Index of active panel
-     * @property {integer} back Index of previous active panel
-     * @property {integer} width Nav container width
-     * @property {integer} height Nav container height
-     * @property {boolean} isMoving True if Nav container is moving
-     * @property {integer} direction Direction for Nav movement
-     * @property {array} [history] Navigation history
-     * @property {integer} count Items count
+     * Navigation
      */
     Nav = function (options) {
 
@@ -80,7 +60,7 @@
         nav = this.el.getElementsByClassName(this.itemClass);
 
         this.count = nav.length;
-
+        
         // Anchor links
         for (i = nav.length; i--;) {
             this.items[i] = {el: nav[i]};
@@ -102,15 +82,12 @@
             item.hidden = item.el.getElementsByClassName(this.hiddenClass);
         }
         
-        //$(this.el).onDragMove(this);
+        $(this.el).onDragMove(this);
         $(this.el).onDragEnd(this);
-
-        if (document.body.style.overflow !== "hidden") {
-            document.body.style.overflow = "hidden";
-        }
 
         this.footer = this.footer.init(this);
         this.header = this.header.init(this);
+
         this.init();
 
         return this;
@@ -121,7 +98,6 @@
 
         /**
          * Gesture handler
-         * @private
          */
         handleGesture: function (gesture) {
             switch (gesture.type) {
@@ -136,7 +112,6 @@
 
         /**
          * Initialize header
-         * @private
          */
         header: {
             init: function (panels) {
@@ -158,7 +133,6 @@
 
         /**
          * Initialize footer
-         * @private
          */
         footer: {
             init: function (panels) {
@@ -167,7 +141,7 @@
                 if (footer.el) {
                     panels.nav(footer);
                     panels.height = panels.height - footer.el.offsetHeight;
-                    panels.el.style.height = panels.height + "px";
+                    //panels.el.style.height = panels.height + "px";
                     return footer;
                 }
             }
@@ -175,7 +149,6 @@
         
         /**
          * Initialize navigation area
-         * @private
          */
         nav: function (obj) {
             obj.anchors = obj.el.getElementsByClassName(this.navClass);
@@ -183,7 +156,6 @@
 
         /**
          * Initialize Nav
-         * @private
          */
         init: function () {
 
@@ -216,8 +188,6 @@
                 $(gesture.el).setClass("active");
             };
 
-            // FIXME: optimize me, DRY!
-            
             // Reset styles and set anchor links
             for (i = this.count; i--;) {
 
@@ -287,7 +257,6 @@
 
         /**
          * Move panel
-         * @private
          */
         move: function (gesture) {
             var panel =  this.items[this.current];
@@ -304,7 +273,6 @@
 
         /**
          * Check movement
-         * @private
          */
         check: function (gesture) {
             var panel = this.items[this.current],
@@ -338,7 +306,6 @@
 
         /**
          * Load current panel
-         * @private
          */
         load: function () {
 
@@ -356,9 +323,13 @@
             $(panel.el).show();
            
             this.isMoving = true;
+            
             callback = function () {
                 $(back.el).hide();
                 fn.isMoving = false;
+                
+                fn.translate({el: fn.el, x: 0});
+                fn.translate({el: panel.el, x: 0});
             };
 
             // Initial position for translate
@@ -414,8 +385,6 @@
 
         /**
          * Set current panel
-         * @param {string} id Nav id
-         * @example nav.set("home");
          */
         set: function (id) {
 
@@ -441,10 +410,6 @@
 
         /**
          * Get panel by id
-         * @param {string} id Nav id
-         * @private
-         * @example nav.get("home").height;
-         * @return {item} Navigation item
          */
         get: function (id) {
             var i;
@@ -458,14 +423,6 @@
 
         /**
          * Translate Nav
-         * @param {object} options
-         * @private
-         * @config {integer} duration Translate duration, in seconds
-         * @config {function} callback Function to call on move end
-         * @config {integer} x Active panel position on X axis
-         * @config {integer} y Active panel position on Y axis
-         * @config {integer} y Active panel position on Y axis
-         * @example item.translateFx({x: 100});
          */
         translate: function (options) {
             if (options.duration === undefined) {
@@ -489,9 +446,6 @@
 
         /**
          * Hide hidden content
-         * @param {Nav} panel
-         * @private
-         * @example nav.hide(nav.items[nav.current])
          */
         hide: function (panel) {
             var i;
@@ -502,8 +456,6 @@
 
         /**
          * Show hidden content
-         * @private
-         * @example nav.show();
          */
         show: function (panel) {
             var i;
@@ -514,7 +466,6 @@
 
         /**
          * Go back on navigation history
-         * @example nav.goBack();
          */
         goBack: function () {
             if (this.history.length > 0) {
@@ -526,13 +477,6 @@
 
         /**
          * Nav configuration
-         * @param {object} options
-         * @config {string} panel Nav id
-         * @config {boolean} movable Set to false to block panel
-         * @example nav.config({
-         *      panel: "geo",
-         *       movable: false
-         * });
          */
         config: function (options) {
             var panel;
@@ -551,18 +495,6 @@
      * Navigation
      */
     $.extend({
-        /** 
-         * @memberOf $.prototype 
-         * @name nav
-         * @function
-         * @param {object} options Configuration options
-         * @return {Nav} Nav object
-         * @config {string} navClass Navigation class name
-         * @config {string} itemClass Nav class name
-         * @config {string} hiddenClass Hidden content class name
-         * @config {string} headerId Header element id
-         * @example var nav = $("#myPanels").nav();
-         */
         nav: function (options) {
             if (typeof options !== "object") {
                 options = {};
