@@ -8,12 +8,10 @@
     background-color: #FFF;
     border: 1px solid #CCC;
     border-radius: 5px;
-    //overflow: hidden;
     @extend .clearfix;
     .moo-field {
         display:block;
         @extend .clearfix;
-        //overflow:hidden;
         padding: 1em 2em;
         border-top: 1px solid #CCC;
         &:first-child {border-top: none}
@@ -57,8 +55,8 @@
             line-height: 1.5em;
             width: 100%;
         }
-
     }
+    
     .moo-ui-select-container {
         @include float-right;
         border: 1px solid #666;
@@ -68,6 +66,7 @@
         padding: 0.25em 0.25em 0.25em 0.25em; 
         width: 75%;
         height: 3em;
+        z-index: 300;
         .moo-ui-select-link {
             color: #000;
             font-size: 1.25em;
@@ -95,7 +94,6 @@
                 width: 2.25em;
                 height: 2.25em;
                 z-index: -1;
-                
             }
         }
         .moo-ui-select-menu {
@@ -112,11 +110,16 @@
             overflow-y: scroll;
             
             li {
-                padding: 1em;
-                display: block;
-                width: 100%;
+                padding: 1em ;
                 border-bottom: 1px solid #CCC;
+                white-space: nowrap;
                 &:last-child { border: none;}
+                &.selected {
+                    @include background(linear-gradient(top, #DAEAEC, #CEE3E6));
+                    border-top-color:#AEBBBD;
+                    border-bottom-color:#AEBBBD;
+                    color: #3F8D94;
+                }
             }
         }
         &.bottom {
