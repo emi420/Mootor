@@ -20,12 +20,12 @@
         /
             .moo-panel#home
                 %nav
-                    %a.nav{:href=>"", :rel=>"nav"} Nav
-                    %a.nav{:href=>"", :rel=>"ui"} UI
-                    %a.nav{:href=>"", :rel=>"geolocalization"} Geolocalization
-                    %a.nav{:href=>"", :rel=>"data"} Data
-                    %a.nav{:href=>"", :rel=>"graph"} Graph
-                    %a.nav{:href=>"", :rel=>"carousel"} Carousel
+                    %a.moo-nav{:href=>"", :rel=>"nav"} Nav
+                    %a.moo-nav{:href=>"", :rel=>"ui"} UI
+                    %a.moo-nav{:href=>"", :rel=>"geolocalization"} Geolocalization
+                    %a.moo-nav{:href=>"", :rel=>"data"} Data
+                    %a.moo-nav{:href=>"", :rel=>"graph"} Graph
+                    %a.moo-nav{:href=>"", :rel=>"carousel"} Carousel
 
         .moo-panel#ui
             %h2 User Interface
@@ -45,62 +45,63 @@
                         %label &Aacute;rea de texto
                         .moo-ui-textarea
                             %textarea#txta1{:name=>"textarea1" ,:placeholder=>"Ingrese su texto aqui"}
-                    .moo-field
-                        %label Select menu
-                        .moo-ui-select-container.top
-                            %a.moo-ui-select-link{:href=>""} &#9660; 
-                            .moo-ui-select-menu{:style=>'height: 217px;'}
-                                %ul.moo-ui-select-list{:style=>'height: 200px;'}
-                                    %li Item 1
-                                    %li This is some other item listed
-                                    %li Third item
-                                    %li some random item
-                                    %li some random item
-                                    %li some random item
-                                    %li some random item
-                                    %li some random item
-                                    %li some random item
-                                    %li some random item
-                                    %li some random item
-                                    %li some random item
-                                    %li some random item
-                                    %li some random item
-                                    %li some random item
-                                    %li some random item
-                                    %li some random item
-                            %select#select1{:style=>"display: none"}
-                                %option Text 1
-                                %option Text 2
-                                %option Text 3
-                                %option Text 4
-                    .moo-field
-                        %label Multiple select menu
-                        .moo-ui-select-container.multiple.bottom 
-                            %a.moo-ui-select-link{:href=>""} &#9660; 
-                            .moo-ui-select-menu{:style=>'height: 217px;'}
-                                %ul.moo-ui-select-list{:style=>'height: 200px;'}
-                                    %li Item 1
-                                    %li This is some other item listed
-                                    %li.selected Third item
-                                    %li.selected some random item
-                                    %li some random item
-                                    %li some random item
-                                    %li some random item
-                                    %li some random item
-                                    %li some random item
-                                    %li some random item
-                                    %li some random item
-                                    %li some random item
-                                    %li some random item
-                                    %li some random item
-                                    %li some random item
-                                    %li some random item
-                                    %li some random item
-                            %select#select1{:style=>"display: none", :multiple=>"multiple"}
-                                %option Text 1
-                                %option Text 2
-                                %option Text 3
-                                %option Text 4            
+                    /
+                        .moo-field
+                            %label Select menu
+                            .moo-ui-select-container.top
+                                %a.moo-ui-select-link{:href=>""} &#9660; 
+                                .moo-ui-select-menu{:style=>'height: 217px;'}
+                                    %ul.moo-ui-select-list{:style=>'height: 200px;'}
+                                        %li Item 1
+                                        %li This is some other item listed
+                                        %li Third item
+                                        %li some random item
+                                        %li some random item
+                                        %li some random item
+                                        %li some random item
+                                        %li some random item
+                                        %li some random item
+                                        %li some random item
+                                        %li some random item
+                                        %li some random item
+                                        %li some random item
+                                        %li some random item
+                                        %li some random item
+                                        %li some random item
+                                        %li some random item
+                                %select#select1{:style=>"display: none"}
+                                    %option Text 1
+                                    %option Text 2
+                                    %option Text 3
+                                    %option Text 4
+                        .moo-field
+                            %label Multiple select menu
+                            .moo-ui-select-container.multiple.bottom 
+                                %a.moo-ui-select-link{:href=>""} &#9660; 
+                                .moo-ui-select-menu{:style=>'height: 217px;'}
+                                    %ul.moo-ui-select-list{:style=>'height: 200px;'}
+                                        %li Item 1
+                                        %li This is some other item listed
+                                        %li.selected Third item
+                                        %li.selected some random item
+                                        %li some random item
+                                        %li some random item
+                                        %li some random item
+                                        %li some random item
+                                        %li some random item
+                                        %li some random item
+                                        %li some random item
+                                        %li some random item
+                                        %li some random item
+                                        %li some random item
+                                        %li some random item
+                                        %li some random item
+                                        %li some random item
+                                %select#select1{:style=>"display: none", :multiple=>"multiple"}
+                                    %option Text 1
+                                    %option Text 2
+                                    %option Text 3
+                                    %option Text 4            
                     .moo-field
                         %legend Input radio
                         .moo-ui-radio
@@ -146,8 +147,8 @@
         /
             .moo-panel#nav
                 %nav
-                    %a.nav{:href=>"", :rel=>"item1"} Item 1
-                    %a.nav{:href=>"", :rel=>"item2"} Item 2
+                    %a.moo-nav{:href=>"", :rel=>"item1"} Item 1
+                    %a.moo-nav{:href=>"", :rel=>"item2"} Item 2
 
             .moo-panel#item1
                 %h2 Item 1

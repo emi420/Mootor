@@ -20,12 +20,12 @@
     <!--
       <div class='moo-panel' id='home'>
         <nav>
-          <a class='nav' href='' rel='nav'>Nav</a>
-          <a class='nav' href='' rel='ui'>UI</a>
-          <a class='nav' href='' rel='geolocalization'>Geolocalization</a>
-          <a class='nav' href='' rel='data'>Data</a>
-          <a class='nav' href='' rel='graph'>Graph</a>
-          <a class='nav' href='' rel='carousel'>Carousel</a>
+          <a class='moo-nav' href='' rel='nav'>Nav</a>
+          <a class='moo-nav' href='' rel='ui'>UI</a>
+          <a class='moo-nav' href='' rel='geolocalization'>Geolocalization</a>
+          <a class='moo-nav' href='' rel='data'>Data</a>
+          <a class='moo-nav' href='' rel='graph'>Graph</a>
+          <a class='moo-nav' href='' rel='carousel'>Carousel</a>
         </nav>
       </div>
     -->
@@ -52,72 +52,74 @@
               <textarea id='txta1' name='textarea1' placeholder='Ingrese su texto aqui'></textarea>
             </div>
           </div>
-          <div class='moo-field'>
-            <label>Select menu</label>
-            <div class='moo-ui-select-container top'>
-              <a class='moo-ui-select-link' href=''>&#9660;</a>
-              <div class='moo-ui-select-menu' style='height: 217px;'>
-                <ul class='moo-ui-select-list' style='height: 200px;'>
-                  <li>Item 1</li>
-                  <li>This is some other item listed</li>
-                  <li>Third item</li>
-                  <li>some random item</li>
-                  <li>some random item</li>
-                  <li>some random item</li>
-                  <li>some random item</li>
-                  <li>some random item</li>
-                  <li>some random item</li>
-                  <li>some random item</li>
-                  <li>some random item</li>
-                  <li>some random item</li>
-                  <li>some random item</li>
-                  <li>some random item</li>
-                  <li>some random item</li>
-                  <li>some random item</li>
-                  <li>some random item</li>
-                </ul>
+          <!--
+            <div class='moo-field'>
+              <label>Select menu</label>
+              <div class='moo-ui-select-container top'>
+                <a class='moo-ui-select-link' href=''>&#9660;</a>
+                <div class='moo-ui-select-menu' style='height: 217px;'>
+                  <ul class='moo-ui-select-list' style='height: 200px;'>
+                    <li>Item 1</li>
+                    <li>This is some other item listed</li>
+                    <li>Third item</li>
+                    <li>some random item</li>
+                    <li>some random item</li>
+                    <li>some random item</li>
+                    <li>some random item</li>
+                    <li>some random item</li>
+                    <li>some random item</li>
+                    <li>some random item</li>
+                    <li>some random item</li>
+                    <li>some random item</li>
+                    <li>some random item</li>
+                    <li>some random item</li>
+                    <li>some random item</li>
+                    <li>some random item</li>
+                    <li>some random item</li>
+                  </ul>
+                </div>
+                <select id='select1' style='display: none'>
+                  <option>Text 1</option>
+                  <option>Text 2</option>
+                  <option>Text 3</option>
+                  <option>Text 4</option>
+                </select>
               </div>
-              <select id='select1' style='display: none'>
-                <option>Text 1</option>
-                <option>Text 2</option>
-                <option>Text 3</option>
-                <option>Text 4</option>
-              </select>
             </div>
-          </div>
-          <div class='moo-field'>
-            <label>Multiple select menu</label>
-            <div class='moo-ui-select-container multiple bottom'>
-              <a class='moo-ui-select-link' href=''>&#9660;</a>
-              <div class='moo-ui-select-menu' style='height: 217px;'>
-                <ul class='moo-ui-select-list' style='height: 200px;'>
-                  <li>Item 1</li>
-                  <li>This is some other item listed</li>
-                  <li class='selected'>Third item</li>
-                  <li class='selected'>some random item</li>
-                  <li>some random item</li>
-                  <li>some random item</li>
-                  <li>some random item</li>
-                  <li>some random item</li>
-                  <li>some random item</li>
-                  <li>some random item</li>
-                  <li>some random item</li>
-                  <li>some random item</li>
-                  <li>some random item</li>
-                  <li>some random item</li>
-                  <li>some random item</li>
-                  <li>some random item</li>
-                  <li>some random item</li>
-                </ul>
+            <div class='moo-field'>
+              <label>Multiple select menu</label>
+              <div class='moo-ui-select-container multiple bottom'>
+                <a class='moo-ui-select-link' href=''>&#9660;</a>
+                <div class='moo-ui-select-menu' style='height: 217px;'>
+                  <ul class='moo-ui-select-list' style='height: 200px;'>
+                    <li>Item 1</li>
+                    <li>This is some other item listed</li>
+                    <li class='selected'>Third item</li>
+                    <li class='selected'>some random item</li>
+                    <li>some random item</li>
+                    <li>some random item</li>
+                    <li>some random item</li>
+                    <li>some random item</li>
+                    <li>some random item</li>
+                    <li>some random item</li>
+                    <li>some random item</li>
+                    <li>some random item</li>
+                    <li>some random item</li>
+                    <li>some random item</li>
+                    <li>some random item</li>
+                    <li>some random item</li>
+                    <li>some random item</li>
+                  </ul>
+                </div>
+                <select id='select1' multiple='multiple' style='display: none'>
+                  <option>Text 1</option>
+                  <option>Text 2</option>
+                  <option>Text 3</option>
+                  <option>Text 4</option>
+                </select>
               </div>
-              <select id='select1' multiple='multiple' style='display: none'>
-                <option>Text 1</option>
-                <option>Text 2</option>
-                <option>Text 3</option>
-                <option>Text 4</option>
-              </select>
             </div>
-          </div>
+          -->
           <div class='moo-field'>
             <legend>Input radio</legend>
             <div class='moo-ui-radio'>
@@ -178,8 +180,8 @@
     <!--
       <div class='moo-panel' id='nav'>
         <nav>
-          <a class='nav' href='' rel='item1'>Item 1</a>
-          <a class='nav' href='' rel='item2'>Item 2</a>
+          <a class='moo-nav' href='' rel='item1'>Item 1</a>
+          <a class='moo-nav' href='' rel='item2'>Item 2</a>
         </nav>
       </div>
       <div class='moo-panel' id='item1'>
