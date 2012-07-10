@@ -1,24 +1,15 @@
-/* -----------------------------------------------------------------------------------------
- 
---------------------------------------------------------------------------------------------*/
 /* =============================================================================
-   Base
+   CSS Normalization
+   normalize.css 2012-07-07T09:50 UTC - http://github.com/necolas/normalize.css 
    ========================================================================== */
-   
-/*
- * Addresses margins/padding handled incorrectly 
- */
-html,
-body {
-    margin: 0;
-    padding: 0; 
-    border: 0;
-}
 
-/*
- * Corrects block display not defined in Android 2.1, iOS 3.2, Opera Mini
- */
+/* ==========================================================================
+   HTML5 display definitions
+   ========================================================================== */
  
+ /*
+ * Corrects `block` display not defined in Android 2.1, iOS 3.2, Opera Mini
+ */
 article,
 aside,
 details,
@@ -33,11 +24,31 @@ summary {
     display: block;
 }
 
+   
+/* =============================================================================
+   Base
+   ========================================================================== */
+   
+/* 
+ * Apply a natural box layout model to all elements 
+ * (padding is calculated inside the box, not changing the width/height set on the element)
+ */
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+/*
+ * Addresses margins/padding handled incorrectly 
+ */
+html,
+body {
+    margin: 0;
+    padding: 0; 
+    border: 0;
+}
+
 
 /*
  * Addresses font-family inconsistency between 'textarea' and other form elements.
  */
-
 html,
 button,
 input,
@@ -50,44 +61,6 @@ textarea {
 /* =============================================================================
    Typography
    ========================================================================== */
-
-/*
- * Addresses font sizes and margins
- */
-
-h1 {
-    font-size: 2em;
-    margin: 0.67em 0;
-}
-
-h2 {
-    font-size: 1.5em;
-    margin: 0.83em 0;
-}
-
-h3 {
-    font-size: 1.17em;
-    margin: 1em 0;
-}
-
-h4 {
-    font-size: 1em;
-    margin: 1.33em 0;
-}
-
-h5 {
-    font-size: 0.83em;
-    margin: 1.67em 0;
-}
-
-h6 {
-    font-size: 0.75em;
-    margin: 2.33em 0;
-}
-
-small {
-    font-size: 75%;
-}
 
 /*
  * Prevents sub and sup affecting line-height in all browsers
@@ -109,6 +82,7 @@ sup {
 sub {
     bottom: -0.25em;
 }
+
 
 /* =============================================================================
    Forms
