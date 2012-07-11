@@ -32,16 +32,15 @@
       <div class='moo-hidden'>
         <form action='' class='moo-ui-form' id='uiform' method='post'>
           <div class='moo-field'>
-            <label>Input checkbox</label>
-            <div class='moo-ui-switch' id='switch1'>
-              <input id='check1' name='checkbox1' type='checkbox' value='1' />
+            <label>Input Switch</label>
+            <div class='moo-ui-switch' id='moo-ui-switch-1'>
+              <input name='switch1' type='checkbox' value='1' />
             </div>
           </div>
           <div class='moo-field'>
             <label>Input de texto</label>
-            <div class='moo-ui-text'>
-              <input id='txt1' name='text1' placeholder='Ingrese su texto aqui' type='text' />
-              <span class='cleanbox' href=''>&times;</span>
+            <div class='moo-ui-text' id='moo-ui-text-1'>
+              <input name='text1' placeholder='Ingrese su texto aqui' type='text' />
             </div>
           </div>
           <div class='moo-field'>
@@ -248,9 +247,14 @@
            // Navigation panels
            $("#panels").nav();
            
-           // Checkbox
-           $("#switch1").ui({
-                type: "Checkbox"
+           // Switch
+           $("#moo-ui-switch-1").ui({
+                type: "Switch"
+           });
+    
+           // Text
+           $("#moo-ui-text-1").ui({
+                type: "Text"
            });
            
            // Tooltip

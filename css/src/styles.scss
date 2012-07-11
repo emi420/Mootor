@@ -68,7 +68,7 @@ p {
     box-shadow: 1px 2px 2px rgba(0, 0, 0, .1);    
     color: $subColor1;    
     font-weight: bold ;
-    background: $domColor1B;
+    background: rgba(0,0,0,.5); //$domColor1B;
     border: 1px solid $domColor1B;
     nav a {
         color: $subColor1;
