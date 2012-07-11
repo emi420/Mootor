@@ -57,8 +57,8 @@
                 event: []
             };
             // Bind listeners only once
-            fn.bind("mousedown", fn);
-            fn.bind("mouseup", fn);
+            //fn.bind("mousedown", fn);
+            //fn.bind("mouseup", fn);
             fn.bind("touchstart", fn);
             fn.bind("touchend", fn);
         }
@@ -75,7 +75,7 @@
     fire = function (info, callbacks) {
         var i;
 
-        info.e.preventDefault();           
+        info.e.preventDefault();
 
         if (callbacks !== undefined) {
             for (i = 0; i < callbacks.length; i++) {
