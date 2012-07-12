@@ -48,7 +48,7 @@
         padding: 0.25em; 
         width: 75%;
         textarea { 
-            -webkit-appearance:none;  /* Remove default iOS shadow */
+            -webkit-appearance:none;  /* Remove default shadow in iOS 3.2 */
             border: none; 
             background: none; 
             font-size: 1.5em; 

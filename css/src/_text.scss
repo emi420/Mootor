@@ -40,13 +40,14 @@ $base-font-size: 62.5%;
 }
 
 
-/* =============================================================================
-   Typography
-   ========================================================================== */
+/* ==========================================================================
+Typography 
+(from normalize.css 2012-07-07T09:50 UTC - http://github.com/necolas/normalize.css )
+========================================================================== */
 
 /*
- * Addresses font sizes and margins
- */
+* Addresses font sizes and margins set differently.
+*/
 
 h1 {
     font-size: 2em;
@@ -81,6 +82,5 @@ h6 {
 small {
     font-size: 75%;
 }
-
 
 
