@@ -13,8 +13,8 @@ $readable-font: 'Palatino Linotype', 'Book Antiqua', Palatino, 'Droid Serif', se
 @import "compass/utilities" ;
 @import "text";
 @import "colors";
-@import "_mootor/_mootor.nav.scss";
-@import "_mootor/_mootor.ui.scss";
+@import "../../_source/css/sass/_mootor.nav.scss";
+@import "../../_source/css/sass/_mootor.ui.scss";
 
 // Clearfix
 /* For modern browsers */
