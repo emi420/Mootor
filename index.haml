@@ -32,14 +32,13 @@
             .moo-hidden
                 %form#uiform.moo-ui-form{:action=>"", :method=>"post"}
                     .moo-field
-                        %label Input checkbox
-                        .moo-ui-switch#switch1
-                            %input#check1{:type=>"checkbox", :name=>"checkbox1" ,:value=>"1"}  
+                        %label Input Switch
+                        .moo-ui-switch#moo-ui-switch-1
+                            %input{:type=>"checkbox", :name=>"switch1" ,:value=>"1"}  
                     .moo-field
                         %label Input de texto
-                        .moo-ui-text
-                            %input#txt1{:type=>"text", :name=>"text1" ,:placeholder=>"Ingrese su texto aqui"}
-                            %span.cleanbox{:href=>""} &times;
+                        .moo-ui-text#moo-ui-text-1
+                            %input{:type=>"text", :name=>"text1" ,:placeholder=>"Ingrese su texto aqui"}
                        
                     .moo-field
                         %label &Aacute;rea de texto
@@ -204,9 +203,14 @@
            // Navigation panels
            $("#panels").nav();
            
-           // Checkbox
-           $("#switch1").ui({
-                type: "Checkbox"
+           // Switch
+           $("#moo-ui-switch-1").ui({
+                type: "Switch"
+           });
+
+           // Text
+           $("#moo-ui-text-1").ui({
+                type: "Text"
            });
            
            // Tooltip

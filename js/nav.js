@@ -287,11 +287,22 @@
                     if (this.y > 0) {
                         this.y = 0;
                     } else {
-                        this.y = -(panel.height - this.height);
+                        if (this.header === undefined) {                        
+                            this.y = -(panel.height - this.height);
+                        } else {
+                            this.y = -(panel.height - (this.height + this.header.height));                            
+                            // FIXME CHECK
+                            if (this.y === this.header.height) {
+                               this.y -= this.header.height; 
+                            }
+                        }
                     }
                     for (i = panel.anchors.length; i--;) {
                         $(panel.anchors[i]).removeClass("active");
                     }
+                   
+                    console.log(this.y);
+                   
                     this.translate({
                         y: this.y,
                         el: panel.el,
