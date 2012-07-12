@@ -97,6 +97,7 @@
             }
         }
         .moo-ui-select-menu {
+            display: none;
             background-color: #999;
             border-radius: 5px;
             padding: 1em;
@@ -106,7 +107,8 @@
             font-size: 2em;
             background: #FFF;
             border-radius: 5px;
-            overflow: auto;
+            overflow-y: scroll;
+            
             li {
                 padding: 1em ;
                 border-bottom: 1px solid #CCC;

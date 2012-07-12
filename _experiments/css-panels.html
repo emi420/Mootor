@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Mootor testing</title>
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"/>
+    
+        <style type="text/css">
+          body, html {
+               display: block;
+               height: 100%;
+               background: #ff0000;
+               margin: 0;
+               padding: 0;     
+               width: 100%;
+               overflow-x: hidden;
+          }          
+          .container {
+               min-height: 100%;
+               background: #0000ff;
+               width: 100%;
+               position: absolute;
+               overflow-x: hidden;
+          }
+          .panel {
+               -webkit-transform: translate3d(0, 0, 0);
+               -webkit-backface-visibility: hidden;
+               -webkit-transition-duration: .5s;
+               -webkit-transform-style: preserve-3d;
+               position: absolute;
+               min-height: 100%;
+               width: 100%;
+               background: #f1f1f1;
+               z-index: -9999;
+          }
+          .panel.active {
+               z-index: 1;
+          }
+          .panel.next {
+              left: 768px;
+              z-index: 1;
+          }
+          .moveleft {
+              left: -768px;
+          }
+          .movecenter {
+              left: 0;
+          }
+          .moveright {
+              left: 768px;
+          }
+          
+        </style>
+        <script type="text/javascript">
+            var move = function(panelId, direction) {
+                var panel = document.getElementById(panelId);                                   
+                panel.setAttribute("class","panel move" + direction)
+            }
+            
+        </script>
+    </head>
+    <body>
+        <div id="container" class="container">
+            <div id="panel1" class="panel active">
+                <h1>Panel 1</h1>
+                <input type="text" />
+                <a href="#moveLeft" onclick="
+                    move('panel1', 'left active');
+                    move('panel2', 'center active');
+                    ">
+                    Move left!
+                </a>
+            </div>
+            <div id="panel2" class="panel next">
+                <h1>Panel 2</h1>
+                <input type="text" />
+                <a href="#moveRight" onclick="
+                    move('panel1', 'center active');
+                    move('panel2', 'right active');
+                    ">
+                    Move right!
+                </a>
+            </div>
+            <div id="panel3" class="panel"></div>
+        </div>
+    </body>
+</html>

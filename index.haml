@@ -1,7 +1,7 @@
 !!! 5
 %head
     %title Mootor demo
-    %meta{:name=>"viewport", :content=>"initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"}
+    %meta{:name=>"viewport", :content=>"width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"}
     %link{:href=>"css/styles.css", :media=>"screen",  :rel=>"stylesheet"}
     %script{:src=>"js/mootor.js",:type=>"text/javascript"}
     %script{:src=>"js/type.js",:type=>"text/javascript"}
@@ -17,6 +17,7 @@
 
     #panels
 
+<<<<<<< HEAD
         /
             .moo-panel#home
                 %nav
@@ -26,6 +27,16 @@
                     %a.moo-nav{:href=>"", :rel=>"data"} Data
                     %a.moo-nav{:href=>"", :rel=>"graph"} Graph
                     %a.moo-nav{:href=>"", :rel=>"carousel"} Carousel
+=======
+        .moo-panel#home
+            %nav
+                %a.moo-nav{:href=>"", :rel=>"nav"} Nav
+                %a.moo-nav{:href=>"", :rel=>"ui"} UI
+                %a.moo-nav{:href=>"", :rel=>"geolocalization"} Geolocalization
+                %a.moo-nav{:href=>"", :rel=>"data"} Data
+                %a.moo-nav{:href=>"", :rel=>"graph"} Graph
+                %a.moo-nav{:href=>"", :rel=>"carousel"} Carousel
+>>>>>>> b4d8e3427397a45084750adbf09d0fb098b2a27b
 
         .moo-panel#ui
             %h2 User Interface
@@ -39,12 +50,13 @@
                         %label Input de texto
                         .moo-ui-text
                             %input#txt1{:type=>"text", :name=>"text1" ,:placeholder=>"Ingrese su texto aqui"}
-                            %a.cleanbox{:href=>""} &times;
+                            %span.cleanbox{:href=>""} &times;
                        
                     .moo-field
                         %label &Aacute;rea de texto
                         .moo-ui-textarea
                             %textarea#txta1{:name=>"textarea1" ,:placeholder=>"Ingrese su texto aqui"}
+<<<<<<< HEAD
                     /
                         .moo-field
                             %label Select menu
@@ -102,6 +114,64 @@
                                     %option Text 2
                                     %option Text 3
                                     %option Text 4            
+=======
+                    .moo-field
+                        %label Select menu
+                        .moo-ui-select-container.top
+                            %span.moo-ui-select-link{:href=>""} &#9660; 
+                            .moo-ui-select-menu{:style=>'height: 217px;'}
+                                %ul#moo-ui-select-1.moo-ui-select-list{:style=>'height: 200px;'}
+                                    %li Item 1
+                                    %li This is some other item listed
+                                    %li Third item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                            %select#select1{:style=>"display: none"}
+                                %option Text 1
+                                %option Text 2
+                                %option Text 3
+                                %option Text 4
+                    .moo-field
+                        %label Multiple select menu
+                        .moo-ui-select-container.multiple.bottom 
+                            %a.moo-ui-select-link{:href=>""} &#9660; 
+                            .moo-ui-select-menu{:style=>'height: 217px;'}
+                                %ul.moo-ui-select-list{:style=>'height: 200px;'}
+                                    %li Item 1
+                                    %li This is some other item listed
+                                    %li.selected Third item
+                                    %li.selected some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                                    %li some random item
+                            %select#select1{:style=>"display: none", :multiple=>"multiple"}
+                                %option Text 1
+                                %option Text 2
+                                %option Text 3
+                                %option Text 4            
+>>>>>>> b4d8e3427397a45084750adbf09d0fb098b2a27b
                     .moo-field
                         %legend Input radio
                         .moo-ui-radio
@@ -144,59 +214,67 @@
                         %label Tooltip
                         #radiobtn
                             %span#tooltipTest Show me the tooltip!
+<<<<<<< HEAD
         /
             .moo-panel#nav
                 %nav
                     %a.moo-nav{:href=>"", :rel=>"item1"} Item 1
                     %a.moo-nav{:href=>"", :rel=>"item2"} Item 2
+=======
+>>>>>>> b4d8e3427397a45084750adbf09d0fb098b2a27b
 
-            .moo-panel#item1
-                %h2 Item 1
-                %p
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dictum lobortis erat, vel facilisis massa facilisis non. Sed condimentum massa vitae augue tincidunt id ornare sapien congue. Maecenas pulvinar faucibus lorem. Sed tempus, sem gravida tempus malesuada, lacus lectus lacinia libero, id venenatis eros sapien et nunc. Cras quis urna mauris, non auctor risus. Suspendisse non magna augue, in elementum augue. Donec tincidunt sodales imperdiet. Ut pharetra, nunc in pretium rutrum, eros velit rhoncus est, nec faucibus ante arcu vitae enim. Nam sit amet nulla in risus blandit aliquet. Quisque rutrum accumsan volutpat.
+        .moo-panel#nav
+            %nav
+                %a.moo-nav{:href=>"#", :rel=>"item1"} Item 1
+                %a.moo-nav{:href=>"#", :rel=>"item2"} Item 2
 
-            .moo-panel#item2
-                %h2 Item 2
-                %p
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dictum lobortis erat, vel facilisis massa facilisis non. Sed condimentum massa vitae augue tincidunt id ornare sapien congue. Maecenas pulvinar faucibus lorem. Sed tempus, sem gravida tempus malesuada, lacus lectus lacinia libero, id venenatis eros sapien et nunc. Cras quis urna mauris, non auctor risus. Suspendisse non magna augue, in elementum augue. Donec tincidunt sodales imperdiet. Ut pharetra, nunc in pretium rutrum, eros velit rhoncus est, nec faucibus ante arcu vitae enim. Nam sit amet nulla in risus blandit aliquet. Quisque rutrum accumsan volutpat.
-                
-            .moo-panel#geolocalization
-                %h2 Geolocalization
-                %h3 This module is not activated. See $.geolocation
-                %h3#msg
-                #error
+        .moo-panel#item1
+            %h2 Item 1
+            %p
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dictum lobortis erat, vel facilisis massa facilisis non. Sed condimentum massa vitae augue tincidunt id ornare sapien congue. Maecenas pulvinar faucibus lorem. Sed tempus, sem gravida tempus malesuada, lacus lectus lacinia libero, id venenatis eros sapien et nunc. Cras quis urna mauris, non auctor risus. Suspendisse non magna augue, in elementum augue. Donec tincidunt sodales imperdiet. Ut pharetra, nunc in pretium rutrum, eros velit rhoncus est, nec faucibus ante arcu vitae enim. Nam sit amet nulla in risus blandit aliquet. Quisque rutrum accumsan volutpat.
 
-            .moo-panel#data
-                %h2 Data
-                %h3 This module is not implemented yet.
+        .moo-panel#item2
+            %h2 Item 2
+            %p
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dictum lobortis erat, vel facilisis massa facilisis non. Sed condimentum massa vitae augue tincidunt id ornare sapien congue. Maecenas pulvinar faucibus lorem. Sed tempus, sem gravida tempus malesuada, lacus lectus lacinia libero, id venenatis eros sapien et nunc. Cras quis urna mauris, non auctor risus. Suspendisse non magna augue, in elementum augue. Donec tincidunt sodales imperdiet. Ut pharetra, nunc in pretium rutrum, eros velit rhoncus est, nec faucibus ante arcu vitae enim. Nam sit amet nulla in risus blandit aliquet. Quisque rutrum accumsan volutpat.
+            
+        .moo-panel#geolocalization
+            %h2 Geolocalization
+            %h3 This module is not activated. See $.geolocation
+            %h3#msg
+            #error
 
-            .moo-panel#graph
-                %h2 Graph
-                %h3 This module is not implemented yet.
-                %p
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dictum lobortis erat, vel facilisis massa facilisis non. Sed condimentum massa vitae augue tincidunt id ornare sapien congue. Maecenas pulvinar faucibus lorem. Sed tempus, sem gravida tempus malesuada, lacus lectus lacinia libero, id venenatis eros sapien et nunc. Cras quis urna mauris, non auctor risus. Suspendisse non magna augue, in elementum augue. Donec tincidunt sodales imperdiet. Ut pharetra, nunc in pretium rutrum, eros velit rhoncus est, nec faucibus ante arcu vitae enim. Nam sit amet nulla in risus blandit aliquet. Quisque rutrum accumsan volutpat.
-                %p
-                    Duis vitae enim nunc. Praesent vitae porttitor enim. Nunc augue turpis, luctus id gravida vitae, eleifend ut sem. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce vitae dui scelerisque turpis bibendum placerat. Sed venenatis tincidunt ornare. Integer mauris velit, consectetur id fermentum nec, varius sed quam. Sed convallis tortor est, vel vehicula ipsum. Aliquam erat volutpat. Proin porttitor semper turpis. Phasellus turpis purus, tincidunt nec dignissim non, posuere id dui.
-                %p
-                    Mauris feugiat aliquam erat vitae faucibus. Donec in semper felis. Nam aliquet fermentum porta. Morbi imperdiet orci at justo sagittis egestas. Phasellus vel pharetra quam. Vestibulum volutpat nisi sit amet mi blandit vitae commodo dui posuere. Mauris augue est, semper a tempus vitae, vulputate non odio. Quisque tincidunt, dolor at commodo ornare, nisl risus tristique dolor, non imperdiet libero ligula vel magna. Nullam id massa neque. Maecenas porttitor dignissim massa, nec euismod augue scelerisque nec. Nam commodo eleifend lacinia. Nullam at tincidunt est. Donec pellentesque convallis arcu et molestie. Cras ultrices sem non risus sagittis sed pellentesque quam sodales. Phasellus dui justo, lobortis eu hendrerit sit amet, faucibus non nisl. Ut non lectus metus, nec gravida orci.
-                %p
-                    Mauris leo sem, venenatis eu laoreet eget, adipiscing sit amet leo. Integer consequat, leo sed congue vestibulum, nulla nunc tempor eros, a tincidunt magna quam non enim. In non sapien velit. Suspendisse gravida congue nisi id pellentesque. Morbi nulla elit, dignissim nec vestibulum in, elementum eget nunc. Nulla fermentum iaculis metus sit amet sagittis. In egestas faucibus mattis. Nulla non metus est, ac adipiscing ligula. Integer quis purus erat. Nullam at diam lectus. Maecenas laoreet sapien sit amet magna varius laoreet. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-                %p
-                    Mauris aliquam nunc a augue malesuada vel congue nunc cursus. Proin pellentesque diam iaculis sapien convallis ac sagittis sem feugiat. Ut ac iaculis neque. Curabitur vel felis non nisi rhoncus mollis suscipit quis nisi. Integer vitae augue at lorem pellentesque placerat. Donec ac nibh id massa malesuada adipiscing. Cras egestas, ligula eget tempor sagittis, metus arcu convallis orci, vehicula tempor arcu tortor quis dolor. Nullam facilisis iaculis magna sed suscipit.
-     
-            .moo-panel#carousel
-                %h2 Carousel
-                %h3 This module is not implemented yet.
-                %p
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dictum lobortis erat, vel facilisis massa facilisis non. Sed condimentum massa vitae augue tincidunt id ornare sapien congue. Maecenas pulvinar faucibus lorem. Sed tempus, sem gravida tempus malesuada, lacus lectus lacinia libero, id venenatis eros sapien et nunc. Cras quis urna mauris, non auctor risus. Suspendisse non magna augue, in elementum augue. Donec tincidunt sodales imperdiet. Ut pharetra, nunc in pretium rutrum, eros velit rhoncus est, nec faucibus ante arcu vitae enim. Nam sit amet nulla in risus blandit aliquet. Quisque rutrum accumsan volutpat.
-                %p
-                    Duis vitae enim nunc. Praesent vitae porttitor enim. Nunc augue turpis, luctus id gravida vitae, eleifend ut sem. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce vitae dui scelerisque turpis bibendum placerat. Sed venenatis tincidunt ornare. Integer mauris velit, consectetur id fermentum nec, varius sed quam. Sed convallis tortor est, vel vehicula ipsum. Aliquam erat volutpat. Proin porttitor semper turpis. Phasellus turpis purus, tincidunt nec dignissim non, posuere id dui.
-                %p
-                    Mauris feugiat aliquam erat vitae faucibus. Donec in semper felis. Nam aliquet fermentum porta. Morbi imperdiet orci at justo sagittis egestas. Phasellus vel pharetra quam. Vestibulum volutpat nisi sit amet mi blandit vitae commodo dui posuere. Mauris augue est, semper a tempus vitae, vulputate non odio. Quisque tincidunt, dolor at commodo ornare, nisl risus tristique dolor, non imperdiet libero ligula vel magna. Nullam id massa neque. Maecenas porttitor dignissim massa, nec euismod augue scelerisque nec. Nam commodo eleifend lacinia. Nullam at tincidunt est. Donec pellentesque convallis arcu et molestie. Cras ultrices sem non risus sagittis sed pellentesque quam sodales. Phasellus dui justo, lobortis eu hendrerit sit amet, faucibus non nisl. Ut non lectus metus, nec gravida orci.
-                %p
-                    Mauris leo sem, venenatis eu laoreet eget, adipiscing sit amet leo. Integer consequat, leo sed congue vestibulum, nulla nunc tempor eros, a tincidunt magna quam non enim. In non sapien velit. Suspendisse gravida congue nisi id pellentesque. Morbi nulla elit, dignissim nec vestibulum in, elementum eget nunc. Nulla fermentum iaculis metus sit amet sagittis. In egestas faucibus mattis. Nulla non metus est, ac adipiscing ligula. Integer quis purus erat. Nullam at diam lectus. Maecenas laoreet sapien sit amet magna varius laoreet. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-                %p
-                    Mauris aliquam nunc a augue malesuada vel congue nunc cursus. Proin pellentesque diam iaculis sapien convallis ac sagittis sem feugiat. Ut ac iaculis neque. Curabitur vel felis non nisi rhoncus mollis suscipit quis nisi. Integer vitae augue at lorem pellentesque placerat. Donec ac nibh id massa malesuada adipiscing. Cras egestas, ligula eget tempor sagittis, metus arcu convallis orci, vehicula tempor arcu tortor quis dolor. Nullam facilisis iaculis magna sed suscipit.
+        .moo-panel#data
+            %h2 Data
+            %h3 This module is not implemented yet.
+
+        .moo-panel#graph
+            %h2 Graph
+            %h3 This module is not implemented yet.
+            %p
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dictum lobortis erat, vel facilisis massa facilisis non. Sed condimentum massa vitae augue tincidunt id ornare sapien congue. Maecenas pulvinar faucibus lorem. Sed tempus, sem gravida tempus malesuada, lacus lectus lacinia libero, id venenatis eros sapien et nunc. Cras quis urna mauris, non auctor risus. Suspendisse non magna augue, in elementum augue. Donec tincidunt sodales imperdiet. Ut pharetra, nunc in pretium rutrum, eros velit rhoncus est, nec faucibus ante arcu vitae enim. Nam sit amet nulla in risus blandit aliquet. Quisque rutrum accumsan volutpat.
+            %p
+                Duis vitae enim nunc. Praesent vitae porttitor enim. Nunc augue turpis, luctus id gravida vitae, eleifend ut sem. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce vitae dui scelerisque turpis bibendum placerat. Sed venenatis tincidunt ornare. Integer mauris velit, consectetur id fermentum nec, varius sed quam. Sed convallis tortor est, vel vehicula ipsum. Aliquam erat volutpat. Proin porttitor semper turpis. Phasellus turpis purus, tincidunt nec dignissim non, posuere id dui.
+            %p
+                Mauris feugiat aliquam erat vitae faucibus. Donec in semper felis. Nam aliquet fermentum porta. Morbi imperdiet orci at justo sagittis egestas. Phasellus vel pharetra quam. Vestibulum volutpat nisi sit amet mi blandit vitae commodo dui posuere. Mauris augue est, semper a tempus vitae, vulputate non odio. Quisque tincidunt, dolor at commodo ornare, nisl risus tristique dolor, non imperdiet libero ligula vel magna. Nullam id massa neque. Maecenas porttitor dignissim massa, nec euismod augue scelerisque nec. Nam commodo eleifend lacinia. Nullam at tincidunt est. Donec pellentesque convallis arcu et molestie. Cras ultrices sem non risus sagittis sed pellentesque quam sodales. Phasellus dui justo, lobortis eu hendrerit sit amet, faucibus non nisl. Ut non lectus metus, nec gravida orci.
+            %p
+                Mauris leo sem, venenatis eu laoreet eget, adipiscing sit amet leo. Integer consequat, leo sed congue vestibulum, nulla nunc tempor eros, a tincidunt magna quam non enim. In non sapien velit. Suspendisse gravida congue nisi id pellentesque. Morbi nulla elit, dignissim nec vestibulum in, elementum eget nunc. Nulla fermentum iaculis metus sit amet sagittis. In egestas faucibus mattis. Nulla non metus est, ac adipiscing ligula. Integer quis purus erat. Nullam at diam lectus. Maecenas laoreet sapien sit amet magna varius laoreet. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+            %p
+                Mauris aliquam nunc a augue malesuada vel congue nunc cursus. Proin pellentesque diam iaculis sapien convallis ac sagittis sem feugiat. Ut ac iaculis neque. Curabitur vel felis non nisi rhoncus mollis suscipit quis nisi. Integer vitae augue at lorem pellentesque placerat. Donec ac nibh id massa malesuada adipiscing. Cras egestas, ligula eget tempor sagittis, metus arcu convallis orci, vehicula tempor arcu tortor quis dolor. Nullam facilisis iaculis magna sed suscipit.
+ 
+        .moo-panel#carousel
+            %h2 Carousel
+            %h3 This module is not implemented yet.
+            %p
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dictum lobortis erat, vel facilisis massa facilisis non. Sed condimentum massa vitae augue tincidunt id ornare sapien congue. Maecenas pulvinar faucibus lorem. Sed tempus, sem gravida tempus malesuada, lacus lectus lacinia libero, id venenatis eros sapien et nunc. Cras quis urna mauris, non auctor risus. Suspendisse non magna augue, in elementum augue. Donec tincidunt sodales imperdiet. Ut pharetra, nunc in pretium rutrum, eros velit rhoncus est, nec faucibus ante arcu vitae enim. Nam sit amet nulla in risus blandit aliquet. Quisque rutrum accumsan volutpat.
+            %p
+                Duis vitae enim nunc. Praesent vitae porttitor enim. Nunc augue turpis, luctus id gravida vitae, eleifend ut sem. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce vitae dui scelerisque turpis bibendum placerat. Sed venenatis tincidunt ornare. Integer mauris velit, consectetur id fermentum nec, varius sed quam. Sed convallis tortor est, vel vehicula ipsum. Aliquam erat volutpat. Proin porttitor semper turpis. Phasellus turpis purus, tincidunt nec dignissim non, posuere id dui.
+            %p
+                Mauris feugiat aliquam erat vitae faucibus. Donec in semper felis. Nam aliquet fermentum porta. Morbi imperdiet orci at justo sagittis egestas. Phasellus vel pharetra quam. Vestibulum volutpat nisi sit amet mi blandit vitae commodo dui posuere. Mauris augue est, semper a tempus vitae, vulputate non odio. Quisque tincidunt, dolor at commodo ornare, nisl risus tristique dolor, non imperdiet libero ligula vel magna. Nullam id massa neque. Maecenas porttitor dignissim massa, nec euismod augue scelerisque nec. Nam commodo eleifend lacinia. Nullam at tincidunt est. Donec pellentesque convallis arcu et molestie. Cras ultrices sem non risus sagittis sed pellentesque quam sodales. Phasellus dui justo, lobortis eu hendrerit sit amet, faucibus non nisl. Ut non lectus metus, nec gravida orci.
+            %p
+                Mauris leo sem, venenatis eu laoreet eget, adipiscing sit amet leo. Integer consequat, leo sed congue vestibulum, nulla nunc tempor eros, a tincidunt magna quam non enim. In non sapien velit. Suspendisse gravida congue nisi id pellentesque. Morbi nulla elit, dignissim nec vestibulum in, elementum eget nunc. Nulla fermentum iaculis metus sit amet sagittis. In egestas faucibus mattis. Nulla non metus est, ac adipiscing ligula. Integer quis purus erat. Nullam at diam lectus. Maecenas laoreet sapien sit amet magna varius laoreet. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+            %p
+                Mauris aliquam nunc a augue malesuada vel congue nunc cursus. Proin pellentesque diam iaculis sapien convallis ac sagittis sem feugiat. Ut ac iaculis neque. Curabitur vel felis non nisi rhoncus mollis suscipit quis nisi. Integer vitae augue at lorem pellentesque placerat. Donec ac nibh id massa malesuada adipiscing. Cras egestas, ligula eget tempor sagittis, metus arcu convallis orci, vehicula tempor arcu tortor quis dolor. Nullam facilisis iaculis magna sed suscipit.
 
 :javascript    
 
@@ -210,16 +288,17 @@
                 type: "Checkbox"
            });
            
-           // focus on inputs
-           $("#txt1").onTapEnd(function(){ event.target.focus()});
-           $("#txta1").onTapEnd(function(){ event.target.focus()});
-           
            // Tooltip
            $("#tooltipTest").ui({
                 type: "Tooltip",
                 html: "Testing this tooltip"
            });
-
+           
+           // Select
+           $("#moo-ui-select-1").ui({
+                type: "Select",
+           });
+           
            // Show location
            /*$("#location").geolocation({
                 error: "error",
