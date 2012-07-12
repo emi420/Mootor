@@ -1,4 +1,24 @@
 
+
+// extended classes 
+
+.moo-ui-input-container {
+    @include float-right;
+    border: 1px solid #666;
+    border-radius: 5px;
+    background-color: #FFF;
+    position: relative;
+    width: 75%;
+}
+.moo-ui-input {
+    -webkit-appearance:none;  /* Remove default iOS shadow */
+    border: none; 
+    background: none; 
+    font-size: 1.5em; 
+    line-height: 1.5em;
+    width: 100%;
+}
+
 // Standard form
 
 .moo-ui-form {
@@ -23,48 +43,18 @@
         }
     }
     .moo-ui-text {
-        @include float-right;
-        border: 1px solid #666;
-        border-radius: 5px;
-        background-color: #FFF;
-        position: relative;
+        @extend .moo-ui-input-container;
         padding: 0.25em 2.25em 0.25em 0.25em; 
-        width: 75%;
-        input { 
-            -webkit-appearance:none;  /* Remove default iOS shadow */
-            border: none; 
-            background: none; 
-            font-size: 1.5em; 
-            line-height: 1.5em;
-            width: 100%;
-        }
+        input { @extend .moo-ui-input; }
     }
     .moo-ui-textarea {
-        @include float-right;
-        border: 1px solid #666;
-        border-radius: 5px;
-        background-color: #FFF;
-        position: relative;
+        @extend .moo-ui-input-container;
         padding: 0.25em; 
-        width: 75%;
-        textarea { 
-            -webkit-appearance:none;  /* Remove default shadow in iOS 3.2 */
-            border: none; 
-            background: none; 
-            font-size: 1.5em; 
-            line-height: 1.5em;
-            width: 100%;
-        }
+        textarea { @extend .moo-ui-input; }
     }
-    
     .moo-ui-select-container {
-        @include float-right;
-        border: 1px solid #666;
-        border-radius: 5px;
-        background-color: #FFF;
-        position: relative;
-        padding: 0.25em 0.25em 0.25em 0.25em; 
-        width: 75%;
+        @extend .moo-ui-input-container;
+        padding: 0.25em; 
         height: 3em;
         z-index: 300;
         .moo-ui-select-link {
@@ -108,7 +98,6 @@
             background: #FFF;
             border-radius: 5px;
             overflow-y: scroll;
-            
             li {
                 padding: 1em ;
                 border-bottom: 1px solid #CCC;
@@ -155,6 +144,9 @@
             }
         }
     }   
+    /*
+    *  Cleanbox is the styling of the link used to "clean" a text input
+    */
     .cleanbox {
         display: block;
         padding: 0.35em;
@@ -194,7 +186,7 @@
                 &.moo-radio-active {
                     background-color: #666;
                     &:after {
-                         content: " ";
+                        content: " ";
                         display: block;
                         position: absolute;
                         top: 0.2em;

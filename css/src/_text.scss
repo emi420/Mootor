@@ -1,7 +1,11 @@
 // Text mixins and vars
 
-$base-font-size: 62.5%;
  
+$base-font: Helvetica, Arial, sans-serif; 
+$readable-font: 'Palatino Linotype', 'Book Antiqua', Palatino, 'Droid Serif', serif;
+$base-font-size: 62.5%;
+$base-line-height: 140%; 
+
 @mixin baseType { 
   line-height: $base-line-height ;  
 }
@@ -9,7 +13,7 @@ $base-font-size: 62.5%;
 // Type 1
 @mixin domType1 {
   @include baseType;
-  font-size: 2.3em ;
+  font-size: 2.6em ;
 }
 @mixin subType1 {
   @include baseType;
@@ -49,23 +53,31 @@ Typography
 * Addresses font sizes and margins set differently.
 */
 
+body { 
+   font-family: $base-font; 
+   font-size: $base-font-size;
+   text-align: center;
+}
+
 h1 {
-    font-size: 2em;
+    font-size: 2.3em;
+    letter-spacing: -0.07em;
+    text-align: center;
     margin: 0.67em 0;
 }
 
 h2 {
-    font-size: 1.5em;
-    margin: 0.83em 0;
+    font-size: 7em;
+    margin: 0.5em 0;
 }
 
 h3 {
-    font-size: 1.17em;
-    margin: 1em 0;
+    font-size: 1.5em;
+    margin: 0.67em 0;
 }
 
 h4 {
-    font-size: 1em;
+    font-size: 1.15em;
     margin: 1.33em 0;
 }
 
@@ -79,6 +91,9 @@ h6 {
     margin: 2.33em 0;
 }
 
+p {
+    @include readableType;
+}
 small {
     font-size: 75%;
 }

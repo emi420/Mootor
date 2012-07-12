@@ -1,11 +1,5 @@
 //-- App styles
 
-// Settings
-
-$base-line-height: 140%;  
-$base-font: Helvetica, Arial, sans-serif; 
-$readable-font: 'Palatino Linotype', 'Book Antiqua', Palatino, 'Droid Serif', serif;
-
 // Imports
 
 @import "compass/css3";
@@ -30,35 +24,6 @@ $readable-font: 'Palatino Linotype', 'Book Antiqua', Palatino, 'Droid Serif', se
 }
 
 
-// General
-
-body { 
-   font-family: $base-font; 
-   font-size: $base-font-size;
-   text-align: center;
-}
-
-h1 {
-    @include domType1;
-    text-align: center;
-    font-size: 2.6em;
-    letter-spacing: -0.07em;
-}
-
-h2 {
-  @include empType1;
-}
-
-h3 {
-  @include subType1;
-
-}
-
-p {
-  @include readableType;
-}
-
-
 // Navigation
 
 .moo-panel {
@@ -78,12 +43,6 @@ p {
         background: rgba(255, 255, 255, .1);
         @include border-radius(.2em);
         @include box-shadow(0px 1px 1px rgba(0,0,0,.2));
-    }
-    h1 {
-        @include domType1;
-        text-align: center;
-        font-size: 2.6em;
-        letter-spacing: -0.07em;
     }
 }
 
