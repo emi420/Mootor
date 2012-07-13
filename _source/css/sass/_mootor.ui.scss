@@ -248,7 +248,8 @@
 
 // Checkbox
 .moo-ui-switch {
-    @include background-image(linear-gradient(top, #ddd, #fff 45%));
+     @include background-image(linear-gradient(top, #888, #bbb 65%));
+    
     border: 1px solid #666;
     border-radius: 0.5em;
     @include float-right;
@@ -268,32 +269,43 @@
         height: 110%;
         position: relative;
         top: -5%;
+        right: -0.04em;
         -webkit-transition-duration: .25s;
         -webkit-transform: translate3d(4.05em, 0, 0);
+
         &:before { 
             content: "I";
-            background-color: rgba(66,66,66,.5);
+            border-radius: 0.35em 0 0 0.35em;
+            //background-color: rgba(66,66,66,.5);
             color: #FFF;
             font-weight: 700;
             display: block;
-            height: 110%;
-            width: 4.5em;
-            position: absolute;
-            top: -5%;
-            left: -4.5em;
+            height: 100%;
+            width: 4.15em;
+            position: relative;
+            top: 0;
+            left: -4.15em;
+            z-index: -1;
         }
         &:after {
             content: "O";
+            //background: rgba(200, 0, 0, 0.3);
+            border-radius: 0 0.35em 0.35em 0;
             color: #333;
             display: block;
-            height: 110%;
-            width: 4em;
+            height: 100%;
+            width: 4.15em;
             position: absolute;
             right: -4.15em;
+            top: 0;
         }
     }
-    &.off b {
-        -webkit-transform: translate3d(-0.05em, 0, 0);
+    &.off{
+        @include background-image(linear-gradient(top, #ddd, #fff 45%));
+         left: -0.04em;
+        b {
+            -webkit-transform: translate3d(0, 0, 0);
+        }
     }
 
 }
