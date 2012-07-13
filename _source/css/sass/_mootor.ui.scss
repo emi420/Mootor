@@ -247,7 +247,13 @@
 // User Interface plugin
 
 // Checkbox
-.moo-ui-switch{
+.moo-ui-switch {
+    display: block;
+    
+
+}
+/*
+.moo-ui-switch {
     display: block;
     height: 28px;
     width: 94px;
@@ -270,11 +276,12 @@
         line-height: 28px;
     }
 }
+*/
+
 
 // Tooltip
 .moo_tooltip {
     position: absolute;
-    @include domType1;
     background: $subColor1;
     border: 1px solid $subColor1B;
     padding: 1em;

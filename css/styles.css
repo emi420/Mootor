@@ -272,54 +272,53 @@ Typography
 /*
 * Addresses font sizes and margins set differently.
 */
-/* line 56, src/_text.scss */
+/* line 18, src/_text.scss */
 body {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 62.5%;
   text-align: center;
 }
 
-/* line 62, src/_text.scss */
+/* line 24, src/_text.scss */
 h1 {
   font-size: 2.3em;
   letter-spacing: -0.07em;
   text-align: center;
-  margin: 0.67em 0;
+  margin: 0.75em 0;
 }
 
-/* line 69, src/_text.scss */
+/* line 31, src/_text.scss */
 h2 {
   font-size: 7em;
   margin: 0.5em 0;
 }
 
-/* line 74, src/_text.scss */
+/* line 36, src/_text.scss */
 h3 {
-  font-size: 1.5em;
+  font-size: 1.83em;
   margin: 0.67em 0;
 }
 
-/* line 79, src/_text.scss */
+/* line 41, src/_text.scss */
 h4 {
-  font-size: 1.15em;
+  font-size: 1.5em;
   margin: 1.33em 0;
 }
 
-/* line 84, src/_text.scss */
+/* line 46, src/_text.scss */
 h5 {
   font-size: 0.83em;
   margin: 1.67em 0;
 }
 
-/* line 89, src/_text.scss */
+/* line 51, src/_text.scss */
 h6 {
   font-size: 0.75em;
   margin: 2.33em 0;
 }
 
-/* line 94, src/_text.scss */
+/* line 56, src/_text.scss */
 p {
-  line-height: 140%;
   font-size: 3em;
   text-align: justify;
   padding: 1em;
@@ -328,7 +327,7 @@ p {
   letter-spacing: 0;
 }
 
-/* line 97, src/_text.scss */
+/* line 64, src/_text.scss */
 small {
   font-size: 75%;
 }
@@ -710,34 +709,36 @@ a:focus {
 /* line 250, ../_source/css/sass/_mootor.ui.scss */
 .moo-ui-switch {
   display: block;
-  height: 28px;
-  width: 94px;
-  overflow: hidden;
-  float: right;
-}
-/* line 257, ../_source/css/sass/_mootor.ui.scss */
-.moo-ui-switch b {
-  -webkit-transition-duration: .25s;
-  background: url(../img/ui/switch.png);
-  height: 28px;
-  width: 149px;
-  display: block;
-  -webkit-transform: translate3d(0, 0, 0);
-}
-/* line 266, ../_source/css/sass/_mootor.ui.scss */
-.moo-ui-switch.off b {
-  -webkit-transform: translate3d(-54px, 0, 0);
-}
-/* line 269, ../_source/css/sass/_mootor.ui.scss */
-.moo-ui-switch label {
-  line-height: 28px;
 }
 
-/* line 275, ../_source/css/sass/_mootor.ui.scss */
+/*
+.moo-ui-switch {
+    display: block;
+    height: 28px;
+    width: 94px;
+    overflow: hidden;
+    float: right;
+    
+    b {
+        -webkit-transition-duration: .25s;
+        background: url(../img/ui/switch.png);
+        height: 28px;
+        width: 149px;
+        display: block;
+        -webkit-transform: translate3d(0, 0, 0);
+    }
+    
+    &.off b {
+        -webkit-transform: translate3d(-54px, 0, 0);
+    }
+    label {
+        line-height: 28px;
+    }
+}
+*/
+/* line 283, ../_source/css/sass/_mootor.ui.scss */
 .moo_tooltip {
   position: absolute;
-  line-height: 140%;
-  font-size: 2.6em;
   background: white;
   border: 1px solid #f7f7f7;
   padding: 1em;
