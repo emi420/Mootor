@@ -76,7 +76,7 @@
                 border-bottom: 1px solid #666;
                 border-top-right-radius: 5px;
                 border-bottom-right-radius: 5px;
-                content: " ";
+                content: " "; 
                 display: block;
                 position: absolute;
                 top: -0.25em;
@@ -131,7 +131,7 @@
             .moo-ui-select-menu{
                 bottom: 4.5em;
                 &:after {
-                    content: "";
+                    content: " ";
                     display: block;
                     position: absolute;
                     bottom: -3em;
@@ -228,7 +228,7 @@
                 &.moo-checkbox-active {
                     background-color: #666;
                     &:after {
-                         content: " ";
+                        content: " ";
                         display: block;
                         position: absolute;
                         top: 0.2em;
@@ -248,36 +248,55 @@
 
 // Checkbox
 .moo-ui-switch {
-    display: block;
-    
-
-}
-/*
-.moo-ui-switch {
-    display: block;
-    height: 28px;
-    width: 94px;
+    @include background-image(linear-gradient(top, #ddd, #fff 45%));
+    border: 1px solid #666;
+    border-radius: 0.5em;
+    @include float-right;
     overflow: hidden;
-    float: right;
-    
+    width: 9em;
+    height: 2.8em;
     b {
-        -webkit-transition-duration: .25s;
-        background: url(../img/ui/switch.png);
-        height: 28px;
-        width: 149px;
+        font-size: 1.5em;
+        font-weight: 700;
+        line-height: 175%;
+        text-align: center;
+        @include background-image(linear-gradient(top, #fff, #dedede));
+        border: 1px solid #666;
+        border-radius: 0.33em;
         display: block;
-        -webkit-transform: translate3d(0, 0, 0);
+        width: 1.9em;
+        height: 110%;
+        position: relative;
+        top: -5%;
+        -webkit-transition-duration: .25s;
+        -webkit-transform: translate3d(4.05em, 0, 0);
+        &:before { 
+            content: "I";
+            background-color: rgba(66,66,66,.5);
+            color: #FFF;
+            font-weight: 700;
+            display: block;
+            height: 110%;
+            width: 4.5em;
+            position: absolute;
+            top: -5%;
+            left: -4.5em;
+        }
+        &:after {
+            content: "O";
+            color: #333;
+            display: block;
+            height: 110%;
+            width: 4em;
+            position: absolute;
+            right: -4.15em;
+        }
     }
-    
     &.off b {
-        -webkit-transform: translate3d(-54px, 0, 0);
+        -webkit-transform: translate3d(-0.05em, 0, 0);
     }
-    label {
-        line-height: 28px;
-    }
-}
-*/
 
+}
 
 // Tooltip
 .moo_tooltip {

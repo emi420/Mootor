@@ -272,14 +272,14 @@ Typography
 /*
 * Addresses font sizes and margins set differently.
 */
-/* line 18, src/_text.scss */
+/* line 19, src/_text.scss */
 body {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 62.5%;
   text-align: center;
 }
 
-/* line 24, src/_text.scss */
+/* line 25, src/_text.scss */
 h1 {
   font-size: 2.3em;
   letter-spacing: -0.07em;
@@ -287,37 +287,37 @@ h1 {
   margin: 0.75em 0;
 }
 
-/* line 31, src/_text.scss */
+/* line 32, src/_text.scss */
 h2 {
   font-size: 7em;
   margin: 0.5em 0;
 }
 
-/* line 36, src/_text.scss */
+/* line 37, src/_text.scss */
 h3 {
   font-size: 1.83em;
   margin: 0.67em 0;
 }
 
-/* line 41, src/_text.scss */
+/* line 42, src/_text.scss */
 h4 {
   font-size: 1.5em;
   margin: 1.33em 0;
 }
 
-/* line 46, src/_text.scss */
+/* line 47, src/_text.scss */
 h5 {
   font-size: 0.83em;
   margin: 1.67em 0;
 }
 
-/* line 51, src/_text.scss */
+/* line 52, src/_text.scss */
 h6 {
   font-size: 0.75em;
   margin: 2.33em 0;
 }
 
-/* line 56, src/_text.scss */
+/* line 57, src/_text.scss */
 p {
   font-size: 3em;
   text-align: justify;
@@ -327,7 +327,7 @@ p {
   letter-spacing: 0;
 }
 
-/* line 64, src/_text.scss */
+/* line 65, src/_text.scss */
 small {
   font-size: 75%;
 }
@@ -571,7 +571,7 @@ a:focus {
 }
 /* line 133, ../_source/css/sass/_mootor.ui.scss */
 .moo-ui-form .moo-ui-select-container.top .moo-ui-select-menu:after {
-  content: "";
+  content: " ";
   display: block;
   position: absolute;
   bottom: -3em;
@@ -708,35 +708,71 @@ a:focus {
 
 /* line 250, ../_source/css/sass/_mootor.ui.scss */
 .moo-ui-switch {
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #dddddd), color-stop(45%, #ffffff));
+  background-image: -webkit-linear-gradient(top, #dddddd, #ffffff 45%);
+  background-image: -moz-linear-gradient(top, #dddddd, #ffffff 45%);
+  background-image: -o-linear-gradient(top, #dddddd, #ffffff 45%);
+  background-image: -ms-linear-gradient(top, #dddddd, #ffffff 45%);
+  background-image: linear-gradient(top, #dddddd, #ffffff 45%);
+  border: 1px solid #666;
+  border-radius: 0.5em;
+  display: inline;
+  float: right;
+  overflow: hidden;
+  width: 9em;
+  height: 2.8em;
+}
+/* line 258, ../_source/css/sass/_mootor.ui.scss */
+.moo-ui-switch b {
+  font-size: 1.5em;
+  font-weight: 700;
+  line-height: 175%;
+  text-align: center;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #dedede));
+  background-image: -webkit-linear-gradient(top, #ffffff, #dedede);
+  background-image: -moz-linear-gradient(top, #ffffff, #dedede);
+  background-image: -o-linear-gradient(top, #ffffff, #dedede);
+  background-image: -ms-linear-gradient(top, #ffffff, #dedede);
+  background-image: linear-gradient(top, #ffffff, #dedede);
+  border: 1px solid #666;
+  border-radius: 0.33em;
   display: block;
+  width: 1.9em;
+  height: 110%;
+  position: relative;
+  top: -5%;
+  -webkit-transition-duration: .25s;
+  -webkit-transform: translate3d(4.05em, 0, 0);
+}
+/* line 273, ../_source/css/sass/_mootor.ui.scss */
+.moo-ui-switch b:before {
+  content: "I";
+  background-color: rgba(66, 66, 66, 0.5);
+  color: #FFF;
+  font-weight: 700;
+  display: block;
+  height: 110%;
+  width: 4.5em;
+  position: absolute;
+  top: -5%;
+  left: -4.5em;
+}
+/* line 285, ../_source/css/sass/_mootor.ui.scss */
+.moo-ui-switch b:after {
+  content: "O";
+  color: #333;
+  display: block;
+  height: 110%;
+  width: 4em;
+  position: absolute;
+  right: -4.15em;
+}
+/* line 295, ../_source/css/sass/_mootor.ui.scss */
+.moo-ui-switch.off b {
+  -webkit-transform: translate3d(-0.05em, 0, 0);
 }
 
-/*
-.moo-ui-switch {
-    display: block;
-    height: 28px;
-    width: 94px;
-    overflow: hidden;
-    float: right;
-    
-    b {
-        -webkit-transition-duration: .25s;
-        background: url(../img/ui/switch.png);
-        height: 28px;
-        width: 149px;
-        display: block;
-        -webkit-transform: translate3d(0, 0, 0);
-    }
-    
-    &.off b {
-        -webkit-transform: translate3d(-54px, 0, 0);
-    }
-    label {
-        line-height: 28px;
-    }
-}
-*/
-/* line 283, ../_source/css/sass/_mootor.ui.scss */
+/* line 302, ../_source/css/sass/_mootor.ui.scss */
 .moo_tooltip {
   position: absolute;
   background: white;
@@ -745,26 +781,12 @@ a:focus {
   text-align: center;
 }
 
-/* line 18, src/styles.scss */
-.clearfix:before, .moo-ui-form:before, .moo-ui-form .moo-field:before,
-.clearfix:after,
-.moo-ui-form:after,
-.moo-ui-form .moo-field:after {
-  content: "";
-  display: table;
-}
-
-/* line 22, src/styles.scss */
-.clearfix:after, .moo-ui-form:after, .moo-ui-form .moo-field:after {
-  clear: both;
-}
-
-/* line 29, src/styles.scss */
+/* line 17, src/styles.scss */
 .moo-panel {
   background: #f7f7f7;
 }
 
-/* line 33, src/styles.scss */
+/* line 21, src/styles.scss */
 .moo-header {
   box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.1);
   color: white;
@@ -772,7 +794,7 @@ a:focus {
   background: rgba(0, 0, 0, 0.5);
   border: 1px solid #333333;
 }
-/* line 39, src/styles.scss */
+/* line 27, src/styles.scss */
 .moo-header nav a {
   color: white;
   border: 0;
@@ -788,7 +810,7 @@ a:focus {
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
 }
 
-/* line 49, src/styles.scss */
+/* line 37, src/styles.scss */
 nav a {
   font-size: 3em;
   color: black;
@@ -797,8 +819,22 @@ nav a {
   border-top: 1px solid #dddddd;
 }
 
-/* line 57, src/styles.scss */
+/* line 45, src/styles.scss */
 .moo-nav.active {
   background: #29a6f7;
   color: white;
+}
+
+/* line 56, src/styles.scss */
+.clearfix:before, .moo-ui-form:before, .moo-ui-form .moo-field:before,
+.clearfix:after,
+.moo-ui-form:after,
+.moo-ui-form .moo-field:after {
+  content: "";
+  display: table;
+}
+
+/* line 60, src/styles.scss */
+.clearfix:after, .moo-ui-form:after, .moo-ui-form .moo-field:after {
+  clear: both;
 }
