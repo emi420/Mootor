@@ -272,7 +272,6 @@
         right: -0.04em;
         -webkit-transition-duration: .25s;
         -webkit-transform: translate3d(4.05em, 0, 0);
-
         &:before { 
             content: "I";
             border-radius: 0.35em 0 0 0.35em;
@@ -320,3 +319,72 @@
 }
 
 
+
+// Loading
+.moo-overlay {
+    background-color: rgba(0,0,0,0.3);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 500;
+}
+.moo-ui-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    z-index: 550;
+    .moo-ui-loading-block {
+        background-color: #EFEFEF;
+        height: 2.5em;
+        width: 1em;
+        float: left;
+        -webkit-animation-name: fade;
+        -webkit-animation-duration: 0.7s;
+        -webkit-animation-iteration-count: infinite;
+        -webkit-animation-direction: linear;
+        position:absolute;
+        top:0;
+        left:0;
+    }
+    .moo-loading-01 {
+       -webkit-transform: rotate(-90deg) translate(0, -2.8em);
+       -webkit-animation-delay: .3s;
+    }
+    .moo-loading-02 {
+        -webkit-transform: rotate(-45deg) translate(0, -2.8em);
+        -webkit-animation-delay: .4s;
+    }
+    .moo-loading-03 {
+        -webkit-transform: rotate(0deg) translate(0, -2.8em);
+        -webkit-animation-delay: .5s;
+    }
+    .moo-loading-04 {
+        -webkit-transform: rotate(45deg) translate(0, -2.8em);
+        -webkit-animation-delay: .6s;
+    }
+    .moo-loading-05 {
+        -webkit-transform: rotate(90deg) translate(0, -2.8em);
+        -webkit-animation-delay: .7s;
+    }
+    .moo-loading-06 {
+        -webkit-transform: rotate(135deg) translate(0, -2.8em);
+        -webkit-animation-delay: .8s;
+    }
+    .moo-loading-07 {
+        -webkit-transform: rotate(180deg) translate(0, -2.8em);
+        -webkit-animation-delay: .9s;
+    }
+    .moo-loading-08 {
+        -webkit-transform: rotate(-135deg) translate(0, -2.8em);
+        -webkit-animation-delay: 1s;
+    } 
+}
+
+@-webkit-keyframes fade{
+	0%{background-color:#333;}
+	100%{background-color:#efefef;}
+}

@@ -275,7 +275,7 @@ Typography
 /* line 19, src/_text.scss */
 body {
   font-family: Helvetica, Arial, sans-serif;
-  font-size: 100%;
+  font-size: 62.5%;
   text-align: center;
 }
 
@@ -745,7 +745,7 @@ a:focus {
   -webkit-transition-duration: .25s;
   -webkit-transform: translate3d(4.05em, 0, 0);
 }
-/* line 276, ../_source/css/sass/_mootor.ui.scss */
+/* line 275, ../_source/css/sass/_mootor.ui.scss */
 .moo-ui-switch b:before {
   content: "I";
   border-radius: 0.35em 0 0 0.35em;
@@ -759,7 +759,7 @@ a:focus {
   left: -4.15em;
   z-index: -1;
 }
-/* line 290, ../_source/css/sass/_mootor.ui.scss */
+/* line 289, ../_source/css/sass/_mootor.ui.scss */
 .moo-ui-switch b:after {
   content: "O";
   border-radius: 0 0.35em 0.35em 0;
@@ -771,7 +771,7 @@ a:focus {
   right: -4.15em;
   top: 0;
 }
-/* line 303, ../_source/css/sass/_mootor.ui.scss */
+/* line 302, ../_source/css/sass/_mootor.ui.scss */
 .moo-ui-switch.off {
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #dddddd), color-stop(45%, #ffffff));
   background-image: -webkit-linear-gradient(top, #dddddd, #ffffff 45%);
@@ -781,18 +781,105 @@ a:focus {
   background-image: linear-gradient(top, #dddddd, #ffffff 45%);
   left: -0.04em;
 }
-/* line 306, ../_source/css/sass/_mootor.ui.scss */
+/* line 305, ../_source/css/sass/_mootor.ui.scss */
 .moo-ui-switch.off b {
   -webkit-transform: translate3d(0, 0, 0);
 }
 
-/* line 314, ../_source/css/sass/_mootor.ui.scss */
+/* line 313, ../_source/css/sass/_mootor.ui.scss */
 .moo_tooltip {
   position: absolute;
   background: white;
   border: 1px solid #f7f7f7;
   padding: 1em;
   text-align: center;
+}
+
+/* line 324, ../_source/css/sass/_mootor.ui.scss */
+.moo-overlay {
+  background-color: rgba(0, 0, 0, 0.3);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 500;
+}
+
+/* line 333, ../_source/css/sass/_mootor.ui.scss */
+.moo-ui-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  z-index: 550;
+}
+/* line 340, ../_source/css/sass/_mootor.ui.scss */
+.moo-ui-loading .moo-ui-loading-block {
+  background-color: #EFEFEF;
+  height: 2.5em;
+  width: 1em;
+  float: left;
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 0.7s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-direction: linear;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+/* line 353, ../_source/css/sass/_mootor.ui.scss */
+.moo-ui-loading .moo-loading-01 {
+  -webkit-transform: rotate(-90deg) translate(0, -2.8em);
+  -webkit-animation-delay: .3s;
+}
+/* line 357, ../_source/css/sass/_mootor.ui.scss */
+.moo-ui-loading .moo-loading-02 {
+  -webkit-transform: rotate(-45deg) translate(0, -2.8em);
+  -webkit-animation-delay: .4s;
+}
+/* line 361, ../_source/css/sass/_mootor.ui.scss */
+.moo-ui-loading .moo-loading-03 {
+  -webkit-transform: rotate(0deg) translate(0, -2.8em);
+  -webkit-animation-delay: .5s;
+}
+/* line 365, ../_source/css/sass/_mootor.ui.scss */
+.moo-ui-loading .moo-loading-04 {
+  -webkit-transform: rotate(45deg) translate(0, -2.8em);
+  -webkit-animation-delay: .6s;
+}
+/* line 369, ../_source/css/sass/_mootor.ui.scss */
+.moo-ui-loading .moo-loading-05 {
+  -webkit-transform: rotate(90deg) translate(0, -2.8em);
+  -webkit-animation-delay: .7s;
+}
+/* line 373, ../_source/css/sass/_mootor.ui.scss */
+.moo-ui-loading .moo-loading-06 {
+  -webkit-transform: rotate(135deg) translate(0, -2.8em);
+  -webkit-animation-delay: .8s;
+}
+/* line 377, ../_source/css/sass/_mootor.ui.scss */
+.moo-ui-loading .moo-loading-07 {
+  -webkit-transform: rotate(180deg) translate(0, -2.8em);
+  -webkit-animation-delay: .9s;
+}
+/* line 381, ../_source/css/sass/_mootor.ui.scss */
+.moo-ui-loading .moo-loading-08 {
+  -webkit-transform: rotate(-135deg) translate(0, -2.8em);
+  -webkit-animation-delay: 1s;
+}
+
+@-webkit-keyframes fade {
+  /* line 388, ../_source/css/sass/_mootor.ui.scss */
+  0% {
+    background-color: #333;
+  }
+
+  /* line 389, ../_source/css/sass/_mootor.ui.scss */
+  100% {
+    background-color: #efefef;
+  }
 }
 
 /* line 17, src/styles.scss */
