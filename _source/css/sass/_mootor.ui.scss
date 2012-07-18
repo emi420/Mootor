@@ -318,72 +318,103 @@
     text-align: center;
 }
 
-// Loading
+// Overlay controls
+
 .moo-overlay {
     background-color: rgba(0,0,0,0.3);
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    bottom: 0;
+    right: 0;
     z-index: 500;
 }
 
+/*
+* Loading animation 
+* -----------------------------------------------------------------------------------------
+*/
+
+/*
+* Editable styles
+* Change this styles to position/resize the element as needed.
+* 1. base (darkest) color. The gradient palette derives from this color.
+* 2. Position of the center point of the animation. 
+     Place wherever is needed, by default is in the center of its parent container.
+* 3. The overall size of the loading is relative to this value.
+* 4. Animation speed
+*/
+
+$background-color: #000;  /*1*/
 .moo-ui-loading {
-    position: absolute;
-    top: 50%;
-    left: 50%;
+    position: absolute;/*2*/
+    top: 50%;/*2*/
+    left: 50%;/*2*/
+    font-size: 1em; /*3*/
+    -webkit-animation-duration:1.5s;/*4*/
+}
+
+/*
+* Base styles
+*/
+
+.moo-ui-loading {
     width: 0;
     height: 0;
     z-index: 550;
+    -webkit-animation-name: rotateThis;
+    -webkit-animation-duration:1.5s;
+    -webkit-animation-iteration-count:infinite;
+    -webkit-animation-timing-function:linear;
     .moo-ui-loading-block {
-        background-color: #EFEFEF;
         height: 2.5em;
         width: 1em;
         float: left;
-        -webkit-animation-name: fade;
-        -webkit-animation-duration: 0.7s;
-        -webkit-animation-iteration-count: infinite;
-        -webkit-animation-direction: linear;
         position:absolute;
-        top:0;
-        left:0;
+        top: -1.25em;
+        left: -0.5em;
     }
     .moo-loading-01 {
-       -webkit-transform: rotate(-90deg) translate(0, -2.8em);
-       -webkit-animation-delay: .3s;
+       -webkit-transform: rotate(-90deg) translate(0, -3em);
+       background-color: lighten($background-color, 100%);
     }
     .moo-loading-02 {
-        -webkit-transform: rotate(-45deg) translate(0, -2.8em);
-        -webkit-animation-delay: .4s;
+        -webkit-transform: rotate(-45deg) translate(0, -3em);
+         background-color: lighten($background-color, 87.5%);
     }
     .moo-loading-03 {
-        -webkit-transform: rotate(0deg) translate(0, -2.8em);
-        -webkit-animation-delay: .5s;
+        -webkit-transform: rotate(0deg) translate(0, -3em);
+         background-color: lighten($background-color, 75%);
     }
     .moo-loading-04 {
-        -webkit-transform: rotate(45deg) translate(0, -2.8em);
-        -webkit-animation-delay: .6s;
+        -webkit-transform: rotate(45deg) translate(0, -3em);
+         background-color: lighten($background-color, 62.5%);
     }
     .moo-loading-05 {
-        -webkit-transform: rotate(90deg) translate(0, -2.8em);
-        -webkit-animation-delay: .7s;
+        -webkit-transform: rotate(90deg) translate(0, -3em);
+         background-color: lighten($background-color, 50%);
     }
     .moo-loading-06 {
-        -webkit-transform: rotate(135deg) translate(0, -2.8em);
-        -webkit-animation-delay: .8s;
+        -webkit-transform: rotate(135deg) translate(0, -3em);
+         background-color: lighten($background-color, 37.5%);
     }
     .moo-loading-07 {
-        -webkit-transform: rotate(180deg) translate(0, -2.8em);
-        -webkit-animation-delay: .9s;
+        -webkit-transform: rotate(180deg) translate(0, -3em);
+         background-color: lighten($background-color, 25%);
     }
     .moo-loading-08 {
-        -webkit-transform: rotate(-135deg) translate(0, -2.8em);
-        -webkit-animation-delay: 1s;
+        -webkit-transform: rotate(-135deg) translate(0, -3em);
+         background-color: lighten($background-color, 12.5%);
     } 
 }
 
-@-webkit-keyframes fade{
-	0%{background-color:#333;}
-	100%{background-color:#efefef;}
+@-webkit-keyframes rotateThis {
+  from {-webkit-transform:  rotate(0deg);}
+  to {-webkit-transform: rotate(360deg);}
 }
+
+
+/*
+* Overlay Modal
+*/
+
