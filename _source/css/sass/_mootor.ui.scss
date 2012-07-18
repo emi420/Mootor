@@ -52,7 +52,8 @@
         padding: 0.25em; 
         textarea { @extend .moo-ui-input; }
     }
-    .moo-ui-select-container {
+    .moo-ui-select-container,
+    .moo-ui-select-container-multiple {
         @extend .moo-ui-input-container;
         padding: 0.25em; 
         height: 3em;
@@ -111,7 +112,7 @@
                 }
             }
         }
-        &.bottom {
+        &.moo-bottom {
             .moo-ui-select-menu{
                 top:4.5em;
                 &:before {
@@ -127,8 +128,8 @@
                 }
             }
         }
-        &.top {
-            .moo-ui-select-menu{
+        &.moo-top {
+            .moo-ui-select-menu {
                 bottom: 4.5em;
                 &:after {
                     content: " ";
@@ -145,7 +146,7 @@
         }
     }   
     /*
-    *  Cleanbox is the styling of the link used to "clean" a text input
+    *  Cleanbox is the styling of the icon link used to "clean" a text input
     */
     .cleanbox {
         display: block;
@@ -205,7 +206,7 @@
         @include float-right;
         position: relative;
         width: 75%;
-        input{ 
+        input { 
             position:absolute;
             top: 0.5em;
             left: 0.5em;
@@ -248,8 +249,7 @@
 
 // Checkbox
 .moo-ui-switch {
-     @include background-image(linear-gradient(top, #888, #bbb 65%));
-    
+    @include background-image(linear-gradient(top, #888, #bbb 65%));
     border: 1px solid #666;
     border-radius: 0.5em;
     @include float-right;
@@ -318,8 +318,6 @@
     text-align: center;
 }
 
-
-
 // Loading
 .moo-overlay {
     background-color: rgba(0,0,0,0.3);
@@ -330,6 +328,7 @@
     height: 100%;
     z-index: 500;
 }
+
 .moo-ui-loading {
     position: absolute;
     top: 50%;
