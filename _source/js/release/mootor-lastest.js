@@ -29,32 +29,45 @@ var $ = (function () {
      * @return {$} Mootor object
      */
 	$ = function (query) {
-		return new Moo(query);
+		return new Moo(query, document);
 	};
     /**
      * @ignore
      */
-	var Moo = function (query) {
+	var Moo = function (query, context) {
 		var qtype = typeof query,
-			el;
-
+			el,
+			i;
+			
         // Get element from query
         if (qtype === "string") {
 
             if (query.indexOf("#") > -1) {
                 query = query.replace("#", "");
-                el = document.getElementById(query);
+                el = context.getElementById(query);
 
             } else if (query.indexOf(".") > -1) {
                 query = query.replace(".", "");
-                el = document.getElementsByClassName(query);
-
+                el = context.getElementsByClassName(query);
+            } else {
+                el = context.getElementsByTagName(query);
             }
+            
         } else if (qtype === "object") {
             el = query;
+        }               
+        
+        
+        if ($.isArrayLike(el) === true) {
+            for(i = 0; i < el.length; i++) {
+                this[i] = el[i];
+            }
+            this.length = i;
+        } else {
+            this.length = 0;
         }
-
-         // Instance properties
+                       
+        // Instance properties
         this.el = (function () {
             return el;
         }());
@@ -146,11 +159,17 @@ var $ = (function () {
          * @example $("#myDiv").setClass("featured");
          */
         setClass: function (name) {
-            if (this.el.className.indexOf(" ") > -1) {
-                this.el.className += " " + name;
-            } else {
-                this.el.className = name + " ";                
+            var classes = this.el.className.split(" "),
+                classesN = [name],
+                i = 0;
+            
+            for(i = 0; i < classes.length; i++) {
+                if(classes[i] !== name) {
+                    classesN.push(classes[i]);
+                }
             }
+            
+            this.el.className = classesN.join(" ");
             
             return this;
         },
@@ -173,12 +192,18 @@ var $ = (function () {
          * @example $("#myDiv").removeClass("featured");
          */
         removeClass: function (name) {
-            if (this.el.className.indexOf(" ") > -1) {
-                this.el.className = this.el.className.replace(" " + name, "");
-            } else {
-                this.el.className = this.el.className.replace(name + " ", "");                
+            var classes = this.el.className.split(" "),
+                classesN = [],
+                i = 0;
+            
+            for(i = 0; i < classes.length; i++) {
+                if(classes[i] !== name) {
+                    classesN.push(classes[i]);
+                }
             }
-            return this;
+            
+            this.el.className = classesN.join(" ");
+            
         },
 
         /**
@@ -189,8 +214,16 @@ var $ = (function () {
         html: function (html) {
             this.el.innerHTML = html;
             return this;
-        }
+        },
         
+        /**
+         * Selector useful for query chaining
+         * @param {string} query Query
+         * @example $("#myList").find(".item")
+         */
+        find: function(query) {
+            return new Moo(query, this.el);
+        }        
 	};
 
     /**
@@ -290,7 +323,27 @@ var $ = (function () {
                 }
             }
             xmlhttp.send(data);
+        },
+        
+                
+        /**
+         * isArrayLike Check if el is an array-like object
+         */
+        isArrayLike: function(obj) {
+                        
+            if (obj &&
+                typeof obj === "object" || typeof obj === "function" &&
+                isFinite(obj.length) &&
+                obj.length >= 0 &&
+                obj.length === Math.floor(obj.length) &&
+                obj.length < 4294967296)
+            {
+                return true            
+            } else {
+                return false;
+            }
         }
+
 
     }, $);
 
@@ -383,6 +436,7 @@ if (!window.$ || typeof ($) !== "function") {
     window.$ = $;
 }
 
+
 /*
  * Mootor Gestures
  */
@@ -390,70 +444,69 @@ if (!window.$ || typeof ($) !== "function") {
 (function ($) {
     "use strict";
 
-    var createKey,
-        addGesture,
-        fire;
-
-     $.extend({
-        /**
-         * Gestures
-         *
-         * @class
-         * @name gestures
-         * @memberOf $
-         * @property {integer} x Position on X axis
-         * @property {integer} y Position on Y axis
-         * @property {integer} startX Position on X axis at the start of the gesture
-         * @property {integer} endX Position on X axis at the end of the gesture
-         * @property {integer} startY Position on Y axis at the start of the gesture
-         * @property {integer} endY Position on Y axis at the end of the gesture
-         * @property {boolean} isDraggingY Return true when is dragging on Y axis
-         * @property {boolean} mousedown Return true when mouse or touch is down
-         * @property {boolean} tapped Return true when a onTap was fired
-         * @property {integer} time Time between last 2 touchs
-         * @property {element} el Element binded to gesture
-         */
-        gestures: {
-            list: []
-        }
-    }, $);
-
-    // Create key for element
-    createKey = function (el) {
-
-        if (el.id !== "") {
-            return el.id;
-        } else if (el.rel !== undefined) {
-            return el.rel;
-        } else if (typeof el === "object") {
-            return el;
-        }
+    var addGesture,
+        fire,
+        _isListed,
+        gestures,
+        Gestures;
+        
+    Gestures = function() {
+        
     };
+    
+    Gestures.prototype = {
+        list: [],
+        getByElement: function(element) {
+            var i = 0;
+            for (i = this.list.length; i--;) {
+                if (this.list[i].el === element) {
+                    return this.list[i];
+                }
+            }
+            return null;
+        },
+        push: function(gesture) {
+            this.list.push(gesture);
+        }
+    }
+    
+    $.gestures = new Gestures();
 
     addGesture = function (options) {
         var gestureList = $.gestures.list,
             type = options.type,
-            fn = options.fn,
+            self = options.fn,
             callback = options.callback,
-            key = createKey(fn.el);
-
-        if (gestureList[key] === undefined) {
-            gestureList[key] = {
-                event: []
-            };
-            // Bind listeners only once
-            //fn.bind("mousedown", fn);
-            //fn.bind("mouseup", fn);
-            fn.bind("touchstart", fn);
-            fn.bind("touchend", fn);
+            gesture;
+    
+        if ((gesture = $.gestures.getByElement(self.el)) === null) {
+            gesture = {
+                el: self.el,
+                event: {}
+            }
+            gestureList.push(gesture);
         }
-
-        if (gestureList[key].event[type] === undefined) {
-            gestureList[key].event[type] = [];
+        
+        if (gesture.event[type] === undefined) {
+            gesture.event[type] = [];
         }
+        
+        gesture.event[type].push(callback);
 
-        gestureList[key].event[type].push(callback);
+        // Bind listeners only once
+        self.bind("touchstart", self);
+        self.bind("touchend", self);
 
+    };
+    
+    _isListed = function(list, el) {
+        var i;
+        for (i = list.length; i--;) {
+            if (list[i].el === el) {
+                return true;
+            }
+        }
+        return false;
     };
 
     // Fire callbacks
@@ -461,7 +514,7 @@ if (!window.$ || typeof ($) !== "function") {
         var i;
 
         info.e.preventDefault();
-
+        
         if (callbacks !== undefined) {
             for (i = 0; i < callbacks.length; i++) {
                 if (callbacks[i].handleGesture !== undefined) {
@@ -582,16 +635,15 @@ if (!window.$ || typeof ($) !== "function") {
 
         // Handler to detect gestures and fire callbacks        
         handleEvent: function (e) {
-            var key = createKey(this.el),
-                info = {
+            var info = {
                     el: this.el,
                     e: e
                 },
-                gesture = $.gestures.list[key],
+                gesture = $.gestures.getByElement(this.el),
                 date = new Date(),
                 clientX,
                 clientY;
-
+            
             if (e.clientX || e.clientY) {
                 // Mouse
                 clientX = e.clientX;
@@ -606,9 +658,8 @@ if (!window.$ || typeof ($) !== "function") {
             }
 
             // TapStart
-            if (e.type === "mousedown" || e.type === "touchstart") {
+            if (e.type === "touchstart") {
 
-                this.bind("mousemove", this);
                 this.bind("touchmove", this);
 
                 gesture.event.time = date.getTime();
@@ -633,7 +684,7 @@ if (!window.$ || typeof ($) !== "function") {
                 }
             }
 
-            if (e.type === "mousemove" || e.type === "touchmove") {
+            if (e.type === "touchmove") {
             
                 info.lastY = gesture.event.y;
                 info.lastX = gesture.event.x;
@@ -660,10 +711,9 @@ if (!window.$ || typeof ($) !== "function") {
                 }
             }
 
-            if (e.type === "mouseup" || e.type === "touchend") {
-
+            if (e.type === "touchend") {
+                        
                 if (gesture.event.tapped === false) {
-                    this.unbind("mousemove", this);
                     this.unbind("touchmove", this);
                     gesture.event.tapped = true;
                     info.time = date.getTime() - gesture.event.time;
@@ -676,19 +726,18 @@ if (!window.$ || typeof ($) !== "function") {
                     gesture.event.isDraggingY = 0;
                     fire(info, gesture.event.onDragEnd);
 
-                } else {
+                } else if (info.time !== undefined) {
                     // TapEnd
                     info.type = "tapEnd";
                     fire(info, gesture.event.onTapEnd);
                 }
+
             }
 
         }
     });
 
-}($));
-
-/* 
+}($));/* 
  * Mootor Visual FX
  */
 

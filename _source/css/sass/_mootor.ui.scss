@@ -102,14 +102,14 @@
             border-radius: 5px;
             padding: 1em;
             position: absolute;
+            overflow: hidden;
         }
         .moo-ui-select-list {
             font-size: 2em;
-            background: #FFF;
             border-radius: 5px;
-            overflow-y: scroll;
             
             li {
+                background: #FFF;
                 padding: 1em ;
                 border-bottom: 1px solid #CCC;
                 white-space: nowrap;
@@ -155,6 +155,23 @@
             }
         }
     }   
+    div.moo-ui-selectmultiple {
+        display: inline;
+        float: right;
+        border: 1px solid #666;
+        margin-top: -1.5em;
+        margin-left: -0.2em;
+        border-radius: 5px;
+        background-color: white;
+        position: relative;
+        padding: 0.25em 0.25em 0.25em 0.25em;
+        width: 75%;
+        height: 3em;
+        z-index: 300;
+    }
+    select.moo-ui-selectmultiple {
+        margin-left: 0.5em;
+    }
     .cleanbox {
         display: block;
         padding: 0.35em;
@@ -191,7 +208,7 @@
                 border-radius: 8px;
                 width: 1em;
                 height: 1em;
-                &.moo-radio-active {
+                &.moo-ui-radio-active {
                     background-color: #666;
                     &:after {
                          content: " ";
@@ -233,7 +250,7 @@
                 border: 1px solid #999;
                 width: 1em;
                 height: 1em;
-                &.moo-checkbox-active {
+                &.moo-ui-checkbox-active {
                     background-color: #666;
                     &:after {
                          content: " ";

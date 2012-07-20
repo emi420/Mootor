@@ -99,38 +99,17 @@ sub {
    ========================================================================== */
 
 /*
-* Addresses margins set differently in IE6/7.
+* Remove default padding
 */
-
-dl,
-menu,
-ol,
 ul {
-    margin: 1em 0;
-}
-
-dd {
-    margin: 0 0 0 40px;
+    padding-left: 0;
 }
 
 /*
-* Addresses paddings set differently in IE6/7.
+* Remove style decorations
 */
-
-menu,
-ol,
-ul {
-    padding: 0 0 0 40px;
-}
-
-/*
-* Corrects list images handled incorrectly in IE7.
-*/
-
-nav ul,
-nav ol {
+ul li {
     list-style: none;
-    list-style-image: none;
 }
 
 

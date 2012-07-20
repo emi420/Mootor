@@ -18,32 +18,45 @@ var $ = (function () {
      * @return {$} Mootor object
      */
 	$ = function (query) {
-		return new Moo(query);
+		return new Moo(query, document);
 	};
     /**
      * @ignore
      */
-	var Moo = function (query) {
+	var Moo = function (query, context) {
 		var qtype = typeof query,
-			el;
-
+			el,
+			i;
+			
         // Get element from query
         if (qtype === "string") {
 
             if (query.indexOf("#") > -1) {
                 query = query.replace("#", "");
-                el = document.getElementById(query);
+                el = context.getElementById(query);
 
             } else if (query.indexOf(".") > -1) {
                 query = query.replace(".", "");
-                el = document.getElementsByClassName(query);
-
+                el = context.getElementsByClassName(query);
+            } else {
+                el = context.getElementsByTagName(query);
             }
+            
         } else if (qtype === "object") {
             el = query;
+        }               
+        
+        
+        if ($.isArrayLike(el) === true) {
+            for(i = 0; i < el.length; i++) {
+                this[i] = el[i];
+            }
+            this.length = i;
+        } else {
+            this.length = 0;
         }
-
-         // Instance properties
+                       
+        // Instance properties
         this.el = (function () {
             return el;
         }());
@@ -135,11 +148,17 @@ var $ = (function () {
          * @example $("#myDiv").setClass("featured");
          */
         setClass: function (name) {
-            if (this.el.className.indexOf(" ") > -1) {
-                this.el.className += " " + name;
-            } else {
-                this.el.className = name + " ";                
+            var classes = this.el.className.split(" "),
+                classesN = [name],
+                i = 0;
+            
+            for(i = 0; i < classes.length; i++) {
+                if(classes[i] !== name) {
+                    classesN.push(classes[i]);
+                }
             }
+            
+            this.el.className = classesN.join(" ");
             
             return this;
         },
@@ -162,12 +181,18 @@ var $ = (function () {
          * @example $("#myDiv").removeClass("featured");
          */
         removeClass: function (name) {
-            if (this.el.className.indexOf(" ") > -1) {
-                this.el.className = this.el.className.replace(" " + name, "");
-            } else {
-                this.el.className = this.el.className.replace(name + " ", "");                
+            var classes = this.el.className.split(" "),
+                classesN = [],
+                i = 0;
+            
+            for(i = 0; i < classes.length; i++) {
+                if(classes[i] !== name) {
+                    classesN.push(classes[i]);
+                }
             }
-            return this;
+            
+            this.el.className = classesN.join(" ");
+            
         },
 
         /**
@@ -178,8 +203,16 @@ var $ = (function () {
         html: function (html) {
             this.el.innerHTML = html;
             return this;
-        }
+        },
         
+        /**
+         * Selector useful for query chaining
+         * @param {string} query Query
+         * @example $("#myList").find(".item")
+         */
+        find: function(query) {
+            return new Moo(query, this.el);
+        }        
 	};
 
     /**
@@ -279,7 +312,27 @@ var $ = (function () {
                 }
             }
             xmlhttp.send(data);
+        },
+        
+                
+        /**
+         * isArrayLike Check if el is an array-like object
+         */
+        isArrayLike: function(obj) {
+                        
+            if (obj &&
+                typeof obj === "object" || typeof obj === "function" &&
+                isFinite(obj.length) &&
+                obj.length >= 0 &&
+                obj.length === Math.floor(obj.length) &&
+                obj.length < 4294967296)
+            {
+                return true            
+            } else {
+                return false;
+            }
         }
+
 
     }, $);
 

@@ -133,6 +133,7 @@
         /**
          * Initialize footer
          */
+         // FIXME CHECK
         footer: {
             init: function (panels) {
                 var footer = {};
@@ -140,7 +141,6 @@
                 if (footer.el) {
                     panels.nav(footer);
                     panels.height = panels.height - footer.el.offsetHeight;
-                    //panels.el.style.height = panels.height + "px";
                     return footer;
                 }
             }
@@ -279,9 +279,8 @@
                 cb,
                 i;
                 
-            if (gesture.isDraggingY !== 0) {
+            if (gesture.type === "dragEnd") {
 
-                this.isMoving = false;
                 // Bounce back
                 if (this.y >= 0 || maxdist < -this.y) {
                     if (this.y > 0) {
@@ -300,8 +299,6 @@
                     for (i = panel.anchors.length; i--;) {
                         $(panel.anchors[i]).removeClass("active");
                     }
-                   
-                    console.log(this.y);
                    
                     this.translate({
                         y: this.y,
