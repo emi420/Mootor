@@ -13,7 +13,9 @@
          * Translate element, using GPU acceleration when available
          * @param {object} positions Axis positions
          * @param {object} options Options
-         * @config {integer} transitionDuration Duration of transition (in seconds)
+         * @config {number} transitionDuration Duration of transition (in seconds)
+         * @config {number} positions.x X position
+         * @config {number} positions.y Y position
          */
         translateFx: function (positions, options) {
 
@@ -43,8 +45,6 @@
 
         /**
          * Clean element transform styles
-         * @param {element} el Element
-         * @example $.Fx.clean($("#myDiv");
          */
         cleanFx: function () {
             this.el.style.webkitTransform = "";

@@ -8,411 +8,144 @@
     
 	/*
 	 * Hide all while loading, show when ready
+	 * TODO: "Loading..." overlay
 	 */
 	$.view.hide();	
 	$(document).ready(function() {
 		$.view.show();
 	});
+	
+	// Prevents native scrolling
+	$(document).ready(function() {
+    	$(document.body).bind("touchmove", function(gesture) {
+            gesture.preventDefault();
+            gesture.stopPropagation();
+    	});	
+	});
 
-    var Nav,
-     
-     /**
-     * Navigation
-     */
-    Nav = function (options) {
+	// Constructors
+	
+    /**
+     * Nav
+     */  
+    var Nav = function (options) {
 
-        var i,
-            j,
-            anchors,
-            anchor,
-            /**
-             * Navigation item
-             */
-            item = {
-                anchors: [],
-                el: undefined,
-                height: 0,
-                x: 0,
-                y: 0,
-                hidden: []
-            },
-            nav;
+        // Initialize instance & panels
+        Nav.init(options, this);
 
-        this.el = options.el;
-        this.navClass = options.nav_class !== undefined ? options.nav_class : "moo-nav";
-        this.itemClass = options.item_class !== undefined ? options.item_class : "moo-panel";
-        this.headerId = options.header_id !== undefined ? options.header_id : "header";
-        this.footerId = options.footer_id !== undefined ? options.footer_id : "footer";
-        this.hiddenClass = options.hidden_class !== undefined ? options.hidden_class : "moo-hidden";
-        this.margin = options.item_margin !== undefined ? options.item_margin : 5;
-        this.width = options.width !== undefined ? options.width : $.view.clientW;
-        this.height = options.height !== undefined ? options.height : $.view.clientH;
-        this.x = 0;
-        this.y = 0;
-        this.current = 0;
-        this.back = 0;
-        this.items = [];
-        this.isMoving = false;
-        this.direction = 0;
-        this.history = [];
-
-        nav = this.el.getElementsByClassName(this.itemClass);
-
-        this.count = nav.length;
-        
-        // Anchor links
-        for (i = nav.length; i--;) {
-            this.items[i] = {el: nav[i]};
-            item = this.items[i];
-            item.x = 0;
-            item.y = 0;
-            
-            // External links
-            anchors = item.el.getElementsByTagName("a");
-            for (j = anchors.length; j--;) {
-                anchor = anchors[j];
-                if ($(anchor).hasClass(this.navClass) === false) {
-                    $(anchor).onTapEnd( function(gesture) {
-                        window.location = gesture.el.href;
-                    });
-                }
-            }
-            item.anchors = item.el.getElementsByClassName(this.navClass);
-            item.hidden = item.el.getElementsByClassName(this.hiddenClass);
-        }
-        
-        $(this.el).onDragMove(this);
-        $(this.el).onDragEnd(this);
-
-        this.footer = this.footer.init(this);
-        this.header = this.header.init(this);
-
-        this.init();
+        // Initialize header & footer
+        this.header = new Header(this);
+        this.footer = new Footer(this);
 
         return this;
 
-    };
-
-    Nav.prototype = {
-
-        /**
-         * Gesture handler
-         */
-        handleGesture: function (gesture) {
-            switch (gesture.type) {
-            case "dragMove":
-                this.move(gesture);
-                break;
-            case "dragEnd":
-                this.check(gesture);
-                break;
-            }
-        },
-
-        /**
-         * Initialize header
-         */
-        header: {
-            init: function (panels) {
-                var header = {},
-                    i;
-                header.el = document.getElementById(panels.headerId);
-                header.height = header.el.offsetHeight;
-                if (header.el) {
-                    panels.nav(header);
-                    for (i = panels.count; i--;) {
-                        panels.items[i].el.style.paddingTop = header.height + "px";
-                    }
-                    return header;
-                } else {
-                    return undefined;
-                }
-            }
-        },
-
-        /**
-         * Initialize footer
-         */
-         // FIXME CHECK
-        footer: {
-            init: function (panels) {
-                var footer = {};
-                footer.el = document.getElementById(panels.footerId);
-                if (footer.el) {
-                    panels.nav(footer);
-                    panels.height = panels.height - footer.el.offsetHeight;
-                    return footer;
-                }
-            }
-        },
+    },    
+    /**
+     * Header
+     */  
+    Header = function(self) {
+        var i,
+            elementId;
+            
+        elementId = self._config.header_id !== undefined ?
+                    self._config.header_id : "header";
+            
+        this.el = $(elementId)[0];
         
-        /**
-         * Initialize navigation area
-         */
-        nav: function (obj) {
-            obj.anchors = obj.el.getElementsByClassName(this.navClass);
-        },
+        if (this.el !== null) {
+            this.height = this.el.offsetHeight;
 
-        /**
-         * Initialize Nav
-         */
-        init: function () {
-
-            var anchorCallback,
-                j,
-                i,
-                Nav = this,
-                panel,
-                setActive,
-                headerAnchor,
-                footerAnchor,
-                goBack,
-                clickcb;
-
-            anchorCallback = function (gesture) {
-                Nav.direction = 0;
-                $(gesture.el).removeClass("active");
-                if (Nav.isMoving === false) {
-                    Nav.isMoving = true;
-                    Nav.set(gesture.el.rel);
-                }
-                return false;
-            };
+            self._config.anchorBack = $($(this.el).find(".moo-nav-back")[0]);
             
-            clickcb = function () {
-                return false;
-            };
-
-            setActive = function (gesture) {
-                $(gesture.el).setClass("active");
-            };
-
-            // Reset styles and set anchor links
-            for (i = this.count; i--;) {
-
-                panel = this.items[i];
-                
-                if (i > 0) {
-                    this.translate({el: panel.el, x:  -((this.width + this.margin) * 4) , y:0});
-                } else {
-                    this.translate({el: panel.el, x:0 });
-                }
-
-                panel.height = panel.el.offsetHeight;
-                if (this.height > panel.height) {
-                    panel.height = this.height;
-                }
-
-                for (j = panel.anchors.length; j--;) {
-                    if (panel.anchors[j].rel !== "") {
-                        $(panel.anchors[j]).onTapStart(setActive);
-                        panel.anchors[j].onclick = clickcb;
-                        $(panel.anchors[j]).onTapEnd(anchorCallback);
-                    }
-                }
-            }
-            
-            // On window resize
-            $(window).bind("resize", function(){
-                setTimeout( function() {
-                    if (Nav.header !== undefined) {
-                        Nav.height = $.view.clientH - Nav.header.height;
-                    }
-                }, 1);
+            self._config.anchorBack.onTapEnd(function(gesture) {
+                self.goBack();
             });
-
-
-            if (this.header) {
-                goBack = function () {
-                    Nav.goBack();
-                };
-                for (i = this.header.anchors.length; i--;) {
-                    headerAnchor =this.header.anchors[i];
-                    this.anchorBack = headerAnchor.parentNode;
-                    $(this.anchorBack).hide()
-                    headerAnchor.onclick = clickcb;
-                    if (headerAnchor.rel === "back") {
-                        $(headerAnchor).onTapEnd(goBack);
-                    } else {
-                        $(headerAnchor).onTapEnd(anchorCallback);                        
-                    }
-                }
-            }
             
-
-            if (this.footer) {
-                for (i = this.footer.anchors.length; i--;) {
-                    footerAnchor = this.footer.anchors[i];
-                    if (footerAnchor.rel !== "") {
-                        footerAnchor.onclick = clickcb;
-                        $(footerAnchor).onTapEnd(anchorCallback);
-                    }
-                }
-            }
+            $(this.el).onDragMove(function(gesture) {
+                gesture.e.preventDefault();
+            });
             
+            for (i = self._config.count; i--;) {
+                self.panels[i].el.style.paddingTop = this.height + "px";
+            }
             return this;
-
-        },
-
-        /**
-         * Move panel
-         */
-        move: function (gesture) {
-            var panel =  this.items[this.current];
-            if (gesture.isDraggingY !== 0 && panel.movable !== false) {
-                this.y = this.y + (gesture.y - gesture.lastY);
-                this.translate({
-                    el: panel.el,
-                    y: this.y,
-                    x: panel.x
-                });
-            }
-
-        },
-
-        /**
-         * Check movement
-         */
-        check: function (gesture) {
-            var panel = this.items[this.current],
-                maxdist = panel.height - this.height,
-                cb,
-                i;
-                
-            if (gesture.type === "dragEnd") {
-
-                // Bounce back
-                if (this.y >= 0 || maxdist < -this.y) {
-                    if (this.y > 0) {
-                        this.y = 0;
-                    } else {
-                        if (this.header === undefined) {                        
-                            this.y = -(panel.height - this.height);
-                        } else {
-                            this.y = -(panel.height - (this.height + this.header.height));                            
-                            // FIXME CHECK
-                            if (this.y === this.header.height) {
-                               this.y -= this.header.height; 
-                            }
-                        }
-                    }
-                    for (i = panel.anchors.length; i--;) {
-                        $(panel.anchors[i]).removeClass("active");
-                    }
-                   
-                    this.translate({
-                        y: this.y,
-                        el: panel.el,
-                        duration: 0.25
-                    });
-                }
-
-            }
-
-        },
-
-        /**
-         * Load current panel
-         */
-        load: function () {
-
-            var panel,
-                callback,
-                back,
-                positionX,
-                fn = this;
-    
-            // Current panel
-            panel = this.items[this.current];
-            // Back panel
-            back = this.items[this.back];
+        } else {
+            return undefined;
+        }
+        
+    },    
+    /**
+     * Footer
+     */  
+    Footer = function(self) {        
+        var i,
+            elementId;
             
-            $(panel.el).show();
-           
-            this.isMoving = true;
+        elementId = self._config.footer_id !== undefined ?
+                    self._config.footer_id : "footer";
             
-            callback = function () {
-                $(back.el).hide();
-                fn.isMoving = false;
-                
-                panel.x = 0;
-                fn.x = 0;
-                fn.translate({el: fn.el, x: 0});
-                fn.translate({el: panel.el, x: 0});
-            };
-
-            // Initial position for translate
-            positionX = this.width + this.margin;
-
-            if (this.current !== 0) {
-
-                $(this.anchorBack).show()
-
-                if (this.back === 0) {
-                    this.translate({el: panel.el, x: positionX});
-                    panel.x = positionX;
-                    positionX = -positionX;
-
-                } else {
-                                    
-                    if (this.direction === 0 ) {
-
-                        this.translate({el: this.el, x: 0});
-                        this.translate({el: panel.el, x: positionX});
-                        panel.x = positionX;
-                        this.translate({el: back.el, x: 0});
-                        positionX = -positionX;
-                    
-                    } else {
-
-                        positionX = 0;
-                        panel.x = 0;
+        this.el = document.getElementById(elementId);
+        
+        if (this.el !== null) {
+            this.height = this.el.offsetHeight;
     
-                    }
-                    
-                }
-            } else if (this.back !== 0) {
-           
-                this.translate({el: this.el, x: -positionX});
-                this.translate({el: panel.el, x: 0});
-                panel.x = 0;
-                this.translate({el: back.el, x: positionX});
-                positionX = 0;                
-                $(this.anchorBack).hide();
-
+            self._nav(footer);
+            for (i = self.count; i--;) {
+                self.panels[i].el.style.paddingBottom = footer.height + "px";
             }
-                        
-            window.setTimeout(function () {
-                fn.translate({
-                    el: fn.el,
-                    duration: .25,
-                    x: positionX,
-                    callback: callback
-                });
-            }, 1);
-        },
+            return this;
+            
+        } else {
+            return undefined;
+        }
+    },    
+    /**
+     * Panel
+     */  
+    Panel = function(options) {
+    
+        // Element
+        this.el = options.el;
+        
+        // Id
+        this.id = this.el.id;
 
+        // Panel index
+        this.index = options.index;
+        
+        // Panel height (in pixels)
+        this.height = options.height;
+
+        // Panel 2D position
+        this.x = options.x;
+        this.y = options.y;
+        
+        return this;  
+    };
+          
+    // Public instance prototypes
+    
+    /**
+     * Nav
+     */  
+    Nav.prototype = {
+    
         /**
          * Set current panel
          */
         set: function (id) {
 
-            var i;
-
-            // Get panel by id and load it
-            for (i = this.count; i--;) {
-                if (this.items[i].el.id === id) {
-                    if (this.current != i) {
-                        this.back = this.current;
-                        if (this.direction === 0) {
-                            this.history.push(this.current);
-                        }
-                        this.current = i;
-                        this.load();
-                    } else {
-                        this.isMoving = false;
-                    }
+            var panel = this.get(id);
+            
+            if (this.current !== panel.index) {
+                this._config.back = this.current;
+                if (this._config.direction === 0) {
+                    this.history.push(this.current);
                 }
+                this.current = panel.index;
+                Nav.load(this);
+            } else {
+                this._config.isMoving = false;
             }
 
         },
@@ -423,17 +156,124 @@
         get: function (id) {
             var i;
             // Get panel by id and load it
-            for (i = this.count; i--;) {
-                if (this.items[i].el.id === id) {
-                    return this.items[i];
+            for (i = this._config.count; i--;) {
+                if (this.panels[i].el.id === id) {
+                    return this.panels[i];
                 }
             }
         },
 
         /**
+         * Go back on navigation history
+         */
+        goBack: function () {
+            if (this.history.length > 0) {
+                this._config.direction = -1;
+                this._config.back = this.history.pop();
+                this.set(this.panels[this._config.back].el.id);
+            }
+	    },
+
+        /**
+         * Gesture handler
+         */
+        handleGesture: function (gesture) {
+            Nav.handleGesture(gesture, this);
+        },        
+
+    };
+    
+    // Private static methods
+
+    /**
+     * Panel
+     */     
+    $.extend({
+        initializeAnchorLinks: function(panel, self) {
+        
+            var anchors,
+            anchor,
+            anchorCallback,
+            clickcb,
+            setActive,
+            i,j;
+
+            // External links    
+            anchors = panel.el.getElementsByTagName("a");
+            for (j = anchors.length; j--;) {
+                anchor = anchors[j];
+                if ($(anchor).hasClass(self._config.navClass) === false) {
+                    $(anchor).onTapEnd( function(gesture) {
+                        window.location = gesture.el.href;
+                    });
+                }
+            }
+            
+            panel._anchors = panel.el.getElementsByClassName(self._config.navClass);
+            
+            anchorCallback = function (gesture) {
+                self._config.direction = 0;
+                $(gesture.el).removeClass("active");
+                if (self._config.isMoving === false) {
+                    self._config.isMoving = true;
+                    if (gesture.el.rel !== undefined) {
+                        self.set(gesture.el.rel);
+                    }
+                }
+                return false;
+            };
+            
+            clickcb = function () {
+                return false;
+            };
+    
+            setActive = function (gesture) {
+                $(gesture.el).setClass("active");
+            };
+
+            for (j = panel._anchors.length; j--;) {
+                if (panel._anchors[j].rel !== "") {
+                    $(panel._anchors[j]).onTapStart(setActive);
+                    panel._anchors[j].onclick = clickcb;
+                    $(panel._anchors[j]).onTapEnd(anchorCallback);
+                }
+            }
+            
+        }    
+    }, Panel);
+
+
+    /**
+     * Nav
+     */    
+    $.extend({
+    
+        /** Initialize Nav **/
+        init: function(options, self) {
+
+            self.el = options.el;            
+            self._options = options;
+            
+            // Initialize instance properties
+            Nav.initializeProperties(self, options);                                                    
+            
+            // Initialize panels navigation
+            Nav.panelsInit(self);
+                        
+            // Map touch events to event handler
+            $(self.el).onDragMove(self);
+            $(self.el).onDragEnd(self);
+            
+            // Update sizes window resize
+            Nav.updateSizesOnWindowResize(self);
+            
+            return self;
+        },
+        
+        /**
          * Translate Nav
          */
-        translate: function (options) {
+        translate: function (options, self) {
             if (options.duration === undefined) {
                 options.duration = 0;
             }
@@ -444,72 +284,306 @@
                 options.y = 0;
             }
             if (options.x === undefined) {
-                options.x = this.items[this.current].x;
+                options.x = self.panels[self.current].x;
             }
                         
             $(options.el).translateFx(
-                {y: options.y, x: options.x},
+                {y: options.y,x: options.x},
                 {transitionDuration: options.duration, callback: options.callback}
             );
+            
         },
-
+        
         /**
-         * Hide hidden content
+         * Gesture handler
          */
-        hide: function (panel) {
-            var i;
-            for (i = panel.hidden.length; i--;) {
-                $(panel.hidden[i]).hide();
-            }
-        },
-
-        /**
-         * Show hidden content
-         */
-        show: function (panel) {
-            var i;
-            for (i = panel.hidden.length; i--;) {
-                $(panel.hidden[i]).show();
-            }
-        },
-
-        /**
-         * Go back on navigation history
-         */
-        goBack: function () {
-            if (this.history.length > 0) {
-                this.direction = -1;
-                this.back = this.history.pop();
-                this.set(this.items[this.back].el.id);
-	    }
-        },
-
-        /**
-         * Nav configuration
-         */
-        config: function (options) {
-            var panel;
-            if (options.panel !== undefined) {
-                panel = this.get(options.panel);
-                if (options.movable !== undefined) {
-                    panel.movable = options.movable;
+        handleGesture: function (gesture, self) {
+            gesture.e.preventDefault();
+            switch (gesture.type) {
+                case "dragMove":
+                    Nav.move(gesture, self);
+                    break;
+                case "dragEnd":
+                    Nav.checkMove(gesture, self);
+                    break;
                 }
+        },
+        
+        /**
+         * Initialize navigation area
+         */
+        nav: function (navElement, self) {
+            navElement._anchors = self.el.getElementsByClassName(self._options.navClass);
+        },
+
+        /**
+         * Move panel
+         */
+        move: function (gesture, self) {
+            var panel =  self.panels[self.current];
+            if (gesture.isDraggingY !== 0 && panel.movable !== false) {
+                self._config.y = self._config.y + (gesture.y - gesture.lastY);
+                Nav.translate({
+                    el: panel.el,
+                    y: self._config.y,
+                    x: panel.x
+                }, self);
+            }
+
+        },
+
+        /**
+         * Check move
+         */
+        checkMove: function (gesture, self) {
+            var panel = self.panels[self.current],
+                maxdist = panel.height - self._config.height,
+                cb,
+                i;
+                
+            if (gesture.type === "dragEnd") {
+
+                // Bounce back
+                if (self._config.y >= 0 || maxdist < -self._config.y) {
+                    if (self._config.y > 0) {
+                        self._config.y = 0;
+                    } else {
+                        if (self.header === undefined) {                        
+                            self._config.y = -(panel.height - self._config.height);
+                        } else {
+                            self._config.y = -(panel.height - (self._config.height + self.header.height));                            
+                            // FIXME CHECK
+                            if (self._config.y === self.header.height) {
+                               self._config.y -= self.header.height; 
+                            }
+                        }
+                    }
+                    for (i = panel._anchors.length; i--;) {
+                        $(panel._anchors[i]).removeClass("active");
+                    }
+                                      
+                    Nav.translate({
+                        y: self._config.y,
+                        el: panel.el,
+                        duration: 0.25
+                    }, self);
+                }
+
+            }
+
+        },
+
+        /**
+         * Load current panel
+         */
+        load: function (self) {
+
+            var panel,
+                callback,
+                back,
+                positionX;
+    
+            // Current panel
+            panel = self.panels[self.current];
+            // Back panel
+            back = self.panels[self._config.back];
+            
+            $(panel.el).show();
+           
+            self._config.isMoving = true;
+            
+            callback = function () {
+                $(back.el).hide();
+                self._config.isMoving = false;
+                
+                panel.x = 0;
+                self._config.x = 0;
+                Nav.translate({el: self.el, x: 0}, self);
+                Nav.translate({el: panel.el, x: 0}, self);
+            };
+
+            // Initial position for translate
+            positionX = self._config.width + self._config.margin;
+
+            if (self.current !== 0) {
+
+                self._config.anchorBack.show()
+
+                if (self._config.back === 0) {
+                    Nav.translate({el: panel.el, x: positionX}, self);
+                    panel.x = positionX;
+                    positionX = -positionX;
+
+                } else {
+                                    
+                    if (self._config.direction === 0 ) {
+
+                        Nav.translate({el: self.el, x: 0}, self);
+                        Nav.translate({el: panel.el, x: positionX}, self);
+                        panel.x = positionX;
+                        Nav.translate({el: back.el, x: 0}, self);
+                        positionX = -positionX;
+                    
+                    } else {
+
+                        positionX = 0;
+                        panel.x = 0;
+    
+                    }
+                    
+                }
+            } else if (self._config.back !== 0) {
+           
+                Nav.translate({el: self.el, x: -positionX}, self);
+                Nav.translate({el: panel.el, x: 0});
+                panel.x = 0;
+                Nav.translate({el: back.el, x: positionX}, self);
+                positionX = 0;                
+                self._config.anchorBack.hide();
+
+            }
+            
+            window.setTimeout(function () {
+                Nav.translate({
+                    el: self.el,
+                    duration: .25,
+                    x: positionX,
+                    callback: callback
+                }, self);
+            }, 1);
+        },
+        
+        updateSizesOnWindowResize: function(self) {
+            $(window).bind("resize", function(){
+                setTimeout( function() {
+                    if (self.header !== undefined) {
+                        self._config.height = $.view.clientH - self.header.height;
+                    } else {
+                        self._config.height = $.view.clientH;                        
+                    }
+                }, 1);
+            });
+        },
+
+        panelsInit: function(self) {
+            var item,
+                i,j,
+                anchors,
+                anchor,
+                item,
+                anchorCallback,
+                clickcb,
+                setActive,
+                panel,
+                nav = self.el.getElementsByClassName(self._config.itemClass);  
+                
+            self._config.count = nav.length;
+            self.panels = [];
+            
+            // Initialize panels
+            for (i = 0; i < nav.length; i++) {
+    
+                panel = new Panel({
+                    el: nav[i],
+                    index: i,
+                    x: 0,
+                    y: 0,
+                });
+    
+                Panel.initializeAnchorLinks(panel, self);
+                self.panels.push(panel);
+            }
+                        
+            Nav.initializePanelsStyles(self);
+            
+        },
+
+        initializeProperties: function(self, options) {
+        
+            self._config = {
+                x: 0,
+                y: 0,
+                back: 0,
+                isMoving: false,
+                direction: 0,
+                margin: 5,
+                width: $.view.clientW,
+                height: $.view.clientH,
+                navClass: "moo-nav",
+                itemClass: "moo-panel",
+                hidden_class: "moo-hidden"            
+            }
+    
+            self.panels = [];
+            self.current = 0;
+            self.history = [];
+            
+            if (options.item_margin !== undefined) { 
+                self._config.item_margin = options.item_margin ;
+            }
+            
+            if (options.nav_class !== undefined) {
+                self._config.nav_class = options.nav_class;
+            }
+                                     
+            if (options.item_class !== undefined) {
+                self._config.item_class = options.item_class;
+            }
+                              
+            if (options.hidden_class !== undefined) {
+                self._config.hidden_class = options.hidden_class;
+            }
+                                        
+      
+        },    
+
+        initializePanelsStyles: function(self) {
+            var i,
+                panel;
+                
+            // Reset styles
+            for (i = self._config.count; i--;) {
+    
+                panel = self.panels[i];
+                
+                if (i > 0) {
+                    Nav.translate({
+                        el: panel.el, 
+                        x:  -((self._config.width + self._config.margin) * 4),
+                        y:0
+                    }, self);
+                } else {
+                    Nav.translate({
+                        el: panel.el,
+                        x:0
+                    }, self);
+                }
+    
+                panel.height = panel.el.offsetHeight;
+                
+                if (self._config.height > panel.height) {
+                    panel.height = self._config.height;
+                }
+    
             }
         }
+            
+    }, Nav);
 
-    };
+    
+    // Public constructors
 
-
-    /**
-     * Navigation
-     */
     $.extend({
         nav: function (options) {
             if (typeof options !== "object") {
                 options = {};
             }
             options.el = this.el;
-            return new Nav(options);
+            
+            switch (options.type) {
+                default:
+                    return new Nav(options);                
+            }
         }
     });
 

@@ -13,7 +13,7 @@
     %header#header.moo-header
         %h1 Mootor demo
         %nav
-            %a.moo-nav{:href=>"", :rel=>"back"} Back
+            %a.moo-nav-back{:href=>"", :rel=>"back"} Back
 
     #panels
     
@@ -27,89 +27,87 @@
                 %a.moo-nav{:href=>"", :rel=>"carousel"} Carousel
                     
         .moo-panel#ui
-            %h2 User Interface
-            .moo-hidden
-                %form.moo-ui-form{:action=>"", :method=>"post"}
-                    .moo-field
-                        %label Input Switch
-                        .moo-ui-switch#moo-ui-switch-1
-                            %input{:type=>"checkbox", :name=>"switch1" ,:value=>"1"}  
-                    .moo-field
-                        %label Input de texto
-                        .moo-ui-text#moo-ui-text-1
-                            %input{:type=>"text", :name=>"text1" ,:placeholder=>"Ingrese su texto aqui"}
-                       
-                    .moo-field
-                        %label &Aacute;rea de texto
-                        .moo-ui-textarea
-                            %textarea#moo-ui-textarea-1{:name=>"textarea1" ,:placeholder=>"Ingrese su texto aqui"}
+            %form.moo-ui-form{:action=>"", :method=>"post"}
+                .moo-field
+                    %label Switch
+                    .moo-ui-switch#moo-ui-switch-1
+                        %input{:type=>"checkbox", :name=>"switch1" ,:value=>"1"}  
+                .moo-field
+                    %label Text
+                    .moo-ui-text#moo-ui-text-1
+                        %input{:type=>"text", :name=>"text1" ,:placeholder=>"Ingrese su texto aqui"}
+                   
+                .moo-field
+                    %label TextArea
+                    .moo-ui-textarea
+                        %textarea#moo-ui-textarea-1{:name=>"textarea1" ,:placeholder=>"Ingrese su texto aqui"}
 
-                    .moo-field
-                        %label Select menu
-                        %select#moo-ui-select-1
-                            %option{:value=>"100"} Item 1
-                            %option{:value=>"200"} This is some other item listed
-                            %option{:value=>"300"} Third item
-                            %option{:value=>"400"} some random item
-                            %option{:value=>"500"} Item 1
-                            %option{:value=>"600"} This is some other item listed
-                            %option{:value=>"700"} Third item
-                            %option{:value=>"800"} Item 1
-                            %option{:value=>"900"} This is some other item listed
-                            %option{:value=>"1000"} Third item
-                            %option{:value=>"1100"} Item 1
-                            %option{:value=>"1200"} This is some other item listed
-                            %option{:value=>"1300"} Third item
+                .moo-field
+                    %label Select
+                    %select#moo-ui-select-1
+                        %option{:value=>"100"} Item 1
+                        %option{:value=>"200"} This is some other item listed
+                        %option{:value=>"300"} Third item
+                        %option{:value=>"400"} some random item
+                        %option{:value=>"500"} Item 1
+                        %option{:value=>"600"} This is some other item listed
+                        %option{:value=>"700"} Third item
+                        %option{:value=>"800"} Item 1
+                        %option{:value=>"900"} This is some other item listed
+                        %option{:value=>"1000"} Third item
+                        %option{:value=>"1100"} Item 1
+                        %option{:value=>"1200"} This is some other item listed
+                        %option{:value=>"1300"} Third item
 
 
-                    .moo-field
-                        %label Multiple select menu
-                        %select#moo-ui-select-multiple-1
-                            %option{:value=>"300"} Item 1
-                            %option{:value=>"200"} This is some other item listed
-                            %option{:value=>"400"} Third item
-                            %option{:value=>"450"} some random item
-                            %option{:value=>"500"} Item 1
-                            %option{:value=>"600"} This is some other item listed
-                            %option{:value=>"700"} Third item
-                            %option{:value=>"800"} Item 1
-                            %option{:value=>"900"} This is some other item listed
+                .moo-field
+                    %label MultipleSelect
+                    %select#moo-ui-select-multiple-1
+                        %option{:value=>"300"} Item 1
+                        %option{:value=>"200"} This is some other item listed
+                        %option{:value=>"400"} Third item
+                        %option{:value=>"450"} some random item
+                        %option{:value=>"500"} Item 1
+                        %option{:value=>"600"} This is some other item listed
+                        %option{:value=>"700"} Third item
+                        %option{:value=>"800"} Item 1
+                        %option{:value=>"900"} This is some other item listed
 
 
-                    .moo-field
-                        %legend 
-                            Input radio
+                .moo-field
+                    %legend 
+                        Radio
 
-                        %fieldset#moo-ui-radio-1
-                            %label{:for=>"radio0"} Option 0
-                            %input{:type=>"radio", :name=>"radios", :id=>"radio0" ,:value=>"0"}
-                            %label{:for=>"radio1"} Option 1
-                            %input{:type=>"radio", :name=>"radios", :id=>"radio1" ,:value=>"1"}
-                            %label{:for=>"radio2"} Option 2
-                            %input{:type=>"radio", :name=>"radios", :id=>"radio2" ,:value=>"2"}
-                            %label{:for=>"radio3"} Option 3
-                            %input{:type=>"radio", :name=>"radios", :id=>"radio3" ,:value=>"3"}
-                       
-                    
-                    .moo-field
-                        %legend 
-                            Input checkbox
-                        %fieldset#moo-ui-checkbox-1
-                            .moo-ui-checkbox
-                                %label{:for=>"check1"} Option 1
-                                %input#check1{:type=>"checkbox", :name=>"checkboxes" ,:value=>"0"}
-                            .moo-ui-checkbox
-                                %label{:for=>"check2"} Option 2
-                                %input#check2{:type=>"checkbox", :name=>"checkboxes" ,:value=>"1"}
-                            .moo-ui-checkbox
-                                %label{:for=>"check3"} Option 3
-                                %input#check3{:type=>"checkbox", :name=>"checkboxes" ,:value=>"2"}
-                                            
-                    
-                    .moo-field
-                        %label Tooltip
-                        #radiobtn
-                            %span#tooltipTest Show me the tooltip!
+                    %fieldset#moo-ui-radio-1
+                        %label{:for=>"radio0"} Option 0
+                        %input{:type=>"radio", :name=>"radios", :id=>"radio0" ,:value=>"0"}
+                        %label{:for=>"radio1"} Option 1
+                        %input{:type=>"radio", :name=>"radios", :id=>"radio1" ,:value=>"1"}
+                        %label{:for=>"radio2"} Option 2
+                        %input{:type=>"radio", :name=>"radios", :id=>"radio2" ,:value=>"2"}
+                        %label{:for=>"radio3"} Option 3
+                        %input{:type=>"radio", :name=>"radios", :id=>"radio3" ,:value=>"3"}
+                   
+                
+                .moo-field
+                    %legend 
+                        Checkbox
+                    %fieldset#moo-ui-checkbox-1
+                        .moo-ui-checkbox
+                            %label{:for=>"check1"} Option 1
+                            %input#check1{:type=>"checkbox", :name=>"checkboxes" ,:value=>"0"}
+                        .moo-ui-checkbox
+                            %label{:for=>"check2"} Option 2
+                            %input#check2{:type=>"checkbox", :name=>"checkboxes" ,:value=>"1"}
+                        .moo-ui-checkbox
+                            %label{:for=>"check3"} Option 3
+                            %input#check3{:type=>"checkbox", :name=>"checkboxes" ,:value=>"2"}
+                                        
+                
+                .moo-field
+                    %label Tooltip
+                    #radiobtn
+                        %span#tooltipTest Show me the tooltip!
 
         .moo-panel#nav
             %nav
@@ -169,44 +167,46 @@
        $(document).ready(function(){
        
            // Navigation panels
-           $("#panels").nav();
+           window.myNav = $("#panels").nav();
            
            // Switch
-           $("#moo-ui-switch-1").ui({
+           window.mySwitch = $("#moo-ui-switch-1").ui({
                 type: "Switch"
            });
 
            // Text
-           $("#moo-ui-text-1").ui({
+           window.myText = $("#moo-ui-text-1").ui({
                 type: "Text"
            });
            
            // TextArea
-           $("#moo-ui-textarea-1").ui({
+           window.myTextArea = $("#moo-ui-textarea-1").ui({
                 type: "TextArea"
            });
 
            // Tooltip
-           $("#tooltipTest").ui({
+           window.myTooltip = $("#tooltipTest").ui({
                 type: "Tooltip",
                 html: "Testing this tooltip"
            });
            
            // Select
-           $("#moo-ui-select-1").ui({
+           window.mySelect = $("#moo-ui-select-1").ui({
                 type: "Select",
            });
 
            // Multiple select
-           $("#moo-ui-select-multiple-1").ui({
+           window.myMultipleSelect = $("#moo-ui-select-multiple-1").ui({
                 type: "SelectMultiple",
            });
            
-           $("#moo-ui-radio-1").ui({
+           // Radio
+           window.myRadio = $("#moo-ui-radio-1").ui({
                 type: "Radio",
            });
            
-           $("#moo-ui-checkbox-1").ui({
+           // Checkbox
+           window.myCheckbox = $("#moo-ui-checkbox-1").ui({
                 type: "Checkbox",
            });
            

@@ -6,18 +6,17 @@
 (function ($) {
     "use strict";
 
-    var addGesture,
-        fire,
+    var _addGesture,
+        _fire,
         _isListed,
         gestures,
         Gestures;
         
     Gestures = function() {
-        
+        this.list = [];
     };
     
     Gestures.prototype = {
-        list: [],
         getByElement: function(element) {
             var i = 0;
             for (i = this.list.length; i--;) {
@@ -34,7 +33,7 @@
     
     $.gestures = new Gestures();
 
-    addGesture = function (options) {
+    _addGesture = function (options) {
         var gestureList = $.gestures.list,
             type = options.type,
             self = options.fn,
@@ -71,8 +70,8 @@
         return false;
     };
 
-    // Fire callbacks
-    fire = function (info, callbacks) {
+    // _fire callbacks
+    _fire = function (info, callbacks) {
         var i;
 
         info.e.preventDefault();
@@ -107,7 +106,7 @@
          * }); 
          */
         onTapEnd: function (callback) {
-            addGesture({
+            _addGesture({
                 fn: this,
                 callback: callback,
                 type: "onTapEnd"
@@ -122,7 +121,7 @@
          * }); 
          */
         onTapStart: function (callback) {
-            addGesture({
+            _addGesture({
                 fn: this,
                 callback: callback,
                 type: "onTapStart"
@@ -137,7 +136,7 @@
          * }); 
          */
         onTapHold: function (callback) {
-            addGesture({
+            _addGesture({
                 fn: this,
                 callback: callback,
                 type: "onTapHold"
@@ -152,7 +151,7 @@
          * }); 
          */
         onDragStart: function (callback) {
-            addGesture({
+            _addGesture({
                 fn: this,
                 callback: callback,
                 type: "onDragStart"
@@ -173,7 +172,7 @@
          * }
          */
         onDragMove: function (callback) {
-            addGesture({
+            _addGesture({
                 fn: this,
                 callback: callback,
                 type: "onDragMove"
@@ -188,15 +187,18 @@
          * }); 
          */
         onDragEnd: function (callback) {
-            addGesture({
+            _addGesture({
                 fn: this,
                 callback: callback,
                 type: "onDragEnd"
             });
         },
 
-        // Handler to detect gestures and fire callbacks        
-        handleEvent: function (e) {
+        // Handler to detect gestures and _fire callbacks        
+        handleEvent: function (event) {
+            this._handleEvent(event);
+        },
+        _handleEvent: function (e) {
             var info = {
                     el: this.el,
                     e: e
@@ -235,14 +237,14 @@
                     // TapHold
                     if (gesture.event.mousedown === true) {
                         info.type = "tapHold";
-                        fire(info, gesture.event.onTapHold);
+                        _fire(info, gesture.event.onTapHold);
                     }
                 }, 500);
 
                 if (gesture.event.onTapStart !== undefined) {
                     // TapStart
                     info.type = "tapStart";
-                    fire(info, gesture.event.onTapStart);
+                    _fire(info, gesture.event.onTapStart);
                 }
             }
 
@@ -260,16 +262,16 @@
                     if ((clientY - gesture.event.startY) > 10) {
                         gesture.event.isDraggingY = 1;
                         info.type = "dragStart";
-                        fire(info, gesture.event.onDragStart);
+                        _fire(info, gesture.event.onDragStart);
                     } else if ((clientY - gesture.event.startY) < -10) {
                         gesture.event.isDraggingY = -1;
                         info.type = "dragStart";
-                        fire(info, gesture.event.onDragStart);
+                        _fire(info, gesture.event.onDragStart);
                     }
                 } else {
                     // DragMove
                     info.type = "dragMove";
-                    fire(info, gesture.event.onDragMove);
+                    _fire(info, gesture.event.onDragMove);
                 }
             }
 
@@ -286,12 +288,12 @@
                     // DragEnd
                     info.type = "dragEnd";
                     gesture.event.isDraggingY = 0;
-                    fire(info, gesture.event.onDragEnd);
+                    _fire(info, gesture.event.onDragEnd);
 
                 } else if (info.time !== undefined) {
                     // TapEnd
                     info.type = "tapEnd";
-                    fire(info, gesture.event.onTapEnd);
+                    _fire(info, gesture.event.onTapEnd);
                 }
 
             }

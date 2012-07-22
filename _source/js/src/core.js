@@ -15,13 +15,19 @@ var $ = (function () {
      *
      * @constructor
      * @param {string} query Query selector
-     * @return {$} Mootor object
+     * @return {object} $ Mootor object
      */
 	$ = function (query) {
 		return new Moo(query, document);
 	};
+	
     /**
-     * @ignore
+     * Private constructor
+     *
+     * @private
+     * @param {string} query Query selector
+     * @param {object} context Context element
+     * @return {object} $ Mootor object
      */
 	var Moo = function (query, context) {
 		var qtype = typeof query,
@@ -67,7 +73,7 @@ var $ = (function () {
         return this;
 	};
 
-     $.prototype = Moo.prototype = {
+    $.prototype = Moo.prototype = {
      
         /** @lends $.prototype */
         

@@ -337,7 +337,7 @@ body, html {
   right: 0;
   top: 0;
   bottom: 0;
-  background: #0000ff;
+  background: #f7f7f7;
 }
 /* line 53, ../_source/css/sass/_mootor.nav.scss */
 #panels .moo-panel {
@@ -376,7 +376,7 @@ a:focus {
 .moo-ui-form {
   text-align: left;
   width: 90%;
-  margin: 0 auto;
+  margin: 2em auto;
   background-color: #FFF;
   border: 1px solid #CCC;
   border-radius: 5px;
@@ -804,7 +804,7 @@ p {
   box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.1);
   color: white;
   font-weight: bold;
-  background: rgba(0, 0, 0, 0.5);
+  background: #333333;
   border: 1px solid #333333;
 }
 /* line 74, src/styles.scss */
