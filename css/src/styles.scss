@@ -34,7 +34,7 @@ $readable-font: 'Palatino Linotype', 'Book Antiqua', Palatino, 'Droid Serif', se
 
 body { 
    font-family: $base-font; 
-   font-size: $base-font-size;
+   font-size: 50%; //$base-font-size ;
    text-align: center;
 }
 

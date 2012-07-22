@@ -51,16 +51,24 @@
   //<![CDATA[
        $(document).ready(function(){
        
-           // Application & Navigation panels
-           $.app({
+           "use strict";
+       
+           // Navigation panels
+           var myNav = $("#panels").nav(),
+       
+           // Application
+           myApp = $.app({
                views: [
                     "ui",
                     "nav",
                     "item1",
                     "item2"
                ],
-               nav: $("#panels").nav()
+               nav: myNav
            });
+           
+           // Preload a view
+           myApp.load(myApp.views[0], myNav.get("ui"));           
                                   
        });
   //]]>

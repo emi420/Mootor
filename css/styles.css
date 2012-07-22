@@ -297,7 +297,7 @@ small {
 /* line 9, ../_source/css/sass/_mootor.nav.scss */
 body, html {
   height: 100%;
-  background: #ff0000;
+  background: #ccc;
   overflow-x: hidden;
   overflow-y: hidden;
   max-width: 100%;
@@ -312,23 +312,30 @@ body, html {
   position: fixed;
   top: 0;
   width: 100%;
-  padding: 1em 1em;
+  padding: .6em 1em;
 }
 /* line 28, ../_source/css/sass/_mootor.nav.scss */
 .moo-header nav {
   position: absolute;
   margin-top: 0;
   top: 1.6em;
+  left: 1.5em;
 }
-/* line 33, ../_source/css/sass/_mootor.nav.scss */
+/* line 34, ../_source/css/sass/_mootor.nav.scss */
 .moo-header nav a {
+  -webkit-transition: opacity 0.25s ease;
+  -webkit-transition-delay: 2ms;
+  -moz-transition: opacity 0.25s ease 2ms;
+  -ms-transition: opacity 0.25s ease 2ms;
+  -o-transition: opacity 0.25s ease 2ms;
+  transition: opacity 0.25s ease 2ms;
   padding: .5em 1em;
   width: auto;
   display: inline;
   font-size: 1.5em;
 }
 
-/* line 43, ../_source/css/sass/_mootor.nav.scss */
+/* line 45, ../_source/css/sass/_mootor.nav.scss */
 #panels {
   position: absolute;
   width: 100%;
@@ -339,19 +346,19 @@ body, html {
   bottom: 0;
   background: #f7f7f7;
 }
-/* line 53, ../_source/css/sass/_mootor.nav.scss */
+/* line 55, ../_source/css/sass/_mootor.nav.scss */
 #panels .moo-panel {
   min-height: 100%;
   width: 100%;
   position: absolute;
 }
 
-/* line 65, ../_source/css/sass/_mootor.nav.scss */
+/* line 67, ../_source/css/sass/_mootor.nav.scss */
 nav ul,
 nav ol {
   list-style: none;
 }
-/* line 69, ../_source/css/sass/_mootor.nav.scss */
+/* line 71, ../_source/css/sass/_mootor.nav.scss */
 nav a {
   text-decoration: none;
   text-align: left;
@@ -359,13 +366,13 @@ nav a {
   padding: 1em;
 }
 
-/* line 79, ../_source/css/sass/_mootor.nav.scss */
+/* line 81, ../_source/css/sass/_mootor.nav.scss */
 #panels .moo-panel {
   -webkit-transition-duration: 0;
   -webkit-transform: translate3d(0, 0, 0);
 }
 
-/* line 87, ../_source/css/sass/_mootor.nav.scss */
+/* line 89, ../_source/css/sass/_mootor.nav.scss */
 a,
 a:hover,
 a:focus {
@@ -757,7 +764,7 @@ a:focus {
 /* line 35, src/styles.scss */
 body {
   font-family: Helvetica, Arial, sans-serif;
-  font-size: 62.5%;
+  font-size: 50%;
   text-align: center;
 }
 

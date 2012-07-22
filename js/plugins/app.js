@@ -34,8 +34,12 @@
        appInstance.views.push(this);
     
        this.nav.get(this.id).onLoad = function() {
-           appInstance.load(self, this);
+           if (self.cached === false) {
+               appInstance.load(self, this);
+           }
        }
+       
+       this.cached = false;
         
        return this;
     };
@@ -46,15 +50,18 @@
      * App
      */  
     App.prototype = {
+    
+        // Load a view
         load: function(view, panelInstance) {
 
           // Template
           $.ajax({
                 url: "views/" + view.id + "/" + view.id + ".html",
                 callback: function(response) {
-                   $((view).el).html(response);
+                   $(view.el).html(response);
+                   view.cached = true;
                    if (typeof panelInstance.onLoadCallback === "function") {
-                       panelInstance.onLoadCallback();                                          
+                       panelInstance.onLoadCallback();                                     
                    } 
                 }
           });

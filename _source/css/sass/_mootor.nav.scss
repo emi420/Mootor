@@ -1,4 +1,4 @@
-
+@import "compass/css3/transition";
 
 // Navigation plugin
 
@@ -8,7 +8,7 @@
 
 body, html {
     height: 100%;
-    background: #ff0000;
+    background: #ccc;
     overflow-x: hidden;
     overflow-y: hidden;
     max-width: 100%;
@@ -24,13 +24,15 @@ body, html {
     position: fixed;
     top:0;
     width: 100%;
-    padding: 1em 1em;
+    padding: .6em 1em;
     nav {
         position: absolute;
         margin-top: 0;
         top: 1.6em;
+        left: 1.5em;
     }
     nav a {
+        @include single-transition(opacity, 0.25s, ease, 2ms);
         padding: .5em 1em;
         width: auto;
         display: inline;

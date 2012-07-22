@@ -46,7 +46,8 @@
      */  
     Header = function(self) {
         var i,
-            elementId;
+            elementId,
+            anchorBack;
             
         elementId = self._config.header_id !== undefined ?
                     self._config.header_id : "header";
@@ -56,7 +57,10 @@
         if (this.el !== null) {
             this.height = this.el.offsetHeight;
 
-            self._config.anchorBack = $($(this.el).find(".moo-nav-back")[0]);
+            anchorBack = self._config.anchorBack = $($(this.el).find(".moo-nav-back")[0]);
+            anchorBack.hide();
+            anchorBack.el.style.opacity = 0;
+            anchorBack.show();
             
             self._config.anchorBack.onTapEnd(function(gesture) {
                 self.goBack();
@@ -411,7 +415,7 @@
 
             if (self.current !== 0) {
 
-                self._config.anchorBack.show()
+                self._config.anchorBack.el.style.opacity = "1";
 
                 if (self._config.back === 0) {
                     Nav.translate({el: panel.el, x: positionX}, self);
@@ -443,8 +447,7 @@
                 panel.x = 0;
                 Nav.translate({el: back.el, x: positionX}, self);
                 positionX = 0;                
-                self._config.anchorBack.hide();
-
+                self._config.anchorBack.el.style.opacity = "0";
             }
             
             window.setTimeout(function () {
@@ -461,6 +464,13 @@
                 panel.onLoad();
                 panel.onLoadCallback = function() {
                     Panel.initializeAnchorLinks(panel, self);
+
+                    panel.height = panel.el.offsetHeight;
+                    
+                    if (self._config.height > panel.height) {
+                        panel.height = self._config.height;
+                    }
+
                 }
             }
             
