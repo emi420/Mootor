@@ -1,6 +1,7 @@
 
 /*
- * Mootor Gestures
+ * Mootor Gestures 
+ * @author Emilio Mariscal (emi420 [at] gmail.com)
  */
 
 (function ($) {

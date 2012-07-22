@@ -1,5 +1,6 @@
 /**
- * Maplocalization Mootor Fx Plugin
+ * Geolocation Mootor plugin
+ * @author Emilio Mariscal (emi420 [at] gmail.com)
  */
  
  /** 

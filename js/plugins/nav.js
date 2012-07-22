@@ -1,5 +1,6 @@
 /**
- * @summary Mootor Navigation
+ * @summary Mootor Navigation plugin
+ * @author Emilio Mariscal (emi420 [at] gmail.com)
  */
 
 (function ($) {
@@ -143,7 +144,10 @@
                     this.history.push(this.current);
                 }
                 this.current = panel.index;
-                Nav.load(this);
+                if (this._config.isMoving === false) {
+                    this._config.isMoving = true;
+                    Nav.load(this);                    
+                }
             } else {
                 this._config.isMoving = false;
             }
@@ -168,9 +172,11 @@
          */
         goBack: function () {
             if (this.history.length > 0) {
-                this._config.direction = -1;
-                this._config.back = this.history.pop();
-                this.set(this.panels[this._config.back].el.id);
+                if(this._config.isMoving === false) {
+                    this._config.direction = -1;
+                    this._config.back = this.history.pop();
+                    this.set(this.panels[this._config.back].el.id);
+                }
             }
 	    },
 
@@ -182,6 +188,7 @@
         },        
 
     };
+    
     
     // Private static methods
 
@@ -215,7 +222,6 @@
                 self._config.direction = 0;
                 $(gesture.el).removeClass("active");
                 if (self._config.isMoving === false) {
-                    self._config.isMoving = true;
                     if (gesture.el.rel !== undefined) {
                         self.set(gesture.el.rel);
                     }
@@ -390,8 +396,6 @@
             
             $(panel.el).show();
            
-            self._config.isMoving = true;
-            
             callback = function () {
                 $(back.el).hide();
                 self._config.isMoving = false;
@@ -451,6 +455,15 @@
                     callback: callback
                 }, self);
             }, 1);
+            
+            
+            if (typeof panel.onLoad === "function") {
+                panel.onLoad();
+                panel.onLoadCallback = function() {
+                    Panel.initializeAnchorLinks(panel, self);
+                }
+            }
+            
         },
         
         updateSizesOnWindowResize: function(self) {

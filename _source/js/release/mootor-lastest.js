@@ -348,6 +348,23 @@ var $ = (function () {
             } else {
                 return false;
             }
+        },
+        
+        /**
+         * require Include scripts
+         */
+        require: function(script, callback) {
+          $.ajax({
+                url: script,
+                callback: function(response) {
+                   var script = document.createElement("script");
+                   script.innerHTML = response;
+                   document.head.appendChild(script);
+                   if (typeof callback === "function") {
+                        callback();
+                   }
+                }
+          });
         }
 
 
@@ -444,7 +461,8 @@ if (!window.$ || typeof ($) !== "function") {
 
 
 /*
- * Mootor Gestures
+ * Mootor Gestures 
+ * @author Emilio Mariscal (emi420 [at] gmail.com)
  */
 
 (function ($) {
