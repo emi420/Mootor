@@ -63,16 +63,6 @@ textarea {
    ========================================================================== */
 
 /*
-* Addresses margins/paddings handled differently across devices.
-*/
-html,
-body {
-    margin: 0;
-    padding: 0;
-    border: 0;
-}
-
-/*
 * Prevents `sub` and `sup` affecting `line-height` in all browsers.
 * gist.github.com/413930
 */
@@ -101,17 +91,27 @@ sub {
 /*
 * Remove default padding
 */
+
+dl,
+menu,
+ol,
 ul {
-    padding-left: 0;
+    margin: 1em 0;
+}
+
+dd {
+    margin: 0;
 }
 
 /*
-* Remove style decorations
+* Addresses paddings.
 */
-ul li {
-    list-style: none;
-}
 
+menu,
+ol,
+ul {
+    padding: 0;
+}
 
 /* =============================================================================
    Forms
@@ -173,7 +173,6 @@ input[type="reset"],
 input[type="submit"] {
     -webkit-appearance: button; /* 2 */
     cursor: pointer; /* 3 */
-
 }
 
 /*
@@ -218,7 +217,6 @@ input[type="search"]::-webkit-search-decoration {
 /*
 * Improves readability and alignment in all browsers.
 */
-
 textarea {
     vertical-align: top; 
 }

@@ -62,6 +62,10 @@
             anchorBack.el.style.opacity = 0;
             anchorBack.show();
             
+            self._config.anchorBack.el.onclick = function() {
+                return false;
+            }
+
             self._config.anchorBack.onTapEnd(function(gesture) {
                 self.goBack();
             });

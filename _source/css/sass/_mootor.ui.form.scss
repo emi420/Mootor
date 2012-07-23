@@ -1,0 +1,246 @@
+
+// extended classes 
+
+.moo-ui-input-container {
+    @include float-right;
+    border: 1px solid #666;
+    border-radius: 5px;
+    background-color: #FFF;
+    position: relative;
+    width: 75%;
+}
+.moo-ui-input {
+    -webkit-appearance:none;  /* Remove default iOS shadow */
+    border: none; 
+    background: none; 
+    font-size: 1.5em; 
+    line-height: 1.5em;
+    width: 100%;
+}
+
+
+// Standard form
+
+.moo-ui-form {
+    text-align: left;
+    width: 90%;
+    margin: 0 auto;
+    background-color: #FFF;
+    border: 1px solid #CCC;
+    border-radius: 5px;
+    @extend .clearfix;
+    .moo-field {
+        display:block;
+        @extend .clearfix;
+        padding: 1em 2em;
+        border-top: 1px solid #CCC;
+        &:first-child { border-top: none }
+        > label, legend {
+            @include float-left;
+            font-size: 2em;
+            font-weight: 700;
+            width: 25%;
+        }
+    }
+    .moo-ui-text {
+        @extend .moo-ui-input-container;
+        padding: 0.25em 2.25em 0.25em 0.25em; 
+        input { @extend .moo-ui-input; }
+    }
+    .moo-ui-textarea {
+        @extend .moo-ui-input-container;
+        padding: 0.25em; 
+        textarea { @extend .moo-ui-input; }
+    }
+    .moo-ui-select-container,
+    .moo-ui-select-container-multiple {
+        @extend .moo-ui-input-container;
+        padding: 0.25em; 
+        height: 3em;
+        z-index: 300;
+        .moo-ui-select-link {
+            color: #000;
+            font-size: 1.25em;
+            line-height: 2.25em;
+            text-align: right;
+            text-decoration: none;
+            display: block;
+            height: 100%;
+            padding: 0 0.5em;
+            position:relative;
+            right: 0;
+            z-index: 10;
+            &:after  {
+                @include background(linear-gradient(top, #FFF, #CCC));
+                border-top: 1px solid #666;
+                border-right: 1px solid #666;
+                border-bottom: 1px solid #666;
+                border-top-right-radius: 5px;
+                border-bottom-right-radius: 5px;
+                content: " "; 
+                display: block;
+                position: absolute;
+                top: -0.25em;
+                right: -0.25em;
+                width: 2.25em;
+                height: 2.25em;
+                z-index: -1;
+            }
+        }
+        .moo-ui-select-menu {
+            display: none;
+            background-color: #999;
+            border-radius: 5px;
+            padding: 1em;
+            position: absolute;
+        }
+        .moo-ui-select-list {
+            font-size: 2em;
+            background: #FFF;
+            border-radius: 5px;
+            overflow-y: scroll;
+            li {
+                padding: 1em ;
+                border-bottom: 1px solid #CCC;
+                white-space: nowrap;
+                &:last-child { border: none;}
+                &.selected {
+                    @include background(linear-gradient(top, #DAEAEC, #CEE3E6));
+                    border-top-color:#AEBBBD;
+                    border-bottom-color:#AEBBBD;
+                    color: #3F8D94;
+                }
+            }
+        }
+        &.moo-bottom {
+            .moo-ui-select-menu{
+                top:4.5em;
+                &:before {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    top: -3em;
+                    left: 25%;
+                    border-top: 15px solid transparent;
+                    border-left: 20px solid transparent;
+                    border-right: 20px solid transparent;
+                    border-bottom: 15px solid #999;
+                }
+            }
+        }
+        &.moo-top {
+            .moo-ui-select-menu {
+                bottom: 4.5em;
+                &:after {
+                    content: " ";
+                    display: block;
+                    position: absolute;
+                    bottom: -3em;
+                    left: 25%;
+                    border-bottom: 1.5em solid transparent;
+                    border-left: 2em solid transparent;
+                    border-right: 2em solid transparent;
+                    border-top: 1.5em solid #999;
+                }
+            }
+        }
+    }   
+    /*
+    *  Cleanbox is the styling of the icon link used to "clean" a text input
+    */
+    .cleanbox {
+        display: block;
+        padding: 0.35em;
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: #666;
+        font-size: 2em;
+        font-weight: 700;
+        text-decoration: none;
+    }
+    .moo-ui-radio {
+        @include float-right;
+        position: relative;
+        width: 75%;
+        input{ 
+            position:absolute;
+            top: 0.5em;
+            left: 0.5em;
+        }
+        label {
+            position: relative;
+            display: block;
+            padding: 0.5em 0.5em 0.5em 2em;
+            background: #FFF;
+            font-size: 1.4em;
+            .moo-ui-radio-icon {
+                display: block;
+                position: absolute;
+                left: 0.5em;
+                top: 0.5em;
+                background-color: #CCC;
+                border: 1px solid #999;
+                border-radius: 8px;
+                width: 1em;
+                height: 1em;
+                &.moo-active {
+                    background-color: #666;
+                    &:after {
+                        content: " ";
+                        display: block;
+                        position: absolute;
+                        top: 0.2em;
+                        left: 0.2em;
+                        @include background(radial-gradient(#FFF, #A6C9FD 6px));
+                        border-radius: 4px;
+                        @include single-box-shadow(#666, 0, 0, 2px, 2px);
+                        width:0.6em;
+                        height: 0.6em;
+                    }
+                }
+            }
+        }
+    }
+    .moo-ui-checkbox {
+        @include float-right;
+        position: relative;
+        width: 75%;
+        input { 
+            position:absolute;
+            top: 0.5em;
+            left: 0.5em;
+        }
+        label {
+            position: relative;
+            display: block;
+            padding: 0.5em 0.5em 0.5em 2em;
+            background: #FFF;
+            font-size: 1.4em;
+            .moo-ui-checkbox-icon {
+                display: block;
+                position: absolute;
+                left: 0.5em;
+                top: 0.5em;
+                background-color: #CCC;
+                border: 1px solid #999;
+                width: 1em;
+                height: 1em;
+                &.moo-active {
+                    background-color: #666;
+                    &:after {
+                        content: " ";
+                        display: block;
+                        position: absolute;
+                        top: 0.2em;
+                        left: 0.2em;
+                        @include background(linear-gradient(top, #FFF, #BDD7FD));
+                        @include single-box-shadow(#666, 0, 0, 2px, 2px);
+                        width:0.6em;
+                        height: 0.6em;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -9,7 +9,7 @@
 /*
 * Corrects `block` display not defined in Android 2.1, iOS 3.2 and Opera Mini.
 */
-/* line 24, src/_normalize.scss */
+/* line 24, ../_source/css/sass/_normalize.scss */
 article,
 aside,
 details,
@@ -31,7 +31,7 @@ summary {
  * Apply a natural box layout model to all elements 
  * (padding is calculated inside the box, not changing the width/height set on the element)
  */
-/* line 36, src/_normalize.scss */
+/* line 36, ../_source/css/sass/_normalize.scss */
 * {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -41,7 +41,7 @@ summary {
 /*
  * Addresses margins/padding handled incorrectly 
  */
-/* line 42, src/_normalize.scss */
+/* line 42, ../_source/css/sass/_normalize.scss */
 html,
 body {
   margin: 0;
@@ -53,7 +53,7 @@ body {
 * Addresses `font-family` inconsistency between `textarea` and other form
 * elements.
 */
-/* line 57, src/_normalize.scss */
+/* line 57, ../_source/css/sass/_normalize.scss */
 html,
 button,
 input,
@@ -66,21 +66,10 @@ textarea {
    Typography
    ========================================================================== */
 /*
-* Addresses margins/paddings handled differently across devices.
-*/
-/* line 69, src/_normalize.scss */
-html,
-body {
-  margin: 0;
-  padding: 0;
-  border: 0;
-}
-
-/*
 * Prevents `sub` and `sup` affecting `line-height` in all browsers.
 * gist.github.com/413930
 */
-/* line 81, src/_normalize.scss */
+/* line 71, ../_source/css/sass/_normalize.scss */
 sub,
 sup {
   font-size: 75%;
@@ -89,12 +78,12 @@ sup {
   vertical-align: baseline;
 }
 
-/* line 88, src/_normalize.scss */
+/* line 78, ../_source/css/sass/_normalize.scss */
 sup {
   top: -0.5em;
 }
 
-/* line 92, src/_normalize.scss */
+/* line 82, ../_source/css/sass/_normalize.scss */
 sub {
   bottom: -0.25em;
 }
@@ -105,17 +94,27 @@ sub {
 /*
 * Remove default padding
 */
-/* line 104, src/_normalize.scss */
+/* line 98, ../_source/css/sass/_normalize.scss */
+dl,
+menu,
+ol,
 ul {
-  padding-left: 0;
+  margin: 1em 0;
+}
+
+/* line 102, ../_source/css/sass/_normalize.scss */
+dd {
+  margin: 0;
 }
 
 /*
-* Remove style decorations
+* Addresses paddings.
 */
-/* line 111, src/_normalize.scss */
-ul li {
-  list-style: none;
+/* line 112, ../_source/css/sass/_normalize.scss */
+menu,
+ol,
+ul {
+  padding: 0;
 }
 
 /* =============================================================================
@@ -124,12 +123,12 @@ ul li {
 /*
  * Define consistent margin and padding
  */
-/* line 124, src/_normalize.scss */
+/* line 124, ../_source/css/sass/_normalize.scss */
 form {
   margin: 0;
 }
 
-/* line 128, src/_normalize.scss */
+/* line 128, ../_source/css/sass/_normalize.scss */
 fieldset {
   margin: 0 2px;
   padding: 0.35em 0.625em 0.75em;
@@ -139,7 +138,7 @@ fieldset {
  * 1. Improves usability and consistency of cursor style between image-type 'input' and others
  * 2. Corrects inability to style clickable 'input' types in iOS
  */
-/* line 142, src/_normalize.scss */
+/* line 142, ../_source/css/sass/_normalize.scss */
 button,
 input[type="button"],
 input[type="reset"],
@@ -155,7 +154,7 @@ input[type="submit"] {
 * 2. Addresses margins set differently in IE6/7, FF3+, S5, Chrome.
 * 3. Improves appearance and consistency in all browsers.
 */
-/* line 156, src/_normalize.scss */
+/* line 156, ../_source/css/sass/_normalize.scss */
 button,
 input,
 select,
@@ -175,7 +174,7 @@ textarea {
 * 3. Improves usability and consistency of cursor style between image-type
 * `input` and others.
 */
-/* line 173, src/_normalize.scss */
+/* line 173, ../_source/css/sass/_normalize.scss */
 button,
 html input[type="button"],
 input[type="reset"],
@@ -189,7 +188,7 @@ input[type="submit"] {
 /*
 * Re-set default cursor for disabled elements.
 */
-/* line 184, src/_normalize.scss */
+/* line 183, ../_source/css/sass/_normalize.scss */
 button[disabled],
 input[disabled] {
   cursor: default;
@@ -198,7 +197,7 @@ input[disabled] {
 /*
  * Removes inner padding and search cancel button in S5, Chrome on OS X
  */
-/* line 193, src/_normalize.scss */
+/* line 192, ../_source/css/sass/_normalize.scss */
 input[type="search"]::-webkit-search-decoration,
 input[type="search"]::-webkit-search-cancel-button {
   -webkit-appearance: none;
@@ -208,7 +207,7 @@ input[type="search"]::-webkit-search-cancel-button {
 * 1. Addresses `appearance` set to `searchfield` in S5, Chrome.
 * 2. Addresses `box-sizing` set to `border-box` in S5, Chrome.
 */
-/* line 202, src/_normalize.scss */
+/* line 201, ../_source/css/sass/_normalize.scss */
 input[type="search"] {
   -webkit-appearance: textfield;
   /* 1 */
@@ -220,7 +219,7 @@ input[type="search"] {
 /*
 * Removes inner padding and search cancel button in S5, Chrome on OS X.
 */
-/* line 213, src/_normalize.scss */
+/* line 212, ../_source/css/sass/_normalize.scss */
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-decoration {
   -webkit-appearance: none;
@@ -229,7 +228,7 @@ input[type="search"]::-webkit-search-decoration {
 /*
 * Improves readability and alignment in all browsers.
 */
-/* line 222, src/_normalize.scss */
+/* line 220, ../_source/css/sass/_normalize.scss */
 textarea {
   vertical-align: top;
 }
@@ -240,7 +239,7 @@ textarea {
 /*
 * Remove most spacing between table cells.
 */
-/* line 235, src/_normalize.scss */
+/* line 233, ../_source/css/sass/_normalize.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -253,43 +252,62 @@ Typography
 /*
 * Addresses font sizes and margins set differently.
 */
-/* line 52, src/_text.scss */
+/* line 19, src/_text.scss */
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 62.5%;
+  text-align: center;
+}
+
+/* line 25, src/_text.scss */
 h1 {
-  font-size: 2em;
+  font-size: 2.3em;
+  letter-spacing: -0.07em;
+  text-align: center;
+  margin: 0.75em 0;
+}
+
+/* line 32, src/_text.scss */
+h2 {
+  font-size: 7em;
+  margin: 0.5em 0;
+}
+
+/* line 37, src/_text.scss */
+h3 {
+  font-size: 1.83em;
   margin: 0.67em 0;
 }
 
-/* line 57, src/_text.scss */
-h2 {
-  font-size: 1.5em;
-  margin: 0.83em 0;
-}
-
-/* line 62, src/_text.scss */
-h3 {
-  font-size: 1.17em;
-  margin: 1em 0;
-}
-
-/* line 67, src/_text.scss */
+/* line 42, src/_text.scss */
 h4 {
-  font-size: 1em;
+  font-size: 1.5em;
   margin: 1.33em 0;
 }
 
-/* line 72, src/_text.scss */
+/* line 47, src/_text.scss */
 h5 {
   font-size: 0.83em;
   margin: 1.67em 0;
 }
 
-/* line 77, src/_text.scss */
+/* line 52, src/_text.scss */
 h6 {
   font-size: 0.75em;
   margin: 2.33em 0;
 }
 
-/* line 82, src/_text.scss */
+/* line 57, src/_text.scss */
+p {
+  font-size: 3em;
+  text-align: justify;
+  padding: 1em;
+  line-height: 150%;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, "Droid Serif", serif;
+  letter-spacing: 0;
+}
+
+/* line 65, src/_text.scss */
 small {
   font-size: 75%;
 }
@@ -373,46 +391,20 @@ a:focus {
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
 
-/* line 4, ../_source/css/sass/_mootor.ui.scss */
-.moo-ui-form {
-  text-align: left;
-  width: 90%;
-  margin: 2em auto;
-  background-color: #FFF;
-  border: 1px solid #CCC;
-  border-radius: 5px;
-}
-/* line 12, ../_source/css/sass/_mootor.ui.scss */
-.moo-ui-form .moo-field {
-  display: block;
-  padding: 1em 2em;
-  border-top: 1px solid #CCC;
-}
-/* line 17, ../_source/css/sass/_mootor.ui.scss */
-.moo-ui-form .moo-field:first-child {
-  border-top: none;
-}
-/* line 18, ../_source/css/sass/_mootor.ui.scss */
-.moo-ui-form .moo-field > label, .moo-ui-form .moo-field legend {
-  display: inline;
-  float: left;
-  font-size: 2em;
-  font-weight: 700;
-  width: 25%;
-}
-/* line 25, ../_source/css/sass/_mootor.ui.scss */
-.moo-ui-form .moo-ui-text {
+/* line 4, ../_source/css/sass/_mootor.ui.form.scss */
+.moo-ui-input-container, .moo-ui-form .moo-ui-text, .moo-ui-form .moo-ui-textarea, .moo-ui-form .moo-ui-select-container,
+.moo-ui-form .moo-ui-select-container-multiple {
   display: inline;
   float: right;
   border: 1px solid #666;
   border-radius: 5px;
   background-color: #FFF;
   position: relative;
-  padding: 0.25em 2.25em 0.25em 0.25em;
   width: 75%;
 }
-/* line 33, ../_source/css/sass/_mootor.ui.scss */
-.moo-ui-form .moo-ui-text input {
+
+/* line 12, ../_source/css/sass/_mootor.ui.form.scss */
+.moo-ui-input, .moo-ui-form .moo-ui-text input, .moo-ui-form .moo-ui-textarea textarea {
   -webkit-appearance: none;
   /* Remove default iOS shadow */
   border: none;
@@ -421,42 +413,55 @@ a:focus {
   line-height: 1.5em;
   width: 100%;
 }
-/* line 42, ../_source/css/sass/_mootor.ui.scss */
+
+/* line 24, ../_source/css/sass/_mootor.ui.form.scss */
+.moo-ui-form {
+  text-align: left;
+  width: 90%;
+  margin: 0 auto;
+  background-color: #FFF;
+  border: 1px solid #CCC;
+  border-radius: 5px;
+  /*
+  *  Cleanbox is the styling of the icon link used to "clean" a text input
+  */
+}
+/* line 32, ../_source/css/sass/_mootor.ui.form.scss */
+.moo-ui-form .moo-field {
+  display: block;
+  padding: 1em 2em;
+  border-top: 1px solid #CCC;
+}
+/* line 37, ../_source/css/sass/_mootor.ui.form.scss */
+.moo-ui-form .moo-field:first-child {
+  border-top: none;
+}
+/* line 38, ../_source/css/sass/_mootor.ui.form.scss */
+.moo-ui-form .moo-field > label, .moo-ui-form .moo-field legend {
+  display: inline;
+  float: left;
+  font-size: 2em;
+  font-weight: 700;
+  width: 25%;
+}
+/* line 45, ../_source/css/sass/_mootor.ui.form.scss */
+.moo-ui-form .moo-ui-text {
+  padding: 0.25em 2.25em 0.25em 0.25em;
+}
+/* line 50, ../_source/css/sass/_mootor.ui.form.scss */
 .moo-ui-form .moo-ui-textarea {
-  display: inline;
-  float: right;
-  border: 1px solid #666;
-  border-radius: 5px;
-  background-color: #FFF;
-  position: relative;
   padding: 0.25em;
-  width: 75%;
 }
-/* line 50, ../_source/css/sass/_mootor.ui.scss */
-.moo-ui-form .moo-ui-textarea textarea {
-  -webkit-appearance: none;
-  /* Remove default shadow in iOS 3.2 */
-  border: none;
-  background: none;
-  font-size: 1.5em;
-  line-height: 1.5em;
-  width: 100%;
-}
-/* line 60, ../_source/css/sass/_mootor.ui.scss */
-.moo-ui-form .moo-ui-select-container {
-  display: inline;
-  float: right;
-  border: 1px solid #666;
-  border-radius: 5px;
-  background-color: #FFF;
-  position: relative;
-  padding: 0.25em 0.25em 0.25em 0.25em;
-  width: 75%;
+/* line 56, ../_source/css/sass/_mootor.ui.form.scss */
+.moo-ui-form .moo-ui-select-container,
+.moo-ui-form .moo-ui-select-container-multiple {
+  padding: 0.25em;
   height: 3em;
   z-index: 300;
 }
-/* line 70, ../_source/css/sass/_mootor.ui.scss */
-.moo-ui-form .moo-ui-select-container .moo-ui-select-link {
+/* line 61, ../_source/css/sass/_mootor.ui.form.scss */
+.moo-ui-form .moo-ui-select-container .moo-ui-select-link,
+.moo-ui-form .moo-ui-select-container-multiple .moo-ui-select-link {
   color: #000;
   font-size: 1.25em;
   line-height: 2.25em;
@@ -469,8 +474,9 @@ a:focus {
   right: 0;
   z-index: 10;
 }
-/* line 82, ../_source/css/sass/_mootor.ui.scss */
-.moo-ui-form .moo-ui-select-container .moo-ui-select-link:after {
+/* line 73, ../_source/css/sass/_mootor.ui.form.scss */
+.moo-ui-form .moo-ui-select-container .moo-ui-select-link:after,
+.moo-ui-form .moo-ui-select-container-multiple .moo-ui-select-link:after {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #cccccc));
   background: -webkit-linear-gradient(top, #ffffff, #cccccc);
   background: -moz-linear-gradient(top, #ffffff, #cccccc);
@@ -491,33 +497,38 @@ a:focus {
   height: 2.25em;
   z-index: -1;
 }
-/* line 99, ../_source/css/sass/_mootor.ui.scss */
-.moo-ui-form .moo-ui-select-container .moo-ui-select-menu {
+/* line 90, ../_source/css/sass/_mootor.ui.form.scss */
+.moo-ui-form .moo-ui-select-container .moo-ui-select-menu,
+.moo-ui-form .moo-ui-select-container-multiple .moo-ui-select-menu {
   display: none;
   background-color: #999;
   border-radius: 5px;
   padding: 1em;
   position: absolute;
-  overflow: hidden;
 }
-/* line 107, ../_source/css/sass/_mootor.ui.scss */
-.moo-ui-form .moo-ui-select-container .moo-ui-select-list {
+/* line 97, ../_source/css/sass/_mootor.ui.form.scss */
+.moo-ui-form .moo-ui-select-container .moo-ui-select-list,
+.moo-ui-form .moo-ui-select-container-multiple .moo-ui-select-list {
   font-size: 2em;
-  border-radius: 5px;
-}
-/* line 111, ../_source/css/sass/_mootor.ui.scss */
-.moo-ui-form .moo-ui-select-container .moo-ui-select-list li {
   background: #FFF;
+  border-radius: 5px;
+  overflow-y: scroll;
+}
+/* line 102, ../_source/css/sass/_mootor.ui.form.scss */
+.moo-ui-form .moo-ui-select-container .moo-ui-select-list li,
+.moo-ui-form .moo-ui-select-container-multiple .moo-ui-select-list li {
   padding: 1em;
   border-bottom: 1px solid #CCC;
   white-space: nowrap;
 }
-/* line 116, ../_source/css/sass/_mootor.ui.scss */
-.moo-ui-form .moo-ui-select-container .moo-ui-select-list li:last-child {
+/* line 106, ../_source/css/sass/_mootor.ui.form.scss */
+.moo-ui-form .moo-ui-select-container .moo-ui-select-list li:last-child,
+.moo-ui-form .moo-ui-select-container-multiple .moo-ui-select-list li:last-child {
   border: none;
 }
-/* line 117, ../_source/css/sass/_mootor.ui.scss */
-.moo-ui-form .moo-ui-select-container .moo-ui-select-list li.selected {
+/* line 107, ../_source/css/sass/_mootor.ui.form.scss */
+.moo-ui-form .moo-ui-select-container .moo-ui-select-list li.selected,
+.moo-ui-form .moo-ui-select-container-multiple .moo-ui-select-list li.selected {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #daeaec), color-stop(100%, #cee3e6));
   background: -webkit-linear-gradient(top, #daeaec, #cee3e6);
   background: -moz-linear-gradient(top, #daeaec, #cee3e6);
@@ -528,12 +539,14 @@ a:focus {
   border-bottom-color: #AEBBBD;
   color: #3F8D94;
 }
-/* line 126, ../_source/css/sass/_mootor.ui.scss */
-.moo-ui-form .moo-ui-select-container.bottom .moo-ui-select-menu {
+/* line 116, ../_source/css/sass/_mootor.ui.form.scss */
+.moo-ui-form .moo-ui-select-container.moo-bottom .moo-ui-select-menu,
+.moo-ui-form .moo-ui-select-container-multiple.moo-bottom .moo-ui-select-menu {
   top: 4.5em;
 }
-/* line 128, ../_source/css/sass/_mootor.ui.scss */
-.moo-ui-form .moo-ui-select-container.bottom .moo-ui-select-menu:before {
+/* line 118, ../_source/css/sass/_mootor.ui.form.scss */
+.moo-ui-form .moo-ui-select-container.moo-bottom .moo-ui-select-menu:before,
+.moo-ui-form .moo-ui-select-container-multiple.moo-bottom .moo-ui-select-menu:before {
   content: "";
   display: block;
   position: absolute;
@@ -544,13 +557,15 @@ a:focus {
   border-right: 20px solid transparent;
   border-bottom: 15px solid #999;
 }
-/* line 142, ../_source/css/sass/_mootor.ui.scss */
-.moo-ui-form .moo-ui-select-container.top .moo-ui-select-menu {
+/* line 132, ../_source/css/sass/_mootor.ui.form.scss */
+.moo-ui-form .moo-ui-select-container.moo-top .moo-ui-select-menu,
+.moo-ui-form .moo-ui-select-container-multiple.moo-top .moo-ui-select-menu {
   bottom: 4.5em;
 }
-/* line 144, ../_source/css/sass/_mootor.ui.scss */
-.moo-ui-form .moo-ui-select-container.top .moo-ui-select-menu:after {
-  content: "";
+/* line 134, ../_source/css/sass/_mootor.ui.form.scss */
+.moo-ui-form .moo-ui-select-container.moo-top .moo-ui-select-menu:after,
+.moo-ui-form .moo-ui-select-container-multiple.moo-top .moo-ui-select-menu:after {
+  content: " ";
   display: block;
   position: absolute;
   bottom: -3em;
@@ -560,26 +575,7 @@ a:focus {
   border-right: 2em solid transparent;
   border-top: 1.5em solid #999;
 }
-/* line 158, ../_source/css/sass/_mootor.ui.scss */
-.moo-ui-form div.moo-ui-selectmultiple {
-  display: inline;
-  float: right;
-  border: 1px solid #666;
-  margin-top: -1.5em;
-  margin-left: -0.2em;
-  border-radius: 5px;
-  background-color: white;
-  position: relative;
-  padding: 0.25em 0.25em 0.25em 0.25em;
-  width: 75%;
-  height: 3em;
-  z-index: 300;
-}
-/* line 172, ../_source/css/sass/_mootor.ui.scss */
-.moo-ui-form select.moo-ui-selectmultiple {
-  margin-left: 0.5em;
-}
-/* line 175, ../_source/css/sass/_mootor.ui.scss */
+/* line 151, ../_source/css/sass/_mootor.ui.form.scss */
 .moo-ui-form .cleanbox {
   display: block;
   padding: 0.35em;
@@ -591,20 +587,20 @@ a:focus {
   font-weight: 700;
   text-decoration: none;
 }
-/* line 186, ../_source/css/sass/_mootor.ui.scss */
+/* line 162, ../_source/css/sass/_mootor.ui.form.scss */
 .moo-ui-form .moo-ui-radio {
   display: inline;
   float: right;
   position: relative;
   width: 75%;
 }
-/* line 190, ../_source/css/sass/_mootor.ui.scss */
+/* line 166, ../_source/css/sass/_mootor.ui.form.scss */
 .moo-ui-form .moo-ui-radio input {
   position: absolute;
   top: 0.5em;
   left: 0.5em;
 }
-/* line 195, ../_source/css/sass/_mootor.ui.scss */
+/* line 171, ../_source/css/sass/_mootor.ui.form.scss */
 .moo-ui-form .moo-ui-radio label {
   position: relative;
   display: block;
@@ -612,7 +608,7 @@ a:focus {
   background: #FFF;
   font-size: 1.4em;
 }
-/* line 201, ../_source/css/sass/_mootor.ui.scss */
+/* line 177, ../_source/css/sass/_mootor.ui.form.scss */
 .moo-ui-form .moo-ui-radio label .moo-ui-radio-icon {
   display: block;
   position: absolute;
@@ -624,12 +620,12 @@ a:focus {
   width: 1em;
   height: 1em;
 }
-/* line 211, ../_source/css/sass/_mootor.ui.scss */
-.moo-ui-form .moo-ui-radio label .moo-ui-radio-icon.moo-ui-radio-active {
+/* line 187, ../_source/css/sass/_mootor.ui.form.scss */
+.moo-ui-form .moo-ui-radio label .moo-ui-radio-icon.moo-active {
   background-color: #666;
 }
-/* line 213, ../_source/css/sass/_mootor.ui.scss */
-.moo-ui-form .moo-ui-radio label .moo-ui-radio-icon.moo-ui-radio-active:after {
+/* line 189, ../_source/css/sass/_mootor.ui.form.scss */
+.moo-ui-form .moo-ui-radio label .moo-ui-radio-icon.moo-active:after {
   content: " ";
   display: block;
   position: absolute;
@@ -648,20 +644,20 @@ a:focus {
   width: 0.6em;
   height: 0.6em;
 }
-/* line 229, ../_source/css/sass/_mootor.ui.scss */
+/* line 205, ../_source/css/sass/_mootor.ui.form.scss */
 .moo-ui-form .moo-ui-checkbox {
   display: inline;
   float: right;
   position: relative;
   width: 75%;
 }
-/* line 233, ../_source/css/sass/_mootor.ui.scss */
+/* line 209, ../_source/css/sass/_mootor.ui.form.scss */
 .moo-ui-form .moo-ui-checkbox input {
   position: absolute;
   top: 0.5em;
   left: 0.5em;
 }
-/* line 238, ../_source/css/sass/_mootor.ui.scss */
+/* line 214, ../_source/css/sass/_mootor.ui.form.scss */
 .moo-ui-form .moo-ui-checkbox label {
   position: relative;
   display: block;
@@ -669,7 +665,7 @@ a:focus {
   background: #FFF;
   font-size: 1.4em;
 }
-/* line 244, ../_source/css/sass/_mootor.ui.scss */
+/* line 220, ../_source/css/sass/_mootor.ui.form.scss */
 .moo-ui-form .moo-ui-checkbox label .moo-ui-checkbox-icon {
   display: block;
   position: absolute;
@@ -680,12 +676,12 @@ a:focus {
   width: 1em;
   height: 1em;
 }
-/* line 253, ../_source/css/sass/_mootor.ui.scss */
-.moo-ui-form .moo-ui-checkbox label .moo-ui-checkbox-icon.moo-ui-checkbox-active {
+/* line 229, ../_source/css/sass/_mootor.ui.form.scss */
+.moo-ui-form .moo-ui-checkbox label .moo-ui-checkbox-icon.moo-active {
   background-color: #666;
 }
-/* line 255, ../_source/css/sass/_mootor.ui.scss */
-.moo-ui-form .moo-ui-checkbox label .moo-ui-checkbox-icon.moo-ui-checkbox-active:after {
+/* line 231, ../_source/css/sass/_mootor.ui.form.scss */
+.moo-ui-form .moo-ui-checkbox label .moo-ui-checkbox-icon.moo-active:after {
   content: " ";
   display: block;
   position: absolute;
@@ -704,103 +700,303 @@ a:focus {
   height: 0.6em;
 }
 
-/* line 275, ../_source/css/sass/_mootor.ui.scss */
+/* line 4, ../_source/css/sass/_mootor.ui.switch.scss */
 .moo-ui-switch {
-  display: block;
-  height: 28px;
-  width: 94px;
-  overflow: hidden;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #888888), color-stop(65%, #bbbbbb));
+  background-image: -webkit-linear-gradient(top, #888888, #bbbbbb 65%);
+  background-image: -moz-linear-gradient(top, #888888, #bbbbbb 65%);
+  background-image: -o-linear-gradient(top, #888888, #bbbbbb 65%);
+  background-image: -ms-linear-gradient(top, #888888, #bbbbbb 65%);
+  background-image: linear-gradient(top, #888888, #bbbbbb 65%);
+  border: 1px solid #666;
+  border-radius: 0.5em;
+  display: inline;
   float: right;
+  overflow: hidden;
+  width: 9em;
+  height: 2.8em;
 }
-/* line 282, ../_source/css/sass/_mootor.ui.scss */
+/* line 12, ../_source/css/sass/_mootor.ui.switch.scss */
 .moo-ui-switch b {
-  -webkit-transition-duration: .25s;
-  background: url(../img/ui/switch.png);
-  height: 28px;
-  width: 149px;
+  font-size: 1.5em;
+  font-weight: 700;
+  line-height: 175%;
+  text-align: center;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #dedede));
+  background-image: -webkit-linear-gradient(top, #ffffff, #dedede);
+  background-image: -moz-linear-gradient(top, #ffffff, #dedede);
+  background-image: -o-linear-gradient(top, #ffffff, #dedede);
+  background-image: -ms-linear-gradient(top, #ffffff, #dedede);
+  background-image: linear-gradient(top, #ffffff, #dedede);
+  border: 1px solid #666;
+  border-radius: 0.33em;
   display: block;
+  width: 1.9em;
+  height: 110%;
+  position: relative;
+  top: -5%;
+  right: -0.04em;
+  -webkit-transition-duration: .25s;
+  -webkit-transform: translate3d(4.05em, 0, 0);
+}
+/* line 28, ../_source/css/sass/_mootor.ui.switch.scss */
+.moo-ui-switch b:before {
+  content: "I";
+  border-radius: 0.35em 0 0 0.35em;
+  color: #FFF;
+  font-weight: 700;
+  display: block;
+  height: 100%;
+  width: 4.15em;
+  position: relative;
+  top: 0;
+  left: -4.15em;
+  z-index: -1;
+}
+/* line 42, ../_source/css/sass/_mootor.ui.switch.scss */
+.moo-ui-switch b:after {
+  content: "O";
+  border-radius: 0 0.35em 0.35em 0;
+  color: #333;
+  display: block;
+  height: 100%;
+  width: 4.15em;
+  position: absolute;
+  right: -4.15em;
+  top: 0;
+}
+/* line 55, ../_source/css/sass/_mootor.ui.switch.scss */
+.moo-ui-switch.moo-off {
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #dddddd), color-stop(45%, #ffffff));
+  background-image: -webkit-linear-gradient(top, #dddddd, #ffffff 45%);
+  background-image: -moz-linear-gradient(top, #dddddd, #ffffff 45%);
+  background-image: -o-linear-gradient(top, #dddddd, #ffffff 45%);
+  background-image: -ms-linear-gradient(top, #dddddd, #ffffff 45%);
+  background-image: linear-gradient(top, #dddddd, #ffffff 45%);
+  left: -0.04em;
+}
+/* line 58, ../_source/css/sass/_mootor.ui.switch.scss */
+.moo-ui-switch.moo-off b {
   -webkit-transform: translate3d(0, 0, 0);
 }
-/* line 291, ../_source/css/sass/_mootor.ui.scss */
-.moo-ui-switch.off b {
-  -webkit-transform: translate3d(-54px, 0, 0);
-}
-/* line 294, ../_source/css/sass/_mootor.ui.scss */
-.moo-ui-switch label {
-  line-height: 28px;
-}
 
-/* line 300, ../_source/css/sass/_mootor.ui.scss */
+/* line 2, ../_source/css/sass/_mootor.ui.tooltip.scss */
 .moo_tooltip {
   position: absolute;
-  line-height: 140%;
-  font-size: 2.3em;
   background: white;
   border: 1px solid #f7f7f7;
   padding: 1em;
   text-align: center;
 }
 
-/* line 24, src/styles.scss */
-.clearfix:before, .moo-ui-form:before, .moo-ui-form .moo-field:before,
-.clearfix:after,
-.moo-ui-form:after,
-.moo-ui-form .moo-field:after {
-  content: "";
-  display: table;
+/* line 4, ../_source/css/sass/_mootor.ui.overlay.scss */
+.moo-overlay {
+  background-color: rgba(0, 0, 0, 0.3);
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 500;
 }
 
-/* line 28, src/styles.scss */
-.clearfix:after, .moo-ui-form:after, .moo-ui-form .moo-field:after {
-  clear: both;
+/*
+* Loading animation 
+* -----------------------------------------------------------------------------------------
+*/
+/*
+* Editable styles
+* Change this styles to position/resize the element as needed.
+* 1. base (darkest) color. The gradient palette derives from this color.
+* 2. Position of the center point of the animation. 
+     Place wherever is needed, by default is in the center of its parent container.
+* 3. The overall size of the loading is relative to this value.
+* 4. Animation speed
+*/
+/*1*/
+/* line 18, ../_source/css/sass/_mootor.ui.loading.scss */
+.moo-ui-loading {
+  position: absolute;
+  /*2*/
+  top: 50%;
+  /*2*/
+  left: 50%;
+  /*2*/
+  font-size: 1em;
+  /*3*/
+  -webkit-animation-duration: 1.5s;
+  /*4*/
 }
 
-/* line 35, src/styles.scss */
-body {
+/*
+* Base styles
+*/
+/* line 30, ../_source/css/sass/_mootor.ui.loading.scss */
+.moo-ui-loading {
+  width: 0;
+  height: 0;
+  z-index: 550;
+  -webkit-animation-name: rotateThis;
+  -webkit-animation-duration: 1.5s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+}
+/* line 38, ../_source/css/sass/_mootor.ui.loading.scss */
+.moo-ui-loading .moo-ui-loading-block {
+  height: 2.5em;
+  width: 1em;
+  float: left;
+  position: absolute;
+  top: -1.25em;
+  left: -0.5em;
+}
+/* line 46, ../_source/css/sass/_mootor.ui.loading.scss */
+.moo-ui-loading .moo-loading-01 {
+  -webkit-transform: rotate(-90deg) translate(0, -3em);
+  background-color: white;
+}
+/* line 50, ../_source/css/sass/_mootor.ui.loading.scss */
+.moo-ui-loading .moo-loading-02 {
+  -webkit-transform: rotate(-45deg) translate(0, -3em);
+  background-color: #dfdfdf;
+}
+/* line 54, ../_source/css/sass/_mootor.ui.loading.scss */
+.moo-ui-loading .moo-loading-03 {
+  -webkit-transform: rotate(0deg) translate(0, -3em);
+  background-color: #bfbfbf;
+}
+/* line 58, ../_source/css/sass/_mootor.ui.loading.scss */
+.moo-ui-loading .moo-loading-04 {
+  -webkit-transform: rotate(45deg) translate(0, -3em);
+  background-color: #9f9f9f;
+}
+/* line 62, ../_source/css/sass/_mootor.ui.loading.scss */
+.moo-ui-loading .moo-loading-05 {
+  -webkit-transform: rotate(90deg) translate(0, -3em);
+  background-color: gray;
+}
+/* line 66, ../_source/css/sass/_mootor.ui.loading.scss */
+.moo-ui-loading .moo-loading-06 {
+  -webkit-transform: rotate(135deg) translate(0, -3em);
+  background-color: #606060;
+}
+/* line 70, ../_source/css/sass/_mootor.ui.loading.scss */
+.moo-ui-loading .moo-loading-07 {
+  -webkit-transform: rotate(180deg) translate(0, -3em);
+  background-color: #404040;
+}
+/* line 74, ../_source/css/sass/_mootor.ui.loading.scss */
+.moo-ui-loading .moo-loading-08 {
+  -webkit-transform: rotate(-135deg) translate(0, -3em);
+  background-color: #202020;
+}
+
+@-webkit-keyframes rotateThis {
+  /* line 81, ../_source/css/sass/_mootor.ui.loading.scss */
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+
+  /* line 82, ../_source/css/sass/_mootor.ui.loading.scss */
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+/*
+* Overlay Modal
+*/
+/* line 7, ../_source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-container {
+  color: #333;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  z-index: 1050;
+}
+
+/* line 16, ../_source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-panel {
+  border: 3px solid #CCC;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+  background-color: #FFF;
+  width: 30em;
+  overflow: hidden;
+  padding: 5px;
+  position: relative;
+  top: -10em;
+  left: -15em;
+  z-index: 1500;
+}
+/* line 27, ../_source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-panel .moo-title {
+  color: #000;
+  font-size: 2em;
+  font-weight: 700;
+  white-space: nowrap;
+}
+/* line 33, ../_source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-panel .moo-text {
   font-family: Helvetica, Arial, sans-serif;
-  font-size: 50%;
-  text-align: center;
+  font-size: 1.5em;
+  line-height: 120%;
+  padding: 0;
+}
+/* line 39, ../_source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-panel .moo-buttons {
+  overflow: hidden;
+}
+/* line 41, ../_source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-panel .moo-ui-cancel,
+.moo-ui-modal-panel .moo-ui-submit {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  font-size: 1.5em;
+  font-weight: 700;
+  line-height: 200%;
+  width: 49%;
+}
+/* line 48, ../_source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-panel .moo-ui-cancel {
+  display: inline;
+  float: left;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #eeeeee), color-stop(100%, #cccccc));
+  background: -webkit-linear-gradient(top, #eeeeee, #cccccc);
+  background: -moz-linear-gradient(top, #eeeeee, #cccccc);
+  background: -o-linear-gradient(top, #eeeeee, #cccccc);
+  background: -ms-linear-gradient(top, #eeeeee, #cccccc);
+  background: linear-gradient(top, #eeeeee, #cccccc);
+  border: 1px solid #c1c1c1;
+}
+/* line 53, ../_source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-panel .moo-ui-submit {
+  display: inline;
+  float: right;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #cccccc), color-stop(100%, #888888));
+  background: -webkit-linear-gradient(top, #cccccc, #888888);
+  background: -moz-linear-gradient(top, #cccccc, #888888);
+  background: -o-linear-gradient(top, #cccccc, #888888);
+  background: -ms-linear-gradient(top, #cccccc, #888888);
+  background: linear-gradient(top, #cccccc, #888888);
+  border: 1px solid #a1a1a1;
+  color: #FFF;
 }
 
-/* line 41, src/styles.scss */
-h1 {
-  line-height: 140%;
-  font-size: 2.3em;
-  text-align: center;
-  font-size: 2.6em;
-  letter-spacing: -0.07em;
-}
-
-/* line 48, src/styles.scss */
-h2 {
-  line-height: 140%;
-  font-size: 7em;
-  letter-spacing: -0.1em;
-}
-
-/* line 52, src/styles.scss */
-h3 {
-  line-height: 140%;
-  font-size: 3em;
-}
-
-/* line 57, src/styles.scss */
-p {
-  line-height: 140%;
-  font-size: 3em;
-  text-align: justify;
-  padding: 1em;
-  line-height: 150%;
-  font-family: "Palatino Linotype", "Book Antiqua", Palatino, "Droid Serif", serif;
-  letter-spacing: 0;
-}
-
-/* line 64, src/styles.scss */
+/* line 17, src/styles.scss */
 .moo-panel {
   background: #f7f7f7;
 }
 
-/* line 68, src/styles.scss */
+/* line 21, src/styles.scss */
 .moo-header {
   box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.1);
   color: white;
@@ -808,7 +1004,7 @@ p {
   background: #333333;
   border: 1px solid #333333;
 }
-/* line 74, src/styles.scss */
+/* line 27, src/styles.scss */
 .moo-header nav a {
   color: white;
   border: 0;
@@ -823,16 +1019,8 @@ p {
   -moz-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
 }
-/* line 82, src/styles.scss */
-.moo-header h1 {
-  line-height: 140%;
-  font-size: 2.3em;
-  text-align: center;
-  font-size: 2.6em;
-  letter-spacing: -0.07em;
-}
 
-/* line 90, src/styles.scss */
+/* line 37, src/styles.scss */
 nav a {
   font-size: 3em;
   color: black;
@@ -841,8 +1029,22 @@ nav a {
   border-top: 1px solid #dddddd;
 }
 
-/* line 98, src/styles.scss */
+/* line 45, src/styles.scss */
 .moo-nav.active {
   background: #29a6f7;
   color: white;
+}
+
+/* line 56, src/styles.scss */
+.clearfix:before, .moo-ui-form:before, .moo-ui-form .moo-field:before,
+.clearfix:after,
+.moo-ui-form:after,
+.moo-ui-form .moo-field:after {
+  content: "";
+  display: table;
+}
+
+/* line 60, src/styles.scss */
+.clearfix:after, .moo-ui-form:after, .moo-ui-form .moo-field:after {
+  clear: both;
 }
