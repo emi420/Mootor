@@ -1,0 +1,63 @@
+
+// Switch
+
+.moo-ui-switch {
+    @include background-image(linear-gradient(top, #888, #bbb 65%));
+    border: 1px solid #666;
+    border-radius: 0.5em;
+    @include float-right;
+    overflow: hidden;
+    width: 9em;
+    height: 2.8em;
+    b {
+        font-size: 1.5em;
+        font-weight: 700;
+        line-height: 175%;
+        text-align: center;
+        @include background-image(linear-gradient(top, #fff, #dedede));
+        border: 1px solid #666;
+        border-radius: 0.33em;
+        display: block;
+        width: 1.9em;
+        height: 110%;
+        position: relative;
+        top: -5%;
+        right: -0.04em;
+        -webkit-transition-duration: .25s;
+        -webkit-transform: translate3d(4.05em, 0, 0);
+        &:before { 
+            content: "I";
+            border-radius: 0.35em 0 0 0.35em;
+            //background-color: rgba(66,66,66,.5);
+            color: #FFF;
+            font-weight: 700;
+            display: block;
+            height: 100%;
+            width: 4.15em;
+            position: relative;
+            top: 0;
+            left: -4.15em;
+            z-index: -1;
+        }
+        &:after {
+            content: "O";
+            //background: rgba(200, 0, 0, 0.3);
+            border-radius: 0 0.35em 0.35em 0;
+            color: #333;
+            display: block;
+            height: 100%;
+            width: 4.15em;
+            position: absolute;
+            right: -4.15em;
+            top: 0;
+        }
+    }
+    &.off{
+        @include background-image(linear-gradient(top, #ddd, #fff 45%));
+         left: -0.04em;
+        b {
+            -webkit-transform: translate3d(0, 0, 0);
+        }
+    }
+
+}
