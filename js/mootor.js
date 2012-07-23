@@ -333,10 +333,9 @@ var $ = (function () {
         
                 
         /**
-         * isArrayLike Check if el is an array-like object
+         * isArrayLike Check if an object is an array-like object
          */
-        isArrayLike: function(obj) {
-                        
+        isArrayLike: function(obj) {                        
             if (obj &&
                 typeof obj === "object" || typeof obj === "function" &&
                 isFinite(obj.length) &&

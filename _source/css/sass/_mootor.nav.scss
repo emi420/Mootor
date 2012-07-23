@@ -1,4 +1,4 @@
-@import "compass/css3/transition";
+//@import "compass/css3/transition";
 
 // Navigation plugin
 
@@ -32,7 +32,6 @@ body, html {
         left: 1.5em;
     }
     nav a {
-        @include single-transition(opacity, 0.25s, ease, 2ms);
         padding: .5em 1em;
         width: auto;
         display: inline;
