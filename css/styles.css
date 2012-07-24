@@ -1,4 +1,3 @@
-@charset "utf-8";
 /* ==========================================================================
    CSS Normalization, based on
    normalize.css 2012-07-07T09:50 UTC - http://github.com/necolas/normalize.css 
@@ -959,12 +958,13 @@ a:focus {
   font-size: 1.5em;
   line-height: 120%;
   padding: 0;
+  margin: 1em;
 }
-/* line 43, ../_source/css/sass/_mootor.ui.modal.scss */
+/* line 44, ../_source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-panel .moo-buttons {
   overflow: hidden;
 }
-/* line 45, ../_source/css/sass/_mootor.ui.modal.scss */
+/* line 46, ../_source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-panel .moo-ui-cancel,
 .moo-ui-modal-panel .moo-ui-submit {
   -webkit-border-radius: 5px;
@@ -977,7 +977,7 @@ a:focus {
   line-height: 200%;
   width: 49%;
 }
-/* line 52, ../_source/css/sass/_mootor.ui.modal.scss */
+/* line 53, ../_source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-panel .moo-ui-cancel {
   display: inline;
   float: left;
@@ -989,7 +989,7 @@ a:focus {
   background: linear-gradient(top, #eeeeee, #cccccc);
   border: 1px solid #c1c1c1;
 }
-/* line 57, ../_source/css/sass/_mootor.ui.modal.scss */
+/* line 58, ../_source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-panel .moo-ui-submit {
   display: inline;
   float: right;
@@ -1001,6 +1001,56 @@ a:focus {
   background: linear-gradient(top, #cccccc, #888888);
   border: 1px solid #a1a1a1;
   color: #FFF;
+}
+
+/*
+* Overlay Image
+*/
+/* line 5, ../_source/css/sass/_mootor.ui.image.scss */
+.moo-ui-image-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  z-index: 800;
+}
+
+/* line 13, ../_source/css/sass/_mootor.ui.image.scss */
+.moo-ui-image-panel {
+  background-color: #FFF;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+  position: relative;
+  top: -15em;
+  left: -300px;
+  width: 600px;
+  min-height: 30em;
+  z-index: 1000;
+}
+/* line 22, ../_source/css/sass/_mootor.ui.image.scss */
+.moo-ui-image-panel .moo-image-wrapper {
+  display: inline;
+  float: left;
+  margin: 0.5em;
+}
+/* line 23, ../_source/css/sass/_mootor.ui.image.scss */
+.moo-ui-image-panel .moo-image {
+  line-height: 1px;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid #eee;
+  display: table-cell;
+  margin: 0.25em;
+  width: 105px;
+  height: 105px;
+}
+/* line 32, ../_source/css/sass/_mootor.ui.image.scss */
+.moo-ui-image-panel .moo-image.moo-active {
+  border: 2px solid #000;
 }
 
 /* line 17, src/styles.scss */

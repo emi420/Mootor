@@ -14,4 +14,3 @@ FSSM.monitor(directory, '*.scss') do
     puts "Updated"
   end
 end
-
