@@ -53,10 +53,10 @@
     
         // Load a view
         load: function(view, panelInstance) {
-
+        
           // Template
           $.ajax({
-                url: "views/" + view.id + "/" + view.id + ".html",
+                url: this.path + "views/" + view.id + "/" + view.id + ".html",
                 callback: function(response) {
                    $(view.el).html(response);
                    view.cached = true;
@@ -67,7 +67,7 @@
           });
           
           // Controller
-          $.require("views/" + view.id + "/" + view.id + ".js");
+          $.require(this.path + "views/" + view.id + "/" + view.id + ".js");
         }
     };
 
@@ -89,6 +89,14 @@
                 view;
                 
             self.views = [];
+            
+            if (options.path !== undefined) {
+                self.path = options.path;
+            } else {
+                self.path = "";
+            }
+            
+            console.log(self.path);
                 
             if (options.views !== undefined) {
                 for (i = 0; i < options.views.length; i++) {

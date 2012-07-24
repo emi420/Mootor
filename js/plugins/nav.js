@@ -181,7 +181,7 @@
         set: function (id) {
 
             var panel = this.get(id);
-            
+                        
             if (this.current !== panel.index) {
                 this._config.back = this.current;
                 if (this._config.direction === 0) {
@@ -263,8 +263,11 @@
 
 
             loadNavigationItem = function (gesture) {
+                var i;
 
-                $(gesture.el).removeClass("active");
+                for (i = navigationItems.length; i--;) {
+                    $(navigationItems[i]).removeClass("active");
+                }
 
                 self._config.direction = 0;
                 if (self._config.isMoving === false) {
@@ -278,7 +281,8 @@
                 $(gesture.el).setClass("active");
             };            
             
-            navigationItems = panel.el.getElementsByTagName("a");
+            panel.navigationItems = navigationItems = panel.el.getElementsByTagName("a");
+            
             for (j = navigationItems.length; j--;) {
                 navigationItem = navigationItems[j];
 
@@ -403,7 +407,7 @@
                         options.y : 0;
             
             options.x = options.x ?
-                        options.x : self.panels[self.current].x;
+                        options.x : 0;
             
             $(options.el).translateFx(
                 {y: options.y,x: options.x},
@@ -463,6 +467,7 @@
 
                 // Bounce back
                 if (self._config.y >= 0 || maxdist < -self._config.y) {
+             
                     if (self._config.y > 0) {
                         self._config.y = 0;
                     } else {
@@ -476,10 +481,10 @@
                             }
                         }
                     }
-                    for (i = panel._anchors.length; i--;) {
-                        $(panel._anchors[i]).removeClass("active");
+                    for (i = panel.navigationItems.length; i--;) {
+                        $(panel.navigationItems[i]).removeClass("active");
                     }
-                                      
+                                                          
                     Nav.translate({
                         y: self._config.y,
                         el: panel.el,

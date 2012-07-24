@@ -342,6 +342,7 @@ var $ = (function () {
          * require Include scripts
          */
         require: function(script, callback) {
+          console.log(script);
           $.ajax({
                 url: script,
                 callback: function(response) {
