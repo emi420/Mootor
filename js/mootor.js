@@ -308,7 +308,7 @@ var $ = (function () {
                 i;
 			
             xmlhttp.onreadystatechange = function() {
-                if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+                if (xmlhttp.readyState==4 && (xmlhttp.status==200 || xmlhttp.status==0)) {
                     options.callback(xmlhttp.responseText);
                 }
             };
@@ -353,7 +353,6 @@ var $ = (function () {
          * require Include scripts
          */
         require: function(script, callback) {
-          console.log(script);
           $.ajax({
                 url: script,
                 callback: function(response) {
