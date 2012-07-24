@@ -6,29 +6,19 @@
 (function ($) {
 
     "use strict";
-    
-	/*
-	 * Hide all while loading, show when ready
-	 * TODO: "Loading..." overlay
-	 */
-	$.view.hide();	
-	$(document).ready(function() {
-		$.view.show();
-	});
-	
-	// Prevents native scrolling
-	$(document).ready(function() {
-    	$(document.body).bind("touchmove", function(gesture) {
-            gesture.preventDefault();
-            gesture.stopPropagation();
-    	});	
-	});
 
 	// Constructors
 	
     /**
      * Nav
-     */  
+     * @param {object} options Options
+     * @config {number} panelsMargin Margin between panels
+     * @config {string} navLinksClassName Navigation links class
+     * @config {string} panelsItemsClassName Panels items class
+     * @config {string} hiddenContentClassName Hidden content 
+                        (when transitioning) class
+     * @return {object} Nav Mootor Nav object
+     */
     var Nav = function (options) {
 
         // Initialize instance & panels
@@ -130,9 +120,55 @@
         this.y = options.y;
         
         return this;  
+    },
+    
+    /**
+     * Loading Show "loading" screen
+     * @return {object} Loading Mootor UI Loading object
+     */
+    Loading = function(self) {
+        this.el = document.createElement("div");
+        $(this.el).setClass("moo-ui-loading");
+        self.el.appendChild(this.el);
+        
+        Loading.init(this);
+
+        return this;
     };
+    
+        
+	/*
+	 * Hide all while loading, show when ready
+	 */
+
+	$.view.hide();
+	$(document).ready(function() {
+		$.view.show();
+	});
+	
+	// Prevents native scrolling
+	$(document).ready(function() {
+    	$(document.body).bind("touchmove", function(gesture) {
+            gesture.preventDefault();
+            gesture.stopPropagation();
+    	});	
+	});
+
           
     // Public instance prototypes
+    
+    
+    /**
+     * Loading
+     */  
+    Loading.prototype = {
+        show: function() {
+            $(this.el).show();
+        },
+        hide: function() {
+            $(this.el).hide();
+        }
+    };
     
     /**
      * Nav
@@ -199,60 +235,71 @@
     
     
     // Private static methods
+    
+    /**
+     * Loading
+     */ 
+    $.extend({
+        init: function(self) {
+            var i;
+            self.el.innerHTML = '<div class="moo-ui-loading-block"></div>';
+            for (i = 1; i < 9; i++) {
+                self.el.innerHTML += '<div class="moo-loading-0' + i + '"></div>';
+            }
+        }
+    }, Loading);
 
     /**
      * Panel
      */     
     $.extend({
-        initializeAnchorLinks: function(panel, self) {
+        initNavigationItems: function(panel, self) {
         
-            var anchors,
-            anchor,
-            anchorCallback,
-            clickcb,
-            setActive,
+            var navigationItems,
+            navigationItem,
+            loadNavigationItem,
+            setActiveItem,
             i,j;
 
-            // External links    
-            anchors = panel.el.getElementsByTagName("a");
-            for (j = anchors.length; j--;) {
-                anchor = anchors[j];
-                if ($(anchor).hasClass(self._config.navClass) === false) {
-                    $(anchor).onTapEnd( function(gesture) {
-                        window.location = gesture.el.href;
-                    });
-                }
-            }
-            
-            panel._anchors = panel.el.getElementsByClassName(self._config.navClass);
-            
-            anchorCallback = function (gesture) {
-                self._config.direction = 0;
+
+            loadNavigationItem = function (gesture) {
+
                 $(gesture.el).removeClass("active");
+
+                self._config.direction = 0;
                 if (self._config.isMoving === false) {
                     if (gesture.el.rel !== undefined) {
                         self.set(gesture.el.rel);
                     }
                 }
-                return false;
             };
-            
-            clickcb = function () {
-                return false;
-            };
-    
-            setActive = function (gesture) {
+                
+            setActiveItem = function (gesture) {
                 $(gesture.el).setClass("active");
-            };
+            };            
+            
+            navigationItems = panel.el.getElementsByTagName("a");
+            for (j = navigationItems.length; j--;) {
+                navigationItem = navigationItems[j];
 
-            for (j = panel._anchors.length; j--;) {
-                if (panel._anchors[j].rel !== "") {
-                    $(panel._anchors[j]).onTapStart(setActive);
-                    panel._anchors[j].onclick = clickcb;
-                    $(panel._anchors[j]).onTapEnd(anchorCallback);
+                // External links    
+                if ($(navigationItem).hasClass(self._config.navClass) === false) {
+                    $(navigationItem).onTapEnd( function(gesture) {
+                        window.location = gesture.el.href;
+                    });
+
+                // Internal navigation links    
+                } else {
+                    if (navigationItems[j].rel !== "") {
+                        $(navigationItems[j]).onTapStart(setActiveItem);
+                        $(navigationItems[j]).onTapEnd(loadNavigationItem);
+                    }                    
                 }
             }
             
+            // Initialize navigation area
+            Nav.nav(panel, self);
+                        
         }    
     }, Panel);
 
@@ -265,42 +312,99 @@
         /** Initialize Nav **/
         init: function(options, self) {
 
-            self.el = options.el;            
+            // Container element
+            self.el = options.el;
+
+            // Cache options for later use
             self._options = options;
             
             // Initialize instance properties
-            Nav.initializeProperties(self, options);                                                    
+            Nav.initProperties(self, options);                                                    
             
-            // Initialize panels navigation
-            Nav.panelsInit(self);
+            // Initialize panels
+            Nav.initPanels(self);
                         
             // Map touch events to event handler
             $(self.el).onDragMove(self);
             $(self.el).onDragEnd(self);
             
-            // Update sizes window resize
-            Nav.updateSizesOnWindowResize(self);
+            // Initialize events on window resize
+            Nav.initResizeEvents(self);
             
             return self;
         },
+        
+        initProperties: function(self, options) {
+        
+            // Private properties
+
+            self._config = {
+            
+                // Panel 2D positions
+                x: 0,
+                y: 0,
+                
+                // Index of previous panel in navigation history
+                back: 0,
+                
+                // Flag for panels transitions
+                isMoving: false,
+                
+                // Direction of moving for panels transitions
+                direction: 0,
+                
+                // Sizes of panels container
+                width: $.view.clientW,
+                height: $.view.clientH,
+
+                // Container class name
+                navClass: options.navLinksClassName ? 
+                          options.navLinksClassName : "moo-nav",
+
+                // Navigation item class name
+                itemClass: options.panelsItemsClassName ?
+                           options.panelsItemsClassName : "moo-panel",
+
+                // Hidden content when isMoving class name
+                hidden_class: options.panelsHiddenClassName ?
+                              options.panelsHiddenClassName : "moo-hidden",
+
+                // Margin between panels
+                margin: options.panelsMargin ?
+                              options.panelsMargin : 5,
+                        
+            }
+                
+            // Public properties
+            
+            // Array of navigation panels
+            self.panels = [];
+            
+            // Current panel index
+            self.current = 0;
+            
+            // Navigation index (array of panels indexes)
+            self.history = [];                       
+      
+        },    
         
         /**
          * Translate Nav
          */
         translate: function (options, self) {
-            if (options.duration === undefined) {
-                options.duration = 0;
-            }
-            if (options.callback === undefined) {
-                options.callback = function () {};
-            }
-            if (options.y === undefined) {
-                options.y = 0;
-            }
-            if (options.x === undefined) {
-                options.x = self.panels[self.current].x;
-            }
-                        
+            
+            options.duration = options.duration ? 
+                              options.duration : 0;
+                              
+            options.callback = options.callback ? 
+                               options.callback : function () {};
+                               
+            options.y = options.y ?
+                        options.y : 0;
+            
+            options.x = options.x ?
+                        options.x : self.panels[self.current].x;
+            
             $(options.el).translateFx(
                 {y: options.y,x: options.x},
                 {transitionDuration: options.duration, callback: options.callback}
@@ -467,20 +571,19 @@
             if (typeof panel.onLoad === "function") {
                 panel.onLoad();
                 panel.onLoadCallback = function() {
-                    Panel.initializeAnchorLinks(panel, self);
-
-                    panel.height = panel.el.offsetHeight;
-                    
+                    Panel.initNavigationItems(panel, self);
+                    panel.height = panel.el.offsetHeight;                    
                     if (self._config.height > panel.height) {
                         panel.height = self._config.height;
                     }
-
                 }
             }
             
         },
         
-        updateSizesOnWindowResize: function(self) {
+        initResizeEvents: function(self) {
+
+            // Update cached window sizes on window resize
             $(window).bind("resize", function(){
                 setTimeout( function() {
                     if (self.header !== undefined) {
@@ -490,24 +593,17 @@
                     }
                 }, 1);
             });
+
         },
 
-        panelsInit: function(self) {
-            var item,
-                i,j,
-                anchors,
-                anchor,
-                item,
-                anchorCallback,
-                clickcb,
-                setActive,
+        initPanels: function(self) {
+            var i,
                 panel,
                 nav = self.el.getElementsByClassName(self._config.itemClass);  
                 
-            self._config.count = nav.length;
-            self.panels = [];
             
-            // Initialize panels
+            // Initialize panels 
+            self.panels = [];
             for (i = 0; i < nav.length; i++) {
     
                 panel = new Panel({
@@ -517,62 +613,29 @@
                     y: 0,
                 });
     
-                Panel.initializeAnchorLinks(panel, self);
+                // Initialize navigation items
+                Panel.initNavigationItems(panel, self);
+                
                 self.panels.push(panel);
             }
-                        
-            Nav.initializePanelsStyles(self);
+            
+            // Panels count
+            self._config.count = i;
+            
+            // Initialize panels CSS styles
+            Nav.initPanelsStyles(self);
             
         },
 
-        initializeProperties: function(self, options) {
-        
-            self._config = {
-                x: 0,
-                y: 0,
-                back: 0,
-                isMoving: false,
-                direction: 0,
-                margin: 5,
-                width: $.view.clientW,
-                height: $.view.clientH,
-                navClass: "moo-nav",
-                itemClass: "moo-panel",
-                hidden_class: "moo-hidden"            
-            }
-    
-            self.panels = [];
-            self.current = 0;
-            self.history = [];
-            
-            if (options.item_margin !== undefined) { 
-                self._config.item_margin = options.item_margin ;
-            }
-            
-            if (options.nav_class !== undefined) {
-                self._config.nav_class = options.nav_class;
-            }
-                                     
-            if (options.item_class !== undefined) {
-                self._config.item_class = options.item_class;
-            }
-                              
-            if (options.hidden_class !== undefined) {
-                self._config.hidden_class = options.hidden_class;
-            }
-                                        
-      
-        },    
-
-        initializePanelsStyles: function(self) {
+        initPanelsStyles: function(self) {
             var i,
                 panel;
                 
-            // Reset styles
             for (i = self._config.count; i--;) {
     
                 panel = self.panels[i];
                 
+                // Translate all but first panel off of the screen
                 if (i > 0) {
                     Nav.translate({
                         el: panel.el, 
@@ -585,9 +648,9 @@
                         x:0
                     }, self);
                 }
-    
-                panel.height = panel.el.offsetHeight;
                 
+                // Fill screen vertically
+                panel.height = panel.el.offsetHeight;                
                 if (self._config.height > panel.height) {
                     panel.height = self._config.height;
                 }
@@ -596,7 +659,7 @@
         }
             
     }, Nav);
-
+    
     
     // Public constructors
 
@@ -611,7 +674,10 @@
                 default:
                     return new Nav(options);                
             }
+        },
+        loading: function() {
+            return new Loading(this);
         }
     });
-
+    
 }($));

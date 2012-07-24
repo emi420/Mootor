@@ -35,6 +35,9 @@ $background-color: #000;  /*1*/
     -webkit-animation-duration:1.5s;
     -webkit-animation-iteration-count:infinite;
     -webkit-animation-timing-function:linear;
+    &.moo-hidden {
+        display: none;
+    }
     .moo-ui-loading-block {
         height: 2.5em;
         width: 1em;

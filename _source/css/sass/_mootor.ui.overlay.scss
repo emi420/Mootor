@@ -9,4 +9,9 @@
     bottom: 0;
     right: 0;
     z-index: 500;
+    
+    &.moo-hidden {
+        display: none;
+    }
 }
+

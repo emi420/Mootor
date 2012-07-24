@@ -6,6 +6,7 @@
     %script{:src=>"js/mootor.js",:type=>"text/javascript"}
     %script{:src=>"js/plugins/nav.js",:type=>"text/javascript"}
     %script{:src=>"js/plugins/app.js",:type=>"text/javascript"}
+    %script{:src=>"js/plugins/ui.js",:type=>"text/javascript"}
 %body.main
 
     %header#header.moo-header
@@ -22,6 +23,7 @@
                 %a.moo-nav{:href=>"", :rel=>"data"} Data
                 %a.moo-nav{:href=>"", :rel=>"graph"} Graph
                 %a.moo-nav{:href=>"", :rel=>"carousel"} Carousel
+                %a{:href=>"http://localhost/xampp/"} External
                     
         .moo-panel#ui
         .moo-panel#nav
@@ -65,6 +67,6 @@
            });
            
            // Preload a view
-           myApp.load(myApp.views[0], myNav.get("ui"));           
+           // myApp.load(myApp.views[0], myNav.get("ui"));           
                                   
        });

@@ -799,6 +799,10 @@ a:focus {
   right: 0;
   z-index: 500;
 }
+/* line 13, ../_source/css/sass/_mootor.ui.overlay.scss */
+.moo-overlay.moo-hidden {
+  display: none;
+}
 
 /*
 * Loading animation 
@@ -842,6 +846,10 @@ a:focus {
   -webkit-animation-timing-function: linear;
 }
 /* line 38, ../_source/css/sass/_mootor.ui.loading.scss */
+.moo-ui-loading.moo-hidden {
+  display: none;
+}
+/* line 41, ../_source/css/sass/_mootor.ui.loading.scss */
 .moo-ui-loading .moo-ui-loading-block {
   height: 2.5em;
   width: 1em;
@@ -850,54 +858,54 @@ a:focus {
   top: -1.25em;
   left: -0.5em;
 }
-/* line 46, ../_source/css/sass/_mootor.ui.loading.scss */
+/* line 49, ../_source/css/sass/_mootor.ui.loading.scss */
 .moo-ui-loading .moo-loading-01 {
   -webkit-transform: rotate(-90deg) translate(0, -3em);
   background-color: white;
 }
-/* line 50, ../_source/css/sass/_mootor.ui.loading.scss */
+/* line 53, ../_source/css/sass/_mootor.ui.loading.scss */
 .moo-ui-loading .moo-loading-02 {
   -webkit-transform: rotate(-45deg) translate(0, -3em);
   background-color: #dfdfdf;
 }
-/* line 54, ../_source/css/sass/_mootor.ui.loading.scss */
+/* line 57, ../_source/css/sass/_mootor.ui.loading.scss */
 .moo-ui-loading .moo-loading-03 {
   -webkit-transform: rotate(0deg) translate(0, -3em);
   background-color: #bfbfbf;
 }
-/* line 58, ../_source/css/sass/_mootor.ui.loading.scss */
+/* line 61, ../_source/css/sass/_mootor.ui.loading.scss */
 .moo-ui-loading .moo-loading-04 {
   -webkit-transform: rotate(45deg) translate(0, -3em);
   background-color: #9f9f9f;
 }
-/* line 62, ../_source/css/sass/_mootor.ui.loading.scss */
+/* line 65, ../_source/css/sass/_mootor.ui.loading.scss */
 .moo-ui-loading .moo-loading-05 {
   -webkit-transform: rotate(90deg) translate(0, -3em);
   background-color: gray;
 }
-/* line 66, ../_source/css/sass/_mootor.ui.loading.scss */
+/* line 69, ../_source/css/sass/_mootor.ui.loading.scss */
 .moo-ui-loading .moo-loading-06 {
   -webkit-transform: rotate(135deg) translate(0, -3em);
   background-color: #606060;
 }
-/* line 70, ../_source/css/sass/_mootor.ui.loading.scss */
+/* line 73, ../_source/css/sass/_mootor.ui.loading.scss */
 .moo-ui-loading .moo-loading-07 {
   -webkit-transform: rotate(180deg) translate(0, -3em);
   background-color: #404040;
 }
-/* line 74, ../_source/css/sass/_mootor.ui.loading.scss */
+/* line 77, ../_source/css/sass/_mootor.ui.loading.scss */
 .moo-ui-loading .moo-loading-08 {
   -webkit-transform: rotate(-135deg) translate(0, -3em);
   background-color: #202020;
 }
 
 @-webkit-keyframes rotateThis {
-  /* line 81, ../_source/css/sass/_mootor.ui.loading.scss */
+  /* line 84, ../_source/css/sass/_mootor.ui.loading.scss */
   from {
     -webkit-transform: rotate(0deg);
   }
 
-  /* line 82, ../_source/css/sass/_mootor.ui.loading.scss */
+  /* line 85, ../_source/css/sass/_mootor.ui.loading.scss */
   to {
     -webkit-transform: rotate(360deg);
   }
@@ -916,8 +924,12 @@ a:focus {
   height: 0;
   z-index: 1050;
 }
-
 /* line 16, ../_source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-container.moo-hidden {
+  display: none;
+}
+
+/* line 20, ../_source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-panel {
   border: 3px solid #CCC;
   -webkit-border-radius: 6px;
@@ -934,25 +946,25 @@ a:focus {
   left: -15em;
   z-index: 1500;
 }
-/* line 27, ../_source/css/sass/_mootor.ui.modal.scss */
+/* line 31, ../_source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-panel .moo-title {
   color: #000;
   font-size: 2em;
   font-weight: 700;
   white-space: nowrap;
 }
-/* line 33, ../_source/css/sass/_mootor.ui.modal.scss */
+/* line 37, ../_source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-panel .moo-text {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 1.5em;
   line-height: 120%;
   padding: 0;
 }
-/* line 39, ../_source/css/sass/_mootor.ui.modal.scss */
+/* line 43, ../_source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-panel .moo-buttons {
   overflow: hidden;
 }
-/* line 41, ../_source/css/sass/_mootor.ui.modal.scss */
+/* line 45, ../_source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-panel .moo-ui-cancel,
 .moo-ui-modal-panel .moo-ui-submit {
   -webkit-border-radius: 5px;
@@ -965,7 +977,7 @@ a:focus {
   line-height: 200%;
   width: 49%;
 }
-/* line 48, ../_source/css/sass/_mootor.ui.modal.scss */
+/* line 52, ../_source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-panel .moo-ui-cancel {
   display: inline;
   float: left;
@@ -977,7 +989,7 @@ a:focus {
   background: linear-gradient(top, #eeeeee, #cccccc);
   border: 1px solid #c1c1c1;
 }
-/* line 53, ../_source/css/sass/_mootor.ui.modal.scss */
+/* line 57, ../_source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-panel .moo-ui-submit {
   display: inline;
   float: right;

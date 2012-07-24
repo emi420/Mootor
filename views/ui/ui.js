@@ -15,12 +15,6 @@ $.require("js/plugins/ui.js", function() {
         type: "TextArea"
     });
     
-    // Tooltip
-    $("#tooltipTest").ui({
-        type: "Tooltip",
-        html: "Testing this tooltip"
-    });
-    
     // Select
     $("#moo-ui-select-1").ui({
         type: "Select",
