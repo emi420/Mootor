@@ -1,0 +1,54 @@
+/*
+* Overlay Image
+*/
+
+
+.moo-ui-image-container {
+    background-color: #333;
+    @include border-radius(6px);
+    padding: 3px;
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    min-width: 236px;
+    max-width: 581px;
+    width: 80%;
+    height: auto;
+    z-index: 800;
+    header {
+        padding: 4px;
+        overflow: hidden;
+        a {
+            color: #efefef;
+            font-size: 1.2em;
+            @include background(linear-gradient(top, #777,#444));
+            border: 1px solid #444;
+            @include border-radius(3px);
+            display: inline-block;
+            float: right;
+            margin: 0 2px;
+            padding: 2px 4px;
+            
+        }
+    }
+}
+.moo-ui-image-panel {
+    background-color: #FFF;
+    @include border-radius(6px);
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    z-index: 1000;
+    .moo-image-wrapper { @include float-left; margin: 0.5em;}
+    .moo-image {
+        line-height: 1px;
+        text-align: center;
+        vertical-align: middle;
+        border: 1px solid #eee;    
+        display: table-cell;
+        margin: 2px;
+        width: 105px;
+        height: 105px;
+        &.moo-active { border: 2px solid #000;}
+    }
+}

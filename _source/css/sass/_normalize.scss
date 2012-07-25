@@ -89,17 +89,22 @@ sub {
    ========================================================================== */
 
 /*
-* Remove default padding
+*   Removes default style 
+*/
+ol,
+ul { 
+    list-style: none; 
+}
+
+/*
+* Removes default margin
 */
 
+dd,
 dl,
 menu,
 ol,
 ul {
-    margin: 1em 0;
-}
-
-dd {
     margin: 0;
 }
 
@@ -173,6 +178,15 @@ input[type="reset"],
 input[type="submit"] {
     -webkit-appearance: button; /* 2 */
     cursor: pointer; /* 3 */
+}
+
+/*
+* Removes webkit border on input and textarea when the element is on focus
+*/
+textarea:focus,
+input:focus { 
+    outline: none;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0); 
 }
 
 /*

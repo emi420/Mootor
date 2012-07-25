@@ -24,7 +24,7 @@
 .moo-ui-form {
     text-align: left;
     width: 90%;
-    margin: 0 auto;
+    margin: 5em auto;
     background-color: #FFF;
     border: 1px solid #CCC;
     border-radius: 5px;
@@ -58,13 +58,23 @@
         padding: 0.25em; 
         height: 3em;
         z-index: 300;
+        .moo-ui-select-text {
+            font-size: 1.5em;
+            line-height: 1.5em;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            @include float-left;
+            padding: 0 0.35em;
+            width: 90%;
+        }
         .moo-ui-select-link {
             color: #000;
             font-size: 1.25em;
             line-height: 2.25em;
             text-align: right;
             text-decoration: none;
-            display: block;
+            @include float-right;
             height: 100%;
             padding: 0 0.5em;
             position:relative;
@@ -88,17 +98,18 @@
             }
         }
         .moo-ui-select-menu {
-            display: none;
             background-color: #999;
             border-radius: 5px;
+            display: none;
             padding: 1em;
             position: absolute;
+            width: 99%;
+            z-index: 1000;
         }
         .moo-ui-select-list {
-            font-size: 2em;
+            font-size: 1.5em;
             background: #FFF;
             border-radius: 5px;
-            overflow-y: scroll;
             li {
                 padding: 1em ;
                 border-bottom: 1px solid #CCC;
@@ -150,13 +161,14 @@
     */
     .cleanbox {
         display: block;
-        padding: 0.35em;
+        padding: 0 0.35em;
         position: absolute;
         top: 0;
         right: 0;
         color: #666;
         font-size: 2em;
         font-weight: 700;
+        line-height: 1.5em;
         text-decoration: none;
     }
     .moo-ui-radio {

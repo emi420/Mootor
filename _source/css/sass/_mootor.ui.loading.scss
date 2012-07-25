@@ -32,18 +32,18 @@ $background-color: #000;  /*1*/
     height: 0;
     z-index: 550;
     -webkit-animation-name: rotateThis;
-    -webkit-animation-duration:1.5s;
+    -webkit-animation-duration:0.5s;
     -webkit-animation-iteration-count:infinite;
-    -webkit-animation-timing-function:linear;
+    -webkit-animation-timing-function: steps(8, start);
     &.moo-hidden {
         display: none;
     }
     .moo-ui-loading-block {
-        height: 2.5em;
+        height: 3em;
         width: 1em;
         float: left;
         position:absolute;
-        top: -1.25em;
+        top: -1.5em;
         left: -0.5em;
     }
     .moo-loading-01 {
