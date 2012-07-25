@@ -141,10 +141,14 @@ var $ = (function () {
          *      console.log("Touch start!")
          * }); 
          */
-        bind: function (event, callback) {
+        on: function(event, callback) {
             this.el.addEventListener(event, callback, false);
             return this;
         },
+        // Deprecated method
+        bind: function (event, callback) {
+            this.on(event,callback);
+        },        
 
         /**
          * Unbind event listener

@@ -6,8 +6,10 @@
 (function ($) {
 
     "use strict";
+    
+    var _translate,
 
-	// Constructors
+	// Private constructors
 	
     /**
      * Nav
@@ -17,11 +19,11 @@
      * @config {string} panelsItemsClassName Panels items class
      * @config {string} hiddenContentClassName Hidden content 
                         (when transitioning) class
-     * @return {object} Nav Mootor Nav object
+     * @return {object} Nav Mootor Nav instance
      */
-    var Nav = function (options) {
+    Nav = function (options) {
 
-        // Initialize instance & panels
+        // Initialize instance & navigation items (ex: panels)
         Nav.init(options, this);
 
         // Initialize header & footer
@@ -31,144 +33,74 @@
         return this;
 
     },    
+    
     /**
      * Header
-     */  
+     * @param {object} self Nav instance
+     * @return {object} Header Header instance
+     */
     Header = function(self) {
-        var i,
-            elementId,
-            anchorBack;
-            
-        elementId = self._config.header_id !== undefined ?
-                    self._config.header_id : "header";
-            
-        this.el = $(elementId)[0];
+
+        // Cache element
+        this.el = $("#moo-header").el;
         
         if (this.el !== null) {
+            
+            // Cache element height
             this.height = this.el.offsetHeight;
 
-            anchorBack = self._config.anchorBack = $($(this.el).find(".moo-nav-back")[0]);
-            anchorBack.hide();
-            anchorBack.el.style.opacity = 0;
-            anchorBack.show();
+            // Initialize back button
+            Header.initAnchorBack(this, self);            
             
-            self._config.anchorBack.el.onclick = function() {
-                return false;
-            }
-
-            self._config.anchorBack.onTapEnd(function(gesture) {
-                self.goBack();
-            });
+            // Prevent native scrolling
+            Header.preventNativeScrolling(this)
             
-            $(this.el).onDragMove(function(gesture) {
-                gesture.e.preventDefault();
-            });
+            // Set paddingTop on navigation items
+            Nav.setPaddingTop(this.height, self);
             
-            for (i = self._config.count; i--;) {
-                self.panels[i].el.style.paddingTop = this.height + "px";
-            }
             return this;
         } else {
             return undefined;
         }
         
-    },    
+    },   
+     
     /**
      * Footer
-     */  
+     * @param {object} self Nav instance
+     * @return {object} Footer Footer instance
+     */
     Footer = function(self) {        
-        var i,
-            elementId;
-            
-        elementId = self._config.footer_id !== undefined ?
-                    self._config.footer_id : "footer";
-            
-        this.el = document.getElementById(elementId);
-        
-        if (this.el !== null) {
-            this.height = this.el.offsetHeight;
-    
-            self._nav(footer);
-            for (i = self.count; i--;) {
-                self.panels[i].el.style.paddingBottom = footer.height + "px";
-            }
-            return this;
-            
-        } else {
-            return undefined;
-        }
+        // TODO: create an object like Header
+        //       ex: using a NavBar constructor
     },    
-    /**
-     * Panel
-     */  
-    Panel = function(options) {
     
-        // Element
-        this.el = options.el;
+    /**
+     * Item
+     * @param {object} options Options
+     * @config {object} el Element
+     * @return {object} Item Navigation Item instance
+     */
+    Item = function(options) {
+    
+        // Cache element
+        this.el = options.el;        
         
-        // Id
+        // Initialize properties
         this.id = this.el.id;
-
-        // Panel index
         this.index = options.index;
-        
-        // Panel height (in pixels)
         this.height = options.height;
 
-        // Panel 2D position
+        // Item 2D position
         this.x = options.x;
         this.y = options.y;
         
         return this;  
     },
     
-    /**
-     * Loading Show "loading" screen
-     * @return {object} Loading Mootor UI Loading object
-     */
-    Loading = function(self) {
-        this.el = document.createElement("div");
-        $(this.el).setClass("moo-ui-loading");
-        self.el.appendChild(this.el);
-        
-        Loading.init(this);
-
-        return this;
-    };
-    
-        
-	/*
-	 * Hide all while loading, show when ready
-	 */
-
-	$.view.hide();
-	$(document).ready(function() {
-		$.view.show();
-	});
-	
-	// Prevents native scrolling
-	$(document).ready(function() {
-    	$(document.body).bind("touchmove", function(gesture) {
-            gesture.preventDefault();
-            gesture.stopPropagation();
-    	});	
-	});
-
-          
+    Panel = function(){};
+    	
     // Public instance prototypes
-    
-    
-    /**
-     * Loading
-     */  
-    Loading.prototype = {
-        show: function() {
-            $(this.el).show();
-        },
-        hide: function() {
-            $(this.el).hide();
-        }
-    };
     
     /**
      * Nav
@@ -176,56 +108,87 @@
     Nav.prototype = {
     
         /**
-         * Set current panel
+         * set Set current navigation item
+         * @param {string} id Navigation item id
+         * @return {object} Item Navigation item instance
          */
         set: function (id) {
-
-            var panel = this.get(id);
+            var item = this.get(id);
                         
-            if (this.current !== panel.index) {
+            if (this.current !== item.index) {
+
+                // Save current index
                 this._config.back = this.current;
+
+                // Add item to navigation history
                 if (this._config.direction === 0) {
                     this.history.push(this.current);
                 }
-                this.current = panel.index;
+
+                // Update current index
+                this.current = item.index;
+
+                // If no transition is happening..
                 if (this._config.isMoving === false) {
                     this._config.isMoving = true;
+
+                    // Load this Item
                     Nav.load(this);                    
+
                 }
+
             } else {
                 this._config.isMoving = false;
             }
+            
+            return item;
 
         },
 
         /**
-         * Get panel by id
+         * get Get Item object by id
+         * @param {string} id Navigation item (ex: panel) id
+         * @return {object} Item Navigation Item instance
          */
         get: function (id) {
             var i;
-            // Get panel by id and load it
             for (i = this._config.count; i--;) {
-                if (this.panels[i].el.id === id) {
-                    return this.panels[i];
+                if (this.items[i].el.id === id) {
+                    return this.items[i];
                 }
             }
+            return null;
         },
 
         /**
-         * Go back on navigation history
+         * goBack Go back on navigation history
+         * @param {string} id Navigation item (ex: panel) id
+         * @return {integer} index Current navigation item index
          */
         goBack: function () {
+        
+            // If not in the begin of navigation history
+            // and not doing transitions
             if (this.history.length > 0) {
                 if(this._config.isMoving === false) {
+
+                    // Set direction for transitions
                     this._config.direction = -1;
+
+                    // Update history
                     this._config.back = this.history.pop();
-                    this.set(this.panels[this._config.back].el.id);
+                    
+                    // Load Item
+                    this.set(this.items[this._config.back].el.id);
                 }
             }
+            return this.items[this.current].index;
 	    },
 
         /**
          * Gesture handler
+         * @private
+         * TODO: move this property off of prototype
          */
         handleGesture: function (gesture) {
             Nav.handleGesture(gesture, this);
@@ -233,87 +196,126 @@
 
     };
     
-    
     // Private static methods
     
     /**
-     * Loading
-     */ 
-    $.extend({
-        init: function(self) {
-            var i;
-            self.el.innerHTML = '<div class="moo-ui-loading-block"></div>';
-            for (i = 1; i < 9; i++) {
-                self.el.innerHTML += '<div class="moo-loading-0' + i + '"></div>';
-            }
-        }
-    }, Loading);
-
-    /**
-     * Panel
+     * Item
      */     
     $.extend({
-        initNavigationItems: function(panel, self) {
+    
+        getLinks: function(self) {
+            var links,
+                i,
+                navigationItems = [];
+                       
+            links = $(self.el).find("a");
+            for (i = 0; i < links.length; i++) {
+                if (links[i].rel !== "") {
+                    navigationItems.push(links[i])
+                }
+            }
+            
+            navigationItems.length = i;
+            return navigationItems;
+        },
         
-            var navigationItems,
-            navigationItem,
-            loadNavigationItem,
-            setActiveItem,
-            i,j;
+        loadNavigationItem: function (gesture, self, navInstance) {
+            var i;
 
-
-            loadNavigationItem = function (gesture) {
-                var i;
-
-                for (i = navigationItems.length; i--;) {
-                    $(navigationItems[i]).removeClass("active");
-                }
-
-                self._config.direction = 0;
-                if (self._config.isMoving === false) {
-                    if (gesture.el.rel !== undefined) {
-                        self.set(gesture.el.rel);
-                    }
-                }
-            };
-                
-            setActiveItem = function (gesture) {
-                $(gesture.el).setClass("active");
-            };            
+            // Clear navigation items styles
+            for (i = self.navigationItemsCount; i--;) {
+                $(self.navigationItems[i]).removeClass("active");
+            }
             
-            panel.navigationItems = navigationItems = panel.el.getElementsByTagName("a");
+            // Default load transition direction
+            navInstance._config.direction = 0;
             
-            for (j = navigationItems.length; j--;) {
-                navigationItem = navigationItems[j];
+            // If not doing a transition 
+            if (navInstance._config.isMoving === false) {                
+                // Set & load navigation Item
+                navInstance.set(gesture.el.rel);
+            }
+        },
+        
+        initNavigationItems: function(self, navInstance) {
+        
+            var navigationItem,
+                i;
+                                                
+            // Get navigation links
+            self.navigationItems = Item.getLinks(self);
+            self.navigationItemsCount = self.navigationItems.length;
+            
+            // Setup navigation links            
+            for (i = self.navigationItemsCount; i--;) {
+                navigationItem = self.navigationItems[i];
 
                 // External links    
-                if ($(navigationItem).hasClass(self._config.navClass) === false) {
+                if ($(navigationItem).hasClass(navInstance._config.navClass) === false) {
                     $(navigationItem).onTapEnd( function(gesture) {
                         window.location = gesture.el.href;
                     });
 
                 // Internal navigation links    
                 } else {
-                    if (navigationItems[j].rel !== "") {
-                        $(navigationItems[j]).onTapStart(setActiveItem);
-                        $(navigationItems[j]).onTapEnd(loadNavigationItem);
+                    if (navigationItem.rel !== "") {
+
+                        $(navigationItem).onTapStart(
+                            function(gesture) {
+                                $(gesture.el).setClass("active");
+                        });                        
+
+                        $(navigationItem).onTapEnd(
+                            function(gesture) {                                
+                                Item.loadNavigationItem(gesture, self, navInstance);
+                        });
+
                     }                    
                 }
             }
             
-            // Initialize navigation area
-            Nav.nav(panel, self);
-                        
+            return self;                        
         }    
-    }, Panel);
+        
+    }, Item);
+    
+    /**
+     * Header
+     */
+    $.extend({
+    
+        initAnchorBack: function(self, navInstance) {
+            var $anchorBack =
+                navInstance._config.anchorBack =
+                $($(self.el).find(".moo-nav-back")[0]);
+            
+            $anchorBack.hide();
+            
+            $anchorBack.on("click", function() {
+                return false;
+            });
 
+            $anchorBack.onTapEnd(function(gesture) {
+                navInstance.goBack();
+            });
+        },
+        
+        preventNativeScrolling: function(self) {
+            $(self.el).onDragMove(function(gesture) {
+                gesture.e.preventDefault();
+            });
+        }
+
+    }, Header);
 
     /**
      * Nav
      */    
     $.extend({
     
-        /** Initialize Nav **/
+        /**
+         * Initialize Nav instance
+         */
         init: function(options, self) {
 
             // Container element
@@ -325,8 +327,8 @@
             // Initialize instance properties
             Nav.initProperties(self, options);                                                    
             
-            // Initialize panels
-            Nav.initPanels(self);
+            // Initialize items
+            Nav.initItems(self);
                         
             // Map touch events to event handler
             $(self.el).onDragMove(self);
@@ -338,26 +340,29 @@
             return self;
         },
         
+        /**
+         * Translate Nav instance properties
+         */
         initProperties: function(self, options) {
         
             // Private properties
 
             self._config = {
             
-                // Panel 2D positions
+                // Item 2D positions
                 x: 0,
                 y: 0,
                 
-                // Index of previous panel in navigation history
+                // Index of previous item in navigation history
                 back: 0,
                 
-                // Flag for panels transitions
+                // Flag for items transitions
                 isMoving: false,
                 
-                // Direction of moving for panels transitions
+                // Direction of moving for items transitions
                 direction: 0,
                 
-                // Sizes of panels container
+                // Sizes of items container
                 width: $.view.clientW,
                 height: $.view.clientH,
 
@@ -365,56 +370,36 @@
                 navClass: options.navLinksClassName ? 
                           options.navLinksClassName : "moo-nav",
 
-                // Navigation item class name
-                itemClass: options.panelsItemsClassName ?
-                           options.panelsItemsClassName : "moo-panel",
-
                 // Hidden content when isMoving class name
                 hidden_class: options.panelsHiddenClassName ?
                               options.panelsHiddenClassName : "moo-hidden",
+                              
+                // Margin between items
+                margin: options.margin ?
+                              options.margin : 5,
 
-                // Margin between panels
-                margin: options.panelsMargin ?
-                              options.panelsMargin : 5,
+                // Navigation item class name
+                itemClass: options.itemsClassName ?
+                           options.itemsClassName : "moo-panel",
+
+                // Navigation type
+                type: options.type ?
+                              options.type : "Panels"
                         
             }
                 
             // Public properties
             
-            // Array of navigation panels
-            self.panels = [];
+            // Array of navigation items
+            self.items = [];
             
-            // Current panel index
+            // Current item index
             self.current = 0;
             
-            // Navigation index (array of panels indexes)
+            // Navigation index (array of items indexes)
             self.history = [];                       
       
         },    
-        
-        /**
-         * Translate Nav
-         */
-        translate: function (options, self) {
-            
-            options.duration = options.duration ? 
-                              options.duration : 0;
-                              
-            options.callback = options.callback ? 
-                               options.callback : function () {};
-                               
-            options.y = options.y ?
-                        options.y : 0;
-            
-            options.x = options.x ?
-                        options.x : 0;
-            
-            $(options.el).translateFx(
-                {y: options.y,x: options.x},
-                {transitionDuration: options.duration, callback: options.callback}
-            );
-            
-        },
         
         /**
          * Gesture handler
@@ -442,14 +427,16 @@
          * Move panel
          */
         move: function (gesture, self) {
-            var panel =  self.panels[self.current];
+            var panel =  self.items[self.current];
             if (gesture.isDraggingY !== 0 && panel.movable !== false) {
+                
                 self._config.y = self._config.y + (gesture.y - gesture.lastY);
-                Nav.translate({
+                _translate({
                     el: panel.el,
                     y: self._config.y,
                     x: panel.x
                 }, self);
+                
             }
 
         },
@@ -458,7 +445,7 @@
          * Check move
          */
         checkMove: function (gesture, self) {
-            var panel = self.panels[self.current],
+            var panel = self.items[self.current],
                 maxdist = panel.height - self._config.height,
                 cb,
                 i;
@@ -485,7 +472,7 @@
                         $(panel.navigationItems[i]).removeClass("active");
                     }
                                                           
-                    Nav.translate({
+                    _translate({
                         y: self._config.y,
                         el: panel.el,
                         duration: 0.25
@@ -500,88 +487,10 @@
          * Load current panel
          */
         load: function (self) {
-
-            var panel,
-                callback,
-                back,
-                positionX;
-    
-            // Current panel
-            panel = self.panels[self.current];
-            // Back panel
-            back = self.panels[self._config.back];
-            
-            $(panel.el).show();
-           
-            callback = function () {
-                $(back.el).hide();
-                self._config.isMoving = false;
-                
-                panel.x = 0;
-                self._config.x = 0;
-                Nav.translate({el: self.el, x: 0}, self);
-                Nav.translate({el: panel.el, x: 0}, self);
-            };
-
-            // Initial position for translate
-            positionX = self._config.width + self._config.margin;
-
-            if (self.current !== 0) {
-
-                self._config.anchorBack.el.style.opacity = "1";
-
-                if (self._config.back === 0) {
-                    Nav.translate({el: panel.el, x: positionX}, self);
-                    panel.x = positionX;
-                    positionX = -positionX;
-
-                } else {
-                                    
-                    if (self._config.direction === 0 ) {
-
-                        Nav.translate({el: self.el, x: 0}, self);
-                        Nav.translate({el: panel.el, x: positionX}, self);
-                        panel.x = positionX;
-                        Nav.translate({el: back.el, x: 0}, self);
-                        positionX = -positionX;
-                    
-                    } else {
-
-                        positionX = 0;
-                        panel.x = 0;
-    
-                    }
-                    
-                }
-            } else if (self._config.back !== 0) {
-           
-                Nav.translate({el: self.el, x: -positionX}, self);
-                Nav.translate({el: panel.el, x: 0});
-                panel.x = 0;
-                Nav.translate({el: back.el, x: positionX}, self);
-                positionX = 0;                
-                self._config.anchorBack.el.style.opacity = "0";
-            }
-            
-            window.setTimeout(function () {
-                Nav.translate({
-                    el: self.el,
-                    duration: .25,
-                    x: positionX,
-                    callback: callback
-                }, self);
-            }, 1);
-            
-            
-            if (typeof panel.onLoad === "function") {
-                panel.onLoad();
-                panel.onLoadCallback = function() {
-                    Panel.initNavigationItems(panel, self);
-                    panel.height = panel.el.offsetHeight;                    
-                    if (self._config.height > panel.height) {
-                        panel.height = self._config.height;
-                    }
-                }
+        
+            switch (self._config.type) {
+                case "Panels":
+                    Panel.load(self);
             }
             
         },
@@ -601,30 +510,30 @@
 
         },
 
-        initPanels: function(self) {
+        // Initialize Nav items
+        initItems: function(self) {
             var i,
-                panel,
-                nav = self.el.getElementsByClassName(self._config.itemClass);  
-                
+                item,
+                elements = self.el.getElementsByClassName(self._config.itemClass);                  
             
-            // Initialize panels 
-            self.panels = [];
-            for (i = 0; i < nav.length; i++) {
+            // Initialize items 
+            self.items = [];
+            for (i = 0; i < elements.length; i++) {
     
-                panel = new Panel({
-                    el: nav[i],
+                item = new Item({
+                    el: elements[i],
                     index: i,
                     x: 0,
                     y: 0,
                 });
     
                 // Initialize navigation items
-                Panel.initNavigationItems(panel, self);
+                Item.initNavigationItems(item, self);
                 
-                self.panels.push(panel);
+                self.items.push(item);
             }
             
-            // Panels count
+            // Items count
             self._config.count = i;
             
             // Initialize panels CSS styles
@@ -633,37 +542,152 @@
         },
 
         initPanelsStyles: function(self) {
-            var i,
-                panel;
+            var i = 0,
+                item = {};
                 
             for (i = self._config.count; i--;) {
     
-                panel = self.panels[i];
+                item = self.items[i];
                 
                 // Translate all but first panel off of the screen
                 if (i > 0) {
-                    Nav.translate({
-                        el: panel.el, 
+                    _translate({
+                        el: item.el, 
                         x:  -((self._config.width + self._config.margin) * 4),
                         y:0
                     }, self);
                 } else {
-                    Nav.translate({
-                        el: panel.el,
+                    _translate({
+                        el: item.el,
                         x:0
                     }, self);
                 }
                 
                 // Fill screen vertically
-                panel.height = panel.el.offsetHeight;                
-                if (self._config.height > panel.height) {
-                    panel.height = self._config.height;
+                item.height = item.el.offsetHeight;                
+                if (self._config.height > item.height) {
+                    item.height = self._config.height;
                 }
     
+            }
+        },
+        
+        hideContentWhileDocumentNotReady: function() {
+        	$.view.hide();
+        	$(document).ready(function() {
+        		$.view.show();
+        	});
+        },
+        
+        preventNativeScrolling: function() {
+        	$(document).ready(function() {
+            	$(document.body).bind("touchmove", function(gesture) {
+                    gesture.preventDefault();
+                    gesture.stopPropagation();
+            	});	
+        	});
+        },
+        
+        setPaddingTop: function(height, navInstance) {
+            var i;
+            for (i = navInstance._config.count; i--;) {
+                navInstance.items[i].el.style.paddingTop = height + "px";
             }
         }
             
     }, Nav);
+    
+    $.extend({
+    
+        load: function(navInstance) {
+        
+            var panel,
+                callback,
+                back,
+                positionX;
+    
+            // Current panel
+            panel = navInstance.items[navInstance.current];
+            // Back panel
+            back = navInstance.items[navInstance._config.back];
+            
+            $(panel.el).show();
+           
+            callback = function () {
+                $(back.el).hide();
+                navInstance._config.isMoving = false;
+                
+                panel.x = 0;
+                navInstance._config.x = 0;
+                _translate({el: navInstance.el, x: 0}, navInstance);
+                _translate({el: panel.el, x: 0}, navInstance);
+            };
+
+            // Initial position for translate
+            positionX = navInstance._config.width + navInstance._config.margin;
+
+            if (navInstance.current !== 0) {
+
+                navInstance._config.anchorBack.show()
+
+                if (navInstance._config.back === 0) {
+                    _translate({el: panel.el, x: positionX}, navInstance);
+                    panel.x = positionX;
+                    positionX = -positionX;
+
+                } else {
+                                    
+                    if (navInstance._config.direction === 0 ) {
+
+                        _translate({el: navInstance.el, x: 0}, navInstance);
+                        _translate({el: panel.el, x: positionX}, navInstance);
+                        panel.x = positionX;
+                        _translate({el: back.el, x: 0}, navInstance);
+                        positionX = -positionX;
+                    
+                    } else {
+
+                        positionX = 0;
+                        panel.x = 0;
+    
+                    }
+                    
+                }
+            } else if (navInstance._config.back !== 0) {
+           
+                _translate({el: navInstance.el, x: -positionX}, navInstance);
+                _translate({el: panel.el, x: 0});
+                panel.x = 0;
+                _translate({el: back.el, x: positionX}, navInstance);
+                positionX = 0;                
+                navInstance._config.anchorBack.hide();
+            }
+            
+            window.setTimeout(function () {
+                _translate({
+                    el: navInstance.el,
+                    duration: .25,
+                    x: positionX,
+                    callback: callback
+                }, navInstance);
+            }, 1);
+            
+            
+            if (typeof panel.onLoad === "function") {
+                panel.onLoad();
+                panel.onLoadCallback = function() {
+                    Item.initNavigationItems(panel, navInstance);
+                    panel.height = panel.el.offsetHeight;                    
+                    if (navInstance._config.height > panel.height) {
+                        panel.height = navInstance._config.height;
+                    }
+                }
+            }
+
+        }
+
+
+    }, Panel);
     
     
     // Public constructors
@@ -680,9 +704,42 @@
                     return new Nav(options);                
             }
         },
-        loading: function() {
-            return new Loading(this);
-        }
     });
+    
+	/*
+	 * Hide content while loading, show when ready
+	 */
+	Nav.hideContentWhileDocumentNotReady()   
+
+	/*
+	 * Prevent native scrolling
+	 */
+    Nav.preventNativeScrolling();
+
+    // Private utilities
+    
+    /**
+     * Translate element
+     */
+    _translate = function (options) {
+        
+        options.duration = options.duration ? 
+                          options.duration : 0;
+                          
+        options.callback = options.callback ? 
+                           options.callback : function () {};
+                           
+        options.y = options.y ?
+                    options.y : 0;
+        
+        options.x = options.x ?
+                    options.x : 0;
+        
+        $(options.el).translateFx(
+            {y: options.y,x: options.x},
+            {transitionDuration: options.duration, callback: options.callback}
+        );
+        
+    };
     
 }($));

@@ -1,23 +1,19 @@
 
 # Mootor - HTML5 library for application development
 
-The main purpose of this project is to create a simple HTML5 library for application development, 
-that helps web professionals to build fully customizable apps, for use in browsers 
-or embedded in mobile applications.
+The main purpose of this project is to create a simple HTML5 library for application development, that helps web professionals to build fully customizable apps, for use in browsers or embedded in mobile applications.
 
-Current modules:
+Current modules (mootor.js):
 
-* core.js - Core functions and query selector
-* fx.js - Visual FX (ex: show, hide, translate, ...)
-* gestures.js- Gestures (ex: tapStart, tapEnd, ...)
+* core - Core functions and query selector
+* gestures - Gestures (ex: onTapStart, onTapEnd, ...)
+* fx - Visual FX (ex: translateFx, ...)
 
 and plugins:
 
-* app.js - Application
-* nav.js - Navigation
-* ui.js - User interface
-* geo.js - Geolocalization
-* type.js - Typography
+* ui - User interface
+* nav - Navigation
+* app - Application
 
 # About Mootor
 
@@ -25,7 +21,7 @@ The key features are:
 
 * Fast performance
 * Easy to use
-* Strongly considering design issues
+* Fully customizable, strongly considering design issues
 
 ## Demo
 
@@ -35,22 +31,22 @@ http://voolks.com/mootor
 
 Currently compatibility is only WebKit based browsers:
 
-* iOS (tested in iOS 3.1, iOS 5, Retina Display)
+* iOS (tested in iOS 3.1, iOS 5)
 * Android (tested in Android 2.3, Android 3.1)
 
-# Info
+# Only for testing
 
 We are in a development stage, THIS SOFTWARE IS ONLY FOR TESTING.
 
 # Design
 
-Mootor **LOVES** design, and we aim to make delightful user interfaces. 
+Mootor team **LOVES** design, and we aim to make delightful user interfaces. 
 We are working with the last tools like Haml and Compass, to provide maximum 
 efficiency and fully customization.
 
 # How can I help?
 
-We are in a development stage, so you can help this way:
+You can help this way:
 
 * Suggest and/or build new features
 * Help to find and/or fix issues
@@ -64,12 +60,12 @@ Please use GitHub to report any bugs found.
 
 You may use any Mootor project under the terms of either the MIT License or the GNU General Public License (GPL) Version 3.
 
-(c) 2012 Emilio Mariscal
+(c) 2012 Emilio Mariscal (emi420 [at] voolks.com)
 
 # Hablas español?
 
 Mootor también! y estaríamos encantados de sumar colaboradores en nuestro idioma nativo.
 
-Para más información podés escribir a emi420@voolks.com o solicitar un Pull Request.
+Para más información podés escribir a emi420 [at] voolks.com o solicitar un Pull Request.
 
 Adios amigos!

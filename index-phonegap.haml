@@ -7,11 +7,10 @@
     %script{:src=>"js/mootor.js",:type=>"text/javascript"}
     %script{:src=>"js/plugins/nav.js",:type=>"text/javascript"}
     %script{:src=>"js/plugins/app.js",:type=>"text/javascript"}
-    %script{:src=>"js/plugins/ui.js",:type=>"text/javascript"}
 
 %body.main
 
-    %header#header.moo-header
+    %header#moo-header.moo-header
         %h1 Mootor demo (phonegap)
         %nav
             %a.moo-nav-back{:href=>"", :rel=>"back"} Back
@@ -34,9 +33,7 @@
             %h3 This module is not activated. See $.geolocation
  
         .moo-panel#picture
-            %h2 Picture
-            %input#openPicture{:type=>"button", :value=>"Open..."}
-            %img#myImage
+
 
 :javascript    
 
@@ -45,43 +42,21 @@
            "use strict";
        
            // Navigation panels
-           var myNav = $("#panels").nav(),
+           window.myNav = $("#panels").nav();
        
            // Application
-           myApp = $.app({
+           var myApp = $.app({
                views: [
                     "ui",
                     "nav",
                     "item1",
-                    "item2"
+                    "item2",
+                    "picture"
                ],
                nav: myNav
            });
            
            // Preload a view           
            myApp.load(myApp.views[0], myNav.get("ui"));
-           
-           
-           // Testing Camera
-           
-           $("#openPicture").onTapEnd(function() {
-                navigator.camera.getPicture(
-                    onSuccess,
-                    onFail, 
-                    { 
-                        quality: 50, 
-                        destinationType: Camera.DestinationType.FILE_URI,
-                        // sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM
-                    }
-                ); 
-           }); 
-           
-           var onSuccess = function(imageURI) {
-                $("#myImage").el.src = imageURI;
-           },
-            
-           onFail = function(message) {
-                alert('Failed because: ' + message);
-           }
-                                  
+                   
        });

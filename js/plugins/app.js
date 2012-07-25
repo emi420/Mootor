@@ -26,6 +26,7 @@
        var el = this.el = options.el,
            self = this;
            
+       // TODO: independence of Nav plugin
        this.nav = options.nav;
        
        if (options.el.id !== undefined) {
@@ -33,6 +34,7 @@
        }
        appInstance.views.push(this);
     
+       // TODO: independence of Nav plugin
        this.nav.get(this.id).onLoad = function() {
            if (self.cached === false) {
                appInstance.load(self, this);
@@ -52,6 +54,7 @@
     App.prototype = {
     
         // Load a view
+        // TODO: independence of Nav plugin
         load: function(view, panelInstance) {
         
           // Template
@@ -60,6 +63,8 @@
                 callback: function(response) {
                    $(view.el).html(response);
                    view.cached = true;
+                   
+                   // TODO: independence of Nav plugin
                    if (typeof panelInstance.onLoadCallback === "function") {
                        panelInstance.onLoadCallback();                                     
                    } 
