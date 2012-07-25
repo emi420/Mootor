@@ -55,8 +55,8 @@
             // Prevent native scrolling
             Header.preventNativeScrolling(this)
             
-            // Set paddingTop on navigation items
-            Nav.setPaddingTop(this.height, self);
+            // Set styles when header active on navigation items
+            self._config.navItem.setStylesWhenHeaderActive(this.height, self);
             
             return this;
         } else {
@@ -215,7 +215,6 @@
                 }
             }
             
-            navigationItems.length = i;
             return navigationItems;
         },
         
@@ -241,9 +240,9 @@
         
             var navigationItem,
                 i;
-                                                
+                
             // Get navigation links
-            self.navigationItems = Item.getLinks(self);
+            self.navigationItems = Item.getLinks(self);            
             self.navigationItemsCount = self.navigationItems.length;
             
             // Setup navigation links            
@@ -345,6 +344,8 @@
          */
         initProperties: function(self, options) {
         
+            var navObject;
+        
             // Private properties
 
             self._config = {
@@ -371,8 +372,8 @@
                           options.navLinksClassName : "moo-nav",
 
                 // Hidden content when isMoving class name
-                hidden_class: options.panelsHiddenClassName ?
-                              options.panelsHiddenClassName : "moo-hidden",
+                hiddenClassName: options.hiddenClassName ?
+                              options.hiddenClassName : "moo-hidden",
                               
                 // Margin between items
                 margin: options.margin ?
@@ -385,9 +386,17 @@
                 // Navigation type
                 type: options.type ?
                               options.type : "Panels"
-                        
+                              
+                                                
             }
-                
+            
+            // Access to navigation object by type, ex: self.Panel
+            switch (self._config.type) {
+                case "Panels":
+                    navObject = Panel;
+            }
+            self._config.navItem = navObject;
+            
             // Public properties
             
             // Array of navigation items
@@ -411,7 +420,7 @@
                     Nav.move(gesture, self);
                     break;
                 case "dragEnd":
-                    Nav.checkMove(gesture, self);
+                    self._config.navItem.checkMove(gesture, self);
                     break;
                 }
         },
@@ -424,77 +433,27 @@
         },
 
         /**
-         * Move panel
+         * Move item
          */
         move: function (gesture, self) {
-            var panel =  self.items[self.current];
-            if (gesture.isDraggingY !== 0 && panel.movable !== false) {
-                
-                self._config.y = self._config.y + (gesture.y - gesture.lastY);
-                _translate({
-                    el: panel.el,
-                    y: self._config.y,
-                    x: panel.x
-                }, self);
-                
-            }
-
-        },
-
-        /**
-         * Check move
-         */
-        checkMove: function (gesture, self) {
-            var panel = self.items[self.current],
-                maxdist = panel.height - self._config.height,
-                cb,
-                i;
-                
-            if (gesture.type === "dragEnd") {
-
-                // Bounce back
-                if (self._config.y >= 0 || maxdist < -self._config.y) {
-             
-                    if (self._config.y > 0) {
-                        self._config.y = 0;
-                    } else {
-                        if (self.header === undefined) {                        
-                            self._config.y = -(panel.height - self._config.height);
-                        } else {
-                            self._config.y = -(panel.height - (self._config.height + self.header.height));                            
-                            // FIXME CHECK
-                            if (self._config.y === self.header.height) {
-                               self._config.y -= self.header.height; 
-                            }
-                        }
-                    }
-                    for (i = panel.navigationItems.length; i--;) {
-                        $(panel.navigationItems[i]).removeClass("active");
-                    }
-                                                          
-                    _translate({
-                        y: self._config.y,
-                        el: panel.el,
-                        duration: 0.25
-                    }, self);
-                }
-
-            }
-
-        },
-
-        /**
-         * Load current panel
-         */
-        load: function (self) {
-        
-            switch (self._config.type) {
-                case "Panels":
-                    Panel.load(self);
-            }
+            var item =  self.items[self.current];
             
+            if (gesture.isDraggingY !== 0 && item.movable !== false) {                
+                self._config.navItem.move(self, item, gesture);
+            }
+
+        },
+
+        /**
+         * Load item
+         */
+        load: function (self) {        
+            self._config.navItem.load(self);            
         },
         
+        /**
+         * Setup events onResize
+         */
         initResizeEvents: function(self) {
 
             // Update cached window sizes on window resize
@@ -510,7 +469,9 @@
 
         },
 
-        // Initialize Nav items
+        /**
+         * Initialize navigation items
+         */
         initItems: function(self) {
             var i,
                 item,
@@ -536,49 +497,21 @@
             // Items count
             self._config.count = i;
             
-            // Initialize panels CSS styles
-            Nav.initPanelsStyles(self);
+            // Initialize navigation items CSS styles
+            Nav.initNavItemStyles(self);
             
         },
 
-        initPanelsStyles: function(self) {
-            var i = 0,
-                item = {};
-                
-            for (i = self._config.count; i--;) {
-    
-                item = self.items[i];
-                
-                // Translate all but first panel off of the screen
-                if (i > 0) {
-                    _translate({
-                        el: item.el, 
-                        x:  -((self._config.width + self._config.margin) * 4),
-                        y:0
-                    }, self);
-                } else {
-                    _translate({
-                        el: item.el,
-                        x:0
-                    }, self);
-                }
-                
-                // Fill screen vertically
-                item.height = item.el.offsetHeight;                
-                if (self._config.height > item.height) {
-                    item.height = self._config.height;
-                }
-    
-            }
+        /**
+         * Initialize navigation items CSS Styles
+         */
+        initNavItemStyles: function(self) {
+            self._config.navItem.initStyles(self);
         },
-        
-        hideContentWhileDocumentNotReady: function() {
-        	$.view.hide();
-        	$(document).ready(function() {
-        		$.view.show();
-        	});
-        },
-        
+                
+        /**
+         * Prevent native browser scrolling 
+         */
         preventNativeScrolling: function() {
         	$(document).ready(function() {
             	$(document.body).bind("touchmove", function(gesture) {
@@ -588,34 +521,44 @@
         	});
         },
         
-        setPaddingTop: function(height, navInstance) {
-            var i;
-            for (i = navInstance._config.count; i--;) {
-                navInstance.items[i].el.style.paddingTop = height + "px";
-            }
-        }
             
     }, Nav);
     
     $.extend({
-    
+        
+        /**
+         * Load panel
+         */
+        // TODO: rewrite & comment
         load: function(navInstance) {
         
             var panel,
                 callback,
                 back,
-                positionX;
+                positionX,
+                hiddenContent,
+                i;
     
             // Current panel
             panel = navInstance.items[navInstance.current];
             // Back panel
             back = navInstance.items[navInstance._config.back];
+            // Hidden content while transitioning
+            hiddenContent = $(panel.el).find("." + navInstance._config.hiddenClassName);
+            
+            for (i = hiddenContent.length; i--;) {
+                $(hiddenContent[i]).el.style.opacity = "0";
+            }
             
             $(panel.el).show();
            
             callback = function () {
                 $(back.el).hide();
                 navInstance._config.isMoving = false;
+
+                for (i = hiddenContent.length; i--;) {
+                    $(hiddenContent[i]).el.style.opacity = "1";
+                }
                 
                 panel.x = 0;
                 navInstance._config.x = 0;
@@ -684,9 +627,107 @@
                 }
             }
 
+        },
+        
+        /**
+         * Initialize CSS Styles
+         */
+        // TODO: rewrite & comment
+        initStyles: function(self) {
+            var i = 0,
+                item = {};
+                
+            for (i = self._config.count; i--;) {
+    
+                item = self.items[i];
+                
+                // Translate all but first panel off of the screen
+                if (i > 0) {
+                    _translate({
+                        el: item.el, 
+                        x:  -((self._config.width + self._config.margin) * 4),
+                        y:0
+                    }, self);
+                } else {
+                    _translate({
+                        el: item.el,
+                        x:0
+                    }, self);
+                }
+                
+                // Fill screen vertically
+                item.height = item.el.offsetHeight;                
+                if (self._config.height > item.height) {
+                    item.height = self._config.height;
+                }
+            }
+        },
+        
+        /**
+         * Check move
+         */
+        // TODO: rewrite & comment
+        checkMove: function (gesture, self) {
+            var panel = self.items[self.current],
+                maxdist = panel.height - self._config.height,
+                cb,
+                i;
+                
+            if (gesture.type === "dragEnd") {
+
+                // Bounce back
+                if (self._config.y >= 0 || maxdist < -self._config.y) {
+             
+                    if (self._config.y > 0) {
+                        self._config.y = 0;
+                    } else {
+                        if (self.header === undefined) {                        
+                            self._config.y = -(panel.height - self._config.height);
+                        } else {
+                            self._config.y = -(panel.height - (self._config.height + self.header.height));                            
+                            // FIXME CHECK
+                            if (self._config.y === self.header.height) {
+                               self._config.y -= self.header.height; 
+                            }
+                        }
+                    }
+                    for (i = panel.navigationItems.length; i--;) {
+                        $(panel.navigationItems[i]).removeClass("active");
+                    }
+                                                          
+                    _translate({
+                        y: self._config.y,
+                        el: panel.el,
+                        duration: 0.25
+                    }, self);
+                }
+
+            }
+
+        },
+        
+        /**
+         * Move panels
+         */
+        move: function(self, item, gesture) {
+           self._config.y = self._config.y + (gesture.y - gesture.lastY);
+            _translate({
+                el: item.el,
+                y: self._config.y,
+                x: item.x
+            }, self);                
+        },
+
+        /**
+         * Set styles when Header is active
+         */
+        setStylesWhenHeaderActive: function(height, navInstance) {
+            var i;
+            for (i = navInstance._config.count; i--;) {
+                navInstance.items[i].el.style.paddingTop = height + "px";
+            }
         }
-
-
+    
     }, Panel);
     
     
@@ -706,11 +747,6 @@
         },
     });
     
-	/*
-	 * Hide content while loading, show when ready
-	 */
-	Nav.hideContentWhileDocumentNotReady()   
-
 	/*
 	 * Prevent native scrolling
 	 */

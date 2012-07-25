@@ -24,20 +24,26 @@
     View = function(options, appInstance) {
        
        var el = this.el = options.el,
-           self = this;
-           
-       // TODO: independence of Nav plugin
-       this.nav = options.nav;
-       
+           self = this,
+           navItem;
+                  
        if (options.el.id !== undefined) {
            this.id = options.el.id;
        }
        appInstance.views.push(this);
-    
-       // TODO: independence of Nav plugin
-       this.nav.get(this.id).onLoad = function() {
-           if (self.cached === false) {
-               appInstance.load(self, this);
+       
+       // If a Nav object instance is passed
+       // then get a navigation item by id and
+       // define the onLoad method of that item
+       // as a function that load this View instance
+       if (options.nav !== undefined) {
+           navItem = options.nav.get(this.id);
+           navItem.onLoad = function() {
+               if (self.cached === false) {
+                   appInstance.load(this, {
+                        nav: navItem
+                   });
+               }               
            }
        }
        
@@ -54,34 +60,54 @@
     App.prototype = {
     
         // Load a view
-        // TODO: independence of Nav plugin
-        load: function(view, panelInstance) {
+        load: function(view, options) {
         
+          var callback = function() {};
+          
+          if (options.callback !== undefined) {
+              callback = options.callback;
+ 
+          } else {
+ 
+              callback = function(response) {
+             
+                  if (view.cached !== true) {
+                      view.cached = true;
+    
+                      if (options.el !== undefined) {
+           
+                          // Load view into element
+                          $(options.el).html(response);
+          
+                      } else {
+                             
+                          $(view.el).html(response);
+        
+                      }
+    
+                  }
+                 
+                  // If a navItemInstance param is passed
+                  // and that object has an onLoadCallback function
+                  // then call that onLoadCallback function                     
+                  if (options.nav !== undefined &&
+                      typeof options.nav.onLoadCallback === "function") {                       
+                      options.nav.onLoadCallback();                                     
+                  }                           
+              }
+
+          }
+                       
           // Template
           $.ajax({
                 url: this.path + "views/" + view.id + "/" + view.id + ".html",
-                callback: function(response) {
-                   $(view.el).html(response);
-                   view.cached = true;
-                   
-                   // TODO: independence of Nav plugin
-                   if (typeof panelInstance.onLoadCallback === "function") {
-                       panelInstance.onLoadCallback();                                     
-                   } 
-                }
+                callback: callback
           });
           
           // Controller
           $.require(this.path + "views/" + view.id + "/" + view.id + ".js");
         }
     };
-
-    /**
-     * View
-     */  
-    View.prototype = {
-        
-    };  
       
     // Private static methods
 
@@ -100,8 +126,6 @@
             } else {
                 self.path = "";
             }
-            
-            console.log(self.path);
                 
             if (options.views !== undefined) {
                 for (i = 0; i < options.views.length; i++) {
@@ -114,7 +138,6 @@
             }    
                     
         }
-
     }, App);
     
     // Public constructors
