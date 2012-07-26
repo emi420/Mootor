@@ -196,15 +196,18 @@
                     Mauris aliquam nunc a augue malesuada vel congue nunc cursus. Proin pellentesque diam iaculis sapien convallis ac sagittis sem feugiat. Ut ac iaculis neque. Curabitur vel felis non nisi rhoncus mollis suscipit quis nisi. Integer vitae augue at lorem pellentesque placerat. Donec ac nibh id massa malesuada adipiscing. Cras egestas, ligula eget tempor sagittis, metus arcu convallis orci, vehicula tempor arcu tortor quis dolor. Nullam facilisis iaculis magna sed suscipit.
     
     .moo-overlay
-    .moo-ui-modal-container
-        .moo-ui-modal-panel
-            %h1.moo-title Titulo del modal
-            %p.moo-text P&aacute;rrafo explicativo, puede tener varios renglones.
-            .moo-buttons
-                %a.moo-ui-cancel
-                    Cancelar
-                %a.moo-ui-submit
-                    Aceptar
+    .moo-ui-modal-placeholder
+        .moo-ui-modal-container
+            %header.moo-ui-modal-header
+                %h1 Alert overlay
+            .moo-ui-modal-panel
+                %h2.moo-title T&iacute;ulo del texto
+                %p.moo-text P&aacute;rrafo explicativo, puede tener varios renglones.
+                .moo-buttons
+                    %a.moo-ui-cancel
+                        Cancelar
+                    %a.moo-ui-submit
+                        Aceptar
 :javascript    
 
        $(document).ready(function(){

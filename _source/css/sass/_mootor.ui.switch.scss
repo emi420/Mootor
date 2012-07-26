@@ -7,24 +7,23 @@
     border-radius: 0.5em;
     @include float-right;
     overflow: hidden;
+    padding: 0.1em;
     width: 9em;
     height: 2.8em;
     b {
         font-size: 1.5em;
         font-weight: 700;
-        line-height: 175%;
+        line-height: 150%;
         text-align: center;
         @include background-image(linear-gradient(top, #fff, #dedede));
         border: 1px solid #666;
         border-radius: 0.33em;
         display: block;
-        width: 1.9em;
-        height: 110%;
         position: relative;
-        top: -5%;
-        right: -0.04em;
+        width: 1.9em;
+        height: 100%;
         -webkit-transition-duration: .25s;
-        -webkit-transform: translate3d(4.05em, 0, 0);
+        -webkit-transform: translate3d(3.85em, 0, 0);
         &:before { 
             content: "I";
             border-radius: 0.35em 0 0 0.35em;
@@ -41,20 +40,20 @@
         }
         &:after {
             content: "O";
+            line-height: 150%;
             //background: rgba(200, 0, 0, 0.3);
             border-radius: 0 0.35em 0.35em 0;
             color: #333;
             display: block;
-            height: 100%;
-            width: 4.15em;
             position: absolute;
             right: -4.15em;
             top: 0;
+            height: 100%;
+            width: 4.15em;
         }
     }
     &.moo-off{
         @include background-image(linear-gradient(top, #ddd, #fff 45%));
-         left: -0.04em;
         b {
             -webkit-transform: translate3d(0, 0, 0);
         }

@@ -3,31 +3,39 @@
 /*
 * Overlay Modal
 */
-
-.moo-ui-modal-container {
-    color: #333;
+.moo-ui-modal-placeholder {
     position: absolute;
     top: 50%;
     left: 50%;
     width: 0;
     height: 0;
     z-index: 1050;
-    
     &.moo-hidden {
         display: none;
     }
 }
+.moo-ui-modal-container {
+    background: #333;
+    @include border-radius(6px);
+    color: #333;
+    padding: 0.5em;
+    position: relative;
+    top: -10em;
+    left: -15em;
+    width: 31em;
+    height: auto;
+    z-index: 1500;
+    header {
+        color: #FFF;
+        @include text-shadow;
+    }
+}
 .moo-ui-modal-panel {
-    border: 3px solid #CCC;
     @include border-radius(6px);
     background-color: #FFF;
     width: 30em;
     overflow: hidden;
     padding: 5px;
-    position: relative;
-    top: -10em;
-    left: -15em;
-    z-index: 1500;
     .moo-title {
         color: #000;
         font-size: 2em;
@@ -39,8 +47,11 @@
         font-size: 1.5em;
         line-height: 120%;
         padding: 0;
+        margin: 0.5em;
     }
-    .moo-buttons { overflow: hidden;}
+   
+    /* Pasar estos a estilos de botones genericos */  
+    .moo-buttons { margin: 1.5em 0 0; overflow: hidden;}
     .moo-ui-cancel, 
     .moo-ui-submit {
         @include border-radius(5px);
@@ -48,7 +59,7 @@
         font-weight: 700;
         line-height: 200%;  
         width: 49%;
-    }
+    }   
     .moo-ui-cancel {
         @include float-left;
         @include background(linear-gradient(top, #eee, #ccc));
