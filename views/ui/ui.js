@@ -1,13 +1,21 @@
-$.require("js/plugins/ui.js", function() {
-    
+(function() {
+
     // Switch
-    $("#moo-ui-switch-1").ui({
-        type: "Switch"
+    var mySwitch = $("#moo-ui-switch-1").ui({
+        type: "Switch",
+        value: window.localStorage.getItem("moo-switch-1")
+    });    
+    mySwitch.on("change", function() {
+        window.localStorage.setItem("moo-switch-1", this.value);
     });
     
     // Text
-    $("#moo-ui-text-1").ui({
-        type: "Text"
+    var myText = $("#moo-ui-text-1").ui({
+        type: "Text",
+        value: window.localStorage.getItem("moo-text-1")
+    });
+    myText.on("change", function() {
+        window.localStorage.setItem("moo-text-1", this.value);
     });
     
     // TextArea
@@ -34,5 +42,5 @@ $.require("js/plugins/ui.js", function() {
     $("#moo-ui-checkbox-1").ui({
         type: "Checkbox",
     });
-    
-});
+        
+}());

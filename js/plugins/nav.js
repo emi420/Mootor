@@ -248,7 +248,7 @@
             // Setup navigation links            
             for (i = self.navigationItemsCount; i--;) {
                 navigationItem = self.navigationItems[i];
-
+                
                 // External links    
                 if ($(navigationItem).hasClass(navInstance._config.navClass) === false) {
                     $(navigationItem).onTapEnd( function(gesture) {
@@ -290,9 +290,9 @@
             
             $anchorBack.hide();
             
-            $anchorBack.on("click", function() {
+            $anchorBack.el.onclick = function() {
                 return false;
-            });
+            };
 
             $anchorBack.onTapEnd(function(gesture) {
                 navInstance.goBack();
@@ -475,8 +475,8 @@
         initItems: function(self) {
             var i,
                 item,
-                elements = self.el.getElementsByClassName(self._config.itemClass);                  
-            
+                elements = self.el.getElementsByClassName(self._config.itemClass);     
+                
             // Initialize items 
             self.items = [];
             for (i = 0; i < elements.length; i++) {
@@ -619,7 +619,9 @@
             if (typeof panel.onLoad === "function") {
                 panel.onLoad();
                 panel.onLoadCallback = function() {
-                    Item.initNavigationItems(panel, navInstance);
+                    if (panel.navigationItems.length === 0) {
+                        Item.initNavigationItems(panel, navInstance);
+                    }
                     panel.height = panel.el.offsetHeight;                    
                     if (navInstance._config.height > panel.height) {
                         panel.height = navInstance._config.height;

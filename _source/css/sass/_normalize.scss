@@ -33,7 +33,8 @@ summary {
  * Apply a natural box layout model to all elements 
  * (padding is calculated inside the box, not changing the width/height set on the element)
  */
-* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+@mixin borderBox { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+* { @include borderBox; }
 
 /*
  * Addresses margins/padding handled incorrectly 

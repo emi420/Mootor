@@ -4,6 +4,7 @@
     %meta{:name=>"viewport", :content=>"width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"}
     %link{:href=>"css/styles.css", :media=>"screen",  :rel=>"stylesheet"}
     %script{:src=>"js/mootor.js",:type=>"text/javascript"}
+    %script{:src=>"js/plugins/ui.js",:type=>"text/javascript"}
     %script{:src=>"phonegap/cordova-1.9.0.js",:type=>"text/javascript"}
     
 %body.main
@@ -18,18 +19,12 @@
             %nav
                 %a.moo-nav{:href=>"", :rel=>"nav"} Nav
                 %a.moo-nav{:href=>"", :rel=>"ui"} UI
-                %a.moo-nav{:href=>"", :rel=>"geolocalization"} Geolocalization
                 %a.moo-nav{:href=>"", :rel=>"picture"} Picture
                     
         .moo-panel#ui
         .moo-panel#nav
         .moo-panel#item1
-        .moo-panel#item2
-        
-        .moo-panel#geolocalization
-            %h2 Geolocalization
-            %h3 This module is not activated. See $.geolocation
- 
+        .moo-panel#item2        
         .moo-panel#picture
 
 

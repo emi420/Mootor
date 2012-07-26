@@ -1,6 +1,14 @@
 (function() {
 
-    // Testing Camera
+    /*
+     * Camera and localStorage example
+     */
+    
+    // Load pictures
+  
+    var imageURI = window.localStorage.getItem("imageURI");
+    
+    // Take or choose and save pictures
     
     var sourceType,
   
@@ -21,12 +29,17 @@
     }, 
     
     onSuccess = function(imageURI) {
+        window.localStorage.setItem("imageURI", imageURI);  
         $("#myImage").el.src = imageURI;
     },
     
     onFail = function(message) {
         console.log('Failed because: ' + message);
     };
+    
+    if (imageURI !== null) {
+        $("#myImage").el.src = imageURI;
+    }
 
     $("#takePicture").onTapEnd(function(gesture) {
         picture();
