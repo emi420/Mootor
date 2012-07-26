@@ -45,28 +45,24 @@
             %h2 Carousel
             %h3 This module is not implemented yet.
         
-        .moo-panel#image
-            .moo-overlay
-            .moo-ui-image-container
-                %header
-                    %a.moo-ui-add{ :rel=>""} New
-                    %a.moo-ui-delete{ :rel=>""} Delete
-                .moo-ui-image-panel
-                    .moo-image-wrapper
-                        .moo-image
-                            %img{ :src=>"img/tmp/sample1.jpg", :alt=>"image 1"}
-                    .moo-image-wrapper
-                        .moo-image
-                            %img{ :src=>"img/tmp/sample2.jpg", :alt=>"image 2"}
-                    .moo-image-wrapper
-                        .moo-image.moo-active
-                            %img{ :src=>"img/tmp/sample3.jpg", :alt=>"image 3"}
-                    .moo-image-wrapper
-                        .moo-image
-                            %img{ :src=>"img/tmp/sample4.jpg", :alt=>"image 4"}
-                    .moo-image-wrapper
-                        .moo-image
-                            %img{ :src=>"img/tmp/sample5.jpg", :alt=>"image 5"}
+        .moo-panel#tabs
+            .moo-nav-tabs-container
+                .moo-nav-tabs-header
+                    %ul
+                        %li.moo-tab-1.moo-active
+                            %a{:rel=>""} Tab 1
+                        %li.moo-tab-2
+                            %a{:rel=>""} Tab 2
+                        %li.moo-tab-3
+                            %a{:rel=>""} Tab 3
+                .moo-nav-tabs-content
+                    .moo-tab-content-1
+                        %p This is some random content paragraph for the first tab.
+                    .moo-tab-content-2
+                        %p This is the second tab, and it's content it is also a paragraph.
+                    .moo-tab-content-3
+                        %p This is the third tab.
+            
 :javascript    
 
        $(document).ready(function(){

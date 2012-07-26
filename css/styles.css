@@ -1099,7 +1099,7 @@ a:focus {
   padding: 2px 4px;
 }
 
-/* line 36, ../_source/css/sass/_mootor.ui.image.scss */
+/* line 35, ../_source/css/sass/_mootor.ui.image.scss */
 .moo-ui-image-panel {
   background-color: #FFF;
   -webkit-border-radius: 6px;
@@ -1112,13 +1112,13 @@ a:focus {
   width: 100%;
   z-index: 1000;
 }
-/* line 43, ../_source/css/sass/_mootor.ui.image.scss */
+/* line 42, ../_source/css/sass/_mootor.ui.image.scss */
 .moo-ui-image-panel .moo-image-wrapper {
   display: inline;
   float: left;
   margin: 0.5em;
 }
-/* line 44, ../_source/css/sass/_mootor.ui.image.scss */
+/* line 43, ../_source/css/sass/_mootor.ui.image.scss */
 .moo-ui-image-panel .moo-image {
   line-height: 1px;
   text-align: center;
@@ -1129,7 +1129,7 @@ a:focus {
   width: 105px;
   height: 105px;
 }
-/* line 53, ../_source/css/sass/_mootor.ui.image.scss */
+/* line 52, ../_source/css/sass/_mootor.ui.image.scss */
 .moo-ui-image-panel .moo-image.moo-active {
   border: 2px solid #000;
 }
