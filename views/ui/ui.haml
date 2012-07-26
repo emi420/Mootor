@@ -1,17 +1,15 @@
 %form.moo-ui-form{:action=>"", :method=>"post"}
     .moo-field
         %label Switch
-        .moo-ui-switch#moo-ui-switch-1
-            %input{:type=>"checkbox", :name=>"switch1" ,:value=>"1"}  
+        %input#moo-ui-switch-1{:type=>"checkbox", :name=>"switch1" ,:value=>"1"}  
+
     .moo-field
-        %label Text
-        .moo-ui-text#moo-ui-text-1
-            %input{:type=>"text", :name=>"text1" ,:placeholder=>"Ingrese su texto aqui"}
+        %label Text        
+        %input#moo-ui-text-1{:type=>"text", :name=>"text1" ,:placeholder=>"Ingrese su texto aqui"}
        
     .moo-field
         %label TextArea
-        .moo-ui-textarea
-            %textarea#moo-ui-textarea-1{:name=>"textarea1" ,:placeholder=>"Ingrese su texto aqui"}
+        %textarea#moo-ui-textarea-1{:name=>"textarea1" ,:placeholder=>"Ingrese su texto aqui"}
 
     .moo-field
         %label Select
@@ -49,14 +47,13 @@
         %legend 
             Checkbox
         %fieldset#moo-ui-checkbox-1
-            .moo-ui-checkbox
-                %label{:for=>"check1"} Option 1
-                %input#check1{:type=>"checkbox", :name=>"checkboxes" ,:value=>"0"}
-            .moo-ui-checkbox
-                %label{:for=>"check2"} Option 2
-                %input#check2{:type=>"checkbox", :name=>"checkboxes" ,:value=>"1"}
-            .moo-ui-checkbox
-                %label{:for=>"check3"} Option 3
-                %input#check3{:type=>"checkbox", :name=>"checkboxes" ,:value=>"2"}
+            %label{:for=>"check1"} Option 1                
+            %input#check1{:type=>"checkbox", :name=>"checkboxes" ,:value=>"0"}
+
+            %label{:for=>"check2"} Option 2
+            %input#check2{:type=>"checkbox", :name=>"checkboxes" ,:value=>"1"}
+
+            %label{:for=>"check3"} Option 3
+            %input#check3{:type=>"checkbox", :name=>"checkboxes" ,:value=>"2"}
                             
     
