@@ -284,6 +284,7 @@
     $.extend({
     
         initAnchorBack: function(self, navInstance) {
+            
             var $anchorBack =
                 navInstance._config.anchorBack =
                 $($(self.el).find(".moo-nav-back")[0]);
