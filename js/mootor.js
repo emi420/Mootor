@@ -141,10 +141,14 @@ var $ = (function () {
          *      console.log("Touch start!")
          * }); 
          */
-        bind: function (event, callback) {
+        on: function(event, callback) {
             this.el.addEventListener(event, callback, false);
             return this;
         },
+        // Deprecated method
+        bind: function (event, callback) {
+            this.on(event,callback);
+        },        
 
         /**
          * Unbind event listener
@@ -353,19 +357,15 @@ var $ = (function () {
          * require Include scripts
          */
         require: function(script, callback) {
-          $.ajax({
-                url: script,
-                callback: function(response) {
-                   var script = document.createElement("script");
-                   script.innerHTML = response;
-                   document.head.appendChild(script);
-                   if (typeof callback === "function") {
-                        callback();
-                   }
-                }
-          });
+              // FIXME CHECK
+              if (scripts.isIncluded(script) === false) {
+                  scripts.include(script, callback);
+              } else {
+                 if (typeof callback === "function") {
+                     callback();
+                 }
+              }
         }
-
 
     }, $);
 
@@ -448,6 +448,47 @@ var $ = (function () {
         });       
 
 	}, document);
+	
+    /**
+     * Hide all content while document is not ready
+     */
+    var _hideContentWhileDocumentNotReady = function() {
+    	$.view.hide();
+    	$(document).ready(function() {
+    		$.view.show();
+    	});
+    },
+    
+    scripts = {
+        isIncluded: function(script) {
+            var i;
+            for (i = scripts.list.length; i--;) {
+                if (scripts.list[i] === script) {
+                    return true;
+                }
+            }
+            return false;
+        },
+        
+        include: function(script, callback) {
+            scripts.list.push(script);
+            $.ajax({
+                  url: script,
+                  callback: function(response) {
+                     var script = document.createElement("script");
+                     script.innerHTML = response;
+                     document.head.appendChild(script);
+                     if (typeof callback === "function") {
+                          callback();
+                     }
+                  }
+            });              
+        },
+        
+        list: []
+    }
+
+    _hideContentWhileDocumentNotReady();
 
 	return $;
 

@@ -3,16 +3,14 @@
     %title Mootor demo
     %meta{:name=>"viewport", :content=>"width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"}
     %link{:href=>"css/styles.css", :media=>"screen",  :rel=>"stylesheet"}
-    %script{:src=>"phonegap/cordova-1.9.0.js", :type=>"text/javascript"}
     %script{:src=>"js/mootor.js",:type=>"text/javascript"}
-    %script{:src=>"js/plugins/nav.js",:type=>"text/javascript"}
-    %script{:src=>"js/plugins/app.js",:type=>"text/javascript"}
     %script{:src=>"js/plugins/ui.js",:type=>"text/javascript"}
-
+    %script{:src=>"phonegap/cordova-1.9.0.js",:type=>"text/javascript"}
+    
 %body.main
 
-    %header#header.moo-header
-        %h1 Mootor demo (phonegap)
+    %header#moo-header.moo-header
+        %h1 Mootor
         %nav
             %a.moo-nav-back{:href=>"", :rel=>"back"} Back
 
@@ -21,67 +19,45 @@
             %nav
                 %a.moo-nav{:href=>"", :rel=>"nav"} Nav
                 %a.moo-nav{:href=>"", :rel=>"ui"} UI
-                %a.moo-nav{:href=>"", :rel=>"geolocalization"} Geolocalization
                 %a.moo-nav{:href=>"", :rel=>"picture"} Picture
                     
         .moo-panel#ui
         .moo-panel#nav
         .moo-panel#item1
-        .moo-panel#item2
-        
-        .moo-panel#geolocalization
-            %h2 Geolocalization
-            %h3 This module is not activated. See $.geolocation
- 
+        .moo-panel#item2        
         .moo-panel#picture
-            %h2 Picture
-            %input#openPicture{:type=>"button", :value=>"Open..."}
-            %img#myImage
+
 
 :javascript    
 
        $(document).ready(function(){
        
            "use strict";
+           
+           $.require("js/plugins/nav.js", function() {
        
-           // Navigation panels
-           var myNav = $("#panels").nav(),
-       
-           // Application
-           myApp = $.app({
-               views: [
-                    "ui",
-                    "nav",
-                    "item1",
-                    "item2"
-               ],
-               nav: myNav
-           });
+               // Navigation panels
+               var myNav = $("#panels").nav();
            
-           // Preload a view           
-           myApp.load(myApp.views[0], myNav.get("ui"));
-           
-           
-           // Testing Camera
-           
-           $("#openPicture").onTapEnd(function() {
-                navigator.camera.getPicture(
-                    onSuccess,
-                    onFail, 
-                    { 
-                        quality: 50, 
-                        destinationType: Camera.DestinationType.FILE_URI,
-                        // sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM
-                    }
-                ); 
-           }); 
-           
-           var onSuccess = function(imageURI) {
-                $("#myImage").el.src = imageURI;
-           },
-            
-           onFail = function(message) {
-                alert('Failed because: ' + message);
-           }
-                                  
+               // Application
+               $.require("js/plugins/app.js", function() {
+               
+                   var myApp = $.app({
+                       views: [
+                            "ui",
+                            "nav",
+                            "item1",
+                            "item2",
+                            "picture"
+                       ],
+                       nav: myNav
+                   });
+                   
+                   myApp.load( myApp.views[0], {
+                       nav: myNav.get("ui")
+                   });
+                                      
+               });
+                   
+          });
        });
