@@ -1,7 +1,7 @@
 $.require("js/plugins/ui.js", function() {
     
     // Switch
-    $("#moo-ui-switch-1").ui({
+    var mySwitch = $("#moo-ui-switch-1").ui({
         type: "Switch"
     });
     
@@ -19,12 +19,7 @@ $.require("js/plugins/ui.js", function() {
     $("#moo-ui-select-1").ui({
         type: "Select",
     });
-    
-    // Multiple select
-    $("#moo-ui-select-multiple-1").ui({
-        type: "SelectMultiple",
-    });
-    
+        
     // Radio
     $("#moo-ui-radio-1").ui({
         type: "Radio",

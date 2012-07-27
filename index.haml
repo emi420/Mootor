@@ -19,7 +19,7 @@
             %nav
                 %a.moo-nav{:href=>"", :rel=>"nav"} Nav
                 %a.moo-nav{:href=>"", :rel=>"ui"} UI
-                %a.moo-nav{:href=>"", :rel=>"geolocalization"} Geolocalization
+                %a.moo-nav{:href=>"", :rel=>"gestures"} Gestures
                 %a.moo-nav{:href=>"", :rel=>"data"} Data
                 %a.moo-nav{:href=>"", :rel=>"graph"} Graph
                 %a.moo-nav{:href=>"", :rel=>"carousel"} Carousel
@@ -27,11 +27,8 @@
         .moo-panel#ui
         .moo-panel#nav
         .moo-panel#item1
-        .moo-panel#item2
-        
-        .moo-panel#geolocalization
-            %h2 Geolocalization
-            %h3 This module is not activated. See $.geolocation
+        .moo-panel#item2        
+        .moo-panel#gestures
 
         .moo-panel#data
             %h2 Data
@@ -52,20 +49,21 @@
            "use strict";
        
            // Navigation panels
-           var myNav = $("#panels").nav(),
+           window.myNav = $("#panels").nav();
        
            // Application
-           myApp = $.app({
+           var myApp = $.app({
                views: [
                     "ui",
                     "nav",
                     "item1",
-                    "item2"
+                    "item2",
+                    "gestures"
                ],
                nav: myNav
            });
            
            // Preload a view
-           // myApp.load(myApp.views[0], myNav.get("ui"));           
+           myApp.load(myApp.views[0], myNav.get("ui"));           
                                   
        });

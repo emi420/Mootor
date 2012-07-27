@@ -515,9 +515,9 @@
          */
         preventNativeScrolling: function() {
         	$(document).ready(function() {
-            	$(document.body).bind("touchmove", function(gesture) {
-                    gesture.preventDefault();
-                    gesture.stopPropagation();
+            	$(document.body).bind("touchmove", function(event) {
+                    event.preventDefault();
+                    event.stopPropagation();
             	});	
         	});
         },
