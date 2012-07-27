@@ -25,7 +25,7 @@
         .moo-button {
             @include background-image(linear-gradient(top, #fff, #dedede));
             border: 1px solid #666;
-            border-radius: 0.45em;
+            border-radius: 0.5em;
             display: block;
             position: relative;
             width: 2em;
@@ -44,7 +44,7 @@
             width: 4.25em;
             position: absolute;
             top: -0.1em;
-            left: -4.15em;
+            left: -4.05em;
             z-index: -1;
         }
         .moo-after {

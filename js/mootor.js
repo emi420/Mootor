@@ -709,19 +709,14 @@ if (!window.$ || typeof ($) !== "function") {
                 date = new Date(),
                 clientX,
                 clientY;
-            
-            if (e.clientX || e.clientY) {
-                // Mouse
-                clientX = e.clientX;
-                clientY = e.clientY;
-            } else {
-                // Touch
-                // FIXME CHECK
-                try {
-                    clientX = e.touches[0].clientX;
-                    clientY = e.touches[0].clientY;
-                } catch (error) {}
-            }
+        
+            // Touch
+            // FIXME CHECK
+            try {
+                clientX = e.touches[0].clientX;
+                clientY = e.touches[0].clientY;
+            } catch (error) {}
+
 
             // TapStart
             if (e.type === "touchstart") {
@@ -730,6 +725,7 @@ if (!window.$ || typeof ($) !== "function") {
 
                 gesture.event.time = date.getTime();
                 gesture.event.isDraggingY = 0;
+                gesture.event.isDraggingX = 0;
                 gesture.event.mousedown = true;
                 gesture.event.tapped = false;
                 gesture.event.startX = clientX;
@@ -751,27 +747,45 @@ if (!window.$ || typeof ($) !== "function") {
             }
 
             if (e.type === "touchmove") {
-            
+                        
                 info.lastY = gesture.event.y;
                 info.lastX = gesture.event.x;
                 gesture.event.y = info.y = clientY;
                 gesture.event.x = info.x = clientX;
                 info.distanceFromOriginY = clientY - gesture.event.startY;
                 info.distanceFromOriginX = clientX - gesture.event.startX;
+                info.isDraggingY = info.isDraggingY ? info.isDraggingY : 0;
+                info.isDraggingX = info.isDraggingX ? info.isDraggingX : 0;
 
-                if (gesture.event.isDraggingY === 0) {
+                if ((clientY - gesture.event.startY) > 10) {
+                    info.isDraggingY = gesture.event.isDraggingY = 1;
+                } else if ((clientY - gesture.event.startY) < -10) {
+                    info.isDraggingY = gesture.event.isDraggingY = -1;
+                } else if (clientX - gesture.event.startX > 10) {
+                    info.isDraggingX = gesture.event.isDraggingX = 1;
+                } else if ((clientX - gesture.event.startX) < -10) {
+                    info.isDraggingX = gesture.event.isDraggingX = -1;
+                }
+
+
+                if (gesture.event.isDraggingY === 0 && gesture.event.isDraggingX === 0) {
                     // DragStart
                     if ((clientY - gesture.event.startY) > 10) {
-                        gesture.event.isDraggingY = 1;
                         info.type = "dragStart";
                         _fire(info, gesture.event.onDragStart);
                     } else if ((clientY - gesture.event.startY) < -10) {
-                        gesture.event.isDraggingY = -1;
                         info.type = "dragStart";
                         _fire(info, gesture.event.onDragStart);
+                    } else if (clientX - gesture.event.startX > 10) {
+                        info.type = "dragStart";
+                        _fire(info, gesture.event.onDragStart);
+                    } else if ((clientX - gesture.event.startX) < -10) {
+                        info.type = "dragStart";
+                        _fire(info, gesture.event.onDragStart);                    
                     }
                 } else {
                     // DragMove
+                    info.isDraggingX = gesture.event.isDraggingX;
                     info.type = "dragMove";
                     _fire(info, gesture.event.onDragMove);
                 }
@@ -789,9 +803,15 @@ if (!window.$ || typeof ($) !== "function") {
                 if (gesture.event.isDraggingY !== 0) {
                     // DragEnd
                     info.type = "dragEnd";
-                    gesture.event.isDraggingY = 0;
+                    info.isDraggingY = gesture.event.isDraggingY = 0;
                     _fire(info, gesture.event.onDragEnd);
 
+                } else if (gesture.event.isDraggingX !== 0) {
+                    // DragEnd
+                    info.type = "dragEnd";
+                    info.isDraggingX = gesture.event.isDraggingX = 0;
+                    _fire(info, gesture.event.onDragEnd);
+                
                 } else if (info.time !== undefined) {
                     // TapEnd
                     info.type = "tapEnd";
