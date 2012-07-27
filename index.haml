@@ -7,6 +7,8 @@
     %script{:src=>"js/plugins/nav.js",:type=>"text/javascript"}
     %script{:src=>"js/plugins/app.js",:type=>"text/javascript"}
     %script{:src=>"js/plugins/ui.js",:type=>"text/javascript"}
+    %script{:src=>"phonegap/cordova-1.9.0.js",:type=>"text/javascript"}
+
 %body.main
 
     %header#moo-header.moo-header
@@ -20,27 +22,14 @@
                 %a.moo-nav{:href=>"", :rel=>"nav"} Nav
                 %a.moo-nav{:href=>"", :rel=>"ui"} UI
                 %a.moo-nav{:href=>"", :rel=>"gestures"} Gestures
-                %a.moo-nav{:href=>"", :rel=>"data"} Data
-                %a.moo-nav{:href=>"", :rel=>"graph"} Graph
-                %a.moo-nav{:href=>"", :rel=>"carousel"} Carousel
+                %a.moo-nav{:href=>"", :rel=>"camera"} Camera
                      
         .moo-panel#ui
         .moo-panel#nav
         .moo-panel#item1
         .moo-panel#item2        
         .moo-panel#gestures
-
-        .moo-panel#data
-            %h2 Data
-            %h3 This module is not implemented yet.
-
-        .moo-panel#graph
-            %h2 Graph
-            %h3 This module is not implemented yet.
- 
-        .moo-panel#carousel
-            %h2 Carousel
-            %h3 This module is not implemented yet.
+        .moo-panel#camera
 
 :javascript    
 
@@ -58,7 +47,8 @@
                     "nav",
                     "item1",
                     "item2",
-                    "gestures"
+                    "gestures",
+                    "camera"
                ],
                nav: myNav
            });
