@@ -8,7 +8,7 @@
     %script{:src=>"js/plugins/app.js",:type=>"text/javascript"}
 %body.main
 
-    %header#header.moo-header
+    %header#moo-header.moo-header
         %h1 Mootor demo
         %nav
             %a.moo-nav-back{:href=>"", :rel=>"back"} Back
@@ -23,7 +23,7 @@
                 %a.moo-nav{:href=>"", :rel=>"graph"} Graph
                 %a.moo-nav{:href=>"", :rel=>"carousel"} Carousel
                 %a.moo-nav{:href=>"", :rel=>"image"} Image modal
-                    
+
         .moo-panel#ui
         .moo-panel#nav
         .moo-panel#item1
@@ -49,24 +49,41 @@
             .moo-overlay
             .moo-ui-image-container
                 %header
-                    %a.moo-ui-add{ :rel=>""} New
-                    %a.moo-ui-delete{ :rel=>""} Delete
+                    %a.moo-ui-add-new{:rel=>""} Take a picture
+                    %a.moo-ui-add-filed{:rel=>""} Choose a picture
+                    %a.moo-ui-delete{:rel=>""} Delete selected
                 .moo-ui-image-panel
-                    .moo-image-wrapper
-                        .moo-image
-                            %img{ :src=>"img/tmp/sample1.jpg", :alt=>"image 1"}
-                    .moo-image-wrapper
-                        .moo-image
-                            %img{ :src=>"img/tmp/sample2.jpg", :alt=>"image 2"}
-                    .moo-image-wrapper
-                        .moo-image.moo-active
-                            %img{ :src=>"img/tmp/sample3.jpg", :alt=>"image 3"}
-                    .moo-image-wrapper
-                        .moo-image
-                            %img{ :src=>"img/tmp/sample4.jpg", :alt=>"image 4"}
-                    .moo-image-wrapper
-                        .moo-image
-                            %img{ :src=>"img/tmp/sample5.jpg", :alt=>"image 5"}
+                    %ul.moo-image-list
+                        %li.moo-image-wrapper
+                            .moo-image
+                                %img{ :src=>"img/tmp/sample1.jpg", :alt=>"image 1"}
+                        %li.moo-image-wrapper
+                            .moo-image
+                                %img{ :src=>"img/tmp/sample2.jpg", :alt=>"image 2"}
+                        %li.moo-image-wrapper
+                            .moo-image.moo-active
+                                %img{ :src=>"img/tmp/sample3.jpg", :alt=>"image 3"}
+                        %li.moo-image-wrapper
+                            .moo-image
+                                %img{ :src=>"img/tmp/sample4.jpg", :alt=>"image 4"}
+                        %li.moo-image-wrapper
+                            .moo-image
+                                %img{ :src=>"img/tmp/sample5.jpg", :alt=>"image 5"}
+                        %li.moo-image-wrapper
+                            .moo-image
+                                %img{ :src=>"img/tmp/sample1.jpg", :alt=>"image 1"}
+                        %li.moo-image-wrapper
+                            .moo-image
+                                %img{ :src=>"img/tmp/sample2.jpg", :alt=>"image 2"}
+                        %li.moo-image-wrapper
+                            .moo-image.moo-active
+                                %img{ :src=>"img/tmp/sample3.jpg", :alt=>"image 3"}
+                        %li.moo-image-wrapper
+                            .moo-image
+                                %img{ :src=>"img/tmp/sample4.jpg", :alt=>"image 4"}
+                        %li.moo-image-wrapper
+                            .moo-image
+                                %img{ :src=>"img/tmp/sample5.jpg", :alt=>"image 5"}
 :javascript    
 
        $(document).ready(function(){

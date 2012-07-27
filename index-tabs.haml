@@ -8,7 +8,7 @@
     %script{:src=>"js/plugins/app.js",:type=>"text/javascript"}
 %body.main
 
-    %header#header.moo-header
+    %header#moo-header.moo-header
         %h1 Mootor demo
         %nav
             %a.moo-nav-back{:href=>"", :rel=>"back"} Back
@@ -18,53 +18,50 @@
             %nav
                 %a.moo-nav{:href=>"", :rel=>"nav"} Nav
                 %a.moo-nav{:href=>"", :rel=>"ui"} UI
-                %a.moo-nav{:href=>"", :rel=>"geolocalization"} Geolocalization
-                %a.moo-nav{:href=>"", :rel=>"data"} Data
-                %a.moo-nav{:href=>"", :rel=>"graph"} Graph
-                %a.moo-nav{:href=>"", :rel=>"carousel"} Carousel
-                %a.moo-nav{:href=>"", :rel=>"image"} Image modal
+                %a.moo-nav{:href=>"", :rel=>"tabs"} Tabs nav
                     
         .moo-panel#ui
         .moo-panel#nav
-        .moo-panel#item1
-        .moo-panel#item2
-        
-        .moo-panel#geolocalization
-            %h2 Geolocalization
-            %h3 This module is not activated. See $.geolocation
-
-        .moo-panel#data
-            %h2 Data
-            %h3 This module is not implemented yet.
-
-        .moo-panel#graph
-            %h2 Graph
-            %h3 This module is not implemented yet.
- 
-        .moo-panel#carousel
-            %h2 Carousel
-            %h3 This module is not implemented yet.
         
         .moo-panel#tabs
             .moo-nav-tabs-container
-                .moo-nav-tabs-header
-                    %ul
-                        %li.moo-tab-1.moo-active
-                            %a{:rel=>""} Tab 1
-                        %li.moo-tab-2
-                            %a{:rel=>""} Tab 2
-                        %li.moo-tab-3
-                            %a{:rel=>""} Tab 3
+                %nav.moo-nav-tabs-header
+                    %a.moo-tab.moo-active{:rel=>""}
+                        Tab 1
+                    %a.moo-tab{:rel=>""} 
+                        Tab 2
+                    %a.moo-tab{:rel=>""} 
+                        Tab 3
                 .moo-nav-tabs-content
-                    .moo-tab-content-1
+                    .moo-tab-content.moo-active
                         %p This is some random content paragraph for the first tab.
-                    .moo-tab-content-2
+                        .moo-sample-icon
+                            .moo-ui-badge
+                                2
+                        .moo-sample-icon
+                            .moo-ui-badge
+                                22
+                        .moo-sample-icon
+                            .moo-ui-badge
+                                522
+                        .moo-sample-icon.medium
+                            .moo-ui-badge
+                                22
+                        .moo-sample-icon.medium
+                            .moo-ui-badge
+                                2
+                        .moo-sample-icon.small
+                            .moo-ui-badge
+                                22
+                        .moo-sample-icon.small
+                            .moo-ui-badge
+                                2
+                    .moo-tab-content
                         %p This is the second tab, and it's content it is also a paragraph.
-                    .moo-tab-content-3
+                    .moo-tab-content
                         %p This is the third tab.
             
 :javascript    
-
        $(document).ready(function(){
        
            "use strict";
@@ -85,5 +82,5 @@
            
            // Preload a view
            myApp.load(myApp.views[0], myNav.get("ui"));           
-                                  
+           
        });

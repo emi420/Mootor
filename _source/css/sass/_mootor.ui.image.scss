@@ -26,7 +26,7 @@
             @include border-radius(3px);
             display: inline-block;
             float: right;
-            margin: 0 2px;
+            margin: 2px;
             padding: 2px 4px;
             
         }
@@ -38,6 +38,8 @@
     overflow: hidden;
     position: relative;
     width: 100%;
+    height: auto;
+    max-height: 232px;
     z-index: 1000;
     .moo-image-wrapper { @include float-left; margin: 0.5em;}
     .moo-image {

@@ -4,3 +4,33 @@
 * -----------------------------------------------------------------------------------------
 */
 
+.moo-nav-tabs-container {
+    padding: 2em 0;
+}
+
+.moo-nav-tabs-header {
+    height: 5em;
+    .moo-tab {
+        color: #999;
+        background: #DDD;
+        border: 1px solid #DDD;
+        @include border-radius(5px 5px 0 0 );
+        display: inline-block;
+        padding: 0.2em 1em;
+        height: 100%;
+        &.moo-active {
+            color: #333;
+            background-color: #FFF;
+            border-color: #999 #999 #FFF #999; 
+            height: 104%;
+        }
+    }
+}
+
+.moo-tab-content {
+    display: none;
+    background-color: #FFF;
+    border-top: 1px solid #999;
+    overflow: hidden;
+    &.moo-active { display: block;}
+}

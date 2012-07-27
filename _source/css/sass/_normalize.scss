@@ -182,10 +182,18 @@ input[type="submit"] {
 }
 
 /*
-* Removes webkit border on input and textarea when the element is on focus
+* Removes webkit border when the element is on focus
 */
-textarea:focus,
-input:focus { 
+
+a,
+a:hover,
+a:focus,
+input,
+input:focus,
+select,
+select:focus,
+textarea,
+textarea:focus { 
     outline: none;
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0); 
 }
