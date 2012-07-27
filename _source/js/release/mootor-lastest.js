@@ -695,7 +695,39 @@ if (!window.$ || typeof ($) !== "function") {
                 type: "onDragEnd"
             });
         },
-
+        
+        /*
+         *  Swipe
+         */
+        onSwipeLeft: function (callback) {
+            _addGesture({
+                fn: this,
+                callback: callback,
+                type: "onSwipeLeft"
+            });
+        },
+        onSwipeRight: function (callback) {
+            _addGesture({
+                fn: this,
+                callback: callback,
+                type: "onSwipeRight"
+            });
+        },
+        onSwipeUp: function (callback) {
+            _addGesture({
+                fn: this,
+                callback: callback,
+                type: "onSwipeUp"
+            });
+        },
+        onSwipeDown: function (callback) {
+            _addGesture({
+                fn: this,
+                callback: callback,
+                type: "onSwipeDown"
+            });
+        },
+                
         // Handler to detect gestures and _fire callbacks        
         handleEvent: function (event) {
             this._handleEvent(event);
@@ -711,14 +743,11 @@ if (!window.$ || typeof ($) !== "function") {
                 clientY;
         
             // Touch
-            // FIXME CHECK
             try {
                 clientX = e.touches[0].clientX;
                 clientY = e.touches[0].clientY;
             } catch (error) {}
 
-
-            // TapStart
             if (e.type === "touchstart") {
 
                 this.bind("touchmove", this);
@@ -730,6 +759,7 @@ if (!window.$ || typeof ($) !== "function") {
                 gesture.event.tapped = false;
                 gesture.event.startX = clientX;
                 gesture.event.startY = clientY;
+                gesture.event.swipe = 0;
 
                 window.setTimeout(function () {
                     // TapHold
@@ -754,38 +784,42 @@ if (!window.$ || typeof ($) !== "function") {
                 gesture.event.x = info.x = clientX;
                 info.distanceFromOriginY = clientY - gesture.event.startY;
                 info.distanceFromOriginX = clientX - gesture.event.startX;
-                info.isDraggingY = info.isDraggingY ? info.isDraggingY : 0;
-                info.isDraggingX = info.isDraggingX ? info.isDraggingX : 0;
 
-                if ((clientY - gesture.event.startY) > 10) {
-                    info.isDraggingY = gesture.event.isDraggingY = 1;
-                } else if ((clientY - gesture.event.startY) < -10) {
-                    info.isDraggingY = gesture.event.isDraggingY = -1;
-                } else if (clientX - gesture.event.startX > 10) {
-                    info.isDraggingX = gesture.event.isDraggingX = 1;
-                } else if ((clientX - gesture.event.startX) < -10) {
-                    info.isDraggingX = gesture.event.isDraggingX = -1;
-                }
+                gesture.event.isDraggingY = gesture.event.isDraggingY ?
+                                            gesture.event.isDraggingY : 0;
+                                            
+                gesture.event.isDraggingX = gesture.event.isDraggingX ?
+                                            gesture.event.isDraggingX : 0;
 
-
-                if (gesture.event.isDraggingY === 0 && gesture.event.isDraggingX === 0) {
-                    // DragStart
-                    if ((clientY - gesture.event.startY) > 10) {
+                if (gesture.event.isDraggingY === 0 
+                    && gesture.event.isDraggingX === 0) 
+                {
+                
+                    if (info.distanceFromOriginX > 10) {
+                        gesture.event.isDraggingX = 1;
                         info.type = "dragStart";
-                        _fire(info, gesture.event.onDragStart);
-                    } else if ((clientY - gesture.event.startY) < -10) {
-                        info.type = "dragStart";
-                        _fire(info, gesture.event.onDragStart);
-                    } else if (clientX - gesture.event.startX > 10) {
-                        info.type = "dragStart";
-                        _fire(info, gesture.event.onDragStart);
-                    } else if ((clientX - gesture.event.startX) < -10) {
-                        info.type = "dragStart";
-                        _fire(info, gesture.event.onDragStart);                    
                     }
+                    if (info.distanceFromOriginX < -10) {
+                        info.type = "dragStart";
+                        gesture.event.isDraggingX = -1;
+                    }
+
+                    if (info.distanceFromOriginY > 10) {
+                        gesture.event.isDraggingY = 1;
+                        info.type = "dragStart";
+                    }
+                    if (info.distanceFromOriginY < -10) {
+                        info.type = "dragStart";
+                        gesture.event.isDraggingY = -1;
+                    }
+
+                    // DragStart   
+                    if (info.type === "dragStart") {                 
+                        _fire(info, gesture.event.onDragStart);
+                    }
+                                        
                 } else {
                     // DragMove
-                    info.isDraggingX = gesture.event.isDraggingX;
                     info.type = "dragMove";
                     _fire(info, gesture.event.onDragMove);
                 }
@@ -800,21 +834,41 @@ if (!window.$ || typeof ($) !== "function") {
                     gesture.event.mousedown = false;
                 }
 
-                if (gesture.event.isDraggingY !== 0) {
-                    // DragEnd
-                    info.type = "dragEnd";
-                    info.isDraggingY = gesture.event.isDraggingY = 0;
-                    _fire(info, gesture.event.onDragEnd);
+                if ((gesture.event.isDraggingY !== 0 || 
+                    gesture.event.isDraggingX !== 0)) {
 
-                } else if (gesture.event.isDraggingX !== 0) {
+                    // Swipe
+                    if (gesture.event.swipe === 0) {
+                        if (gesture.event.isDraggingX === 1) {
+                            gesture.event.swipe = gesture.event.isDraggingX;
+                            _fire(info, gesture.event.onSwipeRight);
+                        }
+                        if (gesture.event.isDraggingX === -1) {
+                            gesture.event.swipe = gesture.event.isDraggingX;
+                            _fire(info, gesture.event.onSwipeLeft);
+                        }
+                        if (gesture.event.isDraggingY === 1) {
+                            gesture.event.swipe = gesture.event.isDraggingY;
+                            _fire(info, gesture.event.onSwipeDown);
+                        }
+                        if (gesture.event.isDraggingY === -1) {
+                            gesture.event.swipe = gesture.event.isDraggingY;
+                            _fire(info, gesture.event.onSwipeUp);
+                        }
+                    }
+                    
                     // DragEnd
                     info.type = "dragEnd";
+                                        
+                    info.isDraggingY = gesture.event.isDraggingY = 0;
                     info.isDraggingX = gesture.event.isDraggingX = 0;
                     _fire(info, gesture.event.onDragEnd);
                 
                 } else if (info.time !== undefined) {
+
                     // TapEnd
                     info.type = "tapEnd";
+                    info.e.stopPropagation();
                     _fire(info, gesture.event.onTapEnd);
                 }
 

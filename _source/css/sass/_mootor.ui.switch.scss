@@ -3,7 +3,6 @@
 
 .moo-ui-switch {
     @include background-image(linear-gradient(top, #ddd, #fff 45%));
-    //@include background-image(linear-gradient(top, #888, #bbb 65%));
     border: 1px solid #666;
     border-radius: 0.5em;
     @include float-right;
@@ -20,8 +19,8 @@
         position: relative;
         height: auto;
         width: auto;
-        -webkit-transition-duration: .25s;
-        -webkit-transform: translate3d(3.85em, 0, 0);
+        -webkit-transform: translate3d(0, 0, 0);
+        //-webkit-transform: translate3d(3.85em, 0, 0);
         .moo-button {
             @include background-image(linear-gradient(top, #fff, #dedede));
             border: 1px solid #666;
@@ -61,10 +60,21 @@
             width: 4.15em;
         }
     }
+    &.moo-on,
+    &.moo-off {
+        b {
+            -webkit-transition-duration: .25s;    
+        }
+    }
+    
     &.moo-off{
-       // @include background-image(linear-gradient(top, #ddd, #fff 45%));
         b {
             -webkit-transform: translate3d(-0.15em, 0, 0);
+        }
+    }
+    &.moo-on{
+        b {
+            -webkit-transform: translate3d(3.85em, 0, 0);
         }
     }
 
