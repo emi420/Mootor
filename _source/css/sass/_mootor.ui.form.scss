@@ -60,8 +60,7 @@
     height: 3em;
     z-index: 300;
     .moo-ui-select-text {
-        font-size: 1.5em;
-        line-height: 1.5em;
+        line-height: 2em;
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
@@ -71,7 +70,6 @@
     }
     .moo-ui-select-link {
         color: #000;
-        font-size: 1.25em;
         line-height: 2.25em;
         text-align: right;
         text-decoration: none;
@@ -91,10 +89,10 @@
             content: " "; 
             display: block;
             position: absolute;
-            top: -0.25em;
-            right: -0.25em;
-            width: 2.25em;
-            height: 2.25em;
+            top: -0.35em;
+            right: -0.35em;
+            width: 2.75em;
+            height: 2.8em;
             z-index: -1;
         }
     }
