@@ -25,7 +25,7 @@ The key features are:
 
 ## Demo
 
-http://voolks.com/mootor
+http://www.voolks.com/mootor
 
 # Useful info
 
@@ -60,12 +60,4 @@ Please use GitHub to report any bugs found.
 
 You may use any Mootor project under the terms of either the MIT License or the GNU General Public License (GPL) Version 3.
 
-(c) 2012 Emilio Mariscal (emi420 [at] voolks.com)
-
-# Hablas español?
-
-Mootor también! y estaríamos encantados de sumar colaboradores en nuestro idioma nativo.
-
-Para más información podés escribir a emi420 [at] voolks.com o solicitar un Pull Request.
-
-Adios amigos!
+(c) 2012 Emilio Mariscal

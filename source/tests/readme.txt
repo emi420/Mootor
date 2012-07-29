@@ -1,0 +1,1 @@
+To run this tests, first download and install Jasmine BDD Framework
