@@ -1,8 +1,9 @@
 (function($) {
     
     // Switch
-    var mySwitch = $("#moo-ui-switch-1").ui({
-        type: "Switch"
+    $("#moo-ui-switch-1").ui({
+        type: "Switch",
+        value: 0
     });
     
     // Text
