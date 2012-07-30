@@ -5,12 +5,7 @@
         /** @lends $.prototype */
         
         /**
-         * Translate element, using GPU acceleration when available
-         * @param {object} positions Axis positions
-         * @param {object} options Options
-         * @config {number} transitionDuration Duration of transition (in seconds)
-         * @config {number} positions.x X position
-         * @config {number} positions.y Y position
+         * Legacy translateFx Mootor Fx function
          */
         translateFx: function (positions, options) {
     
@@ -36,6 +31,17 @@
                 window.setTimeout(options.callback, tduration * 1000);
             }
     
+        },
+
+        /**
+         * Translate element, using GPU acceleration when available
+         * @param {object} options Options
+         * @config {number} transitionDuration Duration of transition (in seconds)
+         * @config {number} x X position
+         * @config {number} y Y position
+         */
+        translate: function (options) {
+            this.translateFx({x: options.x, y: options.y},options)
         },
     
         /**

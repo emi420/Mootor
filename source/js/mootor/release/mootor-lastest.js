@@ -907,6 +907,13 @@ if (!window.$ || typeof ($) !== "function") {
             }
     
         },
+
+        /**
+         * TranslateFx shortcut
+         */
+        translate: function (options) {
+            this.translateFx({x: options.x, y: options.y},options)
+        },
     
         /**
          * Clean element transform styles

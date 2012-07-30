@@ -100,12 +100,12 @@
                        
           // Template
           $.ajax({
-                url: this.path + "views/" + view.id + "/" + view.id + ".html",
+                url: this.path + "/" + view.id + "/" + view.id + ".html",
                 callback: callback
           });
           
           // Controller
-          $.require(this.path + "views/" + view.id + "/" + view.id + ".js");
+          $.require(this.path + "/" + view.id + "/" + view.id + ".js");
         }
     };
       
@@ -117,7 +117,11 @@
     $.extend({
         init: function(options, self) {
             var i,
-                view;
+                moduleNamePosition,
+                href = window.location.href,
+                view,
+                viewId,
+                initView;
                 
             self.views = [];
             
@@ -135,7 +139,15 @@
                         nav: options.nav
                     }, self);
                 }
-            }    
+            }
+            
+            // Load view by URL, example: /myapp/#myPanel2
+            if ((moduleNamePosition = href.lastIndexOf("#")) > -1) {
+                viewId = href.substring(moduleNamePosition, href.length).replace("#","");
+                if (viewId !== undefined) {
+                    options.nav.set(viewId);
+                }               
+            }
                     
         }
     }, App);

@@ -35,7 +35,6 @@ Currently compatibility is only WebKit based browsers, ex: iOS, Android (we're w
 
 We are in a development stage, THIS SOFTWARE IS ONLY FOR TESTING.
 
-
 # How can I make changes in the source code and compile it?
 
 You will need the following tools:

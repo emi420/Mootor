@@ -13,7 +13,7 @@ var Radio = function(options) {
     this._makeHTML();
     
     this.mooItems = $(this.el).find(".moo-ui-radio");        
-
+    
     for (i = this.mooItems.length; i--;) {
         $(this.mooItems[i]).onTapEnd(function(gesture) {
             self.activate($(gesture.e.target));
