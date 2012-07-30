@@ -1,19 +1,25 @@
-//-- App styles
+//! mootor.css - Basic styling for Mootor, a Html5 Javascript for application developement. - (c) 2012 Natalia Petit (natalia.petit@voolks.com)
 
-// Imports
 
+// Compass Imports
 @import "compass/css3";
 @import "compass/utilities";
 
+// cross-browser normalization
 @import "../../_source/css/sass/_normalize.scss";
 
+// Basic Mootor imports
 @import "text";
 @import "colors";
 @import "../../_source/css/sass/_mootor.nav.scss";
 @import "../../_source/css/sass/_mootor.ui.scss";
 
+
 @import "sprites";
 @import "sprites-demo";
+
+
+
 // Navigation
 
 .moo-panel {

@@ -1,35 +1,34 @@
 
-/*
-* Loading animation 
-* -----------------------------------------------------------------------------------------
-*/
+// Loading animation 
+// -----------------------------------------------------------------------------------
 
-/*
-* Editable styles
-* Change this styles to position/resize the element as needed.
-* 1. base (darkest) color. The gradient palette derives from this color.
-* 2. Position of the center point of the animation. 
-     Place wherever is needed, by default is in the center of its parent container.
-* 3. The overall size of the loading is relative to this value.
-* 4. Animation speed
-*/
 
-$background-color: #000;  /*1*/
+// Editable styles
+// -----------------------------------------------------------
+// Change this styles to position/resize the element as needed.
+// 1. base (darkest) color. The gradient palette derives from this color.
+// 2. Position of the center point of the animation. 
+//    Place wherever is needed, by default is in the center of its parent container.
+// 3. The overall size of the loading is relative to this value.
+// 4. Animation speed
+
+$loading-background-color: #000;  // 1
 .moo-ui-loading {
-    position: absolute;/*2*/
-    top: 50%;/*2*/
-    left: 50%;/*2*/
-    font-size: 1em; /*3*/
-    -webkit-animation-duration:1.5s;/*4*/
+    position: absolute; // 2
+    top: 50%; // 2
+    left: 50%; // 2
+    font-size: 1em; // 2
+    -webkit-animation-duration:1.5s; // 2
 }
 
-/*
-* Base styles
-*/
+
+// Base
+// -------------------------------------------------------
+// These are the basic styles of the elements that create the animation.
 
 .moo-ui-loading {
-    width: 0;
     height: 0;
+    width: 0;
     z-index: 550;
     -webkit-animation-name: rotateThis;
     -webkit-animation-duration:0.5s;
@@ -47,39 +46,40 @@ $background-color: #000;  /*1*/
         left: -0.5em;
     }
     .moo-loading-01 {
+       background-color: lighten($loading-background-color, 100%);
        -webkit-transform: rotate(-90deg) translate(0, -3em);
-       background-color: lighten($background-color, 100%);
     }
     .moo-loading-02 {
+        background-color: lighten($loading-background-color, 87.5%);
         -webkit-transform: rotate(-45deg) translate(0, -3em);
-         background-color: lighten($background-color, 87.5%);
     }
     .moo-loading-03 {
+        background-color: lighten($loading-background-color, 75%);
         -webkit-transform: rotate(0deg) translate(0, -3em);
-         background-color: lighten($background-color, 75%);
     }
     .moo-loading-04 {
+        background-color: lighten($loading-background-color, 62.5%);
         -webkit-transform: rotate(45deg) translate(0, -3em);
-         background-color: lighten($background-color, 62.5%);
     }
     .moo-loading-05 {
+        background-color: lighten($loading-background-color, 50%);
         -webkit-transform: rotate(90deg) translate(0, -3em);
-         background-color: lighten($background-color, 50%);
     }
     .moo-loading-06 {
+        background-color: lighten($loading-background-color, 37.5%);
         -webkit-transform: rotate(135deg) translate(0, -3em);
-         background-color: lighten($background-color, 37.5%);
     }
     .moo-loading-07 {
+        background-color: lighten($loading-background-color, 25%);
         -webkit-transform: rotate(180deg) translate(0, -3em);
-         background-color: lighten($background-color, 25%);
     }
     .moo-loading-08 {
+        background-color: lighten($loading-background-color, 12.5%);
         -webkit-transform: rotate(-135deg) translate(0, -3em);
-         background-color: lighten($background-color, 12.5%);
     } 
 }
 
+// Animation -------------------------------------
 @-webkit-keyframes rotateThis {
   from {-webkit-transform:  rotate(0deg);}
   to {-webkit-transform: rotate(360deg);}

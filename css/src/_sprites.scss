@@ -1,0 +1,48 @@
+@import "compass/utilities/sprites/base";
+
+// General Sprite Defaults
+// You can override them before you import this file.
+$emblem-sprite-base-class: ".moo-icons" !default;
+$emblem-sprite-dimensions: false !default;
+$emblem-position: 0% !default;
+$emblem-spacing: 20px !default;
+$emblem-repeat: no-repeat !default;
+
+$emblem-sprites: sprite-map("ui/icons/*.png",
+  $position: $emblem-position,
+  $spacing: $emblem-spacing,
+  $repeat: $emblem-repeat);
+
+// All sprites should extend this class
+// The emblem-sprite mixin will do so for you.
+#{$emblem-sprite-base-class} {
+  background-image: $emblem-sprites;
+  background-repeat: no-repeat;
+}
+
+// Use this to set the dimensions of an element
+// based on the size of the original image.
+@mixin emblem-sprite-dimensions($name) {
+  @include sprite-dimensions($emblem-sprites, $name)
+}
+
+// Move the background position to display the sprite.
+@mixin emblem-sprite-position($name, $offset-x: 0, $offset-y: 0) {
+  @include sprite-position($emblem-sprites, $name, $offset-x, $offset-y)
+}
+
+// Extends the sprite base class and set the background position for the desired sprite.
+// It will also apply the image dimensions if $dimensions is true.
+@mixin emblem-sprite($name, $dimensions: $emblem-sprite-dimensions, $offset-x: 0, $offset-y: 0) {
+  @extend #{$emblem-sprite-base-class};
+  @include sprite($emblem-sprites, $name, $dimensions, $offset-x, $offset-y)
+}
+
+@mixin emblem-sprites($sprite-names, $dimensions: $emblem-sprite-dimensions, $prefix: sprite-map-name($emblem-sprites)) {
+  @include sprites($emblem-sprites, $sprite-names, $emblem-sprite-base-class, $dimensions, $prefix)
+}
+
+// Generates a class for each sprited image.
+@mixin all-emblem-sprites($dimensions: $emblem-sprite-dimensions, $prefix: sprite-map-name($emblem-sprites)) {
+  @include emblem-sprites(favorite important photos readonly symbolic-link system unreadable, $dimensions, $prefix);
+}
