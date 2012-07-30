@@ -4,7 +4,7 @@
     
     var sourceType,
   
-    picture = function(sourceType) {
+    camera = function(sourceType) {
         var source;
         if (sourceType === "album") {
             source = Camera.PictureSourceType.SAVEDPHOTOALBUM
@@ -29,11 +29,11 @@
     };
 
     $("#takePicture").onTapEnd(function(gesture) {
-        picture();
+        camera();
     });
         
     $("#choosePicture").onTapEnd(function(gesture) {
-        picture("album");
+        camera("album");
     });
 
 

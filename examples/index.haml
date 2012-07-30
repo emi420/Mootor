@@ -10,25 +10,25 @@
 
 %body.main
 
-    %header#moo-header
+    %header
         %h1 Mootor demo
         %nav
-            %a.moo-nav-back{:href=>"#moo-nav-back", :rel=>"back"} Back
+            %a.moo-nav-back{:href=>"#moo-nav-back"} Back
 
     #main
-        .moo-panel#home
+        #home.moo-panel
             %nav
-                %a.moo-nav{:href=>"#nav", :rel=>"nav"} Nav
-                %a.moo-nav{:href=>"#ui", :rel=>"ui"} UI
-                %a.moo-nav{:href=>"#gestures", :rel=>"gestures"} Gestures
-                %a.moo-nav{:href=>"#camera", :rel=>"camera"} Camera
+                %a.moo-nav{:href=>"#nav"} Nav
+                %a.moo-nav{:href=>"#ui"} UI
+                %a.moo-nav{:href=>"#gestures"} Gestures
+                %a.moo-nav{:href=>"#camera"} Camera
                      
-        .moo-panel#nav
-        .moo-panel#item1
-        .moo-panel#item2        
-        .moo-panel#ui
-        .moo-panel#gestures
-        .moo-panel#camera
+        #nav.moo-panel
+        #item1.moo-panel
+        #item2.moo-panel       
+        #ui.moo-panel
+        #gestures.moo-panel
+        #camera.moo-panel
 
 :javascript    
         

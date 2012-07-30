@@ -6,7 +6,7 @@
 var Header = function(self) {
 
     // Cache element
-    this.el = $("#moo-header").el;
+    this.el = $("header")[0];
     
     if (this.el !== null) {
         
@@ -29,6 +29,12 @@ var Header = function(self) {
     }
     
 };
+
+Header.prototype = {
+    setTitle: function(title) {
+        $(this.el).find("h1")[0].innerText = title;
+    }
+}
 
 /**
  * Header

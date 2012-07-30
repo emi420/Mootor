@@ -156,14 +156,14 @@ Nav.prototype = {
  */     
 $.extend({
     
-        getLinks: function(self) {
+        getLinks: function(self, navInstance) {
             var links,
                 i,
                 navigationItems = [];
                        
-            links = $(self.el).find("a");
+            links = $(self.el).find("." + navInstance._config.navClass);
             for (i = 0; i < links.length; i++) {
-                if (links[i].rel !== "") {
+                if (links[i].getAttribute("href").replace("#","") !== "") {
                     navigationItems.push(links[i])
                 }
             }
@@ -185,7 +185,7 @@ $.extend({
             // If not doing a transition 
             if (navInstance._config.isMoving === false) {                
                 // Set & load navigation Item
-                navInstance.set(gesture.el.rel);
+                navInstance.set(gesture.el.getAttribute("href").replace("#",""));
             }
         },
         
@@ -195,7 +195,7 @@ $.extend({
                 i;
                 
             // Get navigation links
-            self.navigationItems = Item.getLinks(self);            
+            self.navigationItems = Item.getLinks(self, navInstance);            
             self.navigationItemsCount = self.navigationItems.length;
             
             // Setup navigation links            
@@ -210,7 +210,7 @@ $.extend({
 
                 // Internal navigation links    
                 } else {
-                    if (navigationItem.rel !== "") {
+                    if (navigationItem.getAttribute("href").replace("#","") !== "") {
 
                         $(navigationItem).onTapStart(
                             function(gesture) {
@@ -488,7 +488,7 @@ Nav.preventNativeScrolling();
 var Header = function(self) {
 
     // Cache element
-    this.el = $("#moo-header").el;
+    this.el = $("header")[0];
     
     if (this.el !== null) {
         
@@ -511,6 +511,12 @@ var Header = function(self) {
     }
     
 };
+
+Header.prototype = {
+    setTitle: function(title) {
+        $(this.el).find("h1")[0].innerText = title;
+    }
+}
 
 /**
  * Header
@@ -609,7 +615,9 @@ $.extend({
            
             callback = function () {
                 $(back.el).hide();
-                navInstance._config.isMoving = false;
+                
+                navInstance._config.isMoving = false;                
+                navInstance.header.setTitle(panel.id);
 
                 for (i = hiddenContent.length; i--;) {
                     $(hiddenContent[i]).el.style.opacity = "1";
