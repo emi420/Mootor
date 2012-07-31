@@ -6,14 +6,14 @@
 @import "compass/utilities";
 
 // cross-browser normalization
-@import "../../_source/css/sass/_normalize.scss";
+@import "normalize";
 
 // Basic Mootor imports
 @import "text";
 @import "colors";
-@import "../../_source/css/sass/_mootor.nav.scss";
-@import "../../_source/css/sass/_mootor.ui.scss";
 
+@import "mootor.nav";
+@import "mootor.ui";
 
 @import "sprites";
 @import "sprites-demo";
