@@ -62,12 +62,11 @@
         // Load a view
         load: function(view, options) {
         
-          var callback = function() {},
-              viewPath = "";
+          var callback = function() {};
           
           if (options.callback !== undefined) {
-              callback = options.callback; 
-
+              callback = options.callback;
+ 
           } else {
  
               callback = function(response) {
@@ -75,12 +74,15 @@
                   if (view.cached !== true) {
                       view.cached = true;
     
-                      // Load view into element
-
-                      if (options.el !== undefined) {           
-                          $(options.el).html(response);          
-                      } else {                             
-                          $(view.el).html(response);        
+                      if (options.el !== undefined) {
+           
+                          // Load view into element
+                          $(options.el).html(response);
+          
+                      } else {
+                             
+                          $(view.el).html(response);
+        
                       }
     
                   }
@@ -95,17 +97,15 @@
               }
 
           }
-          
-          viewPath = this.path + "/" + view.id + "/" + view.id
                        
           // Template
           $.ajax({
-                url: viewPath + ".html",
+                url: this.path + "/" + view.id + "/" + view.id + ".html",
                 callback: callback
           });
           
           // Controller
-          $.require(viewPath + ".js");
+          $.require(this.path + "/" + view.id + "/" + view.id + ".js");
         }
     };
       
@@ -115,31 +115,22 @@
      * App
      */     
     $.extend({
-        _collection: [],
-        
         init: function(options, self) {
             var i,
                 moduleNamePosition,
                 href = window.location.href,
                 view,
                 viewId,
-                initView,
-                appId;
+                initView;
                 
-                
-            if (options.id !== undefined) {
-                self.id = options.id;
-            }
-                            
-            // Initialize path
+            self.views = [];
+            
             if (options.path !== undefined) {
                 self.path = options.path;
             } else {
                 self.path = "";
             }
                 
-            // Create views
-            self.views = [];
             if (options.views !== undefined) {
                 for (i = 0; i < options.views.length; i++) {
                     view = new View({
@@ -150,9 +141,6 @@
                 }
             }
             
-            // Add to internal apps collection
-            App._collection.push(self);
-            
             // Load view by URL, example: /myapp/#myPanel2
             if ((moduleNamePosition = href.lastIndexOf("#")) > -1) {
                 viewId = href.substring(moduleNamePosition, href.length).replace("#","");
@@ -161,14 +149,7 @@
                 }               
             }
                     
-        },
-        
-        get: function(id) {
-            return App._collection.map(function(x) {
-                if(x.id === id) { return x }
-            })[0];
         }
-        
     }, App);
     
     // Public constructors
@@ -186,11 +167,5 @@
             }
         }
     }, $);
-    
-    $.extend({
-        app: function(id) {
-            return App.get(this.query);
-        }
-    });
 
 }(Mootor));

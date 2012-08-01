@@ -7,7 +7,7 @@
  * (c) 2012 Emilio Mariscal (emi420 [at] gmail.com)
  *
  */
- 
+
 (function (document) {
 
 "use strict";
@@ -95,7 +95,6 @@ var $ = (function () {
                         query.replace(".", "")
                     );
                 } else {
-                    // TODO: filter valid tags
                     el = context.getElementsByTagName(query);
                 }
                 for(i = 0; i < el.length; i++) {
