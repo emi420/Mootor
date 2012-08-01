@@ -81,6 +81,7 @@ var $ = (function () {
                         query.replace(".", "")
                     );
                 } else {
+                    // TODO: filter valid tags
                     el = context.getElementsByTagName(query);
                 }
                 for(i = 0; i < el.length; i++) {

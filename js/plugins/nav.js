@@ -59,7 +59,7 @@ Item = function(options) {
  * Nav
  */  
 Nav.prototype = {
-    
+        
         /**
          * set Set current navigation item
          * @param {string} id Navigation item id
@@ -145,8 +145,8 @@ Nav.prototype = {
          */
         handleGesture: function (gesture) {
             Nav.handleGesture(gesture, this);
-        },        
-
+        },       
+        
     };
 
 // Private static methods
@@ -215,12 +215,14 @@ $.extend({
                         $(navigationItem).onTapStart(
                             function(gesture) {
                                 $(gesture.el).setClass("active");
-                        });                        
+                            }
+                        );                        
 
                         $(navigationItem).onTapEnd(
                             function(gesture) {                                
                                 Item.loadNavigationItem(gesture, self, navInstance);
-                        });
+                            }
+                        );
 
                     }                    
                 }
@@ -236,6 +238,8 @@ $.extend({
  */    
 $.extend({
     
+        _collection: [],
+
         /**
          * Initialize Nav instance
          */
@@ -340,7 +344,10 @@ $.extend({
             self.current = 0;
             
             // Navigation index (array of items indexes)
-            self.history = [];                       
+            self.history = [];           
+            
+            Nav._collection.push(self);
+            self.id = options.id ? options.id : options._query;
       
         },    
         
@@ -455,6 +462,11 @@ $.extend({
         	});
         },
         
+        get: function(id) {
+            return Nav._collection.map(function(x) {
+                if (x.id === id) { return x }
+            })[0];
+        }
             
     }, Nav);
 
@@ -462,15 +474,24 @@ $.extend({
 
 $.extend({
     nav: function (options) {
+            var nav;
             if (typeof options !== "object") {
                 options = {};
             }
             options.el = this.el;
+            options._query = this.query;
             
-            switch (options.type) {
-                default:
-                    return new Nav(options);                
+            nav = Nav.get(this.query);
+            
+            if(nav === undefined) {
+                switch (options.type) {
+                    default:
+                        return new Nav(options);
+                }                
+            } else {
+                return nav;
             }
+            
         },
 });
 
@@ -479,6 +500,8 @@ $.extend({
  */
 Nav.preventNativeScrolling();
 
+
+// #include "nav.js"
 
 /**
  * Header
@@ -497,7 +520,10 @@ var Header = function(self) {
         $(this.el).setClass(self._config.headerClassName);
 
         // Initialize back button
-        Header.initAnchorBack(this, self);            
+        Header.initAnchorBack(this, self);           
+        
+        // Initialize nav links
+        Header.initNavigationLinks(this, self); 
         
         // Prevent native scrolling
         Header.preventNativeScrolling(this)
@@ -544,9 +570,22 @@ $.extend({
         $(self.el).onDragMove(function(gesture) {
             gesture.e.preventDefault();
         });
+    },
+    
+    initNavigationLinks: function(self, navInstance) {
+        var navigationItems = $(self.el).find(".moo-nav"),
+            i;
+        
+        for (i = navigationItems.length; i--;) {
+            $(navigationItems[i]).onTapEnd(function(gesture) {
+                Item.loadNavigationItem(gesture, self, navInstance);                    
+            })
+        }
     }
 
 }, Header);
+// #include "nav.js"
+
 /**
  * Footer
  * @param {object} self Nav instance
@@ -558,6 +597,8 @@ var Footer = function(self) {
 };
 
 
+
+// #include "nav.js"
 
 var Panel = function(){},
 
@@ -617,7 +658,6 @@ $.extend({
                 $(back.el).hide();
                 
                 navInstance._config.isMoving = false;                
-                navInstance.header.setTitle(panel.id);
 
                 for (i = hiddenContent.length; i--;) {
                     $(hiddenContent[i]).el.style.opacity = "1";

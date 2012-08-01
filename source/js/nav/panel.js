@@ -1,3 +1,5 @@
+// #include "nav.js"
+
 var Panel = function(){},
 
 /**
@@ -56,7 +58,6 @@ $.extend({
                 $(back.el).hide();
                 
                 navInstance._config.isMoving = false;                
-                navInstance.header.setTitle(panel.id);
 
                 for (i = hiddenContent.length; i--;) {
                     $(hiddenContent[i]).el.style.opacity = "1";

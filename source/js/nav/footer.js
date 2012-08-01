@@ -1,3 +1,5 @@
+// #include "nav.js"
+
 /**
  * Footer
  * @param {object} self Nav instance

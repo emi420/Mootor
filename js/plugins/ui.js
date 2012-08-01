@@ -305,7 +305,7 @@ $.extend({
         var type = options.type,
             object = options.object,
             el = document.createElement("div");
-        el.innerHTML = templates[type];
+        el.innerHTML = _templates[type];
         object.el = el.firstChild;
         $(object.el).setClass("moo-hidden");
         $(document.body).el.appendChild(object.el);
@@ -337,10 +337,6 @@ var Switch = function(options) {
     return this;
 };
 
-
-/*
-* Switch prototype
-*/   
 Switch.prototype = {
 
     _makeHTML: function() {
@@ -557,7 +553,7 @@ var Radio = function(options) {
     this._makeHTML();
     
     this.mooItems = $(this.el).find(".moo-ui-radio");        
-
+    
     for (i = this.mooItems.length; i--;) {
         $(this.mooItems[i]).onTapEnd(function(gesture) {
             self.activate($(gesture.e.target));
@@ -729,8 +725,10 @@ var Text = function(options) {
     var self = this;
                 
     this.el = this.input = options.el;                               
-    if (options.value) {
+    if (options.value !== undefined) {
         this.value = options.value;
+    } else {
+        this.value = "";
     }
 
     this._makeHTML();

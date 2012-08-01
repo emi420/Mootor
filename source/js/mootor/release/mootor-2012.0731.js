@@ -7,7 +7,7 @@
  * (c) 2012 Emilio Mariscal (emi420 [at] gmail.com)
  *
  */
- 
+
 (function (document) {
 
 "use strict";

@@ -1,3 +1,5 @@
+// #include "nav.js"
+
 /**
  * Header
  * @param {object} self Nav instance
@@ -15,7 +17,10 @@ var Header = function(self) {
         $(this.el).setClass(self._config.headerClassName);
 
         // Initialize back button
-        Header.initAnchorBack(this, self);            
+        Header.initAnchorBack(this, self);           
+        
+        // Initialize nav links
+        Header.initNavigationLinks(this, self); 
         
         // Prevent native scrolling
         Header.preventNativeScrolling(this)
@@ -62,6 +67,17 @@ $.extend({
         $(self.el).onDragMove(function(gesture) {
             gesture.e.preventDefault();
         });
+    },
+    
+    initNavigationLinks: function(self, navInstance) {
+        var navigationItems = $(self.el).find(".moo-nav"),
+            i;
+        
+        for (i = navigationItems.length; i--;) {
+            $(navigationItems[i]).onTapEnd(function(gesture) {
+                Item.loadNavigationItem(gesture, self, navInstance);                    
+            })
+        }
     }
 
 }, Header);

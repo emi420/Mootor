@@ -81,7 +81,7 @@ $.extend({
         var type = options.type,
             object = options.object,
             el = document.createElement("div");
-        el.innerHTML = templates[type];
+        el.innerHTML = _templates[type];
         object.el = el.firstChild;
         $(object.el).setClass("moo-hidden");
         $(document.body).el.appendChild(object.el);

@@ -8,8 +8,10 @@ var Text = function(options) {
     var self = this;
                 
     this.el = this.input = options.el;                               
-    if (options.value) {
+    if (options.value !== undefined) {
         this.value = options.value;
+    } else {
+        this.value = "";
     }
 
     this._makeHTML();
