@@ -3,7 +3,8 @@
 
 $base-font: Helvetica, Arial, sans-serif; 
 $readable-font: 'Palatino Linotype', 'Book Antiqua', Palatino, 'Droid Serif', serif;
-$base-font-size: 62.5%;
+
+$base-font-size: 0.65em;
 
 /* ==========================================================================
 Typography 
@@ -65,3 +66,57 @@ small {
     font-size: 75%;
 }
 
+// Responsive Media queries 
+
+// 320px a 480px
+@media only screen  
+and (max-width: 479px) {
+    body { font-size: 0.5em}
+    @media (orientation: portrait) {}
+}
+
+// 480px a 600px
+@media only screen 
+and (min-width: 480px) 
+and (max-width: 599px) {
+    body { font-size: 0.65em}
+    @media (orientation: landscape) {
+        body { font-size: 0.5em }
+    }
+}
+
+// 600px a 767px
+@media only screen 
+and (min-width: 600px) 
+and (max-width: 767px) {
+    body { font-size: 0.75em}
+    @media (orientation: landscape) { 
+        body { font-size: 0.65em}
+    }
+}
+
+
+// 768px a 960px
+@media only screen 
+and (min-width: 768px)  {
+    body { font-size: 0.85em}
+    @media (orientation: landscape) {
+        body { font-size: 0.75em}
+    }
+}
+
+
+// 992px
+@media only screen and (min-width: 992px) {
+    body { font-size: 1em}
+}
+
+
+
+// 2x (devices with higher pixel ratios)
+@media
+only screen and (-webkit-min-device-pixel-ratio: 1.5),
+only screen and (min--moz-device-pixel-ratio: 1.5),
+only screen and (min-device-pixel-ratio: 1.5) {
+
+}

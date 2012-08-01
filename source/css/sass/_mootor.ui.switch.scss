@@ -11,25 +11,24 @@
     width: 9em;
     height: 2.8em;
     b {
-        font-size: 1.5em;
+        //font-size: 1.5em;
         font-weight: 700;
-        line-height: 150%;
+        line-height: 2.8em;
         text-align: center;
         display: block;
         position: relative;
         height: auto;
         width: auto;
         -webkit-transform: translate3d(0, 0, 0);
-        //-webkit-transform: translate3d(3.85em, 0, 0);
+        //-webkit-transform: translate3d(6.9em, 0, 0);
         .moo-button {
             @include background-image(linear-gradient(top, #fff, #dedede));
             border: 1px solid #666;
             border-radius: 0.5em;
             display: block;
             position: relative;
-            width: 2em;
-            width: 2em;
-            height: 2em;
+            width: 3em;
+            height: 2.8em;
             top: -0.2em;
         }
         .moo-before { 
@@ -37,14 +36,16 @@
             border-radius: 0.35em 0 0 0.35em;
             background-color: rgba(66,66,66,.5);
             color: #FFF;
+            //font-size: 1.5em;
             font-weight: 700;
-            line-height: 175%;
+            //line-height: 1.8em;
             display: block;
-            width: 4.25em;
+            width: 6.55em;
             position: absolute;
             top: -0.1em;
-            left: -4.05em;
+            left: -6.1em;
             z-index: -1;
+            &::first-letter { font-size: 1.5em;}
         }
         .moo-after {
             //content: "O";
@@ -52,12 +53,14 @@
             border-radius: 0 0.35em 0.35em 0;
             color: #333;
             display: block;
-            line-height: 175%;
+            //font-size: 1.5em;
+            //line-height: 1.8em;
             position: absolute;
             right: -0.3em;
             top: 0;
-            height: 100%;
-            width: 4.15em;
+            height: 2.8em;
+            width: 6.15em;
+            &::first-letter { font-size: 1.5em;}
         }
     }
     &.moo-on,
@@ -74,7 +77,7 @@
     }
     &.moo-on{
         b {
-            -webkit-transform: translate3d(3.85em, 0, 0);
+            -webkit-transform: translate3d(5.85em, 0, 0);
         }
     }
 
