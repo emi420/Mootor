@@ -1,17 +1,15 @@
-/* ==========================================================================
-   CSS Normalization, based on
-   normalize.css 2012-07-07T09:50 UTC - http://github.com/necolas/normalize.css 
-   ========================================================================== */
+// =============================================================================
+//   CSS Normalization, based on
+//   normalize.css 2012-07-07T09:50 UTC - http://github.com/necolas/normalize.css 
+// =============================================================================
 
    
-/* ==========================================================================
-   HTML5 display definitions
-   ========================================================================== */
+// =============================================================================
+// HTML5 display definitions
+// ============================================================================= 
 
-/*
-* Corrects `block` display not defined in Android 2.1, iOS 3.2 and Opera Mini.
-*/
-
+// Corrects `block` display not defined in Android 2.1, iOS 3.2 and Opera Mini.
+//
 article,
 aside,
 details,
@@ -26,20 +24,22 @@ summary {
     display: block;
 }
    
-/* =============================================================================
-   Base
-   ========================================================================== */
    
-/* 
- * Apply a natural box layout model to all elements 
- * (padding is calculated inside the box, not changing the width/height set on the element)
- */
-@mixin borderBox { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
-* { @include borderBox; }
+// =============================================================================
+// Base
+// =============================================================================
+   
+// Apply a natural box layout model to all elements 
+// (padding is calculated inside the box, not changing the width/height set on the element)
+//
+* { 
+    -moz-box-sizing: border-box; 
+    -webkit-box-sizing: border-box; 
+    box-sizing: border-box;
+}
 
-/*
- * Addresses margins/padding handled incorrectly 
- */
+// Addresses margins/padding handled incorrectly 
+//
 html,
 body {
     margin: 0;
@@ -47,11 +47,9 @@ body {
     border: 0;
 }
 
-/*
-* Addresses `font-family` inconsistency between `textarea` and other form
-* elements.
-*/
-
+// Addresses `font-family` inconsistency between `textarea` and other form
+// elements.
+//
 html,
 button,
 input,
@@ -60,15 +58,14 @@ textarea {
     font-family: sans-serif;
 }
 
-/* =============================================================================
-   Typography
-   ========================================================================== */
 
-/*
-* Prevents `sub` and `sup` affecting `line-height` in all browsers.
-* gist.github.com/413930
-*/
+// =============================================================================
+// Typography
+// =============================================================================
 
+// Prevents `sub` and `sup` affecting `line-height` in all browsers.
+// gist.github.com/413930
+//
 sub,
 sup {
     font-size: 75%;
@@ -86,22 +83,19 @@ sub {
 }
 
 
-/* ==========================================================================
-   Lists
-   ========================================================================== */
+// =============================================================================
+// Lists
+// =============================================================================
 
-/*
-*   Removes default style 
-*/
+// Removes default style 
+//
 ol,
 ul { 
     list-style: none; 
 }
 
-/*
-* Removes default margin
-*/
-
+// Removes default margin
+//
 dd,
 dl,
 menu,
@@ -110,24 +104,21 @@ ul {
     margin: 0;
 }
 
-/*
-* Addresses paddings.
-*/
-
+// Addresses paddings.
+//
 menu,
 ol,
 ul {
     padding: 0;
 }
 
-/* =============================================================================
-   Forms
-   ========================================================================== */
 
-/*
- * Define consistent margin and padding
- */
+// =============================================================================
+// Forms
+// =============================================================================
 
+// Define consistent margin and padding
+//
 form {
     margin: 0;
 }
@@ -138,124 +129,98 @@ fieldset {
 }
 
 
-/*
- * 1. Improves usability and consistency of cursor style between image-type 'input' and others
- * 2. Corrects inability to style clickable 'input' types in iOS
- */
-
+// 1. Improves usability and consistency of cursor style between image-type 'input' and others
+// 2. Corrects inability to style clickable 'input' types in iOS
+//
 button,
 input[type="button"],
 input[type="reset"],
 input[type="submit"] {
-    cursor: pointer; /* 1 */
-    -webkit-appearance: button; /* 2 */
+    cursor: pointer; // 1 
+    -webkit-appearance: button; // 2 
 }
 
-/*
-* 1. Corrects font size not being inherited in all browsers.
-* 2. Addresses margins set differently in IE6/7, FF3+, S5, Chrome.
-* 3. Improves appearance and consistency in all browsers.
-*/
-
+// 1. Corrects font size not being inherited in all browsers.
+// 2. Addresses margins set differently in IE6/7, FF3+, S5, Chrome.
+// 3. Improves appearance and consistency in all browsers.
+//
 button,
 input,
 select,
 textarea {
-    font-size: 100%; /* 1 */
-    margin: 0; /* 2 */
-    vertical-align: baseline; /* 3 */
+    font-size: 100%; // 1
+    margin: 0; // 2
+    vertical-align: baseline; // 3
 }
 
-
-/*
-* 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
-* and `video` controls.
-* 2. Corrects inability to style clickable `input` types in iOS.
-* 3. Improves usability and consistency of cursor style between image-type
-* `input` and others.
-*/
-
+// 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+// and `video` controls.
+// 2. Corrects inability to style clickable `input` types in iOS.
+// 3. Improves usability and consistency of cursor style between image-type
+// `input` and others.
+//
 button,
-html input[type="button"], /* 1 */
+html input[type="button"], // 1
 input[type="reset"],
 input[type="submit"] {
-    -webkit-appearance: button; /* 2 */
-    cursor: pointer; /* 3 */
+    -webkit-appearance: button; // 2 
+    cursor: pointer; // 3
 }
 
-/*
-* Removes webkit border when the element is on focus
-*/
-
-a,
-a:hover,
-a:focus,
-input,
-input:focus,
-select,
-select:focus,
-textarea,
-textarea:focus { 
+// Removes webkit border when the element is on focus
+//
+a, a:hover, a:focus,
+input, input:focus,
+select, select:focus,
+textarea, textarea:focus { 
     outline: none;
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0); 
 }
 
-
-/*
-* Re-set default cursor for disabled elements.
-*/
-
+// Re-set default cursor for disabled elements.
+//
 button[disabled],
 input[disabled] {
     cursor: default;
 }
 
-/*
- * Removes inner padding and search cancel button in S5, Chrome on OS X
- */
-
+// Removes inner padding and search cancel button in S5, Chrome on OS X
+//
 input[type="search"]::-webkit-search-decoration,
 input[type="search"]::-webkit-search-cancel-button {
     -webkit-appearance: none;
 }
 
-/*
-* 1. Addresses `appearance` set to `searchfield` in S5, Chrome.
-* 2. Addresses `box-sizing` set to `border-box` in S5, Chrome.
-*/
-
+// 1. Addresses `appearance` set to `searchfield` in S5, Chrome.
+// 2. Addresses `box-sizing` set to `border-box` in S5, Chrome.
+//
 input[type="search"] {
-    -webkit-appearance: textfield; /* 1 */
-    -webkit-box-sizing: content-box; /* 2 */
+    -webkit-appearance: textfield; // 1
+    -webkit-box-sizing: content-box; // 2
     box-sizing: content-box;
 }
 
-/*
-* Removes inner padding and search cancel button in S5, Chrome on OS X.
-*/
-
+// Removes inner padding and search cancel button in S5, Chrome on OS X.
+//
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-decoration {
     -webkit-appearance: none;
 }
 
 
-/*
-* Improves readability and alignment in all browsers.
-*/
+// Improves readability and alignment in all browsers.
+//
 textarea {
     vertical-align: top; 
 }
 
 
-/* =============================================================================
-   Tables
-   ========================================================================== */
+// =============================================================================
+// Tables
+// =============================================================================
 
-/*
-* Remove most spacing between table cells.
-*/
-
+// Remove most spacing between table cells.
+//
 table {
     border-collapse: collapse;
     border-spacing: 0;

@@ -3,11 +3,11 @@
 // variables 
 
 #sprites {
-    .arrow { @include emblem-sprite(arrow); }
-    .bell {  @include emblem-sprite(bell); }
-    .burst {  @include emblem-sprite(burst); }
-    .cancel {  @include emblem-sprite(cancel); }
-    .checkbox {  @include emblem-sprite(checkbox); }
-    .grid {  @include emblem-sprite(grid); }
-    .close {  @include emblem-sprite(close); }
+    .arrow { @include mootor-sprite(arrow); }
+    .bell {  @include mootor-sprite(bell); }
+    .burst {  @include mootor-sprite(burst); }
+    .cancel {  @include mootor-sprite(cancel); }
+    .checkbox {  @include mootor-sprite(checkbox); }
+    .grid {  @include mootor-sprite(grid); }
+    .close {  @include mootor-sprite(close); }
 }

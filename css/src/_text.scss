@@ -6,14 +6,13 @@ $readable-font: 'Palatino Linotype', 'Book Antiqua', Palatino, 'Droid Serif', se
 
 $base-font-size: 0.65em;
 
-/* ==========================================================================
-Typography 
-(from normalize.css 2012-07-07T09:50 UTC - http://github.com/necolas/normalize.css )
-========================================================================== */
+// ============================================================================
+// Typography 
+// (from normalize.css 2012-07-07T09:50 UTC - http://github.com/necolas/normalize.css )
+// ============================================================================
 
-/*
-* Addresses font sizes and margins set differently.
-*/
+
+// Addresses font sizes and margins set differently.
 
 body { 
    font-family: $base-font; 
@@ -67,6 +66,7 @@ small {
 
 
 // Responsive Media queries 
+// --------------------------------------------------------------------------------------------
 
 // 320px a 480px
 @media only screen  
@@ -110,7 +110,6 @@ and (min-width: 768px)  {
 @media only screen and (min-width: 992px) {
     body { font-size: 1em}
 }
-
 
 
 // 2x (devices with higher pixel ratios)
