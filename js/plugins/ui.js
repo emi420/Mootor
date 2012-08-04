@@ -26,7 +26,7 @@ var _templates = {
     
     text: '<span class="cleanbox">&times</span>',
     
-    select: '<div class="moo-ui-select-container moo-top"><span class="moo-ui-select-text"></span><span class="mo-ui-select-link"> &#9660;</span><div class="moo-ui-select-menu" style="height:217px;display:none"><div class="moo-ui-select-wrapper"><ul class="moo-ui-select-list" moo-template="foreach: option"><li moo-template="text: this.text"></li></ul></div></div>'
+    select: '<div class="moo-ui-select-container"><span class="moo-ui-select-text"></span><span class="mo-ui-select-link"> &#9660;</span><div class="moo-ui-select-menu" style="height:217px;display:none"><div class="moo-ui-select-wrapper"><ul class="moo-ui-select-list" moo-template="foreach: option"><li moo-template="text: this.text"></li></ul></div></div>'
 
 },
 
@@ -624,6 +624,7 @@ var Select = function(options) {
         
     this.y = 0;
     this.input = options.el;        
+    this.position = options.position;
     $(this.input).hide();
     this._makeHTML();       
     this._setTouchEvents();               
@@ -656,8 +657,16 @@ Select.prototype = {
             template: template,
             self: this
         });            
+               
+        if (this.position == "top") {
+            $(this.el).setClass("moo-top");
+        } else if (this.position == "bottom") {
+            $(this.el).setClass("moo-bottom");            
+        }
+                      
         this.input.parentElement.appendChild(this.el);                        
         this.ul = $(this.el).find("ul")[0];
+        
         this.box = $(this.el).find(".moo-ui-select-menu")[0];
         this.textspan = $(this.el).find(".moo-ui-select-text")[0];            
     },
@@ -725,6 +734,7 @@ var Text = function(options) {
     var self = this;
                 
     this.el = this.input = options.el;                               
+    
     if (options.value !== undefined) {
         this.value = options.value;
     } else {
@@ -775,6 +785,7 @@ Text.prototype = {
     
     clean: function() {
         this.input.value = "";
+        this.input.focus();
     },
     
     on: function(event, callback) {

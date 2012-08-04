@@ -349,6 +349,7 @@ var $ = (function () {
 			
 			// FIXME CHECK: xmlhttp.status==0 for WebView Ajax
             xmlhttp.onreadystatechange = function() {
+                // FIXME CHECK: status==0 on iOS?
                 if (xmlhttp.readyState==4 && (xmlhttp.status==200 || xmlhttp.status==0)) {
                     options.callback(xmlhttp.responseText);
                 }

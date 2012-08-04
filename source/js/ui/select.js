@@ -12,6 +12,7 @@ var Select = function(options) {
         
     this.y = 0;
     this.input = options.el;        
+    this.position = options.position;
     $(this.input).hide();
     this._makeHTML();       
     this._setTouchEvents();               
@@ -44,8 +45,16 @@ Select.prototype = {
             template: template,
             self: this
         });            
+               
+        if (this.position == "top") {
+            $(this.el).setClass("moo-top");
+        } else if (this.position == "bottom") {
+            $(this.el).setClass("moo-bottom");            
+        }
+                      
         this.input.parentElement.appendChild(this.el);                        
         this.ul = $(this.el).find("ul")[0];
+        
         this.box = $(this.el).find(".moo-ui-select-menu")[0];
         this.textspan = $(this.el).find(".moo-ui-select-text")[0];            
     },
