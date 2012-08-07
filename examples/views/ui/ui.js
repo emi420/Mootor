@@ -19,6 +19,7 @@
     // Select
     $("#moo-ui-select-1").ui({
         type: "Select",
+        position: "bottom"
     });
         
     // Radio
