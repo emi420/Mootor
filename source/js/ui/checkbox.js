@@ -6,17 +6,22 @@
  */
 var Checkbox = function(options) {
     var self = this,
-        i = 0;
+        i = 0,
+        item;
                 
     this.input = options.el;                       
     $(this.input).hide();
     this._makeHTML();
     
+    // "Pseudo" items
     this.mooItems = $(this.el).find(".moo-ui-checkbox");        
 
-    for (i = this.mooItems.length; i--;) {
-        $(this.mooItems[i]).onTapEnd(function(gesture) {
-            self.activate($(gesture.e.target));
+    for (i = this.mooItems.length; i--;) { 
+        item = this.mooItems[i];
+
+        // Set gesture events
+        $(item).onTapEnd(function(gesture) {
+            self.set($(gesture.e.target));
         });
     }    
 };
@@ -40,7 +45,7 @@ Checkbox.prototype = {
         
     },
     
-    activate: function(element) {
+    set: function(element) {
         var i = 0,
             j = 0,
             items = {},

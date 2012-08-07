@@ -143,6 +143,7 @@ _templateArrayHasForeach = function(elements) {
         tmpDiv = {},
         html = element.el.innerHTML,
         items = [],
+        item,
         labels = [],
         tmpElement = document.createElement("div");
                     
@@ -155,12 +156,19 @@ _templateArrayHasForeach = function(elements) {
     }
             
     for (i = 0; i < items.length; i++) {
+        
         self.items.push({
             el: items[i],
             text: items[i].innerText
         });
+        
+        item = self.items[self.items.length-1];
+        
         if(tag === "input") {
-            self.items[self.items.length-1].label = labels[i];
+            item.label = labels[i];
+        }
+        if (item.el.value !== undefined) {
+            item.value = item.el.value
         }
     }
                     
@@ -171,6 +179,8 @@ _templateArrayHasForeach = function(elements) {
         tmpDiv.innerHTML = html;
         tmpDiv.firstChild.setAttribute("moo-foreach-index", i);
         
+        tmpDiv.firstChild.setAttribute("moo-foreach-value", self.items[i].value);
+                
         tmpDiv.innerHTML = _templateParse({
             template: tmpDiv.innerHTML,
             self: self
@@ -466,17 +476,22 @@ Switch.prototype = {
  */
 var Checkbox = function(options) {
     var self = this,
-        i = 0;
+        i = 0,
+        item;
                 
     this.input = options.el;                       
     $(this.input).hide();
     this._makeHTML();
     
+    // "Pseudo" items
     this.mooItems = $(this.el).find(".moo-ui-checkbox");        
 
-    for (i = this.mooItems.length; i--;) {
-        $(this.mooItems[i]).onTapEnd(function(gesture) {
-            self.activate($(gesture.e.target));
+    for (i = this.mooItems.length; i--;) { 
+        item = this.mooItems[i];
+
+        // Set gesture events
+        $(item).onTapEnd(function(gesture) {
+            self.set($(gesture.e.target));
         });
     }    
 };
@@ -500,7 +515,7 @@ Checkbox.prototype = {
         
     },
     
-    activate: function(element) {
+    set: function(element) {
         var i = 0,
             j = 0,
             items = {},
@@ -638,6 +653,11 @@ var Select = function(options) {
         });            
     }
     
+    // Init value
+    if (options.value !== undefined) {
+        this.selectByValue(options.value);
+    }
+    
     return this;
             
 };
@@ -681,19 +701,28 @@ Select.prototype = {
         });
         
         // Prevents default on DragStasrt
-        $(this.el).onDragStart(_stopEventPropagationAndPreventDefault);
-        
+        $(this.el).onDragStart(_stopEventPropagationAndPreventDefault);        
+
         // Tap (to select)
         $(this.ul).onTapEnd(function(gesture) {
+            var i;
             _stopEventPropagationAndPreventDefault(gesture); 
+    
+            for(i = 0; i < self.pseudoItems.length; i++) {
+                $(self.pseudoItems[i].el).removeClass("selected");                
+            }
+            $(gesture.e.target).setClass("selected");
+
             self.select(gesture.e.target.getAttribute("moo-foreach-index"));
         });
         
         // Scroll
         $(this.ul).onDragMove(function(gesture) {
-            var newY;
+            var newY,
+                i;
             
             _stopEventPropagationAndPreventDefault(gesture);
+
             newY = self.y + (gesture.y - gesture.lastY);
 
             // FIXME CHECK: 160?
@@ -702,7 +731,7 @@ Select.prototype = {
                 $(self.ul).translateFx({x: 0, y: self.y}, {});
             }
             
-        });  
+        });
     },
 
     /**
@@ -710,20 +739,35 @@ Select.prototype = {
     * @param {integer} index Index of element to select
     */
     select: function(index) {
-        var i;
-        $(this.box).hide();
-        this.value = this.pseudoItems[index].el.getAttribute("moo-select-value");
-        this.input.value = this.value;
-        for(i = 0; i < this.pseudoItems.length; i++) {
-            $(this.pseudoItems[i].el).removeClass("selected");                
-        }
-        $(this.pseudoItems[index].el).setClass("selected");
+        var self = this;
+            
+        window.setTimeout(function() { 
+            $(self.box).hide() 
+        }, 100);
+        
+        // Get value
+        this.value = this.items[index].value;
+        
+        // Update selected index
+        this.selectedIndex = index;
+        this.input.selectedIndex = index;
+        
+        // Update text with selected value
         $(this.textspan).html(this.pseudoItems[index].el.innerHTML);
+    },
+    
+    selectByValue: function(value) {
+        var i;
+        for (i = this.items.length; i--;) {
+            if (this.items[i].value === value) {
+                this.select(i);
+            }
+        }
     }
     
-    // TODO: a show() method that position the select
-    //       box on top or bottom 
 }
+
+
  /**
  * Text
  * @param {object} options Options
@@ -732,21 +776,30 @@ Select.prototype = {
  */
 var Text = function(options) {
     var self = this;
-                
+                    
+    // Input element
     this.el = this.input = options.el;                               
     
+    // Value
     if (options.value !== undefined) {
-        this.value = options.value;
-    } else {
-        this.value = "";
-    }
-
+        this.el.value = options.value;
+    } 
+    this.value = self.el.value;
+    
+    // Make HTML
     this._makeHTML();
                 
-    $(this.el).onDragStart(_stopEventPropagationAndPreventDefault);                
-
+    // Set gesture events    
+    $(this.el).onDragStart(_stopEventPropagationAndPreventDefault);      
     $(this.el).onTapEnd(function(gesture) {
         gesture.el.focus();
+
+        // Do something to prevents keyboard scroll here
+        gesture.el.onblur = function() {
+            window.scrollTo(0,0);
+            // Do something to prevents keyboard scroll here
+        }
+
         _stopEventPropagationAndPreventDefault(gesture);
     });        
     $(this.cleanbox).onTapEnd(function() {
@@ -767,19 +820,23 @@ Text.prototype = {
             self = this;
         
         this.cleanbox = document.createElement("div");
-        this.cleanbox.innerHTML = _templates.text;                        
-        this.input.value = this.value;
+        this.cleanbox.innerHTML = _templates.text;
 
         el = document.createElement("div");
         $(el).setClass("moo-ui-text");
         el.appendChild(this.cleanbox);         
         el.appendChild(this.input);
-        this.input.onkeyup = function() {
+        
+        // Update on text change
+        $(this.input).on("keyup", function(gesture) {
+            
             self.value = self.input.value;
             if (typeof self.onChange === "function") {
-                self.onChange();                    
+                self.onChange();               
             }
-        }
+
+        });
+        
         parent.appendChild(el);         
     },
     
@@ -833,32 +890,48 @@ TextArea.prototype = {
     },
 
 }
+var UI = function() {};
+
 // Public constructors
 
 $.extend({
 
      ui: function(options) {
-         options.el = this.el;
-         switch (options.type) {
-             case "Switch":
-                return new Switch(options);
-                break;
-             case "Text":
-                return new Text(options);
-                break;
-             case "TextArea":
-                return new TextArea(options);
-                break;
-             case "Select":
-                return new Select(options);
-                break;
-             case "Radio":
-                return new Radio(options);
-                break;
-             case "Checkbox":
-                return new Checkbox(options);
-                break;                 
-         }
+     
+         var UIControl = UI.get(this.query);
+
+         if (UIControl === undefined) {
+
+             options.el = this.el;
+             switch (options.type) {
+                 case "Switch":
+                    UIControl = new Switch(options);
+                    break;
+                 case "Text":
+                    UIControl = new Text(options);
+                    break;
+                 case "TextArea":
+                    UIControl = new TextArea(options);
+                    break;
+                 case "Select":
+                    UIControl = new Select(options);
+                    break;
+                 case "Radio":
+                    UIControl = new Radio(options);
+                    break;
+                 case "Checkbox":
+                    UIControl = new Checkbox(options);
+                    break;                 
+             }
+
+             UIControl.id = this.query;
+             UI.push(UIControl);
+
+             return UIControl;
+
+        } else {
+             return UI.get(this.query);
+        }
      },
 });
 
@@ -877,7 +950,29 @@ $.extend({
 }, $);
 
 
-// Private static functions & utilities
+// Private static functions
+
+$.extend({
+    
+    _collection: [],
+    
+    get: function(id) {
+        var i;
+        for (i = UI._collection.length; i--;) {
+            if (UI._collection[i].id === id) {
+                return UI._collection[i];
+            }
+        }
+    },
+    
+    push: function(obj) {
+        this._collection.push(obj);
+    }
+
+} ,UI);
+
+
+// Utilities
 
  /**
  * Stop event propagation and prevent default
@@ -888,6 +983,7 @@ var _stopEventPropagationAndPreventDefault = function(gesture) {
     gesture.e.stopPropagation();
     gesture.e.preventDefault();
 };
+
 
 
 }(Mootor));

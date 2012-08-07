@@ -1,5 +1,3 @@
-// #include "nav.js"
-
 var Panel = function(){},
 
 /**

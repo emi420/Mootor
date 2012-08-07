@@ -10,16 +10,18 @@
 /**
  * Nav
  * @param {object} options Options
+
  * @config {number} panelsMargin Margin between panels
- * @config {string} navLinksClassName Navigation links class
  * @config {string} panelsItemsClassName Panels items class
+
+ * @config {string} navLinksClassName Navigation links class
  * @config {string} hiddenContentClassName Hidden content 
                     (when transitioning) class
  * @return {object} Nav Mootor Nav instance
  */
 var Nav = function (options) {
 
-        // Initialize instance & navigation items (ex: panels)
+        // Initialize instance & navigation items
         Nav.init(options, this);
 
         // Initialize header & footer
@@ -100,7 +102,7 @@ Nav.prototype = {
 
         /**
          * get Get Item object by id
-         * @param {string} id Navigation item (ex: panel) id
+         * @param {string} id Navigation item id
          * @return {object} Item Navigation Item instance
          */
         get: function (id) {
@@ -115,7 +117,7 @@ Nav.prototype = {
 
         /**
          * goBack Go back on navigation history
-         * @param {string} id Navigation item (ex: panel) id
+         * @param {string} id Navigation item id
          * @return {integer} index Current navigation item index
          */
         goBack: function () {
@@ -306,10 +308,6 @@ $.extend({
                 // Main container class name
                 headerClassName: options.headerClassName ? 
                           options.headerClassName : "moo-header",
-                          
-                // Main container class name
-                containerClassName: options.containerClassName ? 
-                          options.containerClassName : "moo-panels",
 
                 // Navigation links container class name
                 navClass: options.navLinksClassName ? 
@@ -323,6 +321,11 @@ $.extend({
                 margin: options.margin ?
                               options.margin : 5,
 
+
+                // Main container class name
+                containerClassName: options.containerClassName ? 
+                          options.containerClassName : "moo-panels",
+
                 // Navigation item class name
                 itemClass: options.itemsClassName ?
                            options.itemsClassName : "moo-panel",
@@ -330,6 +333,7 @@ $.extend({
                 // Navigation type
                 type: options.type ?
                               options.type : "Panels"                                                
+
             }
             
             // Access to navigation object by type, ex: self.Panel
@@ -338,6 +342,7 @@ $.extend({
                     navObject = Panel;
             }
             self._config.navItem = navObject;
+
             
             // Public properties
             
