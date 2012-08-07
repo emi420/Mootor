@@ -131,6 +131,7 @@ _templateArrayHasForeach = function(elements) {
         tmpDiv = {},
         html = element.el.innerHTML,
         items = [],
+        item,
         labels = [],
         tmpElement = document.createElement("div");
                     
@@ -143,12 +144,19 @@ _templateArrayHasForeach = function(elements) {
     }
             
     for (i = 0; i < items.length; i++) {
+        
         self.items.push({
             el: items[i],
             text: items[i].innerText
         });
+        
+        item = self.items[self.items.length-1];
+        
         if(tag === "input") {
-            self.items[self.items.length-1].label = labels[i];
+            item.label = labels[i];
+        }
+        if (item.el.value !== undefined) {
+            item.value = item.el.value
         }
     }
                     
@@ -159,6 +167,8 @@ _templateArrayHasForeach = function(elements) {
         tmpDiv.innerHTML = html;
         tmpDiv.firstChild.setAttribute("moo-foreach-index", i);
         
+        tmpDiv.firstChild.setAttribute("moo-foreach-value", self.items[i].value);
+                
         tmpDiv.innerHTML = _templateParse({
             template: tmpDiv.innerHTML,
             self: self

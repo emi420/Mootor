@@ -1,3 +1,4 @@
+@charset "utf-8";
 /* mootor.css - Basic styling for Mootor, a Html5 Javascript for application developement. - (c) 2012 Natalia Petit (natalia.petit@voolks.com) */
 /* line 23, ../source/css/sass/_normalize.scss */
 article,
@@ -222,43 +223,54 @@ small {
   font-size: 75%;
 }
 
-@media only screen and (max-width: 479px) {
+@media only screen  
+and (max-width: 479px) {
   /* line 74, default/_text.scss */
   body {
     font-size: 0.5em;
   }
 }
-@media only screen and (min-width: 480px) and (max-width: 599px) {
+@media only screen 
+and (min-width: 480px) 
+and (max-width: 599px) {
   /* line 82, default/_text.scss */
   body {
     font-size: 0.65em;
   }
 }
-@media only screen and (min-width: 480px) and (max-width: 599px) and (orientation: landscape) {
+@media only screen 
+and (min-width: 480px) 
+and (max-width: 599px) and (orientation: landscape) {
   /* line 84, default/_text.scss */
   body {
     font-size: 0.5em;
   }
 }
-@media only screen and (min-width: 600px) and (max-width: 767px) {
+@media only screen 
+and (min-width: 600px) 
+and (max-width: 767px) {
   /* line 92, default/_text.scss */
   body {
     font-size: 0.75em;
   }
 }
-@media only screen and (min-width: 600px) and (max-width: 767px) and (orientation: landscape) {
+@media only screen 
+and (min-width: 600px) 
+and (max-width: 767px) and (orientation: landscape) {
   /* line 94, default/_text.scss */
   body {
     font-size: 0.65em;
   }
 }
-@media only screen and (min-width: 768px) {
+@media only screen 
+and (min-width: 768px) {
   /* line 102, default/_text.scss */
   body {
     font-size: 0.85em;
   }
 }
-@media only screen and (min-width: 768px) and (orientation: landscape) {
+@media only screen 
+and (min-width: 768px) and (orientation: landscape) {
   /* line 104, default/_text.scss */
   body {
     font-size: 0.75em;
@@ -279,9 +291,10 @@ body, html {
   max-width: 100%;
   width: 100%;
   max-height: 100%;
+  -webkit-transform: translate3d(0, 0, 0);
 }
 
-/* line 21, ../source/css/sass/_mootor.nav.scss */
+/* line 22, ../source/css/sass/_mootor.nav.scss */
 .moo-header {
   text-align: left;
   z-index: 9999;
@@ -290,14 +303,14 @@ body, html {
   width: 100%;
   padding: .6em 1em;
 }
-/* line 28, ../source/css/sass/_mootor.nav.scss */
+/* line 29, ../source/css/sass/_mootor.nav.scss */
 .moo-header nav {
   position: absolute;
   margin-top: 0;
   top: 1.6em;
   left: 1.5em;
 }
-/* line 34, ../source/css/sass/_mootor.nav.scss */
+/* line 35, ../source/css/sass/_mootor.nav.scss */
 .moo-header nav a {
   padding: .5em 1em;
   width: auto;
@@ -305,7 +318,7 @@ body, html {
   font-size: 1.5em;
 }
 
-/* line 44, ../source/css/sass/_mootor.nav.scss */
+/* line 45, ../source/css/sass/_mootor.nav.scss */
 .moo-panels {
   position: absolute;
   width: 100%;
@@ -317,19 +330,19 @@ body, html {
   background: #f7f7f7;
 }
 
-/* line 54, ../source/css/sass/_mootor.nav.scss */
+/* line 55, ../source/css/sass/_mootor.nav.scss */
 .moo-panel {
   min-height: 100%;
   width: 100%;
   position: absolute;
 }
 
-/* line 64, ../source/css/sass/_mootor.nav.scss */
+/* line 65, ../source/css/sass/_mootor.nav.scss */
 nav ul,
 nav ol {
   list-style: none;
 }
-/* line 68, ../source/css/sass/_mootor.nav.scss */
+/* line 69, ../source/css/sass/_mootor.nav.scss */
 nav a {
   text-decoration: none;
   text-align: left;
@@ -337,7 +350,7 @@ nav a {
   padding: 1em;
 }
 
-/* line 78, ../source/css/sass/_mootor.nav.scss */
+/* line 79, ../source/css/sass/_mootor.nav.scss */
 .moo-panel {
   -webkit-transition-duration: 0;
   -webkit-transform: translate3d(0, 0, 0);
@@ -1143,41 +1156,6 @@ nav a {
   position: absolute;
   top: -0.5em;
   right: -0.5em;
-}
-
-/* line 20, default/_sprites.scss */
-.moo-icons, #sprites .arrow, #sprites .bell, #sprites .burst, #sprites .cancel, #sprites .checkbox, #sprites .grid, #sprites .close {
-  background-image: url('../examples/img/ui/icons-s84a98065e0.png');
-  background-repeat: no-repeat;
-}
-
-/* line 6, default/_sprites-demo.scss */
-#sprites .arrow {
-  background-position: 0 -232px;
-}
-/* line 7, default/_sprites-demo.scss */
-#sprites .bell {
-  background-position: 0 -174px;
-}
-/* line 8, default/_sprites-demo.scss */
-#sprites .burst {
-  background-position: 0 -116px;
-}
-/* line 9, default/_sprites-demo.scss */
-#sprites .cancel {
-  background-position: 0 0;
-}
-/* line 10, default/_sprites-demo.scss */
-#sprites .checkbox {
-  background-position: 0 -58px;
-}
-/* line 11, default/_sprites-demo.scss */
-#sprites .grid {
-  background-position: 0 -348px;
-}
-/* line 12, default/_sprites-demo.scss */
-#sprites .close {
-  background-position: 0 -290px;
 }
 
 /* line 24, default/styles.scss */

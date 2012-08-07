@@ -26,6 +26,11 @@ var Select = function(options) {
         });            
     }
     
+    // Init value
+    if (options.value !== undefined) {
+        this.selectByValue(options.value);
+    }
+    
     return this;
             
 };
@@ -69,19 +74,28 @@ Select.prototype = {
         });
         
         // Prevents default on DragStasrt
-        $(this.el).onDragStart(_stopEventPropagationAndPreventDefault);
-        
+        $(this.el).onDragStart(_stopEventPropagationAndPreventDefault);        
+
         // Tap (to select)
         $(this.ul).onTapEnd(function(gesture) {
+            var i;
             _stopEventPropagationAndPreventDefault(gesture); 
+    
+            for(i = 0; i < self.pseudoItems.length; i++) {
+                $(self.pseudoItems[i].el).removeClass("selected");                
+            }
+            $(gesture.e.target).setClass("selected");
+
             self.select(gesture.e.target.getAttribute("moo-foreach-index"));
         });
         
         // Scroll
         $(this.ul).onDragMove(function(gesture) {
-            var newY;
+            var newY,
+                i;
             
             _stopEventPropagationAndPreventDefault(gesture);
+
             newY = self.y + (gesture.y - gesture.lastY);
 
             // FIXME CHECK: 160?
@@ -90,7 +104,7 @@ Select.prototype = {
                 $(self.ul).translateFx({x: 0, y: self.y}, {});
             }
             
-        });  
+        });
     },
 
     /**
@@ -98,17 +112,32 @@ Select.prototype = {
     * @param {integer} index Index of element to select
     */
     select: function(index) {
-        var i;
-        $(this.box).hide();
-        this.value = this.pseudoItems[index].el.getAttribute("moo-select-value");
-        this.input.value = this.value;
-        for(i = 0; i < this.pseudoItems.length; i++) {
-            $(this.pseudoItems[i].el).removeClass("selected");                
-        }
-        $(this.pseudoItems[index].el).setClass("selected");
+        var self = this;
+            
+        window.setTimeout(function() { 
+            $(self.box).hide() 
+        }, 100);
+        
+        // Get value
+        this.value = this.items[index].value;
+        
+        // Update selected index
+        this.selectedIndex = index;
+        this.input.selectedIndex = index;
+        
+        // Update text with selected value
         $(this.textspan).html(this.pseudoItems[index].el.innerHTML);
+    },
+    
+    selectByValue: function(value) {
+        var i;
+        for (i = this.items.length; i--;) {
+            if (this.items[i].value === value) {
+                this.select(i);
+            }
+        }
     }
     
-    // TODO: a show() method that position the select
-    //       box on top or bottom 
 }
+
+
