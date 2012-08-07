@@ -672,12 +672,13 @@ Select.prototype = {
         var el = document.createElement("div"),
             template = _templates.select;
 
-        this.el = el;
-        this.el.innerHTML = _templateParse({
+        el.innerHTML = _templateParse({
             template: template,
             self: this
-        });            
-               
+        });           
+        
+        this.el = el.firstChild;
+        
         if (this.position == "top") {
             $(this.el).setClass("moo-top");
         } else if (this.position == "bottom") {
