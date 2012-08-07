@@ -8,6 +8,7 @@ var Text = function(options) {
     var self = this;
                 
     this.el = this.input = options.el;                               
+    
     if (options.value !== undefined) {
         this.value = options.value;
     } else {
@@ -58,6 +59,7 @@ Text.prototype = {
     
     clean: function() {
         this.input.value = "";
+        this.input.focus();
     },
     
     on: function(event, callback) {

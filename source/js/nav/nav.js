@@ -165,7 +165,8 @@ $.extend({
         },
         
         loadNavigationItem: function (gesture, self, navInstance) {
-            var i;
+            var i = 0,
+                href = "";
 
             // Clear navigation items styles
             for (i = self.navigationItemsCount; i--;) {
@@ -178,7 +179,10 @@ $.extend({
             // If not doing a transition 
             if (navInstance._config.isMoving === false) {                
                 // Set & load navigation Item
-                navInstance.set(gesture.el.getAttribute("href").replace("#",""));
+                href = gesture.el.getAttribute("href").replace("#","");
+                if (href !== "") {
+                    navInstance.set(href);
+                }
             }
         },
         

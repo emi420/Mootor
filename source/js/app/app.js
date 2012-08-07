@@ -101,12 +101,48 @@
           // Template
           $.ajax({
                 url: viewPath + ".html",
-                callback: callback
+                callback: function(response) {
+    
+                    // Controller
+                    $.require(viewPath + ".js");
+
+                    callback(response);
+                }
           });
           
-          // Controller
-          $.require(viewPath + ".js");
+        },
+        
+        // Get a view by id
+        get: function(id) {
+            var i;
+            for (i = this.views.length; i--;) {
+                if (this.views[i].id === id) {
+                    return this.views[i];
+                }
+            }
+            return null;
+        },
+        
+        data: {
+            _collection: {},
+            
+            get: function(key) {
+                return this._collection[key];
+            },
+            set: function(key, value) {
+                this._collection[key] = value;
+            },
+            unset: function(key) {
+                var i;
+                for (i in this._collection) {
+                    if (i === key) {
+                        delete(this._collection[i]);
+                    }
+                }
+            }
         }
+
+        
     };
       
     // Private static methods
@@ -167,7 +203,8 @@
             return App._collection.map(function(x) {
                 if(x.id === id) { return x }
             })[0];
-        }
+        },
+        
         
     }, App);
     
