@@ -1,0 +1,58 @@
+%form.moo-ui-form{:action=>"", :method=>"post"}
+
+    .moo-field
+        %label 
+            Switch
+        %input#switch{:type=>"checkbox", :value=>"0"}  
+
+    .moo-field
+        %label 
+            Text        
+        %input#text{:type=>"text", :placeholder=>"Your text here"}
+       
+    .moo-field
+        %label 
+            TextArea
+        %textarea#textarea{:placeholder=>"Your text here"}
+
+    .moo-field
+        %label Select
+        %select#select
+            %option{:value=>"0"} One
+            %option{:value=>"1"} Two
+            %option{:value=>"2"} Three
+            %option{:value=>"3"} Four
+            %option{:value=>"4"} Let's go!
+
+    .moo-field
+        %legend 
+            Radio
+        %fieldset#radio
+            %label One
+            %input{:type=>"radio", :value=>"0"}
+            %label Two
+            %input{:type=>"radio", :value=>"1"}
+            %label Three
+            %input{:type=>"radio", :value=>"2"}
+            %label Four
+            %input{:type=>"radio", :value=>"3"}
+            %label Let's go!
+            %input{:type=>"radio", :value=>"4"}
+           
+    .moo-field
+        %legend 
+            Check
+        %fieldset#checkbox
+            %label One
+            %input{:type=>"checkbox", :value=>"0"}
+            %label Two                
+            %input{:type=>"checkbox", :value=>"1"}
+            %label Three                
+            %input{:type=>"checkbox", :value=>"2"}
+            %label Four                
+            %input{:type=>"checkbox", :value=>"3"}
+            %label Let's go!                
+            %input{:type=>"checkbox", :value=>"4"}
+                                
+    .moo-field
+        %button.button.submit#save{:type=>"button"} Save

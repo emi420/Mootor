@@ -2,84 +2,125 @@
  * Checkbox
  * @param {object} options Options
  * @config {object} el Fieldset element
- * @return {object} Checkbox Mootor UI Checkbox object
+ * @return {object} Radio Mootor UI Checkbox object
  */
 var Checkbox = function(options) {
     var self = this,
         i = 0,
-        item;
-                
-    this.input = options.el;                       
+        pseudoItems = this.pseudoItems = [];
+        
+    this.input = options.el;        
+    this.value = [];
     $(this.input).hide();
-    this._makeHTML();
+    this._makeHTML();    
+
+    // Create "pseudo" items collection
+    pseudoItems = $(this.container).find("div");
+    for(i = 0; i < pseudoItems.length; i++) {
+        this.pseudoItems.push({
+            el: pseudoItems[i],
+            value: pseudoItems[i].value,
+            mooSelectIndex: i
+        });            
+    }
     
-    // "Pseudo" items
-    this.mooItems = $(this.el).find(".moo-ui-checkbox");        
+    this._setTouchEvents();               
 
-    for (i = this.mooItems.length; i--;) { 
-        item = this.mooItems[i];
-
-        // Set gesture events
-        $(item).onTapEnd(function(gesture) {
-            self.set($(gesture.e.target));
-        });
-    }    
+    // Init value
+    if (options.value !== undefined) {
+        this.selectByValue(options.value);
+    }
+    
+    return this;
+            
 };
 
 /*
  * Checkbox prototype
  */   
 Checkbox.prototype = {
+
     // Make HTML
     _makeHTML: function() {
-        var template = _templates.checkbox,
-            i;
-        
         this.el = document.createElement("div");
         this.el.innerHTML = _templateParse({
-            template: template,
+            template: _templates.checkbox,
             self: this
-        });
-        
-        this.input.parentElement.appendChild(this.el);            
-        
+        });        
+        this.container = $(this.el).find("div")[0];
+        this.input.parentElement.appendChild(this.el);  
     },
     
-    set: function(element) {
-        var i = 0,
-            j = 0,
-            items = {},
-            item,
-            itemIndex,
-            checked = true;
-                            
-        if($(element.el).hasClass("moo-ui-checkbox-icon") === false) {
-            item = $(element.el.parentElement).find(".moo-ui-checkbox-icon")[0];
-        } else {
-            item = element.el;
-        }            
-            
-        for (i = this.mooItems.length; i--;) {
-            items = $(this.mooItems[i]).find(".moo-ui-checkbox-icon");
-            for (j = items.length; j--;) {
-                if (items[j] === item) {
-                    if($(items[j]).hasClass("moo-active") === false) {
-                        $(items[j]).setClass("moo-active");
-                        checked = true;
-                    } else {
-                        $(items[j]).removeClass("moo-active");
-                        checked = false;
-                    }
-                    itemIndex = i;                                                                                              
-                }
-            } 
-        }
+    // Set touch events
+    _setTouchEvents: function() {
+       var self = this,
+            i = 0;
         
-        if (checked === true) {
-            this.items[itemIndex].el.setAttribute("checked", "checked");        
-        } else {
-            this.items[itemIndex].el.removeAttribute("checked", "checked");
-        }
+       for(i = 0; i < this.pseudoItems.length; i++) {
+       
+           $(this.pseudoItems[i].el).onTapEnd(function(gesture) {
+                var i,
+                    $el = $(gesture.el);
+                
+                _stopEventPropagationAndPreventDefault(gesture); 
 
-    }
+                if ($el.hasClass("moo-active")) {
+                    $el.removeClass("moo-active");
+                    self.unselect(gesture.el.getAttribute("moo-foreach-index"));
+                } else {
+                    $el.setClass("moo-active");                
+                    self.select(gesture.el.getAttribute("moo-foreach-index"));
+                }
+                              
+           });
+
+       }
+        
+        
+    },
+
+    /**
+    * Select an item from the list
+    * @param {integer} index Index of element to select
+    */
+    select: function(index) {
+        var self = this;
+        
+        // Get value
+        this.value.push(this.items[index].value);
+        this.items[index].el.setAttribute("checked", "checked");
+        
+    },
+
+    /**
+    * Unselect an item from the list
+    * @param {integer} index Index of element to select
+    */
+    unselect: function(index) {
+        var self = this;
+        
+        // Get value
+        this.value.splice(index, index);
+        this.items[index].el.removeAttribute("checked", "");
+        
+    },
+
+    selectByValue: function(value) {
+        var i,
+            j;
+            
+        if( Object.prototype.toString.call( value ) !== '[object Array]' ) {
+            value = [value];
+        }
+        for (i = this.items.length; i--;) {
+            for (j = value.length; j--;) {
+                if (this.items[i].value === value[j]) {
+                    $(this.pseudoItems[i].el).setClass("moo-active");
+                    this.select(i);
+                }                
+            }
+        }
+    }    
+    
 }
+

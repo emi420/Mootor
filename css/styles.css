@@ -1,3 +1,4 @@
+@charset "utf-8";
 /* mootor.css - Basic styling for Mootor, a Html5 Javascript for application developement. - (c) 2012 Natalia Petit (natalia.petit@voolks.com) */
 /* line 23, ../source/css/sass/_normalize.scss */
 article,
@@ -222,43 +223,54 @@ small {
   font-size: 75%;
 }
 
-@media only screen and (max-width: 479px) {
+@media only screen  
+and (max-width: 479px) {
   /* line 74, default/_text.scss */
   body {
     font-size: 0.5em;
   }
 }
-@media only screen and (min-width: 480px) and (max-width: 599px) {
+@media only screen 
+and (min-width: 480px) 
+and (max-width: 599px) {
   /* line 82, default/_text.scss */
   body {
     font-size: 0.65em;
   }
 }
-@media only screen and (min-width: 480px) and (max-width: 599px) and (orientation: landscape) {
+@media only screen 
+and (min-width: 480px) 
+and (max-width: 599px) and (orientation: landscape) {
   /* line 84, default/_text.scss */
   body {
     font-size: 0.5em;
   }
 }
-@media only screen and (min-width: 600px) and (max-width: 767px) {
+@media only screen 
+and (min-width: 600px) 
+and (max-width: 767px) {
   /* line 92, default/_text.scss */
   body {
     font-size: 0.75em;
   }
 }
-@media only screen and (min-width: 600px) and (max-width: 767px) and (orientation: landscape) {
+@media only screen 
+and (min-width: 600px) 
+and (max-width: 767px) and (orientation: landscape) {
   /* line 94, default/_text.scss */
   body {
     font-size: 0.65em;
   }
 }
-@media only screen and (min-width: 768px) {
+@media only screen 
+and (min-width: 768px) {
   /* line 102, default/_text.scss */
   body {
     font-size: 0.85em;
   }
 }
-@media only screen and (min-width: 768px) and (orientation: landscape) {
+@media only screen 
+and (min-width: 768px) and (orientation: landscape) {
   /* line 104, default/_text.scss */
   body {
     font-size: 0.75em;
@@ -641,12 +653,12 @@ nav a {
   width: 1em;
   height: 1em;
 }
-/* line 203, ../source/css/sass/_mootor.ui.form.scss */
-.moo-ui-radio label .moo-ui-radio-icon.moo-active {
+/* line 206, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-radio.moo-active .moo-ui-radio-icon {
   background-color: #666;
 }
-/* line 205, ../source/css/sass/_mootor.ui.form.scss */
-.moo-ui-radio label .moo-ui-radio-icon.moo-active:after {
+/* line 208, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-radio.moo-active .moo-ui-radio-icon:after {
   content: " ";
   display: block;
   position: absolute;
@@ -666,20 +678,20 @@ nav a {
   height: 0.6em;
 }
 
-/* line 221, ../source/css/sass/_mootor.ui.form.scss */
+/* line 224, ../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-checkbox {
   display: inline;
   float: right;
   position: relative;
   width: 75%;
 }
-/* line 225, ../source/css/sass/_mootor.ui.form.scss */
+/* line 228, ../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-checkbox input {
   position: absolute;
   top: 0.5em;
   left: 0.5em;
 }
-/* line 230, ../source/css/sass/_mootor.ui.form.scss */
+/* line 233, ../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-checkbox label {
   position: relative;
   display: block;
@@ -687,7 +699,7 @@ nav a {
   background: #FFF;
   font-size: 1.4em;
 }
-/* line 236, ../source/css/sass/_mootor.ui.form.scss */
+/* line 239, ../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-checkbox label .moo-ui-checkbox-icon {
   display: block;
   position: absolute;
@@ -698,12 +710,12 @@ nav a {
   width: 1em;
   height: 1em;
 }
-/* line 245, ../source/css/sass/_mootor.ui.form.scss */
-.moo-ui-checkbox label .moo-ui-checkbox-icon.moo-active {
+/* line 251, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-checkbox.moo-active .moo-ui-checkbox-icon {
   background-color: #666;
 }
-/* line 247, ../source/css/sass/_mootor.ui.form.scss */
-.moo-ui-checkbox label .moo-ui-checkbox-icon.moo-active:after {
+/* line 253, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-checkbox.moo-active .moo-ui-checkbox-icon:after {
   content: " ";
   display: block;
   position: absolute;
@@ -1190,7 +1202,7 @@ nav a {
   color: white;
 }
 
-/* line 63, default/styles.scss */
+/* line 60, default/styles.scss */
 .clearfix:before, .moo-ui-form:before, .moo-ui-form .moo-field:before,
 .clearfix:after,
 .moo-ui-form:after,
@@ -1199,7 +1211,19 @@ nav a {
   display: table;
 }
 
-/* line 67, default/styles.scss */
+/* line 64, default/styles.scss */
 .clearfix:after, .moo-ui-form:after, .moo-ui-form .moo-field:after {
   clear: both;
+}
+
+/* line 70, default/styles.scss */
+.button {
+  font-size: 1.4em;
+  padding: .75em;
+  font-weight: bold;
+}
+
+/* line 76, default/styles.scss */
+.moo-ui-form .button {
+  float: right;
 }

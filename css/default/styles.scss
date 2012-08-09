@@ -54,9 +54,6 @@ nav a {
     color: $subColor1;
 }
 
-
-
-
 // Clearfix
 
 .clearfix:before,
@@ -68,3 +65,14 @@ nav a {
     clear:both;
 }
 
+// Buttons
+
+.button {
+    font-size: 1.4em;
+    padding: .75em;
+    font-weight: bold;
+}
+
+.moo-ui-form .button {
+    float: right;
+}

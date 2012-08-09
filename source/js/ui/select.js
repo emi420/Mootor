@@ -21,7 +21,7 @@ var Select = function(options) {
     pseudoItems = $(this.ul).find("li");        
     for(i = 0; i < pseudoItems.length; i++) {
         this.pseudoItems.push({
-            el: pseudoItems[i], 
+            el: pseudoItems[i],
             mooSelectIndex: i
         });            
     }
