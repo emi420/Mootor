@@ -348,7 +348,8 @@ Model.prototype = {
         var count = this.count(),
             result = [],
             i = 0,
-            item;
+            item,
+            record;
              
         // If any records found, fill the response array
         if (count > 0) {
