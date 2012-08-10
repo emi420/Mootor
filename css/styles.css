@@ -1,4 +1,3 @@
-@charset "utf-8";
 /* mootor.css - Basic styling for Mootor, a Html5 Javascript for application developement. - (c) 2012 Natalia Petit (natalia.petit@voolks.com) */
 /* line 23, ../source/css/sass/_normalize.scss */
 article,
@@ -223,54 +222,43 @@ small {
   font-size: 75%;
 }
 
-@media only screen  
-and (max-width: 479px) {
+@media only screen and (max-width: 479px) {
   /* line 74, default/_text.scss */
   body {
     font-size: 0.5em;
   }
 }
-@media only screen 
-and (min-width: 480px) 
-and (max-width: 599px) {
+@media only screen and (min-width: 480px) and (max-width: 599px) {
   /* line 82, default/_text.scss */
   body {
     font-size: 0.65em;
   }
 }
-@media only screen 
-and (min-width: 480px) 
-and (max-width: 599px) and (orientation: landscape) {
+@media only screen and (min-width: 480px) and (max-width: 599px) and (orientation: landscape) {
   /* line 84, default/_text.scss */
   body {
     font-size: 0.5em;
   }
 }
-@media only screen 
-and (min-width: 600px) 
-and (max-width: 767px) {
+@media only screen and (min-width: 600px) and (max-width: 767px) {
   /* line 92, default/_text.scss */
   body {
     font-size: 0.75em;
   }
 }
-@media only screen 
-and (min-width: 600px) 
-and (max-width: 767px) and (orientation: landscape) {
+@media only screen and (min-width: 600px) and (max-width: 767px) and (orientation: landscape) {
   /* line 94, default/_text.scss */
   body {
     font-size: 0.65em;
   }
 }
-@media only screen 
-and (min-width: 768px) {
+@media only screen and (min-width: 768px) {
   /* line 102, default/_text.scss */
   body {
     font-size: 0.85em;
   }
 }
-@media only screen 
-and (min-width: 768px) and (orientation: landscape) {
+@media only screen and (min-width: 768px) and (orientation: landscape) {
   /* line 104, default/_text.scss */
   body {
     font-size: 0.75em;
@@ -399,8 +387,7 @@ nav a {
 }
 
 /* line 4, ../source/css/sass/_mootor.ui.form.scss */
-.moo-ui-input-container, .moo-ui-text, .moo-ui-textarea, .moo-ui-select-container,
-.moo-ui-select-container-multiple {
+.moo-ui-input-container, .moo-ui-text, .moo-ui-textarea, .moo-ui-select-container {
   display: inline;
   float: right;
   border: 1px solid #666;
@@ -441,7 +428,7 @@ nav a {
   border-top: none;
 }
 /* line 38, ../source/css/sass/_mootor.ui.form.scss */
-.moo-ui-form .moo-field > label, .moo-ui-form .moo-field legend {
+.moo-ui-form .moo-field > label {
   display: inline;
   float: left;
   font-size: 2em;
@@ -459,16 +446,13 @@ nav a {
   padding: 0.25em;
 }
 
-/* line 57, ../source/css/sass/_mootor.ui.form.scss */
-.moo-ui-select-container,
-.moo-ui-select-container-multiple {
+/* line 56, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-select-container {
   padding: 0.25em;
   height: 3em;
-  z-index: 300;
 }
-/* line 62, ../source/css/sass/_mootor.ui.form.scss */
-.moo-ui-select-container .moo-ui-select-text,
-.moo-ui-select-container-multiple .moo-ui-select-text {
+/* line 61, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-select-container .moo-ui-select-text {
   font-size: 1.5em;
   line-height: 1.5;
   text-overflow: ellipsis;
@@ -479,9 +463,8 @@ nav a {
   padding: 0 0.35em;
   width: 90%;
 }
-/* line 72, ../source/css/sass/_mootor.ui.form.scss */
-.moo-ui-select-container .moo-ui-select-link,
-.moo-ui-select-container-multiple .moo-ui-select-link {
+/* line 71, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-select-container .moo-ui-select-link {
   color: #000;
   line-height: 2.25em;
   text-align: right;
@@ -494,9 +477,8 @@ nav a {
   right: 0;
   z-index: 10;
 }
-/* line 83, ../source/css/sass/_mootor.ui.form.scss */
-.moo-ui-select-container .moo-ui-select-link:after,
-.moo-ui-select-container-multiple .moo-ui-select-link:after {
+/* line 82, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-select-container .moo-ui-select-link:after {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #cccccc));
   background: -webkit-linear-gradient(top, #ffffff, #cccccc);
   background: -moz-linear-gradient(top, #ffffff, #cccccc);
@@ -517,9 +499,8 @@ nav a {
   height: 2.8em;
   z-index: -1;
 }
-/* line 100, ../source/css/sass/_mootor.ui.form.scss */
-.moo-ui-select-container .moo-ui-select-menu,
-.moo-ui-select-container-multiple .moo-ui-select-menu {
+/* line 99, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-select-container .moo-ui-select-menu {
   background-color: #999;
   border-radius: 5px;
   display: none;
@@ -528,34 +509,29 @@ nav a {
   width: 99%;
   z-index: 1000;
 }
-/* line 109, ../source/css/sass/_mootor.ui.form.scss */
-.moo-ui-select-container .moo-ui-select-wrapper,
-.moo-ui-select-container-multiple .moo-ui-select-wrapper {
+/* line 108, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-select-container .moo-ui-select-wrapper {
   overflow: hidden;
   height: 100%;
 }
-/* line 113, ../source/css/sass/_mootor.ui.form.scss */
-.moo-ui-select-container .moo-ui-select-list,
-.moo-ui-select-container-multiple .moo-ui-select-list {
+/* line 112, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-select-container .moo-ui-select-list {
   font-size: 1.5em;
   background: #FFF;
   border-radius: 5px;
 }
-/* line 117, ../source/css/sass/_mootor.ui.form.scss */
-.moo-ui-select-container .moo-ui-select-list li,
-.moo-ui-select-container-multiple .moo-ui-select-list li {
+/* line 116, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-select-container .moo-ui-select-list li {
   padding: 1em;
   border-bottom: 1px solid #CCC;
   white-space: nowrap;
 }
-/* line 121, ../source/css/sass/_mootor.ui.form.scss */
-.moo-ui-select-container .moo-ui-select-list li:last-child,
-.moo-ui-select-container-multiple .moo-ui-select-list li:last-child {
+/* line 120, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-select-container .moo-ui-select-list li:last-child {
   border: none;
 }
-/* line 122, ../source/css/sass/_mootor.ui.form.scss */
-.moo-ui-select-container .moo-ui-select-list li.selected,
-.moo-ui-select-container-multiple .moo-ui-select-list li.selected {
+/* line 121, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-select-container .moo-ui-select-list li.selected {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #daeaec), color-stop(100%, #cee3e6));
   background: -webkit-linear-gradient(top, #daeaec, #cee3e6);
   background: -moz-linear-gradient(top, #daeaec, #cee3e6);
@@ -566,14 +542,12 @@ nav a {
   border-bottom-color: #AEBBBD;
   color: #3F8D94;
 }
-/* line 131, ../source/css/sass/_mootor.ui.form.scss */
-.moo-ui-select-container.moo-bottom .moo-ui-select-menu,
-.moo-ui-select-container-multiple.moo-bottom .moo-ui-select-menu {
+/* line 130, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-select-container.moo-bottom .moo-ui-select-menu {
   top: 4.5em;
 }
-/* line 133, ../source/css/sass/_mootor.ui.form.scss */
-.moo-ui-select-container.moo-bottom .moo-ui-select-menu:before,
-.moo-ui-select-container-multiple.moo-bottom .moo-ui-select-menu:before {
+/* line 132, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-select-container.moo-bottom .moo-ui-select-menu:before {
   content: " ";
   display: block;
   position: absolute;
@@ -584,14 +558,12 @@ nav a {
   border-right: 20px solid transparent;
   border-bottom: 15px solid #999;
 }
-/* line 147, ../source/css/sass/_mootor.ui.form.scss */
-.moo-ui-select-container.moo-top .moo-ui-select-menu,
-.moo-ui-select-container-multiple.moo-top .moo-ui-select-menu {
+/* line 146, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-select-container.moo-top .moo-ui-select-menu {
   bottom: 4.5em;
 }
-/* line 149, ../source/css/sass/_mootor.ui.form.scss */
-.moo-ui-select-container.moo-top .moo-ui-select-menu:after,
-.moo-ui-select-container-multiple.moo-top .moo-ui-select-menu:after {
+/* line 148, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-select-container.moo-top .moo-ui-select-menu:after {
   content: " ";
   display: block;
   position: absolute;
@@ -606,7 +578,7 @@ nav a {
 /*
 *  Cleanbox is the styling of the icon link used to "clean" a text input
 */
-/* line 166, ../source/css/sass/_mootor.ui.form.scss */
+/* line 165, ../source/css/sass/_mootor.ui.form.scss */
 .cleanbox {
   display: block;
   padding: 0 0.35em;
@@ -620,20 +592,20 @@ nav a {
   text-decoration: none;
 }
 
-/* line 178, ../source/css/sass/_mootor.ui.form.scss */
+/* line 177, ../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-radio {
   display: inline;
   float: right;
   position: relative;
   width: 75%;
 }
-/* line 182, ../source/css/sass/_mootor.ui.form.scss */
+/* line 181, ../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-radio input {
   position: absolute;
   top: 0.5em;
   left: 0.5em;
 }
-/* line 187, ../source/css/sass/_mootor.ui.form.scss */
+/* line 186, ../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-radio label {
   position: relative;
   display: block;
@@ -641,7 +613,7 @@ nav a {
   background: #FFF;
   font-size: 1.4em;
 }
-/* line 193, ../source/css/sass/_mootor.ui.form.scss */
+/* line 192, ../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-radio label .moo-ui-radio-icon {
   display: block;
   position: absolute;
@@ -653,11 +625,11 @@ nav a {
   width: 1em;
   height: 1em;
 }
-/* line 206, ../source/css/sass/_mootor.ui.form.scss */
+/* line 205, ../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-radio.moo-active .moo-ui-radio-icon {
   background-color: #666;
 }
-/* line 208, ../source/css/sass/_mootor.ui.form.scss */
+/* line 207, ../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-radio.moo-active .moo-ui-radio-icon:after {
   content: " ";
   display: block;
@@ -678,20 +650,20 @@ nav a {
   height: 0.6em;
 }
 
-/* line 224, ../source/css/sass/_mootor.ui.form.scss */
+/* line 223, ../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-checkbox {
   display: inline;
   float: right;
   position: relative;
   width: 75%;
 }
-/* line 228, ../source/css/sass/_mootor.ui.form.scss */
+/* line 227, ../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-checkbox input {
   position: absolute;
   top: 0.5em;
   left: 0.5em;
 }
-/* line 233, ../source/css/sass/_mootor.ui.form.scss */
+/* line 232, ../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-checkbox label {
   position: relative;
   display: block;
@@ -699,7 +671,7 @@ nav a {
   background: #FFF;
   font-size: 1.4em;
 }
-/* line 239, ../source/css/sass/_mootor.ui.form.scss */
+/* line 238, ../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-checkbox label .moo-ui-checkbox-icon {
   display: block;
   position: absolute;
@@ -710,11 +682,11 @@ nav a {
   width: 1em;
   height: 1em;
 }
-/* line 251, ../source/css/sass/_mootor.ui.form.scss */
+/* line 250, ../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-checkbox.moo-active .moo-ui-checkbox-icon {
   background-color: #666;
 }
-/* line 253, ../source/css/sass/_mootor.ui.form.scss */
+/* line 252, ../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-checkbox.moo-active .moo-ui-checkbox-icon:after {
   content: " ";
   display: block;

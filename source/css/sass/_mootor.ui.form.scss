@@ -53,12 +53,11 @@
     padding: 0.25em; 
     textarea { @extend .moo-ui-input; }
 }
-.moo-ui-select-container,
-.moo-ui-select-container-multiple {
+.moo-ui-select-container {
     @extend .moo-ui-input-container;
     padding: 0.25em; 
     height: 3em;
-    z-index: 300;
+    // z-index: 300;  BUG WITH MULTIPLE SELECTS
     .moo-ui-select-text {
         font-size: 1.5em;
         line-height: 1.5;
