@@ -501,5 +501,3 @@ $.extend({
  * Prevent native scrolling
  */
 Nav.preventNativeScrolling();
-
-

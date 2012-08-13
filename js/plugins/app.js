@@ -32,11 +32,11 @@ View = function(options, appInstance) {
    
    // If a Nav object instance is passed
    // then get a navigation item by id and
-   // define the onLoad method of that item
+   // define the onLoadContent method of that item
    // as a function that load this View instance
    if (options.nav !== undefined) {
        navItem = options.nav.get(this.id);
-       navItem.onLoad = function() {
+       navItem.onLoadContent = function() {
            if (self.cached === false) {
                appInstance.load(this, {
                     nav: navItem
@@ -62,7 +62,11 @@ App.prototype = {
     
       var callback = function() {},
           viewPath = "";
-      
+
+      if (options === undefined) {
+          options = {};
+      }
+
       if (options.callback !== undefined) {
           callback = options.callback; 
 
@@ -82,20 +86,23 @@ App.prototype = {
                   }
 
               }
-             
+              
+              console.log(view);
+                           
               // If a navItemInstance param is passed
               // and that object has an onLoadCallback function
-              // then call that onLoadCallback function                     
+              // then call that onLoadContentCallback function                     
               if (options.nav !== undefined &&
-                  typeof options.nav.onLoadCallback === "function") {                       
-                  options.nav.onLoadCallback();                                     
+                  typeof options.nav.onLoadContentCallback === "function") {  
+                  console.log("here 1");                     
+                  options.nav.onLoadContentCallback();                                     
               }                           
           }
 
       }
       
       viewPath = this.path + "/" + view.id + "/" + view.id
-                   
+              
       // Template
       $.ajax({
             url: viewPath + ".html",
@@ -139,7 +146,6 @@ App.prototype = {
             }
         }
     }
-
     
 };
   
@@ -213,6 +219,7 @@ $.extend({
 
 $.extend({
     app: function (options) {
+    
             if (typeof options !== "object") {
                 options = {};
             }
@@ -256,11 +263,12 @@ Model.prototype = {
     get: function(id) {
         var result,
             self = this;
-        
+            
         id = this.localStoragePrefix + '-' + id;                
-        result = JSON.parse(window.localStorage.getItem(id));
+        result = window.localStorage.getItem(id); ;
         
         if (result !== null) {
+            result = JSON.parse(result);
             $.extend({
                 put: function() {
                     self.put(this)
@@ -361,7 +369,7 @@ Model.prototype = {
             }
         }
         
-        return result;                
+        return result;               
     },
 
     // Update
@@ -375,18 +383,19 @@ Model.prototype = {
     count: function() {
         var prefix = this.localStoragePrefix,
             count = 0;
-            
-        count = JSON.parse(window.localStorage.getItem(prefix + "-count"));
+
+        count = window.localStorage.getItem(prefix + "-count");
+        
         if (count !== null) {
-            return count.value;
+            return JSON.parse(count).value;
         } else {
             return 0;
         }
     }, 
 
     // Delete (not implemented yet)
-    delete: function(id) {        
-        return null;                       
+    remove: function(id) {        
+        return null;                    
     },
 
 }
@@ -396,6 +405,4 @@ $.extend({
         return new Model(options);
     },
     models: {}
-}, App.prototype);
-    
-}(Mootor));
+}, App.prototype);}(Mootor));

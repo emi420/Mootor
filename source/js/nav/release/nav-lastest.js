@@ -509,7 +509,6 @@ $.extend({
  */
 Nav.preventNativeScrolling();
 
-
 // #include "nav.js"
 
 /**
@@ -607,7 +606,7 @@ var Footer = function(self) {
 
 
 
-// #include "nav.js"
+// TODO: rewrite & comment
 
 var Panel = function(){},
 
@@ -649,13 +648,15 @@ $.extend({
                 positionX,
                 hiddenContent,
                 i;
-    
+                   
             // Current panel
             panel = navInstance.items[navInstance.current];
             // Back panel
             back = navInstance.items[navInstance._config.back];
             // Hidden content while transitioning
             hiddenContent = $(panel.el).find("." + navInstance._config.hiddenClassName);
+            
+            console.log(panel);
             
             for (i = hiddenContent.length; i--;) {
                 $(hiddenContent[i]).el.style.opacity = "0";
@@ -726,11 +727,13 @@ $.extend({
                     callback: callback
                 }, navInstance);
             }, 1);
+                        
+            if (typeof panel.onLoadContent === "function") {
+                
+                console.log("here!");
             
-            
-            if (typeof panel.onLoad === "function") {
-                panel.onLoad();
-                panel.onLoadCallback = function() {
+                panel.onLoadContent();
+                panel.onLoadContentCallback = function() {
                     if (panel.navigationItems.length === 0) {
                         Item.initNavigationItems(panel, navInstance);
                     }
@@ -739,6 +742,10 @@ $.extend({
                         panel.height = navInstance._config.height;
                     }
                 }
+            }
+            
+            if (typeof panel.onLoadContent === "function") {
+                panel.onLoad();
             }
 
         },

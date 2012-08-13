@@ -1,3 +1,4 @@
+
 /*
 * Model object (draft using localStorage)
 *
@@ -23,11 +24,12 @@ Model.prototype = {
     get: function(id) {
         var result,
             self = this;
-        
+            
         id = this.localStoragePrefix + '-' + id;                
-        result = JSON.parse(window.localStorage.getItem(id));
+        result = window.localStorage.getItem(id); ;
         
         if (result !== null) {
+            result = JSON.parse(result);
             $.extend({
                 put: function() {
                     self.put(this)
@@ -128,7 +130,7 @@ Model.prototype = {
             }
         }
         
-        return result;                
+        return result;               
     },
 
     // Update
@@ -142,18 +144,19 @@ Model.prototype = {
     count: function() {
         var prefix = this.localStoragePrefix,
             count = 0;
-            
-        count = JSON.parse(window.localStorage.getItem(prefix + "-count"));
+
+        count = window.localStorage.getItem(prefix + "-count");
+        
         if (count !== null) {
-            return count.value;
+            return JSON.parse(count).value;
         } else {
             return 0;
         }
     }, 
 
     // Delete (not implemented yet)
-    delete: function(id) {        
-        return null;                       
+    remove: function(id) {        
+        return null;                    
     },
 
 }
@@ -164,4 +167,3 @@ $.extend({
     },
     models: {}
 }, App.prototype);
-    

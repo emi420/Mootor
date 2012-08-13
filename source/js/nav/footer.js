@@ -10,5 +10,3 @@ var Footer = function(self) {
     //       ex: using a NavBar constructor
 };
 
-
-
