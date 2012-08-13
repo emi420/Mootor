@@ -65,10 +65,8 @@ Checkbox.prototype = {
                 _stopEventPropagationAndPreventDefault(gesture); 
 
                 if ($el.hasClass("moo-active")) {
-                    $el.removeClass("moo-active");
                     self.unselect(gesture.el.getAttribute("moo-foreach-index"));
                 } else {
-                    $el.setClass("moo-active");                
                     self.select(gesture.el.getAttribute("moo-foreach-index"));
                 }
                               
@@ -84,12 +82,11 @@ Checkbox.prototype = {
     * @param {integer} index Index of element to select
     */
     select: function(index) {
-        var self = this;
-        
-        // Get value
-        this.value.push(this.items[index].value);
-        this.items[index].el.setAttribute("checked", "checked");
-        
+        if (this.value.indexOf(index) < 0) {
+            this.value.push(index.toString());
+            this.items[index].el.setAttribute("checked", "checked");
+            $(this.pseudoItems[index].el).setClass("moo-active");
+        }
     },
 
     /**
@@ -97,12 +94,22 @@ Checkbox.prototype = {
     * @param {integer} index Index of element to select
     */
     unselect: function(index) {
-        var self = this;
-        
-        // Get value
-        this.value.splice(index, index);
+        this.value.splice(this.value.indexOf(index) , 1);
         this.items[index].el.removeAttribute("checked", "");
+        $(this.pseudoItems[index].el).removeClass("moo-active");
+    },
+
+
+    /**
+    * Unselect all items from the list
+    */
+    unselectAll: function() {
+        var i = 0;        
         
+        for (i = this.items.length;i--;) {            
+            this.unselect(i);
+        }        
+
     },
 
     selectByValue: function(value) {

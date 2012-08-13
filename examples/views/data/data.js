@@ -11,7 +11,7 @@
      
     var myModel = function(options) {
         this.id = options.id;
-        this.switch = options.switch;
+        this._switch = options._switch;
         this.text = options.text;
         this.textarea = options.textarea;
         this.select = options.select;
@@ -35,7 +35,7 @@
     
     if (app.models.myModel.count() === 0) {
         record = app.models.myModel.create({
-            switch: 0,
+            _switch: 0,
             text: "And you run, and you run",
             textarea: "Is not the way it seems",
             select: "0",
@@ -50,7 +50,7 @@
     // Initialize UI
 
     var ui = {
-        switch: $("#switch").ui({
+        _switch: $("#switch").ui({
             type: "Switch",
             value: record.switch,
         }),
@@ -87,7 +87,7 @@
     // Save button
     
     ui.save.onTapEnd(function() {
-        record.switch = ui.switch.value;
+        record._switch = ui._switch.value;
         record.text = ui.text.value;
         record.textarea = ui.textarea.value;
         record.select = ui.select.value;

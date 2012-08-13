@@ -655,9 +655,7 @@ $.extend({
             back = navInstance.items[navInstance._config.back];
             // Hidden content while transitioning
             hiddenContent = $(panel.el).find("." + navInstance._config.hiddenClassName);
-            
-            console.log(panel);
-            
+                        
             for (i = hiddenContent.length; i--;) {
                 $(hiddenContent[i]).el.style.opacity = "0";
             }
@@ -729,9 +727,7 @@ $.extend({
             }, 1);
                         
             if (typeof panel.onLoadContent === "function") {
-                
-                console.log("here!");
-            
+                            
                 panel.onLoadContent();
                 panel.onLoadContentCallback = function() {
                     if (panel.navigationItems.length === 0) {

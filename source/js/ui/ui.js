@@ -33,6 +33,7 @@ $.extend({
              }
 
              UIControl.id = this.query;
+             UIControl.type = options.type;
              UI.push(UIControl);
 
              return UIControl;

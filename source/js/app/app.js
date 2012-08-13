@@ -79,15 +79,12 @@ App.prototype = {
                   }
 
               }
-              
-              console.log(view);
-                           
+                                         
               // If a navItemInstance param is passed
               // and that object has an onLoadCallback function
               // then call that onLoadContentCallback function                     
               if (options.nav !== undefined &&
                   typeof options.nav.onLoadContentCallback === "function") {  
-                  console.log("here 1");                     
                   options.nav.onLoadContentCallback();                                     
               }                           
           }

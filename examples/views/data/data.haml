@@ -1,6 +1,9 @@
 %form.moo-ui-form{:action=>"", :method=>"post"}
 
     .moo-field
+        %button.button.submit#save{:type=>"button"} Save
+
+    .moo-field
         %label 
             Switch
         %input#switch{:type=>"checkbox", :value=>"0"}  
@@ -54,5 +57,3 @@
             %label Let's go!                
             %input{:type=>"checkbox", :value=>"4"}
                                 
-    .moo-field
-        %button.button.submit#save{:type=>"button"} Save

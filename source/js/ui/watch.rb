@@ -9,7 +9,7 @@ require 'fssm'
 # Monitor
 FSSM.monitor('.' ,'*.js') do
   update do |base|
-    command = "make -f MakefileFull"
+    command = "make"
     %x{#{command}}
     puts "Updated."
   end
