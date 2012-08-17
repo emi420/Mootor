@@ -232,7 +232,8 @@
                 gesture = $.gestures.getByElement(this.el),
                 date = new Date(),
                 clientX,
-                clientY;
+                clientY,
+                time;
         
             // Touch
             try {
@@ -245,6 +246,7 @@
                 this.bind("touchmove", this);
     
                 gesture.event.time = date.getTime();
+                gesture.event.lastTime = date.getMilliseconds();
                 gesture.event.isDraggingY = 0;
                 gesture.event.isDraggingX = 0;
                 gesture.event.mousedown = true;
@@ -269,13 +271,29 @@
             }
     
             if (e.type === "touchmove") {
-                        
-                info.lastY = gesture.event.y;
-                info.lastX = gesture.event.x;
+            
+                time = date.getMilliseconds() - gesture.event.lastTime;
+                time = (time + gesture.event.lastTime) / 2;
+                
+                info.velocity = {};
+                if (time > 0) {
+                    info.velocity.x = (gesture.event.lastX - gesture.event.x) / time;
+                    info.velocity.y = (gesture.event.lastY - gesture.event.y) / time;
+                } else {
+                    info.velocity.x = 0;
+                    info.velocity.y = 0;
+                }
+
+                gesture.event.velocity = info.velocity;
+                
+                gesture.event.lastTime = date.getMilliseconds();
+                gesture.event.lastY = info.lastY = gesture.event.y;
+                gesture.event.lastX = info.lastX = gesture.event.x;
                 gesture.event.y = info.y = clientY;
                 gesture.event.x = info.x = clientX;
                 info.distanceFromOriginY = clientY - gesture.event.startY;
                 info.distanceFromOriginX = clientX - gesture.event.startX;
+
     
                 gesture.event.isDraggingY = gesture.event.isDraggingY ?
                                             gesture.event.isDraggingY : 0;
@@ -318,6 +336,8 @@
             }
     
             if (e.type === "touchend") {
+               
+                info.velocity = {};
                         
                 if (gesture.event.tapped === false) {
                     this.unbind("touchmove", this);
@@ -352,6 +372,7 @@
                     // DragEnd
                     info.type = "dragEnd";
                                         
+                    info.velocity = gesture.event.velocity;
                     info.isDraggingY = gesture.event.isDraggingY = 0;
                     info.isDraggingX = gesture.event.isDraggingX = 0;
                     _fire(info, gesture.event.onDragEnd);

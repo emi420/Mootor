@@ -5,7 +5,7 @@
     %meta{:name=>"apple-mobile-web-app-capable", :content=>"yes"}
     %link{:href=>"../css/styles.css", :media=>"screen",  :rel=>"stylesheet"}
     %script{:src=>"../js/mootor.min.js",:type=>"text/javascript"}
-    %script{:src=>"../js/plugins/nav.min.js",:type=>"text/javascript"}
+    %script{:src=>"../js/plugins/nav.js",:type=>"text/javascript"}
     %script{:src=>"../js/plugins/app.min.js",:type=>"text/javascript"}
     %script{:src=>"../js/plugins/ui.min.js",:type=>"text/javascript"}
 
@@ -81,7 +81,7 @@
            
            // Preload a view
            myApp.load(
-                myApp.views[0],
+                myApp.get("ui"),
                 myNav.get("ui")
            );           
                                   

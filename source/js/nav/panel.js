@@ -1,7 +1,3 @@
-
-
-// TODO: rewrite & comment
-
 var Panel = function(){},
 
 /**
@@ -33,7 +29,6 @@ $.extend({
     /**
      * Load panel
      */
-    // TODO: rewrite & comment
     load: function(navInstance) {
         
             var panel,
@@ -47,12 +42,6 @@ $.extend({
             panel = navInstance.items[navInstance.current];
             // Back panel
             back = navInstance.items[navInstance._config.back];
-            // Hidden content while transitioning
-            hiddenContent = $(panel.el).find("." + navInstance._config.hiddenClassName);
-                        
-            for (i = hiddenContent.length; i--;) {
-                $(hiddenContent[i]).el.style.opacity = "0";
-            }
             
             $(panel.el).show();
            
@@ -60,10 +49,6 @@ $.extend({
                 $(back.el).hide();
                 
                 navInstance._config.isMoving = false;                
-
-                for (i = hiddenContent.length; i--;) {
-                    $(hiddenContent[i]).el.style.opacity = "1";
-                }
                 
                 panel.x = 0;
                 navInstance._config.x = 0;
@@ -75,46 +60,34 @@ $.extend({
             positionX = navInstance._config.width + navInstance._config.margin;
 
             if (navInstance.current !== 0) {
-
-                navInstance._config.anchorBack.show()
-
-                if (navInstance._config.back === 0) {
-                    _translate({el: panel.el, x: positionX}, navInstance);
-                    panel.x = positionX;
-                    positionX = -positionX;
-
-                } else {
-                                    
-                    if (navInstance._config.direction === 0 ) {
-
-                        _translate({el: navInstance.el, x: 0}, navInstance);
-                        _translate({el: panel.el, x: positionX}, navInstance);
-                        panel.x = positionX;
-                        _translate({el: back.el, x: 0}, navInstance);
-                        positionX = -positionX;
-                    
-                    } else {
-
-                        positionX = 0;
-                        panel.x = 0;
-    
-                    }
-                    
-                }
-            } else if (navInstance._config.back !== 0) {
-           
-                _translate({el: navInstance.el, x: -positionX}, navInstance);
-                _translate({el: panel.el, x: 0});
-                panel.x = 0;
-                _translate({el: back.el, x: positionX}, navInstance);
-                positionX = 0;                
+                navInstance._config.anchorBack.show();           
+            } else {
                 navInstance._config.anchorBack.hide();
             }
+                                
+            if (navInstance._config.direction === 0 || navInstance._config.back === 0) {
+            
+                // Right
+
+                _translate({el: panel.el, x: positionX}, navInstance);
+                panel.x = positionX;
+                positionX = -positionX;
+            
+            } else {
+            
+                // Left
+            
+                _translate({el: panel.el, x: -positionX}, navInstance);
+                panel.x = -positionX;
+                positionX = positionX;
+
+            }
+
             
             window.setTimeout(function () {
                 _translate({
                     el: navInstance.el,
-                    duration: .25,
+                    duration: 0.25,
                     x: positionX,
                     callback: callback
                 }, navInstance);
@@ -131,10 +104,10 @@ $.extend({
                     if (navInstance._config.height > panel.height) {
                         panel.height = navInstance._config.height;
                     }
-                }
+                };
             }
             
-            if (typeof panel.onLoadContent === "function") {
+            if (typeof panel.onLoad === "function") {
                 panel.onLoad();
             }
 
@@ -143,7 +116,6 @@ $.extend({
     /**
      * Initialize CSS Styles
      */
-    // TODO: rewrite & comment
     initStyles: function(self) {
             var i = 0,
                 item = {};
@@ -177,12 +149,14 @@ $.extend({
     /**
      * Check move
      */
-    // TODO: rewrite & comment
     checkMove: function (gesture, self) {
             var panel = self.items[self.current],
                 maxdist = panel.height - self._config.height,
-                cb,
                 i;
+
+            if (self.header !== undefined) {
+                maxdist += self.header.height;
+            }
                 
             if (gesture.type === "dragEnd") {
 
@@ -192,15 +166,7 @@ $.extend({
                     if (self._config.y > 0) {
                         self._config.y = 0;
                     } else {
-                        if (self.header === undefined) {                        
-                            self._config.y = -(panel.height - self._config.height);
-                        } else {
-                            self._config.y = -(panel.height - (self._config.height + self.header.height));                            
-                            // FIXME CHECK
-                            if (self._config.y === self.header.height) {
-                               self._config.y -= self.header.height; 
-                            }
-                        }
+                        self._config.y = -maxdist;                            
                     }
                     for (i = panel.navigationItems.length; i--;) {
                         $(panel.navigationItems[i]).removeClass("active");
@@ -211,6 +177,8 @@ $.extend({
                         el: panel.el,
                         duration: 0.25
                     }, self);
+                } else {
+                    // TODO: boost movement
                 }
 
             }

@@ -30,6 +30,9 @@ $.extend({
                  case "Checkbox":
                     UIControl = new Checkbox(options);
                     break;                 
+                 case "Camera":
+                    UIControl = new Camera(options);
+                    break;                 
              }
 
              UIControl.id = this.query;
@@ -41,7 +44,7 @@ $.extend({
         } else {
              return UI.get(this.query);
         }
-     },
+     }
 });
 
 $.extend({

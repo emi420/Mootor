@@ -500,64 +500,6 @@ if (!window.$ || typeof ($) !== "function") {
 
 (function () {
 
-    $.extend({         
-    
-        /** @lends $.prototype */
-        
-        /**
-         * Legacy translateFx Mootor Fx function
-         */
-        translateFx: function (positions, options) {
-    
-            var x_pos = positions.x,
-                y_pos = positions.y,
-                tduration;
-               
-            tduration = options.transitionDuration;
-            this.el.style.transitionProperty = "webkit-transform";
-    
-            if (tduration !== undefined && tduration > 0) {
-                this.el.style.webkitTransitionDuration = tduration + "s";
-                this.el.style.webkitTransitionTimingFunction = "ease-out";
-            } else {
-                if (this.el.style.webkitTransitionDuration !== "") {
-                    this.cleanFx();
-                }
-            }
-    
-            this.el.style.webkitTransform = "translate3d(" + x_pos + "px," + y_pos + "px, 0)";
-    
-            if (options.callback) {
-                window.setTimeout(options.callback, tduration * 1000);
-            }
-    
-        },
-
-        /**
-         * Translate element, using GPU acceleration when available
-         * @param {object} options Options
-         * @config {number} transitionDuration Duration of transition (in seconds)
-         * @config {number} x X position
-         * @config {number} y Y position
-         */
-        translate: function (options) {
-            this.translateFx({x: options.x, y: options.y},options)
-        },
-    
-        /**
-         * Clean element transform styles
-         */
-        cleanFx: function () {
-            this.el.style.webkitTransform = "";
-            this.el.style.webkitTransitionDuration = "";
-            this.el.style.webkitTransitionTimingFunction = "";
-        }
-    
-    });
-    
-} ());
-(function () {
-
     var _addGesture,
         _fire,
         _isListed,
@@ -790,8 +732,7 @@ if (!window.$ || typeof ($) !== "function") {
                 gesture = $.gestures.getByElement(this.el),
                 date = new Date(),
                 clientX,
-                clientY,
-                time;
+                clientY;
         
             // Touch
             try {
@@ -804,7 +745,7 @@ if (!window.$ || typeof ($) !== "function") {
                 this.bind("touchmove", this);
     
                 gesture.event.time = date.getTime();
-                gesture.event.lastTime = date.getMilliseconds();
+                console.log(gesture.event.time);
                 gesture.event.isDraggingY = 0;
                 gesture.event.isDraggingX = 0;
                 gesture.event.mousedown = true;
@@ -829,29 +770,13 @@ if (!window.$ || typeof ($) !== "function") {
             }
     
             if (e.type === "touchmove") {
-            
-                time = date.getMilliseconds() - gesture.event.lastTime;
-                time = (time + gesture.event.lastTime) / 2;
-                
-                info.velocity = {};
-                if (time > 0) {
-                    info.velocity.x = (gesture.event.lastX - gesture.event.x) / time;
-                    info.velocity.y = (gesture.event.lastY - gesture.event.y) / time;
-                } else {
-                    info.velocity.x = 0;
-                    info.velocity.y = 0;
-                }
-
-                gesture.event.velocity = info.velocity;
-                
-                gesture.event.lastTime = date.getMilliseconds();
-                gesture.event.lastY = info.lastY = gesture.event.y;
-                gesture.event.lastX = info.lastX = gesture.event.x;
+                        
+                info.lastY = gesture.event.y;
+                info.lastX = gesture.event.x;
                 gesture.event.y = info.y = clientY;
                 gesture.event.x = info.x = clientX;
                 info.distanceFromOriginY = clientY - gesture.event.startY;
                 info.distanceFromOriginX = clientX - gesture.event.startX;
-
     
                 gesture.event.isDraggingY = gesture.event.isDraggingY ?
                                             gesture.event.isDraggingY : 0;
@@ -894,8 +819,6 @@ if (!window.$ || typeof ($) !== "function") {
             }
     
             if (e.type === "touchend") {
-               
-                info.velocity = {};
                         
                 if (gesture.event.tapped === false) {
                     this.unbind("touchmove", this);
@@ -930,7 +853,6 @@ if (!window.$ || typeof ($) !== "function") {
                     // DragEnd
                     info.type = "dragEnd";
                                         
-                    info.velocity = gesture.event.velocity;
                     info.isDraggingY = gesture.event.isDraggingY = 0;
                     info.isDraggingX = gesture.event.isDraggingX = 0;
                     _fire(info, gesture.event.onDragEnd);
@@ -948,5 +870,63 @@ if (!window.$ || typeof ($) !== "function") {
         }
     });
 
+} ());(function () {
+
+    $.extend({         
+    
+        /** @lends $.prototype */
+        
+        /**
+         * Legacy translateFx Mootor Fx function
+         */
+        translateFx: function (positions, options) {
+    
+            var x_pos = positions.x,
+                y_pos = positions.y,
+                tduration;
+               
+            tduration = options.transitionDuration;
+            this.el.style.transitionProperty = "webkit-transform";
+    
+            if (tduration !== undefined && tduration > 0) {
+                this.el.style.webkitTransitionDuration = tduration + "s";
+                this.el.style.webkitTransitionTimingFunction = "ease-out";
+            } else {
+                if (this.el.style.webkitTransitionDuration !== "") {
+                    this.cleanFx();
+                }
+            }
+    
+            this.el.style.webkitTransform = "translate3d(" + x_pos + "px," + y_pos + "px, 0)";
+    
+            if (options.callback) {
+                window.setTimeout(options.callback, tduration * 1000);
+            }
+    
+        },
+
+        /**
+         * Translate element, using GPU acceleration when available
+         * @param {object} options Options
+         * @config {number} transitionDuration Duration of transition (in seconds)
+         * @config {number} x X position
+         * @config {number} y Y position
+         */
+        translate: function (options) {
+            this.translateFx({x: options.x, y: options.y},options)
+        },
+    
+        /**
+         * Clean element transform styles
+         */
+        cleanFx: function () {
+            this.el.style.webkitTransform = "";
+            this.el.style.webkitTransitionDuration = "";
+            this.el.style.webkitTransitionTimingFunction = "";
+        }
+    
+    });
+    
 } ());
+
 }(window.document));
