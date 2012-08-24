@@ -85,7 +85,7 @@ Model.prototype = {
             obj.id = count;
 
             // A copy of the object. If any value is an object and
-            // that object has an id, save the id and not the object
+            // that object has an id, then save the id and not the object
             for (i in obj) {
                 if (typeof obj[i] === "object" && obj[i].id !== undefined) {
                     objCopy[i] = obj[i].id;

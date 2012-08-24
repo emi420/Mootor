@@ -2,7 +2,7 @@
 var _templates = {
     radio: '<div moo-template="foreach: input"><div class="moo-ui-radio"><label><span class="moo-ui-radio-label" moo-template="text: this.label"></span><span class="moo-ui-radio-icon"> &nbsp;</span></label></div></div>',
 
-    checkbox: '<div moo-template="foreach: input"><div class="moo-ui-checkbox"><label><span class="moo-ui-checkbox-label" moo-template="text: this.label"></span><span class="moo-ui-checkbox-icon"> &nbsp;</span></label></div></div>',
+    checkbox: '<div moo-template="foreach: input"><div class="moo-ui-checkbox"><label><span class="moo-ui-checkbox-label" moo-template="html: this.label"></span><span class="moo-ui-checkbox-icon"> &nbsp;</span></label></div></div>',
     
     overlay: "<div class='moo-overlay'></div>",
     
@@ -215,10 +215,19 @@ _templateText = function(element, self) {
  */
 _templateHTML = function(element, self) {
     var index = element.index,
-        value = "";
-        
+        value = "",
+        valueToLoad = "";
+                    
     if(element.value.indexOf("this.") > -1) {
         value = element.value.replace("this.","");
-        element.el.innerHTML = self[value];        
+        valueToLoad = self.items[index][value];
+        if (typeof valueToLoad === "string") {
+            element.el.innerHTML = valueToLoad;
+        } else {
+            element.el.innerHTML = valueToLoad.innerHTML;                        
+        }
+        
+        // FIXME CHECK
+        valueToLoad.parentElement.removeChild(valueToLoad);
     }
 };
