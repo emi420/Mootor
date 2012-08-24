@@ -5,6 +5,8 @@
 var Camera = function(options) {
 
     this.input = options.el;
+    this.position = options.position;
+    this.count = 0;
 
     Camera._makeHTML(options, this);       
     Camera._setTouchEvents(this);               
@@ -13,6 +15,8 @@ var Camera = function(options) {
     // Init value
     if (options.value !== undefined) { 
         this.value = options.value;
+    } else {
+        this.value = [];
     }
     
     return this;
@@ -25,13 +29,20 @@ var Camera = function(options) {
 Camera.prototype = {        
     
     show: function() {
-        $(this.el).removeClass("moo-hidden");
+        if (typeof this.onShowBox === "function") {
+            this.onShowBox();
+        }
+        $(this.el).show();
     },
     
     hide: function() {
-        $(this.el).setClass("moo-hidden");
+        $(this.el).hide()
+    },    
+
+    onShowBox: function(callback) {
+        this.onShowBox = callback;  
     },
-    
+
     onCamera: function(callback) {
         this.onCamera = callback;  
     },
@@ -44,36 +55,79 @@ Camera.prototype = {
         this.onFail = callback;  
     },
     
+    push: function(imageElement) {
+    
+        var tmpDiv = document.createElement("div"),
+            imgDiv;
+                    
+        tmpDiv.innerHTML = this.imageWrapper.outerHTML;
+
+        imgDiv = $(tmpDiv).find(".moo-image")[0];
+        imgDiv.appendChild(imageElement);
+        
+        this.value.push(imageElement.getAttribute("src"));
+        $(tmpDiv.firstChild).show();
+        this.imageList.appendChild(tmpDiv.firstChild); 
+
+        this.count++;
+        
+    },
+    
+    clear: function() {
+        var items = $(this.imageList).find("li"),
+            i = 0;
+            
+        for (i = items.length; i--;) {
+            this.imageList.removeChild(items[i]);
+        }
+        
+        this.count = 0;        
+        this.value = [];
+        
+    }
+    
 }
 
 /*
  * Private static properties
  */
 $.extend({
+
     _makeHTML: function(options, self) {
+    
         var type = options.type,
             el = document.createElement("div");
         el.innerHTML = _templates.camera;
 
         self.el = el.firstChild;
+        
+        if (self.position == "top") {
+            $(self.el).setClass("moo-top");
+        } else if (self.position == "bottom") {
+            $(self.el).setClass("moo-bottom");            
+        }
+        
         self.takeButton = $(self.el).find(".moo-ui-add-new")[0];
         self.chooseButton = $(self.el).find(".moo-ui-add-filed")[0];
         self.imageWrapper = $(self.el).find(".moo-image-wrapper")[0];
         self.imageList = $(self.el).find(".moo-image-list")[0];
 
         $(self.el).hide();
-        $(document.body).el.appendChild(self.el);
+
+        self.input.appendChild(self.el);
+
         // FIXME CHECK: remove template element
-        //self.el.removeChild(self.imageWrapper);
+        $(self.imageWrapper).hide();
     },
+    
     _setTouchEvents: function(self) {
     
         // Show/hide box
         $(self.input).onTapEnd(function() {
-           $(self.el).show();
+           self.show();
         });
         $(self.el).onTapEnd(function() {
-           $(self.el).hide();
+           self.hide();
         });
         
         // Take/choose pictures
@@ -84,102 +138,48 @@ $.extend({
             Camera.camera(self, "album");
         });
     },
+    
     _initProperties: function(self, options) {
         self.quality = self.quality ? self.quality : 50;
         self.width = self.width ? self.width : 1024;
         self.height = self.height ? self.height : 768;
     },
+    
     camera: function(self, sourceType) {
         var source;
 
         if (typeof self.onCamera === "function") {
             self.onCamera();
         }        
-        if (sourceType === "album") {
-            source = window.Camera.PictureSourceType.SAVEDPHOTOALBUM
+        
+        if (self.disabled !== true) {
+            if (window.Camera !== undefined) {
+                if (sourceType === "album") {
+                    source = window.Camera.PictureSourceType.SAVEDPHOTOALBUM
+                }
+        
+                var onSuccess = function(data) {
+                   // TODO: update image list? use callback?
+                   self.onSuccess(data);
+                };
+        
+                navigator.camera.getPicture(           
+                   onSuccess,
+                   self.onFail, 
+                   { 
+                       quality: self.quality, 
+                       destinationType: window.Camera.DestinationType.FILE_URI,
+                       sourceType: source,
+                       targetWidth: self.width,
+                       targetHeight: self.height,
+                   }
+                );
+    
+            } else {
+                console.log("Not camera! using sample pic");
+                self.onSuccess("img/temp/samplepic.jpg"); 
+            }
         }
-
-       var onSuccess = function(data) {
-           // TODO: update image list? use callback?
-           self.onSuccess(data);
-       };
-
-       navigator.camera.getPicture(           
-           onSuccess,
-           self.onFail, 
-           { 
-               quality: self.quality, 
-               destinationType: window.Camera.DestinationType.FILE_URI,
-               sourceType: source,
-               targetWidth: self.width,
-               targetHeight: self.height,
-           }
-       );
     }
 }, Camera);
 
-
-/*       // Thumbnail image element
-       $img = $("#clientPic" + count);
-
-       // Create a temporary "img" element
-       // with the taken picture as a source
-       // and resize that picture, then
-       // call the callback function with
-       // JPEG raw data as the response
-
-       tmpImg = document.createElement("img");
-       $(tmpImg).hide();           
-       tmpImg.onload = function() {
-           tmpImg.onload = null;
-           app.thumbnailer({
-                img: tmpImg, 
-                width: 100,
-                callback: function(data) {
-
-                    nav.loading.hide();
-                    nav.overlay.hide();   
-
-                    $img.el.src = data;
-                                    
-                    view.data.pics.push(data.replace(/data:image\/jpeg;base64,/, ''));
-                }
-           });           
-       }           
-       tmpImg.src = imageURI;
-    },
-    
-    onFail = function(message) {
-        console.log('Failed because: ' + message);
-    };
-    
-    $("#clientPics").onTapEnd(function(gesture) {   
-        $("#clientPicsBox").show();
-    });
-
-    // FIXME CHECK
-    $("#clientPicsBox").onTapEnd(function(gesture) {   
-        $("#clientPicsBox").hide();
-    });
-
-    $("#clientPics_takePic").onTapEnd(function(gesture) {
-        // Pictures count
-        var count = view.data.pics.length;
-        
-        if (count < 5) {
-            camera();
-        } else {
-            alert("Not allowed more than 5 images");
-        }
-    });
-        
-    $("#clientPics_choosePic").onTapEnd(function(gesture) {
-        var count = view.data.pics.length;
-        
-        if (count < 5) {
-            camera("album");
-        } else {
-            alert("Not allowed more than 5 images");
-        }
-    });
-*/

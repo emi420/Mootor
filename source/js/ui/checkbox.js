@@ -86,7 +86,7 @@ Checkbox.prototype = {
             this.value.push(index.toString());
             this.items[index].el.setAttribute("checked", "checked");
             $(this.pseudoItems[index].el).setClass("moo-active");
-        }
+        } 
     },
 
     /**

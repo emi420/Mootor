@@ -154,8 +154,8 @@ Model.prototype = {
         }
     }, 
 
-    // Delete (not implemented yet)
-    remove: function(id) {        
+    // Destroy (not implemented yet)
+    destroy: function(id) {        
         return null;                    
     },
 

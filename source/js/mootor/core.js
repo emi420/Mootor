@@ -325,6 +325,7 @@ var $ = (function () {
          * @config {string} url URL to open
          * @config {string} method Request method
          * @config {string} headers Request headers
+         * @config {string} data Data that is sent to the server via POST
          * @config {function} callback Function callback
          */
         ajax:  function (options) {
@@ -333,7 +334,7 @@ var $ = (function () {
                 data = null,
                 i;
 			
-			// FIXME CHECK: xmlhttp.status==0 for WebView Ajax
+			// FIXME CHECK: xmlhttp.status==0 for UIWebView?
             xmlhttp.onreadystatechange = function() {
                 if (xmlhttp.readyState==4 && (xmlhttp.status==200 || xmlhttp.status==0)) {
                     options.callback(xmlhttp.responseText);
