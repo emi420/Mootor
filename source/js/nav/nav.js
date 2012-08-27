@@ -169,7 +169,7 @@ $.extend({
         loadNavigationItem: function (gesture, self, navInstance) {
             var i = 0,
                 href = "";
-
+                
             // Clear navigation items styles
             for (i = self.navigationItemsCount; i--;) {
                 $(self.navigationItems[i]).removeClass("active");

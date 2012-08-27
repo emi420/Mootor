@@ -91,7 +91,7 @@ App.prototype = {
 
       }
       
-      viewPath = this.path + "/" + view.id + "/" + view.id
+      viewPath = this.path + "/" + view.id + "/" + view.id;
               
       // Template
       $.ajax({

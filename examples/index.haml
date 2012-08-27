@@ -4,10 +4,10 @@
     %meta{:name=>"viewport", :content=>"width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"}
     %meta{:name=>"apple-mobile-web-app-capable", :content=>"yes"}
     %link{:href=>"../css/styles.css", :media=>"screen",  :rel=>"stylesheet"}
-    %script{:src=>"../js/mootor.min.js",:type=>"text/javascript"}
+    %script{:src=>"../js/mootor.js",:type=>"text/javascript"}
     %script{:src=>"../js/plugins/nav.js",:type=>"text/javascript"}
-    %script{:src=>"../js/plugins/app.min.js",:type=>"text/javascript"}
-    %script{:src=>"../js/plugins/ui.min.js",:type=>"text/javascript"}
+    %script{:src=>"../js/plugins/app.js",:type=>"text/javascript"}
+    %script{:src=>"../js/plugins/ui.js",:type=>"text/javascript"}
 
 %body.main
     %header#moo-header
@@ -21,38 +21,12 @@
                 %a.moo-nav{:href=>"#nav"} Nav
                 %a.moo-nav{:href=>"#ui"} UI
                 %a.moo-nav{:href=>"#gestures"} Gestures
-                %a.moo-nav{:href=>"#camera"} Camera
-                %a.moo-nav{:href=>"#sprites"} Sprites
                      
         #nav.moo-panel
         #item1.moo-panel
         #item2.moo-panel       
         #ui.moo-panel
         #gestures.moo-panel
-        #camera.moo-panel
-         
-        #sprites.moo-panel
-            .moo-sample-icon.arrow  
-                .moo-ui-badge
-                    2
-            .moo-sample-icon.bell
-                .moo-ui-badge
-                    22
-            .moo-sample-icon.burst
-                .moo-ui-badge
-                    522
-            .moo-sample-icon.medium
-                .moo-ui-badge
-                    22
-            .moo-sample-icon.medium
-                .moo-ui-badge
-                    2
-            .moo-sample-icon.small
-                .moo-ui-badge
-                    22
-            .moo-sample-icon.small
-                .moo-ui-badge
-                    2
 
 :javascript    
         
@@ -74,7 +48,6 @@
                     "item1",
                     "item2",
                     "gestures",
-                    "camera"
                ],
                nav: myNav
            });
