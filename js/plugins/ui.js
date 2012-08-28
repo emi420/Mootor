@@ -1065,6 +1065,8 @@ Camera.prototype = {
         $(tmpDiv.firstChild).show();
         this.imageList.appendChild(tmpDiv.firstChild); 
 
+        $(this.el).removeClass("moo-empty");
+
         this.count++;
         
     },
@@ -1096,6 +1098,8 @@ $.extend({
         el.innerHTML = _templates.camera;
 
         self.el = el.firstChild;
+        $(self.el).setClass("moo-empty");
+
         
         if (self.position == "top") {
             $(self.el).setClass("moo-top");
