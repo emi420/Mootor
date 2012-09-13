@@ -45,7 +45,7 @@
 }
 .moo-ui-text {
     @extend .moo-ui-input-container;
-    padding: 0.25em 2.25em 0.25em 0.25em; 
+    padding: 0.35em 2.25em 0.25em 0.25em; 
     input { @extend .moo-ui-input; }
 }
 .moo-ui-textarea {
@@ -220,6 +220,16 @@
     }
 
 }
+.moo-ui-checkbox-icon {
+    display: block;
+    position: absolute;
+    left: 0.5em;
+    top: 0.5em;
+    background-color: #CCC;
+    border: 1px solid #999;
+    width: 1em;
+    height: 1em;
+}
 .moo-ui-checkbox {
     @include float-right;
     position: relative;
@@ -235,16 +245,6 @@
         padding: 0.5em 0.5em 0.5em 2em;
         background: #FFF;
         font-size: 1.4em;
-        .moo-ui-checkbox-icon {
-            display: block;
-            position: absolute;
-            left: 0.5em;
-            top: 0.5em;
-            background-color: #CCC;
-            border: 1px solid #999;
-            width: 1em;
-            height: 1em;
-        }
     }
     &.moo-active {
         .moo-ui-checkbox-icon {

@@ -27,7 +27,7 @@
     display: none;
     background-color: #fff;
     border-top: 1px solid #999;
-    overflow: hidden;
+    @extend .clearfix;
     &.moo-active { 
         display: block;
     }
