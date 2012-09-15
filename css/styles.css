@@ -1,0 +1,1199 @@
+@charset "utf-8";
+/* mootor.css - Basic styling for Mootor, a Html5 Javascript for application developement. - (c) 2012 Natalia Petit (natalia.petit@voolks.com) */
+/* line 23, ../source/css/sass/_normalize.scss */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section,
+summary {
+  display: block;
+}
+
+/* line 35, ../source/css/sass/_normalize.scss */
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* line 44, ../source/css/sass/_normalize.scss */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* line 57, ../source/css/sass/_normalize.scss */
+html,
+button,
+input,
+select,
+textarea {
+  font-family: sans-serif;
+}
+
+/* line 70, ../source/css/sass/_normalize.scss */
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+/* line 77, ../source/css/sass/_normalize.scss */
+sup {
+  top: -0.5em;
+}
+
+/* line 81, ../source/css/sass/_normalize.scss */
+sub {
+  bottom: -0.25em;
+}
+
+/* line 93, ../source/css/sass/_normalize.scss */
+ol,
+ul {
+  list-style: none;
+}
+
+/* line 103, ../source/css/sass/_normalize.scss */
+dd,
+dl,
+menu,
+ol,
+ul {
+  margin: 0;
+}
+
+/* line 111, ../source/css/sass/_normalize.scss */
+menu,
+ol,
+ul {
+  padding: 0;
+}
+
+/* line 122, ../source/css/sass/_normalize.scss */
+form {
+  margin: 0;
+}
+
+/* line 126, ../source/css/sass/_normalize.scss */
+fieldset {
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em;
+}
+
+/* line 138, ../source/css/sass/_normalize.scss */
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  cursor: pointer;
+  -webkit-appearance: button;
+}
+
+/* line 150, ../source/css/sass/_normalize.scss */
+button,
+input,
+select,
+textarea {
+  font-size: 100%;
+  margin: 0;
+  vertical-align: baseline;
+}
+
+/* line 165, ../source/css/sass/_normalize.scss */
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+
+/* line 175, ../source/css/sass/_normalize.scss */
+a, a:hover, a:focus,
+input, input:focus,
+select, select:focus,
+textarea, textarea:focus {
+  outline: none;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+
+/* line 183, ../source/css/sass/_normalize.scss */
+button[disabled],
+input[disabled] {
+  cursor: default;
+}
+
+/* line 190, ../source/css/sass/_normalize.scss */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+/* line 197, ../source/css/sass/_normalize.scss */
+input[type="search"] {
+  -webkit-appearance: textfield;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+/* line 206, ../source/css/sass/_normalize.scss */
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/* line 213, ../source/css/sass/_normalize.scss */
+textarea {
+  vertical-align: top;
+}
+
+/* line 224, ../source/css/sass/_normalize.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 17, default/_text.scss */
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 0.65em;
+  text-align: center;
+}
+
+/* line 23, default/_text.scss */
+h1 {
+  font-size: 2.3em;
+  text-align: center;
+  margin: 0.62em 0;
+}
+
+/* line 29, default/_text.scss */
+h2 {
+  font-size: 7em;
+  margin: 0.5em 0;
+}
+
+/* line 34, default/_text.scss */
+h3 {
+  font-size: 1.83em;
+  margin: 0.67em 0;
+}
+
+/* line 39, default/_text.scss */
+h4 {
+  font-size: 1.5em;
+  margin: 1.33em 0;
+}
+
+/* line 44, default/_text.scss */
+h5 {
+  font-size: 0.83em;
+  margin: 1.67em 0;
+}
+
+/* line 49, default/_text.scss */
+h6 {
+  font-size: 0.75em;
+  margin: 2.33em 0;
+}
+
+/* line 54, default/_text.scss */
+p {
+  font-size: 3em;
+  text-align: justify;
+  padding: 1em;
+  line-height: 150%;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, "Droid Serif", serif;
+  letter-spacing: 0;
+}
+
+/* line 63, default/_text.scss */
+small {
+  font-size: 75%;
+}
+
+@media only screen and (max-width: 479px) {
+  /* line 74, default/_text.scss */
+  body {
+    font-size: 0.5em;
+  }
+}
+@media only screen and (min-width: 480px) and (max-width: 599px) {
+  /* line 82, default/_text.scss */
+  body {
+    font-size: 0.65em;
+  }
+}
+@media only screen and (min-width: 480px) and (max-width: 599px) and (orientation: landscape) {
+  /* line 84, default/_text.scss */
+  body {
+    font-size: 0.5em;
+  }
+}
+@media only screen and (min-width: 600px) and (max-width: 767px) {
+  /* line 92, default/_text.scss */
+  body {
+    font-size: 0.75em;
+  }
+}
+@media only screen and (min-width: 600px) and (max-width: 767px) and (orientation: landscape) {
+  /* line 94, default/_text.scss */
+  body {
+    font-size: 0.65em;
+  }
+}
+@media only screen and (min-width: 768px) {
+  /* line 102, default/_text.scss */
+  body {
+    font-size: 0.85em;
+  }
+}
+@media only screen and (min-width: 768px) and (orientation: landscape) {
+  /* line 104, default/_text.scss */
+  body {
+    font-size: 0.75em;
+  }
+}
+@media only screen and (min-width: 992px) {
+  /* line 111, default/_text.scss */
+  body {
+    font-size: 1em;
+  }
+}
+/* line 9, ../source/css/sass/_mootor.nav.scss */
+body, html {
+  height: 100%;
+  background: #ccc;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  max-width: 100%;
+  width: 100%;
+  max-height: 100%;
+}
+
+/* line 21, ../source/css/sass/_mootor.nav.scss */
+.moo-header {
+  text-align: left;
+  z-index: 9999;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: .6em 1em;
+}
+/* line 28, ../source/css/sass/_mootor.nav.scss */
+.moo-header nav {
+  position: absolute;
+  margin-top: 0;
+  top: 1.6em;
+  left: 1.5em;
+}
+/* line 34, ../source/css/sass/_mootor.nav.scss */
+.moo-header nav a {
+  padding: .5em 1em;
+  width: auto;
+  display: inline;
+  font-size: 1.5em;
+}
+
+/* line 44, ../source/css/sass/_mootor.nav.scss */
+.moo-panels {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  min-height: 100%;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: #f7f7f7;
+}
+
+/* line 54, ../source/css/sass/_mootor.nav.scss */
+.moo-panel {
+  min-height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+/* line 64, ../source/css/sass/_mootor.nav.scss */
+nav ul,
+nav ol {
+  list-style: none;
+}
+/* line 68, ../source/css/sass/_mootor.nav.scss */
+nav a {
+  text-decoration: none;
+  text-align: left;
+  display: block;
+  padding: 1em;
+}
+
+/* line 78, ../source/css/sass/_mootor.nav.scss */
+.moo-panel {
+  -webkit-transition-duration: 0;
+  -webkit-transform: translate3d(0, 0, 0);
+}
+
+/* line 5, ../source/css/sass/_mootor.nav.tabs.scss */
+.moo-nav-tabs-container {
+  padding: 2em 0;
+}
+
+/* line 8, ../source/css/sass/_mootor.nav.tabs.scss */
+.moo-nav-tabs-header {
+  height: 5em;
+}
+/* line 10, ../source/css/sass/_mootor.nav.tabs.scss */
+.moo-nav-tabs-header .moo-tab {
+  color: #999;
+  background-color: #ddd;
+  border: 1px solid #ddd;
+  -webkit-border-radius: 5px 5px 0 0;
+  -moz-border-radius: 5px 5px 0 0;
+  -ms-border-radius: 5px 5px 0 0;
+  -o-border-radius: 5px 5px 0 0;
+  border-radius: 5px 5px 0 0;
+  display: inline-block;
+  padding: .2em 1em;
+  height: 100%;
+}
+/* line 18, ../source/css/sass/_mootor.nav.tabs.scss */
+.moo-nav-tabs-header .moo-tab.moo-active {
+  color: #333;
+  background-color: #fff;
+  border-color: #999 #999 #fff #999;
+  height: 104%;
+}
+
+/* line 26, ../source/css/sass/_mootor.nav.tabs.scss */
+.moo-tab-content {
+  display: none;
+  background-color: #fff;
+  border-top: 1px solid #999;
+}
+/* line 31, ../source/css/sass/_mootor.nav.tabs.scss */
+.moo-tab-content.moo-active {
+  display: block;
+}
+
+/* line 4, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-input-container, .moo-ui-text, .moo-ui-textarea, .moo-ui-select-container {
+  display: inline;
+  float: right;
+  border: 1px solid #666;
+  border-radius: 5px;
+  background-color: #FFF;
+  position: relative;
+  width: 75%;
+}
+
+/* line 12, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-input, .moo-ui-text input, .moo-ui-textarea textarea {
+  -webkit-appearance: none;
+  /* Remove default iOS shadow */
+  border: none;
+  background: none;
+  font-size: 1.5em;
+  line-height: 1.5em;
+  width: 100%;
+}
+
+/* line 24, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-form {
+  text-align: left;
+  width: 90%;
+  margin: 5em auto;
+  background-color: #FFF;
+  border: 1px solid #CCC;
+  border-radius: 5px;
+}
+/* line 32, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-form .moo-field {
+  display: block;
+  padding: 1em 2em;
+  border-top: 1px solid #CCC;
+}
+/* line 37, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-form .moo-field:first-child {
+  border-top: none;
+}
+/* line 38, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-form .moo-field > label, .moo-ui-form .moo-field > legend {
+  display: inline;
+  float: left;
+  font-size: 2em;
+  font-weight: 700;
+  width: 25%;
+}
+
+/* line 46, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-text {
+  padding: 0.35em 2.25em 0.25em 0.25em;
+}
+
+/* line 51, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-textarea {
+  padding: 0.25em;
+}
+
+/* line 56, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-select-container {
+  padding: 0.25em;
+  height: 3em;
+}
+/* line 61, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-select-container .moo-ui-select-text {
+  font-size: 1.5em;
+  line-height: 1.5;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline;
+  float: left;
+  padding: 0 0.35em;
+  width: 90%;
+}
+/* line 71, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-select-container .moo-ui-select-link {
+  color: #000;
+  line-height: 2.25em;
+  text-align: right;
+  text-decoration: none;
+  display: inline;
+  float: right;
+  height: 100%;
+  padding: 0 0.5em;
+  position: relative;
+  right: 0;
+  z-index: 10;
+}
+/* line 82, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-select-container .moo-ui-select-link:after {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #cccccc));
+  background: -webkit-linear-gradient(top, #ffffff, #cccccc);
+  background: -moz-linear-gradient(top, #ffffff, #cccccc);
+  background: -o-linear-gradient(top, #ffffff, #cccccc);
+  background: linear-gradient(top, #ffffff, #cccccc);
+  border-top: 1px solid #666;
+  border-right: 1px solid #666;
+  border-bottom: 1px solid #666;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  content: " ";
+  display: block;
+  position: absolute;
+  top: -0.35em;
+  right: -0.35em;
+  width: 2.75em;
+  height: 2.8em;
+  z-index: -1;
+}
+/* line 99, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-select-container .moo-ui-select-menu {
+  background-color: #999;
+  border-radius: 5px;
+  display: none;
+  padding: 1em;
+  position: absolute;
+  width: 99%;
+  z-index: 1000;
+}
+/* line 108, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-select-container .moo-ui-select-wrapper {
+  overflow: hidden;
+  height: 100%;
+}
+/* line 112, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-select-container .moo-ui-select-list {
+  font-size: 1.5em;
+  background: #FFF;
+  border-radius: 5px;
+}
+/* line 116, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-select-container .moo-ui-select-list li {
+  padding: 1em;
+  border-bottom: 1px solid #CCC;
+  white-space: nowrap;
+}
+/* line 120, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-select-container .moo-ui-select-list li:last-child {
+  border: none;
+}
+/* line 121, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-select-container .moo-ui-select-list li.selected {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #daeaec), color-stop(100%, #cee3e6));
+  background: -webkit-linear-gradient(top, #daeaec, #cee3e6);
+  background: -moz-linear-gradient(top, #daeaec, #cee3e6);
+  background: -o-linear-gradient(top, #daeaec, #cee3e6);
+  background: linear-gradient(top, #daeaec, #cee3e6);
+  border-top-color: #AEBBBD;
+  border-bottom-color: #AEBBBD;
+  color: #3F8D94;
+}
+/* line 130, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-select-container.moo-bottom .moo-ui-select-menu {
+  top: 4.5em;
+}
+/* line 132, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-select-container.moo-bottom .moo-ui-select-menu:before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: -2.9em;
+  left: 25%;
+  border-top: 15px solid transparent;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 15px solid #999;
+}
+/* line 146, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-select-container.moo-top .moo-ui-select-menu {
+  bottom: 4.5em;
+}
+/* line 148, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-select-container.moo-top .moo-ui-select-menu:after {
+  content: " ";
+  display: block;
+  position: absolute;
+  bottom: -2.9em;
+  left: 25%;
+  border-bottom: 1.5em solid transparent;
+  border-left: 2em solid transparent;
+  border-right: 2em solid transparent;
+  border-top: 1.5em solid #999;
+}
+
+/*
+*  Cleanbox is the styling of the icon link used to "clean" a text input
+*/
+/* line 165, ../source/css/sass/_mootor.ui.form.scss */
+.cleanbox {
+  display: block;
+  padding: 0 0.35em;
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #666;
+  font-size: 2em;
+  font-weight: 700;
+  line-height: 1.5em;
+  text-decoration: none;
+}
+
+/* line 177, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-radio {
+  display: inline;
+  float: right;
+  position: relative;
+  width: 75%;
+}
+/* line 181, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-radio input {
+  position: absolute;
+  top: 0.5em;
+  left: 0.5em;
+}
+/* line 186, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-radio label {
+  position: relative;
+  display: block;
+  padding: 0.5em 0.5em 0.5em 2em;
+  background: #FFF;
+  font-size: 1.4em;
+}
+/* line 192, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-radio label .moo-ui-radio-icon {
+  display: block;
+  position: absolute;
+  left: 0.5em;
+  top: 0.5em;
+  background-color: #CCC;
+  border: 1px solid #999;
+  border-radius: 0.5em;
+  width: 1em;
+  height: 1em;
+}
+/* line 205, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-radio.moo-active .moo-ui-radio-icon {
+  background-color: #666;
+}
+/* line 207, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-radio.moo-active .moo-ui-radio-icon:after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0.14em;
+  left: 0.14em;
+  background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 6, color-stop(0%, #ffffff), color-stop(100%, #a6c9fd));
+  background: -webkit-radial-gradient(#ffffff, #a6c9fd 6px);
+  background: -moz-radial-gradient(#ffffff, #a6c9fd 6px);
+  background: -o-radial-gradient(#ffffff, #a6c9fd 6px);
+  background: radial-gradient(#ffffff, #a6c9fd 6px);
+  border-radius: 0.5em;
+  -webkit-box-shadow: 0 0 2px 2px #666666;
+  -moz-box-shadow: 0 0 2px 2px #666666;
+  box-shadow: 0 0 2px 2px #666666;
+  width: 0.6em;
+  height: 0.6em;
+}
+
+/* line 223, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-checkbox-icon {
+  display: block;
+  position: absolute;
+  left: 0.5em;
+  top: 0.5em;
+  background-color: #CCC;
+  border: 1px solid #999;
+  width: 1em;
+  height: 1em;
+}
+
+/* line 233, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-checkbox {
+  display: inline;
+  float: right;
+  position: relative;
+  width: 75%;
+}
+/* line 237, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-checkbox input {
+  position: absolute;
+  top: 0.5em;
+  left: 0.5em;
+}
+/* line 242, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-checkbox label {
+  position: relative;
+  display: block;
+  padding: 0.5em 0.5em 0.5em 2em;
+  background: #FFF;
+  font-size: 1.4em;
+}
+/* line 250, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-checkbox.moo-active .moo-ui-checkbox-icon {
+  background-color: #666;
+}
+/* line 252, ../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-checkbox.moo-active .moo-ui-checkbox-icon:after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0.2em;
+  left: 0.2em;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #bdd7fd));
+  background: -webkit-linear-gradient(top, #ffffff, #bdd7fd);
+  background: -moz-linear-gradient(top, #ffffff, #bdd7fd);
+  background: -o-linear-gradient(top, #ffffff, #bdd7fd);
+  background: linear-gradient(top, #ffffff, #bdd7fd);
+  -webkit-box-shadow: 0 0 2px 2px #666666;
+  -moz-box-shadow: 0 0 2px 2px #666666;
+  box-shadow: 0 0 2px 2px #666666;
+  width: 0.6em;
+  height: 0.6em;
+}
+
+/* line 5, ../source/css/sass/_mootor.ui.switch.scss */
+.moo-ui-switch {
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #dddddd), color-stop(45%, #ffffff));
+  background-image: -webkit-linear-gradient(top, #dddddd, #ffffff 45%);
+  background-image: -moz-linear-gradient(top, #dddddd, #ffffff 45%);
+  background-image: -o-linear-gradient(top, #dddddd, #ffffff 45%);
+  background-image: linear-gradient(top, #dddddd, #ffffff 45%);
+  border: 1px solid #666;
+  border-radius: 0.5em;
+  display: inline;
+  float: right;
+  overflow: hidden;
+  padding: 0.1em;
+  height: 2.8em;
+  width: 9em;
+}
+/* line 14, ../source/css/sass/_mootor.ui.switch.scss */
+.moo-ui-switch b {
+  font-weight: 700;
+  line-height: 2.8em;
+  text-align: center;
+  display: block;
+  position: relative;
+  height: auto;
+  width: auto;
+  -webkit-transform: translate3d(0, 0, 0);
+}
+/* line 23, ../source/css/sass/_mootor.ui.switch.scss */
+.moo-ui-switch b .moo-button {
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #dedede));
+  background-image: -webkit-linear-gradient(top, #ffffff, #dedede);
+  background-image: -moz-linear-gradient(top, #ffffff, #dedede);
+  background-image: -o-linear-gradient(top, #ffffff, #dedede);
+  background-image: linear-gradient(top, #ffffff, #dedede);
+  border: 1px solid #666;
+  border-radius: 0.5em;
+  display: block;
+  position: relative;
+  top: -0.2em;
+  height: 2.8em;
+  width: 3em;
+}
+/* line 34, ../source/css/sass/_mootor.ui.switch.scss */
+.moo-ui-switch b .moo-before,
+.moo-ui-switch b .moo-after {
+  display: block;
+  position: absolute;
+  top: -0.1em;
+  height: 2.8em;
+  width: 6.55em;
+}
+/* line 40, ../source/css/sass/_mootor.ui.switch.scss */
+.moo-ui-switch b .moo-before::first-letter,
+.moo-ui-switch b .moo-after::first-letter {
+  font-size: 1.5em;
+}
+/* line 42, ../source/css/sass/_mootor.ui.switch.scss */
+.moo-ui-switch b .moo-before {
+  background-color: rgba(66, 66, 66, 0.5);
+  border-radius: 0.35em 0 0 0.35em;
+  color: #fff;
+  left: -6.1em;
+  z-index: -1;
+}
+/* line 49, ../source/css/sass/_mootor.ui.switch.scss */
+.moo-ui-switch b .moo-after {
+  border-radius: 0 0.35em 0.35em 0;
+  color: #333;
+  right: -0.3em;
+}
+/* line 57, ../source/css/sass/_mootor.ui.switch.scss */
+.moo-ui-switch.moo-on b, .moo-ui-switch.moo-off b {
+  -webkit-transition-duration: .25s;
+}
+/* line 62, ../source/css/sass/_mootor.ui.switch.scss */
+.moo-ui-switch.moo-on b {
+  -webkit-transform: translate3d(5.85em, 0, 0);
+}
+/* line 67, ../source/css/sass/_mootor.ui.switch.scss */
+.moo-ui-switch.moo-off b {
+  -webkit-transform: translate3d(-0.15em, 0, 0);
+}
+
+/* line 4, ../source/css/sass/_mootor.ui.tooltip.scss */
+.moo_tooltip {
+  position: absolute;
+  background: white;
+  border: 1px solid #f7f7f7;
+  padding: 1em;
+  text-align: center;
+}
+
+/* line 5, ../source/css/sass/_mootor.ui.overlay.scss */
+.moo-overlay {
+  background-color: #f7f7f7;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 500;
+}
+/* line 13, ../source/css/sass/_mootor.ui.overlay.scss */
+.moo-overlay.moo-hidden {
+  display: none;
+}
+
+/* line 16, ../source/css/sass/_mootor.ui.loading.scss */
+.moo-ui-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 1em;
+  -webkit-animation-duration: 1.5s;
+}
+
+/* line 29, ../source/css/sass/_mootor.ui.loading.scss */
+.moo-ui-loading {
+  height: 0;
+  width: 0;
+  z-index: 550;
+  -webkit-animation-name: rotateThis;
+  -webkit-animation-duration: 0.5s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: steps(8, start);
+}
+/* line 37, ../source/css/sass/_mootor.ui.loading.scss */
+.moo-ui-loading.moo-hidden {
+  display: none;
+}
+/* line 40, ../source/css/sass/_mootor.ui.loading.scss */
+.moo-ui-loading .moo-ui-loading-block {
+  height: 3em;
+  width: 1em;
+  float: left;
+  position: absolute;
+  top: -1.5em;
+  left: -0.5em;
+}
+/* line 48, ../source/css/sass/_mootor.ui.loading.scss */
+.moo-ui-loading .moo-loading-01 {
+  background-color: white;
+  -webkit-transform: rotate(-90deg) translate(0, -3em);
+}
+/* line 52, ../source/css/sass/_mootor.ui.loading.scss */
+.moo-ui-loading .moo-loading-02 {
+  background-color: #dfdfdf;
+  -webkit-transform: rotate(-45deg) translate(0, -3em);
+}
+/* line 56, ../source/css/sass/_mootor.ui.loading.scss */
+.moo-ui-loading .moo-loading-03 {
+  background-color: #bfbfbf;
+  -webkit-transform: rotate(0deg) translate(0, -3em);
+}
+/* line 60, ../source/css/sass/_mootor.ui.loading.scss */
+.moo-ui-loading .moo-loading-04 {
+  background-color: #9f9f9f;
+  -webkit-transform: rotate(45deg) translate(0, -3em);
+}
+/* line 64, ../source/css/sass/_mootor.ui.loading.scss */
+.moo-ui-loading .moo-loading-05 {
+  background-color: gray;
+  -webkit-transform: rotate(90deg) translate(0, -3em);
+}
+/* line 68, ../source/css/sass/_mootor.ui.loading.scss */
+.moo-ui-loading .moo-loading-06 {
+  background-color: #606060;
+  -webkit-transform: rotate(135deg) translate(0, -3em);
+}
+/* line 72, ../source/css/sass/_mootor.ui.loading.scss */
+.moo-ui-loading .moo-loading-07 {
+  background-color: #404040;
+  -webkit-transform: rotate(180deg) translate(0, -3em);
+}
+/* line 76, ../source/css/sass/_mootor.ui.loading.scss */
+.moo-ui-loading .moo-loading-08 {
+  background-color: #202020;
+  -webkit-transform: rotate(-135deg) translate(0, -3em);
+}
+
+@-webkit-keyframes rotateThis {
+  /* line 84, ../source/css/sass/_mootor.ui.loading.scss */
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+
+  /* line 85, ../source/css/sass/_mootor.ui.loading.scss */
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+/* line 5, ../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-placeholder {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  z-index: 1050;
+}
+/* line 12, ../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-placeholder.moo-hidden {
+  display: none;
+}
+
+/* line 16, ../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-container {
+  background: #333;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+  color: #333;
+  padding: 0.5em;
+  position: relative;
+  top: -10em;
+  left: -15em;
+  width: 31em;
+  height: auto;
+  z-index: 1500;
+}
+/* line 27, ../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-container header {
+  color: #FFF;
+  text-shadow: 0px 0px 1px #aaaaaa;
+}
+
+/* line 32, ../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-panel {
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+  background-color: #FFF;
+  width: 30em;
+  overflow: hidden;
+  padding: 5px;
+  /* Pasar estos a estilos de botones genericos */
+}
+/* line 38, ../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-panel .moo-title {
+  color: #000;
+  font-size: 2em;
+  font-weight: 700;
+  white-space: nowrap;
+}
+/* line 44, ../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-panel .moo-text {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1.5em;
+  line-height: 120%;
+  padding: 0;
+  margin: 0.5em;
+}
+/* line 53, ../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-panel .moo-buttons {
+  margin: 1.5em 0 0;
+  overflow: hidden;
+}
+/* line 55, ../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-panel .moo-ui-cancel,
+.moo-ui-modal-panel .moo-ui-submit {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  font-size: 1.5em;
+  font-weight: 700;
+  line-height: 200%;
+  width: 49%;
+}
+/* line 62, ../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-panel .moo-ui-cancel {
+  display: inline;
+  float: left;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #eeeeee), color-stop(100%, #cccccc));
+  background: -webkit-linear-gradient(top, #eeeeee, #cccccc);
+  background: -moz-linear-gradient(top, #eeeeee, #cccccc);
+  background: -o-linear-gradient(top, #eeeeee, #cccccc);
+  background: linear-gradient(top, #eeeeee, #cccccc);
+  border: 1px solid #c1c1c1;
+}
+/* line 67, ../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-panel .moo-ui-submit {
+  display: inline;
+  float: right;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #cccccc), color-stop(100%, #888888));
+  background: -webkit-linear-gradient(top, #cccccc, #888888);
+  background: -moz-linear-gradient(top, #cccccc, #888888);
+  background: -o-linear-gradient(top, #cccccc, #888888);
+  background: linear-gradient(top, #cccccc, #888888);
+  border: 1px solid #a1a1a1;
+  color: #FFF;
+}
+
+/* line 5, ../source/css/sass/_mootor.ui.image.scss */
+.moo-ui-image-container {
+  background-color: #333;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+  padding: 3px;
+  position: absolute;
+  top: 20%;
+  left: 10%;
+  min-width: 236px;
+  max-width: 581px;
+  width: 80%;
+  height: auto;
+  z-index: 800;
+}
+/* line 17, ../source/css/sass/_mootor.ui.image.scss */
+.moo-ui-image-container header {
+  padding: 4px;
+  overflow: hidden;
+}
+/* line 20, ../source/css/sass/_mootor.ui.image.scss */
+.moo-ui-image-container header a {
+  color: #efefef;
+  font-size: 1.2em;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #777777), color-stop(100%, #444444));
+  background: -webkit-linear-gradient(top, #777777, #444444);
+  background: -moz-linear-gradient(top, #777777, #444444);
+  background: -o-linear-gradient(top, #777777, #444444);
+  background: linear-gradient(top, #777777, #444444);
+  border: 1px solid #444;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  display: inline-block;
+  float: right;
+  margin: 2px;
+  padding: 2px 4px;
+}
+
+/* line 33, ../source/css/sass/_mootor.ui.image.scss */
+.moo-ui-image-panel {
+  background-color: #FFF;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-height: 232px;
+  z-index: 1000;
+}
+/* line 42, ../source/css/sass/_mootor.ui.image.scss */
+.moo-ui-image-panel .moo-image-wrapper {
+  display: inline;
+  float: left;
+  margin: 0.5em;
+}
+/* line 43, ../source/css/sass/_mootor.ui.image.scss */
+.moo-ui-image-panel .moo-image {
+  line-height: 1px;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid #eee;
+  display: table-cell;
+  margin: 2px;
+  width: 105px;
+  height: 105px;
+}
+/* line 52, ../source/css/sass/_mootor.ui.image.scss */
+.moo-ui-image-panel .moo-image.moo-active {
+  border: 2px solid #000;
+}
+/* line 53, ../source/css/sass/_mootor.ui.image.scss */
+.moo-ui-image-panel .moo-image img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* line 5, ../source/css/sass/_mootor.ui.badge.scss */
+.moo-sample-icon {
+  background-color: #ccc;
+  border-radius: 6px;
+  border: 1px solid #999;
+  display: inline-block;
+  margin: 0 20px;
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+/* line 14, ../source/css/sass/_mootor.ui.badge.scss */
+.moo-sample-icon.medium {
+  width: 50px;
+  height: 50px;
+  font-size: 0.8em;
+}
+/* line 19, ../source/css/sass/_mootor.ui.badge.scss */
+.moo-sample-icon.small {
+  width: 24px;
+  height: 24px;
+  font-size: 0.5em;
+}
+
+/* line 26, ../source/css/sass/_mootor.ui.badge.scss */
+.moo-ui-badge {
+  font-size: 1.8em;
+  line-height: 125%;
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #666;
+  border-radius: 10em;
+  display: block;
+  padding: 0.2em 0.5em;
+  position: absolute;
+  top: -0.5em;
+  right: -0.5em;
+}
+
+/* line 24, default/styles.scss */
+.moo-panel {
+  background: #f7f7f7;
+}
+
+/* line 28, default/styles.scss */
+.moo-header {
+  box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.1);
+  color: white;
+  font-weight: bold;
+  background: #333333;
+  border: 1px solid #333333;
+}
+/* line 34, default/styles.scss */
+.moo-header nav a {
+  color: white;
+  border: 0;
+  font-size: 2em;
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-border-radius: 0.2em;
+  -moz-border-radius: 0.2em;
+  -ms-border-radius: 0.2em;
+  -o-border-radius: 0.2em;
+  border-radius: 0.2em;
+  -webkit-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+/* line 44, default/styles.scss */
+nav a {
+  font-size: 3em;
+  color: black;
+  border-bottom: 1px solid #f7f7f7;
+  background: #f7f7f7;
+  border-top: 1px solid #dddddd;
+}
+
+/* line 52, default/styles.scss */
+.moo-nav.active {
+  background: #29a6f7;
+  color: white;
+}
+
+/* line 60, default/styles.scss */
+.clearfix:before, .moo-tab-content:before, .moo-ui-form:before, .moo-ui-form .moo-field:before,
+.clearfix:after,
+.moo-tab-content:after,
+.moo-ui-form:after,
+.moo-ui-form .moo-field:after {
+  content: "";
+  display: table;
+}
+
+/* line 64, default/styles.scss */
+.clearfix:after, .moo-tab-content:after, .moo-ui-form:after, .moo-ui-form .moo-field:after {
+  clear: both;
+}
+
+/* line 70, default/styles.scss */
+.button {
+  font-size: 1.4em;
+  padding: .75em;
+  font-weight: bold;
+}
+
+/* line 76, default/styles.scss */
+.moo-ui-form .button {
+  float: right;
+}
