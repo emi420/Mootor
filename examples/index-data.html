@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<head>
+  <title>Mootor demo</title>
+  <meta content='width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0' name='viewport' />
+  <meta content='yes' name='apple-mobile-web-app-capable' />
+  <link href='../css/styles.css' media='screen' rel='stylesheet' />
+  <script src='../js/mootor.min.js' type='text/javascript'></script>
+  <script src='../js/plugins/nav.js' type='text/javascript'></script>
+  <script src='../js/plugins/app.js' type='text/javascript'></script>
+  <script src='../js/plugins/ui.js' type='text/javascript'></script>
+</head>
+<body class='main'>
+  <header class='moo-header' id='moo-header'>
+    <h1>Mootor demo</h1>
+    <nav>
+      <a class='moo-nav-back' href='#moo-nav-back'>Back</a>
+    </nav>
+  </header>
+  <div class='moo-panels' id='main'>
+    <div class='moo-panel' id='data'></div>
+  </div>
+</body>
+<script type='text/javascript'>
+  //<![CDATA[
+         
+    $(document).ready(function() {
+    
+       "use strict";
+    
+       // Navigation panels
+       var nav = $("#main").nav(),
+    
+       // Application
+       app = $.app({
+           id: "demo",
+           path: "views",
+           views: [
+                "data",
+           ],
+           nav: nav
+       });
+       
+       // Preload a view
+       app.load(
+            app.views[0],
+            nav.get("data")
+       );           
+                              
+    });
+  //]]>
+</script>
