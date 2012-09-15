@@ -131,7 +131,7 @@ $.extend({
                         x:  -((self._config.width + self._config.margin) * 4),
                         y:0
                     }, self);
-                    item.hide();
+                    $(item.el).hide();
                 } else {
                     _translate({
                         el: item.el,
@@ -187,8 +187,8 @@ $.extend({
 
         },
     
-    /**
-     * Move panel
+    /** 
+     * Move panel 
      */
     move: function(self, item, gesture) {
            self._config.y = self._config.y + (gesture.y - gesture.lastY);
@@ -205,7 +205,7 @@ $.extend({
     setStylesWhenHeaderActive: function(height, navInstance) {
         var i;
         for (i = navInstance._config.count; i--;) {
-            navInstance.items[i].el.style.paddingTop = height + "px";
+            navInstance.items[i].el.style.paddingTop = height/2 + "px";
         }
     }
 

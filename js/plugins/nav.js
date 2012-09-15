@@ -646,7 +646,7 @@ $.extend({
                    
             // Current panel
             panel = navInstance.items[navInstance.current];
-            // Back panel
+            // Back panel 
             back = navInstance.items[navInstance._config.back];
             
             $(panel.el).show();
@@ -737,6 +737,7 @@ $.extend({
                         x:  -((self._config.width + self._config.margin) * 4),
                         y:0
                     }, self);
+                    $(item.el).hide();
                 } else {
                     _translate({
                         el: item.el,
@@ -783,16 +784,17 @@ $.extend({
                         el: panel.el,
                         duration: 0.25
                     }, self);
-                } else {
-                    // TODO: boost movement
                 }
+                
+                // TODO: boost movement
+                
 
             }
 
         },
     
-    /**
-     * Move panels
+    /** 
+     * Move panel 
      */
     move: function(self, item, gesture) {
            self._config.y = self._config.y + (gesture.y - gesture.lastY);
@@ -809,7 +811,7 @@ $.extend({
     setStylesWhenHeaderActive: function(height, navInstance) {
         var i;
         for (i = navInstance._config.count; i--;) {
-            navInstance.items[i].el.style.paddingTop = height + "px";
+            navInstance.items[i].el.style.paddingTop = height/2 + "px";
         }
     }
 

@@ -67,11 +67,11 @@ var $ = (function () {
         // Get element from query
         if (qtype === "string") {
 
-            el = document.querySelectorAll(query);                
+            el = context.querySelectorAll(query);                
             
             if (query.indexOf("#") > -1) {
 
-                this[0] = el = el[0];                
+                el = this[0] = el[0];                
                 if (this[0] !== null) {
                     this.length = 1;                    
                 }
