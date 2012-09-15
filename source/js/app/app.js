@@ -35,7 +35,7 @@ View = function(options, appInstance) {
                     nav: navItem
                });
            }               
-       }
+       };
    }
    
    this.cached = false;
@@ -54,7 +54,8 @@ App.prototype = {
     load: function(view, options) {
     
       var callback = function() {},
-          viewPath = "";
+          viewPath = "",
+          optionsNav = options.nav;
 
       if (options === undefined) {
           options = {};
@@ -83,11 +84,11 @@ App.prototype = {
               // If a navItemInstance param is passed
               // and that object has an onLoadCallback function
               // then call that onLoadContentCallback function                     
-              if (options.nav !== undefined &&
-                  typeof options.nav.onLoadContentCallback === "function") {  
-                  options.nav.onLoadContentCallback();                                     
+              if (optionsNav !== undefined &&
+                  typeof optionsNav.onLoadContentCallback === "function") {  
+                  optionsNav.onLoadContentCallback();                                     
               }                           
-          }
+          };
 
       }
       
@@ -200,7 +201,7 @@ $.extend({
                 return App._collection[i];
             }
         }
-    },
+    }
     
     
 }, App);
@@ -213,12 +214,8 @@ $.extend({
             if (typeof options !== "object") {
                 options = {};
             }
-            options.el = this.el;
-            
-            switch (options.type) {
-                default:
-                    return new App(options);                
-            }
+            options.el = this.el;            
+            return new App(options);                
         }
 }, $);
 

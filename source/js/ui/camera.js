@@ -37,7 +37,7 @@ Camera.prototype = {
     },
     
     hide: function() {
-        $(this.el).hide()
+        $(this.el).hide();
         this._visibility = "hidden";
     },    
 
@@ -113,7 +113,7 @@ Camera.prototype = {
         
     }
     
-}
+};
 
 /*
  * Private static properties
@@ -122,26 +122,27 @@ $.extend({
 
     _makeHTML: function(options, self) {
     
-        var type = options.type,
-            el = document.createElement("div");
+        var el = document.createElement("div"),
+            $selfEl;
         el.innerHTML = _templates.camera;
 
         self.el = el.firstChild;
-        $(self.el).setClass("moo-empty");
+        $selfEl = $(self.el);
+        $selfEl.setClass("moo-empty");
 
         
-        if (self.position == "top") {
-            $(self.el).setClass("moo-top");
-        } else if (self.position == "bottom") {
-            $(self.el).setClass("moo-bottom");            
+        if (self.position === "top") {
+            $selfEl.setClass("moo-top");
+        } else if (self.position === "bottom") {
+            $selfEl.setClass("moo-bottom");            
         }
         
-        self.takeButton = $(self.el).find(".moo-ui-add-new")[0];
-        self.chooseButton = $(self.el).find(".moo-ui-add-filed")[0];
-        self.imageWrapper = $(self.el).find(".moo-image-wrapper")[0];
-        self.imageList = $(self.el).find(".moo-image-list")[0];
+        self.takeButton = $selfEl.find(".moo-ui-add-new")[0];
+        self.chooseButton = $selfEl.find(".moo-ui-add-filed")[0];
+        self.imageWrapper = $selfEl.find(".moo-image-wrapper")[0];
+        self.imageList = $selfEl.find(".moo-image-list")[0];
 
-        $(self.el).hide();
+        $selfEl.hide();
         self._visibility = "hidden";
 
         self.input.appendChild(self.el);
@@ -180,7 +181,8 @@ $.extend({
     },
     
     camera: function(self, sourceType) {
-        var source;
+        var source,
+            onSuccess;
 
         if (typeof self.onCamera === "function") {
             self.onCamera();
@@ -189,10 +191,10 @@ $.extend({
         if (self.disabled !== true) {
             if (window.Camera !== undefined) {
                 if (sourceType === "album") {
-                    source = window.Camera.PictureSourceType.SAVEDPHOTOALBUM
+                    source = window.Camera.PictureSourceType.SAVEDPHOTOALBUM;
                 }
         
-                var onSuccess = function(data) {
+                onSuccess = function(data) {
                    // TODO: update image list? use callback?
                    self.onSuccess(data);
                 };
@@ -205,7 +207,7 @@ $.extend({
                        destinationType: window.Camera.DestinationType.FILE_URI,
                        sourceType: source,
                        targetWidth: self.width,
-                       targetHeight: self.height,
+                       targetHeight: self.height
                    }
                 );
     

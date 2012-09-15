@@ -3,7 +3,6 @@
     var _addGesture,
         _fire,
         _isListed,
-        gestures,
         Gestures;
         
     Gestures = function() {
@@ -23,7 +22,7 @@
         push: function(gesture) {
             this.list.push(gesture);
         }
-    }
+    };
     
     $.gestures = new Gestures();
     
@@ -38,7 +37,7 @@
             gesture = {
                 el: self.el,
                 event: {}
-            }
+            };
             gestureList.push(gesture);
         }
         
@@ -230,6 +229,7 @@
                     e: e
                 },
                 gesture = $.gestures.getByElement(this.el),
+                gestureEvent = gesture.event,
                 date = new Date(),
                 clientX,
                 clientY,
@@ -245,93 +245,93 @@
     
                 this.bind("touchmove", this);
     
-                gesture.event.time = date.getTime();
-                gesture.event.lastTime = date.getMilliseconds();
-                gesture.event.isDraggingY = 0;
-                gesture.event.isDraggingX = 0;
-                gesture.event.mousedown = true;
-                gesture.event.tapped = false;
-                gesture.event.startX = clientX;
-                gesture.event.startY = clientY;
-                gesture.event.swipe = 0;
+                gestureEvent.time = date.getTime();
+                gestureEvent.lastTime = date.getMilliseconds();
+                gestureEvent.isDraggingY = 0;
+                gestureEvent.isDraggingX = 0;
+                gestureEvent.mousedown = true;
+                gestureEvent.tapped = false;
+                gestureEvent.startX = clientX;
+                gestureEvent.startY = clientY;
+                gestureEvent.swipe = 0;
     
                 window.setTimeout(function () {
                     // TapHold
-                    if (gesture.event.mousedown === true) {
+                    if (gestureEvent.mousedown === true) {
                         info.type = "tapHold";
-                        _fire(info, gesture.event.onTapHold);
+                        _fire(info, gestureEvent.onTapHold);
                     }
                 }, 500);
     
-                if (gesture.event.onTapStart !== undefined) {
+                if (gestureEvent.onTapStart !== undefined) {
                     // TapStart
                     info.type = "tapStart";
-                    _fire(info, gesture.event.onTapStart);
+                    _fire(info, gestureEvent.onTapStart);
                 }
             }
     
             if (e.type === "touchmove") {
             
-                time = date.getMilliseconds() - gesture.event.lastTime;
-                time = (time + gesture.event.lastTime) / 2;
+                time = date.getMilliseconds() - gestureEvent.lastTime;
+                time = (time + gestureEvent.lastTime) / 2;
                 
                 info.velocity = {};
                 if (time > 0) {
-                    info.velocity.x = (gesture.event.lastX - gesture.event.x) / time;
-                    info.velocity.y = (gesture.event.lastY - gesture.event.y) / time;
+                    info.velocity.x = (gestureEvent.lastX - gestureEvent.x) / time;
+                    info.velocity.y = (gestureEvent.lastY - gestureEvent.y) / time;
                 } else {
                     info.velocity.x = 0;
                     info.velocity.y = 0;
                 }
 
-                gesture.event.velocity = info.velocity;
+                gestureEvent.velocity = info.velocity;
                 
-                gesture.event.lastTime = date.getMilliseconds();
-                gesture.event.lastY = info.lastY = gesture.event.y;
-                gesture.event.lastX = info.lastX = gesture.event.x;
-                gesture.event.y = info.y = clientY;
-                gesture.event.x = info.x = clientX;
-                info.distanceFromOriginY = clientY - gesture.event.startY;
-                info.distanceFromOriginX = clientX - gesture.event.startX;
+                gestureEvent.lastTime = date.getMilliseconds();
+                gestureEvent.lastY = info.lastY = gestureEvent.y;
+                gestureEvent.lastX = info.lastX = gestureEvent.x;
+                gestureEvent.y = info.y = clientY;
+                gestureEvent.x = info.x = clientX;
+                info.distanceFromOriginY = clientY - gestureEvent.startY;
+                info.distanceFromOriginX = clientX - gestureEvent.startX;
 
     
-                gesture.event.isDraggingY = gesture.event.isDraggingY ?
-                                            gesture.event.isDraggingY : 0;
+                gestureEvent.isDraggingY = gestureEvent.isDraggingY ?
+                                            gestureEvent.isDraggingY : 0;
                                             
-                gesture.event.isDraggingX = gesture.event.isDraggingX ?
-                                            gesture.event.isDraggingX : 0;
+                gestureEvent.isDraggingX = gestureEvent.isDraggingX ?
+                                            gestureEvent.isDraggingX : 0;
     
                 if (gesture.event.isDraggingY === 0 
                     && gesture.event.isDraggingX === 0) 
                 {
                 
                     if (info.distanceFromOriginX > 10) {
-                        gesture.event.isDraggingX = 1;
+                        gestureEvent.isDraggingX = 1;
                         info.type = "dragStart";
                     }
                     if (info.distanceFromOriginX < -10) {
                         info.type = "dragStart";
-                        gesture.event.isDraggingX = -1;
+                        gestureEvent.isDraggingX = -1;
                     }
     
                     if (info.distanceFromOriginY > 10) {
-                        gesture.event.isDraggingY = 1;
+                        gestureEvent.isDraggingY = 1;
                         info.type = "dragStart";
                     }
                     if (info.distanceFromOriginY < -10) {
                         info.type = "dragStart";
-                        gesture.event.isDraggingY = -1;
+                        gestureEvent.isDraggingY = -1;
                     }
     
                     // DragStart   
                     if (info.type === "dragStart") {                 
-                        _fire(info, gesture.event.onDragStart);
+                        _fire(info, gestureEvent.onDragStart);
                     }
                                         
                 } else {
                     // DragMove
                     info.type = "dragMove";
-                    _fire(info, gesture.event.onDragMove);
+                    _fire(info, gestureEvent.onDragMove);
                 }
             }
     
@@ -339,50 +339,50 @@
                
                 info.velocity = {};
                         
-                if (gesture.event.tapped === false) {
+                if (gestureEvent.tapped === false) {
                     this.unbind("touchmove", this);
-                    gesture.event.tapped = true;
-                    info.time = date.getTime() - gesture.event.time;
-                    gesture.event.mousedown = false;
+                    gestureEvent.tapped = true;
+                    info.time = date.getTime() - gestureEvent.time;
+                    gestureEvent.mousedown = false;
                 }
     
-                if ((gesture.event.isDraggingY !== 0 || 
-                    gesture.event.isDraggingX !== 0)) {
+                if ((gestureEvent.isDraggingY !== 0 || 
+                    gestureEvent.isDraggingX !== 0)) {
     
                     // Swipe
-                    if (gesture.event.swipe === 0) {
-                        if (gesture.event.isDraggingX === 1) {
-                            gesture.event.swipe = gesture.event.isDraggingX;
+                    if (gestureEvent.swipe === 0) {
+                        if (gestureEvent.isDraggingX === 1) {
+                            gestureEvent.swipe = gestureEvent.isDraggingX;
                             _fire(info, gesture.event.onSwipeRight);
                         }
-                        if (gesture.event.isDraggingX === -1) {
-                            gesture.event.swipe = gesture.event.isDraggingX;
+                        if (gestureEvent.isDraggingX === -1) {
+                            gestureEvent.swipe = gestureEvent.isDraggingX;
                             _fire(info, gesture.event.onSwipeLeft);
                         }
-                        if (gesture.event.isDraggingY === 1) {
-                            gesture.event.swipe = gesture.event.isDraggingY;
-                            _fire(info, gesture.event.onSwipeDown);
+                        if (gestureEvent.isDraggingY === 1) {
+                            gestureEvent.swipe = gestureEvent.isDraggingY;
+                            _fire(info, gestureEvent.onSwipeDown);
                         }
-                        if (gesture.event.isDraggingY === -1) {
-                            gesture.event.swipe = gesture.event.isDraggingY;
-                            _fire(info, gesture.event.onSwipeUp);
+                        if (gestureEvent.isDraggingY === -1) {
+                            gestureEvent.swipe = gestureEvent.isDraggingY;
+                            _fire(info, gestureEvent.onSwipeUp);
                         }
                     }
                     
                     // DragEnd
                     info.type = "dragEnd";
                                         
-                    info.velocity = gesture.event.velocity;
-                    info.isDraggingY = gesture.event.isDraggingY = 0;
-                    info.isDraggingX = gesture.event.isDraggingX = 0;
-                    _fire(info, gesture.event.onDragEnd);
+                    info.velocity = gestureEvent.velocity;
+                    info.isDraggingY = gestureEvent.isDraggingY = 0;
+                    info.isDraggingX = gestureEvent.isDraggingX = 0;
+                    _fire(info, gestureEvent.onDragEnd);
                 
                 } else if (info.time !== undefined) {
     
                     // TapEnd
                     info.type = "tapEnd";
                     info.e.stopPropagation();
-                    _fire(info, gesture.event.onTapEnd);
+                    _fire(info, gestureEvent.onTapEnd);
                 }
     
             }

@@ -4,9 +4,7 @@
  * @config {object} el Switch container
  * @return {object} Switch Mootor UI Switch object
  */
-var Switch = function(options) {
-    var self = this;
-                
+var Switch = function(options) {               
     this.input = options.el;                   
     $(this.input).hide();
     this._makeHTML();
@@ -38,7 +36,6 @@ Switch.prototype = {
 
             // FIXME CHECK: 32? 3?
             limit = self.el.offsetWidth - 32,
-            treshold = limit / 3,
             swipe = 0;
         
         self.x = 0;
@@ -78,7 +75,6 @@ Switch.prototype = {
         //             and toggle by swipe
         //             or drag
         $(this.el).onDragEnd(function(gesture) {
-            var newX;
                             
             gesture.e.stopPropagation();                
             $(el).cleanFx();
@@ -136,10 +132,8 @@ Switch.prototype = {
     },
     
     on: function(event, callback) {
-        switch (event) {
-            case "change":
-                this.onChange = callback;
-                break;
+        if (event === "change") {
+            this.onChange = callback;
         }
     }
-}
+};

@@ -1,5 +1,24 @@
 (function () {
 
+    var tmpDivStyle = document.createElement("div").style,
+        vendor,
+        transition,
+        transformFnStr;
+    
+    if (tmpDivStyle.webkitTransitionDuration !== undefined) {
+        vendor = "webkit";        
+        transformFnStr = "translate3d";
+    } else if (tmpDivStyle.MozTransitionDuration !== undefined) {
+        vendor = "Moz";            
+        transformFnStr = "translate";
+    }
+    
+    transition = {
+        transform: vendor + "Transform",
+        duration: vendor + "TransitionDuration",
+        timingFunction: vendor + "TransitionTimingFunction"
+    };
+
     $.extend({         
     
         /** @lends $.prototype */
@@ -11,29 +30,29 @@
     
             var x_pos = positions.x,
                 y_pos = positions.y,
-                tduration;
+                tduration,
+                elStyle = {},
+                key,
+                el = this.el;
                
             tduration = options.transitionDuration;
-
-            this.el.style.transitionProperty = "webkit-transform";
     
             if (tduration !== undefined && tduration > 0) {
-                this.el.style.webkitTransitionDuration = tduration + "s";
-                this.el.style.webkitTransitionTimingFunction = "ease-out";
-
-                this.el.style.MozTransitionDuration = tduration + "s";
-                this.el.style.MozTransitionTimingFunction = "ease-out";
+                elStyle[transition.duration] = tduration + "s";
+                elStyle[transition.timingFunction] = "ease-out";
 
             } else {
-                if (this.el.style.webkitTransitionDuration !== ""
-                    || this.el.style.MozTransitionDuration !== "") {
+                if (elStyle[transition.duration] !== "") {
                     this.cleanFx();
                 }
             }
     
-            this.el.style.webkitTransform = "translate3d(" + x_pos + "px," + y_pos + "px, 0)";            
-            this.el.style.MozTransform = "translate(" + x_pos + "px," + y_pos + "px)";
-    
+            elStyle[transition.transform] = transformFnStr + "(" + x_pos + "px," + y_pos + "px, 0)";            
+            
+            for (key in elStyle) {
+                el.style[key] = elStyle[key]; 
+            }
+            
             if (options.callback) {
                 window.setTimeout(options.callback, tduration * 1000);
             }
@@ -48,20 +67,24 @@
          * @config {number} y Y position
          */
         translate: function (options) {
-            this.translateFx({x: options.x, y: options.y},options)
+            this.translateFx({x: options.x, y: options.y},options);
         },
     
         /**
          * Clean element transform styles
          */
         cleanFx: function () {
-            this.el.style.webkitTransform = "";
-            this.el.style.webkitTransitionDuration = "";
-            this.el.style.webkitTransitionTimingFunction = "";
+            var elStyle = {},
+                key,
+                el = this.el;
+            
+            elStyle[transition.transform] = "";
+            elStyle[transition.duration] = "";
+            elStyle[transition.timingDuration] = "";
 
-            this.el.style.MozTransform = "";
-            this.el.style.MozTransitionDuration = "";
-            this.el.style.MozTransitionTimingFunction = "";
+            for (key in elStyle) {
+                el.style[key] = elStyle[key];
+            }
         }
     
     });

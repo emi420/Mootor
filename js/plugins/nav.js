@@ -30,7 +30,8 @@ var Nav = function (options) {
 
         return this;
 
-    },    
+    },
+    // _scrollBarElement,    
 
 /**
  * Item
@@ -138,7 +139,7 @@ Nav.prototype = {
                 }
             }
             return this.items[this.current].index;
-	    },
+        },
 
         /**
          * Gesture handler
@@ -147,7 +148,7 @@ Nav.prototype = {
          */
         handleGesture: function (gesture) {
             Nav.handleGesture(gesture, this);
-        },       
+        }
         
     };
 
@@ -166,7 +167,7 @@ $.extend({
             links = $(self.el).find("." + navInstance._config.navClass);
             for (i = 0; i < links.length; i++) {
                 if (links[i].getAttribute("href").replace("#","") !== "") {
-                    navigationItems.push(links[i])
+                    navigationItems.push(links[i]);
                 }
             }
             
@@ -334,12 +335,11 @@ $.extend({
                 type: options.type ?
                               options.type : "Panels"                                                
 
-            }
+            };
             
             // Access to navigation object by type, ex: self.Panel
-            switch (self._config.type) {
-                case "Panels":
-                    navObject = Panel;
+            if (self._config.type === "Panels") {
+                navObject = Panel;
             }
             self._config.navItem = navObject;
 
@@ -435,7 +435,7 @@ $.extend({
                     el: elements[i],
                     index: i,
                     x: 0,
-                    y: 0,
+                    y: 0
                 });
     
                 // Initialize navigation items
@@ -463,21 +463,31 @@ $.extend({
          * Prevent native browser scrolling 
          */
         preventNativeScrolling: function() {
-        	$(document).ready(function() {
-            	$(document.body).bind("touchmove", function(event) {
+            $(document).ready(function() {
+                $(document.body).bind("touchmove", function(event) {
                     event.preventDefault();
                     event.stopPropagation();
-            	});	
-        	});
+                });    
+            });
         },
         
         get: function(id) {
             return Nav._collection.map(function(x) {
-                if (x.id === id) { return x }
+                if (x.id === id) { return x; }
             })[0];
+        },
+        
+        _scrollBar: function(options) {
+            // TODO
         }
             
-    }, Nav);
+}, Nav);
+
+/*
+Nav._scrollBarElement = _scrollBarElement = document.createElement("div");
+_scrollBarElement.setAttrbute("class","moo-scrollbar-h");
+document.body.appendChild(_scrollBarElement);
+*/
 
 // Public constructors
 
@@ -493,15 +503,12 @@ $.extend({
             nav = Nav.get(this.query);
             
             if(nav === undefined) {
-                switch (options.type) {
-                    default:
-                        return new Nav(options);
-                }                
+                return new Nav(options);
             } else {
                 return nav;
             }
             
-        },
+    }
 });
 
 /*
@@ -642,19 +649,20 @@ $.extend({
                 back,
                 positionX,
                 hiddenContent,
-                i;
+                i,
+                navInstance_config = navInstance._config;
                    
             // Current panel
             panel = navInstance.items[navInstance.current];
             // Back panel 
-            back = navInstance.items[navInstance._config.back];
+            back = navInstance.items[navInstance_config.back];
             
             $(panel.el).show();
            
             callback = function () {
                 $(back.el).hide();
                 
-                navInstance._config.isMoving = false;                
+                navInstance_config.isMoving = false;                
                 
                 panel.x = 0;
                 navInstance._config.x = 0;
@@ -663,15 +671,15 @@ $.extend({
             };
 
             // Initial position for translate
-            positionX = navInstance._config.width + navInstance._config.margin;
+            positionX = navInstance_config.width + navInstance_config.margin;
 
             if (navInstance.current !== 0) {
-                navInstance._config.anchorBack.show();           
+                navInstance_config.anchorBack.show();           
             } else {
-                navInstance._config.anchorBack.hide();
+                navInstance_config.anchorBack.hide();
             }
                                 
-            if (navInstance._config.direction === 0 || navInstance._config.back === 0) {
+            if (navInstance_config.direction === 0 || navInstance_config.back === 0) {
             
                 // Right
 
@@ -707,8 +715,8 @@ $.extend({
                         Item.initNavigationItems(panel, navInstance);
                     }
                     panel.height = panel.el.offsetHeight;                    
-                    if (navInstance._config.height > panel.height) {
-                        panel.height = navInstance._config.height;
+                    if (navInstance_config.height > panel.height) {
+                        panel.height = navInstance_config.height;
                     }
                 };
             }
@@ -797,7 +805,7 @@ $.extend({
      * Move panel 
      */
     move: function(self, item, gesture) {
-           self._config.y = self._config.y + (gesture.y - gesture.lastY);
+            self._config.y = self._config.y + (gesture.y - gesture.lastY);
             _translate({
                 el: item.el,
                 y: self._config.y,

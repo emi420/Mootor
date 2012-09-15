@@ -5,8 +5,7 @@
  * @return {object} Radio Mootor UI Radio object
  */
 var Radio = function(options) {
-    var self = this,
-        i = 0,
+    var i = 0,
         pseudoItems = this.pseudoItems = [];
         
     this.input = options.el;        
@@ -101,5 +100,5 @@ Radio.prototype = {
         }
     }
     
-}
+};
 

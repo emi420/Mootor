@@ -5,8 +5,7 @@
  * @return {object} Radio Mootor UI Checkbox object
  */
 var Checkbox = function(options) {
-    var self = this,
-        i = 0,
+    var i = 0,
         pseudoItems = this.pseudoItems = [];
         
     this.input = options.el;        
@@ -59,8 +58,7 @@ Checkbox.prototype = {
        for(i = 0; i < this.pseudoItems.length; i++) {
        
            $(this.pseudoItems[i].el).onTapEnd(function(gesture) {
-                var i,
-                    $el = $(gesture.el);
+                var $el = $(gesture.el);
                 
                 _stopEventPropagationAndPreventDefault(gesture); 
 
@@ -129,5 +127,5 @@ Checkbox.prototype = {
         }
     }    
     
-}
+};
 

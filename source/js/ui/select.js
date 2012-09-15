@@ -6,8 +6,7 @@
  * @return {object} Select Mootor UI Select object
  */
 var Select = function(options) {
-    var self = this,
-        i = 0,
+    var i = 0,
         pseudoItems = this.pseudoItems = [];
         
     this.y = 0;
@@ -53,9 +52,9 @@ Select.prototype = {
         
         this.el = el.firstChild;
         
-        if (this.position == "top") {
+        if (this.position === "top") {
             $(this.el).setClass("moo-top");
-        } else if (this.position == "bottom") {
+        } else if (this.position === "bottom") {
             $(this.el).setClass("moo-bottom");            
         }
                       
@@ -99,8 +98,7 @@ Select.prototype = {
         
         // Scroll
         $(this.ul).onDragMove(function(gesture) {
-            var newY,
-                i;
+            var newY;
             
             _stopEventPropagationAndPreventDefault(gesture);
 
@@ -147,6 +145,6 @@ Select.prototype = {
         }
     }
     
-}
+};
 
 

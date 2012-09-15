@@ -28,13 +28,13 @@ var Text = function(options) {
         gesture.el.onblur = function() {
             window.scrollTo(0,0);
             // Do something to prevents keyboard scroll here
-        }
+        };
 
         _stopEventPropagationAndPreventDefault(gesture);
     });        
     $(this.cleanbox).onTapEnd(function() {
         self.clean();
-    })
+    });
                     
     return this;
 };
@@ -76,10 +76,8 @@ Text.prototype = {
     },
     
     on: function(event, callback) {
-        switch (event) {
-            case "change":
-                this.onChange = callback;
-                break;
+        if (event === "change") {
+            this.onChange = callback;
         }
     }
-}
+};

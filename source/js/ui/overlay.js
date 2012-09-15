@@ -55,8 +55,8 @@ Loading.prototype = Overlay.prototype = {
     
     hide: function() {
         $(this.el).setClass("moo-hidden");
-    },
-}
+    }
+};
 
 // Modal prototype
 Modal.prototype = {
@@ -67,7 +67,7 @@ Modal.prototype = {
             self: this
         });
     }
-}
+};
 
 $.extend(Overlay.prototype, Modal.prototype);
 

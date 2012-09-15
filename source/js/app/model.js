@@ -8,12 +8,6 @@
 
 var Model = function(options) {
    this.model = options.model;
-
-   // Legacy compatibility
-   if (options._localStoragePrefix !== undefined) {
-        options.localStoragePrefix = options.localStoragePrefix;
-   }
-
    this.localStoragePrefix = options.localStoragePrefix;
    return this;
 };
@@ -26,13 +20,13 @@ Model.prototype = {
             self = this;
             
         id = this.localStoragePrefix + '-' + id;                
-        result = window.localStorage.getItem(id); ;
+        result = window.localStorage.getItem(id); 
         
         if (result !== null) {
             result = JSON.parse(result);
             $.extend({
                 put: function() {
-                    self.put(this)
+                    self.put(this);
                 }                    
             }, result);
         }         
@@ -117,7 +111,6 @@ Model.prototype = {
         var count = this.count(),
             result = [],
             i = 0,
-            item,
             record;
              
         // If any records found, fill the response array
@@ -157,9 +150,9 @@ Model.prototype = {
     // Destroy (not implemented yet)
     destroy: function(id) {        
         return null;                    
-    },
+    }
 
-}
+};
 
 $.extend({
     Model: function (options) {

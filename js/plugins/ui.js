@@ -28,7 +28,7 @@ var _templates = {
     
     select: '<div class="moo-ui-select-container"><span class="moo-ui-select-text"></span><span class="moo-ui-select-link"> &#9660;</span><div class="moo-ui-select-menu" style="height:217px;display:none"><div class="moo-ui-select-wrapper"><ul class="moo-ui-select-list" moo-template="foreach: option"><li moo-template="text: this.text"></li></ul></div></div></div>',
     
-    camera: "<div class='moo-ui-image-container'><header><a class='moo-ui-add-new' href='#takepic'>Take a picture</a><a class='moo-ui-add-filed' href='#choosepic'>Choose a picture</a><a class='moo-ui-delete' href='#delete'></a><a class='moo-ui-add-comment' href='#addcomment'></a></header><div class='moo-ui-image-panel'><ul class='moo-image-list'><li class='moo-image-wrapper'><div class='moo-image'></div></li></ul></div></div>",
+    camera: "<div class='moo-ui-image-container'><header><a class='moo-ui-add-new' href='#takepic'>Take a picture</a><a class='moo-ui-add-filed' href='#choosepic'>Choose a picture</a><a class='moo-ui-delete' href='#delete'></a><a class='moo-ui-add-comment' href='#addcomment'></a></header><div class='moo-ui-image-panel'><ul class='moo-image-list'><li class='moo-image-wrapper'><div class='moo-image'></div></li></ul></div></div>"
 
 },
 
@@ -55,8 +55,7 @@ _removeSpaces = function(string) {
  */
 _templateParse = function(options) {
     var template = options.template,
-        self = options.self,
-        
+        self = options.self,        
         elements = [],
         parsedHTML = document.createElement("div"),
         tmpElements = [],
@@ -170,14 +169,14 @@ _templateArrayHasForeach = function(elements) {
             item.label = labels[i];
         }
         if (item.el.value !== undefined) {
-            item.value = item.el.value
+            item.value = item.el.value;
         }
     }
                     
     element.el.innerHTML = "";
     
     for (i = 0; i < collection.length; i++) {
-        tmpDiv = document.createElement("div")
+        tmpDiv = document.createElement("div");
         tmpDiv.innerHTML = html;
         tmpDiv.firstChild.setAttribute("moo-foreach-index", i);
         
@@ -302,8 +301,8 @@ Loading.prototype = Overlay.prototype = {
     
     hide: function() {
         $(this.el).setClass("moo-hidden");
-    },
-}
+    }
+};
 
 // Modal prototype
 Modal.prototype = {
@@ -314,7 +313,7 @@ Modal.prototype = {
             self: this
         });
     }
-}
+};
 
 $.extend(Overlay.prototype, Modal.prototype);
 
@@ -342,9 +341,7 @@ var Input = function() {
  * @config {object} el Switch container
  * @return {object} Switch Mootor UI Switch object
  */
-var Switch = function(options) {
-    var self = this;
-                
+var Switch = function(options) {               
     this.input = options.el;                   
     $(this.input).hide();
     this._makeHTML();
@@ -376,7 +373,6 @@ Switch.prototype = {
 
             // FIXME CHECK: 32? 3?
             limit = self.el.offsetWidth - 32,
-            treshold = limit / 3,
             swipe = 0;
         
         self.x = 0;
@@ -416,7 +412,6 @@ Switch.prototype = {
         //             and toggle by swipe
         //             or drag
         $(this.el).onDragEnd(function(gesture) {
-            var newX;
                             
             gesture.e.stopPropagation();                
             $(el).cleanFx();
@@ -474,13 +469,11 @@ Switch.prototype = {
     },
     
     on: function(event, callback) {
-        switch (event) {
-            case "change":
-                this.onChange = callback;
-                break;
+        if (event === "change") {
+            this.onChange = callback;
         }
     }
-}
+};
 /**
  * Checkbox
  * @param {object} options Options
@@ -488,8 +481,7 @@ Switch.prototype = {
  * @return {object} Radio Mootor UI Checkbox object
  */
 var Checkbox = function(options) {
-    var self = this,
-        i = 0,
+    var i = 0,
         pseudoItems = this.pseudoItems = [];
         
     this.input = options.el;        
@@ -542,8 +534,7 @@ Checkbox.prototype = {
        for(i = 0; i < this.pseudoItems.length; i++) {
        
            $(this.pseudoItems[i].el).onTapEnd(function(gesture) {
-                var i,
-                    $el = $(gesture.el);
+                var $el = $(gesture.el);
                 
                 _stopEventPropagationAndPreventDefault(gesture); 
 
@@ -612,7 +603,7 @@ Checkbox.prototype = {
         }
     }    
     
-}
+};
 
 /**
  * Radio
@@ -621,8 +612,7 @@ Checkbox.prototype = {
  * @return {object} Radio Mootor UI Radio object
  */
 var Radio = function(options) {
-    var self = this,
-        i = 0,
+    var i = 0,
         pseudoItems = this.pseudoItems = [];
         
     this.input = options.el;        
@@ -717,7 +707,7 @@ Radio.prototype = {
         }
     }
     
-}
+};
 
 
 /**
@@ -727,8 +717,7 @@ Radio.prototype = {
  * @return {object} Select Mootor UI Select object
  */
 var Select = function(options) {
-    var self = this,
-        i = 0,
+    var i = 0,
         pseudoItems = this.pseudoItems = [];
         
     this.y = 0;
@@ -774,9 +763,9 @@ Select.prototype = {
         
         this.el = el.firstChild;
         
-        if (this.position == "top") {
+        if (this.position === "top") {
             $(this.el).setClass("moo-top");
-        } else if (this.position == "bottom") {
+        } else if (this.position === "bottom") {
             $(this.el).setClass("moo-bottom");            
         }
                       
@@ -820,8 +809,7 @@ Select.prototype = {
         
         // Scroll
         $(this.ul).onDragMove(function(gesture) {
-            var newY,
-                i;
+            var newY;
             
             _stopEventPropagationAndPreventDefault(gesture);
 
@@ -868,7 +856,7 @@ Select.prototype = {
         }
     }
     
-}
+};
 
 
  /**
@@ -901,13 +889,13 @@ var Text = function(options) {
         gesture.el.onblur = function() {
             window.scrollTo(0,0);
             // Do something to prevents keyboard scroll here
-        }
+        };
 
         _stopEventPropagationAndPreventDefault(gesture);
     });        
     $(this.cleanbox).onTapEnd(function() {
         self.clean();
-    })
+    });
                     
     return this;
 };
@@ -949,13 +937,11 @@ Text.prototype = {
     },
     
     on: function(event, callback) {
-        switch (event) {
-            case "change":
-                this.onChange = callback;
-                break;
+        if (event === "change") {
+            this.onChange = callback;
         }
     }
-}/**
+};/**
  * TextArea
  * @param {object} options Options
  * @config {object} el Textarea element
@@ -1001,9 +987,9 @@ TextArea.prototype = {
         $(el).setClass("moo-ui-textarea");
         el.appendChild(this.input);
         parent.appendChild(el);         
-    },
+    }
 
-}
+};
 /**
  * Camera
  * @return {object} Camera Mootor UI Camera object
@@ -1043,7 +1029,7 @@ Camera.prototype = {
     },
     
     hide: function() {
-        $(this.el).hide()
+        $(this.el).hide();
         this._visibility = "hidden";
     },    
 
@@ -1119,7 +1105,7 @@ Camera.prototype = {
         
     }
     
-}
+};
 
 /*
  * Private static properties
@@ -1128,26 +1114,27 @@ $.extend({
 
     _makeHTML: function(options, self) {
     
-        var type = options.type,
-            el = document.createElement("div");
+        var el = document.createElement("div"),
+            $selfEl;
         el.innerHTML = _templates.camera;
 
         self.el = el.firstChild;
-        $(self.el).setClass("moo-empty");
+        $selfEl = $(self.el);
+        $selfEl.setClass("moo-empty");
 
         
-        if (self.position == "top") {
-            $(self.el).setClass("moo-top");
-        } else if (self.position == "bottom") {
-            $(self.el).setClass("moo-bottom");            
+        if (self.position === "top") {
+            $selfEl.setClass("moo-top");
+        } else if (self.position === "bottom") {
+            $selfEl.setClass("moo-bottom");            
         }
         
-        self.takeButton = $(self.el).find(".moo-ui-add-new")[0];
-        self.chooseButton = $(self.el).find(".moo-ui-add-filed")[0];
-        self.imageWrapper = $(self.el).find(".moo-image-wrapper")[0];
-        self.imageList = $(self.el).find(".moo-image-list")[0];
+        self.takeButton = $selfEl.find(".moo-ui-add-new")[0];
+        self.chooseButton = $selfEl.find(".moo-ui-add-filed")[0];
+        self.imageWrapper = $selfEl.find(".moo-image-wrapper")[0];
+        self.imageList = $selfEl.find(".moo-image-list")[0];
 
-        $(self.el).hide();
+        $selfEl.hide();
         self._visibility = "hidden";
 
         self.input.appendChild(self.el);
@@ -1186,7 +1173,8 @@ $.extend({
     },
     
     camera: function(self, sourceType) {
-        var source;
+        var source,
+            onSuccess;
 
         if (typeof self.onCamera === "function") {
             self.onCamera();
@@ -1195,10 +1183,10 @@ $.extend({
         if (self.disabled !== true) {
             if (window.Camera !== undefined) {
                 if (sourceType === "album") {
-                    source = window.Camera.PictureSourceType.SAVEDPHOTOALBUM
+                    source = window.Camera.PictureSourceType.SAVEDPHOTOALBUM;
                 }
         
-                var onSuccess = function(data) {
+                onSuccess = function(data) {
                    // TODO: update image list? use callback?
                    self.onSuccess(data);
                 };
@@ -1211,7 +1199,7 @@ $.extend({
                        destinationType: window.Camera.DestinationType.FILE_URI,
                        sourceType: source,
                        targetWidth: self.width,
-                       targetHeight: self.height,
+                       targetHeight: self.height
                    }
                 );
     

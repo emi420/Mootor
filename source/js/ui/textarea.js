@@ -44,6 +44,6 @@ TextArea.prototype = {
         $(el).setClass("moo-ui-textarea");
         el.appendChild(this.input);
         parent.appendChild(el);         
-    },
+    }
 
-}
+};

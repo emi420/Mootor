@@ -14,485 +14,504 @@
 
 var $ = (function () {
 
-    var Moo,
-        _scripts,
-        _hideContentWhileDocumentNotReady,
+   var Moo,
+      _scripts,
+      _hideContentWhileDocumentNotReady,
 
-    /**
-     * Main public constructor 
-     *
-     * @constructor
-     * @param {string} query Query selector
-     * @return {object} $ Mootor object
-     */
+   /**
+    * Main public constructor 
+    *
+    * @constructor
+    * @param {string} query Query selector
+    * @return {object} $ Mootor object
+    */
 	$ = function (query) {
 		return new Moo(query, document);
 	},
 	
-    /**
-     * On element ready
-     * @private
-     * @ignore
-     */
-    ready = function (fn, el) {
-        if (el === document) {
-            el = window;
-        }
-        if (el === window) {
-            var ready = false,
-                handler;
+   /**
+    * On element ready
+    * @private
+    * @ignore
+    */
+   ready = function (fn, el) {
+      if (el === document) {
+         el = window;
 
-            handler = function (e) {
-                if (ready) {return; }
-                if (e.type === "readystatechange" 
-                    && document.readyState !== "complete") 
-                    {return; }
-                fn.call(document);
-                ready = true;
-            };
-            if ($.window.addEventListener) {
-                el.addEventListener = $.window.addEventListener;
-                ["DOM-ContentLoaded",
-                 "readystatechange",
-                 "load"].map(
-                    function(x){
-                        el.addEventListener(x, handler, false);
-                    }
-                );
-            }
-        } else {
-            el.onload = Moo;
-        }
-    };
-        	
-    /**
-     * Private constructor
-     *
-     * @private
-     * @param {string} query Query selector
-     * @param {object} context Context element
-     * @return {object} $ Mootor object
-     */
+         var ready = false,
+            handler;
+
+         handler = function (e) {
+            if (ready) {return; }
+            if (e.type === "readystatechange" 
+               && document.readyState !== "complete") 
+               {return; }
+            fn.call(document);
+            ready = true;
+         };
+         if ($.window.addEventListener) {
+            el.addEventListener = $.window.addEventListener;
+            ["DOM-ContentLoaded",
+             "readystatechange",
+             "load"].map(
+               function(x){
+                  el.addEventListener(x, handler, false);
+               }
+            );
+         }
+      } else {
+         el.onload = Moo;
+      }
+   };
+
+   /**
+    * Private constructor
+    *
+    * @private
+    * @param {string} query Query selector
+    * @param {object} context Context element
+    * @return {object} $ Mootor object
+    */
 	Moo = function (query, context) {
 		var qtype = typeof query,
 			el,
 			i = 1;	
 
-        // Get element from query
-        if (qtype === "string") {
+      // Get element from query
+      if (qtype === "string") {
 
-            el = context.querySelectorAll(query);                
-            
-            if (query.indexOf("#") > -1) {
+         el = context.querySelectorAll(query);            
+         
+         if (query.indexOf("#") > -1) {
 
-                el = this[0] = el[0];                
-                if (this[0] !== null) {
-                    this.length = 1;                    
-                }
-
-            } else {            
-                for(i = 0; i < el.length; i++) {
-                    this[i] = el[i];
-                }
-                this.length = i;
+            el = this[0] = el[0];            
+            if (this[0] !== null) {
+               this.length = 1;               
             }
-            
-        } else if (qtype === "object") {
-            el = this[0] = query;
-            this.length = 1;
-        }               
-        
-        // Direct access to query result
-        this.el = (function () {
-            return el;
-        }());
 
-        // Query string passed
-        this.query = (function () {
-            return query;
-        }());     
-                       
-        return this;
+         } else {         
+            for(i = 0; i < el.length; i++) {
+               this[i] = el[i];
+            }
+            this.length = i;
+         }
+         
+      } else if (qtype === "object") {
+         el = this[0] = query;
+         this.length = 1;
+      }            
+      
+      // Direct access to query result
+      this.el = (function () {
+         return el;
+      }());
+
+      // Query string passed
+      this.query = (function () {
+         return query;
+      }());    
+                  
+      return this;
 	};
 
 	// Inherits Array prototype
-    $.prototype = Moo.prototype = [];
-        
-    /**
-     * Extend function
-     * @param {object} obj Object with properties
-     * @param {object} target Target object to be extended
-     * @example $.extend(target, {id: 1});
-     */
-    $.extend = function (obj, target) {
-        var i;
-        target = target === undefined ?
-                 $.prototype : target;
-        for (i in obj) {
-            if (obj.hasOwnProperty(i) && !target.hasOwnProperty(i)) {
-                target[i] = obj[i];
-            }
-        }
-    };
+   $.prototype = Moo.prototype = [];
+      
+   /**
+    * Extend function
+    * @param {object} obj Object with properties
+    * @param {object} target Target object to be extended
+    * @example $.extend(target, {id: 1});
+    */
+   $.extend = function (obj, target) {
+      var i;
+      target = target === undefined ?
+             $.prototype : target;
+      for (i in obj) {
+         if (obj.hasOwnProperty(i) && !target.hasOwnProperty(i)) {
+            target[i] = obj[i];
+         }
+      }
+   };
+   
+   $.extend({
     
-    $.extend({
-     
-        /** @lends $.prototype */
-        
-        /**
-         * Element selected
-         */
-        el: undefined,
+      /** @lends $.prototype */
+      
+      /**
+       * Element selected
+       */
+      el: undefined,
 
-        /**
-         * Query passed
-         */
-        query: "",
+      /**
+       * Query passed
+       */
+      query: "",
 
-        /**
-         * On element ready
-         * @example $(document).ready(function() {
-         *      console.log("Im ready (The Document)"); 
-         *  });
-         * @param {function} callback Callback function
-         */
-        ready: function (callback) {
-            ready(callback, this.el);
-        },
+      /**
+       * On element ready
+       * @example $(document).ready(function() {
+       *     console.log("Im ready (The Document)"); 
+       *  });
+       * @param {function} callback Callback function
+       */
+      ready: function (callback) {
+         ready(callback, this.el);
+      },
 
-        /**
-         * Show element
-         * @example $("#myDiv").show(); 
-         */
-        show: function (el) {
-            var element = typeof el === "object" ? 
-                          el : this.el;
-            if (element !== undefined) {
-                element.style.display = "block";
+      /**
+       * Show element
+       * @example $("#myDiv").show(); 
+       */
+      show: function (el) {
+         var element = typeof el === "object" ? 
+                    el : this.el;
+         if (element !== undefined) {
+            element.style.display = "block";
+         }
+         return this;
+      },
+
+      /**
+       * Hide element
+       * @example $("#myDiv").hide(); 
+       */
+      hide: function (el) {
+         var element = typeof el === "object" ?
+                    el : this.el;
+         if (element !== undefined) {
+            element.style.display = "none";
+         }
+         return this;
+      },
+
+      /**
+       * Bind event listener
+       * @param {string} event Event
+       * @param {function} callback Callback function
+       * @example $("#myDiv").on("click", function() {
+       *     console.log("click!")
+       * }); 
+       */
+      on: function(event, callback) {
+         this.el.addEventListener(event, callback, false);
+         return this;
+      },
+      // Deprecated method
+      bind: function (event, callback) {
+         this.on(event,callback);
+      },      
+
+      /**
+       * Unbind event listener
+       * @param {string} event Event
+       * @param {function} callback Callback function
+       * @example $("#myDiv").unbind("touchstart", function() {
+       *     console.log("Touch start!")
+       * }); 
+       */
+      unbind: function (event, callback) {
+         this.el.removeEventListener(event, callback, false);
+         return this;
+      },
+
+      /**
+       * Set class name
+       * @param {string} name Class name
+       * @example $("#myDiv").setClass("featured");
+       */
+      setClass: function (name) {
+         var classes = this.el.className.split(" ");
+         if (classes.indexOf(name) === -1) {
+            classes.push(name);
+            this.el.className = classes.join(" ");
+         }
+         return this;
+      },
+
+      /**
+       * Check if has class name
+       * @param {string} name Class name
+       * @return {boolean}
+       * @example if ($("#myDiv").hasClass("featured") === true) { 
+       *     console.log("this div is featured");
+       * }
+       */
+      hasClass: function (name) {
+         var classes = this.el.className.split(" ");
+         return classes.indexOf(name) !== -1;
+      },
+
+      /**
+       * Remove class name
+       * @param {string} name Class name
+       * @example $("#myDiv").removeClass("featured");
+       */
+      removeClass: function (name) {
+         this.el.className = Array.prototype.filter.call(
+            this.el.className.split(" "), 
+            function(x) { 
+               return x !== name; 
             }
-            return this;
-        },
+         ).join(" ");
+         return this;
+      },
 
-        /**
-         * Hide element
-         * @example $("#myDiv").hide(); 
-         */
-        hide: function (el) {
-            var element = typeof el === "object" ?
-                          el : this.el;
-            if (element !== undefined) {
-                element.style.display = "none";
-            }
-            return this;
-        },
-
-        /**
-         * Bind event listener
-         * @param {string} event Event
-         * @param {function} callback Callback function
-         * @example $("#myDiv").on("click", function() {
-         *      console.log("click!")
-         * }); 
-         */
-        on: function(event, callback) {
-            this.el.addEventListener(event, callback, false);
-            return this;
-        },
-        // Deprecated method
-        bind: function (event, callback) {
-            this.on(event,callback);
-        },        
-
-        /**
-         * Unbind event listener
-         * @param {string} event Event
-         * @param {function} callback Callback function
-         * @example $("#myDiv").unbind("touchstart", function() {
-         *      console.log("Touch start!")
-         * }); 
-         */
-        unbind: function (event, callback) {
-            this.el.removeEventListener(event, callback, false);
-            return this;
-        },
-
-        /**
-         * Set class name
-         * @param {string} name Class name
-         * @example $("#myDiv").setClass("featured");
-         */
-        setClass: function (name) {
-            var classes = this.el.className.split(" ");
-            if (classes.indexOf(name) === -1) {
-                classes.push(name);
-                this.el.className = classes.join(" ");
-            }
-            return this;
-        },
-
-        /**
-         * Check if has class name
-         * @param {string} name Class name
-         * @return {boolean}
-         * @example if ($("#myDiv").hasClass("featured") === true) { 
-         *      console.log("this div is featured");
-         * }
-         */
-        hasClass: function (name) {
-            var classes = this.el.className.split(" ")
-            return classes.indexOf(name) !== -1;
-        },
-
-        /**
-         * Remove class name
-         * @param {string} name Class name
-         * @example $("#myDiv").removeClass("featured");
-         */
-        removeClass: function (name) {
-            this.el.className = Array.prototype.filter.call(
-                this.el.className.split(" "), 
-                function(x) { 
-                    return x !== name; 
-                }
-            ).join(" ");
-            return this;
-        },
-
-        /**
-         * Load HTML content into an element
-         * @param {string} html HTML
-         * @example $("#myDiv").html("<b>I love Spectre.</b>");
-         */
-        html: function (html) {
-            this.el.innerHTML = html;
-            return this;
-        },
-        
-        /**
-         * Selector useful for query chaining
-         * @param {string} query Query
-         * @example $("#myList").find(".item")
-         */
-        find: function(query) {
-            return new Moo(query, this.el);
-        }        
-        
+      /**
+       * Load HTML content into an element
+       * @param {string} html HTML
+       * @example $("#myDiv").html("<b>I love Spectre.</b>");
+       */
+      html: function (html) {
+         this.el.innerHTML = html;
+         return this;
+      },
+      
+      /**
+       * Selector useful for query chaining
+       * @param {string} query Query
+       * @example $("#myList").find(".item")
+       */
+      find: function(query) {
+         return new Moo(query, this.el);
+      }      
+      
 	});
 
-    // Core
-    $.extend({
-    
-         /**
-         * @lends $
-         */
+   // Core
+   $.extend({
+   
+       /**
+       * @lends $
+       */
 
-         /**
-         * Mootor  version
-         */
-        version:  (function () {
-            return "0.11";
-        }()),
+       /**
+       * Mootor  version
+       */
+      version:  (function () {
+         return "0.11";
+      }()),
 
-        /**
-         * Context features
-         * @example $.context.addEventListener
-         */
-        context: {
-            addEventListener: false,
-            userAgent: "",
-        },
+      /**
+       * Context features
+       * @example $.context.addEventListener
+       */
+      context: {
+         addEventListener: false,
+         userAgent: ""
+      },
 
-        /**
-         * Viewport
-         * @example $.view.clientH - Client height
-         * $.view.clientW - Client width
-         * $.view.hide() - Hide viewport
-         * $.view.show() - Show viewport
-         */
-        view: {
+      /**
+       * Viewport
+       * @example $.view.clientH - Client height
+       * $.view.clientW - Client width
+       * $.view.hide() - Hide viewport
+       * $.view.show() - Show viewport
+       */
+      view: {
 
-            clientH: 0,
-            clientW: 0,
+         clientH: 0,
+         clientW: 0,
 
-            hide: function () {
-                var styles = document.createElement("style");
-                styles.innerHTML = "body {display: none}";
-                document.head.appendChild(styles);
-                $.view.styles = styles;
-            },
+         hide: function () {
+            var styles = document.createElement("style");
+            styles.innerHTML = "body {display: none}";
+            document.head.appendChild(styles);
+            $.view.styles = styles;
+         },
 
-            show: function () {
-                document.head.removeChild($.view.styles);
-            }
-        },
-        
-        /**
-         * Ajax request
-         * @param {object} options Options configuration
-         * @config {string} url URL to open
-         * @config {string} method Request method
-         * @config {string} headers Request headers
-         * @config {string} data Data that is sent to the server via POST
-         * @config {function} callback Function callback
-         */
-        ajax:  function (options) {
-            var xmlhttp = new $.window.XMLHttpRequest(),
-                handler,
-                data = null,
-                i;
+         show: function () {
+            document.head.removeChild($.view.styles);
+         }
+      },
+      
+      /**
+       * Ajax request
+       * @param {object} options Options configuration
+       * @config {string} url URL to open
+       * @config {string} method Request method
+       * @config {string} headers Request headers
+       * @config {string} data Data that is sent to the server via POST
+       * @config {function} callback Function callback
+       */
+      ajax:  function (options) {
+         var xmlhttp = new $.window.XMLHttpRequest(),
+            data = null,
+            i;
 			
 			// FIXME CHECK: xmlhttp.status==0 for UIWebView?
-            xmlhttp.onreadystatechange = function() {
-                if (xmlhttp.readyState==4 && (xmlhttp.status==200 || xmlhttp.status==0)) {
-                    options.callback(xmlhttp.responseText);
-                }
-            };
-            
-            if (options.method === undefined || options.method === "GET")
-            {
-	            xmlhttp.open("GET", options.url, true);
-            } else if (options.method === "POST") {
-            	xmlhttp.open("POST", options.url, true);
-            	data = options.data;
+         xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState===4 && (xmlhttp.status===200 || xmlhttp.status===0)) {
+               options.callback(xmlhttp.responseText);
             }
-            
-            if (options.headers === undefined) {
-                xmlhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-            } else {
-                for (i in options.headers) {
-                    xmlhttp.setRequestHeader(i, options.headers[i]);                
-                }
+         };
+         
+         if (options.method === undefined || options.method === "GET")
+         {
+            xmlhttp.open("GET", options.url, true);
+         } else if (options.method === "POST") {
+            xmlhttp.open("POST", options.url, true);
+            data = options.data;
+         }
+         
+         if (options.headers === undefined) {
+            xmlhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+         } else {
+            for (i in options.headers) {
+               xmlhttp.setRequestHeader(i, options.headers[i]);            
             }
-            xmlhttp.send(data);
-        },
-        
-        /**
-         * require Include scripts
-         * @param {string} script Script URL
-         * @param {function} callback Function callback
-         */
-         require: function(script, callback) {
-              if (_scripts.isIncluded(script) === false) {
-                  _scripts.include(script, callback);
-              } else {
-                 if (typeof callback === "function") {
-                     callback();
-                 }
-              }
-        }
+         }
+         xmlhttp.send(data);
+      },
+      
+      /**
+       * require Include scripts
+       * @param {string} script Script URL
+       * @param {function} callback Function callback
+       */
+       require: function(script, callback) {
+           if (_scripts.isIncluded(script) === false) {
+              _scripts.include(script, callback);
+           } else {
+             if (typeof callback === "function") {
+                callback();
+             }
+           }
+      }
 
-    }, $);
+   }, $);
 
-    // Localise globals
-    $.window = {
-        XMLHttpRequest: window.XMLHttpRequest,
-        addEventListener: window.addEventListener
-    }
+   // Localise globals
+   $.window = {
+      XMLHttpRequest: window.XMLHttpRequest,
+      addEventListener: window.addEventListener
+   };
 
-    // Cross-browser compatibility
-    if ($.window.addEventListener === undefined) {
-        $.window.attachEvent = window.attachEvent;
-        $.window.addEventListener = function(event, callback) {
-            $.window.attachEvent("on" + event, callback);
-        }
-    }
-    
-    // Context features
-    
-    if (navigator.userAgent.toLowerCase().indexOf("android") > -1) {
-        $.context.userAgent = "android";
-    } else if (navigator.userAgent.toLowerCase().indexOf("safari") > -1) {
-        $.context.userAgent = "safari";
-    } else if (navigator.userAgent.toLowerCase().indexOf("msie") > -1) {
-        $.context.userAgent = "msie";
-    } else {
-        $.context.userAgent = "";    
-    }
+   // Cross-browser compatibility
+   if ($.window.addEventListener === undefined) {
+      $.window.attachEvent = window.attachEvent;
+      $.window.addEventListener = function(event, callback) {
+         $.window.attachEvent("on" + event, callback);
+      };
+   }
+   
+   // Context features
+   
+   if (navigator.userAgent.toLowerCase().indexOf("android") > -1) {
+      $.context.userAgent = "android";
+   } else if (navigator.userAgent.toLowerCase().indexOf("safari") > -1) {
+      $.context.userAgent = "safari";
+   } else if (navigator.userAgent.toLowerCase().indexOf("msie") > -1) {
+      $.context.userAgent = "msie";
+   } else {
+      $.context.userAgent = "";   
+   }
 
-    // Initialize Mootor on document ready
-    ready(function () {
-        var clientW,
-            clientH,
+   // Initialize Mootor on document ready
+   ready(function () {
+      var clientW,
+         clientH,
+         documentElement = document.documentElement,
 
-        updateClientSizes = function() {
-            clientW = document.documentElement.clientWidth,
-            clientH = document.documentElement.clientHeight;
+      updateClientSizes = function() {
+         clientW = documentElement.clientWidth,
+         clientH = documentElement.clientHeight;
 
-            $.view.clientH = (function () {
-                return clientH;
-            }());
-            $.view.clientW = (function () {
-                return clientW;
-            }());
+         $.view.clientH = (function () {
+            return clientH;
+         }());
+         $.view.clientW = (function () {
+            return clientW;
+         }());
 
-        }
-        
-        updateClientSizes();
-    
-        $(window).bind("resize", function(){
-            updateClientSizes();
-        });       
+      };
+      
+      updateClientSizes();
+   
+      $(window).bind("resize", function(){
+         updateClientSizes();
+      });      
 
 	}, document);
 	
 	
-    /**
-     * Hide all content while document is not ready
-     * @private
-     */
-    _hideContentWhileDocumentNotReady = function() {
-    	$.view.hide();
-    	$(document).ready(function() {
-    		$.view.show();
-    	});
-    };
-    _hideContentWhileDocumentNotReady();
+   /**
+    * Hide all content while document is not ready
+    * @private
+    */
+   _hideContentWhileDocumentNotReady = function() {
+    $.view.hide();
+    $(document).ready(function() {
+         $.view.show();
+    });
+   };
+   _hideContentWhileDocumentNotReady();
 
-    /**
-     * Scripts included
-     * @private
-     */
-    _scripts = {
-        isIncluded: function(script) {
-            var i;
-            for (i = _scripts.list.length; i--;) {
-                if (_scripts.list[i] === script) {
-                    return true;
-                }
+   /**
+    * Scripts included
+    * @private
+    */
+   _scripts = {
+      isIncluded: function(script) {
+         var i;
+         for (i = _scripts.list.length; i--;) {
+            if (_scripts.list[i] === script) {
+               return true;
             }
-            return false;
-        },
-        
-        include: function(script, callback) {
-            _scripts.list.push(script);
-            $.ajax({
-                  url: script,
-                  callback: function(response) {
-                     var script = document.createElement("script");
-                     script.innerHTML = response;
-                     document.head.appendChild(script);
-                     if (typeof callback === "function") {
-                          callback();
-                     }
-                  }
-            });              
-        },
-        
-        list: []
-    }
+         }
+         return false;
+      },
+      
+      include: function(script, callback) {
+         var d = document;
+         _scripts.list.push(script);
+         $.ajax({
+              url: script,
+              callback: function(response) {
+                var script = d.createElement("script");
+                script.innerHTML = response;
+                d.head.appendChild(script);
+                if (typeof callback === "function") {
+                    callback();
+                }
+              }
+         });           
+      },
+      
+      list: []
+   };
 
-	return $;
+   return $;
 
 }());
 
 // Go public!
 if (!window.$ || typeof ($) !== "function") {
-    window.Mootor = window.$ = $;
+   window.Mootor = window.$ = $;
 } else {
-    window.Mootor = $;    
+   window.Mootor = $;   
 }
 
 (function () {
+
+    var tmpDivStyle = document.createElement("div").style,
+        vendor,
+        transition,
+        transformFnStr;
+    
+    if (tmpDivStyle.webkitTransitionDuration !== undefined) {
+        vendor = "webkit";        
+        transformFnStr = "translate3d";
+    } else if (tmpDivStyle.MozTransitionDuration !== undefined) {
+        vendor = "Moz";            
+        transformFnStr = "translate";
+    }
+    
+    transition = {
+        transform: vendor + "Transform",
+        duration: vendor + "TransitionDuration",
+        timingFunction: vendor + "TransitionTimingFunction"
+    };
 
     $.extend({         
     
@@ -505,29 +524,29 @@ if (!window.$ || typeof ($) !== "function") {
     
             var x_pos = positions.x,
                 y_pos = positions.y,
-                tduration;
+                tduration,
+                elStyle = {},
+                key,
+                el = this.el;
                
             tduration = options.transitionDuration;
-
-            this.el.style.transitionProperty = "webkit-transform";
     
             if (tduration !== undefined && tduration > 0) {
-                this.el.style.webkitTransitionDuration = tduration + "s";
-                this.el.style.webkitTransitionTimingFunction = "ease-out";
-
-                this.el.style.MozTransitionDuration = tduration + "s";
-                this.el.style.MozTransitionTimingFunction = "ease-out";
+                elStyle[transition.duration] = tduration + "s";
+                elStyle[transition.timingFunction] = "ease-out";
 
             } else {
-                if (this.el.style.webkitTransitionDuration !== ""
-                    || this.el.style.MozTransitionDuration !== "") {
+                if (elStyle[transition.duration] !== "") {
                     this.cleanFx();
                 }
             }
     
-            this.el.style.webkitTransform = "translate3d(" + x_pos + "px," + y_pos + "px, 0)";            
-            this.el.style.MozTransform = "translate(" + x_pos + "px," + y_pos + "px)";
-    
+            elStyle[transition.transform] = transformFnStr + "(" + x_pos + "px," + y_pos + "px, 0)";            
+            
+            for (key in elStyle) {
+                el.style[key] = elStyle[key]; 
+            }
+            
             if (options.callback) {
                 window.setTimeout(options.callback, tduration * 1000);
             }
@@ -542,20 +561,24 @@ if (!window.$ || typeof ($) !== "function") {
          * @config {number} y Y position
          */
         translate: function (options) {
-            this.translateFx({x: options.x, y: options.y},options)
+            this.translateFx({x: options.x, y: options.y},options);
         },
     
         /**
          * Clean element transform styles
          */
         cleanFx: function () {
-            this.el.style.webkitTransform = "";
-            this.el.style.webkitTransitionDuration = "";
-            this.el.style.webkitTransitionTimingFunction = "";
+            var elStyle = {},
+                key,
+                el = this.el;
+            
+            elStyle[transition.transform] = "";
+            elStyle[transition.duration] = "";
+            elStyle[transition.timingDuration] = "";
 
-            this.el.style.MozTransform = "";
-            this.el.style.MozTransitionDuration = "";
-            this.el.style.MozTransitionTimingFunction = "";
+            for (key in elStyle) {
+                el.style[key] = elStyle[key];
+            }
         }
     
     });
@@ -566,7 +589,6 @@ if (!window.$ || typeof ($) !== "function") {
     var _addGesture,
         _fire,
         _isListed,
-        gestures,
         Gestures;
         
     Gestures = function() {
@@ -586,7 +608,7 @@ if (!window.$ || typeof ($) !== "function") {
         push: function(gesture) {
             this.list.push(gesture);
         }
-    }
+    };
     
     $.gestures = new Gestures();
     
@@ -601,7 +623,7 @@ if (!window.$ || typeof ($) !== "function") {
             gesture = {
                 el: self.el,
                 event: {}
-            }
+            };
             gestureList.push(gesture);
         }
         
@@ -793,6 +815,7 @@ if (!window.$ || typeof ($) !== "function") {
                     e: e
                 },
                 gesture = $.gestures.getByElement(this.el),
+                gestureEvent = gesture.event,
                 date = new Date(),
                 clientX,
                 clientY,
@@ -808,93 +831,93 @@ if (!window.$ || typeof ($) !== "function") {
     
                 this.bind("touchmove", this);
     
-                gesture.event.time = date.getTime();
-                gesture.event.lastTime = date.getMilliseconds();
-                gesture.event.isDraggingY = 0;
-                gesture.event.isDraggingX = 0;
-                gesture.event.mousedown = true;
-                gesture.event.tapped = false;
-                gesture.event.startX = clientX;
-                gesture.event.startY = clientY;
-                gesture.event.swipe = 0;
+                gestureEvent.time = date.getTime();
+                gestureEvent.lastTime = date.getMilliseconds();
+                gestureEvent.isDraggingY = 0;
+                gestureEvent.isDraggingX = 0;
+                gestureEvent.mousedown = true;
+                gestureEvent.tapped = false;
+                gestureEvent.startX = clientX;
+                gestureEvent.startY = clientY;
+                gestureEvent.swipe = 0;
     
                 window.setTimeout(function () {
                     // TapHold
-                    if (gesture.event.mousedown === true) {
+                    if (gestureEvent.mousedown === true) {
                         info.type = "tapHold";
-                        _fire(info, gesture.event.onTapHold);
+                        _fire(info, gestureEvent.onTapHold);
                     }
                 }, 500);
     
-                if (gesture.event.onTapStart !== undefined) {
+                if (gestureEvent.onTapStart !== undefined) {
                     // TapStart
                     info.type = "tapStart";
-                    _fire(info, gesture.event.onTapStart);
+                    _fire(info, gestureEvent.onTapStart);
                 }
             }
     
             if (e.type === "touchmove") {
             
-                time = date.getMilliseconds() - gesture.event.lastTime;
-                time = (time + gesture.event.lastTime) / 2;
+                time = date.getMilliseconds() - gestureEvent.lastTime;
+                time = (time + gestureEvent.lastTime) / 2;
                 
                 info.velocity = {};
                 if (time > 0) {
-                    info.velocity.x = (gesture.event.lastX - gesture.event.x) / time;
-                    info.velocity.y = (gesture.event.lastY - gesture.event.y) / time;
+                    info.velocity.x = (gestureEvent.lastX - gestureEvent.x) / time;
+                    info.velocity.y = (gestureEvent.lastY - gestureEvent.y) / time;
                 } else {
                     info.velocity.x = 0;
                     info.velocity.y = 0;
                 }
 
-                gesture.event.velocity = info.velocity;
+                gestureEvent.velocity = info.velocity;
                 
-                gesture.event.lastTime = date.getMilliseconds();
-                gesture.event.lastY = info.lastY = gesture.event.y;
-                gesture.event.lastX = info.lastX = gesture.event.x;
-                gesture.event.y = info.y = clientY;
-                gesture.event.x = info.x = clientX;
-                info.distanceFromOriginY = clientY - gesture.event.startY;
-                info.distanceFromOriginX = clientX - gesture.event.startX;
+                gestureEvent.lastTime = date.getMilliseconds();
+                gestureEvent.lastY = info.lastY = gestureEvent.y;
+                gestureEvent.lastX = info.lastX = gestureEvent.x;
+                gestureEvent.y = info.y = clientY;
+                gestureEvent.x = info.x = clientX;
+                info.distanceFromOriginY = clientY - gestureEvent.startY;
+                info.distanceFromOriginX = clientX - gestureEvent.startX;
 
     
-                gesture.event.isDraggingY = gesture.event.isDraggingY ?
-                                            gesture.event.isDraggingY : 0;
+                gestureEvent.isDraggingY = gestureEvent.isDraggingY ?
+                                            gestureEvent.isDraggingY : 0;
                                             
-                gesture.event.isDraggingX = gesture.event.isDraggingX ?
-                                            gesture.event.isDraggingX : 0;
+                gestureEvent.isDraggingX = gestureEvent.isDraggingX ?
+                                            gestureEvent.isDraggingX : 0;
     
                 if (gesture.event.isDraggingY === 0 
                     && gesture.event.isDraggingX === 0) 
                 {
                 
                     if (info.distanceFromOriginX > 10) {
-                        gesture.event.isDraggingX = 1;
+                        gestureEvent.isDraggingX = 1;
                         info.type = "dragStart";
                     }
                     if (info.distanceFromOriginX < -10) {
                         info.type = "dragStart";
-                        gesture.event.isDraggingX = -1;
+                        gestureEvent.isDraggingX = -1;
                     }
     
                     if (info.distanceFromOriginY > 10) {
-                        gesture.event.isDraggingY = 1;
+                        gestureEvent.isDraggingY = 1;
                         info.type = "dragStart";
                     }
                     if (info.distanceFromOriginY < -10) {
                         info.type = "dragStart";
-                        gesture.event.isDraggingY = -1;
+                        gestureEvent.isDraggingY = -1;
                     }
     
                     // DragStart   
                     if (info.type === "dragStart") {                 
-                        _fire(info, gesture.event.onDragStart);
+                        _fire(info, gestureEvent.onDragStart);
                     }
                                         
                 } else {
                     // DragMove
                     info.type = "dragMove";
-                    _fire(info, gesture.event.onDragMove);
+                    _fire(info, gestureEvent.onDragMove);
                 }
             }
     
@@ -902,50 +925,50 @@ if (!window.$ || typeof ($) !== "function") {
                
                 info.velocity = {};
                         
-                if (gesture.event.tapped === false) {
+                if (gestureEvent.tapped === false) {
                     this.unbind("touchmove", this);
-                    gesture.event.tapped = true;
-                    info.time = date.getTime() - gesture.event.time;
-                    gesture.event.mousedown = false;
+                    gestureEvent.tapped = true;
+                    info.time = date.getTime() - gestureEvent.time;
+                    gestureEvent.mousedown = false;
                 }
     
-                if ((gesture.event.isDraggingY !== 0 || 
-                    gesture.event.isDraggingX !== 0)) {
+                if ((gestureEvent.isDraggingY !== 0 || 
+                    gestureEvent.isDraggingX !== 0)) {
     
                     // Swipe
-                    if (gesture.event.swipe === 0) {
-                        if (gesture.event.isDraggingX === 1) {
-                            gesture.event.swipe = gesture.event.isDraggingX;
+                    if (gestureEvent.swipe === 0) {
+                        if (gestureEvent.isDraggingX === 1) {
+                            gestureEvent.swipe = gestureEvent.isDraggingX;
                             _fire(info, gesture.event.onSwipeRight);
                         }
-                        if (gesture.event.isDraggingX === -1) {
-                            gesture.event.swipe = gesture.event.isDraggingX;
+                        if (gestureEvent.isDraggingX === -1) {
+                            gestureEvent.swipe = gestureEvent.isDraggingX;
                             _fire(info, gesture.event.onSwipeLeft);
                         }
-                        if (gesture.event.isDraggingY === 1) {
-                            gesture.event.swipe = gesture.event.isDraggingY;
-                            _fire(info, gesture.event.onSwipeDown);
+                        if (gestureEvent.isDraggingY === 1) {
+                            gestureEvent.swipe = gestureEvent.isDraggingY;
+                            _fire(info, gestureEvent.onSwipeDown);
                         }
-                        if (gesture.event.isDraggingY === -1) {
-                            gesture.event.swipe = gesture.event.isDraggingY;
-                            _fire(info, gesture.event.onSwipeUp);
+                        if (gestureEvent.isDraggingY === -1) {
+                            gestureEvent.swipe = gestureEvent.isDraggingY;
+                            _fire(info, gestureEvent.onSwipeUp);
                         }
                     }
                     
                     // DragEnd
                     info.type = "dragEnd";
                                         
-                    info.velocity = gesture.event.velocity;
-                    info.isDraggingY = gesture.event.isDraggingY = 0;
-                    info.isDraggingX = gesture.event.isDraggingX = 0;
-                    _fire(info, gesture.event.onDragEnd);
+                    info.velocity = gestureEvent.velocity;
+                    info.isDraggingY = gestureEvent.isDraggingY = 0;
+                    info.isDraggingX = gestureEvent.isDraggingX = 0;
+                    _fire(info, gestureEvent.onDragEnd);
                 
                 } else if (info.time !== undefined) {
     
                     // TapEnd
                     info.type = "tapEnd";
                     info.e.stopPropagation();
-                    _fire(info, gesture.event.onTapEnd);
+                    _fire(info, gestureEvent.onTapEnd);
                 }
     
             }

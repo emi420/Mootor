@@ -36,19 +36,20 @@ $.extend({
                 back,
                 positionX,
                 hiddenContent,
-                i;
+                i,
+                navInstance_config = navInstance._config;
                    
             // Current panel
             panel = navInstance.items[navInstance.current];
             // Back panel 
-            back = navInstance.items[navInstance._config.back];
+            back = navInstance.items[navInstance_config.back];
             
             $(panel.el).show();
            
             callback = function () {
                 $(back.el).hide();
                 
-                navInstance._config.isMoving = false;                
+                navInstance_config.isMoving = false;                
                 
                 panel.x = 0;
                 navInstance._config.x = 0;
@@ -57,15 +58,15 @@ $.extend({
             };
 
             // Initial position for translate
-            positionX = navInstance._config.width + navInstance._config.margin;
+            positionX = navInstance_config.width + navInstance_config.margin;
 
             if (navInstance.current !== 0) {
-                navInstance._config.anchorBack.show();           
+                navInstance_config.anchorBack.show();           
             } else {
-                navInstance._config.anchorBack.hide();
+                navInstance_config.anchorBack.hide();
             }
                                 
-            if (navInstance._config.direction === 0 || navInstance._config.back === 0) {
+            if (navInstance_config.direction === 0 || navInstance_config.back === 0) {
             
                 // Right
 
@@ -101,8 +102,8 @@ $.extend({
                         Item.initNavigationItems(panel, navInstance);
                     }
                     panel.height = panel.el.offsetHeight;                    
-                    if (navInstance._config.height > panel.height) {
-                        panel.height = navInstance._config.height;
+                    if (navInstance_config.height > panel.height) {
+                        panel.height = navInstance_config.height;
                     }
                 };
             }
@@ -191,7 +192,7 @@ $.extend({
      * Move panel 
      */
     move: function(self, item, gesture) {
-           self._config.y = self._config.y + (gesture.y - gesture.lastY);
+            self._config.y = self._config.y + (gesture.y - gesture.lastY);
             _translate({
                 el: item.el,
                 y: self._config.y,

@@ -16,7 +16,7 @@ var _templates = {
     
     select: '<div class="moo-ui-select-container"><span class="moo-ui-select-text"></span><span class="moo-ui-select-link"> &#9660;</span><div class="moo-ui-select-menu" style="height:217px;display:none"><div class="moo-ui-select-wrapper"><ul class="moo-ui-select-list" moo-template="foreach: option"><li moo-template="text: this.text"></li></ul></div></div></div>',
     
-    camera: "<div class='moo-ui-image-container'><header><a class='moo-ui-add-new' href='#takepic'>Take a picture</a><a class='moo-ui-add-filed' href='#choosepic'>Choose a picture</a><a class='moo-ui-delete' href='#delete'></a><a class='moo-ui-add-comment' href='#addcomment'></a></header><div class='moo-ui-image-panel'><ul class='moo-image-list'><li class='moo-image-wrapper'><div class='moo-image'></div></li></ul></div></div>",
+    camera: "<div class='moo-ui-image-container'><header><a class='moo-ui-add-new' href='#takepic'>Take a picture</a><a class='moo-ui-add-filed' href='#choosepic'>Choose a picture</a><a class='moo-ui-delete' href='#delete'></a><a class='moo-ui-add-comment' href='#addcomment'></a></header><div class='moo-ui-image-panel'><ul class='moo-image-list'><li class='moo-image-wrapper'><div class='moo-image'></div></li></ul></div></div>"
 
 },
 
@@ -43,8 +43,7 @@ _removeSpaces = function(string) {
  */
 _templateParse = function(options) {
     var template = options.template,
-        self = options.self,
-        
+        self = options.self,        
         elements = [],
         parsedHTML = document.createElement("div"),
         tmpElements = [],
@@ -158,14 +157,14 @@ _templateArrayHasForeach = function(elements) {
             item.label = labels[i];
         }
         if (item.el.value !== undefined) {
-            item.value = item.el.value
+            item.value = item.el.value;
         }
     }
                     
     element.el.innerHTML = "";
     
     for (i = 0; i < collection.length; i++) {
-        tmpDiv = document.createElement("div")
+        tmpDiv = document.createElement("div");
         tmpDiv.innerHTML = html;
         tmpDiv.firstChild.setAttribute("moo-foreach-index", i);
         

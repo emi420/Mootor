@@ -23,7 +23,8 @@ var Nav = function (options) {
 
         return this;
 
-    },    
+    },
+    // _scrollBarElement,    
 
 /**
  * Item
@@ -131,7 +132,7 @@ Nav.prototype = {
                 }
             }
             return this.items[this.current].index;
-	    },
+        },
 
         /**
          * Gesture handler
@@ -140,7 +141,7 @@ Nav.prototype = {
          */
         handleGesture: function (gesture) {
             Nav.handleGesture(gesture, this);
-        },       
+        }
         
     };
 
@@ -159,7 +160,7 @@ $.extend({
             links = $(self.el).find("." + navInstance._config.navClass);
             for (i = 0; i < links.length; i++) {
                 if (links[i].getAttribute("href").replace("#","") !== "") {
-                    navigationItems.push(links[i])
+                    navigationItems.push(links[i]);
                 }
             }
             
@@ -327,12 +328,11 @@ $.extend({
                 type: options.type ?
                               options.type : "Panels"                                                
 
-            }
+            };
             
             // Access to navigation object by type, ex: self.Panel
-            switch (self._config.type) {
-                case "Panels":
-                    navObject = Panel;
+            if (self._config.type === "Panels") {
+                navObject = Panel;
             }
             self._config.navItem = navObject;
 
@@ -428,7 +428,7 @@ $.extend({
                     el: elements[i],
                     index: i,
                     x: 0,
-                    y: 0,
+                    y: 0
                 });
     
                 // Initialize navigation items
@@ -456,21 +456,31 @@ $.extend({
          * Prevent native browser scrolling 
          */
         preventNativeScrolling: function() {
-        	$(document).ready(function() {
-            	$(document.body).bind("touchmove", function(event) {
+            $(document).ready(function() {
+                $(document.body).bind("touchmove", function(event) {
                     event.preventDefault();
                     event.stopPropagation();
-            	});	
-        	});
+                });    
+            });
         },
         
         get: function(id) {
             return Nav._collection.map(function(x) {
-                if (x.id === id) { return x }
+                if (x.id === id) { return x; }
             })[0];
+        },
+        
+        _scrollBar: function(options) {
+            // TODO
         }
             
-    }, Nav);
+}, Nav);
+
+/*
+Nav._scrollBarElement = _scrollBarElement = document.createElement("div");
+_scrollBarElement.setAttrbute("class","moo-scrollbar-h");
+document.body.appendChild(_scrollBarElement);
+*/
 
 // Public constructors
 
@@ -486,15 +496,12 @@ $.extend({
             nav = Nav.get(this.query);
             
             if(nav === undefined) {
-                switch (options.type) {
-                    default:
-                        return new Nav(options);
-                }                
+                return new Nav(options);
             } else {
                 return nav;
             }
             
-        },
+    }
 });
 
 /*
