@@ -40,7 +40,7 @@ $.extend({
                    
             // Current panel
             panel = navInstance.items[navInstance.current];
-            // Back panel
+            // Back panel 
             back = navInstance.items[navInstance._config.back];
             
             $(panel.el).show();
@@ -131,6 +131,7 @@ $.extend({
                         x:  -((self._config.width + self._config.margin) * 4),
                         y:0
                     }, self);
+                    item.hide();
                 } else {
                     _translate({
                         el: item.el,
@@ -177,16 +178,17 @@ $.extend({
                         el: panel.el,
                         duration: 0.25
                     }, self);
-                } else {
-                    // TODO: boost movement
                 }
+                
+                // TODO: boost movement
+                
 
             }
 
         },
     
     /**
-     * Move panels
+     * Move panel
      */
     move: function(self, item, gesture) {
            self._config.y = self._config.y + (gesture.y - gesture.lastY);

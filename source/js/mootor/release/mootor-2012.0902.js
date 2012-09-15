@@ -81,16 +81,23 @@ var $ = (function () {
         // Get element from query
         if (qtype === "string") {
 
-            el = document.querySelectorAll(query);                
-            
             if (query.indexOf("#") > -1) {
-
-                this[0] = el = el[0];                
+                el = this[0] = context.getElementById(
+                    query.replace("#", "")
+                );
                 if (this[0] !== null) {
                     this.length = 1;                    
                 }
 
             } else {            
+                if (query.indexOf(".") > -1) {
+                    el = context.getElementsByClassName(
+                        query.replace(".", "")
+                    );
+                } else {
+                    // TODO: filter valid tags
+                    el = context.getElementsByTagName(query);
+                }
                 for(i = 0; i < el.length; i++) {
                     this[i] = el[i];
                 }

@@ -33,10 +33,12 @@ Camera.prototype = {
             this.onShowBox();
         }
         $(this.el).show();
+        this._visibility = "visible";
     },
     
     hide: function() {
         $(this.el).hide()
+        this._visibility = "hidden";
     },    
 
     onShowBox: function(callback) {
@@ -58,11 +60,34 @@ Camera.prototype = {
     push: function(imageElement) {
     
         var tmpDiv = document.createElement("div"),
-            imgDiv;
+            imgDiv,
+            self = this,
+            items;
                     
-        tmpDiv.innerHTML = this.imageWrapper.outerHTML;
+        tmpDiv.innerHTML = this.imageWrapper.outerHTML;        
+        items = $(tmpDiv).find(".moo-image");        
+        imgDiv = items[0];
+        imgDiv.setAttribute("moo-index", this.count);
 
-        imgDiv = $(tmpDiv).find(".moo-image")[0];
+        $(imgDiv).onTapEnd(function(gesture) {
+            var $el = $(gesture.el),
+                i,
+                items = $(self.imageList).find("li");
+                
+            if ($el.hasClass("moo-active") === false) {
+
+                for (i = items.length; i--;) {
+                    $(items[i].firstChild).removeClass("moo-active");
+                }
+
+                $(gesture.el).setClass("moo-active");
+                self.itemSelected = gesture.el.getAttribute("moo-index");    
+                                
+            } else {
+                $(gesture.el).removeClass("moo-active");                                
+            }
+        });
+
         imgDiv.appendChild(imageElement);
         
         this.value.push(imageElement.getAttribute("src"));
@@ -117,6 +142,7 @@ $.extend({
         self.imageList = $(self.el).find(".moo-image-list")[0];
 
         $(self.el).hide();
+        self._visibility = "hidden";
 
         self.input.appendChild(self.el);
 
@@ -128,7 +154,11 @@ $.extend({
     
         // Show/hide box
         $(self.input).onTapEnd(function() {
-           self.show();
+           if (self._visibility === "hidden") {
+               self.show();           
+           } else {
+               self.hide();                          
+           }
         });
         $(self.el).onTapEnd(function() {
            self.hide();

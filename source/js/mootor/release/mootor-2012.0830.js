@@ -81,16 +81,23 @@ var $ = (function () {
         // Get element from query
         if (qtype === "string") {
 
-            el = document.querySelectorAll(query);                
-            
             if (query.indexOf("#") > -1) {
-
-                this[0] = el = el[0];                
+                el = this[0] = context.getElementById(
+                    query.replace("#", "")
+                );
                 if (this[0] !== null) {
                     this.length = 1;                    
                 }
 
             } else {            
+                if (query.indexOf(".") > -1) {
+                    el = context.getElementsByClassName(
+                        query.replace(".", "")
+                    );
+                } else {
+                    // TODO: filter valid tags
+                    el = context.getElementsByTagName(query);
+                }
                 for(i = 0; i < el.length; i++) {
                     this[i] = el[i];
                 }
@@ -508,25 +515,18 @@ if (!window.$ || typeof ($) !== "function") {
                 tduration;
                
             tduration = options.transitionDuration;
-
             this.el.style.transitionProperty = "webkit-transform";
     
             if (tduration !== undefined && tduration > 0) {
                 this.el.style.webkitTransitionDuration = tduration + "s";
                 this.el.style.webkitTransitionTimingFunction = "ease-out";
-
-                this.el.style.MozTransitionDuration = tduration + "s";
-                this.el.style.MozTransitionTimingFunction = "ease-out";
-
             } else {
-                if (this.el.style.webkitTransitionDuration !== ""
-                    || this.el.style.MozTransitionDuration !== "") {
+                if (this.el.style.webkitTransitionDuration !== "") {
                     this.cleanFx();
                 }
             }
     
-            this.el.style.webkitTransform = "translate3d(" + x_pos + "px," + y_pos + "px, 0)";            
-            this.el.style.MozTransform = "translate(" + x_pos + "px," + y_pos + "px)";
+            this.el.style.webkitTransform = "translate3d(" + x_pos + "px," + y_pos + "px, 0)";
     
             if (options.callback) {
                 window.setTimeout(options.callback, tduration * 1000);
@@ -552,10 +552,6 @@ if (!window.$ || typeof ($) !== "function") {
             this.el.style.webkitTransform = "";
             this.el.style.webkitTransitionDuration = "";
             this.el.style.webkitTransitionTimingFunction = "";
-
-            this.el.style.MozTransform = "";
-            this.el.style.MozTransitionDuration = "";
-            this.el.style.MozTransitionTimingFunction = "";
         }
     
     });

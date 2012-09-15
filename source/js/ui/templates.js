@@ -198,10 +198,12 @@ _templateText = function(element, self) {
     if(element.value.indexOf("this.") > -1) {
         value = element.value.replace("this.","");
         valueToLoad = self.items[index][value];
-        if (typeof valueToLoad === "string") {
-            element.el.innerText = valueToLoad;
-        } else {
-            element.el.innerText = valueToLoad.innerText;                        
+        if (valueToLoad !== undefined) {
+            if (typeof valueToLoad === "string") {
+                element.el.innerText = valueToLoad;
+            } else {
+                element.el.innerText = valueToLoad.innerText;                        
+            }
         }
     }
 },

@@ -62,28 +62,21 @@ var $ = (function () {
 	Moo = function (query, context) {
 		var qtype = typeof query,
 			el,
-			i = 1;
-			
+			i = 1;	
+
         // Get element from query
         if (qtype === "string") {
 
+            el = document.querySelectorAll(query);                
+            
             if (query.indexOf("#") > -1) {
-                el = this[0] = context.getElementById(
-                    query.replace("#", "")
-                );
+
+                this[0] = el = el[0];                
                 if (this[0] !== null) {
                     this.length = 1;                    
                 }
 
             } else {            
-                if (query.indexOf(".") > -1) {
-                    el = context.getElementsByClassName(
-                        query.replace(".", "")
-                    );
-                } else {
-                    // TODO: filter valid tags
-                    el = context.getElementsByTagName(query);
-                }
                 for(i = 0; i < el.length; i++) {
                     this[i] = el[i];
                 }
@@ -93,7 +86,7 @@ var $ = (function () {
         } else if (qtype === "object") {
             el = this[0] = query;
             this.length = 1;
-        }                    
+        }               
         
         // Direct access to query result
         this.el = (function () {

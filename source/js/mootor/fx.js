@@ -14,18 +14,25 @@
                 tduration;
                
             tduration = options.transitionDuration;
+
             this.el.style.transitionProperty = "webkit-transform";
     
             if (tduration !== undefined && tduration > 0) {
                 this.el.style.webkitTransitionDuration = tduration + "s";
                 this.el.style.webkitTransitionTimingFunction = "ease-out";
+
+                this.el.style.MozTransitionDuration = tduration + "s";
+                this.el.style.MozTransitionTimingFunction = "ease-out";
+
             } else {
-                if (this.el.style.webkitTransitionDuration !== "") {
+                if (this.el.style.webkitTransitionDuration !== ""
+                    || this.el.style.MozTransitionDuration !== "") {
                     this.cleanFx();
                 }
             }
     
-            this.el.style.webkitTransform = "translate3d(" + x_pos + "px," + y_pos + "px, 0)";
+            this.el.style.webkitTransform = "translate3d(" + x_pos + "px," + y_pos + "px, 0)";            
+            this.el.style.MozTransform = "translate(" + x_pos + "px," + y_pos + "px)";
     
             if (options.callback) {
                 window.setTimeout(options.callback, tduration * 1000);
@@ -51,6 +58,10 @@
             this.el.style.webkitTransform = "";
             this.el.style.webkitTransitionDuration = "";
             this.el.style.webkitTransitionTimingFunction = "";
+
+            this.el.style.MozTransform = "";
+            this.el.style.MozTransitionDuration = "";
+            this.el.style.MozTransitionTimingFunction = "";
         }
     
     });

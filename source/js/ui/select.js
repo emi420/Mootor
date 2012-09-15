@@ -14,6 +14,7 @@ var Select = function(options) {
     this.input = options.el;        
     this.position = options.position;
     $(this.input).hide();
+    this._visibility = "hidden";
     this._makeHTML();       
     this._setTouchEvents();               
 
@@ -71,7 +72,13 @@ Select.prototype = {
         
         // Show selection box
         $(this.el).onTapEnd(function(gesture) {
-            $(self.box).show();
+            if (self._visibility !== "visible") {
+                $(self.box).show();
+                self._visibility = "visible";
+            } else {
+                $(self.box).hide();                
+                self._visibility = "hidden";
+            }
         });
         
         // Prevents default on DragStasrt
@@ -116,7 +123,8 @@ Select.prototype = {
         var self = this;
             
         window.setTimeout(function() { 
-            $(self.box).hide() 
+            $(self.box).hide();
+            self._visibility = "hidden";
         }, 100);
         
         // Get value
