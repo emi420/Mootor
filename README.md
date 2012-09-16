@@ -25,7 +25,7 @@ The key features are:
 
 ## Examples
 
-See inside the "examples" folder, you will need a web server if you want to load views. In order to run this examples in your desktop computer.
+See inside the "examples" folder, you will need a web server (or UIWebView) if you want to load views. In order to run this examples in your desktop computer.
 
 **IMPORTANT: you will need to emulate touch events, for example using the "Emulate touch events" in Chrome Developer Tools.**
 
@@ -33,7 +33,7 @@ http://www.voolks.com/mootor/
 
 # Useful info
 
-Currently compatibility is only WebKit based browsers, ex: iOS, Android (we're working on that, Mozilla)
+Currently compatibility is only WebKit or Gecko based browsers (iOS, Android, Mozilla)
 
 # Only for testing
 
