@@ -2,6 +2,83 @@ var UI = function() {};
 
 // Public constructors
 
+/**
+ * User Interface
+ * @class .ui
+ * @constructor 
+ * @param {UIOptions} UI Options
+ * @return {UIControl} UI Control
+ * @example
+ *       // ToggleSwitch
+ *       $("#moo-ui-switch-1").ui({
+ *           type: "ToggleSwitch",
+ *           value: 0
+ *       });
+ *       
+ *       // Text
+ *       $("#moo-ui-text-1").ui({
+ *           type: "Text"
+ *       });
+ *       
+ *       // TextArea
+ *       $("#moo-ui-textarea-1").ui({
+ *           type: "TextArea"
+ *       });
+ *       
+ *       // Select
+ *       $("#moo-ui-select-1").ui({
+ *           type: "Select",
+ *           position: "bottom"
+ *       });
+ *           
+ *       // Radio
+ *       $("#moo-ui-radio-1").ui({
+ *           type: "Radio",
+ *       });
+ *       
+ *       // Checkbox
+ *       $("#moo-ui-checkbox-1").ui({
+ *           type: "Checkbox",
+ *       });
+ */
+
+
+/**
+ * @class UIOptions
+ * @private
+ * @static
+ */
+ 
+/**
+ * Control type
+ *
+ * @attribute type
+ * @type string
+ */
+
+/**
+ * Original DOM element
+ *
+ * @attribute el
+ * @type HTMLElement
+ */
+
+/**
+ * Control position (top, bottom)
+ *
+ * @attribute position
+ * @optional
+ * @type string
+ */
+
+/**
+ * Value
+ *
+ * @attribute value
+ * @optional
+ * @type string
+ */
+
 $.extend({
 
      ui: function(options) {
@@ -12,8 +89,8 @@ $.extend({
 
              options.el = this.el;
              switch (options.type) {
-                 case "Switch":
-                    UIControl = new Switch(options);
+                 case "ToggleSwitch":
+                    UIControl = new ToggleSwitch(options);
                     break;
                  case "Text":
                     UIControl = new Text(options);

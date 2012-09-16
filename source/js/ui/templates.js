@@ -10,7 +10,7 @@ var _templates = {
     
     modal: "<div class='moo-ui-modal-container'><div class='moo-ui-modal-panel' moo-template='html: this.html'></div></div>",
     
-    _switch: "<div class='moo-ui-switch'><b><span class='moo-before'>I</span><span class='moo-button'>&nbsp;</span><span class='moo-after'>O</span></b></div>",
+    toggleswitch: "<div class='moo-ui-switch'><b><span class='moo-before'>I</span><span class='moo-button'>&nbsp;</span><span class='moo-after'>O</span></b></div>",
     
     text: '<span class="cleanbox">&times</span>',
     
@@ -37,8 +37,6 @@ _removeSpaces = function(string) {
  * Mootor UI template parser
  * @private
  * @param {object} options Options
- * @config {string} template HTML template
- * @config {object} self Mootor object instance (scope)
  * @return {string} parsedHTML Parsed HTML template
  */
 _templateParse = function(options) {
@@ -103,8 +101,6 @@ _templateParse = function(options) {
  * Check if any element of a Mootor template array has a "foreach" attribute
  * @private
  * @param {object} options Options
- * @config {string} template HTML template
- * @config {object} self Mootor object instance (scope)
  * @return {boolean}
  */
 _templateArrayHasForeach = function(elements) {

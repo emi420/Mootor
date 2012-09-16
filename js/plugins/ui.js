@@ -22,7 +22,7 @@ var _templates = {
     
     modal: "<div class='moo-ui-modal-container'><div class='moo-ui-modal-panel' moo-template='html: this.html'></div></div>",
     
-    _switch: "<div class='moo-ui-switch'><b><span class='moo-before'>I</span><span class='moo-button'>&nbsp;</span><span class='moo-after'>O</span></b></div>",
+    toggleswitch: "<div class='moo-ui-switch'><b><span class='moo-before'>I</span><span class='moo-button'>&nbsp;</span><span class='moo-after'>O</span></b></div>",
     
     text: '<span class="cleanbox">&times</span>',
     
@@ -49,8 +49,6 @@ _removeSpaces = function(string) {
  * Mootor UI template parser
  * @private
  * @param {object} options Options
- * @config {string} template HTML template
- * @config {object} self Mootor object instance (scope)
  * @return {string} parsedHTML Parsed HTML template
  */
 _templateParse = function(options) {
@@ -115,8 +113,6 @@ _templateParse = function(options) {
  * Check if any element of a Mootor template array has a "foreach" attribute
  * @private
  * @param {object} options Options
- * @config {string} template HTML template
- * @config {object} self Mootor object instance (scope)
  * @return {boolean}
  */
 _templateArrayHasForeach = function(elements) {
@@ -336,12 +332,9 @@ $.extend({
 var Input = function() {
 };
 /**
- * Switch
- * @param {object} options Options
- * @config {object} el Switch container
- * @return {object} Switch Mootor UI Switch object
+ * ToggleSwitch
  */
-var Switch = function(options) {               
+var ToggleSwitch = function(options) {               
     this.input = options.el;                   
     $(this.input).hide();
     this._makeHTML();
@@ -357,12 +350,12 @@ var Switch = function(options) {
     return this;
 };
 
-Switch.prototype = {
+ToggleSwitch.prototype = {
 
     _makeHTML: function() {
         var el;
         el = document.createElement("div");
-        el.innerHTML = _templates._switch;            
+        el.innerHTML = _templates.toggleswitch;            
         this.el = el.firstChild;
         this.input.parentElement.appendChild(this.el);                        
     },
@@ -477,7 +470,6 @@ Switch.prototype = {
 /**
  * Checkbox
  * @param {object} options Options
- * @config {object} el Fieldset element
  * @return {object} Radio Mootor UI Checkbox object
  */
 var Checkbox = function(options) {
@@ -608,7 +600,6 @@ Checkbox.prototype = {
 /**
  * Radio
  * @param {object} options Options
- * @config {object} el Fieldset element
  * @return {object} Radio Mootor UI Radio object
  */
 var Radio = function(options) {
@@ -713,7 +704,6 @@ Radio.prototype = {
 /**
  * Select
  * @param {object} options Options
- * @config {object} el Input select element
  * @return {object} Select Mootor UI Select object
  */
 var Select = function(options) {
@@ -862,7 +852,6 @@ Select.prototype = {
  /**
  * Text
  * @param {object} options Options
- * @config {object} el Text input element
  * @return {object} Text Mootor UI Text object
  */
 var Text = function(options) {
@@ -944,7 +933,6 @@ Text.prototype = {
 };/**
  * TextArea
  * @param {object} options Options
- * @config {object} el Textarea element
  * @return {object} TextArea Mootor UI TextArea object
  */
 var TextArea = function(options) {
@@ -1215,6 +1203,83 @@ var UI = function() {};
 
 // Public constructors
 
+/**
+ * User Interface
+ * @class .ui
+ * @constructor 
+ * @param {UIOptions} UI Options
+ * @return {UIControl} UI Control
+ * @example
+ *       // ToggleSwitch
+ *       $("#moo-ui-switch-1").ui({
+ *           type: "ToggleSwitch",
+ *           value: 0
+ *       });
+ *       
+ *       // Text
+ *       $("#moo-ui-text-1").ui({
+ *           type: "Text"
+ *       });
+ *       
+ *       // TextArea
+ *       $("#moo-ui-textarea-1").ui({
+ *           type: "TextArea"
+ *       });
+ *       
+ *       // Select
+ *       $("#moo-ui-select-1").ui({
+ *           type: "Select",
+ *           position: "bottom"
+ *       });
+ *           
+ *       // Radio
+ *       $("#moo-ui-radio-1").ui({
+ *           type: "Radio",
+ *       });
+ *       
+ *       // Checkbox
+ *       $("#moo-ui-checkbox-1").ui({
+ *           type: "Checkbox",
+ *       });
+ */
+
+
+/**
+ * @class UIOptions
+ * @private
+ * @static
+ */
+ 
+/**
+ * Control type
+ *
+ * @attribute type
+ * @type string
+ */
+
+/**
+ * Original DOM element
+ *
+ * @attribute el
+ * @type HTMLElement
+ */
+
+/**
+ * Control position (top, bottom)
+ *
+ * @attribute position
+ * @optional
+ * @type string
+ */
+
+/**
+ * Value
+ *
+ * @attribute value
+ * @optional
+ * @type string
+ */
+
 $.extend({
 
      ui: function(options) {
@@ -1225,8 +1290,8 @@ $.extend({
 
              options.el = this.el;
              switch (options.type) {
-                 case "Switch":
-                    UIControl = new Switch(options);
+                 case "ToggleSwitch":
+                    UIControl = new ToggleSwitch(options);
                     break;
                  case "Text":
                     UIControl = new Text(options);
@@ -1312,3 +1377,4 @@ var _stopEventPropagationAndPreventDefault = function(gesture) {
 
 
 }(Mootor));
+

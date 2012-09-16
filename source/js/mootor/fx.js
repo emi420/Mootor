@@ -1,3 +1,4 @@
+
 (function () {
 
     var tmpDivStyle = document.createElement("div").style,
@@ -18,13 +19,12 @@
         duration: vendor + "TransitionDuration",
         timingFunction: vendor + "TransitionTimingFunction"
     };
-
-    $.extend({         
     
-        /** @lends $.prototype */
+    $.extend({         
         
         /**
          * Legacy translateFx Mootor Fx function
+         * @private
          */
         translateFx: function (positions, options) {
     
@@ -61,10 +61,8 @@
 
         /**
          * Translate element, using GPU acceleration when available
-         * @param {object} options Options
-         * @config {number} transitionDuration Duration of transition (in seconds)
-         * @config {number} x X position
-         * @config {number} y Y position
+         * @method translate
+         * @param {TranslateOptions} options Options
          */
         translate: function (options) {
             this.translateFx({x: options.x, y: options.y},options);
@@ -72,6 +70,7 @@
     
         /**
          * Clean element transform styles
+         * @method cleanFx
          */
         cleanFx: function () {
             var elStyle = {},

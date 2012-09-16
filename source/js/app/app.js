@@ -2,6 +2,9 @@
 
 /**
  * App
+ * @constructor 
+ * @param {AppOptions} options App options
+ * @chainable
  */  
 var App = function (options) {
 
@@ -208,7 +211,27 @@ $.extend({
 
 // Public constructors
 
+/**
+ * App
+ * @class $
+ */  
 $.extend({
+     /**
+      * @method app
+      * @param {AppOptions} options App options
+      * @example
+      *      var nav = $("#main").nav();
+      *      $.app
+      *         id: "demoApp",
+      *         path: "views",
+      *         views: [
+      *              "nav",
+      *              "item1",
+      *              "item2",
+      *         ],
+      *         nav: nav
+      *     });
+      */
     app: function (options) {
     
             if (typeof options !== "object") {

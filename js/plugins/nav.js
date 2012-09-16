@@ -9,14 +9,7 @@
 
 /**
  * Nav
- * @param {object} options Options
-
- * @config {number} panelsMargin Margin between panels
- * @config {string} panelsItemsClassName Panels items class
-
- * @config {string} navLinksClassName Navigation links class
- * @config {string} hiddenContentClassName Hidden content 
-                    (when transitioning) class
+ * @param {NavOptions} options Options
  * @return {object} Nav Mootor Nav instance
  */
 var Nav = function (options) {
@@ -31,7 +24,6 @@ var Nav = function (options) {
         return this;
 
     },
-    // _scrollBarElement,    
 
 /**
  * Item
@@ -483,14 +475,15 @@ $.extend({
             
 }, Nav);
 
-/*
-Nav._scrollBarElement = _scrollBarElement = document.createElement("div");
-_scrollBarElement.setAttrbute("class","moo-scrollbar-h");
-document.body.appendChild(_scrollBarElement);
-*/
 
 // Public constructors
 
+/** 
+ * @class .nav
+ * @param {NavOptions} options Navigation configuration options
+ * @constructor
+ * @return {Nav} Nav instance
+ */
 $.extend({
     nav: function (options) {
             var nav;
@@ -825,3 +818,37 @@ $.extend({
 
 }, Panel);
 }(Mootor));
+
+/**
+ * @class NavOptions
+ * @private
+ * @static
+ */
+
+/**
+ * Margin between panels
+ *
+ * @property panelsMargin
+ * @type number
+ */
+
+/**
+ * Panels items class
+ *
+ * @property panelsItemsClassName
+ * @type string
+ */
+ 
+ /**
+ * Navigation links class
+ *
+ * @property navLinksClassName
+ * @type string
+ */
+ 
+ /**
+ * Hidden content (when transitioning) class
+ *
+ * @property hiddenContentClassName
+ * @type string
+ */

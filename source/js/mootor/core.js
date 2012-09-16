@@ -1,3 +1,11 @@
+
+/**
+* Mootor $
+*
+* @class $
+* @static
+*/
+
 var $ = (function () {
 
    var Moo,
@@ -6,10 +14,6 @@ var $ = (function () {
 
    /**
     * Main public constructor 
-    *
-    * @constructor
-    * @param {string} query Query selector
-    * @return {object} $ Mootor object
     */
 	$ = function (query) {
 		return new Moo(query, document);
@@ -17,8 +21,6 @@ var $ = (function () {
 	
    /**
     * On element ready
-    * @private
-    * @ignore
     */
    ready = function (fn, el) {
       if (el === document) {
@@ -52,11 +54,6 @@ var $ = (function () {
 
    /**
     * Private constructor
-    *
-    * @private
-    * @param {string} query Query selector
-    * @param {object} context Context element
-    * @return {object} $ Mootor object
     */
 	Moo = function (query, context) {
 		var qtype = typeof query,
@@ -99,15 +96,14 @@ var $ = (function () {
                   
       return this;
 	};
-
-	// Inherits Array prototype
-   $.prototype = Moo.prototype = [];
       
    /**
     * Extend function
+    * @method extend
     * @param {object} obj Object with properties
     * @param {object} target Target object to be extended
-    * @example $.extend(target, {id: 1});
+    * @example 
+    *       $.extend({id: 1}, target);
     */
    $.extend = function (obj, target) {
       var i;
@@ -120,179 +116,39 @@ var $ = (function () {
       }
    };
    
-   $.extend({
-    
-      /** @lends $.prototype */
-      
-      /**
-       * Element selected
-       */
-      el: undefined,
-
-      /**
-       * Query passed
-       */
-      query: "",
-
-      /**
-       * On element ready
-       * @example $(document).ready(function() {
-       *     console.log("Im ready (The Document)"); 
-       *  });
-       * @param {function} callback Callback function
-       */
-      ready: function (callback) {
-         ready(callback, this.el);
-      },
-
-      /**
-       * Show element
-       * @example $("#myDiv").show(); 
-       */
-      show: function (el) {
-         var element = typeof el === "object" ? 
-                    el : this.el;
-         if (element !== undefined) {
-            element.style.display = "block";
-         }
-         return this;
-      },
-
-      /**
-       * Hide element
-       * @example $("#myDiv").hide(); 
-       */
-      hide: function (el) {
-         var element = typeof el === "object" ?
-                    el : this.el;
-         if (element !== undefined) {
-            element.style.display = "none";
-         }
-         return this;
-      },
-
-      /**
-       * Bind event listener
-       * @param {string} event Event
-       * @param {function} callback Callback function
-       * @example $("#myDiv").on("click", function() {
-       *     console.log("click!")
-       * }); 
-       */
-      on: function(event, callback) {
-         this.el.addEventListener(event, callback, false);
-         return this;
-      },
-      // Deprecated method
-      bind: function (event, callback) {
-         this.on(event,callback);
-      },      
-
-      /**
-       * Unbind event listener
-       * @param {string} event Event
-       * @param {function} callback Callback function
-       * @example $("#myDiv").unbind("touchstart", function() {
-       *     console.log("Touch start!")
-       * }); 
-       */
-      unbind: function (event, callback) {
-         this.el.removeEventListener(event, callback, false);
-         return this;
-      },
-
-      /**
-       * Set class name
-       * @param {string} name Class name
-       * @example $("#myDiv").setClass("featured");
-       */
-      setClass: function (name) {
-         var classes = this.el.className.split(" ");
-         if (classes.indexOf(name) === -1) {
-            classes.push(name);
-            this.el.className = classes.join(" ");
-         }
-         return this;
-      },
-
-      /**
-       * Check if has class name
-       * @param {string} name Class name
-       * @return {boolean}
-       * @example if ($("#myDiv").hasClass("featured") === true) { 
-       *     console.log("this div is featured");
-       * }
-       */
-      hasClass: function (name) {
-         var classes = this.el.className.split(" ");
-         return classes.indexOf(name) !== -1;
-      },
-
-      /**
-       * Remove class name
-       * @param {string} name Class name
-       * @example $("#myDiv").removeClass("featured");
-       */
-      removeClass: function (name) {
-         this.el.className = Array.prototype.filter.call(
-            this.el.className.split(" "), 
-            function(x) { 
-               return x !== name; 
-            }
-         ).join(" ");
-         return this;
-      },
-
-      /**
-       * Load HTML content into an element
-       * @param {string} html HTML
-       * @example $("#myDiv").html("<b>I love Spectre.</b>");
-       */
-      html: function (html) {
-         this.el.innerHTML = html;
-         return this;
-      },
-      
-      /**
-       * Selector useful for query chaining
-       * @param {string} query Query
-       * @example $("#myList").find(".item")
-       */
-      find: function(query) {
-         return new Moo(query, this.el);
-      }      
-      
-	});
 
    // Core
    $.extend({
    
        /**
-       * @lends $
-       */
-
-       /**
        * Mootor  version
        */
       version:  (function () {
-         return "0.11";
+         return "0.12";
       }()),
 
       /**
        * Context features
-       * @example $.context.addEventListener
+       * @property context
+       * @type object
+       * @example 
+       *        if ($.context.addEventListener) { ... }
+       *        if ($.context.userAgent === "android") { ... }
        */
       context: {
          addEventListener: false,
          userAgent: ""
       },
-
+      
       /**
        * Viewport
-       * @example $.view.clientH - Client height
-       * $.view.clientW - Client width
-       * $.view.hide() - Hide viewport
-       * $.view.show() - Show viewport
+       * @property view
+       * @type object
+       * @example 
+       *        var clientHeight = $.view.clientH 
+       *        var clientWidth = $.view.clientW
+       *        var hideViewport = function() { $.view.hide(); }
+       *        var showViewport = function() { $.view.show(); }
        */
       view: {
 
@@ -312,14 +168,20 @@ var $ = (function () {
       },
       
       /**
-       * Ajax request
-       * @param {object} options Options configuration
-       * @config {string} url URL to open
-       * @config {string} method Request method
-       * @config {string} headers Request headers
-       * @config {string} data Data that is sent to the server via POST
-       * @config {function} callback Function callback
+       * ajax Ajax request
+       * @method ajax
+       * @param {AjaxOptions} options Options configuration
+       * @example
+       *        $.ajax({
+       *            url: "http://api.mydomain.com",
+       *            method: "POST",
+       *            data: "id=1&msg=hello",
+       *            callback: function(response) {
+       *                alert(response);
+       *            }
+       *        });
        */
+
       ajax:  function (options) {
          var xmlhttp = new $.window.XMLHttpRequest(),
             data = null,
@@ -350,10 +212,18 @@ var $ = (function () {
          xmlhttp.send(data);
       },
       
+      
       /**
        * require Include scripts
+       * @method require
        * @param {string} script Script URL
        * @param {function} callback Function callback
+       * @example
+       *        $.require("lib/mylib.js",
+       *             function() {
+       *                 alert("ok");
+       *             }
+       *        );
        */
        require: function(script, callback) {
            if (_scripts.isIncluded(script) === false) {
@@ -366,6 +236,192 @@ var $ = (function () {
       }
 
    }, $);
+
+   // Inherits Array prototype
+   $.prototype = Moo.prototype = [];
+
+   /**
+    * Mootor instance
+    * @constructor
+    * @param query
+    * @class $()
+    */
+
+   $.extend({
+      
+      /**
+       * Element selected
+       * @property el
+       * @type object
+       */
+      el: undefined,
+
+      /**
+       * Query passed
+       * @property query
+       * @type string
+       */
+      query: "",
+
+      /**
+       * On element ready
+       * @method ready
+       * @example 
+       *        $(document).ready(function() {
+       *            console.log("Im ready (The Document)");
+       *        });
+       * @param {function} callback Callback function
+       */
+      ready: function (callback) {
+         ready(callback, this.el);
+      },
+
+      /**
+       * Show element
+       * @method show
+       * @chainable
+       * @example 
+       *        $("#myDiv").show(); 
+       */
+      show: function (el) {
+         var element = typeof el === "object" ? 
+                    el : this.el;
+         if (element !== undefined) {
+            element.style.display = "block";
+         }
+         return this;
+      },
+
+      /**
+       * Hide element
+       * @chainable
+       * @method hide
+       * @example 
+       *        $("#myDiv").hide(); 
+       */
+      hide: function (el) {
+         var element = typeof el === "object" ?
+                    el : this.el;
+         if (element !== undefined) {
+            element.style.display = "none";
+         }
+         return this;
+      },
+
+      /**
+       * Bind event listener
+       * @method on
+       * @chainable
+       * @param {string} event Event
+       * @param {function} callback Callback function
+       * @example 
+       *        $("#myDiv").on("click", function() {
+       *            console.log("click!")
+       *        }); 
+       */
+      on: function(event, callback) {
+         this.el.addEventListener(event, callback, false);
+         return this;
+      },
+      // Deprecated method
+      bind: function (event, callback) {
+         this.on(event,callback);
+      },      
+
+      /**
+       * Unbind event listener
+       * @method unbind
+       * @chainable
+       * @param {string} event Event
+       * @param {function} callback Callback function
+       * @example 
+       *        $("#myDiv").unbind("touchstart", function() {
+       *             console.log("Touch start!")
+       *        });
+       */
+      unbind: function (event, callback) {
+         this.el.removeEventListener(event, callback, false);
+         return this;
+      },
+
+      /**
+       * Set class name
+       * @method setClass
+       * @chainable
+       * @param {string} name Class name
+       * @example 
+       *        $("#myDiv").setClass("featured");
+       */
+      setClass: function (name) {
+         var classes = this.el.className.split(" ");
+         if (classes.indexOf(name) === -1) {
+            classes.push(name);
+            this.el.className = classes.join(" ");
+         }
+         return this;
+      },
+
+      /**
+       * Check if has class name
+       * @method hasClass
+       * @chainable
+       * @param {string} name Class name
+       * @return {boolean}
+       * @example 
+       *        if ($("#myDiv").hasClass("featured") === true) { 
+       *            console.log("this div is featured");
+       *        }
+       */
+      hasClass: function (name) {
+         var classes = this.el.className.split(" ");
+         return classes.indexOf(name) !== -1;
+      },
+
+      /**
+       * Remove class name
+       * @method removeClass
+       * @chainable
+       * @param {string} name Class name
+       * @example 
+       *        $("#myDiv").removeClass("featured");
+       */
+      removeClass: function (name) {
+         this.el.className = Array.prototype.filter.call(
+            this.el.className.split(" "), 
+            function(x) { 
+               return x !== name; 
+            }
+         ).join(" ");
+         return this;
+      },
+
+      /**
+       * Load HTML content into an element
+       * @method html
+       * @chainable
+       * @param {string} html HTML
+       * @example 
+       *        $("#myDiv").html("<b>I love Spectre.</b>");
+       */
+      html: function (html) {
+         this.el.innerHTML = html;
+         return this;
+      },
+      
+      /**
+       * Selector useful for query chaining
+       * @method find
+       * @chainable
+       * @param {string} query Query
+       * @example 
+       *        $("#myList").find(".item")
+       */
+      find: function(query) {
+         return new Moo(query, this.el);
+      }      
+      
+	});
+
 
    // Localise globals
    $.window = {
@@ -470,11 +526,12 @@ var $ = (function () {
    return $;
 
 }());
-
+ 
 // Go public!
 if (!window.$ || typeof ($) !== "function") {
    window.Mootor = window.$ = $;
 } else {
    window.Mootor = $;   
 }
+
 

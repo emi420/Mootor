@@ -1,7 +1,6 @@
 /**
  * Radio
  * @param {object} options Options
- * @config {object} el Fieldset element
  * @return {object} Radio Mootor UI Radio object
  */
 var Radio = function(options) {

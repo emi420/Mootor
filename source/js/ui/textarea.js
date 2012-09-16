@@ -1,7 +1,6 @@
 /**
  * TextArea
  * @param {object} options Options
- * @config {object} el Textarea element
  * @return {object} TextArea Mootor UI TextArea object
  */
 var TextArea = function(options) {

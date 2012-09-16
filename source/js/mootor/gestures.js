@@ -82,21 +82,18 @@
     
     /**
      * Gestures
-     *
-     * @class
-     * @see $.gestures
      */
     $.extend({
-    
-        /** @lends $.prototype */
-        
+            
         /**
          * On Tap End
          *
+         * @method onTapEnd
          * @param {function} callback Callback function
-         * @example $("#myDiv").onTapEnd(function() {
-         *      console.log("Tap!")
-         * }); 
+         * @example 
+         *      $("#myDiv").onTapEnd(function() {
+         *          console.log("Tap!")
+         *      });
          */
         onTapEnd: function (callback) {
             _addGesture({
@@ -108,11 +105,13 @@
         /**
          * On Tap Start
          *
+         * @method onTapStart
          * @param {function} callback Callback function
-         * @example $("#myDiv").onTapStart(function() {
-         *      console.log("Tap start!")
-         * }); 
-         */
+         * @example 
+         *      $("#myDiv").onTapStart(function() {
+         *          console.log("Tap start!")
+         *      }); 
+        */
         onTapStart: function (callback) {
             _addGesture({
                 fn: this,
@@ -123,10 +122,12 @@
         /**
          * On Tap Hold (500 ms)
          *
+         * @method onTapHold
          * @param {function} callback Callback function
-         * @example $("#myDiv").onTapHold(function() {
-         *      console.log("Tap hold!")
-         * }); 
+         * @example 
+         *      $("#myDiv").onTapHold(function() {
+         *          console.log("Tap hold!")
+         *      }); 
          */
         onTapHold: function (callback) {
             _addGesture({
@@ -138,10 +139,12 @@
         /**
          * On Drag Start
          *
+         * @method onDragStart
          * @param {function} callback Callback function
-         * @example $("#myDiv").onDragStart(function() {
-         *      console.log("Drag start!")
-         * }); 
+         * @example 
+         *      $("#myDiv").onDragStart(function() {
+         *          console.log("Drag start!")
+         *      }); 
          */
         onDragStart: function (callback) {
             _addGesture({
@@ -153,16 +156,18 @@
         /**
          * On Drag Move
          *
+         * @method onDragMove
          * @param {function} callback Callback function
          * @example $("#myDiv").onDragMove(function(gesture) {
          *      console.log(gesture.y)
          * }); 
-         * @example fn = this;
-         * $("#myDiv").onDragMove(fn);
-         * fn.handleGesture = function(gesture) {
-         *       console.log(gesture.x);
-         *       console.log(gesture.y);
-         * }
+         * @example 
+         *      fn = this;
+         *      $("#myDiv").onDragMove(fn);
+         *      fn.handleGesture = function(gesture) {
+         *          console.log(gesture.x);
+         *          console.log(gesture.y);
+         *      }
          */
         onDragMove: function (callback) {
             _addGesture({
@@ -174,10 +179,12 @@
         /**
          * On Drag End
          *
+         * @method onDragEnd
          * @param {function} callback Callback function
-         * @example $("#myDiv").onDragEnd(function() {
-         *      console.log("Drag end!")
-         * }); 
+         * @example 
+         *      $("#myDiv").onDragEnd(function() {
+         *          console.log("Drag end!")
+         *      }); 
          */
         onDragEnd: function (callback) {
             _addGesture({
@@ -187,8 +194,15 @@
             });
         },
         
-        /*
-         *  Swipe
+        /**
+         * On Swipe Left
+         *
+         * @method onSwipeLeft
+         * @param {function} callback Callback function
+         * @example 
+         *      $("#myDiv").onSwipeLeft(function() {
+         *           console.log("Swipe left!")
+         *      }); 
          */
         onSwipeLeft: function (callback) {
             _addGesture({
@@ -197,6 +211,16 @@
                 type: "onSwipeLeft"
             });
         },
+        /**
+         * On Swipe Right
+         *
+         * @method onSwipeRight
+         * @param {function} callback Callback function
+         * @example 
+         *      $("#myDiv").onSwipeRight(function() {
+         *           console.log("Swipe right!")
+         *      }); 
+         */
         onSwipeRight: function (callback) {
             _addGesture({
                 fn: this,
@@ -204,6 +228,16 @@
                 type: "onSwipeRight"
             });
         },
+        /**
+         * On Swipe Up
+         *
+         * @method onSwipeUp
+         * @param {function} callback Callback function
+         * @example 
+         *      $("#myDiv").onSwipeUp(function() {
+         *           console.log("Swipe up!")
+         *      }); 
+         */
         onSwipeUp: function (callback) {
             _addGesture({
                 fn: this,
@@ -211,6 +245,16 @@
                 type: "onSwipeUp"
             });
         },
+        /**
+         * On Swipe Down
+         *
+         * @method onSwipeDown
+         * @param {function} callback Callback function
+         * @example 
+         *      $("#myDiv").onSwipeDown(function() {
+         *           console.log("Swipe down!")
+         *      }); 
+         */
         onSwipeDown: function (callback) {
             _addGesture({
                 fn: this,

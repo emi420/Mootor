@@ -1,10 +1,7 @@
 /**
- * Switch
- * @param {object} options Options
- * @config {object} el Switch container
- * @return {object} Switch Mootor UI Switch object
+ * ToggleSwitch
  */
-var Switch = function(options) {               
+var ToggleSwitch = function(options) {               
     this.input = options.el;                   
     $(this.input).hide();
     this._makeHTML();
@@ -20,12 +17,12 @@ var Switch = function(options) {
     return this;
 };
 
-Switch.prototype = {
+ToggleSwitch.prototype = {
 
     _makeHTML: function() {
         var el;
         el = document.createElement("div");
-        el.innerHTML = _templates._switch;            
+        el.innerHTML = _templates.toggleswitch;            
         this.el = el.firstChild;
         this.input.parentElement.appendChild(this.el);                        
     },

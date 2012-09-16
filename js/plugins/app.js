@@ -9,6 +9,9 @@
 
 /**
  * App
+ * @constructor 
+ * @param {AppOptions} options App options
+ * @chainable
  */  
 var App = function (options) {
 
@@ -42,7 +45,7 @@ View = function(options, appInstance) {
                     nav: navItem
                });
            }               
-       }
+       };
    }
    
    this.cached = false;
@@ -61,7 +64,8 @@ App.prototype = {
     load: function(view, options) {
     
       var callback = function() {},
-          viewPath = "";
+          viewPath = "",
+          optionsNav = options.nav;
 
       if (options === undefined) {
           options = {};
@@ -90,21 +94,21 @@ App.prototype = {
               // If a navItemInstance param is passed
               // and that object has an onLoadCallback function
               // then call that onLoadContentCallback function                     
-              if (options.nav !== undefined &&
-                  typeof options.nav.onLoadContentCallback === "function") {  
-                  options.nav.onLoadContentCallback();                                     
+              if (optionsNav !== undefined &&
+                  typeof optionsNav.onLoadContentCallback === "function") {  
+                  optionsNav.onLoadContentCallback();                                     
               }                           
-          }
+          };
 
       }
       
       viewPath = this.path + "/" + view.id + "/" + view.id;
-      
+              
       // Template
       $.ajax({
             url: viewPath + ".html",
             callback: function(response) {
-            
+
                 // Controller
                 $.require(viewPath + ".js");
 
@@ -207,25 +211,41 @@ $.extend({
                 return App._collection[i];
             }
         }
-    },
+    }
     
     
 }, App);
 
 // Public constructors
 
+/**
+ * App
+ * @class $
+ */  
 $.extend({
+     /**
+      * @method app
+      * @param {AppOptions} options App options
+      * @example
+      *      var nav = $("#main").nav();
+      *      $.app
+      *         id: "demoApp",
+      *         path: "views",
+      *         views: [
+      *              "nav",
+      *              "item1",
+      *              "item2",
+      *         ],
+      *         nav: nav
+      *     });
+      */
     app: function (options) {
     
             if (typeof options !== "object") {
                 options = {};
             }
-            options.el = this.el;
-            
-            switch (options.type) {
-                default:
-                    return new App(options);                
-            }
+            options.el = this.el;            
+            return new App(options);                
         }
 }, $);
 
@@ -244,12 +264,6 @@ $.extend({
 
 var Model = function(options) {
    this.model = options.model;
-
-   // Legacy compatibility
-   if (options._localStoragePrefix !== undefined) {
-        options.localStoragePrefix = options.localStoragePrefix;
-   }
-
    this.localStoragePrefix = options.localStoragePrefix;
    return this;
 };
@@ -262,13 +276,13 @@ Model.prototype = {
             self = this;
             
         id = this.localStoragePrefix + '-' + id;                
-        result = window.localStorage.getItem(id); ;
+        result = window.localStorage.getItem(id); 
         
         if (result !== null) {
             result = JSON.parse(result);
             $.extend({
                 put: function() {
-                    self.put(this)
+                    self.put(this);
                 }                    
             }, result);
         }         
@@ -353,7 +367,6 @@ Model.prototype = {
         var count = this.count(),
             result = [],
             i = 0,
-            item,
             record;
              
         // If any records found, fill the response array
@@ -393,9 +406,9 @@ Model.prototype = {
     // Destroy (not implemented yet)
     destroy: function(id) {        
         return null;                    
-    },
+    }
 
-}
+};
 
 $.extend({
     Model: function (options) {
@@ -403,3 +416,31 @@ $.extend({
     },
     models: {}
 }, App.prototype);}(Mootor));
+
+
+/**
+ * @class AppOptions
+ * @private
+ * @static
+ */
+
+/**
+ * App id
+ *
+ * @property id
+ * @type string
+ */
+
+/**
+ * Views path
+ *
+ * @property path
+ * @type string
+ */
+
+/**
+ * Views
+ *
+ * @property views
+ * @type array
+ */

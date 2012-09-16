@@ -2,7 +2,7 @@
     
     // Switch
     $("#moo-ui-switch-1").ui({
-        type: "Switch",
+        type: "ToggleSwitch",
         value: 0
     });
     

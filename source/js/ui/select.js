@@ -2,7 +2,6 @@
 /**
  * Select
  * @param {object} options Options
- * @config {object} el Input select element
  * @return {object} Select Mootor UI Select object
  */
 var Select = function(options) {

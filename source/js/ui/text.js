@@ -1,7 +1,6 @@
  /**
  * Text
  * @param {object} options Options
- * @config {object} el Text input element
  * @return {object} Text Mootor UI Text object
  */
 var Text = function(options) {
