@@ -2,12 +2,7 @@
  * @summary User Interface Mootor plugin
  * @author Emilio Mariscal (emi420 [at] gmail.com)
  */
- 
-/** 
- * @class
- * @name $ 
- */
- 
+  
 (function ($) {
 
     "use strict";
@@ -329,6 +324,7 @@ $.extend({
         $(document.body).el.appendChild(object.el);
     }
 }, Overlay);
+
 var Input = function() {
 };
 /**
@@ -1199,13 +1195,14 @@ $.extend({
     }
 }, Camera);
 
+ 
 var UI = function() {};
 
 // Public constructors
 
 /**
  * User Interface
- * @class .ui
+ * @class $.prototype.ui
  * @constructor 
  * @param {UIOptions} UI Options
  * @return {UIControl} UI Control
@@ -1243,42 +1240,6 @@ var UI = function() {};
  *       });
  */
 
-
-/**
- * @class UIOptions
- * @private
- * @static
- */
- 
-/**
- * Control type
- *
- * @attribute type
- * @type string
- */
-
-/**
- * Original DOM element
- *
- * @attribute el
- * @type HTMLElement
- */
-
-/**
- * Control position (top, bottom)
- *
- * @attribute position
- * @optional
- * @type string
- */
-
-/**
- * Value
- *
- * @attribute value
- * @optional
- * @type string
- */
 
 $.extend({
 
@@ -1325,11 +1286,39 @@ $.extend({
      }
 });
 
+/**
+ * UI Control
+ * @class UIControl
+ */
+var UIControl = {};
+
+/**
+ * Original DOM element
+ * @property UIControl
+ * @type HTMLElement
+ */
+
+/**
+ * UI
+ * @class $.ui
+ */
 $.extend({
      ui: {
+        /**
+         * Overlay
+         * @method overlay
+         * @example
+         *      $.ui.overlay()
+         */
          overlay: function() {
             return new Overlay();
          },
+        /**
+         * Loading
+         * @method loading
+         * @example
+         *      $.ui.loading()
+         */
          loading: function() {
             return new Loading();
          },
@@ -1374,6 +1363,41 @@ var _stopEventPropagationAndPreventDefault = function(gesture) {
     gesture.e.preventDefault();
 };
 
+
+/**
+ * @class UIOptions
+ * @static
+ */
+ 
+/**
+ * Control type
+ *
+ * @property type
+ * @type string
+ */
+
+/**
+ * Original DOM element
+ *
+ * @property el
+ * @type HTMLElement
+ */
+
+/**
+ * Control position (top, bottom)
+ *
+ * @property position
+ * @optional
+ * @type string
+ */
+
+/**
+ * Value
+ *
+ * @property value
+ * @optional
+ * @type string
+ */
 
 
 }(Mootor));

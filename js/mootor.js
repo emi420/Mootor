@@ -8,10 +8,23 @@
  *
  */
 
+
 (function (document) {
 
 "use strict";
 
+/**
+* Core
+*
+* @module core
+* @submodule core
+*/
+/**
+* Core
+*
+* @module core
+* @submodule $
+*/
 
 /**
 * Mootor $
@@ -27,7 +40,7 @@ var $ = (function () {
       _hideContentWhileDocumentNotReady,
 
    /**
-    * Main public constructor 
+    * Main public constructor  
     */
 	$ = function (query) {
 		return new Moo(query, document);
@@ -257,8 +270,14 @@ var $ = (function () {
    /**
     * Mootor instance
     * @constructor
-    * @param query
+    * @param {string|HTMLElement} query
+    * @return $.prototype
     * @class $()
+    */
+
+   /**
+    * Mootor instance
+    * @class $.prototype
     */
 
    $.extend({
@@ -550,6 +569,14 @@ if (!window.$ || typeof ($) !== "function") {
 
 
 
+
+
+/**
+ * Fx
+ * @module core
+ * @submodule fx
+ */ 
+
 (function () {
 
     var tmpDivStyle = document.createElement("div").style,
@@ -640,6 +667,13 @@ if (!window.$ || typeof ($) !== "function") {
     });
     
 } ());
+
+/**
+ * Gestures
+ * @module core
+ * @submodule gestures
+ */ 
+
 (function () {
 
     var _addGesture,
@@ -1080,72 +1114,4 @@ if (!window.$ || typeof ($) !== "function") {
 }(window.document));
 
 
-/**
- * @class AjaxOptions
- * @private
- * @static
- */
-
-/**
- * URL to load
- *
- * @property url
- * @type string
- */
-
-/**
- * Request method (ex: POST)
- *
- * @property method
- * @type string
- */
-
-/**
- * Request headers
- *
- * @property headers
- * @type string
- */
- 
-/**
- * Data that is sent to the server via POST
- *
- * @property data
- * @type string
- */
-
-/**
- * Function callback
- *
- * @property callback
- * @type function
- */
-
-
-/**
- * @class TranslateOptions
- * @private
- * @static
- */
-
-/**
- * Duration of transition (in seconds)
- *
- * @property transitionDuration
- * @type number
- */
-
-/**
- * X position
- *
- * @property x
- * @type number
- */
-
-/**
- * Y position
- *
- * @property y
- * @type number
- */
 

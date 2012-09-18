@@ -1,3 +1,15 @@
+/**
+* Core
+*
+* @module core
+* @submodule core
+*/
+/**
+* Core
+*
+* @module core
+* @submodule $
+*/
 
 /**
 * Mootor $
@@ -13,7 +25,7 @@ var $ = (function () {
       _hideContentWhileDocumentNotReady,
 
    /**
-    * Main public constructor 
+    * Main public constructor  
     */
 	$ = function (query) {
 		return new Moo(query, document);
@@ -243,8 +255,14 @@ var $ = (function () {
    /**
     * Mootor instance
     * @constructor
-    * @param query
+    * @param {string|HTMLElement} query
+    * @return $.prototype
     * @class $()
+    */
+
+   /**
+    * Mootor instance
+    * @class $.prototype
     */
 
    $.extend({
@@ -533,5 +551,8 @@ if (!window.$ || typeof ($) !== "function") {
 } else {
    window.Mootor = $;   
 }
+
+
+
 
 

@@ -1,3 +1,9 @@
+/**
+ * Gestures
+ * @module core
+ * @submodule gestures
+ */ 
+
 (function () {
 
     var _addGesture,

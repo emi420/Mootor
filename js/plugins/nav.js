@@ -5,13 +5,14 @@
 
 (function ($) {
 
-    "use strict";// Private constructors
-
+    "use strict";
+    
+ 
 /**
  * Nav
+ * @class Nav
  * @param {NavOptions} options Options
- * @return {object} Nav Mootor Nav instance
- */
+ */ 
 var Nav = function (options) {
 
         // Initialize instance & navigation items
@@ -24,29 +25,7 @@ var Nav = function (options) {
         return this;
 
     },
-
-/**
- * Item
- * @param {object} options Options
- * @config {object} el Element
- * @return {object} Item Navigation Item instance
- */
-Item = function(options) {
-    
-        // Cache element
-        this.el = options.el;        
-        
-        // Initialize properties
-        this.id = this.el.id;
-        this.index = options.index;
-        this.height = options.height;
-
-        // Item 2D position
-        this.x = options.x;
-        this.y = options.y;
-        
-        return this;  
-    };
+    Item;
 
 // Public instance prototypes
 
@@ -54,9 +33,18 @@ Item = function(options) {
  * Nav
  */  
 Nav.prototype = {
+
+        /**
+         * Original DOM lement
+         * @property el
+         * @type HTMLElement
+         */
+        el: undefined,
         
         /**
-         * set Set current navigation item
+         * Set current navigation item
+         * @extends Nav
+         * @method set
          * @param {string} id Navigation item id
          * @return {object} Item Navigation item instance
          */
@@ -94,7 +82,8 @@ Nav.prototype = {
         },
 
         /**
-         * get Get Item object by id
+         * Get Item object by id
+         * @method get
          * @param {string} id Navigation item id
          * @return {object} Item Navigation Item instance
          */
@@ -109,7 +98,8 @@ Nav.prototype = {
         },
 
         /**
-         * goBack Go back on navigation history
+         * Go back on navigation history
+         * @method goBack
          * @param {string} id Navigation item id
          * @return {integer} index Current navigation item index
          */
@@ -144,6 +134,29 @@ Nav.prototype = {
         
     };
 
+
+/**
+ * Item
+ * @param {object} options Options
+ * @return {object} Item Navigation Item instance
+ */
+Item = function(options) {
+    
+        // Cache element
+        this.el = options.el;        
+        
+        // Initialize properties
+        this.id = this.el.id;
+        this.index = options.index;
+        this.height = options.height;
+
+        // Item 2D position
+        this.x = options.x;
+        this.y = options.y;
+        
+        return this;  
+    };
+    
 // Private static methods
 
 /**
@@ -232,6 +245,36 @@ $.extend({
         
     }, Item);
 
+
+
+// Public constructors
+
+/** 
+ * @class $.prototype.nav
+ * @param {NavOptions} options Navigation configuration options
+ * @constructor
+ * @return {Nav} Nav instance
+ */
+$.extend({
+    nav: function (options) {
+            var nav;
+            if (typeof options !== "object") {
+                options = {};
+            }
+            options.el = this.el;
+            options._query = this.query;
+            
+            nav = Nav.get(this.query);
+            
+            if(nav === undefined) {
+                return new Nav(options);
+            } else {
+                return nav;
+            }
+            
+    }
+});
+
 /**
  * Nav
  */    
@@ -241,6 +284,7 @@ $.extend({
 
         /**
          * Initialize Nav instance
+         * @method init
          */
         init: function(options, self) {
 
@@ -476,39 +520,10 @@ $.extend({
 }, Nav);
 
 
-// Public constructors
-
-/** 
- * @class .nav
- * @param {NavOptions} options Navigation configuration options
- * @constructor
- * @return {Nav} Nav instance
- */
-$.extend({
-    nav: function (options) {
-            var nav;
-            if (typeof options !== "object") {
-                options = {};
-            }
-            options.el = this.el;
-            options._query = this.query;
-            
-            nav = Nav.get(this.query);
-            
-            if(nav === undefined) {
-                return new Nav(options);
-            } else {
-                return nav;
-            }
-            
-    }
-});
-
 /*
  * Prevent native scrolling
  */
 Nav.preventNativeScrolling();
-
 // #include "nav.js"
 
 /**
@@ -592,6 +607,7 @@ $.extend({
     }
 
 }, Header);
+
 // #include "nav.js"
 
 /**
@@ -603,6 +619,7 @@ var Footer = function(self) {
     // TODO: create an object like Header
     //       ex: using a NavBar constructor
 };
+
 
 var Panel = function(){},
 
@@ -852,3 +869,4 @@ $.extend({
  * @property hiddenContentClassName
  * @type string
  */
+

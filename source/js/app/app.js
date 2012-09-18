@@ -1,10 +1,26 @@
+
 // Constructors
 
 /**
  * App
+ * @class App
  * @constructor 
  * @param {AppOptions} options App options
  * @chainable
+ * @example
+ *       $(document).ready(function() {
+ *          app = $.app({
+ *              id: "trulyn",
+ *              path: "views",
+ *              views: [
+ *                 "login",
+ *                 "inspections",
+ *                 "client",
+ *                 "inspection"
+ *              ],
+ *              nav: $("#main").nav()
+ *          });
+ *      
  */  
 var App = function (options) {
 
@@ -15,6 +31,12 @@ var App = function (options) {
 
 },
 
+/**
+ * View
+ * @constructor
+ * @param {ViewOptions} options
+ * @param {App} appInstance
+ */ 
 View = function(options, appInstance) {
    
    var el = this.el = options.el,
@@ -50,10 +72,21 @@ View = function(options, appInstance) {
 
 /**
  * App
+ * @class App
  */  
 App.prototype = {
 
-    // Load a view
+    /**
+     * Load a view
+     * @method load
+     * @param {View} view
+     * @param {AppLoadOptions} options
+     * @example
+     *         app.load(
+     *              app.get("myapp"), 
+     *              nav.get("main")
+     *          );
+     */
     load: function(view, options) {
     
       var callback = function() {},
@@ -111,7 +144,14 @@ App.prototype = {
       
     },
     
-    // Get a view by id
+    /**
+     * Get a view by id
+     * @method get
+     * @param {string} id
+     * @return {View} view
+     * @example
+     *      $("myapp").app().get("home");
+     */
     get: function(id) {
         var i;
         for (i = this.views.length; i--;) {
@@ -121,17 +161,35 @@ App.prototype = {
         }
         return null;
     },
-    
+
     data: {
         _collection: {},
         
+        /**
+         * Get
+         * @method data.get
+         * @example
+         *      $("myapp").app().data.get("title");
+         */    
         get: function(key) {
             return this._collection[key];
         },
+        /**
+         * Set
+         * @method data.set
+         * @example
+         *      $("myapp").app().data.set("title","Home page");
+         */    
         set: function(key, value) {
             this._collection[key] = value;
         },
-        unset: function(key) {
+        /**
+         * Unset
+         * @method data.unset
+         * @example
+         *      $("myapp").app().data.unset("title");
+         */  
+         unset: function(key) {
             var i;
             for (i in this._collection) {
                 if (i === key) {
@@ -151,6 +209,7 @@ App.prototype = {
 $.extend({
     _collection: [],
     
+
     init: function(options, self) {
         var i,
             moduleNamePosition,
@@ -211,17 +270,20 @@ $.extend({
 
 // Public constructors
 
-/**
- * App
- * @class $
- */  
 $.extend({
      /**
-      * @method app
+      * @class $.app
+      * @constructor
       * @param {AppOptions} options App options
+      * @return 
       * @example
+      *
+      *      // In this example "nav" view is in:
+      *      // ./views/nav/nav.html
+      *      // ./views/nav/nav.js
+      *
       *      var nav = $("#main").nav();
-      *      $.app
+      *      $.app({
       *         id: "demoApp",
       *         path: "views",
       *         views: [

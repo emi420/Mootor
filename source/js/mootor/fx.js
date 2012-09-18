@@ -1,3 +1,8 @@
+/**
+ * Fx
+ * @module core
+ * @submodule fx
+ */ 
 
 (function () {
 
@@ -89,3 +94,4 @@
     });
     
 } ());
+
