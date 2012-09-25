@@ -182,9 +182,6 @@ $.extend({
                     }, self);
                 }
                 
-                // TODO: boost movement
-                
-
             }
 
         },
@@ -207,7 +204,7 @@ $.extend({
     setStylesWhenHeaderActive: function(height, navInstance) {
         var i;
         for (i = navInstance._config.count; i--;) {
-            navInstance.items[i].el.style.paddingTop = height/2 + "px";
+            navInstance.items[i].el.style.paddingTop = height + "px";
         }
     }
 
