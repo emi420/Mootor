@@ -765,14 +765,17 @@ Select.prototype = {
     // Set touch events
     _setTouchEvents: function() {
         var self = this;
-        
+                
         // Show selection box
         $(this.el).onTapEnd(function(gesture) {
             if (self._visibility !== "visible") {
-                $(self.box).show();
+                //$(self.box).show();
+                $(self.input).show();
+                self.input.focus();                
                 self._visibility = "visible";
             } else {
-                $(self.box).hide();                
+                //$(self.box).hide();                
+                $(self.input).hide();
                 self._visibility = "hidden";
             }
         });
@@ -850,7 +853,10 @@ Select.prototype = {
  * @param {object} options Options
  * @return {object} Text Mootor UI Text object
  */
-var Text = function(options) {
+
+var _focused = false,
+ 
+Text = function(options) {
     var self = this;
                     
     // Input element
@@ -869,21 +875,31 @@ var Text = function(options) {
     $(this.el).onDragStart(_stopEventPropagationAndPreventDefault);      
     $(this.el).onTapEnd(function(gesture) {
         gesture.el.focus();
-
-        // Do something to prevents keyboard scroll here
-        gesture.el.onblur = function() {
-            window.scrollTo(0,0);
-            // Do something to prevents keyboard scroll here
-        };
-
         _stopEventPropagationAndPreventDefault(gesture);
     });        
     $(this.cleanbox).onTapEnd(function() {
         self.clean();
     });
-                    
+
+    // Do something to prevents keyboard scroll here
+    // FIXME
+    /*this.el.onblur = function() {
+        _focused = false;
+        window.setTimeout(function() {
+        //    console.log(Text.focused);
+            if (_focused === false) {
+                window.scrollTo(0,0); 
+            }                
+        }, 50);
+    };
+    this.el.onfocus = function() {
+        _focused = true;
+    };*/
+    
     return this;
 };
+
+Text.focused = false;
 
  /*
 * Text prototype
@@ -1044,6 +1060,13 @@ Camera.prototype = {
         items = $(tmpDiv).find(".moo-image");        
         imgDiv = items[0];
         imgDiv.setAttribute("moo-index", this.count);
+        items = $(self.imageList).find("li");
+
+        for (i = items.length; i--;) {
+            $(items[i].firstChild).removeClass("moo-active");
+        }
+        $(imgDiv).setClass("moo-active");
+        self.itemSelected = this.count;    
 
         $(imgDiv).onTapEnd(function(gesture) {
             var $el = $(gesture.el),
@@ -1059,8 +1082,6 @@ Camera.prototype = {
                 $(gesture.el).setClass("moo-active");
                 self.itemSelected = gesture.el.getAttribute("moo-index");    
                                 
-            } else {
-                $(gesture.el).removeClass("moo-active");                                
             }
         });
 

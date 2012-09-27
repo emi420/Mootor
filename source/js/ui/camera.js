@@ -68,6 +68,13 @@ Camera.prototype = {
         items = $(tmpDiv).find(".moo-image");        
         imgDiv = items[0];
         imgDiv.setAttribute("moo-index", this.count);
+        items = $(self.imageList).find("li");
+
+        for (i = items.length; i--;) {
+            $(items[i].firstChild).removeClass("moo-active");
+        }
+        $(imgDiv).setClass("moo-active");
+        self.itemSelected = this.count;    
 
         $(imgDiv).onTapEnd(function(gesture) {
             var $el = $(gesture.el),
@@ -83,8 +90,6 @@ Camera.prototype = {
                 $(gesture.el).setClass("moo-active");
                 self.itemSelected = gesture.el.getAttribute("moo-index");    
                                 
-            } else {
-                $(gesture.el).removeClass("moo-active");                                
             }
         });
 

@@ -67,14 +67,17 @@ Select.prototype = {
     // Set touch events
     _setTouchEvents: function() {
         var self = this;
-        
+                
         // Show selection box
         $(this.el).onTapEnd(function(gesture) {
             if (self._visibility !== "visible") {
-                $(self.box).show();
+                //$(self.box).show();
+                $(self.input).show();
+                self.input.focus();                
                 self._visibility = "visible";
             } else {
-                $(self.box).hide();                
+                //$(self.box).hide();                
+                $(self.input).hide();
                 self._visibility = "hidden";
             }
         });
