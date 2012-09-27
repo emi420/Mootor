@@ -10,12 +10,16 @@
     width: 75%;
 }
 .moo-ui-input {
-    -webkit-appearance:none;  /* Remove default iOS shadow */
+    -webkit-appearance: none;  /* Remove default iOS shadow */
+    // -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     border: none; 
     background: none; 
     font-size: 1.5em; 
     line-height: 1.5em;
     width: 100%;
+    &:focus {
+        border: rgba(0, 0, 0, 0) none;
+    }
 }
 
 
@@ -133,7 +137,7 @@
                 content: " "; 
                 display: block;
                 position: absolute;
-                top: -2.9em;
+                top: -2.5em;
                 left: 25%;
                 border-top: 15px solid transparent;
                 border-left: 20px solid transparent;
