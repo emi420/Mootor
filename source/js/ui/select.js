@@ -77,15 +77,21 @@ Select.prototype = {
                 self._visibility = "visible";
             } else {
                 //$(self.box).hide();                
+                self.input.blur();                
                 $(self.input).hide();
                 self._visibility = "hidden";
             }
         });
         
+        $(this.input).on("blur", function() {
+            $(self.input).hide();
+            self._visibility = "hidden";
+        });
+        
         // Prevents default on DragStasrt
         $(this.el).onDragStart(_stopEventPropagationAndPreventDefault);        
 
-        // Tap (to select)
+        /*// Tap (to select)
         $(this.ul).onTapEnd(function(gesture) {
             var i;
             _stopEventPropagationAndPreventDefault(gesture); 
@@ -112,7 +118,7 @@ Select.prototype = {
                 $(self.ul).translateFx({x: 0, y: self.y}, {});
             }
             
-        });
+        });*/
     },
 
     /**

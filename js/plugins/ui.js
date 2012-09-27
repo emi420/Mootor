@@ -775,15 +775,21 @@ Select.prototype = {
                 self._visibility = "visible";
             } else {
                 //$(self.box).hide();                
+                self.input.blur();                
                 $(self.input).hide();
                 self._visibility = "hidden";
             }
         });
         
+        $(this.input).on("blur", function() {
+            $(self.input).hide();
+            self._visibility = "hidden";
+        });
+        
         // Prevents default on DragStasrt
         $(this.el).onDragStart(_stopEventPropagationAndPreventDefault);        
 
-        // Tap (to select)
+        /*// Tap (to select)
         $(this.ul).onTapEnd(function(gesture) {
             var i;
             _stopEventPropagationAndPreventDefault(gesture); 
@@ -810,7 +816,7 @@ Select.prototype = {
                 $(self.ul).translateFx({x: 0, y: self.y}, {});
             }
             
-        });
+        });*/
     },
 
     /**
@@ -883,16 +889,16 @@ Text = function(options) {
 
     // Do something to prevents keyboard scroll here
     // FIXME
-    /*this.el.onblur = function() {
-        _focused = false;
-        window.setTimeout(function() {
+    this.el.onblur = function() {
+    //    _focused = false;
+    //    window.setTimeout(function() {
         //    console.log(Text.focused);
-            if (_focused === false) {
+    //        if (_focused === false) {
                 window.scrollTo(0,0); 
-            }                
-        }, 50);
+    //        }                
+    //    }, 50);
     };
-    this.el.onfocus = function() {
+    /*this.el.onfocus = function() {
         _focused = true;
     };*/
     

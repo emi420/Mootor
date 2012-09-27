@@ -33,16 +33,16 @@ Text = function(options) {
 
     // Do something to prevents keyboard scroll here
     // FIXME
-    /*this.el.onblur = function() {
-        _focused = false;
-        window.setTimeout(function() {
+    this.el.onblur = function() {
+    //    _focused = false;
+    //    window.setTimeout(function() {
         //    console.log(Text.focused);
-            if (_focused === false) {
+    //        if (_focused === false) {
                 window.scrollTo(0,0); 
-            }                
-        }, 50);
+    //        }                
+    //    }, 50);
     };
-    this.el.onfocus = function() {
+    /*this.el.onfocus = function() {
         _focused = true;
     };*/
     

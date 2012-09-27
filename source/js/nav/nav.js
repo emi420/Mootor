@@ -186,9 +186,9 @@ $.extend({
             // If not doing a transition 
             if (navInstance._config.isMoving === false) {                
                 // Set & load navigation Item
-                href = gesture.el.getAttribute("href").replace("#","");
-                if (href !== "") {
-                    navInstance.set(href);
+                href = gesture.el.getAttribute("href");
+                if (href && href !== "") {
+                    navInstance.set(href.replace("#",""));
                 }
             }
         },
