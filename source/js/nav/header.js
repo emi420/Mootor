@@ -64,8 +64,8 @@ $.extend({
     },
     
     preventNativeScrolling: function(self) {
-        $(self.el).onDragMove(function(gesture) {
-            gesture.e.preventDefault();
+        $(self.el).on("touchmove", function(event) {
+            event.preventDefault();
         });
     },
     
