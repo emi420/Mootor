@@ -75,50 +75,18 @@ Select.prototype = {
                 $(self.input).show();
                 self.input.focus();                
                 self._visibility = "visible";
-            } else {
-                //$(self.box).hide();                
-                self.input.blur();                
-                $(self.input).hide();
-                self._visibility = "hidden";
-            }
+            } 
         });
         
         $(this.input).on("blur", function() {
             $(self.input).hide();
             self._visibility = "hidden";
+            self.select(self.input.selectedIndex);
         });
         
         // Prevents default on DragStasrt
         $(this.el).onDragStart(_stopEventPropagationAndPreventDefault);        
 
-        /*// Tap (to select)
-        $(this.ul).onTapEnd(function(gesture) {
-            var i;
-            _stopEventPropagationAndPreventDefault(gesture); 
-    
-            for(i = 0; i < self.pseudoItems.length; i++) {
-                $(self.pseudoItems[i].el).removeClass("selected");                
-            }
-            $(gesture.e.target).setClass("selected");
-
-            self.select(gesture.e.target.getAttribute("moo-foreach-index"));
-        });
-        
-        // Scroll
-        $(this.ul).onDragMove(function(gesture) {
-            var newY;
-            
-            _stopEventPropagationAndPreventDefault(gesture);
-
-            newY = self.y + (gesture.y - gesture.lastY);
-
-            // FIXME CHECK: 160?
-            if ((newY <= 0) && (newY >= -(self.ul.offsetHeight - 160))) {
-                self.y = newY;
-                $(self.ul).translateFx({x: 0, y: self.y}, {});
-            }
-            
-        });*/
     },
 
     /**
