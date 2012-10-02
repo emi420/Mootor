@@ -25,6 +25,19 @@ _translate = function (options) {
     
 };
 
+var _loadCallback = function (navInstance, panel, back) {
+    var navInstance_config = navInstance._config;
+    
+    $(back.el).hide();
+    
+    navInstance_config.isMoving = false;                
+    
+    panel.x = 0;
+    navInstance._config.x = 0;
+    _translate({el: navInstance.el, x: 0}, navInstance);
+    _translate({el: panel.el, x: 0}, navInstance);
+};
+
 $.extend({
     
     /**
@@ -38,26 +51,17 @@ $.extend({
                 positionX,
                 hiddenContent,
                 i,
-                navInstance_config = navInstance._config;
-                   
+                navInstance_config = navInstance._config,
+                block;
+                    
             // Current panel
             panel = navInstance.items[navInstance.current];
             // Back panel 
             back = navInstance.items[navInstance_config.back];
             
+            // Display panel
             $(panel.el).show();
            
-            callback = function () {
-                $(back.el).hide();
-                
-                navInstance_config.isMoving = false;                
-                
-                panel.x = 0;
-                navInstance._config.x = 0;
-                _translate({el: navInstance.el, x: 0}, navInstance);
-                _translate({el: panel.el, x: 0}, navInstance);
-            };
-
             // Initial position for translate
             positionX = navInstance_config.width + navInstance_config.margin;
 
@@ -89,25 +93,13 @@ $.extend({
             window.setTimeout(function () {
                 _translate({
                     el: navInstance.el,
-                    duration: 0.25,
+                    duration: .25,
                     x: positionX,
-                    callback: callback
+                    callback: function() {
+                        _loadCallback(navInstance, panel, back);
+                    }
                 }, navInstance);
             }, 1);
-                        
-            if (typeof panel.onLoadContent === "function") {
-                            
-                panel.onLoadContent();
-                panel.onLoadContentCallback = function() {
-                    if (panel.navigationItems.length === 0) {
-                        Item.initNavigationItems(panel, navInstance);
-                    }
-                    panel.height = panel.el.offsetHeight;                    
-                    if (navInstance_config.height > panel.height) {
-                        panel.height = navInstance_config.height;
-                    }
-                };
-            }
             
             if (typeof panel.onLoad === "function") {
                 panel.onLoad();
@@ -182,9 +174,6 @@ $.extend({
                     }, self);
                 }
                 
-                // TODO: boost movement
-                
-
             }
 
         },
@@ -207,7 +196,7 @@ $.extend({
     setStylesWhenHeaderActive: function(height, navInstance) {
         var i;
         for (i = navInstance._config.count; i--;) {
-            navInstance.items[i].el.style.paddingTop = height/2 + "px";
+            navInstance.items[i].el.style.paddingTop = height + "px";
         }
     }
 
