@@ -1023,6 +1023,10 @@ Camera.prototype = {
         this.onFail = callback;  
     },
     
+    onChange: function(callback) {
+        this.onChange = callback;
+    },
+    
     push: function(imageElement) {
     
         var tmpDiv = document.createElement("div"),
@@ -1082,6 +1086,26 @@ Camera.prototype = {
         this.count = 0;        
         this.value = [];
         
+    },
+    
+    removeItem: function(index) {
+        var items = $(this.imageList).find("li"),
+            i = 0;
+            
+        console.log("remove item!");
+            
+        this.imageList.removeChild(items[i]);
+        this.value.splice(index,1)
+        
+        this.count = items.length-1;   
+        
+        if (typeof this.onChange === "function")  {
+            this.onChange(this, index);
+        }    
+        
+        // FIXME CHECK
+        $(items[this.count]).setClass("moo-active");
+        this.itemSelected = this.count;
     }
     
 };

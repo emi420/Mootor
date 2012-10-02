@@ -1,6 +1,5 @@
-@charset "utf-8";
 /* mootor.css - Basic styling for Mootor, a Html5 Javascript for application developement. - (c) 2012 Natalia Petit (natalia.petit@voolks.com) */
-/* line 23, ../source/css/sass/_normalize.scss */
+/* line 23, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_normalize.scss */
 article,
 aside,
 details,
@@ -15,14 +14,14 @@ summary {
   display: block;
 }
 
-/* line 35, ../source/css/sass/_normalize.scss */
+/* line 35, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_normalize.scss */
 * {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
-/* line 44, ../source/css/sass/_normalize.scss */
+/* line 44, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_normalize.scss */
 html,
 body {
   margin: 0;
@@ -30,7 +29,7 @@ body {
   border: 0;
 }
 
-/* line 57, ../source/css/sass/_normalize.scss */
+/* line 57, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_normalize.scss */
 html,
 button,
 input,
@@ -39,7 +38,7 @@ textarea {
   font-family: sans-serif;
 }
 
-/* line 70, ../source/css/sass/_normalize.scss */
+/* line 70, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_normalize.scss */
 sub,
 sup {
   font-size: 75%;
@@ -48,23 +47,23 @@ sup {
   vertical-align: baseline;
 }
 
-/* line 77, ../source/css/sass/_normalize.scss */
+/* line 77, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_normalize.scss */
 sup {
   top: -0.5em;
 }
 
-/* line 81, ../source/css/sass/_normalize.scss */
+/* line 81, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_normalize.scss */
 sub {
   bottom: -0.25em;
 }
 
-/* line 93, ../source/css/sass/_normalize.scss */
+/* line 93, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_normalize.scss */
 ol,
 ul {
   list-style: none;
 }
 
-/* line 103, ../source/css/sass/_normalize.scss */
+/* line 103, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_normalize.scss */
 dd,
 dl,
 menu,
@@ -73,25 +72,25 @@ ul {
   margin: 0;
 }
 
-/* line 111, ../source/css/sass/_normalize.scss */
+/* line 111, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_normalize.scss */
 menu,
 ol,
 ul {
   padding: 0;
 }
 
-/* line 122, ../source/css/sass/_normalize.scss */
+/* line 122, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_normalize.scss */
 form {
   margin: 0;
 }
 
-/* line 126, ../source/css/sass/_normalize.scss */
+/* line 126, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_normalize.scss */
 fieldset {
   margin: 0 2px;
   padding: 0.35em 0.625em 0.75em;
 }
 
-/* line 138, ../source/css/sass/_normalize.scss */
+/* line 138, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_normalize.scss */
 button,
 input[type="button"],
 input[type="reset"],
@@ -100,7 +99,7 @@ input[type="submit"] {
   -webkit-appearance: button;
 }
 
-/* line 150, ../source/css/sass/_normalize.scss */
+/* line 150, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_normalize.scss */
 button,
 input,
 select,
@@ -110,7 +109,7 @@ textarea {
   vertical-align: baseline;
 }
 
-/* line 165, ../source/css/sass/_normalize.scss */
+/* line 165, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_normalize.scss */
 button,
 html input[type="button"],
 input[type="reset"],
@@ -119,7 +118,7 @@ input[type="submit"] {
   cursor: pointer;
 }
 
-/* line 175, ../source/css/sass/_normalize.scss */
+/* line 175, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_normalize.scss */
 a, a:hover, a:focus,
 input, input:focus,
 select, select:focus,
@@ -128,87 +127,87 @@ textarea, textarea:focus {
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
 
-/* line 183, ../source/css/sass/_normalize.scss */
+/* line 183, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_normalize.scss */
 button[disabled],
 input[disabled] {
   cursor: default;
 }
 
-/* line 190, ../source/css/sass/_normalize.scss */
+/* line 190, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_normalize.scss */
 input[type="search"]::-webkit-search-decoration,
 input[type="search"]::-webkit-search-cancel-button {
   -webkit-appearance: none;
 }
 
-/* line 197, ../source/css/sass/_normalize.scss */
+/* line 197, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_normalize.scss */
 input[type="search"] {
   -webkit-appearance: textfield;
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
 }
 
-/* line 206, ../source/css/sass/_normalize.scss */
+/* line 206, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_normalize.scss */
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 
-/* line 213, ../source/css/sass/_normalize.scss */
+/* line 213, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_normalize.scss */
 textarea {
   vertical-align: top;
 }
 
-/* line 224, ../source/css/sass/_normalize.scss */
+/* line 224, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_normalize.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 17, default/_text.scss */
+/* line 17, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/css/default/_text.scss */
 body {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 0.65em;
   text-align: center;
 }
 
-/* line 23, default/_text.scss */
+/* line 23, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/css/default/_text.scss */
 h1 {
   font-size: 2.3em;
   text-align: center;
   margin: 0.62em 0;
 }
 
-/* line 29, default/_text.scss */
+/* line 29, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/css/default/_text.scss */
 h2 {
   font-size: 7em;
   margin: 0.5em 0;
 }
 
-/* line 34, default/_text.scss */
+/* line 34, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/css/default/_text.scss */
 h3 {
   font-size: 1.83em;
   margin: 0.67em 0;
 }
 
-/* line 39, default/_text.scss */
+/* line 39, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/css/default/_text.scss */
 h4 {
   font-size: 1.5em;
   margin: 1.33em 0;
 }
 
-/* line 44, default/_text.scss */
+/* line 44, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/css/default/_text.scss */
 h5 {
   font-size: 0.83em;
   margin: 1.67em 0;
 }
 
-/* line 49, default/_text.scss */
+/* line 49, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/css/default/_text.scss */
 h6 {
   font-size: 0.75em;
   margin: 2.33em 0;
 }
 
-/* line 54, default/_text.scss */
+/* line 54, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/css/default/_text.scss */
 p {
   font-size: 3em;
   text-align: justify;
@@ -218,60 +217,60 @@ p {
   letter-spacing: 0;
 }
 
-/* line 63, default/_text.scss */
+/* line 63, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/css/default/_text.scss */
 small {
   font-size: 75%;
 }
 
 @media only screen and (max-width: 479px) {
-  /* line 74, default/_text.scss */
+  /* line 74, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/css/default/_text.scss */
   body {
     font-size: 0.5em;
   }
 }
 @media only screen and (min-width: 480px) and (max-width: 599px) {
-  /* line 82, default/_text.scss */
+  /* line 82, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/css/default/_text.scss */
   body {
     font-size: 0.65em;
   }
 }
 @media only screen and (min-width: 480px) and (max-width: 599px) and (orientation: landscape) {
-  /* line 84, default/_text.scss */
+  /* line 84, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/css/default/_text.scss */
   body {
     font-size: 0.5em;
   }
 }
 @media only screen and (min-width: 600px) and (max-width: 767px) {
-  /* line 92, default/_text.scss */
+  /* line 92, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/css/default/_text.scss */
   body {
     font-size: 0.75em;
   }
 }
 @media only screen and (min-width: 600px) and (max-width: 767px) and (orientation: landscape) {
-  /* line 94, default/_text.scss */
+  /* line 94, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/css/default/_text.scss */
   body {
     font-size: 0.65em;
   }
 }
 @media only screen and (min-width: 768px) {
-  /* line 102, default/_text.scss */
+  /* line 102, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/css/default/_text.scss */
   body {
     font-size: 0.85em;
   }
 }
 @media only screen and (min-width: 768px) and (orientation: landscape) {
-  /* line 104, default/_text.scss */
+  /* line 104, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/css/default/_text.scss */
   body {
     font-size: 0.75em;
   }
 }
 @media only screen and (min-width: 992px) {
-  /* line 111, default/_text.scss */
+  /* line 111, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/css/default/_text.scss */
   body {
     font-size: 1em;
   }
 }
-/* line 9, ../source/css/sass/_mootor.nav.scss */
+/* line 9, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.nav.scss */
 body, html {
   height: 100%;
   background: #ccc;
@@ -282,7 +281,7 @@ body, html {
   max-height: 100%;
 }
 
-/* line 21, ../source/css/sass/_mootor.nav.scss */
+/* line 21, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.nav.scss */
 .moo-header {
   text-align: left;
   z-index: 9999;
@@ -291,14 +290,14 @@ body, html {
   width: 100%;
   padding: .6em 1em;
 }
-/* line 28, ../source/css/sass/_mootor.nav.scss */
+/* line 28, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.nav.scss */
 .moo-header nav {
   position: absolute;
   margin-top: 0;
   top: 1.6em;
   left: 1.5em;
 }
-/* line 34, ../source/css/sass/_mootor.nav.scss */
+/* line 34, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.nav.scss */
 .moo-header nav a {
   padding: .5em 1em;
   width: auto;
@@ -306,7 +305,7 @@ body, html {
   font-size: 1.5em;
 }
 
-/* line 44, ../source/css/sass/_mootor.nav.scss */
+/* line 44, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.nav.scss */
 .moo-panels {
   position: absolute;
   width: 100%;
@@ -318,19 +317,19 @@ body, html {
   background: #f7f7f7;
 }
 
-/* line 54, ../source/css/sass/_mootor.nav.scss */
+/* line 54, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.nav.scss */
 .moo-panel {
   min-height: 100%;
   width: 100%;
   position: absolute;
 }
 
-/* line 64, ../source/css/sass/_mootor.nav.scss */
+/* line 64, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.nav.scss */
 nav ul,
 nav ol {
   list-style: none;
 }
-/* line 68, ../source/css/sass/_mootor.nav.scss */
+/* line 68, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.nav.scss */
 nav a {
   text-decoration: none;
   text-align: left;
@@ -338,22 +337,22 @@ nav a {
   padding: 1em;
 }
 
-/* line 78, ../source/css/sass/_mootor.nav.scss */
+/* line 78, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.nav.scss */
 .moo-panel {
   -webkit-transition-duration: 0;
   -webkit-transform: translate3d(0, 0, 0);
 }
 
-/* line 5, ../source/css/sass/_mootor.nav.tabs.scss */
+/* line 5, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.nav.tabs.scss */
 .moo-nav-tabs-container {
   padding: 2em 0;
 }
 
-/* line 8, ../source/css/sass/_mootor.nav.tabs.scss */
+/* line 8, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.nav.tabs.scss */
 .moo-nav-tabs-header {
   height: 5em;
 }
-/* line 10, ../source/css/sass/_mootor.nav.tabs.scss */
+/* line 10, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.nav.tabs.scss */
 .moo-nav-tabs-header .moo-tab {
   color: #999;
   background-color: #ddd;
@@ -367,7 +366,7 @@ nav a {
   padding: .2em 1em;
   height: 100%;
 }
-/* line 18, ../source/css/sass/_mootor.nav.tabs.scss */
+/* line 18, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.nav.tabs.scss */
 .moo-nav-tabs-header .moo-tab.moo-active {
   color: #333;
   background-color: #fff;
@@ -375,18 +374,18 @@ nav a {
   height: 104%;
 }
 
-/* line 26, ../source/css/sass/_mootor.nav.tabs.scss */
+/* line 26, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.nav.tabs.scss */
 .moo-tab-content {
   display: none;
   background-color: #fff;
   border-top: 1px solid #999;
 }
-/* line 31, ../source/css/sass/_mootor.nav.tabs.scss */
+/* line 31, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.nav.tabs.scss */
 .moo-tab-content.moo-active {
   display: block;
 }
 
-/* line 4, ../source/css/sass/_mootor.ui.form.scss */
+/* line 4, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.form.scss */
 .moo-ui-input-container, .moo-ui-text, .moo-ui-textarea, .moo-ui-select-container {
   display: inline;
   float: right;
@@ -397,7 +396,7 @@ nav a {
   width: 75%;
 }
 
-/* line 12, ../source/css/sass/_mootor.ui.form.scss */
+/* line 12, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.form.scss */
 .moo-ui-input, .moo-ui-text input, .moo-ui-textarea textarea {
   -webkit-appearance: none;
   /* Remove default iOS shadow */
@@ -407,8 +406,12 @@ nav a {
   line-height: 1.5em;
   width: 100%;
 }
+/* line 20, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.form.scss */
+.moo-ui-input:focus, .moo-ui-text input:focus, .moo-ui-textarea textarea:focus {
+  border: rgba(0, 0, 0, 0) none;
+}
 
-/* line 24, ../source/css/sass/_mootor.ui.form.scss */
+/* line 28, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.form.scss */
 .moo-ui-form {
   text-align: left;
   width: 90%;
@@ -417,17 +420,17 @@ nav a {
   border: 1px solid #CCC;
   border-radius: 5px;
 }
-/* line 32, ../source/css/sass/_mootor.ui.form.scss */
+/* line 36, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.form.scss */
 .moo-ui-form .moo-field {
   display: block;
   padding: 1em 2em;
   border-top: 1px solid #CCC;
 }
-/* line 37, ../source/css/sass/_mootor.ui.form.scss */
+/* line 41, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.form.scss */
 .moo-ui-form .moo-field:first-child {
   border-top: none;
 }
-/* line 38, ../source/css/sass/_mootor.ui.form.scss */
+/* line 42, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.form.scss */
 .moo-ui-form .moo-field > label, .moo-ui-form .moo-field > legend {
   display: inline;
   float: left;
@@ -436,22 +439,22 @@ nav a {
   width: 25%;
 }
 
-/* line 46, ../source/css/sass/_mootor.ui.form.scss */
+/* line 50, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.form.scss */
 .moo-ui-text {
   padding: 0.35em 2.25em 0.25em 0.25em;
 }
 
-/* line 51, ../source/css/sass/_mootor.ui.form.scss */
+/* line 55, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.form.scss */
 .moo-ui-textarea {
   padding: 0.25em;
 }
 
-/* line 56, ../source/css/sass/_mootor.ui.form.scss */
+/* line 60, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.form.scss */
 .moo-ui-select-container {
   padding: 0.25em;
   height: 3em;
 }
-/* line 61, ../source/css/sass/_mootor.ui.form.scss */
+/* line 65, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.form.scss */
 .moo-ui-select-container .moo-ui-select-text {
   font-size: 1.5em;
   line-height: 1.5;
@@ -463,7 +466,7 @@ nav a {
   padding: 0 0.35em;
   width: 90%;
 }
-/* line 71, ../source/css/sass/_mootor.ui.form.scss */
+/* line 75, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.form.scss */
 .moo-ui-select-container .moo-ui-select-link {
   color: #000;
   line-height: 2.25em;
@@ -477,7 +480,7 @@ nav a {
   right: 0;
   z-index: 10;
 }
-/* line 82, ../source/css/sass/_mootor.ui.form.scss */
+/* line 86, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.form.scss */
 .moo-ui-select-container .moo-ui-select-link:after {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #cccccc));
   background: -webkit-linear-gradient(top, #ffffff, #cccccc);
@@ -498,7 +501,7 @@ nav a {
   height: 2.8em;
   z-index: -1;
 }
-/* line 99, ../source/css/sass/_mootor.ui.form.scss */
+/* line 103, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.form.scss */
 .moo-ui-select-container .moo-ui-select-menu {
   background-color: #999;
   border-radius: 5px;
@@ -508,28 +511,28 @@ nav a {
   width: 99%;
   z-index: 1000;
 }
-/* line 108, ../source/css/sass/_mootor.ui.form.scss */
+/* line 112, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.form.scss */
 .moo-ui-select-container .moo-ui-select-wrapper {
   overflow: hidden;
   height: 100%;
 }
-/* line 112, ../source/css/sass/_mootor.ui.form.scss */
+/* line 116, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.form.scss */
 .moo-ui-select-container .moo-ui-select-list {
   font-size: 1.5em;
   background: #FFF;
   border-radius: 5px;
 }
-/* line 116, ../source/css/sass/_mootor.ui.form.scss */
+/* line 120, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.form.scss */
 .moo-ui-select-container .moo-ui-select-list li {
   padding: 1em;
   border-bottom: 1px solid #CCC;
   white-space: nowrap;
 }
-/* line 120, ../source/css/sass/_mootor.ui.form.scss */
+/* line 124, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.form.scss */
 .moo-ui-select-container .moo-ui-select-list li:last-child {
   border: none;
 }
-/* line 121, ../source/css/sass/_mootor.ui.form.scss */
+/* line 125, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.form.scss */
 .moo-ui-select-container .moo-ui-select-list li.selected {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #daeaec), color-stop(100%, #cee3e6));
   background: -webkit-linear-gradient(top, #daeaec, #cee3e6);
@@ -540,27 +543,27 @@ nav a {
   border-bottom-color: #AEBBBD;
   color: #3F8D94;
 }
-/* line 130, ../source/css/sass/_mootor.ui.form.scss */
+/* line 134, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.form.scss */
 .moo-ui-select-container.moo-bottom .moo-ui-select-menu {
   top: 4.5em;
 }
-/* line 132, ../source/css/sass/_mootor.ui.form.scss */
+/* line 136, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.form.scss */
 .moo-ui-select-container.moo-bottom .moo-ui-select-menu:before {
   content: " ";
   display: block;
   position: absolute;
-  top: -2.9em;
+  top: -2.5em;
   left: 25%;
   border-top: 15px solid transparent;
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
   border-bottom: 15px solid #999;
 }
-/* line 146, ../source/css/sass/_mootor.ui.form.scss */
+/* line 150, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.form.scss */
 .moo-ui-select-container.moo-top .moo-ui-select-menu {
   bottom: 4.5em;
 }
-/* line 148, ../source/css/sass/_mootor.ui.form.scss */
+/* line 152, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.form.scss */
 .moo-ui-select-container.moo-top .moo-ui-select-menu:after {
   content: " ";
   display: block;
@@ -576,7 +579,7 @@ nav a {
 /*
 *  Cleanbox is the styling of the icon link used to "clean" a text input
 */
-/* line 165, ../source/css/sass/_mootor.ui.form.scss */
+/* line 169, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.form.scss */
 .cleanbox {
   display: block;
   padding: 0 0.35em;
@@ -590,20 +593,20 @@ nav a {
   text-decoration: none;
 }
 
-/* line 177, ../source/css/sass/_mootor.ui.form.scss */
+/* line 181, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.form.scss */
 .moo-ui-radio {
   display: inline;
   float: right;
   position: relative;
   width: 75%;
 }
-/* line 181, ../source/css/sass/_mootor.ui.form.scss */
+/* line 185, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.form.scss */
 .moo-ui-radio input {
   position: absolute;
   top: 0.5em;
   left: 0.5em;
 }
-/* line 186, ../source/css/sass/_mootor.ui.form.scss */
+/* line 190, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.form.scss */
 .moo-ui-radio label {
   position: relative;
   display: block;
@@ -611,7 +614,7 @@ nav a {
   background: #FFF;
   font-size: 1.4em;
 }
-/* line 192, ../source/css/sass/_mootor.ui.form.scss */
+/* line 196, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.form.scss */
 .moo-ui-radio label .moo-ui-radio-icon {
   display: block;
   position: absolute;
@@ -623,11 +626,11 @@ nav a {
   width: 1em;
   height: 1em;
 }
-/* line 205, ../source/css/sass/_mootor.ui.form.scss */
+/* line 209, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.form.scss */
 .moo-ui-radio.moo-active .moo-ui-radio-icon {
   background-color: #666;
 }
-/* line 207, ../source/css/sass/_mootor.ui.form.scss */
+/* line 211, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.form.scss */
 .moo-ui-radio.moo-active .moo-ui-radio-icon:after {
   content: " ";
   display: block;
@@ -647,7 +650,7 @@ nav a {
   height: 0.6em;
 }
 
-/* line 223, ../source/css/sass/_mootor.ui.form.scss */
+/* line 227, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.form.scss */
 .moo-ui-checkbox-icon {
   display: block;
   position: absolute;
@@ -659,20 +662,20 @@ nav a {
   height: 1em;
 }
 
-/* line 233, ../source/css/sass/_mootor.ui.form.scss */
+/* line 237, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.form.scss */
 .moo-ui-checkbox {
   display: inline;
   float: right;
   position: relative;
   width: 75%;
 }
-/* line 237, ../source/css/sass/_mootor.ui.form.scss */
+/* line 241, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.form.scss */
 .moo-ui-checkbox input {
   position: absolute;
   top: 0.5em;
   left: 0.5em;
 }
-/* line 242, ../source/css/sass/_mootor.ui.form.scss */
+/* line 246, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.form.scss */
 .moo-ui-checkbox label {
   position: relative;
   display: block;
@@ -680,11 +683,11 @@ nav a {
   background: #FFF;
   font-size: 1.4em;
 }
-/* line 250, ../source/css/sass/_mootor.ui.form.scss */
+/* line 254, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.form.scss */
 .moo-ui-checkbox.moo-active .moo-ui-checkbox-icon {
   background-color: #666;
 }
-/* line 252, ../source/css/sass/_mootor.ui.form.scss */
+/* line 256, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.form.scss */
 .moo-ui-checkbox.moo-active .moo-ui-checkbox-icon:after {
   content: " ";
   display: block;
@@ -703,7 +706,7 @@ nav a {
   height: 0.6em;
 }
 
-/* line 5, ../source/css/sass/_mootor.ui.switch.scss */
+/* line 5, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.switch.scss */
 .moo-ui-switch {
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #dddddd), color-stop(45%, #ffffff));
   background-image: -webkit-linear-gradient(top, #dddddd, #ffffff 45%);
@@ -719,7 +722,7 @@ nav a {
   height: 2.8em;
   width: 9em;
 }
-/* line 14, ../source/css/sass/_mootor.ui.switch.scss */
+/* line 14, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.switch.scss */
 .moo-ui-switch b {
   font-weight: 700;
   line-height: 2.8em;
@@ -730,7 +733,7 @@ nav a {
   width: auto;
   -webkit-transform: translate3d(0, 0, 0);
 }
-/* line 23, ../source/css/sass/_mootor.ui.switch.scss */
+/* line 23, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.switch.scss */
 .moo-ui-switch b .moo-button {
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #dedede));
   background-image: -webkit-linear-gradient(top, #ffffff, #dedede);
@@ -745,7 +748,7 @@ nav a {
   height: 2.8em;
   width: 3em;
 }
-/* line 34, ../source/css/sass/_mootor.ui.switch.scss */
+/* line 34, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.switch.scss */
 .moo-ui-switch b .moo-before,
 .moo-ui-switch b .moo-after {
   display: block;
@@ -754,12 +757,12 @@ nav a {
   height: 2.8em;
   width: 6.55em;
 }
-/* line 40, ../source/css/sass/_mootor.ui.switch.scss */
+/* line 40, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.switch.scss */
 .moo-ui-switch b .moo-before::first-letter,
 .moo-ui-switch b .moo-after::first-letter {
   font-size: 1.5em;
 }
-/* line 42, ../source/css/sass/_mootor.ui.switch.scss */
+/* line 42, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.switch.scss */
 .moo-ui-switch b .moo-before {
   background-color: rgba(66, 66, 66, 0.5);
   border-radius: 0.35em 0 0 0.35em;
@@ -767,26 +770,26 @@ nav a {
   left: -6.1em;
   z-index: -1;
 }
-/* line 49, ../source/css/sass/_mootor.ui.switch.scss */
+/* line 49, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.switch.scss */
 .moo-ui-switch b .moo-after {
   border-radius: 0 0.35em 0.35em 0;
   color: #333;
   right: -0.3em;
 }
-/* line 57, ../source/css/sass/_mootor.ui.switch.scss */
+/* line 57, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.switch.scss */
 .moo-ui-switch.moo-on b, .moo-ui-switch.moo-off b {
   -webkit-transition-duration: .25s;
 }
-/* line 62, ../source/css/sass/_mootor.ui.switch.scss */
+/* line 62, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.switch.scss */
 .moo-ui-switch.moo-on b {
   -webkit-transform: translate3d(5.85em, 0, 0);
 }
-/* line 67, ../source/css/sass/_mootor.ui.switch.scss */
+/* line 67, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.switch.scss */
 .moo-ui-switch.moo-off b {
   -webkit-transform: translate3d(-0.15em, 0, 0);
 }
 
-/* line 4, ../source/css/sass/_mootor.ui.tooltip.scss */
+/* line 4, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.tooltip.scss */
 .moo_tooltip {
   position: absolute;
   background: white;
@@ -795,7 +798,7 @@ nav a {
   text-align: center;
 }
 
-/* line 5, ../source/css/sass/_mootor.ui.overlay.scss */
+/* line 5, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.overlay.scss */
 .moo-overlay {
   background-color: #f7f7f7;
   position: absolute;
@@ -805,12 +808,12 @@ nav a {
   right: 0;
   z-index: 500;
 }
-/* line 13, ../source/css/sass/_mootor.ui.overlay.scss */
+/* line 13, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.overlay.scss */
 .moo-overlay.moo-hidden {
   display: none;
 }
 
-/* line 16, ../source/css/sass/_mootor.ui.loading.scss */
+/* line 16, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.loading.scss */
 .moo-ui-loading {
   position: absolute;
   top: 50%;
@@ -819,7 +822,7 @@ nav a {
   -webkit-animation-duration: 1.5s;
 }
 
-/* line 29, ../source/css/sass/_mootor.ui.loading.scss */
+/* line 29, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.loading.scss */
 .moo-ui-loading {
   height: 0;
   width: 0;
@@ -829,11 +832,11 @@ nav a {
   -webkit-animation-iteration-count: infinite;
   -webkit-animation-timing-function: steps(8, start);
 }
-/* line 37, ../source/css/sass/_mootor.ui.loading.scss */
+/* line 37, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.loading.scss */
 .moo-ui-loading.moo-hidden {
   display: none;
 }
-/* line 40, ../source/css/sass/_mootor.ui.loading.scss */
+/* line 40, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.loading.scss */
 .moo-ui-loading .moo-ui-loading-block {
   height: 3em;
   width: 1em;
@@ -842,60 +845,60 @@ nav a {
   top: -1.5em;
   left: -0.5em;
 }
-/* line 48, ../source/css/sass/_mootor.ui.loading.scss */
+/* line 48, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.loading.scss */
 .moo-ui-loading .moo-loading-01 {
   background-color: white;
   -webkit-transform: rotate(-90deg) translate(0, -3em);
 }
-/* line 52, ../source/css/sass/_mootor.ui.loading.scss */
+/* line 52, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.loading.scss */
 .moo-ui-loading .moo-loading-02 {
   background-color: #dfdfdf;
   -webkit-transform: rotate(-45deg) translate(0, -3em);
 }
-/* line 56, ../source/css/sass/_mootor.ui.loading.scss */
+/* line 56, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.loading.scss */
 .moo-ui-loading .moo-loading-03 {
   background-color: #bfbfbf;
   -webkit-transform: rotate(0deg) translate(0, -3em);
 }
-/* line 60, ../source/css/sass/_mootor.ui.loading.scss */
+/* line 60, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.loading.scss */
 .moo-ui-loading .moo-loading-04 {
   background-color: #9f9f9f;
   -webkit-transform: rotate(45deg) translate(0, -3em);
 }
-/* line 64, ../source/css/sass/_mootor.ui.loading.scss */
+/* line 64, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.loading.scss */
 .moo-ui-loading .moo-loading-05 {
   background-color: gray;
   -webkit-transform: rotate(90deg) translate(0, -3em);
 }
-/* line 68, ../source/css/sass/_mootor.ui.loading.scss */
+/* line 68, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.loading.scss */
 .moo-ui-loading .moo-loading-06 {
   background-color: #606060;
   -webkit-transform: rotate(135deg) translate(0, -3em);
 }
-/* line 72, ../source/css/sass/_mootor.ui.loading.scss */
+/* line 72, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.loading.scss */
 .moo-ui-loading .moo-loading-07 {
   background-color: #404040;
   -webkit-transform: rotate(180deg) translate(0, -3em);
 }
-/* line 76, ../source/css/sass/_mootor.ui.loading.scss */
+/* line 76, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.loading.scss */
 .moo-ui-loading .moo-loading-08 {
   background-color: #202020;
   -webkit-transform: rotate(-135deg) translate(0, -3em);
 }
 
 @-webkit-keyframes rotateThis {
-  /* line 84, ../source/css/sass/_mootor.ui.loading.scss */
+  /* line 84, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.loading.scss */
   from {
     -webkit-transform: rotate(0deg);
   }
 
-  /* line 85, ../source/css/sass/_mootor.ui.loading.scss */
+  /* line 85, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.loading.scss */
   to {
     -webkit-transform: rotate(360deg);
   }
 }
 
-/* line 5, ../source/css/sass/_mootor.ui.modal.scss */
+/* line 5, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-placeholder {
   position: absolute;
   top: 50%;
@@ -904,12 +907,12 @@ nav a {
   height: 0;
   z-index: 1050;
 }
-/* line 12, ../source/css/sass/_mootor.ui.modal.scss */
+/* line 12, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-placeholder.moo-hidden {
   display: none;
 }
 
-/* line 16, ../source/css/sass/_mootor.ui.modal.scss */
+/* line 16, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-container {
   background: #333;
   -webkit-border-radius: 6px;
@@ -926,13 +929,13 @@ nav a {
   height: auto;
   z-index: 1500;
 }
-/* line 27, ../source/css/sass/_mootor.ui.modal.scss */
+/* line 27, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-container header {
   color: #FFF;
   text-shadow: 0px 0px 1px #aaaaaa;
 }
 
-/* line 32, ../source/css/sass/_mootor.ui.modal.scss */
+/* line 32, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-panel {
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
@@ -945,14 +948,14 @@ nav a {
   padding: 5px;
   /* Pasar estos a estilos de botones genericos */
 }
-/* line 38, ../source/css/sass/_mootor.ui.modal.scss */
+/* line 38, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-panel .moo-title {
   color: #000;
   font-size: 2em;
   font-weight: 700;
   white-space: nowrap;
 }
-/* line 44, ../source/css/sass/_mootor.ui.modal.scss */
+/* line 44, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-panel .moo-text {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 1.5em;
@@ -960,12 +963,12 @@ nav a {
   padding: 0;
   margin: 0.5em;
 }
-/* line 53, ../source/css/sass/_mootor.ui.modal.scss */
+/* line 53, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-panel .moo-buttons {
   margin: 1.5em 0 0;
   overflow: hidden;
 }
-/* line 55, ../source/css/sass/_mootor.ui.modal.scss */
+/* line 55, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-panel .moo-ui-cancel,
 .moo-ui-modal-panel .moo-ui-submit {
   -webkit-border-radius: 5px;
@@ -978,7 +981,7 @@ nav a {
   line-height: 200%;
   width: 49%;
 }
-/* line 62, ../source/css/sass/_mootor.ui.modal.scss */
+/* line 62, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-panel .moo-ui-cancel {
   display: inline;
   float: left;
@@ -989,7 +992,7 @@ nav a {
   background: linear-gradient(top, #eeeeee, #cccccc);
   border: 1px solid #c1c1c1;
 }
-/* line 67, ../source/css/sass/_mootor.ui.modal.scss */
+/* line 67, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-panel .moo-ui-submit {
   display: inline;
   float: right;
@@ -1002,7 +1005,7 @@ nav a {
   color: #FFF;
 }
 
-/* line 5, ../source/css/sass/_mootor.ui.image.scss */
+/* line 5, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.image.scss */
 .moo-ui-image-container {
   background-color: #333;
   -webkit-border-radius: 6px;
@@ -1015,25 +1018,21 @@ nav a {
   top: 20%;
   left: 10%;
   min-width: 236px;
-  max-width: 581px;
+  max-width: 660px;
   width: 80%;
   height: auto;
   z-index: 800;
 }
-/* line 17, ../source/css/sass/_mootor.ui.image.scss */
+/* line 17, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.image.scss */
 .moo-ui-image-container header {
   padding: 4px;
   overflow: hidden;
 }
-/* line 20, ../source/css/sass/_mootor.ui.image.scss */
+/* line 20, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.image.scss */
 .moo-ui-image-container header a {
   color: #efefef;
   font-size: 1.2em;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #777777), color-stop(100%, #444444));
-  background: -webkit-linear-gradient(top, #777777, #444444);
-  background: -moz-linear-gradient(top, #777777, #444444);
-  background: -o-linear-gradient(top, #777777, #444444);
-  background: linear-gradient(top, #777777, #444444);
+  background-color: #666;
   border: 1px solid #444;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -1046,7 +1045,7 @@ nav a {
   padding: 2px 4px;
 }
 
-/* line 33, ../source/css/sass/_mootor.ui.image.scss */
+/* line 33, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.image.scss */
 .moo-ui-image-panel {
   background-color: #FFF;
   -webkit-border-radius: 6px;
@@ -1054,41 +1053,41 @@ nav a {
   -ms-border-radius: 6px;
   -o-border-radius: 6px;
   border-radius: 6px;
-  overflow: hidden;
+  overflow: auto;
   position: relative;
   width: 100%;
   height: auto;
-  max-height: 232px;
+  max-height: 12em;
   z-index: 1000;
 }
-/* line 42, ../source/css/sass/_mootor.ui.image.scss */
+/* line 42, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.image.scss */
 .moo-ui-image-panel .moo-image-wrapper {
   display: inline;
   float: left;
   margin: 0.5em;
 }
-/* line 43, ../source/css/sass/_mootor.ui.image.scss */
+/* line 43, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.image.scss */
 .moo-ui-image-panel .moo-image {
   line-height: 1px;
   text-align: center;
   vertical-align: middle;
   border: 1px solid #eee;
   display: table-cell;
-  margin: 2px;
-  width: 105px;
-  height: 105px;
+  margin: .2em;
+  width: 4.5em;
+  height: 4.5em;
 }
-/* line 52, ../source/css/sass/_mootor.ui.image.scss */
+/* line 52, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.image.scss */
 .moo-ui-image-panel .moo-image.moo-active {
   border: 2px solid #000;
 }
-/* line 53, ../source/css/sass/_mootor.ui.image.scss */
+/* line 53, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.image.scss */
 .moo-ui-image-panel .moo-image img {
   max-width: 100%;
   max-height: 100%;
 }
 
-/* line 5, ../source/css/sass/_mootor.ui.badge.scss */
+/* line 5, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.badge.scss */
 .moo-sample-icon {
   background-color: #ccc;
   border-radius: 6px;
@@ -1099,20 +1098,20 @@ nav a {
   width: 100px;
   height: 100px;
 }
-/* line 14, ../source/css/sass/_mootor.ui.badge.scss */
+/* line 14, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.badge.scss */
 .moo-sample-icon.medium {
   width: 50px;
   height: 50px;
   font-size: 0.8em;
 }
-/* line 19, ../source/css/sass/_mootor.ui.badge.scss */
+/* line 19, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.badge.scss */
 .moo-sample-icon.small {
   width: 24px;
   height: 24px;
   font-size: 0.5em;
 }
 
-/* line 26, ../source/css/sass/_mootor.ui.badge.scss */
+/* line 26, /Applications/XAMPP/xamppfiles/htdocs/xampp/mootor/source/css/sass/_mootor.ui.badge.scss */
 .moo-ui-badge {
   font-size: 1.8em;
   line-height: 125%;
