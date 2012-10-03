@@ -65,18 +65,26 @@ Model.prototype = {
     
     // Created
     create: function(obj) {
-        var i = 0,
+        var i = 0, 
             strObj = "",
             objCopy = {},
             result,
             count = this.count(),
-            prefix = this.localStoragePrefix;
+            prefix = this.localStoragePrefix,
+            item = {};
                             
         // Set record id
         if (obj.id === undefined) {
             
             count++;
             obj.id = count;
+            
+            for (i = 1; i < count+1;i++) {
+                item = this.get(i);
+                if (item === undefined || item === null) {
+                    obj.id = i;
+                }
+            }
 
             // A copy of the object. If any value is an object and
             // that object has an id, then save the id and not the object
@@ -149,7 +157,14 @@ Model.prototype = {
 
     // Destroy (not implemented yet)
     destroy: function(id) {        
-        return null;                    
+         var count = this.count(),
+             prefix = this.localStoragePrefix;
+     
+         window.localStorage.removeItem(prefix + "-" + id);
+    
+         count--;
+         count = JSON.stringify({value: count});
+         window.localStorage.setItem(prefix + "-count", count);
     }
 
 };
