@@ -99,22 +99,31 @@ App.prototype = {
      */
     load: function(view, options) {
     
-      var callback = function() {},
-          viewPath = "",
-          optionsNav = options.nav;
-
-      if (options === undefined) {
-          options = {};
-      }
-
-      if (options.callback !== undefined) {
-          callback = options.callback; 
-
-      } else {
-
-          callback = function(response) {
-         
-              if (view.cached !== true) {
+      if (view.cached !== true) {
+    
+          var callback = function() {},
+              viewPath = "",
+              scriptPath = "",
+              templatePath = "",
+              optionsNav = options.nav,
+              reqOptions = {};
+              
+    
+          if (options === undefined) {
+              options = {};
+          } else {
+              if (options.reload === true) {
+                reqOptions = {reload: true}
+              }
+          }
+    
+          if (options.callback !== undefined) {
+              callback = options.callback; 
+    
+          } else {
+    
+              callback = function(response) {
+             
                   view.cached = true;
 
                   // Load view into element
@@ -124,34 +133,32 @@ App.prototype = {
                   } else {                             
                       $(view.el).html(response);        
                   }
-
-              }
-                                         
-              // If a navItemInstance param is passed
-              // and that object has an onLoadCallback function
-              // then call that onLoadContentCallback function                     
-              if (optionsNav !== undefined &&
-                  typeof optionsNav.onLoadContentCallback === "function") {  
-                  optionsNav.onLoadContentCallback();                                     
-              }                           
-          };
-
-      }
-      
-      viewPath = this.path + "/" + view.id + "/" + view.id;
-              
-      // Template
-      $.ajax({
-            url: viewPath + ".html",
-            callback: function(response) {
-
-                // Controller
-                $.require(viewPath + ".js");
-
-                callback(response);
-            }
-      });
-      
+                            
+              };
+    
+          }
+          
+          if (view.templatePath !== undefined) {
+              templatePath = view.templatePath;          
+          } else {
+              templatePath = "/" + view.id + "/" + view.id
+          }
+          viewPath = this.path + templatePath + ".html";
+          scriptPath = this.path + "/" + view.id + "/" + view.id + ".js";
+                  
+          // Template
+          $.ajax({
+                url: viewPath,
+                callback: function(response) {
+ 
+                    // Controller
+                    // FIXME CHECK ($.require function)
+                    $.require(scriptPath,function(){},reqOptions);
+    
+                    callback(response);
+                }
+          });
+       }
     },
     
     /**

@@ -237,7 +237,10 @@ var $ = (function () {
        *             }
        *        );
        */
-       require: function(script, callback) {
+       require: function(script, callback, options) {
+           if (typeof options === "object" && options.reload === true) {
+               _scripts.remove(script);
+           }
            if (_scripts.isIncluded(script) === false) {
               _scripts.include(script, callback);
            } else {
@@ -245,7 +248,7 @@ var $ = (function () {
                 callback();
              }
            }
-      }
+       },
 
    }, $);
 
@@ -512,25 +515,31 @@ var $ = (function () {
     * @private
     */
    _scripts = {
+   
+      // Check if script is included
       isIncluded: function(script) {
          var i;
          for (i = _scripts.list.length; i--;) {
-            if (_scripts.list[i] === script) {
+            if (_scripts.list[i].path === script) {
                return true;
             }
          }
          return false;
       },
       
+      // Include script
       include: function(script, callback) {
          var d = document;
-         _scripts.list.push(script);
          $.ajax({
               url: script,
               callback: function(response) {
-                var script = d.createElement("script");
-                script.innerHTML = response;
-                d.head.appendChild(script);
+                var scriptEl = d.createElement("script");
+                scriptEl.innerHTML = response;
+                d.head.appendChild(scriptEl);
+                _scripts.list.push({
+                    path: script,
+                    el: scriptEl
+                });
                 if (typeof callback === "function") {
                     callback();
                 }
@@ -538,6 +547,22 @@ var $ = (function () {
          });           
       },
       
+      // Remove script
+      remove: function(script) {
+         var i,
+             d = document,
+             scriptItem;
+             
+         for (i = _scripts.list.length; i--;) {
+            scriptItem = _scripts.list[i];
+            if (scriptItem.path === script) {
+                d.head.removeChild(scriptItem.el)
+                _scripts.list.splice(i,1);
+            }
+         }
+      },
+      
+      // Included scripts list
       list: []
    };
 
