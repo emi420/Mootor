@@ -319,11 +319,8 @@ $.extend({
         return App.get(this.query);
     }
 });
-
 /*
-* Model object (draft using localStorage)
-*
-* TODO: DB engine/storage independence
+* Model object
 *
 */ 
 
@@ -379,12 +376,13 @@ localStorage.prototype = {
                 }
             }           
 
+            this._index.push(obj.id);
+            this._updateIndex();
+
         } else {
             objCopy = obj;
         }
         
-        this._index.push(obj.id);
-        this._updateIndex();
 
         // Create a new record from data model
         result = new this.model(objCopy);
@@ -521,7 +519,6 @@ localStorage.prototype = {
             
         this._index = result;
     }
-
 
 };
 
