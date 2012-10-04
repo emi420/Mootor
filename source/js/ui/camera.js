@@ -57,6 +57,10 @@ Camera.prototype = {
         this.onFail = callback;  
     },
     
+    onChange: function(callback) {
+        this.onChange = callback;
+    },
+    
     push: function(imageElement) {
     
         var tmpDiv = document.createElement("div"),
@@ -68,6 +72,13 @@ Camera.prototype = {
         items = $(tmpDiv).find(".moo-image");        
         imgDiv = items[0];
         imgDiv.setAttribute("moo-index", this.count);
+        items = $(self.imageList).find("li");
+
+        for (i = items.length; i--;) {
+            $(items[i].firstChild).removeClass("moo-active");
+        }
+        $(imgDiv).setClass("moo-active");
+        self.itemSelected = this.count;    
 
         $(imgDiv).onTapEnd(function(gesture) {
             var $el = $(gesture.el),
@@ -83,8 +94,6 @@ Camera.prototype = {
                 $(gesture.el).setClass("moo-active");
                 self.itemSelected = gesture.el.getAttribute("moo-index");    
                                 
-            } else {
-                $(gesture.el).removeClass("moo-active");                                
             }
         });
 
@@ -111,6 +120,26 @@ Camera.prototype = {
         this.count = 0;        
         this.value = [];
         
+    },
+    
+    removeItem: function(index) {
+        var items = $(this.imageList).find("li"),
+            i = 0;
+            
+        console.log("remove item!");
+            
+        this.imageList.removeChild(items[i]);
+        this.value.splice(index,1)
+        
+        this.count = items.length-1;   
+        
+        if (typeof this.onChange === "function")  {
+            this.onChange(this, index);
+        }    
+        
+        // FIXME CHECK
+        $(items[this.count]).setClass("moo-active");
+        this.itemSelected = this.count;
     }
     
 };

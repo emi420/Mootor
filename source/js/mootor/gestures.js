@@ -73,9 +73,8 @@
     _fire = function (info, callbacks) {
         var i;
     
-        info.e.preventDefault();
-        
         if (callbacks !== undefined) {
+            info.e.preventDefault();
             for (i = 0; i < callbacks.length; i++) {
                 if (callbacks[i].handleGesture !== undefined) {
                     callbacks[i].handleGesture(info);

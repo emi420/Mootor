@@ -3,7 +3,10 @@
  * @param {object} options Options
  * @return {object} Text Mootor UI Text object
  */
-var Text = function(options) {
+
+var _focused = false,
+ 
+Text = function(options) {
     var self = this;
                     
     // Input element
@@ -22,21 +25,31 @@ var Text = function(options) {
     $(this.el).onDragStart(_stopEventPropagationAndPreventDefault);      
     $(this.el).onTapEnd(function(gesture) {
         gesture.el.focus();
-
-        // Do something to prevents keyboard scroll here
-        gesture.el.onblur = function() {
-            window.scrollTo(0,0);
-            // Do something to prevents keyboard scroll here
-        };
-
         _stopEventPropagationAndPreventDefault(gesture);
     });        
     $(this.cleanbox).onTapEnd(function() {
         self.clean();
     });
-                    
+
+    // Do something to prevents keyboard scroll here
+    // FIXME
+    this.el.onblur = function() {
+    //    _focused = false;
+    //    window.setTimeout(function() {
+        //    console.log(Text.focused);
+    //        if (_focused === false) {
+                window.scrollTo(0,0); 
+    //        }                
+    //    }, 50);
+    };
+    /*this.el.onfocus = function() {
+        _focused = true;
+    };*/
+    
     return this;
 };
+
+Text.focused = false;
 
  /*
 * Text prototype

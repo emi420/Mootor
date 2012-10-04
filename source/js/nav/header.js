@@ -13,7 +13,8 @@ var Header = function(self) {
     if (this.el !== null) {
         
         // Cache element height
-        this.height = this.el.offsetHeight;            
+        this.height = this.el.offsetHeight;       
+        this.el.style.height = this.height + "px";    
         $(this.el).setClass(self._config.headerClassName);
 
         // Initialize back button

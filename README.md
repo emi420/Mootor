@@ -25,15 +25,15 @@ The key features are:
 
 ## Examples
 
-See inside the "examples" folder, you will need a web server (or UIWebView) if you want to load views. In order to run this examples in your desktop computer.
+See inside the "examples" folder, **you will need a web server (or UIWebView)** if you want to load views. 
 
-**IMPORTANT: you will need to emulate touch events, for example using the "Emulate touch events" in Chrome Developer Tools.**
+If you want to run the examples in a desktop browser, **you will need to emulate touch events**, for example using the "Emulate touch events" in Chrome Developer Tools.
 
 http://www.voolks.com/mootor/
 
 # Useful info
 
-Currently compatibility is only WebKit or Gecko based browsers (iOS, Android, Mozilla)
+Currently compatibility is WebKit or Gecko based browsers (iOS, Android, Mozilla)
 
 # Only for testing
 
@@ -43,10 +43,14 @@ We are in a development stage, THIS SOFTWARE IS ONLY FOR TESTING.
 
 You will need the following tools:
 
-* Compass Framework for compile stylesheets (.scss in .css files)
-* Haml for compile templates (.haml in .html files)
-* Ruby for install and run tools like Compass and the "watch.rb" files
+Required:
+
 * The "make" command for compile JavaScript modules
+* Haml for compile .haml templates
+* Ruby & Compass Framework for compile .scss stylesheets
+
+Optional:
+
 * Java for minifying JavaScript code using YUI Compressor 
 
 You can help this way:
