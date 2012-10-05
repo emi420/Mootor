@@ -25,17 +25,18 @@ _translate = function (options) {
     
 };
 
-var _loadCallback = function (navInstance, panel, back) {
-    var navInstance_config = navInstance._config;
+var _loadCallback = function (self, panel, back) {
+    var self_config = self._config;
     
     $(back.el).hide();
     
-    navInstance_config.isMoving = false;                
+    self_config.isMoving = false;                 
     
     panel.x = 0;
-    navInstance._config.x = 0;
-    _translate({el: navInstance.el, x: 0}, navInstance);
-    _translate({el: panel.el, x: 0}, navInstance);
+    self_config.x = 0;
+    _translate({el: self.el, x: 0}, self);
+    _translate({el: panel.el, x: 0}, self);
+    
 };
 
 $.extend({
@@ -53,7 +54,7 @@ $.extend({
                 i,
                 navInstance_config = navInstance._config,
                 block;
-                    
+                                    
             // Current panel
             panel = navInstance.items[navInstance.current];
             // Back panel 
