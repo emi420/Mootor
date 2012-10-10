@@ -253,8 +253,6 @@ var $ = (function () {
        *        );
        */
        require: function(script, callback, options) {
-           console.log(options);
-
            if (typeof options === "object" && options.reload === true) {
                _scripts.remove(script);
            }
@@ -573,9 +571,8 @@ var $ = (function () {
          for (i = _scripts.list.length; i--;) {
             scriptItem = _scripts.list[i];
             if (scriptItem.path === script) {
-                 debugger;
-                //d.header.removeChild(scriptItem.scriptEl)
-                //_script.list.splice(i,1);
+                d.head.removeChild(scriptItem.el)
+                _scripts.list.splice(i,1);
             }
          }
       },
