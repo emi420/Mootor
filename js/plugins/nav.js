@@ -52,30 +52,29 @@ Nav.prototype = {
         set: function (id) {
             var item = this.get(id);
                         
-            if (this.current !== item.index) {
+            // If no transition is happening..
+            if (this._config.isMoving === false) {
 
-                // Save current index
-                this._config.back = this.current;
+                this._config.isMoving = true;
 
-                // Add item to navigation history
-                if (this._config.direction === 0) {
-                    this.history.push(this.current);
-                }
-
-                // Update current index
-                this.current = item.index;
-
-                // If no transition is happening..
-                if (this._config.isMoving === false) {
-                    this._config.isMoving = true;
+                if (this.current !== item.index) {
+    
+                    // Save current index
+                    this._config.back = this.current;
+    
+                    // Add item to navigation history
+                    if (this._config.direction === 0) {
+                        this.history.push(this.current);
+                    }
+    
+                    // Update current index
+                    this.current = item.index;
 
                     // Load this Item
                     Nav.load(this);                    
-
+    
                 }
 
-            } else {
-                this._config.isMoving = false;
             }
             
             return item;
@@ -649,17 +648,18 @@ _translate = function (options) {
     
 };
 
-var _loadCallback = function (navInstance, panel, back) {
-    var navInstance_config = navInstance._config;
+var _loadCallback = function (self, panel, back) {
+    var self_config = self._config;
     
     $(back.el).hide();
     
-    navInstance_config.isMoving = false;                
+    self_config.isMoving = false;                 
     
     panel.x = 0;
-    navInstance._config.x = 0;
-    _translate({el: navInstance.el, x: 0}, navInstance);
-    _translate({el: panel.el, x: 0}, navInstance);
+    self_config.x = 0;
+    _translate({el: self.el, x: 0}, self);
+    _translate({el: panel.el, x: 0}, self);
+    
 };
 
 $.extend({
@@ -677,7 +677,7 @@ $.extend({
                 i,
                 navInstance_config = navInstance._config,
                 block;
-                    
+                                    
             // Current panel
             panel = navInstance.items[navInstance.current];
             // Back panel 

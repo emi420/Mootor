@@ -1134,6 +1134,14 @@ $.extend({
         
         self.takeButton = $selfEl.find(".moo-ui-add-new")[0];
         self.chooseButton = $selfEl.find(".moo-ui-add-filed")[0];
+        
+        if (options.labelTakeButton !== undefined) {
+            self.takeButton.innerHTML = options.labelTakeButton;
+        }
+        if (options.labelChooseButton !== undefined) {
+            self.chooseButton.innerHTML = options.labelChooseButton;
+        }
+        
         self.imageWrapper = $selfEl.find(".moo-image-wrapper")[0];
         self.imageList = $selfEl.find(".moo-image-list")[0];
 

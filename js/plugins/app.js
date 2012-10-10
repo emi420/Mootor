@@ -99,22 +99,31 @@ App.prototype = {
      */
     load: function(view, options) {
     
-      var callback = function() {},
-          viewPath = "",
-          optionsNav = options.nav;
-
-      if (options === undefined) {
-          options = {};
-      }
-
-      if (options.callback !== undefined) {
-          callback = options.callback; 
-
-      } else {
-
-          callback = function(response) {
-         
-              if (view.cached !== true) {
+      if (view.cached !== true) {
+    
+          var callback = function() {},
+              viewPath = "",
+              scriptPath = "",
+              templatePath = "",
+              optionsNav = options.nav,
+              reqOptions = {};
+              
+    
+          if (options === undefined) {
+              options = {};
+          } else {
+              if (options.reload === true) {
+                reqOptions = {reload: true}
+              }
+          }
+    
+          if (options.callback !== undefined) {
+              callback = options.callback; 
+    
+          } else {
+    
+              callback = function(response) {
+             
                   view.cached = true;
 
                   // Load view into element
@@ -124,34 +133,32 @@ App.prototype = {
                   } else {                             
                       $(view.el).html(response);        
                   }
-
-              }
-                                         
-              // If a navItemInstance param is passed
-              // and that object has an onLoadCallback function
-              // then call that onLoadContentCallback function                     
-              if (optionsNav !== undefined &&
-                  typeof optionsNav.onLoadContentCallback === "function") {  
-                  optionsNav.onLoadContentCallback();                                     
-              }                           
-          };
-
-      }
-      
-      viewPath = this.path + "/" + view.id + "/" + view.id;
-              
-      // Template
-      $.ajax({
-            url: viewPath + ".html",
-            callback: function(response) {
-
-                // Controller
-                $.require(viewPath + ".js");
-
-                callback(response);
-            }
-      });
-      
+                            
+              };
+    
+          }
+          
+          if (view.templatePath !== undefined) {
+              templatePath = view.templatePath;          
+          } else {
+              templatePath = "/" + view.id + "/" + view.id
+          }
+          viewPath = this.path + templatePath + ".html";
+          scriptPath = this.path + "/" + view.id + "/" + view.id + ".js";
+                  
+          // Template
+          $.ajax({
+                url: viewPath,
+                callback: function(response) {
+ 
+                    // Controller
+                    // FIXME CHECK ($.require function)
+                    $.require(scriptPath,function(){},reqOptions);
+    
+                    callback(response);
+                }
+          });
+       }
     },
     
     /**
@@ -319,22 +326,81 @@ $.extend({
         return App.get(this.query);
     }
 });
-
 /*
-* Model object (draft using localStorage)
-*
-* TODO: DB engine/storage independence
+* Model object
 *
 */ 
 
 var Model = function(options) {
+   switch(options.engine) {
+       case "localStorage":
+           return new localStorage(options);       
+           break;
+       default:
+   }
+},
+
+localStorage = function(options) {
    this.model = options.model;
    this.localStoragePrefix = options.localStoragePrefix;
+   this._loadIndex();
    return this;
 };
 
-Model.prototype = {
+localStorage.prototype = {
       
+    // Created
+    create: function(obj) {
+        var i = 0, 
+            strObj = "",
+            objCopy = {},
+            result,
+            count = this.count(),
+            prefix = this.localStoragePrefix,
+            item = {},
+            index = this._index;
+                            
+        // Set record id
+        if (obj.id === undefined) {
+            
+            count++;
+            obj.id = count;
+            
+            for (i = 1; i < count+1;i++) {
+                item = this.get(i);
+                if (item === undefined || item === null) {
+                    obj.id = i;
+                }
+            }
+
+            // A copy of the object. If any value is an object and
+            // that object has an id, then save the id and not the object
+            for (i in obj) {
+                if (typeof obj[i] === "object" && obj[i].id !== undefined) {
+                    objCopy[i] = obj[i].id;
+                } else {
+                    objCopy[i] = obj[i];
+                }
+            }           
+
+            this._index.push(obj.id);
+            this._updateIndex();
+
+        } else {
+            objCopy = obj;
+        }
+        
+
+        // Create a new record from data model
+        result = new this.model(objCopy);
+
+        // Save object as a JSON string
+        strObj = JSON.stringify(result);
+        window.localStorage.setItem(prefix + "-" + result.id, strObj);
+
+        return result;
+    },
+    
     // Get
     get: function(id) {
         var result,
@@ -354,7 +420,27 @@ Model.prototype = {
 
         return result;
     },
-    
+
+    // Get all
+    all: function() {
+        var count = this.count(),
+            result = [],
+            i = 0,
+            id;
+             
+        // If any records found, fill the response array
+        if (count > 0) {
+            for (i = 0; i <= count; i++) {
+                id = this._index[i];
+                if (id) {
+                    result.push(this.get(id));
+                }
+            }
+        }
+        
+        return result;               
+    },
+   
     // Filter            
     filter: function(oQuery) {
 
@@ -383,69 +469,6 @@ Model.prototype = {
         return result;
 
     },
-    
-    // Created
-    create: function(obj) {
-        var i = 0,
-            strObj = "",
-            objCopy = {},
-            result,
-            count = this.count(),
-            prefix = this.localStoragePrefix;
-                            
-        // Set record id
-        if (obj.id === undefined) {
-            
-            count++;
-            obj.id = count;
-
-            // A copy of the object. If any value is an object and
-            // that object has an id, then save the id and not the object
-            for (i in obj) {
-                if (typeof obj[i] === "object" && obj[i].id !== undefined) {
-                    objCopy[i] = obj[i].id;
-                } else {
-                    objCopy[i] = obj[i];
-                }
-            }           
-
-        } else {
-            objCopy = obj;
-        }
-
-        // Create a new record from data model
-        result = new this.model(objCopy);
-
-        // Save object as a JSON string
-        strObj = JSON.stringify(result);
-        window.localStorage.setItem(prefix + "-" + result.id, strObj);
-
-        // Update record count
-        count = JSON.stringify({value: count});
-        window.localStorage.setItem(prefix + "-count", count);
-
-        return result;
-    },
-    
-    // Get all
-    all: function() {
-        var count = this.count(),
-            result = [],
-            i = 0,
-            record;
-             
-        // If any records found, fill the response array
-        if (count > 0) {
-            for (i = 0; i <= count; i++) {
-                record = this.get(i);
-                if (record) {
-                    result.push(record);
-                }
-            }
-        }
-        
-        return result;               
-    },
 
     // Update
     put: function(obj) {
@@ -454,30 +477,62 @@ Model.prototype = {
         return this.create(obj);
     },
     
+    // Destroy
+    destroy: function(id) {        
+         var count = this.count(),
+             prefix = this.localStoragePrefix,
+             index = this._index,
+             i;
+     
+         window.localStorage.removeItem(prefix + "-" + id);
+         
+         for (i = index.length;i--;) {
+             if (index[i] === id) {
+                 index.splice(i,1);
+             }
+         }
+    
+         count--;
+         
+         this._updateIndex();
+    },
+
     // Count
     count: function() {
-        var prefix = this.localStoragePrefix,
-            count = 0;
-
-        count = window.localStorage.getItem(prefix + "-count");
-        
-        if (count !== null) {
-            return JSON.parse(count).value;
+        var index = this._index;
+            
+        if (index.length) {
+            return index.length;
         } else {
             return 0;
         }
-    }, 
-
-    // Destroy (not implemented yet)
-    destroy: function(id) {        
-        return null;                    
+    },
+    
+    // Index management
+    _updateIndex: function() {
+        var strObj = JSON.stringify(this._index),
+            prefix = this.localStoragePrefix;
+        window.localStorage.setItem(prefix + "-index", strObj);
+    },
+    _loadIndex: function() {
+        var prefix = this.localStoragePrefix,
+            data = window.localStorage.getItem(prefix + "-index"),
+            result = JSON.parse(data);
+            
+        if (!result) {
+            this._index = result = [];
+            this._updateIndex();
+        }
+            
+        this._index = result;
     }
 
 };
 
 $.extend({
     Model: function (options) {
-        return new Model(options);
+        options.engine = "localStorage";
+        return Model(options);
     },
     models: {}
 }, App.prototype);}(Mootor));
