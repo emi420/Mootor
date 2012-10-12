@@ -332,6 +332,8 @@ $.extend({
                 width: $.view.clientW,
                 height: $.view.clientH,
 
+                // Enable or disable transitions
+                transitions: options.transitions,
 
                 // Main container class name
                 headerClassName: options.headerClassName ? 
@@ -363,6 +365,13 @@ $.extend({
                               options.type : "Panels"                                                
 
             };
+
+            // Enable or disable transitions
+            if (self._config.transitions === undefined) {
+                self._config.transitionDuration = .25
+            } else {
+                self._config.transitionDuration = 0                
+            }
             
             // Access to navigation object by type, ex: self.Panel
             if (self._config.type === "Panels") {
@@ -493,7 +502,7 @@ $.extend({
             $(document).ready(function() {
                 $(document.body).bind("touchmove", function(event) {
                     event.preventDefault();
-                    event.stopPropagation();
+                    event.stopPropagation();                        
                 });    
             });
         },
@@ -506,7 +515,7 @@ $.extend({
         
         _scrollBar: function(options) {
             // TODO
-        }
+        } 
             
 }, Nav);
 

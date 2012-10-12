@@ -1018,6 +1018,10 @@ if (!window.$ || typeof ($) !== "function") {
                     
                     // DragEnd
                     info.type = "dragEnd";
+                    
+                    if ($.debug === true) {
+                        console.log("dragEnd");
+                    }
                                         
                     info.velocity = gestureEvent.velocity;
                     info.isDraggingY = gestureEvent.isDraggingY = 0;
@@ -1025,7 +1029,11 @@ if (!window.$ || typeof ($) !== "function") {
                     _fire(info, gestureEvent.onDragEnd);
                 
                 } else if (info.time !== undefined) {
-    
+
+                    if ($.debug === true) {
+                        console.log("tapEnd");
+                    }
+
                     // TapEnd
                     info.type = "tapEnd";
                     info.e.stopPropagation();

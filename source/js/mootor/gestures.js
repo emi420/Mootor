@@ -420,6 +420,10 @@
                     
                     // DragEnd
                     info.type = "dragEnd";
+                    
+                    if ($.debug === true) {
+                        console.log("dragEnd");
+                    }
                                         
                     info.velocity = gestureEvent.velocity;
                     info.isDraggingY = gestureEvent.isDraggingY = 0;
@@ -427,7 +431,11 @@
                     _fire(info, gestureEvent.onDragEnd);
                 
                 } else if (info.time !== undefined) {
-    
+
+                    if ($.debug === true) {
+                        console.log("tapEnd");
+                    }
+
                     // TapEnd
                     info.type = "tapEnd";
                     info.e.stopPropagation();

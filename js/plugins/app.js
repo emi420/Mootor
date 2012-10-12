@@ -517,7 +517,11 @@ localStorage.prototype = {
     _loadIndex: function() {
         var prefix = this.localStoragePrefix,
             data = window.localStorage.getItem(prefix + "-index"),
+            result;
+            
+        if (data !== null) {
             result = JSON.parse(data);
+        }
             
         if (!result) {
             this._index = result = [];

@@ -90,11 +90,10 @@ $.extend({
 
             }
 
-            
             window.setTimeout(function () {
                 _translate({
                     el: navInstance.el,
-                    duration: .25,
+                    duration: navInstance_config.transitionDuration,
                     x: positionX,
                     callback: function() {
                         _loadCallback(navInstance, panel, back);
@@ -164,6 +163,8 @@ $.extend({
                     } else {
                         self._config.y = -maxdist;                            
                     }
+                    
+                    // FIXME CHECK
                     for (i = panel.navigationItems.length; i--;) {
                         $(panel.navigationItems[i]).removeClass("active");
                     }
@@ -183,12 +184,33 @@ $.extend({
      * Move panel 
      */
     move: function(self, item, gesture) {
+            var isPermitted = false;
+    
             self._config.y = self._config.y + (gesture.y - gesture.lastY);
-            _translate({
-                el: item.el,
-                y: self._config.y,
-                x: item.x
-            }, self);                
+            
+            // FIXME CHECK
+            var panel = self.items[self.current],
+                maxdist = panel.height - self._config.height,
+                i;
+            if (self.header !== undefined) {
+                maxdist += self.header.height;
+            }
+            
+            if (self._config.transitions === false) {
+                if (self._config.y < 0 && maxdist > -self._config.y) {
+                    isPermitted = true;
+                }
+            } else {
+                isPermitted = true
+            }
+            
+            if (isPermitted === true) {
+                _translate({
+                    el: item.el,
+                    y: self._config.y,
+                    x: item.x
+                }, self);
+            }
         },
 
     /**

@@ -466,6 +466,7 @@ var $ = (function () {
       $.context.userAgent = "safari";
    } else if (navigator.userAgent.toLowerCase().indexOf("msie") > -1) {
       $.context.userAgent = "msie";
+   // TODO: mozilla 
    } else {
       $.context.userAgent = "";   
    }
