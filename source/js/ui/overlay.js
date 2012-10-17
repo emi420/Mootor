@@ -15,8 +15,7 @@ var Overlay = function() {
 
 
 /**
- * Modal
- * @return {object} Modal Mootor UI Modal object
+ * Modal * @return {object} Modal Mootor UI Modal object
  */
 Modal = function() {
     if (Modal.el === undefined) {
@@ -70,7 +69,6 @@ Modal.prototype = {
 };
 
 $.extend(Overlay.prototype, Modal.prototype);
-
 
 
 // Static properties

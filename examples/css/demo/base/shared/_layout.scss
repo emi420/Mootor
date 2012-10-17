@@ -1,0 +1,54 @@
+// -----------------------------------------------------------------------------------
+// Layout 
+// -----------------------------------------------------------------------------------
+// 
+// This partial contains general layout and shared styles among panels 
+//
+// Contents: 
+// 1. .moo-header - header styles
+// 1.1 .moo-header.hidden  - header styles when is hidden
+// 2. .moo-panels - panels common styling
+// -----------------------------------------------------------------------------------
+
+// 1. header
+// -----------------------------------------------------------------------------------
+.moo-header {
+    color: $color-text-alt;    
+    font-weight: bold;
+    background-color: lighten($color-bg-alt, 5%);
+    border: 1px solid $color-border-main;
+    h1 {
+        @include float-left;
+        font-size: 2.3em;
+        line-height: 1.5;
+        text-align: center;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;       
+        margin: 0;
+        padding: 0 2em;
+        width: 75%;
+    }
+}
+ 
+// 1.1 .hidden header
+// -----------------------------------------------------------------------------------
+//
+// This style vissually hides the header without removing it from the DOM. 
+// 1. Fix to overwrite .hidden generic class
+// 2. Prevents using nav when header is hidden
+.moo-header.hidden {
+    display: block; // 1
+    opacity: 0;
+    nav {
+        top: -9999em !important; // 2
+    }
+}
+
+// 2. panels 
+// -----------------------------------------------------------------------------------
+.moo-panel  {
+    background: $color-bg-main; 
+}
+
+

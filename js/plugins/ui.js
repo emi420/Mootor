@@ -21,7 +21,7 @@ var _templates = {
     
     text: '<span class="cleanbox">&times</span>',
     
-    select: '<div class="moo-ui-select-container"><span class="moo-ui-select-text"></span><span class="moo-ui-select-link"> &#9660;</span><div class="moo-ui-select-menu" style="height:217px;display:none"><div class="moo-ui-select-wrapper"><ul class="moo-ui-select-list" moo-template="foreach: option"><li moo-template="text: this.text"></li></ul></div></div></div>',
+    select: '<div class="moo-ui-select-container"><span class="moo-ui-select-text"></span><span class="moo-ui-select-link"> &#9660;</span><div class="moo-ui-select-menu" style="height:217px;display:none"><div class="moo-ui-select-wrapper"></div></div></div>',
     
     camera: "<div class='moo-ui-image-container'><header><a class='moo-ui-add-new' href='#takepic'>Take a picture</a><a class='moo-ui-add-filed' href='#choosepic'>Choose a picture</a><a class='moo-ui-delete' href='#delete'></a><a class='moo-ui-add-comment' href='#addcomment'></a></header><div class='moo-ui-image-panel'><ul class='moo-image-list'><li class='moo-image-wrapper'><div class='moo-image'></div></li></ul></div></div>"
 
@@ -252,8 +252,7 @@ var Overlay = function() {
 
 
 /**
- * Modal
- * @return {object} Modal Mootor UI Modal object
+ * Modal * @return {object} Modal Mootor UI Modal object
  */
 Modal = function() {
     if (Modal.el === undefined) {
@@ -307,7 +306,6 @@ Modal.prototype = {
 };
 
 $.extend(Overlay.prototype, Modal.prototype);
-
 
 
 // Static properties
@@ -708,14 +706,12 @@ var Select = function(options) {
         
     this.y = 0;
     this.input = options.el;        
-    this.position = options.position;
-    $(this.input).hide();
     this._visibility = "hidden";
     this._makeHTML();       
     this._setTouchEvents();               
 
     // Create "pseudo" items collection
-    pseudoItems = $(this.ul).find("li");        
+    pseudoItems = $(this.input).find("option");        
     for(i = 0; i < pseudoItems.length; i++) {
         this.pseudoItems.push({
             el: pseudoItems[i],
@@ -727,6 +723,9 @@ var Select = function(options) {
     if (options.value !== undefined) {
         this.selectByValue(options.value);
     }
+    
+    // FIXME CHECK: initial value
+    this.select(0);     
     
     return this;
             
@@ -740,26 +739,23 @@ Select.prototype = {
     // Make HTML
     _makeHTML: function() {
         var el = document.createElement("div"),
-            template = _templates.select;
+            template = _templates.select,
+            container = this.input.parentElement;
 
         el.innerHTML = _templateParse({
             template: template,
             self: this
         });           
         
-        this.el = el.firstChild;
+        this.el = el.firstChild;                      
+        this.el.parentElement.insertBefore(this.input);
         
-        if (this.position === "top") {
-            $(this.el).setClass("moo-top");
-        } else if (this.position === "bottom") {
-            $(this.el).setClass("moo-bottom");            
-        }
-                      
-        this.input.parentElement.appendChild(this.el);                        
-        this.ul = $(this.el).find("ul")[0];
+        // FIXME CHECK
+        container.appendChild(el);
         
         this.box = $(this.el).find(".moo-ui-select-menu")[0];
-        this.textspan = $(this.el).find(".moo-ui-select-text")[0];            
+        this.textspan = $(this.el).find(".moo-ui-select-text")[0];
+        
     },
     
     // Set touch events
@@ -767,22 +763,22 @@ Select.prototype = {
         var self = this;
                 
         // Show selection box
-        $(this.el).onTapEnd(function(gesture) {
+        $(this.el).on("touchend", function(gesture) {
             if (self._visibility !== "visible") {
-                //$(self.box).show();
-                $(self.input).show();
                 self.input.focus();                
                 self._visibility = "visible";
-            } 
+            }
         });
         
         $(this.input).on("blur", function() {
-            $(self.input).hide();
             self._visibility = "hidden";
+        });
+
+        $(this.input).on("change", function() {
             self.select(self.input.selectedIndex);
         });
         
-        // Prevents default on DragStasrt
+        // Prevents default on DragStart
         $(this.el).onDragStart(_stopEventPropagationAndPreventDefault);        
 
     },
@@ -800,14 +796,14 @@ Select.prototype = {
         }, 100);
         
         // Get value
-        this.value = this.items[index].value;
+        this.value = this.pseudoItems[index].el.value;
         
         // Update selected index
         this.selectedIndex = index;
         this.input.selectedIndex = index;
         
         // Update text with selected value
-        $(this.textspan).html(this.pseudoItems[index].el.innerHTML);
+        $(this.textspan).html(this.pseudoItems[index].el.innerText);
     },
     
     selectByValue: function(value) {

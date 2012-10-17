@@ -1,0 +1,38 @@
+// -- Default theme
+
+// Compass used modules
+@import "compass/css3";
+@import "compass/utilities";
+
+// Mootor utilities
+@import "mootor.utilities";
+@import "normalize";
+
+// Global variables
+@import "base/globals/text";
+@import "base/globals/colors";
+
+// Mootor plugins
+@import "mootor.nav";
+@import "mootor.ui";
+
+// shared elements
+@import "base/shared/sprites";
+@import "base/shared/utilities";
+
+// General
+@import "base/shared/layout";
+@import "base/shared/nav";
+@import "base/shared/forms";
+
+// generic components
+@import "base/components/buttons";
+@import "base/components/gallery";
+@import "base/components/comments";
+@import "base/shared/panels";
+
+// Sections
+
+// Media Queries and fixes for different resolutions 
+@import "base/shared/resize";
+

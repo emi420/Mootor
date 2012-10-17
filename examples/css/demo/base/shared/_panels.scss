@@ -1,0 +1,39 @@
+// -----------------------------------------------------------------------------------
+// Panels
+// -----------------------------------------------------------------------------------
+// 
+// This partial contains specific styling for the app panels.
+//
+// Contents: 
+// 1. .sheet-panel      - extensible style for panels shared backgrounds and styles
+// -----------------------------------------------------------------------------------
+
+
+//  .sheet-panel
+// -----------------------------------------------------------------------------------
+// .sheet-panel {
+    // &:before {
+        // content: " ";
+        // display: block;
+        // height: 100%;
+        // width: 0.5em;
+        // border: 1px solid red;
+        // border-top: none;
+        // border-bottom: none;
+        // position: absolute;
+        // top: 0em;
+        // left: 4em;
+    // }
+// }
+
+// .moo-panels {
+    // @extend .sheet-panel;
+    // background: transparent url(../img/bg/panels.png) repeat 0 0 scroll;
+// }
+
+// .moo-panel.inspections, 
+// .moo-panel.client,
+// .moo-panel.inspection .moo-nav-tabs-content {
+    // @extend .sheet-panel;
+    // background: transparent url(../img/bg/panel.png) repeat 0 0 scroll;
+// }

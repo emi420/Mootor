@@ -1,0 +1,73 @@
+// -----------------------------------------------------------------------------------
+// Buttons
+// -----------------------------------------------------------------------------------
+// 
+// This partial contains general styles for buttons. 
+//
+// Contents: 
+// 1. .button / default styles for form buttons and primary page actions.
+// 1.1. .button.submit / Default submit (action) button 
+// 1.2. .button.cancel / Default cancel button // not implemented yet
+// -----------------------------------------------------------------------------------
+
+// color variables
+// -----------------------------------------------------------------------------------
+
+$submit-border-color: $color-tn-blue;
+$submit-text-color: lighten($color-text-action, 75%);
+$submit-bg-color: lighten($color-tn-blue, 40%);
+$submit-bg-color-hover: lighten($color-tn-blue, 35%);
+
+$badge-bg-color: $color-tn-tab-red;
+
+
+
+// 1. button 
+// -----------------------------------------------------------------------------------
+
+// A standard form button
+//
+// :hover - Highlights when hovering. // not implemented yet
+// :disabled - Dims the button when disabled. // not implemented yet
+// .submit - Indicates button is the primary action. 
+// .cancel - Indicates button is the cancel action. // not implemented yet
+// 
+// No styleguide reference
+.button {
+    // font-size: 1.4em;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 7px 20px;
+    // padding: .5em 1.5em;
+    border: 1px solid $color-border-main;
+    background-color: lighten($color-border-main, 50%);
+    @include border-radius(3px);  
+    &:hover {
+       background-color: lighten($color-border-main, 35%); 
+    }
+    &.submit {
+        color: $submit-text-color;
+        border-color:$submit-border-color; 
+        background-color: $submit-bg-color;
+        &:hover {
+            background-color: $submit-bg-color-hover;
+        } 
+    }
+}
+
+
+.moo-ui-badge {
+    background-color: $badge-bg-color;
+    color: $color-text-alt;
+    border: 2px solid darken($badge-bg-color, 5%);
+    @include border-radius(8em);
+    font-size: 0.65em;
+    font-weight: 700;
+    line-height: 100%;
+    text-indent: 0;
+    text-shadow: none;
+    padding:  0.18em .4em;
+    top: auto;
+    bottom: -.5em;
+    right: -.6em;
+}

@@ -1,0 +1,38 @@
+// -----------------------------------------------------------------------------------
+// Image Gallery
+// -----------------------------------------------------------------------------------
+// 
+// This partial contains styling for image galleries. 
+//
+// Contents:
+// 1.   .moo-gallery-icon     - icon button that triggers open/close the gallery.
+// 2.   .moo-gallery          - gallery for images / floor plans / etc.
+// 2.1. .moo-empty            - styles for the gallery when is empty
+// 3.   .moo-comment-icon     - icon button that triggers open/close the comment box.
+// 4.   .moo-comment          - comment box
+// -----------------------------------------------------------------------------------
+
+// color variables
+// -----------------------------------------------------------------------------------
+
+// 1. .moo-gallery-icon
+// -----------------------------------------------------------------------------------
+
+// An icon button/link that opens the gallery menu when clicked.
+//
+.moo-gallery-icon {
+}
+.moo-ui-image-container {
+    @include box-shadow(rgba($color-bg-alt,.5)  .2em .2em .6em 0,rgba(0, 0, 0, 0.4) 0px -2px 6px 0 inset, rgba(255, 255, 255, 0.3) 0px 1px 0 0);  
+    header a {
+        @include background(linear-gradient(top, #777,#444));
+    }
+    
+}
+
+.moo-gallery-icon-button {
+    @include background(linear-gradient(top,  rgba($nav-bg-light-color, .5), rgba(darken($nav-bg-dark-color, 30%), .5)));
+}
+
+
+

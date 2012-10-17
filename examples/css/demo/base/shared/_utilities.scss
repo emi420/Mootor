@@ -1,0 +1,50 @@
+// -----------------------------------------------------------------------------------
+// General classes used for placing elements, hiding components, etc.
+// -----------------------------------------------------------------------------------
+//
+// Contents:
+// .hidden      - removes opacity of the element
+// .placeholder - a 0 px div in the exact center of the container
+// .clearfix    - popular hack to contain floats 
+// -----------------------------------------------------------------------------------
+
+// A class that removes the element from the DOM
+//
+// No styleguide yet
+.hidden {
+    display: none;
+}
+
+// A 0 px width/height element placed in the center of it's container
+// Used to place elements (like modals) in the center of the screen.
+//
+// No styleguide yet
+.placeholder {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;  
+}
+
+// A shorted version of the popular hack method, 
+// commonly used to contain floats without resorting to using presentational markup.
+// method shortened by Nicolas Gallager (http://nicolasgallagher.com/micro-clearfix-hack/)
+//
+// 1. The space content is one way to avoid an Opera bug when the
+//    contenteditable attribute is included anywhere else in the document.
+//    Otherwise it causes space to appear at the top and bottom of elements
+//    that are clearfixed.
+// 2. The use of `table` rather than `block` is only necessary if using
+//    `:before` to contain the top-margins of child elements.
+//
+// No styleguide yet
+.clearfix:before,
+.clearfix:after {
+    content: " "; // 1 
+    display: table; // 2
+}
+.clearfix:after {
+    clear: both;
+}

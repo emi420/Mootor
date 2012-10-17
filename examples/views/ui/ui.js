@@ -1,35 +1,48 @@
 (function($) {
+
+    var view_name = "ui",
     
-    // Switch
-    $("#moo-ui-switch-1").ui({
-        type: "ToggleSwitch",
-        value: 0
-    });
+        nav = $("#main").nav(),
+        app = $("main").app(),
+        view = {},
+        navCurrent = nav.get(view_name);
+
+    if( app.settings.debug === true ) {
+        console.log("Load " + view_name + ".js");
+    }
     
-    // Text
-    $("#moo-ui-text-1").ui({
-        type: "Text"
-    });
-    
-    // TextArea
-    $("#moo-ui-textarea-1").ui({
-        type: "TextArea"
-    });
-    
-    // Select
-    $("#moo-ui-select-1").ui({
-        type: "Select",
-        position: "bottom"
-    });
+    view = {
+       
+        init: function() {
+            
+            // >> Put view init code here <<
+
+            // Initialize navigation items
+            navCurrent.initNavigation();
+
+            // Set onLoad callbacks
+            navCurrent.onLoad = view.onLoad;
+            if(app.views[nav.current].id === view_name) {
+                view.onLoad();               
+            }
+            
+        },
         
-    // Radio
-    $("#moo-ui-radio-1").ui({
-        type: "Radio",
-    });
+        onLoad: function() {
+            // Set header title
+            nav.header.setTitle("UI");                        
+        },        
+
+            
+    }
     
-    // Checkbox
-    $("#moo-ui-checkbox-1").ui({
-        type: "Checkbox",
-    });
+    // Initialize view
+
+    view.init();
     
+    var mySelect = $("#mySelect").ui({
+        type: "Select"
+    });
+   
+        
 }(Mootor));

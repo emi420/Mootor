@@ -1,0 +1,103 @@
+
+// Responsive Media queries 
+// --------------------------------------------------------------------------------------------
+
+// 320px a 480px
+@media 
+only screen and (max-width: 641px), // iphone 3gs 
+only screen and (max-width: 641px) and (-webkit-min-device-pixel-ratio: 1.5), // iphone 4s
+only screen and (max-width: 641px) and (min-device-pixel-ratio: 1.5) {
+    body { font-size: 0.55em}
+    #login .moo-ui-form {
+        top: -230px;
+    }
+    .moo-header {
+        nav,
+        h1 {
+            padding: 0 .5em;
+            line-height: 2;
+        }
+        nav a { line-height: 2;}
+    }
+    .moo-ui-form {
+        .moo-field {
+            > label {
+                text-align: left;
+                margin: 0 0 .2em;
+                width: 100%;
+            }
+        }
+    }
+    .moo-ui-input { font-size: 13px }
+    .moo-field.postal-code .moo-ui-text,
+    .moo-field .moo-ui-select-wrapper,
+    .moo-ui-input-container {
+        width: 100%;
+    }
+    .moo-field.contact {
+        .moo-ui-select-wrapper { width: 35%}
+        .moo-ui-text { width: 62%}
+    }
+    
+    .moo-field.phone {
+        .moo-ui-text { 
+            width: 24%;
+            &:nth-child(4) { width: 51% }
+        }
+    }
+    
+    .moo-field.plans legend { 
+        padding: 0 0.5em .75em;
+        width: 100%; 
+    }
+    .moo-field.contact .moo-ui-select-container .moo-ui-select-text { width: 75% } 
+    
+    .moo-nav-tabs-header .moo-tab { padding: .5em; }
+    .moo-tab-content .moo-section-header legend { padding: 0 .5em; }
+    .inspection-details .moo-ui-checkbox label { padding: .75em 3.5em .75em 2.5em;} 
+    .pictures .moo-section-header { width: 50%}
+    
+    .moo-ui-image-container {
+        min-width: 205px;
+        max-width: 288px;
+        right: -4.5em;
+        &.moo-top:after,
+        &.moo-bottom:before { right: 5em;}
+    }
+    .moo-gallery-icon:nth-child(2) {
+        .moo-ui-image-container {
+            right: -1.5em;
+            &.moo-top:after, 
+            &.moo-bottom:before { right: 1.5em;}
+        }
+    }
+    .moo-ui-add-filed,
+    .moo-ui-add-new { 
+        text-align: center;
+        width: 34%
+    }
+}
+
+
+
+
+// 600px a 767px
+@media only screen 
+and (min-width: 642px) 
+and (max-width: 767px) {
+    body { font-size: 0.6em }
+}
+
+
+// 768px a 960px
+@media only screen 
+and (min-width: 768px)  {
+    body { font-size: 0.7em }
+}
+
+
+// 992px
+@media only screen and (min-width: 992px) {
+    body { font-size: .75em}
+}
+

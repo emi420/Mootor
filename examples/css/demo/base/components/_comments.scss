@@ -1,0 +1,29 @@
+// -----------------------------------------------------------------------------------
+// Comments
+// -----------------------------------------------------------------------------------
+// 
+// This partial contains styling for the comments link.
+//
+// Contents:
+// 1. .textarea-container
+// -----------------------------------------------------------------------------------
+
+// 1. .textarea-container
+// -----------------------------------------------------------------------------------
+
+.textarea-container {
+    width: 51em;
+    left: -25em;
+    .moo-ui-modal-panel {
+        width: 50em;
+    }
+    .moo-ui-textarea,
+    .moo-buttons {
+        margin: 1em 0;
+        width: 100%;
+        @extend .clearfix;
+    }
+    .moo-buttons {
+         margin: 1em 0 0;
+    }
+}

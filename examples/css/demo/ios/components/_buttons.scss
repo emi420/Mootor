@@ -1,0 +1,55 @@
+// -----------------------------------------------------------------------------------
+// Buttons
+// -----------------------------------------------------------------------------------
+// 
+// This partial contains general styles for buttons. 
+//
+// Contents: 
+// 1. .button / default styles for form buttons and primary page actions.
+// 1.1. .button.submit / Default submit (action) button 
+// 1.2. .button.cancel / Default cancel button // not implemented yet
+// -----------------------------------------------------------------------------------
+
+// color variables
+// -----------------------------------------------------------------------------------
+
+$submit-border-color: $color-tn-blue;
+$submit-bg-light-color: lighten($color-tn-blue, 50%);
+$submit-bg-dark-color: lighten($color-tn-blue, 30%);
+$submit-focus-bg-light-color: lighten($color-tn-blue, 45%);
+$submit-focus-bg-dark-color: lighten($color-tn-blue, 25%);
+$submit-text-color: lighten($color-text-action, 75%);
+
+$badge-bg-light-color: lighten($color-tn-tab-red, 25%);
+$badge-bg-dark-color: darken($color-tn-tab-red, 5%);
+
+
+// 1. button 
+// -----------------------------------------------------------------------------------
+
+// A standard form button
+//
+// :hover - Highlights when hovering. // not implemented yet
+// :disabled - Dims the button when disabled. // not implemented yet
+// .submit - Indicates button is the primary action. 
+// 
+// No styleguide reference
+.button {
+    @include box-shadow(rgba(white,0.6) 0 1px 1px 0 inset, rgba(white, 0.3) 0 1px 0 0);   
+    &:hover {
+        @include box-shadow(rgba(#333,0.6) 0 1px 1px 0 inset, rgba(#333, 0.3) 0 -1px 0 0 inset, rgba(white, 0.3) 0 1px 0 0); 
+    }
+    &.submit {
+ 
+        @include background(linear-gradient(top, $submit-bg-light-color, $submit-bg-dark-color));
+        @include text-shadow(darken($submit-text-color, 60%)  0 -1px 1px);
+        &:hover {
+            @include background(linear-gradient(top, $submit-focus-bg-light-color, $submit-focus-bg-dark-color));
+        } 
+    }
+}
+
+
+.moo-ui-badge {
+    @include background(linear-gradient(top left, $badge-bg-light-color, $badge-bg-dark-color));
+}
