@@ -44,7 +44,7 @@ Loading = function() {
 };
 
 /*
- * Overlay prototype
+ * Loading / Overlay prototype
  */
 Loading.prototype = Overlay.prototype = {        
     

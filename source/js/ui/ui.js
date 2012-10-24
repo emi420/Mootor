@@ -132,6 +132,28 @@ $.extend({
 }, $);
 
 
+$(document).ready(function() {
+    var _overlay = new Overlay(),
+        _loading = new Loading(); 
+
+    /**
+     * @class $
+     */
+    $.extend({
+        loadingScreen: {
+            show: function() {
+                _overlay.show();
+                _loading.show();
+            },
+            hide: function() {
+                _overlay.hide();
+                _loading.hide();            
+            }
+        }
+    }, $)
+});
+
+
 // Private static functions
 
 $.extend({

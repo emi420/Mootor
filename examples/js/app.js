@@ -14,13 +14,7 @@
         * Navigation init
         */        
        nav = $("#main").nav();
-       
-       // Create and show 'Loading...' screen
-       nav.overlay = $.ui.overlay();
-       nav.loading = $.ui.loading();
-       nav.overlay.show();
-       nav.loading.show();        
-       
+             
        nav.header.navLinks = $(nav.header.el).find(".moo-nav");       
          
        /*
@@ -31,13 +25,13 @@
            id: "main",
            path: "views",
            views: [
-                "ui",
                 "index",
+                "gestures",
+                "ui",
                 "core",
                 "core_selector",
-                "fx",
                 "nav",
-                "gestures",
+                "fx",
                 "app"
            ],
            nav: nav
@@ -52,21 +46,6 @@
        };
 
        $.extend({
-
-           /*
-            * Show loading screen
-            */   
-           showLoadingScreen: function() {
-                nav.overlay.show();
-                nav.loading.show();
-           },        
-           /*
-            * Hide loading screen
-            */   
-           hideLoadingScreen: function() {
-                nav.overlay.hide();
-                nav.loading.hide();
-           },
            /*
             * Pre-load views
             */   
@@ -126,9 +105,6 @@
        for (i = app.views.length; i--;) {
            app.preload(app.views[i].id);      
        }
-       
-       // Hide loading screen
-       app.hideLoadingScreen();
 
    });
    

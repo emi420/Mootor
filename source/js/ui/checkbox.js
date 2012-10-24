@@ -57,14 +57,15 @@ Checkbox.prototype = {
        for(i = 0; i < this.pseudoItems.length; i++) {
        
            $(this.pseudoItems[i].el).onTapEnd(function(gesture) {
-                var $el = $(gesture.el);
+                var $el = $(gesture.el),
+                    index = gesture.el.getAttribute("moo-foreach-index");
                 
                 _stopEventPropagationAndPreventDefault(gesture); 
 
                 if ($el.hasClass("moo-active")) {
-                    self.unselect(gesture.el.getAttribute("moo-foreach-index"));
+                    self.unselect(index);
                 } else {
-                    self.select(gesture.el.getAttribute("moo-foreach-index"));
+                    self.select(index);
                 }
                               
            });

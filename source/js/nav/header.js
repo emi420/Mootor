@@ -12,9 +12,22 @@ var Header = function(self) {
     
     if (this.el !== null) {
         
-        // Cache element height
-        this.height = this.el.offsetHeight;       
-        this.el.style.height = this.height + "px";    
+        var setHeaderElementHeight = function(header) {
+            header.height = header.el.offsetHeight;       
+            header.el.style.height = header.height + "px";      
+
+            // Set styles when header active on navigation items
+            self._config.navItem.setStylesWhenHeaderActive(header.height, self);         
+        }
+
+        if ($._documentIsReady === true) {
+            setHeaderElementHeight(this);
+        } else {
+            $(document).ready(function() {
+                setHeaderElementHeight(self.header);            
+            });
+        }
+                
         $(this.el).setClass(self._config.headerClassName);
 
         // Initialize back button
@@ -25,9 +38,6 @@ var Header = function(self) {
         
         // Prevent native scrolling
         Header.preventNativeScrolling(this)
-        
-        // Set styles when header active on navigation items
-        self._config.navItem.setStylesWhenHeaderActive(this.height, self);
         
         return this;
     } else {
@@ -52,16 +62,19 @@ $.extend({
         var $anchorBack =
             navInstance._config.anchorBack =
             $($(self.el).find(".moo-nav-back")[0]);
+            
+        if ($anchorBack.el !== undefined) {
+            $anchorBack.hide();
+            
+            $anchorBack.el.onclick = function() {
+                return false;
+            };
+    
+            $anchorBack.onTapEnd(function(gesture) {
+                navInstance.goBack();
+            });        
+        }
         
-        $anchorBack.hide();
-        
-        $anchorBack.el.onclick = function() {
-            return false;
-        };
-
-        $anchorBack.onTapEnd(function(gesture) {
-            navInstance.goBack();
-        });
     },
     
     preventNativeScrolling: function(self) {

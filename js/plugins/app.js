@@ -180,8 +180,6 @@ App.prototype = {
     },
 
     data: {
-        _collection: {},
-        
         /**
          * Get
          * @method data.get
@@ -189,7 +187,7 @@ App.prototype = {
          *      $("myapp").app().data.get("title");
          */    
         get: function(key) {
-            return this._collection[key];
+            return _collection[key];
         },
         /**
          * Set
@@ -198,7 +196,8 @@ App.prototype = {
          *      $("myapp").app().data.set("title","Home page");
          */    
         set: function(key, value) {
-            this._collection[key] = value;
+            _collection[key] = value;
+            return value;
         },
         /**
          * Unset
@@ -208,9 +207,9 @@ App.prototype = {
          */  
          unset: function(key) {
             var i;
-            for (i in this._collection) {
+            for (i in _collection) {
                 if (i === key) {
-                    delete(this._collection[i]);
+                    delete(_collection[i]);
                 }
             }
         }
@@ -223,10 +222,8 @@ App.prototype = {
 /**
  * App
  */     
+var _collection = [];
 $.extend({
-    _collection: [],
-    
-
     init: function(options, self) {
         var i,
             moduleNamePosition,
@@ -261,7 +258,7 @@ $.extend({
         }
         
         // Add to internal apps collection
-        App._collection.push(self);
+        _collection.push(self);
         
         // Load view by URL, example: /myapp/#myPanel2
         if ((moduleNamePosition = href.lastIndexOf("#")) > -1) {
@@ -275,9 +272,9 @@ $.extend({
     
     get: function(id) {
         var i;
-        for (i = App._collection.length; i--;) {
-            if (App._collection[i].id === id) {
-                return App._collection[i];
+        for (i = _collection.length; i--;) {
+            if (_collection[i].id === id) {
+                return _collection[i];
             }
         }
     }

@@ -112,8 +112,8 @@ Select.prototype = {
     
     selectByValue: function(value) {
         var i;
-        for (i = this.items.length; i--;) {
-            if (this.items[i].value === value) {
+        for (i = this.pseudoItems.length; i--;) {
+            if (this.pseudoItems[i].el.value === value) {
                 this.select(i);
             }
         }

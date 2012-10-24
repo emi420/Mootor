@@ -40,5 +40,45 @@
 
     view.init()
     
+    // Block panel movement
+    $("#gestures").on("touchmove",function(e) {
+        e.stopPropagation(); 
+        e.preventDefault(); 
+    });
+    
+    // Controllers
+    
+    var $gestureTestingStatus = $("#gestureTestingStatus");
+    
+    $("#gestureTestingArea").onTapStart(function(gesture) {
+        var content = $gestureTestingStatus.el.innerHTML;
+        $gestureTestingStatus.html("onTapStart <br />" + content);
+    });
+    
+    $("#gestureTestingArea").onTapHold(function(gesture) {
+        var content = $gestureTestingStatus.el.innerHTML;
+        $gestureTestingStatus.html("onTapHold <br />" + content);
+    });
+
+    $("#gestureTestingArea").onTapEnd(function(gesture) {
+        var content = $gestureTestingStatus.el.innerHTML;
+        $gestureTestingStatus.html("onTapEnd <br />" + content);
+    });
+
+    $("#gestureTestingArea").onDragStart(function(gesture) {
+        var content = $gestureTestingStatus.el.innerHTML;
+        $gestureTestingStatus.html("onDragStart <br />" + content);
+    });
+
+    $("#gestureTestingArea").onDragMove(function(gesture) {
+        var content = $gestureTestingStatus.el.innerHTML;
+        $gestureTestingStatus.html("onDragMove <br />" + content);
+    });
+
+    $("#gestureTestingArea").onDragEnd(function(gesture) {
+        var content = $gestureTestingStatus.el.innerHTML;
+        $gestureTestingStatus.html("onDragEnd <br />" + content);
+    });
+    
         
 }(Mootor));

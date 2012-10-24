@@ -281,7 +281,7 @@ Loading = function() {
 };
 
 /*
- * Overlay prototype
+ * Loading / Overlay prototype
  */
 Loading.prototype = Overlay.prototype = {        
     
@@ -520,14 +520,15 @@ Checkbox.prototype = {
        for(i = 0; i < this.pseudoItems.length; i++) {
        
            $(this.pseudoItems[i].el).onTapEnd(function(gesture) {
-                var $el = $(gesture.el);
+                var $el = $(gesture.el),
+                    index = gesture.el.getAttribute("moo-foreach-index");
                 
                 _stopEventPropagationAndPreventDefault(gesture); 
 
                 if ($el.hasClass("moo-active")) {
-                    self.unselect(gesture.el.getAttribute("moo-foreach-index"));
+                    self.unselect(index);
                 } else {
-                    self.select(gesture.el.getAttribute("moo-foreach-index"));
+                    self.select(index);
                 }
                               
            });
@@ -808,8 +809,8 @@ Select.prototype = {
     
     selectByValue: function(value) {
         var i;
-        for (i = this.items.length; i--;) {
-            if (this.items[i].value === value) {
+        for (i = this.pseudoItems.length; i--;) {
+            if (this.pseudoItems[i].el.value === value) {
                 this.select(i);
             }
         }
@@ -1350,6 +1351,28 @@ $.extend({
          }
      }
 }, $);
+
+
+$(document).ready(function() {
+    var _overlay = new Overlay(),
+        _loading = new Loading(); 
+
+    /**
+     * @class $
+     */
+    $.extend({
+        loadingScreen: {
+            show: function() {
+                _overlay.show();
+                _loading.show();
+            },
+            hide: function() {
+                _overlay.hide();
+                _loading.hide();            
+            }
+        }
+    }, $)
+});
 
 
 // Private static functions

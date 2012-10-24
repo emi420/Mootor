@@ -506,6 +506,7 @@ var $ = (function () {
    _hideContentWhileDocumentNotReady = function() {
     $.view.hide();
     $(document).ready(function() {
+         $._documentIsReady = true;
          $.view.show();
     });
    };

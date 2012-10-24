@@ -481,6 +481,7 @@ var $ = (function () {
       $.context.userAgent = "safari";
    } else if (navigator.userAgent.toLowerCase().indexOf("msie") > -1) {
       $.context.userAgent = "msie";
+   // TODO: mozilla 
    } else {
       $.context.userAgent = "";   
    }
@@ -520,6 +521,7 @@ var $ = (function () {
    _hideContentWhileDocumentNotReady = function() {
     $.view.hide();
     $(document).ready(function() {
+         $._documentIsReady = true;
          $.view.show();
     });
    };
@@ -643,6 +645,10 @@ if (!window.$ || typeof ($) !== "function") {
                 event: {}
             };
             gestureList.push(gesture);
+
+            // Bind listeners only once
+            self.bind("touchstart", self);
+
         }
         
         if (gesture.event[type] === undefined) {
@@ -650,10 +656,6 @@ if (!window.$ || typeof ($) !== "function") {
         }
         
         gesture.event[type].push(callback);
-    
-        // Bind listeners only once
-        self.bind("touchstart", self);
-        self.bind("touchend", self);
     
     };
     
@@ -881,16 +883,17 @@ if (!window.$ || typeof ($) !== "function") {
                 clientX,
                 clientY,
                 time;
-        
+                
             // Touch
             try {
                 clientX = e.touches[0].clientX;
                 clientY = e.touches[0].clientY;
-            } catch (error) {}
+            } catch (error) {};
     
             if (e.type === "touchstart") {
-    
+            
                 this.bind("touchmove", this);
+                this.bind("touchend", this);
     
                 gestureEvent.time = date.getTime();
                 gestureEvent.lastTime = date.getMilliseconds();
@@ -904,12 +907,16 @@ if (!window.$ || typeof ($) !== "function") {
     
                 window.setTimeout(function () {
                     // TapHold
-                    if (gestureEvent.mousedown === true) {
+                    if (gestureEvent.mousedown === true &&
+                        gestureEvent.isDraggingY === 0 &&
+                        gestureEvent.isDraggingX === 0) {
+                        
                         info.type = "tapHold";
                         _fire(info, gestureEvent.onTapHold);
                     }
                 }, 500);
     
+                e.stopPropagation();
                 if (gestureEvent.onTapStart !== undefined) {
                     // TapStart
                     info.type = "tapStart";
@@ -977,6 +984,7 @@ if (!window.$ || typeof ($) !== "function") {
                                         
                 } else {
                     // DragMove
+                    e.stopPropagation();
                     info.type = "dragMove";
                     _fire(info, gestureEvent.onDragMove);
                 }
@@ -988,11 +996,13 @@ if (!window.$ || typeof ($) !== "function") {
                         
                 if (gestureEvent.tapped === false) {
                     this.unbind("touchmove", this);
+                    this.unbind("touchend", this);
                     gestureEvent.tapped = true;
                     info.time = date.getTime() - gestureEvent.time;
                     gestureEvent.mousedown = false;
                 }
     
+                e.stopPropagation();
                 if ((gestureEvent.isDraggingY !== 0 || 
                     gestureEvent.isDraggingX !== 0)) {
     
@@ -1036,7 +1046,6 @@ if (!window.$ || typeof ($) !== "function") {
 
                     // TapEnd
                     info.type = "tapEnd";
-                    info.e.stopPropagation();
                     _fire(info, gestureEvent.onTapEnd);
                 }
     

@@ -481,6 +481,7 @@ var $ = (function () {
       $.context.userAgent = "safari";
    } else if (navigator.userAgent.toLowerCase().indexOf("msie") > -1) {
       $.context.userAgent = "msie";
+   // TODO: mozilla 
    } else {
       $.context.userAgent = "";   
    }
@@ -520,6 +521,7 @@ var $ = (function () {
    _hideContentWhileDocumentNotReady = function() {
     $.view.hide();
     $(document).ready(function() {
+         $._documentIsReady = true;
          $.view.show();
     });
    };
@@ -597,6 +599,103 @@ if (!window.$ || typeof ($) !== "function") {
 
 
 /**
+ * Fx
+ * @module core
+ * @submodule fx
+ */ 
+
+(function () {
+
+    var tmpDivStyle = document.createElement("div").style,
+        vendor,
+        transition,
+        transformFnStr;
+    
+    if (tmpDivStyle.webkitTransitionDuration !== undefined) {
+        vendor = "webkit";        
+        transformFnStr = "translate3d";
+    } else if (tmpDivStyle.MozTransitionDuration !== undefined) {
+        vendor = "Moz";            
+        transformFnStr = "translate";
+    }
+    
+    transition = {
+        transform: vendor + "Transform",
+        duration: vendor + "TransitionDuration",
+        timingFunction: vendor + "TransitionTimingFunction"
+    };
+    
+    $.extend({         
+        
+        /**
+         * Legacy translateFx Mootor Fx function
+         * @private
+         */
+        translateFx: function (positions, options) {
+    
+            var x_pos = positions.x,
+                y_pos = positions.y,
+                tduration,
+                elStyle = {},
+                key,
+                el = this.el;
+               
+            tduration = options.transitionDuration;
+    
+            if (tduration !== undefined && tduration > 0) {
+                elStyle[transition.duration] = tduration + "s";
+                elStyle[transition.timingFunction] = "ease-out";
+
+            } else {
+                if (elStyle[transition.duration] !== "") {
+                    this.cleanFx();
+                }
+            }
+    
+            elStyle[transition.transform] = transformFnStr + "(" + x_pos + "px," + y_pos + "px, 0)";            
+            
+            for (key in elStyle) {
+                el.style[key] = elStyle[key]; 
+            }
+            
+            if (options.callback) {
+                window.setTimeout(options.callback, tduration * 1000);
+            }
+    
+        },
+
+        /**
+         * Translate element, using GPU acceleration when available
+         * @method translate
+         * @param {TranslateOptions} options Options
+         */
+        translate: function (options) {
+            this.translateFx({x: options.x, y: options.y},options);
+        },
+    
+        /**
+         * Clean element transform styles
+         * @method cleanFx
+         */
+        cleanFx: function () {
+            var elStyle = {},
+                key,
+                el = this.el;
+            
+            elStyle[transition.transform] = "";
+            elStyle[transition.duration] = "";
+            elStyle[transition.timingDuration] = "";
+
+            for (key in elStyle) {
+                el.style[key] = elStyle[key];
+            }
+        }
+    
+    });
+    
+} ());
+
+/**
  * Gestures
  * @module core
  * @submodule gestures
@@ -643,6 +742,10 @@ if (!window.$ || typeof ($) !== "function") {
                 event: {}
             };
             gestureList.push(gesture);
+
+            // Bind listeners only once
+            self.bind("touchstart", self);
+
         }
         
         if (gesture.event[type] === undefined) {
@@ -650,10 +753,6 @@ if (!window.$ || typeof ($) !== "function") {
         }
         
         gesture.event[type].push(callback);
-    
-        // Bind listeners only once
-        self.bind("touchstart", self);
-        self.bind("touchend", self);
     
     };
     
@@ -881,16 +980,17 @@ if (!window.$ || typeof ($) !== "function") {
                 clientX,
                 clientY,
                 time;
-        
+                
             // Touch
             try {
                 clientX = e.touches[0].clientX;
                 clientY = e.touches[0].clientY;
-            } catch (error) {}
+            } catch (error) {};
     
             if (e.type === "touchstart") {
-    
+            
                 this.bind("touchmove", this);
+                this.bind("touchend", this);
     
                 gestureEvent.time = date.getTime();
                 gestureEvent.lastTime = date.getMilliseconds();
@@ -904,12 +1004,16 @@ if (!window.$ || typeof ($) !== "function") {
     
                 window.setTimeout(function () {
                     // TapHold
-                    if (gestureEvent.mousedown === true) {
+                    if (gestureEvent.mousedown === true &&
+                        gestureEvent.isDraggingY === 0 &&
+                        gestureEvent.isDraggingX === 0) {
+                        
                         info.type = "tapHold";
                         _fire(info, gestureEvent.onTapHold);
                     }
                 }, 500);
     
+                e.stopPropagation();
                 if (gestureEvent.onTapStart !== undefined) {
                     // TapStart
                     info.type = "tapStart";
@@ -977,6 +1081,7 @@ if (!window.$ || typeof ($) !== "function") {
                                         
                 } else {
                     // DragMove
+                    e.stopPropagation();
                     info.type = "dragMove";
                     _fire(info, gestureEvent.onDragMove);
                 }
@@ -988,11 +1093,13 @@ if (!window.$ || typeof ($) !== "function") {
                         
                 if (gestureEvent.tapped === false) {
                     this.unbind("touchmove", this);
+                    this.unbind("touchend", this);
                     gestureEvent.tapped = true;
                     info.time = date.getTime() - gestureEvent.time;
                     gestureEvent.mousedown = false;
                 }
     
+                e.stopPropagation();
                 if ((gestureEvent.isDraggingY !== 0 || 
                     gestureEvent.isDraggingX !== 0)) {
     
@@ -1036,7 +1143,6 @@ if (!window.$ || typeof ($) !== "function") {
 
                     // TapEnd
                     info.type = "tapEnd";
-                    info.e.stopPropagation();
                     _fire(info, gestureEvent.onTapEnd);
                 }
     
@@ -1045,103 +1151,6 @@ if (!window.$ || typeof ($) !== "function") {
         }
     });
 
-} ());/**
- * Fx
- * @module core
- * @submodule fx
- */ 
-
-(function () {
-
-    var tmpDivStyle = document.createElement("div").style,
-        vendor,
-        transition,
-        transformFnStr;
-    
-    if (tmpDivStyle.webkitTransitionDuration !== undefined) {
-        vendor = "webkit";        
-        transformFnStr = "translate3d";
-    } else if (tmpDivStyle.MozTransitionDuration !== undefined) {
-        vendor = "Moz";            
-        transformFnStr = "translate";
-    }
-    
-    transition = {
-        transform: vendor + "Transform",
-        duration: vendor + "TransitionDuration",
-        timingFunction: vendor + "TransitionTimingFunction"
-    };
-    
-    $.extend({         
-        
-        /**
-         * Legacy translateFx Mootor Fx function
-         * @private
-         */
-        translateFx: function (positions, options) {
-    
-            var x_pos = positions.x,
-                y_pos = positions.y,
-                tduration,
-                elStyle = {},
-                key,
-                el = this.el;
-               
-            tduration = options.transitionDuration;
-    
-            if (tduration !== undefined && tduration > 0) {
-                elStyle[transition.duration] = tduration + "s";
-                elStyle[transition.timingFunction] = "ease-out";
-
-            } else {
-                if (elStyle[transition.duration] !== "") {
-                    this.cleanFx();
-                }
-            }
-    
-            elStyle[transition.transform] = transformFnStr + "(" + x_pos + "px," + y_pos + "px, 0)";            
-            
-            for (key in elStyle) {
-                el.style[key] = elStyle[key]; 
-            }
-            
-            if (options.callback) {
-                window.setTimeout(options.callback, tduration * 1000);
-            }
-    
-        },
-
-        /**
-         * Translate element, using GPU acceleration when available
-         * @method translate
-         * @param {TranslateOptions} options Options
-         */
-        translate: function (options) {
-            this.translateFx({x: options.x, y: options.y},options);
-        },
-    
-        /**
-         * Clean element transform styles
-         * @method cleanFx
-         */
-        cleanFx: function () {
-            var elStyle = {},
-                key,
-                el = this.el;
-            
-            elStyle[transition.transform] = "";
-            elStyle[transition.duration] = "";
-            elStyle[transition.timingDuration] = "";
-
-            for (key in elStyle) {
-                el.style[key] = elStyle[key];
-            }
-        }
-    
-    });
-    
 } ());
-
-
 }(window.document));
 
