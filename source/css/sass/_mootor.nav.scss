@@ -39,6 +39,28 @@ body, html {
     }
 }
 
+
+// Footer
+
+.moo-footer {
+    text-align: left;
+    z-index: 9999; 
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: .5em 1em;
+    nav {
+        text-align: center;
+        a {
+            display: inline-block;
+            font-size: 1.4em;
+            padding: .3em 1.5em;
+        }
+    }
+}
+
+
+
 // Panels 
 
 .moo-panels {
