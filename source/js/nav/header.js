@@ -17,16 +17,12 @@ var Header = function(self) {
             header.el.style.height = header.height + "px";      
 
             // Set styles when header active on navigation items
-            self._config.navItem.setStylesWhenHeaderOrFooterIsActive(header.height, self);         
+            _setStylesWhenHeaderOrFooterIsActive(header.height, self);         
         }
 
-        if ($._documentIsReady === true) {
-            setHeaderElementHeight(this);
-        } else {
-            $(document).ready(function() {
-                setHeaderElementHeight(self.header);            
-            });
-        }
+        _callbacksOnDocumentReady.push(function() {
+            setHeaderElementHeight(self.header);                    
+        });
                 
         $(this.el).setClass(self._config.headerClassName);
 

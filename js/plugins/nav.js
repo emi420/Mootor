@@ -7,7 +7,7 @@
 
     "use strict";
     
- 
+
 /**
  * Nav
  * @class Nav
@@ -26,7 +26,11 @@ var Nav = function (options) {
         return this;
 
     },
-    Item;
+    Item,
+    i,
+    _setStylesWhenHeaderOrFooterIsActive,
+    _onDocumentReady,
+    _callbacksOnDocumentReady;
 
 // Public instance prototypes
 
@@ -539,9 +543,41 @@ $.extend({
 
 
 /*
+ * Styles when Header or Footer is active
+ */
+_setStylesWhenHeaderOrFooterIsActive = function(height, navInstance) {
+    var i;
+    for (i = navInstance._config.count; i--;) {
+        navInstance.items[i].el.style.paddingTop = height + "px";
+    }
+}
+
+
+/*
  * Prevent native scrolling
  */
 Nav.preventNativeScrolling();
+
+/*
+ * Callbacks for Nav initialization when document is ready
+ */
+
+_callbacksOnDocumentReady = [];
+
+_onDocumentReady = function() {
+    for (i = _callbacksOnDocumentReady.length; i--;) {
+        _callbacksOnDocumentReady[i]();
+    }    
+}
+
+if ($._documentIsReady === true) {
+    _onDocumentReady();
+} else {
+    $(document).ready(function() {
+        _onDocumentReady();
+    });
+}
+
 // #include "nav.js"
 
 /**
@@ -561,16 +597,12 @@ var Header = function(self) {
             header.el.style.height = header.height + "px";      
 
             // Set styles when header active on navigation items
-            self._config.navItem.setStylesWhenHeaderOrFooterIsActive(header.height, self);         
+            _setStylesWhenHeaderOrFooterIsActive(header.height, self);         
         }
 
-        if ($._documentIsReady === true) {
-            setHeaderElementHeight(this);
-        } else {
-            $(document).ready(function() {
-                setHeaderElementHeight(self.header);            
-            });
-        }
+        _callbacksOnDocumentReady.push(function() {
+            setHeaderElementHeight(self.header);                    
+        });
                 
         $(this.el).setClass(self._config.headerClassName);
 
@@ -650,31 +682,24 @@ $.extend({
 var Footer = function(self) {
 
     // Cache element
-    this.el = $("Footer")[0];
+    this.el = $("footer")[0];
     
     if (this.el !== null) {
         
-        var setFooterElementHeight = function(Footer) {
-            Footer.height = Footer.el.offsetHeight;       
-            Footer.el.style.height = Footer.height + "px";      
+        var setFooterElementHeight = function(footer) {
+            footer.height = Footer.el.offsetHeight;       
+            footer.el.style.height = Footer.height + "px";      
 
             // Set styles when Footer active on navigation items
-            self._config.navItem.setStylesWhenHeaderOrFooterIsActive(Footer.height, self);         
+            _setStylesWhenHeaderOrFooterIsActive(footer.height, self);         
         }
 
-        if ($._documentIsReady === true) {
-            setFooterElementHeight(this);
-        } else {
-            $(document).ready(function() {
-                setFooterElementHeight(self.Footer);            
-            });
-        }
+        _callbacksOnDocumentReady.push(function() {
+            setFooterElementHeight(self.footer);  
+        });
                 
-        $(this.el).setClass(self._config.FooterClassName);
+        $(this.el).setClass(self._config.footerClassName);
 
-        // Initialize back button
-        Footer.initAnchorBack(this, self);           
-        
         // Initialize nav links
         Footer.initNavigationLinks(this, self); 
         
@@ -688,36 +713,10 @@ var Footer = function(self) {
     
 };
 
-Footer.prototype = {
-    setTitle: function(title) {
-        $(this.el).find("h1")[0].innerText = title;
-    }
-}
-
 /**
  * Footer
  */
 $.extend({
-
-    initAnchorBack: function(self, navInstance) {
-        
-        var $anchorBack =
-            navInstance._config.anchorBack =
-            $($(self.el).find(".moo-nav-back")[0]);
-            
-        if ($anchorBack.el !== undefined) {
-            $anchorBack.hide();
-            
-            $anchorBack.el.onclick = function() {
-                return false;
-            };
-    
-            $anchorBack.onTapEnd(function(gesture) {
-                navInstance.goBack();
-            });        
-        }
-        
-    },
     
     preventNativeScrolling: function(self) {
         $(self.el).on("touchmove", function(event) {
