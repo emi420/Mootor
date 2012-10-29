@@ -58,15 +58,25 @@ Checkbox.prototype = {
        
            $(this.pseudoItems[i].el).onTapEnd(function(gesture) {
                 var $el = $(gesture.el),
-                    index = gesture.el.getAttribute("moo-foreach-index");
+                    index = gesture.el.getAttribute("moo-foreach-index"),
+                    onTap = function() {
+                        if ($el.hasClass("moo-active")) {
+                            self.unselect(index);
+                        } else {
+                            self.select(index);
+                        }
+                    }                     
+                
+                if ($.context.userAgent === "android") {
+                    window.setTimeout(function() {
+                       onTap();
+                    }, 0)
+                } else {
+                    onTap();
+                }
                 
                 _stopEventPropagationAndPreventDefault(gesture); 
 
-                if ($el.hasClass("moo-active")) {
-                    self.unselect(index);
-                } else {
-                    self.select(index);
-                }
                               
            });
 

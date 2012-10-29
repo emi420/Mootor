@@ -30,6 +30,7 @@
                 "ui",
                 "core",
                 "core_selector",
+                "core_ready",
                 "nav",
                 "fx",
                 "app"

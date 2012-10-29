@@ -214,9 +214,9 @@ $.extend({
         },
 
     /**
-     * Set styles when Header is active
+     * Set styles when Header or Footer is active
      */
-    setStylesWhenHeaderActive: function(height, navInstance) {
+    setStylesWhenHeaderOrFooterIsActive: function(height, navInstance) {
         var i;
         for (i = navInstance._config.count; i--;) {
             navInstance.items[i].el.style.paddingTop = height + "px";

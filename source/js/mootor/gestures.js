@@ -316,7 +316,6 @@
                     }
                 }, 500);
     
-                e.stopPropagation();
                 if (gestureEvent.onTapStart !== undefined) {
                     // TapStart
                     info.type = "tapStart";
@@ -384,7 +383,6 @@
                                         
                 } else {
                     // DragMove
-                    e.stopPropagation();
                     info.type = "dragMove";
                     _fire(info, gestureEvent.onDragMove);
                 }
@@ -402,7 +400,6 @@
                     gestureEvent.mousedown = false;
                 }
     
-                e.stopPropagation();
                 if ((gestureEvent.isDraggingY !== 0 || 
                     gestureEvent.isDraggingX !== 0)) {
     

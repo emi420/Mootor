@@ -340,9 +340,13 @@ $.extend({
                 // Enable or disable transitions
                 transitions: options.transitions,
 
-                // Main container class name
+                // Header container class name
                 headerClassName: options.headerClassName ? 
                           options.headerClassName : "moo-header",
+
+                // Footer container class name
+                footerClassName: options.footerClassName ? 
+                          options.footerClassName : "moo-footer",
 
                 // Navigation links container class name
                 navClass: options.navLinksClassName ? 

@@ -17,7 +17,7 @@ var Header = function(self) {
             header.el.style.height = header.height + "px";      
 
             // Set styles when header active on navigation items
-            self._config.navItem.setStylesWhenHeaderActive(header.height, self);         
+            self._config.navItem.setStylesWhenHeaderOrFooterIsActive(header.height, self);         
         }
 
         if ($._documentIsReady === true) {

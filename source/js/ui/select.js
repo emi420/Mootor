@@ -67,7 +67,7 @@ Select.prototype = {
         var self = this;
                 
         // Show selection box
-        $(this.el).on("touchend", function(gesture) {
+        $(this.input).onTapEnd(function(gesture) {
             if (self._visibility !== "visible") {
                 self.input.focus();                
                 self._visibility = "visible";

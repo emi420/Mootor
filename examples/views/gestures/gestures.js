@@ -79,6 +79,25 @@
         var content = $gestureTestingStatus.el.innerHTML;
         $gestureTestingStatus.html("onDragEnd <br />" + content);
     });
+
+    $("#gestureTestingArea").onSwipeLeft(function(gesture) {
+        var content = $gestureTestingStatus.el.innerHTML;
+        $gestureTestingStatus.html("onSwipeLeft <br />" + content);
+    });
     
+    $("#gestureTestingArea").onSwipeRight(function(gesture) {
+        var content = $gestureTestingStatus.el.innerHTML;
+        $gestureTestingStatus.html("onSwipeRight <br />" + content);
+    });    
+
+    $("#gestureTestingArea").onSwipeUp(function(gesture) {
+        var content = $gestureTestingStatus.el.innerHTML;
+        $gestureTestingStatus.html("onSwipeUp <br />" + content);
+    });    
+
+    $("#gestureTestingArea").onSwipeDown(function(gesture) {
+        var content = $gestureTestingStatus.el.innerHTML;
+        $gestureTestingStatus.html("onSwipeDown <br />" + content);
+    });    
         
 }(Mootor));

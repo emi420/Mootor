@@ -39,13 +39,13 @@ var $ = (function () {
          el = window;
 
          var ready = false,
-            handler;
+             handler;
 
          handler = function (e) {
             if (ready) {return; }
             if (e.type === "readystatechange" 
                && document.readyState !== "complete") 
-               {return; }
+               {return;}
             fn.call(document);
             ready = true;
          };
@@ -60,7 +60,7 @@ var $ = (function () {
             );
          }
       } else {
-         el.onload = Moo;
+         el.addEventListener("load", fn);
       }
    };
 
