@@ -17,10 +17,7 @@ var Nav = function (options) {
         return this;
 
     },
-    Item,
-    i,
-    _onDocumentReady,
-    _callbacksOnDocumentReady = [];
+    Item;
 
 // Public instance prototypes
 

@@ -13,11 +13,8 @@ var Footer = function(self) {
     if (this.el !== undefined) {
         
         // FIXME: remove setTimeout
-        var footer = this;
-        window.setTimeout(function() {
-            footer.height = footer.el.offsetHeight;       
-            footer.el.style.height = footer.height + "px";     
-        }, 1000)
+        this.height = this.el.offsetHeight;       
+        this.el.style.height = this.height + "px";     
 
         // Set styles when Footer active on navigation items
         _setStylesWhenFooterIsActive(this, self);         
