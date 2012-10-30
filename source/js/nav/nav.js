@@ -19,9 +19,8 @@ var Nav = function (options) {
     },
     Item,
     i,
-    _setStylesWhenHeaderOrFooterIsActive,
     _onDocumentReady,
-    _callbacksOnDocumentReady;
+    _callbacksOnDocumentReady = [];
 
 // Public instance prototypes
 
@@ -534,38 +533,8 @@ $.extend({
 
 
 /*
- * Styles when Header or Footer is active
- */
-_setStylesWhenHeaderOrFooterIsActive = function(height, navInstance) {
-    var i;
-    for (i = navInstance._config.count; i--;) {
-        navInstance.items[i].el.style.paddingTop = height + "px";
-    }
-}
-
-
-/*
  * Prevent native scrolling
  */
 Nav.preventNativeScrolling();
 
-/*
- * Callbacks for Nav initialization when document is ready
- */
-
-_callbacksOnDocumentReady = [];
-
-_onDocumentReady = function() {
-    for (i = _callbacksOnDocumentReady.length; i--;) {
-        _callbacksOnDocumentReady[i]();
-    }    
-}
-
-if ($._documentIsReady === true) {
-    _onDocumentReady();
-} else {
-    $(document).ready(function() {
-        _onDocumentReady();
-    });
-}
 

@@ -10,20 +10,18 @@ var Footer = function(self) {
     // Cache element
     this.el = $("footer")[0];
     
-    if (this.el !== null) {
+    if (this.el !== undefined) {
         
-        var setFooterElementHeight = function(footer) {
-            footer.height = Footer.el.offsetHeight;       
-            footer.el.style.height = Footer.height + "px";      
+        // FIXME
+        var footer = this;
+        window.setTimeout(function() {
+            footer.height = footer.el.offsetHeight;       
+            footer.el.style.height = footer.height + "px";     
+        }, 10)
 
-            // Set styles when Footer active on navigation items
-            _setStylesWhenHeaderOrFooterIsActive(footer.height, self);         
-        }
-
-        _callbacksOnDocumentReady.push(function() {
-            setFooterElementHeight(self.footer);  
-        });
-                
+        // Set styles when Footer active on navigation items
+        _setStylesWhenFooterIsActive(this, self);         
+            
         $(this.el).setClass(self._config.footerClassName);
 
         // Initialize nav links
@@ -63,3 +61,12 @@ $.extend({
 
 }, Footer);
 
+/*
+ * Styles when Footer is active
+ */
+var _setStylesWhenFooterIsActive = function(footer, navInstance) {
+    var i;
+    for (i = navInstance._config.count; i--;) {
+        navInstance.items[i].el.style.paddingBottom = footer.height + "px";
+    }
+}

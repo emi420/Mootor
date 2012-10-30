@@ -28,9 +28,8 @@ var Nav = function (options) {
     },
     Item,
     i,
-    _setStylesWhenHeaderOrFooterIsActive,
     _onDocumentReady,
-    _callbacksOnDocumentReady;
+    _callbacksOnDocumentReady = [];
 
 // Public instance prototypes
 
@@ -543,40 +542,10 @@ $.extend({
 
 
 /*
- * Styles when Header or Footer is active
- */
-_setStylesWhenHeaderOrFooterIsActive = function(height, navInstance) {
-    var i;
-    for (i = navInstance._config.count; i--;) {
-        navInstance.items[i].el.style.paddingTop = height + "px";
-    }
-}
-
-
-/*
  * Prevent native scrolling
  */
 Nav.preventNativeScrolling();
 
-/*
- * Callbacks for Nav initialization when document is ready
- */
-
-_callbacksOnDocumentReady = [];
-
-_onDocumentReady = function() {
-    for (i = _callbacksOnDocumentReady.length; i--;) {
-        _callbacksOnDocumentReady[i]();
-    }    
-}
-
-if ($._documentIsReady === true) {
-    _onDocumentReady();
-} else {
-    $(document).ready(function() {
-        _onDocumentReady();
-    });
-}
 
 // #include "nav.js"
 
@@ -590,20 +559,14 @@ var Header = function(self) {
     // Cache element
     this.el = $("header")[0];
     
-    if (this.el !== null) {
+    if (this.el !== undefined) {
         
-        var setHeaderElementHeight = function(header) {
-            header.height = header.el.offsetHeight;       
-            header.el.style.height = header.height + "px";      
+        this.height = this.el.offsetHeight;       
+        this.el.style.height = this.height + "px";      
 
-            // Set styles when header active on navigation items
-            _setStylesWhenHeaderOrFooterIsActive(header.height, self);         
-        }
+        // Set styles when header active on navigation items
+        _setStylesWhenHeaderIsActive(this.height, self);         
 
-        _callbacksOnDocumentReady.push(function() {
-            setHeaderElementHeight(self.header);                    
-        });
-                
         $(this.el).setClass(self._config.headerClassName);
 
         // Initialize back button
@@ -672,6 +635,17 @@ $.extend({
 
 }, Header);
 
+
+
+/*
+ * Styles when Header is active
+ */
+var _setStylesWhenHeaderIsActive = function(height, navInstance) {
+    var i;
+    for (i = navInstance._config.count; i--;) {
+        navInstance.items[i].el.style.paddingTop = height + "px";
+    }
+}
 // #include "nav.js"
 
 /**
@@ -684,20 +658,18 @@ var Footer = function(self) {
     // Cache element
     this.el = $("footer")[0];
     
-    if (this.el !== null) {
+    if (this.el !== undefined) {
         
-        var setFooterElementHeight = function(footer) {
-            footer.height = Footer.el.offsetHeight;       
-            footer.el.style.height = Footer.height + "px";      
+        // FIXME
+        var footer = this;
+        window.setTimeout(function() {
+            footer.height = footer.el.offsetHeight;       
+            footer.el.style.height = footer.height + "px";     
+        }, 10)
 
-            // Set styles when Footer active on navigation items
-            _setStylesWhenHeaderOrFooterIsActive(footer.height, self);         
-        }
-
-        _callbacksOnDocumentReady.push(function() {
-            setFooterElementHeight(self.footer);  
-        });
-                
+        // Set styles when Footer active on navigation items
+        _setStylesWhenFooterIsActive(this, self);         
+            
         $(this.el).setClass(self._config.footerClassName);
 
         // Initialize nav links
@@ -737,6 +709,15 @@ $.extend({
 
 }, Footer);
 
+/*
+ * Styles when Footer is active
+ */
+var _setStylesWhenFooterIsActive = function(footer, navInstance) {
+    var i;
+    for (i = navInstance._config.count; i--;) {
+        navInstance.items[i].el.style.paddingBottom = footer.height + "px";
+    }
+}
 
 var Panel = function(){},
 
@@ -963,6 +944,7 @@ $.extend({
     }
 
 }, Panel);
+
 }(Mootor));
 
 /**

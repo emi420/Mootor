@@ -10,20 +10,14 @@ var Header = function(self) {
     // Cache element
     this.el = $("header")[0];
     
-    if (this.el !== null) {
+    if (this.el !== undefined) {
         
-        var setHeaderElementHeight = function(header) {
-            header.height = header.el.offsetHeight;       
-            header.el.style.height = header.height + "px";      
+        this.height = this.el.offsetHeight;       
+        this.el.style.height = this.height + "px";      
 
-            // Set styles when header active on navigation items
-            _setStylesWhenHeaderOrFooterIsActive(header.height, self);         
-        }
+        // Set styles when header active on navigation items
+        _setStylesWhenHeaderIsActive(this.height, self);         
 
-        _callbacksOnDocumentReady.push(function() {
-            setHeaderElementHeight(self.header);                    
-        });
-                
         $(this.el).setClass(self._config.headerClassName);
 
         // Initialize back button
@@ -92,3 +86,14 @@ $.extend({
 
 }, Header);
 
+
+
+/*
+ * Styles when Header is active
+ */
+var _setStylesWhenHeaderIsActive = function(height, navInstance) {
+    var i;
+    for (i = navInstance._config.count; i--;) {
+        navInstance.items[i].el.style.paddingTop = height + "px";
+    }
+}
