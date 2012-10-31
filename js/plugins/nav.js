@@ -196,6 +196,7 @@ $.extend({
                 // Set & load navigation Item
                 href = gesture.el.getAttribute("href");
                 if (href && href !== "") {
+                    gesture.e.stopPropagation();
                     navInstance.set(href.replace("#",""));
                 }
             }

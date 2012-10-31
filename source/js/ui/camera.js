@@ -1,3 +1,5 @@
+/*** Require Apache Cordova ***/
+
 /**
  * Camera
  * @return {object} Camera Mootor UI Camera object
@@ -232,7 +234,6 @@ $.extend({
                 }
         
                 onSuccess = function(data) {
-                   // TODO: update image list? use callback?
                    self.onSuccess(data);
                 };
         
