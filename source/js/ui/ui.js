@@ -78,6 +78,9 @@ $.extend({
                  case "SimpleCamera":
                     UIControl = new SimpleCamera(options);
                     break;                 
+                 case "Map":
+                    UIControl = new Map(options);
+                    break;                 
              }
 
              UIControl.id = this.query;

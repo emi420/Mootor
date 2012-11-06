@@ -28,6 +28,7 @@
                 "index",
                 "gestures",
                 "ui",
+                "ui_map",
                 "core",
                 "core_selector",
                 "core_ready",

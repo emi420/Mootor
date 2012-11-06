@@ -268,7 +268,27 @@ body, html {
   font-size: 1.5em;
 }
 
-/* line 44, ../../source/css/sass/_mootor.nav.scss */
+/* line 45, ../../source/css/sass/_mootor.nav.scss */
+.moo-footer {
+  text-align: left;
+  z-index: 9999;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: .5em 1em;
+}
+/* line 52, ../../source/css/sass/_mootor.nav.scss */
+.moo-footer nav {
+  text-align: center;
+}
+/* line 54, ../../source/css/sass/_mootor.nav.scss */
+.moo-footer nav a {
+  display: inline-block;
+  font-size: 1.4em;
+  padding: .3em 1.5em;
+}
+
+/* line 66, ../../source/css/sass/_mootor.nav.scss */
 .moo-panels {
   position: absolute;
   width: 100%;
@@ -280,19 +300,19 @@ body, html {
   background: #f7f7f7;
 }
 
-/* line 54, ../../source/css/sass/_mootor.nav.scss */
+/* line 76, ../../source/css/sass/_mootor.nav.scss */
 .moo-panel {
   min-height: 100%;
   width: 100%;
   position: absolute;
 }
 
-/* line 64, ../../source/css/sass/_mootor.nav.scss */
+/* line 86, ../../source/css/sass/_mootor.nav.scss */
 nav ul,
 nav ol {
   list-style: none;
 }
-/* line 68, ../../source/css/sass/_mootor.nav.scss */
+/* line 90, ../../source/css/sass/_mootor.nav.scss */
 nav a {
   text-decoration: none;
   text-align: left;
@@ -300,7 +320,7 @@ nav a {
   padding: 1em;
 }
 
-/* line 78, ../../source/css/sass/_mootor.nav.scss */
+/* line 100, ../../source/css/sass/_mootor.nav.scss */
 .moo-panel {
   -webkit-transition-duration: 0;
   -webkit-transform: translate3d(0, 0, 0);

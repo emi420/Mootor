@@ -2,7 +2,7 @@
 
 /**
  * simpleCamera
- * @return {object} simpleCamera Mootor UI simpleCamera object
+ * @return {object} SimpleCamera Mootor UI SimpleCamera object
  */
 var SimpleCamera = function(options) {
 

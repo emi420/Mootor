@@ -20,6 +20,7 @@ all:
 	      textarea.js\
 	      camera.js\
 	      simpleCamera.js\
+	      map.js\
 	      ui.js\
 	      _footer.js\
 	      > $(RELEASE_DIR)/$(RELEASE_FILE)
