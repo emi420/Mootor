@@ -818,6 +818,7 @@ $.extend({
             
             if (typeof panel.onLoad === "function") {
                 panel.onLoad();
+                panel.height = panel.el.offsetHeight
             }
 
         },
