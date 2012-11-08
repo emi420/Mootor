@@ -1,6 +1,6 @@
 (function($) {
 
-    var view_name = "core_selector",
+    var view_name = "core_find",
     
         nav = $("#main").nav(),
         app = $("main").app(),
@@ -27,7 +27,7 @@
         
         onLoad: function() {
             // Set header title
-            nav.header.setTitle("$ selector");                        
+            nav.header.setTitle("$().find()");                        
         },        
 
             
@@ -37,9 +37,11 @@
 
     view.init()
     
-    $("#selectorTest").onTapEnd(function() {
-        alert($("#myElement")[0]);
-    })
-
-        
+    $("#core_find_Button").onTapEnd(function() {       
+        alert(
+            $("#core_find_myDiv").find("p")
+        );
+    });
+    
+       
 }(Mootor));

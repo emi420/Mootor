@@ -37,10 +37,11 @@
 
     view.init()
     
-    $("#myImage").ready(function(){alert("I'm ready!")});
-    
-    $("#loadMyImage").onTapEnd(function() {
-        $("#myImage")[0].src = "http://upload.wikimedia.org/wikipedia/commons/7/76/Clementina.jpg";
+
+    $("#core_ready_myImage").ready(function(){alert("I'm ready!")});
+
+    $("#core_ready_loadMyImage").onTapEnd(function() {
+        $("#core_ready_myImage")[0].src = "http://upload.wikimedia.org/wikipedia/commons/7/76/Clementina.jpg";
     });
-        
+            
 }(Mootor));

@@ -1,6 +1,6 @@
 (function($) {
 
-    var view_name = "core_selector",
+    var view_name = "core_hasclass",
     
         nav = $("#main").nav(),
         app = $("main").app(),
@@ -27,7 +27,7 @@
         
         onLoad: function() {
             // Set header title
-            nav.header.setTitle("$ selector");                        
+            nav.header.setTitle("$().hasClass()");                        
         },        
 
             
@@ -37,9 +37,10 @@
 
     view.init()
     
-    $("#selectorTest").onTapEnd(function() {
-        alert($("#myElement")[0]);
-    })
-
-        
+    $("#core_hasclass_Button").onTapEnd(function() {
+       alert(
+            $("#core_hasclass_myDiv").hasClass("test")
+       );
+    });
+            
 }(Mootor));

@@ -1971,3 +1971,8 @@ nav.app .moo-nav.client-accept:before {
 .myMap {
   position: absolute;
 }
+
+/* line 45, demo/styles.scss */
+.blue {
+  background: #0000dd;
+}

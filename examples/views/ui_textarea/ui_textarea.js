@@ -1,6 +1,6 @@
 (function($) {
 
-    var view_name = "nav",
+    var view_name = "ui_textarea",
     
         nav = $("#main").nav(),
         app = $("main").app(),
@@ -30,7 +30,7 @@
         
         onLoad: function() {
             // Set header title
-            nav.header.setTitle("Nav");                        
+            nav.header.setTitle("UI TextArea");                        
         },        
 
             
@@ -38,7 +38,7 @@
     
     // Initialize view
 
-    view.init()
-
+    view.init();
+       
         
 }(Mootor));

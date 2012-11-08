@@ -1,6 +1,6 @@
 (function($) {
 
-    var view_name = "core_selector",
+    var view_name = "core_setclass",
     
         nav = $("#main").nav(),
         app = $("main").app(),
@@ -27,7 +27,9 @@
         
         onLoad: function() {
             // Set header title
-            nav.header.setTitle("$ selector");                        
+            nav.header.setTitle("$().setClass()");        
+            
+            $("#core_setclass_myDiv").removeClass("blue");                
         },        
 
             
@@ -35,11 +37,10 @@
     
     // Initialize view
 
-    view.init()
+    view.init();
     
-    $("#selectorTest").onTapEnd(function() {
-        alert($("#myElement")[0]);
-    })
-
+    $("#core_setclass_Button").onTapEnd(function() {
+        $("#core_setclass_myDiv").setClass("blue");
+    });
         
 }(Mootor));

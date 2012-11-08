@@ -1,6 +1,6 @@
 (function($) {
 
-    var view_name = "core_selector",
+    var view_name = "core_hide",
     
         nav = $("#main").nav(),
         app = $("main").app(),
@@ -27,7 +27,9 @@
         
         onLoad: function() {
             // Set header title
-            nav.header.setTitle("$ selector");                        
+            nav.header.setTitle("$().hide()"); 
+            
+            $("#core_hide_myDiv").show()                       
         },        
 
             
@@ -36,10 +38,10 @@
     // Initialize view
 
     view.init()
-    
-    $("#selectorTest").onTapEnd(function() {
-        alert($("#myElement")[0]);
-    })
 
-        
+    $("#core_hide_Button").onTapEnd(function() {       
+        $("#core_hide_myDiv").hide()
+    });
+    
+            
 }(Mootor));

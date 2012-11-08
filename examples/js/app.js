@@ -26,15 +26,40 @@
            path: "views",
            views: [
                 "index",
-                "gestures",
-                "ui",
-                "ui_map",
+                
                 "core",
-                "core_selector",
+                "core_ajax",
+                "core_context",
+                "core_extend",
+                "core_find",
+                "core_hasclass",
+                "core_hide",
+                "core_html",
+                "core_on",
                 "core_ready",
-                "nav",
+                "core_removeclass",
+                "core_require",
+                "core_selector",
+                "core_setclass",
+                "core_show",
+                "core_unbind",
+                
                 "fx",
-                "app"
+                "fx_translate",
+                
+                "gestures",
+                
+                "ui",
+                "ui_checkbox",
+                "ui_map",
+                "ui_option",
+                "ui_overlay",
+                "ui_select",
+                "ui_text",
+                "ui_textarea",
+                "ui_toggleswitch",
+                "ui_camera",
+                "ui_simplecamera",
            ],
            nav: nav
        });

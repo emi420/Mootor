@@ -1,6 +1,6 @@
 (function($) {
 
-    var view_name = "app",
+    var view_name = "core_ajax",
     
         nav = $("#main").nav(),
         app = $("main").app(),
@@ -16,10 +16,7 @@
         init: function() {
             
             // >> Put view init code here <<
-
-            // Initialize navigation items
-            navCurrent.initNavigation();
-
+            
             // Set onLoad callbacks
             navCurrent.onLoad = view.onLoad;
             if(app.views[nav.current].id === view_name) {
@@ -30,8 +27,7 @@
         
         onLoad: function() {
             // Set header title
-            nav.header.setTitle("App");                        
-            
+            nav.header.setTitle("$.ajax()");                        
         },        
 
             
@@ -40,6 +36,15 @@
     // Initialize view
 
     view.init()
-        
+    
+    $("#core_ajax_Load").onTapEnd(function() {
+        $.ajax({
+            url: "views/core_ajax/test.json",
+            callback: function(response) {
+                alert(response);
+            }
+        });
+    })
+
         
 }(Mootor));
