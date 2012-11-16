@@ -1355,9 +1355,15 @@ var Map = function(options) {
         self.key = ""
     }
     
+    self.onLoad = options.onLoad;
+    
     Map._includeScript(self.key, function() {
+        Map._API = google.maps;
         Map._initProperties(self, options);
         Map._initMap(self, options);
+        if (typeof self.onLoad === "function") {
+            self.onLoad();
+        }
         return self;                
     });
             
@@ -1366,9 +1372,49 @@ var Map = function(options) {
 /*
  * Public prototype
  */
-Map.prototype = {        
-    
+Map.prototype = {
+    addMarker: function(options) {
+        var marker = new Marker(options, this.map);
+        marker.setMap(this);
+        return this;
+    }
 };
+
+/*
+ * Marker
+ */
+var Marker = function(options, map) {
+    var infowindow,
+        self = this;
+
+    this.lat = options.lat;
+    this.lon = options.lon;
+    this.html = options.html;    
+
+    this._APIMarker = new Map._API.Marker();
+    this._APIMarker.setPosition(
+        new Map._API.LatLng(
+            this.lat,
+            this.lon
+        )
+    );
+    
+    infowindow = new Map._API.InfoWindow({
+        content: self.html
+    });
+    
+    Map._API.event.addListener(this._APIMarker, 'click', function() {             
+        infowindow.open(map,self._APIMarker);
+    });
+    
+    return this;
+}
+
+Marker.prototype = {
+    setMap: function(map) {
+        this._APIMarker.setMap(map.map);
+    }
+}
 
 /*
  * Private static properties
@@ -1391,13 +1437,13 @@ $.extend({
         
         self.zoom = options.zoom ? options.zoom : 13;
         self.center = options.center ? options.center : [-34.599567,-58.372553];
-        self.mapType = options.mapType ? options.mapType : google.maps.MapTypeId.ROADMAP
+        self.mapType = options.mapType ? options.mapType : Map._API.MapTypeId.ROADMAP
     },
 
     _includeScript: function(key, callback) {
         // TODO: multiple callbacks support
         $._UIMapCallbacks = callback;
-        _includeScript("https://maps.googleapis.com/maps/api/js?sensor=false&callback=$._UIMapCallbacks&key=" + key)
+        _includeScript(Map._APIScript + "&key=" + key)
     },
     
     _initMap: function(self) {
@@ -1405,12 +1451,14 @@ $.extend({
     
         mapOptions = {
             zoom: self.zoom,
-            center: new google.maps.LatLng(self.center[0], self.center[1]),
+            center: new Map._API.LatLng(self.center[0], self.center[1]),
             mapTypeId: self.mapType                    
         };
-        self.map = new google.maps.Map(self.el,
+        self.map = new Map._API.Map(self.el,
                     mapOptions);        
-    }
+    },
+    
+    _APIScript: "https://maps.googleapis.com/maps/api/js?sensor=false&callback=$._UIMapCallbacks"
     
 }, Map);
 

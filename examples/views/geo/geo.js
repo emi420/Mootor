@@ -29,7 +29,7 @@
         
         onLoad: function() {
             // Set header title
-            nav.header.setTitle("UI Map");        
+            nav.header.setTitle("Geo");        
                                                    
         },        
 
@@ -43,15 +43,14 @@
 
     // Initialize UI
     
-    ui.map = $("#myMap").ui({
-        type: "Map",
-        onLoad: function() {
-            ui.map.addMarker({
-                lat: -34.599567,
-                lon: -58.372553,
-                html: "Test"                
-            });
-        }
+    $.geo().getCurrentPosition({
+        onSuccess: function(position) {
+            var html = position.coords.latitude + ',' + position.coords.longitude
+            $("#geo_myPosition").html(html);
+        },
+        onError: function(position) {
+            $("#geo_myPosition").html("Error");
+        },
     });                
 
         
