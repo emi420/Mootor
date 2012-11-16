@@ -48,6 +48,7 @@
                 "fx_translate",
                 
                 "gestures",
+                "geo",
                 
                 "ui",
                 "ui_checkbox",
