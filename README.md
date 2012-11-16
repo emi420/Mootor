@@ -14,6 +14,7 @@ and plugins:
 * ui.js - User interface
 * nav.js - Navigation
 * app.js - Application
+* geo.js - Geopositioning
 
 # About Mootor
 
@@ -29,7 +30,7 @@ See inside the "examples" folder, **you will need a web server (or UIWebView)** 
 
 If you want to run the examples in a desktop browser, **you will need to emulate touch events**, for example using the "Emulate touch events" in Chrome Developer Tools.
 
-http://www.voolks.com/mootor/
+http://voolks.com/mootor/
 
 # Useful info
 
