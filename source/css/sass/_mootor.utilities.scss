@@ -46,7 +46,7 @@
 //
 @mixin moo-clearfix {
     &:before,
-    &after {
+    &:after {
         content: " "; // 1 
         display: table; // 2
     }
