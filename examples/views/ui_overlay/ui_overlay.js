@@ -39,6 +39,25 @@
     // Initialize view
 
     view.init();
+    
+    var overlay = $.ui.overlay(),
+        loading = $.ui.loading();
+       
+    $("#ui_overlay_show_Button").onTapEnd(function() {       
+        overlay.show();
+        setTimeout(function() { overlay.hide() },  1000);
+    });
+
+    $("#ui_loading_show_Button").onTapEnd(function() {       
+        loading.show();
+        setTimeout(function() { loading.hide() },  1000);
+    });
+
+    $("#ui_loadingoverlay_show_Button").onTapEnd(function() {       
+        $.loadingScreen.show();
+        setTimeout(function() { $.loadingScreen.hide(); },  1000);
+    });
+    
        
         
 }(Mootor));

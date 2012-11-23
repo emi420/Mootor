@@ -30,7 +30,8 @@
         
         onLoad: function() {
             // Set header title
-            nav.header.setTitle("UI SimpleCamera");                        
+            nav.header.setTitle("UI SimpleCamera");    
+            imageElement.src = "";                    
         },        
 
             
@@ -39,6 +40,17 @@
     // Initialize view
 
     view.init();
+    
+    var scamera = {},
+        imageElement = $("#ui_simplecamera_Picture")[0];
+    
+    scamera = $("#ui_simplecamera_Button").ui({
+        type: "SimpleCamera"
+    });
+    
+    scamera.onSuccess = function(src) {
+        imageElement.src = src;
+    }
        
         
 }(Mootor));

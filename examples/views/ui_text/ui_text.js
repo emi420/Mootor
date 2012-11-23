@@ -40,5 +40,8 @@
 
     view.init();
        
-        
+    $("#ui_text").ui({
+        type: "Text"
+    });        
+            
 }(Mootor));

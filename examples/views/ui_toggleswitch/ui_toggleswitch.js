@@ -39,6 +39,10 @@
     // Initialize view
 
     view.init();
+    
+    $("#ui_toggleswitch").ui({
+        type: "ToggleSwitch"
+    });
        
         
 }(Mootor));

@@ -39,6 +39,9 @@
     // Initialize view
 
     view.init();
-       
+
+    $("#ui_textarea").ui({
+        type: "TextArea"
+    });          
         
 }(Mootor));

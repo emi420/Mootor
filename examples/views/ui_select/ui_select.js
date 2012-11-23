@@ -40,5 +40,8 @@
 
     view.init();
        
+    $("#ui_select_input").ui({
+        type: "Select"
+    });        
         
 }(Mootor));
