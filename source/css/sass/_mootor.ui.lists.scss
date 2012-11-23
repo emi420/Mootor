@@ -1,0 +1,53 @@
+// -----------------------------------------------------------------------------------
+// General item list styles
+// -----------------------------------------------------------------------------------
+
+@mixin list(
+    $has-image:false, 
+    $rounded:false, 
+    $color-bg: #f0f0f0, 
+    $border-top: #f5f5f5, 
+    $border-bottom: #DDD, 
+    $color-bg-rounded: #FFF, 
+    $color-border-rounded: #CCC) {
+     li {
+        background-color: $color-list-background;
+        border-top: 1px solid $color-border-top;
+        border-bottom: 1px solid $color-border-bottom;
+        text-align: left;
+        padding: 1em 1.5em;
+        position: relative;
+        overflow: hidden;
+    }
+    h2 {
+        margin: 0;    
+    }
+    p {
+        margin: 0;
+    }
+    span {
+        @include float-right;
+        font-weight: bold;
+        font-size: 1.5em;
+        margin: .25em 0 0 .1em;
+    }
+    @if $has-image {
+        h2 { padding: 0 0 0 2.75em; }
+        p { padding: 0 0 0 4.2em; }
+        img {
+            @include float-left;
+            margin: 0 1em 0 0; 
+            max-width: 4.5em;
+            max-height: 4.5em;
+        }
+    }
+    @if $rounded {
+        padding: 3em 0;
+        li {
+            background-color: $color-bg-rounded;
+            border: 1px solid $color-border-rounded;
+            @include border-radius(9px);
+            margin: 1em;
+        }
+    }
+}
