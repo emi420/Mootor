@@ -1041,7 +1041,8 @@ Camera.prototype = {
         var tmpDiv = document.createElement("div"),
             imgDiv,
             self = this,
-            items;
+            items,
+            i;
                     
         tmpDiv.innerHTML = this.imageWrapper.outerHTML;        
         items = $(tmpDiv).find(".moo-image");        

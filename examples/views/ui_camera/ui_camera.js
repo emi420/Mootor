@@ -39,6 +39,20 @@
     // Initialize view
 
     view.init();
-       
-        
+    
+    var camera = {},
+        counterElement = $("#ui_camera_count");
+    
+    var camera = $("#ui_camera_Button").ui({
+        type: "Camera"
+    });
+    
+    camera.onSuccess(function(imageURI) {
+       var thumbnail;        
+       thumbnail = document.createElement("img");
+       thumbnail.src = imageURI
+       this.push(thumbnail);
+       counterElement.html(this.count);
+    });
+            
 }(Mootor));

@@ -39,6 +39,9 @@
     // Initialize view
 
     view.init();
-       
+
+    $("#ui_option_Fieldset").ui({
+        type: "Radio"
+    });       
         
 }(Mootor));

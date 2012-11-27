@@ -1,17 +1,16 @@
-%form.moo-ui-form
+%form.moo-ui-form{:action=>"", :method=>"post"}
 
     .moo-field
-    
-        %legend Checkbox
-    
+        %legend
+            Checkbox
         %fieldset#ui_checkbox_Fieldset
-    
-            %label Check 1
-            %input{:type=>"checkbox", :value=>"0"}
-    
-            %label Check 2
-            %input{:type=>"checkbox", :value=>"1"}
-    
-            %label Check 3
-            %input{:type=>"checkbox", :value=>"2"}
-        
+            %label{:for=>"check1"} Option 1
+            %input#check1{:type=>"checkbox", :name=>"checkboxes" ,:value=>"0"}
+
+            %label{:for=>"check2"} Option 2
+            %input#check2{:type=>"checkbox", :name=>"checkboxes" ,:value=>"1"}
+
+            %label{:for=>"check3"} Option 3
+            %input#check3{:type=>"checkbox", :name=>"checkboxes" ,:value=>"2"}
+
+
