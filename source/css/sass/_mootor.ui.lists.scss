@@ -23,7 +23,7 @@
         margin: 0;    
     }
     p {
-        margin: 0;
+        margin: .25em 0;
     }
     span {
         @include float-right;
@@ -32,13 +32,14 @@
         margin: .25em 0 0 .1em;
     }
     @if $has-image {
-        h2 { padding: 0 0 0 2.75em; }
         p { padding: 0 0 0 4.2em; }
+        h2 { padding: 0 0 0 2.75em; }
         img {
             @include float-left;
             margin: 0 1em 0 0; 
             max-width: 4.5em;
             max-height: 4.5em;
+            
         }
     }
     @if $rounded {
