@@ -30,7 +30,10 @@
         h2 { padding: 0 0 0 2.75em; }
         img {
             @include float-left;
+            background: lighten($color-list-background, 10%);
+            border: 1px solid $color-border-bottom;
             margin: 0 1em 0 0; 
+            padding: .25em;
             max-width: 4.5em;
             max-height: 4.5em;
             
