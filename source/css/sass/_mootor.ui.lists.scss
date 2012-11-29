@@ -10,7 +10,7 @@
     $border-bottom: #DDD, 
     $color-bg-rounded: #FFF, 
     $color-border-rounded: #CCC) {
-     li {
+    li {
         background-color: $color-list-background;
         border-top: 1px solid $color-border-top;
         border-bottom: 1px solid $color-border-bottom;
@@ -24,12 +24,6 @@
     }
     p {
         margin: .25em 0;
-    }
-    span {
-        @include float-right;
-        font-weight: bold;
-        font-size: 1.5em;
-        margin: .25em 0 0 .1em;
     }
     @if $has-image {
         p { padding: 0 0 0 4.2em; }
