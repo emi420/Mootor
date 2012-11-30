@@ -27,7 +27,6 @@ $badge-bg-color: $color-tn-tab-red;
 
 // A standard form button
 //
-// :hover - Highlights when hovering. // not implemented yet
 // :disabled - Dims the button when disabled. // not implemented yet
 // .submit - Indicates button is the primary action. 
 // .cancel - Indicates button is the cancel action. // not implemented yet
@@ -42,16 +41,10 @@ $badge-bg-color: $color-tn-tab-red;
     border: 1px solid $color-border-main;
     background-color: lighten($color-border-main, 50%);
     @include border-radius(3px);  
-    &:hover {
-       background-color: lighten($color-border-main, 35%); 
-    }
     &.submit {
         color: $submit-text-color;
         border-color:$submit-border-color; 
         background-color: $submit-bg-color;
-        &:hover {
-            background-color: $submit-bg-color-hover;
-        } 
     }
 }
 

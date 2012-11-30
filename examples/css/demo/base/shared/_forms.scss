@@ -182,51 +182,6 @@ $input-border-color: lighten($color-border-forms, 15%);
     }
 }
 
-// 4 select
-// -----------------------------------------------------------------------------------
-.moo-field {
-     .moo-ui-select-wrapper {
-        @include float-left;
-        position: relative;
-        width: 70%;
-        select {
-            position: absolute;
-            top: .5em;
-            left: 1em;
-            z-index: 201;
-            opacity: 0;
-            width: 100%;
-            min-height: 100%;
-            -webkit-appearance: none;
-        }
-        .moo-ui-select-container {
-            width: 100%;
-            z-index: 200;
-        }
-    }
-}
-
-.moo-ui-select-container { 
-    .moo-ui-select-list li { padding: .75em}
-    .moo-ui-select-link {
-        color: transparent;
-        text-indent: -9999px;
-        &:before {
-            content: " ";
-            @include mootor-sprite(select-arrow, $offset-y: 9px);
-            display: inline-block;
-            position: absolute;
-            height: 100%;
-            width: 100%;
-        }
-        &:after {
-            border-color: $input-border-color;
-            border-left: 1px solid $input-border-color;
-            background: transparent none;
-        }
-    }
-}
-
 
 // 3.3 contact name 
 // -----------------------------------------------------------------------------------
@@ -244,6 +199,48 @@ $input-border-color: lighten($color-border-forms, 15%);
         width: 43%;
     }
 }
+
+// 4 select
+// -----------------------------------------------------------------------------------
+.moo-field {
+     .moo-ui-select-wrapper {
+        @include float-left;
+        position: relative;
+        width: 70%;
+        select {
+            position: absolute;
+            top: .5em;
+            left: 1em;
+            opacity: 0;
+            width: 100%;
+            min-height: 100%;
+            -webkit-appearance: none;
+        }
+        .moo-ui-select-container {
+            width: 100%;
+        }
+    }
+}
+
+.moo-ui-select-container { 
+    .moo-ui-select-link {
+        color: transparent;
+        &:before {
+            content: " ";
+            @include mootor-sprite(select-arrow, $offset-y: 9px);
+            display: inline-block;
+            position: absolute;
+            height: 100%;
+            width: 100%;
+        }
+        &:after {
+            border-color: $input-border-color;
+            border-left: 1px solid $input-border-color;
+            background: transparent none;
+        }
+    }
+}
+
 
 // 5 checkbox
 // -----------------------------------------------------------------------------------

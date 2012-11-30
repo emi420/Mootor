@@ -64,14 +64,8 @@ nav a {
     background-color: lighten($color-bg-alt, 15%);
     padding: .5em 1.5em;
     position: relative;
-    &:hover {
-       background-color: lighten($color-bg-alt, 25%);
-    }
     &.disabled {
         color: lighten($nav-bg-light-color, 25%);
-        &:hover {
-           background-color: lighten($nav-bg-light-color, 25%);
-        }
     }
 }
 
@@ -116,9 +110,6 @@ nav a {
     &:before {
         content: " ";
         display: block;
-    }
-    &:hover {
-        background-color: lighten($color-bg-alt, 25%);
     }
 }
 
