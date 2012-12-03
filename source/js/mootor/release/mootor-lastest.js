@@ -550,6 +550,7 @@ var $ = (function () {
          $.ajax({
               url: script,
               callback: function(response) {
+                debugger;
                 var scriptEl = d.createElement("script");
                 scriptEl.innerHTML = response;
                 d.head.appendChild(scriptEl);
@@ -916,7 +917,6 @@ if (!window.$ || typeof ($) !== "function") {
                     }
                 }, 500);
     
-                e.stopPropagation();
                 if (gestureEvent.onTapStart !== undefined) {
                     // TapStart
                     info.type = "tapStart";
@@ -984,7 +984,6 @@ if (!window.$ || typeof ($) !== "function") {
                                         
                 } else {
                     // DragMove
-                    e.stopPropagation();
                     info.type = "dragMove";
                     _fire(info, gestureEvent.onDragMove);
                 }
@@ -1002,7 +1001,6 @@ if (!window.$ || typeof ($) !== "function") {
                     gestureEvent.mousedown = false;
                 }
     
-                e.stopPropagation();
                 if ((gestureEvent.isDraggingY !== 0 || 
                     gestureEvent.isDraggingX !== 0)) {
     

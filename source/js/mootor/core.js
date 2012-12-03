@@ -536,6 +536,7 @@ var $ = (function () {
               url: script,
               callback: function(response) {
                 var scriptEl = d.createElement("script");
+                scriptEl.src = script; 
                 scriptEl.innerHTML = response;
                 d.head.appendChild(scriptEl);
                 _scripts.list.push({
