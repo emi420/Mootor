@@ -538,14 +538,28 @@ $.extend({
             
 }, Nav);
 
-
 /*
  * Prevent native scrolling
  */
 Nav.preventNativeScrolling();
 
+/**
+ * Navigation link
+ */
+var NavLink = function(el) {
+    this.$el = $(el);
+    this.id = el.id;
+    return this;
+}
 
-// #include "nav.js"
+NavLink.prototype = {
+    hide: function() {
+        this.$el.hide();
+    },
+    show: function() {
+        this.$el.show();
+    }
+}// #include "nav.js"
 
 /**
  * Header
@@ -622,17 +636,21 @@ $.extend({
     
     initNavigationLinks: function(self, navInstance) {
         var navigationItems = $(self.el).find(".moo-nav"),
-            i;
+            i,
+            navLink;
+            
+        self.navLinks = {};
         
         for (i = navigationItems.length; i--;) {
             $(navigationItems[i]).onTapEnd(function(gesture) {
                 Item.loadNavigationItem(gesture, self, navInstance);                    
-            })
+            });
+            navLink = new NavLink(navigationItems[i]);
+            self.navLinks[navLink.id] = navLink;
         }
     }
 
 }, Header);
-
 
 
 /*

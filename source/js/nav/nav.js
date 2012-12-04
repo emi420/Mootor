@@ -529,10 +529,25 @@ $.extend({
             
 }, Nav);
 
-
 /*
  * Prevent native scrolling
  */
 Nav.preventNativeScrolling();
 
+/**
+ * Navigation link
+ */
+var NavLink = function(el) {
+    this.$el = $(el);
+    this.id = el.id;
+    return this;
+}
 
+NavLink.prototype = {
+    hide: function() {
+        this.$el.hide();
+    },
+    show: function() {
+        this.$el.show();
+    }
+}

@@ -75,17 +75,21 @@ $.extend({
     
     initNavigationLinks: function(self, navInstance) {
         var navigationItems = $(self.el).find(".moo-nav"),
-            i;
+            i,
+            navLink;
+            
+        self.navLinks = {};
         
         for (i = navigationItems.length; i--;) {
             $(navigationItems[i]).onTapEnd(function(gesture) {
                 Item.loadNavigationItem(gesture, self, navInstance);                    
-            })
+            });
+            navLink = new NavLink(navigationItems[i]);
+            self.navLinks[navLink.id] = navLink;
         }
     }
 
 }, Header);
-
 
 
 /*
