@@ -24,27 +24,13 @@ localStorage.prototype = {
     // Created
     create: function(obj) {
         var i = 0, 
-            strObj = "",
             objCopy = {},
             result,
-            count = this.count(),
-            prefix = this.localStoragePrefix,
-            item = {},
-            index = this._index;
+            self = this;
                             
         // Set record id
         if (obj.id === undefined) {
             
-            count++;
-            obj.id = count;
-            
-            for (i = 1; i < count+1;i++) {
-                item = this.get(i);
-                if (item === undefined || item === null) {
-                    obj.id = i;
-                }
-            }
-
             // A copy of the object. If any value is an object and
             // that object has an id, then save the id and not the object
             for (i in obj) {
@@ -55,22 +41,60 @@ localStorage.prototype = {
                 }
             }           
 
-            this._index.push(obj.id);
-            this._updateIndex();
-
         } else {
             objCopy = obj;
         }
-        
 
         // Create a new record from data model
         result = new this.model(objCopy);
 
-        // Save object as a JSON string
-        strObj = JSON.stringify(result);
-        window.localStorage.setItem(prefix + "-" + result.id, strObj);
+        // FIXME CHECK
+        $.extend({
+            put: function() {
+                self.put(this);
+            },
+            save: function() {
+            
+                var obj,
+                    count = self.count(),
+                    i,
+                    item;
+
+                // Set id
+                count++;
+                this.id = count;
+                
+                for (i = 1; i < count+1;i++) {
+                    item = self.get(i);
+                    if (item === undefined || item === null) {
+                        this.id = i;
+                    }
+                }
+
+                obj = self.save(this);
+
+                self._index.push(obj.id);
+                self._updateIndex();
+            }
+        }, result);
 
         return result;
+    },
+    
+    // Save
+    save: function(obj) {
+    
+        var strObj,
+            prefix = this.localStoragePrefix;
+
+        // Save object as a JSON string
+        strObj = JSON.stringify(obj);
+        window.localStorage.setItem(prefix + "-" + obj.id, strObj);
+        
+        delete obj.save;
+        
+        return obj;
+
     },
     
     // Get
@@ -83,6 +107,7 @@ localStorage.prototype = {
         
         if (result !== null) {
             result = JSON.parse(result);
+            // FIXME CHECK
             $.extend({
                 put: function() {
                     self.put(this);
@@ -146,7 +171,7 @@ localStorage.prototype = {
     put: function(obj) {
         var prefix = this.localStoragePrefix;
         window.localStorage.removeItem(prefix + '-' + obj.id);
-        return this.create(obj);
+        return this.save(this.create(obj));
     },
     
     // Destroy

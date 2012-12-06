@@ -98,7 +98,6 @@ App.prototype = {
               optionsNav = options.nav,
               reqOptions = {};
               
-    
           if (options === undefined) {
               options = {};
           } else {
@@ -140,11 +139,7 @@ App.prototype = {
           $.ajax({
                 url: viewPath,
                 callback: function(response) {
- 
-                    // Controller
-                    // FIXME CHECK ($.require function)
-                    $.require(scriptPath,function(){},reqOptions);
-    
+                    $.require(scriptPath,function(){},reqOptions);   
                     callback(response);
                 }
           });

@@ -267,3 +267,32 @@
         }
     }
 }
+
+// FIXME CHECK
+.fieldset-container {    
+    border-top: none;
+    border-bottom: 1px solid $color-border-forms;
+    padding: 0;
+    @extend .clearfix;
+    width: 100%;
+    &:last-child { border:none;}
+    fieldset {
+        border: 1px solid #ccc;
+        @include border-radius(5px);
+        padding: 0;
+    }
+    .moo-ui-checkbox {
+        float: left;
+        padding: 0 0 0 1em;
+        width: 100%; // FIXME this width has issues in android.
+        border-bottom: 1px solid $input-border-color;
+        label {
+            background-color: transparent;
+            font-size: 1.6em;
+            padding: .75em 3em .75em 2.5em;
+            position: relative;
+            width: 100%;
+            @extend .clearfix;
+        }
+    }
+}
