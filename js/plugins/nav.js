@@ -8,13 +8,13 @@
     "use strict";
     
 
-/**
- * Nav
- * @class Nav
- * @constructor
- * @param {NavOptions} options Options
- */ 
-var Nav = function (options) {
+    /**
+     * Nav
+     * @class Nav
+     * @constructor
+     * @param {NavOptions} options Options
+     */ 
+    var Nav = function (options) {
 
         // Initialize instance & navigation items
         Nav.init(options, this);
@@ -28,12 +28,12 @@ var Nav = function (options) {
     },
     Item;
 
-// Public instance prototypes
+    // Public instance prototypes
 
-/**
- * Nav
- */  
-Nav.prototype = {
+    /**
+     * Nav
+     */  
+    Nav.prototype = {
 
         /**
          * Original DOM lement
@@ -135,12 +135,12 @@ Nav.prototype = {
     };
 
 
-/**
- * Item
- * @param {object} options Options
- * @return {object} Item Navigation Item instance
- */
-Item = function(options) {
+    /**
+     * Item
+     * @param {object} options Options
+     * @return {object} Item Navigation Item instance
+     */
+    Item = function(options) {
     
         // Cache element
         this.el = options.el;        
@@ -157,17 +157,17 @@ Item = function(options) {
         return this;  
     };
     
-// Private static methods
+    // Private static methods
 
-/**
- * Item
- */     
-$.extend({
+    /**
+     * Item
+     */     
+    $.extend({
     
         getLinks: function(self, navInstance) {
             var links,
-                i,
-                navigationItems = [];
+            i,
+            navigationItems = [];
                 
             links = $(self.el).find("." + navInstance._config.navClass);
             for (i = 0; i < links.length; i++) {
@@ -181,7 +181,7 @@ $.extend({
         
         loadNavigationItem: function (gesture, self, navInstance) {
             var i = 0,
-                href = "";
+            href = "";
                 
             // Clear navigation items styles
             for (i = self.navigationItemsCount; i--;) {
@@ -197,7 +197,10 @@ $.extend({
                 href = gesture.el.getAttribute("href");
                 if (href && href !== "") {
                     gesture.e.stopPropagation();
-                    navInstance.set(href.replace("#",""));
+                    if (href.replace("#","") !== navInstance.items[navInstance.current].id) {
+                    
+                        navInstance.set(href.replace("#",""));
+                    }
                 }
             }
         },
@@ -205,7 +208,7 @@ $.extend({
         initNavigationItems: function(self, navInstance) {
         
             var navigationItem,
-                i;
+            i;
                 
             // Get navigation links
             self.navigationItems = Item.getLinks(self, navInstance);            
@@ -221,21 +224,21 @@ $.extend({
                         window.location = gesture.el.href;
                     });
 
-                // Internal navigation links    
+                    // Internal navigation links    
                 } else {
                     if (navigationItem.getAttribute("href").replace("#","") !== "") {
 
                         $(navigationItem).onTapStart(
-                            function(gesture) {
-                                $(gesture.el).setClass("active");
-                            }
-                        );                        
+                        function(gesture) {
+                            $(gesture.el).setClass("active");
+                        }
+                    );                        
 
                         $(navigationItem).onTapEnd(
-                            function(gesture) {                                
-                                Item.loadNavigationItem(gesture, self, navInstance);
-                            }
-                        );
+                        function(gesture) {                                
+                            Item.loadNavigationItem(gesture, self, navInstance);
+                        }
+                    );
 
                     }                    
                 }
@@ -253,16 +256,16 @@ $.extend({
 
 
 
-// Public constructors
+    // Public constructors
 
-/** 
- * @class $.prototype.nav
- * @param {NavOptions} options Navigation configuration options
- * @constructor
- * @return {Nav} Nav instance
- */
-$.extend({
-    nav: function (options) {
+    /** 
+     * @class $.prototype.nav
+     * @param {NavOptions} options Navigation configuration options
+     * @constructor
+     * @return {Nav} Nav instance
+     */
+    $.extend({
+        nav: function (options) {
             var nav;
             if (typeof options !== "object") {
                 options = {};
@@ -278,13 +281,13 @@ $.extend({
                 return nav;
             }
             
-    }
-});
+        }
+    });
 
-/**
- * Nav
- */    
-$.extend({
+    /**
+     * Nav
+     */    
+    $.extend({
     
         _collection: [],
 
@@ -352,36 +355,36 @@ $.extend({
 
                 // Header container class name
                 headerClassName: options.headerClassName ? 
-                          options.headerClassName : "moo-header",
+                    options.headerClassName : "moo-header",
 
                 // Footer container class name
                 footerClassName: options.footerClassName ? 
-                          options.footerClassName : "moo-footer",
+                    options.footerClassName : "moo-footer",
 
                 // Navigation links container class name
                 navClass: options.navLinksClassName ? 
-                          options.navLinksClassName : "moo-nav",
+                    options.navLinksClassName : "moo-nav",
 
                 // Hidden content when isMoving class name
                 hiddenClassName: options.hiddenClassName ?
-                              options.hiddenClassName : "moo-hidden",
+                    options.hiddenClassName : "moo-hidden",
                               
                 // Margin between items
                 margin: options.margin ?
-                              options.margin : 5,
+                    options.margin : 5,
 
 
                 // Main container class name
                 containerClassName: options.containerClassName ? 
-                          options.containerClassName : "moo-panels",
+                    options.containerClassName : "moo-panels",
 
                 // Navigation item class name
                 itemClass: options.itemsClassName ?
-                           options.itemsClassName : "moo-panel",
+                    options.itemsClassName : "moo-panel",
 
                 // Navigation type
                 type: options.type ?
-                              options.type : "Panels"                                                
+                    options.type : "Panels"                                                
 
             };
 
@@ -427,7 +430,7 @@ $.extend({
                 case "dragEnd":
                     self._config.navItem.checkMove(gesture, self);
                     break;
-                }
+            }
         },
         
         /**
@@ -479,8 +482,8 @@ $.extend({
          */
         initItems: function(self) {
             var i,
-                item,
-                elements = self.el.getElementsByClassName(self._config.itemClass);     
+            item,
+            elements = self.el.getElementsByClassName(self._config.itemClass);     
                 
             // Initialize items 
             self.items = [];
@@ -536,257 +539,257 @@ $.extend({
             // TODO
         } 
             
-}, Nav);
+    }, Nav);
 
-/*
- * Prevent native scrolling
- */
-Nav.preventNativeScrolling();
+    /*
+     * Prevent native scrolling
+     */
+    Nav.preventNativeScrolling();
 
-/**
- * Navigation link
- */
-var NavLink = function(el) {
-    this.$el = $(el);
-    this.id = el.id;
-    return this;
-}
-
-NavLink.prototype = {
-    hide: function() {
-        this.$el.hide();
-    },
-    show: function() {
-        this.$el.show();
-    }
-}// #include "nav.js"
-
-/**
- * Header
- * @param {object} self Nav instance
- * @return {object} Header Header instance
- */
-var Header = function(self) {
-
-    // Cache element
-    this.el = $("header")[0];
-    
-    if (this.el !== undefined) {
-        
-        this.height = this.el.offsetHeight;       
-        this.el.style.height = this.height + "px";      
-
-        // Set styles when header active on navigation items
-        _setStylesWhenHeaderIsActive(this.height, self);         
-
-        $(this.el).setClass(self._config.headerClassName);
-
-        // Initialize back button
-        Header.initAnchorBack(this, self);           
-        
-        // Initialize nav links
-        Header.initNavigationLinks(this, self); 
-        
-        // Prevent native scrolling
-        Header.preventNativeScrolling(this)
-        
+    /**
+     * Navigation link
+     */
+    var NavLink = function(el) {
+        this.$el = $(el);
+        this.id = el.id;
         return this;
-    } else {
-        return undefined;
     }
-    
-};
 
-Header.prototype = {
-    setTitle: function(title) {
-        $(this.el).find("h1")[0].innerText = title;
-    }
-}
-
-/**
- * Header
- */
-$.extend({
-
-    initAnchorBack: function(self, navInstance) {
-        
-        var $anchorBack =
-            navInstance._config.anchorBack =
-            $($(self.el).find(".moo-nav-back")[0]);
-            
-        if ($anchorBack.el !== undefined) {
-            $anchorBack.hide();
-            
-            $anchorBack.el.onclick = function() {
-                return false;
-            };
-    
-            $anchorBack.onTapEnd(function(gesture) {
-                navInstance.goBack();
-            });        
+    NavLink.prototype = {
+        hide: function() {
+            this.$el.hide();
+        },
+        show: function() {
+            this.$el.show();
         }
+    }// #include "nav.js"
+
+    /**
+     * Header
+     * @param {object} self Nav instance
+     * @return {object} Header Header instance
+     */
+    var Header = function(self) {
+
+        // Cache element
+        this.el = $("header")[0];
+    
+        if (this.el !== undefined) {
         
-    },
+            this.height = this.el.offsetHeight;       
+            this.el.style.height = this.height + "px";      
+
+            // Set styles when header active on navigation items
+            _setStylesWhenHeaderIsActive(this.height, self);         
+
+            $(this.el).setClass(self._config.headerClassName);
+
+            // Initialize back button
+            Header.initAnchorBack(this, self);           
+        
+            // Initialize nav links
+            Header.initNavigationLinks(this, self); 
+        
+            // Prevent native scrolling
+            Header.preventNativeScrolling(this)
+        
+            return this;
+        } else {
+            return undefined;
+        }
     
-    preventNativeScrolling: function(self) {
-        $(self.el).on("touchmove", function(event) {
-            event.preventDefault();
-        });
-    },
+    };
+
+    Header.prototype = {
+        setTitle: function(title) {
+            $(this.el).find("h1")[0].innerText = title;
+        }
+    }
+
+    /**
+     * Header
+     */
+    $.extend({
+
+        initAnchorBack: function(self, navInstance) {
+        
+            var $anchorBack =
+                navInstance._config.anchorBack =
+                $($(self.el).find(".moo-nav-back")[0]);
+            
+            if ($anchorBack.el !== undefined) {
+                $anchorBack.hide();
+            
+                $anchorBack.el.onclick = function() {
+                    return false;
+                };
     
-    initNavigationLinks: function(self, navInstance) {
-        var navigationItems = $(self.el).find(".moo-nav"),
+                $anchorBack.onTapEnd(function(gesture) {
+                    navInstance.goBack();
+                });        
+            }
+        
+        },
+    
+        preventNativeScrolling: function(self) {
+            $(self.el).on("touchmove", function(event) {
+                event.preventDefault();
+            });
+        },
+    
+        initNavigationLinks: function(self, navInstance) {
+            var navigationItems = $(self.el).find(".moo-nav"),
             i,
             navLink;
             
-        self.navLinks = {};
+            self.navLinks = {};
         
-        for (i = navigationItems.length; i--;) {
-            $(navigationItems[i]).onTapEnd(function(gesture) {
-                Item.loadNavigationItem(gesture, self, navInstance);                    
-            });
-            navLink = new NavLink(navigationItems[i]);
-            self.navLinks[navLink.id] = navLink;
+            for (i = navigationItems.length; i--;) {
+                $(navigationItems[i]).onTapEnd(function(gesture) {
+                    Item.loadNavigationItem(gesture, self, navInstance);                    
+                });
+                navLink = new NavLink(navigationItems[i]);
+                self.navLinks[navLink.id] = navLink;
+            }
+        }
+
+    }, Header);
+
+
+    /*
+     * Styles when Header is active
+     */
+    var _setStylesWhenHeaderIsActive = function(height, navInstance) {
+        var i;
+        for (i = navInstance._config.count; i--;) {
+            navInstance.items[i].el.style.paddingTop = height + "px";
         }
     }
+    // #include "nav.js"
 
-}, Header);
+    /**
+     * Footer
+     * @param {object} self Nav instance
+     * @return {object} Footer Footer instance
+     */
+    var Footer = function(self) {
 
-
-/*
- * Styles when Header is active
- */
-var _setStylesWhenHeaderIsActive = function(height, navInstance) {
-    var i;
-    for (i = navInstance._config.count; i--;) {
-        navInstance.items[i].el.style.paddingTop = height + "px";
-    }
-}
-// #include "nav.js"
-
-/**
- * Footer
- * @param {object} self Nav instance
- * @return {object} Footer Footer instance
- */
-var Footer = function(self) {
-
-    // Cache element
-    this.el = $("footer")[0];
+        // Cache element
+        this.el = $("footer")[0];
     
-    if (this.el !== undefined) {
+        if (this.el !== undefined) {
         
-        // FIXME: remove setTimeout
-        this.height = this.el.offsetHeight;       
-        this.el.style.height = this.height + "px";     
+            // FIXME: remove setTimeout
+            this.height = this.el.offsetHeight;       
+            this.el.style.height = this.height + "px";     
 
-        // Set styles when Footer active on navigation items
-        _setStylesWhenFooterIsActive(this, self);         
+            // Set styles when Footer active on navigation items
+            _setStylesWhenFooterIsActive(this, self);         
             
-        $(this.el).setClass(self._config.footerClassName);
+            $(this.el).setClass(self._config.footerClassName);
 
-        // Initialize nav links
-        Footer.initNavigationLinks(this, self); 
+            // Initialize nav links
+            Footer.initNavigationLinks(this, self); 
         
-        // Prevent native scrolling
-        Footer.preventNativeScrolling(this)
+            // Prevent native scrolling
+            Footer.preventNativeScrolling(this)
         
-        return this;
-    } else {
-        return undefined;
-    }
+            return this;
+        } else {
+            return undefined;
+        }
     
-};
+    };
 
-/**
- * Footer
- */
-$.extend({
+    /**
+     * Footer
+     */
+    $.extend({
     
-    preventNativeScrolling: function(self) {
-        $(self.el).on("touchmove", function(event) {
-            event.preventDefault();
-        });
-    },
+        preventNativeScrolling: function(self) {
+            $(self.el).on("touchmove", function(event) {
+                event.preventDefault();
+            });
+        },
     
-    initNavigationLinks: function(self, navInstance) {
-        var navigationItems = $(self.el).find(".moo-nav"),
+        initNavigationLinks: function(self, navInstance) {
+            var navigationItems = $(self.el).find(".moo-nav"),
             i;
         
-        for (i = navigationItems.length; i--;) {
-            $(navigationItems[i]).onTapEnd(function(gesture) {
-                Item.loadNavigationItem(gesture, self, navInstance);                    
-            })
+            for (i = navigationItems.length; i--;) {
+                $(navigationItems[i]).onTapEnd(function(gesture) {
+                    Item.loadNavigationItem(gesture, self, navInstance);                    
+                })
+            }
+        }
+
+    }, Footer);
+
+    /*
+     * Styles when Footer is active
+     */
+    var _setStylesWhenFooterIsActive = function(footer, navInstance) {
+        var i;
+        for (i = navInstance._config.count; i--;) {
+            navInstance.items[i].el.style.paddingBottom = footer.height + "px";
         }
     }
 
-}, Footer);
+    var Panel = function(){},
 
-/*
- * Styles when Footer is active
- */
-var _setStylesWhenFooterIsActive = function(footer, navInstance) {
-    var i;
-    for (i = navInstance._config.count; i--;) {
-        navInstance.items[i].el.style.paddingBottom = footer.height + "px";
-    }
-}
-
-var Panel = function(){},
-
-/**
- * Translate element
- */
-_translate = function (options) {
+    /**
+     * Translate element
+     */
+    _translate = function (options) {
         
-    options.duration = options.duration ? 
-                      options.duration : 0;
+        options.duration = options.duration ? 
+            options.duration : 0;
                       
-    options.callback = options.callback ? 
-                       options.callback : function () {};
+        options.callback = options.callback ? 
+            options.callback : function () {};
                        
-    options.y = options.y ?
-                options.y : 0;
+        options.y = options.y ?
+            options.y : 0;
     
-    options.x = options.x ?
-                options.x : 0;
+        options.x = options.x ?
+            options.x : 0;
     
-    $(options.el).translateFx(
+        $(options.el).translateFx(
         {y: options.y,x: options.x},
         {transitionDuration: options.duration, callback: options.callback}
     );
     
-};
+    };
 
-var _loadCallback = function (self, panel, back) {
-    var self_config = self._config;
+    var _loadCallback = function (self, panel, back) {
+        var self_config = self._config;
     
-    $(back.el).hide();
+        $(back.el).hide();
     
-    self_config.isMoving = false;                 
+        self_config.isMoving = false;                 
     
-    panel.x = 0;
-    self_config.x = 0;
-    _translate({el: self.el, x: 0}, self);
-    _translate({el: panel.el, x: 0}, self);
+        panel.x = 0;
+        self_config.x = 0;
+        _translate({el: self.el, x: 0}, self);
+        _translate({el: panel.el, x: 0}, self);
     
-};
+    };
 
-$.extend({
+    $.extend({
     
-    /**
-     * Load panel
-     */
-    load: function(navInstance) {
+        /**
+         * Load panel
+         */
+        load: function(navInstance) {
         
             var panel,
-                callback,
-                back,
-                positionX,
-                hiddenContent,
-                i,
-                navInstance_config = navInstance._config,
-                block;
+            callback,
+            back,
+            positionX,
+            hiddenContent,
+            i,
+            navInstance_config = navInstance._config,
+            block;
                                     
             // Current panel
             panel = navInstance.items[navInstance.current];
@@ -841,12 +844,12 @@ $.extend({
 
         },
     
-    /**
-     * Initialize CSS Styles
-     */
-    initStyles: function(self) {
+        /**
+         * Initialize CSS Styles
+         */
+        initStyles: function(self) {
             var i = 0,
-                item = {};
+            item = {};
                 
             for (i = self._config.count; i--;) {
     
@@ -875,13 +878,13 @@ $.extend({
             }
         },
     
-    /**
-     * Check move
-     */
-    checkMove: function (gesture, self) {
+        /**
+         * Check move
+         */
+        checkMove: function (gesture, self) {
             var panel = self.items[self.current],
-                maxdist = panel.height - self._config.height,
-                i;
+            maxdist = panel.height - self._config.height,
+            i;
 
             if (self.header !== undefined) {
                 maxdist += self.header.height;
@@ -914,18 +917,18 @@ $.extend({
 
         },
     
-    /** 
-     * Move panel 
-     */
-    move: function(self, item, gesture) {
+        /** 
+         * Move panel 
+         */
+        move: function(self, item, gesture) {
             var isPermitted = false;
     
             self._config.y = self._config.y + (gesture.y - gesture.lastY);
             
             // FIXME CHECK
             var panel = self.items[self.current],
-                maxdist = panel.height - self._config.height,
-                i;
+            maxdist = panel.height - self._config.height,
+            i;
             if (self.header !== undefined) {
                 maxdist += self.header.height;
             }
@@ -947,17 +950,17 @@ $.extend({
             }
         },
 
-    /**
-     * Set styles when Header or Footer is active
-     */
-    setStylesWhenHeaderOrFooterIsActive: function(height, navInstance) {
-        var i;
-        for (i = navInstance._config.count; i--;) {
-            navInstance.items[i].el.style.paddingTop = height + "px";
+        /**
+         * Set styles when Header or Footer is active
+         */
+        setStylesWhenHeaderOrFooterIsActive: function(height, navInstance) {
+            var i;
+            for (i = navInstance._config.count; i--;) {
+                navInstance.items[i].el.style.paddingTop = height + "px";
+            }
         }
-    }
 
-}, Panel);
+    }, Panel);
 
 }(Mootor));
 
@@ -981,14 +984,14 @@ $.extend({
  * @type string
  */
  
- /**
+/**
  * Navigation links class
  *
  * @property navLinksClassName
  * @type string
  */
  
- /**
+/**
  * Hidden content (when transitioning) class
  *
  * @property hiddenContentClassName
