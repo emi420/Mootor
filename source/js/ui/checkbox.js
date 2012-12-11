@@ -94,6 +94,7 @@ Checkbox.prototype = {
             this.value.push(index.toString());
             this.items[index].el.setAttribute("checked", "checked");
             $(this.pseudoItems[index].el).setClass("moo-active");
+            _onChange(this);
         } 
     },
 
@@ -105,6 +106,7 @@ Checkbox.prototype = {
         this.value.splice(this.value.indexOf(index) , 1);
         this.items[index].el.removeAttribute("checked", "");
         $(this.pseudoItems[index].el).removeClass("moo-active");
+        _onChange(this);
     },
 
 
@@ -135,7 +137,23 @@ Checkbox.prototype = {
                 }                
             }
         }
-    }    
+    },
+    
+    onChange: function(callback) {
+        if (_onChangeCallbacks[this.input.id] === undefined) {
+            _onChangeCallbacks[this.input.id] = [];
+        }
+        _onChangeCallbacks[this.input.id].push(callback);
+    }
     
 };
 
+var _onChangeCallbacks = {},
+    _onChange;
+    
+_onChange = function(self) {
+    var i;
+    for (i = _onChangeCallbacks[self.input.id].length; i--;) {
+        _onChangeCallbacks[self.input.id][i](self);
+    }
+}
