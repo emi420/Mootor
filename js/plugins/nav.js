@@ -554,12 +554,14 @@ var NavLink = function(el) {
 
 NavLink.prototype = {
     hide: function() {
-        this.$el.hide();
+        this.$el.removeClass("moo-visible");
     },
     show: function() {
-        this.$el.show();
+        this.$el.setClass("moo-visible");;
     }
-}// #include "nav.js"
+}
+
+// #include "nav.js"
 
 /**
  * Header
@@ -574,7 +576,7 @@ var Header = function(self) {
     if (this.el !== undefined) {
         
         this.height = this.el.offsetHeight;       
-        this.el.style.height = this.height + "px";      
+        //this.el.style.height = this.height + "px";      
 
         // Set styles when header active on navigation items
         _setStylesWhenHeaderIsActive(this.height, self);         
@@ -613,6 +615,14 @@ $.extend({
         var $anchorBack =
             navInstance._config.anchorBack =
             $($(self.el).find(".moo-nav-back")[0]);
+            
+        navInstance._config.anchorBack.show = function() {
+            this.setClass("moo-visible");
+        }
+
+        navInstance._config.anchorBack.hide = function() {
+            this.removeClass("moo-visible");
+        }
             
         if ($anchorBack.el !== undefined) {
             $anchorBack.hide();

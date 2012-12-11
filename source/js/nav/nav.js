@@ -545,9 +545,10 @@ var NavLink = function(el) {
 
 NavLink.prototype = {
     hide: function() {
-        this.$el.hide();
+        this.$el.removeClass("moo-visible");
     },
     show: function() {
-        this.$el.show();
+        this.$el.setClass("moo-visible");;
     }
 }
+

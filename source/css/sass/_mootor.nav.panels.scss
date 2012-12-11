@@ -73,8 +73,16 @@ nav {
 
 // Hacks
  
+
+body {
+    -webkit-transform:translate3d(0,0,0);
+    -webkit-translateZ: 0px;
+}
+ 
 .moo-panel {
     // Prevents flicker on transform3d (iOS)    
     -webkit-transition-duration:0;
     -webkit-transform:translate3d(0,0,0);
+    -webkit-perspective: 1000;
+    -webkit-backface-visibility: hidden;
 }
