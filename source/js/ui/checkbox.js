@@ -153,7 +153,9 @@ var _onChangeCallbacks = {},
     
 _onChange = function(self) {
     var i;
-    for (i = _onChangeCallbacks[self.input.id].length; i--;) {
-        _onChangeCallbacks[self.input.id][i](self);
+    if (_onChangeCallbacks[self.input.id] !== undefined) {
+        for (i = _onChangeCallbacks[self.input.id].length; i--;) {
+            _onChangeCallbacks[self.input.id][i](self);
+        }
     }
 }
