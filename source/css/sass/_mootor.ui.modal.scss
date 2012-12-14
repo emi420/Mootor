@@ -19,22 +19,26 @@
     color: #333;
     padding: 0.5em;
     position: relative;
-    top: -10em;
-    left: -15em;
-    width: 31em;
+    top: 10%;
+    left: 10%;
+    width: 80%;
     height: auto;
     z-index: 1500;
     header {
         color: #FFF;
         @include text-shadow;
+        h1 {
+            margin: 0;
+        }
     }
 }
 .moo-ui-modal-panel {
     @include border-radius(6px);
     background-color: #FFF;
-    width: 30em;
+    width: 99.5%;
     overflow: hidden;
     padding: 5px;
+    margin: 0 auto;
     .moo-title {
         color: #000;
         font-size: 2em;
