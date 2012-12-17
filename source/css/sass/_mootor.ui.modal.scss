@@ -17,9 +17,10 @@
     background: #333;
     @include border-radius(6px);
     color: #333;
+    text-align: center;
     padding: 0.5em;
-    position: relative;
-    top: 10%;
+    position: absolute;
+    top:  20%;
     left: 10%;
     width: 80%;
     height: auto;
@@ -44,13 +45,14 @@
         font-size: 2em;
         font-weight: 700;
         white-space: nowrap;
+        margin: .8em .5em;
     }
     .moo-text {
         font-family: $base-font;
         font-size: 1.5em;
         line-height: 120%;
         padding: 0;
-        margin: 0.5em;
+        margin: .75em .6em;
     }
    
     /* Pasar estos a estilos de botones genericos */  
@@ -61,7 +63,7 @@
         font-size: 1.5em;
         font-weight: 700;
         line-height: 200%;  
-        width: 49%;
+        width: 49.5%;
     }   
     .moo-ui-cancel {
         @include float-left;

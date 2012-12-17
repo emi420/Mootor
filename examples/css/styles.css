@@ -446,7 +446,6 @@ nav a {
   background: -webkit-linear-gradient(top, #ffffff, #cccccc);
   background: -moz-linear-gradient(top, #ffffff, #cccccc);
   background: -o-linear-gradient(top, #ffffff, #cccccc);
-  background: -ms-linear-gradient(top, #ffffff, #cccccc);
   background: linear-gradient(top, #ffffff, #cccccc);
   border-top: 1px solid #666;
   border-right: 1px solid #666;
@@ -499,7 +498,6 @@ nav a {
   background: -webkit-linear-gradient(top, #daeaec, #cee3e6);
   background: -moz-linear-gradient(top, #daeaec, #cee3e6);
   background: -o-linear-gradient(top, #daeaec, #cee3e6);
-  background: -ms-linear-gradient(top, #daeaec, #cee3e6);
   background: linear-gradient(top, #daeaec, #cee3e6);
   border-top-color: #AEBBBD;
   border-bottom-color: #AEBBBD;
@@ -603,7 +601,6 @@ nav a {
   background: -webkit-radial-gradient(#ffffff, #a6c9fd 6px);
   background: -moz-radial-gradient(#ffffff, #a6c9fd 6px);
   background: -o-radial-gradient(#ffffff, #a6c9fd 6px);
-  background: -ms-radial-gradient(#ffffff, #a6c9fd 6px);
   background: radial-gradient(#ffffff, #a6c9fd 6px);
   border-radius: 0.5em;
   -webkit-box-shadow: 0 0 2px 2px #666666;
@@ -661,7 +658,6 @@ nav a {
   background: -webkit-linear-gradient(top, #ffffff, #bdd7fd);
   background: -moz-linear-gradient(top, #ffffff, #bdd7fd);
   background: -o-linear-gradient(top, #ffffff, #bdd7fd);
-  background: -ms-linear-gradient(top, #ffffff, #bdd7fd);
   background: linear-gradient(top, #ffffff, #bdd7fd);
   -webkit-box-shadow: 0 0 2px 2px #666666;
   -moz-box-shadow: 0 0 2px 2px #666666;
@@ -676,7 +672,6 @@ nav a {
   background-image: -webkit-linear-gradient(top, #dddddd, #ffffff 45%);
   background-image: -moz-linear-gradient(top, #dddddd, #ffffff 45%);
   background-image: -o-linear-gradient(top, #dddddd, #ffffff 45%);
-  background-image: -ms-linear-gradient(top, #dddddd, #ffffff 45%);
   background-image: linear-gradient(top, #dddddd, #ffffff 45%);
   border: 1px solid #666;
   border-radius: 0.5em;
@@ -704,7 +699,6 @@ nav a {
   background-image: -webkit-linear-gradient(top, #ffffff, #dedede);
   background-image: -moz-linear-gradient(top, #ffffff, #dedede);
   background-image: -o-linear-gradient(top, #ffffff, #dedede);
-  background-image: -ms-linear-gradient(top, #ffffff, #dedede);
   background-image: linear-gradient(top, #ffffff, #dedede);
   border: 1px solid #666;
   border-radius: 0.5em;
@@ -766,7 +760,7 @@ nav a {
 
 /* line 5, ../../source/css/sass/_mootor.ui.overlay.scss */
 .moo-overlay {
-  background-color: #f7f7f7;
+  background-color: #dedede;
   position: absolute;
   top: 0;
   left: 0;
@@ -887,25 +881,26 @@ nav a {
   -o-border-radius: 6px;
   border-radius: 6px;
   color: #333;
+  text-align: center;
   padding: 0.5em;
-  position: relative;
-  top: 10%;
+  position: absolute;
+  top: 20%;
   left: 10%;
   width: 80%;
   height: auto;
   z-index: 1500;
 }
-/* line 27, ../../source/css/sass/_mootor.ui.modal.scss */
+/* line 28, ../../source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-container header {
   color: #FFF;
-  text-shadow: #aaaaaa 0px 0px 1px;
+  text-shadow: 0px 0px 1px #aaaaaa;
 }
-/* line 30, ../../source/css/sass/_mootor.ui.modal.scss */
+/* line 31, ../../source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-container header h1 {
   margin: 0;
 }
 
-/* line 35, ../../source/css/sass/_mootor.ui.modal.scss */
+/* line 36, ../../source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-panel {
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
@@ -919,27 +914,28 @@ nav a {
   margin: 0 auto;
   /* Pasar estos a estilos de botones genericos */
 }
-/* line 42, ../../source/css/sass/_mootor.ui.modal.scss */
+/* line 43, ../../source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-panel .moo-title {
   color: #000;
   font-size: 2em;
   font-weight: 700;
   white-space: nowrap;
+  margin: .8em .5em;
 }
-/* line 48, ../../source/css/sass/_mootor.ui.modal.scss */
+/* line 50, ../../source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-panel .moo-text {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 1.5em;
   line-height: 120%;
   padding: 0;
-  margin: 0.5em;
+  margin: .75em .6em;
 }
-/* line 57, ../../source/css/sass/_mootor.ui.modal.scss */
+/* line 59, ../../source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-panel .moo-buttons {
   margin: 1.5em 0 0;
   overflow: hidden;
 }
-/* line 59, ../../source/css/sass/_mootor.ui.modal.scss */
+/* line 61, ../../source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-panel .moo-ui-cancel,
 .moo-ui-modal-panel .moo-ui-submit {
   -webkit-border-radius: 5px;
@@ -950,9 +946,9 @@ nav a {
   font-size: 1.5em;
   font-weight: 700;
   line-height: 200%;
-  width: 49%;
+  width: 49.5%;
 }
-/* line 66, ../../source/css/sass/_mootor.ui.modal.scss */
+/* line 68, ../../source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-panel .moo-ui-cancel {
   display: inline;
   float: left;
@@ -960,11 +956,10 @@ nav a {
   background: -webkit-linear-gradient(top, #eeeeee, #cccccc);
   background: -moz-linear-gradient(top, #eeeeee, #cccccc);
   background: -o-linear-gradient(top, #eeeeee, #cccccc);
-  background: -ms-linear-gradient(top, #eeeeee, #cccccc);
   background: linear-gradient(top, #eeeeee, #cccccc);
   border: 1px solid #c1c1c1;
 }
-/* line 71, ../../source/css/sass/_mootor.ui.modal.scss */
+/* line 73, ../../source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-panel .moo-ui-submit {
   display: inline;
   float: right;
@@ -972,7 +967,6 @@ nav a {
   background: -webkit-linear-gradient(top, #cccccc, #888888);
   background: -moz-linear-gradient(top, #cccccc, #888888);
   background: -o-linear-gradient(top, #cccccc, #888888);
-  background: -ms-linear-gradient(top, #cccccc, #888888);
   background: linear-gradient(top, #cccccc, #888888);
   border: 1px solid #a1a1a1;
   color: #FFF;
