@@ -446,6 +446,7 @@ nav a {
   background: -webkit-linear-gradient(top, #ffffff, #cccccc);
   background: -moz-linear-gradient(top, #ffffff, #cccccc);
   background: -o-linear-gradient(top, #ffffff, #cccccc);
+  background: -ms-linear-gradient(top, #ffffff, #cccccc);
   background: linear-gradient(top, #ffffff, #cccccc);
   border-top: 1px solid #666;
   border-right: 1px solid #666;
@@ -498,6 +499,7 @@ nav a {
   background: -webkit-linear-gradient(top, #daeaec, #cee3e6);
   background: -moz-linear-gradient(top, #daeaec, #cee3e6);
   background: -o-linear-gradient(top, #daeaec, #cee3e6);
+  background: -ms-linear-gradient(top, #daeaec, #cee3e6);
   background: linear-gradient(top, #daeaec, #cee3e6);
   border-top-color: #AEBBBD;
   border-bottom-color: #AEBBBD;
@@ -601,6 +603,7 @@ nav a {
   background: -webkit-radial-gradient(#ffffff, #a6c9fd 6px);
   background: -moz-radial-gradient(#ffffff, #a6c9fd 6px);
   background: -o-radial-gradient(#ffffff, #a6c9fd 6px);
+  background: -ms-radial-gradient(#ffffff, #a6c9fd 6px);
   background: radial-gradient(#ffffff, #a6c9fd 6px);
   border-radius: 0.5em;
   -webkit-box-shadow: 0 0 2px 2px #666666;
@@ -658,6 +661,7 @@ nav a {
   background: -webkit-linear-gradient(top, #ffffff, #bdd7fd);
   background: -moz-linear-gradient(top, #ffffff, #bdd7fd);
   background: -o-linear-gradient(top, #ffffff, #bdd7fd);
+  background: -ms-linear-gradient(top, #ffffff, #bdd7fd);
   background: linear-gradient(top, #ffffff, #bdd7fd);
   -webkit-box-shadow: 0 0 2px 2px #666666;
   -moz-box-shadow: 0 0 2px 2px #666666;
@@ -672,6 +676,7 @@ nav a {
   background-image: -webkit-linear-gradient(top, #dddddd, #ffffff 45%);
   background-image: -moz-linear-gradient(top, #dddddd, #ffffff 45%);
   background-image: -o-linear-gradient(top, #dddddd, #ffffff 45%);
+  background-image: -ms-linear-gradient(top, #dddddd, #ffffff 45%);
   background-image: linear-gradient(top, #dddddd, #ffffff 45%);
   border: 1px solid #666;
   border-radius: 0.5em;
@@ -699,6 +704,7 @@ nav a {
   background-image: -webkit-linear-gradient(top, #ffffff, #dedede);
   background-image: -moz-linear-gradient(top, #ffffff, #dedede);
   background-image: -o-linear-gradient(top, #ffffff, #dedede);
+  background-image: -ms-linear-gradient(top, #ffffff, #dedede);
   background-image: linear-gradient(top, #ffffff, #dedede);
   border: 1px solid #666;
   border-radius: 0.5em;
@@ -870,106 +876,6 @@ nav a {
 /* line 12, ../../source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-placeholder.moo-hidden {
   display: none;
-}
-
-/* line 16, ../../source/css/sass/_mootor.ui.modal.scss */
-.moo-ui-modal-container {
-  background: #333;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  -ms-border-radius: 6px;
-  -o-border-radius: 6px;
-  border-radius: 6px;
-  color: #333;
-  text-align: center;
-  padding: 0.5em;
-  position: absolute;
-  top: 20%;
-  left: 10%;
-  width: 80%;
-  height: auto;
-  z-index: 1500;
-}
-/* line 28, ../../source/css/sass/_mootor.ui.modal.scss */
-.moo-ui-modal-container header {
-  color: #FFF;
-  text-shadow: 0px 0px 1px #aaaaaa;
-}
-/* line 31, ../../source/css/sass/_mootor.ui.modal.scss */
-.moo-ui-modal-container header h1 {
-  margin: 0;
-}
-
-/* line 36, ../../source/css/sass/_mootor.ui.modal.scss */
-.moo-ui-modal-panel {
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  -ms-border-radius: 6px;
-  -o-border-radius: 6px;
-  border-radius: 6px;
-  background-color: #FFF;
-  width: 99.5%;
-  overflow: hidden;
-  padding: 5px;
-  margin: 0 auto;
-  /* Pasar estos a estilos de botones genericos */
-}
-/* line 43, ../../source/css/sass/_mootor.ui.modal.scss */
-.moo-ui-modal-panel .moo-title {
-  color: #000;
-  font-size: 2em;
-  font-weight: 700;
-  white-space: nowrap;
-  margin: .8em .5em;
-}
-/* line 50, ../../source/css/sass/_mootor.ui.modal.scss */
-.moo-ui-modal-panel .moo-text {
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 1.5em;
-  line-height: 120%;
-  padding: 0;
-  margin: .75em .6em;
-}
-/* line 59, ../../source/css/sass/_mootor.ui.modal.scss */
-.moo-ui-modal-panel .moo-buttons {
-  margin: 1.5em 0 0;
-  overflow: hidden;
-}
-/* line 61, ../../source/css/sass/_mootor.ui.modal.scss */
-.moo-ui-modal-panel .moo-ui-cancel,
-.moo-ui-modal-panel .moo-ui-submit {
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
-  border-radius: 5px;
-  font-size: 1.5em;
-  font-weight: 700;
-  line-height: 200%;
-  width: 49.5%;
-}
-/* line 68, ../../source/css/sass/_mootor.ui.modal.scss */
-.moo-ui-modal-panel .moo-ui-cancel {
-  display: inline;
-  float: left;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #eeeeee), color-stop(100%, #cccccc));
-  background: -webkit-linear-gradient(top, #eeeeee, #cccccc);
-  background: -moz-linear-gradient(top, #eeeeee, #cccccc);
-  background: -o-linear-gradient(top, #eeeeee, #cccccc);
-  background: linear-gradient(top, #eeeeee, #cccccc);
-  border: 1px solid #c1c1c1;
-}
-/* line 73, ../../source/css/sass/_mootor.ui.modal.scss */
-.moo-ui-modal-panel .moo-ui-submit {
-  display: inline;
-  float: right;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #cccccc), color-stop(100%, #888888));
-  background: -webkit-linear-gradient(top, #cccccc, #888888);
-  background: -moz-linear-gradient(top, #cccccc, #888888);
-  background: -o-linear-gradient(top, #cccccc, #888888);
-  background: linear-gradient(top, #cccccc, #888888);
-  border: 1px solid #a1a1a1;
-  color: #FFF;
 }
 
 /* line 5, ../../source/css/sass/_mootor.ui.image.scss */
@@ -1766,6 +1672,108 @@ nav.app .moo-nav.client-accept:before {
   width: 37px;
 }
 
+/* line 22, ../../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-container {
+  background: #333;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+  color: #333;
+  text-align: center;
+  padding: 0.5em;
+  position: absolute;
+  top: 20%;
+  left: 12.5%;
+  width: 75%;
+  height: auto;
+  z-index: 1500;
+}
+/* line 44, ../../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-container header {
+  color: #FFF;
+  text-shadow: #aaaaaa 0px 0px 1px;
+}
+/* line 47, ../../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-container header h1 {
+  margin: 0;
+}
+
+/* line 52, ../../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-panel {
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+  background-color: #FFF;
+  width: 99.5%;
+  overflow: hidden;
+  padding: 5px;
+  margin: 0 auto;
+  /* Pasar estos a estilos de botones genericos */
+}
+/* line 59, ../../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-panel .moo-title {
+  color: #000;
+  font-size: 2em;
+  font-weight: 700;
+  white-space: nowrap;
+  margin: .8em .5em;
+}
+/* line 66, ../../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-panel .moo-text {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1.5em;
+  line-height: 120%;
+  padding: 0;
+  margin: .75em .6em;
+}
+/* line 75, ../../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-panel .moo-buttons {
+  margin: 1.5em 0 0;
+  overflow: hidden;
+}
+/* line 77, ../../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-panel .moo-ui-cancel,
+.moo-ui-modal-panel .moo-ui-submit {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  font-size: 1.5em;
+  font-weight: 700;
+  line-height: 200%;
+  width: 49.5%;
+}
+/* line 84, ../../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-panel .moo-ui-cancel {
+  display: inline;
+  float: left;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #eeeeee), color-stop(100%, #cccccc));
+  background: -webkit-linear-gradient(top, #eeeeee, #cccccc);
+  background: -moz-linear-gradient(top, #eeeeee, #cccccc);
+  background: -o-linear-gradient(top, #eeeeee, #cccccc);
+  background: -ms-linear-gradient(top, #eeeeee, #cccccc);
+  background: linear-gradient(top, #eeeeee, #cccccc);
+  border: 1px solid #c1c1c1;
+}
+/* line 89, ../../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-panel .moo-ui-submit {
+  display: inline;
+  float: right;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #cccccc), color-stop(100%, #888888));
+  background: -webkit-linear-gradient(top, #cccccc, #888888);
+  background: -moz-linear-gradient(top, #cccccc, #888888);
+  background: -o-linear-gradient(top, #cccccc, #888888);
+  background: -ms-linear-gradient(top, #cccccc, #888888);
+  background: linear-gradient(top, #cccccc, #888888);
+  border: 1px solid #a1a1a1;
+  color: #FFF;
+}
+
 /* line 14, demo/base/components/_comments.scss */
 .textarea-container {
   width: 51em;
@@ -1924,7 +1932,7 @@ nav.app .moo-nav.client-accept:before {
     font-size: .75em;
   }
 }
-/* line 41, demo/styles.scss */
+/* line 42, demo/styles.scss */
 .blue {
   background: #0000dd;
 }

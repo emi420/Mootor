@@ -6,131 +6,13 @@
 //
 // Contents:
 // 1.   .moo-gallery-icon     - icon button that triggers open/close the gallery.
-// 2.   .moo-gallery          - gallery for images / floor plans / etc.
-// 2.1. .moo-empty            - styles for the gallery when is empty
-// 3.   .moo-comment-icon     - icon button that triggers open/close the comment box.
+
 // -----------------------------------------------------------------------------------
 
 // color variables
 // -----------------------------------------------------------------------------------
 
-// 1. .moo-gallery-icon
+// 1. mootor-modal
 // -----------------------------------------------------------------------------------
 
-// An icon button/link that opens the gallery menu when clicked.
-//
-.moo-gallery-icon {
-    display: inline-block;
-    font-size: 1.8em;
-    text-decoration: none;
-    position: relative;
-    width: 48px;
-    height: 48px;
-    &:before {
-        content: " ";
-        display: block;
-    }
-    .moo-ui-badge {
-        bottom: -0.7em;
-    } 
-}
-.moo-ui-image-container {
-    top: auto;
-    left: auto;
-    bottom: 2.5em;
-    right: -.5em;
-    width: 28em;
-    border: 1px solid $color-border-main;
-    &.moo-bottom {
-        top: 3.5em;
-        bottom: auto;
-        &:before {
-            content: " "; 
-            display: block;
-            position: absolute;
-            top: -.9em;
-            right: 1em;
-            border-top: .5em solid transparent;
-            border-left: 1em solid transparent;
-            border-right: 1em solid transparent;
-            border-bottom: .5em solid #333;
-        }
-    }
-    &.moo-top {
-        bottom: 3.5em;
-        &:after {
-            content: " ";
-            display: block; 
-            position: absolute;
-            bottom: -.9em;
-            right: 1em;
-            border-bottom: .5em solid transparent;
-            border-left: 1em solid transparent;
-            border-right: 1em solid transparent;
-            border-top: .5em solid #333;
-        }
-    }
-    header {
-        a {
-            @extend .moo-nav-buttons;
-            font-size: 0.6em;
-            font-weight: 700;
-            text-decoration: none;
-            padding: .5em 1em;
-        }
-    }
-    .moo-ui-delete {
-        @extend .moo-gallery-icon-button;
-        &:before {
-            @include mootor-sprite(delete-alt, $dimensions: true);
-        }
-    }
-    .moo-ui-add-comment {
-        @extend .moo-gallery-icon-button;
-        &:before { 
-            @include mootor-sprite(add-comment-alt, $dimensions: true);
-        }
-    }
-}
-
-.moo-gallery-icon-button {
-    @include float-left;
-    border: 1px solid $color-border-main;
-    text-indent: -9999px;
-    padding: .35em 0.5em;
-    &:before {
-        content: " ";
-        display: block;
-    }
-}
-
-
-// 2.1. .moo-empty 
-// -----------------------------------------------------------------------------------
-.moo-ui-image-container.moo-empty {
-    width: auto;
-    a {
-        text-align: center;
-        width: 100%;
-    }
-    .moo-gallery-icon-button {
-        display: none;
-    }
-}
-
-// 3. .moo-comment-icon
-// -----------------------------------------------------------------------------------
-.moo-comment-icon {
-    @extend .moo-gallery-icon;
-    @include float-right;
-    &:before {
-        @include mootor-sprite(comment, $dimensions: true);
-    }
-    &.has-comment {
-        &:before {
-            @include mootor-sprite(comment-has, $dimensions: true);
-        }
-    }
-}
-
-
+@include mootor-modal;
