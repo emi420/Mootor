@@ -84,6 +84,8 @@
         .moo-buttons { margin: 1.5em 0 0; overflow: hidden;}
         @if $buttons == 2 {
             .button {
+                font-size: 1.5em;
+                line-height: 150%;
                 width: 49.5%;
                 &.submit {
                     @include float-right; 
