@@ -18,7 +18,7 @@
 @mixin mootor-modal (
     $container-class:".moo-ui-modal-container",
     $panel-class: ".moo-ui-modal-panel",
-    $show-class: ".moo-show",
+    $hidden-class: ".moo-hidden",
     $width: large,
     $buttons: 2) {
     #{$container-class} {
@@ -30,11 +30,21 @@
         position: absolute;
         top:  20%;
         z-index: 1500;
-        
-        opacity: 0;
-        width: 0;
-        height: 0;
-        
+        height: auto;
+        opacity: 1;
+        @if $width == small {
+            left: 37.5%;
+            width: 25%;
+        }
+        @else if $width == medium {
+            left: 25%;
+            width: 50%;
+        }
+        @else if $width == large {
+            left: 12.5%;
+            width: 75%;
+        }
+
         header {
             color: #FFF;
             @include text-shadow;
@@ -42,22 +52,11 @@
                 margin: 0;
             }
         }
-        &#{$show-class} {
-            height: auto;
-            opacity: 1;
-            @if $width == small {
-                left: 37.5%;
-                width: 25%;
-            }
-            @else if $width == medium {
-                left: 25%;
-                width: 50%;
-            }
-            @else if $width == large {
-                left: 12.5%;
-                width: 75%;
-            }
-        @include single-transition($property: opacity);
+        &#{$hidden-class} {
+            opacity: 0;
+            width: 0;
+            height: 0;
+            @include single-transition($property: opacity);
         }
     }
     #{$panel-class} {
@@ -86,8 +85,17 @@
         @if $buttons == 2 {
             .button {
                 width: 49.5%;
-                &.submit {@include float-right}
-                &.cancel {@include float-left}
+                &.submit {
+                    @include float-right; 
+                    @include background(linear-gradient(top, #ccc, #888));
+                    border: 1px solid #a1a1a1;
+                    color: #FFF;
+                }
+                &.cancel {
+                    @include float-left;
+                    @include background(linear-gradient(top, #eee, #ccc));
+                    border: 1px solid #c1c1c1;
+                }
             }
         }
         @else {

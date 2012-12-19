@@ -43,16 +43,12 @@ $badge-bg-color: $color-tn-tab-red;
     background-color: lighten($color-border-main, 50%);
     @include border-radius(5px);
     &.submit {
-        // color: $submit-text-color;
-        // border-color:$submit-border-color; 
-        // background-color: $submit-bg-color;
-        @include background(linear-gradient(top, #ccc, #888));
-        border: 1px solid #a1a1a1;
-        color: #FFF;
+        color: $submit-text-color;
+        border-color:$submit-border-color; 
+        background-color: $submit-bg-color;
     }
     &.cancel {
-    @include background(linear-gradient(top, #eee, #ccc));
-            border: 1px solid #c1c1c1;
+        
     }
     
 }
