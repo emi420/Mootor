@@ -1683,28 +1683,42 @@ nav.app .moo-nav.client-accept:before {
 }
 
 /* line 35, demo/base/components/_buttons.scss */
-.button, .moo-ui-modal-panel .moo-ui-cancel,
-.moo-ui-modal-panel .moo-ui-submit {
-  font-size: 13px;
+.button {
+  font-size: 1.5em;
+  line-height: 150%;
   font-weight: 700;
   padding: 7px 20px;
   border: 1px solid #151618;
   background-color: #8f949d;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  -ms-border-radius: 3px;
-  -o-border-radius: 3px;
-  border-radius: 3px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
 }
-/* line 44, demo/base/components/_buttons.scss */
-.button.submit, .moo-ui-modal-panel .submit.moo-ui-cancel,
-.moo-ui-modal-panel .submit.moo-ui-submit {
-  color: #dde5f4;
-  border-color: #14233f;
-  background-color: #567ec9;
+/* line 45, demo/base/components/_buttons.scss */
+.button.submit {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #cccccc), color-stop(100%, #888888));
+  background: -webkit-linear-gradient(top, #cccccc, #888888);
+  background: -moz-linear-gradient(top, #cccccc, #888888);
+  background: -o-linear-gradient(top, #cccccc, #888888);
+  background: -ms-linear-gradient(top, #cccccc, #888888);
+  background: linear-gradient(top, #cccccc, #888888);
+  border: 1px solid #a1a1a1;
+  color: #FFF;
+}
+/* line 53, demo/base/components/_buttons.scss */
+.button.cancel {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #eeeeee), color-stop(100%, #cccccc));
+  background: -webkit-linear-gradient(top, #eeeeee, #cccccc);
+  background: -moz-linear-gradient(top, #eeeeee, #cccccc);
+  background: -o-linear-gradient(top, #eeeeee, #cccccc);
+  background: -ms-linear-gradient(top, #eeeeee, #cccccc);
+  background: linear-gradient(top, #eeeeee, #cccccc);
+  border: 1px solid #c1c1c1;
 }
 
-/* line 52, demo/base/components/_buttons.scss */
+/* line 61, demo/base/components/_buttons.scss */
 .moo-ui-badge {
   background-color: #a6220f;
   color: #f3f3f3;
@@ -1726,22 +1740,19 @@ nav.app .moo-nav.client-accept:before {
 }
 
 /* line 37, demo/ios/components/_buttons.scss */
-.button, .moo-ui-modal-panel .moo-ui-cancel,
-.moo-ui-modal-panel .moo-ui-submit {
+.button {
   -webkit-box-shadow: rgba(255, 255, 255, 0.6) 0 1px 1px 0 inset, rgba(255, 255, 255, 0.3) 0 1px 0 0;
   -moz-box-shadow: rgba(255, 255, 255, 0.6) 0 1px 1px 0 inset, rgba(255, 255, 255, 0.3) 0 1px 0 0;
   box-shadow: rgba(255, 255, 255, 0.6) 0 1px 1px 0 inset, rgba(255, 255, 255, 0.3) 0 1px 0 0;
 }
 /* line 39, demo/ios/components/_buttons.scss */
-.button:hover, .moo-ui-modal-panel .moo-ui-cancel:hover,
-.moo-ui-modal-panel .moo-ui-submit:hover {
+.button:hover {
   -webkit-box-shadow: rgba(51, 51, 51, 0.6) 0 1px 1px 0 inset, rgba(51, 51, 51, 0.3) 0 -1px 0 0 inset, rgba(255, 255, 255, 0.3) 0 1px 0 0;
   -moz-box-shadow: rgba(51, 51, 51, 0.6) 0 1px 1px 0 inset, rgba(51, 51, 51, 0.3) 0 -1px 0 0 inset, rgba(255, 255, 255, 0.3) 0 1px 0 0;
   box-shadow: rgba(51, 51, 51, 0.6) 0 1px 1px 0 inset, rgba(51, 51, 51, 0.3) 0 -1px 0 0 inset, rgba(255, 255, 255, 0.3) 0 1px 0 0;
 }
 /* line 42, demo/ios/components/_buttons.scss */
-.button.submit, .moo-ui-modal-panel .submit.moo-ui-cancel,
-.moo-ui-modal-panel .submit.moo-ui-submit {
+.button.submit {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #7c9cd6), color-stop(100%, #3964b3));
   background: -webkit-linear-gradient(top, #7c9cd6, #3964b3);
   background: -moz-linear-gradient(top, #7c9cd6, #3964b3);
@@ -1751,8 +1762,7 @@ nav.app .moo-nav.client-accept:before {
   text-shadow: #264379 0 -1px 1px;
 }
 /* line 46, demo/ios/components/_buttons.scss */
-.button.submit:hover, .moo-ui-modal-panel .submit.moo-ui-cancel:hover,
-.moo-ui-modal-panel .submit.moo-ui-submit:hover {
+.button.submit:hover {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #698dcf), color-stop(100%, #3359a0));
   background: -webkit-linear-gradient(top, #698dcf, #3359a0);
   background: -moz-linear-gradient(top, #698dcf, #3359a0);
@@ -1847,51 +1857,18 @@ nav.app .moo-nav.client-accept:before {
   overflow: hidden;
 }
 /* line 87, ../../source/css/sass/_mootor.ui.modal.scss */
-.moo-ui-modal-panel .moo-ui-cancel,
-.moo-ui-modal-panel .moo-ui-submit {
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
-  border-radius: 5px;
-  font-size: 1.5em;
-  font-weight: 700;
-  line-height: 200%;
-}
-/* line 94, ../../source/css/sass/_mootor.ui.modal.scss */
-.moo-ui-modal-panel .moo-ui-cancel {
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #eeeeee), color-stop(100%, #cccccc));
-  background: -webkit-linear-gradient(top, #eeeeee, #cccccc);
-  background: -moz-linear-gradient(top, #eeeeee, #cccccc);
-  background: -o-linear-gradient(top, #eeeeee, #cccccc);
-  background: -ms-linear-gradient(top, #eeeeee, #cccccc);
-  background: linear-gradient(top, #eeeeee, #cccccc);
-  border: 1px solid #c1c1c1;
-}
-/* line 98, ../../source/css/sass/_mootor.ui.modal.scss */
-.moo-ui-modal-panel .moo-ui-submit {
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #cccccc), color-stop(100%, #888888));
-  background: -webkit-linear-gradient(top, #cccccc, #888888);
-  background: -moz-linear-gradient(top, #cccccc, #888888);
-  background: -o-linear-gradient(top, #cccccc, #888888);
-  background: -ms-linear-gradient(top, #cccccc, #888888);
-  background: linear-gradient(top, #cccccc, #888888);
-  border: 1px solid #a1a1a1;
-  color: #FFF;
-}
-/* line 104, ../../source/css/sass/_mootor.ui.modal.scss */
-.moo-ui-modal-panel .moo-buttons a {
+.moo-ui-modal-panel .button {
   width: 49.5%;
 }
-/* line 107, ../../source/css/sass/_mootor.ui.modal.scss */
-.moo-ui-modal-panel .moo-ui-cancel {
-  display: inline;
-  float: left;
-}
-/* line 108, ../../source/css/sass/_mootor.ui.modal.scss */
-.moo-ui-modal-panel .moo-ui-submit {
+/* line 89, ../../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-panel .button.submit {
   display: inline;
   float: right;
+}
+/* line 90, ../../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-panel .button.cancel {
+  display: inline;
+  float: left;
 }
 
 /* line 23, demo/base/components/_gallery.scss */

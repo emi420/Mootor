@@ -83,32 +83,15 @@
         }
         /* Pasar estos a estilos de botones genericos */  
         .moo-buttons { margin: 1.5em 0 0; overflow: hidden;}
-        .moo-ui-cancel, 
-        .moo-ui-submit {
-            @extend .button;
-            @include border-radius(5px);
-            font-size: 1.5em;
-            font-weight: 700;
-            line-height: 200%;  
-        }   
-        .moo-ui-cancel {
-            @include background(linear-gradient(top, #eee, #ccc));
-            border: 1px solid #c1c1c1;
-        }
-        .moo-ui-submit {
-            @include background(linear-gradient(top, #ccc, #888));
-            border: 1px solid #a1a1a1;
-            color: #FFF;
-        }
         @if $buttons == 2 {
-            .moo-buttons a {
+            .button {
                 width: 49.5%;
+                &.submit {@include float-right}
+                &.cancel {@include float-left}
             }
-            .moo-ui-cancel { @include float-left }
-            .moo-ui-submit { @include float-right }
         }
         @else {
-            .moo-buttons a {
+            .moo-buttons .button {
                 width: 100%;
             }
         }
