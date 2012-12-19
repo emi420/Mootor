@@ -18,7 +18,7 @@
 // parameters defaults:
 // $container-class: ".moo-ui-modal-container"
 // $panel-class: ".moo-ui-modal-panel"
-// $show-class: ".moo-show"
+// $hidden-class: ".moo-hidden"
 // $width: large // large = 75%, medium = 50%, small = 25%
 // $buttons: 2 
 @include mootor-modal();
