@@ -319,7 +319,7 @@ $.extend({
         el.innerHTML = _templates[type];
         object.el = el.firstChild;
         $(object.el).setClass("moo-hidden");
-        $(document.body).el.appendChild(object.el);
+        document.body.insertBefore(object.el, document.body.firstChild);
     }
 }, Overlay);
 

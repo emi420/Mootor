@@ -26,19 +26,25 @@
 // Standard form
 
 .moo-ui-form {
-    text-align: left;
     width: 90%; // FIXME
     margin: 5em auto;
     background-color: #FFF;
     border: 1px solid #CCC;
     border-radius: 5px;
     @extend .clearfix;
+    .legend {
+        text-align: left;
+    }
     .moo-field {
         display:block;
         @extend .clearfix;
         padding: 1em 2em;
         border-top: 1px solid #CCC;
         &:first-child { border-top: none }
+        label span {
+            text-align: left;
+            display: block;
+        }
         > label, > legend {
             @include float-left;
             font-size: 1.5em;
