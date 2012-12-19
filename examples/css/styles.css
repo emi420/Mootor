@@ -1505,7 +1505,8 @@ nav.app .moo-nav.client-accept:before {
 }
 
 /* line 35, demo/base/components/_buttons.scss */
-.button {
+.button, .moo-ui-modal-panel .moo-ui-cancel,
+.moo-ui-modal-panel .moo-ui-submit {
   font-size: 13px;
   font-weight: 700;
   padding: 7px 20px;
@@ -1518,7 +1519,8 @@ nav.app .moo-nav.client-accept:before {
   border-radius: 3px;
 }
 /* line 44, demo/base/components/_buttons.scss */
-.button.submit {
+.button.submit, .moo-ui-modal-panel .submit.moo-ui-cancel,
+.moo-ui-modal-panel .submit.moo-ui-submit {
   color: #dde5f4;
   border-color: #14233f;
   background-color: #567ec9;
@@ -1672,7 +1674,7 @@ nav.app .moo-nav.client-accept:before {
   width: 37px;
 }
 
-/* line 22, ../../source/css/sass/_mootor.ui.modal.scss */
+/* line 24, ../../source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-container {
   background: #333;
   -webkit-border-radius: 6px;
@@ -1685,22 +1687,34 @@ nav.app .moo-nav.client-accept:before {
   padding: 0.5em;
   position: absolute;
   top: 20%;
-  left: 12.5%;
-  width: 75%;
-  height: auto;
   z-index: 1500;
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
-/* line 44, ../../source/css/sass/_mootor.ui.modal.scss */
+/* line 38, ../../source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-container header {
   color: #FFF;
   text-shadow: #aaaaaa 0px 0px 1px;
 }
-/* line 47, ../../source/css/sass/_mootor.ui.modal.scss */
+/* line 41, ../../source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-container header h1 {
   margin: 0;
 }
+/* line 45, ../../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-container.moo-show {
+  height: auto;
+  opacity: 1;
+  left: 12.5%;
+  width: 75%;
+  -webkit-transition: opacity 1s;
+  -moz-transition: opacity 1s;
+  -ms-transition: opacity 1s;
+  -o-transition: opacity 1s;
+  transition: opacity 1s false;
+}
 
-/* line 52, ../../source/css/sass/_mootor.ui.modal.scss */
+/* line 63, ../../source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-panel {
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
@@ -1714,7 +1728,7 @@ nav.app .moo-nav.client-accept:before {
   margin: 0 auto;
   /* Pasar estos a estilos de botones genericos */
 }
-/* line 59, ../../source/css/sass/_mootor.ui.modal.scss */
+/* line 70, ../../source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-panel .moo-title {
   color: #000;
   font-size: 2em;
@@ -1722,7 +1736,7 @@ nav.app .moo-nav.client-accept:before {
   white-space: nowrap;
   margin: .8em .5em;
 }
-/* line 66, ../../source/css/sass/_mootor.ui.modal.scss */
+/* line 77, ../../source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-panel .moo-text {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 1.5em;
@@ -1730,12 +1744,12 @@ nav.app .moo-nav.client-accept:before {
   padding: 0;
   margin: .75em .6em;
 }
-/* line 75, ../../source/css/sass/_mootor.ui.modal.scss */
+/* line 85, ../../source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-panel .moo-buttons {
   margin: 1.5em 0 0;
   overflow: hidden;
 }
-/* line 77, ../../source/css/sass/_mootor.ui.modal.scss */
+/* line 87, ../../source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-panel .moo-ui-cancel,
 .moo-ui-modal-panel .moo-ui-submit {
   -webkit-border-radius: 5px;
@@ -1746,12 +1760,9 @@ nav.app .moo-nav.client-accept:before {
   font-size: 1.5em;
   font-weight: 700;
   line-height: 200%;
-  width: 49.5%;
 }
-/* line 84, ../../source/css/sass/_mootor.ui.modal.scss */
+/* line 94, ../../source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-panel .moo-ui-cancel {
-  display: inline;
-  float: left;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #eeeeee), color-stop(100%, #cccccc));
   background: -webkit-linear-gradient(top, #eeeeee, #cccccc);
   background: -moz-linear-gradient(top, #eeeeee, #cccccc);
@@ -1760,10 +1771,8 @@ nav.app .moo-nav.client-accept:before {
   background: linear-gradient(top, #eeeeee, #cccccc);
   border: 1px solid #c1c1c1;
 }
-/* line 89, ../../source/css/sass/_mootor.ui.modal.scss */
+/* line 99, ../../source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-panel .moo-ui-submit {
-  display: inline;
-  float: right;
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #cccccc), color-stop(100%, #888888));
   background: -webkit-linear-gradient(top, #cccccc, #888888);
   background: -moz-linear-gradient(top, #cccccc, #888888);
@@ -1772,6 +1781,20 @@ nav.app .moo-nav.client-accept:before {
   background: linear-gradient(top, #cccccc, #888888);
   border: 1px solid #a1a1a1;
   color: #FFF;
+}
+/* line 105, ../../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-panel .moo-buttons a {
+  width: 49.5%;
+}
+/* line 108, ../../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-panel .moo-ui-cancel {
+  display: inline;
+  float: left;
+}
+/* line 109, ../../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-panel .moo-ui-submit {
+  display: inline;
+  float: right;
 }
 
 /* line 14, demo/base/components/_comments.scss */
