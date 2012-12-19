@@ -1868,7 +1868,7 @@ nav.app .moo-nav.client-accept:before {
   background: linear-gradient(top, #eeeeee, #cccccc);
   border: 1px solid #c1c1c1;
 }
-/* line 99, ../../source/css/sass/_mootor.ui.modal.scss */
+/* line 98, ../../source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-panel .moo-ui-submit {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #cccccc), color-stop(100%, #888888));
   background: -webkit-linear-gradient(top, #cccccc, #888888);
@@ -1879,16 +1879,16 @@ nav.app .moo-nav.client-accept:before {
   border: 1px solid #a1a1a1;
   color: #FFF;
 }
-/* line 105, ../../source/css/sass/_mootor.ui.modal.scss */
+/* line 104, ../../source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-panel .moo-buttons a {
   width: 49.5%;
 }
-/* line 108, ../../source/css/sass/_mootor.ui.modal.scss */
+/* line 107, ../../source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-panel .moo-ui-cancel {
   display: inline;
   float: left;
 }
-/* line 109, ../../source/css/sass/_mootor.ui.modal.scss */
+/* line 108, ../../source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-panel .moo-ui-submit {
   display: inline;
   float: right;

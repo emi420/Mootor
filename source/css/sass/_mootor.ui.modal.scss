@@ -92,7 +92,6 @@
             line-height: 200%;  
         }   
         .moo-ui-cancel {
-            @extend .button;
             @include background(linear-gradient(top, #eee, #ccc));
             border: 1px solid #c1c1c1;
         }
