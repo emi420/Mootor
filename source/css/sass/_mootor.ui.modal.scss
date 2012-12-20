@@ -12,7 +12,6 @@
     &.moo-hidden {
         display: none;
     }
-    
 }
 
 
@@ -52,13 +51,13 @@
             }
 
         } 
-        &#{$hidden-class} {
-            opacity: 0;
-            width: 0;
-            height: 0;
-            @include single-transition($property: opacity);
-        }
+    &#{$hidden-class} {
+        opacity: 0;
+        width: 0;
+        height: 0;
+        @include single-transition($property: opacity);
     }
+
     #{$panel-class} {
         @include border-radius(6px);
         background-color: #FFF;
@@ -106,6 +105,4 @@
             }
         }
     }
-    
 }
-

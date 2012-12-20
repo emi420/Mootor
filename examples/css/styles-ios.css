@@ -1,38 +1,36 @@
 /*
-Syntax error: Invalid CSS after "    }": expected selector or at-rule, was "}"
-        on line 110 of c:/natts/voolks/mootor-dev/source/css/sass/_mootor.ui.modal.scss
-        from line 8 of c:/natts/voolks/mootor-dev/source/css/sass/_mootor.ui.scss
-        from line 17 of c:/natts/voolks/mootor-dev/examples/css/demo/styles-ios.scss
+Syntax error: Properties are only allowed within rules, directives, mixin includes, or other properties.
+        on line 24 of c:/natts/voolks/mootor-dev/source/css/sass/_mootor.ui.modal.scss
+        from line 37 of c:/natts/voolks/mootor-dev/examples/css/demo/styles-ios.scss
 
 Backtrace:
-c:/natts/voolks/mootor-dev/source/css/sass/_mootor.ui.modal.scss:110
-c:/natts/voolks/mootor-dev/source/css/sass/_mootor.ui.scss:8
-c:/natts/voolks/mootor-dev/examples/css/demo/styles-ios.scss:17
-C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/scss/parser.rb:1130:in `expected'
-C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/scss/parser.rb:1066:in `expected'
-C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/scss/parser.rb:28:in `parse'
-C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/engine.rb:342:in `_to_tree'
-C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/engine.rb:274:in `to_tree'
-C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/visitors/perform.rb:222:in `visit_import'
-C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/visitors/base.rb:37:in `visit'
-C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/visitors/perform.rb:98:in `visit'
-C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/visitors/perform.rb:224:in `block in visit_import'
-C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/visitors/perform.rb:224:in `map'
-C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/visitors/perform.rb:224:in `visit_import'
-C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/visitors/base.rb:37:in `visit'
-C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/visitors/perform.rb:98:in `visit'
+c:/natts/voolks/mootor-dev/source/css/sass/_mootor.ui.modal.scss:24
+c:/natts/voolks/mootor-dev/examples/css/demo/styles-ios.scss:37
+C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/visitors/check_nesting.rb:13:in `visit'
 C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/visitors/base.rb:53:in `block in visit_children'
 C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/visitors/base.rb:53:in `map'
 C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/visitors/base.rb:53:in `visit_children'
-C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/visitors/perform.rb:107:in `block in visit_children'
-C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/visitors/perform.rb:119:in `with_environment'
-C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/visitors/perform.rb:106:in `visit_children'
+C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/visitors/check_nesting.rb:28:in `visit_children'
+C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/visitors/base.rb:39:in `visit'
+C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/visitors/check_nesting.rb:15:in `visit'
+C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/visitors/base.rb:53:in `block in visit_children'
+C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/visitors/base.rb:53:in `map'
+C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/visitors/base.rb:53:in `visit_children'
+C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/visitors/check_nesting.rb:28:in `visit_children'
 C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/visitors/base.rb:37:in `block in visit'
-C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/visitors/perform.rb:126:in `visit_root'
+C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/visitors/check_nesting.rb:42:in `visit_import'
 C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/visitors/base.rb:37:in `visit'
-C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/visitors/perform.rb:98:in `visit'
-C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/visitors/perform.rb:7:in `visit'
-C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/root_node.rb:20:in `render'
+C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/visitors/check_nesting.rb:15:in `visit'
+C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/visitors/base.rb:53:in `block in visit_children'
+C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/visitors/base.rb:53:in `map'
+C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/visitors/base.rb:53:in `visit_children'
+C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/visitors/check_nesting.rb:28:in `visit_children'
+C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/visitors/base.rb:37:in `block in visit'
+C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/visitors/check_nesting.rb:35:in `visit_root'
+C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/visitors/base.rb:37:in `visit'
+C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/visitors/check_nesting.rb:15:in `visit'
+C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/visitors/base.rb:24:in `visit'
+C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/tree/root_node.rb:21:in `render'
 C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/engine.rb:315:in `_render'
 C:/Ruby193/lib/ruby/gems/1.9.1/gems/sass-3.2.1/lib/sass/engine.rb:262:in `render'
 C:/Ruby193/lib/ruby/gems/1.9.1/gems/compass-0.12.2/lib/compass/compiler.rb:140:in `block (2 levels) in compile'
@@ -76,4 +74,4 @@ C:/Ruby193/bin/compass:23:in `<main>'
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Syntax error: Invalid CSS after \"    }\": expected selector or at-rule, was \"}\"\A         on line 110 of c:/natts/voolks/mootor-dev/source/css/sass/_mootor.ui.modal.scss\A         from line 8 of c:/natts/voolks/mootor-dev/source/css/sass/_mootor.ui.scss\A         from line 17 of c:/natts/voolks/mootor-dev/examples/css/demo/styles-ios.scss"; }
+  content: "Syntax error: Properties are only allowed within rules, directives, mixin includes, or other properties.\A         on line 24 of c:/natts/voolks/mootor-dev/source/css/sass/_mootor.ui.modal.scss\A         from line 37 of c:/natts/voolks/mootor-dev/examples/css/demo/styles-ios.scss"; }
