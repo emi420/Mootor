@@ -17,26 +17,22 @@
     %header.moo-header
         %nav
             %a#navBack.moo-nav-back{:href=>"#moo-nav-back"} Back
+        
         %h1 Sample app
 
     #main
         #ui_modal.moo-panel
-            .moo-overlay
-            %p parrafo de prueba lorem ipsum dolor sit amet.
-            %p parrafo de prueba lorem ipsum dolor sit amet.
-            %p parrafo de prueba lorem ipsum dolor sit amet.
-            .moo-ui-form
-                .moo-ui-modal-container
-                    %header.moo-ui-modal-header
-                        %h1 Modal alert
-                    .moo-ui-modal-panel
-                        %h2.moo-title
-                            Titulo del texto
-                        %p.moo-text
-                            Parrafo explicativo, puede tener varios renglones
-                        .moo-buttons
-                            %a.moo-ui-cancel
-                                Cancelar
-                            %a.moo-ui-submit
-                                Aceptar
+            .moo-ui-modal-container
+                %header.moo-ui-modal-header
+                    %h1 Modal alert
+                .moo-ui-modal-panel
+                    %h2.moo-title
+                        Titulo del texto
+                    %p.moo-text
+                        Parrafo explicativo, puede tener varios renglones
+                    .moo-buttons
+                        %a.moo-ui-cancel
+                            Cancelar
+                        %a.moo-ui-submit
+                            Aceptar
             

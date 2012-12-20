@@ -13,67 +13,74 @@
         display: none;
     }
 }
-.moo-ui-modal-container {
-    background: #333;
-    @include border-radius(6px);
-    color: #333;
-    text-align: center;
-    padding: 0.5em;
-    position: absolute;
-    top:  20%;
-    left: 10%;
-    width: 80%;
-    height: auto;
-    z-index: 1500;
-    header {
-        color: #FFF;
-        @include text-shadow;
-        h1 {
-            margin: 0;
+
+// Modal mixin
+@mixin modal-message (
+    $container-class-name: ".moo-ui-modal-container", 
+    $content-class-name: ".moo-ui-modal-panel" 
+    ) {
+    #{$container-class-name} {
+        background: #333;
+        @include border-radius(6px);
+        color: #333;
+        text-align: center;
+        padding: 0.5em;
+        position: absolute;
+        top:  20%;
+        left: 10%;
+        width: 80%;
+        height: auto;
+        z-index: 1500;
+        header {
+            color: #FFF;
+            @include text-shadow;
+            h1 {
+                margin: 0;
+            }
+        } 
+    }
+    #{$content-class-name} {
+        @include border-radius(6px);
+        background-color: #FFF;
+        width: 99.5%;
+        overflow: hidden;
+        padding: 5px;
+        margin: 0 auto;
+        .moo-title {
+            color: #000;
+            font-size: 2em;
+            font-weight: 700;
+            white-space: nowrap;
+            margin: .8em .5em;
         }
-    }
-}
-.moo-ui-modal-panel {
-    @include border-radius(6px);
-    background-color: #FFF;
-    width: 99.5%;
-    overflow: hidden;
-    padding: 5px;
-    margin: 0 auto;
-    .moo-title {
-        color: #000;
-        font-size: 2em;
-        font-weight: 700;
-        white-space: nowrap;
-        margin: .8em .5em;
-    }
-    .moo-text {
-        font-family: $base-font;
-        font-size: 1.5em;
-        line-height: 120%;
-        padding: 0;
-        margin: .75em .6em;
-    }
-   
-    /* Pasar estos a estilos de botones genericos */  
-    .moo-buttons { margin: 1.5em 0 0; overflow: hidden;}
-    .moo-ui-cancel, 
-    .moo-ui-submit {
-        @include border-radius(5px);
-        font-size: 1.5em;
-        font-weight: 700;
-        line-height: 200%;  
-        width: 49.5%;
-    }   
-    .moo-ui-cancel {
-        @include float-left;
-        @include background(linear-gradient(top, #eee, #ccc));
-        border: 1px solid #c1c1c1;
-    }
-    .moo-ui-submit {
-        @include float-right;
-        @include background(linear-gradient(top, #ccc, #888));
-        border: 1px solid #a1a1a1;
-        color: #FFF;
+        .moo-text {
+            font-family: $base-font;
+            font-size: 1.5em;
+            line-height: 120%;
+            padding: 0;
+            margin: .75em .6em;
+        }
+       
+        /* Pasar estos a estilos de botones genericos */  
+        .moo-buttons { margin: 1.5em 0 0; overflow: hidden;}
+        .moo-ui-cancel, 
+        .moo-ui-submit {
+            @include border-radius(5px);
+            font-size: 1.5em;
+            font-weight: 700;
+            line-height: 200%;  
+            width: 49.5%;
+        }   
+        .moo-ui-cancel {
+            @include float-left;
+            @include background(linear-gradient(top, #eee, #ccc));
+            border: 1px solid #c1c1c1;
+        }
+        .moo-ui-submit {
+            @include float-right;
+            @include background(linear-gradient(top, #ccc, #888));
+            border: 1px solid #a1a1a1;
+            color: #FFF;
+        }
     }
 }
