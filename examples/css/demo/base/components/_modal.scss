@@ -8,10 +8,18 @@
 // 1.   .mootor-ui-modal-container    - modal message
 // -----------------------------------------------------------------------------------
 
+
 // color variables
 // -----------------------------------------------------------------------------------
 
-// 1. .mootor-ui-modal-container
+// 1. mootor-modal
 // -----------------------------------------------------------------------------------
+// adds styles to a modal window with a title, message and cancel / accept buttons. 
+// parameters defaults:
+// $container-class: ".moo-ui-modal-container"
+// $panel-class: ".moo-ui-modal-panel"
+// $hidden-class: ".moo-hidden"
+// $width: large // large = 75%, medium = 50%, small = 25%
+// $buttons: 2 
+@include mootor-modal();
 
-@include modal-message;

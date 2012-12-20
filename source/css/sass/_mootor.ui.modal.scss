@@ -12,14 +12,16 @@
     &.moo-hidden {
         display: none;
     }
+    
 }
 
-// Modal mixin
-@mixin modal-message (
-    $container-class-name: ".moo-ui-modal-container", 
-    $content-class-name: ".moo-ui-modal-panel" 
-    ) {
-    #{$container-class-name} {
+
+@mixin mootor-modal (
+    $container-class:".moo-ui-modal-container",
+    $panel-class: ".moo-ui-modal-panel",
+    $hidden-class: ".hidden",
+    $width: large,
+    $buttons: 2) {
         background: #333;
         @include border-radius(6px);
         color: #333;
@@ -27,19 +29,37 @@
         padding: 0.5em;
         position: absolute;
         top:  20%;
-        left: 10%;
-        width: 80%;
-        height: auto;
         z-index: 1500;
+        height: auto;
+        opacity: 1;
+        @if $width == small {
+            left: 37.5%;
+            width: 25%;
+        }
+        @else if $width == medium {
+            left: 25%;
+            width: 50%;
+        }
+        @else if $width == large {
+            left: 12.5%;
+            width: 75%;
+        }
         header {
             color: #FFF;
             @include text-shadow;
             h1 {
                 margin: 0;
             }
+
         } 
+        &#{$hidden-class} {
+            opacity: 0;
+            width: 0;
+            height: 0;
+            @include single-transition($property: opacity);
+        }
     }
-    #{$content-class-name} {
+    #{$panel-class} {
         @include border-radius(6px);
         background-color: #FFF;
         width: 99.5%;
@@ -60,27 +80,32 @@
             padding: 0;
             margin: .75em .6em;
         }
-       
         /* Pasar estos a estilos de botones genericos */  
         .moo-buttons { margin: 1.5em 0 0; overflow: hidden;}
-        .moo-ui-cancel, 
-        .moo-ui-submit {
-            @include border-radius(5px);
-            font-size: 1.5em;
-            font-weight: 700;
-            line-height: 200%;  
-            width: 49.5%;
-        }   
-        .moo-ui-cancel {
-            @include float-left;
-            @include background(linear-gradient(top, #eee, #ccc));
-            border: 1px solid #c1c1c1;
+        @if $buttons == 2 {
+            .button {
+                font-size: 1.5em;
+                line-height: 150%;
+                width: 49.5%;
+                &.submit {
+                    @include float-right; 
+                    @include background(linear-gradient(top, #ccc, #888));
+                    border: 1px solid #a1a1a1;
+                    color: #FFF;
+                }
+                &.cancel {
+                    @include float-left;
+                    @include background(linear-gradient(top, #eee, #ccc));
+                    border: 1px solid #c1c1c1;
+                }
+            }
         }
-        .moo-ui-submit {
-            @include float-right;
-            @include background(linear-gradient(top, #ccc, #888));
-            border: 1px solid #a1a1a1;
-            color: #FFF;
+        @else {
+            .moo-buttons .button {
+                width: 100%;
+            }
         }
     }
+    
 }
+
