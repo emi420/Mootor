@@ -222,6 +222,8 @@ var $ = (function () {
             }
          }
          xmlhttp.send(data);
+         
+         return xmlhttp;
       },
       
       

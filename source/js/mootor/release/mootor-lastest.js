@@ -237,6 +237,8 @@ var $ = (function () {
             }
          }
          xmlhttp.send(data);
+         
+         return xmlhttp;
       },
       
       
@@ -550,8 +552,8 @@ var $ = (function () {
          $.ajax({
               url: script,
               callback: function(response) {
-                debugger;
                 var scriptEl = d.createElement("script");
+                scriptEl.src = script; 
                 scriptEl.innerHTML = response;
                 d.head.appendChild(scriptEl);
                 _scripts.list.push({
