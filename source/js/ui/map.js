@@ -44,7 +44,7 @@ Map.prototype = {
  */
 var Marker = function(options, map) {
     var infowindow,
-        self = this;
+    self = this;
 
     this.lat = options.lat;
     this.lon = options.lon;
@@ -55,8 +55,8 @@ var Marker = function(options, map) {
         new Map._API.LatLng(
             this.lat,
             this.lon
-        )
-    );
+            )
+        );
     
     infowindow = new Map._API.InfoWindow({
         content: self.html
@@ -113,8 +113,19 @@ $.extend({
             center: new Map._API.LatLng(self.center[0], self.center[1]),
             mapTypeId: self.mapType                    
         };
+        Map._API.Map.prototype.markers = new Array();
+        Map._API.Map.prototype.getMarkers = function() {
+            return this.markers
+        };
+        Map._API.Map.prototype.clearMarkers = function() {
+            
+            for(var i=0; i<this.markers.length; i++){
+                this.markers[i].setMap(null);
+            }
+            this.markers = new Array();
+        };
         self.map = new Map._API.Map(self.el,
-                    mapOptions);        
+            mapOptions);        
     },
     
     _APIScript: "https://maps.googleapis.com/maps/api/js?sensor=false&callback=$._UIMapCallbacks"
