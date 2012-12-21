@@ -41,6 +41,16 @@ var UI = function() {};
  *       $("#moo-ui-checkbox-1").ui({
  *           type: "Checkbox",
  *       });
+
+ *       // Date
+ *       $("#moo-ui-date-1").ui({
+ *           type: "Date",
+ *       });
+
+ *       // Time
+ *       $("#moo-ui-time-1").ui({
+ *           type: "Time",
+ *       });
  */
 
 
@@ -80,6 +90,12 @@ $.extend({
                     break;                 
                  case "Map":
                     UIControl = new Map(options);
+                    break;                 
+                 case "Date":
+                    UIControl = new UIDate(options);
+                    break;                 
+                 case "Time":
+                    UIControl = new UITime(options);
                     break;                 
              }
 

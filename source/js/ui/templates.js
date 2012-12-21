@@ -15,6 +15,10 @@ var _templates = {
     text: '<span class="cleanbox">&times</span>',
     
     select: '<div class="moo-ui-select-container"><span class="moo-ui-select-text"></span><span class="moo-ui-select-link"> </span></div>',
+
+    uidate: '<div class="moo-ui-date-container"><span class="moo-ui-date-text"></span><span class="moo-ui-date-link"> </span></div>',
+
+    uitime: '<div class="moo-ui-time-container"><span class="moo-ui-time-text"></span><span class="moo-ui-time-link"> </span></div>',
     
     camera: "<div class='moo-ui-image-container'><div class='moo-ui-image-panel'><ul class='moo-image-list'><li class='moo-image-wrapper'><div class='moo-image'></div></li></ul></div><header><a class='moo-ui-add-new' href='#takepic'>Take a picture</a><a class='moo-ui-add-filed' href='#choosepic'>Choose a picture</a><a class='moo-ui-delete' href='#delete'></a><a class='moo-ui-add-comment' href='#addcomment'></a></header></div>"
 

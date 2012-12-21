@@ -287,3 +287,92 @@
         }
     }
 }
+
+// Date
+
+.moo-ui-date-container {
+    @extend .moo-ui-input-container;
+    padding: 0.25em; 
+    height: 3em;
+    .moo-ui-date-text {
+        font-size: 1.3em;
+        line-height: 1.5;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        @include float-left;
+        padding: 0 0.35em;
+        width: 90%;
+    }
+    .moo-ui-date-link {
+        color: #999;
+        line-height: 2.25em;
+        text-align: right;
+        text-decoration: none;
+        @include float-right;
+        height: 100%;
+        padding: 0 0.5em;
+        position:relative;
+        right: -.2em;
+        z-index: 10;
+
+    }
+    .moo-ui-date-menu {
+        background-color: #999;
+        border-radius: 5px;
+        display: none;
+        padding: 1em;
+        position: absolute;
+        width: 99%;
+        z-index: 1000;
+    }
+    .moo-ui-date-wrapper {
+        overflow: hidden;
+        height: 100%;
+    }
+}   
+
+// time
+
+.moo-ui-time-container {
+    @extend .moo-ui-time-container;
+    padding: 0.25em; 
+    height: 3em;
+    .moo-ui-time-text {
+        font-size: 1.3em;
+        line-height: 1.5;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        @include float-left;
+        padding: 0 0.35em;
+        width: 90%;
+    }
+    .moo-ui-time-link {
+        color: #999;
+        line-height: 2.25em;
+        text-align: right;
+        text-decoration: none;
+        @include float-right;
+        height: 100%;
+        padding: 0 0.5em;
+        position:relative;
+        right: -.2em;
+        z-index: 10;
+
+    }
+    .moo-ui-time-menu {
+        background-color: #999;
+        border-radius: 5px;
+        display: none;
+        padding: 1em;
+        position: absolute;
+        width: 99%;
+        z-index: 1000;
+    }
+    .moo-ui-time-wrapper {
+        overflow: hidden;
+        height: 100%;
+    }
+}   
+

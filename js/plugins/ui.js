@@ -22,6 +22,10 @@ var _templates = {
     text: '<span class="cleanbox">&times</span>',
     
     select: '<div class="moo-ui-select-container"><span class="moo-ui-select-text"></span><span class="moo-ui-select-link"> </span></div>',
+
+    uidate: '<div class="moo-ui-date-container"><span class="moo-ui-date-text"></span><span class="moo-ui-date-link"> </span></div>',
+
+    uitime: '<div class="moo-ui-time-container"><span class="moo-ui-time-text"></span><span class="moo-ui-time-link"> </span></div>',
     
     camera: "<div class='moo-ui-image-container'><div class='moo-ui-image-panel'><ul class='moo-image-list'><li class='moo-image-wrapper'><div class='moo-image'></div></li></ul></div><header><a class='moo-ui-add-new' href='#takepic'>Take a picture</a><a class='moo-ui-add-filed' href='#choosepic'>Choose a picture</a><a class='moo-ui-delete' href='#delete'></a><a class='moo-ui-add-comment' href='#addcomment'></a></header></div>"
 
@@ -848,6 +852,158 @@ Select.prototype = {
 };
 
 
+
+/**
+ * UIDate
+ * @param {object} options Options
+ * @return {object} UIDate Mootor UI UIDate object
+ */
+var UIDate = function(options) {
+    var i = 0,
+        pseudoItems = this.pseudoItems = [];
+        
+    this.y = 0;
+    this.input = options.el;        
+    this._visibility = "hidden";
+    this._makeHTML();       
+    this._setTouchEvents();               
+
+    // Init value
+    if (options.value !== undefined) {
+        this.value = options.value;
+    }
+    
+    return this;
+            
+};
+
+/*
+ * UIDate prototype
+ */   
+UIDate.prototype = {
+
+    // Make HTML
+    _makeHTML: function() {
+        var el = document.createElement("div"),
+            template = _templates.uidate,
+            container = this.input.parentElement;
+
+        el.innerHTML = _templateParse({
+            template: template,
+            self: this
+        });           
+        
+        this.el = el.firstChild;                      
+        this.el.parentElement.insertBefore(this.input);
+        
+        // FIXME CHECK
+        container.appendChild(el);
+        
+        this.box = $(this.el).find(".moo-ui-select-menu")[0];
+        this.textspan = $(this.el).find(".moo-ui-select-text")[0];
+        
+    },
+    
+    // Set touch events
+    _setTouchEvents: function() {
+        var self = this;
+                
+        // Show selection box
+        $(this.input).onTapEnd(function(gesture) {
+            if (self._visibility !== "visible") {
+                self.input.focus();                
+                self._visibility = "visible";
+            }
+        });
+        
+        $(this.input).on("blur", function() {
+            self._visibility = "hidden";
+        });
+
+        // Prevents default on DragStart
+        $(this.el).onDragStart(_stopEventPropagationAndPreventDefault);        
+
+    },
+    
+};
+
+
+
+/**
+ * UITime
+ * @param {object} options Options
+ * @return {object} UITime Mootor UI UITime object
+ */
+var UITime = function(options) {
+    var i = 0,
+        pseudoItems = this.pseudoItems = [];
+        
+    this.y = 0;
+    this.input = options.el;        
+    this._visibility = "hidden";
+    this._makeHTML();       
+    this._setTouchEvents();               
+
+    // Init value
+    if (options.value !== undefined) {
+        this.value = options.value;
+    }
+    
+    return this;
+            
+};
+
+/*
+ * UITime prototype
+ */   
+UITime.prototype = {
+
+    // Make HTML
+    _makeHTML: function() {
+        var el = document.createElement("div"),
+            template = _templates.uitime,
+            container = this.input.parentElement;
+
+        el.innerHTML = _templateParse({
+            template: template,
+            self: this
+        });           
+        
+        this.el = el.firstChild;                      
+        this.el.parentElement.insertBefore(this.input);
+        
+        // FIXME CHECK
+        container.appendChild(el);
+        
+        this.box = $(this.el).find(".moo-ui-select-menu")[0];
+        this.textspan = $(this.el).find(".moo-ui-select-text")[0];
+        
+    },
+    
+    // Set touch events
+    _setTouchEvents: function() {
+        var self = this;
+                
+        // Show selection box
+        $(this.input).onTapEnd(function(gesture) {
+            if (self._visibility !== "visible") {
+                self.input.focus();                
+                self._visibility = "visible";
+            }
+        });
+        
+        $(this.input).on("blur", function() {
+            self._visibility = "hidden";
+        });
+
+        // Prevents default on DragStart
+        $(this.el).onDragStart(_stopEventPropagationAndPreventDefault);        
+
+    },
+    
+};
+
+
  /**
  * Text
  * @param {object} options Options
@@ -1572,6 +1728,12 @@ $.extend({
                     break;                 
                  case "Map":
                     UIControl = new Map(options);
+                    break;                 
+                 case "Date":
+                    UIControl = new UIDate(options);
+                    break;                 
+                 case "Time":
+                    UIControl = new UITime(options);
                     break;                 
              }
 

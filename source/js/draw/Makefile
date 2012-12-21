@@ -1,4 +1,4 @@
-PACKAGE=ui
+PACKAGE=draw
 VERSION=lastest
 RELEASE_DIR=release
 COPY_DIR=../../../js/plugins
@@ -9,21 +9,7 @@ COPY_FILE=$(PACKAGE).js
 all:
 	@@echo "Building..."
 	@@cat _header.js\
-	      templates.js\
-	      overlay.js\
-	      input.js\
-	      switch.js\
-	      checkbox.js\
-	      radio.js\
-	      select.js\
-	      date.js\
-	      time.js\
-	      text.js\
-	      textarea.js\
-	      camera.js\
-	      simpleCamera.js\
-	      map.js\
-	      ui.js\
+	      draw.js\
 	      _footer.js\
 	      > $(RELEASE_DIR)/$(RELEASE_FILE)
 	@@echo "Build completed."
