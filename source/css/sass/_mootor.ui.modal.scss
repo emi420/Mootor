@@ -14,13 +14,13 @@
     }
 }
 
-
-@mixin mootor-modal (
-    $container-class:".moo-ui-modal-container",
+@mixin mootor-modal( 
+    $container-class: ".moo-ui-modal-container",
     $panel-class: ".moo-ui-modal-panel",
     $hidden-class: ".hidden",
     $width: large,
     $buttons: 2) {
+    #{$container-class} {
         background: #333;
         @include border-radius(6px);
         color: #333;
@@ -51,13 +51,13 @@
             }
 
         } 
-    &#{$hidden-class} {
-        opacity: 0;
-        width: 0;
-        height: 0;
-        @include single-transition($property: opacity);
+        &#{$hidden-class} {
+            opacity: 0;
+            width: 0;
+            height: 0;
+            @include single-transition($property: opacity);
+        }
     }
-
     #{$panel-class} {
         @include border-radius(6px);
         background-color: #FFF;
@@ -81,26 +81,35 @@
         }
         /* Pasar estos a estilos de botones genericos */  
         .moo-buttons { margin: 1.5em 0 0; overflow: hidden;}
-        @if $buttons == 2 {
-            .button {
+           .button {
                 font-size: 1.5em;
                 line-height: 150%;
-                width: 49.5%;
                 &.submit {
-                    @include float-right; 
                     @include background(linear-gradient(top, #ccc, #888));
                     border: 1px solid #a1a1a1;
                     color: #FFF;
                 }
                 &.cancel {
-                    @include float-left;
                     @include background(linear-gradient(top, #eee, #ccc));
                     border: 1px solid #c1c1c1;
+                    color: #555;
+                }
+           }
+        @if $buttons == 2 {
+            .button {
+                width: 49.5%;
+                &.submit {
+                    @include float-right; 
+                }
+                &.cancel {
+                    @include float-left;
                 }
             }
         }
         @else {
             .moo-buttons .button {
+                display: block;
+                margin: .5em 0;
                 width: 100%;
             }
         }
