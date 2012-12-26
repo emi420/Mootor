@@ -135,8 +135,8 @@ $.extend({
          * @example
          *      $.ui.overlay()
          */
-         overlay: function() {
-            return new Overlay();
+         overlay: function(options) {
+            return new Overlay(options);
          },
         /**
          * Loading

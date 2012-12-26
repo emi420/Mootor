@@ -2,7 +2,10 @@
  * Overlay
  * @return {object} Overlay Mootor UI Overlay object
  */
-var Overlay = function() {
+var Overlay = function(options) {
+    var container
+        parent;
+
     if (Overlay.el === undefined) {
         Overlay._makeHTML({
             type: "overlay",
@@ -10,6 +13,15 @@ var Overlay = function() {
         });    
     }
     this.el = Overlay.el;
+
+    if (options !== undefined && options.container !== undefined) {
+       options.container.appendChild(this.el);
+    } else {
+        parent = document.body;
+        container = parent.firstChild;            
+        parent.insertBefore(this.el, container);            
+    }
+
     return this;
 },
 
@@ -79,9 +91,9 @@ $.extend({
         var type = options.type,
             object = options.object,
             el = document.createElement("div");
+            
         el.innerHTML = _templates[type];
         object.el = el.firstChild;
         $(object.el).setClass("moo-hidden");
-        document.body.insertBefore(object.el, document.body.firstChild);
     }
 }, Overlay);

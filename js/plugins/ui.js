@@ -243,7 +243,10 @@ _templateHTML = function(element, self) {
  * Overlay
  * @return {object} Overlay Mootor UI Overlay object
  */
-var Overlay = function() {
+var Overlay = function(options) {
+    var container
+        parent;
+
     if (Overlay.el === undefined) {
         Overlay._makeHTML({
             type: "overlay",
@@ -251,6 +254,15 @@ var Overlay = function() {
         });    
     }
     this.el = Overlay.el;
+
+    if (options !== undefined && options.container !== undefined) {
+       options.container.appendChild(this.el);
+    } else {
+        parent = document.body;
+        container = parent.firstChild;            
+        parent.insertBefore(this.el, container);            
+    }
+
     return this;
 },
 
@@ -320,10 +332,10 @@ $.extend({
         var type = options.type,
             object = options.object,
             el = document.createElement("div");
+            
         el.innerHTML = _templates[type];
         object.el = el.firstChild;
         $(object.el).setClass("moo-hidden");
-        document.body.insertBefore(object.el, document.body.firstChild);
     }
 }, Overlay);
 
@@ -1153,10 +1165,17 @@ TextArea.prototype = {
  * @return {object} Camera Mootor UI Camera object
  */
 var Camera = function(options) {
-
+    var self = this;
     this.input = options.el;
     this.position = options.position;
     this.count = 0;
+    this._overlay = $.ui.overlay({
+        container: options.el.parentElement
+    });
+    
+    $(this._overlay.el).onTapEnd(function(){
+        self.hide();
+    });
 
     Camera._makeHTML(options, this);       
     Camera._setTouchEvents(this);               
@@ -1178,15 +1197,25 @@ var Camera = function(options) {
  */
 Camera.prototype = {        
     
-    show: function() {
+    show: function(gesture) {
+        
+        var touch; 
+        
+        if (this.position === undefined && gesture !== undefined) {
+            touch = gesture.e.changedTouches[0];
+            this.el.style.left = (touch.pageX - (touch.pageX/2)) + "px";
+            this.el.style.top = touch.pageY + "px";
+        }
         if (typeof this.onShowBox === "function") {
             this.onShowBox();
         }
         $(this.el).show();
+        this._overlay.show();
         this._visibility = "visible";
     },
     
     hide: function() {
+        this._overlay.hide();
         $(this.el).hide();
         this._visibility = "hidden";
     },    
@@ -1309,7 +1338,6 @@ $.extend({
         self.el = el.firstChild;
         $selfEl = $(self.el);
         $selfEl.setClass("moo-empty");
-
         
         if (self.position === "top") {
             $selfEl.setClass("moo-top");
@@ -1333,7 +1361,7 @@ $.extend({
         $selfEl.hide();
         self._visibility = "hidden";
 
-        self.input.appendChild(self.el);
+        self.input.parentElement.appendChild(self.el);
 
         // FIXME CHECK: remove template element
         $(self.imageWrapper).hide();
@@ -1342,15 +1370,13 @@ $.extend({
     _setTouchEvents: function(self) {
     
         // Show/hide box
-        $(self.input).onTapEnd(function() {
+        $(self.input).onTapEnd(function(gesture) {
            if (self._visibility === "hidden") {
-               self.show();           
+               self.show(gesture);           
            } else {
                self.hide();                          
            }
-        });
-        $(self.el).onTapEnd(function() {
-           self.hide();
+           gesture.e.stopPropagation();
         });
         
         // Take/choose pictures
@@ -1689,6 +1715,16 @@ var UI = function() {};
  *       $("#moo-ui-checkbox-1").ui({
  *           type: "Checkbox",
  *       });
+
+ *       // Date
+ *       $("#moo-ui-date-1").ui({
+ *           type: "Date",
+ *       });
+
+ *       // Time
+ *       $("#moo-ui-time-1").ui({
+ *           type: "Time",
+ *       });
  */
 
 
@@ -1773,8 +1809,8 @@ $.extend({
          * @example
          *      $.ui.overlay()
          */
-         overlay: function() {
-            return new Overlay();
+         overlay: function(options) {
+            return new Overlay(options);
          },
         /**
          * Loading
