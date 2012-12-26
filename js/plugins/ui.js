@@ -839,6 +839,7 @@ Select.prototype = {
                 mooSelectIndex: i
             });            
         }
+        this.select(0);     
     }
     
     
