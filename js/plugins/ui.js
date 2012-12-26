@@ -713,7 +713,7 @@ Radio.prototype = {
  */
 var Select = function(options) {
     var i = 0,
-        pseudoItems = this.pseudoItems = [];
+    pseudoItems = this.pseudoItems = [];
         
     this.y = 0;
     this.input = options.el;        
@@ -750,8 +750,8 @@ Select.prototype = {
     // Make HTML
     _makeHTML: function() {
         var el = document.createElement("div"),
-            template = _templates.select,
-            container = this.input.parentElement;
+        template = _templates.select,
+        container = this.input.parentElement;
 
         el.innerHTML = _templateParse({
             template: template,
@@ -825,6 +825,22 @@ Select.prototype = {
             }
         }
     }
+    ,
+        
+    refresh: function () {
+        var i, pseudoItems = this.pseudoItems = [];
+        
+            
+        // Create "pseudo" items collection
+        pseudoItems = $(this.input).find("option");        
+        for(i = 0; i < pseudoItems.length; i++) {
+            this.pseudoItems.push({
+                el: pseudoItems[i],
+                mooSelectIndex: i
+            });            
+        }
+    }
+    
     
 };
 
