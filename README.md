@@ -30,8 +30,6 @@ See inside the "examples" folder, **you will need a web server (or UIWebView)** 
 
 If you want to run the examples in a desktop browser, **you will need to emulate touch events**, for example using the "Emulate touch events" in Chrome Developer Tools.
 
-http://voolks.com/mootor/
-
 # Useful info
 
 Currently compatibility is WebKit or Gecko based browsers (iOS, Android, Mozilla)
