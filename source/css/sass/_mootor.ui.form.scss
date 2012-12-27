@@ -77,6 +77,7 @@
         @include float-left;
         padding: 0 0.35em;
         width: 90%;
+        text-align: left;
     }
     .moo-ui-select-link {
         color: #999;
@@ -87,7 +88,7 @@
         height: 100%;
         padding: 0 0.5em;
         position:relative;
-        right: -.2em;
+        right: 1em;
         z-index: 10;
 
     }
@@ -266,6 +267,7 @@
     padding: 0;
     @extend .clearfix;
     width: 100%;
+    text-align: left;
     &:last-child { border:none;}
     fieldset {
         border: 1px solid #ccc;
@@ -303,6 +305,7 @@
         @include float-left;
         padding: 0 0.35em;
         width: 90%;
+        text-align: left;
     }
     .moo-ui-date-link {
         color: #999;
@@ -313,7 +316,7 @@
         height: 100%;
         padding: 0 0.5em;
         position:relative;
-        right: -.2em;
+        right: 1em;
         z-index: 10;
 
     }
@@ -347,6 +350,7 @@
         @include float-left;
         padding: 0 0.35em;
         width: 90%;
+        text-align: left;
     }
     .moo-ui-time-link {
         color: #999;
@@ -357,7 +361,7 @@
         height: 100%;
         padding: 0 0.5em;
         position:relative;
-        right: -.2em;
+        right: 1em;
         z-index: 10;
 
     }

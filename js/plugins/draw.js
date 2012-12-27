@@ -66,8 +66,8 @@ var _DrawArea = {
     addEventListeners: function(self) {
         var canvas = self.canvasElement,
             ctx = self.ctx,
-            canvasX = canvas.offsetLeft,
-            canvasY = canvas.offsetTop;
+            canvasX,
+            canvasY;
         
         $(canvas).on("touchend", function(e) {
             e.stopPropagation();
@@ -84,6 +84,11 @@ var _DrawArea = {
                 y,
                 lastX,
                 lastY;
+                
+            if (canvasX === undefined) {
+                canvasX = canvas.offsetLeft;
+                canvasY = canvas.offsetTop;
+            }
 
             lastX = gesture.lastX - canvasX;
             lastY = gesture.lastY - canvasY;

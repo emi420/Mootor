@@ -41,9 +41,19 @@ Camera.prototype = {
         var touch; 
         
         if (this.position === undefined && gesture !== undefined) {
-            touch = gesture.e.changedTouches[0];
-            //this.el.style.left = (touch.pageX - (touch.pageX/2)) + "px";
-            this.el.style.top = touch.pageY + "px";
+            var targetEl = gesture.e.target,
+                posX,
+                posY;
+                
+            posY = targetEl.offsetTop - 50;
+            posX = targetEl.offsetLeft - 175;
+
+            if (posX < 10) {
+                posX = 100;
+            }
+
+            this.el.style.left = posX + "px";
+            this.el.style.top = posY + "px";
         }
         if (typeof this.onShowBox === "function") {
             this.onShowBox();
@@ -53,7 +63,7 @@ Camera.prototype = {
         this._visibility = "visible";
     },
     
-    hide: function() {
+    hide: function() { 
         this._overlay.hide();
         $(this.el).hide();
         this._visibility = "hidden";

@@ -28,6 +28,12 @@ var UITime = function(options) {
  */   
 UITime.prototype = {
 
+    set: function(value) {
+        this.input.value = value;
+        this.value = this.input.value;
+        $(this.textspan).html(this.input.value);
+    },
+
     // Make HTML
     _makeHTML: function() {
         var el = document.createElement("div"),
@@ -45,8 +51,7 @@ UITime.prototype = {
         // FIXME CHECK
         container.appendChild(el);
         
-        this.box = $(this.el).find(".moo-ui-select-menu")[0];
-        this.textspan = $(this.el).find(".moo-ui-select-text")[0];
+        this.textspan = $(this.el).find(".moo-ui-time-text")[0];
         
     },
     
@@ -65,6 +70,11 @@ UITime.prototype = {
         $(this.input).on("blur", function() {
             self._visibility = "hidden";
         });
+
+        $(this.input).on("change", function() {
+            self.value = self.input.value;
+            $(self.textspan).html(self.value);
+        });          
 
         // Prevents default on DragStart
         $(this.el).onDragStart(_stopEventPropagationAndPreventDefault);        

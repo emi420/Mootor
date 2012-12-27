@@ -881,14 +881,15 @@ Select.prototype = {
  */
 var UIDate = function(options) {
     var i = 0,
-        pseudoItems = this.pseudoItems = [];
+        pseudoItems = this.pseudoItems = [],
+        self = this;
         
     this.y = 0;
     this.input = options.el;        
     this._visibility = "hidden";
     this._makeHTML();       
-    this._setTouchEvents();               
-
+    this._setTouchEvents();     
+    
     // Init value
     if (options.value !== undefined) {
         this.value = options.value;
@@ -902,6 +903,12 @@ var UIDate = function(options) {
  * UIDate prototype
  */   
 UIDate.prototype = {
+
+    set: function(value) {
+        this.input.value = value;
+        this.value = this.input.value;
+        $(this.textspan).html(this.input.value);
+    },
 
     // Make HTML
     _makeHTML: function() {
@@ -920,8 +927,7 @@ UIDate.prototype = {
         // FIXME CHECK
         container.appendChild(el);
         
-        this.box = $(this.el).find(".moo-ui-select-menu")[0];
-        this.textspan = $(this.el).find(".moo-ui-select-text")[0];
+        this.textspan = $(this.el).find(".moo-ui-date-text")[0];
         
     },
     
@@ -940,6 +946,11 @@ UIDate.prototype = {
         $(this.input).on("blur", function() {
             self._visibility = "hidden";
         });
+        
+        $(this.input).on("change", function() {
+            self.value = self.input.value;
+            $(self.textspan).html(self.value);
+        });          
 
         // Prevents default on DragStart
         $(this.el).onDragStart(_stopEventPropagationAndPreventDefault);        
@@ -979,6 +990,12 @@ var UITime = function(options) {
  */   
 UITime.prototype = {
 
+    set: function(value) {
+        this.input.value = value;
+        this.value = this.input.value;
+        $(this.textspan).html(this.input.value);
+    },
+
     // Make HTML
     _makeHTML: function() {
         var el = document.createElement("div"),
@@ -996,8 +1013,7 @@ UITime.prototype = {
         // FIXME CHECK
         container.appendChild(el);
         
-        this.box = $(this.el).find(".moo-ui-select-menu")[0];
-        this.textspan = $(this.el).find(".moo-ui-select-text")[0];
+        this.textspan = $(this.el).find(".moo-ui-time-text")[0];
         
     },
     
@@ -1016,6 +1032,11 @@ UITime.prototype = {
         $(this.input).on("blur", function() {
             self._visibility = "hidden";
         });
+
+        $(this.input).on("change", function() {
+            self.value = self.input.value;
+            $(self.textspan).html(self.value);
+        });          
 
         // Prevents default on DragStart
         $(this.el).onDragStart(_stopEventPropagationAndPreventDefault);        
@@ -1210,9 +1231,19 @@ Camera.prototype = {
         var touch; 
         
         if (this.position === undefined && gesture !== undefined) {
-            touch = gesture.e.changedTouches[0];
-            //this.el.style.left = (touch.pageX - (touch.pageX/2)) + "px";
-            this.el.style.top = touch.pageY + "px";
+            var targetEl = gesture.e.target,
+                posX,
+                posY;
+                
+            posY = targetEl.offsetTop - 50;
+            posX = targetEl.offsetLeft - 175;
+
+            if (posX < 10) {
+                posX = 100;
+            }
+
+            this.el.style.left = posX + "px";
+            this.el.style.top = posY + "px";
         }
         if (typeof this.onShowBox === "function") {
             this.onShowBox();
@@ -1222,7 +1253,7 @@ Camera.prototype = {
         this._visibility = "visible";
     },
     
-    hide: function() {
+    hide: function() { 
         this._overlay.hide();
         $(this.el).hide();
         this._visibility = "hidden";
