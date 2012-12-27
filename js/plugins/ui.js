@@ -27,7 +27,7 @@ var _templates = {
 
     uitime: '<div class="moo-ui-time-container"><span class="moo-ui-time-text"></span><span class="moo-ui-time-link"> </span></div>',
     
-    camera: "<div class='moo-ui-image-container'><div class='moo-ui-image-panel'><ul class='moo-image-list'><li class='moo-image-wrapper'><div class='moo-image'></div></li></ul></div><header><a class='moo-ui-add-new' href='#takepic'>Take a picture</a><a class='moo-ui-add-filed' href='#choosepic'>Choose a picture</a><a class='moo-ui-delete' href='#delete'></a><a class='moo-ui-add-comment' href='#addcomment'></a></header></div>"
+    camera: "<div class='moo-ui-image-container'><div class='moo-ui-image-panel'><ul class='moo-image-list'><li class='moo-image-wrapper'><div class='moo-image'></div></li></ul></div><header><a class='moo-ui-add-new' href='#takepic'>Take a picture</a><a class='moo-ui-add-filed' href='#choosepic'>Choose a picture</a><a class='moo-ui-delete' href='#delete'></a></header></div>"
 
 },
 
@@ -247,17 +247,24 @@ var Overlay = function(options) {
     var container
         parent;
 
-    if (Overlay.el === undefined) {
-        Overlay._makeHTML({
+    if (options !== undefined && options.container !== undefined) {
+
+        this.el = Overlay._makeHTML({
             type: "overlay",
             object: Overlay
         });    
-    }
-    this.el = Overlay.el;
 
-    if (options !== undefined && options.container !== undefined) {
-       options.container.appendChild(this.el);
+        options.container.appendChild(this.el);
     } else {
+
+        if (Overlay.el === undefined) {
+             Overlay.el = Overlay._makeHTML({
+                type: "overlay",
+                object: Overlay
+            });    
+        }
+        this.el = Overlay.el;
+
         parent = document.body;
         container = parent.firstChild;            
         parent.insertBefore(this.el, container);            
@@ -272,7 +279,7 @@ var Overlay = function(options) {
  */
 Modal = function() {
     if (Modal.el === undefined) {
-        Overlay._makeHTML({
+        Modal.el = Overlay._makeHTML({
             type: "modal",
             object: Modal
         });    
@@ -287,7 +294,7 @@ Modal = function() {
  */
 Loading = function() {
     if (Loading.el === undefined) {
-        Overlay._makeHTML({
+        Loading.el = Overlay._makeHTML({
             type: "loading",
             object: Loading
         });    
@@ -336,6 +343,8 @@ $.extend({
         el.innerHTML = _templates[type];
         object.el = el.firstChild;
         $(object.el).setClass("moo-hidden");
+        
+        return object.el;
     }
 }, Overlay);
 
@@ -1172,7 +1181,6 @@ var Camera = function(options) {
     this._overlay = $.ui.overlay({
         container: options.el.parentElement
     });
-    
     $(this._overlay.el).onTapEnd(function(){
         self.hide();
     });
@@ -1203,7 +1211,7 @@ Camera.prototype = {
         
         if (this.position === undefined && gesture !== undefined) {
             touch = gesture.e.changedTouches[0];
-            this.el.style.left = (touch.pageX - (touch.pageX/2)) + "px";
+            //this.el.style.left = (touch.pageX - (touch.pageX/2)) + "px";
             this.el.style.top = touch.pageY + "px";
         }
         if (typeof this.onShowBox === "function") {

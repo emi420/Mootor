@@ -6,17 +6,24 @@ var Overlay = function(options) {
     var container
         parent;
 
-    if (Overlay.el === undefined) {
-        Overlay._makeHTML({
+    if (options !== undefined && options.container !== undefined) {
+
+        this.el = Overlay._makeHTML({
             type: "overlay",
             object: Overlay
         });    
-    }
-    this.el = Overlay.el;
 
-    if (options !== undefined && options.container !== undefined) {
-       options.container.appendChild(this.el);
+        options.container.appendChild(this.el);
     } else {
+
+        if (Overlay.el === undefined) {
+             Overlay.el = Overlay._makeHTML({
+                type: "overlay",
+                object: Overlay
+            });    
+        }
+        this.el = Overlay.el;
+
         parent = document.body;
         container = parent.firstChild;            
         parent.insertBefore(this.el, container);            
@@ -31,7 +38,7 @@ var Overlay = function(options) {
  */
 Modal = function() {
     if (Modal.el === undefined) {
-        Overlay._makeHTML({
+        Modal.el = Overlay._makeHTML({
             type: "modal",
             object: Modal
         });    
@@ -46,7 +53,7 @@ Modal = function() {
  */
 Loading = function() {
     if (Loading.el === undefined) {
-        Overlay._makeHTML({
+        Loading.el = Overlay._makeHTML({
             type: "loading",
             object: Loading
         });    
@@ -95,5 +102,7 @@ $.extend({
         el.innerHTML = _templates[type];
         object.el = el.firstChild;
         $(object.el).setClass("moo-hidden");
+        
+        return object.el;
     }
 }, Overlay);

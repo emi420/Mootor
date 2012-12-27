@@ -12,7 +12,6 @@ var Camera = function(options) {
     this._overlay = $.ui.overlay({
         container: options.el.parentElement
     });
-    
     $(this._overlay.el).onTapEnd(function(){
         self.hide();
     });
@@ -43,7 +42,7 @@ Camera.prototype = {
         
         if (this.position === undefined && gesture !== undefined) {
             touch = gesture.e.changedTouches[0];
-            this.el.style.left = (touch.pageX - (touch.pageX/2)) + "px";
+            //this.el.style.left = (touch.pageX - (touch.pageX/2)) + "px";
             this.el.style.top = touch.pageY + "px";
         }
         if (typeof this.onShowBox === "function") {
