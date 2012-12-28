@@ -11,10 +11,11 @@ Current modules (mootor.js):
 
 and plugins:
 
-* ui.js - User interface
-* nav.js - Navigation
-* app.js - Application
-* geo.js - Geopositioning
+* ui.js   - User interface
+* nav.js  - Navigation
+* app.js  - Application
+* geo.js  - Geopositioning
+* draw.js - Drawing
 
 # About Mootor
 
@@ -51,12 +52,6 @@ Required:
 Optional:
 
 * Java for minifying JavaScript code using YUI Compressor 
-
-You can help this way:
-
-* Suggest and/or build new features
-* Help to find and/or fix issues
-* Fork + Pull request
 
 # Design
 
