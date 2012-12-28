@@ -12,13 +12,12 @@
     &.moo-hidden {
         display: none;
     }
-    
 }
 
-@mixin mootor-modal (
-    $container-class:".moo-ui-modal-container",
+@mixin mootor-modal( 
+    $container-class: ".moo-ui-modal-container",
     $panel-class: ".moo-ui-modal-panel",
-    $hidden-class: ".moo-hidden",
+    $hidden-class: ".hidden",
     $width: large,
     $buttons: 2) {
     #{$container-class} {
@@ -44,14 +43,14 @@
             left: 12.5%;
             width: 75%;
         }
-
         header {
             color: #FFF;
             @include text-shadow;
             h1 {
                 margin: 0;
             }
-        }
+
+        } 
         &#{$hidden-class} {
             opacity: 0;
             width: 0;
@@ -82,29 +81,37 @@
         }
         /* Pasar estos a estilos de botones genericos */  
         .moo-buttons { margin: 1.5em 0 0; overflow: hidden;}
+           .button {
+                font-size: 1.5em;
+                line-height: 150%;
+                // &.submit {
+                    // @include background(linear-gradient(top, #ccc, #888));
+                    // border: 1px solid #a1a1a1;
+                    // color: #FFF;
+                // }
+                // &.cancel {
+                    // @include background(linear-gradient(top, #eee, #ccc));
+                    // border: 1px solid #c1c1c1;
+                    // color: #555;
+                // }
+           }
         @if $buttons == 2 {
             .button {
                 width: 49.5%;
                 &.submit {
                     @include float-right; 
-                    @include background(linear-gradient(top, #ccc, #888));
-                    border: 1px solid #a1a1a1;
-                    color: #FFF;
                 }
                 &.cancel {
                     @include float-left;
-                    @include background(linear-gradient(top, #eee, #ccc));
-                    border: 1px solid #c1c1c1;
                 }
             }
         }
         @else {
             .moo-buttons .button {
+                display: block;
+                margin: .5em 0;
                 width: 100%;
             }
         }
     }
-    
 }
-
-
