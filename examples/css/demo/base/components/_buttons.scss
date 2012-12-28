@@ -33,19 +33,23 @@ $badge-bg-color: $color-tn-tab-red;
 // 
 // No styleguide reference
 .button {
-    // font-size: 1.4em;
     font-size: 13px;
+    // font-size: 1.5em;
     font-weight: 700;
     padding: 7px 20px;
     // padding: .5em 1.5em;
     border: 1px solid $color-border-main;
     background-color: lighten($color-border-main, 50%);
-    @include border-radius(3px);  
+    @include border-radius(3px);
     &.submit {
         color: $submit-text-color;
         border-color:$submit-border-color; 
         background-color: $submit-bg-color;
     }
+    &.cancel {
+        
+    }
+    
 }
 
 

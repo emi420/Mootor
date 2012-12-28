@@ -760,7 +760,7 @@ nav a {
 
 /* line 5, ../../source/css/sass/_mootor.ui.overlay.scss */
 .moo-overlay {
-  background-color: #f7f7f7;
+  background-color: #dedede;
   position: absolute;
   top: 0;
   left: 0;
@@ -870,99 +870,6 @@ nav a {
 /* line 12, ../../source/css/sass/_mootor.ui.modal.scss */
 .moo-ui-modal-placeholder.moo-hidden {
   display: none;
-}
-
-/* line 16, ../../source/css/sass/_mootor.ui.modal.scss */
-.moo-ui-modal-container {
-  background: #333;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  -ms-border-radius: 6px;
-  -o-border-radius: 6px;
-  border-radius: 6px;
-  color: #333;
-  padding: 0.5em;
-  position: relative;
-  top: -10em;
-  left: -15em;
-  width: 31em;
-  height: auto;
-  z-index: 1500;
-}
-/* line 27, ../../source/css/sass/_mootor.ui.modal.scss */
-.moo-ui-modal-container header {
-  color: #FFF;
-  text-shadow: 0px 0px 1px #aaaaaa;
-}
-
-/* line 32, ../../source/css/sass/_mootor.ui.modal.scss */
-.moo-ui-modal-panel {
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  -ms-border-radius: 6px;
-  -o-border-radius: 6px;
-  border-radius: 6px;
-  background-color: #FFF;
-  width: 30em;
-  overflow: hidden;
-  padding: 5px;
-  /* Pasar estos a estilos de botones genericos */
-}
-/* line 38, ../../source/css/sass/_mootor.ui.modal.scss */
-.moo-ui-modal-panel .moo-title {
-  color: #000;
-  font-size: 2em;
-  font-weight: 700;
-  white-space: nowrap;
-}
-/* line 44, ../../source/css/sass/_mootor.ui.modal.scss */
-.moo-ui-modal-panel .moo-text {
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 1.5em;
-  line-height: 120%;
-  padding: 0;
-  margin: 0.5em;
-}
-/* line 53, ../../source/css/sass/_mootor.ui.modal.scss */
-.moo-ui-modal-panel .moo-buttons {
-  margin: 1.5em 0 0;
-  overflow: hidden;
-}
-/* line 55, ../../source/css/sass/_mootor.ui.modal.scss */
-.moo-ui-modal-panel .moo-ui-cancel,
-.moo-ui-modal-panel .moo-ui-submit {
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
-  border-radius: 5px;
-  font-size: 1.5em;
-  font-weight: 700;
-  line-height: 200%;
-  width: 49%;
-}
-/* line 62, ../../source/css/sass/_mootor.ui.modal.scss */
-.moo-ui-modal-panel .moo-ui-cancel {
-  display: inline;
-  float: left;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #eeeeee), color-stop(100%, #cccccc));
-  background: -webkit-linear-gradient(top, #eeeeee, #cccccc);
-  background: -moz-linear-gradient(top, #eeeeee, #cccccc);
-  background: -o-linear-gradient(top, #eeeeee, #cccccc);
-  background: linear-gradient(top, #eeeeee, #cccccc);
-  border: 1px solid #c1c1c1;
-}
-/* line 67, ../../source/css/sass/_mootor.ui.modal.scss */
-.moo-ui-modal-panel .moo-ui-submit {
-  display: inline;
-  float: right;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #cccccc), color-stop(100%, #888888));
-  background: -webkit-linear-gradient(top, #cccccc, #888888);
-  background: -moz-linear-gradient(top, #cccccc, #888888);
-  background: -o-linear-gradient(top, #cccccc, #888888);
-  background: linear-gradient(top, #cccccc, #888888);
-  border: 1px solid #a1a1a1;
-  color: #FFF;
 }
 
 /* line 5, ../../source/css/sass/_mootor.ui.image.scss */
@@ -1778,7 +1685,7 @@ nav.app .moo-nav.client-accept:before {
   background-color: #567ec9;
 }
 
-/* line 52, demo/base/components/_buttons.scss */
+/* line 56, demo/base/components/_buttons.scss */
 .moo-ui-badge {
   background-color: #a6220f;
   color: #f3f3f3;
@@ -1836,6 +1743,100 @@ nav.app .moo-nav.client-accept:before {
   background: -moz-linear-gradient(top left, #ee5b46, #8f1d0d);
   background: -o-linear-gradient(top left, #ee5b46, #8f1d0d);
   background: linear-gradient(top left, #ee5b46, #8f1d0d);
+}
+
+/* line 23, ../../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-container {
+  background: #333;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+  color: #333;
+  text-align: center;
+  padding: 0.5em;
+  position: absolute;
+  top: 20%;
+  z-index: 1500;
+  height: auto;
+  opacity: 1;
+  left: 12.5%;
+  width: 75%;
+}
+/* line 46, ../../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-container header {
+  color: #FFF;
+  text-shadow: 0px 0px 1px #aaaaaa;
+}
+/* line 49, ../../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-container header h1 {
+  margin: 0;
+}
+/* line 54, ../../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-container.hidden {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  -webkit-transition: opacity 1s;
+  -moz-transition: opacity 1s;
+  -o-transition: opacity 1s;
+  transition: opacity 1s;
+}
+
+/* line 61, ../../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-panel {
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+  background-color: #FFF;
+  width: 99.5%;
+  overflow: hidden;
+  padding: 5px;
+  margin: 0 auto;
+  /* Pasar estos a estilos de botones genericos */
+}
+/* line 68, ../../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-panel .moo-title {
+  color: #000;
+  font-size: 2em;
+  font-weight: 700;
+  white-space: nowrap;
+  margin: .8em .5em;
+}
+/* line 75, ../../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-panel .moo-text {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1.5em;
+  line-height: 120%;
+  padding: 0;
+  margin: .75em .6em;
+}
+/* line 83, ../../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-panel .moo-buttons {
+  margin: 1.5em 0 0;
+  overflow: hidden;
+}
+/* line 84, ../../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-panel .button {
+  font-size: 1.5em;
+  line-height: 150%;
+}
+/* line 99, ../../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-panel .button {
+  width: 49.5%;
+}
+/* line 101, ../../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-panel .button.submit {
+  display: inline;
+  float: right;
+}
+/* line 104, ../../source/css/sass/_mootor.ui.modal.scss */
+.moo-ui-modal-panel .button.cancel {
+  display: inline;
+  float: left;
 }
 
 /* line 23, demo/base/components/_gallery.scss */

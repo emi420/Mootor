@@ -95,6 +95,16 @@ nav {
     }   
 }
 
+// Header nav buttons
+
+.moo-nav-back {
+    opacity: 0;
+    @include transition(opacity, .5s);    
+    &.moo-visible {
+        opacity: 1;    
+    }
+ }
+
 // Hacks
  
 .moo-panel {

@@ -757,7 +757,7 @@ Radio.prototype = {
  */
 var Select = function(options) {
     var i = 0,
-        pseudoItems = this.pseudoItems = [];
+    pseudoItems = this.pseudoItems = [];
         
     this.y = 0;
     this.input = options.el;        
@@ -794,8 +794,8 @@ Select.prototype = {
     // Make HTML
     _makeHTML: function() {
         var el = document.createElement("div"),
-            template = _templates.select,
-            container = this.input.parentElement;
+        template = _templates.select,
+        container = this.input.parentElement;
 
         el.innerHTML = _templateParse({
             template: template,
@@ -869,6 +869,23 @@ Select.prototype = {
             }
         }
     }
+    ,
+        
+    refresh: function () {
+        var i, pseudoItems = this.pseudoItems = [];
+        
+            
+        // Create "pseudo" items collection
+        pseudoItems = $(this.input).find("option");        
+        for(i = 0; i < pseudoItems.length; i++) {
+            this.pseudoItems.push({
+                el: pseudoItems[i],
+                mooSelectIndex: i
+            });            
+        }
+        this.select(0);     
+    }
+    
     
 };
 
@@ -1626,7 +1643,7 @@ Map.prototype = {
  */
 var Marker = function(options, map) {
     var infowindow,
-        self = this;
+    self = this;
 
     this.lat = options.lat;
     this.lon = options.lon;
@@ -1637,8 +1654,8 @@ var Marker = function(options, map) {
         new Map._API.LatLng(
             this.lat,
             this.lon
-        )
-    );
+            )
+        );
     
     infowindow = new Map._API.InfoWindow({
         content: self.html
@@ -1695,8 +1712,19 @@ $.extend({
             center: new Map._API.LatLng(self.center[0], self.center[1]),
             mapTypeId: self.mapType                    
         };
+        Map._API.Map.prototype.markers = new Array();
+        Map._API.Map.prototype.getMarkers = function() {
+            return this.markers
+        };
+        Map._API.Map.prototype.clearMarkers = function() {
+            
+            for(var i=0; i<this.markers.length; i++){
+                this.markers[i].setMap(null);
+            }
+            this.markers = new Array();
+        };
         self.map = new Map._API.Map(self.el,
-                    mapOptions);        
+            mapOptions);        
     },
     
     _APIScript: "https://maps.googleapis.com/maps/api/js?sensor=false&callback=$._UIMapCallbacks"
