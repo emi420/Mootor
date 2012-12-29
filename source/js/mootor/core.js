@@ -534,22 +534,16 @@ var $ = (function () {
       // Include script
       include: function(script, callback) {
          var d = document;
-         $.ajax({
-              url: script,
-              callback: function(response) {
-                var scriptEl = d.createElement("script");
-                scriptEl.src = script; 
-                scriptEl.innerHTML = response;
-                d.head.appendChild(scriptEl);
-                _scripts.list.push({
-                    path: script,
-                    el: scriptEl
-                });
-                if (typeof callback === "function") {
-                    callback();
-                }
-              }
-         });           
+         var scriptEl = d.createElement("script");
+         scriptEl.src = script; 
+         d.head.appendChild(scriptEl);
+         _scripts.list.push({
+             path: script,
+             el: scriptEl
+         });
+         if (typeof callback === "function") {
+             callback();
+         }             
       },
       
       // Remove script

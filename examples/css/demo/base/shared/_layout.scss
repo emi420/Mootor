@@ -5,29 +5,40 @@
 // This partial contains general layout and shared styles among panels 
 //
 // Contents: 
-// 1. .moo-header - header styles
+// 1.  .moo-header - header styles
 // 1.1 .moo-header.hidden  - header styles when is hidden
-// 2. .moo-panels - panels common styling
+// 2.  .moo-footer - footer styles
+// 3.  .moo-panels - panels common styling
 // -----------------------------------------------------------------------------------
+
+
+// color variables
+// -----------------------------------------------------------------------------------
+
+$color-bg-header-bar: desaturate(lighten($color-main, 5%), 12%);
+$color-header-text: $color-text-alt;
+
+$color-bg-footer-bar: desaturate(lighten($color-main, 5%), 12%);
+$color-footer-text: $color-text-alt;
+
+
 
 // 1. header
 // -----------------------------------------------------------------------------------
 .moo-header {
-    color: $color-text-alt;    
-    font-weight: bold;
-    background-color: lighten($color-bg-alt, 5%);
-    border: 1px solid $color-border-main;
+    color: $color-header-text;    
+    background-color: $color-bg-header-bar;
+    border-bottom: 1px solid $color-border-main;
     h1 {
         @include float-left;
-        font-size: 2.3em;
-        line-height: 1.5;
+        font-size: 1.5em;
         text-align: center;
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;       
         margin: 0;
-        padding: 0 2em;
-        width: 75%;
+        padding: 0 4em;
+        width: 100%;
     }
 }
  
@@ -44,11 +55,48 @@
         top: -9999em !important; // 2
     }
 }
+// FIXME: merge with visually hidden instead of overwriting .hidden class!!
 
-// 2. panels 
-// -----------------------------------------------------------------------------------
-.moo-panel  {
-    background: $color-bg-main; 
+// 2. footer
+// ----------------------------------------------------------------------------------
+.moo-footer {
+    color: $color-footer-text;    
+    background-color: $color-bg-footer-bar;
+    border: 1px solid $color-border-main;
+    nav {
+        a {
+            background-color: transparent;
+            border: none;
+            color: $color-footer-text;
+            font-size: 1em;
+            font-weight: bold;
+            text-align: center;
+        }
+    }
 }
 
+
+// 3. panels 
+// -----------------------------------------------------------------------------------
+.moo-panels,
+.moo-panel  {
+    background: darken($color-bg-main, 5%); 
+}
+
+
+// 4. sections
+// -----------------------------------------------------------------------------------
+
+.section-title {
+    background: darken($color-bg-main, 5%);
+    border-bottom: 1px solid  darken( $light-neutral, 10%);
+    color: $color-text-action;
+    font-size: 2.6em;
+    padding: .5em 0;
+    strong {
+        color: $color-text-strong;
+        display: block;
+        font-size: 1.35em;
+    }
+}
 

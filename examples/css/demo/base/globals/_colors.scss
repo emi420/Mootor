@@ -1,36 +1,37 @@
-// TrulyNolen app color swatches
+// App color swatches
 
 
 // main palette
-$color-tn-white: #F3F3F3;
-$color-tn-black: #151618;
-$color-tn-blue: #14233F;
-$color-tn-light-blue: #9FB7E8;
-$color-tn-tan: #FFBBA6;
-
-// tabs color palette
-$color-tn-tab-red: #A6220F;
-$color-tn-tab-yellow: #FFE0A6;
-$color-tn-tab-green: #00803B;
+$color-main: #10155E;
+$color-accent: #EE3124;
+$light-neutral: #F0F0F0;
+$dark-neutral: #181A1B;
 
 
 // Basic color variables
 
-$color-bg-main: $color-tn-white;
-$color-bg-alt: $color-tn-black;
-$color-bg-action: lighten($color-tn-light-blue, 10%);
-$color-bg-accent: lighten($color-tn-tan, 20%);
+$color-bg-main: $light-neutral;
+$color-bg-alt: $dark-neutral;
+$color-bg-action: lighten($color-main, 30%);
+$color-bg-accent: lighten($color-accent, 30%);
 
 
-$color-text-main: $color-tn-black;
-$color-text-alt: $color-tn-white;
-$color-text-action: $color-tn-blue;
-$color-text-accent: darken($color-tn-tan, 30%);
+$color-text-strong: darken($color-main, 8%);
+$color-text-titles: $dark-neutral;
+$color-text-main: lighten($dark-neutral, 35%);
+$color-text-secondary: lighten($dark-neutral, 20%);
+$color-text-terciary: lighten($dark-neutral, 30%);
 
-$color-border-main: $color-tn-black;
-$color-border-alt: darken($color-tn-white, 10%);
-$color-border-action: $color-tn-blue;
-$color-border-accent: darken($color-tn-tan, 20%);
+$color-text-alt: $light-neutral;
+$color-text-action: lighten($color-main, 15%);
+$color-text-accent: $color-accent;
+
+
+$color-border-main: $dark-neutral;
+$color-border-alt: $light-neutral;
+$color-border-action: darken($color-main, 10%);
+$color-border-accent: darken($color-accent, 20%);
+
 
 
 $color-border-forms: lighten($color-border-main, 70%);

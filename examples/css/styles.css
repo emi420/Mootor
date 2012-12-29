@@ -298,6 +298,19 @@ nav a {
 }
 
 /* line 100, ../../source/css/sass/_mootor.nav.scss */
+.moo-nav-back {
+  opacity: 0;
+  -webkit-transition: opacity, 0.5s;
+  -moz-transition: opacity, 0.5s;
+  -o-transition: opacity, 0.5s;
+  transition: opacity, 0.5s;
+}
+/* line 103, ../../source/css/sass/_mootor.nav.scss */
+.moo-nav-back.moo-visible {
+  opacity: 1;
+}
+
+/* line 110, ../../source/css/sass/_mootor.nav.scss */
 .moo-panel {
   -webkit-transition-duration: 0;
   -webkit-transform: translate3d(0, 0, 0);
@@ -414,8 +427,14 @@ nav a {
   padding: 0.25em;
   height: 3em;
 }
+
 /* line 65, ../../source/css/sass/_mootor.ui.form.scss */
-.moo-ui-select-container .moo-ui-select-text {
+.moo-ui-select-wrapper {
+  overflow: hidden;
+  height: 100%;
+}
+/* line 68, ../../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-select-wrapper .moo-ui-select-text {
   font-size: 1.5em;
   line-height: 1.5;
   text-overflow: ellipsis;
@@ -426,8 +445,8 @@ nav a {
   padding: 0 0.35em;
   width: 90%;
 }
-/* line 75, ../../source/css/sass/_mootor.ui.form.scss */
-.moo-ui-select-container .moo-ui-select-link {
+/* line 78, ../../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-select-wrapper .moo-ui-select-link {
   color: #000;
   line-height: 2.25em;
   text-align: right;
@@ -440,18 +459,8 @@ nav a {
   right: 0;
   z-index: 10;
 }
-/* line 86, ../../source/css/sass/_mootor.ui.form.scss */
-.moo-ui-select-container .moo-ui-select-link:after {
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #cccccc));
-  background: -webkit-linear-gradient(top, #ffffff, #cccccc);
-  background: -moz-linear-gradient(top, #ffffff, #cccccc);
-  background: -o-linear-gradient(top, #ffffff, #cccccc);
-  background: linear-gradient(top, #ffffff, #cccccc);
-  border-top: 1px solid #666;
-  border-right: 1px solid #666;
-  border-bottom: 1px solid #666;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
+/* line 89, ../../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-select-wrapper .moo-ui-select-link:after {
   content: " ";
   display: block;
   position: absolute;
@@ -461,85 +470,22 @@ nav a {
   height: 2.8em;
   z-index: -1;
 }
-/* line 103, ../../source/css/sass/_mootor.ui.form.scss */
-.moo-ui-select-container .moo-ui-select-menu {
-  background-color: #999;
-  border-radius: 5px;
-  display: none;
-  padding: 1em;
+/* line 100, ../../source/css/sass/_mootor.ui.form.scss */
+.moo-ui-select-wrapper select {
   position: absolute;
-  width: 99%;
-  z-index: 1000;
-}
-/* line 112, ../../source/css/sass/_mootor.ui.form.scss */
-.moo-ui-select-container .moo-ui-select-wrapper {
-  overflow: hidden;
-  height: 100%;
-}
-/* line 116, ../../source/css/sass/_mootor.ui.form.scss */
-.moo-ui-select-container .moo-ui-select-list {
-  font-size: 1.5em;
-  background: #FFF;
-  border-radius: 5px;
-}
-/* line 120, ../../source/css/sass/_mootor.ui.form.scss */
-.moo-ui-select-container .moo-ui-select-list li {
-  padding: 1em;
-  border-bottom: 1px solid #CCC;
-  white-space: nowrap;
-}
-/* line 124, ../../source/css/sass/_mootor.ui.form.scss */
-.moo-ui-select-container .moo-ui-select-list li:last-child {
-  border: none;
-}
-/* line 125, ../../source/css/sass/_mootor.ui.form.scss */
-.moo-ui-select-container .moo-ui-select-list li.selected {
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #daeaec), color-stop(100%, #cee3e6));
-  background: -webkit-linear-gradient(top, #daeaec, #cee3e6);
-  background: -moz-linear-gradient(top, #daeaec, #cee3e6);
-  background: -o-linear-gradient(top, #daeaec, #cee3e6);
-  background: linear-gradient(top, #daeaec, #cee3e6);
-  border-top-color: #AEBBBD;
-  border-bottom-color: #AEBBBD;
-  color: #3F8D94;
-}
-/* line 134, ../../source/css/sass/_mootor.ui.form.scss */
-.moo-ui-select-container.moo-bottom .moo-ui-select-menu {
-  top: 4.5em;
-}
-/* line 136, ../../source/css/sass/_mootor.ui.form.scss */
-.moo-ui-select-container.moo-bottom .moo-ui-select-menu:before {
-  content: " ";
-  display: block;
-  position: absolute;
-  top: -2.5em;
-  left: 25%;
-  border-top: 15px solid transparent;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-bottom: 15px solid #999;
-}
-/* line 150, ../../source/css/sass/_mootor.ui.form.scss */
-.moo-ui-select-container.moo-top .moo-ui-select-menu {
-  bottom: 4.5em;
-}
-/* line 152, ../../source/css/sass/_mootor.ui.form.scss */
-.moo-ui-select-container.moo-top .moo-ui-select-menu:after {
-  content: " ";
-  display: block;
-  position: absolute;
-  bottom: -2.9em;
-  left: 25%;
-  border-bottom: 1.5em solid transparent;
-  border-left: 2em solid transparent;
-  border-right: 2em solid transparent;
-  border-top: 1.5em solid #999;
+  top: .5em;
+  left: 1em;
+  opacity: 0;
+  width: 100%;
+  min-height: 100%;
+  -webkit-appearance: none;
+  z-index: 9999;
 }
 
 /*
 *  Cleanbox is the styling of the icon link used to "clean" a text input
 */
-/* line 169, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 114, ../../source/css/sass/_mootor.ui.form.scss */
 .cleanbox {
   display: block;
   padding: 0 0.35em;
@@ -553,20 +499,20 @@ nav a {
   text-decoration: none;
 }
 
-/* line 181, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 126, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-radio {
   display: inline;
   float: right;
   position: relative;
   width: 75%;
 }
-/* line 185, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 130, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-radio input {
   position: absolute;
   top: 0.5em;
   left: 0.5em;
 }
-/* line 190, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 135, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-radio label {
   position: relative;
   display: block;
@@ -574,7 +520,7 @@ nav a {
   background: #FFF;
   font-size: 1.4em;
 }
-/* line 196, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 141, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-radio label .moo-ui-radio-icon {
   display: block;
   position: absolute;
@@ -586,11 +532,11 @@ nav a {
   width: 1em;
   height: 1em;
 }
-/* line 209, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 154, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-radio.moo-active .moo-ui-radio-icon {
   background-color: #666;
 }
-/* line 211, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 156, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-radio.moo-active .moo-ui-radio-icon:after {
   content: " ";
   display: block;
@@ -610,7 +556,7 @@ nav a {
   height: 0.6em;
 }
 
-/* line 227, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 172, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-checkbox-icon {
   display: block;
   position: absolute;
@@ -622,20 +568,20 @@ nav a {
   height: 1em;
 }
 
-/* line 237, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 182, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-checkbox {
   display: inline;
   float: right;
   position: relative;
   width: 75%;
 }
-/* line 241, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 186, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-checkbox input {
   position: absolute;
   top: 0.5em;
   left: 0.5em;
 }
-/* line 246, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 191, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-checkbox label {
   position: relative;
   display: block;
@@ -643,11 +589,11 @@ nav a {
   background: #FFF;
   font-size: 1.4em;
 }
-/* line 254, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 199, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-checkbox.moo-active .moo-ui-checkbox-icon {
   background-color: #666;
 }
-/* line 256, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 201, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-checkbox.moo-active .moo-ui-checkbox-icon:after {
   content: " ";
   display: block;
@@ -993,281 +939,203 @@ nav a {
   right: -0.5em;
 }
 
-/* line 23, demo/base/shared/_sprites.scss */
-.moo-icons, nav.app .moo-nav.new:before, nav.app .moo-nav.upload:before, nav.app .moo-nav.delete:before, nav.app .moo-nav.save:before, nav.app .moo-nav.client-accept:before, .moo-nav.logout:before, .cleanbox:before, .moo-ui-select-container .moo-ui-select-link:before, .moo-ui-checkbox.moo-active .moo-ui-checkbox-icon:after, .moo-ui-image-container .moo-ui-delete:before, .moo-ui-image-container .moo-ui-add-comment:before, .moo-comment-icon:before, .moo-comment-icon.has-comment:before {
+/* line 22, demo/base/shared/_sprites-ui.scss */
+.moo-icons, .cleanbox:before, .moo-ui-select-container .moo-ui-select-link:before, .moo-ui-checkbox.moo-active .moo-ui-checkbox-icon:after {
   background-image: url('../img/ui/icons-sdfca033db1.png');
   background-repeat: no-repeat;
 }
 
-@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
-  /* line 62, demo/base/shared/_sprites.scss */
-  .moo-icons, nav.app .moo-nav.new:before, nav.app .moo-nav.upload:before, nav.app .moo-nav.delete:before, nav.app .moo-nav.save:before, nav.app .moo-nav.client-accept:before, .moo-nav.logout:before, .cleanbox:before, .moo-ui-select-container .moo-ui-select-link:before, .moo-ui-checkbox.moo-active .moo-ui-checkbox-icon:after, .moo-ui-image-container .moo-ui-delete:before, .moo-ui-image-container .moo-ui-add-comment:before, .moo-comment-icon:before, .moo-comment-icon.has-comment:before {
-    background-image: url(../img/ui/2xicons-s28b74d4e75.png);
-    background-size: 48px 987px;
-  }
-}
-/* line 14, demo/base/shared/_utilities.scss */
-.hidden {
-  display: none;
-}
-
-/* line 22, demo/base/shared/_utilities.scss */
-.placeholder {
-  display: block;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-}
-
-/* line 44, demo/base/shared/_utilities.scss */
-.clearfix:before, .moo-tab-content:before, .moo-ui-form:before, .moo-ui-form .moo-field:before, .moo-ui-form legend:before,
-.moo-ui-form .legend:before, .textarea-container .moo-ui-textarea:before,
-.textarea-container .moo-buttons:before,
-.clearfix:after,
-.moo-tab-content:after,
-.moo-ui-form:after,
-.moo-ui-form .moo-field:after,
-.moo-ui-form legend:after,
-.moo-ui-form .legend:after,
-.textarea-container .moo-ui-textarea:after,
-.textarea-container .moo-buttons:after {
-  content: " ";
-  display: table;
-}
-
-/* line 48, demo/base/shared/_utilities.scss */
-.clearfix:after, .moo-tab-content:after, .moo-ui-form:after, .moo-ui-form .moo-field:after, .moo-ui-form legend:after,
-.moo-ui-form .legend:after, .textarea-container .moo-ui-textarea:after,
-.textarea-container .moo-buttons:after {
-  clear: both;
-}
-
-/* line 15, demo/base/shared/_layout.scss */
+/* line 28, demo/base/shared/_layout.scss */
 .moo-header {
-  color: #f3f3f3;
-  font-weight: bold;
-  background-color: #212226;
-  border: 1px solid #151618;
+  color: #f0f0f0;
+  background-color: #1c216c;
+  border-bottom: 1px solid #181a1b;
 }
-/* line 20, demo/base/shared/_layout.scss */
+/* line 32, demo/base/shared/_layout.scss */
 .moo-header h1 {
   display: inline;
   float: left;
-  font-size: 2.3em;
-  line-height: 1.5;
+  font-size: 1.5em;
   text-align: center;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
   margin: 0;
-  padding: 0 2em;
-  width: 75%;
+  padding: 0 4em;
+  width: 100%;
 }
 
-/* line 40, demo/base/shared/_layout.scss */
+/* line 51, demo/base/shared/_layout.scss */
 .moo-header.hidden {
   display: block;
   opacity: 0;
 }
-/* line 43, demo/base/shared/_layout.scss */
+/* line 54, demo/base/shared/_layout.scss */
 .moo-header.hidden nav {
   top: -9999em !important;
 }
 
-/* line 50, demo/base/shared/_layout.scss */
+/* line 62, demo/base/shared/_layout.scss */
+.moo-footer {
+  color: #f0f0f0;
+  background-color: #1c216c;
+  border: 1px solid #181a1b;
+}
+/* line 67, demo/base/shared/_layout.scss */
+.moo-footer nav a {
+  background-color: transparent;
+  border: none;
+  color: #f0f0f0;
+  font-size: 1em;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* line 82, demo/base/shared/_layout.scss */
+.moo-panels,
 .moo-panel {
-  background: #f3f3f3;
+  background: #e3e3e3;
 }
 
-/* line 29, demo/base/shared/_nav.scss */
+/* line 90, demo/base/shared/_layout.scss */
+.section-title {
+  background: #e3e3e3;
+  border-bottom: 1px solid #d6d6d6;
+  color: #1b249f;
+  font-size: 2.6em;
+  padding: .5em 0;
+}
+/* line 96, demo/base/shared/_layout.scss */
+.section-title strong {
+  color: #0a0d3b;
+  display: block;
+  font-size: 1.35em;
+}
+
+/* line 30, demo/base/shared/_nav.scss */
 nav a {
-  font-size: 3em;
-  color: #151618;
-  border-bottom: 1px solid #393b41;
-  background: #f3f3f3;
-  border-top: 1px solid #5c616a;
+  font-size: 2.5em;
+  color: #6c757a;
 }
 
-/* line 38, demo/base/shared/_nav.scss */
+/* line 36, demo/base/shared/_nav.scss */
 .moo-header {
   padding: .6em 0;
 }
-/* line 40, demo/base/shared/_nav.scss */
+/* line 38, demo/base/shared/_nav.scss */
 .moo-header nav {
   display: inline;
   float: left;
-  padding: 0 1em;
-  position: relative;
+  padding: 0 .5em 0 1em;
+  position: absolute;
   top: auto;
   left: auto;
 }
-/* line 46, demo/base/shared/_nav.scss */
+/* line 44, demo/base/shared/_nav.scss */
 .moo-header nav a {
-  color: #f3f3f3;
+  background-color: #6a6d9d;
+  color: #f0f0f0;
   -webkit-border-radius: 0.35em;
   -moz-border-radius: 0.35em;
   -ms-border-radius: 0.35em;
   -o-border-radius: 0.35em;
   border-radius: 0.35em;
-  font-size: 1.3em;
-  line-height: 1.5;
+  line-height: 1.75;
+  font-size: 1.1em;
   font-weight: 700;
-  padding: .6em 1em;
-  height: 36px;
+  padding: .5em 1em;
+}
+/* line 53, demo/base/shared/_nav.scss */
+.moo-header nav.app {
+  top: 0;
+  right: 0;
+  padding: .65em .5em;
+  margin: 0;
+}
+/* line 58, demo/base/shared/_nav.scss */
+.moo-header nav.app a {
+  line-height: 1.2;
 }
 
-/* line 62, demo/base/shared/_nav.scss */
-.moo-nav-buttons, .moo-nav-back, .moo-nav-next, .moo-ui-image-container header a {
-  border: 1px solid #45484e;
-  background-color: #393b41;
+/* line 68, demo/base/shared/_nav.scss */
+.moo-nav-buttons, .moo-nav-back, .moo-nav-next {
   padding: .5em 1.5em;
   position: relative;
 }
-/* line 67, demo/base/shared/_nav.scss */
-.moo-nav-buttons.disabled, .disabled.moo-nav-back, .disabled.moo-nav-next, .moo-ui-image-container header a.disabled {
-  color: #b8bbc1;
+/* line 71, demo/base/shared/_nav.scss */
+.moo-nav-buttons:hover, .moo-nav-back:hover, .moo-nav-next:hover {
+  background-color: #5d62aa;
+}
+/* line 74, demo/base/shared/_nav.scss */
+.moo-nav-buttons.disabled, .disabled.moo-nav-back, .disabled.moo-nav-next {
+  color: #bbc1c3;
+}
+/* line 76, demo/base/shared/_nav.scss */
+.moo-nav-buttons.disabled:hover, .disabled.moo-nav-back:hover, .disabled.moo-nav-next:hover {
+  background-color: #bbc1c3;
 }
 
-/* line 75, demo/base/shared/_nav.scss */
-.moo-nav-back {
-  margin: 0 0 0 1em;
-}
-/* line 78, demo/base/shared/_nav.scss */
+/* line 87, demo/base/shared/_nav.scss */
 .moo-nav-back:before {
   content: ' ';
   display: block;
 }
 
-/* line 86, demo/base/shared/_nav.scss */
+/* line 95, demo/base/shared/_nav.scss */
 .moo-nav-next {
   margin: 0 1em 0 0;
 }
-/* line 89, demo/base/shared/_nav.scss */
+/* line 98, demo/base/shared/_nav.scss */
 .moo-nav-next:after {
   content: ' ';
   display: block;
 }
 
-/* line 98, demo/base/shared/_nav.scss */
-.app-buttons, nav.app .moo-nav.new, nav.app .moo-nav.upload, nav.app .moo-nav.delete, nav.app .moo-nav.save, nav.app .moo-nav.client-accept, .moo-nav.logout {
-  background-color: #2d2f33;
-  border: 1px solid #45484e;
-  font-size: 1.7em;
+/* line 107, demo/base/shared/_nav.scss */
+.app-buttons, nav.app .moo-nav {
+  line-height: 2.5;
   text-indent: -9999px;
-  margin: 0 .5em 0 0;
-  padding: 8px 10px;
-  height: 36px;
+  padding: .75em 1em;
   position: relative;
 }
-/* line 110, demo/base/shared/_nav.scss */
-.app-buttons:before, nav.app .moo-nav.new:before, nav.app .moo-nav.upload:before, nav.app .moo-nav.delete:before, nav.app .moo-nav.save:before, nav.app .moo-nav.client-accept:before, .moo-nav.logout:before {
+/* line 112, demo/base/shared/_nav.scss */
+.app-buttons:before, nav.app .moo-nav:before {
   content: " ";
   display: block;
 }
-
 /* line 116, demo/base/shared/_nav.scss */
+.app-buttons.moo-current, nav.app .moo-current.moo-nav {
+  background-color: #0c0e2f;
+  -webkit-border-radius: 0.5em;
+  -moz-border-radius: 0.5em;
+  -ms-border-radius: 0.5em;
+  -o-border-radius: 0.5em;
+  border-radius: 0.5em;
+}
+
+/* line 122, demo/base/shared/_nav.scss */
 nav.app {
   float: right;
   left: auto;
-}
-/* line 119, demo/base/shared/_nav.scss */
-nav.app .moo-nav {
-  display: none;
-}
-/* line 121, demo/base/shared/_nav.scss */
-nav.app .moo-nav.moo-active {
-  display: inline;
-  float: left;
-}
-/* line 126, demo/base/shared/_nav.scss */
-nav.app .moo-nav.new:before {
-  background-position: 0 -734px;
-  height: 20px;
-  width: 20px;
-}
-/* line 132, demo/base/shared/_nav.scss */
-nav.app .moo-nav.upload:before {
-  background-position: 0 -520px;
-  height: 20px;
-  width: 20px;
-}
-/* line 138, demo/base/shared/_nav.scss */
-nav.app .moo-nav.delete:before {
-  background-position: 0 -174px;
-  height: 48px;
-  width: 48px;
-}
-/* line 144, demo/base/shared/_nav.scss */
-nav.app .moo-nav.save:before {
-  background-position: 0 -292px;
-  height: 20px;
-  width: 20px;
-}
-/* line 150, demo/base/shared/_nav.scss */
-nav.app .moo-nav.client-accept:before {
-  background-position: 0 -232px;
-  height: 20px;
-  width: 20px;
-}
-
-/* line 158, demo/base/shared/_nav.scss */
-.moo-nav.logout {
-  display: inline;
-  float: left;
-}
-/* line 161, demo/base/shared/_nav.scss */
-.moo-nav.logout:before {
-  background-position: 0 -489px;
-  height: 20px;
-  width: 20px;
-}
-
-/* line 169, demo/base/shared/_nav.scss */
-.moo-nav-tabs-header {
-  height: 4em;
-}
-/* line 171, demo/base/shared/_nav.scss */
-.moo-nav-tabs-header .moo-tab {
-  border: none;
-  font-size: 1.5em;
-  line-height: 30px;
-  padding: .5em 1em;
   height: 100%;
-  background-color: #ccc;
-  color: #888;
-}
-/* line 179, demo/base/shared/_nav.scss */
-.moo-nav-tabs-header .moo-tab.moo-active {
-  font-weight: 700;
-  background-color: #f3f3f3;
-}
-/* line 183, demo/base/shared/_nav.scss */
-.moo-nav-tabs-header .moo-tab.red-zone {
-  background-color: #ECABA4;
-  color: #A42517;
-}
-/* line 187, demo/base/shared/_nav.scss */
-.moo-nav-tabs-header .moo-tab.yellow-zone {
-  background-color: #F3E99C;
-  color: #A4910D;
-}
-/* line 191, demo/base/shared/_nav.scss */
-.moo-nav-tabs-header .moo-tab.green-zone {
-  background-color: #A4ECAD;
-  color: #3E9749;
 }
 
-/* line 197, demo/base/shared/_nav.scss */
-.moo-tab-content {
-  background-color: transparent;
+/* line 131, demo/base/shared/_nav.scss */
+.moo-footer {
+  padding: 0;
+}
+/* line 133, demo/base/shared/_nav.scss */
+.moo-footer nav.app {
+  float: none;
+  display: table;
+  border-spacing: 1em .5em;
+  width: 100%;
 }
 
-/* line 26, demo/base/shared/_forms.scss */
+/* line 28, demo/base/shared/_forms.scss */
 .moo-ui-form {
-  background: #fdfdfd;
-  border-color: #c5c8cd;
+  background: transparent;
+  border: none;
   -webkit-border-radius: 9px;
   -moz-border-radius: 9px;
   -ms-border-radius: 9px;
@@ -1275,57 +1143,71 @@ nav.app .moo-nav.client-accept:before {
   border-radius: 9px;
   margin: 3em auto;
 }
-/* line 32, demo/base/shared/_forms.scss */
-.moo-ui-form .moo-field {
-  padding: 1em 2em;
-}
 /* line 34, demo/base/shared/_forms.scss */
+.moo-ui-form fieldset {
+  background: #fafafa;
+  border: 1px solid #c9cdcf;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  -ms-border-radius: 9px;
+  -o-border-radius: 9px;
+  border-radius: 9px;
+  padding: 0;
+  margin: 0 0 2em;
+}
+/* line 41, demo/base/shared/_forms.scss */
+.moo-ui-form .moo-field {
+  border-top: none;
+  border-bottom: 1px solid #c9cdcf;
+  padding: .5em 1em;
+}
+/* line 45, demo/base/shared/_forms.scss */
 .moo-ui-form .moo-field:last-child {
   border: none;
 }
-
-/* line 47, demo/base/shared/_forms.scss */
-.moo-ui-input-container, .moo-ui-text, .moo-ui-textarea, .moo-ui-select-container {
-  border-color: #eeeff0;
-  width: 70%;
+/* line 48, demo/base/shared/_forms.scss */
+.moo-ui-form .moo-field.control-button {
+  padding: 1em;
 }
 
-/* line 59, demo/base/shared/_forms.scss */
+/* line 62, demo/base/shared/_forms.scss */
+.moo-ui-input-container, .moo-ui-text, .moo-ui-textarea, .moo-ui-select-container {
+  border-color: #f2f3f3;
+  width: 100%;
+}
+
+/* line 74, demo/base/shared/_forms.scss */
 .moo-field-short, .moo-field.address-floor, .moo-field.address-number {
   display: inline;
   float: left;
 }
 
-/* line 70, demo/base/shared/_forms.scss */
+/* line 85, demo/base/shared/_forms.scss */
 .cleanbox {
   color: transparent;
   overflow: hidden;
   padding: 0 .5em;
 }
-/* line 74, demo/base/shared/_forms.scss */
+/* line 89, demo/base/shared/_forms.scss */
 .cleanbox:before {
   content: " ";
   background-position: 0 -570px;
+  width: 20px;
+  height: 20px;
   display: inline-block;
   position: absolute;
   width: 100%;
   height: 100%;
 }
 
-/* line 90, demo/base/shared/_forms.scss */
+/* line 105, demo/base/shared/_forms.scss */
 .moo-ui-input, .moo-ui-text input, .moo-ui-textarea textarea {
   padding: 0 0.4em;
 }
 
-/* line 94, demo/base/shared/_forms.scss */
-.moo-ui-form .moo-field {
-  border-top: none;
-  border-bottom: 1px solid #c5c8cd;
-}
-
-/* line 101, demo/base/shared/_forms.scss */
+/* line 111, demo/base/shared/_forms.scss */
 .moo-ui-form .moo-field > label {
-  color: #192c4e;
+  color: #1e27b1;
   text-align: right;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -1334,10 +1216,10 @@ nav.app .moo-nav.client-accept:before {
   width: 30%;
 }
 
-/* line 114, demo/base/shared/_forms.scss */
+/* line 124, demo/base/shared/_forms.scss */
 .moo-ui-form legend,
 .moo-ui-form .legend {
-  border-bottom: 1px solid #c5c8cd;
+  border-bottom: 1px solid #c9cdcf;
   font-size: 3em;
   font-weight: 700;
   line-height: 1.6;
@@ -1347,578 +1229,184 @@ nav.app .moo-nav.client-accept:before {
   width: 100%;
 }
 
-/* line 126, demo/base/shared/_forms.scss */
+/* line 136, demo/base/shared/_forms.scss */
 .moo-ui-form .moo-field > legend {
-  color: #192c4e;
+  color: #1e27b1;
 }
 
-/* line 134, demo/base/shared/_forms.scss */
+/* line 144, demo/base/shared/_forms.scss */
 .moo-ui-input, .moo-ui-text input, .moo-ui-textarea textarea {
   font-size: 15px;
   line-height: 21px;
   height: 21px;
 }
 
-/* line 139, demo/base/shared/_forms.scss */
+/* line 149, demo/base/shared/_forms.scss */
 .moo-ui-text {
-  padding: 3px 16px 2px 2px;
+  background: transparent;
+  border: none;
+  padding: .5em 2em .25em .25em;
+  width: 100%;
 }
 
-/* line 142, demo/base/shared/_forms.scss */
+/* line 155, demo/base/shared/_forms.scss */
 .cleanbox {
   font-size: 19px;
   line-height: 1.5;
   padding: 0 10px;
 }
 
-/* line 151, demo/base/shared/_forms.scss */
+/* line 164, demo/base/shared/_forms.scss */
 .moo-field.address-floor {
   width: 57%;
 }
-/* line 154, demo/base/shared/_forms.scss */
+/* line 167, demo/base/shared/_forms.scss */
 .moo-field.address-floor > label {
   width: 57%;
 }
-/* line 155, demo/base/shared/_forms.scss */
+/* line 168, demo/base/shared/_forms.scss */
 .moo-field.address-floor .moo-ui-text {
   width: 42%;
 }
 
-/* line 158, demo/base/shared/_forms.scss */
+/* line 171, demo/base/shared/_forms.scss */
 .moo-field.address-number {
   width: 43%;
 }
 
-/* line 163, demo/base/shared/_forms.scss */
+/* line 176, demo/base/shared/_forms.scss */
 .moo-field.postal-code {
   clear: both;
 }
-/* line 165, demo/base/shared/_forms.scss */
+/* line 178, demo/base/shared/_forms.scss */
 .moo-field.postal-code .moo-ui-text {
   width: 34.5%;
   float: left;
 }
 
-/* line 174, demo/base/shared/_forms.scss */
+/* line 187, demo/base/shared/_forms.scss */
 .moo-field.phone .moo-ui-text {
   float: left;
   margin: 0 .5% 0 0;
   width: 17%;
 }
-/* line 178, demo/base/shared/_forms.scss */
+/* line 191, demo/base/shared/_forms.scss */
 .moo-field.phone .moo-ui-text:nth-child(4) {
   width: 35%;
   margin: 0;
 }
 
-/* line 189, demo/base/shared/_forms.scss */
+/* line 201, demo/base/shared/_forms.scss */
 .moo-field.contact .moo-ui-select-wrapper {
   width: 26%;
 }
-/* line 193, demo/base/shared/_forms.scss */
+/* line 205, demo/base/shared/_forms.scss */
 .moo-field.contact .moo-ui-select-container .moo-ui-select-text {
   width: 80%;
 }
-/* line 197, demo/base/shared/_forms.scss */
+/* line 209, demo/base/shared/_forms.scss */
 .moo-field.contact .moo-ui-text {
   display: inline;
   float: right;
   width: 43%;
 }
 
-/* line 206, demo/base/shared/_forms.scss */
+/* line 221, demo/base/shared/_forms.scss */
 .moo-field .moo-ui-select-wrapper {
   display: inline;
   float: left;
   position: relative;
-  width: 70%;
-}
-/* line 210, demo/base/shared/_forms.scss */
-.moo-field .moo-ui-select-wrapper select {
-  position: absolute;
-  top: .5em;
-  left: 1em;
-  opacity: 0;
   width: 100%;
-  min-height: 100%;
-  -webkit-appearance: none;
 }
-/* line 219, demo/base/shared/_forms.scss */
+/* line 225, demo/base/shared/_forms.scss */
 .moo-field .moo-ui-select-wrapper .moo-ui-select-container {
   width: 100%;
+  z-index: 200;
 }
 
-/* line 226, demo/base/shared/_forms.scss */
+/* line 233, demo/base/shared/_forms.scss */
+.moo-ui-select-container .moo-ui-select-list li {
+  padding: .75em;
+}
+/* line 234, demo/base/shared/_forms.scss */
 .moo-ui-select-container .moo-ui-select-link {
   color: transparent;
+  text-indent: -9999px;
 }
-/* line 228, demo/base/shared/_forms.scss */
+/* line 237, demo/base/shared/_forms.scss */
 .moo-ui-select-container .moo-ui-select-link:before {
   content: " ";
   background-position: 0 -707px;
+  width: 10px;
+  height: 8px;
   display: inline-block;
   position: absolute;
   height: 100%;
   width: 100%;
 }
-/* line 236, demo/base/shared/_forms.scss */
+/* line 245, demo/base/shared/_forms.scss */
 .moo-ui-select-container .moo-ui-select-link:after {
-  border-color: #eeeff0;
-  border-left: 1px solid #eeeff0;
+  border-color: #f2f3f3;
+  border-left: 1px solid #f2f3f3;
   background: transparent none;
 }
 
-/* line 248, demo/base/shared/_forms.scss */
+/* line 257, demo/base/shared/_forms.scss */
 .moo-ui-checkbox-icon {
-  background-color: #d9d9d9;
-  border: 1px solid #747a85;
+  background-color: #d6d6d6;
+  border: 1px solid #788287;
   top: .85em;
   width: 18px;
   height: 18px;
 }
 
-/* line 256, demo/base/shared/_forms.scss */
+/* line 265, demo/base/shared/_forms.scss */
 .moo-ui-checkbox.moo-active .moo-ui-checkbox-icon {
-  background-color: #d9d9d9;
+  background-color: #d6d6d6;
 }
-/* line 258, demo/base/shared/_forms.scss */
+/* line 267, demo/base/shared/_forms.scss */
 .moo-ui-checkbox.moo-active .moo-ui-checkbox-icon:after {
   background-color: transparent;
   box-shadow: none;
   background-position: 0 -322px;
-  height: 22px;
   width: 21px;
+  height: 22px;
   top: -0.25em;
   left: 0;
 }
 
-/* line 269, demo/base/shared/_forms.scss */
-.pictures .moo-section-header {
-  width: 78%;
-  float: left;
-}
-
-/* line 35, demo/base/components/_buttons.scss */
-.button {
-  font-size: 13px;
-  font-weight: 700;
-  padding: 7px 20px;
-  border: 1px solid #151618;
-  background-color: #8f949d;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  -ms-border-radius: 3px;
-  -o-border-radius: 3px;
-  border-radius: 3px;
-}
-/* line 44, demo/base/components/_buttons.scss */
-.button.submit {
-  color: #dde5f4;
-  border-color: #14233f;
-  background-color: #567ec9;
-}
-
-/* line 56, demo/base/components/_buttons.scss */
-.moo-ui-badge {
-  background-color: #a6220f;
-  color: #f3f3f3;
-  border: 2px solid #8f1d0d;
-  -webkit-border-radius: 8em;
-  -moz-border-radius: 8em;
-  -ms-border-radius: 8em;
-  -o-border-radius: 8em;
-  border-radius: 8em;
-  font-size: 0.65em;
-  font-weight: 700;
-  line-height: 100%;
-  text-indent: 0;
-  text-shadow: none;
-  padding: 0.18em .4em;
-  top: auto;
-  bottom: -0.5em;
-  right: -0.6em;
-}
-
-/* line 23, demo/base/components/_gallery.scss */
-.moo-gallery-icon, .moo-comment-icon {
-  display: inline-block;
-  font-size: 1.8em;
-  text-decoration: none;
-  position: relative;
-  width: 48px;
-  height: 48px;
-}
-/* line 30, demo/base/components/_gallery.scss */
-.moo-gallery-icon:before, .moo-comment-icon:before {
-  content: " ";
-  display: block;
-}
-/* line 34, demo/base/components/_gallery.scss */
-.moo-gallery-icon .moo-ui-badge, .moo-comment-icon .moo-ui-badge {
-  bottom: -0.7em;
-}
-
-/* line 38, demo/base/components/_gallery.scss */
-.moo-ui-image-container {
-  top: auto;
-  left: auto;
-  bottom: 2.5em;
-  right: -0.5em;
-  width: 28em;
-  border: 1px solid #151618;
-}
-/* line 45, demo/base/components/_gallery.scss */
-.moo-ui-image-container.moo-bottom {
-  top: 3.5em;
-  bottom: auto;
-}
-/* line 48, demo/base/components/_gallery.scss */
-.moo-ui-image-container.moo-bottom:before {
-  content: " ";
-  display: block;
-  position: absolute;
-  top: -0.9em;
-  right: 1em;
-  border-top: .5em solid transparent;
-  border-left: 1em solid transparent;
-  border-right: 1em solid transparent;
-  border-bottom: .5em solid #333;
-}
-/* line 60, demo/base/components/_gallery.scss */
-.moo-ui-image-container.moo-top {
-  bottom: 3.5em;
-}
-/* line 62, demo/base/components/_gallery.scss */
-.moo-ui-image-container.moo-top:after {
-  content: " ";
-  display: block;
-  position: absolute;
-  bottom: -0.9em;
-  right: 1em;
-  border-bottom: .5em solid transparent;
-  border-left: 1em solid transparent;
-  border-right: 1em solid transparent;
-  border-top: .5em solid #333;
-}
-/* line 75, demo/base/components/_gallery.scss */
-.moo-ui-image-container header a {
-  font-size: 0.6em;
-  font-weight: 700;
-  text-decoration: none;
-  padding: .5em 1em;
-}
-/* line 85, demo/base/components/_gallery.scss */
-.moo-ui-image-container .moo-ui-delete:before {
-  background-position: 0 -262px;
-  height: 20px;
-  width: 20px;
-}
-/* line 91, demo/base/components/_gallery.scss */
-.moo-ui-image-container .moo-ui-add-comment:before {
-  background-position: 0 -604px;
-  height: 20px;
-  width: 20px;
-}
-
-/* line 97, demo/base/components/_gallery.scss */
-.moo-gallery-icon-button, .moo-ui-image-container .moo-ui-delete, .moo-ui-image-container .moo-ui-add-comment {
-  display: inline;
-  float: left;
-  border: 1px solid #151618;
-  text-indent: -9999px;
-  padding: .35em 0.5em;
-}
-/* line 102, demo/base/components/_gallery.scss */
-.moo-gallery-icon-button:before, .moo-ui-image-container .moo-ui-delete:before, .moo-ui-image-container .moo-ui-add-comment:before {
-  content: " ";
-  display: block;
-}
-
-/* line 111, demo/base/components/_gallery.scss */
-.moo-ui-image-container.moo-empty {
-  width: auto;
-}
-/* line 113, demo/base/components/_gallery.scss */
-.moo-ui-image-container.moo-empty a {
+/* line 281, demo/base/shared/_forms.scss */
+.control-button .button {
+  font-size: 2em;
   text-align: center;
+  display: block;
   width: 100%;
 }
-/* line 117, demo/base/components/_gallery.scss */
-.moo-ui-image-container.moo-empty .moo-gallery-icon-button, .moo-ui-image-container.moo-empty .moo-ui-delete, .moo-ui-image-container.moo-empty .moo-ui-add-comment {
+
+/* line 13, demo/base/shared/_utilities.scss */
+.hidden {
   display: none;
 }
 
-/* line 124, demo/base/components/_gallery.scss */
-.moo-comment-icon {
-  display: inline;
-  float: right;
-}
-/* line 127, demo/base/components/_gallery.scss */
-.moo-comment-icon:before {
-  background-position: 0 -395px;
-  height: 31px;
-  width: 37px;
-}
-/* line 131, demo/base/components/_gallery.scss */
-.moo-comment-icon.has-comment:before {
-  background-position: 0 -354px;
-  height: 31px;
-  width: 37px;
-}
-
-/* line 23, ../../source/css/sass/_mootor.ui.modal.scss */
-.moo-ui-modal-container {
-  background: #333;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  -ms-border-radius: 6px;
-  -o-border-radius: 6px;
-  border-radius: 6px;
-  color: #333;
-  text-align: center;
-  padding: 0.5em;
+/* line 18, demo/base/shared/_utilities.scss */
+.placeholder {
+  display: block;
   position: absolute;
-  top: 20%;
-  z-index: 1500;
-  height: auto;
-  opacity: 1;
-  left: 12.5%;
-  width: 75%;
-}
-/* line 46, ../../source/css/sass/_mootor.ui.modal.scss */
-.moo-ui-modal-container header {
-  color: #FFF;
-  text-shadow: 0px 0px 1px #aaaaaa;
-}
-/* line 49, ../../source/css/sass/_mootor.ui.modal.scss */
-.moo-ui-modal-container header h1 {
-  margin: 0;
-}
-/* line 54, ../../source/css/sass/_mootor.ui.modal.scss */
-.moo-ui-modal-container.hidden {
-  opacity: 0;
+  top: 50%;
+  left: 50%;
   width: 0;
   height: 0;
-  -webkit-transition: opacity 1s;
-  -moz-transition: opacity 1s;
-  -o-transition: opacity 1s;
-  transition: opacity 1s;
 }
 
-/* line 61, ../../source/css/sass/_mootor.ui.modal.scss */
-.moo-ui-modal-panel {
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  -ms-border-radius: 6px;
-  -o-border-radius: 6px;
-  border-radius: 6px;
-  background-color: #FFF;
-  width: 99.5%;
-  overflow: hidden;
-  padding: 5px;
-  margin: 0 auto;
-  /* Pasar estos a estilos de botones genericos */
+/* line 49, ../../source/css/sass/_mootor.utilities.scss */
+.clearfix:before, .moo-tab-content:before, .moo-ui-form:before, .moo-ui-form .moo-field:before, .moo-ui-form legend:before,
+.moo-ui-form .legend:before, .clearfix:after, .moo-tab-content:after, .moo-ui-form:after, .moo-ui-form .moo-field:after, .moo-ui-form legend:after,
+.moo-ui-form .legend:after {
+  content: " ";
+  display: table;
 }
-/* line 68, ../../source/css/sass/_mootor.ui.modal.scss */
-.moo-ui-modal-panel .moo-title {
-  color: #000;
-  font-size: 2em;
-  font-weight: 700;
-  white-space: nowrap;
-  margin: .8em .5em;
-}
-/* line 75, ../../source/css/sass/_mootor.ui.modal.scss */
-.moo-ui-modal-panel .moo-text {
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 1.5em;
-  line-height: 120%;
-  padding: 0;
-  margin: .75em .6em;
-}
-/* line 83, ../../source/css/sass/_mootor.ui.modal.scss */
-.moo-ui-modal-panel .moo-buttons {
-  margin: 1.5em 0 0;
-  overflow: hidden;
-}
-/* line 84, ../../source/css/sass/_mootor.ui.modal.scss */
-.moo-ui-modal-panel .button {
-  font-size: 1.5em;
-  line-height: 150%;
-}
-/* line 99, ../../source/css/sass/_mootor.ui.modal.scss */
-.moo-ui-modal-panel .button {
-  width: 49.5%;
-}
-/* line 101, ../../source/css/sass/_mootor.ui.modal.scss */
-.moo-ui-modal-panel .button.submit {
-  display: inline;
-  float: right;
-}
-/* line 104, ../../source/css/sass/_mootor.ui.modal.scss */
-.moo-ui-modal-panel .button.cancel {
-  display: inline;
-  float: left;
-}
-
-/* line 14, demo/base/components/_comments.scss */
-.textarea-container {
-  width: 51em;
-  left: -25em;
-}
-/* line 17, demo/base/components/_comments.scss */
-.textarea-container .moo-ui-modal-panel {
-  width: 50em;
-}
-/* line 21, demo/base/components/_comments.scss */
-.textarea-container .moo-ui-textarea,
-.textarea-container .moo-buttons {
-  margin: 1em 0;
-  width: 100%;
-}
-/* line 26, demo/base/components/_comments.scss */
-.textarea-container .moo-buttons {
-  margin: 1em 0 0;
-}
-
-@media only screen and (max-width: 641px), only screen and (max-width: 641px) and (-webkit-min-device-pixel-ratio: 1.5), only screen and (max-width: 641px) and (min-device-pixel-ratio: 1.5) {
-  /* line 10, demo/base/shared/_resize.scss */
-  body {
-    font-size: 0.55em;
-  }
-
-  /* line 11, demo/base/shared/_resize.scss */
-  #login .moo-ui-form {
-    top: -230px;
-  }
-
-  /* line 16, demo/base/shared/_resize.scss */
-  .moo-header nav,
-  .moo-header h1 {
-    padding: 0 .5em;
-    line-height: 2;
-  }
-  /* line 20, demo/base/shared/_resize.scss */
-  .moo-header nav a {
-    line-height: 2;
-  }
-
-  /* line 24, demo/base/shared/_resize.scss */
-  .moo-ui-form .moo-field > label {
-    text-align: left;
-    margin: 0 0 .2em;
-    width: 100%;
-  }
-
-  /* line 31, demo/base/shared/_resize.scss */
-  .moo-ui-input, .moo-ui-text input, .moo-ui-textarea textarea {
-    font-size: 13px;
-  }
-
-  /* line 34, demo/base/shared/_resize.scss */
-  .moo-field.postal-code .moo-ui-text,
-  .moo-field .moo-ui-select-wrapper,
-  .moo-ui-input-container,
-  .moo-ui-text,
-  .moo-ui-textarea,
-  .moo-ui-select-container {
-    width: 100%;
-  }
-
-  /* line 38, demo/base/shared/_resize.scss */
-  .moo-field.contact .moo-ui-select-wrapper {
-    width: 35%;
-  }
-  /* line 39, demo/base/shared/_resize.scss */
-  .moo-field.contact .moo-ui-text {
-    width: 62%;
-  }
-
-  /* line 43, demo/base/shared/_resize.scss */
-  .moo-field.phone .moo-ui-text {
-    width: 24%;
-  }
-  /* line 45, demo/base/shared/_resize.scss */
-  .moo-field.phone .moo-ui-text:nth-child(4) {
-    width: 51%;
-  }
-
-  /* line 49, demo/base/shared/_resize.scss */
-  .moo-field.plans legend {
-    padding: 0 0.5em .75em;
-    width: 100%;
-  }
-
-  /* line 53, demo/base/shared/_resize.scss */
-  .moo-field.contact .moo-ui-select-container .moo-ui-select-text {
-    width: 75%;
-  }
-
-  /* line 55, demo/base/shared/_resize.scss */
-  .moo-nav-tabs-header .moo-tab {
-    padding: .5em;
-  }
-
-  /* line 56, demo/base/shared/_resize.scss */
-  .moo-tab-content .moo-section-header legend {
-    padding: 0 .5em;
-  }
-
-  /* line 57, demo/base/shared/_resize.scss */
-  .inspection-details .moo-ui-checkbox label {
-    padding: .75em 3.5em .75em 2.5em;
-  }
-
-  /* line 58, demo/base/shared/_resize.scss */
-  .pictures .moo-section-header {
-    width: 50%;
-  }
-
-  /* line 60, demo/base/shared/_resize.scss */
-  .moo-ui-image-container {
-    min-width: 205px;
-    max-width: 288px;
-    right: -4.5em;
-  }
-  /* line 65, demo/base/shared/_resize.scss */
-  .moo-ui-image-container.moo-top:after, .moo-ui-image-container.moo-bottom:before {
-    right: 5em;
-  }
-
-  /* line 68, demo/base/shared/_resize.scss */
-  .moo-gallery-icon:nth-child(2) .moo-ui-image-container, .moo-comment-icon:nth-child(2) .moo-ui-image-container {
-    right: -1.5em;
-  }
-  /* line 71, demo/base/shared/_resize.scss */
-  .moo-gallery-icon:nth-child(2) .moo-ui-image-container.moo-top:after, .moo-comment-icon:nth-child(2) .moo-ui-image-container.moo-top:after, .moo-gallery-icon:nth-child(2) .moo-ui-image-container.moo-bottom:before, .moo-comment-icon:nth-child(2) .moo-ui-image-container.moo-bottom:before {
-    right: 1.5em;
-  }
-
-  /* line 75, demo/base/shared/_resize.scss */
-  .moo-ui-add-filed,
-  .moo-ui-add-new {
-    text-align: center;
-    width: 34%;
-  }
-}
-@media only screen and (min-width: 642px) and (max-width: 767px) {
-  /* line 88, demo/base/shared/_resize.scss */
-  body {
-    font-size: 0.6em;
-  }
-}
-@media only screen and (min-width: 768px) {
-  /* line 95, demo/base/shared/_resize.scss */
-  body {
-    font-size: 0.7em;
-  }
-}
-@media only screen and (min-width: 992px) {
-  /* line 101, demo/base/shared/_resize.scss */
-  body {
-    font-size: .75em;
-  }
-}
-/* line 42, demo/styles.scss */
-.blue {
-  background: #0000dd;
+/* line 53, ../../source/css/sass/_mootor.utilities.scss */
+.clearfix:after, .moo-tab-content:after, .moo-ui-form:after, .moo-ui-form .moo-field:after, .moo-ui-form legend:after,
+.moo-ui-form .legend:after {
+  clear: both;
 }

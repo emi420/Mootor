@@ -61,7 +61,10 @@
     @extend .moo-ui-input-container;
     padding: 0.25em; 
     height: 3em;
-    // z-index: 300;  BUG WITH MULTIPLE SELECTS
+}
+.moo-ui-select-wrapper {
+    overflow: hidden;
+    height: 100%;
     .moo-ui-select-text {
         font-size: 1.5em;
         line-height: 1.5;
@@ -84,12 +87,6 @@
         right: 0;
         z-index: 10;
         &:after  {
-            @include background(linear-gradient(top, #FFF, #CCC));
-            border-top: 1px solid #666;
-            border-right: 1px solid #666;
-            border-bottom: 1px solid #666;
-            border-top-right-radius: 5px;
-            border-bottom-right-radius: 5px;
             content: " "; 
             display: block;
             position: absolute;
@@ -100,69 +97,17 @@
             z-index: -1;
         }
     }
-    .moo-ui-select-menu {
-        background-color: #999;
-        border-radius: 5px;
-        display: none;
-        padding: 1em;
+    select {
         position: absolute;
-        width: 99%;
-        z-index: 1000;
+        top: .5em;
+        left: 1em;
+        opacity: 0;
+        width: 100%;
+        min-height: 100%;
+        -webkit-appearance: none;
+        z-index: 9999;
     }
-    .moo-ui-select-wrapper {
-        overflow: hidden;
-        height: 100%;
-    }
-    .moo-ui-select-list {
-        font-size: 1.5em;
-        background: #FFF;
-        border-radius: 5px;
-        li {
-            padding: 1em ;
-            border-bottom: 1px solid #CCC;
-            white-space: nowrap;
-            &:last-child { border: none;}
-            &.selected {
-                @include background(linear-gradient(top, #DAEAEC, #CEE3E6));
-                border-top-color:#AEBBBD;
-                border-bottom-color:#AEBBBD;
-                color: #3F8D94;
-            }
-        }
-    }
-    &.moo-bottom {
-        .moo-ui-select-menu {
-            top:4.5em;
-            &:before {
-                content: " "; 
-                display: block;
-                position: absolute;
-                top: -2.5em;
-                left: 25%;
-                border-top: 15px solid transparent;
-                border-left: 20px solid transparent;
-                border-right: 20px solid transparent;
-                border-bottom: 15px solid #999;
-            }
-        }
-    }
-    &.moo-top {
-        .moo-ui-select-menu {
-            bottom: 4.5em;
-            &:after {
-                content: " ";
-                display: block;
-                position: absolute;
-                bottom: -2.9em;
-                left: 25%;
-                border-bottom: 1.5em solid transparent;
-                border-left: 2em solid transparent;
-                border-right: 2em solid transparent;
-                border-top: 1.5em solid #999;
-            }
-        }
-    }
-}   
+}
 /*
 *  Cleanbox is the styling of the icon link used to "clean" a text input
 */

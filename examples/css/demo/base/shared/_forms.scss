@@ -13,7 +13,9 @@
 // 3.   input fields customization  - custom styles for different inputs
 // 3.1  address fields              - address inputs custom styling
 // 3.2  phone fields                - phone inputs custom styling
+// 3.3  contact name                - contact name custom wrapper
 // 4.   select                      - custom styles for select elements
+// 5. checkbox                      - custom checkboxes
 // -----------------------------------------------------------------------------------
 
 // color variables
@@ -24,15 +26,27 @@ $input-border-color: lighten($color-border-forms, 15%);
 // 0   .moo-ui-form
 // -----------------------------------------------------------------------------------
 .moo-ui-form {
-    background: $color-bg-forms;
-    border-color:$color-border-forms;
+    background: transparent;
+    border: none;
     @include border-radius(9px);
     margin: 3em auto;
     // width: 95%; legend fixme
+    fieldset {
+        background: $color-bg-forms;
+        border: 1px solid $color-border-forms;
+        @include border-radius(9px);
+        padding: 0;
+        margin: 0 0 2em;
+    }
     .moo-field {
-        padding: 1em 2em;
-            &:last-child {
+        border-top: none; 
+        border-bottom: 1px solid $color-border-forms;
+        padding: .5em 1em;
+        &:last-child {
             border: none;
+        }
+        &.control-button {
+            padding: 1em;
         }
     }
 
@@ -44,10 +58,11 @@ $input-border-color: lighten($color-border-forms, 15%);
 // A basic class inherited by all the input containers in the forms. 
 // Used for setting common properties, as borders, widths, paddings, etc.
 //
+// * 1 changed from 70% to 100% because this theme has no labels
 .moo-ui-input-container {
     // @include box-shadow( rgba(black, .2) 0 1px 2px 0 inset);
     border-color: $input-border-color;
-    width: 70%;
+    width: 100%; // * 1
 } 
 
 // 1.2 .moo-field-short
@@ -91,11 +106,6 @@ $input-border-color: lighten($color-border-forms, 15%);
     padding: 0 0.4em;
 }
 
-.moo-ui-form .moo-field { 
-    border-top: none; 
-    border-bottom: 1px solid $color-border-forms;
-}
-
 // 2. label customizations
 // -----------------------------------------------------------------------------------
 .moo-ui-form .moo-field > label {
@@ -137,7 +147,10 @@ $input-border-color: lighten($color-border-forms, 15%);
     height: 21px;
 }
 .moo-ui-text {
-    padding: 3px 16px 2px 2px;
+    background: transparent;
+    border: none;
+    padding: .5em 2em .25em .25em;
+    width: 100%;
 }
 .cleanbox {
     font-size: 19px;
@@ -182,7 +195,6 @@ $input-border-color: lighten($color-border-forms, 15%);
     }
 }
 
-
 // 3.3 contact name 
 // -----------------------------------------------------------------------------------
 .moo-field.contact {
@@ -200,31 +212,28 @@ $input-border-color: lighten($color-border-forms, 15%);
     }
 }
 
+
 // 4 select
 // -----------------------------------------------------------------------------------
+// * 1 These styles aren't in the core framework, but are necesary to make the select work in android 2
+// * 2 changed from 70% to 100% because this theme has no labels
 .moo-field {
      .moo-ui-select-wrapper {
         @include float-left;
         position: relative;
-        width: 70%;
-        select {
-            position: absolute;
-            top: .5em;
-            left: 1em;
-            opacity: 0;
-            width: 100%;
-            min-height: 100%;
-            -webkit-appearance: none;
-        }
+        width: 100%; // * 2
         .moo-ui-select-container {
             width: 100%;
+            z-index: 200;
         }
     }
 }
 
 .moo-ui-select-container { 
+    .moo-ui-select-list li { padding: .75em}
     .moo-ui-select-link {
         color: transparent;
+        text-indent: -9999px;
         &:before {
             content: " ";
             @include mootor-sprite(select-arrow, $offset-y: 9px);
@@ -265,9 +274,14 @@ $input-border-color: lighten($color-border-forms, 15%);
     }
 }
 
-.pictures {
-    .moo-section-header { 
-        width: 78%;
-        float: left;
+// 6 button
+// -------------------------------------------------------------------------------------
+
+.control-button {
+    .button {
+        font-size: 2em;
+        text-align: center;
+        display: block;
+        width: 100%;
     }
 }

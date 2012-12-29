@@ -16,6 +16,7 @@
 // color variables
 // -----------------------------------------------------------------------------------
 $nav-border-color: lighten($color-border-main, 30%);
+$nav-bg-color: desaturate($color-bg-action, 50);
 $nav-bg-light-color: lighten($color-bg-alt, 40%);
 $nav-bg-dark-color: lighten($color-bg-alt, 15%);
 $nav-focus-bg-color: lighten($color-bg-alt, 25%);
@@ -27,11 +28,8 @@ $nav-text-color: $color-text-alt;
 // 1. nav
 // -----------------------------------------------------------------------------------
 nav a {
-    font-size: 3em;
+    font-size: 2.5em;
     color: $color-text-main;
-    border-bottom: 1px solid lighten($color-border-main, 15%);
-    background: $color-bg-main;
-    border-top: 1px solid lighten($color-border-main, 30%);
 }
 // 2. header nav
 // -----------------------------------------------------------------------------------
@@ -39,33 +37,45 @@ nav a {
     padding: .6em 0;
     nav {
         @include float-left;
-        padding: 0 1em;
-        position: relative;
+        padding: 0 .5em 0 1em;
+        position: absolute;
         top: auto;
         left: auto;
         a {
+            background-color: $nav-bg-color;
             color: $nav-text-color;
-            // background-color: transparent;
             @include border-radius(.35em);
-            font-size: 1.3em;
-            line-height: 1.5;
+            line-height: 1.75;
+            font-size: 1.1em;
             font-weight: 700;
-            padding: .6em 1em;
-            // height: 2.6em;
-            height: 36px; 
+            padding: .5em 1em;
+        }
+        &.app {
+            top: 0;
+            right: 0;
+            padding: .65em .5em;
+            margin: 0;
+            a {
+                line-height: 1.2;
+            }
         }
     }
+    
 }
 
 // 3. .moo-nav-buttons
 // -----------------------------------------------------------------------------------
 .moo-nav-buttons {
-    border: 1px solid lighten($color-border-main, 20%);
-    background-color: lighten($color-bg-alt, 15%);
     padding: .5em 1.5em;
     position: relative;
+    &:hover {
+       background-color: saturate($nav-bg-color, 10%);
+    }
     &.disabled {
         color: lighten($nav-bg-light-color, 25%);
+        &:hover {
+           background-color: lighten($nav-bg-light-color, 25%);
+        }
     }
 }
 
@@ -74,7 +84,6 @@ nav a {
 // -----------------------------------------------------------------------------------
 .moo-nav-back {
     @extend .moo-nav-buttons;
-    margin: 0 0 0 1em;
     &:before {
         content: ' ';
         display: block;
@@ -96,102 +105,35 @@ nav a {
 // 6. .app-buttons
 // -----------------------------------------------------------------------------------
 .app-buttons {
-    background-color: lighten($color-bg-alt, 10%);
-    border: 1px solid lighten($color-border-main, 20%);
-    font-size: 1.7em; 
+    line-height: 2.5;
     text-indent: -9999px;
-    margin: 0 .5em 0 0;
-    // changed ems for px because of resizing issues.
-    // padding: .47em 0.55em;
-    // height: 2em;
-    padding: 8px 10px;
-    height: 36px; 
+    padding: .75em 1em;
     position: relative;
     &:before {
         content: " ";
         display: block;
+    }
+    &.moo-current {
+        background-color: desaturate(darken($color-main, 10%), 12%);;
+        @include border-radius(.5em); 
     }
 }
 
 nav.app {
     float: right;
     left: auto;
+    height: 100%;
     .moo-nav {
-        display: none;
-        &.moo-active {
-            @include float-left;
-        }
-        &.new {
-            @extend .app-buttons;
-            &:before {
-                @include mootor-sprite(add, $dimensions: true);
-            }
-        }
-        &.upload {
-            @extend .app-buttons;
-            &:before {
-                @include mootor-sprite(upload, $dimensions: true);
-            }
-        }
-        &.delete {
-            @extend .app-buttons;
-            &:before {
-                @include mootor-sprite(delete, $dimensions: true);
-            }
-        }
-        &.save {
-            @extend .app-buttons;
-            &:before {
-                @include mootor-sprite(save, $dimensions: true);
-            }
-        }
-        &.client-accept {
-            @extend .app-buttons;
-            &:before {
-                @include mootor-sprite(client-accept, $dimensions: true);
-            }
-        }
-    }
-}
-// 6.1 .logout button
-// -----------------------------------------------------------------------------------
-.moo-nav.logout {
-    @extend .app-buttons;
-    @include float-left;
-    &:before {
-        @include mootor-sprite(logout, $dimensions: true, $offset-y:1px);
+        @extend .app-buttons;
     }
 }
 
-// 7. tabs
-// -----------------------------------------------------------------------------------
- 
-.moo-nav-tabs-header {
-    height: 4em;
-    .moo-tab {
-        border: none;
-        font-size: 1.5em;
-        line-height: 30px;
-        padding: .5em 1em;
-        height: 100%;
-        background-color: #ccc;
-        color: #888;
-        &.moo-active {
-            font-weight: 700;
-            background-color: $color-bg-main;
-        }
-        &.red-zone {
-            background-color: #ECABA4;
-            color: #A42517;
-        }
-        &.yellow-zone {
-            background-color: #F3E99C;
-            color: #A4910D;
-        }
-        &.green-zone {
-            background-color: #A4ECAD;
-            color: #3E9749;
-        }
+.moo-footer {
+    padding: 0;
+    nav.app {
+        float: none;
+        display: table;
+        border-spacing: 1em .5em;
+        width: 100%;
     }
 }
-.moo-tab-content { background-color: transparent}

@@ -9,36 +9,23 @@
 @import "normalize";
 
 // Global variables
-@import "base/globals/text";
 @import "base/globals/colors";
+@import "base/globals/text";
 
 // Mootor plugins
 @import "mootor.nav";
 @import "mootor.ui";
 
 // shared elements
-@import "base/shared/sprites";
-@import "base/shared/utilities";
+@import "base/shared/sprites-ui";
 
 // General
 @import "base/shared/layout";
 @import "base/shared/nav";
+
 @import "base/shared/forms";
 
-// generic components
-@import "base/components/buttons";
-@import "base/components/gallery";
-@import "base/components/modal";
-@import "base/components/comments";
-@import "base/shared/panels";
+@import "base/shared/utilities";
 
-// Sections
 
-// Media Queries and fixes for different resolutions 
-@import "base/shared/resize";
 
-// Sample styles
-
-.blue {
-    background: #0000dd;
-}
