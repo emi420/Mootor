@@ -3,7 +3,7 @@
  * @return {object} Overlay Mootor UI Overlay object
  */
 var Overlay = function(options) {
-    var container
+    var container,
         parent;
 
     if (options !== undefined && options.container !== undefined) {
