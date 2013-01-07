@@ -4,6 +4,7 @@
 
 .moo-overlay {
     background-color: darken($subColor1B, 10%); //rgba(0,0,0,.3);
+    opacity: .75;
     position: absolute;
     top: 0;
     left: 0;
