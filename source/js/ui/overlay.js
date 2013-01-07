@@ -53,12 +53,14 @@ Modal = function() {
  */
 Loading = function() {
     if (Loading.el === undefined) {
-        Loading.el = Overlay._makeHTML({
+        Loading.el = Overlay._makeHTML({ 
             type: "loading",
             object: Loading
         });    
     }
     this.el = Loading.el;
+    // FIXME CHECK
+    document.body.appendChild(this.el);
     return this;
 };
 

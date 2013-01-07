@@ -1,0 +1,54 @@
+@import "compass/utilities/sprites/base";  
+
+// General Sprite Defaults
+
+$mootor-sprite-base-class: ".moo-icons" !default;
+$mootor-sprite-dimensions: false !default;
+$mootor-position: 0% !default;
+$mootor-spacing: 10px !default;
+$mootor-repeat: no-repeat !default;
+
+// Mootor sprites
+
+$mootor-sprites: sprite-map("default/*.png",
+  $position: $mootor-position,
+  $spacing: $mootor-spacing,
+  $repeat: $mootor-repeat);
+
+// Use this to set the dimensions of an element
+// based on the size of the original image.
+
+@mixin mootor-sprite-dimensions($name) {
+  @include sprite-dimensions($mootor-sprites, $name)
+}
+
+// Move the background position to display the sprite.
+
+@mixin mootor-sprite-position($name, $offset-x: 0, $offset-y: 0) {
+  @include sprite-position($mootor-sprites, $name, $offset-x, $offset-y)
+}
+
+// Extends the sprite base class and set the background position for the desired sprite.
+// It will also apply the image dimensions if $dimensions is true.
+
+@mixin mootor-sprite($name, $dimensions: $mootor-sprite-dimensions, $offset-x: 0, $offset-y: 0) {
+  // @include sprite($mootor-sprites, $name, $dimensions, $offset-x, $offset-y)
+  background-image: $mootor-sprites;
+  background-repeat: no-repeat;
+  $pos: sprite-position($mootor-sprites, $name,  $offset-x,  $offset-y);
+  background-position: nth($pos, 1) nth($pos, 2);
+  width: image-width("default/#{$name}.png");
+  height: image-height("default/#{$name}.png");
+}
+
+@mixin _mootor-sprite($name) {
+    @media screen and ($media-query-0) {
+        @include mootor-sprite($name);
+    }
+    @media screen and ($media-query-1) {
+        @include mootor-sprite($name);
+    }
+    @media screen and ($media-query-2) {
+        @include mootor-sprite($name + "x2");
+    }    
+}

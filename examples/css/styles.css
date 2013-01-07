@@ -358,7 +358,7 @@ nav a {
   display: block;
 }
 
-/* line 4, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 5, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-input-container, .moo-ui-text, .moo-ui-textarea, .moo-ui-select-container {
   display: inline;
   float: right;
@@ -369,7 +369,7 @@ nav a {
   width: 75%;
 }
 
-/* line 12, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 13, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-input, .moo-ui-text input, .moo-ui-textarea textarea {
   -webkit-appearance: none;
   /* Remove default iOS shadow */
@@ -379,12 +379,12 @@ nav a {
   line-height: 1.5em;
   width: 100%;
 }
-/* line 20, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 21, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-input:focus, .moo-ui-text input:focus, .moo-ui-textarea textarea:focus {
   border: rgba(0, 0, 0, 0) none;
 }
 
-/* line 28, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 29, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-form {
   text-align: left;
   width: 90%;
@@ -393,17 +393,17 @@ nav a {
   border: 1px solid #CCC;
   border-radius: 5px;
 }
-/* line 36, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 37, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-form .moo-field {
   display: block;
   padding: 1em 2em;
   border-top: 1px solid #CCC;
 }
-/* line 41, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 42, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-form .moo-field:first-child {
   border-top: none;
 }
-/* line 42, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 43, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-form .moo-field > label, .moo-ui-form .moo-field > legend {
   display: inline;
   float: left;
@@ -412,28 +412,28 @@ nav a {
   width: 25%;
 }
 
-/* line 50, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 51, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-text {
   padding: 0.35em 2.25em 0.25em 0.25em;
 }
 
-/* line 55, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 56, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-textarea {
   padding: 0.25em;
 }
 
-/* line 60, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 61, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-select-container {
   padding: 0.25em;
   height: 3em;
 }
 
-/* line 65, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 66, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-select-wrapper {
   overflow: hidden;
   height: 100%;
 }
-/* line 68, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 69, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-select-wrapper .moo-ui-select-text {
   font-size: 1.5em;
   line-height: 1.5;
@@ -445,7 +445,7 @@ nav a {
   padding: 0 0.35em;
   width: 90%;
 }
-/* line 78, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 79, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-select-wrapper .moo-ui-select-link {
   color: #000;
   line-height: 2.25em;
@@ -459,7 +459,7 @@ nav a {
   right: 0;
   z-index: 10;
 }
-/* line 89, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 90, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-select-wrapper .moo-ui-select-link:after {
   content: " ";
   display: block;
@@ -470,7 +470,7 @@ nav a {
   height: 2.8em;
   z-index: -1;
 }
-/* line 100, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 101, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-select-wrapper select {
   position: absolute;
   top: .5em;
@@ -485,7 +485,7 @@ nav a {
 /*
 *  Cleanbox is the styling of the icon link used to "clean" a text input
 */
-/* line 114, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 115, ../../source/css/sass/_mootor.ui.form.scss */
 .cleanbox {
   display: block;
   padding: 0 0.35em;
@@ -499,20 +499,20 @@ nav a {
   text-decoration: none;
 }
 
-/* line 126, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 127, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-radio {
   display: inline;
   float: right;
   position: relative;
   width: 75%;
 }
-/* line 130, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 131, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-radio input {
   position: absolute;
   top: 0.5em;
   left: 0.5em;
 }
-/* line 135, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 136, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-radio label {
   position: relative;
   display: block;
@@ -520,7 +520,7 @@ nav a {
   background: #FFF;
   font-size: 1.4em;
 }
-/* line 141, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 142, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-radio label .moo-ui-radio-icon {
   display: block;
   position: absolute;
@@ -532,11 +532,11 @@ nav a {
   width: 1em;
   height: 1em;
 }
-/* line 154, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 155, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-radio.moo-active .moo-ui-radio-icon {
   background-color: #666;
 }
-/* line 156, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 157, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-radio.moo-active .moo-ui-radio-icon:after {
   content: " ";
   display: block;
@@ -556,7 +556,7 @@ nav a {
   height: 0.6em;
 }
 
-/* line 172, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 173, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-checkbox-icon {
   display: block;
   position: absolute;
@@ -568,20 +568,20 @@ nav a {
   height: 1em;
 }
 
-/* line 182, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 183, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-checkbox {
   display: inline;
   float: right;
   position: relative;
   width: 75%;
 }
-/* line 186, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 187, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-checkbox input {
   position: absolute;
   top: 0.5em;
   left: 0.5em;
 }
-/* line 191, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 192, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-checkbox label {
   position: relative;
   display: block;
@@ -589,11 +589,11 @@ nav a {
   background: #FFF;
   font-size: 1.4em;
 }
-/* line 199, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 200, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-checkbox.moo-active .moo-ui-checkbox-icon {
   background-color: #666;
 }
-/* line 201, ../../source/css/sass/_mootor.ui.form.scss */
+/* line 202, ../../source/css/sass/_mootor.ui.form.scss */
 .moo-ui-checkbox.moo-active .moo-ui-checkbox-icon:after {
   content: " ";
   display: block;
@@ -707,6 +707,7 @@ nav a {
 /* line 5, ../../source/css/sass/_mootor.ui.overlay.scss */
 .moo-overlay {
   background-color: #dedede;
+  opacity: .75;
   position: absolute;
   top: 0;
   left: 0;
@@ -714,7 +715,7 @@ nav a {
   right: 0;
   z-index: 500;
 }
-/* line 13, ../../source/css/sass/_mootor.ui.overlay.scss */
+/* line 14, ../../source/css/sass/_mootor.ui.overlay.scss */
 .moo-overlay.moo-hidden {
   display: none;
 }
@@ -937,12 +938,6 @@ nav a {
   position: absolute;
   top: -0.5em;
   right: -0.5em;
-}
-
-/* line 22, demo/base/shared/_sprites-ui.scss */
-.moo-icons, .cleanbox:before, .moo-ui-select-container .moo-ui-select-link:before, .moo-ui-checkbox.moo-active .moo-ui-checkbox-icon:after {
-  background-image: url('../img/ui/icons-sdfca033db1.png');
-  background-repeat: no-repeat;
 }
 
 /* line 28, demo/base/shared/_layout.scss */
@@ -1191,7 +1186,9 @@ nav.app {
 /* line 89, demo/base/shared/_forms.scss */
 .cleanbox:before {
   content: " ";
-  background-position: 0 -570px;
+  background-image: url('../img/default-s86cb387897.png');
+  background-repeat: no-repeat;
+  background-position: 0 -904px;
   width: 20px;
   height: 20px;
   display: inline-block;
@@ -1336,7 +1333,9 @@ nav.app {
 /* line 237, demo/base/shared/_forms.scss */
 .moo-ui-select-container .moo-ui-select-link:before {
   content: " ";
-  background-position: 0 -707px;
+  background-image: url('../img/default-s86cb387897.png');
+  background-repeat: no-repeat;
+  background-position: 0 -929px;
   width: 10px;
   height: 8px;
   display: inline-block;
@@ -1368,7 +1367,9 @@ nav.app {
 .moo-ui-checkbox.moo-active .moo-ui-checkbox-icon:after {
   background-color: transparent;
   box-shadow: none;
-  background-position: 0 -322px;
+  background-image: url('../img/default-s86cb387897.png');
+  background-repeat: no-repeat;
+  background-position: 0 -876px;
   width: 21px;
   height: 22px;
   top: -0.25em;
