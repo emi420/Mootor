@@ -233,7 +233,8 @@ $input-border-color: lighten($color-border-forms, 15%);
     .moo-ui-select-list li { padding: .75em}
     .moo-ui-select-link {
         color: transparent;
-        text-indent: -9999px;
+        // text-indent: -9999px;
+        padding: 0 1.5em;
         &:before {
             content: " ";
             @include mootor-sprite(select-arrow, $offset-y: 9px);

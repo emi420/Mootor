@@ -302,6 +302,7 @@ nav a {
   opacity: 0;
   -webkit-transition: opacity, 0.5s;
   -moz-transition: opacity, 0.5s;
+  -ms-transition: opacity, 0.5s;
   -o-transition: opacity, 0.5s;
   transition: opacity, 0.5s;
 }
@@ -547,6 +548,7 @@ nav a {
   background: -webkit-radial-gradient(#ffffff, #a6c9fd 6px);
   background: -moz-radial-gradient(#ffffff, #a6c9fd 6px);
   background: -o-radial-gradient(#ffffff, #a6c9fd 6px);
+  background: -ms-radial-gradient(#ffffff, #a6c9fd 6px);
   background: radial-gradient(#ffffff, #a6c9fd 6px);
   border-radius: 0.5em;
   -webkit-box-shadow: 0 0 2px 2px #666666;
@@ -604,6 +606,7 @@ nav a {
   background: -webkit-linear-gradient(top, #ffffff, #bdd7fd);
   background: -moz-linear-gradient(top, #ffffff, #bdd7fd);
   background: -o-linear-gradient(top, #ffffff, #bdd7fd);
+  background: -ms-linear-gradient(top, #ffffff, #bdd7fd);
   background: linear-gradient(top, #ffffff, #bdd7fd);
   -webkit-box-shadow: 0 0 2px 2px #666666;
   -moz-box-shadow: 0 0 2px 2px #666666;
@@ -618,6 +621,7 @@ nav a {
   background-image: -webkit-linear-gradient(top, #dddddd, #ffffff 45%);
   background-image: -moz-linear-gradient(top, #dddddd, #ffffff 45%);
   background-image: -o-linear-gradient(top, #dddddd, #ffffff 45%);
+  background-image: -ms-linear-gradient(top, #dddddd, #ffffff 45%);
   background-image: linear-gradient(top, #dddddd, #ffffff 45%);
   border: 1px solid #666;
   border-radius: 0.5em;
@@ -645,6 +649,7 @@ nav a {
   background-image: -webkit-linear-gradient(top, #ffffff, #dedede);
   background-image: -moz-linear-gradient(top, #ffffff, #dedede);
   background-image: -o-linear-gradient(top, #ffffff, #dedede);
+  background-image: -ms-linear-gradient(top, #ffffff, #dedede);
   background-image: linear-gradient(top, #ffffff, #dedede);
   border: 1px solid #666;
   border-radius: 0.5em;
@@ -939,12 +944,19 @@ nav a {
   right: -0.5em;
 }
 
-/* line 22, demo/base/shared/_sprites-ui.scss */
+/* line 23, demo/base/shared/_sprites-ui.scss */
 .moo-icons, .cleanbox:before, .moo-ui-select-container .moo-ui-select-link:before, .moo-ui-checkbox.moo-active .moo-ui-checkbox-icon:after {
   background-image: url('../img/ui/icons-sdfca033db1.png');
   background-repeat: no-repeat;
 }
 
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
+  /* line 62, demo/base/shared/_sprites-ui.scss */
+  .moo-icons, .cleanbox:before, .moo-ui-select-container .moo-ui-select-link:before, .moo-ui-checkbox.moo-active .moo-ui-checkbox-icon:after {
+    background-image: url(../img/ui/2xicons-s28b74d4e75.png);
+    background-size: 48px 987px;
+  }
+}
 /* line 28, demo/base/shared/_layout.scss */
 .moo-header {
   color: #f0f0f0;
@@ -1192,8 +1204,6 @@ nav.app {
 .cleanbox:before {
   content: " ";
   background-position: 0 -570px;
-  width: 20px;
-  height: 20px;
   display: inline-block;
   position: absolute;
   width: 100%;
@@ -1331,27 +1341,25 @@ nav.app {
 /* line 234, demo/base/shared/_forms.scss */
 .moo-ui-select-container .moo-ui-select-link {
   color: transparent;
-  text-indent: -9999px;
+  padding: 0 1.5em;
 }
-/* line 237, demo/base/shared/_forms.scss */
+/* line 238, demo/base/shared/_forms.scss */
 .moo-ui-select-container .moo-ui-select-link:before {
   content: " ";
   background-position: 0 -707px;
-  width: 10px;
-  height: 8px;
   display: inline-block;
   position: absolute;
   height: 100%;
   width: 100%;
 }
-/* line 245, demo/base/shared/_forms.scss */
+/* line 246, demo/base/shared/_forms.scss */
 .moo-ui-select-container .moo-ui-select-link:after {
   border-color: #f2f3f3;
   border-left: 1px solid #f2f3f3;
   background: transparent none;
 }
 
-/* line 257, demo/base/shared/_forms.scss */
+/* line 258, demo/base/shared/_forms.scss */
 .moo-ui-checkbox-icon {
   background-color: #d6d6d6;
   border: 1px solid #788287;
@@ -1360,22 +1368,22 @@ nav.app {
   height: 18px;
 }
 
-/* line 265, demo/base/shared/_forms.scss */
+/* line 266, demo/base/shared/_forms.scss */
 .moo-ui-checkbox.moo-active .moo-ui-checkbox-icon {
   background-color: #d6d6d6;
 }
-/* line 267, demo/base/shared/_forms.scss */
+/* line 268, demo/base/shared/_forms.scss */
 .moo-ui-checkbox.moo-active .moo-ui-checkbox-icon:after {
   background-color: transparent;
   box-shadow: none;
   background-position: 0 -322px;
-  width: 21px;
   height: 22px;
+  width: 21px;
   top: -0.25em;
   left: 0;
 }
 
-/* line 281, demo/base/shared/_forms.scss */
+/* line 282, demo/base/shared/_forms.scss */
 .control-button .button {
   font-size: 2em;
   text-align: center;
