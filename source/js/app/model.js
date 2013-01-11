@@ -3,23 +3,30 @@
 *
 */ 
 
-var Model = function(options) {
+var Model,
+    LocalStorage;
+
+Model = function(options) {
    switch(options.engine) {
        case "localStorage":
-           return new localStorage(options);       
+           return new LocalStorage(options);       
            break;
        default:
+           if (options.engine !== undefined && typeof options.engine === "function") {
+               return new options.engine(options);           
+           }
+           break;
    }
-},
+};
 
-localStorage = function(options) {
+LocalStorage = function(options) {
    this.model = options.model;
    this.localStoragePrefix = options.localStoragePrefix;
    this._loadIndex();
    return this;
 };
 
-localStorage.prototype = {
+LocalStorage.prototype = {
       
     // Created
     create: function(obj) {
@@ -232,7 +239,9 @@ localStorage.prototype = {
 
 $.extend({
     Model: function (options) {
-        options.engine = "localStorage";
+        if (options.engine === undefined) {
+            options.engine = "localStorage";
+        }
         return Model(options);
     },
     models: {}
