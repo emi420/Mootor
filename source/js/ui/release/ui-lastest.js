@@ -1618,6 +1618,20 @@ var Map = function(options) {
     self.onLoad = options.onLoad;
     
     Map._includeScript(self.key, function() {
+
+        google.maps.Map.prototype.markers = new Array();
+
+        google.maps.Map.prototype.getMarkers = function() {
+            return this.markers
+        };
+
+        google.maps.Map.prototype.clearMarkers = function() {
+            for(var i=0; i<this.markers.length; i++){
+                this.markers[i].setMap(null);
+            }
+            this.markers = new Array();
+        };
+
         Map._API = google.maps;
         Map._initProperties(self, options);
         Map._initMap(self, options);
@@ -1635,8 +1649,9 @@ var Map = function(options) {
 Map.prototype = {
     addMarker: function(options) {
         var marker = new Marker(options, this.map);
+        this.map.markers.push(marker._APIMarker);
         marker.setMap(this);
-        return this;
+        return marker;
     }
 };
 
@@ -1708,25 +1723,16 @@ $.extend({
     
     _initMap: function(self) {
         var mapOptions;
-    
         mapOptions = {
             zoom: self.zoom,
             center: new Map._API.LatLng(self.center[0], self.center[1]),
-            mapTypeId: self.mapType                    
+            mapTypeId: self.mapType,
+            disableDefaultUI: true                    
         };
-        Map._API.Map.prototype.markers = new Array();
-        Map._API.Map.prototype.getMarkers = function() {
-            return this.markers
-        };
-        Map._API.Map.prototype.clearMarkers = function() {
-            
-            for(var i=0; i<this.markers.length; i++){
-                this.markers[i].setMap(null);
-            }
-            this.markers = new Array();
-        };
-        self.map = new Map._API.Map(self.el,
-            mapOptions);        
+        self.map = new Map._API.Map(
+            self.el,
+            mapOptions
+        );        
     },
     
     _APIScript: "https://maps.googleapis.com/maps/api/js?sensor=false&callback=$._UIMapCallbacks"
