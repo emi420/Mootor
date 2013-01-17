@@ -212,20 +212,39 @@ var $ = (function () {
       ajax:  function (options) {
          var xmlhttp = new $.window.XMLHttpRequest(),
             data = null,
-            i;
+            i,
+            arg,
+            async;
 			
+         
+         
+         if (options.async === undefined)
+         {
+             async = true;
+         } else {
+             async = options.async
+         }
+         if (options.arg === undefined)
+         {
+             arg = null;
+         } else {
+             arg = options.arg;
+         }
+         
 			// FIXME CHECK: xmlhttp.status==0 for UIWebView?
          xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState===4 && (xmlhttp.status===200 || xmlhttp.status===0)) {
-               options.callback(xmlhttp.responseText);
+            if (xmlhttp.readyState===4 && (xmlhttp.status===200 || xmlhttp.status===0) && xmlhttp.callbackcalled === undefined) {
+               options.callback(xmlhttp.responseText,arg);
+               xmlhttp.callbackcalled = true;
             }
          };
-         
+
+
          if (options.method === undefined || options.method === "GET")
          {
-            xmlhttp.open("GET", options.url, true);
+            xmlhttp.open("GET", options.url, async);
          } else if (options.method === "POST") {
-            xmlhttp.open("POST", options.url, true);
+            xmlhttp.open("POST", options.url, async);
             data = options.data;
          }
          
