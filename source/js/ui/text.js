@@ -31,20 +31,9 @@ Text = function(options) {
         self.clean();
     });
 
-    // Do something to prevents keyboard scroll here
-    // FIXME
     this.el.onblur = function() {
-    //    _focused = false;
-    //    window.setTimeout(function() {
-        //    console.log(Text.focused);
-    //        if (_focused === false) {
-                window.scrollTo(0,0); 
-    //        }                
-    //    }, 50);
+        window.scrollTo(0,0); 
     };
-    /*this.el.onfocus = function() {
-        _focused = true;
-    };*/
     
     return this;
 };

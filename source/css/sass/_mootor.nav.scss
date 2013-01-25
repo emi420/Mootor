@@ -18,27 +18,40 @@ body, html {
 
 // Header
 
-.moo-header {
-    text-align: left;
-    z-index: 9999; 
-    position: fixed;
-    top:0;
-    width: 100%;
-    padding: .6em 1em;
-    nav {
-        position: absolute;
-        margin-top: 0;
-        top: 1.6em;
-        left: 1.5em;
-    }
-    nav a {
-        padding: .5em 1em;
-        width: auto;
-        display: inline;
-        font-size: 1.5em;
+@mixin moo-header(
+
+    $class: '.moo-header',
+    $navDisplay: inline
+    ){
+
+    #{$class} {
+        text-align: left;
+        z-index: 9999; 
+        position: fixed;
+        top:0;
+        width: 100%;
+        padding: .6em 1em;
+        nav {
+            position: absolute;
+            margin-top: 0;
+            top: 1.6em;
+            left: 1.5em;
+        }
+        nav a {
+            padding: .5em 1em;
+            font-size: 1.5em;            
+            width: auto;
+            @if $navDisplay == inline {
+                display: inline;                
+            } @else {
+                float: left;
+                display: block;
+            }
+        }        
     }
 }
 
+@include moo-header();
 
 // Footer
 

@@ -43,29 +43,33 @@ Nav.prototype = {
         set: function (id) {
             var item = this.get(id);
                         
-            // If no transition is happening..
-            if (this._config.isMoving === false) {
-
-                this._config.isMoving = true;
-
-                if (this.current !== item.index) {
+            if (item !== null) {
+                
+                // If no transition is happening..
+                if (this._config.isMoving === false) {
     
-                    // Save current index
-                    this._config.back = this.current;
+                    this._config.isMoving = true;
+                    
+                    if (this.current !== item.index) {
+        
+                        // Save current index
+                        this._config.back = this.current;
+        
+                        // Add item to navigation history
+                        if (this._config.direction === 0) {
+                            this.history.push(this.current);
+                        }
+        
+                        // Update current index
+                        this.current = item.index;
     
-                    // Add item to navigation history
-                    if (this._config.direction === 0) {
-                        this.history.push(this.current);
+                        // Load this Item
+                        Nav.load(this);                    
+        
                     }
     
-                    // Update current index
-                    this.current = item.index;
-
-                    // Load this Item
-                    Nav.load(this);                    
-    
                 }
-
+            
             }
             
             return item;
