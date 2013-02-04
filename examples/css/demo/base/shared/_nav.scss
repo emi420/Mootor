@@ -37,10 +37,7 @@ nav a {
     padding: .6em 0;
     nav {
         @include float-left;
-        padding: 0 .5em 0 1em;
-        position: absolute;
-        top: auto;
-        left: auto;
+        padding: 0 .5em 0 1em; 
         a {
             background-color: $nav-bg-color;
             color: $nav-text-color;

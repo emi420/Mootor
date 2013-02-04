@@ -19,11 +19,9 @@ body, html {
 // Header
 
 @mixin moo-header(
-
-    $class: '.moo-header',
-    $navDisplay: inline
+        $class: '.moo-header',
+        $navDisplay: inline
     ){
-
     #{$class} {
         text-align: left;
         z-index: 9999; 
@@ -34,15 +32,15 @@ body, html {
         nav {
             position: absolute;
             margin-top: 0;
-            top: 1.6em;
-            left: 1.5em;
+            top: auto;
+            left: auto;
         }
         nav a {
             padding: .5em 1em;
             font-size: 1.5em;            
             width: auto;
             @if $navDisplay == inline {
-                display: inline;                
+                display: inline-block;                
             } @else {
                 float: left;
                 display: block;
