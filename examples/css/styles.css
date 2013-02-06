@@ -221,7 +221,7 @@ body, html {
   max-height: 100%;
 }
 
-/* line 21, ../../source/css/sass/_mootor.nav.scss */
+/* line 27, ../../source/css/sass/_mootor.nav.scss */
 .moo-header {
   text-align: left;
   z-index: 9999;
@@ -230,22 +230,22 @@ body, html {
   width: 100%;
   padding: .6em 1em;
 }
-/* line 28, ../../source/css/sass/_mootor.nav.scss */
+/* line 34, ../../source/css/sass/_mootor.nav.scss */
 .moo-header nav {
   position: absolute;
   margin-top: 0;
   top: 1.6em;
   left: 1.5em;
 }
-/* line 34, ../../source/css/sass/_mootor.nav.scss */
+/* line 40, ../../source/css/sass/_mootor.nav.scss */
 .moo-header nav a {
   padding: .5em 1em;
+  font-size: 1.5em;
   width: auto;
   display: inline;
-  font-size: 1.5em;
 }
 
-/* line 45, ../../source/css/sass/_mootor.nav.scss */
+/* line 58, ../../source/css/sass/_mootor.nav.scss */
 .moo-footer {
   text-align: left;
   z-index: 9999;
@@ -254,18 +254,18 @@ body, html {
   width: 100%;
   padding: .5em 1em;
 }
-/* line 52, ../../source/css/sass/_mootor.nav.scss */
+/* line 65, ../../source/css/sass/_mootor.nav.scss */
 .moo-footer nav {
   text-align: center;
 }
-/* line 54, ../../source/css/sass/_mootor.nav.scss */
+/* line 67, ../../source/css/sass/_mootor.nav.scss */
 .moo-footer nav a {
   display: inline-block;
   font-size: 1.4em;
   padding: .3em 1.5em;
 }
 
-/* line 66, ../../source/css/sass/_mootor.nav.scss */
+/* line 79, ../../source/css/sass/_mootor.nav.scss */
 .moo-panels {
   position: absolute;
   width: 100%;
@@ -277,19 +277,19 @@ body, html {
   background: #f7f7f7;
 }
 
-/* line 76, ../../source/css/sass/_mootor.nav.scss */
+/* line 89, ../../source/css/sass/_mootor.nav.scss */
 .moo-panel {
   min-height: 100%;
   width: 100%;
   position: absolute;
 }
 
-/* line 86, ../../source/css/sass/_mootor.nav.scss */
+/* line 99, ../../source/css/sass/_mootor.nav.scss */
 nav ul,
 nav ol {
   list-style: none;
 }
-/* line 90, ../../source/css/sass/_mootor.nav.scss */
+/* line 103, ../../source/css/sass/_mootor.nav.scss */
 nav a {
   text-decoration: none;
   text-align: left;
@@ -297,7 +297,7 @@ nav a {
   padding: 1em;
 }
 
-/* line 100, ../../source/css/sass/_mootor.nav.scss */
+/* line 113, ../../source/css/sass/_mootor.nav.scss */
 .moo-nav-back {
   opacity: 0;
   -webkit-transition: opacity, 0.5s;
@@ -306,12 +306,12 @@ nav a {
   -o-transition: opacity, 0.5s;
   transition: opacity, 0.5s;
 }
-/* line 103, ../../source/css/sass/_mootor.nav.scss */
+/* line 116, ../../source/css/sass/_mootor.nav.scss */
 .moo-nav-back.moo-visible {
   opacity: 1;
 }
 
-/* line 110, ../../source/css/sass/_mootor.nav.scss */
+/* line 123, ../../source/css/sass/_mootor.nav.scss */
 .moo-panel {
   -webkit-transition-duration: 0;
   -webkit-transform: translate3d(0, 0, 0);
@@ -1391,7 +1391,7 @@ nav.app {
 
 /* line 13, demo/base/shared/_utilities.scss */
 .hidden {
-  display: none;
+  display: none!important;
 }
 
 /* line 18, demo/base/shared/_utilities.scss */
