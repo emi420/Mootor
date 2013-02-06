@@ -12,7 +12,7 @@
 // A mixin that removes the element from the DOM
 //
 @mixin moo-hidden {
-    display: none;
+    display: none!important;
 }
 
 // A  mixin that hides the element without removing it from the DOM
