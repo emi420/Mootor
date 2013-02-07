@@ -30,6 +30,19 @@ DrawArea.prototype = {
     export: function(format) {
         format !== undefined ? format : "image/png";
         return this.canvasElement.toDataURL(format);
+    },
+    
+    loadImage: function(options) {
+        var src = options.src,
+            x = options.x === undefined ? 0 : options.x, 
+            y = options.y === undefined ? 0 : options.y, 
+            img = new Image(),
+            self = this;
+        
+        img.src = src;
+        img.onload = function() {
+            self.ctx.drawImage(img, x, y);         
+        }
     }
     
 };
