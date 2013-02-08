@@ -186,8 +186,8 @@ $.extend({
      */
     move: function(self, item, gesture) {
             var isPermitted = false;
-    
-            self._config.y = self._config.y + (gesture.y - gesture.lastY);
+            
+            item.y = self._config.y = self._config.y + (gesture.y - gesture.lastY);
             
             // FIXME CHECK
             var panel = self.items[self.current],
@@ -205,10 +205,13 @@ $.extend({
                 isPermitted = true
             }
             
+            // FIXME CHECK
+            item.maxdist = maxdist;
+            
             if (isPermitted === true) {
                 _translate({
                     el: item.el,
-                    y: self._config.y,
+                    y: item.y,
                     x: item.x
                 }, self);
             }
