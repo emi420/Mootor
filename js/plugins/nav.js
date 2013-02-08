@@ -725,11 +725,14 @@ $.extend({
     
     initNavigationLinks: function(self, navInstance) {
         var navigationItems = $(self.el).find(".moo-nav"),
-            i;
+        i;
         
         for (i = navigationItems.length; i--;) {
             $(navigationItems[i]).onTapEnd(function(gesture) {
-                Item.loadNavigationItem(gesture, self, navInstance);                    
+                var item = navInstance.get(gesture.el.getAttribute("href").replace("#",""));
+                if (item.index != navInstance.current) {
+                    Item.loadNavigationItem(gesture, self, navInstance);
+                }               
             })
         }
     }
