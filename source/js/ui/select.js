@@ -22,11 +22,12 @@ var Select = function(options) {
             mooSelectIndex: i
         });            
     }
-    
+
     // Init value
     if (options.value !== undefined) {
         this.selectByValue(options.value);
     }
+    
     
     // FIXME CHECK: initial value
     this.select(0);     
@@ -60,6 +61,23 @@ Select.prototype = {
         this.box = $(this.el).find(".moo-ui-select-menu")[0];
         this.textspan = $(this.el).find(".moo-ui-select-text")[0];
         
+    },
+    
+    _refresh: function() {
+        var self = this;
+
+        var pseudoItemsCount = self.pseudoItems.length,
+            items = $(this.input).find("option"),
+            itemsCount = items.length,
+            i;
+
+        for (i = pseudoItemsCount; i < itemsCount; i++) {
+            self.pseudoItems.push({
+                el: items[i.toString()],
+                mooSelectIndex: i
+            });                                          
+        }
+
     },
     
     // Set touch events
@@ -117,25 +135,7 @@ Select.prototype = {
                 this.select(i);
             }
         }
-    }
-    ,
-        
-    refresh: function () {
-        var i, pseudoItems = this.pseudoItems = [];
-        
-            
-        // Create "pseudo" items collection
-        pseudoItems = $(this.input).find("option");        
-        for(i = 0; i < pseudoItems.length; i++) {
-            this.pseudoItems.push({
-                el: pseudoItems[i],
-                mooSelectIndex: i
-            });            
-        }
-        this.select(0);     
-    }
-    
-    
+    }    
 };
 
 
