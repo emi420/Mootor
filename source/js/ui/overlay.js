@@ -51,12 +51,19 @@ Modal = function() {
  * Loading
  * @return {object} Loading Mootor UI Loading object
  */
-Loading = function() {
-    if (Loading.el === undefined) {
+Loading = function(options) {
+    var type;
+    if (Loading.el === undefined) {    
+        if (options !== undefined && options.style === "circle") {
+            type = "loadingCircle";
+        } else {
+            type = "loading"
+        }
         Loading.el = Overlay._makeHTML({ 
-            type: "loading",
+            type: type,
             object: Loading
         });    
+        
     }
     this.el = Loading.el;
     // FIXME CHECK

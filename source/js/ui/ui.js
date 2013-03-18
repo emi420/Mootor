@@ -156,7 +156,13 @@ $.extend({
 
 $(document).ready(function() {
     var _overlay = new Overlay(),
+        _loading;
+        
+    if ($._settings !== undefined && $._settings.loadingStyle !== undefined) {
+        _loading = new Loading({style: $._settings.loadingStyle});
+    } else {
         _loading = new Loading(); 
+    }
 
     /**
      * @class $

@@ -13,7 +13,9 @@ var _templates = {
     
     overlay: "<div class='moo-overlay'></div>",
     
-    loading: "<div class='moo-ui-loading'><div class='moo-ui-loading-block moo-loading-01'></div><div class='moo-ui-loading-block moo-loading-02'></div><div class='moo-ui-loading-block moo-loading-03'></div><div class='moo-ui-loading-block moo-loading-04'></div><div class='moo-ui-loading-block moo-loading-05'></div><div class='moo-ui-loading-block moo-loading-06'></div><div class='moo-ui-loading-block moo-loading-07'></div><div class='moo-ui-loading-block moo-loading-08'></div></div>",
+    loading: "<div class='moo-ui-loading-circles'><div class='moo-ui-loading-circle moo-loading-circle-01'></div><div class='moo-ui-loading-circle moo-loading-circle-02'></div><div class='moo-ui-loading-circle moo-loading-circle-03'></div></div>",
+    
+    loadingCircle: "<div class='moo-ui-loading'><div class='moo-ui-loading-block moo-loading-01'></div><div class='moo-ui-loading-block moo-loading-02'></div><div class='moo-ui-loading-block moo-loading-03'></div><div class='moo-ui-loading-block moo-loading-04'></div><div class='moo-ui-loading-block moo-loading-05'></div><div class='moo-ui-loading-block moo-loading-06'></div><div class='moo-ui-loading-block moo-loading-07'></div><div class='moo-ui-loading-block moo-loading-08'></div></div>",
     
     modal: "<div class='moo-ui-modal-container'><div class='moo-ui-modal-panel' moo-template='html: this.html'></div></div>",
     
@@ -292,12 +294,19 @@ Modal = function() {
  * Loading
  * @return {object} Loading Mootor UI Loading object
  */
-Loading = function() {
-    if (Loading.el === undefined) {
+Loading = function(options) {
+    var type;
+    if (Loading.el === undefined) {    
+        if (options !== undefined && options.style === "circle") {
+            type = "loadingCircle";
+        } else {
+            type = "loading"
+        }
         Loading.el = Overlay._makeHTML({ 
-            type: "loading",
+            type: type,
             object: Loading
         });    
+        
     }
     this.el = Loading.el;
     // FIXME CHECK
@@ -1901,7 +1910,13 @@ $.extend({
 
 $(document).ready(function() {
     var _overlay = new Overlay(),
+        _loading;
+        
+    if ($._settings !== undefined && $._settings.loadingStyle !== undefined) {
+        _loading = new Loading({style: $._settings.loadingStyle});
+    } else {
         _loading = new Loading(); 
+    }
 
     /**
      * @class $
