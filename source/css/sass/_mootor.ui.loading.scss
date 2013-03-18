@@ -28,6 +28,7 @@
 $loading-background-color: #000;
 .moo-ui-loading-circles {
     width: 15em; //150px
+    height: 3.2em;
     position: absolute; // 2
     top: 50%; // 2
     left: 50%; // 2
@@ -39,56 +40,79 @@ $loading-background-color: #000;
 // -------------------------------------------------------
 // These are the basic styles of the elements that create the animation.
 
-.moo-ui-loading-circles {
-    z-index: 550;
-    &.moo-hidden {
-        display: none;
-    }
-}
 .moo-ui-loading-circle {
-    background-color: lighten($loading-background-color, 100%);
+    background-color: $loading-background-color;
     float: left;
     margin-left: 1.7em; // 17px;
     height: 3.2em; //32px
     width: 3.2em; // 32px
-   
-    animation-name: bounce-circle;
-    animation-duration: .9s;
+  
+    animation-duration: 1;
     animation-iteration-count: infinite;
     animation-direction: linear;
+    animation-delay: 0;
     border-radius: 2.1em; // 21px
-    -webkit-animation-name: bounce-circle;
-    -webkit-animation-duration: .9s;
+    -webkit-animation-duration: 1s;
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-direction: linear;
     -webkit-border-radius: 2.1em; // 21px
+    -webkit-animation-delay: 0;
 }
 
-.moo-loading-circle-01 { 
-    -webkit-animation-delay: .54s; 
-    animation-delay: .54s;
+@mixin moo-ui-loading-object-animation-default-0() {
+    0% { opacity: 0; }   
+    25% { opacity: 1; }
+    50% { opacity: 0; }
+    75% { opacity: 0; }
+    100% { opacity: 0; }
+}
+@keyframes moo-ui-loading-object-animation-0 {
+    @include moo-ui-loading-object-animation-default-0;
+}
+@-webkit-keyframes moo-ui-loading-object-animation-0 {
+    @include moo-ui-loading-object-animation-default-0;
+}
+
+@mixin moo-ui-loading-object-animation-default-1() {
+    0% { opacity: 0; }   
+    25% { opacity: 0; }
+    50% { opacity: 1; }
+    75% { opacity: 0; }
+    100% { opacity: 0; }
+}
+@keyframes moo-ui-loading-object-animation-1 {
+    @include moo-ui-loading-object-animation-default-1;
+}
+@-webkit-keyframes moo-ui-loading-object-animation-1 {
+    @include moo-ui-loading-object-animation-default-1;
+}
+
+@mixin moo-ui-loading-object-animation-default-2() {
+    0% { opacity: 0; }   
+    25% { opacity: 0; }
+    50% { opacity: 0; }
+    75% { opacity: 1; }
+    100% { opacity: 0; }
+}
+@keyframes moo-ui-loading-object-animation-2 {
+    @include moo-ui-loading-object-animation-default-2;
+}
+@-webkit-keyframes moo-ui-loading-object-animation-2 {
+    @include moo-ui-loading-object-animation-default-2;
+}
+
+
+.moo-loading-circle-01 {
+    -webkit-animation-name: moo-ui-loading-object-animation-0;
+    animation-name: moo-ui-loading-object-animation-0;
 }
 .moo-loading-circle-02 {
-    -webkit-animation-delay: .42s;
-    animation-delay: .42s;
-
+    -webkit-animation-name: moo-ui-loading-object-animation-1;
+    animation-name: moo-ui-loading-object-animation-1;
 }
 .moo-loading-circle-03 {
-    -webkit-animation-delay: .18s;
-    animation-delay: .18s;
-}
-
-
-@-webkit-keyframes bounce-circle {
-    0%{}
-    50%{ background-color: $loading-background-color }
-    100%{}
-}
-
-@keyframes bounce-circle {
-    0%{}
-    50%{ background-color: $loading-background-color }
-    100%{}
+    -webkit-animation-name: moo-ui-loading-object-animation-2;
+    animation-name: moo-ui-loading-object-animation-2;
 }
 
 // -------------------------------------------------------
