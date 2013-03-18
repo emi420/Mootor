@@ -3,6 +3,110 @@
 // -----------------------------------------------------------------------------------
 
 
+// -------------------------------------------------------
+// circles loading html and styles
+// -------------------------------------------------------
+
+// <div class='moo-ui-loading-circles'>
+    // <div class="moo-ui-loading-circle moo-loading-circle-01"></div>
+    // <div class="moo-ui-loading-circle moo-loading-circle-02"></div>
+    // <div class="moo-ui-loading-circle moo-loading-circle-03"></div>
+// </div>
+
+
+// Editable styles
+// -----------------------------------------------------------
+// Change this styles to position/resize the element as needed.
+// 1. base (darkest) color. The gradient palette derives from this color.
+// 2. Position of the center point of the animation. 
+//    Place wherever is needed, by default is in the center of its parent container.
+// 3. The overall size of the loading is relative to this value.
+// 4. Animation speed
+
+
+
+$loading-background-color: #000;
+.moo-ui-loading-circles {
+    width: 15em; //150px
+    position: absolute; // 2
+    top: 50%; // 2
+    left: 50%; // 2
+    font-size: 1em; // 2
+}
+
+
+// Base
+// -------------------------------------------------------
+// These are the basic styles of the elements that create the animation.
+
+.moo-ui-loading-circles {
+    z-index: 550;
+    &.moo-hidden {
+        display: none;
+    }
+}
+.moo-ui-loading-circle {
+    background-color: lighten($loading-background-color, 100%);
+    float: left;
+    margin-left: 1.7em; // 17px;
+    height: 3.2em; //32px
+    width: 3.2em; // 32px
+   
+    animation-name: bounce-circle;
+    animation-duration: .9s;
+    animation-iteration-count: infinite;
+    animation-direction: linear;
+    border-radius: 2.1em; // 21px
+    -webkit-animation-name: bounce-circle;
+    -webkit-animation-duration: .9s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-direction: linear;
+    -webkit-border-radius: 2.1em; // 21px
+}
+
+.moo-loading-circle-01 { 
+    -webkit-animation-delay: .54s; 
+    animation-delay: .54s;
+}
+.moo-loading-circle-02 {
+    -webkit-animation-delay: .42s;
+    animation-delay: .42s;
+
+}
+.moo-loading-circle-03 {
+    -webkit-animation-delay: .18s;
+    animation-delay: .18s;
+}
+
+
+@-webkit-keyframes bounce-circle {
+    0%{}
+    50%{ background-color: $loading-background-color }
+    100%{}
+}
+
+@keyframes bounce-circle {
+    0%{}
+    50%{ background-color: $loading-background-color }
+    100%{}
+}
+
+// -------------------------------------------------------
+// wheel loading html and styles
+// -------------------------------------------------------
+
+// <div class='moo-ui-loading'>
+    // <div class='moo-ui-loading-block moo-loading-01'></div>
+    // <div class='moo-ui-loading-block moo-loading-02'></div>
+    // <div class='moo-ui-loading-block moo-loading-03'></div>
+    // <div class='moo-ui-loading-block moo-loading-04'></div>
+    // <div class='moo-ui-loading-block moo-loading-05'></div>
+    // <div class='moo-ui-loading-block moo-loading-06'></div>
+    // <div class='moo-ui-loading-block moo-loading-07'></div>
+    // <div class='moo-ui-loading-block moo-loading-08'></div>
+// </div>
+
+
 // Editable styles
 // -----------------------------------------------------------
 // Change this styles to position/resize the element as needed.
