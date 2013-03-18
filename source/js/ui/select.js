@@ -64,14 +64,14 @@ Select.prototype = {
     },
     
     _refresh: function() {
-        var self = this;
-
-        var pseudoItemsCount = self.pseudoItems.length,
+        var self = this,
             items = $(this.input).find("option"),
             itemsCount = items.length,
             i;
+            
+        self.pseudoItems = [];
 
-        for (i = pseudoItemsCount; i < itemsCount; i++) {
+        for (i = 0; i < itemsCount; i++) {
             self.pseudoItems.push({
                 el: items[i.toString()],
                 mooSelectIndex: i

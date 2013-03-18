@@ -73,8 +73,15 @@ UIDate.prototype = {
         });
         
         $(this.input).on("change", function() {
-            self.value = self.input.value;
-            $(self.textspan).html(self.value);
+            
+            // FIXME CHECK (date formatting)
+            var value = self.value = self.input.value,
+                valueString = "",
+                d = new Date(value);
+            
+            valueString = (d.getMonth()+1) + "/" + (d.getDate()+1) + "/" + d.getFullYear()
+            
+            $(self.textspan).html(valueString);
         });          
 
         // Prevents default on DragStart
