@@ -37,7 +37,6 @@ var $ = (function () {
 
    var Moo,
       _scripts,
-      _hideContentWhileDocumentNotReady,
 
    /**
     * Main public constructor  
@@ -174,24 +173,10 @@ var $ = (function () {
        * @example 
        *        var clientHeight = $.view.clientH 
        *        var clientWidth = $.view.clientW
-       *        var hideViewport = function() { $.view.hide(); }
-       *        var showViewport = function() { $.view.show(); }
        */
       view: {
-
          clientH: 0,
          clientW: 0,
-
-         hide: function () {
-            var styles = document.createElement("style");
-            styles.innerHTML = "body {display: none}";
-            document.head.appendChild(styles);
-            $.view.styles = styles;
-         },
-
-         show: function () {
-            document.head.removeChild($.view.styles);
-         }
       },
       
       /**
@@ -212,20 +197,39 @@ var $ = (function () {
       ajax:  function (options) {
          var xmlhttp = new $.window.XMLHttpRequest(),
             data = null,
-            i;
+            i,
+            arg,
+            async;
 			
+         
+         
+         if (options.async === undefined)
+         {
+             async = true;
+         } else {
+             async = options.async
+         }
+         if (options.arg === undefined)
+         {
+             arg = null;
+         } else {
+             arg = options.arg;
+         }
+         
 			// FIXME CHECK: xmlhttp.status==0 for UIWebView?
          xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState===4 && (xmlhttp.status===200 || xmlhttp.status===0)) {
-               options.callback(xmlhttp.responseText);
+            if (xmlhttp.readyState===4 && (xmlhttp.status===200 || xmlhttp.status===0) && xmlhttp.callbackcalled === undefined) {
+               options.callback(xmlhttp.responseText,arg);
+               xmlhttp.callbackcalled = true;
             }
          };
-         
+
+
          if (options.method === undefined || options.method === "GET")
          {
-            xmlhttp.open("GET", options.url, true);
+            xmlhttp.open("GET", options.url, async);
          } else if (options.method === "POST") {
-            xmlhttp.open("POST", options.url, true);
+            xmlhttp.open("POST", options.url, async);
             data = options.data;
          }
          
@@ -515,20 +519,6 @@ var $ = (function () {
 
 	}, document);
 	
-	
-   /**
-    * Hide all content while document is not ready
-    * @private
-    */
-   _hideContentWhileDocumentNotReady = function() {
-    $.view.hide();
-    $(document).ready(function() {
-         $._documentIsReady = true;
-         $.view.show();
-    });
-   };
-   _hideContentWhileDocumentNotReady();
-
    /**
     * Scripts included
     * @private
@@ -549,22 +539,16 @@ var $ = (function () {
       // Include script
       include: function(script, callback) {
          var d = document;
-         $.ajax({
-              url: script,
-              callback: function(response) {
-                var scriptEl = d.createElement("script");
-                scriptEl.src = script; 
-                scriptEl.innerHTML = response;
-                d.head.appendChild(scriptEl);
-                _scripts.list.push({
-                    path: script,
-                    el: scriptEl
-                });
-                if (typeof callback === "function") {
-                    callback();
-                }
-              }
-         });           
+         var scriptEl = d.createElement("script");
+         scriptEl.src = script; 
+         d.querySelector("head").appendChild(scriptEl);
+         _scripts.list.push({
+             path: script,
+             el: scriptEl
+         });
+         if (typeof callback === "function") {
+             callback();
+         }             
       },
       
       // Remove script

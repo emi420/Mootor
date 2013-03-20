@@ -126,7 +126,6 @@ $.extend({
             zoom: self.zoom,
             center: new Map._API.LatLng(self.center[0], self.center[1]),
             mapTypeId: self.mapType,
-            disableDefaultUI: true                    
         };
         self.map = new Map._API.Map(
             self.el,

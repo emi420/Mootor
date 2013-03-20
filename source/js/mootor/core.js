@@ -22,7 +22,6 @@ var $ = (function () {
 
    var Moo,
       _scripts,
-      _hideContentWhileDocumentNotReady,
 
    /**
     * Main public constructor  
@@ -159,24 +158,10 @@ var $ = (function () {
        * @example 
        *        var clientHeight = $.view.clientH 
        *        var clientWidth = $.view.clientW
-       *        var hideViewport = function() { $.view.hide(); }
-       *        var showViewport = function() { $.view.show(); }
        */
       view: {
-
          clientH: 0,
          clientW: 0,
-
-         hide: function () {
-            var styles = document.createElement("style");
-            styles.innerHTML = "body {display: none}";
-            document.head.appendChild(styles);
-            $.view.styles = styles;
-         },
-
-         show: function () {
-            document.head.removeChild($.view.styles);
-         }
       },
       
       /**
@@ -519,20 +504,6 @@ var $ = (function () {
 
 	}, document);
 	
-	
-   /**
-    * Hide all content while document is not ready
-    * @private
-    */
-   _hideContentWhileDocumentNotReady = function() {
-    $.view.hide();
-    $(document).ready(function() {
-         $._documentIsReady = true;
-         $.view.show();
-    });
-   };
-   _hideContentWhileDocumentNotReady();
-
    /**
     * Scripts included
     * @private
@@ -555,7 +526,7 @@ var $ = (function () {
          var d = document;
          var scriptEl = d.createElement("script");
          scriptEl.src = script; 
-         d.head.appendChild(scriptEl);
+         d.querySelector("head").appendChild(scriptEl);
          _scripts.list.push({
              path: script,
              el: scriptEl
