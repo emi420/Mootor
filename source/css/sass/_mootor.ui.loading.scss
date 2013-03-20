@@ -25,14 +25,19 @@
 
 
 
-$loading-background-color: #000;
+$loading-background-color: #666 !default;
+
 .moo-ui-loading-circles {
     width: 15em; //150px
     height: 3.2em;
+    margin-left: -7.5em;
     position: absolute; // 2
     top: 50%; // 2
     left: 50%; // 2
     font-size: 1em; // 2
+    &.moo-hidden {
+        display: none;
+    }
 }
 
 
