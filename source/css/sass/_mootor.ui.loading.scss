@@ -145,7 +145,7 @@ $loading-background-color: #666 !default;
 // 3. The overall size of the loading is relative to this value.
 // 4. Animation speed
 
-$loading-background-color: #000;  // 1
+$loading-background-color: #000 !default;  // 1
 .moo-ui-loading {
     position: absolute; // 2
     top: 50%; // 2
