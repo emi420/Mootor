@@ -691,7 +691,6 @@ var Footer = function(self) {
     
     if (this.el !== undefined) {
         
-        // FIXME: remove setTimeout
         this.height = this.el.offsetHeight;       
         this.el.style.height = this.height + "px";     
 

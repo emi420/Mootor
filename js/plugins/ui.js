@@ -1657,6 +1657,9 @@ Map.prototype = {
         this.map.markers.push(marker._APIMarker);
         marker.setMap(this);
         return marker;
+    },
+    setCenter: function(lat,lon) {
+        this.map.setCenter(new Map._API.LatLng(lat,lon));
     }
 };
 
