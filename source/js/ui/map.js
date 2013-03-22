@@ -121,11 +121,24 @@ $.extend({
     },
     
     _initMap: function(self) {
-        var mapOptions;
+        var mapOptions,
+            mapStyles;
+            
+        mapStyles = [{
+            "featureType": 
+            "poi", 
+            "stylers": [{
+                "visibility": "off"
+             }]
+        }];  
+                  
         mapOptions = {
             zoom: self.zoom,
             center: new Map._API.LatLng(self.center[0], self.center[1]),
             mapTypeId: self.mapType,
+            disableDefaultUI: true,
+            zoomControl: true,
+            styles: mapStyles
         };
         self.map = new Map._API.Map(
             self.el,
