@@ -113,7 +113,8 @@ $.extend({
      */
     initStyles: function(self) {
             var i = 0,
-                item = {};
+                item = {},
+                initPanelSizes;
                 
             for (i = self._config.count; i--;) {
     
@@ -139,7 +140,21 @@ $.extend({
                 if (self._config.height > item.height) {
                     item.height = self._config.height;
                 }
+                
             }
+            
+            initPanelSizes = function() {
+                var clientWidthStyle = $.view.clientW + "px";     
+                for (i = self._config.count; i--;) {
+                    item.el.style.width = clientWidthStyle;                 
+                }           
+                self.el.style.width = clientWidthStyle;
+                document.body.style.width = clientWidthStyle;
+            }
+            
+            initPanelSizes();
+            
+            $(window).on("resize", initPanelSizes);
         },
     
     /**
