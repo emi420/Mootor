@@ -1665,7 +1665,7 @@ Map.prototype = {
 
 /*
  * Marker
- */
+ */ 
 var Marker = function(options, map) {
     var infowindow,
     self = this;
@@ -1673,8 +1673,8 @@ var Marker = function(options, map) {
     this.lat = options.lat;
     this.lon = options.lon;
     this.html = options.html;    
-
-    this._APIMarker = new Map._API.Marker();
+ 
+    this._APIMarker = new Map._API.Marker(options);
     this._APIMarker.setPosition(
         new Map._API.LatLng(
             this.lat,
@@ -1723,23 +1723,45 @@ $.extend({
         self.mapType = options.mapType ? options.mapType : Map._API.MapTypeId.ROADMAP
     },
 
-    _includeScript: function(key, callback) {
+    _includeScript: function(mapKey, callback) {
         // TODO: multiple callbacks support
         $._UIMapCallbacks = callback;
-        _includeScript(Map._APIScript + "&key=" + key)
+        _includeScript(
+            Map._APIScript + "&key=" + mapKey
+        );
     },
     
-    _initMap: function(self) {
+    _initMap: function(self, options) {
         var mapOptions,
             mapStyles;
             
-        mapStyles = [{
-            "featureType": 
-            "poi", 
-            "stylers": [{
-                "visibility": "off"
-             }]
-        }];  
+        mapStyles = options.styles || [
+             {
+                 "featureType": 
+                 "poi", 
+                 "stylers": [{
+                    "visibility": "off"
+                 }],
+             },
+             {
+                "featureType": "landscape",
+                "stylers": [{
+                    "visibility": "off"
+                }]
+             },
+             {
+                "featureType": "transit",
+                "stylers": [{
+                    "visibility": "off"
+                }]
+             },
+             { 
+                "featureType": "water",
+                "stylers": [{
+                    "visibility": "simplified"
+                }]
+             }                           
+        ];  
                   
         mapOptions = {
             zoom: self.zoom,
@@ -1754,8 +1776,7 @@ $.extend({
             mapOptions
         );        
     },
-    
-    _APIScript: "https://maps.googleapis.com/maps/api/js?sensor=false&callback=$._UIMapCallbacks"
+    _APIScript: "https://maps.googleapis.com/maps/api/js?&sensor=false&callback=$._UIMapCallbacks"
     
 }, Map);
 

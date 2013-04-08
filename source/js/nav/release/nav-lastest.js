@@ -812,44 +812,48 @@ $.extend({
             
             // Display panel
             $(panel.el).show();
-           
-            // Initial position for translate
-            positionX = navInstance_config.width + navInstance_config.margin;
-
+            
             if (navInstance.current !== 0) {
                 navInstance_config.anchorBack.show();           
             } else {
                 navInstance_config.anchorBack.hide();
             }
+
+            if (navInstance_config.transitionDuration > 0) {
+           
+                // Initial position for translate
+                positionX = navInstance_config.width + navInstance_config.margin;
                                 
-            if (navInstance_config.direction === 0 || navInstance_config.back === 0) {
+                if (navInstance_config.direction === 0 || navInstance_config.back === 0) {
             
-                // Right
+                    // Right
+                    _translate({el: panel.el, x: positionX}, navInstance);
+                    panel.x = positionX;
+                    positionX = -positionX;
+            
+                } else {
+            
+                    // Left            
+                    _translate({el: panel.el, x: -positionX}, navInstance);
+                    panel.x = -positionX;
+                    positionX = positionX;
 
-                _translate({el: panel.el, x: positionX}, navInstance);
-                panel.x = positionX;
-                positionX = -positionX;
-            
+                }
+
+                window.setTimeout(function () {
+                    _translate({
+                        el: navInstance.el,
+                        duration: navInstance_config.transitionDuration,
+                        x: positionX,
+                        callback: function() {
+                            _loadCallback(navInstance, panel, back);
+                        }
+                    }, navInstance);
+                }, 1);                
+                
             } else {
-            
-                // Left
-            
-                _translate({el: panel.el, x: -positionX}, navInstance);
-                panel.x = -positionX;
-                positionX = positionX;
-
+                _loadCallback(navInstance, panel, back);
             }
-
-            window.setTimeout(function () {
-                _translate({
-                    el: navInstance.el,
-                    duration: navInstance_config.transitionDuration,
-                    x: positionX,
-                    callback: function() {
-                        _loadCallback(navInstance, panel, back);
-                    }
-                }, navInstance);
-            }, 1);
             
             if (typeof panel.onLoad === "function") {
                 panel.onLoad();
@@ -870,19 +874,24 @@ $.extend({
     
                 item = self.items[i];
                 
-                // Translate all but first panel off of the screen
+                if (self._config.transitionDuration > 0) {
+                    // Translate all but first panel off of the screen
+                    if (i > 0) {
+                        _translate({
+                            el: item.el, 
+                            x:  -((self._config.width + self._config.margin) * 4),
+                            y:0
+                        }, self);
+                    } else {
+                        _translate({
+                            el: item.el,
+                            x:0
+                        }, self);
+                    }
+                }
+
                 if (i > 0) {
-                    _translate({
-                        el: item.el, 
-                        x:  -((self._config.width + self._config.margin) * 4),
-                        y:0
-                    }, self);
                     $(item.el).hide();
-                } else {
-                    _translate({
-                        el: item.el,
-                        x:0
-                    }, self);
                 }
                 
                 // Fill screen vertically
