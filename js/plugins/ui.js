@@ -508,6 +508,7 @@ var Checkbox = function(options) {
         
     this.input = options.el;        
     this.value = [];
+    this._disabled = false;
     $(this.input).hide();
     this._makeHTML();    
 
@@ -556,8 +557,15 @@ Checkbox.prototype = {
        for(i = 0; i < this.pseudoItems.length; i++) {
        
            $(this.pseudoItems[i].el).onTapEnd(function(gesture) {
-                var $el = $(gesture.el),
-                    index = gesture.el.getAttribute("moo-foreach-index"),
+               
+                if (self._disabled === false) {
+                
+                    var $el,
+                        index,
+                        onTap;
+               
+                    $el = $(gesture.el);
+                    index = gesture.el.getAttribute("moo-foreach-index");
                     onTap = function() {
                         if ($el.hasClass("moo-active")) {
                             self.unselect(index);
@@ -566,16 +574,16 @@ Checkbox.prototype = {
                         }
                     }                     
                 
-                if ($.context.userAgent === "android") {
-                    window.setTimeout(function() {
-                       onTap();
-                    }, 0)
-                } else {
-                    onTap();
+                    if ($.context.userAgent === "android") {
+                        window.setTimeout(function() {
+                           onTap();
+                        }, 0)
+                    } else {
+                        onTap();
+                    }
                 }
                 
                 _stopEventPropagationAndPreventDefault(gesture); 
-
                               
            });
 
@@ -643,7 +651,15 @@ Checkbox.prototype = {
             _onChangeCallbacks[this.input.id] = [];
         }
         _onChangeCallbacks[this.input.id].push(callback);
-    }
+    },
+    
+    disable: function() {
+        this._disabled = true;
+    },
+
+    enable: function() {
+        this._disabled = false;
+    },
     
 };
 
