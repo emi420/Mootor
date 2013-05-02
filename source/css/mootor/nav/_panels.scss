@@ -1,0 +1,54 @@
+@import "compass/css3/transition";
+
+body, html {
+    background: #ccc;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+// Navigation
+
+nav {
+    ul, 
+    ol {
+        list-style: none;
+    }    
+    a {
+        text-decoration: none;
+        text-align: left;
+        display: block;
+        padding: 1em;
+    }   
+}
+
+// Panels 
+
+.moo-panels {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    min-height: 100%;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: $light-grey;
+}
+.moo-panel {
+    min-height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+// Hacks
+ 
+.moo-panels, .moo-panel {
+    // Prevents flicker on transform3d (iOS)    
+    -webkit-transition-duration:0;
+    -webkit-backface-visibility: hidden;
+    -webkit-transform:translate3d(0,0,0);
+     -webkit-transform: translateZ(0);
+}

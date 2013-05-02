@@ -1,0 +1,5 @@
+.moo-ui-textarea {
+    @extend .moo-ui-input-container;
+    padding: 0.25em; 
+    textarea { @extend .moo-ui-input; }
+}

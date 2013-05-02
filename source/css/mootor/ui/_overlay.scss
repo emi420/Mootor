@@ -1,9 +1,8 @@
-
-// Overlay controls
-// ---------------------------------------------------------------------------
-
+/*
+ * Overlay
+ */
 .moo-overlay {
-    background-color: darken($subColor1B, 10%); //rgba(0,0,0,.3);
+    background-color: darken($light-grey, 10%); 
     opacity: .75;
     position: absolute;
     top: 0;

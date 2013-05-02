@@ -1,0 +1,60 @@
+/*
+ * Form
+ */
+
+@import "compass/utilities";
+@import "compass/css3";
+
+$color-border-main: $color-neutral-dark;
+$color-text-action: $color-neutral-dark;
+$color-text-alt-secondary: $color-neutral-dark;
+$color-border-forms: lighten($color-border-main, 70%);
+$color-bg-forms:  lighten($color-bg-main, 4%);
+$color-label-forms:  lighten($color-text-action, 4%);
+$color-border-forms-inputs: lighten($color-border-forms, 15%);
+
+.moo-ui-form {
+    text-align: left;
+    width: 90%; // FIXME
+    margin: 5em auto;
+    background-color: #FFF;
+    border: 1px solid #CCC;
+    border-radius: 5px;
+    @extend .clearfix;
+    .moo-field {
+        display:block;
+        @extend .clearfix;
+        padding: 1em 2em;
+        border-top: 1px solid #CCC;
+        &:first-child { border-top: none }
+        > label, > legend {
+            @include float-left;
+            font-size: 2em;
+            font-weight: 700;
+            width: 25%;
+        }
+    }
+}
+
+.moo-ui-input-container {
+    @include float-right;
+    border: 1px solid #666;
+    border-radius: 5px;
+    background-color: #FFF;
+    position: relative;
+    width: 75%;
+}
+.moo-ui-input {
+
+    // Remove default iOS shadow
+    -webkit-appearance: none;  
+
+    border: none; 
+    background: none; 
+    font-size: 1.5em; 
+    line-height: 1.5em;
+    width: 100%;
+    &:focus {
+        border: rgba(0, 0, 0, 0) none;
+    }
+}

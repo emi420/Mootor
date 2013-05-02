@@ -1,0 +1,28 @@
+/*
+ * Button
+ */
+
+.button, .alt-button {
+    @extend %titles-font;
+    font-size: 1.4em;
+    padding: .5em 1.5em;
+    border: 1px solid $color-border-main;
+    @include border-radius(.5em); 
+    @include contrasted(lighten($color-border-main, 50%), $color-border-main, $color-text-alt, 30%);
+
+    &.submit {
+        $submit-border-color: darken($color-accent, 10%);
+        $submit-bg-color: lighten($color-accent, 5%);
+
+        border-color:$submit-border-color; 
+        @include contrasted($submit-bg-color, darken($color-accent, 35%), $color-text-alt, 60%);
+    }
+
+    &.cancel {
+        $cancel-border-color: desaturate($color-main, 10);
+        $cancel-bg-color: lighten(desaturate($color-main, 10), 10%);
+
+        border-color: $cancel-border-color;
+        @include contrasted($cancel-bg-color, darken($color-main, 35%), $color-text-alt, 30%);
+    }
+}

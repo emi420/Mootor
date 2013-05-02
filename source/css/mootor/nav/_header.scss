@@ -1,0 +1,72 @@
+// Header
+
+$nav-header-border-color: $color-main;
+$nav-bg-color: $blue-light;
+
+$nav-header-background: $color-main !default;
+$nav-header-nav-background: $color-light-grey !default;
+
+@mixin moo-header(
+        $class: '.moo-header',
+        $navDisplay: inline, 
+        $height: $nav-bar-height
+    ){
+    #{$class} {
+        background: $nav-header-background; 
+        text-align: left;
+        z-index: 9999; 
+        position: fixed;
+        top:0;
+        width: 100%;
+        padding: .6em 1em;
+        height: $height;
+        nav {
+            position: absolute;
+            margin-top: 0;
+            top: auto;
+            left: auto;
+            &.app {
+                right: 0;
+                .moo-nav {
+                    display: inline-block;
+                    float: left;
+                    text-indent: 0;
+                    font-size: 1.2em;
+                    line-height: 1;
+                    &:before {
+                        display: inline-block;
+                    }
+                }
+            }
+            &.hidden {
+                display: block; 
+                opacity: 0;
+                nav {
+                    top: -9999em !important; 
+                }
+            }
+            a {
+                color: $nav-header-nav-background;
+                padding: .65em 1em;
+                font-size: 1.5em;            
+                width: auto;
+                @if $navDisplay == inline {
+                    display: inline-block;                
+                } @else {
+                    float: left;
+                    display: block;
+                }
+            }        
+        }
+    }
+    .moo-nav-back {
+        opacity: 0;
+        @include transition(opacity, .5s);    
+        &.moo-visible {
+            opacity: 1;    
+        }
+     }
+}
+
+@include moo-header();
+

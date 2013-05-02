@@ -1,6 +1,11 @@
-// -----------------------------------------------------------------------------------
-// General item list styles
-// -----------------------------------------------------------------------------------
+/*
+ * List
+ */
+
+$color-bg-list: $light-neutral;
+$color-list-background: $color-bg-list;
+$color-border-top: lighten($color-bg-list, 5%);
+$color-border-bottom: darken($color-bg-list, 10%);
 
 @mixin list(
     $has-image:false, 

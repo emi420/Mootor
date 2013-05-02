@@ -1,66 +1,42 @@
+/*
+ * "Loading..." animation
+ */
 
-// Loading animation 
-// -----------------------------------------------------------------------------------
-
-
-// -------------------------------------------------------
-// circles loading html and styles
-// -------------------------------------------------------
-
-// <div class='moo-ui-loading-circles'>
-    // <div class="moo-ui-loading-circle moo-loading-circle-01"></div>
-    // <div class="moo-ui-loading-circle moo-loading-circle-02"></div>
-    // <div class="moo-ui-loading-circle moo-loading-circle-03"></div>
-// </div>
-
-
-// Editable styles
-// -----------------------------------------------------------
-// Change this styles to position/resize the element as needed.
-// 1. base (darkest) color. The gradient palette derives from this color.
-// 2. Position of the center point of the animation. 
-//    Place wherever is needed, by default is in the center of its parent container.
-// 3. The overall size of the loading is relative to this value.
-// 4. Animation speed
-
-
-
-$loading-background-color: #666 !default;
+$loading-background-color: $dark-grey;
+$color-overlay-background: $light-grey;
+/*
+ * Circles
+ */
 
 .moo-ui-loading-circles {
-    width: 15em; //150px
+    width: 15em;
     height: 3.2em;
     margin-left: -7.5em;
-    position: absolute; // 2
-    top: 50%; // 2
-    left: 50%; // 2
-    font-size: 1em; // 2
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 1em; 
     &.moo-hidden {
         display: none;
     }
 }
 
-
-// Base
-// -------------------------------------------------------
-// These are the basic styles of the elements that create the animation.
-
 .moo-ui-loading-circle {
     background-color: $loading-background-color;
     float: left;
-    margin-left: 1.7em; // 17px;
-    height: 3.2em; //32px
-    width: 3.2em; // 32px
+    margin-left: 1.7em;
+    height: 3.2em;
+    width: 3.2em;
   
     animation-duration: 1;
     animation-iteration-count: infinite;
     animation-direction: linear;
     animation-delay: 0;
-    border-radius: 2.1em; // 21px
+    border-radius: 2.1em;
     -webkit-animation-duration: 1s;
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-direction: linear;
-    -webkit-border-radius: 2.1em; // 21px
+    -webkit-border-radius: 2.1em;
     -webkit-animation-delay: 0;
 }
 
@@ -106,7 +82,6 @@ $loading-background-color: #666 !default;
     @include moo-ui-loading-object-animation-default-2;
 }
 
-
 .moo-loading-circle-01 {
     -webkit-animation-name: moo-ui-loading-object-animation-0;
     animation-name: moo-ui-loading-object-animation-0;
@@ -120,44 +95,18 @@ $loading-background-color: #666 !default;
     animation-name: moo-ui-loading-object-animation-2;
 }
 
-// -------------------------------------------------------
-// wheel loading html and styles
-// -------------------------------------------------------
 
-// <div class='moo-ui-loading'>
-    // <div class='moo-ui-loading-block moo-loading-01'></div>
-    // <div class='moo-ui-loading-block moo-loading-02'></div>
-    // <div class='moo-ui-loading-block moo-loading-03'></div>
-    // <div class='moo-ui-loading-block moo-loading-04'></div>
-    // <div class='moo-ui-loading-block moo-loading-05'></div>
-    // <div class='moo-ui-loading-block moo-loading-06'></div>
-    // <div class='moo-ui-loading-block moo-loading-07'></div>
-    // <div class='moo-ui-loading-block moo-loading-08'></div>
-// </div>
+/*
+ * Wheel 
+ */
 
-
-// Editable styles
-// -----------------------------------------------------------
-// Change this styles to position/resize the element as needed.
-// 1. base (darkest) color. The gradient palette derives from this color.
-// 2. Position of the center point of the animation. 
-//    Place wherever is needed, by default is in the center of its parent container.
-// 3. The overall size of the loading is relative to this value.
-// 4. Animation speed
-
-$loading-background-color: #000 !default;  // 1
 .moo-ui-loading {
-    position: absolute; // 2
-    top: 50%; // 2
-    left: 50%; // 2
-    font-size: 1em; // 2
-    -webkit-animation-duration:1.5s; // 2
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 1em;
+    -webkit-animation-duration:1.5s;
 }
-
-
-// Base
-// -------------------------------------------------------
-// These are the basic styles of the elements that create the animation.
 
 .moo-ui-loading {
     height: 0;
@@ -212,7 +161,6 @@ $loading-background-color: #000 !default;  // 1
     } 
 }
 
-// Animation -------------------------------------
 @-webkit-keyframes rotateThis {
   from {-webkit-transform:  rotate(0deg);}
   to {-webkit-transform: rotate(360deg);}
