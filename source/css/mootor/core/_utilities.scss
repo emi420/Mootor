@@ -43,3 +43,8 @@
         clear: both;
     }
 }
+
+// A shorted version of the popular hack method to contain floats
+.clearfix {
+    @include moo-clearfix;
+}

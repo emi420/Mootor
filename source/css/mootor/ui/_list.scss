@@ -2,10 +2,10 @@
  * List
  */
 
-$color-bg-list: $light-neutral;
-$color-list-background: $color-bg-list;
-$color-border-top: lighten($color-bg-list, 5%);
-$color-border-bottom: darken($color-bg-list, 10%);
+$color-bg-list: $color-neutral-light !default;
+$color-list-background: $color-bg-list !default;
+$color-border-top: lighten($color-bg-list, 5%) !default;
+$color-border-bottom: darken($color-bg-list, 10%) !default;
 
 @mixin list(
     $has-image:false, 
@@ -53,4 +53,8 @@ $color-border-bottom: darken($color-bg-list, 10%);
             margin: 1em;
         }
     }
+}
+
+.moo-list {
+    @include list;
 }

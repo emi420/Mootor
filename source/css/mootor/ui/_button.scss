@@ -2,6 +2,8 @@
  * Button
  */
 
+$color-text-alt: $color-dark-grey !default;
+
 .button, .alt-button {
     @extend %titles-font;
     font-size: 1.4em;

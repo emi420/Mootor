@@ -1,8 +1,11 @@
 /*
  * Overlay
  */
+
+$color-ui-overlay-bg: $color-dark-grey !default;
+
 .moo-overlay {
-    background-color: darken($light-grey, 10%); 
+    background-color: darken($color-ui-overlay-bg, 10%); 
     opacity: .75;
     position: absolute;
     top: 0;

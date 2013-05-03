@@ -1,15 +1,15 @@
 
 # Set this to the root of your project when deployed:
 http_path = "."
-css_dir = "../"
-sass_dir = ""
-images_dir = "../../img"
+css_dir = "."
+sass_dir = "."
+images_dir = "../img"
 #http_images_dir = "../img"
-javascripts_dir = "../../js"
+javascripts_dir = "../js"
 
 
 #add dd a path to the list of sass import paths for your compass project
-add_import_path "../../../source/css/sass"
+add_import_path "../../source/css"
 
 # You can select your preferred output style here (can be overridden via the command line):
 #output_style = :expanded # :expanded or :nested or :compact or :compressed

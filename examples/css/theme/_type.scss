@@ -2,16 +2,14 @@
  * Typography 
  */
 
-$titles-font: Helvetica, Roboto, 'Droid Sans', Arial, sans-serif;
-$base-font: Helvetica, Roboto, 'Droid Sans', Arial, sans-serif; 
-$readable-font: 'Palatino Linotype', 'Book Antiqua', Palatino, 'Droid Serif', serif;
-$nav-font: Helvetica, Roboto, 'Droid Sans', Arial, sans-serif;
-$normal-font: Helvetica, Roboto, 'Droid Sans', Arial, sans-serif;
-$base-font-size: .65em;
+@import "_fonts";
 
-$color-text-main: $color-dark-grey !default;
-$color-text-titles: $color-dark-grey !default;
-$color-text-strong: $color-dark-grey !default;
+$titles-font: 'HelveticaUltralight', Helvetica, Roboto, 'Droid Sans', Arial, sans-serif;
+$base-font: 'HelveticaMedium', Helvetica, Roboto, 'Droid Sans', Arial, sans-serif; 
+$readable-font: 'Palatino Linotype', 'Book Antiqua', Palatino, 'Droid Serif', serif;
+$nav-font: 'HelveticaMedium', Helvetica, Roboto, 'Droid Sans', Arial, sans-serif;
+$normal-font: 'HelveticaLight', Helvetica, Roboto, 'Droid Sans', Arial, sans-serif;
+$base-font-size: .65em;
 
 // Addresses font sizes and margins set differently.
 

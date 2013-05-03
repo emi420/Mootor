@@ -1,7 +1,7 @@
 // Header
 
-$nav-header-border-color: $color-main;
-$nav-bg-color: $blue-light;
+$nav-header-border-color: $color-main !default;
+$nav-bg-color: $color-dark-grey !default;
 
 $nav-header-background: $color-main !default;
 $nav-header-nav-background: $color-light-grey !default;

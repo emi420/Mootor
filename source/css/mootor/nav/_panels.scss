@@ -1,5 +1,7 @@
 @import "compass/css3/transition";
 
+$color-nav-panels-bg: $color-light-grey !default;
+
 body, html {
     background: #ccc;
     overflow-x: hidden;
@@ -35,7 +37,7 @@ nav {
     right: 0;
     top: 0;
     bottom: 0;
-    background: $light-grey;
+    background: $color-nav-panels-bg;
 }
 .moo-panel {
     min-height: 100%;
