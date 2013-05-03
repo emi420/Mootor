@@ -1,18 +1,36 @@
-// Header
+/*
+ * Nav.Header
+ */
+
+// Defaults
 
 $nav-header-border-color: $color-main !default;
 $nav-bg-color: $color-dark-grey !default;
-
 $nav-header-background: $color-main !default;
 $nav-header-nav-background: $color-light-grey !default;
 
+$nav-header-height: $nav-bar-height !default;
+$nav-header-classname: ".moo-header" !default;
+$nav-header-back-classname: ".moo-nav-back";
+$nav-header-nav-classname: ".moo-nav";
+$nav-header-nav-app-classname: ".app";
+$nav-header-text-color: $color-light-grey !default;
+$nav-header-title-font-size: 1.5em !default;
+
+
 @mixin moo-header(
-        $class: '.moo-header',
+        $class: $nav-header-classname,
+        $back-class: $nav-header-back-classname,
+        $nav-class: $nav-header-nav-classname,
+        $nav-app-class: $nav-header-nav-app-classname,
         $navDisplay: inline, 
-        $height: $nav-bar-height
+        $height: $nav-header-height,
+        $background: $nav-header-background,
+        $color: $nav-header-text-color,
+        $title-font-size: $nav-header-title-font-size
     ){
     #{$class} {
-        background: $nav-header-background; 
+        background: $background; 
         text-align: left;
         z-index: 9999; 
         position: fixed;
@@ -20,14 +38,24 @@ $nav-header-nav-background: $color-light-grey !default;
         width: 100%;
         padding: .6em 1em;
         height: $height;
+        color: $color;
+        
+        // Title
+        h1 {
+            font-size: $title-font-size;
+        }
+        
+        // Navigation
         nav {
             position: absolute;
             margin-top: 0;
             top: auto;
             left: auto;
-            &.app {
+            
+            // App nav
+            #{$nav-app-class} {
                 right: 0;
-                .moo-nav {
+                #{$nav-class} {
                     display: inline-block;
                     float: left;
                     text-indent: 0;
@@ -38,15 +66,19 @@ $nav-header-nav-background: $color-light-grey !default;
                     }
                 }
             }
-            &.hidden {
+
+            // Hidden item
+            &#{$hidden-classname} {
                 display: block; 
                 opacity: 0;
                 nav {
                     top: -9999em !important; 
                 }
             }
+
+            // Nav links
             a {
-                color: $nav-header-nav-background;
+                color: $color;
                 padding: .65em 1em;
                 font-size: 1.5em;            
                 width: auto;
@@ -57,16 +89,18 @@ $nav-header-nav-background: $color-light-grey !default;
                     display: block;
                 }
             }        
+
+            // Back button
+            #{$back-class} { 
+                opacity: 0;
+                @include transition(opacity, .5s);    
+                &#{$visible-classname} {
+                    opacity: 1;    
+                }    
+            }            
         }
     }
-    .moo-nav-back {
-        opacity: 0;
-        @include transition(opacity, .5s);    
-        &.moo-visible {
-            opacity: 1;    
-        }
-     }
 }
 
-@include moo-header();
+
 

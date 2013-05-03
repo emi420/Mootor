@@ -1,22 +1,36 @@
-// Footer
+/*
+ * Nav.Footer
+ */
 
-$nav-footer-background-color: $color-main;
+// Defaults
+
+$nav-footer-background-color: $color-dark-grey !default;
 $nav-current: $color-dark-grey !default;
 
-.moo-footer {
-    text-align: left;
-    z-index: 9999; 
-    position: fixed;
-    bottom: 0;
-    padding: 0 1em;
-    width: 100%;
-    height: $nav-bar-height;
-    nav {
-        text-align: center;
-        a {
-            display: inline-block;
-            font-size: 1.4em;
-            padding: .3em 1.5em;
+$nav-footer-height: $nav-bar-height !default;
+$nav-footer-classname: ".moo-footer" !default;
+
+
+@mixin moo-footer(
+        $height: $nav-footer-height,
+        $class: $nav-footer-classname
+    ) {
+    #{$class} {
+        text-align: left;
+        z-index: 9999; 
+        position: fixed;
+        bottom: 0;
+        padding: 0 1em;
+        width: 100%;
+        height: $height;
+        nav {
+            text-align: center;
+            a {
+                display: inline-block;
+                font-size: 1.4em;
+                padding: .3em 1.5em;
+            }
         }
     }
 }
+

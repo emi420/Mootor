@@ -1,6 +1,11 @@
-@import "mootor/core/color";
 @import "mootor/core/utilities";
+@import "mootor/core/color";
 @import "mootor/core/normalize";
 @import "mootor/core/type";
 @import "mootor/nav";
 @import "mootor/ui";
+
+@include moo-footer();
+@include moo-header();
+@include moo-hidden();
+@include moo-clearfix($class: ".clearfix");
