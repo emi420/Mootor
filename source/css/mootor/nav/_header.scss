@@ -11,9 +11,9 @@ $nav-header-nav-background: $color-light-grey !default;
 
 $nav-header-height: $nav-bar-height !default;
 $nav-header-classname: ".moo-header" !default;
-$nav-header-back-classname: ".moo-nav-back";
-$nav-header-nav-classname: ".moo-nav";
-$nav-header-nav-app-classname: ".app";
+$nav-header-back-classname: ".moo-nav-back" !default;
+$nav-header-nav-classname: ".moo-nav" !default;
+$nav-header-nav-app-classname: ".app" !default;
 $nav-header-text-color: $color-light-grey !default;
 $nav-header-title-font-size: 1.5em !default;
 
@@ -27,7 +27,8 @@ $nav-header-title-font-size: 1.5em !default;
         $height: $nav-header-height,
         $background: $nav-header-background,
         $color: $nav-header-text-color,
-        $title-font-size: $nav-header-title-font-size
+        $title-font-size: $nav-header-title-font-size,
+        $title-background-image: ""
     ){
     #{$class} {
         background: $background; 
@@ -42,7 +43,20 @@ $nav-header-title-font-size: 1.5em !default;
         
         // Title
         h1 {
-            font-size: $title-font-size;
+            display: inline;
+            float: left;
+            font-size: 1.5em;
+            text-align: center;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            margin: .3em 0;
+            padding: 0 4em;
+            width: 100%;
+            @if $title-background-image != "" {
+                text-indent: -9999px;
+                background: $title-background-image;
+            }
         }
         
         // Navigation

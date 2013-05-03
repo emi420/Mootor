@@ -1,7 +1,4 @@
 /*
- * Utilities
- */
-/*
  * CSS normalization
  *
  * Based on normalize.css 2012-07-07T09:50 UTC 
@@ -185,6 +182,9 @@ table {
   border-spacing: 0;
 }
 
+/*
+ * Utilities
+ */
 /*
  * Typography 
  */
@@ -1152,25 +1152,6 @@ nav a {
 /*
  * List
  */
-/* line 18, ../../source/css/mootor/ui/_list.scss */
-.moo-list li {
-  background-color: #dddddd;
-  border-top: 1px solid #eaeaea;
-  border-bottom: 1px solid #c4c4c4;
-  text-align: left;
-  padding: 1em 1.5em;
-  position: relative;
-  overflow: hidden;
-}
-/* line 27, ../../source/css/mootor/ui/_list.scss */
-.moo-list h2 {
-  margin: 0;
-}
-/* line 30, ../../source/css/mootor/ui/_list.scss */
-.moo-list p {
-  margin: .25em 0;
-}
-
 /* line 18, ../../source/css/mootor/nav/_footer.scss */
 .moo-footer {
   text-align: left;
@@ -1192,7 +1173,7 @@ nav a {
   padding: .3em 1.5em;
 }
 
-/* line 32, ../../source/css/mootor/nav/_header.scss */
+/* line 33, ../../source/css/mootor/nav/_header.scss */
 .moo-header {
   background: #666666;
   text-align: left;
@@ -1204,22 +1185,31 @@ nav a {
   height: 50px;
   color: #dddddd;
 }
-/* line 44, ../../source/css/mootor/nav/_header.scss */
+/* line 45, ../../source/css/mootor/nav/_header.scss */
 .moo-header h1 {
+  display: inline;
+  float: left;
   font-size: 1.5em;
+  text-align: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  margin: .3em 0;
+  padding: 0 4em;
+  width: 100%;
 }
-/* line 49, ../../source/css/mootor/nav/_header.scss */
+/* line 63, ../../source/css/mootor/nav/_header.scss */
 .moo-header nav {
   position: absolute;
   margin-top: 0;
   top: auto;
   left: auto;
 }
-/* line 56, ../../source/css/mootor/nav/_header.scss */
+/* line 70, ../../source/css/mootor/nav/_header.scss */
 .moo-header nav .app {
   right: 0;
 }
-/* line 58, ../../source/css/mootor/nav/_header.scss */
+/* line 72, ../../source/css/mootor/nav/_header.scss */
 .moo-header nav .app .moo-nav {
   display: inline-block;
   float: left;
@@ -1227,20 +1217,20 @@ nav a {
   font-size: 1.2em;
   line-height: 1;
 }
-/* line 64, ../../source/css/mootor/nav/_header.scss */
+/* line 78, ../../source/css/mootor/nav/_header.scss */
 .moo-header nav .app .moo-nav:before {
   display: inline-block;
 }
-/* line 71, ../../source/css/mootor/nav/_header.scss */
+/* line 85, ../../source/css/mootor/nav/_header.scss */
 .moo-header nav.moo-hidden {
   display: block;
   opacity: 0;
 }
-/* line 74, ../../source/css/mootor/nav/_header.scss */
+/* line 88, ../../source/css/mootor/nav/_header.scss */
 .moo-header nav.moo-hidden nav {
   top: -9999em !important;
 }
-/* line 80, ../../source/css/mootor/nav/_header.scss */
+/* line 94, ../../source/css/mootor/nav/_header.scss */
 .moo-header nav a {
   color: #dddddd;
   padding: .65em 1em;
@@ -1248,7 +1238,7 @@ nav a {
   width: auto;
   display: inline-block;
 }
-/* line 94, ../../source/css/mootor/nav/_header.scss */
+/* line 108, ../../source/css/mootor/nav/_header.scss */
 .moo-header nav .moo-nav-back {
   opacity: 0;
   -webkit-transition: opacity, 0.5s;
@@ -1256,7 +1246,7 @@ nav a {
   -o-transition: opacity, 0.5s;
   transition: opacity, 0.5s;
 }
-/* line 97, ../../source/css/mootor/nav/_header.scss */
+/* line 111, ../../source/css/mootor/nav/_header.scss */
 .moo-header nav .moo-nav-back.moo-visible {
   opacity: 1;
 }
@@ -1264,6 +1254,36 @@ nav a {
 /* line 16, ../../source/css/mootor/core/_utilities.scss */
 .moo-hidden {
   display: none;
+}
+
+/* line 22, ../../source/css/mootor/ui/_list.scss */
+.moo-list li {
+  background-color: #dddddd;
+  border-top: 1px solid #eaeaea;
+  border-bottom: 1px solid #c4c4c4;
+  text-align: left;
+  padding: 1em 1.5em;
+  position: relative;
+  overflow: hidden;
+}
+/* line 31, ../../source/css/mootor/ui/_list.scss */
+.moo-list h2 {
+  margin: 0;
+}
+/* line 34, ../../source/css/mootor/ui/_list.scss */
+.moo-list p {
+  margin: .25em 0;
+}
+
+/* line 67, ../../source/css/mootor/ui/_list.scss */
+.moo-list-navigation li {
+  list-style: none;
+}
+/* line 69, ../../source/css/mootor/ui/_list.scss */
+.moo-list-navigation li a {
+  color: #666666;
+  font-size: 1.8em;
+  padding: .2em;
 }
 
 /* line 45, ../../source/css/mootor/core/_utilities.scss */
