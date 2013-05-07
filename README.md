@@ -1,5 +1,7 @@
 
-# Mootor - HTML5 library for application development
+# Mootor
+
+## HTML5 library for application development
 
 The main purpose of this project is to create a simple HTML5 library for application development, that helps web professionals to build fully customizable apps, for use in browsers or embedded in mobile applications.
 
@@ -17,7 +19,7 @@ and plugins:
 * geo.js  - Geopositioning
 * draw.js - Drawing
 
-# About Mootor
+## About Mootor
 
 The key features are:
 
@@ -31,15 +33,15 @@ See inside the "examples" folder, **you will need a web server (or UIWebView)** 
 
 If you want to run the examples in a desktop browser, **you will need to emulate touch events**, for example using the "Emulate touch events" in Chrome Developer Tools.
 
-# Useful info
+## Useful info
 
 Currently compatibility is WebKit or Gecko based browsers (iOS, Android, Mozilla)
 
-# Only for testing
+## Only for testing
 
 We are in a development stage, THIS SOFTWARE IS ONLY FOR TESTING.
 
-# How can I make changes in the source code and compile it?
+## How can I make changes in the source code and compile it?
 
 You will need the following tools:
 
@@ -53,13 +55,13 @@ Optional:
 
 * Java for minifying JavaScript code using YUI Compressor 
 
-# Design
+## Design
 
 Mootor team **LOVES** design, and we aim to make delightful user interfaces. 
 We are working with the last tools like Haml and Compass, to provide maximum 
 efficiency and fully customization.
 
-# How can I help?
+## How can I help?
 
 You can help this way:
 
@@ -67,11 +69,11 @@ You can help this way:
 * Help to find and/or fix issues
 * Fork + Pull request
 
-# Bugs
+## Bugs
 
 Please use GitHub to report any bugs found. 
 
-# License
+## License
 
 You may use any Mootor project under the terms of either the MIT License or the GNU General Public License (GPL) Version 3.
 
