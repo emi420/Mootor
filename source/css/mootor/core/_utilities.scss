@@ -12,8 +12,10 @@ $clearfix-classname: ".moo-clearfix" !default;
 }
 
 // Removes the element from the DOM
-@mixin moo-hidden() {
-    #{$hidden-classname} {
+@mixin moo-hidden(
+    $class: $hidden-classname
+    ) {
+    #{$class} {
         display: none;
     }    
 }
@@ -54,3 +56,4 @@ $clearfix-classname: ".moo-clearfix" !default;
     }
 }
 
+@include moo-clearfix($class: ".clearfix");

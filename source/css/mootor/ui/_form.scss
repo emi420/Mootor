@@ -5,56 +5,70 @@
 @import "compass/utilities";
 @import "compass/css3";
 
-$color-border-main: $color-neutral-dark;
-$color-text-action: $color-neutral-dark;
-$color-text-alt-secondary: $color-neutral-dark;
-$color-border-forms: lighten($color-border-main, 70%);
-$color-bg-forms:  lighten($color-bg-main, 4%);
-$color-label-forms:  lighten($color-text-action, 4%);
-$color-border-forms-inputs: lighten($color-border-forms, 15%);
+$color-border-forms: lighten($color-border-main, 70%) !default;
+$color-bg-forms: $color-white !default;
+$color-label-forms:  lighten($color-text-action, 4%) !default;
+$color-border-forms-inputs: lighten($color-border-forms, 15%) !default;
+$moo-ui-form-classname: ".moo-ui-form" !default;
+$border-radius-forms: 5px !default;
+$padding-forms: 1em !default;
 
-.moo-ui-form {
-    text-align: left;
-    width: 90%; // FIXME
-    margin: 5em auto;
-    background-color: #FFF;
-    border: 1px solid #CCC;
-    border-radius: 5px;
-    @extend .clearfix;
-    .moo-field {
-        display:block;
-        @extend .clearfix;
-        padding: 1em 2em;
-        border-top: 1px solid #CCC;
-        &:first-child { border-top: none }
-        > label, > legend {
-            @include float-left;
+@mixin moo-ui-form(
+    $class: $moo-ui-form-classname
+) {
+    #{$class} {
+        
+        width: 95%; 
+        margin: 5em auto;
+        background-color: $color-bg-forms;
+        border: 1px solid $color-border-forms;
+        border-radius: $border-radius-forms;            
+        padding: $padding-forms;
+        
+        .moo-field {
+            text-align: left;   
+            margin-bottom: 1em;
+            legend, label {
+                font-size: 2em;
+                margin-bottom: 1em;
+            }         
+        }
+
+        // FIXME CHECK
+        .moo-ui-input {
+            -webkit-appearance: none;  /* Remove default iOS shadow */
+            // -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            border: none;
+            background: none;
+            font-size: 1.5em;
+            line-height: 1.5em;
+            width: 100%;
+            &:focus {
+                border: rgba(0, 0, 0, 0) none;
+            }        
+        }
+        .moo-ui-input-container {
+             border: 1px solid #666;
+             border-radius: 5px;
+             background-color: #FFF;
+             position: relative;
+        }
+        // Cleanbox is the styling of the icon link used to "clean" 
+        // a text input
+        .cleanbox {
+            display: block;
+            padding: 0 0.35em;
+            position: absolute;
+            top: 0;
+            right: 0;
+            color: #666;
             font-size: 2em;
             font-weight: 700;
-            width: 25%;
+            line-height: 1.5em;
+            text-decoration: none;
         }
+        
     }
 }
 
-.moo-ui-input-container {
-    @include float-right;
-    border: 1px solid #666;
-    border-radius: 5px;
-    background-color: #FFF;
-    position: relative;
-    width: 75%;
-}
-.moo-ui-input {
 
-    // Remove default iOS shadow
-    -webkit-appearance: none;  
-
-    border: none; 
-    background: none; 
-    font-size: 1.5em; 
-    line-height: 1.5em;
-    width: 100%;
-    &:focus {
-        border: rgba(0, 0, 0, 0) none;
-    }
-}

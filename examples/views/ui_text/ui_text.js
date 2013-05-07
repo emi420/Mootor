@@ -40,7 +40,7 @@
 
     view.init();
        
-    $("#ui_text").ui({
+    $("#ui_text_input").ui({
         type: "Text"
     });        
             

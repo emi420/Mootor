@@ -7,7 +7,7 @@
 $nav-header-border-color: $color-main !default;
 $nav-bg-color: $color-dark-grey !default;
 $nav-header-background: $color-main !default;
-$nav-header-nav-background: $color-light-grey !default;
+$nav-header-nav-background: darken($nav-header-background, 5%);
 
 $nav-header-height: $nav-bar-height !default;
 $nav-header-classname: ".moo-header" !default;
@@ -16,7 +16,6 @@ $nav-header-nav-classname: ".moo-nav" !default;
 $nav-header-nav-app-classname: ".app" !default;
 $nav-header-text-color: $color-light-grey !default;
 $nav-header-title-font-size: 1.5em !default;
-
 
 @mixin moo-header(
         $class: $nav-header-classname,
@@ -28,7 +27,7 @@ $nav-header-title-font-size: 1.5em !default;
         $background: $nav-header-background,
         $color: $nav-header-text-color,
         $title-font-size: $nav-header-title-font-size,
-        $title-background-image: ""
+        $title-background-image: false
     ){
     #{$class} {
         background: $background; 
@@ -53,9 +52,8 @@ $nav-header-title-font-size: 1.5em !default;
             margin: .3em 0;
             padding: 0 4em;
             width: 100%;
-            @if $title-background-image != "" {
+            @if $title-background-image == true {
                 text-indent: -9999px;
-                background: $title-background-image;
             }
         }
         
@@ -67,26 +65,20 @@ $nav-header-title-font-size: 1.5em !default;
             left: auto;
             
             // App nav
-            #{$nav-app-class} {
-                right: 0;
+            &#{$nav-app-class} {
+                right: 1em;
                 #{$nav-class} {
                     display: inline-block;
                     float: left;
-                    text-indent: 0;
-                    font-size: 1.2em;
-                    line-height: 1;
                     &:before {
                         display: inline-block;
                     }
-                }
-            }
 
-            // Hidden item
-            &#{$hidden-classname} {
-                display: block; 
-                opacity: 0;
-                nav {
-                    top: -9999em !important; 
+                    // Hidden item
+                    &#{$hidden-classname} {
+                        display: none; 
+                    }
+
                 }
             }
 
@@ -96,6 +88,7 @@ $nav-header-title-font-size: 1.5em !default;
                 padding: .65em 1em;
                 font-size: 1.5em;            
                 width: auto;
+                background: $nav-header-nav-background;
                 @if $navDisplay == inline {
                     display: inline-block;                
                 } @else {

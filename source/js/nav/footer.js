@@ -13,7 +13,7 @@ var Footer = function(self) {
     if (this.el !== undefined) {
         
         this.height = this.el.offsetHeight;       
-        this.el.style.height = this.height + "px";     
+        //this.el.style.height = this.height + "px";     
 
         // Set styles when Footer active on navigation items
         _setStylesWhenFooterIsActive(this, self);         

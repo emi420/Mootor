@@ -84,16 +84,6 @@
            .button {
                 font-size: 1.5em;
                 line-height: 150%;
-                // &.submit {
-                    // @include background(linear-gradient(top, #ccc, #888));
-                    // border: 1px solid #a1a1a1;
-                    // color: #FFF;
-                // }
-                // &.cancel {
-                    // @include background(linear-gradient(top, #eee, #ccc));
-                    // border: 1px solid #c1c1c1;
-                    // color: #555;
-                // }
            }
         @if $buttons == 2 {
             .button {

@@ -5,7 +5,7 @@
 // Defaults
 
 $nav-footer-background-color: $color-dark-grey !default;
-$nav-current: $color-dark-grey !default;
+$nav-current: darken($nav-footer-background-color, 5%) !default;
 
 $nav-footer-height: $nav-bar-height !default;
 $nav-footer-classname: ".moo-footer" !default;
@@ -20,6 +20,7 @@ $nav-footer-classname: ".moo-footer" !default;
         z-index: 9999; 
         position: fixed;
         bottom: 0;
+        background: $nav-footer-background-color;
         padding: 0 1em;
         width: 100%;
         height: $height;

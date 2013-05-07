@@ -1,20 +1,8 @@
 .moo-ui-text {
     @extend .moo-ui-input-container;
     padding: 0.35em 2.25em 0.25em 0.25em; 
-    input { @extend .moo-ui-input; }
+    input { 
+        @extend .moo-ui-input; 
+    }
 }
 
-// Cleanbox is the styling of the icon link used to "clean" 
-// a text input
-.cleanbox {
-    display: block;
-    padding: 0 0.35em;
-    position: absolute;
-    top: 0;
-    right: 0;
-    color: #666;
-    font-size: 2em;
-    font-weight: 700;
-    line-height: 1.5em;
-    text-decoration: none;
-}

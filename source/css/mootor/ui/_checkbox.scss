@@ -12,9 +12,7 @@ $checkbox-border-color: lighten($color-border-main, 40%);
     height: 1em;
 }
 .moo-ui-checkbox {
-    @include float-right;
     position: relative;
-    width: 75%;
     input { 
         position:absolute;
         top: 0.5em;

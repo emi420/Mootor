@@ -185,6 +185,15 @@ table {
 /*
  * Utilities
  */
+/* line 47, ../../source/css/mootor/core/_utilities.scss */
+.clearfix:before, .clearfix:after {
+  display: table;
+}
+/* line 53, ../../source/css/mootor/core/_utilities.scss */
+.clearfix:after {
+  clear: both;
+}
+
 /*
  * Typography 
  */
@@ -248,7 +257,7 @@ strong {
 }
 
 /* line 67, ../../source/css/mootor/core/_type.scss */
-.button, .alt-button {
+.moo-button {
   font-family: Helvetica, Roboto, "Droid Sans", Arial, sans-serif;
   font-weight: normal;
 }
@@ -313,59 +322,6 @@ nav a {
 /*
  * Form
  */
-/* line 16, ../../source/css/mootor/ui/_form.scss */
-.moo-ui-form {
-  text-align: left;
-  width: 90%;
-  margin: 5em auto;
-  background-color: #FFF;
-  border: 1px solid #CCC;
-  border-radius: 5px;
-}
-/* line 24, ../../source/css/mootor/ui/_form.scss */
-.moo-ui-form .moo-field {
-  display: block;
-  padding: 1em 2em;
-  border-top: 1px solid #CCC;
-}
-/* line 29, ../../source/css/mootor/ui/_form.scss */
-.moo-ui-form .moo-field:first-child {
-  border-top: none;
-}
-/* line 30, ../../source/css/mootor/ui/_form.scss */
-.moo-ui-form .moo-field > label, .moo-ui-form .moo-field > legend {
-  display: inline;
-  float: left;
-  font-size: 2em;
-  font-weight: 700;
-  width: 25%;
-}
-
-/* line 39, ../../source/css/mootor/ui/_form.scss */
-.moo-ui-input-container, .moo-ui-text, .moo-ui-textarea, .moo-ui-select-container {
-  display: inline;
-  float: right;
-  border: 1px solid #666;
-  border-radius: 5px;
-  background-color: #FFF;
-  position: relative;
-  width: 75%;
-}
-
-/* line 47, ../../source/css/mootor/ui/_form.scss */
-.moo-ui-input, .moo-ui-text input, .moo-ui-textarea textarea {
-  -webkit-appearance: none;
-  border: none;
-  background: none;
-  font-size: 1.5em;
-  line-height: 1.5em;
-  width: 100%;
-}
-/* line 57, ../../source/css/mootor/ui/_form.scss */
-.moo-ui-input:focus, .moo-ui-text input:focus, .moo-ui-textarea textarea:focus {
-  border: rgba(0, 0, 0, 0) none;
-}
-
 /*
  * Switch control
  */
@@ -457,20 +413,6 @@ nav a {
   padding: 0.35em 2.25em 0.25em 0.25em;
 }
 
-/* line 9, ../../source/css/mootor/ui/_text.scss */
-.cleanbox {
-  display: block;
-  padding: 0 0.35em;
-  position: absolute;
-  top: 0;
-  right: 0;
-  color: #666;
-  font-size: 2em;
-  font-weight: 700;
-  line-height: 1.5em;
-  text-decoration: none;
-}
-
 /* line 1, ../../source/css/mootor/ui/_textarea.scss */
 .moo-ui-textarea {
   padding: 0.25em;
@@ -490,18 +432,15 @@ nav a {
 
 /* line 14, ../../source/css/mootor/ui/_checkbox.scss */
 .moo-ui-checkbox {
-  display: inline;
-  float: right;
   position: relative;
-  width: 75%;
 }
-/* line 18, ../../source/css/mootor/ui/_checkbox.scss */
+/* line 16, ../../source/css/mootor/ui/_checkbox.scss */
 .moo-ui-checkbox input {
   position: absolute;
   top: 0.5em;
   left: 0.5em;
 }
-/* line 23, ../../source/css/mootor/ui/_checkbox.scss */
+/* line 21, ../../source/css/mootor/ui/_checkbox.scss */
 .moo-ui-checkbox label {
   position: relative;
   display: block;
@@ -509,11 +448,11 @@ nav a {
   background: #FFF;
   font-size: 1.4em;
 }
-/* line 31, ../../source/css/mootor/ui/_checkbox.scss */
+/* line 29, ../../source/css/mootor/ui/_checkbox.scss */
 .moo-ui-checkbox.moo-active .moo-ui-checkbox-icon {
   background-color: #666;
 }
-/* line 33, ../../source/css/mootor/ui/_checkbox.scss */
+/* line 31, ../../source/css/mootor/ui/_checkbox.scss */
 .moo-ui-checkbox.moo-active .moo-ui-checkbox-icon:after {
   content: " ";
   display: block;
@@ -652,32 +591,6 @@ nav a {
 /*
  * Button
  */
-/* line 7, ../../source/css/mootor/ui/_button.scss */
-.button, .alt-button {
-  font-size: 1.4em;
-  padding: .5em 1.5em;
-  border: 1px solid #666666;
-  -webkit-border-radius: 0.5em;
-  -moz-border-radius: 0.5em;
-  -ms-border-radius: 0.5em;
-  -o-border-radius: 0.5em;
-  border-radius: 0.5em;
-  background-color: #e6e6e6;
-  color: #666666;
-}
-/* line 15, ../../source/css/mootor/ui/_button.scss */
-.button.submit, .alt-button.submit {
-  border-color: #4d4d4d;
-  background-color: #737373;
-  color: #333333;
-}
-/* line 23, ../../source/css/mootor/ui/_button.scss */
-.button.cancel, .alt-button.cancel {
-  border-color: #666666;
-  background-color: gray;
-  color: #0d0d0d;
-}
-
 /*
  * Overlay
  */
@@ -1152,28 +1065,7 @@ nav a {
 /*
  * List
  */
-/* line 18, ../../source/css/mootor/nav/_footer.scss */
-.moo-footer {
-  text-align: left;
-  z-index: 9999;
-  position: fixed;
-  bottom: 0;
-  padding: 0 1em;
-  width: 100%;
-  height: 50px;
-}
-/* line 26, ../../source/css/mootor/nav/_footer.scss */
-.moo-footer nav {
-  text-align: center;
-}
-/* line 28, ../../source/css/mootor/nav/_footer.scss */
-.moo-footer nav a {
-  display: inline-block;
-  font-size: 1.4em;
-  padding: .3em 1.5em;
-}
-
-/* line 33, ../../source/css/mootor/nav/_header.scss */
+/* line 32, ../../source/css/mootor/nav/_header.scss */
 .moo-header {
   background: #666666;
   text-align: left;
@@ -1185,7 +1077,7 @@ nav a {
   height: 50px;
   color: #dddddd;
 }
-/* line 45, ../../source/css/mootor/nav/_header.scss */
+/* line 44, ../../source/css/mootor/nav/_header.scss */
 .moo-header h1 {
   display: inline;
   float: left;
@@ -1198,47 +1090,40 @@ nav a {
   padding: 0 4em;
   width: 100%;
 }
-/* line 63, ../../source/css/mootor/nav/_header.scss */
+/* line 61, ../../source/css/mootor/nav/_header.scss */
 .moo-header nav {
   position: absolute;
   margin-top: 0;
   top: auto;
   left: auto;
 }
-/* line 70, ../../source/css/mootor/nav/_header.scss */
-.moo-header nav .app {
-  right: 0;
+/* line 68, ../../source/css/mootor/nav/_header.scss */
+.moo-header nav.app {
+  right: 1em;
 }
-/* line 72, ../../source/css/mootor/nav/_header.scss */
-.moo-header nav .app .moo-nav {
+/* line 70, ../../source/css/mootor/nav/_header.scss */
+.moo-header nav.app .moo-nav {
   display: inline-block;
   float: left;
-  text-indent: 0;
-  font-size: 1.2em;
-  line-height: 1;
 }
-/* line 78, ../../source/css/mootor/nav/_header.scss */
-.moo-header nav .app .moo-nav:before {
+/* line 73, ../../source/css/mootor/nav/_header.scss */
+.moo-header nav.app .moo-nav:before {
   display: inline-block;
 }
-/* line 85, ../../source/css/mootor/nav/_header.scss */
-.moo-header nav.moo-hidden {
-  display: block;
-  opacity: 0;
+/* line 78, ../../source/css/mootor/nav/_header.scss */
+.moo-header nav.app .moo-nav.moo-hidden {
+  display: none;
 }
-/* line 88, ../../source/css/mootor/nav/_header.scss */
-.moo-header nav.moo-hidden nav {
-  top: -9999em !important;
-}
-/* line 94, ../../source/css/mootor/nav/_header.scss */
+/* line 86, ../../source/css/mootor/nav/_header.scss */
 .moo-header nav a {
   color: #dddddd;
   padding: .65em 1em;
   font-size: 1.5em;
   width: auto;
+  background: #595959;
   display: inline-block;
 }
-/* line 108, ../../source/css/mootor/nav/_header.scss */
+/* line 101, ../../source/css/mootor/nav/_header.scss */
 .moo-header nav .moo-nav-back {
   opacity: 0;
   -webkit-transition: opacity, 0.5s;
@@ -1246,17 +1131,92 @@ nav a {
   -o-transition: opacity, 0.5s;
   transition: opacity, 0.5s;
 }
-/* line 111, ../../source/css/mootor/nav/_header.scss */
+/* line 104, ../../source/css/mootor/nav/_header.scss */
 .moo-header nav .moo-nav-back.moo-visible {
   opacity: 1;
 }
 
-/* line 16, ../../source/css/mootor/core/_utilities.scss */
+/* line 18, ../../source/css/mootor/nav/_footer.scss */
+.moo-footer {
+  text-align: left;
+  z-index: 9999;
+  position: fixed;
+  bottom: 0;
+  background: #333333;
+  padding: 0 1em;
+  width: 100%;
+  height: 50px;
+}
+/* line 27, ../../source/css/mootor/nav/_footer.scss */
+.moo-footer nav {
+  text-align: center;
+}
+/* line 29, ../../source/css/mootor/nav/_footer.scss */
+.moo-footer nav a {
+  display: inline-block;
+  font-size: 1.4em;
+  padding: .3em 1.5em;
+}
+
+/* line 19, ../../source/css/mootor/ui/_form.scss */
+.moo-ui-form {
+  width: 95%;
+  margin: 5em auto;
+  background-color: white;
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 1em;
+}
+/* line 28, ../../source/css/mootor/ui/_form.scss */
+.moo-ui-form .moo-field {
+  text-align: left;
+}
+/* line 30, ../../source/css/mootor/ui/_form.scss */
+.moo-ui-form .moo-field legend, .moo-ui-form .moo-field label {
+  font-size: 2em;
+  margin-bottom: 1em;
+}
+/* line 37, ../../source/css/mootor/ui/_form.scss */
+.moo-ui-form .moo-ui-input, .moo-ui-form .moo-ui-text input, .moo-ui-text .moo-ui-form input, .moo-ui-form .moo-ui-textarea textarea, .moo-ui-textarea .moo-ui-form textarea {
+  -webkit-appearance: none;
+  /* Remove default iOS shadow */
+  border: none;
+  background: none;
+  font-size: 1.5em;
+  line-height: 1.5em;
+  width: 100%;
+}
+/* line 45, ../../source/css/mootor/ui/_form.scss */
+.moo-ui-form .moo-ui-input:focus, .moo-ui-form .moo-ui-text input:focus, .moo-ui-text .moo-ui-form input:focus, .moo-ui-form .moo-ui-textarea textarea:focus, .moo-ui-textarea .moo-ui-form textarea:focus {
+  border: rgba(0, 0, 0, 0) none;
+}
+/* line 49, ../../source/css/mootor/ui/_form.scss */
+.moo-ui-form .moo-ui-input-container, .moo-ui-form .moo-ui-text, .moo-ui-form .moo-ui-textarea, .moo-ui-form .moo-ui-select-container {
+  border: 1px solid #666;
+  border-radius: 5px;
+  background-color: #FFF;
+  position: relative;
+}
+/* line 57, ../../source/css/mootor/ui/_form.scss */
+.moo-ui-form .cleanbox {
+  display: block;
+  padding: 0 0.35em;
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #666;
+  font-size: 2em;
+  font-weight: 700;
+  line-height: 1.5em;
+  text-decoration: none;
+}
+
+/* line 18, ../../source/css/mootor/core/_utilities.scss */
 .moo-hidden {
   display: none;
 }
 
-/* line 22, ../../source/css/mootor/ui/_list.scss */
+/* line 45, ../../source/css/mootor/ui/_list.scss */
 .moo-list li {
   background-color: #dddddd;
   border-top: 1px solid #eaeaea;
@@ -1266,31 +1226,48 @@ nav a {
   position: relative;
   overflow: hidden;
 }
-/* line 31, ../../source/css/mootor/ui/_list.scss */
+/* line 54, ../../source/css/mootor/ui/_list.scss */
 .moo-list h2 {
   margin: 0;
 }
-/* line 34, ../../source/css/mootor/ui/_list.scss */
+/* line 57, ../../source/css/mootor/ui/_list.scss */
 .moo-list p {
   margin: .25em 0;
 }
 
-/* line 67, ../../source/css/mootor/ui/_list.scss */
+/* line 25, ../../source/css/mootor/ui/_list.scss */
 .moo-list-navigation li {
   list-style: none;
 }
-/* line 69, ../../source/css/mootor/ui/_list.scss */
+/* line 27, ../../source/css/mootor/ui/_list.scss */
 .moo-list-navigation li a {
   color: #666666;
   font-size: 1.8em;
   padding: .2em;
 }
 
-/* line 45, ../../source/css/mootor/core/_utilities.scss */
-.clearfix:before, .moo-ui-form:before, .moo-ui-form .moo-field:before, .clearfix:after, .moo-ui-form:after, .moo-ui-form .moo-field:after {
-  display: table;
+/* line 11, ../../source/css/mootor/ui/_button.scss */
+.moo-button {
+  font-size: 1.4em;
+  padding: .5em 1.5em;
+  border: 1px solid #666666;
+  -webkit-border-radius: 0.5em;
+  -moz-border-radius: 0.5em;
+  -ms-border-radius: 0.5em;
+  -o-border-radius: 0.5em;
+  border-radius: 0.5em;
+  background-color: #e6e6e6;
+  color: #666666;
 }
-/* line 51, ../../source/css/mootor/core/_utilities.scss */
-.clearfix:after, .moo-ui-form:after, .moo-ui-form .moo-field:after {
-  clear: both;
+/* line 19, ../../source/css/mootor/ui/_button.scss */
+.moo-button.submit {
+  border-color: #4d4d4d;
+  background-color: #737373;
+  color: #333333;
+}
+/* line 27, ../../source/css/mootor/ui/_button.scss */
+.moo-button.cancel {
+  border-color: #666666;
+  background-color: gray;
+  color: #0d0d0d;
 }

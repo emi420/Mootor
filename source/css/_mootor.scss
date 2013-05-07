@@ -5,8 +5,33 @@
 @import "mootor/nav";
 @import "mootor/ui";
 
-@include moo-footer();
-@include moo-header();
-@include moo-hidden();
-@include moo-list();
-@include moo-clearfix($class: ".clearfix");
+@mixin mootor-defaults(
+    $header: true,
+    $footer: true,
+    $hidden: true,
+    $list: true,
+    $form: true,
+    $button: true
+) {
+    @if $header == true {
+        @include moo-header();        
+    }
+    @if $footer == true {
+        @include moo-footer();
+    }
+    @if $form == true {
+        @include moo-ui-form();
+    }
+    @if $hidden == true {
+        @include moo-hidden();
+    }
+    @if $list == true {
+        @include moo-list-default();
+    }
+    @if $button == true {
+        @include moo-button();    
+    }
+}
+
+
+

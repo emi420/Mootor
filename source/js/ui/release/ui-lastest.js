@@ -831,10 +831,9 @@ Select.prototype = {
         });           
         
         this.el = el.firstChild;                      
-        this.el.parentElement.insertBefore(this.input);
-        
-        // FIXME CHECK
-        container.appendChild(el);
+        this.el.appendChild(this.input);
+        container.appendChild(this.el);
+        $(container).setClass("moo-ui-select-wrapper");
         
         this.box = $(this.el).find(".moo-ui-select-menu")[0];
         this.textspan = $(this.el).find(".moo-ui-select-text")[0];
