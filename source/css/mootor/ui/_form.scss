@@ -5,14 +5,15 @@
 @import "compass/utilities";
 @import "compass/css3";
 
-$color-border-forms: lighten($color-border-main, 70%) !default;
+$color-border-forms: $light-grey !default;
 $color-bg-forms: $color-white !default;
 $color-label-forms:  lighten($color-text-action, 4%) !default;
-$color-border-forms-inputs: lighten($color-border-forms, 15%) !default;
+$color-border-forms-inputs: $color-border-forms !default;
 $moo-ui-form-classname: ".moo-ui-form" !default;
 $border-radius-forms: 5px !default;
 $padding-forms: 1em !default;
-
+$ui-form-input-border-width: 1px !default;
+ 
 @mixin moo-ui-form(
     $class: $moo-ui-form-classname
 ) {
@@ -48,7 +49,9 @@ $padding-forms: 1em !default;
             }        
         }
         .moo-ui-input-container {
-             border: 1px solid #666;
+             border-style: solid;
+             border-color: $color-border-forms-inputs;
+             border-width: $ui-form-input-border-width;
              border-radius: 5px;
              background-color: #FFF;
              position: relative;

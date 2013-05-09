@@ -4,6 +4,7 @@
 
 $color-text-alt: $color-dark-grey !default;
 $ui-button-classname: ".moo-button" !default;
+$ui-button-border-radius: .5em;
 
 @mixin moo-button(
     $class: $ui-button-classname
@@ -13,7 +14,9 @@ $ui-button-classname: ".moo-button" !default;
         font-size: 1.4em;
         padding: .5em 1.5em;
         border: 1px solid $color-border-main;
-        @include border-radius(.5em); 
+        border-radius: $ui-button-border-radius; 
+        display: block;
+        
         @include contrasted(lighten($color-border-main, 50%), $color-border-main, $color-text-alt, 30%);
 
         &.submit {

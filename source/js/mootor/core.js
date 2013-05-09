@@ -302,7 +302,6 @@ var $ = (function () {
       ready: function (callback) {
          ready(callback, this.el);
       },
-
       /**
        * Show element
        * @method show

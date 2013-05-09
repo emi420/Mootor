@@ -7,6 +7,7 @@ $color-list-background: $color-bg-list !default;
 $color-border-top: lighten($color-bg-list, 5%) !default;
 $color-border-bottom: darken($color-bg-list, 10%) !default;
 $ui-list-classname: ".moo-list" !default;
+$ui-list-margin: 0 !default;
 
 @mixin moo-list-default(
     $class: $ui-list-classname) {
@@ -40,7 +41,10 @@ $ui-list-classname: ".moo-list" !default;
     $border-bottom: #DDD, 
     $color-bg-rounded: #FFF, 
     $color-border-rounded: #CCC,
+    $margin: $ui-list-margin,
     $style: "default") {
+        
+    margin: $margin;
 
     li {
         background-color: $color-list-background;
@@ -50,6 +54,9 @@ $ui-list-classname: ".moo-list" !default;
         padding: 1em 1.5em;
         position: relative;
         overflow: hidden;
+        &:last-child {
+            border-bottom: 0;
+        }
     }
     h2 {
         margin: 0;    
