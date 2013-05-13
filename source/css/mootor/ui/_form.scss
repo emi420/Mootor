@@ -13,14 +13,19 @@ $moo-ui-form-classname: ".moo-ui-form" !default;
 $border-radius-forms: 5px !default;
 $padding-forms: 1em !default;
 $ui-form-input-border-width: 1px !default;
- 
+$ui-form-width: 95% !default;
+$ui-form-input-border-radius: 5px !default;
+$ui-form-input-background: $color-white !default;
+$ui-form-margin: 5em auto !default;
+$ui-form-field-margin: 0 0 1em 0 !default;
+
 @mixin moo-ui-form(
     $class: $moo-ui-form-classname
 ) {
     #{$class} {
         
-        width: 95%; 
-        margin: 5em auto;
+        width: $ui-form-width; 
+        margin: $ui-form-margin;
         background-color: $color-bg-forms;
         border: 1px solid $color-border-forms;
         border-radius: $border-radius-forms;            
@@ -28,7 +33,7 @@ $ui-form-input-border-width: 1px !default;
         
         .moo-field {
             text-align: left;   
-            margin-bottom: 1em;
+            margin: $ui-form-field-margin;
             legend, label {
                 font-size: 2em;
                 margin-bottom: 1em;
@@ -52,8 +57,8 @@ $ui-form-input-border-width: 1px !default;
              border-style: solid;
              border-color: $color-border-forms-inputs;
              border-width: $ui-form-input-border-width;
-             border-radius: 5px;
-             background-color: #FFF;
+             border-radius: $ui-form-input-border-radius;
+             background-color: $ui-form-input-background;
              position: relative;
         }
         // Cleanbox is the styling of the icon link used to "clean" 

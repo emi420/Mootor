@@ -11,6 +11,7 @@
     $hidden: true,
     $list: true,
     $form: true,
+    $select: true,
     $button: true
 ) {
     @if $header == true {
@@ -21,6 +22,9 @@
     }
     @if $form == true {
         @include moo-ui-form();
+    }
+    @if $select == true {
+        @include moo-ui-select();
     }
     @if $hidden == true {
         @include moo-hidden();
