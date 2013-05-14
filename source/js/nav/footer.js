@@ -13,7 +13,6 @@ var Footer = function(self) {
     if (this.el !== undefined) {
         
         this.height = this.el.offsetHeight;       
-        //this.el.style.height = this.height + "px";     
 
         // Set styles when Footer active on navigation items
         _setStylesWhenFooterIsActive(this, self);         
@@ -46,15 +45,23 @@ $.extend({
     
     initNavigationLinks: function(self, navInstance) {
         var navigationItems = $(self.el).find(".moo-nav"),
-        i;
+            $navigationItem,
+            i;
         
         for (i = navigationItems.length; i--;) {
-            $(navigationItems[i]).onTapEnd(function(gesture) {
+            $navigationItem = $(navigationItems[i]);
+            $navigationItem.onTapEnd(function(gesture) {
                 var item = navInstance.get(gesture.el.getAttribute("href").replace("#",""));
                 if (item.index != navInstance.current) {
                     Item.loadNavigationItem(gesture, self, navInstance);
                 }               
-            })
+            });
+            $navigationItem.onTapStart(function(gesture){
+                $(gesture.el).setClass("moo-hover");
+            });
+            $navigationItem.onTapEnd(function(gesture){
+                $(gesture.el).removeClass("moo-hover");                
+            });            
         }
     }
 
