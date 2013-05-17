@@ -317,7 +317,6 @@ var $ = (function () {
       ready: function (callback) {
          ready(callback, this.el);
       },
-
       /**
        * Show element
        * @method show
@@ -581,10 +580,14 @@ if (!window.$ || typeof ($) !== "function") {
    window.Mootor = $;   
 }
 
-
-
-
-
+// When ready...
+window.addEventListener("load",function() {
+	// Set a timeout...
+	setTimeout(function(){
+		// Hide the address bar!
+		window.scrollTo(0, 1);
+	}, 0);
+});
 /**
  * Gestures
  * @module core

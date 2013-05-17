@@ -93,6 +93,7 @@ Select.prototype = {
         
         $(this.input).on("blur", function() {
             self._visibility = "hidden";
+            window.scrollTo(0,0);
         });
 
         $(this.input).on("change", function() {

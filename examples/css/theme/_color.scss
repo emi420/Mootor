@@ -9,7 +9,7 @@ $blue-light: #2C3E50;
 $light-neutral: #F9F8F6;
 $dark-neutral: #3B474C;
 $dark-grey: #333;
-$light-grey: #ddd;
+$light-grey: #f1f1f1;
 $white: #fff;
 
 // Main palette
@@ -32,3 +32,11 @@ $img-border-color: $light-grey;
 
 // mootor.nav.header
 $nav-header-background: $blue-dark;
+
+/*
+ * Example app styles
+ */
+
+.blue {
+    background: #00d;
+}

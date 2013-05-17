@@ -3,13 +3,8 @@
 $color-nav-panels-bg: $color-light-grey !default;
 
 body, html {
-    background: #ccc;
+    background: $color-nav-panels-bg;
     overflow-x: hidden;
-    overflow-y: hidden;
-    width: 100%;
-    height: 100%;
-    max-width: 100%;
-    max-height: 100%;
 }
 
 // Navigation
@@ -31,18 +26,14 @@ nav {
 
 .moo-panels {
     position: absolute;
-    width: 100%;
-    left: 0;
-    min-height: 100%;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    background: $color-nav-panels-bg;
 }
+
 .moo-panel {
-    min-height: 100%;
-    width: 100%;
     position: absolute;
+    z-index: 1;
+    width: 100%;
+    overflow:auto;
+    top: 0; 
 }
 
 // Hacks

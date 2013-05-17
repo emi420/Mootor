@@ -564,8 +564,3 @@ if (!window.$ || typeof ($) !== "function") {
 } else {
    window.Mootor = $;   
 }
-
-
-
-
-

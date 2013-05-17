@@ -5,7 +5,7 @@
 @import "compass/utilities";
 @import "compass/css3";
 
-$color-border-forms: $light-grey !default;
+$color-border-forms: $color-light-grey !default;
 $color-bg-forms: $color-white !default;
 $color-label-forms:  lighten($color-text-action, 4%) !default;
 $color-border-forms-inputs: $color-border-forms !default;

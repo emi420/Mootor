@@ -61,6 +61,8 @@
                 "ui_toggleswitch",
                 "ui_camera",
                 "ui_simplecamera",
+
+                "nav_scroll",
            ],
            nav: nav
        });

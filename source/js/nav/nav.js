@@ -423,7 +423,7 @@ $.extend({
                 case "dragEnd":
                     self._config.navItem.checkMove(gesture, self);
                     break;
-                }
+            }
         },
         
         /**
@@ -556,4 +556,5 @@ NavLink.prototype = {
         this.$el.setClass("moo-visible");;
     }
 }
+
 

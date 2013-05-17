@@ -19,7 +19,7 @@ _translate = function (options) {
                 options.x : 0;
     
     $(options.el).translateFx(
-        {y: options.y,x: options.x},
+        {y: options.y, x: options.x},
         {transitionDuration: options.duration, callback: options.callback}
     );
     
@@ -50,7 +50,6 @@ $.extend({
                 callback,
                 back,
                 positionX,
-                hiddenContent,
                 i,
                 navInstance_config = navInstance._config,
                 block;
@@ -90,6 +89,8 @@ $.extend({
 
                 }
 
+                navInstance_config.y = 0;
+                
                 window.setTimeout(function () {
                     _translate({
                         el: navInstance.el,
@@ -172,6 +173,7 @@ $.extend({
     checkMove: function (gesture, self) {
             var panel = self.items[self.current],
                 maxdist = panel.height - self._config.height,
+                boostdist,
                 i;
 
             if (self.header !== undefined) {
@@ -199,6 +201,26 @@ $.extend({
                         el: panel.el,
                         duration: 0.25
                     }, self);
+                
+                } else {
+                    
+                    boostdist = gesture.velocity.y * 1000;
+                    self._config.y -= boostdist;
+
+                    if (self._config.y >= 0 || maxdist < -self._config.y) {
+                        if (self._config.y > 0) {
+                            self._config.y = 0;
+                        } else {
+                            self._config.y = -maxdist;                            
+                        }
+                    }
+
+                    _translate({
+                        y: self._config.y,
+                        el: panel.el,
+                        duration: 1,
+                    }, self);                    
+                       
                 }
                 
             }
