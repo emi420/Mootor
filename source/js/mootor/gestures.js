@@ -48,6 +48,7 @@
 
             // Bind listeners only once
             self.bind("touchstart", self);
+            self.bind("click", self);
 
         }
         
@@ -387,7 +388,7 @@
                     _fire(info, gestureEvent.onDragMove);
                 }
             }
-    
+            
             if (e.type === "touchend") {
                
                 info.velocity = {};
@@ -434,7 +435,7 @@
                     info.isDraggingY = gestureEvent.isDraggingY = 0;
                     info.isDraggingX = gestureEvent.isDraggingX = 0;
                     _fire(info, gestureEvent.onDragEnd);
-                
+
                 } else if (info.time !== undefined) {
 
                     if ($.debug === true) {
@@ -446,6 +447,8 @@
                     _fire(info, gestureEvent.onTapEnd);
                 }
     
+            } else if (e.type === "click") {
+                _fire(info, gestureEvent.onTapEnd);
             }
     
         }

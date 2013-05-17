@@ -38,6 +38,18 @@ $loading-background-color: $color-dark-grey !default;
     -webkit-animation-direction: linear;
     -webkit-border-radius: 2.1em;
     -webkit-animation-delay: 0;
+
+    -moz-animation-duration: 1s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-direction: linear;
+    -moz-border-radius: 2.1em;
+    -moz-animation-delay: 0;
+
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-direction: linear;
+    border-radius: 2.1em;
+    animation-delay: 0;
 }
 
 @mixin moo-ui-loading-object-animation-default-0() {
@@ -51,6 +63,9 @@ $loading-background-color: $color-dark-grey !default;
     @include moo-ui-loading-object-animation-default-0;
 }
 @-webkit-keyframes moo-ui-loading-object-animation-0 {
+    @include moo-ui-loading-object-animation-default-0;
+}
+@-moz-keyframes moo-ui-loading-object-animation-0 {
     @include moo-ui-loading-object-animation-default-0;
 }
 
@@ -67,6 +82,9 @@ $loading-background-color: $color-dark-grey !default;
 @-webkit-keyframes moo-ui-loading-object-animation-1 {
     @include moo-ui-loading-object-animation-default-1;
 }
+@-moz-keyframes moo-ui-loading-object-animation-1 {
+    @include moo-ui-loading-object-animation-default-1;
+}
 
 @mixin moo-ui-loading-object-animation-default-2() {
     0% { opacity: 0; }   
@@ -81,17 +99,22 @@ $loading-background-color: $color-dark-grey !default;
 @-webkit-keyframes moo-ui-loading-object-animation-2 {
     @include moo-ui-loading-object-animation-default-2;
 }
-
+@-moz-keyframes moo-ui-loading-object-animation-2 {
+    @include moo-ui-loading-object-animation-default-2;
+}
 .moo-loading-circle-01 {
     -webkit-animation-name: moo-ui-loading-object-animation-0;
+    -moz-animation-name: moo-ui-loading-object-animation-0;
     animation-name: moo-ui-loading-object-animation-0;
 }
 .moo-loading-circle-02 {
     -webkit-animation-name: moo-ui-loading-object-animation-1;
+    -moz-animation-name: moo-ui-loading-object-animation-1;
     animation-name: moo-ui-loading-object-animation-1;
 }
 .moo-loading-circle-03 {
     -webkit-animation-name: moo-ui-loading-object-animation-2;
+    -moz-animation-name: moo-ui-loading-object-animation-2;
     animation-name: moo-ui-loading-object-animation-2;
 }
 

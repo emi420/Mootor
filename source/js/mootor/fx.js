@@ -11,12 +11,11 @@
         transition,
         transformFnStr;
     
+    transformFnStr = "translate3d";
     if (tmpDivStyle.webkitTransitionDuration !== undefined) {
         vendor = "webkit";        
-        transformFnStr = "translate3d";
     } else if (tmpDivStyle.MozTransitionDuration !== undefined) {
         vendor = "Moz";            
-        transformFnStr = "translate";
     }
     
     transition = {
