@@ -557,4 +557,18 @@ NavLink.prototype = {
     }
 }
 
+// When ready...
+window.addEventListener("load",function() {
+	// Set a timeout...
+	setTimeout(function(){
+		// Hide the address bar!
+		window.scrollTo(1, 0);
+	}, 300);
+});
+
+window.addEventListener('scroll', function() {
+    window.scrollTo(1, 0);
+});
+
+
 

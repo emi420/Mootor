@@ -89,16 +89,18 @@ var $ = (function () {
       // Get element from query
       if (qtype === "string") {
 
-         el = context.querySelectorAll(query);            
-         
-         if (query.indexOf("#") > -1) {
+          if (query.indexOf("#") > -1) {
 
-            el = this[0] = el[0];            
+            el = this[0] = document.getElementById(query.replace("#",""));
+
             if (this[0] !== null) {
                this.length = 1;               
             }
 
          } else {         
+            
+            el = context.querySelectorAll(query);            
+             
             for(i = 0; i < el.length; i++) {
                this[i] = el[i];
             }
@@ -579,15 +581,6 @@ if (!window.$ || typeof ($) !== "function") {
 } else {
    window.Mootor = $;   
 }
-
-// When ready...
-window.addEventListener("load",function() {
-	// Set a timeout...
-	setTimeout(function(){
-		// Hide the address bar!
-		window.scrollTo(0, 1);
-	}, 0);
-});
 /**
  * Gestures
  * @module core
@@ -599,7 +592,14 @@ window.addEventListener("load",function() {
     var _addGesture,
         _fire,
         _isListed,
+        _touchOrClick,
         Gestures;
+        
+    if (document.ontouchstart !== undefined) {
+        _touchOrClick = "touchstart";
+    } else {
+        _touchOrClick = "click";        
+    }
         
     Gestures = function() {
         this.list = [];
@@ -637,7 +637,9 @@ window.addEventListener("load",function() {
             gestureList.push(gesture);
 
             // Bind listeners only once
-            self.bind("touchstart", self);
+            //debugger;
+            
+            self.bind(_touchOrClick, self);
 
         }
         
@@ -977,7 +979,7 @@ window.addEventListener("load",function() {
                     _fire(info, gestureEvent.onDragMove);
                 }
             }
-    
+            
             if (e.type === "touchend") {
                
                 info.velocity = {};
@@ -1024,7 +1026,7 @@ window.addEventListener("load",function() {
                     info.isDraggingY = gestureEvent.isDraggingY = 0;
                     info.isDraggingX = gestureEvent.isDraggingX = 0;
                     _fire(info, gestureEvent.onDragEnd);
-                
+
                 } else if (info.time !== undefined) {
 
                     if ($.debug === true) {
@@ -1036,6 +1038,8 @@ window.addEventListener("load",function() {
                     _fire(info, gestureEvent.onTapEnd);
                 }
     
+            } else if (e.type === "click") {
+                _fire(info, gestureEvent.onTapEnd);
             }
     
         }
@@ -1054,12 +1058,11 @@ window.addEventListener("load",function() {
         transition,
         transformFnStr;
     
+    transformFnStr = "translate3d";
     if (tmpDivStyle.webkitTransitionDuration !== undefined) {
         vendor = "webkit";        
-        transformFnStr = "translate3d";
     } else if (tmpDivStyle.MozTransitionDuration !== undefined) {
         vendor = "Moz";            
-        transformFnStr = "translate";
     }
     
     transition = {

@@ -566,6 +566,20 @@ NavLink.prototype = {
     }
 }
 
+// When ready...
+window.addEventListener("load",function() {
+	// Set a timeout...
+	setTimeout(function(){
+		// Hide the address bar!
+		window.scrollTo(1, 0);
+	}, 300);
+});
+
+window.addEventListener('scroll', function() {
+    window.scrollTo(1, 0);
+});
+
+
 
 // #include "nav.js"
 
@@ -947,6 +961,8 @@ $.extend({
             var panel = self.items[self.current],
                 maxdist = panel.height - self._config.height,
                 boostdist,
+                boostdistDiscrete,
+                boostdistAbs,
                 i;
 
             if (self.header !== undefined) {
@@ -977,7 +993,27 @@ $.extend({
                 
                 } else {
                     
+                    // FIXME CHECK
+                    
                     boostdist = gesture.velocity.y * 1000;
+                    boostdistAbs = Math.abs(boostdist);
+                    
+                    if (boostdistAbs < 25) {
+                        boostdistDiscrete = 0;
+                    } else if (boostdistAbs < 50) {
+                        boostdistDiscrete = 100;
+                    } else if (boostdistAbs < 500) {
+                        boostdistDiscrete = 500;
+                    } else if (boostdistAbs < 1000) {
+                        boostdistDiscrete = 1000;
+                    } else if (boostdistAbs < 2000) {
+                        boostdistDiscrete = 3000;
+                    } else {
+                        boostdistDiscrete = 5000;                        
+                    }
+                    
+                    boostdist = boostdistDiscrete * (boostdist / boostdistAbs);
+                    
                     self._config.y -= boostdist;
 
                     if (self._config.y >= 0 || maxdist < -self._config.y) {

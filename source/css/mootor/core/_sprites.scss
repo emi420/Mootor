@@ -1,8 +1,13 @@
 // import compass sprite utility
 @import "compass/utilities/sprites/base";  
 
-$media-query-1: "-webkit-min-device-pixel-ratio : 1";
-$media-query-15: "-webkit-min-device-pixel-ratio : 1.5";
+$webkit-media-query-1: "-webkit-min-device-pixel-ratio: 1";
+$moz-media-query-1: "min--moz-device-pixel-ratio: 1";
+$media-query-1: "min-resolution: 1dppx";
+
+$webkit-media-query-15: "-webkit-min-device-pixel-ratio: 1.5";
+$moz-media-query-15: "min--moz-device-pixel-ratio: 1.5";
+$media-query-15: "min-resolution: 1dppx";
 
 // General Sprite Defaults
 // ----------------------------------------------------------
@@ -37,13 +42,13 @@ $mootor-sprites: sprite-map($mootor-sprite-folder + "*.png",
 @mixin mootor-sprite($name, $dimensions: $mootor-sprite-dimensions, $offset-x: 0, $offset-y: 0) {
   @extend #{$mootor-sprite-base-class};
 
-  @media screen and ($media-query-1) {
+  @media screen and ($webkit-media-query-1), ($moz-media-query-1), ($media-query-1) {
       $pos: sprite-position($mootor-sprites, $name,  $offset-x,  $offset-y );
       background-position: nth($pos, 1) nth($pos, 2);
       width: image-width($mootor-sprite-folder + "#{$name}.png");
       height: image-height($mootor-sprite-folder + "#{$name}.png");
   }
-  @media screen and ($media-query-15) {
+  @media screen and ($webkit-media-query-15), ($moz-media-query-15) , ($media-query-15) {
       background-position: $offset-x round(nth(sprite-position($mootor-sprites,  "x2-" + $name, 0, 2*$offset-y), 2)/ 2);
       background-size: image-width(sprite-path($mootor-sprites))/2 image-height(sprite-path($mootor-sprites))/2; 
       width: image-width($mootor-sprite-folder + "x2-#{$name}.png")/2;

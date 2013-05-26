@@ -74,16 +74,18 @@ var $ = (function () {
       // Get element from query
       if (qtype === "string") {
 
-         el = context.querySelectorAll(query);            
-         
-         if (query.indexOf("#") > -1) {
+          if (query.indexOf("#") > -1) {
 
-            el = this[0] = el[0];            
+            el = this[0] = document.getElementById(query.replace("#",""));
+
             if (this[0] !== null) {
                this.length = 1;               
             }
 
          } else {         
+            
+            el = context.querySelectorAll(query);            
+             
             for(i = 0; i < el.length; i++) {
                this[i] = el[i];
             }

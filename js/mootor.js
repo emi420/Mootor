@@ -89,16 +89,18 @@ var $ = (function () {
       // Get element from query
       if (qtype === "string") {
 
-         el = context.querySelectorAll(query);            
-         
-         if (query.indexOf("#") > -1) {
+          if (query.indexOf("#") > -1) {
 
-            el = this[0] = el[0];            
+            el = this[0] = document.getElementById(query.replace("#",""));
+
             if (this[0] !== null) {
                this.length = 1;               
             }
 
          } else {         
+            
+            el = context.querySelectorAll(query);            
+             
             for(i = 0; i < el.length; i++) {
                this[i] = el[i];
             }
@@ -580,102 +582,6 @@ if (!window.$ || typeof ($) !== "function") {
    window.Mootor = $;   
 }
 /**
- * Fx
- * @module core
- * @submodule fx
- */ 
-
-(function () {
-
-    var tmpDivStyle = document.createElement("div").style,
-        vendor,
-        transition,
-        transformFnStr;
-    
-    transformFnStr = "translate3d";
-    if (tmpDivStyle.webkitTransitionDuration !== undefined) {
-        vendor = "webkit";        
-    } else if (tmpDivStyle.MozTransitionDuration !== undefined) {
-        vendor = "Moz";            
-    }
-    
-    transition = {
-        transform: vendor + "Transform",
-        duration: vendor + "TransitionDuration",
-        timingFunction: vendor + "TransitionTimingFunction"
-    };
-    
-    $.extend({         
-        
-        /**
-         * Legacy translateFx Mootor Fx function
-         * @private
-         */
-        translateFx: function (positions, options) {
-    
-            var x_pos = positions.x,
-                y_pos = positions.y,
-                tduration,
-                elStyle = {},
-                key,
-                el = this.el;
-               
-            tduration = options.transitionDuration;
-    
-            if (tduration !== undefined && tduration > 0) {
-                elStyle[transition.duration] = tduration + "s";
-                elStyle[transition.timingFunction] = "ease-out";
-
-            } else {
-                if (elStyle[transition.duration] !== "") {
-                    this.cleanFx();
-                }
-            }
-    
-            elStyle[transition.transform] = transformFnStr + "(" + x_pos + "px," + y_pos + "px, 0)";            
-            
-            for (key in elStyle) {
-                el.style[key] = elStyle[key]; 
-            }
-            
-            if (options.callback) {
-                window.setTimeout(options.callback, tduration * 1000);
-            }
-    
-        },
-
-        /**
-         * Translate element, using GPU acceleration when available
-         * @method translate
-         * @param {TranslateOptions} options Options
-         */
-        translate: function (options) {
-            this.translateFx({x: options.x, y: options.y},options);
-        },
-    
-        /**
-         * Clean element transform styles
-         * @method cleanFx
-         */
-        cleanFx: function () {
-            var elStyle = {},
-                key,
-                el = this.el;
-            
-            elStyle[transition.transform] = "";
-            elStyle[transition.duration] = "";
-            elStyle[transition.timingDuration] = "";
-
-            for (key in elStyle) {
-                el.style[key] = elStyle[key];
-            }
-        }
-    
-    });
-    
-} ());
-
-/**
  * Gestures
  * @module core
  * @submodule gestures
@@ -686,7 +592,14 @@ if (!window.$ || typeof ($) !== "function") {
     var _addGesture,
         _fire,
         _isListed,
+        _touchOrClick,
         Gestures;
+        
+    if (document.ontouchstart !== undefined) {
+        _touchOrClick = "touchstart";
+    } else {
+        _touchOrClick = "click";        
+    }
         
     Gestures = function() {
         this.list = [];
@@ -724,8 +637,9 @@ if (!window.$ || typeof ($) !== "function") {
             gestureList.push(gesture);
 
             // Bind listeners only once
-            self.bind("touchstart", self);
-            self.bind("click", self);
+            //debugger;
+            
+            self.bind(_touchOrClick, self);
 
         }
         
@@ -1131,6 +1045,102 @@ if (!window.$ || typeof ($) !== "function") {
         }
     });
 
+} ());/**
+ * Fx
+ * @module core
+ * @submodule fx
+ */ 
+
+(function () {
+
+    var tmpDivStyle = document.createElement("div").style,
+        vendor,
+        transition,
+        transformFnStr;
+    
+    transformFnStr = "translate3d";
+    if (tmpDivStyle.webkitTransitionDuration !== undefined) {
+        vendor = "webkit";        
+    } else if (tmpDivStyle.MozTransitionDuration !== undefined) {
+        vendor = "Moz";            
+    }
+    
+    transition = {
+        transform: vendor + "Transform",
+        duration: vendor + "TransitionDuration",
+        timingFunction: vendor + "TransitionTimingFunction"
+    };
+    
+    $.extend({         
+        
+        /**
+         * Legacy translateFx Mootor Fx function
+         * @private
+         */
+        translateFx: function (positions, options) {
+    
+            var x_pos = positions.x,
+                y_pos = positions.y,
+                tduration,
+                elStyle = {},
+                key,
+                el = this.el;
+               
+            tduration = options.transitionDuration;
+    
+            if (tduration !== undefined && tduration > 0) {
+                elStyle[transition.duration] = tduration + "s";
+                elStyle[transition.timingFunction] = "ease-out";
+
+            } else {
+                if (elStyle[transition.duration] !== "") {
+                    this.cleanFx();
+                }
+            }
+    
+            elStyle[transition.transform] = transformFnStr + "(" + x_pos + "px," + y_pos + "px, 0)";            
+            
+            for (key in elStyle) {
+                el.style[key] = elStyle[key]; 
+            }
+            
+            if (options.callback) {
+                window.setTimeout(options.callback, tduration * 1000);
+            }
+    
+        },
+
+        /**
+         * Translate element, using GPU acceleration when available
+         * @method translate
+         * @param {TranslateOptions} options Options
+         */
+        translate: function (options) {
+            this.translateFx({x: options.x, y: options.y},options);
+        },
+    
+        /**
+         * Clean element transform styles
+         * @method cleanFx
+         */
+        cleanFx: function () {
+            var elStyle = {},
+                key,
+                el = this.el;
+            
+            elStyle[transition.transform] = "";
+            elStyle[transition.duration] = "";
+            elStyle[transition.timingDuration] = "";
+
+            for (key in elStyle) {
+                el.style[key] = elStyle[key];
+            }
+        }
+    
+    });
+    
 } ());
+
+
 }(window.document));
 

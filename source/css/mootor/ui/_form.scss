@@ -13,10 +13,10 @@ $moo-ui-form-classname: ".moo-ui-form" !default;
 $border-radius-forms: 5px !default;
 $padding-forms: 1em !default;
 $ui-form-input-border-width: 1px !default;
-$ui-form-width: 95% !default;
+$ui-form-width: auto !default;
 $ui-form-input-border-radius: 5px !default;
 $ui-form-input-background: $color-white !default;
-$ui-form-margin: 5em auto !default;
+$ui-form-margin: 5em 1em !default;
 $ui-form-field-margin: 0 0 1em 0 !default;
 
 @mixin moo-ui-form(

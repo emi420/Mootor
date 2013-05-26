@@ -5,6 +5,7 @@ $color-nav-panels-bg: $color-light-grey !default;
 body, html {
     background: $color-nav-panels-bg;
     overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 // Navigation
@@ -26,6 +27,7 @@ nav {
 
 .moo-panels {
     position: absolute;
+    min-height: 100%;
 }
 
 .moo-panel {
@@ -34,6 +36,7 @@ nav {
     width: 100%;
     overflow:auto;
     top: 0; 
+    min-height: 100%;
 }
 
 // Hacks

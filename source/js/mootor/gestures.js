@@ -9,7 +9,14 @@
     var _addGesture,
         _fire,
         _isListed,
+        _touchOrClick,
         Gestures;
+        
+    if (document.ontouchstart !== undefined) {
+        _touchOrClick = "touchstart";
+    } else {
+        _touchOrClick = "click";        
+    }
         
     Gestures = function() {
         this.list = [];
@@ -47,8 +54,7 @@
             gestureList.push(gesture);
 
             // Bind listeners only once
-            self.bind("touchstart", self);
-            self.bind("click", self);
+            self.bind(_touchOrClick, self);
 
         }
         
