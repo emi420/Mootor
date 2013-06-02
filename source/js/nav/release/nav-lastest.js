@@ -575,10 +575,6 @@ window.addEventListener("load",function() {
 	}, 300);
 });
 
-window.addEventListener('scroll', function() {
-    window.scrollTo(1, 0);
-});
-
 
 
 // #include "nav.js"

@@ -29,7 +29,7 @@ summary {
 // Apply a natural box layout model to all elements 
 // (padding is calculated inside the box, not changing
 // the width/height set on the element)
-* { 
+header, header a { 
     -moz-box-sizing: border-box; 
     -webkit-box-sizing: border-box; 
     box-sizing: border-box;
