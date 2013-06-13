@@ -206,42 +206,45 @@ $.extend({
                 
                 } else {
                     
-                    // FIXME CHECK
+                    // FIXME NEEDS IMPROVEMENTS
                     
-                    boostdist = gesture.velocity.y * 1000;
-                    boostdistAbs = Math.abs(boostdist);
+                    if (self._config.boosting !== false) {
+                        boostdist = gesture.velocity.y * 1000;
+                        boostdistAbs = Math.abs(boostdist);
                     
-                    if (boostdistAbs < 25) {
-                        boostdistDiscrete = 0;
-                    } else if (boostdistAbs < 50) {
-                        boostdistDiscrete = 100;
-                    } else if (boostdistAbs < 500) {
-                        boostdistDiscrete = 500;
-                    } else if (boostdistAbs < 1000) {
-                        boostdistDiscrete = 1000;
-                    } else if (boostdistAbs < 2000) {
-                        boostdistDiscrete = 3000;
-                    } else {
-                        boostdistDiscrete = 5000;                        
-                    }
-                    
-                    boostdist = boostdistDiscrete * (boostdist / boostdistAbs);
-                    
-                    self._config.y -= boostdist;
-
-                    if (self._config.y >= 0 || maxdist < -self._config.y) {
-                        if (self._config.y > 0) {
-                            self._config.y = 0;
+                        if (boostdistAbs < 25) {
+                            boostdistDiscrete = 0;
+                        } else if (boostdistAbs < 50) {
+                            boostdistDiscrete = 100;
+                        } else if (boostdistAbs < 500) {
+                            boostdistDiscrete = 500;
+                        } else if (boostdistAbs < 1000) {
+                            boostdistDiscrete = 1000;
+                        } else if (boostdistAbs < 2000) {
+                            boostdistDiscrete = 3000;
                         } else {
-                            self._config.y = -maxdist;                            
+                            boostdistDiscrete = 5000;                        
                         }
-                    }
+                    
+                        boostdist = boostdistDiscrete * (boostdist / boostdistAbs);
+                    
+                        self._config.y -= boostdist;
 
-                    _translate({
-                        y: self._config.y,
-                        el: panel.el,
-                        duration: 1,
-                    }, self);                    
+                        if (self._config.y >= 0 || maxdist < -self._config.y) {
+                            if (self._config.y > 0) {
+                                self._config.y = 0;
+                            } else {
+                                self._config.y = -maxdist;                            
+                            }
+                        }
+
+                        _translate({
+                            y: self._config.y,
+                            el: panel.el,
+                            duration: 1,
+                        }, self);                    
+                        
+                    }
                        
                 }
                 

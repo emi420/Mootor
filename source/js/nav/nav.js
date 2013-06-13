@@ -346,6 +346,9 @@ $.extend({
                 // Enable or disable transitions
                 transitions: options.transitions,
 
+                // Enable or disable boosting
+                boosting: options.boosting,
+
                 // Header container class name
                 headerClassName: options.headerClassName ? 
                           options.headerClassName : "moo-header",
