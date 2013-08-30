@@ -230,6 +230,9 @@ var $ = (function () {
          if (options.method === undefined || options.method === "GET")
          {
             xmlhttp.open("GET", options.url, async);
+            if (options.data !== undefined) {
+                data = options.data;
+            }
          } else if (options.method === "POST") {
             xmlhttp.open("POST", options.url, async);
             data = options.data;
@@ -637,8 +640,6 @@ if (!window.$ || typeof ($) !== "function") {
             gestureList.push(gesture);
 
             // Bind listeners only once
-            //debugger;
-            
             self.bind(_touchOrClick, self);
 
         }

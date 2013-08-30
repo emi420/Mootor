@@ -24,6 +24,8 @@
  */  
 var App = function (options) {
 
+    this._initScripts = [];
+
     // Initialize instance
     App.init(options, this);
 
@@ -46,6 +48,13 @@ View = function(options, appInstance) {
    if (options.el.id !== undefined) {
        this.id = options.el.id;
    }
+   if (options.html !== undefined) {
+       this.html = options.html;
+   }
+   if (options.script !== undefined) {
+       this.script = options.script;
+   }
+
    appInstance.views.push(this);
    
    // If a Nav object instance is passed
@@ -127,22 +136,42 @@ App.prototype = {
     
           }
           
-          if (view.templatePath !== undefined) {
-              templatePath = view.templatePath;          
-          } else {
-              templatePath = "/" + view.id + "/" + view.id
-          }
-          viewPath = this.path + templatePath + ".html";
           scriptPath = this.path + "/" + view.id + "/" + view.id + ".js";
+
+          if (view.html !== undefined) {
+
+              callback(view.html);
+              
+              if (view.script !== undefined) {
+
+                      this._initScripts.push(function() { view.script.init(options) });
+
+              } else {
+
+                  $.require(scriptPath,function(){},reqOptions);                                   
                   
-          // Template
-          $.ajax({
-                url: viewPath,
-                callback: function(response) {
-                    $.require(scriptPath,function(){},reqOptions);   
-                    callback(response);
-                }
-          });
+              }
+
+          } else {
+
+              if (view.templatePath !== undefined) {
+                  templatePath = view.templatePath;          
+              } else {
+                  templatePath = "/" + view.id + "/" + view.id
+              }
+              viewPath = this.path + templatePath + ".html";
+
+              // Template
+              $.ajax({
+                    url: viewPath,
+                    callback: function(response) {
+                        callback(response);
+                        $.require(scriptPath,function(){},reqOptions);   
+                    }
+              });
+              
+          }
+          
        }
     },
     
@@ -209,6 +238,7 @@ App.prototype = {
  */     
 var _collection = [];
 $.extend({
+    
     init: function(options, self) {
         var i,
             moduleNamePosition,
@@ -217,7 +247,6 @@ $.extend({
             viewId,
             initView,
             appId;
-            
             
         if (options.id !== undefined) {
             self.id = options.id;
@@ -234,10 +263,17 @@ $.extend({
         self.views = [];
         if (options.views !== undefined) {
             for (i = 0; i < options.views.length; i++) {
+                if (typeof options.views[i] === "string") {
+                    viewId = options.views[i];
+                } else {
+                    viewId = options.views[i].id;                    
+                }
                 view = new View({
-                    el: $("#" + options.views[i]).el,
-                    id: options.views[i],
-                    nav: options.nav
+                    el: $("#" + viewId).el,
+                    id: viewId,
+                    nav: options.nav,
+                    html: options.views[i].html,
+                    script: options.views[i].script
                 }, self);
             }
         }
@@ -246,6 +282,7 @@ $.extend({
         _collection.push(self);
         
         // Load view by URL, example: /myapp/#myPanel2
+        // TODO: init app
         if ((moduleNamePosition = href.lastIndexOf("#")) > -1) {
             viewId = href.substring(moduleNamePosition, href.length).replace("#","");
             if (viewId !== undefined) {

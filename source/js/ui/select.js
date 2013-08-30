@@ -135,7 +135,15 @@ Select.prototype = {
                 this.select(i);
             }
         }
-    }    
+    },
+
+    onChange: function(callback) {
+        if (_onChangeCallbacks[this.input.id] === undefined) {
+            _onChangeCallbacks[this.input.id] = [];
+        }
+        _onChangeCallbacks[this.input.id].push(callback);
+    },
+
 };
 
-
+var _onChangeCallbacks = {};

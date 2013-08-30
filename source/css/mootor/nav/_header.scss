@@ -42,6 +42,7 @@ $nav-header-title-font-size: 1.5em !default;
         
         // Title
         h1 {
+            box-sizing: border-box;
             display: inline;
             float: left;
             font-size: 1.5em;
