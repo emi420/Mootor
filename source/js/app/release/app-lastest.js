@@ -33,11 +33,24 @@
  *      
  */  
 var App = function (options) {
-
+    
+    var self = this;
+    
+    this.options = options;
     this._initScripts = [];
 
-    // Initialize instance
-    App.init(options, this);
+    // Add to internal apps collection
+    _collection.push(this);
+
+    if (options.noInit !== true) {
+        // Initialize instance
+        App.init(options, this);
+    } else {
+        this.init = function(options) {    
+            $.extend(self.options, options);        
+            App.init(options, self);
+        }
+    }
 
     return this;
 
@@ -64,7 +77,13 @@ View = function(options, appInstance) {
    if (options.script !== undefined) {
        this.script = options.script;
    }
-
+   if (options.path !== undefined) {
+       this.path = options.path;
+   }
+   if (options.init !== undefined) {
+       this.init = options.init;
+   }
+   
    appInstance.views.push(this);
    
    // If a Nav object instance is passed
@@ -73,6 +92,14 @@ View = function(options, appInstance) {
    // as a function that load this View instance
    if (options.nav !== undefined) {
        navItem = options.nav.get(this.id);
+
+       if (options.onLoad !== undefined) {
+           navItem.onLoad = options.onLoad;
+       }
+       if (options.ui !== undefined) {
+           navItem.ui = options.ui;
+       }
+
        navItem.onLoadContent = function() {
            if (self.cached === false) {
                appInstance.load(this, {
@@ -80,6 +107,7 @@ View = function(options, appInstance) {
                });
            }               
        };
+
    }
    
    this.cached = false;
@@ -107,7 +135,7 @@ App.prototype = {
      *          );
      */
     load: function(view, options) {
-    
+            
       if (view.cached !== true) {
     
           var callback = function() {},
@@ -141,34 +169,39 @@ App.prototype = {
                   } else {                             
                       $(view.el).html(response);        
                   }
+
+                  if (typeof view.init === "function") {
+                      view.init();
+                  }
                             
               };
     
           }
           
-          scriptPath = this.path + "/" + view.id + "/" + view.id + ".js";
+          if (view.path === undefined) {
+              scriptPath = this.path + "/" + view.id + "/" + view.id + ".js";              
+          } else {
+              scriptPath =  this.path + "/" + view.path + ".js";              
+          }
 
-          if (view.html !== undefined) {
+          if (view.script !== undefined) {
 
               callback(view.html);
               
-              if (view.script !== undefined) {
-
-                      this._initScripts.push(function() { view.script.init(options) });
-
-              } else {
-
-                  $.require(scriptPath,function(){},reqOptions);                                   
+              this._initScripts.push(function() { view.script.init(options) });
                   
-              }
-
           } else {
 
               if (view.templatePath !== undefined) {
                   templatePath = view.templatePath;          
               } else {
-                  templatePath = "/" + view.id + "/" + view.id
+                  if (view.path === undefined) {
+                      templatePath = "/" + view.id + "/" + view.id
+                  } else {
+                      templatePath = "/" + view.path;              
+                  }
               }
+              
               viewPath = this.path + templatePath + ".html";
 
               // Template
@@ -247,6 +280,7 @@ App.prototype = {
  * App
  */     
 var _collection = [];
+
 $.extend({
     
     init: function(options, self) {
@@ -255,6 +289,7 @@ $.extend({
             href = window.location.href,
             view,
             viewId,
+            draftView,
             initView,
             appId;
             
@@ -268,9 +303,14 @@ $.extend({
         } else {
             self.path = "";
         }
+        
+        if (self.views !== undefined) {
+            options.views = self.views;
+        }
             
         // Create views
         self.views = [];
+
         if (options.views !== undefined) {
             for (i = 0; i < options.views.length; i++) {
                 if (typeof options.views[i] === "string") {
@@ -278,18 +318,23 @@ $.extend({
                 } else {
                     viewId = options.views[i].id;                    
                 }
+                
+                draftView = options.views[i];
+                
                 view = new View({
                     el: $("#" + viewId).el,
                     id: viewId,
                     nav: options.nav,
-                    html: options.views[i].html,
-                    script: options.views[i].script
+                    html: draftView.html,
+                    script: draftView.script,
+                    path: draftView.path,
+                    onLoad: draftView.onLoad,
+                    ui: draftView.ui,
+                    init: draftView.init
                 }, self);
+
             }
         }
-        
-        // Add to internal apps collection
-        _collection.push(self);
         
         // Load view by URL, example: /myapp/#myPanel2
         // TODO: init app
@@ -305,7 +350,7 @@ $.extend({
     get: function(id) {
         var i;
         for (i = _collection.length; i--;) {
-            if (_collection[i].id === id) {
+            if (_collection[i].id === id || _collection[i].options.id === id) {
                 return _collection[i];
             }
         }

@@ -14,7 +14,14 @@
  * @constructor
  * @param {NavOptions} options Options
  */ 
-var Nav = function (options) {
+var Nav,
+    Item;
+    
+Nav = function (options) {
+    
+    var self = this;
+
+    if (options.noInit !== true) {
 
         // Initialize instance & navigation items
         Nav.init(options, this);
@@ -23,10 +30,12 @@ var Nav = function (options) {
         this.header = new Header(this);
         this.footer = new Footer(this);
 
-        return this;
-
-    },
-    Item;
+    } else {
+        this.init = function() {
+            Nav.init(options, self);                
+        }
+    }
+};
 
 // Public instance prototypes
 
@@ -50,6 +59,7 @@ Nav.prototype = {
          * @return {object} Item Navigation item instance
          */
         set: function (id) {
+            
             var item = this.get(id);
                         
             if (item !== null) {
@@ -413,13 +423,16 @@ $.extend({
             self.items = [];
             
             // Current item index
-            self.current = 0;
+            self.current = 0;                
             
             // Navigation index (array of items indexes)
             self.history = [];           
             
-            Nav._collection.push(self);
             self.id = options.id ? options.id : options._query;
+
+            if (Nav.get(self.id) === undefined) {
+                Nav._collection.push(self);
+            }
       
         },    
         
@@ -460,7 +473,7 @@ $.extend({
         /**
          * Load item
          */
-        load: function (self) {        
+        load: function (self) {      
             self._config.navItem.load(self);            
         },
         
@@ -545,6 +558,8 @@ $.extend({
         } 
             
 }, Nav);
+
+window._navCollection = Nav._collection;
 
 /*
  * Prevent native scrolling
@@ -822,6 +837,11 @@ var _loadCallback = function (self, panel, back) {
     self_config.x = 0;
     _translate({el: self.el, x: 0}, self);
     _translate({el: panel.el, x: 0}, self);
+
+    if (typeof panel.onLoad === "function") {
+        panel.onLoad();
+        panel.height = panel.el.offsetHeight
+    }
     
 };
 
@@ -848,10 +868,12 @@ $.extend({
             // Display panel
             $(panel.el).show();
             
-            if (navInstance.current !== 0) {
-                navInstance_config.anchorBack.show();           
-            } else {
-                navInstance_config.anchorBack.hide();
+            if (navInstance_config.anchorBack !== undefined) {
+                if (navInstance.current !== 0) {                
+                    navInstance_config.anchorBack.show();           
+                } else {
+                    navInstance_config.anchorBack.hide();
+                }
             }
 
             if (navInstance_config.transitionDuration > 0) {
@@ -890,11 +912,6 @@ $.extend({
                 
             } else {
                 _loadCallback(navInstance, panel, back);
-            }
-            
-            if (typeof panel.onLoad === "function") {
-                panel.onLoad();
-                panel.height = panel.el.offsetHeight
             }
 
         },

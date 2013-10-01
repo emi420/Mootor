@@ -36,6 +36,11 @@ var _loadCallback = function (self, panel, back) {
     self_config.x = 0;
     _translate({el: self.el, x: 0}, self);
     _translate({el: panel.el, x: 0}, self);
+
+    if (typeof panel.onLoad === "function") {
+        panel.onLoad();
+        panel.height = panel.el.offsetHeight
+    }
     
 };
 
@@ -62,10 +67,12 @@ $.extend({
             // Display panel
             $(panel.el).show();
             
-            if (navInstance.current !== 0) {
-                navInstance_config.anchorBack.show();           
-            } else {
-                navInstance_config.anchorBack.hide();
+            if (navInstance_config.anchorBack !== undefined) {
+                if (navInstance.current !== 0) {                
+                    navInstance_config.anchorBack.show();           
+                } else {
+                    navInstance_config.anchorBack.hide();
+                }
             }
 
             if (navInstance_config.transitionDuration > 0) {
@@ -104,11 +111,6 @@ $.extend({
                 
             } else {
                 _loadCallback(navInstance, panel, back);
-            }
-            
-            if (typeof panel.onLoad === "function") {
-                panel.onLoad();
-                panel.height = panel.el.offsetHeight
             }
 
         },
