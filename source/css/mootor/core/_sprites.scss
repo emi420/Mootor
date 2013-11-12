@@ -1,8 +1,8 @@
 // import compass sprite utility
 @import "compass/utilities/sprites/base";  
 
-$webkit-media-query-1: "-webkit-min-device-pixel-ratio: 1";
-$moz-media-query-1: "min--moz-device-pixel-ratio: 1";
+$webkit-media-query-1: "-webkit-min-device-pixel-ratio: 0";
+$moz-media-query-1: "min--moz-device-pixel-ratio: 0";
 $media-query-1: "min-resolution: 1dppx";
 
 $webkit-media-query-15: "-webkit-min-device-pixel-ratio: 1.5";
