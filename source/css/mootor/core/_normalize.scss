@@ -29,10 +29,11 @@ summary {
 // Apply a natural box layout model to all elements 
 // (padding is calculated inside the box, not changing
 // the width/height set on the element)
-header, header a { 
+* { 
+    box-sizing: border-box;
     -moz-box-sizing: border-box; 
     -webkit-box-sizing: border-box; 
-    box-sizing: border-box;
+    
 }
 
 // Addresses margins/padding handled incorrectly 
@@ -184,9 +185,6 @@ input[type="search"]::-webkit-search-cancel-button {
 input[type="search"] {
     // Addresses `appearance` set to `searchfield` in S5, Chrome.
     -webkit-appearance: textfield;
-    // Addresses `box-sizing` set to `border-box` in S5, Chrome.
-/*    -webkit-box-sizing: content-box;
-    box-sizing: content-box;*/
 }
 
 input[type="search"]::-webkit-search-cancel-button,
