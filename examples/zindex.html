@@ -83,15 +83,24 @@
 			top: 0;
 			left: 0;
 			background: white;
+			box-shadow: 10px 10px 10px red;
+			-webkit-box-shadow: 10px 10px 10px red;
+			opacity: 0.5;
 		}
 		.panelcontent {
 			margin: 1em;
 			border: 1px solid black;
 			padding: 1em;
 			font-size: 4em;
+			box-shadow: 10px 10px 10px black;
+			-webkit-box-shadow: 10px 10px 10px black;
 		}
 		.moo-panel.slide {
-			transition: left 1s ease-in-out;			
+			transition: left 1s ease-in-out;
+			-ms-transition: left 1s ease-in-out;
+			-moz-transition: left 1s ease-in-out;
+			-o-transition: left 1s ease-in-out;
+			-webkit-transition: left 1s ease-in-out;
 		}
 	</style>
 </head>

@@ -324,7 +324,7 @@ Loading.prototype = Overlay.prototype = {
     },
     
     hide: function() {
-        $(this.el).setClass("moo-hidden");
+        $(this.el).addClass("moo-hidden");
     }
 };
 
@@ -353,7 +353,7 @@ $.extend({
             
         el.innerHTML = _templates[type];
         object.el = el.firstChild;
-        $(object.el).setClass("moo-hidden");
+        $(object.el).addClass("moo-hidden");
         
         return object.el;
     }
@@ -478,10 +478,10 @@ ToggleSwitch.prototype = {
         
         if (this.value === 0) {
             el.removeClass("moo-on");
-            el.setClass("moo-off");                
+            el.addClass("moo-off");                
         } else {
             el.removeClass("moo-off");
-            el.setClass("moo-on");                
+            el.addClass("moo-on");                
         }
 
         this.input.value = this.value;
@@ -600,7 +600,7 @@ Checkbox.prototype = {
         if (this.value.indexOf(index) < 0) {
             this.value.push(index.toString());
             this.items[index].el.setAttribute("checked", "checked");
-            $(this.pseudoItems[index].el).setClass("moo-active");
+            $(this.pseudoItems[index].el).addClass("moo-active");
             _onChange(this);
         } 
     },
@@ -639,7 +639,7 @@ Checkbox.prototype = {
         for (i = this.items.length; i--;) {
             for (j = value.length; j--;) {
                 if (this.items[i].value === value[j]) {
-                    $(this.pseudoItems[i].el).setClass("moo-active");
+                    $(this.pseudoItems[i].el).addClass("moo-active");
                     this.select(i);
                 }                
             }
@@ -752,7 +752,7 @@ Radio.prototype = {
             $(self.pseudoItems[i].el).removeClass("moo-active"); 
             self.pseudoItems[i].el.removeAttribute("checked", "checked");               
         }
-        $(self.pseudoItems[index].el).setClass("moo-active");
+        $(self.pseudoItems[index].el).addClass("moo-active");
 
         // Get value
         this.value = this.items[index].value;
@@ -833,7 +833,7 @@ Select.prototype = {
         this.el = el.firstChild;                      
         this.el.appendChild(this.input);
         container.appendChild(this.el);
-        $(container).setClass("moo-ui-select-wrapper");
+        $(container).addClass("moo-ui-select-wrapper");
         
         this.box = $(this.el).find(".moo-ui-select-menu")[0];
         this.textspan = $(this.el).find(".moo-ui-select-text")[0];
@@ -1161,7 +1161,7 @@ Text.prototype = {
         this.cleanbox.innerHTML = _templates.text;
 
         el = document.createElement("div");
-        $(el).setClass("moo-ui-text");
+        $(el).addClass("moo-ui-text");
         el.appendChild(this.cleanbox);         
         el.appendChild(this.input);
         
@@ -1230,7 +1230,7 @@ TextArea.prototype = {
         });
         
         el = document.createElement("div");
-        $(el).setClass("moo-ui-textarea");
+        $(el).addClass("moo-ui-textarea");
         el.appendChild(this.input);
         parent.appendChild(el);         
     }
@@ -1344,7 +1344,7 @@ Camera.prototype = {
         for (i = items.length; i--;) {
             $(items[i].firstChild).removeClass("moo-active");
         }
-        $(imgDiv).setClass("moo-active");
+        $(imgDiv).addClass("moo-active");
         self.itemSelected = this.count;    
 
         $(imgDiv).onTapEnd(function(gesture) {
@@ -1358,7 +1358,7 @@ Camera.prototype = {
                     $(items[i].firstChild).removeClass("moo-active");
                 }
 
-                $(gesture.el).setClass("moo-active");
+                $(gesture.el).addClass("moo-active");
                 self.itemSelected = gesture.el.getAttribute("moo-index");    
                                 
             }
@@ -1405,7 +1405,7 @@ Camera.prototype = {
         }    
         
         // FIXME CHECK
-        $(items[this.count]).setClass("moo-active");
+        $(items[this.count]).addClass("moo-active");
         this.itemSelected = this.count;
     }
     
@@ -1424,12 +1424,12 @@ $.extend({
 
         self.el = el.firstChild;
         $selfEl = $(self.el);
-        $selfEl.setClass("moo-empty");
+        $selfEl.addClass("moo-empty");
         
         if (self.position === "top") {
-            $selfEl.setClass("moo-top");
+            $selfEl.addClass("moo-top");
         } else if (self.position === "bottom") {
-            $selfEl.setClass("moo-bottom");            
+            $selfEl.addClass("moo-bottom");            
         }
         
         self.takeButton = $selfEl.find(".moo-ui-add-new")[0];
