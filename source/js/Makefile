@@ -8,6 +8,8 @@ COPY_FILE=$(PACKAGE).js
 all:
 	@@echo "Building..."
 	@@cat app/_header.js\
+	      app/app.js\
+	      app/panel.js\
 	      app/view.js\
 	      app/_footer.js\
 	      > $(RELEASE_DIR)/$(RELEASE_FILE)

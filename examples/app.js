@@ -1,13 +1,16 @@
+
 (function ($) {
     "use strict";
-    $.extend($, { 
-    	App: {
-			views: ["panel1","panel2","panel3"]
-			,
-			init: function () {
-				//Show first panel
-				$("#panel1").showPanel();
-			}
+
+	var app = $.app({
+		views: [
+		"panel1",
+		"panel2",
+		"panel3"
+		]
+		,
+		init: function() {
+			$("#panel1").show();
 		}
-	})
-}(window.Zepto));
+	});
+}($));

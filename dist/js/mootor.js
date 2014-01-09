@@ -8,83 +8,55 @@
 
     "use strict";
     
-var loadedViews = [];
+// $.app({
+// views: [
+// "index",
+// "view1"
+// ]
+// });
 
-//Initialize app on document ready
-Zepto(function($){ 
-	loadViews();
-});
 
-function loadViews() {
-	for (var v in $.App.views) {
-		var viewname = $.App.views[v];
-		var viewpath_js = "views/"+viewname+"/"+viewname+".js";
-		var viewpath_html = "views/"+viewname+"/"+viewname+".html";
-		$.getScript(viewpath_js,handleLoadViewJS,handleLoadViewJSError);
-		$("<section id='"+viewname+"' class='panel'></section>").load(viewpath_html,handleLoadViewHTML).appendTo("#main");
+$.app = function(options) {
+	$.app.options = options;
+
+	//Defer init until dom loaded
+	Zepto(function($){
+		$.app.initViews(options.views);
+	}) 
+	
+}
+
+$.app.loadedViews = [];
+$.app.options = [];
+
+
+$.app.initViews = function (views) {
+	for (var v in views) {
+		var viewName = views[v];
+		var viewPathJS = "views/"+viewName+"/"+viewName+".js";
+		var viewPathHTML = "views/"+viewName+"/"+viewName+".html";
+		$.app.getScript(viewPathJS,$.app.View.handleLoadViewJS,$.app.View.handleLoadViewJSError);
+		var s = $("<section id='"+viewName+"' class='panel'></section>")
+			.appendTo("#main")
+			.load(viewPathHTML,$.app.View.handleLoadViewHTML);
+	   console.log("view processed",viewName,s);
 	}
 }
 
-function handleLoadViewJSError(e) {
-	var viewname = getNameFromURL(e.data.url);
-	var viewid = "#"+viewname;
-	console.error("Unable to load view: ",viewname);
-
-	loadedViews.push(viewname);
-	if (loadedViews.length == $.App.views.length) {
-		afterViewsLoaded();
-	}
-
+$.app.onFinishLoadingViews = function() {
+	$.app.options.init();
 }
 
-function handleLoadViewJS(e) {
-	var viewname = getNameFromURL(e.data.url);
-	var viewid = "#"+viewname;
-	console.log("View loaded:",viewname);
+//Helper function to load a remote script
+$.app.getScript = function (url, success, error) {
+    var script = document.createElement("script"),
+        $script = $(script);
+    script.src = url;
 
-	//Initialize panels for this view
-	initPanel(viewid);
-
-	loadedViews.push(viewname);
-	if (loadedViews.length == $.App.views.length) {
-		afterViewsLoaded();
-	}
-}
-
-//Initialize panels for this view
-function initPanel(viewid) {
-	//If the panel is already loaded, call .panel with options
-	//Else wait 100ms and try again
-	if ($(viewid).children().length > 0) {
-		$(viewid).panel({transition: "slide"});				
-	}
-	else {
-		setTimeout(function () {
-			console.log("Panel for view " + viewid + " not loaded, will try again.");
-			initPanel(viewid);	
-		}, 100);
-	}
-}
-
-//Extract the view name from the url for the view's JS file
-function getNameFromURL(url) {
-	var name = url.split("/")[1];
-	return name;
-
-}
-
-function handleLoadViewHTML(e) {
-	console.log("handleLoadViewHTML",e);
-
-}
-
-function afterViewsLoaded(e) {
-	console.log("afterViewsLoaded",e);
-	if ($.App.init) {
-		$.App.init();
-	}
-}
-
+    $("head").append(script);
+    $script.one("load", {url: url}, success);
+    $script.one("error", {url: url}, error);
+};
 /**
  * Extend $ to have panel functions
  */
@@ -153,18 +125,83 @@ $.extend($.fn, {
 		return this;
 	}
 })
+var View = {}, 
+    app =  $.app;
 
-//Extensions to the $. functions
+app.View = function(options) {
 
-//Load a remote script
-$.getScript = function (url, success, error) {
-    var script = document.createElement("script"),
-        $script = $(script);
-    script.src = url;
+	//ToDo: MAJOR scope issue here, using this returns App and not View;
+	if (options.constructor) {
+		options.constructor();
+	}
+   return this;
+}
 
-    $("head").append(script);
-    $script.one("load", {url: url}, success);
-    $script.one("error", {url: url}, error);
-};
+View.prototype = {
+	title: "",
+	id: "",
+	panel: {},
+	setTitle: function (title) {
+    	this.title = title;    
+    	//app.throw(app.Events.TitleUpdated);
+	}
+	,
+	show: function() {
+		this.panel.show();
+	}
+}
 
+
+
+app.View.handleLoadViewJSError = function(e) {
+		var viewName = app.View.getNameFromURL(e.data.url);
+		var viewID = "#"+viewName;
+		console.error("Unable to load view: ",viewName);
+
+		app.loadedViews.push(viewName);
+		if (app.loadedViews.length == app.options.views.length) {
+			app.onFinishLoadingViews();
+		}
+
+	}
+
+app.View.handleLoadViewJS = function(e) {
+		var viewName = app.View.getNameFromURL(e.data.url);
+		var viewID = "#"+viewName;
+		console.log("View loaded:",viewName);
+
+		//Initialize panels for this view
+		app.View.initPanel(viewID);
+
+		app.loadedViews.push(viewName);
+		if (app.loadedViews.length == app.options.views.length) {
+			app.onFinishLoadingViews();
+		}
+	}
+
+	//Initialize panels for this view
+app.View.initPanel = function(viewID) {
+		//If the panel is already loaded, call .panel with options
+		//Else wait 100ms and try again
+		if ($(viewID).children().length > 0) {
+			this.panel = $(viewID).panel({transition: "slide"});				
+		}
+		else if (1==2) {
+			setTimeout(function () {
+				console.log("Panel for view " + viewID + " not loaded, will try again.");
+				app.View.initPanel(viewID);	
+			}, 100);
+		}
+	}
+
+	//Extract the view name from the url for the view's JS file
+app.View.getNameFromURL = function(url) {
+		var name = url.split("/")[1];
+		return name;
+
+	}
+
+app.View.handleLoadViewHTML = function(e) {
+		console.log("handleLoadViewHTML",e);
+	}
 }(window.Zepto));
