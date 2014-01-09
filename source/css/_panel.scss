@@ -2,16 +2,19 @@
 
 body, html {
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .moo-panel {
     position: absolute;
     width: 100%;
-    min-height: 100%;
+    height: 100%;
     top: 0; 
     left: 0;
    
+
+    background: #fa0;
+
     // Prevents flicker on transform3d (iOS)    
     -webkit-transition-duration:0;
     -webkit-backface-visibility: hidden;

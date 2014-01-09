@@ -6,5 +6,5 @@
 
 (function ($) {
 
-    //"use strict";
+    "use strict";
     
