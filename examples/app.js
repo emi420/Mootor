@@ -1,8 +1,13 @@
-var views = ["panel1","panel2"]
-
-
-function App() {
-
-	//Show first panel
-	$("#panel1").showPanel();
-}
+(function ($) {
+    "use strict";
+    $.extend($, { 
+    	App: {
+			views: ["panel1","panel2","panel3"]
+			,
+			init: function () {
+				//Show first panel
+				$("#panel1").showPanel();
+			}
+		}
+	})
+}(window.Zepto));

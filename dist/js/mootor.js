@@ -6,53 +6,88 @@
 
 (function ($) {
 
-    //"use strict";
+    "use strict";
     
-/**
- * Extend $ to have panel functions
- */
+	var loadedViews = [];
 
-var loadedViews = [];
+	//Initialize app on document ready
+	Zepto(function($){ 
+		loadViews();
+	});
 
-//Initialize app on document ready
-Zepto(function($){ 
-	loadViews();
-});
-
-function loadViews() {
-	for (v in views) {
-		var viewname = views[v];
-		viewpath_js = "views/"+viewname+"/"+viewname+".js";
-		viewpath_html = "views/"+viewname+"/"+viewname+".html";
-		$.getScript(viewpath_js,handleLoadViewJS);
-		$("<section id='"+viewname+"' class='panel'></section>").load(viewpath_html,handleLoadViewHTML).appendTo("#main");
+	function loadViews() {
+		for (var v in $.App.views) {
+			var viewname = $.App.views[v];
+			var viewpath_js = "views/"+viewname+"/"+viewname+".js";
+			var viewpath_html = "views/"+viewname+"/"+viewname+".html";
+			$.getScript(viewpath_js,handleLoadViewJS,handleLoadViewJSError);
+			$("<section id='"+viewname+"' class='panel'></section>").load(viewpath_html,handleLoadViewHTML).appendTo("#main");
+		}
 	}
-}
 
-function handleLoadViewJS(e) {
-	console.log("handleLoadViewJS",e);
-	viewname = e.data.url;
-	//Initialize panels
-	$(".panel").panel({transition: "slide"});	
+	function handleLoadViewJSError(e) {
+		var viewname = getNameFromURL(e.data.url);
+		var viewid = "#"+viewname;
+		console.error("Unable to load view: ",viewname);
 
-	loadedViews.push(viewname);
-	if (loadedViews.length == views.length) {
-		afterViewsLoaded();
+		loadedViews.push(viewname);
+		if (loadedViews.length == $.App.views.length) {
+			afterViewsLoaded();
+		}
+
 	}
-}
 
-function handleLoadViewHTML(e) {
-	console.log("handleLoadViewHTML",e);
+	function handleLoadViewJS(e) {
+		var viewname = getNameFromURL(e.data.url);
+		var viewid = "#"+viewname;
+		console.log("View loaded:",viewname);
 
-}
+		//Initialize panels for this view
+		initPanel(viewid);
 
-function afterViewsLoaded(e) {
-	console.log("afterViewsLoaded",e);
-	if (window.App) {
-		App();
+		loadedViews.push(viewname);
+		if (loadedViews.length == $.App.views.length) {
+			afterViewsLoaded();
+		}
 	}
-}
 
+	//Initialize panels for this view
+	function initPanel(viewid) {
+		//If the panel is already loaded, call .panel with options
+		//Else wait 100ms and try again
+		if ($(viewid).children().length > 0) {
+			$(viewid).panel({transition: "slide"});				
+		}
+		else {
+			setTimeout(function () {
+				console.log("Panel for view " + viewid + " not loaded, will try again.");
+				initPanel(viewid);	
+			}, 100);
+		}
+	}
+
+	//Extract the view name from the url for the view's JS file
+	function getNameFromURL(url) {
+		var name = url.split("/")[1];
+		return name;
+
+	}
+
+	function handleLoadViewHTML(e) {
+		console.log("handleLoadViewHTML",e);
+
+	}
+
+	function afterViewsLoaded(e) {
+		console.log("afterViewsLoaded",e);
+		if ($.App.init) {
+			$.App.init();
+		}
+	}
+
+	/**
+	 * Extend $ to have panel functions
+	 */
 	$.extend($.fn, {
 		//Initialize panel
 		panel: function(options){
