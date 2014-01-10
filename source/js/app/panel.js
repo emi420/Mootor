@@ -1,8 +1,19 @@
 /**
- * Extend $ to have panel functions
- */
+Extend $ to have panel functions
+
+@class panel
+**/
 $.extend($.fn, {
 	//Initialize panel
+
+	/**
+	* Turn the given element into a panel: add moo-panel class, set options, transitoin and hide the panel.
+	*
+	* @method panel
+	* @param {Object} options The options for the current panel
+	* * transition - A string that specifies the type of transition used to show this panel (none, slide-left, slide-right)
+	* @return {Object} Returns the same object it's applied to, to allow chaining.
+	*/
 	panel: function(options){
 		// `this` refers to the current Zepto collection.
 		// When possible, return the Zepto collection to allow chaining.
@@ -17,6 +28,12 @@ $.extend($.fn, {
 		return this;
 	}
 	,
+	/**
+	* Shows a panel using the specified transition
+	*
+	* @method showPanel
+	* @return {Object} Returns the same object it's applied to, to allow chaining.
+	*/
 	showPanel: function(){
 		if (this.data("transition") == "slide") {
 
@@ -54,6 +71,12 @@ $.extend($.fn, {
 		return this;
 	}
 	,
+	/**
+	* Hides a panel using the specified transition
+	*
+	* @method hidePanel
+	* @return {Object} Returns the same object it's applied to, to allow chaining.
+	*/
 	hidePanel: function(){
 		if (this.data("transition") == "slide") {
 	      	this.css({
