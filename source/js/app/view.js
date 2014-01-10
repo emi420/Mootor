@@ -12,8 +12,8 @@ var app =  $.app;
 * @class app.View
 * @constructor
 * @param {Object} options An object defining options for the current view.
-* * constructor - A Function that will be run after the view has loaded (optional).
-* * animation - A String defining the type of animation used to show this view (one of: "slide-left", "slide-right", "none").
+* * constructor - A function that will be run after the view has loaded (optional).
+* * animation - a string defining the type of animation used to show this view (one of: "slide-left", "slide-right", "none").
 */
 app.View = function(options) {
 
@@ -24,7 +24,7 @@ app.View = function(options) {
    return this;
 }
 
-View.prototype = {
+app.View.prototype = {
 
 	/**
 	* Title contains the friendly name for the current view.
@@ -34,6 +34,7 @@ View.prototype = {
 	* @default ""
 	*/	
 	title: "",
+	options: {},
 
 
 	/**
