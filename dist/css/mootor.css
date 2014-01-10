@@ -206,6 +206,7 @@ body, html {
   height: 100%;
   top: 0;
   left: 0;
+  opacity: 0.5;
   background: #fa0;
   -webkit-transition-duration: 0;
   -webkit-backface-visibility: hidden;
@@ -213,7 +214,7 @@ body, html {
   -webkit-transform: translateZ(0);
 }
 
-/* line 25, ../../source/css/_panel.scss */
+/* line 26, ../../source/css/_panel.scss */
 .moo-transition-slide {
   transition: left 1s ease-in-out;
   -ms-transition: left 1s ease-in-out;
@@ -222,7 +223,7 @@ body, html {
   -webkit-transition: left 1s ease-in-out;
 }
 
-/* line 34, ../../source/css/_panel.scss */
+/* line 35, ../../source/css/_panel.scss */
 .moo-transition-none {
   -moz-transition: none;
   -webkit-transition: none;

@@ -111,8 +111,12 @@ app.View.handleLoadViewJS = function(e) {
 	var viewID = "#"+viewName;
 	console.log("View loaded:",viewName);
 
+	//ToDo: Hardcoded. This transition should come from the view's options.
+	this.options = {};
+	this.options.transition = "slide-right";
+
 	//Initialize panels for this view
-	app.View.initPanel(viewID);
+	app.View.initPanel(viewID,this.options.transition);
 
 	app.loadedViews.push(viewName);
 	if (app.loadedViews.length == app.options.views.length) {
@@ -127,11 +131,11 @@ app.View.handleLoadViewJS = function(e) {
 * @method initPanel
 * @param {String} viewID The ID of the panel to initialize 
 */
-app.View.initPanel = function(viewID) {
+app.View.initPanel = function(viewID,transition) {
 	//If the panel is already loaded, call .panel with options
 	//Else wait 100ms and try again
 	if ($(viewID).children().length > 0) {
-		this.panel = $(viewID).panel({transition: "slide"});				
+		this.panel = $(viewID).panel({transition: transition});				
 	}
 	else {
 		setTimeout(function () {

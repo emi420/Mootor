@@ -5,8 +5,7 @@
 	var app = $.app({
 		views: [
 		"panel1",
-		"panel2",
-		"panel3"
+		"panel2"
 		]
 		,
 		init: function() {

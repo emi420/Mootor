@@ -123,9 +123,24 @@ $.extend($.fn, {
 		this.hidePanel();
 
 		this.data("transition",options.transition);
-		this.addClass("moo-transition-"+this.data("transition"))
+		this.addTransitionClass(this.data("transition"))
 
 		return this;
+	}
+	,
+	addTransitionClass: function(transitionType) {
+		switch (transitionType) {
+			case "slide-left":
+			case "slide-right":
+				this.addClass("moo-transition-slide");
+				break;
+			default:
+				this.addClass("moo-transition-"+transitionType)
+		}		
+	}
+	,
+	removeTransitionClass: function() {
+		this.removeClass("moo-transition-slide moo-transition-none moo-transition-slide-left moo-transition-slide-right");
 	}
 	,
 	/**
@@ -135,40 +150,72 @@ $.extend($.fn, {
 	* @return {Object} Returns the same object it's applied to, to allow chaining.
 	*/
 	showPanel: function(){
-		if (this.data("transition") == "slide") {
+		switch (this.data("transition")) {
+			case "slide-left":
 
-			//Reposition the panel outside the right edge
-			if (this.position().left < document.documentElement.clientWidth) {
+				this.reposition("left");
 
-				//Temporarily remove the transition
-				this.removeClass("moo-transition-"+this.data("transition"))
-					.addClass("moo-transition-none");
+				this.slideIn();
+				break;
 
-				//Move panel outside stage
-		      	this.css({
-					left: document.documentElement.clientWidth
-				});
-			}
 
-			//A timeout is needed for the browser to process the possible repositioning
-			var _self = this;
-			setTimeout(function() {
+		    case "slide-right":
+				this.reposition("right");
+				this.slideIn();
+		    	break;
 
-				//Add back the transition (it's useless in the case it was not removed)
-				_self.addClass("moo-transition-"+_self.data("transition"))
-					.removeClass("moo-transition-none");
-
-				//Move panel to stage
-		      	_self.show().css({
-					left: 0
-				});
-
-			}, 1)
-	    }
-	    else {
-	    	this.show();
+	    	default:
+	    		this.show();
+		    	break;
 	    }
 		return this;
+	}
+	,
+	reposition: function(side) {
+
+		var newPosition,
+			evalPosition;
+
+		if (side == "left") {
+			evalPosition = (this.position().left < document.documentElement.clientWidth)
+			newPosition = document.documentElement.clientWidth;
+		}
+		else if (side == "right") {
+			evalPosition = (this.position().left > -1);
+			newPosition = -document.documentElement.clientWidth;
+			//debugger;
+
+		}
+
+		//Reposition the panel outside the right edge
+		if  (evalPosition) {
+
+			//Temporarily remove the transition
+			this.removeTransitionClass()
+			this.addTransitionClass("none");
+
+			//Move panel outside stage
+	      	this.css({
+				left: newPosition
+			});
+		}
+	}
+	,
+	slideIn: function() {
+		//A timeout is needed for the browser to process the possible repositioning
+		var _self = this;
+		setTimeout(function() {
+
+			//Add back the transition (it's useless in the case it was not removed)
+			_self.removeTransitionClass();
+			_self.addTransitionClass(_self.data("transition"));
+
+			//Move panel to stage
+	      	_self.show().css({
+				left: 0
+			});
+
+		}, 1)		
 	}
 	,
 	/**
@@ -178,13 +225,20 @@ $.extend($.fn, {
 	* @return {Object} Returns the same object it's applied to, to allow chaining.
 	*/
 	hidePanel: function(){
-		if (this.data("transition") == "slide") {
-	      	this.css({
-				left: -document.documentElement.clientWidth
-			});
-	    }
-	    else {
-	    	this.hide();
+		switch (this.data("transition")) {
+			case "slide":
+			case "slide-left":
+		      	this.css({
+					left: -document.documentElement.clientWidth
+				});
+				break;
+			case "slide-right":
+		      	this.css({
+					left: document.documentElement.clientWidth
+				});
+				break;
+			default:
+		    	this.hide();
 	    }
 		return this;
 	}
@@ -302,8 +356,12 @@ app.View.handleLoadViewJS = function(e) {
 	var viewID = "#"+viewName;
 	console.log("View loaded:",viewName);
 
+	//ToDo: Hardcoded. This transition should come from the view's options.
+	this.options = {};
+	this.options.transition = "slide-right";
+
 	//Initialize panels for this view
-	app.View.initPanel(viewID);
+	app.View.initPanel(viewID,this.options.transition);
 
 	app.loadedViews.push(viewName);
 	if (app.loadedViews.length == app.options.views.length) {
@@ -318,11 +376,11 @@ app.View.handleLoadViewJS = function(e) {
 * @method initPanel
 * @param {String} viewID The ID of the panel to initialize 
 */
-app.View.initPanel = function(viewID) {
+app.View.initPanel = function(viewID,transition) {
 	//If the panel is already loaded, call .panel with options
 	//Else wait 100ms and try again
 	if ($(viewID).children().length > 0) {
-		this.panel = $(viewID).panel({transition: "slide"});				
+		this.panel = $(viewID).panel({transition: transition});				
 	}
 	else {
 		setTimeout(function () {
