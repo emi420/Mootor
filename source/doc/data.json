@@ -1,0 +1,627 @@
+{
+    "project": {},
+    "files": {
+        "js/app/_header.js": {
+            "name": "js/app/_header.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/app/app.js": {
+            "name": "js/app/app.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/app/panel.js": {
+            "name": "js/app/panel.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/app/view.js": {
+            "name": "js/app/view.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "release/mootor-troomo.js": {
+            "name": "release/mootor-troomo.js",
+            "modules": {},
+            "classes": {
+                "$.app": 1,
+                "panel": 1,
+                "app.View": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {},
+    "classes": {
+        "$.app": {
+            "name": "$.app",
+            "shortname": "$.app",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "release/mootor-troomo.js",
+            "line": 11,
+            "description": "The App class defines the main object of the applications\nIt handles creating the views.\n\n$.app({\n\tviews: [\n\t\t\"index\",\n\t\t\"view1\"\n\t]\n});",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "options",
+                    "description": "An object defining options for the application.\n* views - An array with a list of view names. Views have to be present in the /views folder",
+                    "type": "Object"
+                }
+            ]
+        },
+        "panel": {
+            "name": "panel",
+            "shortname": "panel",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "release/mootor-troomo.js",
+            "line": 101,
+            "description": "Extend $ to have panel functions"
+        },
+        "app.View": {
+            "name": "app.View",
+            "shortname": "app.View",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "release/mootor-troomo.js",
+            "line": 196,
+            "description": "The View class handles each screen of the application. \nA list of views is specified in the applications options\nand the files are loaded from the views/ folder.\nEach view has a viewName.js and a viewName.html file.\nThe viewName.js file defines options for the view.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "options",
+                    "description": "An object defining options for the current view.\n* constructor - A function that will be run after the view has loaded (optional).\n* animation - a string defining the type of animation used to show this view (one of: \"slide-left\", \"slide-right\", \"none\").",
+                    "type": "Object"
+                }
+            ]
+        }
+    },
+    "classitems": [
+        {
+            "file": "js/app/_header.js",
+            "line": 1,
+            "summary": "Mootor App",
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)",
+            "class": "$.app"
+        },
+        {
+            "file": "js/app/app.js",
+            "line": 27,
+            "description": "A list of the views that is already loaded",
+            "itemtype": "property",
+            "name": "loadedViews",
+            "type": "{Array}",
+            "default": "[]",
+            "class": "$.app"
+        },
+        {
+            "file": "js/app/app.js",
+            "line": 36,
+            "description": "This aplications options",
+            "itemtype": "property",
+            "name": "options",
+            "type": "{Array}",
+            "default": "[]",
+            "class": "$.app"
+        },
+        {
+            "file": "js/app/app.js",
+            "line": 46,
+            "description": "Init views, load remote files and call the View class to handle it.",
+            "itemtype": "method",
+            "name": "initViews",
+            "params": [
+                {
+                    "name": "views",
+                    "description": "A list of view names to be initialized",
+                    "type": "Array"
+                }
+            ],
+            "class": "$.app"
+        },
+        {
+            "file": "js/app/app.js",
+            "line": 65,
+            "description": "Method executed once all views have been loaded. Calls the application's \"init\" method.",
+            "itemtype": "method",
+            "name": "onFinishLoadingViews",
+            "class": "$.app"
+        },
+        {
+            "file": "js/app/app.js",
+            "line": 74,
+            "description": "Helper function to load a remote script via a <script> element in the <head>.",
+            "itemtype": "method",
+            "name": "getScript",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "The URL to load",
+                    "type": "String"
+                },
+                {
+                    "name": "success",
+                    "description": "A function to be called if the request is successful",
+                    "type": "Function"
+                },
+                {
+                    "name": "error",
+                    "description": "A function to be called if the request fails",
+                    "type": "Function"
+                }
+            ],
+            "class": "$.app"
+        },
+        {
+            "file": "js/app/panel.js",
+            "line": 9,
+            "description": "Turn the given element into a panel: add moo-panel class, set options, transitoin and hide the panel.",
+            "itemtype": "method",
+            "name": "panel",
+            "params": [
+                {
+                    "name": "options",
+                    "description": "The options for the current panel\n* transition - A string that specifies the type of transition used to show this panel (none, slide-left, slide-right)",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Returns the same object it's applied to, to allow chaining.",
+                "type": "Object"
+            },
+            "class": "panel"
+        },
+        {
+            "file": "js/app/panel.js",
+            "line": 31,
+            "description": "Shows a panel using the specified transition",
+            "itemtype": "method",
+            "name": "showPanel",
+            "return": {
+                "description": "Returns the same object it's applied to, to allow chaining.",
+                "type": "Object"
+            },
+            "class": "panel"
+        },
+        {
+            "file": "js/app/panel.js",
+            "line": 74,
+            "description": "Hides a panel using the specified transition",
+            "itemtype": "method",
+            "name": "hidePanel",
+            "return": {
+                "description": "Returns the same object it's applied to, to allow chaining.",
+                "type": "Object"
+            },
+            "class": "panel"
+        },
+        {
+            "file": "js/app/view.js",
+            "line": 29,
+            "description": "Title contains the friendly name for the current view.",
+            "itemtype": "property",
+            "name": "title",
+            "type": "{string}",
+            "default": "\"\"",
+            "class": "app.View"
+        },
+        {
+            "file": "js/app/view.js",
+            "line": 40,
+            "description": "ID contains the internal name for the current view, which applies to file names and internal references such as the views definition in the application's options.",
+            "itemtype": "property",
+            "name": "id",
+            "type": "{string}",
+            "default": "\"\"",
+            "class": "app.View"
+        },
+        {
+            "file": "js/app/view.js",
+            "line": 49,
+            "description": "A reference to the panel representing this view",
+            "itemtype": "property",
+            "name": "panel",
+            "type": "{object}",
+            "default": "{}",
+            "class": "app.View"
+        },
+        {
+            "file": "js/app/view.js",
+            "line": 59,
+            "description": "Sets the title of the view and raises an event.",
+            "itemtype": "method",
+            "name": "setTitle",
+            "params": [
+                {
+                    "name": "title",
+                    "description": "The new title",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Returns true on success",
+                "type": "Boolean"
+            },
+            "class": "app.View"
+        },
+        {
+            "file": "js/app/view.js",
+            "line": 72,
+            "description": "Displays the panel for this view using the animation defined in options.animation",
+            "itemtype": "method",
+            "name": "show",
+            "class": "app.View"
+        },
+        {
+            "file": "js/app/view.js",
+            "line": 83,
+            "description": "Callback for an request error when loadin a view. Static method for the View class.\nLogs error to console, checks if this is the last view and runs callback.",
+            "itemtype": "method",
+            "name": "handleLoadViewJSError",
+            "params": [
+                {
+                    "name": "e",
+                    "description": "The error event.",
+                    "type": "Event"
+                }
+            ],
+            "class": "app.View"
+        },
+        {
+            "file": "js/app/view.js",
+            "line": 102,
+            "description": "Callback for success loading a view. Static method for the View class.\nCalls panel initialization for the view, checks if this is the last view and runs callback.",
+            "itemtype": "method",
+            "name": "handleLoadViewJS",
+            "params": [
+                {
+                    "name": "e",
+                    "description": "The error event.",
+                    "type": "Event"
+                }
+            ],
+            "class": "app.View"
+        },
+        {
+            "file": "js/app/view.js",
+            "line": 123,
+            "description": "Initialize panels for this view.\nIf panel is not present (i.e: HTML has not loaded yet) then the function is called again in 100ms",
+            "itemtype": "method",
+            "name": "initPanel",
+            "params": [
+                {
+                    "name": "viewID",
+                    "description": "The ID of the panel to initialize",
+                    "type": "String"
+                }
+            ],
+            "class": "app.View"
+        },
+        {
+            "file": "js/app/view.js",
+            "line": 144,
+            "description": "Helper method to extract the view name from the url for the view's JS file.",
+            "itemtype": "method",
+            "name": "getNameFromURL",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "The view's file url.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "The view's name",
+                "type": "String"
+            },
+            "class": "app.View"
+        },
+        {
+            "file": "js/app/view.js",
+            "line": 156,
+            "description": "Callback for request when loading a view's html. Static method for the View class.\nIt currently does nothing.",
+            "itemtype": "method",
+            "name": "handleLoadViewHTML",
+            "params": [
+                {
+                    "name": "e",
+                    "description": "The event.",
+                    "type": "Event"
+                }
+            ],
+            "class": "app.View"
+        },
+        {
+            "file": "release/mootor-troomo.js",
+            "line": 1,
+            "summary": "Mootor App",
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)",
+            "class": "$.app"
+        },
+        {
+            "file": "release/mootor-troomo.js",
+            "line": 37,
+            "description": "A list of the views that is already loaded",
+            "itemtype": "property",
+            "name": "loadedViews",
+            "type": "{Array}",
+            "default": "[]",
+            "class": "$.app"
+        },
+        {
+            "file": "release/mootor-troomo.js",
+            "line": 46,
+            "description": "This aplications options",
+            "itemtype": "property",
+            "name": "options",
+            "type": "{Array}",
+            "default": "[]",
+            "class": "$.app"
+        },
+        {
+            "file": "release/mootor-troomo.js",
+            "line": 56,
+            "description": "Init views, load remote files and call the View class to handle it.",
+            "itemtype": "method",
+            "name": "initViews",
+            "params": [
+                {
+                    "name": "views",
+                    "description": "A list of view names to be initialized",
+                    "type": "Array"
+                }
+            ],
+            "class": "$.app"
+        },
+        {
+            "file": "release/mootor-troomo.js",
+            "line": 75,
+            "description": "Method executed once all views have been loaded. Calls the application's \"init\" method.",
+            "itemtype": "method",
+            "name": "onFinishLoadingViews",
+            "class": "$.app"
+        },
+        {
+            "file": "release/mootor-troomo.js",
+            "line": 84,
+            "description": "Helper function to load a remote script via a <script> element in the <head>.",
+            "itemtype": "method",
+            "name": "getScript",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "The URL to load",
+                    "type": "String"
+                },
+                {
+                    "name": "success",
+                    "description": "A function to be called if the request is successful",
+                    "type": "Function"
+                },
+                {
+                    "name": "error",
+                    "description": "A function to be called if the request fails",
+                    "type": "Function"
+                }
+            ],
+            "class": "$.app"
+        },
+        {
+            "file": "release/mootor-troomo.js",
+            "line": 109,
+            "description": "Turn the given element into a panel: add moo-panel class, set options, transitoin and hide the panel.",
+            "itemtype": "method",
+            "name": "panel",
+            "params": [
+                {
+                    "name": "options",
+                    "description": "The options for the current panel\n* transition - A string that specifies the type of transition used to show this panel (none, slide-left, slide-right)",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Returns the same object it's applied to, to allow chaining.",
+                "type": "Object"
+            },
+            "class": "panel"
+        },
+        {
+            "file": "release/mootor-troomo.js",
+            "line": 131,
+            "description": "Shows a panel using the specified transition",
+            "itemtype": "method",
+            "name": "showPanel",
+            "return": {
+                "description": "Returns the same object it's applied to, to allow chaining.",
+                "type": "Object"
+            },
+            "class": "panel"
+        },
+        {
+            "file": "release/mootor-troomo.js",
+            "line": 174,
+            "description": "Hides a panel using the specified transition",
+            "itemtype": "method",
+            "name": "hidePanel",
+            "return": {
+                "description": "Returns the same object it's applied to, to allow chaining.",
+                "type": "Object"
+            },
+            "class": "panel"
+        },
+        {
+            "file": "release/mootor-troomo.js",
+            "line": 220,
+            "description": "Title contains the friendly name for the current view.",
+            "itemtype": "property",
+            "name": "title",
+            "type": "{string}",
+            "default": "\"\"",
+            "class": "app.View"
+        },
+        {
+            "file": "release/mootor-troomo.js",
+            "line": 231,
+            "description": "ID contains the internal name for the current view, which applies to file names and internal references such as the views definition in the application's options.",
+            "itemtype": "property",
+            "name": "id",
+            "type": "{string}",
+            "default": "\"\"",
+            "class": "app.View"
+        },
+        {
+            "file": "release/mootor-troomo.js",
+            "line": 240,
+            "description": "A reference to the panel representing this view",
+            "itemtype": "property",
+            "name": "panel",
+            "type": "{object}",
+            "default": "{}",
+            "class": "app.View"
+        },
+        {
+            "file": "release/mootor-troomo.js",
+            "line": 250,
+            "description": "Sets the title of the view and raises an event.",
+            "itemtype": "method",
+            "name": "setTitle",
+            "params": [
+                {
+                    "name": "title",
+                    "description": "The new title",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Returns true on success",
+                "type": "Boolean"
+            },
+            "class": "app.View"
+        },
+        {
+            "file": "release/mootor-troomo.js",
+            "line": 263,
+            "description": "Displays the panel for this view using the animation defined in options.animation",
+            "itemtype": "method",
+            "name": "show",
+            "class": "app.View"
+        },
+        {
+            "file": "release/mootor-troomo.js",
+            "line": 274,
+            "description": "Callback for an request error when loadin a view. Static method for the View class.\nLogs error to console, checks if this is the last view and runs callback.",
+            "itemtype": "method",
+            "name": "handleLoadViewJSError",
+            "params": [
+                {
+                    "name": "e",
+                    "description": "The error event.",
+                    "type": "Event"
+                }
+            ],
+            "class": "app.View"
+        },
+        {
+            "file": "release/mootor-troomo.js",
+            "line": 293,
+            "description": "Callback for success loading a view. Static method for the View class.\nCalls panel initialization for the view, checks if this is the last view and runs callback.",
+            "itemtype": "method",
+            "name": "handleLoadViewJS",
+            "params": [
+                {
+                    "name": "e",
+                    "description": "The error event.",
+                    "type": "Event"
+                }
+            ],
+            "class": "app.View"
+        },
+        {
+            "file": "release/mootor-troomo.js",
+            "line": 314,
+            "description": "Initialize panels for this view.\nIf panel is not present (i.e: HTML has not loaded yet) then the function is called again in 100ms",
+            "itemtype": "method",
+            "name": "initPanel",
+            "params": [
+                {
+                    "name": "viewID",
+                    "description": "The ID of the panel to initialize",
+                    "type": "String"
+                }
+            ],
+            "class": "app.View"
+        },
+        {
+            "file": "release/mootor-troomo.js",
+            "line": 335,
+            "description": "Helper method to extract the view name from the url for the view's JS file.",
+            "itemtype": "method",
+            "name": "getNameFromURL",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "The view's file url.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "The view's name",
+                "type": "String"
+            },
+            "class": "app.View"
+        },
+        {
+            "file": "release/mootor-troomo.js",
+            "line": 347,
+            "description": "Callback for request when loading a view's html. Static method for the View class.\nIt currently does nothing.",
+            "itemtype": "method",
+            "name": "handleLoadViewHTML",
+            "params": [
+                {
+                    "name": "e",
+                    "description": "The event.",
+                    "type": "Event"
+                }
+            ],
+            "class": "app.View"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "unknown tag: summary",
+            "line": " js/app/_header.js:1"
+        },
+        {
+            "message": "unknown tag: summary",
+            "line": " release/mootor-troomo.js:1"
+        },
+        {
+            "message": "Missing item type",
+            "line": " js/app/_header.js:1"
+        },
+        {
+            "message": "Missing item type",
+            "line": " release/mootor-troomo.js:1"
+        }
+    ]
+}
