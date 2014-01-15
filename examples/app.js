@@ -1,15 +1,12 @@
-
 (function ($) {
+    
     "use strict";
 
 	var app = $.app({
 		views: [
-		"panel1",
-		"panel2"
+    		"index",
+    		"view1"
 		]
-		,
-		init: function() {
-			$("#panel1").show();
-		}
 	});
-}($));
+
+}(window.$));
