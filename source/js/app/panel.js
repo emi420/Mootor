@@ -67,11 +67,13 @@
     			default:
     				$el.addClass("moo-transition-" + self.transition)
     		}		
+    		return self;
     	},
     	
     	removeTransitionClass: function() {
             var self = this;
-    		self.$el.removeClass("moo-transition-slide moo-transition-none moo-transition-slide-left moo-transition-slide-right");
+    		self.$el.removeClass("moo-transition-slide moo-transition-none");
+    		return self;
     	},
     	
     	/**
@@ -99,6 +101,7 @@
     	    		$el.show();
     		    	break;
     	    }
+    		return this;
     	},
     	
     	reposition: function(side) {
@@ -129,6 +132,7 @@
     				left: newPosition
     			});
     		}
+    		return this;
     	},
     	
     	slideIn: function() {
@@ -148,6 +152,7 @@
     			});
 
     		}, 1)		
+    		return this;
     	},
     	
     	/**
@@ -175,6 +180,7 @@
     			default:
     		    	$el.hide();
     	    }
+	   		return this;
     	}
     });
     
