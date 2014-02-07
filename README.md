@@ -3,7 +3,7 @@
 
 ## Update
 
-**We are working on a total code refactoring.**
+**We are working on a complete refactoring of the code.**
 
 More information:
 
