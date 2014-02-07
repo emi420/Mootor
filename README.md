@@ -8,6 +8,7 @@
 More information:
 
 https://github.com/emi420/Mootor/wiki
+
 https://github.com/emi420/Mootor/issues
 
 ## HTML5 library for application development
