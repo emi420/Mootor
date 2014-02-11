@@ -177,7 +177,7 @@
     	    }
     	}
     });
-    
+°    
     // Private constructor
     
     $.__App.panel = function(options) {

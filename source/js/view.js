@@ -1,10 +1,21 @@
-/*
+/**
+* The View class handles each screen of the application. 
+* A list of views is specified in the applications options
+* and the files are loaded from the views/ folder.
+* Each view has a viewName.js and a viewName.html file.
+* The viewName.js file defines options for the view.
+*
+* @class View
+* @constructor
+* @param {Object} options An object defining options for the current view.
+* * constructor - A function that will be run after the view has loaded (optional).
+* * animation - a string defining the type of animation used to show this view (one of: "slide-left", "slide-right", "none").
 * @author Emilio Mariscal (emi420 [at] gmail.com)
 * @author Martín Szyszlican (martinsz [at] gmail.com)
 */
 
 (function ($) {
-
+    // Force strict mode for ECMAScript
     "use strict";
     
     var View,
@@ -12,33 +23,19 @@
         
     // Dependencies
     
-    App = $.__App;
+    App = window.m.app();
 
     // Private constructors
 
-    /**
-    * The View class handles each screen of the application. 
-    * A list of views is specified in the applications options
-    * and the files are loaded from the views/ folder.
-    * Each view has a viewName.js and a viewName.html file.
-    * The viewName.js file defines options for the view.
-    *
-    * @class View
-    * @constructor
-    * @param {Object} options An object defining options for the current view.
-    * * constructor - A function that will be run after the view has loaded (optional).
-    * * animation - a string defining the type of animation used to show this view (one of: "slide-left", "slide-right", "none").
-    */
 
     View = function(options) {
         this.id = options.id;
         View.init(options, this);
-    }
+    };
     
     // Private static methods and properties
     
-    $.extend(View, {
-        
+    $.extend(View, {        
         init: function(options, self) {
             var id = self.id,
                 path = "views/" + id + "/" + id,
@@ -58,16 +55,16 @@
 
                     el.id = id;
                     self.$el = $(el);
-                    self.$el.appendTo("#main")
+                    self.$el.appendTo("#main");
                     self.$el.html(data); 
 
                     self[_navigationMode] = App[_navigationMode]({
                         id: id
                     });
 
-            		View.getScript({
+                    View.getScript({
 
-            		    path: pathJs,
+                        path: pathJs,
 
                         onSuccess: function() {
                            if (self.onInit !== undefined) {
@@ -75,7 +72,7 @@
                            }
                         },
 
-            		});
+                    });
                 },
 
             });
@@ -89,7 +86,7 @@
             );
         },
 
-        /**
+        /* //Disabled from showing in yuidoc, it's a private method. Removed asterisk from this line. //
         * Helper function to load a remote script via a <script> element in the <head>.
         *
         * @method getScript
@@ -112,66 +109,105 @@
     // Public instance prototype
     
     $.extend(View.prototype, {
+
+        /**
+        * A reference to the UI representation of this view
+        *
+        * @property ui
+        * @type UIView
+        */
+        ui: {},
         
-    	/**
-    	* Title contains the friendly name for the current view.
-    	* 
-    	* @property title
-    	* @type {string}
-    	* @default ""
-    	*/	
-    	title: "",
-    	options: {},
+        /**
+        * Title is the friendly name for the current view.
+        * When called without parameters, returns a string containing the title. When called with parameters, sets the title.
+        * 
+        * @method title
+        * @param {string} [title] New title for this view.
+        * @return string
+        */  
+        title: function(title) {
 
+        },
 
-    	/**
-    	* ID contains the internal name for the current view, which applies to file names and internal references such as the views definition in the application's options.
-    	* 
-    	* @property id
-    	* @type {string}
-    	* @default ""
-    	*/	
-    	id: "",
+        /**
+        * Sets an event handler for the view
+        * Possible values for event: load, beforeLoad, unload, beforeUnload, init
+        * TODO: Define which parameters are passed to the callback function.
+        * 
+        * @method on
+        * @param {string} event Defines in which event the handler will be called
+        * @param {function} callback The function to be called when the event is fired.
+        * @return View
+        */  
+        on: function(event,callback) {
 
-    	/**
-    	* Sets the title of the view and raises an event.
-    	*
-    	* @method setTitle
-    	* @param {String} title The new title
-    	* @return {Boolean} Returns true on success
-    	*/
-    	setTitle: function (title) {
-        	this.title = title;    
-        	return true;
-    	},
+        },
 
-    	/**
-    	* Displays the panel
-    	*
-    	* @method show
-    	*/
-    	show: function() {
-    		this[this._navigationMode].show();
-    	},
+        /**
+        * Unsets event handlers for the view
+        * Possible values for event: load, beforeLoad, unload, beforeUnload, init
+        * 
+        * @method off
+        * @param {string} event Defines in which event we want to unset handlers
+        * @param {function} [callback] If this parameter is specified, only that function is removed. Otherwise all callbacks for this event are removed.
+        * @return View
+        */  
+        off: function(event,callback) {
 
-    	/**
-    	* Hides the panel 
-    	*
-    	* @method show
-    	*/
-    	hide: function() {
-    		this[this._navigationMode].hide();
-    	}
+        },
 
-        
-    });
-    
-    // Extends App prototype
-    
-    $.extend(App.prototype, {
-       view: function(options) {
-           return new View(options);
-       } 
-    });
-    
+        /**
+        * Removes the view from the app (and from the screen)
+        * 
+        * @method remove
+        * @return View
+        */  
+        remove: function() {
+
+        },
+
+        /**
+        * Inserts the view to the app
+        * 
+        * @method insert
+        * @return View
+        */  
+        insert: function() {
+
+        },
+
+        /**
+        * Gets or sets the source for the HTML of this view.
+        * 
+        * @method html
+        * @return string
+        * @default /views/[viewid]/[viewid].html
+        */  
+        html: function(source) {
+
+        },
+
+        /**
+        * Gets or sets the source for the JavaScript of this view.
+        * 
+        * @method script
+        * @return string
+        * @default /views/[viewid]/[viewid].js
+        */  
+        script: function(source) {
+
+        },
+
+        /**
+        * Gets or sets the source for the CSS StyleSheet of this view.
+        * 
+        * @method css
+        * @return string
+        * @default /views/[viewid]/[viewid].css
+        */  
+        css: function(source) {
+
+        }
+    });    
 }(window.$));

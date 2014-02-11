@@ -96,7 +96,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/view.js.html#l19"><code>view.js:19</code></a>
+            Defined in: <a href="../files/view.js.html#l1"><code>view.js:1</code></a>
         </div>
     
 
@@ -161,7 +161,7 @@ The viewName.js file defines options for the view.</p>
             
         
         
-        <a href="../files/view.js.html#l19"><code>view.js:19</code></a>
+        <a href="../files/view.js.html#l1"><code>view.js:1</code></a>
         
         </p>
 
@@ -238,7 +238,7 @@ The viewName.js file defines options for the view.</p>
                     <ul class="index-list methods">
                         
                             <li class="index-item method">
-                                <a href="#method_getScript">getScript</a>
+                                <a href="#method_css">css</a>
 
                                 
                                 
@@ -252,6 +252,13 @@ The viewName.js file defines options for the view.</p>
                             </li>
                         
                             <li class="index-item method">
+                                <a href="#method_html">html</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
                                 <a href="#method_init">init</a>
 
                                 
@@ -259,7 +266,35 @@ The viewName.js file defines options for the view.</p>
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_setTitle">setTitle</a>
+                                <a href="#method_insert">insert</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_off">off</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_on">on</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_remove">remove</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_script">script</a>
 
                                 
                                 
@@ -273,14 +308,7 @@ The viewName.js file defines options for the view.</p>
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_show">show</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_show">show</a>
+                                <a href="#method_title">title</a>
 
                                 
                                 
@@ -297,14 +325,7 @@ The viewName.js file defines options for the view.</p>
                     <ul class="index-list properties">
                         
                             <li class="index-item property">
-                                <a href="#property_id">id</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_title">title</a>
+                                <a href="#property_ui">ui</a>
 
                                 
                                 
@@ -324,35 +345,17 @@ The viewName.js file defines options for the view.</p>
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_getScript" class="method item">
-    <h3 class="name"><code>getScript</code></h3>
+                    <div id="method_css" class="method item">
+    <h3 class="name"><code>css</code></h3>
 
     
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>path</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>onSuccess</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>onError</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
+        <span class="paren">()</span>
     
 
+    
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
     
 
     
@@ -378,7 +381,7 @@ The viewName.js file defines options for the view.</p>
             
         
         
-        <a href="../files/view.js.html#l92"><code>view.js:92</code></a>
+        <a href="../files/view.js.html#l202"><code>view.js:202</code></a>
         
         </p>
 
@@ -389,68 +392,24 @@ The viewName.js file defines options for the view.</p>
     </div>
 
     <div class="description">
-        <p>Helper function to load a remote script via a <script> element in the <head>.</p>
+        <p>Gets or sets the source for the CSS StyleSheet of this view.</p>
 
     </div>
 
     
-        <div class="params">
-            <h4>Parameters:</h4>
 
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">path</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>The path to load</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">onSuccess</code>
-                        <span class="type">Function</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>A function to be called if the request is successful</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">onError</code>
-                        <span class="type">Function</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>A function to be called if the request fails</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
     
+        <div class="returns">
+            <h4>Returns:</h4>
 
+            <div class="returns-description">
+                
+                    
+                    <p>string</p>
+
+                
+            </div>
+        </div>
     
 
     
@@ -520,6 +479,77 @@ The viewName.js file defines options for the view.</p>
                         <span class="type">Object</span>:
                     
                     <p>Returns the same object it&#39;s applied to, to allow chaining.</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_html" class="method item">
+    <h3 class="name"><code>html</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/view.js.html#l180"><code>view.js:180</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Gets or sets the source for the HTML of this view.</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                    <p>string</p>
 
                 
             </div>
@@ -662,26 +692,16 @@ The viewName.js file defines options for the view.</p>
 </div>
 
                 
-                    <div id="method_setTitle" class="method item">
-    <h3 class="name"><code>setTitle</code></h3>
+                    <div id="method_insert" class="method item">
+    <h3 class="name"><code>insert</code></h3>
 
     
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>title</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
+        <span class="paren">()</span>
     
 
     
         <span class="returns-inline">
-            <span class="type">Boolean</span>
+            <span class="type"></span>
         </span>
     
 
@@ -708,7 +728,7 @@ The viewName.js file defines options for the view.</p>
             
         
         
-        <a href="../files/view.js.html#l136"><code>view.js:136</code></a>
+        <a href="../files/view.js.html#l170"><code>view.js:170</code></a>
         
         </p>
 
@@ -719,7 +739,95 @@ The viewName.js file defines options for the view.</p>
     </div>
 
     <div class="description">
-        <p>Sets the title of the view and raises an event.</p>
+        <p>Inserts the view to the app</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                    <p>View</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_off" class="method item">
+    <h3 class="name"><code>off</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>event</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code class="optional">[callback]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/view.js.html#l147"><code>view.js:147</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Unsets event handlers for the view
+Possible values for event: load, beforeLoad, unload, beforeUnload, init</p>
 
     </div>
 
@@ -731,14 +839,31 @@ The viewName.js file defines options for the view.</p>
             
                 <li class="param">
                     
-                        <code class="param-name">title</code>
+                        <code class="param-name">event</code>
                         <span class="type">String</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>The new title</p>
+                        <p>Defines in which event we want to unset handlers</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[callback]</code>
+                        <span class="type">Function</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>If this parameter is specified, only that function is removed. Otherwise all callbacks for this event are removed.</p>
 
                     </div>
 
@@ -756,9 +881,278 @@ The viewName.js file defines options for the view.</p>
             <div class="returns-description">
                 
                     
-                        <span class="type">Boolean</span>:
+                    <p>View</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_on" class="method item">
+    <h3 class="name"><code>on</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
                     
-                    <p>Returns true on success</p>
+                        <code>event</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>callback</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/view.js.html#l133"><code>view.js:133</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Sets an event handler for the view
+Possible values for event: load, beforeLoad, unload, beforeUnload, init
+TODO: Define which parameters are passed to the callback function.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">event</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Defines in which event the handler will be called</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">callback</code>
+                        <span class="type">Function</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The function to be called when the event is fired.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                    <p>View</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_remove" class="method item">
+    <h3 class="name"><code>remove</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/view.js.html#l160"><code>view.js:160</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Removes the view from the app (and from the screen)</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                    <p>View</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_script" class="method item">
+    <h3 class="name"><code>script</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/view.js.html#l191"><code>view.js:191</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Gets or sets the source for the JavaScript of this view.</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                    <p>string</p>
 
                 
             </div>
@@ -842,13 +1236,27 @@ The viewName.js file defines options for the view.</p>
 </div>
 
                 
-                    <div id="method_show" class="method item">
-    <h3 class="name"><code>show</code></h3>
+                    <div id="method_title" class="method item">
+    <h3 class="name"><code>title</code></h3>
 
     
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code class="optional">[title]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
     
 
+    
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
     
 
     
@@ -874,7 +1282,7 @@ The viewName.js file defines options for the view.</p>
             
         
         
-        <a href="../files/view.js.html#l148"><code>view.js:148</code></a>
+        <a href="../files/view.js.html#l121"><code>view.js:121</code></a>
         
         </p>
 
@@ -885,67 +1293,50 @@ The viewName.js file defines options for the view.</p>
     </div>
 
     <div class="description">
-        <p>Displays the panel</p>
+        <p>Title is the friendly name for the current view.
+When called without parameters, returns a string containing the title. When called with parameters, sets the title.</p>
 
     </div>
 
     
+        <div class="params">
+            <h4>Parameters:</h4>
 
-    
-
-    
-</div>
-
-                
-                    <div id="method_show" class="method item">
-    <h3 class="name"><code>show</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
+            <ul class="params-list">
             
-                
-                <p>
-                
-                Defined in
-                
+                <li class="param">
+                    
+                        <code class="param-name optional">[title]</code>
+                        <span class="type">String</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>New title for this view.</p>
+
+                    </div>
+
+                    
+                </li>
             
-        
-        
-        <a href="../files/view.js.html#l157"><code>view.js:157</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Hides the panel</p>
-
-    </div>
-
+            </ul>
+        </div>
     
 
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                    <p>string</p>
+
+                
+            </div>
+        </div>
     
 
     
@@ -960,9 +1351,9 @@ The viewName.js file defines options for the view.</p>
                 <h2 class="off-left">Properties</h2>
 
                 
-                    <div id="property_id" class="property item">
-    <h3 class="name"><code>id</code></h3>
-    <span class="type">String</span>
+                    <div id="property_ui" class="property item">
+    <h3 class="name"><code>ui</code></h3>
+    <span class="type">UIView</span>
 
     
 
@@ -983,7 +1374,7 @@ The viewName.js file defines options for the view.</p>
             
         
         
-        <a href="../files/view.js.html#l127"><code>view.js:127</code></a>
+        <a href="../files/view.js.html#l113"><code>view.js:113</code></a>
         
         </p>
 
@@ -993,59 +1384,10 @@ The viewName.js file defines options for the view.</p>
     </div>
 
     <div class="description">
-        <p>ID contains the internal name for the current view, which applies to file names and internal references such as the views definition in the application&#39;s options.</p>
+        <p>A reference to the UI representation of this view</p>
 
     </div>
 
-    
-        <p><strong>Default:</strong> &quot;&quot;</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_title" class="property item">
-    <h3 class="name"><code>title</code></h3>
-    <span class="type">String</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/view.js.html#l116"><code>view.js:116</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Title contains the friendly name for the current view.</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> &quot;&quot;</p>
     
 
     

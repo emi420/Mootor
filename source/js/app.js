@@ -2,28 +2,25 @@
 * The App class defines the main object of the applications
 * It handles creating the views.
 *
+* @class App
+* @constructor
+* @param {Object} options An object defining options for the application.
+* * views - An array with a list of view names
 * @author Emilio Mariscal (emi420 [at] gmail.com)
 * @author Martín Szyszlican (martinsz [at] gmail.com)
 */
 
-(function ($, Zepto) {
-
+(function ($) {
+    // Force strict mode for ECMAScript
     "use strict";
 
     var App,
         _app;
 
     // Private constructors
-
-    /**
-    * @class App
-    * @constructor
-    * @param {Object} options An object defining options for the application.
-    * * views - An array with a list of view names
-    */
     App = function(options) {
         App.init(options, this);
-    }
+    };
     
     // Private static methods and properties
 
@@ -34,10 +31,10 @@
         currentView: undefined,
     
         init: function(options, self) {
-        	// Defer init until dom loaded
-        	Zepto(function($){
-        		App.initViews(options.views, self);
-        	}) 
+            // Defer init until dom loaded
+            $(function($){
+                App.initViews(options.views, self);
+            });
         },
     
         /**
@@ -50,19 +47,19 @@
             var i,
                 view;
                 
-        	for (i = 0; i < views.length; i++) {
+            for (i = 0; i < views.length; i++) {
 
                 view = self.view({
                     id: views[i],
                 });
                 
-                App.views[view.id] = view;
+                App.views[i] = view;
 
-        	}
+            }
             
         },
     
-    })
+    });
 
     //Public methods
 
@@ -84,9 +81,11 @@
         * @method settings
         * @param {String} key The name of the setting
         * @param {object} [value] The value of the setting
-        * @returns object the setting value
+        * @return object the setting value
         */
-        settings: function(key, value) {},
+        settings: function(key, value) {
+            
+        },
 
         /**
         * Create or get a view
@@ -94,43 +93,45 @@
         * @method view
         * @param {String} id The id of the view
         * @param {String} [settings] The settings object for the view
-        * @returns View the referenced view object
+        * @return View the referenced view object
         */
-        view: function(id, settings) {}
+        view: function(id, settings) {
+
+        },
 
         /**
         * Go to a view
         *
         * @method go
         * @param {String} id The id of the view
-        * @returns Route
+        * @return Route
         */
         go: function(id) {
-        }        
+        },        
 
         /**
         * Go to the previous view in the history
         *
         * @method back
-        * @returns Route
+        * @return Route
         */
         back: function(id) {
-        }        
+        },        
 
         /**
         * Go to next view in the history
         *
         * @method forward
-        * @returns Route
+        * @return Route
         */
         forward: function(id) {
-        }        
+        },        
 
         /**
         * Returns a router instance
         *
         * @method router
-        * @returns Router
+        * @return Router
         */
         router: function(id) {
         }        
@@ -143,7 +144,7 @@
         * window.m public global object
         * It is the main way to access the mootor app
         *
-        * @Usage: var app = window.m.app([options]);
+        * Usage: var app = window.m.app([options]);
         * @class window.m
         * @static
         */
@@ -164,7 +165,7 @@
             *
             * @method app
             * @param {Array} [views] A list of view names to be initialized
-            * @returns App
+            * @return App
             */
             app: function(options) {
                 if (_app === undefined) {
@@ -200,11 +201,11 @@
             *
             * @method ns
             * @param {String} name The name of the referenced namespace
-            * @returns object
+            * @return object
             */
             ns: function(name) {
             }
         }
     });
         
-}(window.$, window.Zepto));
+}(window.$));

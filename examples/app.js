@@ -2,7 +2,7 @@
     
     "use strict";
 
-	var app = $.app({
+	var app = window.m.app({
 		views: [
     		"index",
     		"view1"

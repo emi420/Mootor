@@ -40,7 +40,8 @@
             "plugin_for": [],
             "extension_for": [],
             "file": "app.js",
-            "line": 18,
+            "line": 1,
+            "description": "The App class defines the main object of the applications\nIt handles creating the views.",
             "is_constructor": 1,
             "params": [
                 {
@@ -48,7 +49,8 @@
                     "description": "An object defining options for the application.\n* views - An array with a list of view names",
                     "type": "Object"
                 }
-            ]
+            ],
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
         },
         "window.m": {
             "name": "window.m",
@@ -59,9 +61,8 @@
             "plugin_for": [],
             "extension_for": [],
             "file": "app.js",
-            "line": 142,
-            "description": "window.m public global object\nIt is the main way to access the mootor app",
-            "usage": ": var app = window.m.app([options]);",
+            "line": 143,
+            "description": "window.m public global object\nIt is the main way to access the mootor app\n\nUsage: var app = window.m.app([options]);",
             "static": 1
         },
         "window.Mootor": {
@@ -73,7 +74,7 @@
             "plugin_for": [],
             "extension_for": [],
             "file": "app.js",
-            "line": 183,
+            "line": 184,
             "description": "window.Mootor public global object\nAccess modules and namespaces",
             "static": 1
         },
@@ -86,7 +87,7 @@
             "plugin_for": [],
             "extension_for": [],
             "file": "view.js",
-            "line": 19,
+            "line": 1,
             "description": "The View class handles each screen of the application. \nA list of views is specified in the applications options\nand the files are loaded from the views/ folder.\nEach view has a viewName.js and a viewName.html file.\nThe viewName.js file defines options for the view.",
             "is_constructor": 1,
             "params": [
@@ -95,20 +96,14 @@
                     "description": "An object defining options for the current view.\n* constructor - A function that will be run after the view has loaded (optional).\n* animation - a string defining the type of animation used to show this view (one of: \"slide-left\", \"slide-right\", \"none\").",
                     "type": "Object"
                 }
-            ]
+            ],
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
         }
     },
     "classitems": [
         {
             "file": "app.js",
-            "line": 1,
-            "description": "The App class defines the main object of the applications\nIt handles creating the views.",
-            "author": "Martín Szyszlican (martinsz [at] gmail.com)",
-            "class": "App"
-        },
-        {
-            "file": "app.js",
-            "line": 43,
+            "line": 40,
             "description": "Init views, load remote files and call the View class to handle it.",
             "itemtype": "method",
             "name": "initViews",
@@ -123,7 +118,7 @@
         },
         {
             "file": "app.js",
-            "line": 71,
+            "line": 68,
             "description": "Stores the navigation history. \nAn array of views, ordered in the sequence that they were visited by the user.",
             "itemtype": "property",
             "name": "history",
@@ -132,7 +127,7 @@
         },
         {
             "file": "app.js",
-            "line": 80,
+            "line": 77,
             "description": "Application settings\nIf called with a key, returns the value. If called with key and value, sets value to key.",
             "itemtype": "method",
             "name": "settings",
@@ -156,7 +151,7 @@
         },
         {
             "file": "app.js",
-            "line": 91,
+            "line": 90,
             "description": "Create or get a view",
             "itemtype": "method",
             "name": "view",
@@ -180,7 +175,7 @@
         },
         {
             "file": "app.js",
-            "line": 101,
+            "line": 102,
             "description": "Go to a view",
             "itemtype": "method",
             "name": "go",
@@ -198,7 +193,7 @@
         },
         {
             "file": "app.js",
-            "line": 111,
+            "line": 112,
             "description": "Go to the previous view in the history",
             "itemtype": "method",
             "name": "back",
@@ -209,7 +204,7 @@
         },
         {
             "file": "app.js",
-            "line": 120,
+            "line": 121,
             "description": "Go to next view in the history",
             "itemtype": "method",
             "name": "forward",
@@ -220,7 +215,7 @@
         },
         {
             "file": "app.js",
-            "line": 129,
+            "line": 130,
             "description": "Returns a router instance",
             "itemtype": "method",
             "name": "router",
@@ -231,7 +226,7 @@
         },
         {
             "file": "app.js",
-            "line": 151,
+            "line": 152,
             "description": "Creates a new app with the defined options.\nIf the app is already created, it can be called without options to have a reference to the Mootor app. \n\n App instance factory\n\n window.m.app({\n   views: [\n      \"index\",\n      \"view1\"\n   ]\n });",
             "itemtype": "method",
             "name": "app",
@@ -250,7 +245,7 @@
         },
         {
             "file": "app.js",
-            "line": 175,
+            "line": 176,
             "description": "TODO: Write this object's functionality.",
             "itemtype": "property",
             "name": "context",
@@ -259,7 +254,7 @@
         },
         {
             "file": "app.js",
-            "line": 191,
+            "line": 192,
             "description": "TODO: Write this object's functionality.",
             "itemtype": "property",
             "name": "mod",
@@ -268,7 +263,7 @@
         },
         {
             "file": "app.js",
-            "line": 197,
+            "line": 198,
             "description": "Creates a new namespace\nIf the namespace is already created, it returns the namespace",
             "itemtype": "method",
             "name": "ns",
@@ -334,125 +329,137 @@
         },
         {
             "file": "view.js",
-            "line": 92,
-            "description": "Helper function to load a remote script via a <script> element in the <head>.",
-            "itemtype": "method",
-            "name": "getScript",
-            "params": [
-                {
-                    "name": "path",
-                    "description": "The path to load",
-                    "type": "String"
-                },
-                {
-                    "name": "onSuccess",
-                    "description": "A function to be called if the request is successful",
-                    "type": "Function"
-                },
-                {
-                    "name": "onError",
-                    "description": "A function to be called if the request fails",
-                    "type": "Function"
-                }
-            ],
+            "line": 113,
+            "description": "A reference to the UI representation of this view",
+            "itemtype": "property",
+            "name": "ui",
+            "type": "UIView",
             "class": "View"
         },
         {
             "file": "view.js",
-            "line": 116,
-            "description": "Title contains the friendly name for the current view.",
-            "itemtype": "property",
+            "line": 121,
+            "description": "Title is the friendly name for the current view.\nWhen called without parameters, returns a string containing the title. When called with parameters, sets the title.",
+            "itemtype": "method",
             "name": "title",
-            "type": "{string}",
-            "default": "\"\"",
-            "class": "View"
-        },
-        {
-            "file": "view.js",
-            "line": 127,
-            "description": "ID contains the internal name for the current view, which applies to file names and internal references such as the views definition in the application's options.",
-            "itemtype": "property",
-            "name": "id",
-            "type": "{string}",
-            "default": "\"\"",
-            "class": "View"
-        },
-        {
-            "file": "view.js",
-            "line": 136,
-            "description": "Sets the title of the view and raises an event.",
-            "itemtype": "method",
-            "name": "setTitle",
             "params": [
                 {
                     "name": "title",
-                    "description": "The new title",
-                    "type": "String"
+                    "description": "New title for this view.",
+                    "type": "String",
+                    "optional": true
                 }
             ],
             "return": {
-                "description": "Returns true on success",
-                "type": "Boolean"
+                "description": "string"
             },
             "class": "View"
         },
         {
             "file": "view.js",
-            "line": 148,
-            "description": "Displays the panel",
+            "line": 133,
+            "description": "Sets an event handler for the view\nPossible values for event: load, beforeLoad, unload, beforeUnload, init\nTODO: Define which parameters are passed to the callback function.",
             "itemtype": "method",
-            "name": "show",
+            "name": "on",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Defines in which event the handler will be called",
+                    "type": "String"
+                },
+                {
+                    "name": "callback",
+                    "description": "The function to be called when the event is fired.",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "View"
+            },
             "class": "View"
         },
         {
             "file": "view.js",
-            "line": 157,
-            "description": "Hides the panel",
+            "line": 147,
+            "description": "Unsets event handlers for the view\nPossible values for event: load, beforeLoad, unload, beforeUnload, init",
             "itemtype": "method",
-            "name": "show",
+            "name": "off",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Defines in which event we want to unset handlers",
+                    "type": "String"
+                },
+                {
+                    "name": "callback",
+                    "description": "If this parameter is specified, only that function is removed. Otherwise all callbacks for this event are removed.",
+                    "type": "Function",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "View"
+            },
+            "class": "View"
+        },
+        {
+            "file": "view.js",
+            "line": 160,
+            "description": "Removes the view from the app (and from the screen)",
+            "itemtype": "method",
+            "name": "remove",
+            "return": {
+                "description": "View"
+            },
+            "class": "View"
+        },
+        {
+            "file": "view.js",
+            "line": 170,
+            "description": "Inserts the view to the app",
+            "itemtype": "method",
+            "name": "insert",
+            "return": {
+                "description": "View"
+            },
+            "class": "View"
+        },
+        {
+            "file": "view.js",
+            "line": 180,
+            "description": "Gets or sets the source for the HTML of this view.",
+            "itemtype": "method",
+            "name": "html",
+            "return": {
+                "description": "string"
+            },
+            "default": "/views/[viewid]/[viewid].html",
+            "class": "View"
+        },
+        {
+            "file": "view.js",
+            "line": 191,
+            "description": "Gets or sets the source for the JavaScript of this view.",
+            "itemtype": "method",
+            "name": "script",
+            "return": {
+                "description": "string"
+            },
+            "default": "/views/[viewid]/[viewid].js",
+            "class": "View"
+        },
+        {
+            "file": "view.js",
+            "line": 202,
+            "description": "Gets or sets the source for the CSS StyleSheet of this view.",
+            "itemtype": "method",
+            "name": "css",
+            "return": {
+                "description": "string"
+            },
+            "default": "/views/[viewid]/[viewid].css",
             "class": "View"
         }
     ],
-    "warnings": [
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " app.js:80"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " app.js:91"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " app.js:101"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " app.js:111"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " app.js:120"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " app.js:129"
-        },
-        {
-            "message": "unknown tag: usage",
-            "line": " app.js:142"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " app.js:151"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " app.js:197"
-        },
-        {
-            "message": "Missing item type\nThe App class defines the main object of the applications\nIt handles creating the views.",
-            "line": " app.js:1"
-        }
-    ]
+    "warnings": []
 }
