@@ -3,6 +3,7 @@
 *
 * @class Route
 * @constructor
+* @module Router
 * @author Emilio Mariscal (emi420 [at] gmail.com)
 * @author Martín Szyszlican (martinsz [at] gmail.com)
 */
@@ -14,6 +15,7 @@
     var Route;
 
     // Private constructors
+    
     Route = Mootor.Route = function() {
         // code here
     };

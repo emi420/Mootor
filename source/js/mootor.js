@@ -11,28 +11,61 @@
     "use strict";
     
     var Mootor,
+        Context,
         m;
+
+    Mootor = {
+        // code here
+    };
+
+    Context = Mootor.Context = function() {
+        /**
+        * Information about the context of the application (ej: device's viewport)
+        * @class Context
+        * @return object
+        * @static
+        */
+        return ({
+
+            /**
+            * Browser info
+            * @property browser
+            * @type object
+            */            
+            browser: {},
+
+            /**
+            * Viewport info
+            * @property viewport
+            * @type object
+            */            
+            viewport: {},
+
+            /**
+            * Device info
+            * @property device 
+            * @type object
+            */            
+            device: {}
+
+        });
+    };
 
     // Static global objects
     
     m = {
         /**
-        * window.m public global object
+        * m public global object
         * @class window.m
         * @static
         */
+        
         /**
-        * TODO: Write this object's functionality.
         * @property context
-        * @type object
+        * @type Context
         */
-        context: {}
+        context: (function() { new Context(); }()); 
     };
-    
-    Mootor = {
-        // code here
-    };
-
 
     // Make it public!
     

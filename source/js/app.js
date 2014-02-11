@@ -12,6 +12,7 @@
     *
     * @class App
     * @constructor
+    *  @module App
     * @param {Object} options An object defining options for the application.
     * * views - An array with a list of view names
     */
@@ -161,6 +162,7 @@
 
         *
         * @method app
+        * @for window.m
         * @param {Array} [views] A list of view names to be initialized
         * @return App
         */

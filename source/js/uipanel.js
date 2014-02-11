@@ -3,6 +3,7 @@
 *
 * @class UIPanel
 * @extends UI
+* @module UI
 * @author Emilio Mariscal (emi420 [at] gmail.com)
 * @author Martín Szyszlican (martinsz [at] gmail.com)
 */

@@ -3,6 +3,7 @@
 *
 * @class UINavBar
 * @extends UI
+* @module UI
 * @constructor
 * @author Emilio Mariscal (emi420 [at] gmail.com)
 * @author Martín Szyszlican (martinsz [at] gmail.com)

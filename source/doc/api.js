@@ -2,6 +2,7 @@ YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
         "App",
+        "Context",
         "Route",
         "Router",
         "UI",
@@ -13,7 +14,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "UIPanel",
         "UIView",
         "View",
-        "window.Mootor",
         "window.m"
     ],
     "modules": [

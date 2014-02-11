@@ -43,6 +43,8 @@
             
                 <li><a href="../classes/App.html">App</a></li>
             
+                <li><a href="../classes/Context.html">Context</a></li>
+            
                 <li><a href="../classes/Route.html">Route</a></li>
             
                 <li><a href="../classes/Router.html">Router</a></li>
@@ -66,8 +68,6 @@
                 <li><a href="../classes/View.html">View</a></li>
             
                 <li><a href="../classes/window.m.html">window.m</a></li>
-            
-                <li><a href="../classes/window.Mootor.html">window.Mootor</a></li>
             
             </ul>
 
@@ -130,8 +130,8 @@
 * @author Martín Szyszlican (martinsz [at] gmail.com)
 */
 
-(function ($) {
-    // Force strict mode for ECMAScript
+(function ($, Mootor, document) {
+
     &quot;use strict&quot;;
     
     var View,
@@ -139,25 +139,20 @@
         
     // Dependencies
     
-    App = window.m.app();
+    App = Mootor.App;
 
     // Private constructors
 
-
-    View = function(options) {
+    View = Mootor.View = function(options) {
         this.id = options.id;
         View.init(options, this);
     };
-
-
-    //Add this Class as a Mootor module
-    $.extend(Mootor.mod, {View: View});
 
     
     // Private static methods and properties
     
     $.extend(View, {        
-        init: function(options, self) {
+        _init: function(options, self) {
             var id = self.id,
                 path = &quot;views/&quot; + id + &quot;/&quot; + id,
                 pathJs = path + &quot;.js&quot;,
@@ -166,7 +161,7 @@
 
             self._navigationMode = _navigationMode;
             
-            View.getHtml({
+            View._getHtml({
 
                 path: pathHtml,
 
@@ -191,16 +186,16 @@
                            if (self.onInit !== undefined) {
                                self.onInit();
                            }
-                        },
+                        }
 
                     });
-                },
+                }
 
             });
 
         },
 
-        getHtml: function(options) {
+        _getHtml: function(options) {
             $.get(
                 options.path,
                 options.onSuccess
@@ -210,12 +205,12 @@
         /* //Disabled from showing in yuidoc, it&#x27;s a private method. Removed asterisk from this line. //
         * Helper function to load a remote script via a &lt;script&gt; element in the &lt;head&gt;.
         *
-        * @method getScript
+        * @method _getScript
         * @param {String} path The path to load
         * @param {Function} onSuccess A function to be called if the request is successful
         * @param {Function} onError  A function to be called if the request fails
         */
-        getScript: function (options) {
+        _getScript: function (options) {
             var script = document.createElement(&quot;script&quot;),
                 $script = $(script);
         
@@ -331,7 +326,9 @@
 
         }
     });    
-}(window.$));
+
+}(window.$, window.Mootor, window.document));
+
     </pre>
 </div>
 

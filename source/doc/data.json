@@ -7,7 +7,9 @@
             "classes": {
                 "App": 1
             },
-            "fors": {},
+            "fors": {
+                "window.m": 1
+            },
             "namespaces": {}
         },
         "mootor.js": {
@@ -17,15 +19,8 @@
             },
             "classes": {
                 "window.m": 1,
-                "window.Mootor": 1
+                "Context": 1
             },
-            "fors": {},
-            "namespaces": {}
-        },
-        "panel.js": {
-            "name": "panel.js",
-            "modules": {},
-            "classes": {},
             "fors": {},
             "namespaces": {}
         },
@@ -136,7 +131,7 @@
             "classes": {
                 "App": 1,
                 "window.m": 1,
-                "window.Mootor": 1,
+                "Context": 1,
                 "Route": 1,
                 "Router": 1,
                 "UI": 1,
@@ -169,7 +164,7 @@
             "extension_for": [],
             "module": "Mootor",
             "file": "app.js",
-            "line": 11,
+            "line": 10,
             "description": "The App class defines the main object of the applications",
             "is_constructor": 1,
             "params": [
@@ -189,15 +184,14 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "Mootor",
-            "namespace": "",
             "file": "mootor.js",
-            "line": 18,
-            "description": "window.m public global object\nIt is the main way to access the mootor app\n\nUsage: var app = window.m.app([options]);",
+            "line": 57,
+            "description": "m public global object",
             "static": 1
         },
-        "window.Mootor": {
-            "name": "window.Mootor",
-            "shortname": "window.Mootor",
+        "Context": {
+            "name": "Context",
+            "shortname": "Context",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -206,8 +200,11 @@
             "module": "Mootor",
             "namespace": "",
             "file": "mootor.js",
-            "line": 61,
-            "description": "window.Mootor public global object\nAccess modules and namespaces",
+            "line": 22,
+            "description": "Information about the context of the application (ej: device's viewport)",
+            "return": {
+                "description": "object"
+            },
             "static": 1
         },
         "Route": {
@@ -403,12 +400,12 @@
     "classitems": [
         {
             "file": "app.js",
-            "line": 51,
+            "line": 47,
             "description": "Init views, load remote files and call the View class to handle it.",
             "access": "private",
             "tagname": "",
             "itemtype": "method",
-            "name": "initViews",
+            "name": "_initViews",
             "params": [
                 {
                     "name": "views",
@@ -420,7 +417,7 @@
         },
         {
             "file": "app.js",
-            "line": 80,
+            "line": 76,
             "description": "Stores the navigation history. \nAn array of views, ordered in the sequence that they were visited by the user.",
             "itemtype": "property",
             "name": "history",
@@ -429,7 +426,7 @@
         },
         {
             "file": "app.js",
-            "line": 89,
+            "line": 85,
             "description": "Application settings\nIf called with a key, returns the value. If called with key and value, sets value to key.",
             "itemtype": "method",
             "name": "settings",
@@ -453,7 +450,7 @@
         },
         {
             "file": "app.js",
-            "line": 102,
+            "line": 98,
             "description": "Create or get a view",
             "itemtype": "method",
             "name": "view",
@@ -477,7 +474,7 @@
         },
         {
             "file": "app.js",
-            "line": 114,
+            "line": 110,
             "description": "Go to a view",
             "itemtype": "method",
             "name": "go",
@@ -495,7 +492,7 @@
         },
         {
             "file": "app.js",
-            "line": 124,
+            "line": 120,
             "description": "Go to the previous view in the history",
             "itemtype": "method",
             "name": "back",
@@ -506,7 +503,7 @@
         },
         {
             "file": "app.js",
-            "line": 133,
+            "line": 129,
             "description": "Go to next view in the history",
             "itemtype": "method",
             "name": "forward",
@@ -517,7 +514,7 @@
         },
         {
             "file": "app.js",
-            "line": 142,
+            "line": 138,
             "description": "Returns a router instance",
             "itemtype": "method",
             "name": "router",
@@ -527,8 +524,8 @@
             "class": "App"
         },
         {
-            "file": "mootor.js",
-            "line": 27,
+            "file": "app.js",
+            "line": 149,
             "description": "Creates a new app with the defined options.\nIf the app is already created, it can be called without options to have a reference to the Mootor app. \n\n App instance factory\n\n window.m.app({\n   views: [\n      \"index\",\n      \"view1\"\n   ]\n });",
             "itemtype": "method",
             "name": "app",
@@ -543,102 +540,50 @@
             "return": {
                 "description": "App"
             },
-            "class": "window.m",
+            "class": "window.m"
+        },
+        {
+            "file": "mootor.js",
+            "line": 30,
+            "description": "Browser info",
+            "itemtype": "property",
+            "name": "browser",
+            "type": "object",
+            "class": "Context",
             "module": "Mootor"
         },
         {
             "file": "mootor.js",
-            "line": 53,
-            "description": "TODO: Write this object's functionality.",
+            "line": 37,
+            "description": "Viewport info",
+            "itemtype": "property",
+            "name": "viewport",
+            "type": "object",
+            "class": "Context",
+            "module": "Mootor"
+        },
+        {
+            "file": "mootor.js",
+            "line": 44,
+            "description": "Device info",
+            "itemtype": "property",
+            "name": "device",
+            "type": "object",
+            "class": "Context",
+            "module": "Mootor"
+        },
+        {
+            "file": "mootor.js",
+            "line": 63,
             "itemtype": "property",
             "name": "context",
-            "type": "object",
+            "type": "Context",
             "class": "window.m",
-            "module": "Mootor"
-        },
-        {
-            "file": "mootor.js",
-            "line": 69,
-            "description": "TODO: Write this object's functionality.",
-            "itemtype": "property",
-            "name": "mod",
-            "type": "object",
-            "class": "window.Mootor",
-            "module": "Mootor"
-        },
-        {
-            "file": "mootor.js",
-            "line": 75,
-            "description": "Creates a new namespace\nIf the namespace is already created, it returns the namespace",
-            "itemtype": "method",
-            "name": "ns",
-            "params": [
-                {
-                    "name": "name",
-                    "description": "The name of the referenced namespace",
-                    "type": "String"
-                }
-            ],
-            "return": {
-                "description": "object"
-            },
-            "class": "window.Mootor",
-            "module": "Mootor"
-        },
-        {
-            "file": "panel.js",
-            "line": 27,
-            "description": "Turn the given element into a panel: add moo-panel class, set options, transitoin and hide the panel.",
-            "itemtype": "method",
-            "name": "init",
-            "params": [
-                {
-                    "name": "options",
-                    "description": "The options for the current panel\n* transition - A string that specifies the type of transition used to show this panel (none, slide-left, slide-right)",
-                    "type": "Object"
-                },
-                {
-                    "name": "self",
-                    "description": "Panel instance",
-                    "type": "Object"
-                }
-            ],
-            "return": {
-                "description": "Returns the same object it's applied to, to allow chaining.",
-                "type": "Object"
-            },
-            "class": "Route",
-            "module": "Mootor"
-        },
-        {
-            "file": "panel.js",
-            "line": 79,
-            "description": "Shows a panel using the specified transition",
-            "itemtype": "method",
-            "name": "show",
-            "return": {
-                "description": "Returns the same object it's applied to, to allow chaining.",
-                "type": "Object"
-            },
-            "class": "Route",
-            "module": "Mootor"
-        },
-        {
-            "file": "panel.js",
-            "line": 158,
-            "description": "Hides a panel using the specified transition",
-            "itemtype": "method",
-            "name": "hide",
-            "return": {
-                "description": "Returns the same object it's applied to, to allow chaining.",
-                "type": "Object"
-            },
-            "class": "Route",
             "module": "Mootor"
         },
         {
             "file": "route.js",
-            "line": 34,
+            "line": 32,
             "description": "The URL referenced by this route",
             "itemtype": "property",
             "name": "URL",
@@ -648,7 +593,7 @@
         },
         {
             "file": "route.js",
-            "line": 42,
+            "line": 40,
             "description": "An array with the parameters passed to the page\nIf called with no parameters, it returns the currently set params in this route.",
             "itemtype": "method",
             "name": "params",
@@ -668,7 +613,7 @@
         },
         {
             "file": "route.js",
-            "line": 54,
+            "line": 52,
             "description": "The view that implements this route\nIf called with no parameters, it returns the currently set view in this route.",
             "itemtype": "method",
             "name": "view",
@@ -688,7 +633,7 @@
         },
         {
             "file": "router.js",
-            "line": 34,
+            "line": 32,
             "description": "Create a route",
             "itemtype": "method",
             "name": "route",
@@ -707,7 +652,7 @@
         },
         {
             "file": "ui.js",
-            "line": 35,
+            "line": 33,
             "description": "Shows element (not necesarily, since the element's parent might be hidden or out of view)",
             "itemtype": "method",
             "name": "show",
@@ -720,7 +665,7 @@
         },
         {
             "file": "ui.js",
-            "line": 45,
+            "line": 43,
             "description": "Hides element from view",
             "itemtype": "method",
             "name": "hide",
@@ -733,7 +678,7 @@
         },
         {
             "file": "uiapp.js",
-            "line": 39,
+            "line": 42,
             "description": "Show/Hide the loading indicator",
             "itemtype": "method",
             "name": "loading",
@@ -754,7 +699,7 @@
         },
         {
             "file": "uiheader.js",
-            "line": 40,
+            "line": 43,
             "description": "Title\nThe text to display in the header\nIf called with no arguments returns the current title",
             "itemtype": "method",
             "name": "title",
@@ -776,7 +721,7 @@
         },
         {
             "file": "uiloading.js",
-            "line": 40,
+            "line": 44,
             "description": "Set the style for the loading animation",
             "itemtype": "method",
             "name": "style",
@@ -798,7 +743,7 @@
         },
         {
             "file": "uinavbar.js",
-            "line": 40,
+            "line": 42,
             "description": "A nav object",
             "itemtype": "property",
             "name": "nav",
@@ -808,7 +753,7 @@
         },
         {
             "file": "uinavbar.js",
-            "line": 50,
+            "line": 52,
             "description": "Position\nThe nav bar is statically positioned to the top or bottom of the window",
             "itemtype": "method",
             "name": "position",
@@ -830,7 +775,7 @@
         },
         {
             "file": "uinavitem.js",
-            "line": 40,
+            "line": 41,
             "description": "Move the element to the specified coordinates. \nIf coordinates are not specified, it returns coordinates object with the current position.",
             "itemtype": "method",
             "name": "position",
@@ -852,7 +797,7 @@
         },
         {
             "file": "uinavitem.js",
-            "line": 53,
+            "line": 54,
             "description": "Block/Unblock or return block status.",
             "itemtype": "method",
             "name": "blocked",
@@ -877,7 +822,7 @@
             "line": 37,
             "description": "Initialize  a panel",
             "itemtype": "method",
-            "name": "init",
+            "name": "_init",
             "access": "private",
             "tagname": "",
             "class": "UIPanel",
@@ -885,7 +830,7 @@
         },
         {
             "file": "uipanel.js",
-            "line": 65,
+            "line": 66,
             "description": "Move the element to the specified coordinates. \nIf coordinates are not specified, it returns coordinates object with the current position.",
             "itemtype": "method",
             "name": "position",
@@ -906,7 +851,7 @@
         },
         {
             "file": "uipanel.js",
-            "line": 77,
+            "line": 78,
             "description": "Resize the element to the specified dimentions. \nIf dimentions are not specified, it returns dimentions object with the current size.",
             "itemtype": "method",
             "name": "size",
@@ -927,7 +872,7 @@
         },
         {
             "file": "uipanel.js",
-            "line": 89,
+            "line": 90,
             "description": "Block/Unblock or return block status.",
             "itemtype": "method",
             "name": "blocked",
@@ -948,7 +893,7 @@
         },
         {
             "file": "uipanel.js",
-            "line": 100,
+            "line": 101,
             "description": "Set or get transition type",
             "itemtype": "method",
             "name": "transition",
@@ -969,7 +914,7 @@
         },
         {
             "file": "uipanel.js",
-            "line": 136,
+            "line": 134,
             "description": "Shows a panel using the specified transition",
             "itemtype": "method",
             "name": "show",
@@ -982,7 +927,7 @@
         },
         {
             "file": "uipanel.js",
-            "line": 215,
+            "line": 213,
             "description": "Hides a panel using the specified transition",
             "itemtype": "method",
             "name": "hide",
@@ -995,7 +940,7 @@
         },
         {
             "file": "uiview.js",
-            "line": 40,
+            "line": 44,
             "description": "A reference to the view",
             "itemtype": "property",
             "name": "view",
@@ -1005,7 +950,7 @@
         },
         {
             "file": "view.js",
-            "line": 118,
+            "line": 113,
             "description": "A reference to the UI representation of this view",
             "itemtype": "property",
             "name": "ui",
@@ -1015,7 +960,7 @@
         },
         {
             "file": "view.js",
-            "line": 126,
+            "line": 121,
             "description": "Title is the friendly name for the current view.\nWhen called without parameters, returns a string containing the title. When called with parameters, sets the title.",
             "itemtype": "method",
             "name": "title",
@@ -1035,7 +980,7 @@
         },
         {
             "file": "view.js",
-            "line": 138,
+            "line": 133,
             "description": "Sets an event handler for the view\nPossible values for event: load, beforeLoad, unload, beforeUnload, init\nTODO: Define which parameters are passed to the callback function.",
             "itemtype": "method",
             "name": "on",
@@ -1059,7 +1004,7 @@
         },
         {
             "file": "view.js",
-            "line": 152,
+            "line": 147,
             "description": "Unsets event handlers for the view\nPossible values for event: load, beforeLoad, unload, beforeUnload, init",
             "itemtype": "method",
             "name": "off",
@@ -1084,7 +1029,7 @@
         },
         {
             "file": "view.js",
-            "line": 165,
+            "line": 160,
             "description": "Removes the view from the app (and from the screen)",
             "itemtype": "method",
             "name": "remove",
@@ -1096,7 +1041,7 @@
         },
         {
             "file": "view.js",
-            "line": 175,
+            "line": 170,
             "description": "Inserts the view to the app",
             "itemtype": "method",
             "name": "insert",
@@ -1108,7 +1053,7 @@
         },
         {
             "file": "view.js",
-            "line": 185,
+            "line": 180,
             "description": "Gets or sets the source for the HTML of this view.",
             "itemtype": "method",
             "name": "html",
@@ -1121,7 +1066,7 @@
         },
         {
             "file": "view.js",
-            "line": 196,
+            "line": 191,
             "description": "Gets or sets the source for the JavaScript of this view.",
             "itemtype": "method",
             "name": "script",
@@ -1134,7 +1079,7 @@
         },
         {
             "file": "view.js",
-            "line": 207,
+            "line": 202,
             "description": "Gets or sets the source for the CSS StyleSheet of this view.",
             "itemtype": "method",
             "name": "css",

@@ -3,6 +3,7 @@
 *
 * @class Router
 * @constructor
+*  @module Router
 * @author Emilio Mariscal (emi420 [at] gmail.com)
 * @author Martín Szyszlican (martinsz [at] gmail.com)
 */

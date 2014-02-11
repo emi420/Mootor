@@ -6,6 +6,7 @@
 * The viewName.js file defines options for the view.
 *
 * @class View
+* @module View
 * @constructor
 * @param {Object} options An object defining options for the current view.
 * * constructor - A function that will be run after the view has loaded (optional).

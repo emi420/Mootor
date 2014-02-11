@@ -43,6 +43,8 @@
             
                 <li><a href="../classes/App.html">App</a></li>
             
+                <li><a href="../classes/Context.html">Context</a></li>
+            
                 <li><a href="../classes/Route.html">Route</a></li>
             
                 <li><a href="../classes/Router.html">Router</a></li>
@@ -66,8 +68,6 @@
                 <li><a href="../classes/View.html">View</a></li>
             
                 <li><a href="../classes/window.m.html">window.m</a></li>
-            
-                <li><a href="../classes/window.Mootor.html">window.Mootor</a></li>
             
             </ul>
 
@@ -124,32 +124,36 @@
 * @author Martín Szyszlican (martinsz [at] gmail.com)
 */
 
-(function ($) {
+(function ($, Mootor) {
+
     // Force strict mode for ECMAScript
     &quot;use strict&quot;;
 
     var UI,
         UILoading;
 
+    // Dependences
+
+    UI = Mootor.UI;
+
     // Private constructors
-    UILoading = function() {
+
+    UILoading = Mootor.UILoading = function() {
+        // code here
     };
 
-    //This Class extends UI
-    UI = Mootor.ns(&quot;UI&quot;);
+    // Prototypal inheritance
+
     UILoading.prototype = UI.prototype;
 
-
-    //Add this Class as a Mootor module
-    $.extend(Mootor.mod, {UILoading: UILoading});
     
     // Private static methods and properties
 
     $.extend(UILoading, {
-   
+        // code here
     });
 
-    //Public methods
+    // Public methods
 
     $.extend(UILoading.prototype, {
         
@@ -164,8 +168,9 @@
         style: function(options) {
             
         }
-    });        
-}(window.$));
+    });      
+      
+}(window.$, window.Mootor));
 
     </pre>
 </div>
