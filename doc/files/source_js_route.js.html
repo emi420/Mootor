@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>source/js/route.js</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title=""></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/App.html">App</a></li>
+            
+                <li><a href="../classes/Route.html">Route</a></li>
+            
+                <li><a href="../classes/Router.html">Router</a></li>
+            
+                <li><a href="../classes/UI.html">UI</a></li>
+            
+                <li><a href="../classes/UIApp.html">UIApp</a></li>
+            
+                <li><a href="../classes/UIHeader.html">UIHeader</a></li>
+            
+                <li><a href="../classes/UILoading.html">UILoading</a></li>
+            
+                <li><a href="../classes/UINavBar.html">UINavBar</a></li>
+            
+                <li><a href="../classes/UINavItem.html">UINavItem</a></li>
+            
+                <li><a href="../classes/UIPanel.html">UIPanel</a></li>
+            
+                <li><a href="../classes/UIView.html">UIView</a></li>
+            
+                <li><a href="../classes/View.html">View</a></li>
+            
+                <li><a href="../classes/window.m.html">window.m</a></li>
+            
+                <li><a href="../classes/window.Mootor.html">window.Mootor</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/Mootor.html">Mootor</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: source/js/route.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/**
+* The Route class is for defining a route
+*
+* @class Route
+* @constructor
+* @author Emilio Mariscal (emi420 [at] gmail.com)
+* @author Martín Szyszlican (martinsz [at] gmail.com)
+*/
+
+(function ($) {
+    // Force strict mode for ECMAScript
+    &quot;use strict&quot;;
+
+    var Route;
+
+    // Private constructors
+    Route = function() {
+    };
+
+
+    //Add this Class as a Mootor module
+    $.extend(Mootor.mod, {Route: Route});
+    
+    // Private static methods and properties
+
+    $.extend(Route, {
+   
+    });
+
+    //Public methods
+
+    $.extend(Route.prototype, {
+        
+        /**
+        * The URL referenced by this route
+        *
+        * @property URL
+        * @type String
+        */
+        url: &quot;&quot;,
+
+        /**
+        * An array with the parameters passed to the page
+        * If called with no parameters, it returns the currently set params in this route.
+        *
+        * @method params
+        * @param {array} [params] - An array with the parameters passed to the page
+        * @return array
+        */
+        params: function(params) {
+
+        },
+
+        /**
+        * The view that implements this route
+        * If called with no parameters, it returns the currently set view in this route.
+        *
+        * @method view
+        * @param {View} [view] - The view that implements this route
+        * @return view
+        */
+        view: function(view) {
+
+        },
+
+    });        
+}(window.$));
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

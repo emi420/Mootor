@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>App</title>
+    <title>UIPanel</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -110,15 +110,19 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>App Class</h1>
+                        <h1>UIPanel Class</h1>
 <div class="box meta">
     
 
     
+        <div class="extends">
+            Extends <a href="../classes/UI.html" class="crosslink">UI</a>
+        </div>
+    
 
     
         <div class="foundat">
-            Defined in: <a href="../files/source_js_app.js.html#l1"><code>source&#x2F;js&#x2F;app.js:1</code></a>
+            Defined in: <a href="../files/source_js_uipanel.js.html#l1"><code>source&#x2F;js&#x2F;uipanel.js:1</code></a>
         </div>
     
 
@@ -134,105 +138,10 @@
 
 
 <div class="box intro">
-    <p>The App class defines the main object of the applications
-It handles creating the views.</p>
+    <p>A Panel to show views</p>
 
 </div>
 
-
-    <div class="constructor">
-        <h2>Constructor</h2>
-        <div id="method_App" class="method item">
-    <h3 class="name"><code>App</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>options</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/source_js_app.js.html#l1"><code>source&#x2F;js&#x2F;app.js:1</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">options</code>
-                        <span class="type">Object</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>An object defining options for the application.</p>
-<ul>
-<li>views - An array with a list of view names</li>
-</ul>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-    </div>
 
 
 <div id="classdocs" class="tabview">
@@ -242,8 +151,6 @@ It handles creating the views.</p>
         
             <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
         
-        
-            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
         
         
         
@@ -257,52 +164,52 @@ It handles creating the views.</p>
                 <div class="index-section methods">
                     <h3>Methods</h3>
 
-                    <ul class="index-list methods">
+                    <ul class="index-list methods extends">
                         
                             <li class="index-item method">
-                                <a href="#method_back">back</a>
+                                <a href="#method_blocked">blocked</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item method">
-                                <a href="#method_forward">forward</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_go">go</a>
+                            <li class="index-item method inherited">
+                                <a href="#method_hide">hide</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method private">
-                                <a href="#method_initViews">initViews</a>
+                                <a href="#method_init">init</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_router">router</a>
+                                <a href="#method_position">position</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_show">show</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_settings">settings</a>
+                                <a href="#method_size">size</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_view">view</a>
+                                <a href="#method_transition">transition</a>
 
                                 
                                 
@@ -312,21 +219,6 @@ It handles creating the views.</p>
                 </div>
             
 
-            
-                <div class="index-section properties">
-                    <h3>Properties</h3>
-
-                    <ul class="index-list properties">
-                        
-                            <li class="index-item property">
-                                <a href="#property_history">history</a>
-
-                                
-                                
-                            </li>
-                        
-                    </ul>
-                </div>
             
 
             
@@ -339,150 +231,8 @@ It handles creating the views.</p>
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_back" class="method item">
-    <h3 class="name"><code>back</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type"></span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/source_js_app.js.html#l121"><code>source&#x2F;js&#x2F;app.js:121</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Go to the previous view in the history</p>
-
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                    <p>Route</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_forward" class="method item">
-    <h3 class="name"><code>forward</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type"></span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/source_js_app.js.html#l130"><code>source&#x2F;js&#x2F;app.js:130</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Go to next view in the history</p>
-
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                    <p>Route</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_go" class="method item">
-    <h3 class="name"><code>go</code></h3>
+                    <div id="method_blocked" class="method item">
+    <h3 class="name"><code>blocked</code></h3>
 
     
         <div class="args">
@@ -490,7 +240,7 @@ It handles creating the views.</p>
             
                 <li class="arg">
                     
-                        <code>id</code>
+                        <code class="optional">[blocked]</code>
                     
                 </li>
             
@@ -500,7 +250,7 @@ It handles creating the views.</p>
 
     
         <span class="returns-inline">
-            <span class="type"></span>
+            <span class="type">Boolean</span>
         </span>
     
 
@@ -527,7 +277,7 @@ It handles creating the views.</p>
             
         
         
-        <a href="../files/source_js_app.js.html#l111"><code>source&#x2F;js&#x2F;app.js:111</code></a>
+        <a href="../files/source_js_uipanel.js.html#l89"><code>source&#x2F;js&#x2F;uipanel.js:89</code></a>
         
         </p>
 
@@ -538,7 +288,7 @@ It handles creating the views.</p>
     </div>
 
     <div class="description">
-        <p>Go to a view</p>
+        <p>Block/Unblock or return block status.</p>
 
     </div>
 
@@ -550,14 +300,15 @@ It handles creating the views.</p>
             
                 <li class="param">
                     
-                        <code class="param-name">id</code>
-                        <span class="type">String</span>
+                        <code class="param-name optional">[blocked]</code>
+                        <span class="type">Boolean</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>The id of the view</p>
+                        <p>Whether the panel is blocked</p>
 
                     </div>
 
@@ -575,7 +326,9 @@ It handles creating the views.</p>
             <div class="returns-description">
                 
                     
-                    <p>Route</p>
+                        <span class="type">Boolean</span>:
+                    
+                    <p>Whether the panel is blocked</p>
 
                 
             </div>
@@ -586,21 +339,84 @@ It handles creating the views.</p>
 </div>
 
                 
-                    <div id="method_initViews" class="method item private">
-    <h3 class="name"><code>initViews</code></h3>
+                    <div id="method_hide" class="method item">
+    <h3 class="name"><code>hide</code></h3>
 
     
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            <p>Inherited from
+            <a href="../classes/UI.html#method_hide">
+                UI
+            </a>
             
-                <li class="arg">
-                    
-                        <code>views</code>
-                    
-                </li>
+            but overwritten in
             
-            </ul><span class="paren">)</span>
+        
+        
+        <a href="../files/source_js_uipanel.js.html#l215"><code>source&#x2F;js&#x2F;uipanel.js:215</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Hides a panel using the specified transition</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                    <p>Returns the same object it&#39;s applied to, to allow chaining.</p>
+
+                
+            </div>
         </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_init" class="method item private">
+    <h3 class="name"><code>init</code></h3>
+
+    
+        <span class="paren">()</span>
     
 
     
@@ -630,7 +446,7 @@ It handles creating the views.</p>
             
         
         
-        <a href="../files/source_js_app.js.html#l48"><code>source&#x2F;js&#x2F;app.js:48</code></a>
+        <a href="../files/source_js_uipanel.js.html#l37"><code>source&#x2F;js&#x2F;uipanel.js:37</code></a>
         
         </p>
 
@@ -641,34 +457,10 @@ It handles creating the views.</p>
     </div>
 
     <div class="description">
-        <p>Init views, load remote files and call the View class to handle it.</p>
+        <p>Initialize  a panel</p>
 
     </div>
 
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">views</code>
-                        <span class="type">Array</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>A list of view names to be initialized</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
     
 
     
@@ -677,79 +469,8 @@ It handles creating the views.</p>
 </div>
 
                 
-                    <div id="method_router" class="method item">
-    <h3 class="name"><code>router</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type"></span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/source_js_app.js.html#l139"><code>source&#x2F;js&#x2F;app.js:139</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Returns a router instance</p>
-
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                    <p>Router</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_settings" class="method item">
-    <h3 class="name"><code>settings</code></h3>
+                    <div id="method_position" class="method item">
+    <h3 class="name"><code>position</code></h3>
 
     
         <div class="args">
@@ -757,13 +478,7 @@ It handles creating the views.</p>
             
                 <li class="arg">
                     
-                        <code>key</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code class="optional">[value]</code>
+                        <code class="optional">[coordinates]</code>
                     
                 </li>
             
@@ -773,7 +488,7 @@ It handles creating the views.</p>
 
     
         <span class="returns-inline">
-            <span class="type"></span>
+            <span class="type">Object</span>
         </span>
     
 
@@ -800,7 +515,7 @@ It handles creating the views.</p>
             
         
         
-        <a href="../files/source_js_app.js.html#l86"><code>source&#x2F;js&#x2F;app.js:86</code></a>
+        <a href="../files/source_js_uipanel.js.html#l65"><code>source&#x2F;js&#x2F;uipanel.js:65</code></a>
         
         </p>
 
@@ -811,8 +526,8 @@ It handles creating the views.</p>
     </div>
 
     <div class="description">
-        <p>Application settings
-If called with a key, returns the value. If called with key and value, sets value to key.</p>
+        <p>Move the element to the specified coordinates. 
+If coordinates are not specified, it returns coordinates object with the current position.</p>
 
     </div>
 
@@ -824,23 +539,7 @@ If called with a key, returns the value. If called with key and value, sets valu
             
                 <li class="param">
                     
-                        <code class="param-name">key</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>The name of the setting</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name optional">[value]</code>
+                        <code class="param-name optional">[coordinates]</code>
                         <span class="type">Object</span>
                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
@@ -848,7 +547,7 @@ If called with a key, returns the value. If called with key and value, sets valu
                     
 
                     <div class="param-description">
-                        <p>The value of the setting</p>
+                        <p>Object with coordinates. Example: {x: 0, y: 0}</p>
 
                     </div>
 
@@ -866,7 +565,9 @@ If called with a key, returns the value. If called with key and value, sets valu
             <div class="returns-description">
                 
                     
-                    <p>object the setting value</p>
+                        <span class="type">Object</span>:
+                    
+                    <p>Object with coordinates. Example: {x: 0, y: 0}</p>
 
                 
             </div>
@@ -877,8 +578,81 @@ If called with a key, returns the value. If called with key and value, sets valu
 </div>
 
                 
-                    <div id="method_view" class="method item">
-    <h3 class="name"><code>view</code></h3>
+                    <div id="method_show" class="method item">
+    <h3 class="name"><code>show</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            <p>Inherited from
+            <a href="../classes/UI.html#method_show">
+                UI
+            </a>
+            
+            but overwritten in
+            
+        
+        
+        <a href="../files/source_js_uipanel.js.html#l136"><code>source&#x2F;js&#x2F;uipanel.js:136</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Shows a panel using the specified transition</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                    <p>Returns the same object it&#39;s applied to, to allow chaining.</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_size" class="method item">
+    <h3 class="name"><code>size</code></h3>
 
     
         <div class="args">
@@ -886,13 +660,7 @@ If called with a key, returns the value. If called with key and value, sets valu
             
                 <li class="arg">
                     
-                        <code>id</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code class="optional">[settings]</code>
+                        <code class="optional">[dimentions]</code>
                     
                 </li>
             
@@ -902,7 +670,7 @@ If called with a key, returns the value. If called with key and value, sets valu
 
     
         <span class="returns-inline">
-            <span class="type"></span>
+            <span class="type">Object</span>
         </span>
     
 
@@ -929,7 +697,7 @@ If called with a key, returns the value. If called with key and value, sets valu
             
         
         
-        <a href="../files/source_js_app.js.html#l99"><code>source&#x2F;js&#x2F;app.js:99</code></a>
+        <a href="../files/source_js_uipanel.js.html#l77"><code>source&#x2F;js&#x2F;uipanel.js:77</code></a>
         
         </p>
 
@@ -940,7 +708,8 @@ If called with a key, returns the value. If called with key and value, sets valu
     </div>
 
     <div class="description">
-        <p>Create or get a view</p>
+        <p>Resize the element to the specified dimentions. 
+If dimentions are not specified, it returns dimentions object with the current size.</p>
 
     </div>
 
@@ -952,31 +721,15 @@ If called with a key, returns the value. If called with key and value, sets valu
             
                 <li class="param">
                     
-                        <code class="param-name">id</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>The id of the view</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name optional">[settings]</code>
-                        <span class="type">String</span>
+                        <code class="param-name optional">[dimentions]</code>
+                        <span class="type">Object</span>
                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>The settings object for the view</p>
+                        <p>Object with dimentions. Example: {w: 0, h: 0}</p>
 
                     </div>
 
@@ -994,7 +747,9 @@ If called with a key, returns the value. If called with key and value, sets valu
             <div class="returns-description">
                 
                     
-                    <p>View the referenced view object</p>
+                        <span class="type">Object</span>:
+                    
+                    <p>Object with dimentions. Example: {w: 0, h: 0}</p>
 
                 
             </div>
@@ -1005,17 +760,32 @@ If called with a key, returns the value. If called with key and value, sets valu
 </div>
 
                 
-            </div>
-        
+                    <div id="method_transition" class="method item">
+    <h3 class="name"><code>transition</code></h3>
 
-        
-            <div id="properties" class="api-class-tabpanel">
-                <h2 class="off-left">Properties</h2>
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code class="optional">[transition]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
 
-                
-                    <div id="property_history" class="property item">
-    <h3 class="name"><code>history</code></h3>
-    <span class="type">Array</span>
+    
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+    
+
+    
+
+    
 
     
 
@@ -1036,9 +806,10 @@ If called with a key, returns the value. If called with key and value, sets valu
             
         
         
-        <a href="../files/source_js_app.js.html#l77"><code>source&#x2F;js&#x2F;app.js:77</code></a>
+        <a href="../files/source_js_uipanel.js.html#l100"><code>source&#x2F;js&#x2F;uipanel.js:100</code></a>
         
         </p>
+
 
         
 
@@ -1046,13 +817,51 @@ If called with a key, returns the value. If called with key and value, sets valu
     </div>
 
     <div class="description">
-        <p>Stores the navigation history. 
-An array of views, ordered in the sequence that they were visited by the user.</p>
+        <p>Set or get transition type</p>
 
     </div>
 
     
+        <div class="params">
+            <h4>Parameters:</h4>
 
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[transition]</code>
+                        <span class="type">String</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Transition type. MUST be one of: slide-left, slide-right, none</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">String</span>:
+                    
+                    <p>Transition type</p>
+
+                
+            </div>
+        </div>
     
 
     
@@ -1060,6 +869,8 @@ An array of views, ordered in the sequence that they were visited by the user.</
 
                 
             </div>
+        
+
         
 
         

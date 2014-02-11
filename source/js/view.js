@@ -32,6 +32,11 @@
         this.id = options.id;
         View.init(options, this);
     };
+
+
+    //Add this Class as a Mootor module
+    $.extend(Mootor.mod, {View: View});
+
     
     // Private static methods and properties
     

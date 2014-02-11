@@ -14,13 +14,15 @@
     // Force strict mode for ECMAScript
     "use strict";
 
-    var App,
-        _app;
+    var App;
 
     // Private constructors
     App = function(options) {
         App.init(options, this);
     };
+
+    //Add this Class as a Mootor module
+    $.extend(Mootor.mod, {App: App});
     
     // Private static methods and properties
 
@@ -33,7 +35,13 @@
         init: function(options, self) {
             // Defer init until dom loaded
             $(function($){
-                App.initViews(options.views, self);
+                if (options) {
+                    App.initViews(options.views, self);    
+                }
+                else {
+                    console.log("Can't init app without views");
+                }
+                
             });
         },
     
@@ -138,75 +146,5 @@
         }        
     });
 
-    // Public constructors
-
-    $.extend(window, {
-        /**
-        * window.m public global object
-        * It is the main way to access the mootor app
-        *
-        * Usage: var app = window.m.app([options]);
-        * @class window.m
-        * @static
-        */
-        m: {
-            /**
-            * Creates a new app with the defined options.
-            * If the app is already created, it can be called without options to have a reference to the Mootor app. 
-
-            *  App instance factory
-            *
-            *  window.m.app({
-            *    views: [
-            *       "index",
-            *       "view1"
-            *    ]
-            *  });
-
-            *
-            * @method app
-            * @param {Array} [views] A list of view names to be initialized
-            * @return App
-            */
-            app: function(options) {
-                if (_app === undefined) {
-                    _app = new App(options);
-                }
-                return _app;
-            },
-            /**
-            * TODO: Write this object's functionality.
-            * @property context
-            * @type object
-            */
-            context: {}
-        },
-
-        /**
-        * window.Mootor public global object
-        * Access modules and namespaces
-        *
-        * @class window.Mootor
-        * @static
-        */
-        Mootor: {
-            /**
-            * TODO: Write this object's functionality.
-            * @property mod
-            * @type object
-            */
-            mod: {},
-            /**
-            * Creates a new namespace
-            * If the namespace is already created, it returns the namespace
-            *
-            * @method ns
-            * @param {String} name The name of the referenced namespace
-            * @return object
-            */
-            ns: function(name) {
-            }
-        }
-    });
         
 }(window.$));

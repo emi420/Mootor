@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>window.Mootor</title>
+    <title>Router</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -110,7 +110,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>window.Mootor Class</h1>
+                        <h1>Router Class</h1>
 <div class="box meta">
     
 
@@ -118,7 +118,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/source_js_mootor.js.html#l61"><code>source&#x2F;js&#x2F;mootor.js:61</code></a>
+            Defined in: <a href="../files/source_js_router.js.html#l1"><code>source&#x2F;js&#x2F;router.js:1</code></a>
         </div>
     
 
@@ -134,11 +134,67 @@
 
 
 <div class="box intro">
-    <p>window.Mootor public global object
-Access modules and namespaces</p>
+    <p>The Router class is for defining routes</p>
 
 </div>
 
+
+    <div class="constructor">
+        <h2>Constructor</h2>
+        <div id="method_Router" class="method item">
+    <h3 class="name"><code>Router</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/source_js_router.js.html#l1"><code>source&#x2F;js&#x2F;router.js:1</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+    </div>
 
 
 <div id="classdocs" class="tabview">
@@ -148,8 +204,6 @@ Access modules and namespaces</p>
         
             <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
         
-        
-            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
         
         
         
@@ -166,7 +220,7 @@ Access modules and namespaces</p>
                     <ul class="index-list methods">
                         
                             <li class="index-item method">
-                                <a href="#method_ns">ns</a>
+                                <a href="#method_route">route</a>
 
                                 
                                 
@@ -176,21 +230,6 @@ Access modules and namespaces</p>
                 </div>
             
 
-            
-                <div class="index-section properties">
-                    <h3>Properties</h3>
-
-                    <ul class="index-list properties">
-                        
-                            <li class="index-item property">
-                                <a href="#property_mod">mod</a>
-
-                                
-                                
-                            </li>
-                        
-                    </ul>
-                </div>
             
 
             
@@ -203,8 +242,8 @@ Access modules and namespaces</p>
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_ns" class="method item">
-    <h3 class="name"><code>ns</code></h3>
+                    <div id="method_route" class="method item">
+    <h3 class="name"><code>route</code></h3>
 
     
         <div class="args">
@@ -212,7 +251,7 @@ Access modules and namespaces</p>
             
                 <li class="arg">
                     
-                        <code>name</code>
+                        <code>options</code>
                     
                 </li>
             
@@ -249,7 +288,7 @@ Access modules and namespaces</p>
             
         
         
-        <a href="../files/source_js_mootor.js.html#l75"><code>source&#x2F;js&#x2F;mootor.js:75</code></a>
+        <a href="../files/source_js_router.js.html#l34"><code>source&#x2F;js&#x2F;router.js:34</code></a>
         
         </p>
 
@@ -260,8 +299,7 @@ Access modules and namespaces</p>
     </div>
 
     <div class="description">
-        <p>Creates a new namespace
-If the namespace is already created, it returns the namespace</p>
+        <p>Create a route</p>
 
     </div>
 
@@ -273,14 +311,14 @@ If the namespace is already created, it returns the namespace</p>
             
                 <li class="param">
                     
-                        <code class="param-name">name</code>
-                        <span class="type">String</span>
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>The name of the referenced namespace</p>
+                        <p>TODO: Define this object&#39;s properties</p>
 
                     </div>
 
@@ -298,7 +336,7 @@ If the namespace is already created, it returns the namespace</p>
             <div class="returns-description">
                 
                     
-                    <p>object</p>
+                    <p>Route</p>
 
                 
             </div>
@@ -312,57 +350,6 @@ If the namespace is already created, it returns the namespace</p>
             </div>
         
 
-        
-            <div id="properties" class="api-class-tabpanel">
-                <h2 class="off-left">Properties</h2>
-
-                
-                    <div id="property_mod" class="property item">
-    <h3 class="name"><code>mod</code></h3>
-    <span class="type">Object</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/source_js_mootor.js.html#l69"><code>source&#x2F;js&#x2F;mootor.js:69</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>TODO: Write this object&#39;s functionality.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-            </div>
         
 
         
