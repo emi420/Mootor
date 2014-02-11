@@ -1,0 +1,458 @@
+{
+    "project": {},
+    "files": {
+        "app.js": {
+            "name": "app.js",
+            "modules": {},
+            "classes": {
+                "App": 1,
+                "window.m": 1,
+                "window.Mootor": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "panel.js": {
+            "name": "panel.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "view.js": {
+            "name": "view.js",
+            "modules": {},
+            "classes": {
+                "View": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {},
+    "classes": {
+        "App": {
+            "name": "App",
+            "shortname": "App",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "app.js",
+            "line": 18,
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "options",
+                    "description": "An object defining options for the application.\n* views - An array with a list of view names",
+                    "type": "Object"
+                }
+            ]
+        },
+        "window.m": {
+            "name": "window.m",
+            "shortname": "window.m",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "app.js",
+            "line": 142,
+            "description": "window.m public global object\nIt is the main way to access the mootor app",
+            "usage": ": var app = window.m.app([options]);",
+            "static": 1
+        },
+        "window.Mootor": {
+            "name": "window.Mootor",
+            "shortname": "window.Mootor",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "app.js",
+            "line": 183,
+            "description": "window.Mootor public global object\nAccess modules and namespaces",
+            "static": 1
+        },
+        "View": {
+            "name": "View",
+            "shortname": "View",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "view.js",
+            "line": 19,
+            "description": "The View class handles each screen of the application. \nA list of views is specified in the applications options\nand the files are loaded from the views/ folder.\nEach view has a viewName.js and a viewName.html file.\nThe viewName.js file defines options for the view.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "options",
+                    "description": "An object defining options for the current view.\n* constructor - A function that will be run after the view has loaded (optional).\n* animation - a string defining the type of animation used to show this view (one of: \"slide-left\", \"slide-right\", \"none\").",
+                    "type": "Object"
+                }
+            ]
+        }
+    },
+    "classitems": [
+        {
+            "file": "app.js",
+            "line": 1,
+            "description": "The App class defines the main object of the applications\nIt handles creating the views.",
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)",
+            "class": "App"
+        },
+        {
+            "file": "app.js",
+            "line": 43,
+            "description": "Init views, load remote files and call the View class to handle it.",
+            "itemtype": "method",
+            "name": "initViews",
+            "params": [
+                {
+                    "name": "views",
+                    "description": "A list of view names to be initialized",
+                    "type": "Array"
+                }
+            ],
+            "class": "App"
+        },
+        {
+            "file": "app.js",
+            "line": 71,
+            "description": "Stores the navigation history. \nAn array of views, ordered in the sequence that they were visited by the user.",
+            "itemtype": "property",
+            "name": "history",
+            "type": "array",
+            "class": "App"
+        },
+        {
+            "file": "app.js",
+            "line": 80,
+            "description": "Application settings\nIf called with a key, returns the value. If called with key and value, sets value to key.",
+            "itemtype": "method",
+            "name": "settings",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "The name of the setting",
+                    "type": "String"
+                },
+                {
+                    "name": "value",
+                    "description": "The value of the setting",
+                    "type": "Object",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "object the setting value"
+            },
+            "class": "App"
+        },
+        {
+            "file": "app.js",
+            "line": 91,
+            "description": "Create or get a view",
+            "itemtype": "method",
+            "name": "view",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "The id of the view",
+                    "type": "String"
+                },
+                {
+                    "name": "settings",
+                    "description": "The settings object for the view",
+                    "type": "String",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "View the referenced view object"
+            },
+            "class": "App"
+        },
+        {
+            "file": "app.js",
+            "line": 101,
+            "description": "Go to a view",
+            "itemtype": "method",
+            "name": "go",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "The id of the view",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Route"
+            },
+            "class": "App"
+        },
+        {
+            "file": "app.js",
+            "line": 111,
+            "description": "Go to the previous view in the history",
+            "itemtype": "method",
+            "name": "back",
+            "return": {
+                "description": "Route"
+            },
+            "class": "App"
+        },
+        {
+            "file": "app.js",
+            "line": 120,
+            "description": "Go to next view in the history",
+            "itemtype": "method",
+            "name": "forward",
+            "return": {
+                "description": "Route"
+            },
+            "class": "App"
+        },
+        {
+            "file": "app.js",
+            "line": 129,
+            "description": "Returns a router instance",
+            "itemtype": "method",
+            "name": "router",
+            "return": {
+                "description": "Router"
+            },
+            "class": "App"
+        },
+        {
+            "file": "app.js",
+            "line": 151,
+            "description": "Creates a new app with the defined options.\nIf the app is already created, it can be called without options to have a reference to the Mootor app. \n\n App instance factory\n\n window.m.app({\n   views: [\n      \"index\",\n      \"view1\"\n   ]\n });",
+            "itemtype": "method",
+            "name": "app",
+            "params": [
+                {
+                    "name": "views",
+                    "description": "A list of view names to be initialized",
+                    "type": "Array",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "App"
+            },
+            "class": "window.m"
+        },
+        {
+            "file": "app.js",
+            "line": 175,
+            "description": "TODO: Write this object's functionality.",
+            "itemtype": "property",
+            "name": "context",
+            "type": "object",
+            "class": "window.m"
+        },
+        {
+            "file": "app.js",
+            "line": 191,
+            "description": "TODO: Write this object's functionality.",
+            "itemtype": "property",
+            "name": "mod",
+            "type": "object",
+            "class": "window.Mootor"
+        },
+        {
+            "file": "app.js",
+            "line": 197,
+            "description": "Creates a new namespace\nIf the namespace is already created, it returns the namespace",
+            "itemtype": "method",
+            "name": "ns",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The name of the referenced namespace",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "object"
+            },
+            "class": "window.Mootor"
+        },
+        {
+            "file": "panel.js",
+            "line": 27,
+            "description": "Turn the given element into a panel: add moo-panel class, set options, transitoin and hide the panel.",
+            "itemtype": "method",
+            "name": "init",
+            "params": [
+                {
+                    "name": "options",
+                    "description": "The options for the current panel\n* transition - A string that specifies the type of transition used to show this panel (none, slide-left, slide-right)",
+                    "type": "Object"
+                },
+                {
+                    "name": "self",
+                    "description": "Panel instance",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Returns the same object it's applied to, to allow chaining.",
+                "type": "Object"
+            },
+            "class": "View"
+        },
+        {
+            "file": "panel.js",
+            "line": 77,
+            "description": "Shows a panel using the specified transition",
+            "itemtype": "method",
+            "name": "show",
+            "return": {
+                "description": "Returns the same object it's applied to, to allow chaining.",
+                "type": "Object"
+            },
+            "class": "View"
+        },
+        {
+            "file": "panel.js",
+            "line": 153,
+            "description": "Hides a panel using the specified transition",
+            "itemtype": "method",
+            "name": "hide",
+            "return": {
+                "description": "Returns the same object it's applied to, to allow chaining.",
+                "type": "Object"
+            },
+            "class": "View"
+        },
+        {
+            "file": "view.js",
+            "line": 92,
+            "description": "Helper function to load a remote script via a <script> element in the <head>.",
+            "itemtype": "method",
+            "name": "getScript",
+            "params": [
+                {
+                    "name": "path",
+                    "description": "The path to load",
+                    "type": "String"
+                },
+                {
+                    "name": "onSuccess",
+                    "description": "A function to be called if the request is successful",
+                    "type": "Function"
+                },
+                {
+                    "name": "onError",
+                    "description": "A function to be called if the request fails",
+                    "type": "Function"
+                }
+            ],
+            "class": "View"
+        },
+        {
+            "file": "view.js",
+            "line": 116,
+            "description": "Title contains the friendly name for the current view.",
+            "itemtype": "property",
+            "name": "title",
+            "type": "{string}",
+            "default": "\"\"",
+            "class": "View"
+        },
+        {
+            "file": "view.js",
+            "line": 127,
+            "description": "ID contains the internal name for the current view, which applies to file names and internal references such as the views definition in the application's options.",
+            "itemtype": "property",
+            "name": "id",
+            "type": "{string}",
+            "default": "\"\"",
+            "class": "View"
+        },
+        {
+            "file": "view.js",
+            "line": 136,
+            "description": "Sets the title of the view and raises an event.",
+            "itemtype": "method",
+            "name": "setTitle",
+            "params": [
+                {
+                    "name": "title",
+                    "description": "The new title",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Returns true on success",
+                "type": "Boolean"
+            },
+            "class": "View"
+        },
+        {
+            "file": "view.js",
+            "line": 148,
+            "description": "Displays the panel",
+            "itemtype": "method",
+            "name": "show",
+            "class": "View"
+        },
+        {
+            "file": "view.js",
+            "line": 157,
+            "description": "Hides the panel",
+            "itemtype": "method",
+            "name": "show",
+            "class": "View"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " app.js:80"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " app.js:91"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " app.js:101"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " app.js:111"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " app.js:120"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " app.js:129"
+        },
+        {
+            "message": "unknown tag: usage",
+            "line": " app.js:142"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " app.js:151"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " app.js:197"
+        },
+        {
+            "message": "Missing item type\nThe App class defines the main object of the applications\nIt handles creating the views.",
+            "line": " app.js:1"
+        }
+    ]
+}
