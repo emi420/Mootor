@@ -12,7 +12,6 @@ We're working on the stable version.
 
 More information:
 
-* https://github.com/emi420/Mootor/wiki
 * https://github.com/emi420/Mootor/issues
 * http://mootor.mobi (spanish)
 
