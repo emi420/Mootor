@@ -26,7 +26,7 @@ window.setTimeout(function() {
     		it("Should be able create a new View instance", function() {
                 // Except View instance
         		expect(
-        			view instanceof Mootor.Views
+        			view instanceof Mootor.View
         		).toBeDefined(true);
     		});
 
@@ -79,12 +79,13 @@ window.setTimeout(function() {
                     window._testOnLoadView = true;
                 });
                 
-                m.app.view("testview").on("afterload", function() {
+                app.go("testview");
+                
+                window.setTimeout(function() {
         			expect(
         				window._testOnLoadView
         			).toBe(true);
-                });
-
+                }, 500);
 
     		});
     	});
@@ -99,7 +100,7 @@ window.setTimeout(function() {
             
     		xit("Should be able to detect if it is running in a browser", function() {
                 // FIXME CHECK
-                expect(m.context.browser).toBe(true);
+                expect(m.context().browser).toBe(true);
     		});
 
     	});
