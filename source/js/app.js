@@ -43,6 +43,7 @@
         /**
         * Init views, load remote files and call the View class to handle it.
         *
+        * @private
         * @method initViews
         * @param {Array} views A list of view names to be initialized
         */

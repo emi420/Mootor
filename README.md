@@ -10,6 +10,12 @@ THIS SOFTWARE IS EXPERIMENTAL AND ONLY FOR TESTING.
 
 We're working on the stable version.
 
+More information:
+
+* https://github.com/emi420/Mootor/wiki
+* https://github.com/emi420/Mootor/issues
+* http://mootor.mobi (spanish)
+
 ## Design
 
 Mootor team **LOVES** design, and we are working to make delightful user interfaces. 
