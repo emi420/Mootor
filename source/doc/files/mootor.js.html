@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>app.js</title>
+    <title>mootor.js</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -110,159 +110,101 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: app.js</h1>
+                        <h1 class="file-heading">File: mootor.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-/*
- *  @author Emilio Mariscal (emi420 [at] gmail.com)
- *  @author Martín Szyszlican (martinsz [at] gmail.com)
- */
+/**
+* The Mootor module handles the creation of App and Namespaces
+*
+* @module Mootor
+* @author Emilio Mariscal (emi420 [at] gmail.com)
+* @author Martín Szyszlican (martinsz [at] gmail.com)
+*/
 
 (function ($) {
-
     // Force strict mode for ECMAScript
     &quot;use strict&quot;;
 
-    /**
-    * The App class defines the main object of the applications
-    *
-    * @class App
-    * @constructor
-    * @param {Object} options An object defining options for the application.
-    * * views - An array with a list of view names
-    */
-    var App;
+    var _app;
 
-    // Private constructors
-    
-    App = App = function(options) {
-        App.init(options, this);
-    };
+    // Static global objects
 
-    //Add this Class as a Mootor module
-    $.extend(Mootor.mod, {App: App});
-    
-    // Private static methods and properties
+    $.extend(window, {
+        /**
+        * window.m public global object
+        * It is the main way to access the mootor app
+        *
+        * Usage: var app = window.m.app([options]);
+        * @class window.m
+        * @static
+        */
+        m: {
+            /**
+            * Creates a new app with the defined options.
+            * If the app is already created, it can be called without options to have a reference to the Mootor app. 
 
-    $.extend(App, {
-    
-        views: {},
-        
-        currentView: undefined,
-    
-        init: function(options, self) {
-            // Defer init until dom loaded
-            $(function($){
-                if (options) {
-                    App.initViews(options.views, self);    
+            *  App instance factory
+            *
+            *  window.m.app({
+            *    views: [
+            *       &quot;index&quot;,
+            *       &quot;view1&quot;
+            *    ]
+            *  });
+
+            *
+            * @method app
+            * @param {Array} [views] A list of view names to be initialized
+            * @return App
+            */
+            app: function(options) {
+                var App;
+                if (_app === undefined) {
+                    App = Mootor.ns(&quot;App&quot;);
+                    _app = new App(options);
+                }
+                return _app;
+            },
+            /**
+            * TODO: Write this object&#x27;s functionality.
+            * @property context
+            * @type object
+            */
+            context: {}
+        },
+
+        /**
+        * window.Mootor public global object
+        * Access modules and namespaces
+        *
+        * @class window.Mootor
+        * @static
+        */
+        Mootor: {
+            /**
+            * TODO: Write this object&#x27;s functionality.
+            * @property mod
+            * @type object
+            */
+            mod: {},
+            /**
+            * Creates a new namespace
+            * If the namespace is already created, it returns the namespace
+            *
+            * @method ns
+            * @param {String} name The name of the referenced namespace
+            * @return object
+            */
+            ns: function(name) {
+                if (Mootor.mod[name]) {
+                    return Mootor.mod[name];    
                 }
                 else {
-                    console.log(&quot;Can&#x27;t init app without views&quot;);
+                    throw(new Error());
                 }
-                
-            });
-        },
-    
-        /**
-        * Init views, load remote files and call the View class to handle it.
-        *
-        * @private
-        * @method initViews
-        * @param {Array} views A list of view names to be initialized
-        */
-        initViews: function (views, self) {
-            var i,
-                view;
-                
-            for (i = 0; i &lt; views.length; i++) {
-
-                view = self.view({
-                    id: views[i],
-                });
-                
-                App.views[i] = view;
-
             }
-            
-        },
-    
-    });
-
-    // Public methods
-
-    $.extend(App.prototype, {
-        
-        /**
-        * Stores the navigation history. 
-        * An array of views, ordered in the sequence that they were visited by the user.
-        *
-        * @property history
-        * @type array
-        */
-        history: [],
-
-        /**
-        * Application settings
-        * If called with a key, returns the value. If called with key and value, sets value to key.
-        *
-        * @method settings
-        * @param {String} key The name of the setting
-        * @param {object} [value] The value of the setting
-        * @return object the setting value
-        */
-        settings: function(key, value) {
-            
-        },
-
-        /**
-        * Create or get a view
-        *
-        * @method view
-        * @param {String} id The id of the view
-        * @param {String} [settings] The settings object for the view
-        * @return View the referenced view object
-        */
-        view: function(id, settings) {
-
-        },
-
-        /**
-        * Go to a view
-        *
-        * @method go
-        * @param {String} id The id of the view
-        * @return Route
-        */
-        go: function(id) {
-        },        
-
-        /**
-        * Go to the previous view in the history
-        *
-        * @method back
-        * @return Route
-        */
-        back: function(id) {
-        },        
-
-        /**
-        * Go to next view in the history
-        *
-        * @method forward
-        * @return Route
-        */
-        forward: function(id) {
-        },        
-
-        /**
-        * Returns a router instance
-        *
-        * @method router
-        * @return Router
-        */
-        router: function(id) {
-        }        
+        }
     });
 
 }(window.$));

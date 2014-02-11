@@ -5,9 +5,19 @@
             "name": "app.js",
             "modules": {},
             "classes": {
-                "App": 1,
-                "m": 1,
+                "App": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "mootor.js": {
+            "name": "mootor.js",
+            "modules": {
                 "Mootor": 1
+            },
+            "classes": {
+                "window.m": 1,
+                "window.Mootor": 1
             },
             "fors": {},
             "namespaces": {}
@@ -16,6 +26,96 @@
             "name": "panel.js",
             "modules": {},
             "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "route.js": {
+            "name": "route.js",
+            "modules": {},
+            "classes": {
+                "Route": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "router.js": {
+            "name": "router.js",
+            "modules": {},
+            "classes": {
+                "Router": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "ui.js": {
+            "name": "ui.js",
+            "modules": {},
+            "classes": {
+                "UI": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "uiapp.js": {
+            "name": "uiapp.js",
+            "modules": {},
+            "classes": {
+                "UIApp": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "uiheader.js": {
+            "name": "uiheader.js",
+            "modules": {},
+            "classes": {
+                "UIHeader": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "uiloading.js": {
+            "name": "uiloading.js",
+            "modules": {},
+            "classes": {
+                "UILoading": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "uinavbar.js": {
+            "name": "uinavbar.js",
+            "modules": {},
+            "classes": {
+                "UINavBar": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "uinavitem.js": {
+            "name": "uinavitem.js",
+            "modules": {},
+            "classes": {
+                "UINavItem": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "uipanel.js": {
+            "name": "uipanel.js",
+            "modules": {},
+            "classes": {
+                "UIPanel": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "uiview.js": {
+            "name": "uiview.js",
+            "modules": {},
+            "classes": {
+                "UIView": 1
+            },
             "fors": {},
             "namespaces": {}
         },
@@ -29,7 +129,35 @@
             "namespaces": {}
         }
     },
-    "modules": {},
+    "modules": {
+        "Mootor": {
+            "name": "Mootor",
+            "submodules": {},
+            "classes": {
+                "App": 1,
+                "window.m": 1,
+                "window.Mootor": 1,
+                "Route": 1,
+                "Router": 1,
+                "UI": 1,
+                "UIApp": 1,
+                "UIHeader": 1,
+                "UILoading": 1,
+                "UINavBar": 1,
+                "UINavItem": 1,
+                "UIPanel": 1,
+                "UIView": 1,
+                "View": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "view.js",
+            "line": 1,
+            "description": "The Mootor module handles the creation of App and Namespaces",
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        }
+    },
     "classes": {
         "App": {
             "name": "App",
@@ -39,6 +167,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
+            "module": "Mootor",
             "file": "app.js",
             "line": 11,
             "description": "The App class defines the main object of the applications",
@@ -51,31 +180,201 @@
                 }
             ]
         },
-        "m": {
-            "name": "m",
-            "shortname": "m",
+        "window.m": {
+            "name": "window.m",
+            "shortname": "window.m",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "file": "app.js",
-            "line": 147,
-            "description": "m public global object\nIt is the main way to access the mootor modules, like App\n\nUsage: var app = m.app([options]);",
+            "module": "Mootor",
+            "namespace": "",
+            "file": "mootor.js",
+            "line": 18,
+            "description": "window.m public global object\nIt is the main way to access the mootor app\n\nUsage: var app = window.m.app([options]);",
             "static": 1
         },
-        "Mootor": {
-            "name": "Mootor",
-            "shortname": "Mootor",
+        "window.Mootor": {
+            "name": "window.Mootor",
+            "shortname": "window.Mootor",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "file": "app.js",
-            "line": 188,
-            "description": "Mootor public global object\nAccess modules and namespaces",
+            "module": "Mootor",
+            "namespace": "",
+            "file": "mootor.js",
+            "line": 61,
+            "description": "window.Mootor public global object\nAccess modules and namespaces",
             "static": 1
+        },
+        "Route": {
+            "name": "Route",
+            "shortname": "Route",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Mootor",
+            "namespace": "",
+            "file": "route.js",
+            "line": 1,
+            "description": "The Route class is for defining a route",
+            "is_constructor": 1,
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        },
+        "Router": {
+            "name": "Router",
+            "shortname": "Router",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Mootor",
+            "namespace": "",
+            "file": "router.js",
+            "line": 1,
+            "description": "The Router class is for defining routes",
+            "is_constructor": 1,
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        },
+        "UI": {
+            "name": "UI",
+            "shortname": "UI",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Mootor",
+            "namespace": "",
+            "file": "ui.js",
+            "line": 1,
+            "description": "The UI class is the class for all user interface elements.\nIt is not directly used, but extended by many other classes.",
+            "is_constructor": 1,
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        },
+        "UIApp": {
+            "name": "UIApp",
+            "shortname": "UIApp",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Mootor",
+            "namespace": "",
+            "file": "uiapp.js",
+            "line": 1,
+            "description": "The UIApp class is the UI representation of an app",
+            "extends": "UI",
+            "is_constructor": 1,
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        },
+        "UIHeader": {
+            "name": "UIHeader",
+            "shortname": "UIHeader",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Mootor",
+            "namespace": "",
+            "file": "uiheader.js",
+            "line": 1,
+            "description": "The UIHeader class is a navigational element at the top or bottom of the page (header or footer)",
+            "extends": "UI",
+            "is_constructor": 1,
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        },
+        "UILoading": {
+            "name": "UILoading",
+            "shortname": "UILoading",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Mootor",
+            "namespace": "",
+            "file": "uiloading.js",
+            "line": 1,
+            "description": "The UILoading is the loading indicator",
+            "extends": "UI",
+            "is_constructor": 1,
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        },
+        "UINavBar": {
+            "name": "UINavBar",
+            "shortname": "UINavBar",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Mootor",
+            "namespace": "",
+            "file": "uinavbar.js",
+            "line": 1,
+            "description": "The UINavBar class is a navigational element at the top or bottom of the page (header or footer)",
+            "extends": "UI",
+            "is_constructor": 1,
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        },
+        "UINavItem": {
+            "name": "UINavItem",
+            "shortname": "UINavItem",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Mootor",
+            "namespace": "",
+            "file": "uinavitem.js",
+            "line": 1,
+            "description": "The UINavItem is an item of a UINavBar, like an action button or an anchor link",
+            "extends": "UI",
+            "is_constructor": 1,
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        },
+        "UIPanel": {
+            "name": "UIPanel",
+            "shortname": "UIPanel",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Mootor",
+            "namespace": "",
+            "file": "uipanel.js",
+            "line": 1,
+            "description": "A Panel to show views",
+            "extends": "UI",
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        },
+        "UIView": {
+            "name": "UIView",
+            "shortname": "UIView",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Mootor",
+            "namespace": "",
+            "file": "uiview.js",
+            "line": 1,
+            "description": "The UIView class is the UI representation of a view",
+            "extends": "UI",
+            "is_constructor": 1,
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
         },
         "View": {
             "name": "View",
@@ -85,6 +384,8 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
+            "module": "Mootor",
+            "namespace": "",
             "file": "view.js",
             "line": 1,
             "description": "The View class handles each screen of the application. \nA list of views is specified in the applications options\nand the files are loaded from the views/ folder.\nEach view has a viewName.js and a viewName.html file.\nThe viewName.js file defines options for the view.",
@@ -102,7 +403,7 @@
     "classitems": [
         {
             "file": "app.js",
-            "line": 43,
+            "line": 51,
             "description": "Init views, load remote files and call the View class to handle it.",
             "access": "private",
             "tagname": "",
@@ -119,7 +420,7 @@
         },
         {
             "file": "app.js",
-            "line": 72,
+            "line": 80,
             "description": "Stores the navigation history. \nAn array of views, ordered in the sequence that they were visited by the user.",
             "itemtype": "property",
             "name": "history",
@@ -128,7 +429,7 @@
         },
         {
             "file": "app.js",
-            "line": 81,
+            "line": 89,
             "description": "Application settings\nIf called with a key, returns the value. If called with key and value, sets value to key.",
             "itemtype": "method",
             "name": "settings",
@@ -152,7 +453,7 @@
         },
         {
             "file": "app.js",
-            "line": 94,
+            "line": 102,
             "description": "Create or get a view",
             "itemtype": "method",
             "name": "view",
@@ -176,7 +477,7 @@
         },
         {
             "file": "app.js",
-            "line": 106,
+            "line": 114,
             "description": "Go to a view",
             "itemtype": "method",
             "name": "go",
@@ -194,7 +495,7 @@
         },
         {
             "file": "app.js",
-            "line": 116,
+            "line": 124,
             "description": "Go to the previous view in the history",
             "itemtype": "method",
             "name": "back",
@@ -205,7 +506,7 @@
         },
         {
             "file": "app.js",
-            "line": 125,
+            "line": 133,
             "description": "Go to next view in the history",
             "itemtype": "method",
             "name": "forward",
@@ -216,7 +517,7 @@
         },
         {
             "file": "app.js",
-            "line": 134,
+            "line": 142,
             "description": "Returns a router instance",
             "itemtype": "method",
             "name": "router",
@@ -226,9 +527,9 @@
             "class": "App"
         },
         {
-            "file": "app.js",
-            "line": 156,
-            "description": "Creates a new app with the defined options.\nIf the app is already created, it can be called without options to have a reference to the Mootor app. \n\n App instance factory\n\n m.app({\n   views: [\n      \"index\",\n      \"view1\"\n   ]\n });",
+            "file": "mootor.js",
+            "line": 27,
+            "description": "Creates a new app with the defined options.\nIf the app is already created, it can be called without options to have a reference to the Mootor app. \n\n App instance factory\n\n window.m.app({\n   views: [\n      \"index\",\n      \"view1\"\n   ]\n });",
             "itemtype": "method",
             "name": "app",
             "params": [
@@ -242,29 +543,32 @@
             "return": {
                 "description": "App"
             },
-            "class": "m"
+            "class": "window.m",
+            "module": "Mootor"
         },
         {
-            "file": "app.js",
-            "line": 180,
+            "file": "mootor.js",
+            "line": 53,
             "description": "TODO: Write this object's functionality.",
             "itemtype": "property",
             "name": "context",
             "type": "object",
-            "class": "m"
+            "class": "window.m",
+            "module": "Mootor"
         },
         {
-            "file": "app.js",
-            "line": 196,
+            "file": "mootor.js",
+            "line": 69,
             "description": "TODO: Write this object's functionality.",
             "itemtype": "property",
             "name": "mod",
             "type": "object",
-            "class": "Mootor"
+            "class": "window.Mootor",
+            "module": "Mootor"
         },
         {
-            "file": "app.js",
-            "line": 202,
+            "file": "mootor.js",
+            "line": 75,
             "description": "Creates a new namespace\nIf the namespace is already created, it returns the namespace",
             "itemtype": "method",
             "name": "ns",
@@ -278,7 +582,8 @@
             "return": {
                 "description": "object"
             },
-            "class": "Mootor"
+            "class": "window.Mootor",
+            "module": "Mootor"
         },
         {
             "file": "panel.js",
@@ -302,7 +607,8 @@
                 "description": "Returns the same object it's applied to, to allow chaining.",
                 "type": "Object"
             },
-            "class": "View"
+            "class": "Route",
+            "module": "Mootor"
         },
         {
             "file": "panel.js",
@@ -314,7 +620,8 @@
                 "description": "Returns the same object it's applied to, to allow chaining.",
                 "type": "Object"
             },
-            "class": "View"
+            "class": "Route",
+            "module": "Mootor"
         },
         {
             "file": "panel.js",
@@ -326,20 +633,389 @@
                 "description": "Returns the same object it's applied to, to allow chaining.",
                 "type": "Object"
             },
-            "class": "View"
+            "class": "Route",
+            "module": "Mootor"
+        },
+        {
+            "file": "route.js",
+            "line": 34,
+            "description": "The URL referenced by this route",
+            "itemtype": "property",
+            "name": "URL",
+            "type": "String",
+            "class": "Route",
+            "module": "Mootor"
+        },
+        {
+            "file": "route.js",
+            "line": 42,
+            "description": "An array with the parameters passed to the page\nIf called with no parameters, it returns the currently set params in this route.",
+            "itemtype": "method",
+            "name": "params",
+            "params": [
+                {
+                    "name": "params",
+                    "description": "- An array with the parameters passed to the page",
+                    "type": "Array",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "array"
+            },
+            "class": "Route",
+            "module": "Mootor"
+        },
+        {
+            "file": "route.js",
+            "line": 54,
+            "description": "The view that implements this route\nIf called with no parameters, it returns the currently set view in this route.",
+            "itemtype": "method",
+            "name": "view",
+            "params": [
+                {
+                    "name": "view",
+                    "description": "- The view that implements this route",
+                    "type": "View",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "view"
+            },
+            "class": "Route",
+            "module": "Mootor"
+        },
+        {
+            "file": "router.js",
+            "line": 34,
+            "description": "Create a route",
+            "itemtype": "method",
+            "name": "route",
+            "params": [
+                {
+                    "name": "options",
+                    "description": "TODO: Define this object's properties",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Route"
+            },
+            "class": "Router",
+            "module": "Mootor"
+        },
+        {
+            "file": "ui.js",
+            "line": 35,
+            "description": "Shows element (not necesarily, since the element's parent might be hidden or out of view)",
+            "itemtype": "method",
+            "name": "show",
+            "return": {
+                "description": "",
+                "type": "UI"
+            },
+            "class": "UI",
+            "module": "Mootor"
+        },
+        {
+            "file": "ui.js",
+            "line": 45,
+            "description": "Hides element from view",
+            "itemtype": "method",
+            "name": "hide",
+            "return": {
+                "description": "",
+                "type": "UI"
+            },
+            "class": "UI",
+            "module": "Mootor"
+        },
+        {
+            "file": "uiapp.js",
+            "line": 39,
+            "description": "Show/Hide the loading indicator",
+            "itemtype": "method",
+            "name": "loading",
+            "params": [
+                {
+                    "name": "show",
+                    "description": "Show or hide the loading indicator",
+                    "type": "Boolean",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "UIApp",
+            "module": "Mootor"
+        },
+        {
+            "file": "uiheader.js",
+            "line": 40,
+            "description": "Title\nThe text to display in the header\nIf called with no arguments returns the current title",
+            "itemtype": "method",
+            "name": "title",
+            "params": [
+                {
+                    "name": "title",
+                    "description": "The text for the title",
+                    "type": "String",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "chainable": 1,
+            "class": "UIHeader",
+            "module": "Mootor"
+        },
+        {
+            "file": "uiloading.js",
+            "line": 40,
+            "description": "Set the style for the loading animation",
+            "itemtype": "method",
+            "name": "style",
+            "params": [
+                {
+                    "name": "options",
+                    "description": "Style options TODO: Define this object's structure",
+                    "type": "Object",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "UILoading"
+            },
+            "chainable": 1,
+            "class": "UILoading",
+            "module": "Mootor"
+        },
+        {
+            "file": "uinavbar.js",
+            "line": 40,
+            "description": "A nav object",
+            "itemtype": "property",
+            "name": "nav",
+            "type": "Nav",
+            "class": "UINavBar",
+            "module": "Mootor"
+        },
+        {
+            "file": "uinavbar.js",
+            "line": 50,
+            "description": "Position\nThe nav bar is statically positioned to the top or bottom of the window",
+            "itemtype": "method",
+            "name": "position",
+            "params": [
+                {
+                    "name": "position",
+                    "description": "The position for this nav bar, one of: \"top\", \"bottom\".",
+                    "type": "String",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "UINavBar"
+            },
+            "chainable": 1,
+            "class": "UINavBar",
+            "module": "Mootor"
+        },
+        {
+            "file": "uinavitem.js",
+            "line": 40,
+            "description": "Move the element to the specified coordinates. \nIf coordinates are not specified, it returns coordinates object with the current position.",
+            "itemtype": "method",
+            "name": "position",
+            "params": [
+                {
+                    "name": "coordinates",
+                    "description": "Object with coordinates. Example: {x: 0, y: 0}",
+                    "type": "Object",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "Object with coordinates. Example: {x: 0, y: 0}",
+                "type": "Object"
+            },
+            "chainable": 1,
+            "class": "UINavItem",
+            "module": "Mootor"
+        },
+        {
+            "file": "uinavitem.js",
+            "line": 53,
+            "description": "Block/Unblock or return block status.",
+            "itemtype": "method",
+            "name": "blocked",
+            "params": [
+                {
+                    "name": "blocked",
+                    "description": "Whether the item is blocked",
+                    "type": "Boolean",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "Whether the panel is blocked",
+                "type": "Boolean"
+            },
+            "chainable": 1,
+            "class": "UINavItem",
+            "module": "Mootor"
+        },
+        {
+            "file": "uipanel.js",
+            "line": 37,
+            "description": "Initialize  a panel",
+            "itemtype": "method",
+            "name": "init",
+            "access": "private",
+            "tagname": "",
+            "class": "UIPanel",
+            "module": "Mootor"
+        },
+        {
+            "file": "uipanel.js",
+            "line": 65,
+            "description": "Move the element to the specified coordinates. \nIf coordinates are not specified, it returns coordinates object with the current position.",
+            "itemtype": "method",
+            "name": "position",
+            "params": [
+                {
+                    "name": "coordinates",
+                    "description": "Object with coordinates. Example: {x: 0, y: 0}",
+                    "type": "Object",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "Object with coordinates. Example: {x: 0, y: 0}",
+                "type": "Object"
+            },
+            "class": "UIPanel",
+            "module": "Mootor"
+        },
+        {
+            "file": "uipanel.js",
+            "line": 77,
+            "description": "Resize the element to the specified dimentions. \nIf dimentions are not specified, it returns dimentions object with the current size.",
+            "itemtype": "method",
+            "name": "size",
+            "params": [
+                {
+                    "name": "dimentions",
+                    "description": "Object with dimentions. Example: {w: 0, h: 0}",
+                    "type": "Object",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "Object with dimentions. Example: {w: 0, h: 0}",
+                "type": "Object"
+            },
+            "class": "UIPanel",
+            "module": "Mootor"
+        },
+        {
+            "file": "uipanel.js",
+            "line": 89,
+            "description": "Block/Unblock or return block status.",
+            "itemtype": "method",
+            "name": "blocked",
+            "params": [
+                {
+                    "name": "blocked",
+                    "description": "Whether the panel is blocked",
+                    "type": "Boolean",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "Whether the panel is blocked",
+                "type": "Boolean"
+            },
+            "class": "UIPanel",
+            "module": "Mootor"
+        },
+        {
+            "file": "uipanel.js",
+            "line": 100,
+            "description": "Set or get transition type",
+            "itemtype": "method",
+            "name": "transition",
+            "params": [
+                {
+                    "name": "transition",
+                    "description": "Transition type. MUST be one of: slide-left, slide-right, none",
+                    "type": "String",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "Transition type",
+                "type": "String"
+            },
+            "class": "UIPanel",
+            "module": "Mootor"
+        },
+        {
+            "file": "uipanel.js",
+            "line": 136,
+            "description": "Shows a panel using the specified transition",
+            "itemtype": "method",
+            "name": "show",
+            "return": {
+                "description": "Returns the same object it's applied to, to allow chaining.",
+                "type": "Object"
+            },
+            "class": "UIPanel",
+            "module": "Mootor"
+        },
+        {
+            "file": "uipanel.js",
+            "line": 215,
+            "description": "Hides a panel using the specified transition",
+            "itemtype": "method",
+            "name": "hide",
+            "return": {
+                "description": "Returns the same object it's applied to, to allow chaining.",
+                "type": "Object"
+            },
+            "class": "UIPanel",
+            "module": "Mootor"
+        },
+        {
+            "file": "uiview.js",
+            "line": 40,
+            "description": "A reference to the view",
+            "itemtype": "property",
+            "name": "view",
+            "type": "View",
+            "class": "UIView",
+            "module": "Mootor"
         },
         {
             "file": "view.js",
-            "line": 113,
+            "line": 118,
             "description": "A reference to the UI representation of this view",
             "itemtype": "property",
             "name": "ui",
             "type": "UIView",
-            "class": "View"
+            "class": "View",
+            "module": "Mootor"
         },
         {
             "file": "view.js",
-            "line": 121,
+            "line": 126,
             "description": "Title is the friendly name for the current view.\nWhen called without parameters, returns a string containing the title. When called with parameters, sets the title.",
             "itemtype": "method",
             "name": "title",
@@ -354,11 +1030,12 @@
             "return": {
                 "description": "string"
             },
-            "class": "View"
+            "class": "View",
+            "module": "Mootor"
         },
         {
             "file": "view.js",
-            "line": 133,
+            "line": 138,
             "description": "Sets an event handler for the view\nPossible values for event: load, beforeLoad, unload, beforeUnload, init\nTODO: Define which parameters are passed to the callback function.",
             "itemtype": "method",
             "name": "on",
@@ -377,11 +1054,12 @@
             "return": {
                 "description": "View"
             },
-            "class": "View"
+            "class": "View",
+            "module": "Mootor"
         },
         {
             "file": "view.js",
-            "line": 147,
+            "line": 152,
             "description": "Unsets event handlers for the view\nPossible values for event: load, beforeLoad, unload, beforeUnload, init",
             "itemtype": "method",
             "name": "off",
@@ -401,33 +1079,36 @@
             "return": {
                 "description": "View"
             },
-            "class": "View"
+            "class": "View",
+            "module": "Mootor"
         },
         {
             "file": "view.js",
-            "line": 160,
+            "line": 165,
             "description": "Removes the view from the app (and from the screen)",
             "itemtype": "method",
             "name": "remove",
             "return": {
                 "description": "View"
             },
-            "class": "View"
+            "class": "View",
+            "module": "Mootor"
         },
         {
             "file": "view.js",
-            "line": 170,
+            "line": 175,
             "description": "Inserts the view to the app",
             "itemtype": "method",
             "name": "insert",
             "return": {
                 "description": "View"
             },
-            "class": "View"
+            "class": "View",
+            "module": "Mootor"
         },
         {
             "file": "view.js",
-            "line": 180,
+            "line": 185,
             "description": "Gets or sets the source for the HTML of this view.",
             "itemtype": "method",
             "name": "html",
@@ -435,11 +1116,12 @@
                 "description": "string"
             },
             "default": "/views/[viewid]/[viewid].html",
-            "class": "View"
+            "class": "View",
+            "module": "Mootor"
         },
         {
             "file": "view.js",
-            "line": 191,
+            "line": 196,
             "description": "Gets or sets the source for the JavaScript of this view.",
             "itemtype": "method",
             "name": "script",
@@ -447,11 +1129,12 @@
                 "description": "string"
             },
             "default": "/views/[viewid]/[viewid].js",
-            "class": "View"
+            "class": "View",
+            "module": "Mootor"
         },
         {
             "file": "view.js",
-            "line": 202,
+            "line": 207,
             "description": "Gets or sets the source for the CSS StyleSheet of this view.",
             "itemtype": "method",
             "name": "css",
@@ -459,7 +1142,8 @@
                 "description": "string"
             },
             "default": "/views/[viewid]/[viewid].css",
-            "class": "View"
+            "class": "View",
+            "module": "Mootor"
         }
     ],
     "warnings": []

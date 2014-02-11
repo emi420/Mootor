@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>app.js</title>
+    <title>ui.js</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -110,161 +110,65 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: app.js</h1>
+                        <h1 class="file-heading">File: ui.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-/*
- *  @author Emilio Mariscal (emi420 [at] gmail.com)
- *  @author Martín Szyszlican (martinsz [at] gmail.com)
- */
+/**
+* The UI class is the class for all user interface elements.
+* It is not directly used, but extended by many other classes.
+*
+* @class UI
+* @constructor
+* @author Emilio Mariscal (emi420 [at] gmail.com)
+* @author Martín Szyszlican (martinsz [at] gmail.com)
+*/
 
 (function ($) {
-
     // Force strict mode for ECMAScript
     &quot;use strict&quot;;
 
-    /**
-    * The App class defines the main object of the applications
-    *
-    * @class App
-    * @constructor
-    * @param {Object} options An object defining options for the application.
-    * * views - An array with a list of view names
-    */
-    var App;
+    var UI;
 
     // Private constructors
-    
-    App = App = function(options) {
-        App.init(options, this);
+    UI = function() {
     };
 
     //Add this Class as a Mootor module
-    $.extend(Mootor.mod, {App: App});
+    $.extend(Mootor.mod, {UI: UI});
+
     
     // Private static methods and properties
 
-    $.extend(App, {
-    
-        views: {},
-        
-        currentView: undefined,
-    
-        init: function(options, self) {
-            // Defer init until dom loaded
-            $(function($){
-                if (options) {
-                    App.initViews(options.views, self);    
-                }
-                else {
-                    console.log(&quot;Can&#x27;t init app without views&quot;);
-                }
-                
-            });
-        },
-    
-        /**
-        * Init views, load remote files and call the View class to handle it.
-        *
-        * @private
-        * @method initViews
-        * @param {Array} views A list of view names to be initialized
-        */
-        initViews: function (views, self) {
-            var i,
-                view;
-                
-            for (i = 0; i &lt; views.length; i++) {
-
-                view = self.view({
-                    id: views[i],
-                });
-                
-                App.views[i] = view;
-
-            }
-            
-        },
-    
+    $.extend(UI, {
+   
     });
 
-    // Public methods
+    //Public methods
 
-    $.extend(App.prototype, {
+    $.extend(UI.prototype, {
         
         /**
-        * Stores the navigation history. 
-        * An array of views, ordered in the sequence that they were visited by the user.
+        * Shows element (not necesarily, since the element&#x27;s parent might be hidden or out of view)
         *
-        * @property history
-        * @type array
+        * @method show
+        * @return {UI}
         */
-        history: [],
-
-        /**
-        * Application settings
-        * If called with a key, returns the value. If called with key and value, sets value to key.
-        *
-        * @method settings
-        * @param {String} key The name of the setting
-        * @param {object} [value] The value of the setting
-        * @return object the setting value
-        */
-        settings: function(key, value) {
+        show: function() {
             
         },
 
         /**
-        * Create or get a view
+        * Hides element from view
         *
-        * @method view
-        * @param {String} id The id of the view
-        * @param {String} [settings] The settings object for the view
-        * @return View the referenced view object
+        * @method hide
+        * @return {UI}
         */
-        view: function(id, settings) {
-
-        },
-
-        /**
-        * Go to a view
-        *
-        * @method go
-        * @param {String} id The id of the view
-        * @return Route
-        */
-        go: function(id) {
-        },        
-
-        /**
-        * Go to the previous view in the history
-        *
-        * @method back
-        * @return Route
-        */
-        back: function(id) {
-        },        
-
-        /**
-        * Go to next view in the history
-        *
-        * @method forward
-        * @return Route
-        */
-        forward: function(id) {
-        },        
-
-        /**
-        * Returns a router instance
-        *
-        * @method router
-        * @return Router
-        */
-        router: function(id) {
-        }        
+        hide: function() {
+            
+        }
     });
-
+        
 }(window.$));
 
     </pre>

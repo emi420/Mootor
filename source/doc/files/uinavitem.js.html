@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>app.js</title>
+    <title>uinavitem.js</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -110,161 +110,74 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: app.js</h1>
+                        <h1 class="file-heading">File: uinavitem.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-/*
- *  @author Emilio Mariscal (emi420 [at] gmail.com)
- *  @author Martín Szyszlican (martinsz [at] gmail.com)
- */
+/**
+* The UINavItem is an item of a UINavBar, like an action button or an anchor link
+*
+* @class UINavItem
+* @extends UI
+* @constructor
+* @author Emilio Mariscal (emi420 [at] gmail.com)
+* @author Martín Szyszlican (martinsz [at] gmail.com)
+*/
 
 (function ($) {
-
     // Force strict mode for ECMAScript
     &quot;use strict&quot;;
 
-    /**
-    * The App class defines the main object of the applications
-    *
-    * @class App
-    * @constructor
-    * @param {Object} options An object defining options for the application.
-    * * views - An array with a list of view names
-    */
-    var App;
+    var UI,
+        UINavItem;
 
     // Private constructors
-    
-    App = App = function(options) {
-        App.init(options, this);
+    UINavItem = function() {
     };
 
+    //This Class extends UI
+    UI = Mootor.ns(&quot;UI&quot;);
+    UINavItem.prototype = UI.prototype;
+
+
     //Add this Class as a Mootor module
-    $.extend(Mootor.mod, {App: App});
+    $.extend(Mootor.mod, {UINavItem: UINavItem});
     
     // Private static methods and properties
 
-    $.extend(App, {
-    
-        views: {},
-        
-        currentView: undefined,
-    
-        init: function(options, self) {
-            // Defer init until dom loaded
-            $(function($){
-                if (options) {
-                    App.initViews(options.views, self);    
-                }
-                else {
-                    console.log(&quot;Can&#x27;t init app without views&quot;);
-                }
-                
-            });
-        },
-    
-        /**
-        * Init views, load remote files and call the View class to handle it.
-        *
-        * @private
-        * @method initViews
-        * @param {Array} views A list of view names to be initialized
-        */
-        initViews: function (views, self) {
-            var i,
-                view;
-                
-            for (i = 0; i &lt; views.length; i++) {
-
-                view = self.view({
-                    id: views[i],
-                });
-                
-                App.views[i] = view;
-
-            }
-            
-        },
-    
+    $.extend(UINavItem, {
+   
     });
 
-    // Public methods
+    //Public methods
 
-    $.extend(App.prototype, {
+    $.extend(UINavItem.prototype, {
         
         /**
-        * Stores the navigation history. 
-        * An array of views, ordered in the sequence that they were visited by the user.
+        * Move the element to the specified coordinates. 
+        * If coordinates are not specified, it returns coordinates object with the current position.
         *
-        * @property history
-        * @type array
+        * @method position
+        * @param {object} [coordinates] Object with coordinates. Example: {x: 0, y: 0}
+        * @return {object} Object with coordinates. Example: {x: 0, y: 0}
+        * @chainable
         */
-        history: [],
-
-        /**
-        * Application settings
-        * If called with a key, returns the value. If called with key and value, sets value to key.
-        *
-        * @method settings
-        * @param {String} key The name of the setting
-        * @param {object} [value] The value of the setting
-        * @return object the setting value
-        */
-        settings: function(key, value) {
+        position: function(coordinates) {
             
         },
 
         /**
-        * Create or get a view
+        * Block/Unblock or return block status.
         *
-        * @method view
-        * @param {String} id The id of the view
-        * @param {String} [settings] The settings object for the view
-        * @return View the referenced view object
+        * @method blocked
+        * @param {Boolean} [blocked] Whether the item is blocked
+        * @return {Boolean} Whether the panel is blocked
+        * @chainable
         */
-        view: function(id, settings) {
-
-        },
-
-        /**
-        * Go to a view
-        *
-        * @method go
-        * @param {String} id The id of the view
-        * @return Route
-        */
-        go: function(id) {
-        },        
-
-        /**
-        * Go to the previous view in the history
-        *
-        * @method back
-        * @return Route
-        */
-        back: function(id) {
-        },        
-
-        /**
-        * Go to next view in the history
-        *
-        * @method forward
-        * @return Route
-        */
-        forward: function(id) {
-        },        
-
-        /**
-        * Returns a router instance
-        *
-        * @method router
-        * @return Router
-        */
-        router: function(id) {
-        }        
-    });
-
+        blocked: function(blocked) {
+            
+        }
+    });        
 }(window.$));
 
     </pre>

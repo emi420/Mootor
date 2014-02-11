@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>m</title>
+    <title>UIApp</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -43,15 +43,37 @@
             
                 <li><a href="../classes/App.html">App</a></li>
             
-                <li><a href="../classes/m.html">m</a></li>
+                <li><a href="../classes/Route.html">Route</a></li>
             
-                <li><a href="../classes/Mootor.html">Mootor</a></li>
+                <li><a href="../classes/Router.html">Router</a></li>
+            
+                <li><a href="../classes/UI.html">UI</a></li>
+            
+                <li><a href="../classes/UIApp.html">UIApp</a></li>
+            
+                <li><a href="../classes/UIHeader.html">UIHeader</a></li>
+            
+                <li><a href="../classes/UILoading.html">UILoading</a></li>
+            
+                <li><a href="../classes/UINavBar.html">UINavBar</a></li>
+            
+                <li><a href="../classes/UINavItem.html">UINavItem</a></li>
+            
+                <li><a href="../classes/UIPanel.html">UIPanel</a></li>
+            
+                <li><a href="../classes/UIView.html">UIView</a></li>
             
                 <li><a href="../classes/View.html">View</a></li>
+            
+                <li><a href="../classes/window.m.html">window.m</a></li>
+            
+                <li><a href="../classes/window.Mootor.html">window.Mootor</a></li>
             
             </ul>
 
             <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/Mootor.html">Mootor</a></li>
             
             </ul>
         </div>
@@ -88,18 +110,26 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>m Class</h1>
+                        <h1>UIApp Class</h1>
 <div class="box meta">
     
 
     
-
-    
-        <div class="foundat">
-            Defined in: <a href="../files/app.js.html#l147"><code>app.js:147</code></a>
+        <div class="extends">
+            Extends <a href="../classes/UI.html" class="crosslink">UI</a>
         </div>
     
 
+    
+        <div class="foundat">
+            Defined in: <a href="../files/uiapp.js.html#l1"><code>uiapp.js:1</code></a>
+        </div>
+    
+
+    
+        
+            Module: <a href="../modules/Mootor.html">Mootor</a>
+        
     
 
     
@@ -108,12 +138,67 @@
 
 
 <div class="box intro">
-    <p>m public global object
-It is the main way to access the mootor modules, like App</p>
-<p>Usage: var app = m.app([options]);</p>
+    <p>The UIApp class is the UI representation of an app</p>
 
 </div>
 
+
+    <div class="constructor">
+        <h2>Constructor</h2>
+        <div id="method_UIApp" class="method item">
+    <h3 class="name"><code>UIApp</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/uiapp.js.html#l1"><code>uiapp.js:1</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+    </div>
 
 
 <div id="classdocs" class="tabview">
@@ -123,8 +208,6 @@ It is the main way to access the mootor modules, like App</p>
         
             <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
         
-        
-            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
         
         
         
@@ -138,10 +221,24 @@ It is the main way to access the mootor modules, like App</p>
                 <div class="index-section methods">
                     <h3>Methods</h3>
 
-                    <ul class="index-list methods">
+                    <ul class="index-list methods extends">
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_hide">hide</a>
+
+                                
+                                
+                            </li>
                         
                             <li class="index-item method">
-                                <a href="#method_app">app</a>
+                                <a href="#method_loading">loading</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_show">show</a>
 
                                 
                                 
@@ -151,21 +248,6 @@ It is the main way to access the mootor modules, like App</p>
                 </div>
             
 
-            
-                <div class="index-section properties">
-                    <h3>Properties</h3>
-
-                    <ul class="index-list properties">
-                        
-                            <li class="index-item property">
-                                <a href="#property_context">context</a>
-
-                                
-                                
-                            </li>
-                        
-                    </ul>
-                </div>
             
 
             
@@ -178,8 +260,76 @@ It is the main way to access the mootor modules, like App</p>
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_app" class="method item">
-    <h3 class="name"><code>app</code></h3>
+                    <div id="method_hide" class="method item inherited">
+    <h3 class="name"><code>hide</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/UI.html" class="crosslink">UI</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/UI.html#method_hide">UI</a>:
+            
+        
+        
+        <a href="../files/ui.js.html#l45"><code>ui.js:45</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Hides element from view</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/UI.html" class="crosslink">UI</a></span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_loading" class="method item">
+    <h3 class="name"><code>loading</code></h3>
 
     
         <div class="args">
@@ -187,7 +337,7 @@ It is the main way to access the mootor modules, like App</p>
             
                 <li class="arg">
                     
-                        <code class="optional">[views]</code>
+                        <code class="optional">[show]</code>
                     
                 </li>
             
@@ -197,7 +347,7 @@ It is the main way to access the mootor modules, like App</p>
 
     
         <span class="returns-inline">
-            <span class="type"></span>
+            <span class="type">Boolean</span>
         </span>
     
 
@@ -224,7 +374,7 @@ It is the main way to access the mootor modules, like App</p>
             
         
         
-        <a href="../files/app.js.html#l156"><code>app.js:156</code></a>
+        <a href="../files/uiapp.js.html#l39"><code>uiapp.js:39</code></a>
         
         </p>
 
@@ -235,15 +385,7 @@ It is the main way to access the mootor modules, like App</p>
     </div>
 
     <div class="description">
-        <p>Creates a new app with the defined options.
-If the app is already created, it can be called without options to have a reference to the Mootor app. </p>
-<p> App instance factory</p>
-<p> m.app({
-   views: [
-      &quot;index&quot;,
-      &quot;view1&quot;
-   ]
- });</p>
+        <p>Show/Hide the loading indicator</p>
 
     </div>
 
@@ -255,15 +397,15 @@ If the app is already created, it can be called without options to have a refere
             
                 <li class="param">
                     
-                        <code class="param-name optional">[views]</code>
-                        <span class="type">Array</span>
+                        <code class="param-name optional">[show]</code>
+                        <span class="type">Boolean</span>
                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>A list of view names to be initialized</p>
+                        <p>Show or hide the loading indicator</p>
 
                     </div>
 
@@ -281,8 +423,8 @@ If the app is already created, it can be called without options to have a refere
             <div class="returns-description">
                 
                     
-                    <p>App</p>
-
+                        <span class="type">Boolean</span>:
+                    
                 
             </div>
         </div>
@@ -292,17 +434,22 @@ If the app is already created, it can be called without options to have a refere
 </div>
 
                 
-            </div>
-        
+                    <div id="method_show" class="method item inherited">
+    <h3 class="name"><code>show</code></h3>
 
-        
-            <div id="properties" class="api-class-tabpanel">
-                <h2 class="off-left">Properties</h2>
+    
+        <span class="paren">()</span>
+    
 
-                
-                    <div id="property_context" class="property item">
-    <h3 class="name"><code>context</code></h3>
-    <span class="type">Object</span>
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/UI.html" class="crosslink">UI</a></span>
+        </span>
+    
+
+    
+
+    
 
     
 
@@ -315,17 +462,15 @@ If the app is already created, it can be called without options to have a refere
     <div class="meta">
         
             
-                
-                <p>
-                
-                Defined in
-                
+                <p>Inherited from
+                <a href="../classes/UI.html#method_show">UI</a>:
             
         
         
-        <a href="../files/app.js.html#l180"><code>app.js:180</code></a>
+        <a href="../files/ui.js.html#l35"><code>ui.js:35</code></a>
         
         </p>
+
 
         
 
@@ -333,12 +478,24 @@ If the app is already created, it can be called without options to have a refere
     </div>
 
     <div class="description">
-        <p>TODO: Write this object&#39;s functionality.</p>
+        <p>Shows element (not necesarily, since the element&#39;s parent might be hidden or out of view)</p>
 
     </div>
 
     
 
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/UI.html" class="crosslink">UI</a></span>:
+                    
+                
+            </div>
+        </div>
     
 
     
@@ -346,6 +503,8 @@ If the app is already created, it can be called without options to have a refere
 
                 
             </div>
+        
+
         
 
         

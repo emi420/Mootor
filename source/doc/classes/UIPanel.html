@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>View</title>
+    <title>UIPanel</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -110,15 +110,19 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>View Class</h1>
+                        <h1>UIPanel Class</h1>
 <div class="box meta">
     
 
     
+        <div class="extends">
+            Extends <a href="../classes/UI.html" class="crosslink">UI</a>
+        </div>
+    
 
     
         <div class="foundat">
-            Defined in: <a href="../files/view.js.html#l1"><code>view.js:1</code></a>
+            Defined in: <a href="../files/uipanel.js.html#l1"><code>uipanel.js:1</code></a>
         </div>
     
 
@@ -134,109 +138,10 @@
 
 
 <div class="box intro">
-    <p>The View class handles each screen of the application. 
-A list of views is specified in the applications options
-and the files are loaded from the views/ folder.
-Each view has a viewName.js and a viewName.html file.
-The viewName.js file defines options for the view.</p>
+    <p>A Panel to show views</p>
 
 </div>
 
-
-    <div class="constructor">
-        <h2>Constructor</h2>
-        <div id="method_View" class="method item">
-    <h3 class="name"><code>View</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>options</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/view.js.html#l1"><code>view.js:1</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">options</code>
-                        <span class="type">Object</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>An object defining options for the current view.</p>
-<ul>
-<li>constructor - A function that will be run after the view has loaded (optional).</li>
-<li>animation - a string defining the type of animation used to show this view (one of: &quot;slide-left&quot;, &quot;slide-right&quot;, &quot;none&quot;).</li>
-</ul>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-    </div>
 
 
 <div id="classdocs" class="tabview">
@@ -246,8 +151,6 @@ The viewName.js file defines options for the view.</p>
         
             <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
         
-        
-            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
         
         
         
@@ -261,59 +164,52 @@ The viewName.js file defines options for the view.</p>
                 <div class="index-section methods">
                     <h3>Methods</h3>
 
-                    <ul class="index-list methods">
+                    <ul class="index-list methods extends">
                         
                             <li class="index-item method">
-                                <a href="#method_css">css</a>
+                                <a href="#method_blocked">blocked</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_hide">hide</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_init">init</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_html">html</a>
+                                <a href="#method_position">position</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_show">show</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_insert">insert</a>
+                                <a href="#method_size">size</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_off">off</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_on">on</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_remove">remove</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_script">script</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_title">title</a>
+                                <a href="#method_transition">transition</a>
 
                                 
                                 
@@ -323,21 +219,6 @@ The viewName.js file defines options for the view.</p>
                 </div>
             
 
-            
-                <div class="index-section properties">
-                    <h3>Properties</h3>
-
-                    <ul class="index-list properties">
-                        
-                            <li class="index-item property">
-                                <a href="#property_ui">ui</a>
-
-                                
-                                
-                            </li>
-                        
-                    </ul>
-                </div>
             
 
             
@@ -350,221 +231,8 @@ The viewName.js file defines options for the view.</p>
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_css" class="method item">
-    <h3 class="name"><code>css</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type"></span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/view.js.html#l207"><code>view.js:207</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Gets or sets the source for the CSS StyleSheet of this view.</p>
-
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                    <p>string</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_html" class="method item">
-    <h3 class="name"><code>html</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type"></span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/view.js.html#l185"><code>view.js:185</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Gets or sets the source for the HTML of this view.</p>
-
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                    <p>string</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_insert" class="method item">
-    <h3 class="name"><code>insert</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type"></span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/view.js.html#l175"><code>view.js:175</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Inserts the view to the app</p>
-
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                    <p>View</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_off" class="method item">
-    <h3 class="name"><code>off</code></h3>
+                    <div id="method_blocked" class="method item">
+    <h3 class="name"><code>blocked</code></h3>
 
     
         <div class="args">
@@ -572,13 +240,7 @@ The viewName.js file defines options for the view.</p>
             
                 <li class="arg">
                     
-                        <code>event</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code class="optional">[callback]</code>
+                        <code class="optional">[blocked]</code>
                     
                 </li>
             
@@ -588,7 +250,7 @@ The viewName.js file defines options for the view.</p>
 
     
         <span class="returns-inline">
-            <span class="type"></span>
+            <span class="type">Boolean</span>
         </span>
     
 
@@ -615,7 +277,7 @@ The viewName.js file defines options for the view.</p>
             
         
         
-        <a href="../files/view.js.html#l152"><code>view.js:152</code></a>
+        <a href="../files/uipanel.js.html#l89"><code>uipanel.js:89</code></a>
         
         </p>
 
@@ -626,8 +288,7 @@ The viewName.js file defines options for the view.</p>
     </div>
 
     <div class="description">
-        <p>Unsets event handlers for the view
-Possible values for event: load, beforeLoad, unload, beforeUnload, init</p>
+        <p>Block/Unblock or return block status.</p>
 
     </div>
 
@@ -639,31 +300,15 @@ Possible values for event: load, beforeLoad, unload, beforeUnload, init</p>
             
                 <li class="param">
                     
-                        <code class="param-name">event</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Defines in which event we want to unset handlers</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name optional">[callback]</code>
-                        <span class="type">Function</span>
+                        <code class="param-name optional">[blocked]</code>
+                        <span class="type">Boolean</span>
                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>If this parameter is specified, only that function is removed. Otherwise all callbacks for this event are removed.</p>
+                        <p>Whether the panel is blocked</p>
 
                     </div>
 
@@ -681,7 +326,9 @@ Possible values for event: load, beforeLoad, unload, beforeUnload, init</p>
             <div class="returns-description">
                 
                     
-                    <p>View</p>
+                        <span class="type">Boolean</span>:
+                    
+                    <p>Whether the panel is blocked</p>
 
                 
             </div>
@@ -692,8 +339,138 @@ Possible values for event: load, beforeLoad, unload, beforeUnload, init</p>
 </div>
 
                 
-                    <div id="method_on" class="method item">
-    <h3 class="name"><code>on</code></h3>
+                    <div id="method_hide" class="method item">
+    <h3 class="name"><code>hide</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            <p>Inherited from
+            <a href="../classes/UI.html#method_hide">
+                UI
+            </a>
+            
+            but overwritten in
+            
+        
+        
+        <a href="../files/uipanel.js.html#l215"><code>uipanel.js:215</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Hides a panel using the specified transition</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                    <p>Returns the same object it&#39;s applied to, to allow chaining.</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_init" class="method item private">
+    <h3 class="name"><code>init</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/uipanel.js.html#l37"><code>uipanel.js:37</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Initialize  a panel</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_position" class="method item">
+    <h3 class="name"><code>position</code></h3>
 
     
         <div class="args">
@@ -701,13 +478,7 @@ Possible values for event: load, beforeLoad, unload, beforeUnload, init</p>
             
                 <li class="arg">
                     
-                        <code>event</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>callback</code>
+                        <code class="optional">[coordinates]</code>
                     
                 </li>
             
@@ -717,7 +488,7 @@ Possible values for event: load, beforeLoad, unload, beforeUnload, init</p>
 
     
         <span class="returns-inline">
-            <span class="type"></span>
+            <span class="type">Object</span>
         </span>
     
 
@@ -744,7 +515,7 @@ Possible values for event: load, beforeLoad, unload, beforeUnload, init</p>
             
         
         
-        <a href="../files/view.js.html#l138"><code>view.js:138</code></a>
+        <a href="../files/uipanel.js.html#l65"><code>uipanel.js:65</code></a>
         
         </p>
 
@@ -755,9 +526,8 @@ Possible values for event: load, beforeLoad, unload, beforeUnload, init</p>
     </div>
 
     <div class="description">
-        <p>Sets an event handler for the view
-Possible values for event: load, beforeLoad, unload, beforeUnload, init
-TODO: Define which parameters are passed to the callback function.</p>
+        <p>Move the element to the specified coordinates. 
+If coordinates are not specified, it returns coordinates object with the current position.</p>
 
     </div>
 
@@ -769,30 +539,15 @@ TODO: Define which parameters are passed to the callback function.</p>
             
                 <li class="param">
                     
-                        <code class="param-name">event</code>
-                        <span class="type">String</span>
+                        <code class="param-name optional">[coordinates]</code>
+                        <span class="type">Object</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>Defines in which event the handler will be called</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">callback</code>
-                        <span class="type">Function</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>The function to be called when the event is fired.</p>
+                        <p>Object with coordinates. Example: {x: 0, y: 0}</p>
 
                     </div>
 
@@ -810,7 +565,9 @@ TODO: Define which parameters are passed to the callback function.</p>
             <div class="returns-description">
                 
                     
-                    <p>View</p>
+                        <span class="type">Object</span>:
+                    
+                    <p>Object with coordinates. Example: {x: 0, y: 0}</p>
 
                 
             </div>
@@ -821,8 +578,8 @@ TODO: Define which parameters are passed to the callback function.</p>
 </div>
 
                 
-                    <div id="method_remove" class="method item">
-    <h3 class="name"><code>remove</code></h3>
+                    <div id="method_show" class="method item">
+    <h3 class="name"><code>show</code></h3>
 
     
         <span class="paren">()</span>
@@ -830,7 +587,7 @@ TODO: Define which parameters are passed to the callback function.</p>
 
     
         <span class="returns-inline">
-            <span class="type"></span>
+            <span class="type">Object</span>
         </span>
     
 
@@ -848,16 +605,16 @@ TODO: Define which parameters are passed to the callback function.</p>
 
     <div class="meta">
         
+            <p>Inherited from
+            <a href="../classes/UI.html#method_show">
+                UI
+            </a>
             
-                
-                <p>
-                
-                Defined in
-                
+            but overwritten in
             
         
         
-        <a href="../files/view.js.html#l165"><code>view.js:165</code></a>
+        <a href="../files/uipanel.js.html#l136"><code>uipanel.js:136</code></a>
         
         </p>
 
@@ -868,7 +625,7 @@ TODO: Define which parameters are passed to the callback function.</p>
     </div>
 
     <div class="description">
-        <p>Removes the view from the app (and from the screen)</p>
+        <p>Shows a panel using the specified transition</p>
 
     </div>
 
@@ -881,78 +638,9 @@ TODO: Define which parameters are passed to the callback function.</p>
             <div class="returns-description">
                 
                     
-                    <p>View</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_script" class="method item">
-    <h3 class="name"><code>script</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type"></span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/view.js.html#l196"><code>view.js:196</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Gets or sets the source for the JavaScript of this view.</p>
-
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
+                        <span class="type">Object</span>:
                     
-                    <p>string</p>
+                    <p>Returns the same object it&#39;s applied to, to allow chaining.</p>
 
                 
             </div>
@@ -963,8 +651,8 @@ TODO: Define which parameters are passed to the callback function.</p>
 </div>
 
                 
-                    <div id="method_title" class="method item">
-    <h3 class="name"><code>title</code></h3>
+                    <div id="method_size" class="method item">
+    <h3 class="name"><code>size</code></h3>
 
     
         <div class="args">
@@ -972,7 +660,7 @@ TODO: Define which parameters are passed to the callback function.</p>
             
                 <li class="arg">
                     
-                        <code class="optional">[title]</code>
+                        <code class="optional">[dimentions]</code>
                     
                 </li>
             
@@ -982,7 +670,7 @@ TODO: Define which parameters are passed to the callback function.</p>
 
     
         <span class="returns-inline">
-            <span class="type"></span>
+            <span class="type">Object</span>
         </span>
     
 
@@ -1009,7 +697,7 @@ TODO: Define which parameters are passed to the callback function.</p>
             
         
         
-        <a href="../files/view.js.html#l126"><code>view.js:126</code></a>
+        <a href="../files/uipanel.js.html#l77"><code>uipanel.js:77</code></a>
         
         </p>
 
@@ -1020,8 +708,8 @@ TODO: Define which parameters are passed to the callback function.</p>
     </div>
 
     <div class="description">
-        <p>Title is the friendly name for the current view.
-When called without parameters, returns a string containing the title. When called with parameters, sets the title.</p>
+        <p>Resize the element to the specified dimentions. 
+If dimentions are not specified, it returns dimentions object with the current size.</p>
 
     </div>
 
@@ -1033,7 +721,115 @@ When called without parameters, returns a string containing the title. When call
             
                 <li class="param">
                     
-                        <code class="param-name optional">[title]</code>
+                        <code class="param-name optional">[dimentions]</code>
+                        <span class="type">Object</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Object with dimentions. Example: {w: 0, h: 0}</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                    <p>Object with dimentions. Example: {w: 0, h: 0}</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_transition" class="method item">
+    <h3 class="name"><code>transition</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code class="optional">[transition]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/uipanel.js.html#l100"><code>uipanel.js:100</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Set or get transition type</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[transition]</code>
                         <span class="type">String</span>
                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
@@ -1041,7 +837,7 @@ When called without parameters, returns a string containing the title. When call
                     
 
                     <div class="param-description">
-                        <p>New title for this view.</p>
+                        <p>Transition type. MUST be one of: slide-left, slide-right, none</p>
 
                     </div>
 
@@ -1059,7 +855,9 @@ When called without parameters, returns a string containing the title. When call
             <div class="returns-description">
                 
                     
-                    <p>string</p>
+                        <span class="type">String</span>:
+                    
+                    <p>Transition type</p>
 
                 
             </div>
@@ -1073,57 +871,6 @@ When called without parameters, returns a string containing the title. When call
             </div>
         
 
-        
-            <div id="properties" class="api-class-tabpanel">
-                <h2 class="off-left">Properties</h2>
-
-                
-                    <div id="property_ui" class="property item">
-    <h3 class="name"><code>ui</code></h3>
-    <span class="type"><a href="../classes/UIView.html" class="crosslink">UIView</a></span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/view.js.html#l118"><code>view.js:118</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>A reference to the UI representation of this view</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-            </div>
         
 
         
