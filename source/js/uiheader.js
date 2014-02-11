@@ -8,32 +8,35 @@
 * @author Martín Szyszlican (martinsz [at] gmail.com)
 */
 
-(function ($) {
-    // Force strict mode for ECMAScript
+(function ($, Mootor) {
+
     "use strict";
 
     var UINavBar,
         UIHeader;
 
+    // Dependences
+
+    UINavBar = Mootor.UINavBar;
+
     // Private constructors
-    UIHeader = function() {
+
+    UIHeader = Mootor.UIHeader = function() {
+        // code here
     };
 
-    //This Class extends UI
-    UINavBar = Mootor.ns("UINavBar");
-    UIHeader.prototype = UINavBar.prototype;
+    // Prototypal inheritance
 
+    $.extend(UIHeader.prototype, UINavBar.prototype);
 
-    //Add this Class as a Mootor module
-    $.extend(Mootor.mod, {UIHeader: UIHeader});
     
     // Private static methods and properties
 
     $.extend(UIHeader, {
-   
+        // code here
     });
 
-    //Public methods
+    // Public methods
 
     $.extend(UIHeader.prototype, {
         
@@ -50,5 +53,6 @@
         title: function(title) {
             
         }
-    });        
-}(window.$));
+    });  
+          
+}(window.$, window.Mootor));

@@ -14,8 +14,8 @@
 * @author Martín Szyszlican (martinsz [at] gmail.com)
 */
 
-(function ($) {
-    // Force strict mode for ECMAScript
+(function ($, Mootor, document) {
+
     "use strict";
     
     var View,
@@ -23,25 +23,20 @@
         
     // Dependencies
     
-    App = window.m.app();
+    App = Mootor.App;
 
     // Private constructors
 
-
-    View = function(options) {
+    View = Mootor.View = function(options) {
         this.id = options.id;
         View.init(options, this);
     };
-
-
-    //Add this Class as a Mootor module
-    $.extend(Mootor.mod, {View: View});
 
     
     // Private static methods and properties
     
     $.extend(View, {        
-        init: function(options, self) {
+        _init: function(options, self) {
             var id = self.id,
                 path = "views/" + id + "/" + id,
                 pathJs = path + ".js",
@@ -50,7 +45,7 @@
 
             self._navigationMode = _navigationMode;
             
-            View.getHtml({
+            View._getHtml({
 
                 path: pathHtml,
 
@@ -75,16 +70,16 @@
                            if (self.onInit !== undefined) {
                                self.onInit();
                            }
-                        },
+                        }
 
                     });
-                },
+                }
 
             });
 
         },
 
-        getHtml: function(options) {
+        _getHtml: function(options) {
             $.get(
                 options.path,
                 options.onSuccess
@@ -94,12 +89,12 @@
         /* //Disabled from showing in yuidoc, it's a private method. Removed asterisk from this line. //
         * Helper function to load a remote script via a <script> element in the <head>.
         *
-        * @method getScript
+        * @method _getScript
         * @param {String} path The path to load
         * @param {Function} onSuccess A function to be called if the request is successful
         * @param {Function} onError  A function to be called if the request fails
         */
-        getScript: function (options) {
+        _getScript: function (options) {
             var script = document.createElement("script"),
                 $script = $(script);
         
@@ -215,4 +210,5 @@
 
         }
     });    
-}(window.$));
+
+}(window.$, window.Mootor, window.document));

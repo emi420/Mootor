@@ -7,27 +7,24 @@
 * @author Martín Szyszlican (martinsz [at] gmail.com)
 */
 
-(function ($) {
-    // Force strict mode for ECMAScript
+(function ($, Mootor) {
+
     "use strict";
 
     var Route;
 
     // Private constructors
-    Route = function() {
+    Route = Mootor.Route = function() {
+        // code here
     };
-
-
-    //Add this Class as a Mootor module
-    $.extend(Mootor.mod, {Route: Route});
     
     // Private static methods and properties
 
     $.extend(Route, {
-   
+        // code here
     });
 
-    //Public methods
+    // Public methods
 
     $.extend(Route.prototype, {
         
@@ -64,4 +61,5 @@
         },
 
     });        
-}(window.$));
+
+}(window.$, window.Mootor));

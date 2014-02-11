@@ -7,27 +7,27 @@
 * @author Martín Szyszlican (martinsz [at] gmail.com)
 */
 
-(function ($) {
-    // Force strict mode for ECMAScript
+(function ($, Mootor) {
+
     "use strict";
 
     var UI,
         UIPanel;
+        
+    // Dependences 
+    
+    UI = Mootor.UI;    
 
     // Private constructors
 
-    UIPanel = function(options) {
+    UIPanel = Mootor.UIPanel = function(options) {
         UIPanel.init(options, this);
     };
 
-    //This Class extends UI
-    UI = Mootor.ns("UI");
-    UIPanel.prototype = UI.prototype;
+    // Prototypal inheritance
 
-    
-    //Add this Class as a Mootor module
-    $.extend(Mootor.mod, {UIPanel: UIPanel});
-    
+    $.extend(UIPanel.prototype, UI.prototype);
+
     // Private static methods and properties
         
     $.extend(UIPanel, {
@@ -37,10 +37,10 @@
         /**
         * Initialize  a panel
         *
-        * @method init
+        * @method _init
         * @private
         */
-        init: function(options, self) {
+        _init: function(options, self) {
             
             var $el = $("#" + options.id);
             self.$el = $el;
@@ -60,6 +60,7 @@
     });
 
     //Public prototype    
+    
     $.extend(UIPanel.prototype, {
 
         /**
@@ -108,9 +109,6 @@
             
         },
 
-
-
-        
         addTransitionClass: function() {
 
             var self = this,
@@ -197,7 +195,7 @@
             var self = this,
                 $el = self.$el;
                 
-            setTimeout(function() {
+            window.setTimeout(function() {
 
                 //Add back the transition (it's useless in the case it was not removed)
                 self.removeTransitionClass();
@@ -241,4 +239,4 @@
         }
     });
 
-}(window.$));
+}(window.$, window.Mootor));

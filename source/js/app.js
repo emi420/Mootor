@@ -3,9 +3,8 @@
  *  @author Martín Szyszlican (martinsz [at] gmail.com)
  */
 
-(function ($) {
+(function ($, Mootor) {
 
-    // Force strict mode for ECMAScript
     "use strict";
 
     /**
@@ -20,26 +19,23 @@
 
     // Private constructors
     
-    App = App = function(options) {
-        App.init(options, this);
+    App = Mootor.App = function(options) {
+        App._init(options, this);
     };
-
-    //Add this Class as a Mootor module
-    $.extend(Mootor.mod, {App: App});
     
     // Private static methods and properties
 
     $.extend(App, {
     
-        views: {},
+        _views: {},
         
-        currentView: undefined,
+        _currentView: undefined,
     
-        init: function(options, self) {
+        _init: function(options, self) {
             // Defer init until dom loaded
-            $(function($){
+            $(function(){
                 if (options) {
-                    App.initViews(options.views, self);    
+                    App._initViews(options.views, self);    
                 }
                 else {
                     console.log("Can't init app without views");
@@ -52,24 +48,24 @@
         * Init views, load remote files and call the View class to handle it.
         *
         * @private
-        * @method initViews
+        * @method _initViews
         * @param {Array} views A list of view names to be initialized
         */
-        initViews: function (views, self) {
+        _initViews: function (views, self) {
             var i,
                 view;
                 
             for (i = 0; i < views.length; i++) {
 
                 view = self.view({
-                    id: views[i],
+                    id: views[i]
                 });
                 
-                App.views[i] = view;
+                App._views[i] = view;
 
             }
             
-        },
+        }
     
     });
 
@@ -148,5 +144,33 @@
         router: function(id) {
         }        
     });
+    
+    $.extend(window.m, {        
+        /**
+        * Creates a new app with the defined options.
+        * If the app is already created, it can be called without options to have a reference to the Mootor app. 
 
-}(window.$));
+        *  App instance factory
+        *
+        *  window.m.app({
+        *    views: [
+        *       "index",
+        *       "view1"
+        *    ]
+        *  });
+
+        *
+        * @method app
+        * @param {Array} [views] A list of view names to be initialized
+        * @return App
+        */
+        app: function(options) {
+            if (App.app === undefined) {
+                App.app = new App(options);
+            }
+            return App.app;
+        }
+    });
+
+
+}(window.$, window.Mootor));

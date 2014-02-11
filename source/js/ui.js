@@ -8,27 +8,25 @@
 * @author Martín Szyszlican (martinsz [at] gmail.com)
 */
 
-(function ($) {
-    // Force strict mode for ECMAScript
+(function ($, Mootor) {
+
     "use strict";
 
     var UI;
 
     // Private constructors
-    UI = function() {
+
+    UI = Mootor.UI = function() {
+        // code here
     };
 
-    //Add this Class as a Mootor module
-    $.extend(Mootor.mod, {UI: UI});
-
-    
     // Private static methods and properties
 
     $.extend(UI, {
-   
+        // code here
     });
 
-    //Public methods
+    // Public methods
 
     $.extend(UI.prototype, {
         
@@ -53,4 +51,4 @@
         }
     });
         
-}(window.$));
+}(window.$, window.Mootor));

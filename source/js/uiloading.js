@@ -8,32 +8,36 @@
 * @author Martín Szyszlican (martinsz [at] gmail.com)
 */
 
-(function ($) {
+(function ($, Mootor) {
+
     // Force strict mode for ECMAScript
     "use strict";
 
     var UI,
         UILoading;
 
+    // Dependences
+
+    UI = Mootor.UI;
+
     // Private constructors
-    UILoading = function() {
+
+    UILoading = Mootor.UILoading = function() {
+        // code here
     };
 
-    //This Class extends UI
-    UI = Mootor.ns("UI");
+    // Prototypal inheritance
+
     UILoading.prototype = UI.prototype;
 
-
-    //Add this Class as a Mootor module
-    $.extend(Mootor.mod, {UILoading: UILoading});
     
     // Private static methods and properties
 
     $.extend(UILoading, {
-   
+        // code here
     });
 
-    //Public methods
+    // Public methods
 
     $.extend(UILoading.prototype, {
         
@@ -48,5 +52,6 @@
         style: function(options) {
             
         }
-    });        
-}(window.$));
+    });      
+      
+}(window.$, window.Mootor));
