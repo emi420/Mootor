@@ -18,10 +18,7 @@ More information:
 
 ## Design
 
-Mootor team **LOVES** design, and we are working to make delightful user interfaces. 
-
-We are working with the last tools like Haml and Compass, to provide maximum 
-efficiency and fully customization.
+Mootor team **LOVES** design. We are working to make delightful user interfaces, and provide maximum efficiency and fully customization.
 
 ## How can I help?
 
@@ -37,5 +34,5 @@ You may use any Mootor project under the terms of either the MIT License or the 
 
 ## About
 
-* Mootor is under development by the Voölks (www.voolks.com) team.
+* Mootor is under development by the Voölks (voolks.com) team.
 * Also, we recieved public founding by the MinCyT (mincyt.gob.ar)
