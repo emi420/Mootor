@@ -1,9 +1,10 @@
 YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
-        "$.app",
-        "app.View",
-        "panel"
+        "App",
+        "Mootor",
+        "View",
+        "m"
     ],
     "modules": [],
     "allModules": []

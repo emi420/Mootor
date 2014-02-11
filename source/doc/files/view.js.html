@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>view.js</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title=""></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/App.html">App</a></li>
+            
+                <li><a href="../classes/m.html">m</a></li>
+            
+                <li><a href="../classes/Mootor.html">Mootor</a></li>
+            
+                <li><a href="../classes/View.html">View</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: view.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/**
+* The View class handles each screen of the application. 
+* A list of views is specified in the applications options
+* and the files are loaded from the views/ folder.
+* Each view has a viewName.js and a viewName.html file.
+* The viewName.js file defines options for the view.
+*
+* @class View
+* @constructor
+* @param {Object} options An object defining options for the current view.
+* * constructor - A function that will be run after the view has loaded (optional).
+* * animation - a string defining the type of animation used to show this view (one of: &quot;slide-left&quot;, &quot;slide-right&quot;, &quot;none&quot;).
+* @author Emilio Mariscal (emi420 [at] gmail.com)
+* @author Martín Szyszlican (martinsz [at] gmail.com)
+*/
+
+(function ($) {
+    // Force strict mode for ECMAScript
+    &quot;use strict&quot;;
+    
+    var View,
+        App;
+        
+    // Dependencies
+    
+    App = window.m.app();
+
+    // Private constructors
+
+
+    View = function(options) {
+        this.id = options.id;
+        View.init(options, this);
+    };
+    
+    // Private static methods and properties
+    
+    $.extend(View, {        
+        init: function(options, self) {
+            var id = self.id,
+                path = &quot;views/&quot; + id + &quot;/&quot; + id,
+                pathJs = path + &quot;.js&quot;,
+                pathHtml = path + &quot;.html&quot;,
+                _navigationMode = &quot;panel&quot;;
+
+            self._navigationMode = _navigationMode;
+            
+            View.getHtml({
+
+                path: pathHtml,
+
+                onSuccess: function(data) {
+                    
+                    var el = document.createElement(&quot;section&quot;);
+
+                    el.id = id;
+                    self.$el = $(el);
+                    self.$el.appendTo(&quot;#main&quot;);
+                    self.$el.html(data); 
+
+                    self[_navigationMode] = App[_navigationMode]({
+                        id: id
+                    });
+
+                    View.getScript({
+
+                        path: pathJs,
+
+                        onSuccess: function() {
+                           if (self.onInit !== undefined) {
+                               self.onInit();
+                           }
+                        },
+
+                    });
+                },
+
+            });
+
+        },
+
+        getHtml: function(options) {
+            $.get(
+                options.path,
+                options.onSuccess
+            );
+        },
+
+        /* //Disabled from showing in yuidoc, it&#x27;s a private method. Removed asterisk from this line. //
+        * Helper function to load a remote script via a &lt;script&gt; element in the &lt;head&gt;.
+        *
+        * @method getScript
+        * @param {String} path The path to load
+        * @param {Function} onSuccess A function to be called if the request is successful
+        * @param {Function} onError  A function to be called if the request fails
+        */
+        getScript: function (options) {
+            var script = document.createElement(&quot;script&quot;),
+                $script = $(script);
+        
+            script.src = options.path;
+            $(&quot;head&quot;).append(script);
+            $script.one(&quot;load&quot;, {path: options.path}, options.onSuccess);
+            $script.one(&quot;error&quot;, {path: options.path}, options.onError);
+        }
+        
+    });
+
+    // Public instance prototype
+    
+    $.extend(View.prototype, {
+
+        /**
+        * A reference to the UI representation of this view
+        *
+        * @property ui
+        * @type UIView
+        */
+        ui: {},
+        
+        /**
+        * Title is the friendly name for the current view.
+        * When called without parameters, returns a string containing the title. When called with parameters, sets the title.
+        * 
+        * @method title
+        * @param {string} [title] New title for this view.
+        * @return string
+        */  
+        title: function(title) {
+
+        },
+
+        /**
+        * Sets an event handler for the view
+        * Possible values for event: load, beforeLoad, unload, beforeUnload, init
+        * TODO: Define which parameters are passed to the callback function.
+        * 
+        * @method on
+        * @param {string} event Defines in which event the handler will be called
+        * @param {function} callback The function to be called when the event is fired.
+        * @return View
+        */  
+        on: function(event,callback) {
+
+        },
+
+        /**
+        * Unsets event handlers for the view
+        * Possible values for event: load, beforeLoad, unload, beforeUnload, init
+        * 
+        * @method off
+        * @param {string} event Defines in which event we want to unset handlers
+        * @param {function} [callback] If this parameter is specified, only that function is removed. Otherwise all callbacks for this event are removed.
+        * @return View
+        */  
+        off: function(event,callback) {
+
+        },
+
+        /**
+        * Removes the view from the app (and from the screen)
+        * 
+        * @method remove
+        * @return View
+        */  
+        remove: function() {
+
+        },
+
+        /**
+        * Inserts the view to the app
+        * 
+        * @method insert
+        * @return View
+        */  
+        insert: function() {
+
+        },
+
+        /**
+        * Gets or sets the source for the HTML of this view.
+        * 
+        * @method html
+        * @return string
+        * @default /views/[viewid]/[viewid].html
+        */  
+        html: function(source) {
+
+        },
+
+        /**
+        * Gets or sets the source for the JavaScript of this view.
+        * 
+        * @method script
+        * @return string
+        * @default /views/[viewid]/[viewid].js
+        */  
+        script: function(source) {
+
+        },
+
+        /**
+        * Gets or sets the source for the CSS StyleSheet of this view.
+        * 
+        * @method css
+        * @return string
+        * @default /views/[viewid]/[viewid].css
+        */  
+        css: function(source) {
+
+        }
+    });    
+}(window.$));
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

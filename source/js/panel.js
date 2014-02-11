@@ -183,7 +183,7 @@
 	   		return this;
     	}
     });
-°    
+    
     // Private constructor
     
     $.__App.panel = function(options) {

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>$.app</title>
+    <title>App</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -41,11 +41,13 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
-                <li><a href="../classes/$.app.html">$.app</a></li>
+                <li><a href="../classes/App.html">App</a></li>
             
-                <li><a href="../classes/app.View.html">app.View</a></li>
+                <li><a href="../classes/m.html">m</a></li>
             
-                <li><a href="../classes/panel.html">panel</a></li>
+                <li><a href="../classes/Mootor.html">Mootor</a></li>
+            
+                <li><a href="../classes/View.html">View</a></li>
             
             </ul>
 
@@ -86,7 +88,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>$.app Class</h1>
+                        <h1>App Class</h1>
 <div class="box meta">
     
 
@@ -94,7 +96,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/release_mootor-troomo.js.html#l11"><code>release&#x2F;mootor-troomo.js:11</code></a>
+            Defined in: <a href="../files/app.js.html#l11"><code>app.js:11</code></a>
         </div>
     
 
@@ -106,22 +108,15 @@
 
 
 <div class="box intro">
-    <p>The App class defines the main object of the applications
-It handles creating the views.</p>
-<p>$.app({
-    views: [
-        &quot;index&quot;,
-        &quot;view1&quot;
-    ]
-});</p>
+    <p>The App class defines the main object of the applications</p>
 
 </div>
 
 
     <div class="constructor">
         <h2>Constructor</h2>
-        <div id="method_$.app" class="method item">
-    <h3 class="name"><code>$.app</code></h3>
+        <div id="method_App" class="method item">
+    <h3 class="name"><code>App</code></h3>
 
     
         <div class="args">
@@ -162,7 +157,7 @@ It handles creating the views.</p>
             
         
         
-        <a href="../files/release_mootor-troomo.js.html#l11"><code>release&#x2F;mootor-troomo.js:11</code></a>
+        <a href="../files/app.js.html#l11"><code>app.js:11</code></a>
         
         </p>
 
@@ -193,7 +188,7 @@ It handles creating the views.</p>
                     <div class="param-description">
                         <p>An object defining options for the application.</p>
 <ul>
-<li>views - An array with a list of view names. Views have to be present in the /views folder</li>
+<li>views - An array with a list of view names</li>
 </ul>
 
                     </div>
@@ -238,20 +233,27 @@ It handles creating the views.</p>
                     <ul class="index-list methods">
                         
                             <li class="index-item method">
-                                <a href="#method_getScript">getScript</a>
+                                <a href="#method_back">back</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_getScript">getScript</a>
+                                <a href="#method_forward">forward</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
+                                <a href="#method_go">go</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
                                 <a href="#method_initViews">initViews</a>
 
                                 
@@ -259,21 +261,21 @@ It handles creating the views.</p>
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_initViews">initViews</a>
+                                <a href="#method_router">router</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_onFinishLoadingViews">onFinishLoadingViews</a>
+                                <a href="#method_settings">settings</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_onFinishLoadingViews">onFinishLoadingViews</a>
+                                <a href="#method_view">view</a>
 
                                 
                                 
@@ -290,28 +292,7 @@ It handles creating the views.</p>
                     <ul class="index-list properties">
                         
                             <li class="index-item property">
-                                <a href="#property_loadedViews">loadedViews</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_loadedViews">loadedViews</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_options">options</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_options">options</a>
+                                <a href="#property_history">history</a>
 
                                 
                                 
@@ -331,35 +312,17 @@ It handles creating the views.</p>
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_getScript" class="method item">
-    <h3 class="name"><code>getScript</code></h3>
+                    <div id="method_back" class="method item">
+    <h3 class="name"><code>back</code></h3>
 
     
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>url</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>success</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>error</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
+        <span class="paren">()</span>
     
 
+    
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
     
 
     
@@ -385,7 +348,7 @@ It handles creating the views.</p>
             
         
         
-        <a href="../files/js_app_app.js.html#l74"><code>js&#x2F;app&#x2F;app.js:74</code></a>
+        <a href="../files/app.js.html#l116"><code>app.js:116</code></a>
         
         </p>
 
@@ -396,103 +359,41 @@ It handles creating the views.</p>
     </div>
 
     <div class="description">
-        <p>Helper function to load a remote script via a <script> element in the <head>.</p>
+        <p>Go to the previous view in the history</p>
 
     </div>
 
     
-        <div class="params">
-            <h4>Parameters:</h4>
 
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">url</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>The URL to load</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">success</code>
-                        <span class="type">Function</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>A function to be called if the request is successful</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">error</code>
-                        <span class="type">Function</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>A function to be called if the request fails</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
     
+        <div class="returns">
+            <h4>Returns:</h4>
 
+            <div class="returns-description">
+                
+                    
+                    <p>Route</p>
+
+                
+            </div>
+        </div>
     
 
     
 </div>
 
                 
-                    <div id="method_getScript" class="method item">
-    <h3 class="name"><code>getScript</code></h3>
+                    <div id="method_forward" class="method item">
+    <h3 class="name"><code>forward</code></h3>
 
     
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>url</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>success</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>error</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
+        <span class="paren">()</span>
     
 
+    
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
     
 
     
@@ -518,7 +419,7 @@ It handles creating the views.</p>
             
         
         
-        <a href="../files/release_mootor-troomo.js.html#l84"><code>release&#x2F;mootor-troomo.js:84</code></a>
+        <a href="../files/app.js.html#l125"><code>app.js:125</code></a>
         
         </p>
 
@@ -529,7 +430,88 @@ It handles creating the views.</p>
     </div>
 
     <div class="description">
-        <p>Helper function to load a remote script via a <script> element in the <head>.</p>
+        <p>Go to next view in the history</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                    <p>Route</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_go" class="method item">
+    <h3 class="name"><code>go</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>id</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app.js.html#l106"><code>app.js:106</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Go to a view</p>
 
     </div>
 
@@ -541,46 +523,14 @@ It handles creating the views.</p>
             
                 <li class="param">
                     
-                        <code class="param-name">url</code>
+                        <code class="param-name">id</code>
                         <span class="type">String</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>The URL to load</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">success</code>
-                        <span class="type">Function</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>A function to be called if the request is successful</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">error</code>
-                        <span class="type">Function</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>A function to be called if the request fails</p>
+                        <p>The id of the view</p>
 
                     </div>
 
@@ -592,12 +542,24 @@ It handles creating the views.</p>
     
 
     
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                    <p>Route</p>
+
+                
+            </div>
+        </div>
+    
 
     
 </div>
 
                 
-                    <div id="method_initViews" class="method item">
+                    <div id="method_initViews" class="method item private">
     <h3 class="name"><code>initViews</code></h3>
 
     
@@ -619,6 +581,8 @@ It handles creating the views.</p>
     
 
     
+        <span class="flag private">private</span>
+    
 
     
 
@@ -639,7 +603,7 @@ It handles creating the views.</p>
             
         
         
-        <a href="../files/js_app_app.js.html#l46"><code>js&#x2F;app&#x2F;app.js:46</code></a>
+        <a href="../files/app.js.html#l43"><code>app.js:43</code></a>
         
         </p>
 
@@ -686,23 +650,17 @@ It handles creating the views.</p>
 </div>
 
                 
-                    <div id="method_initViews" class="method item">
-    <h3 class="name"><code>initViews</code></h3>
+                    <div id="method_router" class="method item">
+    <h3 class="name"><code>router</code></h3>
 
     
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>views</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
+        <span class="paren">()</span>
     
 
+    
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
     
 
     
@@ -728,7 +686,7 @@ It handles creating the views.</p>
             
         
         
-        <a href="../files/release_mootor-troomo.js.html#l56"><code>release&#x2F;mootor-troomo.js:56</code></a>
+        <a href="../files/app.js.html#l134"><code>app.js:134</code></a>
         
         </p>
 
@@ -739,7 +697,95 @@ It handles creating the views.</p>
     </div>
 
     <div class="description">
-        <p>Init views, load remote files and call the View class to handle it.</p>
+        <p>Returns a router instance</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                    <p>Router</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_settings" class="method item">
+    <h3 class="name"><code>settings</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>key</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code class="optional">[value]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app.js.html#l81"><code>app.js:81</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Application settings
+If called with a key, returns the value. If called with key and value, sets value to key.</p>
 
     </div>
 
@@ -751,14 +797,31 @@ It handles creating the views.</p>
             
                 <li class="param">
                     
-                        <code class="param-name">views</code>
-                        <span class="type">Array</span>
+                        <code class="param-name">key</code>
+                        <span class="type">String</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>A list of view names to be initialized</p>
+                        <p>The name of the setting</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[value]</code>
+                        <span class="type">Object</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The value of the setting</p>
 
                     </div>
 
@@ -770,18 +833,50 @@ It handles creating the views.</p>
     
 
     
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                    <p>object the setting value</p>
+
+                
+            </div>
+        </div>
+    
 
     
 </div>
 
                 
-                    <div id="method_onFinishLoadingViews" class="method item">
-    <h3 class="name"><code>onFinishLoadingViews</code></h3>
+                    <div id="method_view" class="method item">
+    <h3 class="name"><code>view</code></h3>
 
     
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>id</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code class="optional">[settings]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
     
 
+    
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
     
 
     
@@ -807,7 +902,7 @@ It handles creating the views.</p>
             
         
         
-        <a href="../files/js_app_app.js.html#l65"><code>js&#x2F;app&#x2F;app.js:65</code></a>
+        <a href="../files/app.js.html#l94"><code>app.js:94</code></a>
         
         </p>
 
@@ -818,67 +913,65 @@ It handles creating the views.</p>
     </div>
 
     <div class="description">
-        <p>Method executed once all views have been loaded. Calls the application&#39;s &quot;init&quot; method.</p>
+        <p>Create or get a view</p>
 
     </div>
 
     
+        <div class="params">
+            <h4>Parameters:</h4>
 
-    
-
-    
-</div>
-
-                
-                    <div id="method_onFinishLoadingViews" class="method item">
-    <h3 class="name"><code>onFinishLoadingViews</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
+            <ul class="params-list">
             
-                
-                <p>
-                
-                Defined in
-                
+                <li class="param">
+                    
+                        <code class="param-name">id</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The id of the view</p>
+
+                    </div>
+
+                    
+                </li>
             
-        
-        
-        <a href="../files/release_mootor-troomo.js.html#l75"><code>release&#x2F;mootor-troomo.js:75</code></a>
-        
-        </p>
+                <li class="param">
+                    
+                        <code class="param-name optional">[settings]</code>
+                        <span class="type">String</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
 
+                    
 
-        
+                    <div class="param-description">
+                        <p>The settings object for the view</p>
 
-        
-    </div>
+                    </div>
 
-    <div class="description">
-        <p>Method executed once all views have been loaded. Calls the application&#39;s &quot;init&quot; method.</p>
-
-    </div>
-
+                    
+                </li>
+            
+            </ul>
+        </div>
     
 
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                    <p>View the referenced view object</p>
+
+                
+            </div>
+        </div>
     
 
     
@@ -893,8 +986,8 @@ It handles creating the views.</p>
                 <h2 class="off-left">Properties</h2>
 
                 
-                    <div id="property_loadedViews" class="property item">
-    <h3 class="name"><code>loadedViews</code></h3>
+                    <div id="property_history" class="property item">
+    <h3 class="name"><code>history</code></h3>
     <span class="type">Array</span>
 
     
@@ -916,7 +1009,7 @@ It handles creating the views.</p>
             
         
         
-        <a href="../files/js_app_app.js.html#l27"><code>js&#x2F;app&#x2F;app.js:27</code></a>
+        <a href="../files/app.js.html#l72"><code>app.js:72</code></a>
         
         </p>
 
@@ -926,153 +1019,11 @@ It handles creating the views.</p>
     </div>
 
     <div class="description">
-        <p>A list of the views that is already loaded</p>
+        <p>Stores the navigation history. 
+An array of views, ordered in the sequence that they were visited by the user.</p>
 
     </div>
 
-    
-        <p><strong>Default:</strong> []</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_loadedViews" class="property item">
-    <h3 class="name"><code>loadedViews</code></h3>
-    <span class="type">Array</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/release_mootor-troomo.js.html#l37"><code>release&#x2F;mootor-troomo.js:37</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>A list of the views that is already loaded</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> []</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_options" class="property item">
-    <h3 class="name"><code>options</code></h3>
-    <span class="type">Array</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/js_app_app.js.html#l36"><code>js&#x2F;app&#x2F;app.js:36</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>This aplications options</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> []</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_options" class="property item">
-    <h3 class="name"><code>options</code></h3>
-    <span class="type">Array</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/release_mootor-troomo.js.html#l46"><code>release&#x2F;mootor-troomo.js:46</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>This aplications options</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> []</p>
     
 
     

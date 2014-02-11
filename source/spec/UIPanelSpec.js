@@ -39,6 +39,28 @@ describe("Panel", function() {
 
 });
 
+describe("Panel", function() {
+
+	describe("I want to determine the behavior of the panel's load / unload", function() {
+
+		xit("Should be able to define panel's transition (slide-right, slide-left, slide-up, slide-bottom, slide-fade, slide-backface, ...)", function() {
+
+		});
+	});
+
+
+	describe("I want to know the panel properties", function() {
+
+		xit("Should be able to get panel's height", function() {
+
+		});
+		xit("Should be able to get panel's vertical scroll position", function() {
+
+		});
+
+	});
+});
+
 
 describe("Panel asynchronous specs", function() {
   var panel;
