@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>window.Mootor</title>
+    <title>UIHeader</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -110,15 +110,19 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>window.Mootor Class</h1>
+                        <h1>UIHeader Class</h1>
 <div class="box meta">
     
 
     
+        <div class="extends">
+            Extends <a href="../classes/UI.html" class="crosslink">UI</a>
+        </div>
+    
 
     
         <div class="foundat">
-            Defined in: <a href="../files/source_js_mootor.js.html#l61"><code>source&#x2F;js&#x2F;mootor.js:61</code></a>
+            Defined in: <a href="../files/source_js_uiheader.js.html#l1"><code>source&#x2F;js&#x2F;uiheader.js:1</code></a>
         </div>
     
 
@@ -134,11 +138,67 @@
 
 
 <div class="box intro">
-    <p>window.Mootor public global object
-Access modules and namespaces</p>
+    <p>The UIHeader class is a navigational element at the top or bottom of the page (header or footer)</p>
 
 </div>
 
+
+    <div class="constructor">
+        <h2>Constructor</h2>
+        <div id="method_UIHeader" class="method item">
+    <h3 class="name"><code>UIHeader</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/source_js_uiheader.js.html#l1"><code>source&#x2F;js&#x2F;uiheader.js:1</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+    </div>
 
 
 <div id="classdocs" class="tabview">
@@ -148,8 +208,6 @@ Access modules and namespaces</p>
         
             <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
         
-        
-            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
         
         
         
@@ -163,10 +221,24 @@ Access modules and namespaces</p>
                 <div class="index-section methods">
                     <h3>Methods</h3>
 
-                    <ul class="index-list methods">
+                    <ul class="index-list methods extends">
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_hide">hide</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_show">show</a>
+
+                                
+                                
+                            </li>
                         
                             <li class="index-item method">
-                                <a href="#method_ns">ns</a>
+                                <a href="#method_title">title</a>
 
                                 
                                 
@@ -176,21 +248,6 @@ Access modules and namespaces</p>
                 </div>
             
 
-            
-                <div class="index-section properties">
-                    <h3>Properties</h3>
-
-                    <ul class="index-list properties">
-                        
-                            <li class="index-item property">
-                                <a href="#property_mod">mod</a>
-
-                                
-                                
-                            </li>
-                        
-                    </ul>
-                </div>
             
 
             
@@ -203,26 +260,16 @@ Access modules and namespaces</p>
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_ns" class="method item">
-    <h3 class="name"><code>ns</code></h3>
+                    <div id="method_hide" class="method item inherited">
+    <h3 class="name"><code>hide</code></h3>
 
     
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>name</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
+        <span class="paren">()</span>
     
 
     
         <span class="returns-inline">
-            <span class="type"></span>
+            <span class="type"><a href="../classes/UI.html" class="crosslink">UI</a></span>
         </span>
     
 
@@ -241,15 +288,12 @@ Access modules and namespaces</p>
     <div class="meta">
         
             
-                
-                <p>
-                
-                Defined in
-                
+                <p>Inherited from
+                <a href="../classes/UI.html#method_hide">UI</a>:
             
         
         
-        <a href="../files/source_js_mootor.js.html#l75"><code>source&#x2F;js&#x2F;mootor.js:75</code></a>
+        <a href="../files/source_js_ui.js.html#l45"><code>source&#x2F;js&#x2F;ui.js:45</code></a>
         
         </p>
 
@@ -260,8 +304,160 @@ Access modules and namespaces</p>
     </div>
 
     <div class="description">
-        <p>Creates a new namespace
-If the namespace is already created, it returns the namespace</p>
+        <p>Hides element from view</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/UI.html" class="crosslink">UI</a></span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_show" class="method item inherited">
+    <h3 class="name"><code>show</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/UI.html" class="crosslink">UI</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/UI.html#method_show">UI</a>:
+            
+        
+        
+        <a href="../files/source_js_ui.js.html#l35"><code>source&#x2F;js&#x2F;ui.js:35</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Shows element (not necesarily, since the element&#39;s parent might be hidden or out of view)</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/UI.html" class="crosslink">UI</a></span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_title" class="method item">
+    <h3 class="name"><code>title</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code class="optional">[title]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/source_js_uiheader.js.html#l40"><code>source&#x2F;js&#x2F;uiheader.js:40</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Title
+The text to display in the header
+If called with no arguments returns the current title</p>
 
     </div>
 
@@ -273,14 +469,15 @@ If the namespace is already created, it returns the namespace</p>
             
                 <li class="param">
                     
-                        <code class="param-name">name</code>
+                        <code class="param-name optional">[title]</code>
                         <span class="type">String</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>The name of the referenced namespace</p>
+                        <p>The text for the title</p>
 
                     </div>
 
@@ -298,8 +495,8 @@ If the namespace is already created, it returns the namespace</p>
             <div class="returns-description">
                 
                     
-                    <p>object</p>
-
+                        <span class="type">String</span>:
+                    
                 
             </div>
         </div>
@@ -312,57 +509,6 @@ If the namespace is already created, it returns the namespace</p>
             </div>
         
 
-        
-            <div id="properties" class="api-class-tabpanel">
-                <h2 class="off-left">Properties</h2>
-
-                
-                    <div id="property_mod" class="property item">
-    <h3 class="name"><code>mod</code></h3>
-    <span class="type">Object</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/source_js_mootor.js.html#l69"><code>source&#x2F;js&#x2F;mootor.js:69</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>TODO: Write this object&#39;s functionality.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-            </div>
         
 
         

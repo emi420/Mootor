@@ -16,15 +16,17 @@
     * @param {Object} options An object defining options for the application.
     * * views - An array with a list of view names
     */
-    var App,
-        _app;
+    var App;
 
     // Private constructors
     
     App = App = function(options) {
         App.init(options, this);
     };
-        
+
+    //Add this Class as a Mootor module
+    $.extend(Mootor.mod, {App: App});
+    
     // Private static methods and properties
 
     $.extend(App, {
@@ -36,7 +38,13 @@
         init: function(options, self) {
             // Defer init until dom loaded
             $(function($){
-                App.initViews(options.views, self);
+                if (options) {
+                    App.initViews(options.views, self);    
+                }
+                else {
+                    console.log("Can't init app without views");
+                }
+                
             });
         },
     
@@ -141,83 +149,4 @@
         }        
     });
 
-    // Public constructors
-
-    $.extend(window, {
-        /**
-        * m public global object
-        * It is the main way to access the mootor modules, like App
-        *
-        * Usage: var app = m.app([options]);
-        * @class m
-        * @static
-        */
-        m: {
-            /**
-            * Creates a new app with the defined options.
-            * If the app is already created, it can be called without options to have a reference to the Mootor app. 
-
-            *  App instance factory
-            *
-            *  m.app({
-            *    views: [
-            *       "index",
-            *       "view1"
-            *    ]
-            *  });
-
-            *
-            * @method app
-            * @param {Array} [views] A list of view names to be initialized
-            * @return App
-            */
-            app: function(options) {
-                if (_app === undefined) {
-                    _app = new App(options);
-                }
-                return _app;
-            },
-            /**
-            * TODO: Write this object's functionality.
-            * @property context
-            * @type object
-            */
-            context: {}
-        },
-
-        /**
-        * Mootor public global object
-        * Access modules and namespaces
-        *
-        * @class Mootor
-        * @static
-        */
-        Mootor: {
-            /**
-            * TODO: Write this object's functionality.
-            * @property mod
-            * @type object
-            */
-            ns: function (ns_string) {
-                var parts = ns_string.split('.'),
-                    parent = Mootor,
-                    i;
-                // strip redundant leading global
-                if (parts[0] === "Mootor") {
-                    parts = parts.slice(1);
-                }
-                for (i = 0; i < parts.length; i += 1) {
-                    // create a property if it doesn't exist
-                    if (typeof parent[parts[i]] === "undefined") {
-                        parent[parts[i]] = {};
-                    }
-                    parent = parent[parts[i]];
-                }
-                return parent;
-            }
-        }
-    });
-    
-    $.extend(Mootor, {App: App});
-    
 }(window.$));
