@@ -29,8 +29,8 @@
     // Private constructors
 
     View = Mootor.View = function(options) {
-        this.id = options.id;
-        View.init(options, this);
+        //this.id = options.id;
+        View._init(options, this);
     };
 
     

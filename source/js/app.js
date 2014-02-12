@@ -105,7 +105,7 @@
         * @return View the referenced view object
         */
         view: function(id, settings) {
-
+            return new Mootor.View;
         },
 
         /**
