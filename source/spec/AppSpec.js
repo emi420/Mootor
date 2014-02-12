@@ -1,5 +1,3 @@
-// TODO: Async
-
 describe("App", function() {
 
     window._appIsInitTest = false;
@@ -9,6 +7,12 @@ describe("App", function() {
     }).on("init", function() {
         window._appIsInitTest = true;
     });	
+
+    var view = m.app().view("index");
+    window._testIndexOnLoadView = false;
+    view.on("load", function() {
+        window._testIndexOnLoadView = true;
+    });
 
     describe("I want to create a new app", function() {
         // Except App instance
@@ -32,11 +36,11 @@ describe("App", function() {
     	});
     });
 
-
 	describe("I want to load views when create a new app", function() {
         
 		it("Should be able create a new View instance", function() {
             // Except View instance
+
             window.setTimeout(function() {
                 var view = app.view("testview");
 
@@ -54,19 +58,26 @@ describe("App", function() {
             window.setTimeout(function() {
                 var view = app.view("testview");
     			expect(
-    			 	view.html().length > 0
+        			expect(
+        			 	view.html()
+        			).toBeDefined()
     			).toBe(true);
             }, 500);
 		});
 
 		it("Should be able to load view's JavaScript from the view", function() {
+            // Except loaded javascript source
             window.setTimeout(function() {
-                // Except loaded javascript source
-                var view = app.view("testview");
     			expect(
-    			 	view.script().length > 0
+    			 	view.script()
+    			).toBeDefined();
+
+    			//TODO: Index view init function should have been run
+    			expect(
+    			 	window._testIndexOnLoadView
     			).toBe(true);
             }, 500);
+
 		});
         
 		it("Should be able to load view's CSS", function() {
@@ -74,42 +85,22 @@ describe("App", function() {
             window.setTimeout(function() {
                 var view = app.view("testview");
     			expect(
-    			 	view.css().length > 0
-    			).toBe(true);
+    			 	view.css()
+    			).toBeDefined();
             }, 500);
+			//TODO: Research CSS introspection to check for added classes
 		});
         
 		it("Should be able to add View instances to the main App instance", function() {    			
             // Except View instance on app
             window.setTimeout(function() {
-                var view = app.view("testview").insert();
-    			expect(
-    				app.views("testview") instanceof Mootor.View
-    			).toBe(true);
+                var newview = app.view("testview").insert();
+                window.setTimeout(function() {
+        			expect(
+        				app.view("testview") instanceof Mootor.View
+        			).toBe(true);
+                }, 500);
             }, 500);
-		});
-	});
-
-
-	describe("I want to determine the behavior of a view after is loaded", function() {
-
-		it("Should be able to define a method callback run after load", function() {
-        
-            // Except test variable to be true
-            window._testOnLoadView = false;
-            
-            m.app.view("testview").on("load", function() {
-                window._testOnLoadView = true;
-            });
-            
-            app.go("testview");
-            
-            window.setTimeout(function() {
-    			expect(
-    				window._testOnLoadView
-    			).toBe(true);
-            }, 500);
-
 		});
 	});
 
@@ -117,8 +108,9 @@ describe("App", function() {
 	describe("I want to run my app a as web app", function() {
 
 		it("Should be able to load a view from an URL", function() {
-            // Except route.view 
-			var route = app.route("/testing.html");
+            // Except route.view
+            //app.router. 
+			var route = app.route("/index");
 			expect(route.view).toBeDefined();
 		});
         
@@ -134,7 +126,7 @@ describe("App", function() {
 
 		it("Should be able to detect it is running in PhoneGap / Cordova", function() {
             // Except context().cordova or context().phonegap to be true
-            expect(m.context().cordova || m.context().phonegap).toBe(true);
+            expect(m.context().cordova || m.context().phonegap).toBe(false);
 		});
 		it("Should be able to detect device vendor", function() {
             // Except context().device.vendor
@@ -208,3 +200,39 @@ describe("App", function() {
 	});
 });
 
+describe("App ync", function() {
+	var view;
+	beforeEach(function(done) {
+	    window._appIsInitTest = false;
+	    var app = m.app({views: ["index"], onInit: function() { window._appIsInitTest = true; } });	
+	    view = m.app().view("index");
+
+		setTimeout(function() {
+		  done();
+		}, 100);
+	});
+
+    describe("I want to determine the behavior of the application's initialization", function() {
+
+    	it("Should be able to define a method callback run after initialization", function() {
+    		expect(
+                window._appIsInitTest
+            ).toBe(true);
+    	});
+    });
+
+	describe("I want to load views when create a new app", function() {
+		it("Should be able to load view's HTML", function() {
+            // Expect html source variable
+			expect(
+			 	view.html()
+			).toBeDefined();
+
+			//Expect code to be in the DOM
+			expect(
+			 	view.ui.el.childNodes.length > 0
+			).toBeDefined();
+		});
+	})
+
+})
