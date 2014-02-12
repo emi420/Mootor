@@ -27,10 +27,8 @@
     */
     App = Mootor.App = function(options) {
         var self = this;
-        
-        self._options = options;
         $(function() {
-            Event.dispatch("App:init", self);   
+            Event.dispatch("App:init", {self: self, options: options});   
         });
     };
 

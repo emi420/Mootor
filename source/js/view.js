@@ -20,23 +20,19 @@
     "use strict";
     
     var View,
-        App,
         Event;
     
         
     // Dependencies
     
-    App = Mootor.App;
     Event = Mootor.Event;
     
     // Event handlers
 
-    Event.on("App:init", function(app) {
-        var options = app._options,
-            views = options.views,
+    Event.on("App:init", function(params) {
+        var views = params.options.views,
             viewCount = views.length,
-            i;
-            
+            i;            
             
         for (i = 0; i < viewCount; i++) {
             app.view(views[i]);
@@ -68,28 +64,6 @@
         * @private
         */
         _current: undefined,
-        
-        /**
-        * Initialize View instances for app
-        *
-        * @private
-        * @method _initViews
-        * @param {Array} views A list of view names to be initialized
-        * @param {App} self App instance
-        */
-        _initViews: function (views, self) {
-            var i,
-                viewCount = views.length;
-                
-            for (i = 0; i < viewCount; i++) {
-                App._views.push(
-                    self.view({
-                        id: views[i]
-                    })
-                );
-            }
-            
-        },
 
         /**
         * Init View instance, load HTML, CSS and JavaScript files for the view
@@ -327,7 +301,7 @@
         }
     });    
     
-    $.extend(App.prototype, {
+    $.extend(Mootor.App.prototype, {
 
         /**
         * Create or get a view
