@@ -7,6 +7,15 @@
 
     "use strict";
 
+    var App,
+        Event;
+
+    // Dependencies
+
+    Event = Mootor.Event;
+
+    // Private constructors
+    
     /**
     * The App class defines the main object of the applications
     *
@@ -16,63 +25,16 @@
     * @param {Object} options An object defining options for the application.
     * * views - An array with a list of view names
     */
-    var App;
-
-    // Private constructors
-    
     App = Mootor.App = function(options) {
-        App._init(options, this);
+        this._options = options;
+        $(function(){
+            Event.dispatch("App:init", self);   
+        });
     };
-    
-    // Private static methods and properties
-
-    $.extend(App, {
-    
-        _views: {},
-        
-        _currentView: undefined,
-    
-        _init: function(options, self) {
-            // Defer init until dom loaded
-            $(function(){
-                if (options) {
-                    App._initViews(options.views, self);    
-                }
-                else {
-                    console.log("Can't init app without views");
-                }
-                
-            });
-        },
-    
-        /**
-        * Init views, load remote files and call the View class to handle it.
-        *
-        * @private
-        * @method _initViews
-        * @param {Array} views A list of view names to be initialized
-        */
-        _initViews: function (views, self) {
-            var i,
-                view;
-                
-            for (i = 0; i < views.length; i++) {
-
-                view = self.view({
-                    id: views[i]
-                });
-                
-                App._views[i] = view;
-
-            }
-            
-        }
-    
-    });
 
     // Public methods
 
-    $.extend(App.prototype, {
+    App.prototype = {
         
         /**
         * Stores the navigation history. 
@@ -94,18 +56,6 @@
         */
         settings: function(key, value) {
             
-        },
-
-        /**
-        * Create or get a view
-        *
-        * @method view
-        * @param {String} id The id of the view
-        * @param {String} [settings] The settings object for the view
-        * @return View the referenced view object
-        */
-        view: function(id, settings) {
-
         },
 
         /**
@@ -143,8 +93,26 @@
         * @return Router
         */
         router: function(id) {
-        }        
-    });
+        },
+        
+        /**
+        * Set callbacks for app events
+        * @method on
+        * @return App instance
+        */    
+        on: function(event, callback) {
+            Event.on("App:" + event, callback);
+        },
+        
+        /* 
+        * Remove callbacks for app events
+        * @method off
+        * @return App instance
+        */    
+        off: function(event, callback) {
+        }
+        
+    };
     
     $.extend(window.m, {        
         /**

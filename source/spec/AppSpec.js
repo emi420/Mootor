@@ -3,63 +3,90 @@
 describe("App", function() {
 
     window._appIsInitTest = false;
-    var app = m.app({views: ["index"], onInit: function() { window._appIsInitTest = true; } });	
+
+    var app = m.app({
+        views: ["index"]
+    }).on("init", function() {
+        window._appIsInitTest = true;
+    });	
 
     describe("I want to create a new app", function() {
         // Except App instance
     	it("Should be able to return a new app instance", function() {
-    		expect(
-    			app instanceof Mootor.App
-    		).toBe(true);
+            window.setTimeout(function() {
+        		expect(
+        			app instanceof Mootor.App
+        		).toBe(true);
+            }, 500);
     	});
     });
 
     describe("I want to determine the behavior of the application's initialization", function() {
 
-    	xit("Should be able to define a method callback run after initialization", function() {
-    		expect(
-                window._appIsInitTest
-            ).toBe(true);
+    	it("Should be able to define a method callback run after initialization", function() {
+            window.setTimeout(function() {
+        		expect(
+                    window._appIsInitTest
+                ).toBe(true);
+            }, 500);
     	});
     });
 
 
 	describe("I want to load views when create a new app", function() {
-
+        
 		it("Should be able create a new View instance", function() {
             // Except View instance
-    		expect(
-    			view instanceof Mootor.View
-    		).toBeDefined(true);
+            window.setTimeout(function() {
+                var view = app.view("testview");
+
+                window.setTimeout(function() {
+            		expect(
+            			view instanceof Mootor.View
+            		).toBeDefined(true);
+                }, 500);
+                
+            }, 500);
 		});
 
 		it("Should be able to load view's HTML", function() {
             // Except loaded html source
-			expect(
-			 	view.html().length > 0
-			).toBe(true);
+            window.setTimeout(function() {
+                var view = app.view("testview");
+    			expect(
+    			 	view.html().length > 0
+    			).toBe(true);
+            }, 500);
 		});
 
 		it("Should be able to load view's JavaScript from the view", function() {
-            // Except loaded javascript source
-			expect(
-			 	view.script().length > 0
-			).toBe(true);
+            window.setTimeout(function() {
+                // Except loaded javascript source
+                var view = app.view("testview");
+    			expect(
+    			 	view.script().length > 0
+    			).toBe(true);
+            }, 500);
 		});
         
 		it("Should be able to load view's CSS", function() {
             // Except loaded css source
-			expect(
-			 	view.css().length > 0
-			).toBe(true);
+            window.setTimeout(function() {
+                var view = app.view("testview");
+    			expect(
+    			 	view.css().length > 0
+    			).toBe(true);
+            }, 500);
 		});
         
 		it("Should be able to add View instances to the main App instance", function() {    			
             // Except View instance on app
-            var view = app.view("testview").insert();
-			expect(
-				app.views("testview") instanceof Mootor.View
-			).toBe(true);
+            window.setTimeout(function() {
+                var view = app.view("testview").insert();
+    			expect(
+    				app.views("testview") instanceof Mootor.View
+    			).toBe(true);
+            }, 500);
 		});
 	});
 

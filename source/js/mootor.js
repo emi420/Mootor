@@ -11,11 +11,58 @@
     "use strict";
     
     var Mootor,
+        Event,
         Context,
         m;
 
     Mootor = {
         // code here
+    };
+    
+    /**
+    * The Event class defines and manage events
+    *
+    * @class Event
+    * @private
+    *  @module Mootor
+    */
+    Event = Mootor.Event = {
+        
+        /**
+        * Events collection
+        * @private
+        */
+        _collection: [],
+
+        /**
+        * Add event to collection
+        * @private
+        */
+        on: function(event, callback) {
+            var eventToPush = {};
+            eventToPush[event] = callback;
+            Event._collection.push(eventToPush);
+        },
+        
+        /**
+        * Dispatch event
+        * @private
+        */
+        dispatch: function(event, instance) {
+            var i,
+                key,
+                collection = Event._collection,
+                collectionCount = collection.length;
+                
+            for (i = 0; i < collectionCount; i++) {
+                for (key in collection[i]) {
+                    if (key === event) {
+                        collection[i][event](instance);
+                    }
+                }
+            }
+        }
+
     };
 
     Context = Mootor.Context = function() {

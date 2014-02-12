@@ -20,91 +20,166 @@
     "use strict";
     
     var View,
-        App;
+        App,
+        Event;
+    
         
     // Dependencies
     
     App = Mootor.App;
-
+    Event = Mootor.Event;
+    
     // Private constructors
 
     View = Mootor.View = function(options) {
         this.id = options.id;
-        View.init(options, this);
+        View._init(options, this);
     };
 
     
     // Private static methods and properties
     
     $.extend(View, {        
-        _init: function(options, self) {
-            var id = self.id,
-                path = "views/" + id + "/" + id,
-                pathJs = path + ".js",
-                pathHtml = path + ".html",
-                _navigationMode = "panel";
 
-            self._navigationMode = _navigationMode;
+        /**
+        * Views collection
+        * @private
+        */
+        _collection: [],
+    
+        /**
+        * Current active view
+        * @private
+        */
+        _current: undefined,
+        
+        /**
+        * Initialize View instances for app
+        *
+        * @private
+        * @method _initViews
+        * @param {Array} views A list of view names to be initialized
+        * @param {App} self App instance
+        */
+        _initViews: function (views, self) {
+            var i,
+                viewCount = views.length;
+                
+            for (i = 0; i < viewCount; i++) {
+                App._views.push(
+                    self.view({
+                        id: views[i]
+                    })
+                );
+            }
             
-            View._getHtml({
-
-                path: pathHtml,
-
-                onSuccess: function(data) {
-                    
-                    var el = document.createElement("section");
-
-                    el.id = id;
-                    self.$el = $(el);
-                    self.$el.appendTo("#main");
-                    self.$el.html(data); 
-
-                    self[_navigationMode] = App[_navigationMode]({
-                        id: id
-                    });
-
-                    View.getScript({
-
-                        path: pathJs,
-
-                        onSuccess: function() {
-                           if (self.onInit !== undefined) {
-                               self.onInit();
-                           }
-                        }
-
-                    });
-                }
-
-            });
-
         },
 
-        _getHtml: function(options) {
+        /**
+        * Init View instance, load HTML, CSS and JavaScript files for the view
+        *
+        * @private
+        * @method _init
+        * @param {Array} options A list of options
+        * @param {View} self View instance
+        */
+        _init: function(options, self) {
+            
+            // FIXME CHECK: hardcoded value
+            var _navigationMode = "panel";
+            
+            // Set navigation mode
+            self._navigationMode = _navigationMode;
+            
+            // Load Html, Css and JavaScript
+            View._getHtml(self);
+            View._getCss(self);
+            View._getScript(self);
+            
+            View._collection.push(self);
+            
+        },
+
+        /**
+        * Get view HTML
+        *
+        * @private
+        * @method _getHtml
+        * @param {View} self View instance
+        */
+        _getHtml: function(self) {
+            var path,
+                id = self.id;
+                
+            path = "views/" + id + "/" + id + ".html";
             $.get(
-                options.path,
-                options.onSuccess
+                path,
+                function(source) {
+                    self._html = source;
+                    Event.dispatch("View:getHtml", self)
+                }
             );
         },
 
-        /* //Disabled from showing in yuidoc, it's a private method. Removed asterisk from this line. //
-        * Helper function to load a remote script via a <script> element in the <head>.
-        *
+        /*
+        * Get view script
         * @method _getScript
-        * @param {String} path The path to load
-        * @param {Function} onSuccess A function to be called if the request is successful
-        * @param {Function} onError  A function to be called if the request fails
+        * @private
+        * @param {View} self View instance
         */
-        _getScript: function (options) {
-            var script = document.createElement("script"),
+        _getScript: function (self) {
+            var path,
+                id = self.id,
+                script,
+                $script;
+                
+            path = "views/" + id + "/" + id + ".js";
+            
+            script = document.createElement("script"),
                 $script = $(script);
         
-            script.src = options.path;
+            script.src = path;
+            script.type = "text/javascript";
             $("head").append(script);
-            $script.one("load", {path: options.path}, options.onSuccess);
-            $script.one("error", {path: options.path}, options.onError);
-        }
+            $script.one("load", {
+                path: path
+            }, function() {
+                self._script = path;                
+                Event.dispatch("View:getScript", self)
+            });
+        },
+
+        /*
+        * Get view CSS
+        * @method _getCSS
+        * @private
+        * @param {View} self View instance
+        */
+        _getCss: function (self) {
+            var path,
+                id = self.id,
+                link,
+                $link;
+                
+            path = "views/" + id + "/" + id + ".css";
+            
+            link = document.createElement("link");
+            $link = $(link);
         
+            link.href = path;
+            link.type = "text/css";
+            link.rel = "stylesheet";
+
+            $("head").append(link);
+            
+            $link.one("load", {
+                path: path
+            }, function() {
+                self._css = path;
+                Event.dispatch("View:getCss", self)
+            });
+        }
+                
     });
 
     // Public instance prototype
@@ -186,7 +261,9 @@
         * @default /views/[viewid]/[viewid].html
         */  
         html: function(source) {
-
+            if (source === undefined) {
+                return this._html;
+            }
         },
 
         /**
@@ -197,7 +274,9 @@
         * @default /views/[viewid]/[viewid].js
         */  
         script: function(source) {
-
+            if (source === undefined) {
+                return this._script;
+            }
         },
 
         /**
@@ -208,8 +287,46 @@
         * @default /views/[viewid]/[viewid].css
         */  
         css: function(source) {
-
+            if (source === undefined) {
+                return this._css;
+            }            
         }
     });    
+    
+    $.extend(App.prototype, {
+
+        /**
+        * Create or get a view
+        *
+        * @method view
+        * @param {String} id The id of the view
+        * @for View
+        * @param {String} [options] The options object for the view
+        * @return View the referenced view object
+        */
+        view: function(id, options) {
+            var i,
+                views = View._collection,
+                viewCount = views.length,
+                view;
+            
+            for (i = 0; i < viewCount; i++) {
+                if (views[i].id === id) {
+                    view = views[i];
+                }
+            }
+            
+            if (view !== undefined) {
+                return view;
+            } else {
+                if (options === undefined) {
+                    options = {};
+                }
+                options.id = id;
+                return new View(options);
+            }
+        },
+        
+    })
 
 }(window.$, window.Mootor, window.document));
