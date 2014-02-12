@@ -75,37 +75,6 @@
         },
     });
 
-    /*        path: "", //pathHtml,
-
-            onSuccess: function(data) {
-            
-                var el;
-            
-                // Create view container
-                el = document.createElement("section");
-                el.id = id;
-                self.$el = $(el);
-                self.$el.appendTo("#main");
-                self.$el.html(data); 
-
-                self[_navigationMode] = App[_navigationMode]({
-                    id: id
-                });
-
-                View.getScript({
-
-                    path: pathJs,
-
-                    onSuccess: function() {
-                       if (self.onInit !== undefined) {
-                           self.onInit();
-                       }
-                    }
-
-                });
-            }*/
-        
-
     // Prototypal inheritance
 
     $.extend(UIView.prototype, UI.prototype);
