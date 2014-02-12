@@ -1,106 +1,74 @@
+
+var app = m.app({
+    views: ["index"]
+})
+    
 describe("App", function() {
-
-    window._appIsInitTest = false;
-
-    var app = m.app({
-        views: ["index"]
-    }).on("init", function() {
-        window._appIsInitTest = true;
-    });	
-
-    var view = m.app().view("index");
-    window._testIndexOnLoadView = false;
-    view.on("load", function() {
-        window._testIndexOnLoadView = true;
-    });
 
     describe("I want to create a new app", function() {
         // Except App instance
-    	it("Should be able to return a new app instance", function() {
-            window.setTimeout(function() {
-        		expect(
-        			app instanceof Mootor.App
-        		).toBe(true);
-            }, 500);
+
+    	beforeEach(function(done) {
+    		setTimeout(function() {
+    		  done();
+    		}, 100);
     	});
-    });
+        
+    	it("Should be able to return a new app instance", function() {
 
-    describe("I want to determine the behavior of the application's initialization", function() {
+    		expect(
+    			app instanceof Mootor.App
+    		).toBe(true);
 
-    	it("Should be able to define a method callback run after initialization", function() {
-            window.setTimeout(function() {
-        		expect(
-                    window._appIsInitTest
-                ).toBe(true);
-            }, 500);
     	});
     });
 
 	describe("I want to load views when create a new app", function() {
         
+        var view = app.view("testview");
+
+    	beforeEach(function(done) {
+    		setTimeout(function() {
+    		  done();
+    		}, 100);
+    	});
+        
 		it("Should be able create a new View instance", function() {
             // Except View instance
 
-            window.setTimeout(function() {
-                var view = app.view("testview");
+    		expect(
+    			view instanceof Mootor.View
+    		).toBeDefined(true);
 
-                window.setTimeout(function() {
-            		expect(
-            			view instanceof Mootor.View
-            		).toBeDefined(true);
-                }, 500);
-                
-            }, 500);
 		});
 
 		it("Should be able to load view's HTML", function() {
             // Except loaded html source
-            window.setTimeout(function() {
-                var view = app.view("testview");
-    			expect(
-        			expect(
-        			 	view.html()
-        			).toBeDefined()
-    			).toBe(true);
-            }, 500);
+			expect(
+			 	view.html()
+			).toBeDefined()
 		});
 
 		it("Should be able to load view's JavaScript from the view", function() {
             // Except loaded javascript source
-            window.setTimeout(function() {
-    			expect(
-    			 	view.script()
-    			).toBeDefined();
-
-    			//TODO: Index view init function should have been run
-    			expect(
-    			 	window._testIndexOnLoadView
-    			).toBe(true);
-            }, 500);
-
+			expect(
+			 	view.script()
+			).toBeDefined();
 		});
         
 		it("Should be able to load view's CSS", function() {
             // Except loaded css source
-            window.setTimeout(function() {
-                var view = app.view("testview");
-    			expect(
-    			 	view.css()
-    			).toBeDefined();
-            }, 500);
-			//TODO: Research CSS introspection to check for added classes
+			expect(
+			 	view.css()
+			).toBeDefined();
 		});
         
 		it("Should be able to add View instances to the main App instance", function() {    			
             // Except View instance on app
-            window.setTimeout(function() {
-                var newview = app.view("testview").insert();
-                window.setTimeout(function() {
-        			expect(
-        				app.view("testview") instanceof Mootor.View
-        			).toBe(true);
-                }, 500);
-            }, 500);
+            var newview = app.view("testview").insert();
+			expect(
+				app.view("testview") instanceof Mootor.View
+			).toBe(true);
 		});
 	});
 
@@ -201,11 +169,14 @@ describe("App", function() {
 });
 
 describe("App ync", function() {
-	var view;
+
+    window._appIsInitTest = false;
+
+    app.on("init", function() {
+        window._appIsInitTest = true;
+    });	
+
 	beforeEach(function(done) {
-	    window._appIsInitTest = false;
-	    var app = m.app({views: ["index"], onInit: function() { window._appIsInitTest = true; } });	
-	    view = m.app().view("index");
 
 		setTimeout(function() {
 		  done();
@@ -223,14 +194,9 @@ describe("App ync", function() {
 
 	describe("I want to load views when create a new app", function() {
 		it("Should be able to load view's HTML", function() {
-            // Expect html source variable
+			// Expect view 'index' html to be defined
 			expect(
-			 	view.html()
-			).toBeDefined();
-
-			//Expect code to be in the DOM
-			expect(
-			 	view.ui.el.childNodes.length > 0
+			 	Mootor.View._get("index").html()
 			).toBeDefined();
 		});
 	})

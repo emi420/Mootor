@@ -32,16 +32,19 @@
         * Events collection
         * @private
         */
-        _collection: [],
+        _collection: {},
 
         /**
         * Add event to collection
         * @private
         */
         on: function(event, callback) {
-            var eventToPush = {};
-            eventToPush[event] = callback;
-            Event._collection.push(eventToPush);
+            
+            if (Event._collection[event] === undefined) {
+                Event._collection[event] = [];
+            } 
+            Event._collection[event].push(callback);
+
         },
         
         /**
@@ -50,16 +53,15 @@
         */
         dispatch: function(event, instance) {
             var i,
-                key,
-                collection = Event._collection,
-                collectionCount = collection.length;
+                count = 0,
+                callbacks = Event._collection[event];
                 
-            for (i = 0; i < collectionCount; i++) {
-                for (key in collection[i]) {
-                    if (key === event) {
-                        collection[i][event](instance);
-                    }
-                }
+            if (callbacks !== undefined) {
+                count = callbacks.length ;
+            }
+                
+            for (i = 0; i < count; i++) {
+                callbacks[i](instance);
             }
         }
 

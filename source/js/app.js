@@ -26,8 +26,10 @@
     * * views - An array with a list of view names
     */
     App = Mootor.App = function(options) {
-        this._options = options;
-        $(function(){
+        var self = this;
+        
+        self._options = options;
+        $(function() {
             Event.dispatch("App:init", self);   
         });
     };
@@ -137,8 +139,9 @@
         app: function(options) {
             if (App.app === undefined) {
                 App.app = new App(options);
+                this.app = App.app;
+                return App.app;
             }
-            return App.app;
         }
     });
 

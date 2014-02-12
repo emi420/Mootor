@@ -27,6 +27,8 @@
     UIView = Mootor.UIView = function(viewid) {
         // code here
     };
+    
+    // Event handlers
 
     Event.on("View:getHtml", function(view) {
         UIView._set(view, {html: true})

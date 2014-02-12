@@ -29,6 +29,22 @@
     App = Mootor.App;
     Event = Mootor.Event;
     
+    // Event handlers
+
+    Event.on("App:init", function(app) {
+        var options = app._options,
+            views = options.views,
+            viewCount = views.length,
+            i;
+            
+            
+        for (i = 0; i < viewCount; i++) {
+            app.view(views[i]);
+        }
+        
+        
+    });   
+    
     // Private constructors
 
     View = Mootor.View = function(options) {
@@ -92,9 +108,13 @@
             self._navigationMode = _navigationMode;
             
             // Load Html, Css and JavaScript
+            Event.on("View:getHtml", function(view) {
+                console.log("OK");
+                View._getScript(self);
+            })
+
             View._getHtml(self);
             View._getCss(self);
-            View._getScript(self);
             
             View._collection.push(self);
             
@@ -178,6 +198,20 @@
                 self._css = path;
                 Event.dispatch("View:getCss", self)
             });
+        },
+        
+        _get: function(id) {
+            var i,
+                collection = View._collection,
+                length = collection.length;
+                
+            for (i = length; i--;) {
+                if (collection[i].id === id) {
+                    return View._collection[i];
+                } else {
+                    return undefined;
+                }
+            }
         }
                 
     });
