@@ -27,9 +27,6 @@
     */
     App = Mootor.App = function(options) {
         var self = this;
-        $(function() {
-            Event.dispatch("App:init", {self: self, options: options});   
-        });
     };
 
     // Public methods
@@ -50,66 +47,91 @@
         * If called with a key, returns the value. If called with key and value, sets value to key.
         *
         * @method settings
-        * @param {String} key The name of the setting
+        * @param {String} key The name of the setting\
+        * @chainable
         * @param {object} [value] The value of the setting
         * @return object the setting value
         */
         settings: function(key, value) {
-            
+            return this;            
         },
 
         /**
         * Go to a view
         *
         * @method go
+        * @chainable
         * @param {String} id The id of the view
         * @return Route
         */
         go: function(id) {
+            return this;
         },        
 
         /**
         * Go to the previous view in the history
         *
         * @method back
+        * @chainable
         * @return Route
         */
         back: function(id) {
+            return this;
         },        
 
         /**
         * Go to next view in the history
         *
         * @method forward
+        * @chainable
         * @return Route
         */
         forward: function(id) {
+            return this;
         },        
 
         /**
         * Returns a router instance
         *
         * @method router
+        * @chainable
         * @return Router
         */
         router: function(id) {
+            return this;
         },
         
         /**
         * Set callbacks for app events
         * @method on
+        * @chainable
         * @return App instance
         */    
         on: function(event, callback) {
             Event.on("App:" + event, callback);
+            return this;
         },
         
         /* 
         * Remove callbacks for app events
         * @method off
+        * @chainable
         * @return App instance
         */    
         off: function(event, callback) {
+            return this;
+        },
+        
+        /*
+        * Initialize app
+        * @chainable
+        * @method init
+        * @return App instance
+        */
+        init: function() {
+            var self = this;
+            Event.dispatch("App:init", {self: self, options: App._options});   
+            return this;
         }
         
     };
@@ -137,8 +159,9 @@
         app: function(options) {
             if (App.app === undefined) {
                 App.app = new App(options);
+                App._options = options;
                 this.app = App.app;
-                return App.app;
+                return this.app;
             }
         }
     });

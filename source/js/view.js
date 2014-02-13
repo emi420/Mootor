@@ -30,6 +30,7 @@
 
     Event.on("App:init", function(params) {
         var views = params.options.views,
+            app = params.self,
             viewCount = views.length,
             i;            
             

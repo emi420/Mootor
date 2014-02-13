@@ -1,7 +1,9 @@
 
 var app = m.app({
     views: ["index"]
-})
+}).on("init", function() {
+    window._appIsInitTest = true;
+}).init();	
     
 describe("App", function() {
 
@@ -171,10 +173,6 @@ describe("App", function() {
 describe("App ync", function() {
 
     window._appIsInitTest = false;
-
-    app.on("init", function() {
-        window._appIsInitTest = true;
-    });	
 
 	beforeEach(function(done) {
 
