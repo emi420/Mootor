@@ -2,7 +2,7 @@ describe("UIPanel", function() {
   var panel;
 
   beforeEach(function() {
-    var app = m.app({views: ["index"]); 
+    var app = m.app({views: ["index"]}); 
     var view = app.view("index");
     panel = view.ui;
   })
@@ -33,7 +33,7 @@ describe("Panel asynchronous specs", function() {
   var panel;
 
   beforeEach(function(done) {
-    var app = m.app({views: ["index"]); 
+    var app = m.app({views: ["index"]}); 
     var view = app.view("index");
     panel = view.ui;
 

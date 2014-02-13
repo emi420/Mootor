@@ -11,11 +11,60 @@
     "use strict";
     
     var Mootor,
+        Event,
         Context,
         m;
 
     Mootor = {
         // code here
+    };
+    
+    /**
+    * The Event class defines and manage events
+    *
+    * @class Event
+    * @private
+    *  @module Mootor
+    */
+    Event = Mootor.Event = {
+        
+        /**
+        * Events collection
+        * @private
+        */
+        _collection: {},
+
+        /**
+        * Add event to collection
+        * @private
+        */
+        on: function(event, callback) {
+            
+            if (Event._collection[event] === undefined) {
+                Event._collection[event] = [];
+            } 
+            Event._collection[event].push(callback);
+
+        },
+        
+        /**
+        * Dispatch event
+        * @private
+        */
+        dispatch: function(event, instance) {
+            var i,
+                count = 0,
+                callbacks = Event._collection[event];
+                
+            if (callbacks !== undefined) {
+                count = callbacks.length ;
+            }
+                
+            for (i = 0; i < count; i++) {
+                callbacks[i](instance);
+            }
+        }
+
     };
 
     Context = Mootor.Context = function() {
@@ -64,11 +113,8 @@
         * @property context
         * @type Context
         */
-        context: (
-            function() {
-                new Context();
-            }()
-        ) 
+        context: new Context()
+        
     };
 
     // Make it public!
