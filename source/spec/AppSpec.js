@@ -1,21 +1,29 @@
-var app;
+var app,
+	view;
 
 window._appIsInitTest = false;
 
 var createApp = function(done) {
-		console.log("beforeEach");
-		if (typeof m.app == "function") {
-			app = m.app({
-			    views: ["index"]
-			});
-			console.log("app",app);
-
-		}
-		setTimeout(function() {
+	if (typeof m.app == "function") {
+		console.log("createApp");
+		app = m.app({
+		    views: ["index"]
+		})
+		app.on("init",function() {
 		    console.log("init");
-			done();
-		}, 100);
+			window._appIsInitTest = true;	
+			view = app.view("index");
+			done();	
+		})
+		app.init();
+		
+
 	}
+	else {
+		console.log("done");
+		done();
+	}
+}
 
 describe("App", function() {
 
@@ -40,7 +48,7 @@ describe("App", function() {
         
 		it("Should be able create a new View instance", function(done) {
             // Except View instance
-        	var view = app.view("testview");
+        	
 
     		expect(
     			view instanceof Mootor.View
@@ -53,9 +61,6 @@ describe("App", function() {
 
 		it("Should be able to load view's HTML", function(done) {
             // Except loaded html source
-
-       		var view = app.view("testview");
-
 			expect(
 			 	view.html()
 			).toBeDefined();
@@ -66,7 +71,6 @@ describe("App", function() {
 
 		it("Should be able to load view's JavaScript from the view", function(done) {
             // Except loaded javascript source
-       		var view = app.view("testview");
 
 			expect(
 			 	view.script()
@@ -77,8 +81,7 @@ describe("App", function() {
 		});
         
 		it("Should be able to load view's CSS", function(done) {
-            // Except loaded css source
-       		var view = app.view("testview");            
+            // Except loaded css source       
 			expect(
 			 	view.css()
 			).toBeDefined();
@@ -128,7 +131,7 @@ describe("App", function() {
 	describe("I want to run my app a as native app", function() {
 		beforeEach(createApp);
 		it("Should be able to detect it is running in PhoneGap / Cordova", function(done) {
-            // Except context().cordova or context().phonegap to be true
+            // Except context().cordova or context().phonegap to be false if running jasmine in a web browser
             expect(m.context.cordova || m.context.phonegap).toBe(false);
 
             done();
@@ -141,7 +144,7 @@ describe("App", function() {
             done();
 
 		});
-		it("Should be able to detect browser vendor, engine and version ... and available features (needs to be more specific)", function() {
+		it("Should be able to detect browser vendor, engine and version ... and available features (needs to be more specific)", function(done) {
             // Except context().browser.vendor, context().browser.version, context().browser.engine 
             expect(m.context.browser.vendor || m.context.browser.version || m.context.browser.engine).toBeDefined();
 
@@ -179,9 +182,9 @@ describe("App", function() {
 	describe("I want to state the version number of my application", function() {
 		beforeEach(createApp);
 		it("Should be able to define a version number for the App instance", function(done) {
-			app.settings("version",0.1);
+			app.version(0.1);
 			expect(
-				app.settings("version")
+				app.version()
 			).toBe(0.1);
 
 			done();
@@ -219,7 +222,7 @@ describe("App", function() {
 		beforeEach(createApp);
 		it("Should be able to set a debug boolean value", function(done) {
 			expect(
-				app.settings("debugMode",true)
+				app.settings("debug",true)
 			).toBe(true);
 
 			done();
@@ -227,7 +230,7 @@ describe("App", function() {
 		});
 		it("Should be able to read a debug boolean value", function(done) {
 			expect(
-				app.settings("debugMode")
+				app.settings("debug")
 			).toBe(true);
 
 			done();
@@ -266,29 +269,53 @@ describe("App", function() {
 
 	})
 
-})
+
+	describe("I want to add a link to another view", function() {
+
+		var route;
+
+		beforeEach(function(done) {
+			window._testURLonLoad = true;
+			route = app.route("#testURL",view);
+			view.on("load", function () {
+				window._testURLonLoad = true;
+				done();
+			});
+			app.go("#testURL");
+			    //Add a route, a link and click it
+		       
+				//a = $("<a href=\"#testURL\"></a>").appendTo(view.el);
+				//a.click();
+		});
+
+		it("Should be able to obtain a route from a url", function() {
+			expect(route.view()).toBe(view);
+		})
 
 
-describe("App Async 2", function() {
-	var view,
-		app;
-	beforeEach(function(done) {
-	    app = m.app({views: ["index"], onInit: function() { 
-		    //Add a route, a link and click it
-	        app.router().route(view,"#testURL");
-			a = $("<a href=\"#testURL\"></a>").appendTo(view.el);
-			a.click();
+		it("Should be able to go to a view from url", function(done) {
+			expect(app.view()).toBe(view);
+			done();
+		})
 
-	    } });	
-	    view = m.app().view("index");
-		setTimeout(function() {
-		  done();
-		}, 200);
+
+
 
 	});
 
-	describe("I want to add a link to another view with parameters", function() {
+	describe("I want to add a link to another view with parameters", function(done) {
 
+		beforeEach(function(done) {
+			route = app.route("#testURL/(.*)",view);
+			view.on("load", function () {
+				done();
+			});
+			app.go("#testURL/testValue");
+			    //Add a route, a link and click it
+		       
+				//a = $("<a href=\"#testURL\"></a>").appendTo(view.el);
+				//a.click();
+		});
 		it("Should be able to click a link and change the view and recieve parameters", function(done) {
 			expect(app.view().params()).toBe({testParam: "testValue"});
 
@@ -297,39 +324,4 @@ describe("App Async 2", function() {
 
 		});
 	});
-
-
-})
-
-describe("App Async 3", function() {
-	var view,
-		app;
-	beforeEach(function(done) {
-	    app = m.app({views: ["index"], onInit: function() { 
-		    //Add a route, a link and click it
-	        app.router().route(view,"#testURL/(.*)", "testParam");
-			a = $("<a href=\"#testURL/testValue\"></a>").appendTo(view.el);
-			a.click();
-
-	    } });	
-	    view = m.app().view("index");
-		setTimeout(function() {
-		  done();
-		}, 200);
-
-
-	});
-
-	describe("I want to add a link to another view with parameters", function(done) {
-
-		it("Should be able to click a link and change the view and recieve parameters", function() {
-			expect(app.view().params()).toBe({testParam: "testValue"});
-
-
-			done();
-
-		});
-	});
-
-
 })
