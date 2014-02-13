@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Router</title>
+    <title>source/js/app.js</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -120,252 +120,159 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>Router Class</h1>
-<div class="box meta">
-    
+                        <h1 class="file-heading">File: source/js/app.js</h1>
 
-    
+<div class="file">
+    <pre class="code prettyprint linenums">
+/*
+ *  @author Emilio Mariscal (emi420 [at] gmail.com)
+ *  @author Martín Szyszlican (martinsz [at] gmail.com)
+ */
 
-    
-        <div class="foundat">
-            Defined in: <a href="../files/source_js_router.js.html#l1"><code>source&#x2F;js&#x2F;router.js:1</code></a>
-        </div>
-    
+(function ($, Mootor) {
 
+    &quot;use strict&quot;;
+
+    var App,
+        Event;
+
+    // Dependencies
+
+    Event = Mootor.Event;
+
+    // Private constructors
     
+    /**
+    * The App class defines the main object of the applications
+    *
+    * @class App
+    * @constructor
+    *  @module App
+    * @param {Object} options An object defining options for the application.
+    * * views - An array with a list of view names
+    */
+    App = Mootor.App = function(options) {
+        var self = this;
+        $(function() {
+            Event.dispatch(&quot;App:init&quot;, {self: self, options: options});   
+        });
+    };
+
+    // Public methods
+
+    App.prototype = {
         
-            Module: <a href="../modules/Router.html">Router</a>
-        
-    
+        /**
+        * Stores the navigation history. 
+        * An array of views, ordered in the sequence that they were visited by the user.
+        *
+        * @property history
+        * @type array
+        */
+        history: [],
 
-    
-</div>
-
-
-
-<div class="box intro">
-    <p>The Router class is for defining routes</p>
-
-</div>
-
-
-    <div class="constructor">
-        <h2>Constructor</h2>
-        <div id="method_Router" class="method item">
-    <h3 class="name"><code>Router</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
+        /**
+        * Application settings
+        * If called with a key, returns the value. If called with key and value, sets value to key.
+        *
+        * @method settings
+        * @param {String} key The name of the setting
+        * @param {object} [value] The value of the setting
+        * @return object the setting value
+        */
+        settings: function(key, value) {
             
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/source_js_router.js.html#l1"><code>source&#x2F;js&#x2F;router.js:1</code></a>
-        
-        </p>
+        },
 
+        /**
+        * Go to a view
+        *
+        * @method go
+        * @param {String} id The id of the view
+        * @return Route
+        */
+        go: function(id) {
+        },        
 
+        /**
+        * Go to the previous view in the history
+        *
+        * @method back
+        * @return Route
+        */
+        back: function(id) {
+        },        
+
+        /**
+        * Go to next view in the history
+        *
+        * @method forward
+        * @return Route
+        */
+        forward: function(id) {
+        },        
+
+        /**
+        * Returns a router instance
+        *
+        * @method router
+        * @return Router
+        */
+        router: function(id) {
+        },
         
-
+        /**
+        * Set callbacks for app events
+        * @method on
+        * @return App instance
+        */    
+        on: function(event, callback) {
+            Event.on(&quot;App:&quot; + event, callback);
+        },
         
-    </div>
-
-    <div class="description">
+        /* 
+        * Remove callbacks for app events
+        * @method off
+        * @return App instance
+        */    
+        off: function(event, callback) {
+        }
         
-    </div>
-
+    };
     
+    $.extend(window.m, {        
+        /**
+        * Creates a new app with the defined options.
+        * If the app is already created, it can be called without options to have a reference to the Mootor app. 
 
-    
+        *  App instance factory
+        *
+        *  window.m.app({
+        *    views: [
+        *       &quot;index&quot;,
+        *       &quot;view1&quot;
+        *    ]
+        *  });
 
-    
-</div>
-
-    </div>
-
-
-<div id="classdocs" class="tabview">
-    <ul class="api-class-tabs">
-        <li class="api-class-tab index"><a href="#index">Index</a></li>
-
-        
-            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
-        
-        
-        
-        
-    </ul>
-
-    <div>
-        <div id="index" class="api-class-tabpanel index">
-            <h2 class="off-left">Item Index</h2>
-
-            
-                <div class="index-section methods">
-                    <h3>Methods</h3>
-
-                    <ul class="index-list methods">
-                        
-                            <li class="index-item method">
-                                <a href="#method_route">route</a>
-
-                                
-                                
-                            </li>
-                        
-                    </ul>
-                </div>
-            
-
-            
-
-            
-
-            
-        </div>
-
-        
-            <div id="methods" class="api-class-tabpanel">
-                <h2 class="off-left">Methods</h2>
-
-                
-                    <div id="method_route" class="method item">
-    <h3 class="name"><code>route</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>options</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type"></span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/source_js_router.js.html#l33"><code>source&#x2F;js&#x2F;router.js:33</code></a>
-        
-        </p>
+        *
+        * @method app
+        * @for window.m
+        * @param {Array} [views] A list of view names to be initialized
+        * @return App
+        */
+        app: function(options) {
+            if (App.app === undefined) {
+                App.app = new App(options);
+                this.app = App.app;
+                return App.app;
+            }
+        }
+    });
 
 
-        
+}(window.$, window.Mootor));
 
-        
-    </div>
-
-    <div class="description">
-        <p>Create a route</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">options</code>
-                        <span class="type">Object</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>TODO: Define this object&#39;s properties</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                    <p>Route</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-            </div>
-        
-
-        
-
-        
-
-        
-    </div>
+    </pre>
 </div>
 
                     </div>

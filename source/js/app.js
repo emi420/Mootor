@@ -26,7 +26,6 @@
     * * views - An array with a list of view names
     */
     App = Mootor.App = function(options) {
-        var self = this;
     };
 
     // Public methods

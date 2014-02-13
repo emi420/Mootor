@@ -45,6 +45,8 @@
             
                 <li><a href="../classes/Context.html">Context</a></li>
             
+                <li><a href="../classes/Event.html">Event</a></li>
+            
                 <li><a href="../classes/Route.html">Route</a></li>
             
                 <li><a href="../classes/Router.html">Router</a></li>
@@ -73,7 +75,15 @@
 
             <ul id="api-modules" class="apis modules">
             
+                <li><a href="../modules/App.html">App</a></li>
+            
                 <li><a href="../modules/Mootor.html">Mootor</a></li>
+            
+                <li><a href="../modules/Router.html">Router</a></li>
+            
+                <li><a href="../modules/UI.html">UI</a></li>
+            
+                <li><a href="../modules/View.html">View</a></li>
             
             </ul>
         </div>
@@ -118,13 +128,13 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/app.js.html#l10"><code>app.js:10</code></a>
+            Defined in: <a href="../files/source_js_app.js.html#l19"><code>source&#x2F;js&#x2F;app.js:19</code></a>
         </div>
     
 
     
         
-            Module: <a href="../modules/Mootor.html">Mootor</a>
+            Module: <a href="../modules/App.html">App</a>
         
     
 
@@ -183,7 +193,7 @@
             
         
         
-        <a href="../files/app.js.html#l10"><code>app.js:10</code></a>
+        <a href="../files/source_js_app.js.html#l19"><code>source&#x2F;js&#x2F;app.js:19</code></a>
         
         </p>
 
@@ -258,13 +268,6 @@
 
                     <ul class="index-list methods">
                         
-                            <li class="index-item method private">
-                                <a href="#method__initViews">_initViews</a>
-
-                                
-                                
-                            </li>
-                        
                             <li class="index-item method">
                                 <a href="#method_back">back</a>
 
@@ -281,6 +284,13 @@
                         
                             <li class="index-item method">
                                 <a href="#method_go">go</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_on">on</a>
 
                                 
                                 
@@ -338,97 +348,6 @@
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method__initViews" class="method item private">
-    <h3 class="name"><code>_initViews</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>views</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app.js.html#l47"><code>app.js:47</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Init views, load remote files and call the View class to handle it.</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">views</code>
-                        <span class="type">Array</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>A list of view names to be initialized</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
                     <div id="method_back" class="method item">
     <h3 class="name"><code>back</code></h3>
 
@@ -465,7 +384,7 @@
             
         
         
-        <a href="../files/app.js.html#l120"><code>app.js:120</code></a>
+        <a href="../files/source_js_app.js.html#l71"><code>source&#x2F;js&#x2F;app.js:71</code></a>
         
         </p>
 
@@ -536,7 +455,7 @@
             
         
         
-        <a href="../files/app.js.html#l129"><code>app.js:129</code></a>
+        <a href="../files/source_js_app.js.html#l80"><code>source&#x2F;js&#x2F;app.js:80</code></a>
         
         </p>
 
@@ -617,7 +536,7 @@
             
         
         
-        <a href="../files/app.js.html#l110"><code>app.js:110</code></a>
+        <a href="../files/source_js_app.js.html#l61"><code>source&#x2F;js&#x2F;app.js:61</code></a>
         
         </p>
 
@@ -676,6 +595,77 @@
 </div>
 
                 
+                    <div id="method_on" class="method item">
+    <h3 class="name"><code>on</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/source_js_app.js.html#l98"><code>source&#x2F;js&#x2F;app.js:98</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Set callbacks for app events</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                    <p>App instance</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
                     <div id="method_router" class="method item">
     <h3 class="name"><code>router</code></h3>
 
@@ -712,7 +702,7 @@
             
         
         
-        <a href="../files/app.js.html#l138"><code>app.js:138</code></a>
+        <a href="../files/source_js_app.js.html#l89"><code>source&#x2F;js&#x2F;app.js:89</code></a>
         
         </p>
 
@@ -799,7 +789,7 @@
             
         
         
-        <a href="../files/app.js.html#l85"><code>app.js:85</code></a>
+        <a href="../files/source_js_app.js.html#l48"><code>source&#x2F;js&#x2F;app.js:48</code></a>
         
         </p>
 
@@ -891,7 +881,7 @@ If called with a key, returns the value. If called with key and value, sets valu
             
                 <li class="arg">
                     
-                        <code class="optional">[settings]</code>
+                        <code class="optional">[options]</code>
                     
                 </li>
             
@@ -921,6 +911,8 @@ If called with a key, returns the value. If called with key and value, sets valu
         
             
                 
+                    <p>Provided by the <a href="../modules/View.html">View</a> module.</p>
+                
                 <p>
                 
                 Defined in
@@ -928,7 +920,7 @@ If called with a key, returns the value. If called with key and value, sets valu
             
         
         
-        <a href="../files/app.js.html#l98"><code>app.js:98</code></a>
+        <a href="../files/source_js_view.js.html#l288"><code>source&#x2F;js&#x2F;view.js:288</code></a>
         
         </p>
 
@@ -967,7 +959,7 @@ If called with a key, returns the value. If called with key and value, sets valu
             
                 <li class="param">
                     
-                        <code class="param-name optional">[settings]</code>
+                        <code class="param-name optional">[options]</code>
                         <span class="type">String</span>
                         <span class="flag optional" title="This parameter is optional.">optional</span>
                     
@@ -975,7 +967,7 @@ If called with a key, returns the value. If called with key and value, sets valu
                     
 
                     <div class="param-description">
-                        <p>The settings object for the view</p>
+                        <p>The options object for the view</p>
 
                     </div>
 
@@ -1035,7 +1027,7 @@ If called with a key, returns the value. If called with key and value, sets valu
             
         
         
-        <a href="../files/app.js.html#l76"><code>app.js:76</code></a>
+        <a href="../files/source_js_app.js.html#l39"><code>source&#x2F;js&#x2F;app.js:39</code></a>
         
         </p>
 

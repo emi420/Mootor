@@ -113,11 +113,8 @@
         * @property context
         * @type Context
         */
-        context: (
-            function() {
-                new Context();
-            }()
-        ) 
+        context: new Context()
+        
     };
 
     // Make it public!
