@@ -196,7 +196,7 @@ describe("App ync", function() {
 		it("Should be able to load view's HTML", function() {
 			// Expect view 'index' html to be defined
 			expect(
-			 	Mootor.View._get("index").html()
+			 	app.view("index").html()
 			).toBeDefined();
 		});
 	})

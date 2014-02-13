@@ -1,4 +1,4 @@
-(function ($) {
+/*(function ($) {
 
     var view = m.app.view("index");
     
@@ -7,3 +7,4 @@
     });
 
 }(window.$));
+*/

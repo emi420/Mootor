@@ -21,7 +21,6 @@
     
     var View,
         Event;
-    
         
     // Dependencies
     
@@ -57,7 +56,7 @@
         * Views collection
         * @private
         */
-        _collection: [],
+        _collection: {},
     
         /**
         * Current active view
@@ -83,14 +82,13 @@
             
             // Load Html, Css and JavaScript
             Event.on("View:getHtml", function(view) {
-                console.log("OK");
                 View._getScript(self);
             })
 
             View._getHtml(self);
             View._getCss(self);
             
-            View._collection.push(self);
+            View._collection[self.id] = {id: self.id, obj: self};
             
         },
 
@@ -109,7 +107,7 @@
             $.get(
                 path,
                 function(source) {
-                    self._html = source;
+                    View._get(self.id).html = source;
                     Event.dispatch("View:getHtml", self)
                 }
             );
@@ -138,7 +136,7 @@
             $script.one("load", {
                 path: path
             }, function() {
-                self._script = path;                
+                View._get(self.id).script = path;
                 Event.dispatch("View:getScript", self)
             });
         },
@@ -169,23 +167,13 @@
             $link.one("load", {
                 path: path
             }, function() {
-                self._css = path;
+                View._get(self.id).css = path;
                 Event.dispatch("View:getCss", self)
             });
         },
         
         _get: function(id) {
-            var i,
-                collection = View._collection,
-                length = collection.length;
-                
-            for (i = length; i--;) {
-                if (collection[i].id === id) {
-                    return View._collection[i];
-                } else {
-                    return undefined;
-                }
-            }
+            return View._collection[id];
         }
                 
     });
@@ -270,7 +258,7 @@
         */  
         html: function(source) {
             if (source === undefined) {
-                return this._html;
+                 return View._get(this.id).html;
             }
         },
 
@@ -283,7 +271,7 @@
         */  
         script: function(source) {
             if (source === undefined) {
-                return this._script;
+                return View._get(this.id).script;
             }
         },
 
@@ -296,7 +284,7 @@
         */  
         css: function(source) {
             if (source === undefined) {
-                return this._css;
+                return View._get(this.id).css;
             }            
         }
     });    
@@ -315,24 +303,22 @@
         view: function(id, options) {
             var i,
                 views = View._collection,
-                viewCount = views.length,
                 view;
             
-            for (i = 0; i < viewCount; i++) {
-                if (views[i].id === id) {
-                    view = views[i];
+            if (id !== "" && id !== undefined) {
+                
+                if (views[id] !== undefined) {
+                    view = views[id].obj;
+                } else {
+                    if (options === undefined) {
+                        options = {};
+                    }
+                    options.id = id;
+                    view = new View(options);
                 }
             }
-            
-            if (view !== undefined) {
-                return view;
-            } else {
-                if (options === undefined) {
-                    options = {};
-                }
-                options.id = id;
-                return new View(options);
-            }
+
+            return view
         },
         
     })
