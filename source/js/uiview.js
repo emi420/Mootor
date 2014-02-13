@@ -47,6 +47,7 @@
     // Private static methods and properties
 
     $.extend(UIView, {
+        
         _collection: {},
         
         _set: function(view, options, self) {
@@ -77,22 +78,14 @@
         },
     });
 
+    // Public methods
+
+    UIView.prototype = {
+        // code here
+    }
+
     // Prototypal inheritance
 
     $.extend(UIView.prototype, UI.prototype);
 
-    // Public methods
-
-    $.extend(UIView.prototype, {
-        
-        /**
-        * A reference to the view
-        *
-        * @property view
-        * @type View
-        */
-        view: {
-            
-        }
-    });        
 }(window.$, window.Mootor));

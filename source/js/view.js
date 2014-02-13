@@ -74,12 +74,6 @@
         */
         _init: function(options, self) {
             
-            // FIXME CHECK: hardcoded value
-            var _navigationMode = "panel";
-            
-            // Set navigation mode
-            self._navigationMode = _navigationMode;
-            
             // Load Html, Css and JavaScript
             Event.on("View:getHtml", function(view) {
                 View._getScript(self);
