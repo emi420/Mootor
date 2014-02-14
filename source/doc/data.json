@@ -1,8 +1,8 @@
 {
     "project": {},
     "files": {
-        "source/js/app.js": {
-            "name": "source/js/app.js",
+        "app.js": {
+            "name": "app.js",
             "modules": {
                 "App": 1
             },
@@ -14,8 +14,8 @@
             },
             "namespaces": {}
         },
-        "source/js/mootor.js": {
-            "name": "source/js/mootor.js",
+        "mootor.js": {
+            "name": "mootor.js",
             "modules": {
                 "Mootor": 1
             },
@@ -27,8 +27,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "source/js/route.js": {
-            "name": "source/js/route.js",
+        "route.js": {
+            "name": "route.js",
             "modules": {
                 "Router": 1
             },
@@ -38,8 +38,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "source/js/router.js": {
-            "name": "source/js/router.js",
+        "router.js": {
+            "name": "router.js",
             "modules": {},
             "classes": {
                 "Router": 1
@@ -47,8 +47,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "source/js/ui.js": {
-            "name": "source/js/ui.js",
+        "ui.js": {
+            "name": "ui.js",
             "modules": {
                 "UI": 1
             },
@@ -58,8 +58,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "source/js/uiapp.js": {
-            "name": "source/js/uiapp.js",
+        "uiapp.js": {
+            "name": "uiapp.js",
             "modules": {},
             "classes": {
                 "UIApp": 1
@@ -67,8 +67,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "source/js/uiheader.js": {
-            "name": "source/js/uiheader.js",
+        "uiheader.js": {
+            "name": "uiheader.js",
             "modules": {},
             "classes": {
                 "UIHeader": 1
@@ -76,8 +76,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "source/js/uiloading.js": {
-            "name": "source/js/uiloading.js",
+        "uiloading.js": {
+            "name": "uiloading.js",
             "modules": {},
             "classes": {
                 "UILoading": 1
@@ -85,8 +85,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "source/js/uinavbar.js": {
-            "name": "source/js/uinavbar.js",
+        "uinavbar.js": {
+            "name": "uinavbar.js",
             "modules": {},
             "classes": {
                 "UINavBar": 1
@@ -94,8 +94,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "source/js/uinavitem.js": {
-            "name": "source/js/uinavitem.js",
+        "uinavitem.js": {
+            "name": "uinavitem.js",
             "modules": {},
             "classes": {
                 "UINavItem": 1
@@ -103,8 +103,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "source/js/uipanel.js": {
-            "name": "source/js/uipanel.js",
+        "uipanel.js": {
+            "name": "uipanel.js",
             "modules": {},
             "classes": {
                 "UIPanel": 1
@@ -112,8 +112,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "source/js/uiview.js": {
-            "name": "source/js/uiview.js",
+        "uiview.js": {
+            "name": "uiview.js",
             "modules": {},
             "classes": {
                 "UIView": 1
@@ -121,8 +121,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "source/js/view.js": {
-            "name": "source/js/view.js",
+        "view.js": {
+            "name": "view.js",
             "modules": {
                 "View": 1
             },
@@ -147,7 +147,7 @@
             },
             "namespaces": {},
             "tag": "module",
-            "file": "source/js/app.js",
+            "file": "app.js",
             "line": 19,
             "description": "The App class defines the main object of the applications"
         },
@@ -162,7 +162,7 @@
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "source/js/mootor.js",
+            "file": "mootor.js",
             "line": 71,
             "description": "The Mootor module handles the creation of App and Namespaces",
             "author": "Martín Szyszlican (martinsz [at] gmail.com)"
@@ -177,7 +177,7 @@
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "source/js/router.js",
+            "file": "router.js",
             "line": 1,
             "description": "The Route class is for defining a route"
         },
@@ -197,7 +197,7 @@
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "source/js/uiview.js",
+            "file": "uiview.js",
             "line": 1,
             "description": "The UI class is the class for all user interface elements.\nIt is not directly used, but extended by many other classes."
         },
@@ -212,7 +212,7 @@
             },
             "namespaces": {},
             "tag": "module",
-            "file": "source/js/view.js",
+            "file": "view.js",
             "line": 1,
             "description": "The View class handles each screen of the application. \nA list of views is specified in the applications options\nand the files are loaded from the views/ folder.\nEach view has a viewName.js and a viewName.html file.\nThe viewName.js file defines options for the view."
         }
@@ -227,7 +227,7 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "App",
-            "file": "source/js/app.js",
+            "file": "app.js",
             "line": 19,
             "description": "The App class defines the main object of the applications",
             "is_constructor": 1,
@@ -249,7 +249,7 @@
             "extension_for": [],
             "module": "Mootor",
             "namespace": "",
-            "file": "source/js/mootor.js",
+            "file": "mootor.js",
             "line": 106,
             "description": "m public global object",
             "static": 1
@@ -264,7 +264,7 @@
             "extension_for": [],
             "module": "Mootor",
             "namespace": "",
-            "file": "source/js/mootor.js",
+            "file": "mootor.js",
             "line": 22,
             "description": "The Event class defines and manage events",
             "access": "private",
@@ -280,7 +280,7 @@
             "extension_for": [],
             "module": "Mootor",
             "namespace": "",
-            "file": "source/js/mootor.js",
+            "file": "mootor.js",
             "line": 71,
             "description": "Information about the context of the application (ej: device's viewport)",
             "return": {
@@ -298,7 +298,7 @@
             "extension_for": [],
             "module": "Router",
             "namespace": "",
-            "file": "source/js/route.js",
+            "file": "route.js",
             "line": 1,
             "description": "The Route class is for defining a route",
             "is_constructor": 1,
@@ -314,7 +314,7 @@
             "extension_for": [],
             "module": "Router",
             "namespace": "",
-            "file": "source/js/router.js",
+            "file": "router.js",
             "line": 1,
             "description": "The Router class is for defining routes",
             "is_constructor": 1,
@@ -330,7 +330,7 @@
             "extension_for": [],
             "module": "UI",
             "namespace": "",
-            "file": "source/js/ui.js",
+            "file": "ui.js",
             "line": 1,
             "description": "The UI class is the class for all user interface elements.\nIt is not directly used, but extended by many other classes.",
             "is_constructor": 1,
@@ -346,7 +346,7 @@
             "extension_for": [],
             "module": "UI",
             "namespace": "",
-            "file": "source/js/uiapp.js",
+            "file": "uiapp.js",
             "line": 1,
             "description": "The UIApp class is the UI representation of an app",
             "extends": "UI",
@@ -363,7 +363,7 @@
             "extension_for": [],
             "module": "UI",
             "namespace": "",
-            "file": "source/js/uiheader.js",
+            "file": "uiheader.js",
             "line": 1,
             "description": "The UIHeader class is a navigational element at the top or bottom of the page (header or footer)",
             "extends": "UI",
@@ -380,7 +380,7 @@
             "extension_for": [],
             "module": "UI",
             "namespace": "",
-            "file": "source/js/uiloading.js",
+            "file": "uiloading.js",
             "line": 1,
             "description": "The UILoading is the loading indicator",
             "extends": "UI",
@@ -397,7 +397,7 @@
             "extension_for": [],
             "module": "UI",
             "namespace": "",
-            "file": "source/js/uinavbar.js",
+            "file": "uinavbar.js",
             "line": 1,
             "description": "The UINavBar class is a navigational element at the top or bottom of the page (header or footer)",
             "extends": "UI",
@@ -414,7 +414,7 @@
             "extension_for": [],
             "module": "UI",
             "namespace": "",
-            "file": "source/js/uinavitem.js",
+            "file": "uinavitem.js",
             "line": 1,
             "description": "The UINavItem is an item of a UINavBar, like an action button or an anchor link",
             "extends": "UI",
@@ -431,7 +431,7 @@
             "extension_for": [],
             "module": "UI",
             "namespace": "",
-            "file": "source/js/uipanel.js",
+            "file": "uipanel.js",
             "line": 1,
             "description": "A Panel to show views",
             "extends": "UI",
@@ -447,7 +447,7 @@
             "extension_for": [],
             "module": "UI",
             "namespace": "",
-            "file": "source/js/uiview.js",
+            "file": "uiview.js",
             "line": 1,
             "description": "The UIView class is the UI representation of a view",
             "extends": "UI",
@@ -464,7 +464,7 @@
             "extension_for": [],
             "module": "View",
             "namespace": "",
-            "file": "source/js/view.js",
+            "file": "view.js",
             "line": 1,
             "description": "The View class handles each screen of the application. \nA list of views is specified in the applications options\nand the files are loaded from the views/ folder.\nEach view has a viewName.js and a viewName.html file.\nThe viewName.js file defines options for the view.",
             "is_constructor": 1,
@@ -480,8 +480,8 @@
     },
     "classitems": [
         {
-            "file": "source/js/app.js",
-            "line": 39,
+            "file": "app.js",
+            "line": 35,
             "description": "Stores the navigation history. \nAn array of views, ordered in the sequence that they were visited by the user.",
             "itemtype": "property",
             "name": "history",
@@ -490,15 +490,15 @@
             "module": "App"
         },
         {
-            "file": "source/js/app.js",
-            "line": 48,
+            "file": "app.js",
+            "line": 44,
             "description": "Application settings\nIf called with a key, returns the value. If called with key and value, sets value to key.",
             "itemtype": "method",
             "name": "settings",
             "params": [
                 {
                     "name": "key",
-                    "description": "The name of the setting",
+                    "description": "The name of the setting\\",
                     "type": "String"
                 },
                 {
@@ -508,6 +508,7 @@
                     "optional": true
                 }
             ],
+            "chainable": 1,
             "return": {
                 "description": "object the setting value"
             },
@@ -515,11 +516,12 @@
             "module": "App"
         },
         {
-            "file": "source/js/app.js",
-            "line": 61,
+            "file": "app.js",
+            "line": 58,
             "description": "Go to a view",
             "itemtype": "method",
             "name": "go",
+            "chainable": 1,
             "params": [
                 {
                     "name": "id",
@@ -534,11 +536,12 @@
             "module": "App"
         },
         {
-            "file": "source/js/app.js",
-            "line": 71,
+            "file": "app.js",
+            "line": 70,
             "description": "Go to the previous view in the history",
             "itemtype": "method",
             "name": "back",
+            "chainable": 1,
             "return": {
                 "description": "Route"
             },
@@ -546,11 +549,12 @@
             "module": "App"
         },
         {
-            "file": "source/js/app.js",
-            "line": 80,
+            "file": "app.js",
+            "line": 81,
             "description": "Go to next view in the history",
             "itemtype": "method",
             "name": "forward",
+            "chainable": 1,
             "return": {
                 "description": "Route"
             },
@@ -558,11 +562,12 @@
             "module": "App"
         },
         {
-            "file": "source/js/app.js",
-            "line": 89,
+            "file": "app.js",
+            "line": 92,
             "description": "Returns a router instance",
             "itemtype": "method",
             "name": "router",
+            "chainable": 1,
             "return": {
                 "description": "Router"
             },
@@ -570,11 +575,12 @@
             "module": "App"
         },
         {
-            "file": "source/js/app.js",
-            "line": 98,
+            "file": "app.js",
+            "line": 103,
             "description": "Set callbacks for app events",
             "itemtype": "method",
             "name": "on",
+            "chainable": 1,
             "return": {
                 "description": "App instance"
             },
@@ -582,8 +588,8 @@
             "module": "App"
         },
         {
-            "file": "source/js/app.js",
-            "line": 118,
+            "file": "app.js",
+            "line": 140,
             "description": "Creates a new app with the defined options.\nIf the app is already created, it can be called without options to have a reference to the Mootor app. \n\n App instance factory\n\n window.m.app({\n   views: [\n      \"index\",\n      \"view1\"\n   ]\n });",
             "itemtype": "method",
             "name": "app",
@@ -602,7 +608,7 @@
             "module": "App"
         },
         {
-            "file": "source/js/mootor.js",
+            "file": "mootor.js",
             "line": 31,
             "description": "Events collection",
             "access": "private",
@@ -611,7 +617,7 @@
             "module": "Mootor"
         },
         {
-            "file": "source/js/mootor.js",
+            "file": "mootor.js",
             "line": 37,
             "description": "Add event to collection",
             "access": "private",
@@ -620,7 +626,7 @@
             "module": "Mootor"
         },
         {
-            "file": "source/js/mootor.js",
+            "file": "mootor.js",
             "line": 50,
             "description": "Dispatch event",
             "access": "private",
@@ -629,7 +635,7 @@
             "module": "Mootor"
         },
         {
-            "file": "source/js/mootor.js",
+            "file": "mootor.js",
             "line": 79,
             "description": "Browser info",
             "itemtype": "property",
@@ -639,7 +645,7 @@
             "module": "Mootor"
         },
         {
-            "file": "source/js/mootor.js",
+            "file": "mootor.js",
             "line": 86,
             "description": "Viewport info",
             "itemtype": "property",
@@ -649,7 +655,7 @@
             "module": "Mootor"
         },
         {
-            "file": "source/js/mootor.js",
+            "file": "mootor.js",
             "line": 93,
             "description": "Device info",
             "itemtype": "property",
@@ -659,7 +665,7 @@
             "module": "Mootor"
         },
         {
-            "file": "source/js/mootor.js",
+            "file": "mootor.js",
             "line": 112,
             "itemtype": "property",
             "name": "context",
@@ -668,7 +674,7 @@
             "module": "Mootor"
         },
         {
-            "file": "source/js/route.js",
+            "file": "route.js",
             "line": 33,
             "description": "The URL referenced by this route",
             "itemtype": "property",
@@ -678,7 +684,7 @@
             "module": "Router"
         },
         {
-            "file": "source/js/route.js",
+            "file": "route.js",
             "line": 41,
             "description": "An array with the parameters passed to the page\nIf called with no parameters, it returns the currently set params in this route.",
             "itemtype": "method",
@@ -698,7 +704,7 @@
             "module": "Router"
         },
         {
-            "file": "source/js/route.js",
+            "file": "route.js",
             "line": 53,
             "description": "The view that implements this route\nIf called with no parameters, it returns the currently set view in this route.",
             "itemtype": "method",
@@ -718,7 +724,7 @@
             "module": "Router"
         },
         {
-            "file": "source/js/router.js",
+            "file": "router.js",
             "line": 33,
             "description": "Create a route",
             "itemtype": "method",
@@ -737,7 +743,7 @@
             "module": "Router"
         },
         {
-            "file": "source/js/ui.js",
+            "file": "ui.js",
             "line": 34,
             "description": "Shows element (not necesarily, since the element's parent might be hidden or out of view)",
             "itemtype": "method",
@@ -750,7 +756,7 @@
             "module": "UI"
         },
         {
-            "file": "source/js/ui.js",
+            "file": "ui.js",
             "line": 44,
             "description": "Hides element from view",
             "itemtype": "method",
@@ -763,7 +769,7 @@
             "module": "UI"
         },
         {
-            "file": "source/js/uiapp.js",
+            "file": "uiapp.js",
             "line": 43,
             "description": "Show/Hide the loading indicator",
             "itemtype": "method",
@@ -784,7 +790,7 @@
             "module": "UI"
         },
         {
-            "file": "source/js/uiheader.js",
+            "file": "uiheader.js",
             "line": 44,
             "description": "Title\nThe text to display in the header\nIf called with no arguments returns the current title",
             "itemtype": "method",
@@ -806,7 +812,7 @@
             "module": "UI"
         },
         {
-            "file": "source/js/uiloading.js",
+            "file": "uiloading.js",
             "line": 45,
             "description": "Set the style for the loading animation",
             "itemtype": "method",
@@ -828,7 +834,7 @@
             "module": "UI"
         },
         {
-            "file": "source/js/uinavbar.js",
+            "file": "uinavbar.js",
             "line": 43,
             "description": "A nav object",
             "itemtype": "property",
@@ -838,7 +844,7 @@
             "module": "UI"
         },
         {
-            "file": "source/js/uinavbar.js",
+            "file": "uinavbar.js",
             "line": 53,
             "description": "Position\nThe nav bar is statically positioned to the top or bottom of the window",
             "itemtype": "method",
@@ -860,7 +866,7 @@
             "module": "UI"
         },
         {
-            "file": "source/js/uinavitem.js",
+            "file": "uinavitem.js",
             "line": 42,
             "description": "Move the element to the specified coordinates. \nIf coordinates are not specified, it returns coordinates object with the current position.",
             "itemtype": "method",
@@ -882,7 +888,7 @@
             "module": "UI"
         },
         {
-            "file": "source/js/uinavitem.js",
+            "file": "uinavitem.js",
             "line": 55,
             "description": "Block/Unblock or return block status.",
             "itemtype": "method",
@@ -904,7 +910,7 @@
             "module": "UI"
         },
         {
-            "file": "source/js/uipanel.js",
+            "file": "uipanel.js",
             "line": 38,
             "description": "Initialize  a panel",
             "itemtype": "method",
@@ -915,7 +921,7 @@
             "module": "UI"
         },
         {
-            "file": "source/js/uipanel.js",
+            "file": "uipanel.js",
             "line": 67,
             "description": "Move the element to the specified coordinates. \nIf coordinates are not specified, it returns coordinates object with the current position.",
             "itemtype": "method",
@@ -936,7 +942,7 @@
             "module": "UI"
         },
         {
-            "file": "source/js/uipanel.js",
+            "file": "uipanel.js",
             "line": 79,
             "description": "Resize the element to the specified dimentions. \nIf dimentions are not specified, it returns dimentions object with the current size.",
             "itemtype": "method",
@@ -957,7 +963,7 @@
             "module": "UI"
         },
         {
-            "file": "source/js/uipanel.js",
+            "file": "uipanel.js",
             "line": 91,
             "description": "Block/Unblock or return block status.",
             "itemtype": "method",
@@ -978,7 +984,7 @@
             "module": "UI"
         },
         {
-            "file": "source/js/uipanel.js",
+            "file": "uipanel.js",
             "line": 102,
             "description": "Set or get transition type",
             "itemtype": "method",
@@ -999,7 +1005,7 @@
             "module": "UI"
         },
         {
-            "file": "source/js/uipanel.js",
+            "file": "uipanel.js",
             "line": 135,
             "description": "Shows a panel using the specified transition",
             "itemtype": "method",
@@ -1012,7 +1018,7 @@
             "module": "UI"
         },
         {
-            "file": "source/js/uipanel.js",
+            "file": "uipanel.js",
             "line": 214,
             "description": "Hides a panel using the specified transition",
             "itemtype": "method",
@@ -1025,8 +1031,8 @@
             "module": "UI"
         },
         {
-            "file": "source/js/view.js",
-            "line": 55,
+            "file": "view.js",
+            "line": 56,
             "description": "Views collection",
             "access": "private",
             "tagname": "",
@@ -1034,8 +1040,8 @@
             "module": "View"
         },
         {
-            "file": "source/js/view.js",
-            "line": 61,
+            "file": "view.js",
+            "line": 62,
             "description": "Current active view",
             "access": "private",
             "tagname": "",
@@ -1043,8 +1049,8 @@
             "module": "View"
         },
         {
-            "file": "source/js/view.js",
-            "line": 67,
+            "file": "view.js",
+            "line": 68,
             "description": "Init View instance, load HTML, CSS and JavaScript files for the view",
             "access": "private",
             "tagname": "",
@@ -1066,8 +1072,8 @@
             "module": "View"
         },
         {
-            "file": "source/js/view.js",
-            "line": 89,
+            "file": "view.js",
+            "line": 90,
             "description": "Get view HTML",
             "access": "private",
             "tagname": "",
@@ -1084,8 +1090,8 @@
             "module": "View"
         },
         {
-            "file": "source/js/view.js",
-            "line": 179,
+            "file": "view.js",
+            "line": 180,
             "description": "A reference to the UI representation of this view",
             "itemtype": "property",
             "name": "ui",
@@ -1094,8 +1100,8 @@
             "module": "View"
         },
         {
-            "file": "source/js/view.js",
-            "line": 187,
+            "file": "view.js",
+            "line": 188,
             "description": "Title is the friendly name for the current view.\nWhen called without parameters, returns a string containing the title. When called with parameters, sets the title.",
             "itemtype": "method",
             "name": "title",
@@ -1114,8 +1120,8 @@
             "module": "View"
         },
         {
-            "file": "source/js/view.js",
-            "line": 199,
+            "file": "view.js",
+            "line": 200,
             "description": "Sets an event handler for the view\nPossible values for event: load, beforeLoad, unload, beforeUnload, init\nTODO: Define which parameters are passed to the callback function.",
             "itemtype": "method",
             "name": "on",
@@ -1138,8 +1144,8 @@
             "module": "View"
         },
         {
-            "file": "source/js/view.js",
-            "line": 213,
+            "file": "view.js",
+            "line": 214,
             "description": "Unsets event handlers for the view\nPossible values for event: load, beforeLoad, unload, beforeUnload, init",
             "itemtype": "method",
             "name": "off",
@@ -1163,8 +1169,8 @@
             "module": "View"
         },
         {
-            "file": "source/js/view.js",
-            "line": 226,
+            "file": "view.js",
+            "line": 227,
             "description": "Removes the view from the app (and from the screen)",
             "itemtype": "method",
             "name": "remove",
@@ -1175,8 +1181,8 @@
             "module": "View"
         },
         {
-            "file": "source/js/view.js",
-            "line": 236,
+            "file": "view.js",
+            "line": 237,
             "description": "Inserts the view to the app",
             "itemtype": "method",
             "name": "insert",
@@ -1187,8 +1193,8 @@
             "module": "View"
         },
         {
-            "file": "source/js/view.js",
-            "line": 246,
+            "file": "view.js",
+            "line": 247,
             "description": "Gets or sets the source for the HTML of this view.",
             "itemtype": "method",
             "name": "html",
@@ -1200,8 +1206,8 @@
             "module": "View"
         },
         {
-            "file": "source/js/view.js",
-            "line": 259,
+            "file": "view.js",
+            "line": 260,
             "description": "Gets or sets the source for the JavaScript of this view.",
             "itemtype": "method",
             "name": "script",
@@ -1213,8 +1219,8 @@
             "module": "View"
         },
         {
-            "file": "source/js/view.js",
-            "line": 272,
+            "file": "view.js",
+            "line": 273,
             "description": "Gets or sets the source for the CSS StyleSheet of this view.",
             "itemtype": "method",
             "name": "css",
@@ -1226,8 +1232,8 @@
             "module": "View"
         },
         {
-            "file": "source/js/view.js",
-            "line": 288,
+            "file": "view.js",
+            "line": 289,
             "description": "Create or get a view",
             "itemtype": "method",
             "name": "view",
@@ -1254,23 +1260,23 @@
     "warnings": [
         {
             "message": "Missing item type\nEvents collection",
-            "line": " source/js/mootor.js:31"
+            "line": " mootor.js:31"
         },
         {
             "message": "Missing item type\nAdd event to collection",
-            "line": " source/js/mootor.js:37"
+            "line": " mootor.js:37"
         },
         {
             "message": "Missing item type\nDispatch event",
-            "line": " source/js/mootor.js:50"
+            "line": " mootor.js:50"
         },
         {
             "message": "Missing item type\nViews collection",
-            "line": " source/js/view.js:55"
+            "line": " view.js:56"
         },
         {
             "message": "Missing item type\nCurrent active view",
-            "line": " source/js/view.js:61"
+            "line": " view.js:62"
         }
     ]
 }
