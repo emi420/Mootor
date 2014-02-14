@@ -45,6 +45,8 @@
             
                 <li><a href="../classes/Context.html">Context</a></li>
             
+                <li><a href="../classes/Event.html">Event</a></li>
+            
                 <li><a href="../classes/Route.html">Route</a></li>
             
                 <li><a href="../classes/Router.html">Router</a></li>
@@ -73,7 +75,15 @@
 
             <ul id="api-modules" class="apis modules">
             
+                <li><a href="../modules/App.html">App</a></li>
+            
                 <li><a href="../modules/Mootor.html">Mootor</a></li>
+            
+                <li><a href="../modules/Router.html">Router</a></li>
+            
+                <li><a href="../modules/UI.html">UI</a></li>
+            
+                <li><a href="../modules/View.html">View</a></li>
             
             </ul>
         </div>
@@ -124,7 +134,7 @@
 
     
         
-            Module: <a href="../modules/Mootor.html">Mootor</a>
+            Module: <a href="../modules/View.html">View</a>
         
     
 
@@ -263,6 +273,20 @@ The viewName.js file defines options for the view.</p>
 
                     <ul class="index-list methods">
                         
+                            <li class="index-item method private">
+                                <a href="#method__getHtml">_getHtml</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__init">_init</a>
+
+                                
+                                
+                            </li>
+                        
                             <li class="index-item method">
                                 <a href="#method_css">css</a>
 
@@ -350,6 +374,210 @@ The viewName.js file defines options for the view.</p>
                 <h2 class="off-left">Methods</h2>
 
                 
+                    <div id="method__getHtml" class="method item private">
+    <h3 class="name"><code>_getHtml</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>self</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/view.js.html#l90"><code>view.js:90</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Get view HTML</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">self</code>
+                        <span class="type"><a href="../classes/View.html" class="crosslink">View</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>View instance</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__init" class="method item private">
+    <h3 class="name"><code>_init</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>options</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>self</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/view.js.html#l68"><code>view.js:68</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Init View instance, load HTML, CSS and JavaScript files for the view</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">options</code>
+                        <span class="type">Array</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>A list of options</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">self</code>
+                        <span class="type"><a href="../classes/View.html" class="crosslink">View</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>View instance</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
                     <div id="method_css" class="method item">
     <h3 class="name"><code>css</code></h3>
 
@@ -386,7 +614,7 @@ The viewName.js file defines options for the view.</p>
             
         
         
-        <a href="../files/view.js.html#l202"><code>view.js:202</code></a>
+        <a href="../files/view.js.html#l273"><code>view.js:273</code></a>
         
         </p>
 
@@ -457,7 +685,7 @@ The viewName.js file defines options for the view.</p>
             
         
         
-        <a href="../files/view.js.html#l180"><code>view.js:180</code></a>
+        <a href="../files/view.js.html#l247"><code>view.js:247</code></a>
         
         </p>
 
@@ -528,7 +756,7 @@ The viewName.js file defines options for the view.</p>
             
         
         
-        <a href="../files/view.js.html#l170"><code>view.js:170</code></a>
+        <a href="../files/view.js.html#l237"><code>view.js:237</code></a>
         
         </p>
 
@@ -615,7 +843,7 @@ The viewName.js file defines options for the view.</p>
             
         
         
-        <a href="../files/view.js.html#l147"><code>view.js:147</code></a>
+        <a href="../files/view.js.html#l214"><code>view.js:214</code></a>
         
         </p>
 
@@ -744,7 +972,7 @@ Possible values for event: load, beforeLoad, unload, beforeUnload, init</p>
             
         
         
-        <a href="../files/view.js.html#l133"><code>view.js:133</code></a>
+        <a href="../files/view.js.html#l200"><code>view.js:200</code></a>
         
         </p>
 
@@ -857,7 +1085,7 @@ TODO: Define which parameters are passed to the callback function.</p>
             
         
         
-        <a href="../files/view.js.html#l160"><code>view.js:160</code></a>
+        <a href="../files/view.js.html#l227"><code>view.js:227</code></a>
         
         </p>
 
@@ -928,7 +1156,7 @@ TODO: Define which parameters are passed to the callback function.</p>
             
         
         
-        <a href="../files/view.js.html#l191"><code>view.js:191</code></a>
+        <a href="../files/view.js.html#l260"><code>view.js:260</code></a>
         
         </p>
 
@@ -1009,7 +1237,7 @@ TODO: Define which parameters are passed to the callback function.</p>
             
         
         
-        <a href="../files/view.js.html#l121"><code>view.js:121</code></a>
+        <a href="../files/view.js.html#l188"><code>view.js:188</code></a>
         
         </p>
 
@@ -1101,7 +1329,7 @@ When called without parameters, returns a string containing the title. When call
             
         
         
-        <a href="../files/view.js.html#l113"><code>view.js:113</code></a>
+        <a href="../files/view.js.html#l180"><code>view.js:180</code></a>
         
         </p>
 
