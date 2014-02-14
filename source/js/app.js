@@ -130,6 +130,7 @@
         init: function() {
             var self = this;
             Event.dispatch("App:init", {self: self, options: App._options});   
+            this.init = function() { return this };
             return this;
         }
         
