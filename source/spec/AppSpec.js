@@ -32,6 +32,8 @@ var createApp = function(done) {
         view.on("unload", function() {
             window._testViewOnUnLoad = true;
         });
+        
+        _appIsInitTest = true;
 
 	}
 	setTimeout(function() {
@@ -164,7 +166,7 @@ describe("App", function() {
             done();
 
 		});
-		it("Should be able to detect hardware buttons", function(done) {
+		xit("Should be able to detect hardware buttons", function(done) {
             // Except context().device.backButton
             expect(m.context.device.backButton).toBeDefined();
 
@@ -272,7 +274,7 @@ describe("App", function() {
 		it("Should be able to load view's HTML", function(done) {
 			// Expect view 'index' html to be defined
 			expect(
-			 	app.view("index").html()
+                Mootor.View._get("index").html
 			).toBeDefined();
 
 			done();

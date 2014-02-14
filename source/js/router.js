@@ -26,7 +26,6 @@
     // Event handlers
 
     Event.on("App:init", function(self) {
-        console.log("on app init (router)");
         var views = App._options.views,
             viewCount = views.length,
             app = m.app,

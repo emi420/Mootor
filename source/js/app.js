@@ -28,6 +28,12 @@
     App = Mootor.App = function(options) {
     };
 
+    // Private static 
+    
+    $.extend(App, {
+        _settings: {}
+    });
+
     // Public methods
 
     App.prototype = {
@@ -46,13 +52,15 @@
         * If called with a key, returns the value. If called with key and value, sets value to key.
         *
         * @method settings
-        * @param {String} key The name of the setting\
-        * @chainable
+        * @param {String} key The name of the setting
         * @param {object} [value] The value of the setting
         * @return object the setting value
         */
         settings: function(key, value) {
-            return this;            
+            if (value !== undefined) {
+                App._settings[key] = value;
+            }
+            return App._settings[key];
         },
 
         /**
@@ -94,17 +102,6 @@
         },        
 
         /**
-        * Returns a router instance
-        *
-        * @method router
-        * @chainable
-        * @return Router
-        */
-        router: function(id) {
-            return this;
-        },
-        
-        /**
         * Set callbacks for app events
         * @method on
         * @chainable
@@ -127,7 +124,7 @@
         
         /*
         * Initialize app
-        * @chainablec
+        * @chainable
         * @method init
         * @return App instance
         */

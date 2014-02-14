@@ -32,7 +32,6 @@
 
     Event.on("App:init", function(self) {
 
-        console.log("on app init (view)");
         var views = App._options.views,
             viewCount = views.length,
             i;            
@@ -260,44 +259,6 @@
 
         },
 
-        /**
-        * Gets or sets the source for the HTML of this view.
-        * 
-        * @method html
-        * @return string
-        * @default /views/[viewid]/[viewid].html
-        */  
-        html: function(source) {
-            if (source === undefined) {
-                 return View._get(this.id).html;
-            }
-        },
-
-        /**
-        * Gets or sets the source for the JavaScript of this view.
-        * 
-        * @method script
-        * @return string
-        * @default /views/[viewid]/[viewid].js
-        */  
-        script: function(source) {
-            if (source === undefined) {
-                return View._get(this.id).script;
-            }
-        },
-
-        /**
-        * Gets or sets the source for the CSS StyleSheet of this view.
-        * 
-        * @method css
-        * @return string
-        * @default /views/[viewid]/[viewid].css
-        */  
-        css: function(source) {
-            if (source === undefined) {
-                return View._get(this.id).css;
-            }            
-        }
     });    
     
     $.extend(Mootor.App.prototype, {

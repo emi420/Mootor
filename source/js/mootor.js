@@ -38,7 +38,7 @@
         * Add event to collection
         * @private
         */
-        on: function(event, callback, options) {
+        on: function(event, callback) {
             if (Event._collection[event] === undefined) {
                 Event._collection[event] = [];
             } 
