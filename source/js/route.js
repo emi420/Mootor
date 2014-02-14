@@ -16,8 +16,9 @@
 
     // Private constructors
     
-    Route = Mootor.Route = function() {
-        // code here
+    Route = Mootor.Route = function(url, view) {
+        this.url = url;
+        this.view = view;
     };
     
     // Private static methods and properties
@@ -58,9 +59,7 @@
         * @param {View} [view] - The view that implements this route
         * @return view
         */
-        view: function(view) {
-
-        },
+        view: {},
 
     });        
 

@@ -20,17 +20,20 @@
     "use strict";
     
     var View,
-        Event;
+        Event,
+        App;
         
     // Dependencies
     
     Event = Mootor.Event;
+    App = Mootor.App;
     
     // Event handlers
 
-    Event.on("App:init", function(params) {
-        var views = params.options.views,
-            app = params.self,
+    Event.on("App:init", function(self) {
+
+        console.log("on app init (view)");
+        var views = App._options.views,
             viewCount = views.length,
             i;            
             
@@ -169,7 +172,20 @@
         
         _get: function(id) {
             return View._collection[id];
+        },
+        
+        _getHtmlPath: function(self) {
+            return  View._get(self.id).html;
+        },
+
+        _getCssPath: function(self) {
+            return View._get(self.id).css;
+        },
+
+        _getScriptPath: function(self) {
+            return View._get(self.id).script;
         }
+        
                 
     });
 
@@ -311,6 +327,8 @@
                     options.id = id;
                     view = new View(options);
                 }
+            } else {
+                view = App._currentView;
             }
 
             return view

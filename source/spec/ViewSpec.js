@@ -1,43 +1,12 @@
+window._testViewOnInit = false;
+window._testViewOnBeforeLoad = false;
+window._testViewOnLoad = false;
+window._testViewOnBeforeUnLoad = false;
+window._testViewOnUnLoad = false;
 
 describe("View", function() {
-	var app,
-		view;
-	beforeEach(function(done) {
-	    app = m.app({views: ["index"], onInit: function() { window._appIsInitTest = true; } });	
-	    view = app.view("index");
 
-	    window._testViewOnInit = false;
-	    window._testViewOnBeforeLoad = false;
-	    window._testViewOnLoad = false;
-	    window._testViewOnBeforeUnLoad = false;
-	    window._testViewOnUnLoad = false;
-
-        view.on("init", function() {
-            window._testViewOnInit = true;
-        });
-
-	    view.on("beforeLoad", function() {
-	        window._testViewOnBeforeLoad = true;
-	    });
-
-	    view.on("load", function() {
-	        window._testViewOnLoad = true;
-	    });
-
-	    view.on("beforeUnload", function() {
-	        window._testViewOnBeforeUnLoad = true;
-	    });
-
-	    view.on("unload", function() {
-	        window._testViewOnUnLoad = true;
-	    });
-
-
-		setTimeout(function() {
-		  done();
-		}, 200);
-	});
-
+	beforeEach(createApp)
 
 	describe("I want to determine the behavior of a view after is initialized", function() {
 

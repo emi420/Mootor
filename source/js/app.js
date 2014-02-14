@@ -60,11 +60,15 @@
         *
         * @method go
         * @chainable
-        * @param {String} id The id of the view
+        * @param {String} url The url to go
         * @return Route
         */
-        go: function(id) {
-            return this;
+        go: function(url) {
+            var router;
+            router = app.router.route(url);
+            App._currentView = router.view;
+            Event.dispatch("App:go");
+            return router;
         },        
 
         /**
@@ -123,14 +127,14 @@
         
         /*
         * Initialize app
-        * @chainable
+        * @chainablec
         * @method init
         * @return App instance
         */
         init: function() {
             var self = this;
-            Event.dispatch("App:init", {self: self, options: App._options});   
-            this.init = function() { return this };
+            Event.dispatch("App:init", self);   
+            this.init = function() { return self };
             return this;
         }
         
