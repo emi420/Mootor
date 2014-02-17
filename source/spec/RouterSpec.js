@@ -1,30 +1,23 @@
-describe("Viewport", function() {
+describe("Router", function() {
 
 	describe("I want to know viewport properties", function() {
+		beforeEach(createApp);
 
-		xit("Should be able to get viewport's height", function() {
+		it("Should be able to define a regular expression for route the URL to a view", function() {
+			app.route("#index/prod-([0-9][0-9])/(.*)/([a-z]",view);
 
-		});
-		xit("Should be able to get viewport's width", function() {
-
-		});
-	});
-
-
-	describe("I want to take action when the viewport is resized - (when this case occurs on mobile?)", function() {
-
-		xit("Should be able to set an event callback when the viewport is resized", function() {
-
+			expect(app.route("#index/prod-15/Product Name/view")).toBe(view);
 		});
 	});
 
 
-	describe("I want to take action when the device is rotated", function() {
+	describe("I want to pass parameters for a view", function() {
+		beforeEach(createApp);
 
-		xit("Should be able to set an event callback when the device is rotated", function() {
+		xit("Should be able to define a regular expression for read parameters passed to a view", function() {
 
 		});
-
 	});
+
 });
 

@@ -1,11 +1,5 @@
 describe("UIPanel", function() {
-  var panel;
 
-  beforeEach(function() {
-    var app = m.app({views: ["index"]}); 
-    var view = app.view("index");
-    panel = view.ui;
-  })
 
   describe("I want to determine the behavior of the panel's load / unload", function() {
 
@@ -26,24 +20,19 @@ describe("UIPanel", function() {
     });
 
   });
-});
 
 
-describe("Panel asynchronous specs", function() {
-  var panel;
 
-  beforeEach(function(done) {
-    var app = m.app({views: ["index"]}); 
-    var view = app.view("index");
-    panel = view.ui;
+  describe("Panel asynchronous specs", function() {
+    beforeEach(function () { 
+      createApp(); 
+      panel.show();
+    });
 
-  panel.slideIn();
-  setTimeout(function() {
-      done();
-    }, 2);
-  });
-  xit("Slides a panel in", function(done) {
-    expect(panel.css("left")).toBe("0px");
-    done();
+      it("Slides a panel in", function(done) {
+        //TODO: Which one is gonig to be the zeptified element? panel? panel.el? or $(panel.el) ?
+        expect(panel.el.css("left")).toBe("0px");
+        done();
+      });
   });
 });

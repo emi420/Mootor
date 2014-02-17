@@ -1,4 +1,4 @@
-describe("Viewport", function() {
+describe("Mootor", function() {
 
 	describe("I want to know viewport properties", function() {
 

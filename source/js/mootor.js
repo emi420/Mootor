@@ -39,12 +39,10 @@
         * @private
         */
         on: function(event, callback) {
-            
             if (Event._collection[event] === undefined) {
                 Event._collection[event] = [];
             } 
             Event._collection[event].push(callback);
-
         },
         
         /**
@@ -54,14 +52,18 @@
         dispatch: function(event, instance) {
             var i,
                 count = 0,
-                callbacks = Event._collection[event];
+                callbacks = Event._collection[event],
+                callback;
                 
             if (callbacks !== undefined) {
                 count = callbacks.length ;
             }
-                
             for (i = 0; i < count; i++) {
-                callbacks[i](instance);
+                (function(callback) {
+                    window.setTimeout(function() {
+                        callback(instance);
+                    }, 1)
+                }(callbacks[i]));
             }
         }
 
@@ -79,9 +81,9 @@
             /**
             * Browser info
             * @property browser
-            * @type object
+            * @type string
             */            
-            browser: {},
+            browser: navigator.userAgent.toLowerCase(),
 
             /**
             * Viewport info
@@ -95,7 +97,18 @@
             * @property device 
             * @type object
             */            
-            device: {}
+            device: {
+                /**
+                * Vendor info
+                * @property vendor
+                * @type string
+                */            
+                vendor: navigator.vendor.toLowerCase(),
+                
+            },
+            
+            cordova: (window.Cordova !== undefined),
+            phonegap: (window.PhoneGap !== undefined),
 
         });
     };

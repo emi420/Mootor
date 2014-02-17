@@ -45,6 +45,8 @@
             
                 <li><a href="../classes/Context.html">Context</a></li>
             
+                <li><a href="../classes/Event.html">Event</a></li>
+            
                 <li><a href="../classes/Route.html">Route</a></li>
             
                 <li><a href="../classes/Router.html">Router</a></li>
@@ -73,7 +75,15 @@
 
             <ul id="api-modules" class="apis modules">
             
+                <li><a href="../modules/App.html">App</a></li>
+            
                 <li><a href="../modules/Mootor.html">Mootor</a></li>
+            
+                <li><a href="../modules/Router.html">Router</a></li>
+            
+                <li><a href="../modules/UI.html">UI</a></li>
+            
+                <li><a href="../modules/View.html">View</a></li>
             
             </ul>
         </div>
@@ -123,71 +133,30 @@
 
     &quot;use strict&quot;;
 
+    var App,
+        Event;
+
+    // Dependencies
+
+    Event = Mootor.Event;
+
+    // Private constructors
+    
     /**
     * The App class defines the main object of the applications
     *
     * @class App
     * @constructor
+    *  @module App
     * @param {Object} options An object defining options for the application.
     * * views - An array with a list of view names
     */
-    var App;
-
-    // Private constructors
-    
     App = Mootor.App = function(options) {
-        App._init(options, this);
     };
-    
-    // Private static methods and properties
-
-    $.extend(App, {
-    
-        _views: {},
-        
-        _currentView: undefined,
-    
-        _init: function(options, self) {
-            // Defer init until dom loaded
-            $(function(){
-                if (options) {
-                    App._initViews(options.views, self);    
-                }
-                else {
-                    console.log(&quot;Can&#x27;t init app without views&quot;);
-                }
-                
-            });
-        },
-    
-        /**
-        * Init views, load remote files and call the View class to handle it.
-        *
-        * @private
-        * @method _initViews
-        * @param {Array} views A list of view names to be initialized
-        */
-        _initViews: function (views, self) {
-            var i,
-                view;
-                
-            for (i = 0; i &lt; views.length; i++) {
-
-                view = self.view({
-                    id: views[i]
-                });
-                
-                App._views[i] = view;
-
-            }
-            
-        }
-    
-    });
 
     // Public methods
 
-    $.extend(App.prototype, {
+    App.prototype = {
         
         /**
         * Stores the navigation history. 
@@ -203,63 +172,95 @@
         * If called with a key, returns the value. If called with key and value, sets value to key.
         *
         * @method settings
-        * @param {String} key The name of the setting
+        * @param {String} key The name of the setting\
+        * @chainable
         * @param {object} [value] The value of the setting
         * @return object the setting value
         */
         settings: function(key, value) {
-            
-        },
-
-        /**
-        * Create or get a view
-        *
-        * @method view
-        * @param {String} id The id of the view
-        * @param {String} [settings] The settings object for the view
-        * @return View the referenced view object
-        */
-        view: function(id, settings) {
-
+            return this;            
         },
 
         /**
         * Go to a view
         *
         * @method go
+        * @chainable
         * @param {String} id The id of the view
         * @return Route
         */
         go: function(id) {
+            return this;
         },        
 
         /**
         * Go to the previous view in the history
         *
         * @method back
+        * @chainable
         * @return Route
         */
         back: function(id) {
+            return this;
         },        
 
         /**
         * Go to next view in the history
         *
         * @method forward
+        * @chainable
         * @return Route
         */
         forward: function(id) {
+            return this;
         },        
 
         /**
         * Returns a router instance
         *
         * @method router
+        * @chainable
         * @return Router
         */
         router: function(id) {
-        }        
-    });
+            return this;
+        },
+        
+        /**
+        * Set callbacks for app events
+        * @method on
+        * @chainable
+        * @return App instance
+        */    
+        on: function(event, callback) {
+            Event.on(&quot;App:&quot; + event, callback);
+            return this;
+        },
+        
+        /* 
+        * Remove callbacks for app events
+        * @method off
+        * @chainable
+        * @return App instance
+        */    
+        off: function(event, callback) {
+            return this;
+        },
+        
+        /*
+        * Initialize app
+        * @chainable
+        * @method init
+        * @return App instance
+        */
+        init: function() {
+            var self = this;
+            Event.dispatch(&quot;App:init&quot;, {self: self, options: App._options});   
+            this.init = function() { return this };
+            return this;
+        }
+        
+    };
     
     $.extend(window.m, {        
         /**
@@ -284,8 +285,10 @@
         app: function(options) {
             if (App.app === undefined) {
                 App.app = new App(options);
+                App._options = options;
+                this.app = App.app;
+                return this.app;
             }
-            return App.app;
         }
     });
 

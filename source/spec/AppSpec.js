@@ -1,28 +1,46 @@
 var app,
-	view;
+	view,
+	panel;
 
 window._appIsInitTest = false;
 
 var createApp = function(done) {
-	if (typeof m.app == "function") {
-		console.log("createApp");
+	if (typeof m.app === "function") {
 		app = m.app({
 		    views: ["index"]
-		})
-		app.on("init",function() {
-		    console.log("init");
-			window._appIsInitTest = true;	
-			view = app.view("index");
-			done();	
-		})
-		app.init();
-		
+		});
+        
+        app.init()
+        
+        view = app.view("index");
+        panel = view.ui;
+
+        view.on("init", function() {
+            window._testViewOnInit = true;
+        });
+
+        view.on("beforeLoad", function() {
+            window._testViewOnBeforeLoad = true;
+        });
+
+        view.on("load", function() {
+            window._testViewOnLoad = true;
+        });
+
+        view.on("beforeUnload", function() {
+            window._testViewOnBeforeUnLoad = true;
+        });
+
+        view.on("unload", function() {
+            window._testViewOnUnLoad = true;
+        });
+        
+        _appIsInitTest = true;
 
 	}
-	else {
-		console.log("done");
+	setTimeout(function() {
 		done();
-	}
+	}, 100);
 }
 
 describe("App", function() {
@@ -62,7 +80,7 @@ describe("App", function() {
 		it("Should be able to load view's HTML", function(done) {
             // Except loaded html source
 			expect(
-			 	view.html()
+			 	Mootor.View._getHtmlPath(view)
 			).toBeDefined();
 
 			done();
@@ -73,7 +91,7 @@ describe("App", function() {
             // Except loaded javascript source
 
 			expect(
-			 	view.script()
+			 	Mootor.View._getScriptPath(view)
 			).toBeDefined();
 
 			done();
@@ -83,7 +101,7 @@ describe("App", function() {
 		it("Should be able to load view's CSS", function(done) {
             // Except loaded css source       
 			expect(
-			 	view.css()
+			 	Mootor.View._getCssPath(view)
 			).toBeDefined();
 
 			done();
@@ -108,8 +126,9 @@ describe("App", function() {
 		it("Should be able to load a view from an URL", function(done) {
             // Except route.view
        		var view = app.view("testview");            
-            app.router.route(view,"/testURL/");
-			app.go("/testURL");
+            app.go("index");
+            app.router.route("/test/", view);
+			app.go("/test/");
 			expect(app.view()).toBe(view);
 
 			done();
@@ -130,9 +149,9 @@ describe("App", function() {
 
 	describe("I want to run my app a as native app", function() {
 		beforeEach(createApp);
-		it("Should be able to detect it is running in PhoneGap / Cordova", function(done) {
-            // Except context().cordova or context().phonegap to be false if running jasmine in a web browser
-            expect(m.context.cordova || m.context.phonegap).toBe(false);
+		xit("Should be able to detect it is running in PhoneGap / Cordova", function(done) {
+            // Except context().cordova or context().phonegap to be true
+            expect(m.context.cordova || m.context.phonegap).toBe(true);
 
             done();
 
@@ -144,14 +163,7 @@ describe("App", function() {
             done();
 
 		});
-		it("Should be able to detect browser vendor, engine and version ... and available features (needs to be more specific)", function(done) {
-            // Except context().browser.vendor, context().browser.version, context().browser.engine 
-            expect(m.context.browser.vendor || m.context.browser.version || m.context.browser.engine).toBeDefined();
-
-            done();
-
-		});
-		it("Should be able to detect hardware buttons", function(done) {
+		xit("Should be able to detect hardware buttons", function(done) {
             // Except context().device.backButton
             expect(m.context.device.backButton).toBeDefined();
 
@@ -259,7 +271,7 @@ describe("App", function() {
 		it("Should be able to load view's HTML", function(done) {
 			// Expect view 'index' html to be defined
 			expect(
-			 	app.view("index").html()
+                Mootor.View._get("index").html
 			).toBeDefined();
 
 			done();
@@ -268,60 +280,30 @@ describe("App", function() {
 		
 
 	})
+});
 
 
-	describe("I want to add a link to another view", function() {
+describe("App Async 2", function() {
 
-		var route;
+	describe("I want to add a link to another view with parameters", function() {
 
-		beforeEach(function(done) {
-			window._testURLonLoad = true;
-			route = app.route("#testURL",view);
-			view.on("load", function () {
-				window._testURLonLoad = true;
-				done();
-			});
-			app.go("#testURL");
-			    //Add a route, a link and click it
-		       
-				//a = $("<a href=\"#testURL\"></a>").appendTo(view.el);
-				//a.click();
+		beforeEach(function (done) { 
+			createApp(done) 
+            a = $("<a href=\"#index/10\"></a>").appendTo(view.ui.el);
+            a.click();
 		});
 
-		it("Should be able to obtain a route from a url", function() {
-			expect(route.view()).toBe(view);
-		})
-
-
-		it("Should be able to go to a view from url", function(done) {
-			expect(app.view()).toBe(view);
-			done();
-		})
-
-
-
-
-	});
-
-	describe("I want to add a link to another view with parameters", function(done) {
-
-		beforeEach(function(done) {
-			route = app.route("#testURL/(.*)",view);
-			view.on("load", function () {
-				done();
-			});
-			app.go("#testURL/testValue");
-			    //Add a route, a link and click it
-		       
-				//a = $("<a href=\"#testURL\"></a>").appendTo(view.el);
-				//a.click();
-		});
 		it("Should be able to click a link and change the view and recieve parameters", function(done) {
-			expect(app.view().params()).toBe({testParam: "testValue"});
 
-			done();
-
+            
+			expect(
+                view.params[0]
+            ).toBe("10");
+            
+            done();
 
 		});
 	});
-})
+
+
+});

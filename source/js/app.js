@@ -28,6 +28,12 @@
     App = Mootor.App = function(options) {
     };
 
+    // Private static 
+    
+    $.extend(App, {
+        _settings: {}
+    });
+
     // Public methods
 
     App.prototype = {
@@ -46,13 +52,15 @@
         * If called with a key, returns the value. If called with key and value, sets value to key.
         *
         * @method settings
-        * @param {String} key The name of the setting\
-        * @chainable
+        * @param {String} key The name of the setting
         * @param {object} [value] The value of the setting
         * @return object the setting value
         */
         settings: function(key, value) {
-            return this;            
+            if (value !== undefined) {
+                App._settings[key] = value;
+            }
+            return App._settings[key];
         },
 
         /**
@@ -60,11 +68,15 @@
         *
         * @method go
         * @chainable
-        * @param {String} id The id of the view
+        * @param {String} url The url to go
         * @return Route
         */
-        go: function(id) {
-            return this;
+        go: function(url) {
+            var router;
+            router = app.router.route(url);
+            App._currentView = router.view;
+            Event.dispatch("App:go");
+            return router;
         },        
 
         /**
@@ -89,17 +101,6 @@
             return this;
         },        
 
-        /**
-        * Returns a router instance
-        *
-        * @method router
-        * @chainable
-        * @return Router
-        */
-        router: function(id) {
-            return this;
-        },
-        
         /**
         * Set callbacks for app events
         * @method on
@@ -129,7 +130,8 @@
         */
         init: function() {
             var self = this;
-            Event.dispatch("App:init", {self: self, options: App._options});   
+            Event.dispatch("App:init", self);   
+            this.init = function() { return self };
             return this;
         }
         

@@ -45,6 +45,8 @@
             
                 <li><a href="../classes/Context.html">Context</a></li>
             
+                <li><a href="../classes/Event.html">Event</a></li>
+            
                 <li><a href="../classes/Route.html">Route</a></li>
             
                 <li><a href="../classes/Router.html">Router</a></li>
@@ -73,7 +75,15 @@
 
             <ul id="api-modules" class="apis modules">
             
+                <li><a href="../modules/App.html">App</a></li>
+            
                 <li><a href="../modules/Mootor.html">Mootor</a></li>
+            
+                <li><a href="../modules/Router.html">Router</a></li>
+            
+                <li><a href="../modules/UI.html">UI</a></li>
+            
+                <li><a href="../modules/View.html">View</a></li>
             
             </ul>
         </div>
@@ -120,6 +130,7 @@
 * @class UIView
 * @extends UI
 * @constructor
+* @module UI
 * @author Emilio Mariscal (emi420 [at] gmail.com)
 * @author Martín Szyszlican (martinsz [at] gmail.com)
 */
@@ -129,44 +140,80 @@
     &quot;use strict&quot;;
 
     var UI,
-        UIView;
-
+        UIView,
+        Event;
 
     // Dependences
 
     UI = Mootor.UI;
+    Event = Mootor.Event;
         
     // Private constructors
 
-    UIView = Mootor.UIView = function() {
+    UIView = Mootor.UIView = function(viewid) {
         // code here
     };
+    
+    // Event handlers
 
+    Event.on(&quot;View:getHtml&quot;, function(view) {
+        UIView._set(view, {html: true})
+    });
+    Event.on(&quot;View:getScript&quot;, function(view) {
+        UIView._set(view, {script: true})
+    });
+    Event.on(&quot;View:getCss&quot;, function(view) {
+        UIView._set(view, {css: true})
+    });
+    Event.on(&quot;UIView:ready&quot;, function(view) {
+        var uiview = new UIView();
+        view.ui = uiview;
+    });
 
     // Private static methods and properties
 
     $.extend(UIView, {
-   
+        
+        _collection: {},
+        
+        _set: function(view, options, self) {
+            var viewid = view.id,
+                uiview,
+                i,
+                ready = false;
+            
+            if ((viewid in UIView._collection) === false) {
+                uiview = UIView._collection[viewid] = {};
+            } else {
+                uiview = UIView._collection[viewid];                
+            }
+
+            for (i in options) {
+                uiview[i] = options[i];
+            }
+            
+            if (uiview.html === true &amp;&amp; uiview.css === true &amp;&amp; uiview.script === true) {
+                uiview.ready = true;
+                Event.dispatch(&quot;UIView:ready&quot;, view);
+            }
+            
+        },
+        
+        _get: function() {
+            
+        },
     });
+
+    // Public methods
+
+    UIView.prototype = {
+        // code here
+    }
 
     // Prototypal inheritance
 
     $.extend(UIView.prototype, UI.prototype);
 
-    // Public methods
-
-    $.extend(UIView.prototype, {
-        
-        /**
-        * A reference to the view
-        *
-        * @property view
-        * @type View
-        */
-        view: {
-            
-        }
-    });        
 }(window.$, window.Mootor));
 
     </pre>
