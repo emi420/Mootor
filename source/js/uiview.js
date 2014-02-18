@@ -29,20 +29,7 @@
     };
     
     // Event handlers
-
-    Event.on("View:getHtml", function(view) {
-        UIView._set(view, {html: true})
-    });
-    Event.on("View:getScript", function(view) {
-        UIView._set(view, {script: true})
-    });
-    Event.on("View:getCss", function(view) {
-        UIView._set(view, {css: true})
-    });
-    Event.on("UIView:ready", function(view) {
-        var uiview = new UIView();
-        view.ui = uiview;
-    });
+    // TODO
 
     // Private static methods and properties
 
