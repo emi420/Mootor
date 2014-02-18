@@ -27,16 +27,26 @@
 
     Event.on("App:init", function(self) {
         var views = App._options.views,
+            view,
+            viewid,
             viewCount = views.length,
             app = m.app,
+            route = app.router.route,
             i;            
             
         for (i = 0; i < viewCount; i++) {
-            app.router.route(views[i], app.view(views[i]));
+            viewid = views[i];
+            view = app.view(viewid);
+            route("/" + viewid, view);
+            route("#" + viewid, view);
         }
-        
-        
     });   
+
+
+
+    window.onpopstate = function(event) {
+      app.go(window.location.hash);
+    };
 
     // Private constructors
 
@@ -50,10 +60,8 @@
         _collection: {}
     });
 
-    // Public methods
-
-    $.extend(Router.prototype, {
-        
+    
+    $.extend(App.prototype, {
         /**
         * Create a route
         *
@@ -61,6 +69,8 @@
         * @param {object} options TODO: Define this object's properties
         * @return Route
         */
+        
+        
         route: function(url, view) {
             if (view === undefined) {
                 return Router._collection[url];
@@ -68,17 +78,6 @@
                 return Router._collection[url] = new Route(url, view);
             }
         }
-});  
-    
-    $.extend(App.prototype, {
-        /**
-        * Returns Router instance
-        *
-        * @method router
-        * @for m.app
-        * @return Router
-        */
-        router: new Router()
     });
           
 }(window.$, window.Mootor));
