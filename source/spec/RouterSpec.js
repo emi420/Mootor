@@ -6,7 +6,7 @@ describe("Router", function() {
 		it("Should be able to define a regular expression for route the URL to a view", function() {
 			app.route("/(.*).html",view);
 
-			expect(app.route("/hola.html")).toBe(view);
+			expect(app.route("/hola.html").view).toBe(view);
 		});
 	});
 
@@ -17,7 +17,7 @@ describe("Router", function() {
 		it("Should be able to define a regular expression for read parameters passed to a view", function() {
 			app.route("#index/prod-([0-9][0-9])/(.*)/([a-z]",view);
 
-			expect(app.route("#index/prod-15/Product Name/view")).toBe(view);
+			expect(app.route("#index/prod-15/Product Name/view").view).toBe(view);
 
 		});
 	});

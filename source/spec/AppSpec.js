@@ -4,7 +4,9 @@ var app,
 
 window._appIsInitTest = false;
 
-window.location.hash = "";
+if (window.location.hash !== "") {
+    window.location = "";
+}
 
 var createApp = function(done) {
 	if (typeof m.app === "function") {
@@ -16,6 +18,8 @@ var createApp = function(done) {
         
         view = app.view("index");
         panel = view.ui;
+        
+        app.route("/index.html", view);
 
         view.on("init", function() {
             window._testViewOnInit = true;
@@ -40,9 +44,7 @@ var createApp = function(done) {
         _appIsInitTest = true;
 
 	}
-	setTimeout(function() {
-		done();
-	}, 100);
+	window.setTimeout(done, 100);
 }
 
 describe("App", function() {
@@ -127,14 +129,12 @@ describe("App", function() {
 		beforeEach(createApp);
 		it("Should be able to load a view from an URL", function(done) {
             // Except route.view
-       		var view = app.view("testview");            
-            app.go("index");
-            app.router.route("/test/", view);
-			app.go("/test/");
+       		var view = app.view("testview");   
+            app.route("/testview.html", view);         
+            app.go("/index.html");
+			app.go("/testview.html");
 			expect(app.view()).toBe(view);
-
 			done();
-
 
 		});
 
@@ -144,10 +144,10 @@ describe("App", function() {
 	describe("I want to state the version number of my application", function() {
 		beforeEach(createApp);
 		it("Should be able to define a version number for the App instance", function(done) {
-			app.version(0.1);
+			app.version("0.1");
 			expect(
 				app.version()
-			).toBe(0.1);
+			).toBe("0.1");
 
 			done();
 
@@ -239,16 +239,21 @@ describe("App Links", function() {
 
 		beforeEach(function (done) { 
 			createApp(done) 
-            a = $("<a href=\"#index/10\"></a>").appendTo(view.ui.el);
-            a.click();
+                view = app.view("index");
+                app.route("#index/(.*)/(.*)$", app.view("index"));
+                a = $("<a href=\"#index/10/20\"></a>").appendTo(view.ui.el);
+                a.onclick = function() { return false };
+                a.click();
 		});
 
 		it("Should be able to click a link and change the view and recieve parameters", function(done) {
 
-            
 			expect(
-                view.params()[0]
+                view.params[0]
             ).toBe("10");
+			expect(
+                view.params[1]
+            ).toBe("20");
             
             done();
 

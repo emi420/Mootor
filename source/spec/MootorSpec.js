@@ -17,7 +17,7 @@ describe("Mootor", function() {
 
 	describe("I want to run my app a as native app", function() {
 		beforeEach(createApp);
-		it("Should be able to detect it is running in PhoneGap / Cordova", function(done) {
+		xit("Should be able to detect it is running in PhoneGap / Cordova", function(done) {
             // Except context().cordova or context().phonegap to be true
             expect(m.context.cordova || m.context.phonegap).toBe(true);
 
@@ -31,7 +31,7 @@ describe("Mootor", function() {
             done();
 
 		});
-		it("Should be able to detect hardware buttons", function(done) {
+		xit("Should be able to detect hardware buttons", function(done) {
             // Except context().device.backButton
             expect(m.context.device.backButton).toBeDefined();
 
@@ -39,19 +39,19 @@ describe("Mootor", function() {
 
 		});
 
-		it("Should be able to define a method callback run on back button event", function(done) {
+		xit("Should be able to define a method callback run on back button event", function(done) {
             // TODO
 
             done();
 
 		});
-		it("Should be able to define a method callback run on home button event", function(done) {
+		xit("Should be able to define a method callback run on home button event", function(done) {
             // TODO
 
             done();
 
 		});
-		it("Should be able to define a method callback run on menu button event", function(done) {
+		xit("Should be able to define a method callback run on menu button event", function(done) {
             // TODO
 
             done();

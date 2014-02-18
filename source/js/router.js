@@ -25,27 +25,10 @@
     
     // Event handlers
 
-    Event.on("App:init", function(self) {
-        var views = App._options.views,
-            view,
-            viewid,
-            viewCount = views.length,
-            app = m.app,
-            route = app.router.route,
-            i;            
-            
-        for (i = 0; i < viewCount; i++) {
-            viewid = views[i];
-            view = app.view(viewid);
-            route("/" + viewid, view);
-            route("#" + viewid, view);
-        }
-    });   
-
-
-
     window.onpopstate = function(event) {
-      app.go(window.location.hash);
+      if (window.location.hash !== "") {
+          app.go(window.location.hash);
+      }
     };
 
     // Private constructors
@@ -73,7 +56,19 @@
         
         route: function(url, view) {
             if (view === undefined) {
-                return Router._collection[url];
+                var s,
+                    route,
+                    match;
+                
+                for (s in Router._collection) {
+                    match = url.match(s)
+                    if (match !== null) {
+                        route = Router._collection[s];
+                        route.view.params = match.slice(1, match.length);
+                        return route;
+                    }
+                }
+                return undefined;
             } else {
                 return Router._collection[url] = new Route(url, view);
             }
