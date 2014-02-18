@@ -90,21 +90,6 @@
         },
 
         /**
-        * Application version
-        * If called with a string, set value. If not, return value.
-        *
-        * @method version
-        * @param {String} version Version string
-        * @return string the version string
-        */
-        version: function(version) {
-            if (version !== undefined) {
-                App._version = version;
-            }
-            return App._version;
-        },
-
-        /**
         * Go to a view
         *
         * @method go
