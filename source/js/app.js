@@ -31,6 +31,16 @@
     // Private static 
     
     $.extend(App, {
+  
+      /**
+        * The application's version number
+        * Note: It's not Mootor version, this value is defined in application code, not framework code.
+        *
+        * @property version
+        * @type Strign
+        */
+        _version: window.undefined,
+
         _settings: {}
     });
 
@@ -46,6 +56,22 @@
         * @type array
         */
         history: [],
+       
+
+        /**
+        * The application's version number
+        * Note: It's not Mootor version, this value is defined in application code, not framework code.
+        *
+        * @method version
+        * @param {String} [version] The version number or name
+        * @return {String} Version number or name
+        */
+        version: function(version) {
+            if (version !== undefined) {
+                App._version = version;
+            }
+            return App._version;
+        },
 
         /**
         * Application settings

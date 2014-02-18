@@ -25,7 +25,7 @@ describe("UIPanel", function() {
 
   describe("Panel asynchronous specs", function() {
     beforeEach(function () { 
-      createApp(); 
+      createApp(done); 
       panel.show();
     });
 
