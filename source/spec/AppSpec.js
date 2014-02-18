@@ -1,7 +1,10 @@
 var app,
-    view;
+	view,
+	panel;
 
 window._appIsInitTest = false;
+
+window.location.hash = "";
 
 var createApp = function(done) {
 	if (typeof m.app === "function") {
@@ -12,6 +15,7 @@ var createApp = function(done) {
         app.init()
         
         view = app.view("index");
+        panel = view.ui;
 
         view.on("init", function() {
             window._testViewOnInit = true;
@@ -64,7 +68,7 @@ describe("App", function() {
         
 		it("Should be able create a new View instance", function(done) {
             // Except View instance
-        	var view = app.view("testview");
+        	
 
     		expect(
     			view instanceof Mootor.View
@@ -77,9 +81,6 @@ describe("App", function() {
 
 		it("Should be able to load view's HTML", function(done) {
             // Except loaded html source
-
-       		var view = app.view("testview");
-
 			expect(
 			 	Mootor.View._getHtmlPath(view)
 			).toBeDefined();
@@ -90,7 +91,6 @@ describe("App", function() {
 
 		it("Should be able to load view's JavaScript from the view", function(done) {
             // Except loaded javascript source
-       		var view = app.view("testview");
 
 			expect(
 			 	Mootor.View._getScriptPath(view)
@@ -101,8 +101,7 @@ describe("App", function() {
 		});
         
 		it("Should be able to load view's CSS", function(done) {
-            // Except loaded css source
-       		var view = app.view("testview");            
+            // Except loaded css source       
 			expect(
 			 	Mootor.View._getCssPath(view)
 			).toBeDefined();
@@ -138,68 +137,16 @@ describe("App", function() {
 
 
 		});
-        
-		it("Should be able to detect if it is running in a browser", function(done) {
-            // Except context().browser to be true
-            expect(typeof m.context.browser).toBe("string");
 
-            done();
-
-		});
-
-	});
-
-
-	describe("I want to run my app a as native app", function() {
-		beforeEach(createApp);
-		xit("Should be able to detect it is running in PhoneGap / Cordova", function(done) {
-            // Except context().cordova or context().phonegap to be true
-            expect(m.context.cordova || m.context.phonegap).toBe(true);
-
-            done();
-
-		});
-		it("Should be able to detect device vendor", function(done) {
-            // Except context().device.vendor
-            expect(m.context.device.vendor).toBeDefined();
-
-            done();
-
-		});
-		xit("Should be able to detect hardware buttons", function(done) {
-            // Except context().device.backButton
-            expect(m.context.device.backButton).toBeDefined();
-
-            done();
-
-		});
-		xit("Should be able to define a method callback run on back button event", function(done) {
-            // TODO
-
-            done();
-
-		});
-		xit("Should be able to define a method callback run on home button event", function(done) {
-            // TODO
-
-            done();
-
-		});
-		xit("Should be able to define a method callback run on menu button event", function(done) {
-            // TODO
-
-            done();
-
-		});
 	});
 
 
 	describe("I want to state the version number of my application", function() {
 		beforeEach(createApp);
 		it("Should be able to define a version number for the App instance", function(done) {
-			app.settings("version",0.1);
+			app.version(0.1);
 			expect(
-				app.settings("version")
+				app.version()
 			).toBe(0.1);
 
 			done();
@@ -237,7 +184,7 @@ describe("App", function() {
 		beforeEach(createApp);
 		it("Should be able to set a debug boolean value", function(done) {
 			expect(
-				app.settings("debugMode",true)
+				app.settings("debug",true)
 			).toBe(true);
 
 			done();
@@ -245,7 +192,7 @@ describe("App", function() {
 		});
 		it("Should be able to read a debug boolean value", function(done) {
 			expect(
-				app.settings("debugMode")
+				app.settings("debug")
 			).toBe(true);
 
 			done();
@@ -283,24 +230,24 @@ describe("App", function() {
 		
 
 	})
-
 });
 
 
-describe("App Async 2", function() {
+describe("App Links", function() {
 
 	describe("I want to add a link to another view with parameters", function() {
 
-    	beforeEach(createApp);
+		beforeEach(function (done) { 
+			createApp(done) 
+            a = $("<a href=\"#index/10\"></a>").appendTo(view.ui.el);
+            a.click();
+		});
 
 		it("Should be able to click a link and change the view and recieve parameters", function(done) {
 
-            view = app.view("index");
-            a = $("<a href=\"#index/10\"></a>").appendTo(view.ui.el);
-            a.click();
             
 			expect(
-                view.params[0]
+                view.params()[0]
             ).toBe("10");
             
             done();
@@ -310,4 +257,3 @@ describe("App Async 2", function() {
 
 
 });
-
