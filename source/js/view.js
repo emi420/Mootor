@@ -78,7 +78,7 @@
         _init: function(options, self) {
             
             // Load Html, Css and JavaScript
-            Event.on("View:getHtml", function(view) {
+            Event.on("View:getHtml:" + self.id, function(view) {
                 View._getScript(self);
             })
 
@@ -105,7 +105,7 @@
                 path,
                 function(source) {
                     View._get(self.id).html = source;
-                    Event.dispatch("View:getHtml", self)
+                    Event.dispatch("View:getHtml:" + self.id, self)
                 }
             );
         },
@@ -134,7 +134,9 @@
                 path: path
             }, function() {
                 View._get(self.id).script = path;
-                Event.dispatch("View:getScript", self)
+                Event.dispatch("View:getScript:" + self.id, self)
+                Event.dispatch("View:init:" + self.id, self)
+                
             });
         },
 
@@ -209,7 +211,13 @@
         * @return string
         */  
         title: function(title) {
-
+            var view = View._collection[this.id];
+            if (title === undefined) {
+                return view.title;
+            } else {
+                view.title = title;
+                return this;
+            }
         },
 
         /**
@@ -223,7 +231,8 @@
         * @return View
         */  
         on: function(event,callback) {
-
+            Event.on("View:" + event + ":" + this.id, callback);
+            return this;
         },
 
         /**
@@ -237,27 +246,7 @@
         */  
         off: function(event,callback) {
 
-        },
-
-        /**
-        * Removes the view from the app (and from the screen)
-        * 
-        * @method remove
-        * @return View
-        */  
-        remove: function() {
-
-        },
-
-        /**
-        * Inserts the view to the app
-        * 
-        * @method insert
-        * @return View
-        */  
-        insert: function() {
-
-        },
+        }
 
     });    
     
