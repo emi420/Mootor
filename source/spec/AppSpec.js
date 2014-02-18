@@ -204,6 +204,7 @@ describe("App", function() {
 
 
     describe("I want to determine the behavior of the application's initialization", function() {
+		beforeEach(createApp);
 
     	it("Should be able to define a method callback run after initialization", function(done) {
     		expect(
@@ -218,6 +219,7 @@ describe("App", function() {
     });
 
 	describe("I want to load views when create a new app", function() {
+		beforeEach(createApp);
 		it("Should be able to load view's HTML", function(done) {
 			// Expect view 'index' html to be defined
 			expect(
