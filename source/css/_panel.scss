@@ -1,9 +1,4 @@
-// @import "compass/css3/transition";
-
-body, html {
-    overflow-x: hidden;
-    overflow-y: auto;
-}
+@import "compass/css3/transition";
 
 .moo-panel {
     position: absolute;
@@ -21,22 +16,16 @@ body, html {
     -webkit-backface-visibility: hidden;
     -webkit-transform:translate3d(0,0,0);
     -webkit-transform: translateZ(0);
-}
 
-.moo-transition-slide {
-    // TODO: use Compass transitions
-	transition: left 1s ease-in-out;
-	-ms-transition: left 1s ease-in-out;
-	-moz-transition: left 1s ease-in-out;
-	-o-transition: left 1s ease-in-out;
-	-webkit-transition: left 1s ease-in-out;
-}
+    &.moo-transition-slide {
+        @include transition(left 1s ease-in-out);
+    }
 
-.moo-transition-none {
-    // TODO: use Compass transitions
-    -moz-transition: none;
-    -webkit-transition: none;
-    -o-transition: left 0 ease-in;
-    transition: none;
+    &.moo-transition-none {
+        @include transition(none);
+    }
+
+
+
 }
 

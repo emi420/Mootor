@@ -5,6 +5,21 @@
  * @author Natalia Petit
  */
 
-@import "normalize";
-@import "panel";
+@import "compass/reset/utilities";
+
+body, html {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+
+.moo-app {
+	@include nested-reset;
+
+	@import "panel";
+
+}
+
+
+
 

@@ -5,202 +5,59 @@
  * @author Martín Szyszlican (martinsz [at] gmail.com)
  * @author Natalia Petit
  */
-/*
- * CSS normalization
- *
- * Based on normalize.css 2012-07-07T09:50 UTC 
- * http://github.com/necolas/normalize.css 
- */
-/* line 20, ../../source/css/_normalize.scss */
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-nav,
-section,
-summary {
-  display: block;
-}
-
-/*
- * General
- */
-/* line 32, ../../source/css/_normalize.scss */
-* {
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-}
-
-/* line 41, ../../source/css/_normalize.scss */
-html,
-body {
-  margin: 0;
-  padding: 0;
-  border: 0;
-}
-
-/* line 53, ../../source/css/_normalize.scss */
-html,
-button,
-input,
-select,
-textarea {
-  font-family: sans-serif;
-}
-
-/*
- * Typography
- */
-/* line 65, ../../source/css/_normalize.scss */
-sub,
-sup {
-  font-size: 75%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
-}
-
-/* line 72, ../../source/css/_normalize.scss */
-sup {
-  top: -0.5em;
-}
-
-/* line 76, ../../source/css/_normalize.scss */
-sub {
-  bottom: -0.25em;
-}
-
-/*
- * Lists
- */
-/* line 87, ../../source/css/_normalize.scss */
-ol,
-ul {
-  list-style: none;
-}
-
-/* line 96, ../../source/css/_normalize.scss */
-dd,
-dl,
-menu,
-ol,
-ul {
-  margin: 0;
-}
-
-/* line 103, ../../source/css/_normalize.scss */
-menu,
-ol,
-ul {
-  padding: 0;
-}
-
-/*
- * Forms
- */
-/* line 113, ../../source/css/_normalize.scss */
-form {
-  margin: 0;
-}
-
-/* line 117, ../../source/css/_normalize.scss */
-fieldset {
-  border: none;
-  margin: 0 2px;
-  padding: 0.35em 0.625em 0.75em;
-}
-
-/* line 127, ../../source/css/_normalize.scss */
-button,
-input[type="button"],
-input[type="reset"],
-input[type="submit"] {
-  cursor: pointer;
-  -webkit-appearance: button;
-}
-
-/* line 140, ../../source/css/_normalize.scss */
-button,
-input,
-select,
-textarea {
-  font-size: 100%;
-  margin: 0;
-  vertical-align: baseline;
-}
-
-/* line 154, ../../source/css/_normalize.scss */
-button,
-html input[type="button"],
-input[type="reset"],
-input[type="submit"] {
-  -webkit-appearance: button;
-}
-
-/* line 167, ../../source/css/_normalize.scss */
-a, a:hover, a:focus,
-input, input:focus,
-select, select:focus,
-textarea, textarea:focus {
-  outline: none;
-  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-}
-
-/* line 174, ../../source/css/_normalize.scss */
-button[disabled],
-input[disabled] {
-  cursor: default;
-}
-
-/* line 180, ../../source/css/_normalize.scss */
-input[type="search"]::-webkit-search-decoration,
-input[type="search"]::-webkit-search-cancel-button {
-  -webkit-appearance: none;
-}
-
-/* line 185, ../../source/css/_normalize.scss */
-input[type="search"] {
-  -webkit-appearance: textfield;
-}
-
-/* line 191, ../../source/css/_normalize.scss */
-input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-decoration {
-  -webkit-appearance: none;
-}
-
-/* line 197, ../../source/css/_normalize.scss */
-textarea {
-  vertical-align: top;
-}
-
-/*
- * Tables
- */
-/* line 207, ../../source/css/_normalize.scss */
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-/* line 212, ../../source/css/_normalize.scss */
-i {
-  font-style: normal;
-}
-
-/* line 3, ../../source/css/_panel.scss */
+/* line 10, ../../source/css/mootor.scss */
 body, html {
   overflow-x: hidden;
   overflow-y: auto;
 }
 
-/* line 8, ../../source/css/_panel.scss */
-.moo-panel {
+/* line 52, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+.moo-app div, .moo-app span, .moo-app applet, .moo-app object, .moo-app iframe,
+.moo-app h1, .moo-app h2, .moo-app h3, .moo-app h4, .moo-app h5, .moo-app h6, .moo-app p, .moo-app blockquote, .moo-app pre,
+.moo-app a, .moo-app abbr, .moo-app acronym, .moo-app address, .moo-app big, .moo-app cite, .moo-app code,
+.moo-app del, .moo-app dfn, .moo-app em, .moo-app img, .moo-app ins, .moo-app kbd, .moo-app q, .moo-app s, .moo-app samp,
+.moo-app small, .moo-app strike, .moo-app strong, .moo-app sub, .moo-app sup, .moo-app tt, .moo-app var,
+.moo-app b, .moo-app u, .moo-app i, .moo-app center,
+.moo-app dl, .moo-app dt, .moo-app dd, .moo-app ol, .moo-app ul, .moo-app li,
+.moo-app fieldset, .moo-app form, .moo-app label, .moo-app legend,
+.moo-app table, .moo-app caption, .moo-app tbody, .moo-app tfoot, .moo-app thead, .moo-app tr, .moo-app th, .moo-app td,
+.moo-app article, .moo-app aside, .moo-app canvas, .moo-app details, .moo-app embed,
+.moo-app figure, .moo-app figcaption, .moo-app footer, .moo-app header, .moo-app hgroup,
+.moo-app menu, .moo-app nav, .moo-app output, .moo-app ruby, .moo-app section, .moo-app summary,
+.moo-app time, .moo-app mark, .moo-app audio, .moo-app video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+/* line 55, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+.moo-app table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+/* line 57, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+.moo-app caption, .moo-app th, .moo-app td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+/* line 59, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+.moo-app q, .moo-app blockquote {
+  quotes: none;
+}
+/* line 103, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+.moo-app q:before, .moo-app q:after, .moo-app blockquote:before, .moo-app blockquote:after {
+  content: "";
+  content: none;
+}
+/* line 61, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+.moo-app a img {
+  border: none;
+}
+/* line 3, ../../source/css/_panel.scss */
+.moo-app .moo-panel {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -213,20 +70,17 @@ body, html {
   -webkit-transform: translate3d(0, 0, 0);
   -webkit-transform: translateZ(0);
 }
-
-/* line 26, ../../source/css/_panel.scss */
-.moo-transition-slide {
-  transition: left 1s ease-in-out;
-  -ms-transition: left 1s ease-in-out;
+/* line 20, ../../source/css/_panel.scss */
+.moo-app .moo-panel.moo-transition-slide {
+  -webkit-transition: left 1s ease-in-out;
   -moz-transition: left 1s ease-in-out;
   -o-transition: left 1s ease-in-out;
-  -webkit-transition: left 1s ease-in-out;
+  transition: left 1s ease-in-out;
 }
-
-/* line 35, ../../source/css/_panel.scss */
-.moo-transition-none {
-  -moz-transition: none;
+/* line 24, ../../source/css/_panel.scss */
+.moo-app .moo-panel.moo-transition-none {
   -webkit-transition: none;
-  -o-transition: left 0 ease-in;
+  -moz-transition: none;
+  -o-transition: none;
   transition: none;
 }
