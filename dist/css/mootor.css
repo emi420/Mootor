@@ -6,25 +6,37 @@
  * @author Natalia Petit
  */
 /* line 10, ../../source/css/mootor.scss */
-body, html {
-  overflow-x: hidden;
-  overflow-y: auto;
+.m-app-html {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  width: 100%;
+  height: 100%;
 }
 
+/* line 18, ../../source/css/mootor.scss */
+.m-app {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
 /* line 52, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-.moo-app div, .moo-app span, .moo-app applet, .moo-app object, .moo-app iframe,
-.moo-app h1, .moo-app h2, .moo-app h3, .moo-app h4, .moo-app h5, .moo-app h6, .moo-app p, .moo-app blockquote, .moo-app pre,
-.moo-app a, .moo-app abbr, .moo-app acronym, .moo-app address, .moo-app big, .moo-app cite, .moo-app code,
-.moo-app del, .moo-app dfn, .moo-app em, .moo-app img, .moo-app ins, .moo-app kbd, .moo-app q, .moo-app s, .moo-app samp,
-.moo-app small, .moo-app strike, .moo-app strong, .moo-app sub, .moo-app sup, .moo-app tt, .moo-app var,
-.moo-app b, .moo-app u, .moo-app i, .moo-app center,
-.moo-app dl, .moo-app dt, .moo-app dd, .moo-app ol, .moo-app ul, .moo-app li,
-.moo-app fieldset, .moo-app form, .moo-app label, .moo-app legend,
-.moo-app table, .moo-app caption, .moo-app tbody, .moo-app tfoot, .moo-app thead, .moo-app tr, .moo-app th, .moo-app td,
-.moo-app article, .moo-app aside, .moo-app canvas, .moo-app details, .moo-app embed,
-.moo-app figure, .moo-app figcaption, .moo-app footer, .moo-app header, .moo-app hgroup,
-.moo-app menu, .moo-app nav, .moo-app output, .moo-app ruby, .moo-app section, .moo-app summary,
-.moo-app time, .moo-app mark, .moo-app audio, .moo-app video {
+.m-app div, .m-app span, .m-app applet, .m-app object, .m-app iframe,
+.m-app h1, .m-app h2, .m-app h3, .m-app h4, .m-app h5, .m-app h6, .m-app p, .m-app blockquote, .m-app pre,
+.m-app a, .m-app abbr, .m-app acronym, .m-app address, .m-app big, .m-app cite, .m-app code,
+.m-app del, .m-app dfn, .m-app em, .m-app img, .m-app ins, .m-app kbd, .m-app q, .m-app s, .m-app samp,
+.m-app small, .m-app strike, .m-app strong, .m-app sub, .m-app sup, .m-app tt, .m-app var,
+.m-app b, .m-app u, .m-app i, .m-app center,
+.m-app dl, .m-app dt, .m-app dd, .m-app ol, .m-app ul, .m-app li,
+.m-app fieldset, .m-app form, .m-app label, .m-app legend,
+.m-app table, .m-app caption, .m-app tbody, .m-app tfoot, .m-app thead, .m-app tr, .m-app th, .m-app td,
+.m-app article, .m-app aside, .m-app canvas, .m-app details, .m-app embed,
+.m-app figure, .m-app figcaption, .m-app footer, .m-app header, .m-app hgroup,
+.m-app menu, .m-app nav, .m-app output, .m-app ruby, .m-app section, .m-app summary,
+.m-app time, .m-app mark, .m-app audio, .m-app video {
   margin: 0;
   padding: 0;
   border: 0;
@@ -33,31 +45,31 @@ body, html {
   vertical-align: baseline;
 }
 /* line 55, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-.moo-app table {
+.m-app table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 /* line 57, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-.moo-app caption, .moo-app th, .moo-app td {
+.m-app caption, .m-app th, .m-app td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 /* line 59, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-.moo-app q, .moo-app blockquote {
+.m-app q, .m-app blockquote {
   quotes: none;
 }
 /* line 103, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-.moo-app q:before, .moo-app q:after, .moo-app blockquote:before, .moo-app blockquote:after {
+.m-app q:before, .m-app q:after, .m-app blockquote:before, .m-app blockquote:after {
   content: "";
   content: none;
 }
 /* line 61, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-.moo-app a img {
+.m-app a img {
   border: none;
 }
 /* line 3, ../../source/css/_panel.scss */
-.moo-app .moo-panel {
+.m-app .m-panel {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -71,16 +83,45 @@ body, html {
   -webkit-transform: translateZ(0);
 }
 /* line 20, ../../source/css/_panel.scss */
-.moo-app .moo-panel.moo-transition-slide {
+.m-app .m-panel.m-transition-slide {
   -webkit-transition: left 1s ease-in-out;
   -moz-transition: left 1s ease-in-out;
   -o-transition: left 1s ease-in-out;
   transition: left 1s ease-in-out;
 }
 /* line 24, ../../source/css/_panel.scss */
-.moo-app .moo-panel.moo-transition-none {
+.m-app .m-panel.m-transition-none {
   -webkit-transition: none;
   -moz-transition: none;
   -o-transition: none;
   transition: none;
+}
+
+/* line 30, ../../source/css/mootor.scss */
+.m-panel-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* line 38, ../../source/css/mootor.scss */
+.m-doc, .m-doc * {
+  border: 1px solid black !important;
+  padding: 0.5em !important;
+  margin: 1em !important;
+  background: rgba(0, 0, 0, 0.1) !important;
+}
+/* line 46, ../../source/css/mootor.scss */
+.m-doc.m-app-html,
+.m-doc .m-app {
+  width: calc(100% - 4em);
+  height: calc(100% - 4em);
+}
+/* line 51, ../../source/css/mootor.scss */
+.m-doc.m-app-html .m-panel-container,
+.m-doc.m-app-html .m-panel,
+.m-doc .m-app .m-panel-container,
+.m-doc .m-app .m-panel {
+  width: calc(100% - 3em);
+  height: calc(100% - 4em);
 }

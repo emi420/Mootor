@@ -1,6 +1,6 @@
 @import "compass/css3/transition";
 
-.moo-panel {
+.m-panel {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -17,11 +17,11 @@
     -webkit-transform:translate3d(0,0,0);
     -webkit-transform: translateZ(0);
 
-    &.moo-transition-slide {
+    &.m-transition-slide {
         @include transition(left 1s ease-in-out);
     }
 
-    &.moo-transition-none {
+    &.m-transition-none {
         @include transition(none);
     }
 
