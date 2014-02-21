@@ -23,7 +23,19 @@
     // Private constructors
 
     UIApp = Mootor.UIApp = function() {
-        // code here
+        var container;
+        var app = m.app;
+
+        $("html").addClass("m-html");
+        if (app.container) {
+            container = app.container;
+        }
+        else {
+            container = $("body");
+        }
+        container.addClass("m-app");
+        this.el = $("<div>").addClass("m-views-container")
+        this.el.appendTo(container);
     };
 
     // Private static methods and properties

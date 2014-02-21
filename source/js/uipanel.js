@@ -60,7 +60,7 @@
             self.uiview = uiview;    
             el.setAttribute("class", "m-panel");
             
-            Mootor.UI.el.appendChild(el);            
+            m.app.ui.el.append(el);            
             
             $el.addClass("m-panel");
             self.hide()

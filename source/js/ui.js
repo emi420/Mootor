@@ -23,12 +23,6 @@
     // Private constructors
 
     UI = Mootor.UI = function() {
-        var el;
-        el = document.createElement("div");
-        el.setAttribute("class", "m-panel-container");
-        document.body.appendChild(el);
-        this.el = el;
-        this.$el = $(el);
     };
 
     // Private static methods and properties

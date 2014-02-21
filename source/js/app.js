@@ -26,6 +26,7 @@
     * * views - An array with a list of view names
     */
     App = Mootor.App = function(options) {
+        this.ui = new Mootor.UIApp();
     };
 
     // Private static 
