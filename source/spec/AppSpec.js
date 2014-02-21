@@ -22,27 +22,22 @@ var createApp = function(done) {
         app.route("/index.html", view);
 
         view.on("init", function() {
-            console.log(view.id + " init");
             window._testViewOnInit = true;
         });
 
         view.on("beforeLoad", function() {
-            console.log(view.id + " beforeLoad");
             window._testViewOnBeforeLoad = true;
         });
 
         view.on("load", function() {
-            console.log(view.id + " load");
             window._testViewOnLoad = true;
         });
 
         view.on("beforeUnload", function() {
-            console.log(view.id + " beforeUnload");
             window._testViewOnBeforeUnLoad = true;
         });
 
         view.on("unload", function() {
-            console.log(view.id + " unload");
             window._testViewOnUnLoad = true;
         });
         

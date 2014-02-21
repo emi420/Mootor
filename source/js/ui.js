@@ -13,18 +13,32 @@
 
     "use strict";
 
-    var UI;
+    var UI,
+        Event;
+        
+    // Dependencies
+    
+    Event = Mootor.Event;    
 
     // Private constructors
 
     UI = Mootor.UI = function() {
-        // code here
+        var el;
+        el = document.createElement("div");
+        el.setAttribute("class", "m-panel-container");
+        document.body.appendChild(el);
+        this._container = el;
     };
 
     // Private static methods and properties
 
     $.extend(UI, {
         // code here
+    });
+    
+    // Event handlers
+    Event.on("App:init", function(self) {
+        Mootor.UI = new UI();
     });
 
     // Public methods

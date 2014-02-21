@@ -136,7 +136,7 @@
                 View._get(self.id).script = path;
                 Event.dispatch("View:getScript:" + self.id, self)
                 Event.dispatch("View:init:" + self.id, self)
-                
+                Event.dispatch("View:init", self)                
             });
         },
 
@@ -193,14 +193,6 @@
     // Public instance prototype
     
     $.extend(View.prototype, {
-
-        /**
-        * A reference to the UI representation of this view
-        *
-        * @property ui
-        * @type UIView
-        */
-        ui: {},
         
         /**
         * Title is the friendly name for the current view.

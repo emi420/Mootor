@@ -9,7 +9,7 @@
 * @author Martín Szyszlican (martinsz [at] gmail.com)
 */
 
-(function ($, Mootor) {
+(function ($, Mootor, document) {
 
     "use strict";
 
@@ -24,45 +24,24 @@
         
     // Private constructors
 
-    UIView = Mootor.UIView = function(viewid) {
-        // code here
+    UIView = Mootor.UIView = function(view) {
+        var el = UI._container;
+        this.el = el;
+        this.view = view;
     };
     
     // Event handlers
-    // TODO
+    Event.on("View:init", function(self) {
+        $.extend(self, {
+            ui: new UIView(self)
+        })
+        Event.dispatch("UIView:init", self.ui);
+    });
 
     // Private static methods and properties
 
     $.extend(UIView, {
         
-        _collection: {},
-        
-        _set: function(view, options, self) {
-            var viewid = view.id,
-                uiview,
-                i,
-                ready = false;
-            
-            if ((viewid in UIView._collection) === false) {
-                uiview = UIView._collection[viewid] = {};
-            } else {
-                uiview = UIView._collection[viewid];                
-            }
-
-            for (i in options) {
-                uiview[i] = options[i];
-            }
-            
-            if (uiview.html === true && uiview.css === true && uiview.script === true) {
-                uiview.ready = true;
-                Event.dispatch("UIView:ready", view);
-            }
-            
-        },
-        
-        _get: function() {
-            
-        },
     });
 
     // Public methods
@@ -75,4 +54,4 @@
 
     $.extend(UIView.prototype, UI.prototype);
 
-}(window.$, window.Mootor));
+}(window.$, window.Mootor, window.document));

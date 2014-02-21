@@ -13,16 +13,24 @@
     "use strict";
 
     var UI,
-        UIPanel;
+        UIPanel,
+        Event;
         
     // Dependences 
     
     UI = Mootor.UI;    
+    Event = Mootor.Event;
+    
+    Event.on("UIView:init", function(self) {
+        $.extend(self, {
+            panel: new UIPanel(self)
+        })
+    });
 
     // Private constructors
 
-    UIPanel = Mootor.UIPanel = function(options) {
-        UIPanel.init(options, this);
+    UIPanel = Mootor.UIPanel = function(uiview) {
+        UIPanel._init(uiview, this);
     };
 
     // Prototypal inheritance
@@ -41,21 +49,19 @@
         * @method _init
         * @private
         */
-        _init: function(options, self) {
+        _init: function(uiview, self) {
             
-            var $el = $("#" + options.id);
-            self.$el = $el;
-
-            if (options.transition !== undefined) {
-                self.transition = options.transition;
-            } else {
-                self.transition = "slide-right";
-            }
-        
+            var $el,
+                el;
+                
+            el = uiview.el = document.createElement("div");
+            el.setAttribute("class", "m-panel");
+            
+            Mootor.UI._container.appendChild(el);            
+            
+            $el = uiview.$el = $(el);
             $el.hide();
-            $el.addClass("moo-panel");
-
-            self.addTransitionClass();
+            $el.addClass("m-panel");
         }
 
     });
@@ -118,17 +124,17 @@
             switch (self.transition) {
                 case "slide-left":
                 case "slide-right":
-                    $el.addClass("moo-transition-slide");
+                    $el.addClass("m-transition-slide");
                     break;
                 default:
-                    $el.addClass("moo-transition-" + self.transition);
+                    $el.addClass("m-transition-" + self.transition);
             }
             return self;
         },
 
         removeTransitionClass: function() {
             var self = this;
-            self.$el.removeClass("moo-transition-slide moo-transition-none");
+            self.$el.removeClass("m-transition-slide m-transition-none");
             return self;
         },
 
