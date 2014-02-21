@@ -27,7 +27,8 @@
         el = document.createElement("div");
         el.setAttribute("class", "m-panel-container");
         document.body.appendChild(el);
-        this._container = el;
+        this.el = el;
+        this.$el = $(el);
     };
 
     // Private static methods and properties
@@ -52,7 +53,7 @@
         * @return {UI}
         */
         show: function() {
-            
+            this.$el.removeClass("m-hidden");
         },
 
         /**
@@ -62,7 +63,7 @@
         * @return {UI}
         */
         hide: function() {
-            
+            this.$el.addClass("m-hidden");
         }
     });
         
