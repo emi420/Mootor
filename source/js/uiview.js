@@ -19,13 +19,12 @@
 
     // Dependences
 
-    UI = Mootor.UI;
     Event = Mootor.Event;
         
     // Private constructors
 
     UIView = Mootor.UIView = function(view) {
-        var el = UI._container;
+        var el = app.ui.el;
         this.el = el;
         this.view = view;
     };

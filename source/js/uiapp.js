@@ -23,14 +23,20 @@
     // Private constructors
 
     UIApp = Mootor.UIApp = function() {
-        // code here
+        var el;
+        el = document.createElement("div");
+        el.setAttribute("class", "m-panel-container");
+        document.body.appendChild(el);
+        this.el = el;
+        this.$el = $(el);
     };
-
-    // Private static methods and properties
-
-    $.extend(UIApp, {
-        // code here
-    });
+    
+    // Event handlers
+    Event.on("App:init", function(self) {
+        $.extend(m.app, {
+           ui: new UIApp()
+        });
+    });    
 
     // Prototypal inheritance
 
