@@ -243,9 +243,12 @@ describe("App Links", function() {
 			createApp(done) 
                 view = app.view("index");
                 app.route("#index/(.*)/(.*)$", app.view("index"));
-                a = $("<a href=\"#index/10/20\"></a>").appendTo(view.ui.el);
-                a.onclick = function() { return false };
-                a.click();
+                $a = $("<a href=\"#index/10/20\"></a>").appendTo(view.ui.el);
+                $a.onclick = function() { 
+                    return false;
+                };
+                $a.click();
+                
 		});
 
 		it("Should be able to click a link and change the view and recieve parameters", function(done) {

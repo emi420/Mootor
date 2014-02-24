@@ -1,4 +1,2 @@
-/*(function ($) {
-
-
-}(window.$));*/
+(function ($) {
+}(window.$));

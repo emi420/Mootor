@@ -14,12 +14,14 @@
 
     var UI,
         UIPanel,
-        Event;
+        Event,
+        View;
         
     // Dependences 
     
     UI = Mootor.UI;    
-    Event = Mootor.Event;    
+    Event = Mootor.Event; 
+    View = Mootor.View;   
 
     // Private constructors
 
@@ -33,6 +35,15 @@
         $.extend(self, {
             panel: new UIPanel(self)
         })
+        self.panel.el.innerHTML = Mootor.View._getHtmlPath(self.view);
+
+        $("head").append(View._get(self.view.id).script);
+        
+        Event.dispatch("View:getScript:" + self.view.id, self.view)
+        Event.dispatch("View:init:" + self.view.id, self.view)
+        
+        console.log(View._get(self.view.id).script);
+        
     });
 
     // Prototypal inheritance

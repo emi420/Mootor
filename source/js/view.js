@@ -129,15 +129,13 @@
         
             script.src = path;
             script.type = "text/javascript";
-            $("head").append(script);
-            $script.one("load", {
-                path: path
-            }, function() {
-                View._get(self.id).script = path;
-                Event.dispatch("View:getScript:" + self.id, self)
-                Event.dispatch("View:init:" + self.id, self)
-                Event.dispatch("View:init", self)                
-            });
+
+            View._get(self.id).script = script;
+
+            //Event.dispatch("View:getScript:" + self.id, self)
+            //Event.dispatch("View:init:" + self.id, self)
+            Event.dispatch("View:init", self)                
+
         },
 
         /*
