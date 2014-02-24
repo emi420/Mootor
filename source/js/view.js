@@ -132,8 +132,6 @@
 
             View._get(self.id).script = script;
 
-            //Event.dispatch("View:getScript:" + self.id, self)
-            //Event.dispatch("View:init:" + self.id, self)
             Event.dispatch("View:init", self)                
 
         },
