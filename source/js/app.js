@@ -101,7 +101,9 @@
             var router,
                 view,
                 currentView;
-                
+            
+            var app = m.app;
+
             router = app.route(url);
             currentView = App._currentView;
 
@@ -115,7 +117,7 @@
                 Event.dispatch("View:unload:" + currentView.id, currentView);
             }
 
-            Event.dispatch("View:beforeLoad:" + view.id, view);
+            Event.dispatch("View:beforeLoad:" + view.id, view);            
             Event.dispatch("App:go", this);
             Event.dispatch("View:load:" + view.id, view);
             

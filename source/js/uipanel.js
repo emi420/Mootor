@@ -19,19 +19,21 @@
     // Dependences 
     
     UI = Mootor.UI;    
-    Event = Mootor.Event;
+    Event = Mootor.Event;    
+
+    // Private constructors
+
+    UIPanel = function(uiview) {
+        UIPanel._init(uiview, this);
+    };
+
+    // Event handlers
     
     Event.on("UIView:init", function(self) {
         $.extend(self, {
             panel: new UIPanel(self)
         })
     });
-
-    // Private constructors
-
-    UIPanel = Mootor.UIPanel = function(uiview) {
-        UIPanel._init(uiview, this);
-    };
 
     // Prototypal inheritance
 
@@ -50,20 +52,20 @@
         * @private
         */
         _init: function(uiview, self) {
-            
+
             var $el,
                 el;
             
-            el = uiview.el = self.el = document.createElement("div");
+            el = self.el = uiview.el = document.createElement("div");
             $el = uiview.$el = self.$el = $(el);
+            $el.addClass("m-panel");
 
-            self.uiview = uiview;    
             el.setAttribute("class", "m-panel");
             
-            Mootor.UI.el.appendChild(el);            
+            m.app.ui.$el.append(el);            
             
-            $el.addClass("m-panel");
-            self.hide()
+            self.hide();
+            
         }
 
     });

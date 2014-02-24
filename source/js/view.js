@@ -86,7 +86,7 @@
             View._getCss(self);
             
             View._collection[self.id] = {id: self.id, obj: self};
-            
+
         },
 
         /**

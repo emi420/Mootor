@@ -7,7 +7,7 @@
 
 @import "compass/reset/utilities";
 
-.m-app-html {
+.m-html {
 	@include reset-box-model;
 
 	width: 100%;
@@ -27,11 +27,15 @@
 
 }
 
-.m-panel-container {
+.m-views-container {
 	position: relative;
 
 	width: 100%;
 	height: 100%;
+}
+
+.m-hidden {
+	display: none;
 }
 
 .m-doc {
@@ -42,12 +46,12 @@
 		background: rgba(0,0,0,0.1) !important;
 	}
 
-	&.m-app-html,
+	&.m-html,
 	.m-app {
 		width: calc(100% - 4em);
 		height: calc(100% - 4em);
 
-		.m-panel-container,
+		.m-views-container,
 		.m-panel {
 			width: calc(100% - 3em);
 			height: calc(100% - 4em);

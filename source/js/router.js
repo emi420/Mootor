@@ -14,14 +14,12 @@
 
     var Router,
         Route,
-        App,
-        Event;
-        
+        App;
+                
     // Dependencies
     
     App = Mootor.App;
     Route = Mootor.Route;
-    Event = Mootor.Event;
     
     // Event handlers
 
@@ -45,6 +43,7 @@
 
     
     $.extend(App.prototype, {
+        
         /**
         * Create a route
         *
@@ -52,8 +51,6 @@
         * @param {object} options TODO: Define this object's properties
         * @return Route
         */
-        
-        
         route: function(url, view) {
             if (view === undefined) {
                 var s,
@@ -70,7 +67,7 @@
                 }
                 return undefined;
             } else {
-                return Router._collection[url] = new Route(url, view);
+                return Router._collection[url] = new Mootor.Route(url, view);
             }
         }
     });

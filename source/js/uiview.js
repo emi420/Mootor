@@ -15,26 +15,26 @@
 
     var UI,
         UIView,
-        Event;
+        Event,
+        View;
 
     // Dependences
 
     Event = Mootor.Event;
+    View = Mootor.View;
+    UI = Mootor.UI;
         
     // Private constructors
 
     UIView = Mootor.UIView = function(view) {
-        var el = app.ui.el;
-        this.el = el;
         this.view = view;
+        Event.dispatch("UIView:init", this);
     };
-    
+
     // Event handlers
+    
     Event.on("View:init", function(self) {
-        $.extend(self, {
-            ui: new UIView(self)
-        })
-        Event.dispatch("UIView:init", self.ui);
+        self.ui = new UIView(self);
     });
 
     // Private static methods and properties

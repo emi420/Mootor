@@ -19,21 +19,31 @@
     // Dependences
 
     UI = Mootor.UI;
+    Event = Mootor.Event;
 
     // Private constructors
 
     UIApp = Mootor.UIApp = function() {
-        var el;
-        el = document.createElement("div");
-        el.setAttribute("class", "m-panel-container");
-        document.body.appendChild(el);
-        this.el = el;
-        this.$el = $(el);
+        var $container,
+            app = m.app;
+
+        if (app.container) {
+            $container = app.container;
+        }
+        else {
+            $("html").addClass("m-html");
+            $container = $("body");
+        }
+        $container.addClass("m-app");
+
+        this.$el = $("<div>").addClass("m-views-container")
+        this.el = this.$el[0];        
+        this.$el.appendTo($container);
     };
     
     // Event handlers
     Event.on("App:init", function(self) {
-        $.extend(m.app, {
+        $.extend(self, {
            ui: new UIApp()
         });
     });    
