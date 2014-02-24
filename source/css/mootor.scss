@@ -34,6 +34,10 @@
 	height: 100%;
 }
 
+.m-hidden {
+	display: none;
+}
+
 .m-doc {
 	&,* {
 		border: 1px solid black !important;

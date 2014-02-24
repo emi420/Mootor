@@ -104,20 +104,25 @@
   height: 100%;
 }
 
-/* line 38, ../../source/css/mootor.scss */
+/* line 37, ../../source/css/mootor.scss */
+.m-hidden {
+  display: none;
+}
+
+/* line 42, ../../source/css/mootor.scss */
 .m-doc, .m-doc * {
   border: 1px solid black !important;
   padding: 0.5em !important;
   margin: 1em !important;
   background: rgba(0, 0, 0, 0.1) !important;
 }
-/* line 46, ../../source/css/mootor.scss */
+/* line 50, ../../source/css/mootor.scss */
 .m-doc.m-html,
 .m-doc .m-app {
   width: calc(100% - 4em);
   height: calc(100% - 4em);
 }
-/* line 51, ../../source/css/mootor.scss */
+/* line 55, ../../source/css/mootor.scss */
 .m-doc.m-html .m-views-container,
 .m-doc.m-html .m-panel,
 .m-doc .m-app .m-views-container,

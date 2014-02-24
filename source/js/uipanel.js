@@ -21,11 +21,6 @@
     UI = Mootor.UI;    
     Event = Mootor.Event;
     
-    Event.on("UIView:init", function(self) {
-        $.extend(self, {
-            panel: new UIPanel(self)
-        })
-    });
 
     // Private constructors
 
@@ -63,7 +58,9 @@
             m.app.ui.el.append(el);            
             
             $el.addClass("m-panel");
-            self.hide()
+            self.hide();
+
+            Event.dispatch("UIPanel:init:"+uiview.view.id, self);
         }
 
     });

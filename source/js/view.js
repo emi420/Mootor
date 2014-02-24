@@ -21,12 +21,16 @@
     
     var View,
         Event,
-        App;
+        App,
+        UIView,
+        UIPanel;
         
     // Dependencies
     
     Event = Mootor.Event;
     App = Mootor.App;
+    UIView = Mootor.UIView;
+    UIPanel = Mootor.UIPanel;
     
     // Event handlers
 
@@ -86,6 +90,13 @@
             View._getCss(self);
             
             View._collection[self.id] = {id: self.id, obj: self};
+
+            m.app.route(self.id,self);
+
+            //Using Mootor.UIView global version because of context mismatch. 
+            self.ui = new Mootor.UIView(self);
+            self.panel = new Mootor.UIPanel(self.ui);
+
             
         },
 

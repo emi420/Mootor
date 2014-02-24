@@ -102,7 +102,9 @@
             var router,
                 view,
                 currentView;
-                
+            
+            var app = m.app;
+
             router = app.route(url);
             currentView = App._currentView;
 
@@ -117,6 +119,13 @@
             }
 
             Event.dispatch("View:beforeLoad:" + view.id, view);
+            
+            //Hide current view, show new view
+            if (currentView !== undefined) {
+                currentView.ui.hide();
+            }
+            view.ui.show();            
+            
             Event.dispatch("App:go", this);
             Event.dispatch("View:load:" + view.id, view);
             

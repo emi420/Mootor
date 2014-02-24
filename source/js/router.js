@@ -70,7 +70,7 @@
                 }
                 return undefined;
             } else {
-                return Router._collection[url] = new Route(url, view);
+                return Router._collection[url] = new Mootor.Route(url, view);
             }
         }
     });
