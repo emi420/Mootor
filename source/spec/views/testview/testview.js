@@ -7,5 +7,9 @@
     view.on("load", function() {
        // console.log("testview view loaded");
     });
+
+    $("#btnOk").on("click", function() {
+        m.app.go("");
+    });
     
 }(window.$));
