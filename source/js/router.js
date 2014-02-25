@@ -24,9 +24,7 @@
     // Event handlers
 
     window.onpopstate = function(event) {
-      if (window.location.hash !== "") {
-          app.go(window.location.hash);
-      }
+      app.go(window.location.hash);
     };
 
     // Private constructors
@@ -56,9 +54,9 @@
                 var s,
                     route,
                     match;
-                
+
                 for (s in Router._collection) {
-                    match = url.match(s)
+                    match = url.match(new RegExp(s))
                     if (match !== null) {
                         route = Router._collection[s];
                         route.view.params = match.slice(1, match.length);

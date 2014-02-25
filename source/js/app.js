@@ -107,25 +107,37 @@
             app = m.app;
             router = app.route(url);
             
-            currentView = App._currentView;
+            if (router !== undefined) {
+                
+                currentView = App._currentView;
         
-            if (currentView !== undefined) {
-                Event.dispatch("View:beforeUnload:" + currentView.id, currentView);
-            }
+                if (currentView !== undefined) {
+                    Event.dispatch("View:beforeUnload:" + currentView.id, currentView);
+                }
 
-            view = App._currentView = router.view;
+                view = App._currentView = router.view;
 
-            if (currentView !== undefined) {
-                Event.dispatch("View:unload:" + currentView.id, currentView);
-            }
+                if (currentView !== undefined) {
+                    Event.dispatch("View:unload:" + currentView.id, currentView);
+                }
 
-            Event.dispatch("View:beforeLoad:" + view.id, view);            
+                Event.dispatch("View:beforeLoad:" + view.id, view);            
             
-            stateObj = { view: view.id };
-            history.pushState(stateObj, view.id, url);
+                stateObj = { view: view.id };
+                
+                if (url !== "") {
+                    history.pushState(stateObj, view.id, url);
+                } else {
+                    history.pushState(stateObj, view.id, window.location.pathname);                    
+                }
             
-            Event.dispatch("App:go", this);
-            Event.dispatch("View:load:" + view.id, view);
+                Event.dispatch("App:go", this);
+                Event.dispatch("View:load:" + view.id, view);
+            
+            } else {
+                throw(new Error("Route " + url + " is not defined"));
+            }
+            
             
             return router;
         },        

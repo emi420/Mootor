@@ -22,9 +22,12 @@
 
 <body>
     <script type="text/javascript">
-    m.app({views: ["index", "testview"]}).on("init", function() {
+    var app = m.app({views: ["index", "testview"]}).on("init", function() {
         console.log("app init")
-    }).init();
+    });
+    m.app.route("^$", m.app.view("index"));
+    m.app.route("^#testview.html$", m.app.view("testview"));
+    app.init();
     </script>
 
 </body>

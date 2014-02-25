@@ -37,7 +37,7 @@
             i;            
             
         Event.on("View:init:" + views[viewCount-1], function(self) {
-           app.go(window.location.hash);
+           m.app.go(window.location.hash);
         });
         
         for (i = 0; i < viewCount; i++) {

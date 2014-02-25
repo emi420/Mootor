@@ -4,9 +4,7 @@ var app,
 
 window._appIsInitTest = false;
 
-if (window.location.hash !== "") {
-    window.location = "#index.html";
-}
+window.location = "#index.html";
 
 var createApp = function(done) {
 	if (typeof m.app === "function") {
