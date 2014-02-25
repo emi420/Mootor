@@ -24,13 +24,30 @@
 </head>
 
 <body>
+    
     <script type="text/javascript">
-    var app = m.app({views: ["index", "testview"]}).on("init", function() {
-        console.log("app init")
-    });
-    m.app.route("^$", m.app.view("index"));
-    m.app.route("^#testview.html$", m.app.view("testview"));
-    app.init();
+    
+    (function() {
+
+        "use strict";
+
+        var app = m.app({
+            views: [
+                "index",
+                "testview"
+            ]
+        }).on("init", function() {
+            console.log("app init")
+        });
+    
+        m.app.route("^$", m.app.view("index"));
+        m.app.route("^#testview.html$", m.app.view("testview"));
+    
+        app.init();
+
+        
+    }());
+    
     </script>
 
 </body>

@@ -24,7 +24,7 @@
     // Event handlers
 
     window.onpopstate = function(event) {
-      app.go(window.location.hash);
+      m.app.go(window.location.hash);
     };
 
     // Private constructors

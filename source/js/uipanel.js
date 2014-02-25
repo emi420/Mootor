@@ -87,7 +87,7 @@
 
     });
 
-    //Public prototype    
+    // Public prototype    
     
     $.extend(UIPanel.prototype, {
 
