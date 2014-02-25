@@ -35,16 +35,22 @@
         $.extend(self, {
             panel: new UIPanel(self)
         })
+
         self.panel.el.innerHTML = Mootor.View._getHtmlPath(self.view);
 
         $("head").append(View._get(self.view.id).script);
         
         Event.dispatch("View:getScript:" + self.view.id, self.view)
         Event.dispatch("View:init:" + self.view.id, self.view)
-        
-        console.log(View._get(self.view.id).script);
-        
+
+        Event.on("View:unload:" + self.view.id, function(self) {
+            self.ui.panel.$el.addClass("m-hidden");
+        }); 
+        Event.on("View:load:" + self.view.id, function(self) {
+            self.ui.panel.$el.removeClass("m-hidden");
+        }); 
     });
+    
 
     // Prototypal inheritance
 

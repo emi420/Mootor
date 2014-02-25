@@ -14,12 +14,14 @@
     "use strict";
 
     var UI,
-        UIApp;
+        UIApp,
+        App;
 
     // Dependences
 
     UI = Mootor.UI;
     Event = Mootor.Event;
+    App = Mootor.App;
 
     // Private constructors
 
@@ -27,8 +29,8 @@
         var $container,
             app = m.app;
 
-        if (app.container) {
-            $container = app.container;
+        if (Mootor.App._options.container) {
+            $container = Mootor.App._options.container;
         }
         else {
             $("html").addClass("m-html");

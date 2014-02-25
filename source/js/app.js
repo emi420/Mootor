@@ -100,26 +100,38 @@
         go: function(url) {
             var router,
                 view,
-                currentView;
+                currentView,
+                app,
+                stateObj;
             
-            var app = m.app;
-
+            app = m.app;
             router = app.route(url);
-            currentView = App._currentView;
+            
+            if (router.view !== undefined) {
+                
+                currentView = App._currentView;
+            
+                if (currentView !== undefined) {
+                    Event.dispatch("View:beforeUnload:" + currentView.id, currentView);
+                }
 
-            if (currentView !== undefined) {
-                Event.dispatch("View:beforeUnload:" + currentView.id, currentView);
+                view = App._currentView = router.view;
+
+                if (currentView !== undefined) {
+                    Event.dispatch("View:unload:" + currentView.id, currentView);
+                }
+
+                Event.dispatch("View:beforeLoad:" + view.id, view);            
+                
+                stateObj = { view: view.id };
+                history.pushState(stateObj, view.id, url);
+                
+                Event.dispatch("App:go", this);
+                Event.dispatch("View:load:" + view.id, view);
+            
+            } else {
+                console.log("Route doesn't exist.");
             }
-
-            view = App._currentView = router.view;
-
-            if (currentView !== undefined) {
-                Event.dispatch("View:unload:" + currentView.id, currentView);
-            }
-
-            Event.dispatch("View:beforeLoad:" + view.id, view);            
-            Event.dispatch("App:go", this);
-            Event.dispatch("View:load:" + view.id, view);
             
             return router;
         },        

@@ -5,13 +5,14 @@ var app,
 window._appIsInitTest = false;
 
 if (window.location.hash !== "") {
-    window.location = "";
+    window.location = "#index.html";
 }
 
 var createApp = function(done) {
 	if (typeof m.app === "function") {
 		app = m.app({
-		    views: ["index"]
+		    views: ["index"],
+            container: $("#container")
 		});
         
         app.init()
@@ -19,7 +20,7 @@ var createApp = function(done) {
         view = app.view("index");
         panel = view.ui;
         
-        app.route("/index.html", view);
+        app.route("#index.html$", view);
 
         view.on("init", function() {
             window._testViewOnInit = true;
@@ -130,9 +131,9 @@ describe("App", function() {
 		it("Should be able to load a view from an URL", function(done) {
             // Except route.view
        		var view = app.view("testview");   
-            app.route("/testview.html", view);         
-            app.go("/index.html");
-			app.go("/testview.html");
+            app.route("#testview.html", view);         
+            app.go("#index.html");
+			app.go("#testview.html");
 			expect(app.view()).toBe(view);
 			done();
 
