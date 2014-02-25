@@ -8,7 +8,7 @@
        // console.log("index view loaded");
     });
     
-    $("#btnLogin").on("click", function() {
+    $("#btnLogin").on("tap", function() {
         m.app.go("#testview.html");
     });
 

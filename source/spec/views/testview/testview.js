@@ -8,8 +8,12 @@
        // console.log("testview view loaded");
     });
 
-    $("#btnOk").on("click", function() {
+    $("#btnOk").on("tap", function(e) {
         m.app.go("");
+    });
+
+    $("#btnOk").on("touchend", function(e) {
+        e.preventDefault();
     });
     
 }(window.$));
