@@ -26,7 +26,7 @@
     // Event handlers
     
     Event.on("UIApp:init", function(self) {
-        var width = document.body.offsetWidth,
+        var width = self.el.offsetWidth,
             uiapp = self;
         self.$el.css("width", width * 2);
 
@@ -36,12 +36,12 @@
         self.$el.addClass("m-transition-slide");
 
         Event.on("View:load", function(self) {
-            var width = document.body.offsetWidth;
+            var width = uiapp.el.offsetWidth;
 
             uiapp.$el.addClass("m-transition-slide");
 
-            uiapp.$el.css("-webkit-transform","translateX(" + (-width) + "px)");
-            uiapp.$el.css("-moz-transform","translateX(" + (-width) + "px)");
+            uiapp.$el.css("-webkit-transform","translateX(-100%)");
+            uiapp.$el.css("-moz-transform","translateX(-100%)");
 
             window.setTimeout(function() {
                 uiapp.$el.removeClass("m-transition-slide");
