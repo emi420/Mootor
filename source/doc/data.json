@@ -777,9 +777,19 @@
             "name": "route",
             "params": [
                 {
-                    "name": "options",
-                    "description": "TODO: Define this object's properties",
-                    "type": "Object"
+                    "name": "url",
+                    "description": "Regular expresion string",
+                    "type": "String"
+                },
+                {
+                    "name": "url",
+                    "description": "URL to route",
+                    "type": "String"
+                },
+                {
+                    "name": "view",
+                    "description": "View object",
+                    "type": "View"
                 }
             ],
             "return": {
@@ -957,7 +967,7 @@
         },
         {
             "file": "uipanel.js",
-            "line": 113,
+            "line": 114,
             "description": "Initialize  a panel",
             "itemtype": "method",
             "name": "_init",
@@ -968,7 +978,7 @@
         },
         {
             "file": "uipanel.js",
-            "line": 147,
+            "line": 148,
             "description": "Move the element to the specified coordinates. \nIf coordinates are not specified, it returns coordinates object with the current position.",
             "itemtype": "method",
             "name": "position",
@@ -989,7 +999,7 @@
         },
         {
             "file": "uipanel.js",
-            "line": 159,
+            "line": 160,
             "description": "Block/Unblock or return block status.",
             "itemtype": "method",
             "name": "blocked",
@@ -1010,7 +1020,7 @@
         },
         {
             "file": "uipanel.js",
-            "line": 170,
+            "line": 171,
             "description": "Set or get transition type",
             "itemtype": "method",
             "name": "transition",

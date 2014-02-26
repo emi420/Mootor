@@ -24,7 +24,7 @@
     View = Mootor.View;   
 
      //TODO: This number must match the $transtionDuration variable in the SCSS
-    var transitionDuration = 15000; 
+    var transitionDuration = 500; 
 
     // Event handlers
     
@@ -68,6 +68,7 @@
             panel: new UIPanel(self)
         })
 
+        var width = m.app.ui.el.offsetWidth;
         self.panel.el.innerHTML = Mootor.View._getHtmlPath(self.view);
 
         $("head").append(View._get(self.view.id).script);
@@ -83,7 +84,7 @@
                 if (Mootor.App._currentView !== self) {
                     self.ui.panel.hide();
                 }
-                
+          
                 m.app.ui.$el.addClass("m-full-width").removeClass("m-double-width");
             },transitionDuration);
         }); 

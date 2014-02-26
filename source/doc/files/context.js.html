@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>router.js</title>
+    <title>context.js</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -120,86 +120,74 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: router.js</h1>
+                        <h1 class="file-heading">File: context.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
-* The Router class is for defining routes
-*
-* @class Router
-* @constructor
-*  @module Router
-* @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* Information about the context of the application (ej: device&#x27;s viewport)
+* @class Context
+* @return object
+* @static
 */
 
 (function ($, Mootor) {
 
     &quot;use strict&quot;;
 
-    var Router,
-        Route,
-        App;
+    var Context;
+
+    Context = Mootor.Context = function() {
+        return ({
+
+            /**
+            * Browser info
+            * @property browser
+            * @type string
+            */            
+            browser: navigator.userAgent.toLowerCase(),
+
+            /**
+            * Viewport info
+            * @property viewport
+            * @type object
+            */            
+            viewport: {},
+
+            /**
+            * Device info
+            * @property device 
+            * @type object
+            */            
+            device: {
+                /**
+                * Vendor info
+                * @property vendor
+                * @type string
+                */            
+                vendor: navigator.vendor.toLowerCase(),
                 
-    // Dependencies
-    
-    App = Mootor.App;
-    Route = Mootor.Route;
-    
-    // Event handlers
+            },
+            
+            cordova: (window.Cordova !== undefined),
+            phonegap: (window.PhoneGap !== undefined),
 
-    window.onpopstate = function(event) {
-      m.app.go(window.location.hash);
+        });
     };
 
-    // Private constructors
-
-    Router = Mootor.Router = function() {
-        // code here
-    };
-
-    // Private static methods and properties
-
-    $.extend(Router, {
-        _collection: {}
-    });
-
+    // Static global objects
     
-    $.extend(App.prototype, {
+    $.extend(m, { 
         
         /**
-        * Create a route
-        *
-        * @method route
-        * @param {string} url Regular expresion string
-        * @param {string} url URL to route
-        * @param {View} view View object
-        * @return Route
+        * @property context
+        * @for window.m
+        * @type Context
         */
-        route: function(url, view) {
-            if (view === undefined) {
-                var s,
-                    route,
-                    match;
-
-                for (s in Router._collection) {
-                    match = url.match(new RegExp(s))
-                    if (match !== null) {
-                        route = Router._collection[s];
-                        route.view.params = match.slice(1, match.length);
-                        return route;
-                    }
-                }
-                return undefined;
-            } else {
-                return Router._collection[url] = new Mootor.Route(url, view);
-            }
-        }
+        context: new Context()
     });
-          
-}(window.$, window.Mootor));
 
+}(window.$, window.Mootor));
     </pre>
 </div>
 

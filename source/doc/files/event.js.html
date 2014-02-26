@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>router.js</title>
+    <title>event.js</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -120,16 +120,16 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: router.js</h1>
+                        <h1 class="file-heading">File: event.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
-* The Router class is for defining routes
+* The Event class defines and manage events
 *
-* @class Router
-* @constructor
-*  @module Router
+* @class Event
+* @private
+* @module Mootor
 * @author Emilio Mariscal (emi420 [at] gmail.com)
 * @author Martín Szyszlican (martinsz [at] gmail.com)
 */
@@ -137,69 +137,54 @@
 (function ($, Mootor) {
 
     &quot;use strict&quot;;
-
-    var Router,
-        Route,
-        App;
-                
-    // Dependencies
     
-    App = Mootor.App;
-    Route = Mootor.Route;
+    var Mootor,
+        Event;
     
-    // Event handlers
-
-    window.onpopstate = function(event) {
-      m.app.go(window.location.hash);
-    };
-
-    // Private constructors
-
-    Router = Mootor.Router = function() {
-        // code here
-    };
-
-    // Private static methods and properties
-
-    $.extend(Router, {
-        _collection: {}
-    });
-
-    
-    $.extend(App.prototype, {
+    Event = Mootor.Event = {
         
         /**
-        * Create a route
-        *
-        * @method route
-        * @param {string} url Regular expresion string
-        * @param {string} url URL to route
-        * @param {View} view View object
-        * @return Route
+        * Events collection
+        * @private
         */
-        route: function(url, view) {
-            if (view === undefined) {
-                var s,
-                    route,
-                    match;
+        _collection: {},
 
-                for (s in Router._collection) {
-                    match = url.match(new RegExp(s))
-                    if (match !== null) {
-                        route = Router._collection[s];
-                        route.view.params = match.slice(1, match.length);
-                        return route;
-                    }
-                }
-                return undefined;
-            } else {
-                return Router._collection[url] = new Mootor.Route(url, view);
+        /**
+        * Add event to collection
+        * @private
+        */
+        on: function(event, callback) {
+            if (Event._collection[event] === undefined) {
+                Event._collection[event] = [];
+            } 
+            Event._collection[event].push(callback);
+        },
+        
+        /**
+        * Dispatch event
+        * @private
+        */
+        dispatch: function(event, instance) {
+            var i,
+                count = 0,
+                callbacks = Event._collection[event],
+                callback;
+                
+            if (callbacks !== undefined) {
+                count = callbacks.length ;
+            }
+            for (i = 0; i &lt; count; i++) {
+                (function(callback) {
+                    window.setTimeout(function() {
+                        callback(instance);
+                    }, 1)
+                }(callbacks[i]));
             }
         }
-    });
-          
-}(window.$, window.Mootor));
 
+    };
+
+}(window.$, window.Mootor));
     </pre>
 </div>
 

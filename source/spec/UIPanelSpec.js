@@ -1,6 +1,5 @@
 describe("UIPanel", function() {
-
-
+ 
   describe("I want to determine the behavior of the panel's load / unload", function() {
 
     it("Should be able to define panel's transition (slide-right, slide-left, slide-up, slide-bottom, slide-fade, slide-backface, ...)", function() {
@@ -24,14 +23,12 @@ describe("UIPanel", function() {
 
 
   describe("Panel asynchronous specs", function() {
-    beforeEach(function () { 
+    beforeEach(function (done) { 
       createApp(done); 
-      panel.show();
     });
 
       it("Slides a panel in", function(done) {
-        //TODO: Which one is gonig to be the zeptified element? panel? panel.el? or $(panel.el) ?
-        expect(panel.el.css("left")).toBe("0px");
+        expect(0).toBe(1);
         done();
       });
   });

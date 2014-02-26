@@ -152,7 +152,7 @@
     // Event handlers
     
     Event.on(&quot;UIApp:init&quot;, function(self) {
-        var width = document.body.offsetWidth,
+        var width = self.el.offsetWidth,
             uiapp = self;
         self.$el.css(&quot;width&quot;, width * 2);
 
@@ -162,12 +162,12 @@
         self.$el.addClass(&quot;m-transition-slide&quot;);
 
         Event.on(&quot;View:load&quot;, function(self) {
-            var width = document.body.offsetWidth;
+            var width = uiapp.el.offsetWidth;
 
             uiapp.$el.addClass(&quot;m-transition-slide&quot;);
 
-            uiapp.$el.css(&quot;-webkit-transform&quot;,&quot;translateX(&quot; + (-width) + &quot;px)&quot;);
-            uiapp.$el.css(&quot;-moz-transform&quot;,&quot;translateX(&quot; + (-width) + &quot;px)&quot;);
+            uiapp.$el.css(&quot;-webkit-transform&quot;,&quot;translateX(-100%)&quot;);
+            uiapp.$el.css(&quot;-moz-transform&quot;,&quot;translateX(-100%)&quot;);
 
             window.setTimeout(function() {
                 uiapp.$el.removeClass(&quot;m-transition-slide&quot;);
@@ -176,7 +176,7 @@
                 uiapp.$el.css(&quot;-moz-transform&quot;, &quot;translateX(0)&quot;);
 
                 self.ui.$el.css(&quot;left&quot;, &quot;0px&quot;);
-            }, 300);
+            }, 500);
         }); 
 
     });
@@ -198,7 +198,10 @@
             panel: new UIPanel(self)
         })
 
+        var width = m.app.ui.el.offsetWidth;
         self.panel.el.innerHTML = Mootor.View._getHtmlPath(self.view);
+
+        m.app.ui.$el.css(&quot;width&quot;, width + &quot;px&quot;);
 
         $(&quot;head&quot;).append(View._get(self.view.id).script);
         
@@ -210,16 +213,14 @@
         Event.on(&quot;View:unload:&quot; + self.view.id, function(self) {
             self.ui.panel.$el.css(&quot;left&quot;, 0);
             setTimeout(function() {
-                var width = document.body.offsetWidth;
                 if (Mootor.App._currentView !== self) {
                     self.ui.panel.hide();
                 }
                 m.app.ui.$el.css(&quot;width&quot;, width + &quot;px&quot;);
-            },300);
+            },500);
         }); 
         
         Event.on(&quot;View:load:&quot; + self.view.id, function(self) {
-            var width = document.body.offsetWidth;
             self.ui.panel.$el.css(&quot;left&quot;, width);
             self.ui.panel.show();
         }); 
@@ -255,7 +256,7 @@
             el.setAttribute(&quot;class&quot;, &quot;m-panel&quot;);
 
             // Fixed panel width
-            width = document.body.offsetWidth;
+            width = m.app.ui.el.offsetWidth;
             $el.width(width + &quot;px&quot;);
             
             m.app.ui.$el.append(el);            

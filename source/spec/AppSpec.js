@@ -16,10 +16,15 @@ var createApp = function(done) {
         app.init()
         
         view = app.view("index");
-        panel = view.ui;
+        
+        window.setTimeout(function() {
+            panel = view.ui.panel;
+        }, 50);
         
         app.route("#index.html$", view);
-
+        m.app.route("^$", view);
+        m.app.route("^#welcome/(.*)", m.app.view("testview"));
+    
         view.on("init", function() {
             window._testViewOnInit = true;
         });
