@@ -38,13 +38,18 @@ $transitionDuration: 1s;
 }
 
 .m-transition-slide {
-
-    @include transition(left $transitionDuration ease-in-out);
-
+    -webkit-transition-duration: .3s;
+    -webkit-timing-function: ease-out;
+    -moz-transition-duration: .3s;
+    -moz-timing-function: ease-out;
+    transition-duration: .3s;
+    timing-function: ease-out;
 }
 
 .m-transition-none {
-    @include transition(none);
+    -webkit-transition: all 0;
+    -moz-transition: all 0;
+    transition: all 0;
 }
 
 .m-hidden {

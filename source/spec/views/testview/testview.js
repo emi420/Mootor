@@ -12,6 +12,10 @@
         m.app.go("");
     });
 
+    $("#btnOk").on("click", function(e) {
+        m.app.go("");
+    });
+
     $("#btnOk").on("touchend", function(e) {
         e.preventDefault();
     });

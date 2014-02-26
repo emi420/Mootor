@@ -29,19 +29,28 @@
         var width = document.body.offsetWidth,
             uiapp = self;
         self.$el.css("width", width * 2);
-        self.$el.css("left",0);
+
+        self.$el.css("-webkit-transform","translateX(0)");
+        self.$el.css("-moz-transform","translateX(0)");
+
         self.$el.addClass("m-transition-slide");
 
         Event.on("View:load", function(self) {
             var width = document.body.offsetWidth;
+
             uiapp.$el.addClass("m-transition-slide");
-            uiapp.$el.css("left", (-width) + "px");
+
+            uiapp.$el.css("-webkit-transform","translateX(" + (-width) + "px)");
+            uiapp.$el.css("-moz-transform","translateX(" + (-width) + "px)");
+
             window.setTimeout(function() {
                 uiapp.$el.removeClass("m-transition-slide");
-                uiapp.$el.css("left", "0px");
+
+                uiapp.$el.css("-webkit-transform", "translateX(0)");
+                uiapp.$el.css("-moz-transform", "translateX(0)");
 
                 self.ui.$el.css("left", "0px");
-            }, 1000);
+            }, 300);
         }); 
 
     });
@@ -80,7 +89,7 @@
                     self.ui.panel.hide();
                 }
                 m.app.ui.$el.css("width", width + "px");
-            },1000);
+            },300);
         }); 
         
         Event.on("View:load:" + self.view.id, function(self) {

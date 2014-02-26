@@ -8,10 +8,13 @@
         // code here
     });
     
-    $("#btnLogin").on("tap", function() {
+    var goToTestview = function() {
         var email = $("#inputEmail")[0].value;
         m.app.go("#welcome/" + email );
-    });
+    }
+    
+    $("#btnLogin").on("tap", goToTestview);
+    $("#btnLogin").on("click", goToTestview);
 
 
 }(window.$));
