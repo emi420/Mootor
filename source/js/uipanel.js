@@ -75,9 +75,11 @@
         Event.on("View:unload:" + self.view.id, function(self) {
             self.ui.panel.$el.css("left", 0);
             setTimeout(function() {
+                var width = document.body.offsetWidth;
                 if (Mootor.App._currentView !== self) {
                     self.ui.panel.hide();
                 }
+                m.app.ui.$el.css("width", width + "px");
             },1000);
         }); 
         
@@ -146,18 +148,6 @@
         },
 
         /**
-        * Resize the element to the specified dimentions. 
-        * If dimentions are not specified, it returns dimentions object with the current size.
-        *
-        * @method size
-        * @param {object} [dimentions] Object with dimentions. Example: {w: 0, h: 0}
-        * @return {object} Object with dimentions. Example: {w: 0, h: 0}
-        */
-        size: function() {
-            
-        },
-
-        /**
         * Block/Unblock or return block status.
         *
         * @method blocked
@@ -177,23 +167,7 @@
         */
         transition: function() {
             
-        },
-
-        addTransitionClass: function() {
-
-        },
-
-        removeTransitionClass: function() {
-
-        },
-
-        reposition: function(side) {
-
-        },
-
-        slideIn: function() {
-
-        },
+        }
 
     });
 
