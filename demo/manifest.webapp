@@ -1,7 +1,7 @@
 {
   "name": "Mootor Demo App",
   "description": "Demo app",
-  "launch_path": "/Mootor/demo/index.html",
+  "launch_path": "/mootor-dev/source/spec/index.html",
   "developer": {
     "name": "Voolks",
     "url": "http://www.voolks.com"
