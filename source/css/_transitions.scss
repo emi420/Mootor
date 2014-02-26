@@ -1,12 +1,12 @@
 @import "compass/css3/transition";
 @import "compass/css3/transform";
 
-.m-transition-hslide {
-    @include transition(transform $transitionDuration ease-out);
-}
-
 .m-transition-none {
     @include transition(all 0);
+}
+
+.m-transition-hslide {
+    @include transition(transform $transitionDuration ease-out);
 }
 
 .m-transition-hslide-left {
