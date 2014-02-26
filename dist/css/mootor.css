@@ -5,7 +5,7 @@
  * @author Martín Szyszlican (martinsz [at] gmail.com)
  * @author Natalia Petit
  */
-/* line 11, ../../source/css/mootor.scss */
+/* line 10, ../../source/css/mootor.scss */
 .m-html {
   margin: 0;
   padding: 0;
@@ -14,7 +14,7 @@
   height: 100%;
 }
 
-/* line 19, ../../source/css/mootor.scss */
+/* line 17, ../../source/css/mootor.scss */
 .m-app {
   margin: 0;
   padding: 0;
@@ -90,18 +90,18 @@
   -webkit-transform: translateZ(0);
 }
 /* line 4, ../../source/css/_transitions.scss */
-.m-app .m-transition-hslide {
-  -webkit-transition: -webkit-transform 0.5s ease-out;
-  -moz-transition: -moz-transform 0.5s ease-out;
-  -o-transition: -o-transform 0.5s ease-out;
-  transition: transform 0.5s ease-out;
-}
-/* line 8, ../../source/css/_transitions.scss */
 .m-app .m-transition-none {
   -webkit-transition: all 0;
   -moz-transition: all 0;
   -o-transition: all 0;
   transition: all 0;
+}
+/* line 8, ../../source/css/_transitions.scss */
+.m-app .m-transition-hslide {
+  -webkit-transition: -webkit-transform 0.5s ease-out;
+  -moz-transition: -moz-transform 0.5s ease-out;
+  -o-transition: -o-transform 0.5s ease-out;
+  transition: transform 0.5s ease-out;
 }
 /* line 12, ../../source/css/_transitions.scss */
 .m-app .m-transition-hslide-left {
@@ -143,25 +143,24 @@
 .m-app .m-position-right {
   left: 100%;
 }
-
-/* line 35, ../../source/css/mootor.scss */
-.m-doc, .m-doc * {
+/* line 26, ../../source/css/_utils.scss */
+.m-app .m-doc, .m-app .m-doc * {
   border: 1px solid black !important;
   padding: 0.5em !important;
   margin: 1em !important;
   background: rgba(0, 0, 0, 0.1) !important;
 }
-/* line 43, ../../source/css/mootor.scss */
-.m-doc.m-html,
-.m-doc .m-app {
+/* line 34, ../../source/css/_utils.scss */
+.m-app .m-doc.m-html,
+.m-app .m-doc .m-app {
   width: calc(100% - 4em);
   height: calc(100% - 4em);
 }
-/* line 48, ../../source/css/mootor.scss */
-.m-doc.m-html .m-views-container,
-.m-doc.m-html .m-panel,
-.m-doc .m-app .m-views-container,
-.m-doc .m-app .m-panel {
+/* line 39, ../../source/css/_utils.scss */
+.m-app .m-doc.m-html .m-views-container,
+.m-app .m-doc.m-html .m-panel,
+.m-app .m-doc .m-app .m-views-container,
+.m-app .m-doc .m-app .m-panel {
   width: calc(100% - 3em);
   height: calc(100% - 4em);
 }
