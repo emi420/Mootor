@@ -6,9 +6,7 @@
  */
 
 @import "compass/reset/utilities";
-
-$transitionDuration: 0.5s;
-@import "transitions";
+@import "config";
 
 .m-html {
 	@include reset-box-model;
@@ -21,25 +19,17 @@ $transitionDuration: 0.5s;
 .m-app {
 	@include nested-reset;
 	@include reset-box-model;
+
     overflow: hidden;
 
 	width: 100%;
 	height: 100%;
 
 	@import "panel";
-
+	@import "transitions";
+	@import "utils";
 }
 
-.m-views-container {
-	position: relative;
-
-	width: 100%;
-	height: 100%;
-}
-
-.m-hidden {
-	display: none;
-}
 
 .m-doc {
 	&,* {
