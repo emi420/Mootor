@@ -8,13 +8,16 @@
        $("#welcomeName").html(view.params[0]);
     });
 
-    $("#btnOk").on("tap", function(e) {
+    var goToHomeView = function () {
         m.app.go("");
+    }
+
+    $("#btnOk").on("tap", function(e) {
+        goToHomeView();
+        $("#btnLogin").off("click", goToHomeView);
     });
 
-    $("#btnOk").on("click", function(e) {
-        m.app.go("");
-    });
+    $("#btnOk").on("click", goToHomeView);
 
     $("#btnOk").on("touchend", function(e) {
         e.preventDefault();
