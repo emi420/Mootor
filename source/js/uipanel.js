@@ -15,7 +15,8 @@
     var UI,
         UIPanel,
         Event,
-        View;
+        View,
+        transitionDuration;
         
     // Dependences 
     
@@ -23,8 +24,8 @@
     Event = Mootor.Event; 
     View = Mootor.View;   
 
-     //TODO: This number must match the $transtionDuration variable in the SCSS
-    var transitionDuration = 300; 
+    // This number must match the $transtionDuration variable in the SCSS
+    transitionDuration = 300; 
 
     // Event handlers
     
@@ -52,15 +53,6 @@
         }); 
 
     });
-
-
-    // Private constructors
-
-    UIPanel = function(uiview) {
-        UIPanel._init(uiview, this);
-    };
-
-    // Event handlers
     
     Event.on("UIView:init", function(self) {
         
@@ -102,6 +94,11 @@
         }); 
     });
     
+    // Private constructors
+
+    UIPanel = function(uiview) {
+        UIPanel._init(uiview, this);
+    };
 
     // Prototypal inheritance
 
@@ -177,5 +174,6 @@
         }
 
     });
-
+    
+    
 }(window.$, window.Mootor));

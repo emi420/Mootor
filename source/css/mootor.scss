@@ -54,6 +54,26 @@
 
 }
 
+// TODO: move this code to another file
+
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #072F52;
+    height: 55px;
+    z-index: 9999;
+}
+.m-panel {
+    padding-top: 55px !important;
+}
+
+body, html {
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
 
 
 
