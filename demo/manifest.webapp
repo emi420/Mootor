@@ -1,0 +1,10 @@
+{
+  "name": "Mootor Demo App",
+  "description": "Demo app",
+  "launch_path": "/Mootor/demo/index.html",
+  "developer": {
+    "name": "Voolks",
+    "url": "http://www.voolks.com"
+  },
+  "default_locale": "en"
+}
