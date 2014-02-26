@@ -46,7 +46,9 @@
         * Create a route
         *
         * @method route
-        * @param {object} options TODO: Define this object's properties
+        * @param {string} url Regular expresion string
+        * @param {string} url URL to route
+        * @param {View} view View object
         * @return Route
         */
         route: function(url, view) {
