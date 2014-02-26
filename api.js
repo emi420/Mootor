@@ -33,7 +33,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Mootor",
             "name": "Mootor",
-            "description": "The Mootor module handles the creation of App and Namespaces"
+            "description": "The Event class defines and manage events"
         },
         {
             "displayName": "Router",

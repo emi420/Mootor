@@ -139,17 +139,92 @@
     &quot;use strict&quot;;
 
     var UI,
-        UIPanel;
+        UIPanel,
+        Event,
+        View;
         
     // Dependences 
     
     UI = Mootor.UI;    
+    Event = Mootor.Event; 
+    View = Mootor.View;   
+
+    // Event handlers
+    
+    Event.on(&quot;UIApp:init&quot;, function(self) {
+        var width = document.body.offsetWidth,
+            uiapp = self;
+        self.$el.css(&quot;width&quot;, width * 2);
+
+        self.$el.css(&quot;-webkit-transform&quot;,&quot;translateX(0)&quot;);
+        self.$el.css(&quot;-moz-transform&quot;,&quot;translateX(0)&quot;);
+
+        self.$el.addClass(&quot;m-transition-slide&quot;);
+
+        Event.on(&quot;View:load&quot;, function(self) {
+            var width = document.body.offsetWidth;
+
+            uiapp.$el.addClass(&quot;m-transition-slide&quot;);
+
+            uiapp.$el.css(&quot;-webkit-transform&quot;,&quot;translateX(&quot; + (-width) + &quot;px)&quot;);
+            uiapp.$el.css(&quot;-moz-transform&quot;,&quot;translateX(&quot; + (-width) + &quot;px)&quot;);
+
+            window.setTimeout(function() {
+                uiapp.$el.removeClass(&quot;m-transition-slide&quot;);
+
+                uiapp.$el.css(&quot;-webkit-transform&quot;, &quot;translateX(0)&quot;);
+                uiapp.$el.css(&quot;-moz-transform&quot;, &quot;translateX(0)&quot;);
+
+                self.ui.$el.css(&quot;left&quot;, &quot;0px&quot;);
+            }, 300);
+        }); 
+
+    });
+
 
     // Private constructors
 
-    UIPanel = Mootor.UIPanel = function(options) {
-        UIPanel.init(options, this);
+    UIPanel = function(uiview) {
+        UIPanel._init(uiview, this);
     };
+
+    // Event handlers
+    
+    Event.on(&quot;UIView:init&quot;, function(self) {
+        
+        // Initialize panels on UIView init
+        
+        $.extend(self, {
+            panel: new UIPanel(self)
+        })
+
+        self.panel.el.innerHTML = Mootor.View._getHtmlPath(self.view);
+
+        $(&quot;head&quot;).append(View._get(self.view.id).script);
+        
+        Event.dispatch(&quot;View:getScript:&quot; + self.view.id, self.view)
+        Event.dispatch(&quot;View:init:&quot; + self.view.id, self.view)
+
+        // on m.app.go
+
+        Event.on(&quot;View:unload:&quot; + self.view.id, function(self) {
+            self.ui.panel.$el.css(&quot;left&quot;, 0);
+            setTimeout(function() {
+                var width = document.body.offsetWidth;
+                if (Mootor.App._currentView !== self) {
+                    self.ui.panel.hide();
+                }
+                m.app.ui.$el.css(&quot;width&quot;, width + &quot;px&quot;);
+            },300);
+        }); 
+        
+        Event.on(&quot;View:load:&quot; + self.view.id, function(self) {
+            var width = document.body.offsetWidth;
+            self.ui.panel.$el.css(&quot;left&quot;, width);
+            self.ui.panel.show();
+        }); 
+    });
+    
 
     // Prototypal inheritance
 
@@ -167,26 +242,31 @@
         * @method _init
         * @private
         */
-        _init: function(options, self) {
+        _init: function(uiview, self) {
+
+            var $el,
+                el,
+                width;
             
-            var $el = $(&quot;#&quot; + options.id);
-            self.$el = $el;
+            el = self.el = uiview.el = document.createElement(&quot;div&quot;);
+            $el = uiview.$el = self.$el = $(el);
+            $el.addClass(&quot;m-panel&quot;);
 
-            if (options.transition !== undefined) {
-                self.transition = options.transition;
-            } else {
-                self.transition = &quot;slide-right&quot;;
-            }
-        
-            $el.hide();
-            $el.addClass(&quot;moo-panel&quot;);
+            el.setAttribute(&quot;class&quot;, &quot;m-panel&quot;);
 
-            self.addTransitionClass();
+            // Fixed panel width
+            width = document.body.offsetWidth;
+            $el.width(width + &quot;px&quot;);
+            
+            m.app.ui.$el.append(el);            
+            
+            self.hide();
+            
         }
 
     });
 
-    //Public prototype    
+    // Public prototype    
     
     $.extend(UIPanel.prototype, {
 
@@ -199,18 +279,6 @@
         * @return {object} Object with coordinates. Example: {x: 0, y: 0}
         */
         position: function(coordinates) {
-            
-        },
-
-        /**
-        * Resize the element to the specified dimentions. 
-        * If dimentions are not specified, it returns dimentions object with the current size.
-        *
-        * @method size
-        * @param {object} [dimentions] Object with dimentions. Example: {w: 0, h: 0}
-        * @return {object} Object with dimentions. Example: {w: 0, h: 0}
-        */
-        size: function() {
             
         },
 
@@ -234,136 +302,8 @@
         */
         transition: function() {
             
-        },
-
-        addTransitionClass: function() {
-
-            var self = this,
-                $el = self.$el;
-            
-            switch (self.transition) {
-                case &quot;slide-left&quot;:
-                case &quot;slide-right&quot;:
-                    $el.addClass(&quot;moo-transition-slide&quot;);
-                    break;
-                default:
-                    $el.addClass(&quot;moo-transition-&quot; + self.transition);
-            }
-            return self;
-        },
-
-        removeTransitionClass: function() {
-            var self = this;
-            self.$el.removeClass(&quot;moo-transition-slide moo-transition-none&quot;);
-            return self;
-        },
-
-        /**
-        * Shows a panel using the specified transition
-        *
-        * @method show
-        * @return {Object} Returns the same object it&#x27;s applied to, to allow chaining.
-        */
-        show: function(){
-            var self = this,
-                $el = self.$el;
-                
-            switch (self.transition) {
-                case &quot;slide-left&quot;:
-                    self.reposition(&quot;left&quot;);
-                    self.slideIn();
-                    break;
-
-                case &quot;slide-right&quot;:
-                    self.reposition(&quot;right&quot;);
-                    self.slideIn();
-                    break;
-
-                default:
-                    $el.show();
-                    break;
-            }
-            return this;
-        },
-
-        reposition: function(side) {
-
-            var self = this,
-                $el = self.$el,
-                newPosition,
-                evalPosition;
-
-            if (side == &quot;left&quot;) {
-                evalPosition = ($el.left &lt; clientWidth);
-                newPosition = clientWidth;
-            }
-            else if (side == &quot;right&quot;) {
-                evalPosition = ($el.left &gt; -1);
-                newPosition = -clientWidth;
-            }
-
-            //Reposition the panel outside the right edge
-            if  (evalPosition) {
-
-                //Temporarily remove the transition
-                self.removeTransitionClass();
-                self.addTransitionClass(&quot;none&quot;);
-
-                //Move panel outside stage
-                $el.css({
-                    left: newPosition
-                });
-            }
-            return this;
-        },
-
-        slideIn: function() {
-            //A timeout is needed for the browser to process the possible repositioning
-            var self = this,
-                $el = self.$el;
-                
-            window.setTimeout(function() {
-
-                //Add back the transition (it&#x27;s useless in the case it was not removed)
-                self.removeTransitionClass();
-                self.addTransitionClass(self.transition);
-
-                //Move panel to stage
-                $el.show().css({
-                    left: 0
-                });
-
-            }, 1);		
-            return this;
-        },
-
-        /**
-        * Hides a panel using the specified transition
-        *
-        * @method hide
-        * @return {Object} Returns the same object it&#x27;s applied to, to allow chaining.
-        */
-        hide: function(){
-            var self = this,
-                $el = self.$el;
-
-            switch (self.transition) {
-                case &quot;slide&quot;:
-                case &quot;slide-left&quot;:
-                    $el.css({
-                        left: clientWidth
-                    });
-                    break;
-                case &quot;slide-right&quot;:
-                    $el.css({
-                        left: clientWidth
-                    });
-                    break;
-                default:
-                    $el.hide();
-            }
-        return this;
         }
+
     });
 
 }(window.$, window.Mootor));

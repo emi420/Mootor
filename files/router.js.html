@@ -138,7 +138,20 @@
 
     &quot;use strict&quot;;
 
-    var Router;
+    var Router,
+        Route,
+        App;
+                
+    // Dependencies
+    
+    App = Mootor.App;
+    Route = Mootor.Route;
+    
+    // Event handlers
+
+    window.onpopstate = function(event) {
+      m.app.go(window.location.hash);
+    };
 
     // Private constructors
 
@@ -149,12 +162,11 @@
     // Private static methods and properties
 
     $.extend(Router, {
-        // code here
+        _collection: {}
     });
 
-    //Public methods
-
-    $.extend(Router.prototype, {
+    
+    $.extend(App.prototype, {
         
         /**
         * Create a route
@@ -163,10 +175,26 @@
         * @param {object} options TODO: Define this object&#x27;s properties
         * @return Route
         */
-        route: function(options) {
-            
+        route: function(url, view) {
+            if (view === undefined) {
+                var s,
+                    route,
+                    match;
+
+                for (s in Router._collection) {
+                    match = url.match(new RegExp(s))
+                    if (match !== null) {
+                        route = Router._collection[s];
+                        route.view.params = match.slice(1, match.length);
+                        return route;
+                    }
+                }
+                return undefined;
+            } else {
+                return Router._collection[url] = new Mootor.Route(url, view);
+            }
         }
-    });  
+    });
           
 }(window.$, window.Mootor));
 

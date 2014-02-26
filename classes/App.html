@@ -297,14 +297,14 @@
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_router">router</a>
+                                <a href="#method_settings">settings</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_settings">settings</a>
+                                <a href="#method_version">version</a>
 
                                 
                                 
@@ -329,6 +329,13 @@
                         
                             <li class="index-item property">
                                 <a href="#property_history">history</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_version">version</a>
 
                                 
                                 
@@ -386,7 +393,7 @@
             
         
         
-        <a href="../files/app.js.html#l70"><code>app.js:70</code></a>
+        <a href="../files/app.js.html#l146"><code>app.js:146</code></a>
         
         </p>
 
@@ -459,7 +466,7 @@
             
         
         
-        <a href="../files/app.js.html#l81"><code>app.js:81</code></a>
+        <a href="../files/app.js.html#l157"><code>app.js:157</code></a>
         
         </p>
 
@@ -503,7 +510,7 @@
             
                 <li class="arg">
                     
-                        <code>id</code>
+                        <code>url</code>
                     
                 </li>
             
@@ -542,7 +549,7 @@
             
         
         
-        <a href="../files/app.js.html#l58"><code>app.js:58</code></a>
+        <a href="../files/app.js.html#l92"><code>app.js:92</code></a>
         
         </p>
 
@@ -565,14 +572,14 @@
             
                 <li class="param">
                     
-                        <code class="param-name">id</code>
+                        <code class="param-name">url</code>
                         <span class="type">String</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>The id of the view</p>
+                        <p>The url to go</p>
 
                     </div>
 
@@ -639,7 +646,7 @@
             
         
         
-        <a href="../files/app.js.html#l103"><code>app.js:103</code></a>
+        <a href="../files/app.js.html#l168"><code>app.js:168</code></a>
         
         </p>
 
@@ -664,79 +671,6 @@
                 
                     
                     <p>App instance</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_router" class="method item">
-    <h3 class="name"><code>router</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type"></span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <span class="flag chainable">chainable</span>
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app.js.html#l92"><code>app.js:92</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Returns a router instance</p>
-
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                    <p>Router</p>
 
                 
             </div>
@@ -785,8 +719,6 @@
     
 
     
-        <span class="flag chainable">chainable</span>
-    
 
     
 
@@ -801,7 +733,7 @@
             
         
         
-        <a href="../files/app.js.html#l44"><code>app.js:44</code></a>
+        <a href="../files/app.js.html#l76"><code>app.js:76</code></a>
         
         </p>
 
@@ -832,7 +764,7 @@ If called with a key, returns the value. If called with key and value, sets valu
                     
 
                     <div class="param-description">
-                        <p>The name of the setting\</p>
+                        <p>The name of the setting</p>
 
                     </div>
 
@@ -868,6 +800,115 @@ If called with a key, returns the value. If called with key and value, sets valu
                 
                     
                     <p>object the setting value</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_version" class="method item">
+    <h3 class="name"><code>version</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code class="optional">[version]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app.js.html#l61"><code>app.js:61</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The application&#39;s version number
+Note: It&#39;s not Mootor version, this value is defined in application code, not framework code.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[version]</code>
+                        <span class="type">String</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The version number or name</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">String</span>:
+                    
+                    <p>Version number or name</p>
 
                 
             </div>
@@ -932,7 +973,7 @@ If called with a key, returns the value. If called with key and value, sets valu
             
         
         
-        <a href="../files/view.js.html#l289"><code>view.js:289</code></a>
+        <a href="../files/view.js.html#l247"><code>view.js:247</code></a>
         
         </p>
 
@@ -1039,7 +1080,7 @@ If called with a key, returns the value. If called with key and value, sets valu
             
         
         
-        <a href="../files/app.js.html#l35"><code>app.js:35</code></a>
+        <a href="../files/app.js.html#l51"><code>app.js:51</code></a>
         
         </p>
 
@@ -1051,6 +1092,52 @@ If called with a key, returns the value. If called with key and value, sets valu
     <div class="description">
         <p>Stores the navigation history. 
 An array of views, ordered in the sequence that they were visited by the user.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_version" class="property item">
+    <h3 class="name"><code>version</code></h3>
+    <span class="type">Strign</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app.js.html#l35"><code>app.js:35</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The application&#39;s version number
+Note: It&#39;s not Mootor version, this value is defined in application code, not framework code.</p>
 
     </div>
 
