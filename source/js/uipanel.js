@@ -34,6 +34,8 @@
         self.$el.addClass("m-transition-hslide m-double-width");
         self.$el.addClass("m-transition-hslide-right").removeClass("m-transition-hslide-left");
 
+        m.app.ui.$el.addClass("m-full-width").removeClass("m-double-width");
+
         Event.on("View:load", function(self) {
 
             uiapp.$el.addClass("m-transition-hslide");
@@ -45,7 +47,7 @@
 
                 uiapp.$el.addClass("m-transition-hslide-right").removeClass("m-transition-hslide-left");
 
-                self.ui.$el.addClass("m-panel-position-left m-full-width").removeClass("m-panel-position-right m-half-width");
+                self.ui.$el.addClass("m-position-left m-full-width").removeClass("m-position-right m-half-width");
             }, transitionDuration);
         }); 
 
@@ -79,7 +81,7 @@
         // on m.app.go
 
         Event.on("View:unload:" + self.view.id, function(self) {
-            self.ui.panel.$el.addClass("m-panel-position-left m-full-width").removeClass("m-panel-position-right m-half-width");
+            self.ui.panel.$el.addClass("m-position-left m-full-width").removeClass("m-position-right m-half-width");
             setTimeout(function() {
                 if (Mootor.App._currentView !== self) {
                     self.ui.panel.hide();
@@ -90,9 +92,8 @@
         }); 
         
         Event.on("View:load:" + self.view.id, function(self) {
-            self.ui.panel.$el.addClass("m-panel-position-right").removeClass("m-panel-position-left");
+            self.ui.panel.$el.addClass("m-position-right").removeClass("m-position-left");
             var visiblePanels = $(".m-panel:not(.m-hidden)").length;
-            console.log("visiblePanels",visiblePanels);
 
             if ( visiblePanels === 0 ) {
                 self.ui.panel.$el.addClass("m-half-width").removeClass("m-full-width");
