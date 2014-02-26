@@ -181,9 +181,3 @@ header {
 .m-panel {
   padding-top: 55px !important;
 }
-
-/* line 45, ../../source/css/mootor.scss */
-body, html {
-  overflow-x: hidden;
-  overflow-y: hidden;
-}
