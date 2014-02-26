@@ -4,6 +4,10 @@
 
 The main purpose of this project is to create a simple HTML5 library for mobile application development, that helps web professionals to build fully customizable apps, for use in browsers or embedded in mobile applications.
 
+## Demo
+
+http://emi420.github.io/Mootor/demo/
+
 ## Only for testing
 
 THIS SOFTWARE IS EXPERIMENTAL AND ONLY FOR TESTING.
