@@ -23,6 +23,30 @@
     Event = Mootor.Event; 
     View = Mootor.View;   
 
+    // Event handlers
+    
+    Event.on("UIApp:init", function(self) {
+        var width = document.body.offsetWidth,
+            uiapp = self;
+        self.$el.css("width", width * 2);
+        self.$el.css("left",0);
+        self.$el.addClass("m-transition-slide");
+
+        Event.on("View:load", function(self) {
+            var width = document.body.offsetWidth;
+            uiapp.$el.addClass("m-transition-slide");
+            uiapp.$el.css("left", (-width) + "px");
+            window.setTimeout(function() {
+                uiapp.$el.removeClass("m-transition-slide");
+                uiapp.$el.css("left", "0px");
+
+                self.ui.$el.css("left", "0px");
+            }, 1000);
+        }); 
+
+    });
+
+
     // Private constructors
 
     UIPanel = function(uiview) {
@@ -32,6 +56,9 @@
     // Event handlers
     
     Event.on("UIView:init", function(self) {
+        
+        // Initialize panels on UIView init
+        
         $.extend(self, {
             panel: new UIPanel(self)
         })
@@ -43,11 +70,21 @@
         Event.dispatch("View:getScript:" + self.view.id, self.view)
         Event.dispatch("View:init:" + self.view.id, self.view)
 
+        // on m.app.go
+
         Event.on("View:unload:" + self.view.id, function(self) {
-            self.ui.panel.$el.addClass("m-hidden");
+            self.ui.panel.$el.css("left", 0);
+            setTimeout(function() {
+                if (Mootor.App._currentView !== self) {
+                    self.ui.panel.hide();
+                }
+            },1000);
         }); 
+        
         Event.on("View:load:" + self.view.id, function(self) {
-            self.ui.panel.$el.removeClass("m-hidden");
+            var width = document.body.offsetWidth;
+            self.ui.panel.$el.css("left", width);
+            self.ui.panel.show();
         }); 
     });
     
@@ -71,13 +108,18 @@
         _init: function(uiview, self) {
 
             var $el,
-                el;
+                el,
+                width;
             
             el = self.el = uiview.el = document.createElement("div");
             $el = uiview.$el = self.$el = $(el);
             $el.addClass("m-panel");
 
             el.setAttribute("class", "m-panel");
+
+            // Fixed panel width
+            width = document.body.offsetWidth;
+            $el.width(width + "px");
             
             m.app.ui.$el.append(el);            
             

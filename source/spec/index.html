@@ -21,6 +21,11 @@
   <script type="text/javascript" src="../js/router.js"></script>
   <script type="text/javascript" src="../js/route.js"></script>
 
+  <style>
+  .m-app .m-panel {
+      opacity: 1;
+  }
+  </style>
 </head>
 
 <body>
@@ -41,7 +46,7 @@
         });
     
         m.app.route("^$", m.app.view("index"));
-        m.app.route("^#testview.html$", m.app.view("testview"));
+        m.app.route("^#welcome/(.*)", m.app.view("testview"));
     
         app.init();
 

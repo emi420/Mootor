@@ -1,11 +1,11 @@
 (function ($) {
-    
-   // console.log("test view init");
+
+    "use strict";
     
     var view = m.app.view("testview");
     
     view.on("load", function() {
-       // console.log("testview view loaded");
+       $("#welcomeName").html(view.params[0]);
     });
 
     $("#btnOk").on("tap", function(e) {

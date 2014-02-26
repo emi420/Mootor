@@ -133,6 +133,7 @@
             
                 Event.dispatch("App:go", this);
                 Event.dispatch("View:load:" + view.id, view);
+                Event.dispatch("View:load", view);
             
             } else {
                 throw(new Error("Route " + url + " is not defined"));

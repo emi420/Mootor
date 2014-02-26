@@ -27,7 +27,8 @@
 
     UIApp = Mootor.UIApp = function() {
         var $container,
-            app = m.app;
+            app = m.app,
+            self = this;
 
         if (Mootor.App._options.container) {
             $container = Mootor.App._options.container;
@@ -41,6 +42,9 @@
         this.$el = $("<div>").addClass("m-views-container")
         this.el = this.$el[0];        
         this.$el.appendTo($container);
+        
+        Event.dispatch("UIApp:init", this);
+    
     };
     
     // Event handlers
