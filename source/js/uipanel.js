@@ -92,7 +92,6 @@
         Event.on("View:load:" + self.view.id, function(self) {
             self.ui.panel.$el.addClass("m-panel-position-right").removeClass("m-panel-position-left");
             var visiblePanels = $(".m-panel:not(.m-hidden)").length;
-            console.log("visiblePanels",visiblePanels);
 
             if ( visiblePanels === 0 ) {
                 self.ui.panel.$el.addClass("m-half-width").removeClass("m-full-width");
