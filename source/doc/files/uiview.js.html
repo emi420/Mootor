@@ -135,73 +135,38 @@
 * @author Martín Szyszlican (martinsz [at] gmail.com)
 */
 
-(function ($, Mootor) {
+(function ($, Mootor, document) {
 
     &quot;use strict&quot;;
 
     var UI,
         UIView,
-        Event;
+        Event,
+        View;
 
     // Dependences
 
-    UI = Mootor.UI;
     Event = Mootor.Event;
+    View = Mootor.View;
+    UI = Mootor.UI;
         
     // Private constructors
 
-    UIView = Mootor.UIView = function(viewid) {
-        // code here
+    UIView = Mootor.UIView = function(view) {
+        this.view = view;
+        Event.dispatch(&quot;UIView:init&quot;, this);
     };
-    
-    // Event handlers
 
-    Event.on(&quot;View:getHtml&quot;, function(view) {
-        UIView._set(view, {html: true})
-    });
-    Event.on(&quot;View:getScript&quot;, function(view) {
-        UIView._set(view, {script: true})
-    });
-    Event.on(&quot;View:getCss&quot;, function(view) {
-        UIView._set(view, {css: true})
-    });
-    Event.on(&quot;UIView:ready&quot;, function(view) {
-        var uiview = new UIView();
-        view.ui = uiview;
+    // Event handlers
+    
+    Event.on(&quot;View:init&quot;, function(self) {
+        self.ui = new UIView(self);
     });
 
     // Private static methods and properties
 
     $.extend(UIView, {
         
-        _collection: {},
-        
-        _set: function(view, options, self) {
-            var viewid = view.id,
-                uiview,
-                i,
-                ready = false;
-            
-            if ((viewid in UIView._collection) === false) {
-                uiview = UIView._collection[viewid] = {};
-            } else {
-                uiview = UIView._collection[viewid];                
-            }
-
-            for (i in options) {
-                uiview[i] = options[i];
-            }
-            
-            if (uiview.html === true &amp;&amp; uiview.css === true &amp;&amp; uiview.script === true) {
-                uiview.ready = true;
-                Event.dispatch(&quot;UIView:ready&quot;, view);
-            }
-            
-        },
-        
-        _get: function() {
-            
-        },
     });
 
     // Public methods
@@ -214,7 +179,7 @@
 
     $.extend(UIView.prototype, UI.prototype);
 
-}(window.$, window.Mootor));
+}(window.$, window.Mootor, window.document));
 
     </pre>
 </div>

@@ -140,23 +140,45 @@
     &quot;use strict&quot;;
 
     var UI,
-        UIApp;
+        UIApp,
+        App;
 
     // Dependences
 
     UI = Mootor.UI;
+    Event = Mootor.Event;
+    App = Mootor.App;
 
     // Private constructors
 
     UIApp = Mootor.UIApp = function() {
-        // code here
+        var $container,
+            app = m.app,
+            self = this;
+
+        if (Mootor.App._options.container) {
+            $container = Mootor.App._options.container;
+        }
+        else {
+            $(&quot;html&quot;).addClass(&quot;m-html&quot;);
+            $container = $(&quot;body&quot;);
+        }
+        $container.addClass(&quot;m-app&quot;);
+
+        this.$el = $(&quot;&lt;div&gt;&quot;).addClass(&quot;m-views-container&quot;)
+        this.el = this.$el[0];        
+        this.$el.appendTo($container);
+        
+        Event.dispatch(&quot;UIApp:init&quot;, this);
+    
     };
-
-    // Private static methods and properties
-
-    $.extend(UIApp, {
-        // code here
-    });
+    
+    // Event handlers
+    Event.on(&quot;App:init&quot;, function(self) {
+        $.extend(self, {
+           ui: new UIApp()
+        });
+    });    
 
     // Prototypal inheritance
 

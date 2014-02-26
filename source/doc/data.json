@@ -14,15 +14,33 @@
             },
             "namespaces": {}
         },
-        "mootor.js": {
-            "name": "mootor.js",
+        "context.js": {
+            "name": "context.js",
+            "modules": {},
+            "classes": {
+                "Context": 1
+            },
+            "fors": {
+                "window.m": 1
+            },
+            "namespaces": {}
+        },
+        "event.js": {
+            "name": "event.js",
             "modules": {
                 "Mootor": 1
             },
             "classes": {
-                "window.m": 1,
-                "Event": 1,
-                "Context": 1
+                "Event": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "mootor.js": {
+            "name": "mootor.js",
+            "modules": {},
+            "classes": {
+                "window.m": 1
             },
             "fors": {},
             "namespaces": {}
@@ -140,15 +158,16 @@
             "name": "App",
             "submodules": {},
             "classes": {
-                "App": 1
+                "App": 1,
+                "Context": 1
             },
             "fors": {
                 "window.m": 1
             },
             "namespaces": {},
             "tag": "module",
-            "file": "app.js",
-            "line": 19,
+            "file": "context.js",
+            "line": 1,
             "description": "The App class defines the main object of the applications"
         },
         "Mootor": {
@@ -156,15 +175,14 @@
             "submodules": {},
             "classes": {
                 "window.m": 1,
-                "Event": 1,
-                "Context": 1
+                "Event": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "mootor.js",
-            "line": 71,
-            "description": "The Mootor module handles the creation of App and Namespaces",
+            "file": "event.js",
+            "line": 1,
+            "description": "The Event class defines and manage events",
             "author": "Martín Szyszlican (martinsz [at] gmail.com)"
         },
         "Router": {
@@ -250,8 +268,26 @@
             "module": "Mootor",
             "namespace": "",
             "file": "mootor.js",
-            "line": 106,
+            "line": 22,
             "description": "m public global object",
+            "static": 1
+        },
+        "Context": {
+            "name": "Context",
+            "shortname": "Context",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "App",
+            "namespace": "",
+            "file": "context.js",
+            "line": 1,
+            "description": "Information about the context of the application (ej: device's viewport)",
+            "return": {
+                "description": "object"
+            },
             "static": 1
         },
         "Event": {
@@ -264,29 +300,12 @@
             "extension_for": [],
             "module": "Mootor",
             "namespace": "",
-            "file": "mootor.js",
-            "line": 22,
+            "file": "event.js",
+            "line": 1,
             "description": "The Event class defines and manage events",
             "access": "private",
-            "tagname": ""
-        },
-        "Context": {
-            "name": "Context",
-            "shortname": "Context",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "Mootor",
-            "namespace": "",
-            "file": "mootor.js",
-            "line": 71,
-            "description": "Information about the context of the application (ej: device's viewport)",
-            "return": {
-                "description": "object"
-            },
-            "static": 1
+            "tagname": "",
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
         },
         "Route": {
             "name": "Route",
@@ -482,6 +501,16 @@
         {
             "file": "app.js",
             "line": 35,
+            "description": "The application's version number\nNote: It's not Mootor version, this value is defined in application code, not framework code.",
+            "itemtype": "property",
+            "name": "version",
+            "type": "Strign",
+            "class": "App",
+            "module": "App"
+        },
+        {
+            "file": "app.js",
+            "line": 51,
             "description": "Stores the navigation history. \nAn array of views, ordered in the sequence that they were visited by the user.",
             "itemtype": "property",
             "name": "history",
@@ -491,14 +520,35 @@
         },
         {
             "file": "app.js",
-            "line": 44,
+            "line": 61,
+            "description": "The application's version number\nNote: It's not Mootor version, this value is defined in application code, not framework code.",
+            "itemtype": "method",
+            "name": "version",
+            "params": [
+                {
+                    "name": "version",
+                    "description": "The version number or name",
+                    "type": "String",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "Version number or name",
+                "type": "String"
+            },
+            "class": "App",
+            "module": "App"
+        },
+        {
+            "file": "app.js",
+            "line": 76,
             "description": "Application settings\nIf called with a key, returns the value. If called with key and value, sets value to key.",
             "itemtype": "method",
             "name": "settings",
             "params": [
                 {
                     "name": "key",
-                    "description": "The name of the setting\\",
+                    "description": "The name of the setting",
                     "type": "String"
                 },
                 {
@@ -508,7 +558,6 @@
                     "optional": true
                 }
             ],
-            "chainable": 1,
             "return": {
                 "description": "object the setting value"
             },
@@ -517,15 +566,15 @@
         },
         {
             "file": "app.js",
-            "line": 58,
+            "line": 92,
             "description": "Go to a view",
             "itemtype": "method",
             "name": "go",
             "chainable": 1,
             "params": [
                 {
-                    "name": "id",
-                    "description": "The id of the view",
+                    "name": "url",
+                    "description": "The url to go",
                     "type": "String"
                 }
             ],
@@ -537,7 +586,7 @@
         },
         {
             "file": "app.js",
-            "line": 70,
+            "line": 146,
             "description": "Go to the previous view in the history",
             "itemtype": "method",
             "name": "back",
@@ -550,7 +599,7 @@
         },
         {
             "file": "app.js",
-            "line": 81,
+            "line": 157,
             "description": "Go to next view in the history",
             "itemtype": "method",
             "name": "forward",
@@ -563,20 +612,7 @@
         },
         {
             "file": "app.js",
-            "line": 92,
-            "description": "Returns a router instance",
-            "itemtype": "method",
-            "name": "router",
-            "chainable": 1,
-            "return": {
-                "description": "Router"
-            },
-            "class": "App",
-            "module": "App"
-        },
-        {
-            "file": "app.js",
-            "line": 103,
+            "line": 168,
             "description": "Set callbacks for app events",
             "itemtype": "method",
             "name": "on",
@@ -589,7 +625,7 @@
         },
         {
             "file": "app.js",
-            "line": 140,
+            "line": 205,
             "description": "Creates a new app with the defined options.\nIf the app is already created, it can be called without options to have a reference to the Mootor app. \n\n App instance factory\n\n window.m.app({\n   views: [\n      \"index\",\n      \"view1\"\n   ]\n });",
             "itemtype": "method",
             "name": "app",
@@ -608,8 +644,57 @@
             "module": "App"
         },
         {
-            "file": "mootor.js",
+            "file": "context.js",
+            "line": 17,
+            "description": "Browser info",
+            "itemtype": "property",
+            "name": "browser",
+            "type": "string",
+            "class": "Context",
+            "module": "App"
+        },
+        {
+            "file": "context.js",
+            "line": 24,
+            "description": "Viewport info",
+            "itemtype": "property",
+            "name": "viewport",
+            "type": "object",
+            "class": "Context",
+            "module": "App"
+        },
+        {
+            "file": "context.js",
             "line": 31,
+            "description": "Device info",
+            "itemtype": "property",
+            "name": "device",
+            "type": "object",
+            "class": "Context",
+            "module": "App"
+        },
+        {
+            "file": "context.js",
+            "line": 37,
+            "description": "Vendor info",
+            "itemtype": "property",
+            "name": "vendor",
+            "type": "string",
+            "class": "Context",
+            "module": "App"
+        },
+        {
+            "file": "context.js",
+            "line": 56,
+            "itemtype": "property",
+            "name": "context",
+            "type": "Context",
+            "class": "window.m",
+            "module": "App"
+        },
+        {
+            "file": "event.js",
+            "line": 20,
             "description": "Events collection",
             "access": "private",
             "tagname": "",
@@ -617,8 +702,8 @@
             "module": "Mootor"
         },
         {
-            "file": "mootor.js",
-            "line": 37,
+            "file": "event.js",
+            "line": 26,
             "description": "Add event to collection",
             "access": "private",
             "tagname": "",
@@ -626,8 +711,8 @@
             "module": "Mootor"
         },
         {
-            "file": "mootor.js",
-            "line": 50,
+            "file": "event.js",
+            "line": 37,
             "description": "Dispatch event",
             "access": "private",
             "tagname": "",
@@ -635,47 +720,8 @@
             "module": "Mootor"
         },
         {
-            "file": "mootor.js",
-            "line": 79,
-            "description": "Browser info",
-            "itemtype": "property",
-            "name": "browser",
-            "type": "object",
-            "class": "Context",
-            "module": "Mootor"
-        },
-        {
-            "file": "mootor.js",
-            "line": 86,
-            "description": "Viewport info",
-            "itemtype": "property",
-            "name": "viewport",
-            "type": "object",
-            "class": "Context",
-            "module": "Mootor"
-        },
-        {
-            "file": "mootor.js",
-            "line": 93,
-            "description": "Device info",
-            "itemtype": "property",
-            "name": "device",
-            "type": "object",
-            "class": "Context",
-            "module": "Mootor"
-        },
-        {
-            "file": "mootor.js",
-            "line": 112,
-            "itemtype": "property",
-            "name": "context",
-            "type": "Context",
-            "class": "window.m",
-            "module": "Mootor"
-        },
-        {
             "file": "route.js",
-            "line": 33,
+            "line": 34,
             "description": "The URL referenced by this route",
             "itemtype": "property",
             "name": "URL",
@@ -685,7 +731,7 @@
         },
         {
             "file": "route.js",
-            "line": 41,
+            "line": 42,
             "description": "An array with the parameters passed to the page\nIf called with no parameters, it returns the currently set params in this route.",
             "itemtype": "method",
             "name": "params",
@@ -705,7 +751,7 @@
         },
         {
             "file": "route.js",
-            "line": 53,
+            "line": 54,
             "description": "The view that implements this route\nIf called with no parameters, it returns the currently set view in this route.",
             "itemtype": "method",
             "name": "view",
@@ -725,7 +771,7 @@
         },
         {
             "file": "router.js",
-            "line": 33,
+            "line": 45,
             "description": "Create a route",
             "itemtype": "method",
             "name": "route",
@@ -744,7 +790,7 @@
         },
         {
             "file": "ui.js",
-            "line": 34,
+            "line": 33,
             "description": "Shows element (not necesarily, since the element's parent might be hidden or out of view)",
             "itemtype": "method",
             "name": "show",
@@ -757,7 +803,7 @@
         },
         {
             "file": "ui.js",
-            "line": 44,
+            "line": 43,
             "description": "Hides element from view",
             "itemtype": "method",
             "name": "hide",
@@ -770,7 +816,7 @@
         },
         {
             "file": "uiapp.js",
-            "line": 43,
+            "line": 65,
             "description": "Show/Hide the loading indicator",
             "itemtype": "method",
             "name": "loading",
@@ -911,7 +957,7 @@
         },
         {
             "file": "uipanel.js",
-            "line": 38,
+            "line": 113,
             "description": "Initialize  a panel",
             "itemtype": "method",
             "name": "_init",
@@ -922,7 +968,7 @@
         },
         {
             "file": "uipanel.js",
-            "line": 67,
+            "line": 147,
             "description": "Move the element to the specified coordinates. \nIf coordinates are not specified, it returns coordinates object with the current position.",
             "itemtype": "method",
             "name": "position",
@@ -943,28 +989,7 @@
         },
         {
             "file": "uipanel.js",
-            "line": 79,
-            "description": "Resize the element to the specified dimentions. \nIf dimentions are not specified, it returns dimentions object with the current size.",
-            "itemtype": "method",
-            "name": "size",
-            "params": [
-                {
-                    "name": "dimentions",
-                    "description": "Object with dimentions. Example: {w: 0, h: 0}",
-                    "type": "Object",
-                    "optional": true
-                }
-            ],
-            "return": {
-                "description": "Object with dimentions. Example: {w: 0, h: 0}",
-                "type": "Object"
-            },
-            "class": "UIPanel",
-            "module": "UI"
-        },
-        {
-            "file": "uipanel.js",
-            "line": 91,
+            "line": 159,
             "description": "Block/Unblock or return block status.",
             "itemtype": "method",
             "name": "blocked",
@@ -985,7 +1010,7 @@
         },
         {
             "file": "uipanel.js",
-            "line": 102,
+            "line": 170,
             "description": "Set or get transition type",
             "itemtype": "method",
             "name": "transition",
@@ -1005,34 +1030,8 @@
             "module": "UI"
         },
         {
-            "file": "uipanel.js",
-            "line": 135,
-            "description": "Shows a panel using the specified transition",
-            "itemtype": "method",
-            "name": "show",
-            "return": {
-                "description": "Returns the same object it's applied to, to allow chaining.",
-                "type": "Object"
-            },
-            "class": "UIPanel",
-            "module": "UI"
-        },
-        {
-            "file": "uipanel.js",
-            "line": 214,
-            "description": "Hides a panel using the specified transition",
-            "itemtype": "method",
-            "name": "hide",
-            "return": {
-                "description": "Returns the same object it's applied to, to allow chaining.",
-                "type": "Object"
-            },
-            "class": "UIPanel",
-            "module": "UI"
-        },
-        {
             "file": "view.js",
-            "line": 56,
+            "line": 62,
             "description": "Views collection",
             "access": "private",
             "tagname": "",
@@ -1041,7 +1040,7 @@
         },
         {
             "file": "view.js",
-            "line": 62,
+            "line": 68,
             "description": "Current active view",
             "access": "private",
             "tagname": "",
@@ -1050,7 +1049,7 @@
         },
         {
             "file": "view.js",
-            "line": 68,
+            "line": 74,
             "description": "Init View instance, load HTML, CSS and JavaScript files for the view",
             "access": "private",
             "tagname": "",
@@ -1073,7 +1072,7 @@
         },
         {
             "file": "view.js",
-            "line": 90,
+            "line": 96,
             "description": "Get view HTML",
             "access": "private",
             "tagname": "",
@@ -1091,17 +1090,7 @@
         },
         {
             "file": "view.js",
-            "line": 180,
-            "description": "A reference to the UI representation of this view",
-            "itemtype": "property",
-            "name": "ui",
-            "type": "UIView",
-            "class": "View",
-            "module": "View"
-        },
-        {
-            "file": "view.js",
-            "line": 188,
+            "line": 197,
             "description": "Title is the friendly name for the current view.\nWhen called without parameters, returns a string containing the title. When called with parameters, sets the title.",
             "itemtype": "method",
             "name": "title",
@@ -1121,7 +1110,7 @@
         },
         {
             "file": "view.js",
-            "line": 200,
+            "line": 215,
             "description": "Sets an event handler for the view\nPossible values for event: load, beforeLoad, unload, beforeUnload, init\nTODO: Define which parameters are passed to the callback function.",
             "itemtype": "method",
             "name": "on",
@@ -1145,7 +1134,7 @@
         },
         {
             "file": "view.js",
-            "line": 214,
+            "line": 230,
             "description": "Unsets event handlers for the view\nPossible values for event: load, beforeLoad, unload, beforeUnload, init",
             "itemtype": "method",
             "name": "off",
@@ -1170,70 +1159,7 @@
         },
         {
             "file": "view.js",
-            "line": 227,
-            "description": "Removes the view from the app (and from the screen)",
-            "itemtype": "method",
-            "name": "remove",
-            "return": {
-                "description": "View"
-            },
-            "class": "View",
-            "module": "View"
-        },
-        {
-            "file": "view.js",
-            "line": 237,
-            "description": "Inserts the view to the app",
-            "itemtype": "method",
-            "name": "insert",
-            "return": {
-                "description": "View"
-            },
-            "class": "View",
-            "module": "View"
-        },
-        {
-            "file": "view.js",
             "line": 247,
-            "description": "Gets or sets the source for the HTML of this view.",
-            "itemtype": "method",
-            "name": "html",
-            "return": {
-                "description": "string"
-            },
-            "default": "/views/[viewid]/[viewid].html",
-            "class": "View",
-            "module": "View"
-        },
-        {
-            "file": "view.js",
-            "line": 260,
-            "description": "Gets or sets the source for the JavaScript of this view.",
-            "itemtype": "method",
-            "name": "script",
-            "return": {
-                "description": "string"
-            },
-            "default": "/views/[viewid]/[viewid].js",
-            "class": "View",
-            "module": "View"
-        },
-        {
-            "file": "view.js",
-            "line": 273,
-            "description": "Gets or sets the source for the CSS StyleSheet of this view.",
-            "itemtype": "method",
-            "name": "css",
-            "return": {
-                "description": "string"
-            },
-            "default": "/views/[viewid]/[viewid].css",
-            "class": "View",
-            "module": "View"
-        },
-        {
-            "file": "view.js",
-            "line": 289,
             "description": "Create or get a view",
             "itemtype": "method",
             "name": "view",
@@ -1260,23 +1186,23 @@
     "warnings": [
         {
             "message": "Missing item type\nEvents collection",
-            "line": " mootor.js:31"
+            "line": " event.js:20"
         },
         {
             "message": "Missing item type\nAdd event to collection",
-            "line": " mootor.js:37"
+            "line": " event.js:26"
         },
         {
             "message": "Missing item type\nDispatch event",
-            "line": " mootor.js:50"
+            "line": " event.js:37"
         },
         {
             "message": "Missing item type\nViews collection",
-            "line": " view.js:56"
+            "line": " view.js:62"
         },
         {
             "message": "Missing item type\nCurrent active view",
-            "line": " view.js:62"
+            "line": " view.js:68"
         }
     ]
 }

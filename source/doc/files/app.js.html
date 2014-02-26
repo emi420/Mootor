@@ -154,6 +154,22 @@
     App = Mootor.App = function(options) {
     };
 
+    // Private static 
+    
+    $.extend(App, {
+  
+      /**
+        * The application&#x27;s version number
+        * Note: It&#x27;s not Mootor version, this value is defined in application code, not framework code.
+        *
+        * @property version
+        * @type Strign
+        */
+        _version: window.undefined,
+
+        _settings: {}
+    });
+
     // Public methods
 
     App.prototype = {
@@ -166,19 +182,37 @@
         * @type array
         */
         history: [],
+       
+
+        /**
+        * The application&#x27;s version number
+        * Note: It&#x27;s not Mootor version, this value is defined in application code, not framework code.
+        *
+        * @method version
+        * @param {String} [version] The version number or name
+        * @return {String} Version number or name
+        */
+        version: function(version) {
+            if (version !== undefined) {
+                App._version = version;
+            }
+            return App._version;
+        },
 
         /**
         * Application settings
         * If called with a key, returns the value. If called with key and value, sets value to key.
         *
         * @method settings
-        * @param {String} key The name of the setting\
-        * @chainable
+        * @param {String} key The name of the setting
         * @param {object} [value] The value of the setting
         * @return object the setting value
         */
         settings: function(key, value) {
-            return this;            
+            if (value !== undefined) {
+                App._settings[key] = value;
+            }
+            return App._settings[key];
         },
 
         /**
@@ -186,11 +220,53 @@
         *
         * @method go
         * @chainable
-        * @param {String} id The id of the view
+        * @param {String} url The url to go
         * @return Route
         */
-        go: function(id) {
-            return this;
+        go: function(url) {
+            var router,
+                view,
+                currentView,
+                app,
+                stateObj;
+            
+            app = m.app;
+            router = app.route(url);
+            
+            if (router !== undefined) {
+                
+                currentView = App._currentView;
+        
+                if (currentView !== undefined) {
+                    Event.dispatch(&quot;View:beforeUnload:&quot; + currentView.id, currentView);
+                }
+
+                view = App._currentView = router.view;
+
+                if (currentView !== undefined) {
+                    Event.dispatch(&quot;View:unload:&quot; + currentView.id, currentView);
+                }
+
+                Event.dispatch(&quot;View:beforeLoad:&quot; + view.id, view);            
+            
+                stateObj = { view: view.id };
+                
+                if (url !== &quot;&quot;) {
+                    history.pushState(stateObj, view.id, url);
+                } else {
+                    history.pushState(stateObj, view.id, window.location.pathname);                    
+                }
+            
+                Event.dispatch(&quot;App:go&quot;, this);
+                Event.dispatch(&quot;View:load:&quot; + view.id, view);
+                Event.dispatch(&quot;View:load&quot;, view);
+            
+            } else {
+                throw(new Error(&quot;Route &quot; + url + &quot; is not defined&quot;));
+            }
+            
+            
+            return router;
         },        
 
         /**
@@ -215,17 +291,6 @@
             return this;
         },        
 
-        /**
-        * Returns a router instance
-        *
-        * @method router
-        * @chainable
-        * @return Router
-        */
-        router: function(id) {
-            return this;
-        },
-        
         /**
         * Set callbacks for app events
         * @method on
@@ -255,8 +320,8 @@
         */
         init: function() {
             var self = this;
-            Event.dispatch(&quot;App:init&quot;, {self: self, options: App._options});   
-            this.init = function() { return this };
+            Event.dispatch(&quot;App:init&quot;, self);   
+            this.init = function() { return self };
             return this;
         }
         
@@ -282,6 +347,8 @@
         * @param {Array} [views] A list of view names to be initialized
         * @return App
         */
+        // TODO: extend zepto to use other container than body
+        // example: $(&quot;#myDiv&quot;).app(...)
         app: function(options) {
             if (App.app === undefined) {
                 App.app = new App(options);

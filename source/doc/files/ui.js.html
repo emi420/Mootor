@@ -140,11 +140,10 @@
     &quot;use strict&quot;;
 
     var UI;
-
+    
     // Private constructors
 
     UI = Mootor.UI = function() {
-        // code here
     };
 
     // Private static methods and properties
@@ -152,7 +151,7 @@
     $.extend(UI, {
         // code here
     });
-
+    
     // Public methods
 
     $.extend(UI.prototype, {
@@ -164,7 +163,7 @@
         * @return {UI}
         */
         show: function() {
-            
+            this.$el.removeClass(&quot;m-hidden&quot;);
         },
 
         /**
@@ -174,7 +173,7 @@
         * @return {UI}
         */
         hide: function() {
-            
+            this.$el.addClass(&quot;m-hidden&quot;);
         }
     });
         
