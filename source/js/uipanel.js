@@ -23,34 +23,30 @@
     Event = Mootor.Event; 
     View = Mootor.View;   
 
+     //TODO: This number must match the $transtionDuration variable in the SCSS
+    var transitionDuration = 500; 
+
     // Event handlers
     
     Event.on("UIApp:init", function(self) {
-        var width = self.el.offsetWidth,
-            uiapp = self;
-        self.$el.css("width", width * 2);
+        var uiapp = self;
 
-        self.$el.css("-webkit-transform","translateX(0)");
-        self.$el.css("-moz-transform","translateX(0)");
-
-        self.$el.addClass("m-transition-slide");
+        self.$el.addClass("m-transition-hslide m-double-width");
+        self.$el.addClass("m-transition-hslide-right").removeClass("m-transition-hslide-left");
 
         Event.on("View:load", function(self) {
-            var width = uiapp.el.offsetWidth;
 
-            uiapp.$el.addClass("m-transition-slide");
+            uiapp.$el.addClass("m-transition-hslide");
 
-            uiapp.$el.css("-webkit-transform","translateX(-100%)");
-            uiapp.$el.css("-moz-transform","translateX(-100%)");
+            uiapp.$el.addClass("m-transition-hslide-left").removeClass("m-transition-hslide-right");
 
             window.setTimeout(function() {
-                uiapp.$el.removeClass("m-transition-slide");
+                uiapp.$el.removeClass("m-transition-hslide");
 
-                uiapp.$el.css("-webkit-transform", "translateX(0)");
-                uiapp.$el.css("-moz-transform", "translateX(0)");
+                uiapp.$el.addClass("m-transition-hslide-right").removeClass("m-transition-hslide-left");
 
-                self.ui.$el.css("left", "0px");
-            }, 500);
+                self.ui.$el.addClass("m-panel-position-left m-full-width").removeClass("m-panel-position-right m-half-width");
+            }, transitionDuration);
         }); 
 
     });
@@ -75,8 +71,6 @@
         var width = m.app.ui.el.offsetWidth;
         self.panel.el.innerHTML = Mootor.View._getHtmlPath(self.view);
 
-        m.app.ui.$el.css("width", width + "px");
-
         $("head").append(View._get(self.view.id).script);
         
         Event.dispatch("View:getScript:" + self.view.id, self.view)
@@ -85,17 +79,24 @@
         // on m.app.go
 
         Event.on("View:unload:" + self.view.id, function(self) {
-            self.ui.panel.$el.css("left", 0);
+            self.ui.panel.$el.addClass("m-panel-position-left m-full-width").removeClass("m-panel-position-right m-half-width");
             setTimeout(function() {
                 if (Mootor.App._currentView !== self) {
                     self.ui.panel.hide();
                 }
-                m.app.ui.$el.css("width", width + "px");
-            },500);
+          
+                m.app.ui.$el.addClass("m-full-width").removeClass("m-double-width");
+            },transitionDuration);
         }); 
         
         Event.on("View:load:" + self.view.id, function(self) {
-            self.ui.panel.$el.css("left", width);
+            self.ui.panel.$el.addClass("m-panel-position-right").removeClass("m-panel-position-left");
+            var visiblePanels = $(".m-panel:not(.m-hidden)").length;
+            console.log("visiblePanels",visiblePanels);
+
+            if ( visiblePanels === 0 ) {
+                self.ui.panel.$el.addClass("m-half-width").removeClass("m-full-width");
+            }
             self.ui.panel.show();
         }); 
     });
@@ -120,8 +121,7 @@
         _init: function(uiview, self) {
 
             var $el,
-                el,
-                width;
+                el;
             
             el = self.el = uiview.el = document.createElement("div");
             $el = uiview.$el = self.$el = $(el);
@@ -129,10 +129,6 @@
 
             el.setAttribute("class", "m-panel");
 
-            // Fixed panel width
-            width = m.app.ui.el.offsetWidth;
-            $el.width(width + "px");
-            
             m.app.ui.$el.append(el);            
             
             self.hide();

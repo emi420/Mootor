@@ -6,9 +6,9 @@
  */
 
 @import "compass/reset/utilities";
-@import "compass/css3/transition";
 
-$transitionDuration: 1s;
+$transitionDuration: 0.5s;
+@import "transitions";
 
 .m-html {
 	@include reset-box-model;
@@ -35,21 +35,6 @@ $transitionDuration: 1s;
 
 	width: 100%;
 	height: 100%;
-}
-
-.m-transition-slide {
-    -webkit-transition-duration: .3s;
-    -webkit-timing-function: ease-out;
-    -moz-transition-duration: .3s;
-    -moz-timing-function: ease-out;
-    transition-duration: .3s;
-    timing-function: ease-out;
-}
-
-.m-transition-none {
-    -webkit-transition: all 0;
-    -moz-transition: all 0;
-    transition: all 0;
 }
 
 .m-hidden {
