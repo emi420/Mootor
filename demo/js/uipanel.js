@@ -24,7 +24,7 @@
     View = Mootor.View;   
 
      //TODO: This number must match the $transtionDuration variable in the SCSS
-    var transitionDuration = 500; 
+    var transitionDuration = 300; 
 
     // Event handlers
     
