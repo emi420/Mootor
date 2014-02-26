@@ -15,6 +15,9 @@
     
     $("#btnLogin").on("tap", goToTestview);
     $("#btnLogin").on("click", goToTestview);
+    $("#btnLogin").on("touchend", function(e) {
+        e.preventDefault();
+    });
 
 
 }(window.$));
