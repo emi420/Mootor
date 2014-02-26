@@ -1,4 +1,3 @@
-@charset "UTF-8";
 /**
  * @summary Mootor CSS
  * @author Emilio Mariscal (emi420 [at] gmail.com)
@@ -23,7 +22,7 @@
   width: 100%;
   height: 100%;
 }
-/* line 52, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 52, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 .m-app div, .m-app span, .m-app applet, .m-app object, .m-app iframe,
 .m-app h1, .m-app h2, .m-app h3, .m-app h4, .m-app h5, .m-app h6, .m-app p, .m-app blockquote, .m-app pre,
 .m-app a, .m-app abbr, .m-app acronym, .m-app address, .m-app big, .m-app cite, .m-app code,
@@ -44,27 +43,27 @@
   font-size: 100%;
   vertical-align: baseline;
 }
-/* line 55, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 55, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 .m-app table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-/* line 57, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 57, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 .m-app caption, .m-app th, .m-app td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
-/* line 59, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 59, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 .m-app q, .m-app blockquote {
   quotes: none;
 }
-/* line 103, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 103, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 .m-app q:before, .m-app q:after, .m-app blockquote:before, .m-app blockquote:after {
   content: "";
   content: none;
 }
-/* line 61, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 61, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 .m-app a img {
   border: none;
 }
