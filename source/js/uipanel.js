@@ -50,7 +50,7 @@
                 uiapp.$el.css("-moz-transform", "translateX(0)");
 
                 self.ui.$el.css("left", "0px");
-            }, 300);
+            }, 500);
         }); 
 
     });
@@ -74,6 +74,9 @@
 
         self.panel.el.innerHTML = Mootor.View._getHtmlPath(self.view);
 
+        var width = m.app.ui.el.offsetWidth;
+        m.app.ui.$el.css("width", width + "px");
+
         $("head").append(View._get(self.view.id).script);
         
         Event.dispatch("View:getScript:" + self.view.id, self.view)
@@ -84,16 +87,14 @@
         Event.on("View:unload:" + self.view.id, function(self) {
             self.ui.panel.$el.css("left", 0);
             setTimeout(function() {
-                var width = document.body.offsetWidth;
                 if (Mootor.App._currentView !== self) {
                     self.ui.panel.hide();
                 }
                 m.app.ui.$el.css("width", width + "px");
-            },300);
+            },500);
         }); 
         
         Event.on("View:load:" + self.view.id, function(self) {
-            var width = document.body.offsetWidth;
             self.ui.panel.$el.css("left", width);
             self.ui.panel.show();
         }); 
