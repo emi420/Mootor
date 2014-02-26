@@ -221,8 +221,6 @@
         * @param {Array} [views] A list of view names to be initialized
         * @return App
         */
-        // TODO: extend zepto to use other container than body
-        // example: $("#myDiv").app(...)
         app: function(options) {
             if (App.app === undefined) {
                 App.app = new App(options);

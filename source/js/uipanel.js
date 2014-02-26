@@ -72,9 +72,9 @@
             panel: new UIPanel(self)
         })
 
+        var width = m.app.ui.el.offsetWidth;
         self.panel.el.innerHTML = Mootor.View._getHtmlPath(self.view);
 
-        var width = m.app.ui.el.offsetWidth;
         m.app.ui.$el.css("width", width + "px");
 
         $("head").append(View._get(self.view.id).script);
@@ -130,7 +130,7 @@
             el.setAttribute("class", "m-panel");
 
             // Fixed panel width
-            width = document.body.offsetWidth;
+            width = m.app.ui.el.offsetWidth;
             $el.width(width + "px");
             
             m.app.ui.$el.append(el);            

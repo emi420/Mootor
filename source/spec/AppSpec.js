@@ -19,7 +19,9 @@ var createApp = function(done) {
         panel = view.ui;
         
         app.route("#index.html$", view);
-
+        m.app.route("^$", view);
+        m.app.route("^#welcome/(.*)", m.app.view("testview"));
+    
         view.on("init", function() {
             window._testViewOnInit = true;
         });
