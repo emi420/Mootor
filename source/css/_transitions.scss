@@ -10,7 +10,7 @@
 }
 
 .m-transition-hslide-left {
-	@include transform(translateX(-100%))
+	@include transform(translateX(-50%))
 }
 
 .m-transition-hslide-right {

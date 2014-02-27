@@ -8,6 +8,7 @@
 
 .m-full-width {
     width: 100%;
+    border: 1px solid green;
 }
 
 .m-half-width {
@@ -19,7 +20,7 @@
 }
 
 .m-position-right {
-    left: 100%;
+    float: right !important;
 }
 
 .m-doc {
