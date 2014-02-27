@@ -185,11 +185,11 @@ header {
 header h1 {
   text-align: center;
   color: #f1f1f1;
-  font-weight: bold;
+  font-weight: bold !important;
   line-height: 55px !important;
 }
 
-/* line 51, ../../source/css/mootor.scss */
+/* line 52, ../../source/css/mootor.scss */
 .m-panel {
   padding-top: 55px !important;
 }
