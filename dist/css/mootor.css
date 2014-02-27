@@ -73,21 +73,38 @@
   position: relative;
   width: 100%;
   height: 100%;
+  box-sizing: border-box;
+  padding-bottom: 55px;
 }
-/* line 7, ../../source/css/_panel.scss */
+/* line 9, ../../source/css/_panel.scss */
 .m-app .m-views-container .m-panel {
-  position: absolute;
+  position: relative;
   width: 100%;
   height: 100%;
+  border: 1px solid red;
   top: 0;
+  -webkit-overflow-scrolling: touch;
   overflow-x: hidden;
+  margin-bottom: 55px;
 }
-/* line 17, ../../source/css/_panel.scss */
+/* line 23, ../../source/css/_panel.scss */
 .m-app .m-views-container .m-panel {
   -webkit-transition-duration: 0;
   -webkit-backface-visibility: hidden;
   -webkit-transform: translate3d(0, 0, 0);
   -webkit-transform: translateZ(0);
+}
+/* line 1, ../../source/css/_header.scss */
+.m-app header {
+  background: #072F52;
+  height: 55px;
+}
+/* line 5, ../../source/css/_header.scss */
+.m-app header h1 {
+  text-align: center;
+  color: #f1f1f1;
+  font-weight: bold !important;
+  line-height: 55px !important;
 }
 /* line 4, ../../source/css/_transitions.scss */
 .m-app .m-transition-none {
@@ -165,31 +182,7 @@
   height: calc(100% - 4em);
 }
 
-/* line 32, ../../source/css/mootor.scss */
+/* line 33, ../../source/css/mootor.scss */
 body {
   font-family: arial;
-}
-
-/* line 36, ../../source/css/mootor.scss */
-header {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: #072F52;
-  height: 55px;
-  z-index: 9999;
-}
-/* line 44, ../../source/css/mootor.scss */
-header h1 {
-  text-align: center;
-  color: #f1f1f1;
-  font-weight: bold !important;
-  line-height: 55px !important;
-}
-
-/* line 52, ../../source/css/mootor.scss */
-.m-panel {
-  top: 55px !important;
-  bottom: 20px;
 }

@@ -3,13 +3,19 @@
 
     width: 100%;
     height: 100%;
+    box-sizing: border-box;
+    padding-bottom: 55px;
 
     .m-panel {
-        position: absolute;
+        position: relative;
         width: 100%;
         height: 100%;
+        border: 1px solid red;
         top: 0; 
+        -webkit-overflow-scrolling: touch;
         overflow-x: hidden;
+        margin-bottom: 55px;
+
     }
 
     // Hacks

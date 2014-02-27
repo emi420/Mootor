@@ -23,6 +23,7 @@
 
 	@import "config";
 	@import "panel";
+	@import "header";
 	@import "transitions";
 	@import "utils";
 }
@@ -31,25 +32,4 @@
 
 body {
     font-family: arial;
-}
-
-header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: #072F52;
-    height: 55px;
-    z-index: 9999;
-    h1 {
-        text-align: center;
-        color: #f1f1f1;
-        // FIXME CHECK
-        font-weight: bold !important;
-        line-height: 55px !important;
-    }
-}
-.m-panel {
-	top: 55px !important;
-	bottom: 20px;
 }
