@@ -5434,7 +5434,7 @@ i.massive.basic.icon {
 /*--------------
       Hover
 ---------------*/
-
+/*
 .ui.button:hover {
   background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0.08)));
   background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.08));
@@ -5450,18 +5450,18 @@ i.massive.basic.icon {
 .ui.button.hover .icon {
   opacity: 0.85;
 }
-
+*/
 /*--------------
       Down
 ---------------*/
-
+/*
 .ui.button:active,
 .ui.active.button:active {
   background-color: #F1F1F1;
   color: rgba(0, 0, 0, 0.7);
   -webkit-box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.05) inset !important;
   box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.05) inset !important;
-}
+}*/
 
 /*--------------
     Loading
@@ -5549,7 +5549,7 @@ i.massive.basic.icon {
   right: -100%;
   margin-top: -0.55em;
 }
-
+/*
 .ui.animated.button:hover .visible.content {
   left: auto;
   right: 200%;
@@ -5558,7 +5558,7 @@ i.massive.basic.icon {
 .ui.animated.button:hover .hidden.content {
   left: auto;
   right: 0%;
-}
+}*/
 
 /* Vertical */
 
@@ -5580,7 +5580,7 @@ i.massive.basic.icon {
   left: 0%;
   right: auto;
 }
-
+/*
 .ui.vertical.animated.button:hover .visible.content {
   -webkit-transform: translateY(200%);
   -ms-transform: translateY(200%);
@@ -5591,7 +5591,7 @@ i.massive.basic.icon {
 .ui.vertical.animated.button:hover .hidden.content {
   top: 50%;
   right: auto;
-}
+}*/
 
 /* Fade */
 
@@ -5618,7 +5618,7 @@ i.massive.basic.icon {
   -ms-transform: scale(1.2);
   transform: scale(1.2);
 }
-
+/*
 .ui.fade.animated.button:hover .visible.content {
   left: auto;
   right: auto;
@@ -5635,7 +5635,7 @@ i.massive.basic.icon {
   -webkit-transform: scale(1);
   -ms-transform: scale(1);
   transform: scale(1);
-}
+}*?
 
 /*-------------------
        Primary
@@ -5646,7 +5646,7 @@ i.massive.basic.icon {
   background-color: #D95C5C;
   color: #FFFFFF;
 }
-
+/*
 .ui.primary.buttons .button:hover,
 .ui.primary.button:hover,
 .ui.primary.buttons .active.button,
@@ -5659,7 +5659,7 @@ i.massive.basic.icon {
 .ui.primary.button:active {
   background-color: #D24B4C;
   color: #FFFFFF;
-}
+}*?
 
 /*-------------------
       Secondary
@@ -5670,7 +5670,7 @@ i.massive.basic.icon {
   background-color: #00B5AD;
   color: #FFFFFF;
 }
-
+/*
 .ui.secondary.buttons .button:hover,
 .ui.secondary.button:hover,
 .ui.secondary.buttons .active.button,
@@ -5683,7 +5683,7 @@ i.massive.basic.icon {
 .ui.secondary.button:active {
   background-color: #00847E;
   color: #FFFFFF;
-}
+}*?
 
 /*-------------------
        Social
@@ -6594,7 +6594,7 @@ i.massive.basic.icon {
   background-color: #6ECFF5;
   color: #FFFFFF;
 }
-
+/*
 .ui.blue.buttons .button:hover,
 .ui.blue.button:hover,
 .ui.blue.buttons .active.button,
@@ -6607,7 +6607,7 @@ i.massive.basic.icon {
 .ui.blue.button:active {
   background-color: #0AA5DF;
   color: #FFFFFF;
-}
+}*/
 
 /*--- Purple ---*/
 
