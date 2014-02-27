@@ -123,9 +123,7 @@
             
             el = self.el = uiview.el = document.createElement("div");
             $el = uiview.$el = self.$el = $(el);
-            $el.addClass("m-panel");
-
-            el.setAttribute("class", "m-panel");
+            $el.addClass("m-panel overthrow");
 
             m.app.ui.$el.append(el);            
             
