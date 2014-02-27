@@ -12,8 +12,7 @@
 
     "use strict";
     
-    var Mootor,
-        Event;
+    var Event;
     
     Event = Mootor.Event = {
         
