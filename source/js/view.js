@@ -20,6 +20,7 @@
     "use strict";
     
     var View,
+    
         Event,
         App;
         

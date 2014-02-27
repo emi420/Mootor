@@ -12,8 +12,9 @@
 
     "use strict";
 
-    var UI,
-        UIPanel,
+    var UIPanel,
+        
+        UI,
         Event,
         View,
         transitionDuration;
@@ -63,7 +64,7 @@
         })
 
         var width = m.app.ui.el.offsetWidth;
-        self.panel.el.innerHTML = Mootor.View._getHtmlPath(self.view);
+        self.panel.el.innerHTML = View._getHtmlPath(self.view);
 
         $("head").append(View._get(self.view.id).script);
         

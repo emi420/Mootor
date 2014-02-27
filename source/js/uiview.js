@@ -13,15 +13,14 @@
 
     "use strict";
 
-    var UI,
-        UIView,
-        Event,
-        View;
+    var UIView,
+    
+        UI,
+        Event;
 
     // Dependences
 
     Event = Mootor.Event;
-    View = Mootor.View;
     UI = Mootor.UI;
         
     // Private constructors

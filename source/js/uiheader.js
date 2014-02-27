@@ -13,8 +13,9 @@
 
     "use strict";
 
-    var UINavBar,
-        UIHeader;
+    var UIHeader,
+    
+        UINavBar;
 
     // Dependences
 

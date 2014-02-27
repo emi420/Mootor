@@ -13,8 +13,9 @@
 
     "use strict";
 
-    var UI,
-        UIApp,
+    var UIApp,
+    
+        UI,
         App;
 
     // Dependences
@@ -30,8 +31,10 @@
             app = m.app,
             self = this;
 
-        if (Mootor.App._options.container) {
-            $container = Mootor.App._options.container;
+        App = Mootor.App;
+
+        if (App._options.container) {
+            $container = App._options.container;
         }
         else {
             $("html").addClass("m-html");
@@ -48,13 +51,14 @@
     };
     
     // Event handlers
+    
     Event.on("App:init", function(self) {
         $.extend(self, {
            ui: new UIApp()
         });
     });    
 
-    // Prototypal inheritance
+    // Extends from UI
 
     $.extend(UIApp.prototype, UI.prototype);
 
@@ -62,17 +66,6 @@
 
     $.extend(UIApp.prototype, {
         
-        /**
-        * Show/Hide the loading indicator
-        *
-        * @method loading
-        * @param {Boolean} [show] Show or hide the loading indicator
-        * @return {Boolean}
-        */
-        loading: function(show) {
-            
-        }
-
     });        
 
 }(window.$, window.Mootor));

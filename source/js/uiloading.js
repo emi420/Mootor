@@ -14,12 +14,15 @@
     // Force strict mode for ECMAScript
     "use strict";
 
-    var UI,
-        UILoading;
+    var UILoading,
+        
+        UIApp,
+        UI;
 
     // Dependences
 
     UI = Mootor.UI;
+    UIApp = Mootor.UIApp;
 
     // Private constructors
 
@@ -54,5 +57,22 @@
             
         }
     });      
+    
+
+    $.extend(UIApp.prototype, {
+        
+        /**
+        * Show/Hide the loading indicator
+        *
+        * @method loading
+        * @for UIApp
+        * @param {Boolean} [show] Show or hide the loading indicator
+        * @return {Boolean}
+        */
+        loading: function(show) {
+            
+        }
+
+    });   
       
 }(window.$, window.Mootor));

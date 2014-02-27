@@ -40,18 +40,6 @@
         url: "",
 
         /**
-        * An array with the parameters passed to the page
-        * If called with no parameters, it returns the currently set params in this route.
-        *
-        * @method params
-        * @param {array} [params] - An array with the parameters passed to the page
-        * @return array
-        */
-        params: function(params) {
-
-        },
-
-        /**
         * The view that implements this route
         * If called with no parameters, it returns the currently set view in this route.
         *

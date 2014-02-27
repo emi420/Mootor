@@ -191,5 +191,5 @@ header h1 {
 
 /* line 52, ../../source/css/mootor.scss */
 .m-panel {
-  padding-top: 55px !important;
+  top: 55px !important;
 }

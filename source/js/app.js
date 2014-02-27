@@ -8,6 +8,7 @@
     "use strict";
 
     var App,
+    
         Event;
 
     // Dependencies
@@ -84,8 +85,10 @@
         */
         settings: function(key, value) {
             if (value !== undefined) {
+                // this.settings[key] = value;
                 App._settings[key] = value;
             }
+            // return this.settings[key] = value;
             return App._settings[key];
         },
 
