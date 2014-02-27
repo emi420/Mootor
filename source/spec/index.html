@@ -3,9 +3,6 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-  <meta content='width=device-width,initial-scale=1.0,user-scalable=no' name='viewport'>
-  <meta content='yes' name='apple-mobile-web-app-capable'>
-
   <meta name="viewport" content="initial-scale = 1.0, user-scalable = no">
   <meta name="apple-mobile-web-app-capable" content="yes" />
 
@@ -26,39 +23,31 @@
   <script type="text/javascript" src="../js/router.js"></script>
   <script type="text/javascript" src="../js/route.js"></script>
 
-  <style>
-  .m-app .m-panel {
-      opacity: 1;
-  }
-  </style>
 </head>
 
 <body>
     
-    <header></header>
+    <header>
+        <h1>Test app</h1>
+    </header>
     
     <script type="text/javascript">
     
-    (function() {
+        (function() {
 
-        "use strict";
+            "use strict";
 
-        var app = m.app({
-            views: [
-                "index",
-                "testview"
-            ]
-        }).on("init", function() {
-            console.log("app init")
-        });
+            var app = m.app({
+                views: [
+                    "index",
+                    "testview"
+                ]
+            }).init();
     
-        m.app.route("^$", m.app.view("index"));
-        m.app.route("^#welcome/(.*)", m.app.view("testview"));
-    
-        app.init();
-
+            app.route("^$", app.view("index"));
+            app.route("^#welcome/(.*)", app.view("testview"));
         
-    }());
+        }());
     
     </script>
 

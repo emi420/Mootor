@@ -1135,9 +1135,9 @@ window.$ === undefined && (window.$ = Zepto)
     return compatible(event)
   }
 
-})(Zepto)
+})(Zepto);
 
-;(function($){
+(function($){
   var jsonpID = 0,
       document = window.document,
       key,
@@ -1475,9 +1475,9 @@ window.$ === undefined && (window.$ = Zepto)
     serialize(params, obj, traditional)
     return params.join('&').replace(/%20/g, '+')
   }
-})(Zepto)
+})(Zepto);
 
-;(function($){
+(function($){
   $.fn.serializeArray = function() {
     var result = [], el
     $([].slice.call(this.get(0).elements)).each(function(){
@@ -1512,9 +1512,9 @@ window.$ === undefined && (window.$ = Zepto)
     return this
   }
 
-})(Zepto)
+})(Zepto);
 
-;(function($){
+(function($){
   // __proto__ doesn't exist on IE<11, so redefine
   // the Z function to use object extension instead
   if (!('__proto__' in {})) {
@@ -1547,12 +1547,13 @@ window.$ === undefined && (window.$ = Zepto)
       }
     }
   }
-})(Zepto)
+})(Zepto);
+
 //     Zepto.js
 //     (c) 2010-2014 Thomas Fuchs
 //     Zepto.js may be freely distributed under the MIT license.
 
-;(function($){
+(function($){
   var touch = {},
     touchTimeout, tapTimeout, swipeTimeout, longTapTimeout,
     longTapDelay = 750,
@@ -1712,7 +1713,8 @@ window.$ === undefined && (window.$ = Zepto)
     'doubleTap', 'tap', 'singleTap', 'longTap'].forEach(function(eventName){
     $.fn[eventName] = function(callback){ return this.on(eventName, callback) }
   })
-})(Zepto)
+})(Zepto);
+
 /**
 * The Mootor module handles the creation of Namespaces and global objects
 *
