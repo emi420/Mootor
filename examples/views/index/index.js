@@ -1,27 +1,26 @@
 (function ($) {
+    
+    "use strict";
 
-    var app = $.app();
-
-    $.extend(app.getView('index'), {
-
-        title: "Index",
-
-        onInit: function() {
-
-            console.log("View 'index' initialized.")
-            
-            app.go("index");
-
-			$("#buttonGoToView1").click(function() {
-                app.go("view1");
-			})		
-
-        },
-
-        onLoad: function() {
-            console.log("View 'index' loaded.")
-        }
-
+    var view = m.app.view("index");
+    
+    view.on("load", function() {
+        // code here
     });
+    
+    var goToTestview = function() {
+        var email = $("#inputEmail")[0].value;
+        m.app.go("#welcome/" + email );
+    }
+    
+    $("#btnLogin").on("tap", function() {
+        $("#btnLogin").off("click", goToTestview);
+        goToTestview();
+    });
+    $("#btnLogin").on("click", goToTestview);
+    $("#btnLogin").on("touchend", function(e) {
+        e.preventDefault();
+    });
+
 
 }(window.$));
