@@ -29,6 +29,10 @@
 
 // TODO: move this code to another file
 
+body {
+    font-family: arial;
+}
+
 header {
     position: absolute;
     top: 0;
@@ -37,6 +41,13 @@ header {
     background: #072F52;
     height: 55px;
     z-index: 9999;
+    h1 {
+        text-align: center;
+        color: #f1f1f1;
+        // FIXME CHECK
+        font-weight: bold !important;
+        line-height: 55px !important;
+    }
 }
 .m-panel {
 	top: 55px !important;

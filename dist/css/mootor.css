@@ -166,6 +166,11 @@
 }
 
 /* line 32, ../../source/css/mootor.scss */
+body {
+  font-family: arial;
+}
+
+/* line 36, ../../source/css/mootor.scss */
 header {
   position: absolute;
   top: 0;
@@ -175,8 +180,15 @@ header {
   height: 55px;
   z-index: 9999;
 }
+/* line 44, ../../source/css/mootor.scss */
+header h1 {
+  text-align: center;
+  color: #f1f1f1;
+  font-weight: bold !important;
+  line-height: 55px !important;
+}
 
-/* line 41, ../../source/css/mootor.scss */
+/* line 52, ../../source/css/mootor.scss */
 .m-panel {
   top: 55px !important;
   bottom: 20px;
