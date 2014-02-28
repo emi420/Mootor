@@ -82,12 +82,13 @@
 .m-app .m-views-container .m-panel {
   position: relative;
   height: 100%;
+  width: 50%;
   top: 0;
   -webkit-overflow-scrolling: touch;
   overflow-x: hidden;
   float: left;
 }
-/* line 21, ../../source/css/_panel.scss */
+/* line 22, ../../source/css/_panel.scss */
 .m-app .m-views-container .m-panel {
   -webkit-transition-duration: 0;
   -webkit-backface-visibility: hidden;
@@ -98,8 +99,10 @@
 .m-app header {
   background: #072F52;
   height: 55px;
+  position: relative;
+  z-index: 100;
 }
-/* line 5, ../../source/css/_header.scss */
+/* line 7, ../../source/css/_header.scss */
 .m-app header h1 {
   text-align: center;
   color: #f1f1f1;
@@ -147,34 +150,29 @@
 /* line 9, ../../source/css/_utils.scss */
 .m-app .m-full-width {
   width: 100%;
-  border: 1px solid green;
 }
-/* line 14, ../../source/css/_utils.scss */
-.m-app .m-half-width {
-  width: 50%;
-}
-/* line 18, ../../source/css/_utils.scss */
+/* line 13, ../../source/css/_utils.scss */
 .m-app .m-position-left {
   left: 0;
 }
-/* line 22, ../../source/css/_utils.scss */
+/* line 17, ../../source/css/_utils.scss */
 .m-app .m-position-right {
   float: right !important;
 }
-/* line 27, ../../source/css/_utils.scss */
+/* line 22, ../../source/css/_utils.scss */
 .m-app .m-doc, .m-app .m-doc * {
   border: 1px solid black !important;
   padding: 0.5em !important;
   margin: 1em !important;
   background: rgba(0, 0, 0, 0.1) !important;
 }
-/* line 35, ../../source/css/_utils.scss */
+/* line 30, ../../source/css/_utils.scss */
 .m-app .m-doc.m-html,
 .m-app .m-doc .m-app {
   width: calc(100% - 4em);
   height: calc(100% - 4em);
 }
-/* line 40, ../../source/css/_utils.scss */
+/* line 35, ../../source/css/_utils.scss */
 .m-app .m-doc.m-html .m-views-container,
 .m-app .m-doc.m-html .m-panel,
 .m-app .m-doc .m-app .m-views-container,

@@ -14836,11 +14836,13 @@ a.ui.nag {
             Sidebar
 *******************************/
 
+/* DISABLED BODY TRANSITION FOR MOOTOR DEMO
 body {
   -webkit-transition: margin 0.3s ease, -webkit-transform 0.3s ease;
   transition: margin 0.3s ease,
     transform 0.3s ease;
 }
+*/
 
 .ui.sidebar {
   position: fixed;
