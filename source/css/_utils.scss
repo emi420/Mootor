@@ -10,16 +10,12 @@
     width: 100%;
 }
 
-.m-half-width {
-    width: 50%;
-}
-
 .m-position-left {
     left: 0;
 }
 
 .m-position-right {
-    left: 100%;
+    float: right !important;
 }
 
 .m-doc {

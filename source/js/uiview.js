@@ -16,25 +16,68 @@
     var UIView,
     
         UI,
-        Event;
+        Event,
+        UIPanel,
+        View;
 
     // Dependences
 
     Event = Mootor.Event;
     UI = Mootor.UI;
+    UIPanel = Mootor.UIPanel;
+    View = Mootor.View;
+
+    // Event handlers
+    
+    Event.on("View:startInit", function(self) {
+        console.log("viewstartinit",self);
+        self.ui = new UIView(self);
+    });
         
     // Private constructors
 
     UIView = Mootor.UIView = function(view) {
-        this.view = view;
-        Event.dispatch("UIView:init", this);
+        var self = this;
+
+        self.view = view;
+
+
+        self.panel = new UIPanel();
+        self.panel.hide();
+
+       //There is a tricky moment when HTML's are already loaded before UIViews are initialized
+        if (View._getHtmlPath(view) !== window.undefined) {
+            self.panel.el.innerHTML = View._getHtmlPath(view);                
+        }
+        else {
+            Event.on("View:getHtml:" + view.id, function(view) {
+                self.panel.el.innerHTML = View._getHtmlPath(view);
+            });
+        }
+
+        Event.on("View:load:" + view.id, function(view) {
+            self.panel.position("right").show();
+            m.app.ui.onTransitionEnd(function() {
+                self.panel.position("left");
+            });
+        });
+        
+        // on m.app.go
+        Event.on("View:unload:" + view.id, function(view) {
+            self.panel.position("left");
+            m.app.ui.onTransitionEnd(function() {
+                //This if is needed because on application start the first view is "unloaded" before it's loaded
+                if (Mootor.App._currentView !== view) {
+                    self.panel.hide();    
+                }
+                
+            });
+        }); 
+
+        Event.dispatch("UIView:init:" + view.id, self);
+
     };
 
-    // Event handlers
-    
-    Event.on("View:init", function(self) {
-        self.ui = new UIView(self);
-    });
 
     // Private static methods and properties
 

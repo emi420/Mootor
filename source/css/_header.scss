@@ -1,6 +1,8 @@
 header {
     background: #072F52;
     height: 55px;
+    position: relative;
+    z-index: 100;
 
     h1 {
         text-align: center;

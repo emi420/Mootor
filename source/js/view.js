@@ -37,7 +37,7 @@
             viewCount = views.length,
             i;            
             
-        Event.on("View:init:" + views[viewCount-1], function(self) {
+        Event.on("View:endInit:" + views[viewCount-1], function(self) {
            m.app.go(window.location.hash);
         });
         
@@ -81,16 +81,25 @@
         * @param {View} self View instance
         */
         _init: function(options, self) {
-            
-            // Load Html, Css and JavaScript
-            Event.on("View:getHtml:" + self.id, function(view) {
-                View._getScript(self);
-            })
+            View._collection[self.id] = {id: self.id, obj: self};
 
-            View._getHtml(self);
+            Event.dispatch("View:startInit", self)                
+
+            // Load Html, Css and JavaScript
             View._getCss(self);
             
-            View._collection[self.id] = {id: self.id, obj: self};
+            View._getHtml(self);
+            
+            Event.on("View:getHtml:" + self.id, function(view) {
+                View._getScript(self);
+
+                $("head").append(View._get(view.id).script);
+                
+                Event.dispatch("View:getScript:" + self.id, self)
+                Event.dispatch("View:endInit:" + self.id, self)
+            })
+
+
 
         },
 
@@ -110,6 +119,7 @@
                 path,
                 function(source) {
                     View._get(self.id).html = source;
+                    console.log("dispatch View:getHtml:" + self.id);
                     Event.dispatch("View:getHtml:" + self.id, self)
                 }
             );
@@ -136,8 +146,6 @@
             script.type = "text/javascript";
 
             View._get(self.id).script = script;
-
-            Event.dispatch("View:init", self)                
 
         },
 
