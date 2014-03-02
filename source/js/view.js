@@ -119,7 +119,6 @@
                 path,
                 function(source) {
                     View._get(self.id).html = source;
-                    console.log("dispatch View:getHtml:" + self.id);
                     Event.dispatch("View:getHtml:" + self.id, self)
                 }
             );

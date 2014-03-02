@@ -30,7 +30,6 @@
     // Event handlers
     
     Event.on("View:startInit", function(self) {
-        console.log("viewstartinit",self);
         self.ui = new UIView(self);
     });
         

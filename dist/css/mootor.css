@@ -117,10 +117,10 @@
 }
 /* line 8, ../../source/css/_transitions.scss */
 .m-app .m-transition-hslide {
-  -webkit-transition: -webkit-transform 2s ease-out;
-  -moz-transition: -moz-transform 2s ease-out;
-  -o-transition: -o-transform 2s ease-out;
-  transition: transform 2s ease-out;
+  -webkit-transition: -webkit-transform 0.3s ease-out;
+  -moz-transition: -moz-transform 0.3s ease-out;
+  -o-transition: -o-transform 0.3s ease-out;
+  transition: transform 0.3s ease-out;
 }
 /* line 12, ../../source/css/_transitions.scss */
 .m-app .m-transition-hslide-left {
