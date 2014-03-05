@@ -14,13 +14,52 @@
 
     var UIPanel,
         
-        UI;
+        UI,
+        View;
         
     // Dependences 
     
-    UI = Mootor.UI;    
+    UI = Mootor.UI;  
+    View = Mootor.View;
+    Event = Mootor.Event;  
 
     // Event handlers
+    
+    Event.on("UIView:init", function(self) {
+        var view = self.view;
+        
+        self.panel = new UIPanel();
+        self.panel.hide();
+
+        if (View._getHtmlPath(view) !== window.undefined) {
+            self.panel.el.innerHTML = View._getHtmlPath(view);                
+        }
+        else {
+            Event.on("View:getHtml:" + view.id, function(view) {
+                self.panel.el.innerHTML = View._getHtmlPath(view);
+            });
+        }
+
+        Event.on("View:load:" + view.id, function(view) {
+            self.panel.position("right").show();
+            m.app.ui.onTransitionEnd(function() {
+                self.panel.position("left");
+            });
+        });
+    
+        // on m.app.go
+        Event.on("View:unload:" + view.id, function(view) {
+            self.panel.position("left");
+            m.app.ui.onTransitionEnd(function() {
+                //This if is needed because on application start the first view is "unloaded" before it's loaded
+                if (Mootor.App._currentView !== view) {
+                    self.panel.hide();    
+                }
+            
+            });
+        }); 
+                
+    });
 
   
     // Private constructors

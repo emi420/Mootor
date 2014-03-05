@@ -97,6 +97,7 @@
                 
                 Event.dispatch("View:getScript:" + self.id, self)
                 Event.dispatch("View:endInit:" + self.id, self)
+                Event.dispatch("View:init:" + self.id, self)
             })
 
 

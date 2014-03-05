@@ -40,7 +40,7 @@
         * @property version
         * @type Strign
         */
-        _version: window.undefined,
+        _version: undefined,
 
         _settings: {}
     });
