@@ -37,7 +37,7 @@
         var self = this;
 
         self.view = view;
-        Event.dispatch("UIView:init", self);
+        UIView.dispatch("init", self);
 
     };
 
@@ -45,7 +45,12 @@
     // Private static methods and properties
 
     $.extend(UIView, {
-        
+        on: function(event, callback) {
+            Event.on("UIView:" + event, callback); 
+        },
+        dispatch: function(event, self) {
+            Event.dispatch("UIView:" + event, self);
+        }
     });
 
     // Public methods

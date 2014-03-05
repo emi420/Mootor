@@ -22,10 +22,18 @@
     UI = Mootor.UI;  
     View = Mootor.View;
     Event = Mootor.Event;  
+    UIView = Mootor.UIView;
 
     // Event handlers
     
-    Event.on("UIView:init", function(self) {
+    /*
+    UIView.on("init", function(self) ...
+    View.on("getHtml", function(self) ...
+    View.on("load", function(self) ...
+    View.on("unload", function(self) ...
+    */
+    
+    UIView.on("init", function(self) {
         var view = self.view;
         
         self.panel = new UIPanel();
