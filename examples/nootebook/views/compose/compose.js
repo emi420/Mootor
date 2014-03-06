@@ -55,7 +55,7 @@
             $.ajax({url:"https://dev.voolks.com/classes/note/",
                 data: JSON.stringify(note),
                 type: "POST",
-                headers: {"X-Voolks-Api-Key":"1234", "X-Voolks-App-Id":"1", "X-Voolks-Session-Id": m.app.settings("sessionId")}, 
+                headers: m.app.settings("headers"), 
                 success: processSaveNote,
                 error: processErrorNote
             });
@@ -64,7 +64,7 @@
             $.ajax({url:"https://dev.voolks.com/classes/note/",
                 data: JSON.stringify(note),
                 type: "PUT",
-                headers: {"X-Voolks-Api-Key":"1234", "X-Voolks-App-Id":"1", "X-Voolks-Session-Id": m.app.settings("sessionId")}, 
+                headers: m.app.settings("headers")}, 
                 success: processSaveNote,
                 error: processErrorNote 
             });

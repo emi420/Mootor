@@ -12,7 +12,7 @@
 
     function getRemoteNotes() {
         $.ajax({url:"https://dev.voolks.com/classes/note/", 
-            headers: {"X-Voolks-Api-Key":"1234", "X-Voolks-App-Id":"1", "X-Voolks-Session-Id": m.app.settings("sessionId")}, 
+            headers: m.app.settings("headers"), 
             success: processRemoteNotes
         });        
     }

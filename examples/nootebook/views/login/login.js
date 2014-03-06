@@ -28,6 +28,7 @@
         if (r.sessionId) {
             m.app.settings("sessionId",r.sessionId);
             m.app.settings("user",r.username);
+            m.app.settings("headers",{"X-Voolks-Api-Key":"1234", "X-Voolks-App-Id":"1", "X-Voolks-Session-Id": m.app.settings("sessionId")});
             goToList();
         }
 
