@@ -6,19 +6,26 @@
     
     console.log("view",view);
     view.on("load", function() {
-        initNotesList();
-        //getRemoteNotes();
+        //initNotesList();
+        getRemoteNotes();
     });
 
     function getRemoteNotes() {
         $.ajax({url:"https://dev.voolks.com/classes/note/", 
-            headers: {"X-Voolks-Api-Key":"1234", "X-Voolks-Session-Id": "dronsqs4wk695kjk3pnhwscoofn3s6fq"}, 
+            headers: {"X-Voolks-Api-Key":"1234", "X-Voolks-App-Id":"1", "X-Voolks-Session-Id": m.app.settings("sessionId")}, 
             success: processRemoteNotes
         });        
     }
 
-    function processRemoveNotes(r) {
-        console.log(r.response);
+    function processRemoteNotes(r) {
+        if (r.result) {
+            window.notes = r.result;
+            initNotesList();
+        }
+        else {
+            console.error(r);
+        }
+        
     }
 
     var goToLogin = function () {
@@ -39,7 +46,7 @@
 
         for (var n in window.notes) {
             var $noteElement = $("#note-template").clone();
-            $noteElement.attr("id",n);
+            $noteElement.attr("id",window.notes[n].id);
             $noteElement.html(window.notes[n].text);
             $noteElement.appendTo(".note-container");
             

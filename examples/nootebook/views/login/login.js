@@ -15,14 +15,20 @@
 
     function login() {
         $.ajax({url:"https://dev.voolks.com/users/login/?username=nootebookuser&password=12345", 
+            headers: {"X-Voolks-Api-Key":"1234", "X-Voolks-App-Id":"1"}, 
             success: processLogin,
-            errror: processError
+            error: processError
         });          
     }
 
     function processLogin(r) {
         if (r.code == "666") {
             alert(r.text);
+        }
+        if (r.sessionId) {
+            m.app.settings("sessionId",r.sessionId);
+            m.app.settings("user",r.username);
+            goToList();
         }
 
         
@@ -32,8 +38,8 @@
     }
 
     $("#btnLogin").on("tap click", function(e) {
-        goToList();
-        //login();
+        //
+        login();
         e.preventDefault();
     });
 

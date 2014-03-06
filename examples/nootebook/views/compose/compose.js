@@ -6,30 +6,70 @@
     
     view.on("load", function() {
         var newval;
-        
-        if (window.notes[view.params[0]]) {
-            newval = window.notes[view.params[0]].text;    
+        var note = getNoteById(view.params[0]);
+        if (note) {
+            newval = note.text;
+            $(".header.edit").show();
+            $(".header.new").hide();    
         }
         else {
             newval = "";
+            $(".header.new").show();
+            $(".header.edit").hide();    
         }
         $("textarea").val(newval);
        
     });
-
-    $("#save").on("tap click", function(e) {
-        var note;
-        if (!window.notes[view.params[0]]) {
-            note = {};
-            window.notes.push(note);
+    function processSaveNote(r) {
+        if (r.id) {
+            m.app.go("#list/");
+        }
+        else if (r[0].id) {
+            window.notes = r;
+            m.app.go("#list/");
         }
         else {
-            note = window.notes[view.params[0]];
+            console.error(r);
         }
-        note.text = $("textarea").val();
-        
-        m.app.go("#list/perdielnombredeusuario");
 
+    }
+    function processErrorNote(e) {
+        throw(new Error(e));
+    }
+
+    function getNoteById(id) {
+        for (var n in window.notes) {
+            if (window.notes[n].id == id) {
+                return window.notes[n];
+            } 
+        }
+        return false;
+    }
+
+    $("#save").on("tap click", function(e) {
+        var note = {};
+        note.id = view.params[0];
+        note.text = $("textarea").val();
+
+        if (!getNoteById(view.params[0])) {
+            $.ajax({url:"https://dev.voolks.com/classes/note/",
+                data: JSON.stringify(note),
+                type: "POST",
+                headers: {"X-Voolks-Api-Key":"1234", "X-Voolks-App-Id":"1", "X-Voolks-Session-Id": m.app.settings("sessionId")}, 
+                success: processSaveNote,
+                error: processErrorNote
+            });
+        }
+        else {
+            $.ajax({url:"https://dev.voolks.com/classes/note/",
+                data: JSON.stringify(note),
+                type: "PUT",
+                headers: {"X-Voolks-Api-Key":"1234", "X-Voolks-App-Id":"1", "X-Voolks-Session-Id": m.app.settings("sessionId")}, 
+                success: processSaveNote,
+                error: processErrorNote 
+            });
+        }
+    
         e.preventDefault();
     });
 
