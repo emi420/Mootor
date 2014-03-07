@@ -8,6 +8,11 @@
     view.on("load", function() {
         //initNotesList();
         getRemoteNotes();
+
+        $("#new").on("tap click", function(e) {
+            goToNote("new");
+            e.preventDefault();
+        });
     });
 
     function getRemoteNotes() {
@@ -35,11 +40,6 @@
     var goToNote = function (id) {
         m.app.go("#compose/"+id);
     }
-
-    $("#new").on("tap click", function(e) {
-        goToNote("new");
-        e.preventDefault();
-    });
 
     function initNotesList() {
         $(".note-container .note:not(#note-template)").remove();

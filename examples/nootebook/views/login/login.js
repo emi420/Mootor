@@ -6,6 +6,11 @@
     
     view.on("load", function() {
         // code here
+        $("#btnLogin").on("tap click", function(e) {
+            //
+            login();
+            e.preventDefault();
+        });    
     });
     
     var goToList = function() {
@@ -37,12 +42,6 @@
     function processError(r) {
         throw(new Error(r));
     }
-
-    $("#btnLogin").on("tap click", function(e) {
-        //
-        login();
-        e.preventDefault();
-    });
 
 
 }(window.$));

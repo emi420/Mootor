@@ -18,14 +18,38 @@
             $(".header.edit").hide();    
         }
         $("textarea").val(newval);
+
+        $("#save").on("tap click", function(e) {
+            var note = {};
+            note.id = view.params[0];
+            note.text = $("textarea").val();
+
+            if (!getNoteById(view.params[0])) {
+                $.ajax({url:"https://dev.voolks.com/classes/note/",
+                    data: JSON.stringify(note),
+                    type: "POST",
+                    headers: m.app.settings("headers"), 
+                    success: processSaveNote,
+                    error: processErrorNote
+                });
+            }
+            else {
+                $.ajax({url:"https://dev.voolks.com/classes/note/"+view.params[0]+"/",
+                    data: JSON.stringify(note),
+                    type: "PUT",
+                    headers: m.app.settings("headers"), 
+                    success: processSaveNote,
+                    error: processErrorNote 
+                });
+            }
+        
+            e.preventDefault();
+        });
+
        
     });
     function processSaveNote(r) {
         if (r.id) {
-            m.app.go("#list/");
-        }
-        else if (r[0].id) {
-            window.notes = r;
             m.app.go("#list/");
         }
         else {
@@ -45,33 +69,5 @@
         }
         return false;
     }
-
-    $("#save").on("tap click", function(e) {
-        var note = {};
-        note.id = view.params[0];
-        note.text = $("textarea").val();
-
-        if (!getNoteById(view.params[0])) {
-            $.ajax({url:"https://dev.voolks.com/classes/note/",
-                data: JSON.stringify(note),
-                type: "POST",
-                headers: m.app.settings("headers"), 
-                success: processSaveNote,
-                error: processErrorNote
-            });
-        }
-        else {
-            $.ajax({url:"https://dev.voolks.com/classes/note/",
-                data: JSON.stringify(note),
-                type: "PUT",
-                headers: m.app.settings("headers"), 
-                success: processSaveNote,
-                error: processErrorNote 
-            });
-        }
-    
-        e.preventDefault();
-    });
-
     
 }(window.$));
