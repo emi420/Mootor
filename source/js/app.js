@@ -133,7 +133,7 @@
                 } else {
                     history.pushState(stateObj, view.id, window.location.pathname);                    
                 }
-            
+
                 Event.dispatch("App:go", this);
                 Event.dispatch("View:load:" + view.id, view);
                 Event.dispatch("View:load", view);

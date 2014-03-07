@@ -85,15 +85,15 @@
 
             Event.dispatch("View:startInit", self)                
 
+            View._getScript(self);
+            $("head").append(View._get(self.id).script);
+
             // Load Html, Css and JavaScript
             View._getCss(self);
             
             View._getHtml(self);
             
             Event.on("View:getHtml:" + self.id, function(view) {
-                View._getScript(self);
-
-                $("head").append(View._get(view.id).script);
                 
                 Event.dispatch("View:getScript:" + self.id, self)
                 Event.dispatch("View:endInit:" + self.id, self)
