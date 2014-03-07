@@ -100,7 +100,7 @@
         * @param {String} url The url to go
         * @return Route
         */
-        go: function(url) {
+        go: function(url,isOnPopState) {
             var router,
                 view,
                 currentView,
@@ -128,10 +128,13 @@
             
                 stateObj = { view: view.id };
                 
-                if (url !== "") {
-                    history.pushState(stateObj, view.id, url);
-                } else {
-                    history.pushState(stateObj, view.id, window.location.pathname);                    
+                if (!isOnPopState) {
+                    if (url !== "") {
+                        history.pushState(stateObj, view.id, url);
+                    } else {
+                        history.pushState(stateObj, view.id, window.location.pathname);                    
+                    }
+                    
                 }
 
                 Event.dispatch("App:go", this);
