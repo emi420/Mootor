@@ -1,42 +1,24 @@
+@charset "UTF-8";
 /**
  * @summary Mootor CSS
  * @author Emilio Mariscal (emi420 [at] gmail.com)
  * @author Martín Szyszlican (martinsz [at] gmail.com)
  * @author Natalia Petit
  */
-/* line 10, ../../source/css/mootor.scss */
-.m-html {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-/* line 18, ../../source/css/mootor.scss */
-.m-app {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
-}
-/* line 52, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-.m-app div, .m-app span, .m-app applet, .m-app object, .m-app iframe,
-.m-app h1, .m-app h2, .m-app h3, .m-app h4, .m-app h5, .m-app h6, .m-app p, .m-app blockquote, .m-app pre,
-.m-app a, .m-app abbr, .m-app acronym, .m-app address, .m-app big, .m-app cite, .m-app code,
-.m-app del, .m-app dfn, .m-app em, .m-app img, .m-app ins, .m-app kbd, .m-app q, .m-app s, .m-app samp,
-.m-app small, .m-app strike, .m-app strong, .m-app sub, .m-app sup, .m-app tt, .m-app var,
-.m-app b, .m-app u, .m-app i, .m-app center,
-.m-app dl, .m-app dt, .m-app dd, .m-app ol, .m-app ul, .m-app li,
-.m-app fieldset, .m-app form, .m-app label, .m-app legend,
-.m-app table, .m-app caption, .m-app tbody, .m-app tfoot, .m-app thead, .m-app tr, .m-app th, .m-app td,
-.m-app article, .m-app aside, .m-app canvas, .m-app details, .m-app embed,
-.m-app figure, .m-app figcaption, .m-app footer, .m-app header, .m-app hgroup,
-.m-app menu, .m-app nav, .m-app output, .m-app ruby, .m-app section, .m-app summary,
-.m-app time, .m-app mark, .m-app audio, .m-app video {
+/* line 17, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
   margin: 0;
   padding: 0;
   border: 0;
@@ -44,29 +26,60 @@
   font-size: 100%;
   vertical-align: baseline;
 }
-/* line 55, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-.m-app table {
+
+/* line 22, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
+
+/* line 24, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-/* line 57, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-.m-app caption, .m-app th, .m-app td {
+
+/* line 28, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
-/* line 59, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-.m-app q, .m-app blockquote {
+
+/* line 30, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
   quotes: none;
 }
-/* line 103, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-.m-app q:before, .m-app q:after, .m-app blockquote:before, .m-app blockquote:after {
+/* line 103, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
-/* line 61, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-.m-app a img {
+
+/* line 32, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+a img {
   border: none;
+}
+
+/* line 116, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+/* line 10, ../../source/css/mootor.scss */
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* line 1, ../../source/css/_fonts.scss */
+.m-app {
+  font-family: arial;
 }
 /* line 1, ../../source/css/_panel.scss */
 .m-app .m-views-container {
@@ -178,9 +191,4 @@
 .m-app .m-doc .m-app .m-panel {
   width: calc(100% - 3em);
   height: calc(100% - 4em);
-}
-
-/* line 34, ../../source/css/mootor.scss */
-body {
-  font-family: arial;
 }
