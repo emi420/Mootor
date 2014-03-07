@@ -4,7 +4,7 @@
     
     var view = m.app.view("list");
     
-    console.log("view",view);
+    console.log("adding onload");
     view.on("load", function() {
         //initNotesList();
         getRemoteNotes();

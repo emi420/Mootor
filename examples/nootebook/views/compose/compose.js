@@ -64,7 +64,7 @@
             $.ajax({url:"https://dev.voolks.com/classes/note/",
                 data: JSON.stringify(note),
                 type: "PUT",
-                headers: m.app.settings("headers")}, 
+                headers: m.app.settings("headers"), 
                 success: processSaveNote,
                 error: processErrorNote 
             });
