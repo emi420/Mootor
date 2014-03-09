@@ -116,6 +116,9 @@
 
             View.dispatch("startInit", self)                
 
+            View._getScript(self);
+            $("head").append(View._get(self.id).script);
+
             // Load Html, Css and JavaScript
             View._getCss(self);
             
@@ -126,7 +129,7 @@
                 View._getScript(self);
 
                 $("head").append(View._get(view.id).script);
-                
+
                 View.dispatch("getScript", self)
                 View.dispatch("endInit", self)
                 View.dispatch("init", self)

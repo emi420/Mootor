@@ -104,7 +104,7 @@
         * @param {String} url The url to go
         * @return Route
         */
-        go: function(url) {
+        go: function(url,isOnPopState) {
             var router,
                 app;
             
@@ -112,6 +112,7 @@
             router = app.route(url);
             
             if (router !== undefined) {
+
                 App._currentRoute = router;
                 App.dispatch("go", this);
             
