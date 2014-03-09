@@ -52,16 +52,16 @@
             router = App._currentRoute,
             url = router.url;
         
-        currentView = App._currentView = view = router.view;
+        currentView = App._currentView;
 
         if (currentView !== undefined) {
-            View.dispatch("beforeUnload", view);
+            View.dispatch("beforeUnload", currentView);
         }
 
         view = App._currentView = router.view;
 
         if (currentView !== undefined) {
-            View.dispatch("unload", view);
+            View.dispatch("unload", currentView);
         }
 
         View.dispatch("beforeLoad", view);            
@@ -85,6 +85,14 @@
     };
     
     Event.extend(View, "View");
+    View._dispatch = View.dispatch;
+    View.dispatch = function(event, instance) {
+        if (event !== "startInit" ) {
+            View._dispatch(event + ":" + instance.id, instance);
+        } else {
+            View._dispatch(event, instance);
+        }
+    }
 
     
     // Private static methods and properties
@@ -116,7 +124,6 @@
 
             View.dispatch("startInit", self)                
 
-            View._getScript(self);
             $("head").append(View._get(self.id).script);
 
             // Load Html, Css and JavaScript
@@ -129,7 +136,6 @@
                 View._getScript(self);
 
                 $("head").append(View._get(view.id).script);
-
                 View.dispatch("getScript", self)
                 View.dispatch("endInit", self)
                 View.dispatch("init", self)
@@ -263,7 +269,11 @@
         * @return View
         */  
         on: function(event,callback) {
-            View.on(event, callback);
+            if (event !== "startInit") {
+                View.on(event + ":" + this.id, callback);                
+            } else {
+                View.on(event, callback);
+            }
             return this;
         },
 

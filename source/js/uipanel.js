@@ -31,7 +31,7 @@
         
         self.panel = new UIPanel();
         self.panel.hide();
-
+        
         if (View._getHtmlPath(view) !== undefined) {
             self.panel.el.innerHTML = View._getHtmlPath(view);                
         } else {
@@ -42,6 +42,9 @@
 
         view.on("load", function(view) {
             self.panel.position("right").show();
+
+            console.log("load " + view.id);
+
             m.app.ui.onTransitionEnd(function() {
                 self.panel.position("left");
             });
@@ -51,6 +54,9 @@
             self.panel.position("left");
             m.app.ui.onTransitionEnd(function() {
                 //This if is needed because on application start the first view is "unloaded" before it's loaded
+
+                console.log("unload " + view.id);
+
                 if (Mootor.App._currentView !== view) {
                     self.panel.hide();    
                 }

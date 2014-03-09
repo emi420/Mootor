@@ -54,7 +54,7 @@
                 }(callbacks[i]));
             }
         }, 
-        
+
         extend: function(object, objectName) {
             $.extend(object, {
                 on: function(event, callback) {
