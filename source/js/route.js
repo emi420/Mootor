@@ -16,8 +16,8 @@
 
     // Private constructors
     
-    Route = Mootor.Route = function(url, view) {
-        this.url = url;
+    Route = Mootor.Route = function(regex, view) {
+        this.regex = regex;
         this.view = view;
     };
     
@@ -32,12 +32,12 @@
     $.extend(Route.prototype, {
         
         /**
-        * The URL referenced by this route
+        * The URL regex referenced by this route
         *
-        * @property URL
+        * @property regex
         * @type String
         */
-        url: "",
+        regex: "",
 
         /**
         * The view that implements this route

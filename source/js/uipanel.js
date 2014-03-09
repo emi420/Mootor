@@ -15,48 +15,39 @@
     var UIPanel,
         
         UI,
-        View;
+        View,
+        UIView;
         
     // Dependences 
     
     UI = Mootor.UI;  
     View = Mootor.View;
-    Event = Mootor.Event;  
     UIView = Mootor.UIView;
 
     // Event handlers
-    
-    /*
-    UIView.on("init", function(self) ...
-    View.on("getHtml", function(self) ...
-    View.on("load", function(self) ...
-    View.on("unload", function(self) ...
-    */
-    
+
     UIView.on("init", function(self) {
         var view = self.view;
         
         self.panel = new UIPanel();
         self.panel.hide();
 
-        if (View._getHtmlPath(view) !== window.undefined) {
+        if (View._getHtmlPath(view) !== undefined) {
             self.panel.el.innerHTML = View._getHtmlPath(view);                
-        }
-        else {
-            Event.on("View:getHtml:" + view.id, function(view) {
+        } else {
+            view.on("getHtml", function(view) {
                 self.panel.el.innerHTML = View._getHtmlPath(view);
             });
         }
 
-        Event.on("View:load:" + view.id, function(view) {
+        view.on("load", function(view) {
             self.panel.position("right").show();
             m.app.ui.onTransitionEnd(function() {
                 self.panel.position("left");
             });
         });
     
-        // on m.app.go
-        Event.on("View:unload:" + view.id, function(view) {
+        view.on("unload", function(view) {
             self.panel.position("left");
             m.app.ui.onTransitionEnd(function() {
                 //This if is needed because on application start the first view is "unloaded" before it's loaded

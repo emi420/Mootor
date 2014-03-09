@@ -53,6 +53,18 @@
                     }, 1)
                 }(callbacks[i]));
             }
+        }, 
+        
+        extend: function(object, objectName) {
+            $.extend(object, {
+                on: function(event, callback) {
+                    Event.on(objectName + ":" + event, callback); 
+                },
+                dispatch: function(event, self) {
+                    Event.dispatch(objectName + ":" + event, self);
+                }
+            });
+            
         }
 
     };

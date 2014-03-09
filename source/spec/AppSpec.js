@@ -137,8 +137,10 @@ describe("App", function() {
             app.route("#testview.html", view);         
             app.go("#index.html");
 			app.go("#testview.html");
-			expect(app.view()).toBe(view);
-			done();
+            window.setTimeout(function() {
+    			expect(app.view()).toBe(view);
+    			done();
+            }, 500);
 
 		});
 

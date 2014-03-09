@@ -9,11 +9,13 @@
 
     var App,
     
-        Event;
+        Event,
+        View;
 
     // Dependencies
 
     Event = Mootor.Event;
+    View = Mootor.View;
 
     // Private constructors
     
@@ -44,7 +46,9 @@
 
         _settings: {}
     });
-
+    
+    Event.extend(App, "App");
+    
     // Public methods
 
     App.prototype = {
@@ -102,41 +106,14 @@
         */
         go: function(url) {
             var router,
-                view,
-                currentView,
-                app,
-                stateObj;
+                app;
             
             app = m.app;
             router = app.route(url);
             
             if (router !== undefined) {
-                
-                currentView = App._currentView;
-        
-                if (currentView !== undefined) {
-                    Event.dispatch("View:beforeUnload:" + currentView.id, currentView);
-                }
-
-                view = App._currentView = router.view;
-
-                if (currentView !== undefined) {
-                    Event.dispatch("View:unload:" + currentView.id, currentView);
-                }
-
-                Event.dispatch("View:beforeLoad:" + view.id, view);            
-            
-                stateObj = { view: view.id };
-                
-                if (url !== "") {
-                    history.pushState(stateObj, view.id, url);
-                } else {
-                    history.pushState(stateObj, view.id, window.location.pathname);                    
-                }
-            
-                Event.dispatch("App:go", this);
-                Event.dispatch("View:load:" + view.id, view);
-                Event.dispatch("View:load", view);
+                App._currentRoute = router;
+                App.dispatch("go", this);
             
             } else {
                 throw(new Error("Route " + url + " is not defined"));
@@ -175,7 +152,7 @@
         * @return App instance
         */    
         on: function(event, callback) {
-            Event.on("App:" + event, callback);
+            App.on(event, callback);
             return this;
         },
         
@@ -197,7 +174,7 @@
         */
         init: function() {
             var self = this;
-            Event.dispatch("App:init", self);   
+            App.dispatch("init", this);   
             this.init = function() { return self };
             return this;
         }

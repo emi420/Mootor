@@ -30,23 +30,52 @@
     App = Mootor.App;
     
     // Event handlers
-
-    Event.on("App:init", function(self) {
+    
+    App.on("init", function(self) {
 
         var views = App._options.views,
             viewCount = views.length,
             i;            
             
-        Event.on("View:endInit:" + views[viewCount-1], function(self) {
-           m.app.go(window.location.hash);
-        });
-        
         for (i = 0; i < viewCount; i++) {
             m.app.view(views[i]);
         }
         
-        
     });   
+    
+    App.on("go", function(self) {
+        
+        var view,
+            currentView,
+            app,
+            stateObj,
+            router = App._currentRoute,
+            url = router.url;
+        
+        currentView = App._currentView = view = router.view;
+
+        if (currentView !== undefined) {
+            View.dispatch("beforeUnload", view);
+        }
+
+        view = App._currentView = router.view;
+
+        if (currentView !== undefined) {
+            View.dispatch("unload", view);
+        }
+
+        View.dispatch("beforeLoad", view);            
+    
+        stateObj = { view: view.id };
+        
+        if (url !== "") {
+            history.pushState(stateObj, view.id, url);
+        } else {
+            history.pushState(stateObj, view.id, window.location.pathname);                    
+        }
+        View.dispatch("load", view);
+        
+    });
     
     // Private constructors
 
@@ -54,6 +83,8 @@
         this.id = options.id;
         View._init(options, this);
     };
+    
+    Event.extend(View, "View");
 
     
     // Private static methods and properties
@@ -83,24 +114,23 @@
         _init: function(options, self) {
             View._collection[self.id] = {id: self.id, obj: self};
 
-            Event.dispatch("View:startInit", self)                
+            View.dispatch("startInit", self)                
 
             // Load Html, Css and JavaScript
             View._getCss(self);
             
             View._getHtml(self);
             
-            Event.on("View:getHtml:" + self.id, function(view) {
+            self.on("getHtml", function(view) {
+                
                 View._getScript(self);
 
                 $("head").append(View._get(view.id).script);
                 
-                Event.dispatch("View:getScript:" + self.id, self)
-                Event.dispatch("View:endInit:" + self.id, self)
-                Event.dispatch("View:init:" + self.id, self)
-            })
-
-
+                View.dispatch("getScript", self)
+                View.dispatch("endInit", self)
+                View.dispatch("init", self)
+            });
 
         },
 
@@ -120,7 +150,7 @@
                 path,
                 function(source) {
                     View._get(self.id).html = source;
-                    Event.dispatch("View:getHtml:" + self.id, self)
+                    View.dispatch("getHtml", self)
                 }
             );
         },
@@ -176,7 +206,7 @@
                 path: path
             }, function() {
                 View._get(self.id).css = path;
-                Event.dispatch("View:getCss", self)
+                View.dispatch("getCss", self)
             });
         },
         
@@ -195,10 +225,8 @@
         _getScriptPath: function(self) {
             return View._get(self.id).script;
         }
-        
-                
     });
-
+    
     // Public instance prototype
     
     $.extend(View.prototype, {
@@ -232,7 +260,7 @@
         * @return View
         */  
         on: function(event,callback) {
-            Event.on("View:" + event + ":" + this.id, callback);
+            View.on(event, callback);
             return this;
         },
 

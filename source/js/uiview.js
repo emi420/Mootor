@@ -27,7 +27,7 @@
 
     // Event handlers
     
-    Event.on("View:startInit", function(self) {
+    View.on("startInit", function(self) {
         self.ui = new UIView(self);
     });
         
@@ -44,14 +44,7 @@
 
     // Private static methods and properties
 
-    $.extend(UIView, {
-        on: function(event, callback) {
-            Event.on("UIView:" + event, callback); 
-        },
-        dispatch: function(event, self) {
-            Event.dispatch("UIView:" + event, self);
-        }
-    });
+    Event.extend(UIView, "UIView");
 
     // Public methods
 

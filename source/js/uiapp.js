@@ -16,13 +16,16 @@
     var UIApp,
     
         UI,
-        App;
+        App,
+        View,
+        Event;
 
     // Dependences
 
     UI = Mootor.UI;
     Event = Mootor.Event;
     App = Mootor.App;
+    View = Mootor.View;
 
     // Private constructors
 
@@ -50,19 +53,19 @@
 
         UIApp.setTransitionDuration();
         
-        Event.dispatch("UIApp:init", this);
+        UIApp.dispatch("init", this);
         
     };
     
     // Event handlers
     
-    Event.on("App:init", function(self) {
+    App.on("init", function(self) {
         $.extend(self, {
            ui: new UIApp()
         });
     });    
 
-    Event.on("View:load", function(self) {
+    View.on("load", function(self) {
         m.app.ui.startTransition();
     }); 
 
@@ -72,6 +75,8 @@
 
 
     // Private static methods and properties
+
+    Event.extend(UIApp, "UIApp");
         
     $.extend(UIApp, {
         transitionDuration: null,

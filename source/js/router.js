@@ -65,6 +65,7 @@
                     if (match !== null) {
                         route = Router._collection[s];
                         route.view.params = match.slice(1, match.length);
+                        route.url = url;
                         return route;
                     }
                 }
