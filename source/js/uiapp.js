@@ -49,8 +49,6 @@
         this.el = this.$el[0];        
         this.$el.appendTo($container);
 
-        this.addTransitionClass();      
-
         UIApp.setTransitionDuration();
         
         UIApp.dispatch("init", this);
@@ -116,26 +114,7 @@
     // Public methods
 
     $.extend(UIApp.prototype, {
-        addTransitionClass: function () {
-            this.$el.addClass("m-transition-hslide m-double-width");
-            this.$el.addClass("m-transition-hslide-right").removeClass("m-transition-hslide-left");
-
-        },
-        startTransition: function () {
-            var self = this;
-
-            self.$el.addClass("m-transition-hslide");
-            self.$el.addClass("m-transition-hslide-left").removeClass("m-transition-hslide-right");
-            
-            self.onTransitionEnd(function () {
-                self.$el.removeClass("m-transition-hslide");
-                self.$el.addClass("m-transition-hslide-right").removeClass("m-transition-hslide-left");
-            })
-        },
-
-        onTransitionEnd: function(callback) {     
-            setTimeout(callback,UIApp.transitionDuration);
-        }
+    
     });        
 
 }(window.$, window.Mootor));

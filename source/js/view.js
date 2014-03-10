@@ -124,22 +124,18 @@
 
             View.dispatch("startInit", self)                
 
-            $("head").append(View._get(self.id).script);
+            self.on("getHtml", function(view) {
+                View._getScript(self);
+            });
+
+            self.on("getScript", function() {
+                View.dispatch("endInit", self)
+                View.dispatch("init", self)
+            })
 
             // Load Html, Css and JavaScript
             View._getCss(self);
-            
             View._getHtml(self);
-            
-            self.on("getHtml", function(view) {
-                
-                View._getScript(self);
-
-                $("head").append(View._get(view.id).script);
-                View.dispatch("getScript", self)
-                View.dispatch("endInit", self)
-                View.dispatch("init", self)
-            });
 
         },
 
@@ -185,7 +181,13 @@
             script.type = "text/javascript";
 
             View._get(self.id).script = script;
-
+            
+            script.addEventListener("load", function() {
+                View.dispatch("getScript", self);
+            });
+            
+            $("head")[0].appendChild(script);
+            
         },
 
         /*

@@ -16,13 +16,17 @@
         
         UI,
         View,
-        UIView;
+        UIView,
+        UIApp,
+        Event;
         
     // Dependences 
-    
+
+    Event = Mootor.Event;
     UI = Mootor.UI;  
     View = Mootor.View;
     UIView = Mootor.UIView;
+    UIApp = Mootor.UIApp;
 
     // Event handlers
 
@@ -39,31 +43,36 @@
                 self.panel.el.innerHTML = View._getHtmlPath(view);
             });
         }
-
+        
+        UIPanel.on("transitionEnd", function(self) {
+            if (Mootor.App._currentView !== view) {
+                view.ui.panel.hide();    
+            } 
+        });
+        
         view.on("load", function(view) {
+
             self.panel.position("right").show();
 
-            console.log("load " + view.id);
+            UIPanel._startTransition()
 
-            m.app.ui.onTransitionEnd(function() {
+            window.setTimeout(function() {
+                UIPanel.dispatch("transitionEnd", self.panel);
+            }, UIApp.transitionDuration);
+
+            UIPanel.on("transitionEnd", function() {
                 self.panel.position("left");
             });
         });
     
         view.on("unload", function(view) {
             self.panel.position("left");
-            m.app.ui.onTransitionEnd(function() {
-                //This if is needed because on application start the first view is "unloaded" before it's loaded
-
-                console.log("unload " + view.id);
-
-                if (Mootor.App._currentView !== view) {
-                    self.panel.hide();    
-                }
-            
-            });
         }); 
                 
+    });
+    
+    UIApp.on("init", function(self) {
+        UIPanel._addTransitionClass(self);      
     });
 
   
@@ -76,7 +85,8 @@
     // Prototypal inheritance
 
     $.extend(UIPanel.prototype, UI.prototype);
-
+    Event.extend(UIPanel, "UIPanel");
+    
     // Private static methods and properties
         
     $.extend(UIPanel, {
@@ -100,7 +110,26 @@
 
             m.app.ui.$el.append(el);            
             
+        },
+        
+        _startTransition: function (self) {
+            var uiapp = m.app.ui;
+            uiapp.$el.addClass("m-transition-hslide");
+            uiapp.$el.addClass("m-transition-hslide-left").removeClass("m-transition-hslide-right");
+            
+            
+            UIPanel.on("transitionEnd", function () {
+                uiapp.$el.removeClass("m-transition-hslide");
+                uiapp.$el.addClass("m-transition-hslide-right").removeClass("m-transition-hslide-left");
+            })
+        },
+        
+        _addTransitionClass: function (self) {
+            var uiapp = m.app.ui;
+            uiapp.$el.addClass("m-transition-hslide m-double-width");
+            uiapp.$el.addClass("m-transition-hslide-right").removeClass("m-transition-hslide-left");
         }
+        
     });
 
     // Public prototype    
