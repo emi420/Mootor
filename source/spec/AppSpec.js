@@ -49,6 +49,8 @@ var createApp = function(done) {
 
 	}
 	window.setTimeout(done, 100);
+
+	$("html,body").css("overflow","auto");
 }
 
 describe("App", function() {
