@@ -49,8 +49,6 @@
         this.el = this.$el[0];        
         this.$el.appendTo($container);
 
-        UIApp.setTransitionDuration();
-        
         UIApp.dispatch("init", this);
         
     };
@@ -63,10 +61,6 @@
         });
     });    
 
-    View.on("load", function(self) {
-        m.app.ui.startTransition();
-    }); 
-
     // Extends from UI
 
     $.extend(UIApp.prototype, UI.prototype);
@@ -75,41 +69,6 @@
     // Private static methods and properties
 
     Event.extend(UIApp, "UIApp");
-        
-    $.extend(UIApp, {
-        transitionDuration: null,
-        setTransitionDuration: function() {
-
-            var getStyleBySelector = function ( selector ) {
-               var sheetList = document.styleSheets;
-               var ruleList;
-               var i, j;
-
-               /* look through stylesheets in reverse order that
-                  they appear in the document */
-               for (i=sheetList.length-1; i >= 0; i--)
-               {
-                   ruleList = sheetList[i].cssRules;
-                   for (j=0; j<ruleList.length; j++)
-                   {
-                       if (ruleList[j].type == CSSRule.STYLE_RULE && 
-                           ruleList[j].selectorText == selector)
-                       {
-                           return ruleList[j].style;
-                       }   
-                   }
-               }
-               return null;
-            }
-
-
-            var t = getStyleBySelector(".m-app .m-transition-hslide");
-
-            var transitionDurationCSS = t.transitionDuration || t.webkitTransitionDuration || t.operaTransitionDuration || t.mozTransitionDuration;
-            var transitionDurationMiliseconds = parseFloat(transitionDurationCSS) * 1000;
-            UIApp.transitionDuration = transitionDurationMiliseconds;
-        }
-    });
 
     // Public methods
 

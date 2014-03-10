@@ -58,7 +58,7 @@
 
             window.setTimeout(function() {
                 UIPanel.dispatch("transitionEnd", self.panel);
-            }, UIApp.transitionDuration);
+            }, UIPanel._transitionDuration);
 
             UIPanel.on("transitionEnd", function() {
                 self.panel.position("left");
@@ -72,7 +72,8 @@
     });
     
     UIApp.on("init", function(self) {
-        UIPanel._addTransitionClass(self);      
+        UIPanel._addTransitionClass(self);    
+        UIPanel._setTransitionDuration();  
     });
 
   
@@ -128,7 +129,41 @@
             var uiapp = m.app.ui;
             uiapp.$el.addClass("m-transition-hslide m-double-width");
             uiapp.$el.addClass("m-transition-hslide-right").removeClass("m-transition-hslide-left");
-        }
+        },
+        
+        _transitionDuration: null,
+        
+        _setTransitionDuration: function() {
+
+            var getStyleBySelector = function ( selector ) {
+               var sheetList = document.styleSheets;
+               var ruleList;
+               var i, j;
+
+               /* look through stylesheets in reverse order that
+                  they appear in the document */
+               for (i=sheetList.length-1; i >= 0; i--)
+               {
+                   ruleList = sheetList[i].cssRules;
+                   for (j=0; j<ruleList.length; j++)
+                   {
+                       if (ruleList[j].type == CSSRule.STYLE_RULE && 
+                           ruleList[j].selectorText == selector)
+                       {
+                           return ruleList[j].style;
+                       }   
+                   }
+               }
+               return null;
+            }
+
+
+            var t = getStyleBySelector(".m-app .m-transition-hslide");
+
+            var transitionDurationCSS = t.transitionDuration || t.webkitTransitionDuration || t.operaTransitionDuration || t.mozTransitionDuration;
+            var transitionDurationMiliseconds = parseFloat(transitionDurationCSS) * 1000;
+            UIPanel._transitionDuration = transitionDurationMiliseconds;
+        }        
         
     });
 
