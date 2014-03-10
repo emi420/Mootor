@@ -10,26 +10,12 @@ describe("UIPanel", function() {
   describe("I want to know the panel properties", function() {
 
     it("Should be able to get panel's height", function() {
-      size = panel.size();
-      expect(size.height).toBeGreaterThan(0);
+      expect(panel.$el.height()).toBeDefined();
     });
     it("Should be able to get panel's vertical scroll position", function() {
       pos = panel.position();
-      expect(pos.x).toBeGreaterThan(0);
+      expect(panel.$el.scrollTop()).toBeDefined();
     });
 
-  });
-
-
-
-  describe("Panel asynchronous specs", function() {
-    beforeEach(function (done) { 
-      createApp(done); 
-    });
-
-      it("Slides a panel in", function(done) {
-        expect(0).toBe(1);
-        done();
-      });
   });
 });

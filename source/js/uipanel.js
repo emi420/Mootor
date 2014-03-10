@@ -72,7 +72,7 @@
     });
     
     UIApp.on("init", function(self) {
-        UIPanel._addTransitionClass(self);    
+        UIPanel._addTransitionClass();    
         UIPanel._setTransitionDuration();  
     });
 
@@ -91,6 +91,8 @@
     // Private static methods and properties
         
     $.extend(UIPanel, {
+
+        DEFAULT_TRANSITION: "hslide",
         
         //Initialize panel
 
@@ -108,6 +110,8 @@
             el = self.el = document.createElement("div");
             $el = self.$el = $(el);
             $el.addClass("m-panel overthrow");
+
+            self.transition(UIPanel.DEFAULT_TRANSITION);
 
             m.app.ui.$el.append(el);            
             
@@ -127,8 +131,11 @@
         
         _addTransitionClass: function (self) {
             var uiapp = m.app.ui;
-            uiapp.$el.addClass("m-transition-hslide m-double-width");
-            uiapp.$el.addClass("m-transition-hslide-right").removeClass("m-transition-hslide-left");
+
+            if (UIPanel.DEFAULT_TRANSITION == "hslide") {
+                uiapp.$el.addClass("m-transition-hslide m-double-width");
+                uiapp.$el.addClass("m-transition-hslide-right").removeClass("m-transition-hslide-left");
+            }
         },
         
         _transitionDuration: null,
@@ -171,6 +178,8 @@
     
     $.extend(UIPanel.prototype, {
 
+        _transition: UIPanel.DEFAULT_TRANSITION,
+
         /**
         * Move the element to the specified position inside the UIApp / m-views-container. 
         * If coordinates are not specified, it returns coordinates object with the current position.
@@ -186,7 +195,8 @@
                 return this;                
             }
             else {
-                return this.$el.hasClass("m-position-left") ? "left" : "right"; 
+                var $el = $(this.el);
+                return $el.hasClass("m-position-left") ? "left" : "right"; 
             }
             
         },
@@ -209,8 +219,13 @@
         * @param {String} [transition] Transition type. MUST be one of: slide-left, slide-right, none
         * @return {String} Transition type
         */
-        transition: function() {
-            
+        transition: function(transition) {
+            if (transition) {
+                this._transition = transition;
+            }
+            else {
+                return this._transition;
+            }
         }
 
     });
