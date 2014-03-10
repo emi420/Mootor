@@ -1,15 +1,13 @@
 describe("UILoading", function() {
 
-	describe("Empty spec", function() {
-		beforeEach(createApp);
+	describe("I want to display a loading indicator (UILoading)", function() {
 
-        
-		xit("Empty", function(done) {
-
-            done();
+		xit("Should be able to display a loading indicator", function() {
 
 		});
+		xit("Should be able to hide a loading indicaor", function() {
 
+		});
 	});
 });
 

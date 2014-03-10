@@ -42,9 +42,13 @@ describe("View", function() {
 	});
 
 
-	describe("I want to determine the view's title", function() {
+	describe("I want to determine the view's header", function() {
 		beforeEach(createApp);
 
+		xit("Should be able to define a view header different from the app's header", function(done) {
+
+		    done();
+		});
 		it("Should be able to define a view's title", function(done) {
 			view.title("test")
 			expect(view.title()).toBe("test");
