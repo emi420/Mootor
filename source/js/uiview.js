@@ -35,10 +35,10 @@
 
     UIView = Mootor.UIView = function(view) {
         var self = this;
-
         self.view = view;
-        UIView.dispatch("init", self);
-
+        view.on("getHtml", function() {
+            UIView.dispatch("init", self);
+        })
     };
 
 

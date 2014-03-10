@@ -42,6 +42,7 @@
     });
 
     UIView.on("init", function(self) {
+        
         var headerEl = self.panel.el.getElementsByTagName("header")[0];
 
         if (headerEl) {
@@ -64,6 +65,7 @@
             self.view.on("load", function(self) {
                 // FIXME CHECK (parentElement?)
                 var headerEl = m.app.ui.el.parentElement.getElementsByTagName("header")[0];
+                console.log(headerEl);
                 m.app.ui.el.parentElement.replaceChild(
                     m.app.ui.header.el,
                     headerEl
