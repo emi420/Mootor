@@ -27,22 +27,37 @@ var createApp = function(done) {
     
         view.on("init", function() {
             window._testViewOnInit = true;
+            $("#initElement").on("click", function() {
+            	window._clickOnInit = true;
+            }).click();
         });
 
         view.on("beforeLoad", function() {
             window._testViewOnBeforeLoad = true;
+            $("#beforeLoadElement").on("click", function() {
+            	window._clickOnBeforeLoad = true;
+            }).click();
         });
 
         view.on("load", function() {
             window._testViewOnLoad = true;
+            $("#loadElement").on("click", function() {
+            	window._clickOnLoad = true;
+            }).click();
         });
 
         view.on("beforeUnload", function() {
             window._testViewOnBeforeUnLoad = true;
+            $("#beforeUnloadElement").on("click", function() {
+            	window._clickOnBeforeUnload = true;
+            }).click();
         });
 
         view.on("unload", function() {
             window._testViewOnUnLoad = true;
+            $("#unloadElement").on("click", function() {
+            	window._clickOnUnload = true;
+            }).click();
         });
         
         _appIsInitTest = true;
