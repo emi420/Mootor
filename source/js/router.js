@@ -15,24 +15,37 @@
     var Router,
 
         Route,
-        App;
-                
+        App,
+        _appGo,
+        _pendingGo;
+            
     // Dependencies
     
     App = Mootor.App;
     Route = Mootor.Route;
     
-    // Event handlers
-
-    window.onpopstate = function(event) {
-      m.app.go(window.location.hash, true);
-    };
-
     // Private constructors
 
     Router = Mootor.Router = function() {
-        // code here
     };
+
+    // Event handlers
+
+    window.onpopstate = function() {
+        _appGo(window.location.hash);
+    };
+
+
+    _appGo = function(url) { 
+        _pendingGo = window.location.hash;
+    }
+
+    App.on("ready", function() {
+        _appGo = function(url) {
+            m.app.go(url);
+        }
+        m.app.go(_pendingGo);
+    });
 
     // Private static methods and properties
 

@@ -35,11 +35,18 @@
 
         var views = App._options.views,
             viewCount = views.length,
-            i;            
+            i,
+            view;
             
         for (i = 0; i < viewCount; i++) {
-            m.app.view(views[i]);
+            view = m.app.view(views[i]);
         }
+        
+        view.on("endInit", function(self) {
+            App.dispatch("ready");
+        });
+        
+        
         
     });   
     
@@ -94,7 +101,6 @@
         }
     }
 
-    
     // Private static methods and properties
     
     $.extend(View, {        
