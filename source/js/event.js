@@ -55,6 +55,10 @@
             }
         }, 
 
+        /**
+        * Extend objects with Event methods
+        * @private
+        */
         extend: function(object, objectName) {
             $.extend(object, {
                 on: function(event, callback) {
