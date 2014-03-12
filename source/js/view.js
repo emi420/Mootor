@@ -72,11 +72,17 @@
         View.dispatch("beforeLoad", view);            
     
         stateObj = { view: view.id };
+
+        debugger;
         
-        if (url !== "") {
-            history.pushState(stateObj, view.id, url);
-        } else {
-            history.pushState(stateObj, view.id, window.location.pathname);                    
+        if (currentView != view) {
+
+            if (url !== "") {
+                history.pushState(stateObj, view.id, url);
+            } else {
+                history.pushState(stateObj, view.id, window.location.pathname);                    
+            }
+
         }
         View.dispatch("load", view);
         
