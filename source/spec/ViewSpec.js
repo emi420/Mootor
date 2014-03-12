@@ -45,8 +45,8 @@ describe("View", function() {
 	describe("I want to determine the view's header", function() {
 		beforeEach(createApp);
 
-		xit("Should be able to define a view header different from the app's header", function(done) {
-
+		it("Should be able to define a view header different from the app's header", function(done) {
+            m.app.view("testview").ui.header.el !== m.app.ui.header.el;
 		    done();
 		});
 		it("Should be able to define a view's title", function(done) {

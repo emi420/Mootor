@@ -44,6 +44,22 @@
             $container = $("body");
         }
         $container.addClass("m-app");
+        
+        // Update context viewport
+        m.context.viewport = {
+            width: $container.width(),
+            height: $container.height()
+        }
+
+        // Event handlers
+    
+        window.addEventListener("resize", function() {
+            m.context.viewport = {
+                width: $container.width(),
+                height: $container.height()
+            }
+        })
+
 
         this.$el = $("<div>").addClass("m-views-container")
         this.el = this.$el[0];        

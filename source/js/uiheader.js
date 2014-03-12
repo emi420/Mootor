@@ -46,11 +46,12 @@
         var headerEl = self.panel.el.getElementsByTagName("header")[0];
 
         if (headerEl) {
-            self.panel.el.removeChild(headerEl);
 
             self.header = new UIHeader({
                 el: headerEl
             });
+
+            self.panel.el.removeChild(headerEl);
 
             self.view.on("load", function(self) {
                 // FIXME CHECK (parentElement?)

@@ -14,33 +14,29 @@
     Context = Mootor.Context = function() {
         return ({
 
+
+            /**
+            * System info
+            * @property os
+            * @type function
+            */            
+            os: $.os,
+
             /**
             * Browser info
             * @property browser
             * @type string
             */            
-            browser: navigator.userAgent.toLowerCase(),
+            browser: $.browser,
 
             /**
             * Viewport info
             * @property viewport
             * @type object
             */            
-            viewport: {},
-
-            /**
-            * Device info
-            * @property device 
-            * @type object
-            */            
-            device: {
-                /**
-                * Vendor info
-                * @property vendor
-                * @type string
-                */            
-                vendor: navigator.vendor.toLowerCase(),
-                
+            viewport: {
+                width: window.screen.width,
+                height: window.screen.height
             },
             
             cordova: (window.Cordova !== undefined),
@@ -48,6 +44,7 @@
 
         });
     };
+    
 
     // Static global objects
     
