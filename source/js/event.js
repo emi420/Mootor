@@ -31,6 +31,8 @@
                 Event._collection[event] = [];
             } 
             Event._collection[event].push(callback);
+            
+            console.log("Registered event: " + event);
         },
         
         /**
@@ -42,6 +44,8 @@
                 count = 0,
                 callbacks = Event._collection[event],
                 callback;
+                
+            console.log("* Dispatched event: " + event);
                 
             if (callbacks !== undefined) {
                 count = callbacks.length ;

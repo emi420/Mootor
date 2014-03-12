@@ -35,11 +35,16 @@
 
         var views = App._options.views,
             viewCount = views.length,
-            i;            
+            i,
+            view;
             
         for (i = 0; i < viewCount; i++) {
-            m.app.view(views[i]);
+            view = m.app.view(views[i]);
         }
+        
+        view.on("ready", function(self) {
+            App.dispatch("ready");
+        });
         
     });   
     
@@ -87,14 +92,13 @@
     Event.extend(View, "View");
     View._dispatch = View.dispatch;
     View.dispatch = function(event, instance) {
-        if (event !== "startInit" ) {
+        if (event !== "init" ) {
             View._dispatch(event + ":" + instance.id, instance);
         } else {
             View._dispatch(event, instance);
         }
     }
 
-    
     // Private static methods and properties
     
     $.extend(View, {        
@@ -122,15 +126,14 @@
         _init: function(options, self) {
             View._collection[self.id] = {id: self.id, obj: self};
 
-            View.dispatch("startInit", self)                
+            View.dispatch("init", self)                
 
             self.on("getHtml", function(view) {
                 View._getScript(self);
             });
 
             self.on("getScript", function() {
-                View.dispatch("endInit", self)
-                View.dispatch("init", self)
+                View.dispatch("ready", self)
             })
 
             // Load Html, Css and JavaScript
@@ -216,7 +219,7 @@
             $link.one("load", {
                 path: path
             }, function() {
-                View._get(self.id).css = path;
+                View._get(self.id).css = link;
                 View.dispatch("getCss", self)
             });
         },
@@ -271,7 +274,7 @@
         * @return View
         */  
         on: function(event,callback) {
-            if (event !== "startInit") {
+            if (event !== "init") {
                 View.on(event + ":" + this.id, callback);                
             } else {
                 View.on(event, callback);
