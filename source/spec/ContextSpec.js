@@ -2,19 +2,15 @@ describe("Context", function() {
 
 	describe("I want to know viewport properties", function() {
 
-		xit("Should be able to get viewport's height", function() {
+		beforeEach(createApp);
 
+		it("Should be able to get viewport's height", function(done) {
+            expect(typeof m.context.viewport.height).toBe("number")
+            done()
 		});
-		xit("Should be able to get viewport's width", function() {
-
-		});
-	});
-
-
-	describe("I want to take action when the viewport is resized", function() {
-
-		xit("Should be able to set an event callback when the viewport is resized", function() {
-
+		it("Should be able to get viewport's width", function(done) {
+            expect(typeof m.context.viewport.width).toBe("number")
+            done()
 		});
 	});
 
@@ -35,7 +31,7 @@ describe("Context", function() {
         
 		it("Should be able to detect if it is running in a browser", function(done) {
             // Except context().browser to be true
-            expect(typeof m.context.browser).toBe("string");
+            expect(m.context.browser.webkit).toBe(true);
 
             done();
 
@@ -49,13 +45,6 @@ describe("Context", function() {
 		xit("Should be able to detect it is running in PhoneGap / Cordova", function(done) {
             // Except context().cordova or context().phonegap to be true
             expect(m.context.cordova || m.context.phonegap).toBe(true);
-
-            done();
-
-		});
-		it("Should be able to detect device vendor", function(done) {
-            // Except context().device.vendor
-            expect(m.context.device.vendor).toBeDefined();
 
             done();
 

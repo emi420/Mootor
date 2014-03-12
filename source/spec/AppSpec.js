@@ -13,8 +13,6 @@ var createApp = function(done) {
             container: $("#container")
 		});
         
-        app.init()
-        
         view = app.view("index");
         
         window.setTimeout(function() {
@@ -25,7 +23,7 @@ var createApp = function(done) {
         m.app.route("^$", view);
         m.app.route("^#welcome/(.*)", m.app.view("testview"));
     
-        view.on("init", function() {
+        view.on("ready", function() {
             window._testViewOnInit = true;
             $("#initElement").on("click", function() {
             	window._clickOnInit = true;
@@ -61,6 +59,9 @@ var createApp = function(done) {
         });
         
         _appIsInitTest = true;
+        
+        app.init()
+        
 
 	}
 	window.setTimeout(done, 100);
