@@ -27,7 +27,7 @@
 
     // Event handlers
     
-    View.on("startInit", function(self) {
+    View.on("beforeInit", function(self) {
         self.ui = new UIView(self);
     });
         
