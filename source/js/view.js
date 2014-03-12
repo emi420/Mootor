@@ -72,8 +72,6 @@
         View.dispatch("beforeLoad", view);            
     
         stateObj = { view: view.id };
-
-        debugger;
         
         if (currentView != view) {
 
