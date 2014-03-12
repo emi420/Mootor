@@ -42,11 +42,9 @@
             view = m.app.view(views[i]);
         }
         
-        view.on("init", function(self) {
+        view.on("ready", function(self) {
             App.dispatch("ready");
         });
-        
-        
         
     });   
     
@@ -94,7 +92,7 @@
     Event.extend(View, "View");
     View._dispatch = View.dispatch;
     View.dispatch = function(event, instance) {
-        if (event !== "beforeInit" ) {
+        if (event !== "init" ) {
             View._dispatch(event + ":" + instance.id, instance);
         } else {
             View._dispatch(event, instance);
@@ -128,14 +126,14 @@
         _init: function(options, self) {
             View._collection[self.id] = {id: self.id, obj: self};
 
-            View.dispatch("beforeInit", self)                
+            View.dispatch("init", self)                
 
             self.on("getHtml", function(view) {
                 View._getScript(self);
             });
 
             self.on("getScript", function() {
-                View.dispatch("init", self)
+                View.dispatch("ready", self)
             })
 
             // Load Html, Css and JavaScript
@@ -276,7 +274,7 @@
         * @return View
         */  
         on: function(event,callback) {
-            if (event !== "beforeInit") {
+            if (event !== "init") {
                 View.on(event + ":" + this.id, callback);                
             } else {
                 View.on(event, callback);
