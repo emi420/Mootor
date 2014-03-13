@@ -50,7 +50,7 @@
         * @chainable
         */
         position: function(coordinates) {
-            
+            // code here
         },
 
         /**
@@ -62,7 +62,8 @@
         * @chainable
         */
         blocked: function(blocked) {
-            
+            // code here
         }
+
     });        
 }(window.$, window.Mootor));

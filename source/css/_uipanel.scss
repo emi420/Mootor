@@ -1,3 +1,9 @@
+// Config
+
+$transitionDuration: .3s;
+
+// UIPanel
+
 .m-views-container {
     position: relative;
 
@@ -29,5 +35,24 @@
 
 }
 
+// Transitions
 
+@import "compass/css3/transition";
+@import "compass/css3/transform";
 
+.m-transition-none {
+    @include transition(all 0);
+}
+
+.m-transition-hslide {
+    @include transition(transform $transitionDuration ease-out);
+}
+
+.m-transition-hslide-left {
+	@include transform(translateX(-50%))
+}
+
+.m-transition-hslide-right {
+	@include transform(translateX(0))
+	
+}

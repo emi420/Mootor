@@ -2,7 +2,6 @@
  * @summary Mootor CSS
  * @author Emilio Mariscal (emi420 [at] gmail.com)
  * @author Martín Szyszlican (martinsz [at] gmail.com)
- * @author Natalia Petit
  */
 /* line 17, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
@@ -69,7 +68,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
-/* line 10, ../../source/css/mootor.scss */
+/* line 9, ../../source/css/mootor.scss */
 html, body {
   width: 100%;
   height: 100%;
@@ -80,7 +79,7 @@ html, body {
 .m-app {
   font-family: arial;
 }
-/* line 1, ../../source/css/_panel.scss */
+/* line 7, ../../source/css/_uipanel.scss */
 .m-app .m-views-container {
   position: relative;
   width: 100%;
@@ -89,7 +88,7 @@ html, body {
   box-sizing: border-box;
   padding-bottom: 55px;
 }
-/* line 10, ../../source/css/_panel.scss */
+/* line 16, ../../source/css/_uipanel.scss */
 .m-app .m-views-container .m-panel {
   position: relative;
   height: 100%;
@@ -99,42 +98,28 @@ html, body {
   overflow-x: hidden;
   float: left;
 }
-/* line 22, ../../source/css/_panel.scss */
+/* line 28, ../../source/css/_uipanel.scss */
 .m-app .m-views-container .m-panel {
   -webkit-transition-duration: 0;
   -webkit-backface-visibility: hidden;
   -webkit-transform: translate3d(0, 0, 0);
   -webkit-transform: translateZ(0);
 }
-/* line 1, ../../source/css/_header.scss */
-.m-app header {
-  background: #072F52;
-  height: 55px;
-  position: relative;
-  z-index: 100;
-}
-/* line 7, ../../source/css/_header.scss */
-.m-app header h1 {
-  text-align: center;
-  color: #f1f1f1;
-  font-weight: bold !important;
-  line-height: 55px !important;
-}
-/* line 4, ../../source/css/_transitions.scss */
+/* line 43, ../../source/css/_uipanel.scss */
 .m-app .m-transition-none {
   -webkit-transition: all 0;
   -moz-transition: all 0;
   -o-transition: all 0;
   transition: all 0;
 }
-/* line 8, ../../source/css/_transitions.scss */
+/* line 47, ../../source/css/_uipanel.scss */
 .m-app .m-transition-hslide {
   -webkit-transition: -webkit-transform 0.3s ease-out;
   -moz-transition: -moz-transform 0.3s ease-out;
   -o-transition: -o-transform 0.3s ease-out;
   transition: transform 0.3s ease-out;
 }
-/* line 12, ../../source/css/_transitions.scss */
+/* line 51, ../../source/css/_uipanel.scss */
 .m-app .m-transition-hslide-left {
   -webkit-transform: translateX(-50%);
   -moz-transform: translateX(-50%);
@@ -142,13 +127,27 @@ html, body {
   -o-transform: translateX(-50%);
   transform: translateX(-50%);
 }
-/* line 16, ../../source/css/_transitions.scss */
+/* line 55, ../../source/css/_uipanel.scss */
 .m-app .m-transition-hslide-right {
   -webkit-transform: translateX(0);
   -moz-transform: translateX(0);
   -ms-transform: translateX(0);
   -o-transform: translateX(0);
   transform: translateX(0);
+}
+/* line 1, ../../source/css/_uiheader.scss */
+.m-app header {
+  background: #072F52;
+  height: 55px;
+  position: relative;
+  z-index: 100;
+}
+/* line 7, ../../source/css/_uiheader.scss */
+.m-app header h1 {
+  text-align: center;
+  color: #f1f1f1;
+  font-weight: bold !important;
+  line-height: 55px !important;
 }
 /* line 1, ../../source/css/_utils.scss */
 .m-app .m-hidden {
