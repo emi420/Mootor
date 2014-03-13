@@ -2,7 +2,6 @@
  * @summary Mootor CSS
  * @author Emilio Mariscal (emi420 [at] gmail.com)
  * @author Martín Szyszlican (martinsz [at] gmail.com)
- * @author Natalia Petit
  */
 
 @import "compass/reset";
@@ -14,10 +13,8 @@ html, body {
 }
 
 .m-app {
-	@import "config";
 	@import "fonts";
-	@import "panel";
-	@import "header";
-	@import "transitions";
+	@import "uipanel";
+	@import "uiheader";
 	@import "utils";
 }
