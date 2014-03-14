@@ -29,6 +29,11 @@
     
     View.on("init", function(self) {
         self.ui = new UIView(self);
+
+        self.on("getHtml", function() {
+            UIView.dispatch("init", self.ui);
+        })
+
     });
         
     // Private constructors
@@ -36,9 +41,6 @@
     UIView = Mootor.UIView = function(view) {
         var self = this;
         self.view = view;
-        view.on("getHtml", function() {
-            UIView.dispatch("init", self);
-        })
     };
 
 

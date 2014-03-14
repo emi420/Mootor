@@ -2,6 +2,9 @@
 
 $transitionDuration: .3s;
 
+@import "compass/css3/transition";
+@import "compass/css3/transform";
+
 // UIPanel
 
 .m-views-container {
@@ -36,9 +39,6 @@ $transitionDuration: .3s;
 }
 
 // Transitions
-
-@import "compass/css3/transition";
-@import "compass/css3/transform";
 
 .m-transition-none {
     @include transition(all 0);

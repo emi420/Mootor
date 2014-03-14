@@ -130,7 +130,7 @@
         _init: function(options, self) {
             View._collection[self.id] = {id: self.id, obj: self};
 
-            View.dispatch("init", self)                
+            View.dispatch("init", self);
 
             self.on("getHtml", function(view) {
                 View._getScript(self);
@@ -141,8 +141,10 @@
             })
 
             // Load Html, Css and JavaScript
+            setTimeout(function() {
+                View._getHtml(self);
+            }, 1)
             View._getCss(self);
-            View._getHtml(self);
 
         },
 

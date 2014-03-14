@@ -38,6 +38,7 @@
         * @private
         */
         dispatch: function(event, instance) {
+            //console.log(event,instance);
             var i,
                 count = 0,
                 callbacks = Event._collection[event],
