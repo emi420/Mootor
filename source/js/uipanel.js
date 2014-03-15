@@ -35,7 +35,7 @@
         
         self.panel = new UIPanel();
         self.panel.hide();
-        
+                
         if (View._getHtmlPath(view) !== undefined) {
             self.panel.el.innerHTML = View._getHtmlPath(view);                
         } else {
@@ -226,6 +226,11 @@
             else {
                 return this._transition;
             }
+        },
+        
+        on: function(event, callback) {
+            UIPanel.on(event, callback);    
+            return this;            
         }
 
     });

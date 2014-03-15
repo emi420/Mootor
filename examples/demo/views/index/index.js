@@ -2,15 +2,21 @@
     
     "use strict";
 
-    var view = m.app.view("index");
+    var view = m.app.view("index"),
+        inputEmail = $("#inputEmail")[0];
     
-    view.on("load", function() {
-        // code here
+    view.ui.panel.on("transitionEnd", function() {
+        inputEmail.focus();            
     });
     
     $("#btnLogin").on("tap", function() {
-        var email = $("#inputEmail")[0].value;
-        m.app.go("#welcome/" + email );
+        var email = inputEmail.value;
+        if (email !== "") {
+            m.app.go("#welcome/" + email );
+        } else {
+            alert("Type your name!");
+            inputEmail.focus();            
+        }
     });
 
 

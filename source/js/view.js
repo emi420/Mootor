@@ -133,7 +133,9 @@
             View.dispatch("init", self);
 
             self.on("getHtml", function(view) {
-                View._getScript(self);
+                window.setTimeout(function() {
+                    View._getScript(self);
+                }, 1)
             });
 
             self.on("getScript", function() {

@@ -47,6 +47,7 @@
             if (callbacks !== undefined) {
                 count = callbacks.length ;
             }
+            
             for (i = 0; i < count; i++) {
                 (function(callback) {
                     window.setTimeout(function() {

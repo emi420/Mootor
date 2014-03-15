@@ -5,7 +5,12 @@
     var view = m.app.view("testview");
     
     view.on("load", function() {
-       $("#welcomeName").html(view.params[0]);
+        var welcomeName = view.params[0];
+        if (welcomeName !== "") {
+            $("#welcomeName").html(welcomeName);
+        } else {
+            m.app.go("");
+        }
     });
 
     $("#btnOk").on("tap", function(e) {
