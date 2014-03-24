@@ -23,8 +23,24 @@
     
     // Private constructors
 
-    UINavItem = function() {
-        // code here
+    Mootor.UINavItem = UINavItem = function(options) {
+
+        var navEl,
+            aEl;
+
+        if (options.container !== undefined) {
+            navEl = document.createElement("nav"),
+            aEl = document.createElement("a");            
+            if (options.className) {
+                aEl.setAttribute("class", options.className)
+            }
+            navEl.appendChild(aEl);
+            options.container.appendChild(navEl);
+        }
+        
+        this.el = navEl;
+        this.$el = $(navEl);
+
     };
 
     // Prototypal inheritance
@@ -40,19 +56,6 @@
 
     $.extend(UINavItem.prototype, {
         
-        /**
-        * Move the element to the specified coordinates. 
-        * If coordinates are not specified, it returns coordinates object with the current position.
-        *
-        * @method position
-        * @param {object} [coordinates] Object with coordinates. Example: {x: 0, y: 0}
-        * @return {object} Object with coordinates. Example: {x: 0, y: 0}
-        * @chainable
-        */
-        position: function(coordinates) {
-            // code here
-        },
-
         /**
         * Block/Unblock or return block status.
         *

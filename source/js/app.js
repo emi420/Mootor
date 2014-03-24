@@ -105,22 +105,21 @@
         * @return Route
         */
         go: function(url) {
-            var router,
-                app;
-            
-            app = m.app;
-            router = app.route(url);
-            
-            if (router !== undefined) {
-                App._currentRoute = router;
+            var route;
+            route =  m.app.route(url);
+            if (route !== undefined) {
+                App._currentRoute = route;
                 App.dispatch("go", this);
-            
+                if (this.history[this.history.length - 2] !== route.url) {
+                    this.history.push(route.url);    
+                } else {
+                    this.history.pop();    
+                }
+                console.log(this.history);
             } else {
                 throw(new Error("Route " + url + " is not defined"));
-            }
-            
-            
-            return router;
+            }                       
+            return route
         },        
 
         /**
@@ -130,8 +129,11 @@
         * @chainable
         * @return Route
         */
-        back: function(id) {
-            return this;
+        back: function() {
+            var url = m.app.history[m.app.history.length - 2];
+            if (url !== undefined) {
+                m.app.go(url);
+            }
         },        
 
         /**

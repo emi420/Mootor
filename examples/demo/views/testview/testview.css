@@ -1,3 +1,20 @@
-.welcomeName {
+.welcome-mame {
     text-transform: capitalize;
+}
+
+.header-nav-back {
+    position: absolute;
+    left: 1em;
+    top: .7em;
+    width: 2em;
+    height: 2em;    
+}
+
+.header-nav-back:before {
+    content: " ";
+    display: block;
+    width: 2em;
+    height: 2em;
+    background: url("../../images/back.png") no-repeat 50% 50%;
+    position: absolute;
 }

@@ -18,7 +18,9 @@
         UINavBar,
         UIView,
         View,
-        UIApp;
+        UIApp,
+        UINavItem,
+        App;
 
     // Dependences
 
@@ -26,6 +28,8 @@
     UINavBar = Mootor.UINavBar;
     UIView = Mootor.UIView;
     UIApp = Mootor.UIApp;
+    UINavItem = Mootor.UINavItem;
+    App = Mootor.App;
     
     // Event handlers
 
@@ -54,7 +58,6 @@
             self.panel.el.removeChild(headerEl);
 
             self.view.on("load", function(self) {
-                // FIXME CHECK (parentElement?)
                 var headerEl = m.app.ui.el.parentElement.getElementsByTagName("header")[0];
                 m.app.ui.el.parentElement.replaceChild(
                     self.ui.header.el,
@@ -64,7 +67,6 @@
         } else {
 
             self.view.on("load", function(self) {
-                // FIXME CHECK (parentElement?)
                 var headerEl = m.app.ui.el.parentElement.getElementsByTagName("header")[0];
                 m.app.ui.el.parentElement.replaceChild(
                     m.app.ui.header.el,
@@ -75,12 +77,33 @@
 
         }
     });
-
+    
     // Private constructors
 
     UIHeader = Mootor.UIHeader = function(options) {
+        var self = this;
         this.el = options.el;
         this.$el = $(this.el);
+        
+        // Back button
+        // TODO: mode this code
+        
+        this.back = new UINavItem({
+            container: this.el,
+            className: "header-nav-back"
+        });
+        this.back.hide();
+        this.back.$el.on("tap click", function() {
+            m.app.back();
+        });
+        App.on("go", function(app) {
+            if (app.history.length > 1) {
+                self.back.show();
+            } else {
+                self.back.hide();
+            }
+        });
+
     };
 
     // Prototypal inheritance
@@ -116,6 +139,7 @@
                 return titleEl.innerHTML;
             }
         }
+        
     });  
           
 }(window.$, window.Mootor));
