@@ -15,16 +15,21 @@
 
     var UINavBar,
     
-        UI;
+        UI,
+        UINavItem;
         
     // Dependences
     
     UI = Mootor.UI;
+    UINavItem = Mootor.UINavItem
 
     // Private constructors
 
-    UINavBar = Mootor.UINavBar = function() {
-        // code here
+    UINavBar = Mootor.UINavBar = function(options) {
+        this.el = options.container;
+        this.$el = $(this.el);
+        this.$el.addClass("m-navbar")
+        this.nav = UINavBar._initNavItems(this.el)
     };
 
     // Prototypal inheritance
@@ -34,35 +39,32 @@
     // Private static methods and properties
 
     $.extend(UINavBar, {
-        // code here
+        _initNavItems: function(el) {
+            var i,
+                j,
+                navGroupsElements = el.getElementsByTagName("nav"),
+                navItemsElements,
+                navGroups = [],
+                navItem;
+                
+            for (i = navGroupsElements.length; i--; i > 1) {
+                $(navGroupsElements[i]).addClass("m-nav")
+                navItemsElements = navGroupsElements[i].getElementsByTagName("a");
+                for (j = navItemsElements.length; j--;) {
+                    navItem = new UINavItem({
+                        el: navItemsElements[j]
+                    });
+                }
+                navGroups.push();
+            }
+            
+            return navGroups;
+        }
     });
 
     //Public methods
 
     $.extend(UINavBar.prototype, {
-        
-        /**
-        * A nav object
-        *
-        * @property nav
-        * @type Nav
-        */
-        nav: {
-            
-        },
-
-        /**
-        * Position
-        * The nav bar is statically positioned to the top or bottom of the window
-        *
-        * @method position
-        * @param {string} [position] The position for this nav bar, one of: "top", "bottom".
-        * @return {UINavBar} 
-        * @chainable
-        */
-        position: function(position) {
-            
-        }
     });  
 
 }(window.$, window.Mootor));

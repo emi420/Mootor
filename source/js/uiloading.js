@@ -23,6 +23,12 @@
 
     UI = Mootor.UI;
     UIApp = Mootor.UIApp;
+    
+    // Event handlers
+    
+    UIApp.on("init", function(self) {
+        new UILoading(self.el);
+    });
 
     // Event handlers
     UIApp.on("init", function(self) {
@@ -49,15 +55,15 @@
 
         });   
 
-    });    
+        $(document).on('ajaxStart', function(e, xhr, options){
+          // This gets fired if no other Ajax requests are currently active
+            m.app.ui.loading(true);
+        });
 
-    $(document).on('ajaxStart', function(e, xhr, options){
-      // This gets fired if no other Ajax requests are currently active
-        m.app.ui.loading(true);
-    });
+        $(document).on('ajaxStop', function(e, xhr, options){
+             m.app.ui.loading(false);
+        });    
 
-    $(document).on('ajaxStop', function(e, xhr, options){
-         m.app.ui.loading(false);
     });    
 
 

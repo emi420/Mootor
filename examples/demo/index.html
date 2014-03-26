@@ -21,9 +21,10 @@
   <script type="text/javascript" src="../../source/js/uiapp.js"></script>
   <script type="text/javascript" src="../../source/js/uiview.js"></script>
   <script type="text/javascript" src="../../source/js/uipanel.js"></script>  
-  <script type="text/javascript" src="../../source/js/uinavbar.js"></script>  
   <script type="text/javascript" src="../../source/js/uinavitem.js"></script>  
+  <script type="text/javascript" src="../../source/js/uinavbar.js"></script>  
   <script type="text/javascript" src="../../source/js/uiheader.js"></script>  
+  <script type="text/javascript" src="../../source/js/uiloading.js"></script>
   <script type="text/javascript" src="../../source/js/router.js"></script>
   <script type="text/javascript" src="../../source/js/route.js"></script>
 
@@ -44,12 +45,16 @@
             var app = m.app({
                 views: [
                     "index",
-                    "testview"
+                    "testview",
+                    "help",
+                    "about"
                 ]
             }).init();
     
             app.route("^$", app.view("index"));
             app.route("^#welcome/(.*)", app.view("testview"));
+            app.route("^#help", app.view("help"));
+            app.route("^#about", app.view("about"));
             
         }());
     

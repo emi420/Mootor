@@ -150,6 +150,46 @@ html, body {
   font-weight: bold;
   line-height: 55px;
 }
+/* line 15, ../../source/css/_uiheader.scss */
+.m-app .m-header-back {
+  position: absolute;
+  left: 1em;
+  top: .7em;
+  width: 2em;
+  height: 2em;
+}
+/* line 23, ../../source/css/_uiheader.scss */
+.m-app .m-header-back:before {
+  content: " ";
+  display: block;
+  width: 2em;
+  height: 2em;
+  position: absolute;
+  background: url("../../examples/demo/images/back.png") no-repeat 50% 50%;
+}
+/* line 1, ../../source/css/_uinavbar.scss */
+.m-app .m-nav {
+  position: absolute;
+  top: 0;
+  right: 1em;
+}
+/* line 6, ../../source/css/_uinavbar.scss */
+.m-app .m-nav .m-nav-item {
+  text-decoration: none;
+  float: left;
+  color: #fff;
+  padding: 1.4em .25em;
+  font-size: .9em;
+  width: auto;
+}
+/* line 14, ../../source/css/_uinavbar.scss */
+.m-app .m-nav .m-nav-item:before {
+  display: inline-block;
+}
+/* line 19, ../../source/css/_uinavbar.scss */
+.m-app .m-nav .m-nav-item.m-hidden {
+  display: none;
+}
 /* line 10, ../../source/css/_uiloading.scss */
 .m-app .m-loading {
   position: absolute;
