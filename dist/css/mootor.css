@@ -1,9 +1,10 @@
+@charset "UTF-8";
 /**
  * @summary Mootor CSS
  * @author Emilio Mariscal (emi420 [at] gmail.com)
  * @author Martín Szyszlican (martinsz [at] gmail.com)
  */
-/* line 17, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 17, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -25,45 +26,45 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-/* line 22, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 22, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html {
   line-height: 1;
 }
 
-/* line 24, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 24, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
-/* line 26, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 26, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 28, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 28, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
-/* line 30, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 30, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
-/* line 103, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 103, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
-/* line 32, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 32, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
-/* line 116, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 116, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
   display: block;
 }
@@ -79,7 +80,7 @@ html, body {
 .m-app {
   font-family: arial;
 }
-/* line 7, ../../source/css/_uipanel.scss */
+/* line 10, ../../source/css/_uipanel.scss */
 .m-app .m-views-container {
   position: relative;
   width: 100%;
@@ -88,7 +89,7 @@ html, body {
   box-sizing: border-box;
   padding-bottom: 55px;
 }
-/* line 16, ../../source/css/_uipanel.scss */
+/* line 19, ../../source/css/_uipanel.scss */
 .m-app .m-views-container .m-panel {
   position: relative;
   height: 100%;
@@ -98,7 +99,7 @@ html, body {
   overflow-x: hidden;
   float: left;
 }
-/* line 28, ../../source/css/_uipanel.scss */
+/* line 31, ../../source/css/_uipanel.scss */
 .m-app .m-views-container .m-panel {
   -webkit-transition-duration: 0;
   -webkit-backface-visibility: hidden;
@@ -146,8 +147,28 @@ html, body {
 .m-app header h1 {
   text-align: center;
   color: #f1f1f1;
-  font-weight: bold !important;
-  line-height: 55px !important;
+  font-weight: bold;
+  line-height: 55px;
+}
+/* line 10, ../../source/css/_uiloading.scss */
+.m-app .m-loading {
+  position: absolute;
+  top: 0;
+  z-index: 100000000000;
+  width: 100%;
+  height: 100%;
+}
+/* line 18, ../../source/css/_uiloading.scss */
+.m-app .m-loading.m-loading-default-style {
+  background-color: rgba(0, 0, 0, 0.6);
+  background-image: url(../../source/img/icons/black/128x128/loading.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  opacity: 1;
+  -webkit-transition: opacity 0.3s ease-out;
+  -moz-transition: opacity 0.3s ease-out;
+  -o-transition: opacity 0.3s ease-out;
+  transition: opacity 0.3s ease-out;
 }
 /* line 1, ../../source/css/_utils.scss */
 .m-app .m-hidden {

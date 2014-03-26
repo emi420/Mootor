@@ -24,10 +24,51 @@
     UI = Mootor.UI;
     UIApp = Mootor.UIApp;
 
+    // Event handlers
+    UIApp.on("init", function(self) {
+        var uiloading = new UILoading();
+
+        $.extend(UIApp.prototype, {
+            
+            /**
+            * Show/Hide the loading indicator
+            *
+            * @method loading
+            * @for UIApp
+            * @param {Boolean} [show] Show or hide the loading indicator
+            * @return {Boolean}
+            */
+            loading: function(show) {
+                if (show === true) {
+                    uiloading.show();
+                }
+                else {
+                    uiloading.hide();
+                }
+            }
+
+        });   
+
+    });    
+
+    $(document).on('ajaxStart', function(e, xhr, options){
+      // This gets fired if no other Ajax requests are currently active
+        m.app.ui.loading(true);
+    });
+
+    $(document).on('ajaxStop', function(e, xhr, options){
+         m.app.ui.loading(false);
+    });    
+
+
     // Private constructors
 
     UILoading = Mootor.UILoading = function() {
         // code here
+        var $el = this.$el = UILoading.create();
+        $el.appendTo(m.app.ui.$container);
+        //debugger;
+        this.hide();
     };
 
     // Prototypal inheritance
@@ -39,6 +80,13 @@
 
     $.extend(UILoading, {
         // code here
+        create: function() {
+            var el = document.createElement("div");
+            var $el = $(el);
+            $el.addClass("m-loading");
+            $el.addClass("m-loading-default-style");
+            return $el;
+        }
     });
 
     // Public methods
@@ -57,22 +105,6 @@
             
         }
     });      
-    
 
-    $.extend(UIApp.prototype, {
-        
-        /**
-        * Show/Hide the loading indicator
-        *
-        * @method loading
-        * @for UIApp
-        * @param {Boolean} [show] Show or hide the loading indicator
-        * @return {Boolean}
-        */
-        loading: function(show) {
-            
-        }
-
-    });   
       
 }(window.$, window.Mootor));

@@ -65,6 +65,8 @@
         this.el = this.$el[0];        
         this.$el.appendTo($container);
 
+        this.$container = $container;
+
         UIApp.dispatch("init", this);
         
     };
