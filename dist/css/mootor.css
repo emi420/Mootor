@@ -75,11 +75,263 @@ html, body {
   overflow: hidden;
 }
 
+/* line 15, ../../source/css/mootor.scss */
+.m-app {
+  /*
+   * "Loading..." animation
+   */
+  /*
+   * Circles
+   */
+  @keyframes moo-ui-loading-object-animation-0 {
+    /* line 51, ../../source/css/_uiloading.scss */
+    0% {
+      opacity: 0;
+    }
+
+    /* line 52, ../../source/css/_uiloading.scss */
+    25% {
+      opacity: 1;
+    }
+
+    /* line 53, ../../source/css/_uiloading.scss */
+    50% {
+      opacity: 0;
+    }
+
+    /* line 54, ../../source/css/_uiloading.scss */
+    75% {
+      opacity: 0;
+    }
+
+    /* line 55, ../../source/css/_uiloading.scss */
+    100% {
+      opacity: 0;
+    }
+}
+
+  @-webkit-keyframes moo-ui-loading-object-animation-0 {
+    /* line 51, ../../source/css/_uiloading.scss */
+    0% {
+      opacity: 0;
+    }
+
+    /* line 52, ../../source/css/_uiloading.scss */
+    25% {
+      opacity: 1;
+    }
+
+    /* line 53, ../../source/css/_uiloading.scss */
+    50% {
+      opacity: 0;
+    }
+
+    /* line 54, ../../source/css/_uiloading.scss */
+    75% {
+      opacity: 0;
+    }
+
+    /* line 55, ../../source/css/_uiloading.scss */
+    100% {
+      opacity: 0;
+    }
+}
+
+  @-moz-keyframes moo-ui-loading-object-animation-0 {
+    /* line 51, ../../source/css/_uiloading.scss */
+    0% {
+      opacity: 0;
+    }
+
+    /* line 52, ../../source/css/_uiloading.scss */
+    25% {
+      opacity: 1;
+    }
+
+    /* line 53, ../../source/css/_uiloading.scss */
+    50% {
+      opacity: 0;
+    }
+
+    /* line 54, ../../source/css/_uiloading.scss */
+    75% {
+      opacity: 0;
+    }
+
+    /* line 55, ../../source/css/_uiloading.scss */
+    100% {
+      opacity: 0;
+    }
+}
+
+  @keyframes moo-ui-loading-object-animation-1 {
+    /* line 68, ../../source/css/_uiloading.scss */
+    0% {
+      opacity: 0;
+    }
+
+    /* line 69, ../../source/css/_uiloading.scss */
+    25% {
+      opacity: 0;
+    }
+
+    /* line 70, ../../source/css/_uiloading.scss */
+    50% {
+      opacity: 1;
+    }
+
+    /* line 71, ../../source/css/_uiloading.scss */
+    75% {
+      opacity: 0;
+    }
+
+    /* line 72, ../../source/css/_uiloading.scss */
+    100% {
+      opacity: 0;
+    }
+}
+
+  @-webkit-keyframes moo-ui-loading-object-animation-1 {
+    /* line 68, ../../source/css/_uiloading.scss */
+    0% {
+      opacity: 0;
+    }
+
+    /* line 69, ../../source/css/_uiloading.scss */
+    25% {
+      opacity: 0;
+    }
+
+    /* line 70, ../../source/css/_uiloading.scss */
+    50% {
+      opacity: 1;
+    }
+
+    /* line 71, ../../source/css/_uiloading.scss */
+    75% {
+      opacity: 0;
+    }
+
+    /* line 72, ../../source/css/_uiloading.scss */
+    100% {
+      opacity: 0;
+    }
+}
+
+  @-moz-keyframes moo-ui-loading-object-animation-1 {
+    /* line 68, ../../source/css/_uiloading.scss */
+    0% {
+      opacity: 0;
+    }
+
+    /* line 69, ../../source/css/_uiloading.scss */
+    25% {
+      opacity: 0;
+    }
+
+    /* line 70, ../../source/css/_uiloading.scss */
+    50% {
+      opacity: 1;
+    }
+
+    /* line 71, ../../source/css/_uiloading.scss */
+    75% {
+      opacity: 0;
+    }
+
+    /* line 72, ../../source/css/_uiloading.scss */
+    100% {
+      opacity: 0;
+    }
+}
+
+  @keyframes moo-ui-loading-object-animation-2 {
+    /* line 85, ../../source/css/_uiloading.scss */
+    0% {
+      opacity: 0;
+    }
+
+    /* line 86, ../../source/css/_uiloading.scss */
+    25% {
+      opacity: 0;
+    }
+
+    /* line 87, ../../source/css/_uiloading.scss */
+    50% {
+      opacity: 0;
+    }
+
+    /* line 88, ../../source/css/_uiloading.scss */
+    75% {
+      opacity: 1;
+    }
+
+    /* line 89, ../../source/css/_uiloading.scss */
+    100% {
+      opacity: 0;
+    }
+}
+
+  @-webkit-keyframes moo-ui-loading-object-animation-2 {
+    /* line 85, ../../source/css/_uiloading.scss */
+    0% {
+      opacity: 0;
+    }
+
+    /* line 86, ../../source/css/_uiloading.scss */
+    25% {
+      opacity: 0;
+    }
+
+    /* line 87, ../../source/css/_uiloading.scss */
+    50% {
+      opacity: 0;
+    }
+
+    /* line 88, ../../source/css/_uiloading.scss */
+    75% {
+      opacity: 1;
+    }
+
+    /* line 89, ../../source/css/_uiloading.scss */
+    100% {
+      opacity: 0;
+    }
+}
+
+  @-moz-keyframes moo-ui-loading-object-animation-2 {
+    /* line 85, ../../source/css/_uiloading.scss */
+    0% {
+      opacity: 0;
+    }
+
+    /* line 86, ../../source/css/_uiloading.scss */
+    25% {
+      opacity: 0;
+    }
+
+    /* line 87, ../../source/css/_uiloading.scss */
+    50% {
+      opacity: 0;
+    }
+
+    /* line 88, ../../source/css/_uiloading.scss */
+    75% {
+      opacity: 1;
+    }
+
+    /* line 89, ../../source/css/_uiloading.scss */
+    100% {
+      opacity: 0;
+    }
+}
+
+}
 /* line 1, ../../source/css/_fonts.scss */
 .m-app {
   font-family: arial;
 }
-/* line 7, ../../source/css/_uipanel.scss */
+/* line 10, ../../source/css/_uipanel.scss */
 .m-app .m-views-container {
   position: relative;
   width: 100%;
@@ -88,7 +340,7 @@ html, body {
   box-sizing: border-box;
   padding-bottom: 55px;
 }
-/* line 16, ../../source/css/_uipanel.scss */
+/* line 19, ../../source/css/_uipanel.scss */
 .m-app .m-views-container .m-panel {
   position: relative;
   height: 100%;
@@ -98,7 +350,7 @@ html, body {
   overflow-x: hidden;
   float: left;
 }
-/* line 28, ../../source/css/_uipanel.scss */
+/* line 31, ../../source/css/_uipanel.scss */
 .m-app .m-views-container .m-panel {
   -webkit-transition-duration: 0;
   -webkit-backface-visibility: hidden;
@@ -146,8 +398,103 @@ html, body {
 .m-app header h1 {
   text-align: center;
   color: #f1f1f1;
-  font-weight: bold !important;
-  line-height: 55px !important;
+  font-weight: bold;
+  line-height: 55px;
+}
+/* line 15, ../../source/css/_uiheader.scss */
+.m-app .m-header-back {
+  position: absolute;
+  left: 1em;
+  top: .7em;
+  width: 2em;
+  height: 2em;
+}
+/* line 23, ../../source/css/_uiheader.scss */
+.m-app .m-header-back:before {
+  content: " ";
+  display: block;
+  width: 2em;
+  height: 2em;
+  position: absolute;
+  background: url("../../examples/demo/images/back.png") no-repeat 50% 50%;
+}
+/* line 1, ../../source/css/_uinavbar.scss */
+.m-app .m-nav {
+  position: absolute;
+  top: 0;
+  right: 1em;
+}
+/* line 6, ../../source/css/_uinavbar.scss */
+.m-app .m-nav .m-nav-item {
+  text-decoration: none;
+  float: left;
+  color: #fff;
+  padding: 1.4em .25em;
+  font-size: .9em;
+  width: auto;
+}
+/* line 14, ../../source/css/_uinavbar.scss */
+.m-app .m-nav .m-nav-item:before {
+  display: inline-block;
+}
+/* line 19, ../../source/css/_uinavbar.scss */
+.m-app .m-nav .m-nav-item.m-hidden {
+  display: none;
+}
+/* line 11, ../../source/css/_uiloading.scss */
+.m-app .m-loading {
+  width: 15em;
+  height: 3.2em;
+  margin-left: -7.5em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 1em;
+}
+/* line 19, ../../source/css/_uiloading.scss */
+.m-app .m-loading.moo-hidden {
+  display: none;
+}
+/* line 24, ../../source/css/_uiloading.scss */
+.m-app .m-loading-circle {
+  background-color: #555555;
+  float: left;
+  margin-left: 1.7em;
+  height: 3.2em;
+  width: 3.2em;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-direction: linear;
+  -webkit-border-radius: 2.1em;
+  -webkit-animation-delay: 0;
+  -moz-animation-duration: 1s;
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-direction: linear;
+  -moz-border-radius: 2.1em;
+  -moz-animation-delay: 0;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-direction: linear;
+  border-radius: 2.1em;
+  animation-delay: 0;
+}
+/* line 100, ../../source/css/_uiloading.scss */
+.m-app .m-loading-circle-01 {
+  -webkit-animation-name: moo-ui-loading-object-animation-0;
+  -moz-animation-name: moo-ui-loading-object-animation-0;
+  animation-name: moo-ui-loading-object-animation-0;
+}
+/* line 105, ../../source/css/_uiloading.scss */
+.m-app .m-loading-circle-02 {
+  -webkit-animation-name: moo-ui-loading-object-animation-1;
+  -moz-animation-name: moo-ui-loading-object-animation-1;
+  animation-name: moo-ui-loading-object-animation-1;
+}
+/* line 110, ../../source/css/_uiloading.scss */
+.m-app .m-loading-circle-03 {
+  -webkit-animation-name: moo-ui-loading-object-animation-2;
+  -moz-animation-name: moo-ui-loading-object-animation-2;
+  animation-name: moo-ui-loading-object-animation-2;
 }
 /* line 1, ../../source/css/_utils.scss */
 .m-app .m-hidden {

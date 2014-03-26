@@ -11,3 +11,22 @@ header {
         line-height: 55px;
     }
 }
+
+.m-header-back {
+    position: absolute;
+    left: 1em;
+    top: .7em;
+    width: 2em;
+    height: 2em;    
+}
+
+.m-header-back:before {
+    content: " ";
+    display: block;
+    width: 2em;
+    height: 2em;
+    position: absolute;
+
+    // FIXME CHECK: url path of back image
+    background: url("../../examples/demo/images/back.png") no-repeat 50% 50%;
+}

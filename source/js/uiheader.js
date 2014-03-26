@@ -81,29 +81,12 @@
     // Private constructors
 
     UIHeader = Mootor.UIHeader = function(options) {
-        var self = this;
-        this.el = options.el;
-        this.$el = $(this.el);
-        
-        // Back button
-        // TODO: mode this code
-        
-        this.back = new UINavItem({
-            container: this.el,
-            className: "header-nav-back"
+        var uinavbar;
+        uinavbar = new UINavBar({
+            container: options.el
         });
-        this.back.hide();
-        this.back.$el.on("tap click", function() {
-            m.app.back();
-        });
-        App.on("go", function(app) {
-            if (app.history.length > 1) {
-                self.back.show();
-            } else {
-                self.back.hide();
-            }
-        });
-
+        UIHeader._initBackButton(uinavbar);
+        return uinavbar;
     };
 
     // Prototypal inheritance
@@ -114,7 +97,33 @@
     // Private static methods and properties
 
     $.extend(UIHeader, {
-        // code here
+        
+        _initBackButton: function(self) {
+            var backEl = document.createElement("a"),
+                backNavEl = document.createElement("nav");
+                
+            backNavEl.appendChild(backEl);
+            backNavEl.setAttribute("class", "m-nav-header-back-container");
+
+            self.el.appendChild(backNavEl);
+            
+            self.back = new UINavItem({
+                el: backEl
+            });
+            self.back.$el.addClass("m-header-back")
+            self.back.hide();
+            self.back.$el.on("tap click", function() {
+                m.app.back();
+            });
+            App.on("go", function(app) {
+                if (app.history.length > 1) {
+                    self.back.show();
+                } else {
+                    self.back.hide();
+                }
+            });            
+        }
+        
     });
 
     // Public methods

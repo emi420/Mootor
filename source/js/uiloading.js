@@ -23,11 +23,23 @@
 
     UI = Mootor.UI;
     UIApp = Mootor.UIApp;
+    
+    // Event handlers
+    
+    UIApp.on("init", function(self) {
+        self.loading = new UILoading(self.el);
+        self.loading.hide();
+    });
 
     // Private constructors
 
-    UILoading = Mootor.UILoading = function() {
-        // code here
+    UILoading = Mootor.UILoading = function(containerEl) {
+        this.$el = $("<div>").addClass("m-loading");
+        this.el = this.$el[0];        
+        $("<div>").addClass("m-loading-circle m-loading-circle-01").appendTo(this.el)
+        $("<div>").addClass("m-loading-circle m-loading-circle-02").appendTo(this.el)
+        $("<div>").addClass("m-loading-circle m-loading-circle-03").appendTo(this.el)
+        this.$el.appendTo(containerEl.parentElement);
     };
 
     // Prototypal inheritance

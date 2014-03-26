@@ -24,23 +24,9 @@
     // Private constructors
 
     Mootor.UINavItem = UINavItem = function(options) {
-
-        var navEl,
-            aEl;
-
-        if (options.container !== undefined) {
-            navEl = document.createElement("nav"),
-            aEl = document.createElement("a");            
-            if (options.className) {
-                aEl.setAttribute("class", options.className)
-            }
-            navEl.appendChild(aEl);
-            options.container.appendChild(navEl);
-        }
-        
-        this.el = navEl;
-        this.$el = $(navEl);
-
+        this.el = options.el;
+        this.$el = $(this.el);
+        this.$el.addClass("m-nav-item")
     };
 
     // Prototypal inheritance

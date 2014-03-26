@@ -115,7 +115,6 @@
                 } else {
                     this.history.pop();    
                 }
-                console.log(this.history);
             } else {
                 throw(new Error("Route " + url + " is not defined"));
             }                       
@@ -134,17 +133,6 @@
             if (url !== undefined) {
                 m.app.go(url);
             }
-        },        
-
-        /**
-        * Go to next view in the history
-        *
-        * @method forward
-        * @chainable
-        * @return Route
-        */
-        forward: function(id) {
-            return this;
         },        
 
         /**
