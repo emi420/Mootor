@@ -42,7 +42,7 @@
 
     App.on("ready", function() {
         _appGo = function(url) {
-            m.app.go(url);
+            m.app.go(url,true);
         }
         m.app.go(_pendingGo);
     });

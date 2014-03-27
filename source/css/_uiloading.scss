@@ -1,6 +1,7 @@
 // Config
 
 $transitionDuration: .3s;
+$loading-background-color: #555 !default;
 
 @import "compass/css3/transition";
 @import "compass/css3/transform";
@@ -23,7 +24,113 @@ $transitionDuration: .3s;
 
         opacity: 1;
         @include transition(opacity $transitionDuration ease-out);    
+
+
+        &.m-hidden {
+            opacity: 0;            
+        }
+
     }
 
+    &.m-loading-circles {
+
+        background-color: rgba(0,0,0,0.6);
+
+        .m-loading-circle {
+            background-color: $loading-background-color;
+            float: left;
+            margin-left: 1.7em;
+            margin-top: 50%;
+            height: 3.2em;
+            width: 3.2em;
+
+            -webkit-animation-duration: 1s;
+            -webkit-animation-iteration-count: infinite;
+            -webkit-animation-direction: linear;
+            -webkit-border-radius: 2.1em;
+            -webkit-animation-delay: 0;
+
+            -moz-animation-duration: 1s;
+            -moz-animation-iteration-count: infinite;
+            -moz-animation-direction: linear;
+            -moz-border-radius: 2.1em;
+            -moz-animation-delay: 0;
+
+            animation-duration: 1s;
+            animation-iteration-count: infinite;
+            animation-direction: linear;
+            border-radius: 2.1em;
+            animation-delay: 0;
+        }
+     
+
+        @mixin m-loading-object-animation-default-0() {
+            0% { opacity: 0; }   
+            25% { opacity: 1; }
+            50% { opacity: 0; }
+            75% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+        @keyframes m-loading-object-animation-0 {
+            @include m-loading-object-animation-default-0;
+        }
+        @-webkit-keyframes m-loading-object-animation-0 {
+            @include m-loading-object-animation-default-0;
+        }
+        @-moz-keyframes m-loading-object-animation-0 {
+            @include m-loading-object-animation-default-0;
+        }
+        
+        @mixin m-loading-object-animation-default-1() {
+            0% { opacity: 0; }   
+            25% { opacity: 0; }
+            50% { opacity: 1; }
+            75% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+        @keyframes m-loading-object-animation-1 {
+            @include m-loading-object-animation-default-1;
+        }
+        @-webkit-keyframes m-loading-object-animation-1 {
+            @include m-loading-object-animation-default-1;
+        }
+        @-moz-keyframes m-loading-object-animation-1 {
+            @include m-loading-object-animation-default-1;
+        }
+        
+        @mixin m-loading-object-animation-default-2() {
+            0% { opacity: 0; }   
+            25% { opacity: 0; }
+            50% { opacity: 0; }
+            75% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        @keyframes m-loading-object-animation-2 {
+            @include m-loading-object-animation-default-2;
+        }
+        @-webkit-keyframes m-loading-object-animation-2 {
+            @include m-loading-object-animation-default-2;
+        }
+        @-moz-keyframes m-loading-object-animation-2 {
+            @include m-loading-object-animation-default-2;
+        }
+        .m-loading-circle-01 {
+            -webkit-animation-name: m-loading-object-animation-0;
+            -moz-animation-name: m-loading-object-animation-0;
+            animation-name: m-loading-object-animation-0;
+        }
+        .m-loading-circle-02 {
+            -webkit-animation-name: m-loading-object-animation-1;
+            -moz-animation-name: m-loading-object-animation-1;
+            animation-name: m-loading-object-animation-1;
+        }
+        .m-loading-circle-03 {
+            -webkit-animation-name: m-loading-object-animation-2;
+            -moz-animation-name: m-loading-object-animation-2;
+            animation-name: m-loading-object-animation-2;
+        }
+    
+    }
 }
+
 

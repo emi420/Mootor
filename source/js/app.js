@@ -104,20 +104,22 @@
         * @param {String} url The url to go
         * @return Route
         */
-        go: function(url) {
+        go: function(url,isUrlChange) {
             var route;
             route =  m.app.route(url);
             if (route !== undefined) {
                 App._currentRoute = route;
                 App.dispatch("go", this);
+                //console.log(this.history,route.url);
                 if (this.history[this.history.length - 2] !== route.url) {
                     this.history.push(route.url);    
                 } else {
-                    this.history.pop();    
+                    this.history.pop();
                 }
             } else {
                 throw(new Error("Route " + url + " is not defined"));
             }                       
+            //console.log(this.history);
             return route
         },        
 
@@ -130,6 +132,7 @@
         */
         back: function() {
             var url = m.app.history[m.app.history.length - 2];
+            //console.log("back",url);
             if (url !== undefined) {
                 m.app.go(url);
             }

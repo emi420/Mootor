@@ -84,7 +84,12 @@
             var el = document.createElement("div");
             var $el = $(el);
             $el.addClass("m-loading");
-            $el.addClass("m-loading-default-style");
+            $el.addClass("m-loading-circles");//m-loading-default-style
+
+            $("<div>").addClass("m-loading-circle m-loading-circle-01").appendTo($el)
+            $("<div>").addClass("m-loading-circle m-loading-circle-02").appendTo($el)
+            $("<div>").addClass("m-loading-circle m-loading-circle-03").appendTo($el)
+
             return $el;
         }
     });

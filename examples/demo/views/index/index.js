@@ -9,7 +9,7 @@
         inputEmail.focus();            
     });
     
-    $("#btnLogin").on("tap", function() {
+    $("#btnLogin").on("click tap", function() {
         var email = inputEmail.value;
         if (email !== "") {
             m.app.go("#welcome/" + email );
