@@ -23,12 +23,6 @@
 
     UI = Mootor.UI;
     UIApp = Mootor.UIApp;
-    
-    // Event handlers
-    
-    UIApp.on("init", function(self) {
-        new UILoading(self.el);
-    });
 
     // Event handlers
     UIApp.on("init", function(self) {
