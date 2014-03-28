@@ -34,7 +34,17 @@
             UIView.dispatch("init", self.ui);
         });
 
+
+        self.on("ready", function() {
+            for (var index in UIView._enhancements) {
+                $(UIView._enhancements[index].selector).each(function (i,element) {
+                    new UIView._enhancements[index].className(element);    
+                });    
+            }
+        });
     });
+
+
         
     // Private constructors
 
@@ -47,6 +57,20 @@
     // Private static methods and properties
 
     Event.extend(UIView, "UIView");
+
+    // Private static methods and properties
+
+    $.extend(UIView, {
+        /**
+        * Element enhancements
+        * @private
+        */
+        _enhancements: [],
+
+        registerEnhancement: function(selector,className) {
+            UIView._enhancements.push({selector:selector,className:className});
+        }
+    });
 
     // Public methods
 
