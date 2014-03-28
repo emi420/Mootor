@@ -49,15 +49,6 @@
 
         });   
 
-        $(document).on('ajaxStart', function(e, xhr, options){
-          // This gets fired if no other Ajax requests are currently active
-            m.app.ui.loading(true);
-        });
-
-        $(document).on('ajaxStop', function(e, xhr, options){
-             m.app.ui.loading(false);
-        });    
-
     });    
 
 
