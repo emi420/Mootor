@@ -11,7 +11,7 @@
     var goToTestview = function() {
         var email = $("#inputEmail")[0].value;
         m.app.go("#welcome/" + email );
-    }
+    };
     
     $("#btnLogin").on("tap", function() {
         $("#btnLogin").off("click", goToTestview);

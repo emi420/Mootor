@@ -38,12 +38,12 @@
 
     _appGo = function(url) { 
         _pendingGo = window.location.hash;
-    }
+    };
 
     App.on("ready", function() {
         _appGo = function(url) {
             m.app.go(url,true);
-        }
+        };
         m.app.go(_pendingGo);
     });
 
@@ -74,7 +74,7 @@
                     match;
 
                 for (s in Router._collection) {
-                    match = url.match(new RegExp(s))
+                    match = url.match(new RegExp(s));
                     if (match !== null) {
                         route = Router._collection[s];
                         route.view.params = match.slice(1, match.length);
@@ -84,7 +84,8 @@
                 }
                 return undefined;
             } else {
-                return Router._collection[url] = new Route(url, view);
+                Router._collection[url] = new Route(url, view);
+                return Router._collection[url];
             }
         }
     });

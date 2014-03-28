@@ -55,7 +55,6 @@
     // Private constructors
 
     UILoading = Mootor.UILoading = function() {
-        // code here
         var $el = this.$el = UILoading.create();
         $el.appendTo(m.app.ui.$container);
         //debugger;
@@ -70,16 +69,22 @@
     // Private static methods and properties
 
     $.extend(UILoading, {
-        // code here
+        /**
+        * Create and add the loading indicator's elements to the DOM
+        *
+        * @method create
+        * @return {Zepto} Zeptified element
+        */
+
         create: function() {
             var el = document.createElement("div");
             var $el = $(el);
             $el.addClass("m-loading");
             $el.addClass("m-loading-circles");//m-loading-default-style
 
-            $("<div>").addClass("m-loading-circle m-loading-circle-01").appendTo($el)
-            $("<div>").addClass("m-loading-circle m-loading-circle-02").appendTo($el)
-            $("<div>").addClass("m-loading-circle m-loading-circle-03").appendTo($el)
+            $("<div>").addClass("m-loading-circle m-loading-circle-01").appendTo($el);
+            $("<div>").addClass("m-loading-circle m-loading-circle-02").appendTo($el);
+            $("<div>").addClass("m-loading-circle m-loading-circle-03").appendTo($el);
 
             return $el;
         }

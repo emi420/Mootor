@@ -35,11 +35,11 @@
 
     var goToLogin = function () {
         m.app.go("");
-    }
+    };
 
     var goToNote = function (id) {
         m.app.go("#compose/"+id);
-    }
+    };
 
     function initNotesList() {
         $(".note-container .note:not(#note-template)").remove();
@@ -50,13 +50,12 @@
             $noteElement.html(window.notes[n].text);
             $noteElement.appendTo(".note-container");
             
-            $noteElement.on("tap click", function(e) {
-                goToNote(e.target.id);
-                e.preventDefault();
-            });
-
-
+            $noteElement.on("tap click", tapnote);
         }
+    }
+    function tapnote(e) {
+        goToNote(e.target.id);
+        e.preventDefault();
     }
     
 }(window.$));

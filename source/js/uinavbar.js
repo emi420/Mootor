@@ -21,15 +21,15 @@
     // Dependences
     
     UI = Mootor.UI;
-    UINavItem = Mootor.UINavItem
+    UINavItem = Mootor.UINavItem;
 
     // Private constructors
 
     UINavBar = Mootor.UINavBar = function(options) {
         this.el = options.container;
         this.$el = $(this.el);
-        this.$el.addClass("m-navbar")
-        this.nav = UINavBar._initNavItems(this.el)
+        this.$el.addClass("m-navbar");
+        this.nav = UINavBar._initNavItems(this.el);
     };
 
     // Prototypal inheritance
@@ -48,7 +48,7 @@
                 navItem;
                 
             for (i = navGroupsElements.length; i--; i > 1) {
-                $(navGroupsElements[i]).addClass("m-nav")
+                $(navGroupsElements[i]).addClass("m-nav");
                 navItemsElements = navGroupsElements[i].getElementsByTagName("a");
                 for (j = navItemsElements.length; j--;) {
                     navItem = new UINavItem({

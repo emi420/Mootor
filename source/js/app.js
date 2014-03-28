@@ -120,7 +120,7 @@
                 throw(new Error("Route " + url + " is not defined"));
             }                       
             //console.log(this.history);
-            return route
+            return route;
         },        
 
         /**
@@ -168,7 +168,7 @@
         init: function() {
             var self = this;
             App.dispatch("init", this);   
-            this.init = function() { return self };
+            this.init = function() { return self; };
             return this;
         }
         

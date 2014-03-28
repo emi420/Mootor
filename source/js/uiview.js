@@ -32,7 +32,7 @@
 
         self.on("getHtml", function() {
             UIView.dispatch("init", self.ui);
-        })
+        });
 
     });
         
@@ -52,7 +52,7 @@
 
     UIView.prototype = {
         // code here
-    }
+    };
 
     // Prototypal inheritance
 

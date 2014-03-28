@@ -54,7 +54,7 @@
 
             self.panel.position("right").show();
 
-            UIPanel._startTransition()
+            UIPanel._startTransition();
 
             window.setTimeout(function() {
                 UIPanel.dispatch("transitionEnd", self.panel);
@@ -126,7 +126,7 @@
             UIPanel.on("transitionEnd", function () {
                 uiapp.$el.removeClass("m-transition-hslide");
                 uiapp.$el.addClass("m-transition-hslide-right").removeClass("m-transition-hslide-left");
-            })
+            });
         },
         
         _addTransitionClass: function (self) {
@@ -162,7 +162,7 @@
                    }
                }
                return null;
-            }
+            };
 
 
             var t = getStyleBySelector(".m-app .m-transition-hslide");

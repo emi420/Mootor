@@ -49,7 +49,7 @@
         m.context.viewport = {
             width: $container.width(),
             height: $container.height()
-        }
+        };
 
         // Event handlers
     
@@ -57,11 +57,11 @@
             m.context.viewport = {
                 width: $container.width(),
                 height: $container.height()
-            }
-        })
+            };
+        });
 
 
-        this.$el = $("<div>").addClass("m-views-container")
+        this.$el = $("<div>").addClass("m-views-container");
         this.el = this.$el[0];        
         this.$el.appendTo($container);
 
