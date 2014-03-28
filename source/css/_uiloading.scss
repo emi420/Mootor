@@ -38,11 +38,12 @@ $loading-background-color: #555 !default;
 
         .m-loading-circle {
             background-color: $loading-background-color;
-            float: left;
-            margin-left: 1.7em;
-            margin-top: 50%;
-            height: 3.2em;
-            width: 3.2em;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            height: 3em;
+            width: 3em;
+            margin-top: -1.5em;
 
             -webkit-animation-duration: 1s;
             -webkit-animation-iteration-count: infinite;
@@ -63,74 +64,25 @@ $loading-background-color: #555 !default;
             animation-delay: 0;
         }
      
-
-        @mixin m-loading-object-animation-default-0() {
-            0% { opacity: 0; }   
-            25% { opacity: 1; }
-            50% { opacity: 0; }
-            75% { opacity: 0; }
-            100% { opacity: 0; }
-        }
-        @keyframes m-loading-object-animation-0 {
-            @include m-loading-object-animation-default-0;
-        }
-        @-webkit-keyframes m-loading-object-animation-0 {
-            @include m-loading-object-animation-default-0;
-        }
-        @-moz-keyframes m-loading-object-animation-0 {
-            @include m-loading-object-animation-default-0;
-        }
-        
-        @mixin m-loading-object-animation-default-1() {
-            0% { opacity: 0; }   
-            25% { opacity: 0; }
-            50% { opacity: 1; }
-            75% { opacity: 0; }
-            100% { opacity: 0; }
-        }
-        @keyframes m-loading-object-animation-1 {
-            @include m-loading-object-animation-default-1;
-        }
-        @-webkit-keyframes m-loading-object-animation-1 {
-            @include m-loading-object-animation-default-1;
-        }
-        @-moz-keyframes m-loading-object-animation-1 {
-            @include m-loading-object-animation-default-1;
-        }
-        
-        @mixin m-loading-object-animation-default-2() {
-            0% { opacity: 0; }   
-            25% { opacity: 0; }
-            50% { opacity: 0; }
-            75% { opacity: 1; }
-            100% { opacity: 0; }
-        }
-        @keyframes m-loading-object-animation-2 {
-            @include m-loading-object-animation-default-2;
-        }
-        @-webkit-keyframes m-loading-object-animation-2 {
-            @include m-loading-object-animation-default-2;
-        }
-        @-moz-keyframes m-loading-object-animation-2 {
-            @include m-loading-object-animation-default-2;
-        }
         .m-loading-circle-01 {
             -webkit-animation-name: m-loading-object-animation-0;
             -moz-animation-name: m-loading-object-animation-0;
             animation-name: m-loading-object-animation-0;
+            margin-left: -5.5em;
         }
         .m-loading-circle-02 {
             -webkit-animation-name: m-loading-object-animation-1;
             -moz-animation-name: m-loading-object-animation-1;
             animation-name: m-loading-object-animation-1;
+            margin-left: -1.5em;
         }
         .m-loading-circle-03 {
             -webkit-animation-name: m-loading-object-animation-2;
             -moz-animation-name: m-loading-object-animation-2;
             animation-name: m-loading-object-animation-2;
+            margin-left: 2.5em;
         }
-    
+
     }
 }
-
 

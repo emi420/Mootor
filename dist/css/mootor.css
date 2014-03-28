@@ -217,258 +217,16 @@ html, body {
 /* line 35, ../../source/css/_uiloading.scss */
 .m-app .m-loading.m-loading-circles {
   background-color: rgba(0, 0, 0, 0.6);
-  @keyframes m-loading-object-animation-0 {
-    /* line 68, ../../source/css/_uiloading.scss */
-    0% {
-      opacity: 0;
-    }
-
-    /* line 69, ../../source/css/_uiloading.scss */
-    25% {
-      opacity: 1;
-    }
-
-    /* line 70, ../../source/css/_uiloading.scss */
-    50% {
-      opacity: 0;
-    }
-
-    /* line 71, ../../source/css/_uiloading.scss */
-    75% {
-      opacity: 0;
-    }
-
-    /* line 72, ../../source/css/_uiloading.scss */
-    100% {
-      opacity: 0;
-    }
-}
-
-  @-webkit-keyframes m-loading-object-animation-0 {
-    /* line 68, ../../source/css/_uiloading.scss */
-    0% {
-      opacity: 0;
-    }
-
-    /* line 69, ../../source/css/_uiloading.scss */
-    25% {
-      opacity: 1;
-    }
-
-    /* line 70, ../../source/css/_uiloading.scss */
-    50% {
-      opacity: 0;
-    }
-
-    /* line 71, ../../source/css/_uiloading.scss */
-    75% {
-      opacity: 0;
-    }
-
-    /* line 72, ../../source/css/_uiloading.scss */
-    100% {
-      opacity: 0;
-    }
-}
-
-  @-moz-keyframes m-loading-object-animation-0 {
-    /* line 68, ../../source/css/_uiloading.scss */
-    0% {
-      opacity: 0;
-    }
-
-    /* line 69, ../../source/css/_uiloading.scss */
-    25% {
-      opacity: 1;
-    }
-
-    /* line 70, ../../source/css/_uiloading.scss */
-    50% {
-      opacity: 0;
-    }
-
-    /* line 71, ../../source/css/_uiloading.scss */
-    75% {
-      opacity: 0;
-    }
-
-    /* line 72, ../../source/css/_uiloading.scss */
-    100% {
-      opacity: 0;
-    }
-}
-
-  @keyframes m-loading-object-animation-1 {
-    /* line 85, ../../source/css/_uiloading.scss */
-    0% {
-      opacity: 0;
-    }
-
-    /* line 86, ../../source/css/_uiloading.scss */
-    25% {
-      opacity: 0;
-    }
-
-    /* line 87, ../../source/css/_uiloading.scss */
-    50% {
-      opacity: 1;
-    }
-
-    /* line 88, ../../source/css/_uiloading.scss */
-    75% {
-      opacity: 0;
-    }
-
-    /* line 89, ../../source/css/_uiloading.scss */
-    100% {
-      opacity: 0;
-    }
-}
-
-  @-webkit-keyframes m-loading-object-animation-1 {
-    /* line 85, ../../source/css/_uiloading.scss */
-    0% {
-      opacity: 0;
-    }
-
-    /* line 86, ../../source/css/_uiloading.scss */
-    25% {
-      opacity: 0;
-    }
-
-    /* line 87, ../../source/css/_uiloading.scss */
-    50% {
-      opacity: 1;
-    }
-
-    /* line 88, ../../source/css/_uiloading.scss */
-    75% {
-      opacity: 0;
-    }
-
-    /* line 89, ../../source/css/_uiloading.scss */
-    100% {
-      opacity: 0;
-    }
-}
-
-  @-moz-keyframes m-loading-object-animation-1 {
-    /* line 85, ../../source/css/_uiloading.scss */
-    0% {
-      opacity: 0;
-    }
-
-    /* line 86, ../../source/css/_uiloading.scss */
-    25% {
-      opacity: 0;
-    }
-
-    /* line 87, ../../source/css/_uiloading.scss */
-    50% {
-      opacity: 1;
-    }
-
-    /* line 88, ../../source/css/_uiloading.scss */
-    75% {
-      opacity: 0;
-    }
-
-    /* line 89, ../../source/css/_uiloading.scss */
-    100% {
-      opacity: 0;
-    }
-}
-
-  @keyframes m-loading-object-animation-2 {
-    /* line 102, ../../source/css/_uiloading.scss */
-    0% {
-      opacity: 0;
-    }
-
-    /* line 103, ../../source/css/_uiloading.scss */
-    25% {
-      opacity: 0;
-    }
-
-    /* line 104, ../../source/css/_uiloading.scss */
-    50% {
-      opacity: 0;
-    }
-
-    /* line 105, ../../source/css/_uiloading.scss */
-    75% {
-      opacity: 1;
-    }
-
-    /* line 106, ../../source/css/_uiloading.scss */
-    100% {
-      opacity: 0;
-    }
-}
-
-  @-webkit-keyframes m-loading-object-animation-2 {
-    /* line 102, ../../source/css/_uiloading.scss */
-    0% {
-      opacity: 0;
-    }
-
-    /* line 103, ../../source/css/_uiloading.scss */
-    25% {
-      opacity: 0;
-    }
-
-    /* line 104, ../../source/css/_uiloading.scss */
-    50% {
-      opacity: 0;
-    }
-
-    /* line 105, ../../source/css/_uiloading.scss */
-    75% {
-      opacity: 1;
-    }
-
-    /* line 106, ../../source/css/_uiloading.scss */
-    100% {
-      opacity: 0;
-    }
-}
-
-  @-moz-keyframes m-loading-object-animation-2 {
-    /* line 102, ../../source/css/_uiloading.scss */
-    0% {
-      opacity: 0;
-    }
-
-    /* line 103, ../../source/css/_uiloading.scss */
-    25% {
-      opacity: 0;
-    }
-
-    /* line 104, ../../source/css/_uiloading.scss */
-    50% {
-      opacity: 0;
-    }
-
-    /* line 105, ../../source/css/_uiloading.scss */
-    75% {
-      opacity: 1;
-    }
-
-    /* line 106, ../../source/css/_uiloading.scss */
-    100% {
-      opacity: 0;
-    }
-}
-
 }
 /* line 39, ../../source/css/_uiloading.scss */
 .m-app .m-loading.m-loading-circles .m-loading-circle {
   background-color: #555555;
-  float: left;
-  margin-left: 1.7em;
-  margin-top: 50%;
-  height: 3.2em;
-  width: 3.2em;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 3em;
+  width: 3em;
+  margin-top: -1.5em;
   -webkit-animation-duration: 1s;
   -webkit-animation-iteration-count: infinite;
   -webkit-animation-direction: linear;
@@ -485,23 +243,26 @@ html, body {
   border-radius: 2.1em;
   animation-delay: 0;
 }
-/* line 117, ../../source/css/_uiloading.scss */
+/* line 67, ../../source/css/_uiloading.scss */
 .m-app .m-loading.m-loading-circles .m-loading-circle-01 {
   -webkit-animation-name: m-loading-object-animation-0;
   -moz-animation-name: m-loading-object-animation-0;
   animation-name: m-loading-object-animation-0;
+  margin-left: -5.5em;
 }
-/* line 122, ../../source/css/_uiloading.scss */
+/* line 73, ../../source/css/_uiloading.scss */
 .m-app .m-loading.m-loading-circles .m-loading-circle-02 {
   -webkit-animation-name: m-loading-object-animation-1;
   -moz-animation-name: m-loading-object-animation-1;
   animation-name: m-loading-object-animation-1;
+  margin-left: -1.5em;
 }
-/* line 127, ../../source/css/_uiloading.scss */
+/* line 79, ../../source/css/_uiloading.scss */
 .m-app .m-loading.m-loading-circles .m-loading-circle-03 {
   -webkit-animation-name: m-loading-object-animation-2;
   -moz-animation-name: m-loading-object-animation-2;
   animation-name: m-loading-object-animation-2;
+  margin-left: 2.5em;
 }
 /* line 1, ../../source/css/_utils.scss */
 .m-app .m-hidden {
@@ -543,4 +304,247 @@ html, body {
 .m-app .m-doc .m-app .m-panel {
   width: calc(100% - 3em);
   height: calc(100% - 4em);
+}
+
+@keyframes m-loading-object-animation-0 {
+  /* line 4, ../../source/css/_uiloading_animations.scss */
+  0% {
+    opacity: 0;
+  }
+
+  /* line 5, ../../source/css/_uiloading_animations.scss */
+  25% {
+    opacity: 1;
+  }
+
+  /* line 6, ../../source/css/_uiloading_animations.scss */
+  50% {
+    opacity: 0;
+  }
+
+  /* line 7, ../../source/css/_uiloading_animations.scss */
+  75% {
+    opacity: 0;
+  }
+
+  /* line 8, ../../source/css/_uiloading_animations.scss */
+  100% {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes m-loading-object-animation-0 {
+  /* line 4, ../../source/css/_uiloading_animations.scss */
+  0% {
+    opacity: 0;
+  }
+
+  /* line 5, ../../source/css/_uiloading_animations.scss */
+  25% {
+    opacity: 1;
+  }
+
+  /* line 6, ../../source/css/_uiloading_animations.scss */
+  50% {
+    opacity: 0;
+  }
+
+  /* line 7, ../../source/css/_uiloading_animations.scss */
+  75% {
+    opacity: 0;
+  }
+
+  /* line 8, ../../source/css/_uiloading_animations.scss */
+  100% {
+    opacity: 0;
+  }
+}
+
+@-moz-keyframes m-loading-object-animation-0 {
+  /* line 4, ../../source/css/_uiloading_animations.scss */
+  0% {
+    opacity: 0;
+  }
+
+  /* line 5, ../../source/css/_uiloading_animations.scss */
+  25% {
+    opacity: 1;
+  }
+
+  /* line 6, ../../source/css/_uiloading_animations.scss */
+  50% {
+    opacity: 0;
+  }
+
+  /* line 7, ../../source/css/_uiloading_animations.scss */
+  75% {
+    opacity: 0;
+  }
+
+  /* line 8, ../../source/css/_uiloading_animations.scss */
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes m-loading-object-animation-1 {
+  /* line 21, ../../source/css/_uiloading_animations.scss */
+  0% {
+    opacity: 0;
+  }
+
+  /* line 22, ../../source/css/_uiloading_animations.scss */
+  25% {
+    opacity: 0;
+  }
+
+  /* line 23, ../../source/css/_uiloading_animations.scss */
+  50% {
+    opacity: 1;
+  }
+
+  /* line 24, ../../source/css/_uiloading_animations.scss */
+  75% {
+    opacity: 0;
+  }
+
+  /* line 25, ../../source/css/_uiloading_animations.scss */
+  100% {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes m-loading-object-animation-1 {
+  /* line 21, ../../source/css/_uiloading_animations.scss */
+  0% {
+    opacity: 0;
+  }
+
+  /* line 22, ../../source/css/_uiloading_animations.scss */
+  25% {
+    opacity: 0;
+  }
+
+  /* line 23, ../../source/css/_uiloading_animations.scss */
+  50% {
+    opacity: 1;
+  }
+
+  /* line 24, ../../source/css/_uiloading_animations.scss */
+  75% {
+    opacity: 0;
+  }
+
+  /* line 25, ../../source/css/_uiloading_animations.scss */
+  100% {
+    opacity: 0;
+  }
+}
+
+@-moz-keyframes m-loading-object-animation-1 {
+  /* line 21, ../../source/css/_uiloading_animations.scss */
+  0% {
+    opacity: 0;
+  }
+
+  /* line 22, ../../source/css/_uiloading_animations.scss */
+  25% {
+    opacity: 0;
+  }
+
+  /* line 23, ../../source/css/_uiloading_animations.scss */
+  50% {
+    opacity: 1;
+  }
+
+  /* line 24, ../../source/css/_uiloading_animations.scss */
+  75% {
+    opacity: 0;
+  }
+
+  /* line 25, ../../source/css/_uiloading_animations.scss */
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes m-loading-object-animation-2 {
+  /* line 38, ../../source/css/_uiloading_animations.scss */
+  0% {
+    opacity: 0;
+  }
+
+  /* line 39, ../../source/css/_uiloading_animations.scss */
+  25% {
+    opacity: 0;
+  }
+
+  /* line 40, ../../source/css/_uiloading_animations.scss */
+  50% {
+    opacity: 0;
+  }
+
+  /* line 41, ../../source/css/_uiloading_animations.scss */
+  75% {
+    opacity: 1;
+  }
+
+  /* line 42, ../../source/css/_uiloading_animations.scss */
+  100% {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes m-loading-object-animation-2 {
+  /* line 38, ../../source/css/_uiloading_animations.scss */
+  0% {
+    opacity: 0;
+  }
+
+  /* line 39, ../../source/css/_uiloading_animations.scss */
+  25% {
+    opacity: 0;
+  }
+
+  /* line 40, ../../source/css/_uiloading_animations.scss */
+  50% {
+    opacity: 0;
+  }
+
+  /* line 41, ../../source/css/_uiloading_animations.scss */
+  75% {
+    opacity: 1;
+  }
+
+  /* line 42, ../../source/css/_uiloading_animations.scss */
+  100% {
+    opacity: 0;
+  }
+}
+
+@-moz-keyframes m-loading-object-animation-2 {
+  /* line 38, ../../source/css/_uiloading_animations.scss */
+  0% {
+    opacity: 0;
+  }
+
+  /* line 39, ../../source/css/_uiloading_animations.scss */
+  25% {
+    opacity: 0;
+  }
+
+  /* line 40, ../../source/css/_uiloading_animations.scss */
+  50% {
+    opacity: 0;
+  }
+
+  /* line 41, ../../source/css/_uiloading_animations.scss */
+  75% {
+    opacity: 1;
+  }
+
+  /* line 42, ../../source/css/_uiloading_animations.scss */
+  100% {
+    opacity: 0;
+  }
 }

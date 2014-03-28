@@ -1,0 +1,53 @@
+
+
+@mixin m-loading-object-animation-default-0() {
+    0% { opacity: 0; }   
+    25% { opacity: 1; }
+    50% { opacity: 0; }
+    75% { opacity: 0; }
+    100% { opacity: 0; }
+}
+@keyframes m-loading-object-animation-0 {
+    @include m-loading-object-animation-default-0;
+}
+@-webkit-keyframes m-loading-object-animation-0 {
+    @include m-loading-object-animation-default-0;
+}
+@-moz-keyframes m-loading-object-animation-0 {
+    @include m-loading-object-animation-default-0;
+}
+
+@mixin m-loading-object-animation-default-1() {
+    0% { opacity: 0; }   
+    25% { opacity: 0; }
+    50% { opacity: 1; }
+    75% { opacity: 0; }
+    100% { opacity: 0; }
+}
+@keyframes m-loading-object-animation-1 {
+    @include m-loading-object-animation-default-1;
+}
+@-webkit-keyframes m-loading-object-animation-1 {
+    @include m-loading-object-animation-default-1;
+}
+@-moz-keyframes m-loading-object-animation-1 {
+    @include m-loading-object-animation-default-1;
+}
+
+@mixin m-loading-object-animation-default-2() {
+    0% { opacity: 0; }   
+    25% { opacity: 0; }
+    50% { opacity: 0; }
+    75% { opacity: 1; }
+    100% { opacity: 0; }
+}
+@keyframes m-loading-object-animation-2 {
+    @include m-loading-object-animation-default-2;
+}
+@-webkit-keyframes m-loading-object-animation-2 {
+    @include m-loading-object-animation-default-2;
+}
+@-moz-keyframes m-loading-object-animation-2 {
+    @include m-loading-object-animation-default-2;
+}
+
