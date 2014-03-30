@@ -413,6 +413,8 @@
             "line": 22,
             "description": "The App class defines the main object of the applications",
             "is_constructor": 1,
+            "access": "private",
+            "tagname": "",
             "params": [
                 {
                     "name": "options",
@@ -936,27 +938,20 @@
     "classitems": [
         {
             "file": "js/app.js",
-            "line": 38,
-            "description": "The application's version number\nNote: It's not Mootor version, this value is defined in application code, not framework code.",
-            "itemtype": "property",
-            "name": "version",
-            "type": "Strign",
-            "class": "App",
-            "module": "App"
-        },
-        {
-            "file": "js/app.js",
-            "line": 56,
+            "line": 50,
             "description": "Stores the navigation history. \nAn array of views, ordered in the sequence that they were visited by the user.",
             "itemtype": "property",
             "name": "history",
             "type": "array",
+            "example": [
+                "\n    if (m.app.history.length === 1) {\n         console.log(\"You are on the first view\")\n    }"
+            ],
             "class": "App",
             "module": "App"
         },
         {
             "file": "js/app.js",
-            "line": 66,
+            "line": 64,
             "description": "The application's version number\nNote: It's not Mootor version, this value is defined in application code, not framework code.",
             "itemtype": "method",
             "name": "version",
@@ -972,12 +967,15 @@
                 "description": "Version number or name",
                 "type": "String"
             },
+            "example": [
+                "\n    m.app.version(\"beta1\");\n    if (m.app.version().indexOf(\"beta\") > -1) {\n        console.log(\"Warning: beta version\")\n    }"
+            ],
             "class": "App",
             "module": "App"
         },
         {
             "file": "js/app.js",
-            "line": 81,
+            "line": 84,
             "description": "Application settings\nIf called with a key, returns the value. If called with key and value, sets value to key.",
             "itemtype": "method",
             "name": "settings",
@@ -997,16 +995,18 @@
             "return": {
                 "description": "object the setting value"
             },
+            "example": [
+                "\n    m.app.settings(\"debug\", true);\n    if (m.app.settings(\"debug\") === true) {\n         console.log(\"Debug mode activated.\");\n    }\n    "
+            ],
             "class": "App",
             "module": "App"
         },
         {
             "file": "js/app.js",
-            "line": 99,
-            "description": "Go to a view",
+            "line": 108,
+            "description": "Go to an url",
             "itemtype": "method",
             "name": "go",
-            "chainable": 1,
             "params": [
                 {
                     "name": "url",
@@ -1017,12 +1017,15 @@
             "return": {
                 "description": "Route"
             },
+            "example": [
+                "\n    m.app.go(\"/product/15/\");"
+            ],
             "class": "App",
             "module": "App"
         },
         {
             "file": "js/app.js",
-            "line": 126,
+            "line": 134,
             "description": "Go to the previous view in the history",
             "itemtype": "method",
             "name": "back",
@@ -1030,12 +1033,15 @@
             "return": {
                 "description": "Route"
             },
+            "example": [
+                "\n    m.app.back();"
+            ],
             "class": "App",
             "module": "App"
         },
         {
             "file": "js/app.js",
-            "line": 141,
+            "line": 151,
             "description": "Set callbacks for app events",
             "itemtype": "method",
             "name": "on",
@@ -1043,13 +1049,23 @@
             "return": {
                 "description": "App instance"
             },
+            "example": [
+                "\n    m.app.on(\"ready\", function(self) {\n        console.log(\"App started.\");\n    });"
+            ],
             "class": "App",
             "module": "App"
         },
         {
             "file": "js/app.js",
-            "line": 178,
-            "description": "Creates a new app with the defined options.\nIf the app is already created, it can be called without options to have a reference to the Mootor app. \n\n App instance factory\n\n window.m.app({\n   views: [\n      \"index\",\n      \"view1\"\n   ]\n });",
+            "line": 173,
+            "description": "off: function(event, callback) {\n    return this;\n},",
+            "class": "App",
+            "module": "App"
+        },
+        {
+            "file": "js/app.js",
+            "line": 200,
+            "description": "Creates a new app with the defined options.\nIf the app is already created, it can be called without options to have a reference to the Mootor app. \n\nApp instance factory",
             "itemtype": "method",
             "name": "app",
             "params": [
@@ -1063,6 +1079,9 @@
             "return": {
                 "description": "App"
             },
+            "example": [
+                "\n    window.m.app({\n      views: [\n         \"index\",\n         \"view1\"\n      ]\n    });"
+            ],
             "class": "window.m",
             "module": "App"
         },
@@ -1073,32 +1092,41 @@
             "itemtype": "property",
             "name": "os",
             "type": "function",
+            "example": [
+                "\n    if (m.context.os === \"android\") {\n         console.log(\"Your device use Android.\");\n    }"
+            ],
             "class": "Context",
             "module": "App"
         },
         {
             "file": "js/context.js",
-            "line": 25,
+            "line": 29,
             "description": "Browser info",
             "itemtype": "property",
             "name": "browser",
             "type": "string",
+            "example": [
+                "\n    if (m.context.browser === \"firefox\") {\n         console.log(\"Your browser is Firefox.\");\n    }"
+            ],
             "class": "Context",
             "module": "App"
         },
         {
             "file": "js/context.js",
-            "line": 32,
+            "line": 40,
             "description": "Viewport info",
             "itemtype": "property",
             "name": "viewport",
             "type": "object",
+            "example": [
+                "\n    img.width = m.context.viewport.width\n    img.height = m.context.viewport.height"
+            ],
             "class": "Context",
             "module": "App"
         },
         {
             "file": "js/context.js",
-            "line": 53,
+            "line": 64,
             "itemtype": "property",
             "name": "context",
             "type": "Context",
@@ -1118,6 +1146,23 @@
             "file": "js/event.js",
             "line": 25,
             "description": "Add event to collection",
+            "itemtype": "method",
+            "name": "on",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Name of the event",
+                    "type": "String"
+                },
+                {
+                    "name": "callback",
+                    "description": "Callback function\\",
+                    "type": "Function"
+                }
+            ],
+            "example": [
+                "\n    Mootor.on(\"myCustomEvent\", function(self) {\n        console.log(\"Event fired!\");\n    });"
+            ],
             "access": "private",
             "tagname": "",
             "class": "Event",
@@ -1125,19 +1170,53 @@
         },
         {
             "file": "js/event.js",
-            "line": 36,
+            "line": 43,
             "description": "Dispatch event",
+            "itemtype": "method",
+            "name": "dispatch",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Name of the event",
+                    "type": "String"
+                },
+                {
+                    "name": "instance",
+                    "description": "Instance for scope",
+                    "type": "Object"
+                }
+            ],
             "access": "private",
             "tagname": "",
+            "example": [
+                "\n    Mootor.dispatch(\"myCustomEvent\", myInstance);"
+            ],
             "class": "Event",
             "module": "Mootor"
         },
         {
             "file": "js/event.js",
-            "line": 60,
+            "line": 71,
             "description": "Extend objects with Event methods",
+            "itemtype": "method",
+            "name": "extend",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "Object to extend",
+                    "type": "Object"
+                },
+                {
+                    "name": "objectName",
+                    "description": "String name of the object",
+                    "type": "String"
+                }
+            ],
             "access": "private",
             "tagname": "",
+            "example": [
+                "\n    Person = function(name) {\n        this.name = name;\n    }\n\n    Mootor.Event.extend(Person.prototype);\n\n    person = new Person(\"Anon\");\n    person.on(\"fire\", function(self) {\n         console.log(self.name + \" is on fire!\");\n    }\n    person.dispatch(\"fire\", person);"
+            ],
             "class": "Event",
             "module": "Mootor"
         },
@@ -1148,12 +1227,15 @@
             "itemtype": "property",
             "name": "regex",
             "type": "String",
+            "example": [
+                "\n    url_regex = m.app.route(\"index.html\").regex;"
+            ],
             "class": "Route",
             "module": "Router"
         },
         {
             "file": "js/route.js",
-            "line": 42,
+            "line": 44,
             "description": "The view that implements this route\nIf called with no parameters, it returns the currently set view in this route.",
             "itemtype": "method",
             "name": "view",
@@ -1168,6 +1250,9 @@
             "return": {
                 "description": "view"
             },
+            "example": [
+                "\n    url_view = m.app.route(\"index.html\").view;"
+            ],
             "class": "Route",
             "module": "Router"
         },
@@ -1197,6 +1282,9 @@
             "return": {
                 "description": "Route"
             },
+            "example": [
+                "\n    // Set route\n    m.app.route(\"index.html\", m.app.view(\"index\"));\n    /\n    // Get route\n    route = m.app.route(\"index.html\");"
+            ],
             "class": "Router",
             "module": "Router"
         },
@@ -1210,12 +1298,15 @@
                 "description": "",
                 "type": "DOM Element"
             },
+            "example": [
+                "\n    appDOMElement = m.app.ui.el;\n    appDOMElement.addEventListener(\"touchend\", function() {\n        console.log(\"Header was touched.\");\n    });"
+            ],
             "class": "UI",
             "module": "UI"
         },
         {
             "file": "js/ui.js",
-            "line": 41,
+            "line": 46,
             "description": "Zepto/jQuery object for DOM element",
             "itemtype": "property",
             "name": "$el",
@@ -1223,12 +1314,15 @@
                 "description": "",
                 "type": "Zepto/jQuery object instance"
             },
+            "example": [
+                "\n    $appDOMElement = m.app.ui.$el;\n    $appDOMElement.on(\"tap\", function() {\n        console.log(\"Header was tapped.\");\n    });"
+            ],
             "class": "UI",
             "module": "UI"
         },
         {
             "file": "js/ui.js",
-            "line": 49,
+            "line": 59,
             "description": "Shows element (not necesarily, since the element's parent might be hidden or out of view)",
             "itemtype": "method",
             "name": "show",
@@ -1236,12 +1330,15 @@
                 "description": "",
                 "type": "UI"
             },
+            "example": [
+                "\n    m.app.ui.show();"
+            ],
             "class": "UI",
             "module": "UI"
         },
         {
             "file": "js/ui.js",
-            "line": 59,
+            "line": 71,
             "description": "Hides element from view",
             "itemtype": "method",
             "name": "hide",
@@ -1249,6 +1346,9 @@
                 "description": "",
                 "type": "UI"
             },
+            "example": [
+                "\n    m.app.ui.hide();"
+            ],
             "class": "UI",
             "module": "UI"
         },
@@ -1485,12 +1585,15 @@
                 "description": "",
                 "type": "UINavItem"
             },
+            "example": [
+                "\n    m.app.view(\"index\").ui.header.back.hide();"
+            ],
             "class": "UIHeader",
             "module": "UI"
         },
         {
             "file": "js/uiheader.js",
-            "line": 138,
+            "line": 140,
             "description": "Title\nThe text to display in the header\nIf called with no arguments returns the current title",
             "itemtype": "method",
             "name": "title",
@@ -1507,6 +1610,9 @@
                 "type": "String"
             },
             "chainable": 1,
+            "example": [
+                "\n    m.app.view(\"index\").ui.header.title(\"My title\");"
+            ],
             "class": "UIHeader",
             "module": "UI"
         },
@@ -1528,12 +1634,15 @@
                 "description": "",
                 "type": "Boolean"
             },
+            "example": [
+                "\n    m.app.ui.loading();\n    m.app.ui.loading(true);"
+            ],
             "class": "UIApp",
             "module": "UI"
         },
         {
             "file": "js/uiloading.js",
-            "line": 72,
+            "line": 75,
             "description": "Create and add the loading indicator's elements to the DOM",
             "itemtype": "method",
             "name": "create",
@@ -1546,7 +1655,7 @@
         },
         {
             "file": "js/uiloading.js",
-            "line": 97,
+            "line": 100,
             "description": "Set the style for the loading animation",
             "itemtype": "method",
             "name": "style",
@@ -1643,7 +1752,7 @@
         },
         {
             "file": "js/uipanel.js",
-            "line": 215,
+            "line": 217,
             "description": "Set or get transition type",
             "itemtype": "method",
             "name": "transition",
@@ -1663,6 +1772,29 @@
             "module": "UI"
         },
         {
+            "file": "js/uipanel.js",
+            "line": 233,
+            "description": "Set callback function for an event",
+            "itemtype": "method",
+            "name": "on",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Event string name",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Callback function",
+                "type": "Function"
+            },
+            "example": [
+                "\n    m.app.view(\"index\").panel.on(\"transitionEnd\", function(self) {\n        console.log(\"transition end!\")\n    });"
+            ],
+            "class": "UIPanel",
+            "module": "UI"
+        },
+        {
             "file": "js/uiview.js",
             "line": 64,
             "description": "Element enhancements",
@@ -1675,64 +1807,33 @@
             "file": "js/view.js",
             "line": 110,
             "description": "Views collection",
-            "access": "private",
-            "tagname": "",
             "class": "View",
             "module": "View"
         },
         {
             "file": "js/view.js",
-            "line": 116,
+            "line": 115,
             "description": "Current active view",
-            "access": "private",
-            "tagname": "",
             "class": "View",
             "module": "View"
         },
         {
             "file": "js/view.js",
-            "line": 122,
+            "line": 120,
             "description": "Init View instance, load HTML, CSS and JavaScript files for the view",
-            "access": "private",
-            "tagname": "",
-            "itemtype": "method",
-            "name": "_init",
-            "params": [
-                {
-                    "name": "options",
-                    "description": "A list of options",
-                    "type": "Array"
-                },
-                {
-                    "name": "self",
-                    "description": "View instance",
-                    "type": "View"
-                }
-            ],
             "class": "View",
             "module": "View"
         },
         {
             "file": "js/view.js",
-            "line": 153,
+            "line": 146,
             "description": "Get view HTML",
-            "access": "private",
-            "tagname": "",
-            "itemtype": "method",
-            "name": "_getHtml",
-            "params": [
-                {
-                    "name": "self",
-                    "description": "View instance",
-                    "type": "View"
-                }
-            ],
             "class": "View",
             "module": "View"
         },
         {
             "file": "js/view.js",
-            "line": 256,
+            "line": 239,
             "description": "Title is the friendly name for the current view.\nWhen called without parameters, returns a string containing the title. When called with parameters, sets the title.",
             "itemtype": "method",
             "name": "title",
@@ -1747,12 +1848,15 @@
             "return": {
                 "description": "string"
             },
+            "example": [
+                "\n    // Get title\n    m.app.view(\"index\").title();\n   \n    // Get title\n    m.app.view(\"index\").title(\"My title\");"
+            ],
             "class": "View",
             "module": "View"
         },
         {
             "file": "js/view.js",
-            "line": 274,
+            "line": 263,
             "description": "Sets an event handler for the view\nPossible values for event: load, beforeLoad, unload, beforeUnload, init\nTODO: Define which parameters are passed to the callback function.",
             "itemtype": "method",
             "name": "on",
@@ -1771,12 +1875,15 @@
             "return": {
                 "description": "View"
             },
+            "example": [
+                "\n    m.app.view(\"index\").on(\"load\", function(self) {\n       console.log(\"Index view is loaded.\"); \n    });"
+            ],
             "class": "View",
             "module": "View"
         },
         {
             "file": "js/view.js",
-            "line": 293,
+            "line": 286,
             "description": "Unsets event handlers for the view\nPossible values for event: load, beforeLoad, unload, beforeUnload, init",
             "itemtype": "method",
             "name": "off",
@@ -1801,7 +1908,7 @@
         },
         {
             "file": "js/view.js",
-            "line": 310,
+            "line": 304,
             "description": "Create or get a view",
             "itemtype": "method",
             "name": "view",
@@ -1821,6 +1928,9 @@
             "return": {
                 "description": "View the referenced view object"
             },
+            "example": [
+                "\n   indexView = m.app.view(\"index\");"
+            ],
             "class": "App",
             "module": "View"
         }
@@ -1831,20 +1941,12 @@
             "line": " js/uiheader.js:129"
         },
         {
+            "message": "Missing item type\noff: function(event, callback) {\n    return this;\n},",
+            "line": " js/app.js:173"
+        },
+        {
             "message": "Missing item type\nEvents collection",
             "line": " js/event.js:19"
-        },
-        {
-            "message": "Missing item type\nAdd event to collection",
-            "line": " js/event.js:25"
-        },
-        {
-            "message": "Missing item type\nDispatch event",
-            "line": " js/event.js:36"
-        },
-        {
-            "message": "Missing item type\nExtend objects with Event methods",
-            "line": " js/event.js:60"
         },
         {
             "message": "Missing item type\nBack\nThe back button",
@@ -1860,7 +1962,15 @@
         },
         {
             "message": "Missing item type\nCurrent active view",
-            "line": " js/view.js:116"
+            "line": " js/view.js:115"
+        },
+        {
+            "message": "Missing item type\nInit View instance, load HTML, CSS and JavaScript files for the view",
+            "line": " js/view.js:120"
+        },
+        {
+            "message": "Missing item type\nGet view HTML",
+            "line": " js/view.js:146"
         }
     ]
 }
