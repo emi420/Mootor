@@ -55,6 +55,38 @@
             
                 <li><a href="../classes/UIApp.html">UIApp</a></li>
             
+                <li><a href="../classes/UIForm.html">UIForm</a></li>
+            
+                <li><a href="../classes/UIFormCamera.html">UIFormCamera</a></li>
+            
+                <li><a href="../classes/UIFormCheckbox.html">UIFormCheckbox</a></li>
+            
+                <li><a href="../classes/UIFormDate.html">UIFormDate</a></li>
+            
+                <li><a href="../classes/UIFormDraw.html">UIFormDraw</a></li>
+            
+                <li><a href="../classes/UIFormFieldset.html">UIFormFieldset</a></li>
+            
+                <li><a href="../classes/UIFormGeo.html">UIFormGeo</a></li>
+            
+                <li><a href="../classes/UIFormInput.html">UIFormInput</a></li>
+            
+                <li><a href="../classes/UIFormOption.html">UIFormOption</a></li>
+            
+                <li><a href="../classes/UIFormPassword.html">UIFormPassword</a></li>
+            
+                <li><a href="../classes/UIFormPseudoInput.html">UIFormPseudoInput</a></li>
+            
+                <li><a href="../classes/UIFormSelect.html">UIFormSelect</a></li>
+            
+                <li><a href="../classes/UIFormText.html">UIFormText</a></li>
+            
+                <li><a href="../classes/UIFormTextArea.html">UIFormTextArea</a></li>
+            
+                <li><a href="../classes/UIFormTime.html">UIFormTime</a></li>
+            
+                <li><a href="../classes/UIFormToggleSwitch.html">UIFormToggleSwitch</a></li>
+            
                 <li><a href="../classes/UIHeader.html">UIHeader</a></li>
             
                 <li><a href="../classes/UILoading.html">UILoading</a></li>
@@ -139,17 +171,23 @@
 
     &quot;use strict&quot;;
 
-    var UI,
-        UINavBar;
+    var UINavBar,
+    
+        UI,
+        UINavItem;
         
     // Dependences
     
     UI = Mootor.UI;
+    UINavItem = Mootor.UINavItem
 
     // Private constructors
 
-    UINavBar = Mootor.UINavBar = function() {
-        // code here
+    UINavBar = Mootor.UINavBar = function(options) {
+        this.el = options.container;
+        this.$el = $(this.el);
+        this.$el.addClass(&quot;m-navbar&quot;)
+        this.nav = UINavBar._initNavItems(this.el)
     };
 
     // Prototypal inheritance
@@ -159,35 +197,32 @@
     // Private static methods and properties
 
     $.extend(UINavBar, {
-        // code here
+        _initNavItems: function(el) {
+            var i,
+                j,
+                navGroupsElements = el.getElementsByTagName(&quot;nav&quot;),
+                navItemsElements,
+                navGroups = [],
+                navItem;
+                
+            for (i = navGroupsElements.length; i--; i &gt; 1) {
+                $(navGroupsElements[i]).addClass(&quot;m-nav&quot;)
+                navItemsElements = navGroupsElements[i].getElementsByTagName(&quot;a&quot;);
+                for (j = navItemsElements.length; j--;) {
+                    navItem = new UINavItem({
+                        el: navItemsElements[j]
+                    });
+                }
+                navGroups.push();
+            }
+            
+            return navGroups;
+        }
     });
 
     //Public methods
 
     $.extend(UINavBar.prototype, {
-        
-        /**
-        * A nav object
-        *
-        * @property nav
-        * @type Nav
-        */
-        nav: {
-            
-        },
-
-        /**
-        * Position
-        * The nav bar is statically positioned to the top or bottom of the window
-        *
-        * @method position
-        * @param {string} [position] The position for this nav bar, one of: &quot;top&quot;, &quot;bottom&quot;.
-        * @return {UINavBar} 
-        * @chainable
-        */
-        position: function(position) {
-            
-        }
     });  
 
 }(window.$, window.Mootor));

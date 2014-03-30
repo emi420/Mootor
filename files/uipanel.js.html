@@ -55,6 +55,38 @@
             
                 <li><a href="../classes/UIApp.html">UIApp</a></li>
             
+                <li><a href="../classes/UIForm.html">UIForm</a></li>
+            
+                <li><a href="../classes/UIFormCamera.html">UIFormCamera</a></li>
+            
+                <li><a href="../classes/UIFormCheckbox.html">UIFormCheckbox</a></li>
+            
+                <li><a href="../classes/UIFormDate.html">UIFormDate</a></li>
+            
+                <li><a href="../classes/UIFormDraw.html">UIFormDraw</a></li>
+            
+                <li><a href="../classes/UIFormFieldset.html">UIFormFieldset</a></li>
+            
+                <li><a href="../classes/UIFormGeo.html">UIFormGeo</a></li>
+            
+                <li><a href="../classes/UIFormInput.html">UIFormInput</a></li>
+            
+                <li><a href="../classes/UIFormOption.html">UIFormOption</a></li>
+            
+                <li><a href="../classes/UIFormPassword.html">UIFormPassword</a></li>
+            
+                <li><a href="../classes/UIFormPseudoInput.html">UIFormPseudoInput</a></li>
+            
+                <li><a href="../classes/UIFormSelect.html">UIFormSelect</a></li>
+            
+                <li><a href="../classes/UIFormText.html">UIFormText</a></li>
+            
+                <li><a href="../classes/UIFormTextArea.html">UIFormTextArea</a></li>
+            
+                <li><a href="../classes/UIFormTime.html">UIFormTime</a></li>
+            
+                <li><a href="../classes/UIFormToggleSwitch.html">UIFormToggleSwitch</a></li>
+            
                 <li><a href="../classes/UIHeader.html">UIHeader</a></li>
             
                 <li><a href="../classes/UILoading.html">UILoading</a></li>
@@ -138,102 +170,87 @@
 
     &quot;use strict&quot;;
 
-    var UI,
-        UIPanel,
-        Event,
-        View;
+    var UIPanel,
+        
+        UI,
+        View,
+        UIView,
+        UIApp,
+        Event;
         
     // Dependences 
-    
-    UI = Mootor.UI;    
-    Event = Mootor.Event; 
-    View = Mootor.View;   
+
+    Event = Mootor.Event;
+    UI = Mootor.UI;  
+    View = Mootor.View;
+    UIView = Mootor.UIView;
+    UIApp = Mootor.UIApp;
 
     // Event handlers
-    
-    Event.on(&quot;UIApp:init&quot;, function(self) {
-        var width = self.el.offsetWidth,
-            uiapp = self;
-        self.$el.css(&quot;width&quot;, width * 2);
 
-        self.$el.css(&quot;-webkit-transform&quot;,&quot;translateX(0)&quot;);
-        self.$el.css(&quot;-moz-transform&quot;,&quot;translateX(0)&quot;);
+    UIView.on(&quot;init&quot;, function(self) {
+        var view = self.view;
+        
+        self.panel = new UIPanel();
+        self.panel.hide();
+                
+        if (View._getHtmlPath(view) !== undefined) {
+            self.panel.el.innerHTML = View._getHtmlPath(view);                
+        } else {
+            view.on(&quot;getHtml&quot;, function(view) {
+                self.panel.el.innerHTML = View._getHtmlPath(view);
+            });
+        }
+        
+        UIPanel.on(&quot;transitionEnd&quot;, function(self) {
+            if (Mootor.App._currentView !== view) {
+                view.ui.panel.hide();    
+            } 
+        });
+        
+        view.on(&quot;load&quot;, function(view) {
 
-        self.$el.addClass(&quot;m-transition-slide&quot;);
+            self.panel.position(&quot;right&quot;).show();
 
-        Event.on(&quot;View:load&quot;, function(self) {
-            var width = uiapp.el.offsetWidth;
-
-            uiapp.$el.addClass(&quot;m-transition-slide&quot;);
-
-            uiapp.$el.css(&quot;-webkit-transform&quot;,&quot;translateX(-100%)&quot;);
-            uiapp.$el.css(&quot;-moz-transform&quot;,&quot;translateX(-100%)&quot;);
+            UIPanel._startTransition()
 
             window.setTimeout(function() {
-                uiapp.$el.removeClass(&quot;m-transition-slide&quot;);
+                UIPanel.dispatch(&quot;transitionEnd&quot;, self.panel);
+            }, UIPanel._transitionDuration);
 
-                uiapp.$el.css(&quot;-webkit-transform&quot;, &quot;translateX(0)&quot;);
-                uiapp.$el.css(&quot;-moz-transform&quot;, &quot;translateX(0)&quot;);
-
-                self.ui.$el.css(&quot;left&quot;, &quot;0px&quot;);
-            }, 500);
+            UIPanel.on(&quot;transitionEnd&quot;, function() {
+                self.panel.position(&quot;left&quot;);
+            });
+        });
+    
+        view.on(&quot;unload&quot;, function(view) {
+            self.panel.position(&quot;left&quot;);
         }); 
-
+                
+    });
+    
+    UIApp.on(&quot;init&quot;, function(self) {
+        UIPanel._addTransitionClass();    
+        UIPanel._setTransitionDuration();  
     });
 
-
+  
     // Private constructors
 
-    UIPanel = function(uiview) {
-        UIPanel._init(uiview, this);
+    UIPanel = Mootor.UIPanel = function() {
+        UIPanel._init(this);
     };
-
-    // Event handlers
-    
-    Event.on(&quot;UIView:init&quot;, function(self) {
-        
-        // Initialize panels on UIView init
-        
-        $.extend(self, {
-            panel: new UIPanel(self)
-        })
-
-        var width = m.app.ui.el.offsetWidth;
-        self.panel.el.innerHTML = Mootor.View._getHtmlPath(self.view);
-
-        m.app.ui.$el.css(&quot;width&quot;, width + &quot;px&quot;);
-
-        $(&quot;head&quot;).append(View._get(self.view.id).script);
-        
-        Event.dispatch(&quot;View:getScript:&quot; + self.view.id, self.view)
-        Event.dispatch(&quot;View:init:&quot; + self.view.id, self.view)
-
-        // on m.app.go
-
-        Event.on(&quot;View:unload:&quot; + self.view.id, function(self) {
-            self.ui.panel.$el.css(&quot;left&quot;, 0);
-            setTimeout(function() {
-                if (Mootor.App._currentView !== self) {
-                    self.ui.panel.hide();
-                }
-                m.app.ui.$el.css(&quot;width&quot;, width + &quot;px&quot;);
-            },500);
-        }); 
-        
-        Event.on(&quot;View:load:&quot; + self.view.id, function(self) {
-            self.ui.panel.$el.css(&quot;left&quot;, width);
-            self.ui.panel.show();
-        }); 
-    });
-    
 
     // Prototypal inheritance
 
     $.extend(UIPanel.prototype, UI.prototype);
-
+    Event.extend(UIPanel, &quot;UIPanel&quot;);
+    
     // Private static methods and properties
         
     $.extend(UIPanel, {
+
+        DEFAULT_TRANSITION: &quot;hslide&quot;,
         
         //Initialize panel
 
@@ -243,43 +260,102 @@
         * @method _init
         * @private
         */
-        _init: function(uiview, self) {
+        _init: function(self) {
 
             var $el,
-                el,
-                width;
+                el;
             
-            el = self.el = uiview.el = document.createElement(&quot;div&quot;);
-            $el = uiview.$el = self.$el = $(el);
-            $el.addClass(&quot;m-panel&quot;);
+            el = self.el = document.createElement(&quot;div&quot;);
+            $el = self.$el = $(el);
+            $el.addClass(&quot;m-panel overthrow&quot;);
 
-            el.setAttribute(&quot;class&quot;, &quot;m-panel&quot;);
+            self.transition(UIPanel.DEFAULT_TRANSITION);
 
-            // Fixed panel width
-            width = m.app.ui.el.offsetWidth;
-            $el.width(width + &quot;px&quot;);
-            
             m.app.ui.$el.append(el);            
             
-            self.hide();
+        },
+        
+        _startTransition: function (self) {
+            var uiapp = m.app.ui;
+            uiapp.$el.addClass(&quot;m-transition-hslide&quot;);
+            uiapp.$el.addClass(&quot;m-transition-hslide-left&quot;).removeClass(&quot;m-transition-hslide-right&quot;);
             
-        }
+            
+            UIPanel.on(&quot;transitionEnd&quot;, function () {
+                uiapp.$el.removeClass(&quot;m-transition-hslide&quot;);
+                uiapp.$el.addClass(&quot;m-transition-hslide-right&quot;).removeClass(&quot;m-transition-hslide-left&quot;);
+            })
+        },
+        
+        _addTransitionClass: function (self) {
+            var uiapp = m.app.ui;
 
+            if (UIPanel.DEFAULT_TRANSITION == &quot;hslide&quot;) {
+                uiapp.$el.addClass(&quot;m-transition-hslide m-double-width&quot;);
+                uiapp.$el.addClass(&quot;m-transition-hslide-right&quot;).removeClass(&quot;m-transition-hslide-left&quot;);
+            }
+        },
+        
+        _transitionDuration: null,
+        
+        _setTransitionDuration: function() {
+
+            var getStyleBySelector = function ( selector ) {
+               var sheetList = document.styleSheets;
+               var ruleList;
+               var i, j;
+
+               /* look through stylesheets in reverse order that
+                  they appear in the document */
+               for (i=sheetList.length-1; i &gt;= 0; i--)
+               {
+                   ruleList = sheetList[i].cssRules;
+                   for (j=0; j&lt;ruleList.length; j++)
+                   {
+                       if (ruleList[j].type == CSSRule.STYLE_RULE &amp;&amp; 
+                           ruleList[j].selectorText == selector)
+                       {
+                           return ruleList[j].style;
+                       }   
+                   }
+               }
+               return null;
+            }
+
+
+            var t = getStyleBySelector(&quot;.m-app .m-transition-hslide&quot;);
+
+            var transitionDurationCSS = t.transitionDuration || t.webkitTransitionDuration || t.operaTransitionDuration || t.mozTransitionDuration;
+            var transitionDurationMiliseconds = parseFloat(transitionDurationCSS) * 1000;
+            UIPanel._transitionDuration = transitionDurationMiliseconds;
+        }        
+        
     });
 
     // Public prototype    
     
     $.extend(UIPanel.prototype, {
 
+        _transition: UIPanel.DEFAULT_TRANSITION,
+
         /**
-        * Move the element to the specified coordinates. 
+        * Move the element to the specified position inside the UIApp / m-views-container. 
         * If coordinates are not specified, it returns coordinates object with the current position.
         *
         * @method position
         * @param {object} [coordinates] Object with coordinates. Example: {x: 0, y: 0}
         * @return {object} Object with coordinates. Example: {x: 0, y: 0}
         */
-        position: function(coordinates) {
+        position: function(side) {
+            if (side) {
+                var counterSide = (side == &quot;left&quot; ? &quot;right&quot; : &quot;left&quot;);
+                this.$el.addClass(&quot;m-position-&quot;+side).removeClass(&quot;m-position-&quot;+counterSide);
+                return this;                
+            }
+            else {
+                var $el = $(this.el);
+                return $el.hasClass(&quot;m-position-left&quot;) ? &quot;left&quot; : &quot;right&quot;; 
+            }
             
         },
 
@@ -301,12 +377,23 @@
         * @param {String} [transition] Transition type. MUST be one of: slide-left, slide-right, none
         * @return {String} Transition type
         */
-        transition: function() {
-            
+        transition: function(transition) {
+            if (transition) {
+                this._transition = transition;
+            }
+            else {
+                return this._transition;
+            }
+        },
+        
+        on: function(event, callback) {
+            UIPanel.on(event, callback);    
+            return this;            
         }
 
     });
-
+    
+    
 }(window.$, window.Mootor));
     </pre>
 </div>

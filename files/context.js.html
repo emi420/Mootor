@@ -55,6 +55,38 @@
             
                 <li><a href="../classes/UIApp.html">UIApp</a></li>
             
+                <li><a href="../classes/UIForm.html">UIForm</a></li>
+            
+                <li><a href="../classes/UIFormCamera.html">UIFormCamera</a></li>
+            
+                <li><a href="../classes/UIFormCheckbox.html">UIFormCheckbox</a></li>
+            
+                <li><a href="../classes/UIFormDate.html">UIFormDate</a></li>
+            
+                <li><a href="../classes/UIFormDraw.html">UIFormDraw</a></li>
+            
+                <li><a href="../classes/UIFormFieldset.html">UIFormFieldset</a></li>
+            
+                <li><a href="../classes/UIFormGeo.html">UIFormGeo</a></li>
+            
+                <li><a href="../classes/UIFormInput.html">UIFormInput</a></li>
+            
+                <li><a href="../classes/UIFormOption.html">UIFormOption</a></li>
+            
+                <li><a href="../classes/UIFormPassword.html">UIFormPassword</a></li>
+            
+                <li><a href="../classes/UIFormPseudoInput.html">UIFormPseudoInput</a></li>
+            
+                <li><a href="../classes/UIFormSelect.html">UIFormSelect</a></li>
+            
+                <li><a href="../classes/UIFormText.html">UIFormText</a></li>
+            
+                <li><a href="../classes/UIFormTextArea.html">UIFormTextArea</a></li>
+            
+                <li><a href="../classes/UIFormTime.html">UIFormTime</a></li>
+            
+                <li><a href="../classes/UIFormToggleSwitch.html">UIFormToggleSwitch</a></li>
+            
                 <li><a href="../classes/UIHeader.html">UIHeader</a></li>
             
                 <li><a href="../classes/UILoading.html">UILoading</a></li>
@@ -140,33 +172,29 @@
     Context = Mootor.Context = function() {
         return ({
 
+
+            /**
+            * System info
+            * @property os
+            * @type function
+            */            
+            os: $.os,
+
             /**
             * Browser info
             * @property browser
             * @type string
             */            
-            browser: navigator.userAgent.toLowerCase(),
+            browser: $.browser,
 
             /**
             * Viewport info
             * @property viewport
             * @type object
             */            
-            viewport: {},
-
-            /**
-            * Device info
-            * @property device 
-            * @type object
-            */            
-            device: {
-                /**
-                * Vendor info
-                * @property vendor
-                * @type string
-                */            
-                vendor: navigator.vendor.toLowerCase(),
-                
+            viewport: {
+                width: window.screen.width,
+                height: window.screen.height
             },
             
             cordova: (window.Cordova !== undefined),
@@ -174,6 +202,7 @@
 
         });
     };
+    
 
     // Static global objects
     

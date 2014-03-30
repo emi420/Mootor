@@ -55,6 +55,38 @@
             
                 <li><a href="../classes/UIApp.html">UIApp</a></li>
             
+                <li><a href="../classes/UIForm.html">UIForm</a></li>
+            
+                <li><a href="../classes/UIFormCamera.html">UIFormCamera</a></li>
+            
+                <li><a href="../classes/UIFormCheckbox.html">UIFormCheckbox</a></li>
+            
+                <li><a href="../classes/UIFormDate.html">UIFormDate</a></li>
+            
+                <li><a href="../classes/UIFormDraw.html">UIFormDraw</a></li>
+            
+                <li><a href="../classes/UIFormFieldset.html">UIFormFieldset</a></li>
+            
+                <li><a href="../classes/UIFormGeo.html">UIFormGeo</a></li>
+            
+                <li><a href="../classes/UIFormInput.html">UIFormInput</a></li>
+            
+                <li><a href="../classes/UIFormOption.html">UIFormOption</a></li>
+            
+                <li><a href="../classes/UIFormPassword.html">UIFormPassword</a></li>
+            
+                <li><a href="../classes/UIFormPseudoInput.html">UIFormPseudoInput</a></li>
+            
+                <li><a href="../classes/UIFormSelect.html">UIFormSelect</a></li>
+            
+                <li><a href="../classes/UIFormText.html">UIFormText</a></li>
+            
+                <li><a href="../classes/UIFormTextArea.html">UIFormTextArea</a></li>
+            
+                <li><a href="../classes/UIFormTime.html">UIFormTime</a></li>
+            
+                <li><a href="../classes/UIFormToggleSwitch.html">UIFormToggleSwitch</a></li>
+            
                 <li><a href="../classes/UIHeader.html">UIHeader</a></li>
             
                 <li><a href="../classes/UILoading.html">UILoading</a></li>
@@ -139,15 +171,19 @@
 
     &quot;use strict&quot;;
 
-    var UI,
-        UIApp,
-        App;
+    var UIApp,
+    
+        UI,
+        App,
+        View,
+        Event;
 
     // Dependences
 
     UI = Mootor.UI;
     Event = Mootor.Event;
     App = Mootor.App;
+    View = Mootor.View;
 
     // Private constructors
 
@@ -156,49 +192,64 @@
             app = m.app,
             self = this;
 
-        if (Mootor.App._options.container) {
-            $container = Mootor.App._options.container;
+        App = Mootor.App;
+
+        if (App._options.container) {
+            $container = App._options.container;
         }
         else {
             $(&quot;html&quot;).addClass(&quot;m-html&quot;);
             $container = $(&quot;body&quot;);
         }
         $container.addClass(&quot;m-app&quot;);
+        
+        // Update context viewport
+        m.context.viewport = {
+            width: $container.width(),
+            height: $container.height()
+        }
+
+        // Event handlers
+    
+        window.addEventListener(&quot;resize&quot;, function() {
+            m.context.viewport = {
+                width: $container.width(),
+                height: $container.height()
+            }
+        })
+
 
         this.$el = $(&quot;&lt;div&gt;&quot;).addClass(&quot;m-views-container&quot;)
         this.el = this.$el[0];        
         this.$el.appendTo($container);
+
+        this.$container = $container;
+
+        UIApp.dispatch(&quot;init&quot;, this);
         
-        Event.dispatch(&quot;UIApp:init&quot;, this);
-    
     };
     
     // Event handlers
-    Event.on(&quot;App:init&quot;, function(self) {
+    
+    App.on(&quot;init&quot;, function(self) {
         $.extend(self, {
            ui: new UIApp()
         });
     });    
 
-    // Prototypal inheritance
+    // Extends from UI
 
     $.extend(UIApp.prototype, UI.prototype);
+
+
+    // Private static methods and properties
+
+    Event.extend(UIApp, &quot;UIApp&quot;);
 
     // Public methods
 
     $.extend(UIApp.prototype, {
-        
-        /**
-        * Show/Hide the loading indicator
-        *
-        * @method loading
-        * @param {Boolean} [show] Show or hide the loading indicator
-        * @return {Boolean}
-        */
-        loading: function(show) {
-            
-        }
-
+    
     });        
 
 }(window.$, window.Mootor));

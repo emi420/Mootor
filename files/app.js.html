@@ -55,6 +55,38 @@
             
                 <li><a href="../classes/UIApp.html">UIApp</a></li>
             
+                <li><a href="../classes/UIForm.html">UIForm</a></li>
+            
+                <li><a href="../classes/UIFormCamera.html">UIFormCamera</a></li>
+            
+                <li><a href="../classes/UIFormCheckbox.html">UIFormCheckbox</a></li>
+            
+                <li><a href="../classes/UIFormDate.html">UIFormDate</a></li>
+            
+                <li><a href="../classes/UIFormDraw.html">UIFormDraw</a></li>
+            
+                <li><a href="../classes/UIFormFieldset.html">UIFormFieldset</a></li>
+            
+                <li><a href="../classes/UIFormGeo.html">UIFormGeo</a></li>
+            
+                <li><a href="../classes/UIFormInput.html">UIFormInput</a></li>
+            
+                <li><a href="../classes/UIFormOption.html">UIFormOption</a></li>
+            
+                <li><a href="../classes/UIFormPassword.html">UIFormPassword</a></li>
+            
+                <li><a href="../classes/UIFormPseudoInput.html">UIFormPseudoInput</a></li>
+            
+                <li><a href="../classes/UIFormSelect.html">UIFormSelect</a></li>
+            
+                <li><a href="../classes/UIFormText.html">UIFormText</a></li>
+            
+                <li><a href="../classes/UIFormTextArea.html">UIFormTextArea</a></li>
+            
+                <li><a href="../classes/UIFormTime.html">UIFormTime</a></li>
+            
+                <li><a href="../classes/UIFormToggleSwitch.html">UIFormToggleSwitch</a></li>
+            
                 <li><a href="../classes/UIHeader.html">UIHeader</a></li>
             
                 <li><a href="../classes/UILoading.html">UILoading</a></li>
@@ -134,11 +166,14 @@
     &quot;use strict&quot;;
 
     var App,
-        Event;
+    
+        Event,
+        View;
 
     // Dependencies
 
     Event = Mootor.Event;
+    View = Mootor.View;
 
     // Private constructors
     
@@ -165,11 +200,13 @@
         * @property version
         * @type Strign
         */
-        _version: window.undefined,
+        _version: undefined,
 
         _settings: {}
     });
-
+    
+    Event.extend(App, &quot;App&quot;);
+    
     // Public methods
 
     App.prototype = {
@@ -210,8 +247,10 @@
         */
         settings: function(key, value) {
             if (value !== undefined) {
+                // this.settings[key] = value;
                 App._settings[key] = value;
             }
+            // return this.settings[key] = value;
             return App._settings[key];
         },
 
@@ -224,49 +263,20 @@
         * @return Route
         */
         go: function(url) {
-            var router,
-                view,
-                currentView,
-                app,
-                stateObj;
-            
-            app = m.app;
-            router = app.route(url);
-            
-            if (router !== undefined) {
-                
-                currentView = App._currentView;
-        
-                if (currentView !== undefined) {
-                    Event.dispatch(&quot;View:beforeUnload:&quot; + currentView.id, currentView);
-                }
-
-                view = App._currentView = router.view;
-
-                if (currentView !== undefined) {
-                    Event.dispatch(&quot;View:unload:&quot; + currentView.id, currentView);
-                }
-
-                Event.dispatch(&quot;View:beforeLoad:&quot; + view.id, view);            
-            
-                stateObj = { view: view.id };
-                
-                if (url !== &quot;&quot;) {
-                    history.pushState(stateObj, view.id, url);
+            var route;
+            route =  m.app.route(url);
+            if (route !== undefined) {
+                App._currentRoute = route;
+                App.dispatch(&quot;go&quot;, this);
+                if (this.history[this.history.length - 2] !== route.url) {
+                    this.history.push(route.url);    
                 } else {
-                    history.pushState(stateObj, view.id, window.location.pathname);                    
+                    this.history.pop();    
                 }
-            
-                Event.dispatch(&quot;App:go&quot;, this);
-                Event.dispatch(&quot;View:load:&quot; + view.id, view);
-                Event.dispatch(&quot;View:load&quot;, view);
-            
             } else {
                 throw(new Error(&quot;Route &quot; + url + &quot; is not defined&quot;));
-            }
-            
-            
-            return router;
+            }                       
+            return route
         },        
 
         /**
@@ -276,19 +286,11 @@
         * @chainable
         * @return Route
         */
-        back: function(id) {
-            return this;
-        },        
-
-        /**
-        * Go to next view in the history
-        *
-        * @method forward
-        * @chainable
-        * @return Route
-        */
-        forward: function(id) {
-            return this;
+        back: function() {
+            var url = m.app.history[m.app.history.length - 2];
+            if (url !== undefined) {
+                m.app.go(url);
+            }
         },        
 
         /**
@@ -298,7 +300,7 @@
         * @return App instance
         */    
         on: function(event, callback) {
-            Event.on(&quot;App:&quot; + event, callback);
+            App.on(event, callback);
             return this;
         },
         
@@ -320,7 +322,7 @@
         */
         init: function() {
             var self = this;
-            Event.dispatch(&quot;App:init&quot;, self);   
+            App.dispatch(&quot;init&quot;, this);   
             this.init = function() { return self };
             return this;
         }
