@@ -55,6 +55,38 @@
             
                 <li><a href="../classes/UIApp.html">UIApp</a></li>
             
+                <li><a href="../classes/UIForm.html">UIForm</a></li>
+            
+                <li><a href="../classes/UIFormCamera.html">UIFormCamera</a></li>
+            
+                <li><a href="../classes/UIFormCheckbox.html">UIFormCheckbox</a></li>
+            
+                <li><a href="../classes/UIFormDate.html">UIFormDate</a></li>
+            
+                <li><a href="../classes/UIFormDraw.html">UIFormDraw</a></li>
+            
+                <li><a href="../classes/UIFormFieldset.html">UIFormFieldset</a></li>
+            
+                <li><a href="../classes/UIFormGeo.html">UIFormGeo</a></li>
+            
+                <li><a href="../classes/UIFormInput.html">UIFormInput</a></li>
+            
+                <li><a href="../classes/UIFormOption.html">UIFormOption</a></li>
+            
+                <li><a href="../classes/UIFormPassword.html">UIFormPassword</a></li>
+            
+                <li><a href="../classes/UIFormPseudoInput.html">UIFormPseudoInput</a></li>
+            
+                <li><a href="../classes/UIFormSelect.html">UIFormSelect</a></li>
+            
+                <li><a href="../classes/UIFormText.html">UIFormText</a></li>
+            
+                <li><a href="../classes/UIFormTextArea.html">UIFormTextArea</a></li>
+            
+                <li><a href="../classes/UIFormTime.html">UIFormTime</a></li>
+            
+                <li><a href="../classes/UIFormToggleSwitch.html">UIFormToggleSwitch</a></li>
+            
                 <li><a href="../classes/UIHeader.html">UIHeader</a></li>
             
                 <li><a href="../classes/UILoading.html">UILoading</a></li>
@@ -139,25 +171,39 @@
     &quot;use strict&quot;;
 
     var Router,
+
         Route,
-        App;
-                
+        App,
+        _appGo,
+        _pendingGo;
+            
     // Dependencies
     
     App = Mootor.App;
     Route = Mootor.Route;
     
-    // Event handlers
-
-    window.onpopstate = function(event) {
-      m.app.go(window.location.hash);
-    };
-
     // Private constructors
 
     Router = Mootor.Router = function() {
-        // code here
     };
+
+    // Event handlers
+
+    window.onpopstate = function() {
+        _appGo(window.location.hash);
+    };
+
+
+    _appGo = function(url) { 
+        _pendingGo = window.location.hash;
+    }
+
+    App.on(&quot;ready&quot;, function() {
+        _appGo = function(url) {
+            m.app.go(url);
+        }
+        m.app.go(_pendingGo);
+    });
 
     // Private static methods and properties
 
@@ -178,6 +224,8 @@
         * @return Route
         */
         route: function(url, view) {
+            Route = Mootor.Route;
+            
             if (view === undefined) {
                 var s,
                     route,
@@ -188,12 +236,13 @@
                     if (match !== null) {
                         route = Router._collection[s];
                         route.view.params = match.slice(1, match.length);
+                        route.url = url;
                         return route;
                     }
                 }
                 return undefined;
             } else {
-                return Router._collection[url] = new Mootor.Route(url, view);
+                return Router._collection[url] = new Route(url, view);
             }
         }
     });

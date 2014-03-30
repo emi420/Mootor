@@ -55,6 +55,38 @@
             
                 <li><a href="../classes/UIApp.html">UIApp</a></li>
             
+                <li><a href="../classes/UIForm.html">UIForm</a></li>
+            
+                <li><a href="../classes/UIFormCamera.html">UIFormCamera</a></li>
+            
+                <li><a href="../classes/UIFormCheckbox.html">UIFormCheckbox</a></li>
+            
+                <li><a href="../classes/UIFormDate.html">UIFormDate</a></li>
+            
+                <li><a href="../classes/UIFormDraw.html">UIFormDraw</a></li>
+            
+                <li><a href="../classes/UIFormFieldset.html">UIFormFieldset</a></li>
+            
+                <li><a href="../classes/UIFormGeo.html">UIFormGeo</a></li>
+            
+                <li><a href="../classes/UIFormInput.html">UIFormInput</a></li>
+            
+                <li><a href="../classes/UIFormOption.html">UIFormOption</a></li>
+            
+                <li><a href="../classes/UIFormPassword.html">UIFormPassword</a></li>
+            
+                <li><a href="../classes/UIFormPseudoInput.html">UIFormPseudoInput</a></li>
+            
+                <li><a href="../classes/UIFormSelect.html">UIFormSelect</a></li>
+            
+                <li><a href="../classes/UIFormText.html">UIFormText</a></li>
+            
+                <li><a href="../classes/UIFormTextArea.html">UIFormTextArea</a></li>
+            
+                <li><a href="../classes/UIFormTime.html">UIFormTime</a></li>
+            
+                <li><a href="../classes/UIFormToggleSwitch.html">UIFormToggleSwitch</a></li>
+            
                 <li><a href="../classes/UIHeader.html">UIHeader</a></li>
             
                 <li><a href="../classes/UILoading.html">UILoading</a></li>
@@ -142,8 +174,8 @@
 
     // Private constructors
     
-    Route = Mootor.Route = function(url, view) {
-        this.url = url;
+    Route = Mootor.Route = function(regex, view) {
+        this.regex = regex;
         this.view = view;
     };
     
@@ -158,24 +190,12 @@
     $.extend(Route.prototype, {
         
         /**
-        * The URL referenced by this route
+        * The URL regex referenced by this route
         *
-        * @property URL
+        * @property regex
         * @type String
         */
-        url: &quot;&quot;,
-
-        /**
-        * An array with the parameters passed to the page
-        * If called with no parameters, it returns the currently set params in this route.
-        *
-        * @method params
-        * @param {array} [params] - An array with the parameters passed to the page
-        * @return array
-        */
-        params: function(params) {
-
-        },
+        regex: &quot;&quot;,
 
         /**
         * The view that implements this route

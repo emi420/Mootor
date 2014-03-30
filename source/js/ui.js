@@ -31,6 +31,22 @@
     $.extend(UI.prototype, {
         
         /**
+        * DOM element
+        *
+        * @property el
+        * @return {DOM Element}
+        */
+        el: undefined,
+        
+        /**
+        * Zepto/jQuery object for DOM element
+        *
+        * @property $el
+        * @return {Zepto/jQuery object instance}
+        */
+        $el: undefined ,
+        
+        /**
         * Shows element (not necesarily, since the element's parent might be hidden or out of view)
         *
         * @method show

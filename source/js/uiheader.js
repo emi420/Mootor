@@ -81,17 +81,13 @@
     // Private constructors
 
     UIHeader = Mootor.UIHeader = function(options) {
-        var uinavbar;
-        uinavbar = new UINavBar({
+        this.nav = new UINavBar({
             container: options.el
         });
-        UIHeader._initBackButton(uinavbar);
-        return uinavbar;
+        this.el = this.nav.el;
+        this.$el = $(this.el);
+        UIHeader._initBackButton(this);
     };
-
-    // Prototypal inheritance
-
-    $.extend(UIHeader.prototype, UINavBar.prototype);
 
     
     // Private static methods and properties
@@ -131,6 +127,15 @@
     $.extend(UIHeader.prototype, {
         
         /**
+        * Back
+        * The back button
+        *
+        * @object back
+        * @return {UINavItem} 
+        */
+        back: {},
+        
+        /**
         * Title
         * The text to display in the header
         * If called with no arguments returns the current title
@@ -151,4 +156,8 @@
         
     });  
           
+    // Prototypal inheritance
+
+    $.extend(UIHeader.prototype, UINavBar.prototype);
+
 }(window.$, window.Mootor));

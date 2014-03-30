@@ -27,11 +27,6 @@ describe("Router", function() {
 		});
 	});
 
-});
-
-
-describe("App Links", function() {
-
 	describe("I want to add a link to another view with parameters", function() {
 
 		beforeEach(function (done) { 

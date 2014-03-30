@@ -55,6 +55,38 @@
             
                 <li><a href="../classes/UIApp.html">UIApp</a></li>
             
+                <li><a href="../classes/UIForm.html">UIForm</a></li>
+            
+                <li><a href="../classes/UIFormCamera.html">UIFormCamera</a></li>
+            
+                <li><a href="../classes/UIFormCheckbox.html">UIFormCheckbox</a></li>
+            
+                <li><a href="../classes/UIFormDate.html">UIFormDate</a></li>
+            
+                <li><a href="../classes/UIFormDraw.html">UIFormDraw</a></li>
+            
+                <li><a href="../classes/UIFormFieldset.html">UIFormFieldset</a></li>
+            
+                <li><a href="../classes/UIFormGeo.html">UIFormGeo</a></li>
+            
+                <li><a href="../classes/UIFormInput.html">UIFormInput</a></li>
+            
+                <li><a href="../classes/UIFormOption.html">UIFormOption</a></li>
+            
+                <li><a href="../classes/UIFormPassword.html">UIFormPassword</a></li>
+            
+                <li><a href="../classes/UIFormPseudoInput.html">UIFormPseudoInput</a></li>
+            
+                <li><a href="../classes/UIFormSelect.html">UIFormSelect</a></li>
+            
+                <li><a href="../classes/UIFormText.html">UIFormText</a></li>
+            
+                <li><a href="../classes/UIFormTextArea.html">UIFormTextArea</a></li>
+            
+                <li><a href="../classes/UIFormTime.html">UIFormTime</a></li>
+            
+                <li><a href="../classes/UIFormToggleSwitch.html">UIFormToggleSwitch</a></li>
+            
                 <li><a href="../classes/UIHeader.html">UIHeader</a></li>
             
                 <li><a href="../classes/UILoading.html">UILoading</a></li>
@@ -146,6 +178,7 @@
     &quot;use strict&quot;;
     
     var View,
+    
         Event,
         App;
         
@@ -155,23 +188,61 @@
     App = Mootor.App;
     
     // Event handlers
-
-    Event.on(&quot;App:init&quot;, function(self) {
+    
+    App.on(&quot;init&quot;, function(self) {
 
         var views = App._options.views,
             viewCount = views.length,
-            i;            
+            i,
+            view;
             
-        Event.on(&quot;View:init:&quot; + views[viewCount-1], function(self) {
-           m.app.go(window.location.hash);
-        });
-        
         for (i = 0; i &lt; viewCount; i++) {
-            m.app.view(views[i]);
+            view = m.app.view(views[i]);
         }
         
+        view.on(&quot;ready&quot;, function(self) {
+            App.dispatch(&quot;ready&quot;);
+        });
         
     });   
+    
+    App.on(&quot;go&quot;, function(self) {
+        
+        var view,
+            currentView,
+            app,
+            stateObj,
+            router = App._currentRoute,
+            url = router.url;
+        
+        currentView = App._currentView;
+
+        if (currentView !== undefined) {
+            View.dispatch(&quot;beforeUnload&quot;, currentView);
+        }
+
+        view = App._currentView = router.view;
+
+        if (currentView !== undefined) {
+            View.dispatch(&quot;unload&quot;, currentView);
+        }
+
+        View.dispatch(&quot;beforeLoad&quot;, view);            
+    
+        stateObj = { view: view.id };
+        
+        if (currentView != view) {
+
+            if (url !== &quot;&quot;) {
+                history.pushState(stateObj, view.id, url);
+            } else {
+                history.pushState(stateObj, view.id, window.location.pathname);                    
+            }
+
+        }
+        View.dispatch(&quot;load&quot;, view);
+        
+    });
     
     // Private constructors
 
@@ -179,8 +250,17 @@
         this.id = options.id;
         View._init(options, this);
     };
-
     
+    Event.extend(View, &quot;View&quot;);
+    View._dispatch = View.dispatch;
+    View.dispatch = function(event, instance) {
+        if (event !== &quot;init&quot; ) {
+            View._dispatch(event + &quot;:&quot; + instance.id, instance);
+        } else {
+            View._dispatch(event, instance);
+        }
+    }
+
     // Private static methods and properties
     
     $.extend(View, {        
@@ -206,16 +286,25 @@
         * @param {View} self View instance
         */
         _init: function(options, self) {
-            
-            // Load Html, Css and JavaScript
-            Event.on(&quot;View:getHtml:&quot; + self.id, function(view) {
-                View._getScript(self);
+            View._collection[self.id] = {id: self.id, obj: self};
+
+            View.dispatch(&quot;init&quot;, self);
+
+            self.on(&quot;getHtml&quot;, function(view) {
+                window.setTimeout(function() {
+                    View._getScript(self);
+                }, 1)
+            });
+
+            self.on(&quot;getScript&quot;, function() {
+                View.dispatch(&quot;ready&quot;, self)
             })
 
-            View._getHtml(self);
+            // Load Html, Css and JavaScript
+            setTimeout(function() {
+                View._getHtml(self);
+            }, 1)
             View._getCss(self);
-            
-            View._collection[self.id] = {id: self.id, obj: self};
 
         },
 
@@ -235,7 +324,7 @@
                 path,
                 function(source) {
                     View._get(self.id).html = source;
-                    Event.dispatch(&quot;View:getHtml:&quot; + self.id, self)
+                    View.dispatch(&quot;getHtml&quot;, self)
                 }
             );
         },
@@ -261,9 +350,13 @@
             script.type = &quot;text/javascript&quot;;
 
             View._get(self.id).script = script;
-
-            Event.dispatch(&quot;View:init&quot;, self)                
-
+            
+            script.addEventListener(&quot;load&quot;, function() {
+                View.dispatch(&quot;getScript&quot;, self);
+            });
+            
+            $(&quot;head&quot;)[0].appendChild(script);
+            
         },
 
         /*
@@ -292,8 +385,8 @@
             $link.one(&quot;load&quot;, {
                 path: path
             }, function() {
-                View._get(self.id).css = path;
-                Event.dispatch(&quot;View:getCss&quot;, self)
+                View._get(self.id).css = link;
+                View.dispatch(&quot;getCss&quot;, self)
             });
         },
         
@@ -312,10 +405,8 @@
         _getScriptPath: function(self) {
             return View._get(self.id).script;
         }
-        
-                
     });
-
+    
     // Public instance prototype
     
     $.extend(View.prototype, {
@@ -349,7 +440,11 @@
         * @return View
         */  
         on: function(event,callback) {
-            Event.on(&quot;View:&quot; + event + &quot;:&quot; + this.id, callback);
+            if (event !== &quot;init&quot;) {
+                View.on(event + &quot;:&quot; + this.id, callback);                
+            } else {
+                View.on(event, callback);
+            }
             return this;
         },
 

@@ -55,6 +55,38 @@
             
                 <li><a href="../classes/UIApp.html">UIApp</a></li>
             
+                <li><a href="../classes/UIForm.html">UIForm</a></li>
+            
+                <li><a href="../classes/UIFormCamera.html">UIFormCamera</a></li>
+            
+                <li><a href="../classes/UIFormCheckbox.html">UIFormCheckbox</a></li>
+            
+                <li><a href="../classes/UIFormDate.html">UIFormDate</a></li>
+            
+                <li><a href="../classes/UIFormDraw.html">UIFormDraw</a></li>
+            
+                <li><a href="../classes/UIFormFieldset.html">UIFormFieldset</a></li>
+            
+                <li><a href="../classes/UIFormGeo.html">UIFormGeo</a></li>
+            
+                <li><a href="../classes/UIFormInput.html">UIFormInput</a></li>
+            
+                <li><a href="../classes/UIFormOption.html">UIFormOption</a></li>
+            
+                <li><a href="../classes/UIFormPassword.html">UIFormPassword</a></li>
+            
+                <li><a href="../classes/UIFormPseudoInput.html">UIFormPseudoInput</a></li>
+            
+                <li><a href="../classes/UIFormSelect.html">UIFormSelect</a></li>
+            
+                <li><a href="../classes/UIFormText.html">UIFormText</a></li>
+            
+                <li><a href="../classes/UIFormTextArea.html">UIFormTextArea</a></li>
+            
+                <li><a href="../classes/UIFormTime.html">UIFormTime</a></li>
+            
+                <li><a href="../classes/UIFormToggleSwitch.html">UIFormToggleSwitch</a></li>
+            
                 <li><a href="../classes/UIHeader.html">UIHeader</a></li>
             
                 <li><a href="../classes/UILoading.html">UILoading</a></li>
@@ -139,33 +171,127 @@
 
     &quot;use strict&quot;;
 
-    var UINavBar,
-        UIHeader;
+    var UIHeader,
+    
+        UINavBar,
+        UIView,
+        View,
+        UIApp,
+        UINavItem,
+        App;
 
     // Dependences
 
+    View = Mootor.View;
     UINavBar = Mootor.UINavBar;
+    UIView = Mootor.UIView;
+    UIApp = Mootor.UIApp;
+    UINavItem = Mootor.UINavItem;
+    App = Mootor.App;
+    
+    // Event handlers
 
+    UIApp.on(&quot;init&quot;, function(self) {
+
+        // FIXME CHECK (parentElement?)
+        var headerEl = self.el.parentElement.getElementsByTagName(&quot;header&quot;)[0];
+
+        if (headerEl) {
+            self.header = new UIHeader({
+                el: headerEl
+            });
+        }
+    });
+
+    UIView.on(&quot;init&quot;, function(self) {
+        
+        var headerEl = self.panel.el.getElementsByTagName(&quot;header&quot;)[0];
+
+        if (headerEl) {
+
+            self.header = new UIHeader({
+                el: headerEl
+            });
+
+            self.panel.el.removeChild(headerEl);
+
+            self.view.on(&quot;load&quot;, function(self) {
+                var headerEl = m.app.ui.el.parentElement.getElementsByTagName(&quot;header&quot;)[0];
+                m.app.ui.el.parentElement.replaceChild(
+                    self.ui.header.el,
+                    headerEl
+                )
+            });
+        } else {
+
+            self.view.on(&quot;load&quot;, function(self) {
+                var headerEl = m.app.ui.el.parentElement.getElementsByTagName(&quot;header&quot;)[0];
+                m.app.ui.el.parentElement.replaceChild(
+                    m.app.ui.header.el,
+                    headerEl
+                )
+            });
+
+
+        }
+    });
+    
     // Private constructors
 
-    UIHeader = Mootor.UIHeader = function() {
-        // code here
+    UIHeader = Mootor.UIHeader = function(options) {
+        this.nav = new UINavBar({
+            container: options.el
+        });
+        this.el = this.nav.el;
+        this.$el = $(this.el);
+        UIHeader._initBackButton(this);
     };
-
-    // Prototypal inheritance
-
-    $.extend(UIHeader.prototype, UINavBar.prototype);
 
     
     // Private static methods and properties
 
     $.extend(UIHeader, {
-        // code here
+        
+        _initBackButton: function(self) {
+            var backEl = document.createElement(&quot;a&quot;),
+                backNavEl = document.createElement(&quot;nav&quot;);
+                
+            backNavEl.appendChild(backEl);
+            backNavEl.setAttribute(&quot;class&quot;, &quot;m-nav-header-back-container&quot;);
+
+            self.el.appendChild(backNavEl);
+            
+            self.back = new UINavItem({
+                el: backEl
+            });
+            self.back.$el.addClass(&quot;m-header-back&quot;)
+            self.back.hide();
+            self.back.$el.on(&quot;tap click&quot;, function() {
+                m.app.back();
+            });
+            App.on(&quot;go&quot;, function(app) {
+                if (app.history.length &gt; 1) {
+                    self.back.show();
+                } else {
+                    self.back.hide();
+                }
+            });            
+        }
+        
     });
 
     // Public methods
 
     $.extend(UIHeader.prototype, {
+        
+        /**
+        * Back
+        * The back button
+        *
+        * @object back
+        * @return {UINavItem} 
+        */
+        back: {},
         
         /**
         * Title
@@ -178,10 +304,20 @@
         * @chainable
         */
         title: function(title) {
-            
+            var titleEl = this.el.getElementsByTagName(&quot;h1&quot;)[0];
+            if (title !== undefined) {
+                titleEl.innerHTML = title;
+            } else {
+                return titleEl.innerHTML;
+            }
         }
+        
     });  
           
+    // Prototypal inheritance
+
+    $.extend(UIHeader.prototype, UINavBar.prototype);
+
 }(window.$, window.Mootor));
 
     </pre>
