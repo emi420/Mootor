@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en" class="yui-overrride">
+<head>
+    <meta charset="utf-8">
+    <title>js/view.js</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            <h1 class="blue-main-title"></h1>
+        </div>
+        <div class="yui3-u-1-4 version project-version">
+            API Docs for: 
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/App.html">App</a></li>
+            
+                <li><a href="../classes/Context.html">Context</a></li>
+            
+                <li><a href="../classes/Event.html">Event</a></li>
+            
+                <li><a href="../classes/Route.html">Route</a></li>
+            
+                <li><a href="../classes/Router.html">Router</a></li>
+            
+                <li><a href="../classes/UI.html">UI</a></li>
+            
+                <li><a href="../classes/UIApp.html">UIApp</a></li>
+            
+                <li><a href="../classes/UIForm.html">UIForm</a></li>
+            
+                <li><a href="../classes/UIFormCamera.html">UIFormCamera</a></li>
+            
+                <li><a href="../classes/UIFormCheckbox.html">UIFormCheckbox</a></li>
+            
+                <li><a href="../classes/UIFormDate.html">UIFormDate</a></li>
+            
+                <li><a href="../classes/UIFormDraw.html">UIFormDraw</a></li>
+            
+                <li><a href="../classes/UIFormFieldset.html">UIFormFieldset</a></li>
+            
+                <li><a href="../classes/UIFormGeo.html">UIFormGeo</a></li>
+            
+                <li><a href="../classes/UIFormInput.html">UIFormInput</a></li>
+            
+                <li><a href="../classes/UIFormOption.html">UIFormOption</a></li>
+            
+                <li><a href="../classes/UIFormPassword.html">UIFormPassword</a></li>
+            
+                <li><a href="../classes/UIFormPseudoInput.html">UIFormPseudoInput</a></li>
+            
+                <li><a href="../classes/UIFormSelect.html">UIFormSelect</a></li>
+            
+                <li><a href="../classes/UIFormText.html">UIFormText</a></li>
+            
+                <li><a href="../classes/UIFormTextArea.html">UIFormTextArea</a></li>
+            
+                <li><a href="../classes/UIFormTime.html">UIFormTime</a></li>
+            
+                <li><a href="../classes/UIFormToggleSwitch.html">UIFormToggleSwitch</a></li>
+            
+                <li><a href="../classes/UIHeader.html">UIHeader</a></li>
+            
+                <li><a href="../classes/UILoading.html">UILoading</a></li>
+            
+                <li><a href="../classes/UINavBar.html">UINavBar</a></li>
+            
+                <li><a href="../classes/UINavItem.html">UINavItem</a></li>
+            
+                <li><a href="../classes/UIPanel.html">UIPanel</a></li>
+            
+                <li><a href="../classes/UIView.html">UIView</a></li>
+            
+                <li><a href="../classes/View.html">View</a></li>
+            
+                <li><a href="../classes/window.m.html">window.m</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/App.html">App</a></li>
+            
+                <li><a href="../modules/Mootor.html">Mootor</a></li>
+            
+                <li><a href="../modules/Router.html">Router</a></li>
+            
+                <li><a href="../modules/UI.html">UI</a></li>
+            
+                <li><a href="../modules/View.html">View</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: js/view.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/**
+* The View class handles each screen of the application. 
+* A list of views is specified in the applications options
+* and the files are loaded from the views/ folder.
+* Each view has a viewName.js and a viewName.html file.
+* The viewName.js file defines options for the view.
+*
+* @class View
+* @module View
+* @constructor
+* @param {Object} options An object defining options for the current view.
+* * constructor - A function that will be run after the view has loaded (optional).
+* * animation - a string defining the type of animation used to show this view (one of: &quot;slide-left&quot;, &quot;slide-right&quot;, &quot;none&quot;).
+* @author Emilio Mariscal (emi420 [at] gmail.com)
+* @author Martín Szyszlican (martinsz [at] gmail.com)
+*/
+
+(function ($, Mootor, document) {
+
+    &quot;use strict&quot;;
+    
+    var View,
+    
+        Event,
+        App;
+        
+    // Dependencies
+    
+    Event = Mootor.Event;
+    App = Mootor.App;
+    
+    // Event handlers
+    
+    App.on(&quot;init&quot;, function(self) {
+
+        var views = App._options.views,
+            viewCount = views.length,
+            i,
+            view;
+            
+        for (i = 0; i &lt; viewCount; i++) {
+            view = m.app.view(views[i]);
+        }
+        
+        view.on(&quot;ready&quot;, function(self) {
+            App.dispatch(&quot;ready&quot;);
+        });
+        
+    });   
+    
+    App.on(&quot;go&quot;, function(self) {
+        
+        var view,
+            currentView,
+            app,
+            stateObj,
+            router = App._currentRoute,
+            url = router.url;
+        
+        currentView = App._currentView;
+
+        if (currentView !== undefined) {
+            View.dispatch(&quot;beforeUnload&quot;, currentView);
+        }
+
+        view = App._currentView = router.view;
+
+        if (currentView !== undefined) {
+            View.dispatch(&quot;unload&quot;, currentView);
+        }
+
+        View.dispatch(&quot;beforeLoad&quot;, view);            
+    
+        stateObj = { view: view.id };
+        
+        if (currentView != view) {
+
+            if (url !== &quot;&quot;) {
+                history.pushState(stateObj, view.id, url);
+            } else {
+                history.pushState(stateObj, view.id, window.location.pathname);                    
+            }
+
+        }
+        View.dispatch(&quot;load&quot;, view);
+        
+    });
+    
+    // Private constructors
+
+    View = Mootor.View = function(options) {
+        this.id = options.id;
+        View._init(options, this);
+    };
+    
+    Event.extend(View, &quot;View&quot;);
+    View._dispatch = View.dispatch;
+    View.dispatch = function(event, instance) {
+        if (event !== &quot;init&quot; ) {
+            View._dispatch(event + &quot;:&quot; + instance.id, instance);
+        } else {
+            View._dispatch(event, instance);
+        }
+    };
+
+    // Private static methods and properties
+    
+    $.extend(View, {        
+
+        /**
+        * Views collection
+        * @private
+        */
+        _collection: {},
+    
+        /**
+        * Current active view
+        * @private
+        */
+        _current: undefined,
+
+        /**
+        * Init View instance, load HTML, CSS and JavaScript files for the view
+        *
+        * @private
+        * @method _init
+        * @param {Array} options A list of options
+        * @param {View} self View instance
+        */
+        _init: function(options, self) {
+            View._collection[self.id] = {id: self.id, obj: self};
+
+            View.dispatch(&quot;init&quot;, self);
+
+            self.on(&quot;getHtml&quot;, function(view) {
+                window.setTimeout(function() {
+                    View._getScript(self);
+                }, 1);
+            });
+
+            self.on(&quot;getScript&quot;, function() {
+                View.dispatch(&quot;ready&quot;, self);
+            });
+
+            // Load Html, Css and JavaScript
+            setTimeout(function() {
+                View._getHtml(self);
+            }, 1);
+            View._getCss(self);
+
+        },
+
+        /**
+        * Get view HTML
+        *
+        * @private
+        * @method _getHtml
+        * @param {View} self View instance
+        */
+        _getHtml: function(self) {
+            var path,
+                id = self.id;
+                
+            path = &quot;views/&quot; + id + &quot;/&quot; + id + &quot;.html&quot;;
+            $.get(
+                path,
+                function(source) {
+                    View._get(self.id).html = source;
+                    View.dispatch(&quot;getHtml&quot;, self);
+                }
+            );
+        },
+
+        /*
+        * Get view script
+        * @method _getScript
+        * @private
+        * @param {View} self View instance
+        */
+        _getScript: function (self) {
+            var path,
+                id = self.id,
+                script,
+                $script;
+                
+            path = &quot;views/&quot; + id + &quot;/&quot; + id + &quot;.js&quot;;
+            
+            script = document.createElement(&quot;script&quot;);
+            $script = $(script);
+        
+            script.src = path;
+            script.type = &quot;text/javascript&quot;;
+
+            View._get(self.id).script = script;
+            
+            script.addEventListener(&quot;load&quot;, function() {
+                View.dispatch(&quot;getScript&quot;, self);
+            });
+            
+            $(&quot;head&quot;)[0].appendChild(script);
+            
+        },
+
+        /*
+        * Get view CSS
+        * @method _getCSS
+        * @private
+        * @param {View} self View instance
+        */
+        _getCss: function (self) {
+            var path,
+                id = self.id,
+                link,
+                $link;
+                
+            path = &quot;views/&quot; + id + &quot;/&quot; + id + &quot;.css&quot;;
+            
+            link = document.createElement(&quot;link&quot;);
+            $link = $(link);
+        
+            link.href = path;
+            link.type = &quot;text/css&quot;;
+            link.rel = &quot;stylesheet&quot;;
+
+            $(&quot;head&quot;).append(link);
+            
+            $link.one(&quot;load&quot;, {
+                path: path
+            }, function() {
+                View._get(self.id).css = link;
+                View.dispatch(&quot;getCss&quot;, self);
+            });
+        },
+        
+        _get: function(id) {
+            return View._collection[id];
+        },
+        
+        _getHtmlPath: function(self) {
+            return  View._get(self.id).html;
+        },
+
+        _getCssPath: function(self) {
+            return View._get(self.id).css;
+        },
+
+        _getScriptPath: function(self) {
+            return View._get(self.id).script;
+        }
+    });
+    
+    // Public instance prototype
+    
+    $.extend(View.prototype, {
+        
+        /**
+        * Title is the friendly name for the current view.
+        * When called without parameters, returns a string containing the title. When called with parameters, sets the title.
+        * 
+        * @method title
+        * @param {string} [title] New title for this view.
+        * @return string
+        */  
+        title: function(title) {
+            var view = View._collection[this.id];
+            if (title === undefined) {
+                return view.title;
+            } else {
+                view.title = title;
+                return this;
+            }
+        },
+
+        /**
+        * Sets an event handler for the view
+        * Possible values for event: load, beforeLoad, unload, beforeUnload, init
+        * TODO: Define which parameters are passed to the callback function.
+        * 
+        * @method on
+        * @param {string} event Defines in which event the handler will be called
+        * @param {function} callback The function to be called when the event is fired.
+        * @return View
+        */  
+        on: function(event,callback) {
+            if (event !== &quot;init&quot;) {
+                View.on(event + &quot;:&quot; + this.id, callback);                
+            } else {
+                View.on(event, callback);
+            }
+            return this;
+        },
+
+        /**
+        * Unsets event handlers for the view
+        * Possible values for event: load, beforeLoad, unload, beforeUnload, init
+        * 
+        * @method off
+        * @param {string} event Defines in which event we want to unset handlers
+        * @param {function} [callback] If this parameter is specified, only that function is removed. Otherwise all callbacks for this event are removed.
+        * @return View
+        */  
+        off: function(event,callback) {
+
+        }
+
+    });    
+    
+    $.extend(Mootor.App.prototype, {
+
+        /**
+        * Create or get a view
+        *
+        * @method view
+        * @param {String} id The id of the view
+        * @for App
+        * @param {String} [options] The options object for the view
+        * @return View the referenced view object
+        */
+        view: function(id, options) {
+            var i,
+                views = View._collection,
+                view;
+            
+            if (id !== &quot;&quot; &amp;&amp; id !== undefined) {
+                
+                if (views[id] !== undefined) {
+                    view = views[id].obj;
+                } else {
+                    if (options === undefined) {
+                        options = {};
+                    }
+                    options.id = id;
+                    view = new View(options);
+                }
+            } else {
+                view = App._currentView;
+            }
+
+            return view;
+        },
+        
+    });
+
+}(window.$, window.Mootor, window.document));
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

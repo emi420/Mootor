@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en" class="yui-overrride">
+<head>
+    <meta charset="utf-8">
+    <title>js/uiform.js</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            <h1 class="blue-main-title"></h1>
+        </div>
+        <div class="yui3-u-1-4 version project-version">
+            API Docs for: 
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/App.html">App</a></li>
+            
+                <li><a href="../classes/Context.html">Context</a></li>
+            
+                <li><a href="../classes/Event.html">Event</a></li>
+            
+                <li><a href="../classes/Route.html">Route</a></li>
+            
+                <li><a href="../classes/Router.html">Router</a></li>
+            
+                <li><a href="../classes/UI.html">UI</a></li>
+            
+                <li><a href="../classes/UIApp.html">UIApp</a></li>
+            
+                <li><a href="../classes/UIForm.html">UIForm</a></li>
+            
+                <li><a href="../classes/UIFormCamera.html">UIFormCamera</a></li>
+            
+                <li><a href="../classes/UIFormCheckbox.html">UIFormCheckbox</a></li>
+            
+                <li><a href="../classes/UIFormDate.html">UIFormDate</a></li>
+            
+                <li><a href="../classes/UIFormDraw.html">UIFormDraw</a></li>
+            
+                <li><a href="../classes/UIFormFieldset.html">UIFormFieldset</a></li>
+            
+                <li><a href="../classes/UIFormGeo.html">UIFormGeo</a></li>
+            
+                <li><a href="../classes/UIFormInput.html">UIFormInput</a></li>
+            
+                <li><a href="../classes/UIFormOption.html">UIFormOption</a></li>
+            
+                <li><a href="../classes/UIFormPassword.html">UIFormPassword</a></li>
+            
+                <li><a href="../classes/UIFormPseudoInput.html">UIFormPseudoInput</a></li>
+            
+                <li><a href="../classes/UIFormSelect.html">UIFormSelect</a></li>
+            
+                <li><a href="../classes/UIFormText.html">UIFormText</a></li>
+            
+                <li><a href="../classes/UIFormTextArea.html">UIFormTextArea</a></li>
+            
+                <li><a href="../classes/UIFormTime.html">UIFormTime</a></li>
+            
+                <li><a href="../classes/UIFormToggleSwitch.html">UIFormToggleSwitch</a></li>
+            
+                <li><a href="../classes/UIHeader.html">UIHeader</a></li>
+            
+                <li><a href="../classes/UILoading.html">UILoading</a></li>
+            
+                <li><a href="../classes/UINavBar.html">UINavBar</a></li>
+            
+                <li><a href="../classes/UINavItem.html">UINavItem</a></li>
+            
+                <li><a href="../classes/UIPanel.html">UIPanel</a></li>
+            
+                <li><a href="../classes/UIView.html">UIView</a></li>
+            
+                <li><a href="../classes/View.html">View</a></li>
+            
+                <li><a href="../classes/window.m.html">window.m</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/App.html">App</a></li>
+            
+                <li><a href="../modules/Mootor.html">Mootor</a></li>
+            
+                <li><a href="../modules/Router.html">Router</a></li>
+            
+                <li><a href="../modules/UI.html">UI</a></li>
+            
+                <li><a href="../modules/View.html">View</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: js/uiform.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+
+
+/**
+* The UIForm is a form to input data
+*
+* @class UIForm
+* @extends UI
+* @constructor
+* @module UI
+* @author Emilio Mariscal (emi420 [at] gmail.com)
+* @author Martín Szyszlican (martinsz [at] gmail.com)
+*/
+
+(function ($, Mootor) {
+    
+    &quot;use strict&quot;;
+
+    var UIForm,
+        UIView,
+        UI;
+
+    // Dependences
+
+    UI = Mootor.UI;
+    UIView = Mootor.UIView;
+
+    // Private constructors
+
+    UIForm = function(element) {
+        console.log(&quot;UIForm&quot;,element);
+    };
+
+    // Event handlers
+
+    UIView.registerEnhancement(&quot;.m-form&quot;,UIForm);
+
+    // Prototypal inheritance
+    $.extend(UIForm.prototype, UI.prototype);
+
+    // Private static methods and properties
+
+    $.extend(UIForm, {
+   
+    });
+
+    // Public methods and properties
+
+    $.extend(UIForm.prototype, {
+        
+        /**
+        * Serialize form&#x27;s data
+        *
+        * @method serialize
+        * @return {Object} Serialized data in a JSON object
+        */
+        serialize: function() {
+            
+        },
+
+        /**
+        * Clear all form fields
+        *
+        * @method clear
+        * @chainable
+        */
+        clear: function() {
+            // code here
+        }
+    });        
+}(window.$, window.Mootor));
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

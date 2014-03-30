@@ -366,5 +366,4 @@ Y.one('#api-options').delegate('click', pjax.onOptionClick, 'input');
 Y.on('hashchange', function (e) {
     pjax.updateTabState('hashchange');
 }, win);
-
 });

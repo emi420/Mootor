@@ -1,8 +1,8 @@
 {
     "project": {},
     "files": {
-        "app.js": {
-            "name": "app.js",
+        "js/app.js": {
+            "name": "js/app.js",
             "modules": {
                 "App": 1
             },
@@ -14,8 +14,8 @@
             },
             "namespaces": {}
         },
-        "context.js": {
-            "name": "context.js",
+        "js/context.js": {
+            "name": "js/context.js",
             "modules": {},
             "classes": {
                 "Context": 1
@@ -25,8 +25,8 @@
             },
             "namespaces": {}
         },
-        "event.js": {
-            "name": "event.js",
+        "js/event.js": {
+            "name": "js/event.js",
             "modules": {
                 "Mootor": 1
             },
@@ -36,8 +36,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "mootor.js": {
-            "name": "mootor.js",
+        "js/mootor.js": {
+            "name": "js/mootor.js",
             "modules": {},
             "classes": {
                 "window.m": 1
@@ -45,8 +45,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "route.js": {
-            "name": "route.js",
+        "js/route.js": {
+            "name": "js/route.js",
             "modules": {
                 "Router": 1
             },
@@ -56,8 +56,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "router.js": {
-            "name": "router.js",
+        "js/router.js": {
+            "name": "js/router.js",
             "modules": {},
             "classes": {
                 "Router": 1
@@ -65,8 +65,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "ui.js": {
-            "name": "ui.js",
+        "js/ui.js": {
+            "name": "js/ui.js",
             "modules": {
                 "UI": 1
             },
@@ -76,8 +76,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "uiapp.js": {
-            "name": "uiapp.js",
+        "js/uiapp.js": {
+            "name": "js/uiapp.js",
             "modules": {},
             "classes": {
                 "UIApp": 1
@@ -85,8 +85,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "uiform.js": {
-            "name": "uiform.js",
+        "js/uiform.js": {
+            "name": "js/uiform.js",
             "modules": {},
             "classes": {
                 "UIForm": 1
@@ -94,8 +94,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "uiformcamera.js": {
-            "name": "uiformcamera.js",
+        "js/uiformcamera.js": {
+            "name": "js/uiformcamera.js",
             "modules": {},
             "classes": {
                 "UIFormCamera": 1
@@ -103,8 +103,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "uiformcheckbox.js": {
-            "name": "uiformcheckbox.js",
+        "js/uiformcheckbox.js": {
+            "name": "js/uiformcheckbox.js",
             "modules": {},
             "classes": {
                 "UIFormCheckbox": 1
@@ -112,8 +112,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "uiformdate.js": {
-            "name": "uiformdate.js",
+        "js/uiformdate.js": {
+            "name": "js/uiformdate.js",
             "modules": {},
             "classes": {
                 "UIFormDate": 1
@@ -121,8 +121,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "uiformdraw.js": {
-            "name": "uiformdraw.js",
+        "js/uiformdraw.js": {
+            "name": "js/uiformdraw.js",
             "modules": {},
             "classes": {
                 "UIFormDraw": 1
@@ -130,8 +130,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "uiformfieldset.js": {
-            "name": "uiformfieldset.js",
+        "js/uiformfieldset.js": {
+            "name": "js/uiformfieldset.js",
             "modules": {},
             "classes": {
                 "UIFormFieldset": 1
@@ -139,8 +139,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "uiformgeo.js": {
-            "name": "uiformgeo.js",
+        "js/uiformgeo.js": {
+            "name": "js/uiformgeo.js",
             "modules": {},
             "classes": {
                 "UIFormGeo": 1
@@ -148,8 +148,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "uiforminput.js": {
-            "name": "uiforminput.js",
+        "js/uiforminput.js": {
+            "name": "js/uiforminput.js",
             "modules": {},
             "classes": {
                 "UIFormInput": 1
@@ -157,8 +157,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "uiformoption.js": {
-            "name": "uiformoption.js",
+        "js/uiformoption.js": {
+            "name": "js/uiformoption.js",
             "modules": {},
             "classes": {
                 "UIFormOption": 1
@@ -166,8 +166,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "uiformpassword.js": {
-            "name": "uiformpassword.js",
+        "js/uiformpassword.js": {
+            "name": "js/uiformpassword.js",
             "modules": {},
             "classes": {
                 "UIFormPassword": 1
@@ -175,8 +175,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "uiformpseudoinput.js": {
-            "name": "uiformpseudoinput.js",
+        "js/uiformpseudoinput.js": {
+            "name": "js/uiformpseudoinput.js",
             "modules": {},
             "classes": {
                 "UIFormPseudoInput": 1
@@ -184,8 +184,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "uiformselect.js": {
-            "name": "uiformselect.js",
+        "js/uiformselect.js": {
+            "name": "js/uiformselect.js",
             "modules": {},
             "classes": {
                 "UIFormSelect": 1
@@ -193,8 +193,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "uiformtext.js": {
-            "name": "uiformtext.js",
+        "js/uiformtext.js": {
+            "name": "js/uiformtext.js",
             "modules": {},
             "classes": {
                 "UIFormText": 1
@@ -202,8 +202,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "uiformtextarea.js": {
-            "name": "uiformtextarea.js",
+        "js/uiformtextarea.js": {
+            "name": "js/uiformtextarea.js",
             "modules": {},
             "classes": {
                 "UIFormTextArea": 1
@@ -211,8 +211,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "uiformtime.js": {
-            "name": "uiformtime.js",
+        "js/uiformtime.js": {
+            "name": "js/uiformtime.js",
             "modules": {},
             "classes": {
                 "UIFormTime": 1
@@ -220,8 +220,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "uiformtoggleswitch.js": {
-            "name": "uiformtoggleswitch.js",
+        "js/uiformtoggleswitch.js": {
+            "name": "js/uiformtoggleswitch.js",
             "modules": {},
             "classes": {
                 "UIFormToggleSwitch": 1
@@ -229,8 +229,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "uiheader.js": {
-            "name": "uiheader.js",
+        "js/uiheader.js": {
+            "name": "js/uiheader.js",
             "modules": {},
             "classes": {
                 "UIHeader": 1
@@ -238,8 +238,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "uiloading.js": {
-            "name": "uiloading.js",
+        "js/uiloading.js": {
+            "name": "js/uiloading.js",
             "modules": {},
             "classes": {
                 "UILoading": 1
@@ -249,8 +249,8 @@
             },
             "namespaces": {}
         },
-        "uinavbar.js": {
-            "name": "uinavbar.js",
+        "js/uinavbar.js": {
+            "name": "js/uinavbar.js",
             "modules": {},
             "classes": {
                 "UINavBar": 1
@@ -258,8 +258,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "uinavitem.js": {
-            "name": "uinavitem.js",
+        "js/uinavitem.js": {
+            "name": "js/uinavitem.js",
             "modules": {},
             "classes": {
                 "UINavItem": 1
@@ -267,8 +267,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "uipanel.js": {
-            "name": "uipanel.js",
+        "js/uipanel.js": {
+            "name": "js/uipanel.js",
             "modules": {},
             "classes": {
                 "UIPanel": 1
@@ -276,8 +276,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "uiview.js": {
-            "name": "uiview.js",
+        "js/uiview.js": {
+            "name": "js/uiview.js",
             "modules": {},
             "classes": {
                 "UIView": 1
@@ -285,8 +285,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "view.js": {
-            "name": "view.js",
+        "js/view.js": {
+            "name": "js/view.js",
             "modules": {
                 "View": 1
             },
@@ -312,7 +312,7 @@
             },
             "namespaces": {},
             "tag": "module",
-            "file": "context.js",
+            "file": "js/context.js",
             "line": 1,
             "description": "The App class defines the main object of the applications"
         },
@@ -326,7 +326,7 @@
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "event.js",
+            "file": "js/event.js",
             "line": 1,
             "description": "The Event class defines and manage events",
             "author": "Martín Szyszlican (martinsz [at] gmail.com)"
@@ -341,7 +341,7 @@
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "router.js",
+            "file": "js/router.js",
             "line": 1,
             "description": "The Route class is for defining a route"
         },
@@ -379,7 +379,7 @@
             },
             "namespaces": {},
             "tag": "module",
-            "file": "uiview.js",
+            "file": "js/uiview.js",
             "line": 1,
             "description": "The UI class is the class for all user interface elements.\nIt is not directly used, but extended by many other classes."
         },
@@ -394,7 +394,7 @@
             },
             "namespaces": {},
             "tag": "module",
-            "file": "view.js",
+            "file": "js/view.js",
             "line": 1,
             "description": "The View class handles each screen of the application. \nA list of views is specified in the applications options\nand the files are loaded from the views/ folder.\nEach view has a viewName.js and a viewName.html file.\nThe viewName.js file defines options for the view."
         }
@@ -409,7 +409,7 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "App",
-            "file": "app.js",
+            "file": "js/app.js",
             "line": 22,
             "description": "The App class defines the main object of the applications",
             "is_constructor": 1,
@@ -431,7 +431,7 @@
             "extension_for": [],
             "module": "Mootor",
             "namespace": "",
-            "file": "mootor.js",
+            "file": "js/mootor.js",
             "line": 22,
             "description": "m public global object",
             "static": 1
@@ -446,7 +446,7 @@
             "extension_for": [],
             "module": "App",
             "namespace": "",
-            "file": "context.js",
+            "file": "js/context.js",
             "line": 1,
             "description": "Information about the context of the application (ej: device's viewport)",
             "return": {
@@ -464,7 +464,7 @@
             "extension_for": [],
             "module": "Mootor",
             "namespace": "",
-            "file": "event.js",
+            "file": "js/event.js",
             "line": 1,
             "description": "The Event class defines and manage events",
             "access": "private",
@@ -481,7 +481,7 @@
             "extension_for": [],
             "module": "Router",
             "namespace": "",
-            "file": "route.js",
+            "file": "js/route.js",
             "line": 1,
             "description": "The Route class is for defining a route",
             "is_constructor": 1,
@@ -497,7 +497,7 @@
             "extension_for": [],
             "module": "Router",
             "namespace": "",
-            "file": "router.js",
+            "file": "js/router.js",
             "line": 1,
             "description": "The Router class is for defining routes",
             "is_constructor": 1,
@@ -513,7 +513,7 @@
             "extension_for": [],
             "module": "UI",
             "namespace": "",
-            "file": "ui.js",
+            "file": "js/ui.js",
             "line": 1,
             "description": "The UI class is the class for all user interface elements.\nIt is not directly used, but extended by many other classes.",
             "is_constructor": 1,
@@ -529,7 +529,7 @@
             "extension_for": [],
             "module": "UI",
             "namespace": "",
-            "file": "uiapp.js",
+            "file": "js/uiapp.js",
             "line": 1,
             "description": "The UIApp class is the UI representation of an app",
             "extends": "UI",
@@ -546,7 +546,7 @@
             "extension_for": [],
             "module": "UI",
             "namespace": "",
-            "file": "uiform.js",
+            "file": "js/uiform.js",
             "line": 3,
             "description": "The UIForm is a form to input data",
             "extends": "UI",
@@ -563,7 +563,7 @@
             "extension_for": [],
             "module": "UI",
             "namespace": "",
-            "file": "uiformcamera.js",
+            "file": "js/uiformcamera.js",
             "line": 1,
             "description": "UIFormCamera is a camera pseudo-input of a form",
             "extends": "UI",
@@ -580,7 +580,7 @@
             "extension_for": [],
             "module": "UI",
             "namespace": "",
-            "file": "uiformcheckbox.js",
+            "file": "js/uiformcheckbox.js",
             "line": 1,
             "description": "UIFormCheckbox is a checkbox input of a form",
             "extends": "UI",
@@ -597,7 +597,7 @@
             "extension_for": [],
             "module": "UI",
             "namespace": "",
-            "file": "uiformdate.js",
+            "file": "js/uiformdate.js",
             "line": 1,
             "description": "UIFormDate is a date input of a form",
             "extends": "UI",
@@ -614,7 +614,7 @@
             "extension_for": [],
             "module": "UI",
             "namespace": "",
-            "file": "uiformdraw.js",
+            "file": "js/uiformdraw.js",
             "line": 1,
             "description": "UIFormDraw is a draw pseudo-input of a form",
             "extends": "UI",
@@ -631,7 +631,7 @@
             "extension_for": [],
             "module": "UI",
             "namespace": "",
-            "file": "uiformfieldset.js",
+            "file": "js/uiformfieldset.js",
             "line": 1,
             "description": "UIFormFieldset is a fieldset item of a form",
             "extends": "UI",
@@ -648,7 +648,7 @@
             "extension_for": [],
             "module": "UI",
             "namespace": "",
-            "file": "uiformgeo.js",
+            "file": "js/uiformgeo.js",
             "line": 1,
             "description": "UIFormGeo is a date pseudo-input of a form",
             "extends": "UI",
@@ -665,7 +665,7 @@
             "extension_for": [],
             "module": "UI",
             "namespace": "",
-            "file": "uiforminput.js",
+            "file": "js/uiforminput.js",
             "line": 1,
             "description": "UIFormInput is an input item of a form",
             "extends": "UI",
@@ -682,7 +682,7 @@
             "extension_for": [],
             "module": "UI",
             "namespace": "",
-            "file": "uiformoption.js",
+            "file": "js/uiformoption.js",
             "line": 1,
             "description": "UIFormOption is an option input of a form",
             "extends": "UI",
@@ -699,7 +699,7 @@
             "extension_for": [],
             "module": "UI",
             "namespace": "",
-            "file": "uiformpassword.js",
+            "file": "js/uiformpassword.js",
             "line": 1,
             "description": "UIFormPassword is a password input of a form",
             "extends": "UI",
@@ -716,7 +716,7 @@
             "extension_for": [],
             "module": "UI",
             "namespace": "",
-            "file": "uiformpseudoinput.js",
+            "file": "js/uiformpseudoinput.js",
             "line": 1,
             "description": "UIFormPseudoInput is a pseudo-input item of a form",
             "extends": "UI",
@@ -733,7 +733,7 @@
             "extension_for": [],
             "module": "UI",
             "namespace": "",
-            "file": "uiformselect.js",
+            "file": "js/uiformselect.js",
             "line": 1,
             "description": "UIFormSelect is a select input of a form",
             "extends": "UI",
@@ -750,7 +750,7 @@
             "extension_for": [],
             "module": "UI",
             "namespace": "",
-            "file": "uiformtext.js",
+            "file": "js/uiformtext.js",
             "line": 1,
             "description": "UIFormText is a text input of a form",
             "extends": "UI",
@@ -767,7 +767,7 @@
             "extension_for": [],
             "module": "UI",
             "namespace": "",
-            "file": "uiformtextarea.js",
+            "file": "js/uiformtextarea.js",
             "line": 1,
             "description": "UIFormTextArea is a textarea input of a form",
             "extends": "UI",
@@ -784,7 +784,7 @@
             "extension_for": [],
             "module": "UI",
             "namespace": "",
-            "file": "uiformtime.js",
+            "file": "js/uiformtime.js",
             "line": 1,
             "description": "UIFormTime is a time input of a form",
             "extends": "UI",
@@ -801,7 +801,7 @@
             "extension_for": [],
             "module": "UI",
             "namespace": "",
-            "file": "uiformtoggleswitch.js",
+            "file": "js/uiformtoggleswitch.js",
             "line": 1,
             "description": "UIFormToggleSwitch is a toggle switch pseudo-input of a form",
             "extends": "UI",
@@ -818,7 +818,7 @@
             "extension_for": [],
             "module": "UI",
             "namespace": "",
-            "file": "uiheader.js",
+            "file": "js/uiheader.js",
             "line": 1,
             "description": "The UIHeader class is a navigational element at the top or bottom of the page (header or footer)",
             "extends": "UI",
@@ -835,7 +835,7 @@
             "extension_for": [],
             "module": "UI",
             "namespace": "",
-            "file": "uiloading.js",
+            "file": "js/uiloading.js",
             "line": 1,
             "description": "The UILoading is the loading indicator",
             "extends": "UI",
@@ -852,7 +852,7 @@
             "extension_for": [],
             "module": "UI",
             "namespace": "",
-            "file": "uinavbar.js",
+            "file": "js/uinavbar.js",
             "line": 1,
             "description": "The UINavBar class is a navigational element at the top or bottom of the page (header or footer)",
             "extends": "UI",
@@ -869,7 +869,7 @@
             "extension_for": [],
             "module": "UI",
             "namespace": "",
-            "file": "uinavitem.js",
+            "file": "js/uinavitem.js",
             "line": 1,
             "description": "The UINavItem is an item of a UINavBar, like an action button or an anchor link",
             "extends": "UI",
@@ -886,7 +886,7 @@
             "extension_for": [],
             "module": "UI",
             "namespace": "",
-            "file": "uipanel.js",
+            "file": "js/uipanel.js",
             "line": 1,
             "description": "A Panel to show views",
             "extends": "UI",
@@ -902,7 +902,7 @@
             "extension_for": [],
             "module": "UI",
             "namespace": "",
-            "file": "uiview.js",
+            "file": "js/uiview.js",
             "line": 1,
             "description": "The UIView class is the UI representation of a view",
             "extends": "UI",
@@ -919,7 +919,7 @@
             "extension_for": [],
             "module": "View",
             "namespace": "",
-            "file": "view.js",
+            "file": "js/view.js",
             "line": 1,
             "description": "The View class handles each screen of the application. \nA list of views is specified in the applications options\nand the files are loaded from the views/ folder.\nEach view has a viewName.js and a viewName.html file.\nThe viewName.js file defines options for the view.",
             "is_constructor": 1,
@@ -935,7 +935,7 @@
     },
     "classitems": [
         {
-            "file": "app.js",
+            "file": "js/app.js",
             "line": 38,
             "description": "The application's version number\nNote: It's not Mootor version, this value is defined in application code, not framework code.",
             "itemtype": "property",
@@ -945,7 +945,7 @@
             "module": "App"
         },
         {
-            "file": "app.js",
+            "file": "js/app.js",
             "line": 56,
             "description": "Stores the navigation history. \nAn array of views, ordered in the sequence that they were visited by the user.",
             "itemtype": "property",
@@ -955,7 +955,7 @@
             "module": "App"
         },
         {
-            "file": "app.js",
+            "file": "js/app.js",
             "line": 66,
             "description": "The application's version number\nNote: It's not Mootor version, this value is defined in application code, not framework code.",
             "itemtype": "method",
@@ -976,7 +976,7 @@
             "module": "App"
         },
         {
-            "file": "app.js",
+            "file": "js/app.js",
             "line": 81,
             "description": "Application settings\nIf called with a key, returns the value. If called with key and value, sets value to key.",
             "itemtype": "method",
@@ -1001,7 +1001,7 @@
             "module": "App"
         },
         {
-            "file": "app.js",
+            "file": "js/app.js",
             "line": 99,
             "description": "Go to a view",
             "itemtype": "method",
@@ -1021,8 +1021,8 @@
             "module": "App"
         },
         {
-            "file": "app.js",
-            "line": 124,
+            "file": "js/app.js",
+            "line": 126,
             "description": "Go to the previous view in the history",
             "itemtype": "method",
             "name": "back",
@@ -1034,8 +1034,8 @@
             "module": "App"
         },
         {
-            "file": "app.js",
-            "line": 138,
+            "file": "js/app.js",
+            "line": 141,
             "description": "Set callbacks for app events",
             "itemtype": "method",
             "name": "on",
@@ -1047,8 +1047,8 @@
             "module": "App"
         },
         {
-            "file": "app.js",
-            "line": 175,
+            "file": "js/app.js",
+            "line": 178,
             "description": "Creates a new app with the defined options.\nIf the app is already created, it can be called without options to have a reference to the Mootor app. \n\n App instance factory\n\n window.m.app({\n   views: [\n      \"index\",\n      \"view1\"\n   ]\n });",
             "itemtype": "method",
             "name": "app",
@@ -1067,7 +1067,7 @@
             "module": "App"
         },
         {
-            "file": "context.js",
+            "file": "js/context.js",
             "line": 18,
             "description": "System info",
             "itemtype": "property",
@@ -1077,7 +1077,7 @@
             "module": "App"
         },
         {
-            "file": "context.js",
+            "file": "js/context.js",
             "line": 25,
             "description": "Browser info",
             "itemtype": "property",
@@ -1087,7 +1087,7 @@
             "module": "App"
         },
         {
-            "file": "context.js",
+            "file": "js/context.js",
             "line": 32,
             "description": "Viewport info",
             "itemtype": "property",
@@ -1097,7 +1097,7 @@
             "module": "App"
         },
         {
-            "file": "context.js",
+            "file": "js/context.js",
             "line": 53,
             "itemtype": "property",
             "name": "context",
@@ -1106,7 +1106,7 @@
             "module": "App"
         },
         {
-            "file": "event.js",
+            "file": "js/event.js",
             "line": 19,
             "description": "Events collection",
             "access": "private",
@@ -1115,7 +1115,7 @@
             "module": "Mootor"
         },
         {
-            "file": "event.js",
+            "file": "js/event.js",
             "line": 25,
             "description": "Add event to collection",
             "access": "private",
@@ -1124,7 +1124,7 @@
             "module": "Mootor"
         },
         {
-            "file": "event.js",
+            "file": "js/event.js",
             "line": 36,
             "description": "Dispatch event",
             "access": "private",
@@ -1133,7 +1133,7 @@
             "module": "Mootor"
         },
         {
-            "file": "event.js",
+            "file": "js/event.js",
             "line": 60,
             "description": "Extend objects with Event methods",
             "access": "private",
@@ -1142,7 +1142,7 @@
             "module": "Mootor"
         },
         {
-            "file": "route.js",
+            "file": "js/route.js",
             "line": 34,
             "description": "The URL regex referenced by this route",
             "itemtype": "property",
@@ -1152,7 +1152,7 @@
             "module": "Router"
         },
         {
-            "file": "route.js",
+            "file": "js/route.js",
             "line": 42,
             "description": "The view that implements this route\nIf called with no parameters, it returns the currently set view in this route.",
             "itemtype": "method",
@@ -1172,7 +1172,7 @@
             "module": "Router"
         },
         {
-            "file": "router.js",
+            "file": "js/router.js",
             "line": 59,
             "description": "Create a route",
             "itemtype": "method",
@@ -1201,7 +1201,7 @@
             "module": "Router"
         },
         {
-            "file": "ui.js",
+            "file": "js/ui.js",
             "line": 33,
             "description": "DOM element",
             "itemtype": "property",
@@ -1214,7 +1214,7 @@
             "module": "UI"
         },
         {
-            "file": "ui.js",
+            "file": "js/ui.js",
             "line": 41,
             "description": "Zepto/jQuery object for DOM element",
             "itemtype": "property",
@@ -1227,7 +1227,7 @@
             "module": "UI"
         },
         {
-            "file": "ui.js",
+            "file": "js/ui.js",
             "line": 49,
             "description": "Shows element (not necesarily, since the element's parent might be hidden or out of view)",
             "itemtype": "method",
@@ -1240,7 +1240,7 @@
             "module": "UI"
         },
         {
-            "file": "ui.js",
+            "file": "js/ui.js",
             "line": 59,
             "description": "Hides element from view",
             "itemtype": "method",
@@ -1253,8 +1253,8 @@
             "module": "UI"
         },
         {
-            "file": "uiform.js",
-            "line": 45,
+            "file": "js/uiform.js",
+            "line": 50,
             "description": "Serialize form's data",
             "itemtype": "method",
             "name": "serialize",
@@ -1266,8 +1266,8 @@
             "module": "UI"
         },
         {
-            "file": "uiform.js",
-            "line": 55,
+            "file": "js/uiform.js",
+            "line": 60,
             "description": "Clear all form fields",
             "itemtype": "method",
             "name": "clear",
@@ -1276,7 +1276,7 @@
             "module": "UI"
         },
         {
-            "file": "uiformcamera.js",
+            "file": "js/uiformcamera.js",
             "line": 53,
             "description": "Take a picture",
             "itemtype": "method",
@@ -1286,7 +1286,7 @@
             "module": "UI"
         },
         {
-            "file": "uiformcamera.js",
+            "file": "js/uiformcamera.js",
             "line": 63,
             "description": "Choose a picture",
             "itemtype": "method",
@@ -1296,7 +1296,7 @@
             "module": "UI"
         },
         {
-            "file": "uiformcamera.js",
+            "file": "js/uiformcamera.js",
             "line": 73,
             "description": "Returns all pictures paths",
             "itemtype": "method",
@@ -1310,7 +1310,7 @@
             "module": "UI"
         },
         {
-            "file": "uiformcamera.js",
+            "file": "js/uiformcamera.js",
             "line": 84,
             "description": "Remove picture from input",
             "params": [
@@ -1326,7 +1326,7 @@
             "module": "UI"
         },
         {
-            "file": "uiformcamera.js",
+            "file": "js/uiformcamera.js",
             "line": 97,
             "description": "Export picture data",
             "itemtype": "method",
@@ -1347,7 +1347,7 @@
             "module": "UI"
         },
         {
-            "file": "uiformdraw.js",
+            "file": "js/uiformdraw.js",
             "line": 44,
             "description": "Export draw data",
             "itemtype": "method",
@@ -1368,7 +1368,7 @@
             "module": "UI"
         },
         {
-            "file": "uiformdraw.js",
+            "file": "js/uiformdraw.js",
             "line": 56,
             "description": "Clear draw",
             "itemtype": "method",
@@ -1378,7 +1378,7 @@
             "module": "UI"
         },
         {
-            "file": "uiformfieldset.js",
+            "file": "js/uiformfieldset.js",
             "line": 43,
             "description": "Disable/enable input field",
             "itemtype": "method",
@@ -1398,7 +1398,7 @@
             "module": "UI"
         },
         {
-            "file": "uiformgeo.js",
+            "file": "js/uiformgeo.js",
             "line": 44,
             "description": "Get current position",
             "itemtype": "method",
@@ -1408,7 +1408,7 @@
             "module": "UI"
         },
         {
-            "file": "uiforminput.js",
+            "file": "js/uiforminput.js",
             "line": 43,
             "description": "Disable/enable input field",
             "itemtype": "method",
@@ -1428,7 +1428,7 @@
             "module": "UI"
         },
         {
-            "file": "uiformpseudoinput.js",
+            "file": "js/uiformpseudoinput.js",
             "line": 43,
             "description": "Value of the input",
             "itemtype": "property",
@@ -1437,7 +1437,7 @@
             "module": "UI"
         },
         {
-            "file": "uiformpseudoinput.js",
+            "file": "js/uiformpseudoinput.js",
             "line": 50,
             "description": "Sets an event handler for the input",
             "itemtype": "method",
@@ -1461,7 +1461,7 @@
             "module": "UI"
         },
         {
-            "file": "uiformtoggleswitch.js",
+            "file": "js/uiformtoggleswitch.js",
             "line": 44,
             "description": "Set/get input toggle switch value",
             "itemtype": "method",
@@ -1477,7 +1477,7 @@
             "module": "UI"
         },
         {
-            "file": "uiheader.js",
+            "file": "js/uiheader.js",
             "line": 129,
             "description": "Back\nThe back button",
             "object": "back",
@@ -1489,7 +1489,7 @@
             "module": "UI"
         },
         {
-            "file": "uiheader.js",
+            "file": "js/uiheader.js",
             "line": 138,
             "description": "Title\nThe text to display in the header\nIf called with no arguments returns the current title",
             "itemtype": "method",
@@ -1511,7 +1511,7 @@
             "module": "UI"
         },
         {
-            "file": "uiloading.js",
+            "file": "js/uiloading.js",
             "line": 33,
             "description": "Show/Hide the loading indicator",
             "itemtype": "method",
@@ -1532,8 +1532,21 @@
             "module": "UI"
         },
         {
-            "file": "uiloading.js",
-            "line": 96,
+            "file": "js/uiloading.js",
+            "line": 72,
+            "description": "Create and add the loading indicator's elements to the DOM",
+            "itemtype": "method",
+            "name": "create",
+            "return": {
+                "description": "Zeptified element",
+                "type": "Zepto"
+            },
+            "class": "UIApp",
+            "module": "UI"
+        },
+        {
+            "file": "js/uiloading.js",
+            "line": 97,
             "description": "Set the style for the loading animation",
             "itemtype": "method",
             "name": "style",
@@ -1554,7 +1567,7 @@
             "module": "UI"
         },
         {
-            "file": "uinavitem.js",
+            "file": "js/uinavitem.js",
             "line": 45,
             "description": "Block/Unblock or return block status.",
             "itemtype": "method",
@@ -1576,7 +1589,7 @@
             "module": "UI"
         },
         {
-            "file": "uipanel.js",
+            "file": "js/uipanel.js",
             "line": 99,
             "description": "Initialize  a panel",
             "itemtype": "method",
@@ -1587,7 +1600,7 @@
             "module": "UI"
         },
         {
-            "file": "uipanel.js",
+            "file": "js/uipanel.js",
             "line": 183,
             "description": "Move the element to the specified position inside the UIApp / m-views-container. \nIf coordinates are not specified, it returns coordinates object with the current position.",
             "itemtype": "method",
@@ -1608,7 +1621,7 @@
             "module": "UI"
         },
         {
-            "file": "uipanel.js",
+            "file": "js/uipanel.js",
             "line": 204,
             "description": "Block/Unblock or return block status.",
             "itemtype": "method",
@@ -1629,7 +1642,7 @@
             "module": "UI"
         },
         {
-            "file": "uipanel.js",
+            "file": "js/uipanel.js",
             "line": 215,
             "description": "Set or get transition type",
             "itemtype": "method",
@@ -1650,7 +1663,16 @@
             "module": "UI"
         },
         {
-            "file": "view.js",
+            "file": "js/uiview.js",
+            "line": 64,
+            "description": "Element enhancements",
+            "access": "private",
+            "tagname": "",
+            "class": "UIView",
+            "module": "UI"
+        },
+        {
+            "file": "js/view.js",
             "line": 110,
             "description": "Views collection",
             "access": "private",
@@ -1659,7 +1681,7 @@
             "module": "View"
         },
         {
-            "file": "view.js",
+            "file": "js/view.js",
             "line": 116,
             "description": "Current active view",
             "access": "private",
@@ -1668,7 +1690,7 @@
             "module": "View"
         },
         {
-            "file": "view.js",
+            "file": "js/view.js",
             "line": 122,
             "description": "Init View instance, load HTML, CSS and JavaScript files for the view",
             "access": "private",
@@ -1691,7 +1713,7 @@
             "module": "View"
         },
         {
-            "file": "view.js",
+            "file": "js/view.js",
             "line": 153,
             "description": "Get view HTML",
             "access": "private",
@@ -1709,7 +1731,7 @@
             "module": "View"
         },
         {
-            "file": "view.js",
+            "file": "js/view.js",
             "line": 256,
             "description": "Title is the friendly name for the current view.\nWhen called without parameters, returns a string containing the title. When called with parameters, sets the title.",
             "itemtype": "method",
@@ -1729,7 +1751,7 @@
             "module": "View"
         },
         {
-            "file": "view.js",
+            "file": "js/view.js",
             "line": 274,
             "description": "Sets an event handler for the view\nPossible values for event: load, beforeLoad, unload, beforeUnload, init\nTODO: Define which parameters are passed to the callback function.",
             "itemtype": "method",
@@ -1753,7 +1775,7 @@
             "module": "View"
         },
         {
-            "file": "view.js",
+            "file": "js/view.js",
             "line": 293,
             "description": "Unsets event handlers for the view\nPossible values for event: load, beforeLoad, unload, beforeUnload, init",
             "itemtype": "method",
@@ -1778,7 +1800,7 @@
             "module": "View"
         },
         {
-            "file": "view.js",
+            "file": "js/view.js",
             "line": 310,
             "description": "Create or get a view",
             "itemtype": "method",
@@ -1806,35 +1828,39 @@
     "warnings": [
         {
             "message": "unknown tag: object",
-            "line": " uiheader.js:129"
+            "line": " js/uiheader.js:129"
         },
         {
             "message": "Missing item type\nEvents collection",
-            "line": " event.js:19"
+            "line": " js/event.js:19"
         },
         {
             "message": "Missing item type\nAdd event to collection",
-            "line": " event.js:25"
+            "line": " js/event.js:25"
         },
         {
             "message": "Missing item type\nDispatch event",
-            "line": " event.js:36"
+            "line": " js/event.js:36"
         },
         {
             "message": "Missing item type\nExtend objects with Event methods",
-            "line": " event.js:60"
+            "line": " js/event.js:60"
         },
         {
             "message": "Missing item type\nBack\nThe back button",
-            "line": " uiheader.js:129"
+            "line": " js/uiheader.js:129"
+        },
+        {
+            "message": "Missing item type\nElement enhancements",
+            "line": " js/uiview.js:64"
         },
         {
             "message": "Missing item type\nViews collection",
-            "line": " view.js:110"
+            "line": " js/view.js:110"
         },
         {
             "message": "Missing item type\nCurrent active view",
-            "line": " view.js:116"
+            "line": " js/view.js:116"
         }
     ]
 }
