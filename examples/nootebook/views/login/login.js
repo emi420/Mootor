@@ -16,7 +16,7 @@
     var goToList = function() {
         var email = $("#inputEmail")[0].value;
         m.app.go("#list/" + email );
-    }
+    };
 
     function login() {
         $.ajax({url:"https://dev.voolks.com/users/login/?username=nootebookuser&password=12345", 

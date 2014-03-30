@@ -16,18 +16,23 @@
     "use strict";
 
     var UIForm,
-    
+        UIView,
         UI;
 
     // Dependences
 
     UI = Mootor.UI;
-    
+    UIView = Mootor.UIView;
+
     // Private constructors
 
-    UIForm = function() {
-        // code here
+    UIForm = function(element) {
+        console.log("UIForm",element);
     };
+
+    // Event handlers
+
+    UIView.registerEnhancement(".m-form",UIForm);
 
     // Prototypal inheritance
     $.extend(UIForm.prototype, UI.prototype);

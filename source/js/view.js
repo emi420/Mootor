@@ -101,7 +101,7 @@
         } else {
             View._dispatch(event, instance);
         }
-    }
+    };
 
     // Private static methods and properties
     
@@ -135,17 +135,17 @@
             self.on("getHtml", function(view) {
                 window.setTimeout(function() {
                     View._getScript(self);
-                }, 1)
+                }, 1);
             });
 
             self.on("getScript", function() {
-                View.dispatch("ready", self)
-            })
+                View.dispatch("ready", self);
+            });
 
             // Load Html, Css and JavaScript
             setTimeout(function() {
                 View._getHtml(self);
-            }, 1)
+            }, 1);
             View._getCss(self);
 
         },
@@ -166,7 +166,7 @@
                 path,
                 function(source) {
                     View._get(self.id).html = source;
-                    View.dispatch("getHtml", self)
+                    View.dispatch("getHtml", self);
                 }
             );
         },
@@ -185,8 +185,8 @@
                 
             path = "views/" + id + "/" + id + ".js";
             
-            script = document.createElement("script"),
-                $script = $(script);
+            script = document.createElement("script");
+            $script = $(script);
         
             script.src = path;
             script.type = "text/javascript";
@@ -228,7 +228,7 @@
                 path: path
             }, function() {
                 View._get(self.id).css = link;
-                View.dispatch("getCss", self)
+                View.dispatch("getCss", self);
             });
         },
         
@@ -336,9 +336,9 @@
                 view = App._currentView;
             }
 
-            return view
+            return view;
         },
         
-    })
+    });
 
 }(window.$, window.Mootor, window.document));

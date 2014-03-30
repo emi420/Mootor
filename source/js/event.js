@@ -52,7 +52,7 @@
                 (function(callback) {
                     window.setTimeout(function() {
                         callback(instance);
-                    }, 1)
+                    }, 1);
                 }(callbacks[i]));
             }
         }, 

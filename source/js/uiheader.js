@@ -62,7 +62,7 @@
                 m.app.ui.el.parentElement.replaceChild(
                     self.ui.header.el,
                     headerEl
-                )
+                );
             });
         } else {
 
@@ -71,7 +71,7 @@
                 m.app.ui.el.parentElement.replaceChild(
                     m.app.ui.header.el,
                     headerEl
-                )
+                );
             });
 
 
@@ -106,7 +106,7 @@
             self.back = new UINavItem({
                 el: backEl
             });
-            self.back.$el.addClass("m-header-back")
+            self.back.$el.addClass("m-header-back");
             self.back.hide();
             self.back.$el.on("tap click", function() {
                 m.app.back();

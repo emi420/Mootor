@@ -26,7 +26,7 @@
     Mootor.UINavItem = UINavItem = function(options) {
         this.el = options.el;
         this.$el = $(this.el);
-        this.$el.addClass("m-nav-item")
+        this.$el.addClass("m-nav-item");
     };
 
     // Prototypal inheritance
