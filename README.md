@@ -16,8 +16,9 @@ We're working on the stable version.
 
 More information:
 
+* http://emi420.github.io/Mootor/
 * https://github.com/emi420/Mootor/issues
-* http://mootor.mobi (spanish)
+* http://mootor.mobi
 
 ## Design
 
