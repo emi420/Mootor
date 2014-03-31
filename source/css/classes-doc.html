@@ -1,0 +1,49 @@
+<!doctype html>
+<html class="m-doc m-html"> <!-- m-doc class is only used in documentation -->
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="Mootor CSS Classes documentation">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Mootor CSS Classes documentation</title>
+        <link rel="stylesheet" href="../../dist/css/mootor.css">
+        <script src="../../dist/js/zepto.js"></script>
+    </head>
+    <body class="m-app">
+		<div class="m-views-container">
+			.m-panel-container
+			<div class="m-panel">
+				.m-panel index
+                <div style="height: 1000px; background: red; width: 22px;"></div>
+                <div></div>
+			</div>
+            <div class="m-panel m-hidden">
+                .m-panel testview
+                <div style="height: 1000px; background: red; width: 22px;"></div>
+                <div></div>
+            </div>
+		</div>
+        <script type="text/javascript">
+        var $viewsContainer = $(".m-views-container");
+        var w = $(".m-panel").width();
+        //Setear ancho fijo a todos los paneles
+        $(".m-panel").width(w);
+
+        //Setear el ancho del contenedor al doble del ancho del viewport
+        $viewsContainer.css("width",w*2);
+
+        $viewsContainer.css("left",0).addClass("m-transition-slide");
+
+        setTimeout(function() {
+            var $currentPanel = $($(".m-panel").get(0));
+            var $nextPanel = $($(".m-panel").get(1));
+            //Movemos el panel a la izquierda del otro panel
+            $nextPanel.css("left",w);
+            $nextPanel.removeClass("m-hidden");
+            $viewsContainer.css("left",-w);
+            setTimeout(function() {
+                $currentPanel.addClass("m-hidden");
+            },1000);
+        },1000);
+        </script>        
+    </body>
+</html>

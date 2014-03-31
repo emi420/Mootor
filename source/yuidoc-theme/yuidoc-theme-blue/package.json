@@ -1,0 +1,40 @@
+{
+  "name": "yuidoc-theme-blue",
+  "version": "0.1.8",
+  "description": "A custom theme for yuidocs inspired by the blue color :)",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/royriojas/yuidoc-theme-blue.git"
+  },
+  "keywords": [
+    "yuidoc-theme",
+    "code documentation",
+    "documentation generator",
+    "themes",
+    "yuidoc themes"
+  ],
+  "author": {
+    "name": "Roy Riojas"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/royriojas/yuidoc-theme-blue/issues"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-bump": "0.0.13",
+    "time-grunt": "~0.2.8",
+    "matchdep": "~0.3.0",
+    "grunt-jsbeautifier": "git://github.com/royriojas/grunt-jsbeautifier",
+    "yuidocjs": "git://github.com/royriojas/yuidoc"
+  },
+  "readme": "yuidoc-theme-blue\n=================\n\na Simple theme inspired by the blue color for yuidoc (npm version)\n\nUsage\n=====\n\n- install yuidoc\n\n`````\nnpm i -g yuidoc\n`````\n\n- point to the theme directory\n\n`````\nyuidoc ./src -t /path/to/yuidoc-theme-blue\n`````\n\nNote\n====\n\nIf you install yuidoc from this fork https://github.com/royriojas/yuidoc, then you will have another tag\n`````\n@exampleurl // points to a url that could be embeded in an iframe like this one http://jsfiddle.net/royriojas/ZuAhz/embedded/\n`````\n\nI needed that attribute to put examples on the methods and APIs that could be more like live examples of my API.\n",
+  "readmeFilename": "README.md",
+  "homepage": "https://github.com/royriojas/yuidoc-theme-blue",
+  "_id": "yuidoc-theme-blue@0.1.8",
+  "dist": {
+    "shasum": "02192ffafaa9596a13a35b126b4ed207110d5e9e"
+  },
+  "_from": "yuidoc-theme-blue@",
+  "_resolved": "https://registry.npmjs.org/yuidoc-theme-blue/-/yuidoc-theme-blue-0.1.8.tgz"
+}

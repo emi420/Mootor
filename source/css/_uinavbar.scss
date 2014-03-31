@@ -1,0 +1,25 @@
+.m-nav {
+    position: absolute;
+    top: 0;
+    right: 1em;
+
+    .m-nav-item {
+        text-decoration: none;
+        float: left;
+        color: #fff;
+        padding: 1.4em .25em;
+        font-size: .9em;
+        width: auto;
+
+        &:before {
+            display: inline-block;
+        }
+
+        // Hidden item
+        &.m-hidden {
+            display: none; 
+        }
+
+    }
+
+}

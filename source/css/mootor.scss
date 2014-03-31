@@ -1,0 +1,23 @@
+/**
+ * @summary Mootor CSS
+ * @author Emilio Mariscal (emi420 [at] gmail.com)
+ * @author Martín Szyszlican (martinsz [at] gmail.com)
+ */
+
+@import "compass/reset";
+
+html, body {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.m-app {
+	@import "fonts";
+	@import "uipanel";
+	@import "uiheader";
+	@import "uinavbar";
+	@import "uiloading";
+	@import "utils";
+}
+@import "uiloading_animations";

@@ -1,0 +1,1976 @@
+{
+    "project": {},
+    "files": {
+        "js/app.js": {
+            "name": "js/app.js",
+            "modules": {
+                "App": 1
+            },
+            "classes": {
+                "App": 1
+            },
+            "fors": {
+                "window.m": 1
+            },
+            "namespaces": {}
+        },
+        "js/context.js": {
+            "name": "js/context.js",
+            "modules": {},
+            "classes": {
+                "Context": 1
+            },
+            "fors": {
+                "window.m": 1
+            },
+            "namespaces": {}
+        },
+        "js/event.js": {
+            "name": "js/event.js",
+            "modules": {
+                "Mootor": 1
+            },
+            "classes": {
+                "Event": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/mootor.js": {
+            "name": "js/mootor.js",
+            "modules": {},
+            "classes": {
+                "window.m": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/route.js": {
+            "name": "js/route.js",
+            "modules": {
+                "Router": 1
+            },
+            "classes": {
+                "Route": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/router.js": {
+            "name": "js/router.js",
+            "modules": {},
+            "classes": {
+                "Router": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/ui.js": {
+            "name": "js/ui.js",
+            "modules": {
+                "UI": 1
+            },
+            "classes": {
+                "UI": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/uiapp.js": {
+            "name": "js/uiapp.js",
+            "modules": {},
+            "classes": {
+                "UIApp": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/uiform.js": {
+            "name": "js/uiform.js",
+            "modules": {},
+            "classes": {
+                "UIForm": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/uiformcamera.js": {
+            "name": "js/uiformcamera.js",
+            "modules": {},
+            "classes": {
+                "UIFormCamera": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/uiformcheckbox.js": {
+            "name": "js/uiformcheckbox.js",
+            "modules": {},
+            "classes": {
+                "UIFormCheckbox": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/uiformdate.js": {
+            "name": "js/uiformdate.js",
+            "modules": {},
+            "classes": {
+                "UIFormDate": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/uiformdraw.js": {
+            "name": "js/uiformdraw.js",
+            "modules": {},
+            "classes": {
+                "UIFormDraw": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/uiformfieldset.js": {
+            "name": "js/uiformfieldset.js",
+            "modules": {},
+            "classes": {
+                "UIFormFieldset": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/uiformgeo.js": {
+            "name": "js/uiformgeo.js",
+            "modules": {},
+            "classes": {
+                "UIFormGeo": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/uiforminput.js": {
+            "name": "js/uiforminput.js",
+            "modules": {},
+            "classes": {
+                "UIFormInput": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/uiformoption.js": {
+            "name": "js/uiformoption.js",
+            "modules": {},
+            "classes": {
+                "UIFormOption": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/uiformpassword.js": {
+            "name": "js/uiformpassword.js",
+            "modules": {},
+            "classes": {
+                "UIFormPassword": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/uiformpseudoinput.js": {
+            "name": "js/uiformpseudoinput.js",
+            "modules": {},
+            "classes": {
+                "UIFormPseudoInput": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/uiformselect.js": {
+            "name": "js/uiformselect.js",
+            "modules": {},
+            "classes": {
+                "UIFormSelect": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/uiformtext.js": {
+            "name": "js/uiformtext.js",
+            "modules": {},
+            "classes": {
+                "UIFormText": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/uiformtextarea.js": {
+            "name": "js/uiformtextarea.js",
+            "modules": {},
+            "classes": {
+                "UIFormTextArea": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/uiformtime.js": {
+            "name": "js/uiformtime.js",
+            "modules": {},
+            "classes": {
+                "UIFormTime": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/uiformtoggleswitch.js": {
+            "name": "js/uiformtoggleswitch.js",
+            "modules": {},
+            "classes": {
+                "UIFormToggleSwitch": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/uiheader.js": {
+            "name": "js/uiheader.js",
+            "modules": {},
+            "classes": {
+                "UIHeader": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/uiloading.js": {
+            "name": "js/uiloading.js",
+            "modules": {},
+            "classes": {
+                "UILoading": 1
+            },
+            "fors": {
+                "UIApp": 1
+            },
+            "namespaces": {}
+        },
+        "js/uinavbar.js": {
+            "name": "js/uinavbar.js",
+            "modules": {},
+            "classes": {
+                "UINavBar": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/uinavitem.js": {
+            "name": "js/uinavitem.js",
+            "modules": {},
+            "classes": {
+                "UINavItem": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/uipanel.js": {
+            "name": "js/uipanel.js",
+            "modules": {},
+            "classes": {
+                "UIPanel": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/uiview.js": {
+            "name": "js/uiview.js",
+            "modules": {},
+            "classes": {
+                "UIView": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/view.js": {
+            "name": "js/view.js",
+            "modules": {
+                "View": 1
+            },
+            "classes": {
+                "View": 1
+            },
+            "fors": {
+                "App": 1
+            },
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "App": {
+            "name": "App",
+            "submodules": {},
+            "classes": {
+                "App": 1,
+                "Context": 1
+            },
+            "fors": {
+                "window.m": 1
+            },
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/context.js",
+            "line": 1,
+            "description": "The App class defines the main object of the applications"
+        },
+        "Mootor": {
+            "name": "Mootor",
+            "submodules": {},
+            "classes": {
+                "window.m": 1,
+                "Event": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/event.js",
+            "line": 1,
+            "description": "The Event class defines and manage events",
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        },
+        "Router": {
+            "name": "Router",
+            "submodules": {},
+            "classes": {
+                "Route": 1,
+                "Router": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/router.js",
+            "line": 1,
+            "description": "The Route class is for defining a route"
+        },
+        "UI": {
+            "name": "UI",
+            "submodules": {},
+            "classes": {
+                "UI": 1,
+                "UIApp": 1,
+                "UIForm": 1,
+                "UIFormCamera": 1,
+                "UIFormCheckbox": 1,
+                "UIFormDate": 1,
+                "UIFormDraw": 1,
+                "UIFormFieldset": 1,
+                "UIFormGeo": 1,
+                "UIFormInput": 1,
+                "UIFormOption": 1,
+                "UIFormPassword": 1,
+                "UIFormPseudoInput": 1,
+                "UIFormSelect": 1,
+                "UIFormText": 1,
+                "UIFormTextArea": 1,
+                "UIFormTime": 1,
+                "UIFormToggleSwitch": 1,
+                "UIHeader": 1,
+                "UILoading": 1,
+                "UINavBar": 1,
+                "UINavItem": 1,
+                "UIPanel": 1,
+                "UIView": 1
+            },
+            "fors": {
+                "UIApp": 1
+            },
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/uiview.js",
+            "line": 1,
+            "description": "The UI class is the class for all user interface elements.\nIt is not directly used, but extended by many other classes."
+        },
+        "View": {
+            "name": "View",
+            "submodules": {},
+            "classes": {
+                "View": 1
+            },
+            "fors": {
+                "App": 1
+            },
+            "namespaces": {},
+            "tag": "module",
+            "file": "js/view.js",
+            "line": 1,
+            "description": "The View class handles each view of the application. \nA list of views is specified in the applications options\nand the files are loaded from the \"views\" folder.\nEach view has a viewName.js, viewName.html and viewName.css files."
+        }
+    },
+    "classes": {
+        "App": {
+            "name": "App",
+            "shortname": "App",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "App",
+            "file": "js/app.js",
+            "line": 22,
+            "description": "The App class defines the main object of the applications",
+            "is_constructor": 1,
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "options",
+                    "description": "An object defining options for the application.\n* views - An array with a list of view names",
+                    "type": "Object"
+                }
+            ]
+        },
+        "window.m": {
+            "name": "window.m",
+            "shortname": "window.m",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Mootor",
+            "namespace": "",
+            "file": "js/mootor.js",
+            "line": 22,
+            "description": "m public global object",
+            "static": 1
+        },
+        "Context": {
+            "name": "Context",
+            "shortname": "Context",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "App",
+            "namespace": "",
+            "file": "js/context.js",
+            "line": 1,
+            "description": "Information about the context of the application (ej: device's viewport)",
+            "return": {
+                "description": "object"
+            },
+            "static": 1
+        },
+        "Event": {
+            "name": "Event",
+            "shortname": "Event",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Mootor",
+            "namespace": "",
+            "file": "js/event.js",
+            "line": 1,
+            "description": "The Event class defines and manage events",
+            "access": "private",
+            "tagname": "",
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        },
+        "Route": {
+            "name": "Route",
+            "shortname": "Route",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Router",
+            "namespace": "",
+            "file": "js/route.js",
+            "line": 1,
+            "description": "The Route class is for defining a route",
+            "is_constructor": 1,
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        },
+        "Router": {
+            "name": "Router",
+            "shortname": "Router",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Router",
+            "namespace": "",
+            "file": "js/router.js",
+            "line": 1,
+            "description": "The Router class is for defining routes",
+            "is_constructor": 1,
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        },
+        "UI": {
+            "name": "UI",
+            "shortname": "UI",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "UI",
+            "namespace": "",
+            "file": "js/ui.js",
+            "line": 1,
+            "description": "The UI class is the class for all user interface elements.\nIt is not directly used, but extended by many other classes.",
+            "is_constructor": 1,
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        },
+        "UIApp": {
+            "name": "UIApp",
+            "shortname": "UIApp",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "UI",
+            "namespace": "",
+            "file": "js/uiapp.js",
+            "line": 1,
+            "description": "The UIApp class is the UI representation of an app",
+            "extends": "UI",
+            "is_constructor": 1,
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        },
+        "UIForm": {
+            "name": "UIForm",
+            "shortname": "UIForm",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "UI",
+            "namespace": "",
+            "file": "js/uiform.js",
+            "line": 3,
+            "description": "The UIForm is a form to input data",
+            "extends": "UI",
+            "is_constructor": 1,
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        },
+        "UIFormCamera": {
+            "name": "UIFormCamera",
+            "shortname": "UIFormCamera",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "UI",
+            "namespace": "",
+            "file": "js/uiformcamera.js",
+            "line": 1,
+            "description": "UIFormCamera is a camera pseudo-input of a form",
+            "extends": "UI",
+            "is_constructor": 1,
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        },
+        "UIFormCheckbox": {
+            "name": "UIFormCheckbox",
+            "shortname": "UIFormCheckbox",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "UI",
+            "namespace": "",
+            "file": "js/uiformcheckbox.js",
+            "line": 1,
+            "description": "UIFormCheckbox is a checkbox input of a form",
+            "extends": "UI",
+            "is_constructor": 1,
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        },
+        "UIFormDate": {
+            "name": "UIFormDate",
+            "shortname": "UIFormDate",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "UI",
+            "namespace": "",
+            "file": "js/uiformdate.js",
+            "line": 1,
+            "description": "UIFormDate is a date input of a form",
+            "extends": "UI",
+            "is_constructor": 1,
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        },
+        "UIFormDraw": {
+            "name": "UIFormDraw",
+            "shortname": "UIFormDraw",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "UI",
+            "namespace": "",
+            "file": "js/uiformdraw.js",
+            "line": 1,
+            "description": "UIFormDraw is a draw pseudo-input of a form",
+            "extends": "UI",
+            "is_constructor": 1,
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        },
+        "UIFormFieldset": {
+            "name": "UIFormFieldset",
+            "shortname": "UIFormFieldset",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "UI",
+            "namespace": "",
+            "file": "js/uiformfieldset.js",
+            "line": 1,
+            "description": "UIFormFieldset is a fieldset item of a form",
+            "extends": "UI",
+            "is_constructor": 1,
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        },
+        "UIFormGeo": {
+            "name": "UIFormGeo",
+            "shortname": "UIFormGeo",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "UI",
+            "namespace": "",
+            "file": "js/uiformgeo.js",
+            "line": 1,
+            "description": "UIFormGeo is a date pseudo-input of a form",
+            "extends": "UI",
+            "is_constructor": 1,
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        },
+        "UIFormInput": {
+            "name": "UIFormInput",
+            "shortname": "UIFormInput",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "UI",
+            "namespace": "",
+            "file": "js/uiforminput.js",
+            "line": 1,
+            "description": "UIFormInput is an input item of a form",
+            "extends": "UI",
+            "is_constructor": 1,
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        },
+        "UIFormOption": {
+            "name": "UIFormOption",
+            "shortname": "UIFormOption",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "UI",
+            "namespace": "",
+            "file": "js/uiformoption.js",
+            "line": 1,
+            "description": "UIFormOption is an option input of a form",
+            "extends": "UI",
+            "is_constructor": 1,
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        },
+        "UIFormPassword": {
+            "name": "UIFormPassword",
+            "shortname": "UIFormPassword",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "UI",
+            "namespace": "",
+            "file": "js/uiformpassword.js",
+            "line": 1,
+            "description": "UIFormPassword is a password input of a form",
+            "extends": "UI",
+            "is_constructor": 1,
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        },
+        "UIFormPseudoInput": {
+            "name": "UIFormPseudoInput",
+            "shortname": "UIFormPseudoInput",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "UI",
+            "namespace": "",
+            "file": "js/uiformpseudoinput.js",
+            "line": 1,
+            "description": "UIFormPseudoInput is a pseudo-input item of a form",
+            "extends": "UI",
+            "is_constructor": 1,
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        },
+        "UIFormSelect": {
+            "name": "UIFormSelect",
+            "shortname": "UIFormSelect",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "UI",
+            "namespace": "",
+            "file": "js/uiformselect.js",
+            "line": 1,
+            "description": "UIFormSelect is a select input of a form",
+            "extends": "UI",
+            "is_constructor": 1,
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        },
+        "UIFormText": {
+            "name": "UIFormText",
+            "shortname": "UIFormText",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "UI",
+            "namespace": "",
+            "file": "js/uiformtext.js",
+            "line": 1,
+            "description": "UIFormText is a text input of a form",
+            "extends": "UI",
+            "is_constructor": 1,
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        },
+        "UIFormTextArea": {
+            "name": "UIFormTextArea",
+            "shortname": "UIFormTextArea",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "UI",
+            "namespace": "",
+            "file": "js/uiformtextarea.js",
+            "line": 1,
+            "description": "UIFormTextArea is a textarea input of a form",
+            "extends": "UI",
+            "is_constructor": 1,
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        },
+        "UIFormTime": {
+            "name": "UIFormTime",
+            "shortname": "UIFormTime",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "UI",
+            "namespace": "",
+            "file": "js/uiformtime.js",
+            "line": 1,
+            "description": "UIFormTime is a time input of a form",
+            "extends": "UI",
+            "is_constructor": 1,
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        },
+        "UIFormToggleSwitch": {
+            "name": "UIFormToggleSwitch",
+            "shortname": "UIFormToggleSwitch",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "UI",
+            "namespace": "",
+            "file": "js/uiformtoggleswitch.js",
+            "line": 1,
+            "description": "UIFormToggleSwitch is a toggle switch pseudo-input of a form",
+            "extends": "UI",
+            "is_constructor": 1,
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        },
+        "UIHeader": {
+            "name": "UIHeader",
+            "shortname": "UIHeader",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "UI",
+            "namespace": "",
+            "file": "js/uiheader.js",
+            "line": 1,
+            "description": "The UIHeader class is a navigational element at the top or bottom of the page (header or footer)",
+            "extends": "UI",
+            "is_constructor": 1,
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        },
+        "UILoading": {
+            "name": "UILoading",
+            "shortname": "UILoading",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "UI",
+            "namespace": "",
+            "file": "js/uiloading.js",
+            "line": 1,
+            "description": "The UILoading is the loading indicator",
+            "extends": "UI",
+            "is_constructor": 1,
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        },
+        "UINavBar": {
+            "name": "UINavBar",
+            "shortname": "UINavBar",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "UI",
+            "namespace": "",
+            "file": "js/uinavbar.js",
+            "line": 1,
+            "description": "The UINavBar class is a navigational element at the top or bottom of the page (header or footer)",
+            "extends": "UI",
+            "is_constructor": 1,
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        },
+        "UINavItem": {
+            "name": "UINavItem",
+            "shortname": "UINavItem",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "UI",
+            "namespace": "",
+            "file": "js/uinavitem.js",
+            "line": 1,
+            "description": "The UINavItem is an item of a UINavBar, like an action button or an anchor link",
+            "extends": "UI",
+            "is_constructor": 1,
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        },
+        "UIPanel": {
+            "name": "UIPanel",
+            "shortname": "UIPanel",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "UI",
+            "namespace": "",
+            "file": "js/uipanel.js",
+            "line": 1,
+            "description": "A Panel to show views",
+            "extends": "UI",
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        },
+        "UIView": {
+            "name": "UIView",
+            "shortname": "UIView",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "UI",
+            "namespace": "",
+            "file": "js/uiview.js",
+            "line": 1,
+            "description": "The UIView class is the UI representation of a view",
+            "extends": "UI",
+            "is_constructor": 1,
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        },
+        "View": {
+            "name": "View",
+            "shortname": "View",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "View",
+            "namespace": "",
+            "file": "js/view.js",
+            "line": 1,
+            "description": "The View class handles each view of the application. \nA list of views is specified in the applications options\nand the files are loaded from the \"views\" folder.\nEach view has a viewName.js, viewName.html and viewName.css files.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "options",
+                    "description": "An object defining options for the current view.\n* constructor - A function that will be run after the view has loaded (optional).\n* animation - a string defining the type of animation used to show this view (one of: \"slide-left\", \"slide-right\", \"none\").",
+                    "type": "Object"
+                }
+            ],
+            "author": "Martín Szyszlican (martinsz [at] gmail.com)"
+        }
+    },
+    "classitems": [
+        {
+            "file": "js/app.js",
+            "line": 50,
+            "description": "Stores the navigation history. \nAn array of views, ordered in the sequence that they were visited by the user.",
+            "itemtype": "property",
+            "name": "history",
+            "type": "array",
+            "example": [
+                "\n    if (m.app.history.length === 1) {\n         console.log(\"You are on the first view\")\n    }"
+            ],
+            "class": "App",
+            "module": "App"
+        },
+        {
+            "file": "js/app.js",
+            "line": 64,
+            "description": "The application's version number\nNote: It's not Mootor version, this value is defined in application code, not framework code.",
+            "itemtype": "method",
+            "name": "version",
+            "params": [
+                {
+                    "name": "version",
+                    "description": "The version number or name",
+                    "type": "String",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "Version number or name",
+                "type": "String"
+            },
+            "example": [
+                "\n    m.app.version(\"beta1\");\n    if (m.app.version().indexOf(\"beta\") > -1) {\n        console.log(\"Warning: beta version\")\n    }"
+            ],
+            "class": "App",
+            "module": "App"
+        },
+        {
+            "file": "js/app.js",
+            "line": 84,
+            "description": "Application settings\nIf called with a key, returns the value. If called with key and value, sets value to key.",
+            "itemtype": "method",
+            "name": "settings",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "The name of the setting",
+                    "type": "String"
+                },
+                {
+                    "name": "value",
+                    "description": "The value of the setting",
+                    "type": "Object",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "object the setting value"
+            },
+            "example": [
+                "\n    m.app.settings(\"debug\", true);\n    if (m.app.settings(\"debug\") === true) {\n         console.log(\"Debug mode activated.\");\n    }\n    "
+            ],
+            "class": "App",
+            "module": "App"
+        },
+        {
+            "file": "js/app.js",
+            "line": 108,
+            "description": "Go to an url",
+            "itemtype": "method",
+            "name": "go",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "The url to go",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Route"
+            },
+            "example": [
+                "\n    m.app.go(\"/product/15/\");"
+            ],
+            "class": "App",
+            "module": "App"
+        },
+        {
+            "file": "js/app.js",
+            "line": 134,
+            "description": "Go to the previous view in the history",
+            "itemtype": "method",
+            "name": "back",
+            "chainable": 1,
+            "return": {
+                "description": "Route"
+            },
+            "example": [
+                "\n    m.app.back();"
+            ],
+            "class": "App",
+            "module": "App"
+        },
+        {
+            "file": "js/app.js",
+            "line": 151,
+            "description": "Set callbacks for app events",
+            "itemtype": "method",
+            "name": "on",
+            "chainable": 1,
+            "return": {
+                "description": "App instance"
+            },
+            "example": [
+                "\n    m.app.on(\"ready\", function(self) {\n        console.log(\"App started.\");\n    });"
+            ],
+            "class": "App",
+            "module": "App"
+        },
+        {
+            "file": "js/app.js",
+            "line": 173,
+            "description": "off: function(event, callback) {\n    return this;\n},",
+            "class": "App",
+            "module": "App"
+        },
+        {
+            "file": "js/app.js",
+            "line": 200,
+            "description": "Creates a new app with the defined options.\nIf the app is already created, it can be called without options to have a reference to the Mootor app. \n\nApp instance factory",
+            "itemtype": "method",
+            "name": "app",
+            "params": [
+                {
+                    "name": "views",
+                    "description": "A list of view names to be initialized",
+                    "type": "Array",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "App"
+            },
+            "example": [
+                "\n    window.m.app({\n      views: [\n         \"index\",\n         \"view1\"\n      ]\n    });"
+            ],
+            "class": "window.m",
+            "module": "App"
+        },
+        {
+            "file": "js/context.js",
+            "line": 18,
+            "description": "System info",
+            "itemtype": "property",
+            "name": "os",
+            "type": "function",
+            "example": [
+                "\n    if (m.context.os === \"android\") {\n         console.log(\"Your device use Android.\");\n    }"
+            ],
+            "class": "Context",
+            "module": "App"
+        },
+        {
+            "file": "js/context.js",
+            "line": 29,
+            "description": "Browser info",
+            "itemtype": "property",
+            "name": "browser",
+            "type": "string",
+            "example": [
+                "\n    if (m.context.browser === \"firefox\") {\n         console.log(\"Your browser is Firefox.\");\n    }"
+            ],
+            "class": "Context",
+            "module": "App"
+        },
+        {
+            "file": "js/context.js",
+            "line": 40,
+            "description": "Viewport info",
+            "itemtype": "property",
+            "name": "viewport",
+            "type": "object",
+            "example": [
+                "\n    img.width = m.context.viewport.width\n    img.height = m.context.viewport.height"
+            ],
+            "class": "Context",
+            "module": "App"
+        },
+        {
+            "file": "js/context.js",
+            "line": 64,
+            "itemtype": "property",
+            "name": "context",
+            "type": "Context",
+            "class": "window.m",
+            "module": "App"
+        },
+        {
+            "file": "js/event.js",
+            "line": 19,
+            "description": "Events collection",
+            "access": "private",
+            "tagname": "",
+            "class": "Event",
+            "module": "Mootor"
+        },
+        {
+            "file": "js/event.js",
+            "line": 25,
+            "description": "Add event to collection",
+            "itemtype": "method",
+            "name": "on",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Name of the event",
+                    "type": "String"
+                },
+                {
+                    "name": "callback",
+                    "description": "Callback function\\",
+                    "type": "Function"
+                }
+            ],
+            "example": [
+                "\n    Mootor.on(\"myCustomEvent\", function(self) {\n        console.log(\"Event fired!\");\n    });"
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "Event",
+            "module": "Mootor"
+        },
+        {
+            "file": "js/event.js",
+            "line": 43,
+            "description": "Dispatch event",
+            "itemtype": "method",
+            "name": "dispatch",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Name of the event",
+                    "type": "String"
+                },
+                {
+                    "name": "instance",
+                    "description": "Instance for scope",
+                    "type": "Object"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "example": [
+                "\n    Mootor.dispatch(\"myCustomEvent\", myInstance);"
+            ],
+            "class": "Event",
+            "module": "Mootor"
+        },
+        {
+            "file": "js/event.js",
+            "line": 71,
+            "description": "Extend objects with Event methods",
+            "itemtype": "method",
+            "name": "extend",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "Object to extend",
+                    "type": "Object"
+                },
+                {
+                    "name": "objectName",
+                    "description": "String name of the object",
+                    "type": "String"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "example": [
+                "\n    Person = function(name) {\n        this.name = name;\n    }\n\n    Mootor.Event.extend(Person.prototype);\n\n    person = new Person(\"Anon\");\n    person.on(\"fire\", function(self) {\n         console.log(self.name + \" is on fire!\");\n    }\n    person.dispatch(\"fire\", person);"
+            ],
+            "class": "Event",
+            "module": "Mootor"
+        },
+        {
+            "file": "js/route.js",
+            "line": 34,
+            "description": "The URL regex referenced by this route",
+            "itemtype": "property",
+            "name": "regex",
+            "type": "String",
+            "example": [
+                "\n    url_regex = m.app.route(\"index.html\").regex;"
+            ],
+            "class": "Route",
+            "module": "Router"
+        },
+        {
+            "file": "js/route.js",
+            "line": 44,
+            "description": "The view that implements this route\nIf called with no parameters, it returns the currently set view in this route.",
+            "itemtype": "method",
+            "name": "view",
+            "params": [
+                {
+                    "name": "view",
+                    "description": "- The view that implements this route",
+                    "type": "View",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "view"
+            },
+            "example": [
+                "\n    url_view = m.app.route(\"index.html\").view;"
+            ],
+            "class": "Route",
+            "module": "Router"
+        },
+        {
+            "file": "js/router.js",
+            "line": 59,
+            "description": "Create a route",
+            "itemtype": "method",
+            "name": "route",
+            "params": [
+                {
+                    "name": "url",
+                    "description": "Regular expresion string",
+                    "type": "String"
+                },
+                {
+                    "name": "url",
+                    "description": "URL to route",
+                    "type": "String"
+                },
+                {
+                    "name": "view",
+                    "description": "View object",
+                    "type": "View"
+                }
+            ],
+            "return": {
+                "description": "Route"
+            },
+            "example": [
+                "\n    // Set route\n    m.app.route(\"index.html\", m.app.view(\"index\"));\n    /\n    // Get route\n    route = m.app.route(\"index.html\");"
+            ],
+            "class": "Router",
+            "module": "Router"
+        },
+        {
+            "file": "js/ui.js",
+            "line": 33,
+            "description": "DOM element",
+            "itemtype": "property",
+            "name": "el",
+            "return": {
+                "description": "",
+                "type": "DOM Element"
+            },
+            "example": [
+                "\n    appDOMElement = m.app.ui.el;\n    appDOMElement.addEventListener(\"touchend\", function() {\n        console.log(\"Header was touched.\");\n    });"
+            ],
+            "class": "UI",
+            "module": "UI"
+        },
+        {
+            "file": "js/ui.js",
+            "line": 46,
+            "description": "Zepto/jQuery object for DOM element",
+            "itemtype": "property",
+            "name": "$el",
+            "return": {
+                "description": "",
+                "type": "Zepto/jQuery object instance"
+            },
+            "example": [
+                "\n    $appDOMElement = m.app.ui.$el;\n    $appDOMElement.on(\"tap\", function() {\n        console.log(\"Header was tapped.\");\n    });"
+            ],
+            "class": "UI",
+            "module": "UI"
+        },
+        {
+            "file": "js/ui.js",
+            "line": 59,
+            "description": "Shows element (not necesarily, since the element's parent might be hidden or out of view)",
+            "itemtype": "method",
+            "name": "show",
+            "return": {
+                "description": "",
+                "type": "UI"
+            },
+            "example": [
+                "\n    m.app.ui.show();"
+            ],
+            "class": "UI",
+            "module": "UI"
+        },
+        {
+            "file": "js/ui.js",
+            "line": 71,
+            "description": "Hides element from view",
+            "itemtype": "method",
+            "name": "hide",
+            "return": {
+                "description": "",
+                "type": "UI"
+            },
+            "example": [
+                "\n    m.app.ui.hide();"
+            ],
+            "class": "UI",
+            "module": "UI"
+        },
+        {
+            "file": "js/uiform.js",
+            "line": 51,
+            "description": "Controls",
+            "access": "private",
+            "tagname": "",
+            "class": "UIForm",
+            "module": "UI"
+        },
+        {
+            "file": "js/uiform.js",
+            "line": 69,
+            "description": "Serialize form's data",
+            "itemtype": "method",
+            "name": "serialize",
+            "return": {
+                "description": "Serialized data in a JSON object",
+                "type": "Object"
+            },
+            "class": "UIForm",
+            "module": "UI"
+        },
+        {
+            "file": "js/uiform.js",
+            "line": 79,
+            "description": "Clear all form fields",
+            "itemtype": "method",
+            "name": "clear",
+            "chainable": 1,
+            "class": "UIForm",
+            "module": "UI"
+        },
+        {
+            "file": "js/uiformcamera.js",
+            "line": 53,
+            "description": "Take a picture",
+            "itemtype": "method",
+            "name": "take",
+            "chainable": 1,
+            "class": "UIFormCamera",
+            "module": "UI"
+        },
+        {
+            "file": "js/uiformcamera.js",
+            "line": 63,
+            "description": "Choose a picture",
+            "itemtype": "method",
+            "name": "choose",
+            "chainable": 1,
+            "class": "UIFormCamera",
+            "module": "UI"
+        },
+        {
+            "file": "js/uiformcamera.js",
+            "line": 73,
+            "description": "Returns all pictures paths",
+            "itemtype": "method",
+            "name": "all",
+            "return": {
+                "description": "Array of pictures paths",
+                "type": "Array"
+            },
+            "chainable": 1,
+            "class": "UIFormCamera",
+            "module": "UI"
+        },
+        {
+            "file": "js/uiformcamera.js",
+            "line": 84,
+            "description": "Remove picture from input",
+            "params": [
+                {
+                    "name": "picture",
+                    "description": "Picture to be removed",
+                    "type": "UIFormCameraPicture"
+                }
+            ],
+            "itemtype": "method",
+            "name": "remove",
+            "class": "UIFormCamera",
+            "module": "UI"
+        },
+        {
+            "file": "js/uiformcamera.js",
+            "line": 97,
+            "description": "Export picture data",
+            "itemtype": "method",
+            "name": "export",
+            "return": {
+                "description": "Exported data (ej: base 64 string)",
+                "type": "String"
+            },
+            "params": [
+                {
+                    "name": "options",
+                    "description": "A list of options",
+                    "type": "Array"
+                }
+            ],
+            "chainable": 1,
+            "class": "UIFormCamera",
+            "module": "UI"
+        },
+        {
+            "file": "js/uiformdraw.js",
+            "line": 44,
+            "description": "Export draw data",
+            "itemtype": "method",
+            "name": "export",
+            "return": {
+                "description": "Exported data (ej: base 64 string)",
+                "type": "String"
+            },
+            "params": [
+                {
+                    "name": "options",
+                    "description": "A list of options",
+                    "type": "Array"
+                }
+            ],
+            "chainable": 1,
+            "class": "UIFormDraw",
+            "module": "UI"
+        },
+        {
+            "file": "js/uiformdraw.js",
+            "line": 56,
+            "description": "Clear draw",
+            "itemtype": "method",
+            "name": "clear",
+            "chainable": 1,
+            "class": "UIFormDraw",
+            "module": "UI"
+        },
+        {
+            "file": "js/uiformfieldset.js",
+            "line": 43,
+            "description": "Disable/enable input field",
+            "itemtype": "method",
+            "name": "disabled",
+            "params": [
+                {
+                    "name": "state",
+                    "description": "State of the input, true if disabled false if enabled",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "Boolean state",
+                "type": "Boolean"
+            },
+            "class": "UIFormFieldset",
+            "module": "UI"
+        },
+        {
+            "file": "js/uiformgeo.js",
+            "line": 44,
+            "description": "Get current position",
+            "itemtype": "method",
+            "name": "get",
+            "chainable": 1,
+            "class": "UIFormGeo",
+            "module": "UI"
+        },
+        {
+            "file": "js/uiforminput.js",
+            "line": 43,
+            "description": "Disable/enable input field",
+            "itemtype": "method",
+            "name": "disabled",
+            "params": [
+                {
+                    "name": "state",
+                    "description": "State of the input, true if disabled false if enabled",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "Boolean state",
+                "type": "Boolean"
+            },
+            "class": "UIFormInput",
+            "module": "UI"
+        },
+        {
+            "file": "js/uiformpseudoinput.js",
+            "line": 43,
+            "description": "Value of the input",
+            "itemtype": "property",
+            "name": "value",
+            "class": "UIFormPseudoInput",
+            "module": "UI"
+        },
+        {
+            "file": "js/uiformpseudoinput.js",
+            "line": 50,
+            "description": "Sets an event handler for the input",
+            "itemtype": "method",
+            "name": "on",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Defines in which event the handler will be called",
+                    "type": "String"
+                },
+                {
+                    "name": "callback",
+                    "description": "The function to be called when the event is fired.",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "this"
+            },
+            "class": "UIFormPseudoInput",
+            "module": "UI"
+        },
+        {
+            "file": "js/uiformtoggleswitch.js",
+            "line": 44,
+            "description": "Set/get input toggle switch value",
+            "itemtype": "method",
+            "name": "value",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "Value of the input",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "UIFormToggleSwitch",
+            "module": "UI"
+        },
+        {
+            "file": "js/uiheader.js",
+            "line": 129,
+            "description": "Back\nThe back button",
+            "object": "back",
+            "return": {
+                "description": "",
+                "type": "UINavItem"
+            },
+            "example": [
+                "\n    m.app.view(\"index\").ui.header.back.hide();"
+            ],
+            "class": "UIHeader",
+            "module": "UI"
+        },
+        {
+            "file": "js/uiheader.js",
+            "line": 140,
+            "description": "Title\nThe text to display in the header\nIf called with no arguments returns the current title",
+            "itemtype": "method",
+            "name": "title",
+            "params": [
+                {
+                    "name": "title",
+                    "description": "The text for the title",
+                    "type": "String",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "chainable": 1,
+            "example": [
+                "\n    m.app.view(\"index\").ui.header.title(\"My title\");"
+            ],
+            "class": "UIHeader",
+            "module": "UI"
+        },
+        {
+            "file": "js/uiloading.js",
+            "line": 33,
+            "description": "Show/Hide the loading indicator",
+            "itemtype": "method",
+            "name": "loading",
+            "params": [
+                {
+                    "name": "show",
+                    "description": "Show or hide the loading indicator",
+                    "type": "Boolean",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "example": [
+                "\n    m.app.ui.loading();\n    m.app.ui.loading(true);"
+            ],
+            "class": "UIApp",
+            "module": "UI"
+        },
+        {
+            "file": "js/uiloading.js",
+            "line": 75,
+            "description": "Create and add the loading indicator's elements to the DOM",
+            "itemtype": "method",
+            "name": "create",
+            "return": {
+                "description": "Zeptified element",
+                "type": "Zepto"
+            },
+            "class": "UIApp",
+            "module": "UI"
+        },
+        {
+            "file": "js/uiloading.js",
+            "line": 100,
+            "description": "Set the style for the loading animation",
+            "itemtype": "method",
+            "name": "style",
+            "params": [
+                {
+                    "name": "options",
+                    "description": "Style options TODO: Define this object's structure",
+                    "type": "Object",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "UILoading"
+            },
+            "chainable": 1,
+            "class": "UIApp",
+            "module": "UI"
+        },
+        {
+            "file": "js/uinavitem.js",
+            "line": 45,
+            "description": "Block/Unblock or return block status.",
+            "itemtype": "method",
+            "name": "blocked",
+            "params": [
+                {
+                    "name": "blocked",
+                    "description": "Whether the item is blocked",
+                    "type": "Boolean",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "Whether the panel is blocked",
+                "type": "Boolean"
+            },
+            "chainable": 1,
+            "class": "UINavItem",
+            "module": "UI"
+        },
+        {
+            "file": "js/uipanel.js",
+            "line": 93,
+            "description": "Initialize  a panel",
+            "itemtype": "method",
+            "name": "_init",
+            "access": "private",
+            "tagname": "",
+            "class": "UIPanel",
+            "module": "UI"
+        },
+        {
+            "file": "js/uipanel.js",
+            "line": 178,
+            "description": "Move the element to the specified position inside the UIApp / m-views-container. \nIf coordinates are not specified, it returns coordinates object with the current position.",
+            "itemtype": "method",
+            "name": "position",
+            "params": [
+                {
+                    "name": "coordinates",
+                    "description": "Object with coordinates. Example: {x: 0, y: 0}",
+                    "type": "Object",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "Object with coordinates. Example: {x: 0, y: 0}",
+                "type": "Object"
+            },
+            "class": "UIPanel",
+            "module": "UI"
+        },
+        {
+            "file": "js/uipanel.js",
+            "line": 199,
+            "description": "Block/Unblock or return block status.",
+            "itemtype": "method",
+            "name": "blocked",
+            "params": [
+                {
+                    "name": "blocked",
+                    "description": "Whether the panel is blocked",
+                    "type": "Boolean",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "Whether the panel is blocked",
+                "type": "Boolean"
+            },
+            "class": "UIPanel",
+            "module": "UI"
+        },
+        {
+            "file": "js/uipanel.js",
+            "line": 212,
+            "description": "Set or get transition type",
+            "itemtype": "method",
+            "name": "transition",
+            "params": [
+                {
+                    "name": "transition",
+                    "description": "Transition type. MUST be one of: slide-left, slide-right, none",
+                    "type": "String",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "Transition type",
+                "type": "String"
+            },
+            "class": "UIPanel",
+            "module": "UI"
+        },
+        {
+            "file": "js/uipanel.js",
+            "line": 228,
+            "description": "Set callback function for an event",
+            "itemtype": "method",
+            "name": "on",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Event string name",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Callback function",
+                "type": "Function"
+            },
+            "example": [
+                "\n    m.app.view(\"index\").panel.on(\"transitionEnd\", function(self) {\n        console.log(\"transition end!\")\n    });"
+            ],
+            "class": "UIPanel",
+            "module": "UI"
+        },
+        {
+            "file": "js/view.js",
+            "line": 109,
+            "description": "Views collection",
+            "class": "View",
+            "module": "View"
+        },
+        {
+            "file": "js/view.js",
+            "line": 114,
+            "description": "Current active view",
+            "class": "View",
+            "module": "View"
+        },
+        {
+            "file": "js/view.js",
+            "line": 119,
+            "description": "Init View instance, load HTML, CSS and JavaScript files for the view",
+            "class": "View",
+            "module": "View"
+        },
+        {
+            "file": "js/view.js",
+            "line": 145,
+            "description": "Get view HTML",
+            "class": "View",
+            "module": "View"
+        },
+        {
+            "file": "js/view.js",
+            "line": 238,
+            "description": "Title is the friendly name for the current view.\nWhen called without parameters, returns a string containing the title. When called with parameters, sets the title.",
+            "itemtype": "method",
+            "name": "title",
+            "params": [
+                {
+                    "name": "title",
+                    "description": "New title for this view.",
+                    "type": "String",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "string"
+            },
+            "example": [
+                "\n    // Get title\n    m.app.view(\"index\").title();\n   \n    // Get title\n    m.app.view(\"index\").title(\"My title\");"
+            ],
+            "class": "View",
+            "module": "View"
+        },
+        {
+            "file": "js/view.js",
+            "line": 262,
+            "description": "Sets an event handler for the view\nPossible values for event: load, beforeLoad, unload, beforeUnload, init\nTODO: Define which parameters are passed to the callback function.",
+            "itemtype": "method",
+            "name": "on",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Defines in which event the handler will be called",
+                    "type": "String"
+                },
+                {
+                    "name": "callback",
+                    "description": "The function to be called when the event is fired.",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "View"
+            },
+            "example": [
+                "\n    m.app.view(\"index\").on(\"load\", function(self) {\n       console.log(\"Index view is loaded.\"); \n    });"
+            ],
+            "class": "View",
+            "module": "View"
+        },
+        {
+            "file": "js/view.js",
+            "line": 285,
+            "description": "Unsets event handlers for the view\nPossible values for event: load, beforeLoad, unload, beforeUnload, init",
+            "itemtype": "method",
+            "name": "off",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Defines in which event we want to unset handlers",
+                    "type": "String"
+                },
+                {
+                    "name": "callback",
+                    "description": "If this parameter is specified, only that function is removed. Otherwise all callbacks for this event are removed.",
+                    "type": "Function",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "View"
+            },
+            "class": "View",
+            "module": "View"
+        },
+        {
+            "file": "js/view.js",
+            "line": 303,
+            "description": "Create or get a view",
+            "itemtype": "method",
+            "name": "view",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "The id of the view",
+                    "type": "String"
+                },
+                {
+                    "name": "options",
+                    "description": "The options object for the view",
+                    "type": "String",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "View the referenced view object"
+            },
+            "example": [
+                "\n    indexView = m.app.view(\"index\");"
+            ],
+            "class": "App",
+            "module": "View"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "unknown tag: object",
+            "line": " js/uiheader.js:129"
+        },
+        {
+            "message": "Missing item type\noff: function(event, callback) {\n    return this;\n},",
+            "line": " js/app.js:173"
+        },
+        {
+            "message": "Missing item type\nEvents collection",
+            "line": " js/event.js:19"
+        },
+        {
+            "message": "Missing item type\nControls",
+            "line": " js/uiform.js:51"
+        },
+        {
+            "message": "Missing item type\nBack\nThe back button",
+            "line": " js/uiheader.js:129"
+        },
+        {
+            "message": "Missing item type\nViews collection",
+            "line": " js/view.js:109"
+        },
+        {
+            "message": "Missing item type\nCurrent active view",
+            "line": " js/view.js:114"
+        },
+        {
+            "message": "Missing item type\nInit View instance, load HTML, CSS and JavaScript files for the view",
+            "line": " js/view.js:119"
+        },
+        {
+            "message": "Missing item type\nGet view HTML",
+            "line": " js/view.js:145"
+        }
+    ]
+}

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" class="yui-overrride">
+<head>
+    <meta charset="utf-8">
+    <title>{{htmlTitle}}</title>
+    <link rel="stylesheet" href="{{yuiGridsUrl}}">
+    <link rel="stylesheet" href="{{projectAssets}}/vendor/prettify/prettify-min.css">
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" type="image/png" href="{{projectAssets}}/favicon.png">
+    <script src="{{yuiSeedUrl}}"></script>
+    <link rel="stylesheet" href="{{projectAssets}}/css/main.css" id="site_styles">
+    <link rel='stylesheet' id='twentythirteen-fonts-css'  href='//fonts.googleapis.com/css?family=Source+Sans+Pro%3A300%2C400%2C700%2C300italic%2C400italic%2C700italic%7CBitter%3A400%2C700&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+    
+    <style>
+
+        .site-header {
+            background: none repeat scroll 0% 0% #68B3B9;
+            height: 200px;
+            text-align: center;
+            position: relative;
+        }
+        article, aside, details, figcaption, figure, footer, header, nav, section, summary {
+            display: block;
+        }
+        
+        .site-title, .site-description {
+            color: #57A5E0;
+        }
+        .site-title {
+            text-indent: -9999em;
+            background: url('http://mootor.mobi/wp-content/themes/mootor/images/mootor-logo.png') no-repeat scroll center center transparent;
+            height: 62px;
+            padding: 0px;
+            font-size: 60px;
+            font-weight: bold;
+            line-height: 1;
+            margin: 0px;
+            padding: 58px 0px 10px;
+        }
+        h1 {
+            font-family: 'Source Sans Pro',sans-serif;
+            font-size: 35px;
+        }
+        
+        .site-description {
+            color: black !important;
+            font-style: normal;
+            font-size: 1.55em !important;
+            text-transform: uppercase;
+            margin-top: 0.5em;
+        }
+        .site-description {
+            font: italic 300 24px "Source Sans Pro",Helvetica,sans-serif;
+            margin: 0px;
+        }
+        .site-header .home-link {
+            min-height: 0px;
+            padding: 2em 0px;
+        }
+        .site-header .home-link {
+            color: #141412;
+            display: block;
+            margin: 0px auto;
+            max-width: 1080px;
+            min-height: 230px;
+            padding: 0px 20px;
+            text-decoration: none;
+            width: 100%;
+        }
+    
+        #hd { display: none;}
+    
+    </style>
+
+</head>
+<body class="yui3-skin-sam">
+
+<header id="masthead" class="site-header" role="banner">
+			<a class="home-link" href="http://mootor.mobi/" title="Mootor Framework" rel="home">
+				<h1 class="site-title">Mootor Framework</h1>
+				<h2 class="site-description">HTML5 framework for mobile application development</h2>
+			</a>
+
+		</header>
+        
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            <h1 class="blue-main-title">{{projectName}}</h1>
+        </div>
+        <div class="yui3-u-1-4 version project-version">
+            API Docs for: {{projectVersion}}
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                {{>sidebar}}
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+            {{>options}}
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        {{>layout_content}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{{projectAssets}}/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="{{projectAssets}}/js/yui-prettify.js"></script>
+<script src="{{projectAssets}}/../api.js"></script>
+<script src="{{projectAssets}}/js/api-filter.js"></script>
+<script src="{{projectAssets}}/js/api-list.js"></script>
+<script src="{{projectAssets}}/js/api-search.js"></script>
+<script src="{{projectAssets}}/js/apidocs.js"></script>
+</body>
+</html>

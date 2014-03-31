@@ -1,0 +1,88 @@
+// Config
+
+$transitionDuration: .3s;
+$loading-background-color: #555 !default;
+
+@import "compass/css3/transition";
+@import "compass/css3/transform";
+
+// UIPanel
+
+.m-loading {
+    position: absolute;
+    top: 0;
+    z-index: 100000000000;
+
+    width: 100%;
+    height: 100%;
+
+    &.m-loading-default-style {
+        background-color: rgba(0,0,0,0.6);
+        background-image: url(../../source/img/icons/black/128x128/loading.png);
+        background-repeat: no-repeat;
+        background-position: center center;
+
+        opacity: 1;
+        @include transition(opacity $transitionDuration ease-out);    
+
+
+        &.m-hidden {
+            opacity: 0;            
+        }
+
+    }
+
+    &.m-loading-circles {
+
+        background-color: rgba(0,0,0,0.6);
+
+        .m-loading-circle {
+            background-color: $loading-background-color;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            height: 3em;
+            width: 3em;
+            margin-top: -1.5em;
+
+            -webkit-animation-duration: 1s;
+            -webkit-animation-iteration-count: infinite;
+            -webkit-animation-direction: linear;
+            -webkit-border-radius: 2.1em;
+            -webkit-animation-delay: 0;
+
+            -moz-animation-duration: 1s;
+            -moz-animation-iteration-count: infinite;
+            -moz-animation-direction: linear;
+            -moz-border-radius: 2.1em;
+            -moz-animation-delay: 0;
+
+            animation-duration: 1s;
+            animation-iteration-count: infinite;
+            animation-direction: linear;
+            border-radius: 2.1em;
+            animation-delay: 0;
+        }
+     
+        .m-loading-circle-01 {
+            -webkit-animation-name: m-loading-object-animation-0;
+            -moz-animation-name: m-loading-object-animation-0;
+            animation-name: m-loading-object-animation-0;
+            margin-left: -5.5em;
+        }
+        .m-loading-circle-02 {
+            -webkit-animation-name: m-loading-object-animation-1;
+            -moz-animation-name: m-loading-object-animation-1;
+            animation-name: m-loading-object-animation-1;
+            margin-left: -1.5em;
+        }
+        .m-loading-circle-03 {
+            -webkit-animation-name: m-loading-object-animation-2;
+            -moz-animation-name: m-loading-object-animation-2;
+            animation-name: m-loading-object-animation-2;
+            margin-left: 2.5em;
+        }
+
+    }
+}
+
