@@ -1,15 +1,46 @@
+@mixin m-all-fields($class) {
+    &.m-form-left-labels .m-field {
+        .#{$class} {
+            width: 70%;
+        }
+    }
+    &.m-form-top-labels .m-field {
+        .#{$class} {
+            width: 100%;
+            display: block;
+        }
+    }
+
+    .m-field {
+        .#{$class} {
+            font-size: 1em;
+            background-color: transparent;
+            border: none;
+            font-family: sans-serif;
+            padding: 0;
+
+            &:disabled {
+                opacity: 0.2;
+            }
+
+        }
+        &.m-error {
+           .#{$class} {
+                background-color: red;
+            }        
+        }
+    }
+}
+
 .m-form {
     &.m-form-left-labels .m-field {
         label {
             float: left;
             width: 30%;
         }  
-        input,textarea,select {
-            width: 70%;
-        }
     } 
     &.m-form-top-labels .m-field {
-        label,input,textarea,select {
+        label {
             width: 100%;
             display: block;
         }
@@ -25,13 +56,15 @@
             font-size: 1em;
             line-height: 1.5em;
         }
-
-        input,textarea,select,option {
-            font-size: 1em;
-            background-color: transparent;
-            border: none;
-            font-family: sans-serif;
-            padding: 0;
+        &.m-error {
+           label {
+                color: red;
+            }        
         }
     }
+
+    @import "uiformtext";
+    @import "uiformtextarea";
+    @import "uiformselect";
+
 }

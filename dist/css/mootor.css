@@ -264,39 +264,110 @@ html, body {
   animation-name: m-loading-object-animation-2;
   margin-left: 2.5em;
 }
-/* line 3, ../../source/css/_uiform.scss */
+/* line 37, ../../source/css/_uiform.scss */
 .m-app .m-form.m-form-left-labels .m-field label {
   float: left;
   width: 30%;
 }
-/* line 7, ../../source/css/_uiform.scss */
-.m-app .m-form.m-form-left-labels .m-field input, .m-app .m-form.m-form-left-labels .m-field textarea, .m-app .m-form.m-form-left-labels .m-field select {
-  width: 70%;
-}
-/* line 12, ../../source/css/_uiform.scss */
-.m-app .m-form.m-form-top-labels .m-field label, .m-app .m-form.m-form-top-labels .m-field input, .m-app .m-form.m-form-top-labels .m-field textarea, .m-app .m-form.m-form-top-labels .m-field select {
+/* line 43, ../../source/css/_uiform.scss */
+.m-app .m-form.m-form-top-labels .m-field label {
   width: 100%;
   display: block;
 }
-/* line 18, ../../source/css/_uiform.scss */
+/* line 49, ../../source/css/_uiform.scss */
 .m-app .m-form .m-field {
   padding: 1em;
   border-bottom: 1px solid #ccc;
   display: block;
 }
-/* line 23, ../../source/css/_uiform.scss */
+/* line 54, ../../source/css/_uiform.scss */
 .m-app .m-form .m-field label {
   font-weight: bold;
   font-size: 1em;
   line-height: 1.5em;
 }
-/* line 29, ../../source/css/_uiform.scss */
-.m-app .m-form .m-field input, .m-app .m-form .m-field textarea, .m-app .m-form .m-field select, .m-app .m-form .m-field option {
+/* line 60, ../../source/css/_uiform.scss */
+.m-app .m-form .m-field.m-error label {
+  color: red;
+}
+/* line 3, ../../source/css/_uiform.scss */
+.m-app .m-form.m-form-left-labels .m-field .m-text {
+  width: 70%;
+}
+/* line 8, ../../source/css/_uiform.scss */
+.m-app .m-form.m-form-top-labels .m-field .m-text {
+  width: 100%;
+  display: block;
+}
+/* line 15, ../../source/css/_uiform.scss */
+.m-app .m-form .m-field .m-text {
   font-size: 1em;
   background-color: transparent;
   border: none;
   font-family: sans-serif;
   padding: 0;
+}
+/* line 22, ../../source/css/_uiform.scss */
+.m-app .m-form .m-field .m-text:disabled {
+  opacity: 0.2;
+}
+/* line 28, ../../source/css/_uiform.scss */
+.m-app .m-form .m-field.m-error .m-text {
+  background-color: red;
+}
+/* line 3, ../../source/css/_uiformtext.scss */
+.m-app .m-form .m-text {
+  background: red;
+}
+/* line 3, ../../source/css/_uiform.scss */
+.m-app .m-form.m-form-left-labels .m-field .m-textarea {
+  width: 70%;
+}
+/* line 8, ../../source/css/_uiform.scss */
+.m-app .m-form.m-form-top-labels .m-field .m-textarea {
+  width: 100%;
+  display: block;
+}
+/* line 15, ../../source/css/_uiform.scss */
+.m-app .m-form .m-field .m-textarea {
+  font-size: 1em;
+  background-color: transparent;
+  border: none;
+  font-family: sans-serif;
+  padding: 0;
+}
+/* line 22, ../../source/css/_uiform.scss */
+.m-app .m-form .m-field .m-textarea:disabled {
+  opacity: 0.2;
+}
+/* line 28, ../../source/css/_uiform.scss */
+.m-app .m-form .m-field.m-error .m-textarea {
+  background-color: red;
+}
+/* line 3, ../../source/css/_uiform.scss */
+.m-app .m-form.m-form-left-labels .m-field .m-select {
+  width: 70%;
+}
+/* line 8, ../../source/css/_uiform.scss */
+.m-app .m-form.m-form-top-labels .m-field .m-select {
+  width: 100%;
+  display: block;
+}
+/* line 15, ../../source/css/_uiform.scss */
+.m-app .m-form .m-field .m-select {
+  font-size: 1em;
+  background-color: transparent;
+  border: none;
+  font-family: sans-serif;
+  padding: 0;
+}
+/* line 22, ../../source/css/_uiform.scss */
+.m-app .m-form .m-field .m-select:disabled {
+  opacity: 0.2;
+}
+/* line 28, ../../source/css/_uiform.scss */
+.m-app .m-form .m-field.m-error .m-select {
+  background-color: red;
 }
 /* line 1, ../../source/css/_utils.scss */
 .m-app .m-hidden {
