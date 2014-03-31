@@ -10,12 +10,14 @@ The main purpose of this project is to create a simple HTML5 library for mobile 
 * Mootor is under design and development by the Voölks (voolks.com) team.
 * Also, we received public founding by the MinCyT (mincyt.gob.ar)
 
-More information:
+Example and documentation:
+
+* http://emi420.github.io/Mootor/demo/
+* http://emi420.github.io/Mootor/
+
+Check our work plan:
 
 * https://github.com/emi420/Mootor/issues
-* http://emi420.github.io/Mootor/
-* http://mootor.mobi
-* http://emi420.github.io/Mootor/demo/
 
 
 ## Design
