@@ -30,6 +30,17 @@
     View.on("init", function(self) {
         self.ui = new UIView(self);
 
+        self.ui.el = document.createElement("div");
+        self.ui.$el = $(self.ui.el);
+
+        if (View._getHtmlPath(self) !== undefined) {
+            self.ui.el.innerHTML = View._getHtmlPath(self);                
+        } else {
+            self.on("getHtml", function(self) {
+                self.ui.el.innerHTML = View._getHtmlPath(self);
+            });
+        }
+
         self.on("getHtml", function() {
             UIView.dispatch("init", self.ui);
         });
@@ -61,15 +72,7 @@
     // Private static methods and properties
 
     $.extend(UIView, {
-        /**
-        * Element enhancements
-        * @private
-        */
-        _enhancements: [],
-
-        registerEnhancement: function(selector,className) {
-            UIView._enhancements.push({selector:selector,className:className});
-        }
+        // code here
     });
 
     // Public methods

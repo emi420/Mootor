@@ -33,16 +33,10 @@
     UIView.on("init", function(self) {
         var view = self.view;
         
-        self.panel = new UIPanel();
+        self.panel = new UIPanel(view);
+        self.panel.el = self.el;
+        self.panel.$el = $(self.el)
         self.panel.hide();
-                
-        if (View._getHtmlPath(view) !== undefined) {
-            self.panel.el.innerHTML = View._getHtmlPath(view);                
-        } else {
-            view.on("getHtml", function(view) {
-                self.panel.el.innerHTML = View._getHtmlPath(view);
-            });
-        }
         
         UIPanel.on("transitionEnd", function(self) {
             if (Mootor.App._currentView !== view) {
@@ -79,8 +73,8 @@
   
     // Private constructors
 
-    UIPanel = Mootor.UIPanel = function() {
-        UIPanel._init(this);
+    UIPanel = Mootor.UIPanel = function(view) {
+        UIPanel._init(this, view);
     };
 
     // Prototypal inheritance
@@ -102,13 +96,14 @@
         * @method _init
         * @private
         */
-        _init: function(self) {
+        _init: function(self, view) {
 
             var $el,
                 el;
+
+            el = view.ui.el;
+            $el = $(el);
             
-            el = self.el = document.createElement("div");
-            $el = self.$el = $(el);
             $el.addClass("m-panel overthrow");
 
             self.transition(UIPanel.DEFAULT_TRANSITION);

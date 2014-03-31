@@ -17,22 +17,30 @@
 
     var UIForm,
         UIView,
-        UI;
-
+        UI,
+        View;
+        
     // Dependences
 
     UI = Mootor.UI;
     UIView = Mootor.UIView;
+    View = Mootor.View;
 
     // Private constructors
 
-    UIForm = function(element) {
+    Mootor.UIForm = UIForm = function(element) {
         console.log("UIForm",element);
     };
-
+    
     // Event handlers
 
-    UIView.registerEnhancement(".m-form",UIForm);
+    UIView.on("init", function(self) {
+        var i;
+        for (i in UIForm._controls) {
+            UIForm._controls[i].constructor._init(self);
+        }
+    });
+
 
     // Prototypal inheritance
     $.extend(UIForm.prototype, UI.prototype);
@@ -40,7 +48,18 @@
     // Private static methods and properties
 
     $.extend(UIForm, {
-   
+        /**
+        * Controls
+        * @private
+        */
+        _controls: [],
+
+        registerControl: function(selector, constructor) {
+            UIForm._controls.push({
+                selector:    selector, 
+                constructor: constructor
+            });
+        }
     });
 
     // Public methods and properties
