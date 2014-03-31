@@ -64,7 +64,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "View",
             "name": "View",
-            "description": "The View class handles each screen of the application. \nA list of views is specified in the applications options\nand the files are loaded from the views/ folder.\nEach view has a viewName.js and a viewName.html file.\nThe viewName.js file defines options for the view."
+            "description": "The View class handles each view of the application. \nA list of views is specified in the applications options\nand the files are loaded from the \"views\" folder.\nEach view has a viewName.js, viewName.html and viewName.css files."
         }
     ]
 } };
