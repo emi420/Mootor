@@ -15,10 +15,8 @@ More information:
 * https://github.com/emi420/Mootor/issues
 * http://emi420.github.io/Mootor/
 * http://mootor.mobi
+* http://emi420.github.io/Mootor/demo/
 
-## Demo
-
-http://emi420.github.io/Mootor/demo/
 
 ## Design
 
