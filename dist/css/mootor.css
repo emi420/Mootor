@@ -264,6 +264,40 @@ html, body {
   animation-name: m-loading-object-animation-2;
   margin-left: 2.5em;
 }
+/* line 3, ../../source/css/_uiform.scss */
+.m-app .m-form.m-form-left-labels .m-field label {
+  float: left;
+  width: 30%;
+}
+/* line 7, ../../source/css/_uiform.scss */
+.m-app .m-form.m-form-left-labels .m-field input, .m-app .m-form.m-form-left-labels .m-field textarea, .m-app .m-form.m-form-left-labels .m-field select {
+  width: 70%;
+}
+/* line 12, ../../source/css/_uiform.scss */
+.m-app .m-form.m-form-top-labels .m-field label, .m-app .m-form.m-form-top-labels .m-field input, .m-app .m-form.m-form-top-labels .m-field textarea, .m-app .m-form.m-form-top-labels .m-field select {
+  width: 100%;
+  display: block;
+}
+/* line 18, ../../source/css/_uiform.scss */
+.m-app .m-form .m-field {
+  padding: 1em;
+  border-bottom: 1px solid #ccc;
+  display: block;
+}
+/* line 23, ../../source/css/_uiform.scss */
+.m-app .m-form .m-field label {
+  font-weight: bold;
+  font-size: 1em;
+  line-height: 1.5em;
+}
+/* line 29, ../../source/css/_uiform.scss */
+.m-app .m-form .m-field input, .m-app .m-form .m-field textarea, .m-app .m-form .m-field select, .m-app .m-form .m-field option {
+  font-size: 1em;
+  background-color: transparent;
+  border: none;
+  font-family: sans-serif;
+  padding: 0;
+}
 /* line 1, ../../source/css/_utils.scss */
 .m-app .m-hidden {
   display: none;

@@ -35,11 +35,11 @@
     // Private static methods and properties
 
     $.extend(UIFormSelect, {
-        _init: function(self, selector) {
+        _init: function(uiview) {
             var inputs,
                 i;
                 
-            inputs = self.$el.find(selector);
+            inputs = uiview.$el.find(".m-select");
 
             // code here
 
@@ -52,6 +52,6 @@
     $.extend(UIFormSelect.prototype, {
     });        
 
-    UIForm.registerControl(".m-select", UIFormSelect);  
+    UIForm.registerControl(UIFormSelect);  
 
 }(window.$, window.Mootor));

@@ -35,11 +35,11 @@
     // Private static methods and properties
 
     $.extend(UIFormTextArea, {
-        _init: function(self, selector) {
+        _init: function(uiview) {
             var inputs,
                 i;
                 
-            inputs = self.$el.find(selector);
+            inputs = uiview.$el.find(".m-textarea");
 
            // code here
         }
@@ -51,6 +51,6 @@
     $.extend(UIFormTextArea.prototype, {
     });        
 
-    UIForm.registerControl(".m-textarea", UIFormTextArea);  
+    UIForm.registerControl(UIFormTextArea);  
 
 }(window.$, window.Mootor));

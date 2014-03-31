@@ -38,11 +38,11 @@
 
     $.extend(UIFormText, {
 
-        _init: function(self, selector) {
+        _init: function(uiview) {
             var inputs,
                 i;
                 
-            inputs = self.$el.find(selector);
+            inputs = uiview.$el.find(".m-text");
             
             // code here
 
@@ -55,6 +55,6 @@
     $.extend(UIFormText.prototype, {
     });      
     
-    UIForm.registerControl(".m-text", UIFormText);  
+    UIForm.registerControl(UIFormText);  
 
 }(window.$, window.Mootor));
