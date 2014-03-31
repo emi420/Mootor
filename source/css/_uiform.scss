@@ -1,0 +1,37 @@
+.m-form {
+    &.m-form-left-labels .m-field {
+        label {
+            float: left;
+            width: 30%;
+        }  
+        input,textarea,select {
+            width: 70%;
+        }
+    } 
+    &.m-form-top-labels .m-field {
+        label,input,textarea,select {
+            width: 100%;
+            display: block;
+        }
+    }
+
+    .m-field {
+        padding: 1em;
+        border-bottom: 1px solid #ccc;
+        display: block;
+
+        label {
+            font-weight: bold;
+            font-size: 1em;
+            line-height: 1.5em;
+        }
+
+        input,textarea,select,option {
+            font-size: 1em;
+            background-color: transparent;
+            border: none;
+            font-family: sans-serif;
+            padding: 0;
+        }
+    }
+}
