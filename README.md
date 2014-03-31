@@ -4,21 +4,21 @@
 
 The main purpose of this project is to create a simple HTML5 library for mobile application development, that helps web professionals to build fully customizable apps, for use in browsers or embedded in mobile applications.
 
-## Demo
 
-http://emi420.github.io/Mootor/demo/
+## About
 
-## Only for testing
-
-THIS SOFTWARE IS EXPERIMENTAL AND ONLY FOR TESTING.
-
-We're working on the stable version.
+* Mootor is under design and development by the Voölks (voolks.com) team.
+* Also, we received public founding by the MinCyT (mincyt.gob.ar)
 
 More information:
 
-* http://emi420.github.io/Mootor/
 * https://github.com/emi420/Mootor/issues
+* http://emi420.github.io/Mootor/
 * http://mootor.mobi
+
+## Demo
+
+http://emi420.github.io/Mootor/demo/
 
 ## Design
 
@@ -31,9 +31,7 @@ Mootor team **LOVES** design. We are working to make delightful user interfaces,
 
 ## How can I help?
 
-E-mail us!
-
-mootor [at] voolks.com
+Write us to mootor [at] voolks.com
 
 ## License
 
@@ -41,7 +39,3 @@ You may use any Mootor project under the terms of either the MIT License or the 
 
 (c) 2012 Emilio Mariscal
 
-## About
-
-* Mootor is under design and development by the Voölks (voolks.com) team.
-* Also, we received public founding by the MinCyT (mincyt.gob.ar)
