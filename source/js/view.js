@@ -309,7 +309,7 @@
         * @param {String} [options] The options object for the view
         * @return View the referenced view object
         * @example
-        *    indexView = m.app.view("index");
+        *     indexView = m.app.view("index");
         */
         view: function(id, options) {
             var i,

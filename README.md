@@ -27,9 +27,6 @@ Mootor team **LOVES** design. We are working to make delightful user interfaces,
 * https://github.com/emi420/Mootor/tree/dev/source/img/icons
 * http://mootor.mobi/uiicons/
 
-## How can I help?
-
-Write us to mootor [at] voolks.com
 
 ## License
 
@@ -37,3 +34,4 @@ You may use any Mootor project under the terms of either the MIT License or the 
 
 (c) 2012 Emilio Mariscal
 
+Want to contribute? fork the project, write us to mootor [at] voolks.com
