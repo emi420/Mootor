@@ -19,6 +19,10 @@
             * System info
             * @property os
             * @type function
+            * @example
+            *     if (m.context.os === "android") {
+            *          console.log("Your device use Android.");
+            *     }
             */            
             os: $.os,
 
@@ -26,6 +30,10 @@
             * Browser info
             * @property browser
             * @type string
+            * @example
+            *     if (m.context.browser === "firefox") {
+            *          console.log("Your browser is Firefox.");
+            *     }
             */            
             browser: $.browser,
 
@@ -33,6 +41,9 @@
             * Viewport info
             * @property viewport
             * @type object
+            * @example
+            *     img.width = m.context.viewport.width
+            *     img.height = m.context.viewport.height
             */            
             viewport: {
                 width: window.screen.width,

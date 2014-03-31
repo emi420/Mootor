@@ -208,9 +208,11 @@
         * @param {Boolean} [blocked] Whether the panel is blocked
         * @return {Boolean} Whether the panel is blocked
         */
+        /*
         blocked: function(blocked) {
             
         },
+        */
 
         /**
         * Set or get transition type
@@ -228,6 +230,17 @@
             }
         },
         
+        /**
+        * Set callback function for an event
+        *
+        * @method on
+        * @param {String} event Event string name
+        * @return {Function} Callback function
+        * @example
+        *     m.app.view("index").panel.on("transitionEnd", function(self) {
+        *         console.log("transition end!")
+        *     });
+        */
         on: function(event, callback) {
             UIPanel.on(event, callback);    
             return this;            

@@ -35,6 +35,11 @@
         *
         * @property el
         * @return {DOM Element}
+        * @example
+        *     appDOMElement = m.app.ui.el;
+        *     appDOMElement.addEventListener("touchend", function() {
+        *         console.log("Header was touched.");
+        *     });
         */
         el: undefined,
         
@@ -43,6 +48,11 @@
         *
         * @property $el
         * @return {Zepto/jQuery object instance}
+        * @example
+        *     $appDOMElement = m.app.ui.$el;
+        *     $appDOMElement.on("tap", function() {
+        *         console.log("Header was tapped.");
+        *     });
         */
         $el: undefined ,
         
@@ -51,6 +61,8 @@
         *
         * @method show
         * @return {UI}
+        * @example
+        *     m.app.ui.show();
         */
         show: function() {
             this.$el.removeClass("m-hidden");
@@ -61,6 +73,8 @@
         *
         * @method hide
         * @return {UI}
+        * @example
+        *     m.app.ui.hide();
         */
         hide: function() {
             this.$el.addClass("m-hidden");

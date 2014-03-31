@@ -384,20 +384,6 @@ The viewName.js file defines options for the view.</p>
 
                     <ul class="index-list methods">
                         
-                            <li class="index-item method private">
-                                <a href="#method__getHtml">_getHtml</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method private">
-                                <a href="#method__init">_init</a>
-
-                                
-                                
-                            </li>
-                        
                             <li class="index-item method">
                                 <a href="#method_off">off</a>
 
@@ -435,228 +421,6 @@ The viewName.js file defines options for the view.</p>
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method__getHtml" class="method item private">
-  <h3 class="blue-method-name">_getHtml</h3>
-
-  <div class="meta method-meta">
-    
-      
-        
-      <p>
-        
-          Defined in
-        
-      
-    
-    
-      <a href="../files/js_view.js.html#l153"><code>js&#x2F;view.js:153</code></a>
-    
-  </p>
-
-
-    
-
-    
-  </div>
-
-  <h3>Syntax</h3>
-  <div class="blue-method-syntax">
-  <h3 class="name"><code>_getHtml</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>self</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-  </div>
-    <div class="description">
-      <h3>Summary</h3>
-        <p>Get view HTML</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">self</code>
-                        <span class="type"><a href="../classes/View.html" class="crosslink">View</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>View instance</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-
-    
-
-</div>
-
-                
-                    <div id="method__init" class="method item private">
-  <h3 class="blue-method-name">_init</h3>
-
-  <div class="meta method-meta">
-    
-      
-        
-      <p>
-        
-          Defined in
-        
-      
-    
-    
-      <a href="../files/js_view.js.html#l122"><code>js&#x2F;view.js:122</code></a>
-    
-  </p>
-
-
-    
-
-    
-  </div>
-
-  <h3>Syntax</h3>
-  <div class="blue-method-syntax">
-  <h3 class="name"><code>_init</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>options</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>self</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-  </div>
-    <div class="description">
-      <h3>Summary</h3>
-        <p>Init View instance, load HTML, CSS and JavaScript files for the view</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">options</code>
-                        <span class="type">Array</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>A list of options</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">self</code>
-                        <span class="type"><a href="../classes/View.html" class="crosslink">View</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>View instance</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-
-    
-
-</div>
-
-                
                     <div id="method_off" class="method item">
   <h3 class="blue-method-name">off</h3>
 
@@ -671,7 +435,7 @@ The viewName.js file defines options for the view.</p>
       
     
     
-      <a href="../files/js_view.js.html#l293"><code>js&#x2F;view.js:293</code></a>
+      <a href="../files/js_view.js.html#l286"><code>js&#x2F;view.js:286</code></a>
     
   </p>
 
@@ -813,7 +577,7 @@ Possible values for event: load, beforeLoad, unload, beforeUnload, init</p>
       
     
     
-      <a href="../files/js_view.js.html#l274"><code>js&#x2F;view.js:274</code></a>
+      <a href="../files/js_view.js.html#l263"><code>js&#x2F;view.js:263</code></a>
     
   </p>
 
@@ -935,6 +699,17 @@ TODO: Define which parameters are passed to the callback function.</p>
     
 
     
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>m.app.view(&quot;index&quot;).on(&quot;load&quot;, function(self) {
+   console.log(&quot;Index view is loaded.&quot;); 
+});</code></pre>
+
+            </div>
+        </div>
+    
 
     
 
@@ -955,7 +730,7 @@ TODO: Define which parameters are passed to the callback function.</p>
       
     
     
-      <a href="../files/js_view.js.html#l256"><code>js&#x2F;view.js:256</code></a>
+      <a href="../files/js_view.js.html#l239"><code>js&#x2F;view.js:239</code></a>
     
   </p>
 
@@ -1054,6 +829,19 @@ When called without parameters, returns a string containing the title. When call
         </div>
     
 
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>// Get title
+m.app.view(&quot;index&quot;).title();
+
+// Get title
+m.app.view(&quot;index&quot;).title(&quot;My title&quot;);</code></pre>
+
+            </div>
+        </div>
     
 
     

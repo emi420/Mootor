@@ -109,23 +109,16 @@
 
         /**
         * Views collection
-        * @private
         */
         _collection: {},
     
         /**
         * Current active view
-        * @private
         */
         _current: undefined,
 
         /**
         * Init View instance, load HTML, CSS and JavaScript files for the view
-        *
-        * @private
-        * @method _init
-        * @param {Array} options A list of options
-        * @param {View} self View instance
         */
         _init: function(options, self) {
             View._collection[self.id] = {id: self.id, obj: self};
@@ -152,10 +145,6 @@
 
         /**
         * Get view HTML
-        *
-        * @private
-        * @method _getHtml
-        * @param {View} self View instance
         */
         _getHtml: function(self) {
             var path,
@@ -173,9 +162,6 @@
 
         /*
         * Get view script
-        * @method _getScript
-        * @private
-        * @param {View} self View instance
         */
         _getScript: function (self) {
             var path,
@@ -203,9 +189,6 @@
 
         /*
         * Get view CSS
-        * @method _getCSS
-        * @private
-        * @param {View} self View instance
         */
         _getCss: function (self) {
             var path,
@@ -260,6 +243,12 @@
         * @method title
         * @param {string} [title] New title for this view.
         * @return string
+        * @example
+        *     // Get title
+        *     m.app.view("index").title();
+        *    
+        *     // Get title
+        *     m.app.view("index").title("My title");
         */  
         title: function(title) {
             var view = View._collection[this.id];
@@ -280,7 +269,11 @@
         * @param {string} event Defines in which event the handler will be called
         * @param {function} callback The function to be called when the event is fired.
         * @return View
-        */  
+        * @example
+        *     m.app.view("index").on("load", function(self) {
+        *        console.log("Index view is loaded."); 
+        *     });
+        */   
         on: function(event,callback) {
             if (event !== "init") {
                 View.on(event + ":" + this.id, callback);                
@@ -299,9 +292,10 @@
         * @param {function} [callback] If this parameter is specified, only that function is removed. Otherwise all callbacks for this event are removed.
         * @return View
         */  
+        /*
         off: function(event,callback) {
 
-        }
+        }*/
 
     });    
     
@@ -315,6 +309,8 @@
         * @for App
         * @param {String} [options] The options object for the view
         * @return View the referenced view object
+        * @example
+        *    indexView = m.app.view("index");
         */
         view: function(id, options) {
             var i,

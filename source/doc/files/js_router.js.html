@@ -292,6 +292,12 @@
         * @param {string} url URL to route
         * @param {View} view View object
         * @return Route
+        * @example
+        *     // Set route
+        *     m.app.route(&quot;index.html&quot;, m.app.view(&quot;index&quot;));
+        *     /
+        *     // Get route
+        *     route = m.app.route(&quot;index.html&quot;);
         */
         route: function(url, view) {
             Route = Mootor.Route;

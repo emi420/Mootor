@@ -64,6 +64,12 @@
         * @param {string} url URL to route
         * @param {View} view View object
         * @return Route
+        * @example
+        *     // Set route
+        *     m.app.route("index.html", m.app.view("index"));
+        *     /
+        *     // Get route
+        *     route = m.app.route("index.html");
         */
         route: function(url, view) {
             Route = Mootor.Route;

@@ -37,6 +37,9 @@
             * @for UIApp
             * @param {Boolean} [show] Show or hide the loading indicator
             * @return {Boolean}
+            * @example
+            *     m.app.ui.loading();
+            *     m.app.ui.loading(true);
             */
             loading: function(show) {
                 if (show === true) {
@@ -102,9 +105,10 @@
         * @return {UILoading} 
         * @chainable
         */
+        /*
         style: function(options) {
             
-        }
+        }*/
     });      
 
       

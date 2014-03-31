@@ -360,6 +360,8 @@
         *
         * @object back
         * @return {UINavItem} 
+        * @example
+        *     m.app.view(&quot;index&quot;).ui.header.back.hide();
         */
         back: {},
         
@@ -372,6 +374,8 @@
         * @param {string} [title] The text for the title
         * @return {String} 
         * @chainable
+        * @example
+        *     m.app.view(&quot;index&quot;).ui.header.title(&quot;My title&quot;);
         */
         title: function(title) {
             var titleEl = this.el.getElementsByTagName(&quot;h1&quot;)[0];
@@ -380,6 +384,7 @@
             } else {
                 return titleEl.innerHTML;
             }
+            return this;
         }
         
     });  

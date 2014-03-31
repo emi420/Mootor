@@ -50,9 +50,10 @@
         * @return {Boolean} Whether the panel is blocked
         * @chainable
         */
+        /*
         blocked: function(blocked) {
             // code here
-        }
+        }*/
 
     });        
 }(window.$, window.Mootor));

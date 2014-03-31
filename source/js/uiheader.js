@@ -132,6 +132,8 @@
         *
         * @object back
         * @return {UINavItem} 
+        * @example
+        *     m.app.view("index").ui.header.back.hide();
         */
         back: {},
         
@@ -144,6 +146,8 @@
         * @param {string} [title] The text for the title
         * @return {String} 
         * @chainable
+        * @example
+        *     m.app.view("index").ui.header.title("My title");
         */
         title: function(title) {
             var titleEl = this.el.getElementsByTagName("h1")[0];
@@ -152,6 +156,7 @@
             } else {
                 return titleEl.innerHTML;
             }
+            return this;
         }
         
     });  

@@ -24,7 +24,8 @@
     *
     * @class App
     * @constructor
-    *  @module App
+    * @module App
+    * @private
     * @param {Object} options An object defining options for the application.
     * * views - An array with a list of view names
     */
@@ -35,13 +36,6 @@
     
     $.extend(App, {
   
-      /**
-        * The application's version number
-        * Note: It's not Mootor version, this value is defined in application code, not framework code.
-        *
-        * @property version
-        * @type Strign
-        */
         _version: undefined,
 
         _settings: {}
@@ -59,6 +53,10 @@
         *
         * @property history
         * @type array
+        * @example
+        *     if (m.app.history.length === 1) {
+        *          console.log("You are on the first view")
+        *     }
         */
         history: [],
        
@@ -70,6 +68,11 @@
         * @method version
         * @param {String} [version] The version number or name
         * @return {String} Version number or name
+        * @example
+        *     m.app.version("beta1");
+        *     if (m.app.version().indexOf("beta") > -1) {
+        *         console.log("Warning: beta version")
+        *     }
         */
         version: function(version) {
             if (version !== undefined) {
@@ -86,6 +89,12 @@
         * @param {String} key The name of the setting
         * @param {object} [value] The value of the setting
         * @return object the setting value
+        * @example
+        *     m.app.settings("debug", true);
+        *     if (m.app.settings("debug") === true) {
+        *          console.log("Debug mode activated.");
+        *     }
+        *     
         */
         settings: function(key, value) {
             if (value !== undefined) {
@@ -97,12 +106,13 @@
         },
 
         /**
-        * Go to a view
+        * Go to an url
         *
         * @method go
-        * @chainable
         * @param {String} url The url to go
         * @return Route
+        * @example
+        *     m.app.go("/product/15/");
         */
         go: function(url,isUrlChange) {
             var route;
@@ -110,7 +120,6 @@
             if (route !== undefined) {
                 App._currentRoute = route;
                 App.dispatch("go", this);
-                //console.log(this.history,route.url);
                 if (this.history[this.history.length - 2] !== route.url) {
                     this.history.push(route.url);    
                 } else {
@@ -119,7 +128,6 @@
             } else {
                 throw(new Error("Route " + url + " is not defined"));
             }                       
-            //console.log(this.history);
             return route;
         },        
 
@@ -129,13 +137,15 @@
         * @method back
         * @chainable
         * @return Route
+        * @example
+        *     m.app.back();
         */
         back: function() {
             var url = m.app.history[m.app.history.length - 2];
-            //console.log("back",url);
             if (url !== undefined) {
                 m.app.go(url);
             }
+            return this;
         },        
 
         /**
@@ -143,6 +153,10 @@
         * @method on
         * @chainable
         * @return App instance
+        * @example
+        *     m.app.on("ready", function(self) {
+        *         console.log("App started.");
+        *     });
         */    
         on: function(event, callback) {
             App.on(event, callback);
@@ -155,15 +169,23 @@
         * @chainable
         * @return App instance
         */    
+        
+        /** TODO
         off: function(event, callback) {
             return this;
         },
+        */
         
         /*
         * Initialize app
         * @chainable
         * @method init
         * @return App instance
+        * @example
+        *     m.app.on("init", function() {
+        *          console.log("App initialized.");
+        *     })
+        *     m.app.init();
         */
         init: function() {
             var self = this;
@@ -178,21 +200,20 @@
         /**
         * Creates a new app with the defined options.
         * If the app is already created, it can be called without options to have a reference to the Mootor app. 
-
-        *  App instance factory
         *
-        *  window.m.app({
-        *    views: [
-        *       "index",
-        *       "view1"
-        *    ]
-        *  });
-
+        * App instance factory
         *
-        * @method app
+        * @method app 
         * @for window.m
         * @param {Array} [views] A list of view names to be initialized
         * @return App
+        * @example
+        *     window.m.app({
+        *       views: [
+        *          "index",
+        *          "view1"
+        *       ]
+        *     });
         */
         app: function(options) {
             if (App.app === undefined) {

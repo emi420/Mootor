@@ -36,6 +36,8 @@
         *
         * @property regex
         * @type String
+        * @example
+        *     url_regex = m.app.route("index.html").regex;
         */
         regex: "",
 
@@ -46,6 +48,8 @@
         * @method view
         * @param {View} [view] - The view that implements this route
         * @return view
+        * @example
+        *     url_view = m.app.route("index.html").view;
         */
         view: {},
 

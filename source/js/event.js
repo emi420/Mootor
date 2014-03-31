@@ -24,6 +24,13 @@
 
         /**
         * Add event to collection
+        * @method on
+        * @param {string} event Name of the event
+        * @param {function} callback Callback function\
+        * @example
+        *     Mootor.on("myCustomEvent", function(self) {
+        *         console.log("Event fired!");
+        *     });
         * @private
         */
         on: function(event, callback) {
@@ -35,10 +42,14 @@
         
         /**
         * Dispatch event
+        * @method dispatch
+        * @param {string} event Name of the event
+        * @param {object} instance Instance for scope
         * @private
+        * @example
+        *     Mootor.dispatch("myCustomEvent", myInstance);
         */
         dispatch: function(event, instance) {
-            //console.log(event,instance);
             var i,
                 count = 0,
                 callbacks = Event._collection[event],
@@ -59,7 +70,22 @@
 
         /**
         * Extend objects with Event methods
+        * @method extend
+        * @param {object} object Object to extend
+        * @param {string} objectName String name of the object
         * @private
+        * @example
+        *     Person = function(name) {
+        *         this.name = name;
+        *     }
+        *
+        *     Mootor.Event.extend(Person.prototype);
+        *
+        *     person = new Person("Anon");
+        *     person.on("fire", function(self) {
+        *          console.log(self.name + " is on fire!");
+        *     }
+        *     person.dispatch("fire", person);
         */
         extend: function(object, objectName) {
             $.extend(object, {
