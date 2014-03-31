@@ -26,8 +26,8 @@ Mootor team **LOVES** design. We are working to make delightful user interfaces,
 
 **Update:** check our new icons!
 
-* https://github.com/emi420/Mootor/tree/dev/source/img/icons
 * http://mootor.mobi/uiicons/
+* https://github.com/emi420/Mootor/tree/dev/source/img/icons
 
 
 ## License
