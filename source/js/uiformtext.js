@@ -16,13 +16,11 @@
     var UIFormText,
     
         UI,
-        UIView,
         UIForm;
 
     // Dependences
 
     UI = Mootor.UI;
-    UIView = Mootor.UIView;
     UIForm = Mootor.UIForm;
 
     // Event handelers
