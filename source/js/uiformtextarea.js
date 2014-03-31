@@ -15,11 +15,13 @@
 
     var UIFormTextArea,
     
-        UI;
+        UI,
+        UIForm;
 
     // Dependences
 
     UI = Mootor.UI;
+    UIForm = Mootor.UIForm;
     
     // Private constructors
 
@@ -33,6 +35,14 @@
     // Private static methods and properties
 
     $.extend(UIFormTextArea, {
+        _init: function(self, selector) {
+            var inputs,
+                i;
+                
+            inputs = self.$el.find(selector);
+
+           // code here
+        }
    
     });
 
@@ -40,5 +50,7 @@
 
     $.extend(UIFormTextArea.prototype, {
     });        
+
+    UIForm.registerControl(".m-textarea", UIFormTextArea);  
 
 }(window.$, window.Mootor));

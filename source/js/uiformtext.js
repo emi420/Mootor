@@ -38,20 +38,16 @@
 
     $.extend(UIFormText, {
 
-        _init: function(self) {
-            var textInputs,
+        _init: function(self, selector) {
+            var inputs,
                 i;
                 
-            textInputs = self.$el.find(".m-text");
+            inputs = self.$el.find(selector);
+            
+            // code here
 
-            for (i = textInputs.length; i--;) {
-                UIFormText.addEventListeners(textInputs[i]); 
-            }
         },
         
-        addEventListeners: function(textInput) {
-            $(textInput).on("tap", function() { textInput.focus(); } );
-        }
     });
 
     // Public methods and properties

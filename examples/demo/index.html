@@ -28,8 +28,8 @@
   <script type="text/javascript" src="../../source/js/route.js"></script>
   <script type="text/javascript" src="../../source/js/uiform.js"></script>
   <script type="text/javascript" src="../../source/js/uiformtext.js"></script>
-
-
+  <script type="text/javascript" src="../../source/js/uiformtextarea.js"></script>
+  <script type="text/javascript" src="../../source/js/uiformselect.js"></script>
 
 </head>
 
@@ -50,6 +50,7 @@
                     "index",
                     "testview",
                     "help",
+                    "form",
                     "about"
                 ]
             }).init();
@@ -58,6 +59,7 @@
             app.route("^#welcome/(.*)", app.view("testview"));
             app.route("^#help", app.view("help"));
             app.route("^#about", app.view("about"));
+            app.route("^#form", app.view("form"));
             
         }());
     

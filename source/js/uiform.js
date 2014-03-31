@@ -37,7 +37,7 @@
     UIView.on("init", function(self) {
         var i;
         for (i in UIForm._controls) {
-            UIForm._controls[i].constructor._init(self);
+            UIForm._controls[i].constructor._init(self, UIForm._controls[i].selector);
         }
     });
 

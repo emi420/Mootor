@@ -15,11 +15,13 @@
 
     var UIFormSelect,
     
-        UI;
+        UI,
+        UIForm;
 
     // Dependences
 
     UI = Mootor.UI;
+    UIForm = Mootor.UIForm;
     
     // Private constructors
 
@@ -33,6 +35,15 @@
     // Private static methods and properties
 
     $.extend(UIFormSelect, {
+        _init: function(self, selector) {
+            var inputs,
+                i;
+                
+            inputs = self.$el.find(selector);
+
+            // code here
+
+        }
    
     });
 
@@ -40,5 +51,7 @@
 
     $.extend(UIFormSelect.prototype, {
     });        
+
+    UIForm.registerControl(".m-select", UIFormSelect);  
 
 }(window.$, window.Mootor));
