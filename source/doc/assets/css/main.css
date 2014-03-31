@@ -31,7 +31,7 @@ body {
 }
 /* -- Links ----------------------------------------------------------------- */
 a {
-  color: #4085CF;
+  color: #000;
   text-decoration: none;
 }
 .hidden {
@@ -74,7 +74,7 @@ h6 {
   line-height: 1.1;
   margin: 1.1em 0 0.5em;
   border: none;
-  color: #3570BD;
+  color: #000;
   font-weight: 300;
   text-decoration: none;
 }
@@ -453,7 +453,7 @@ specific tabview, see the other sections below.
 .apidocs .intro {
   background: #f9f9f9;
   border-color: rgba(0, 0, 0, 0);
-  border-left: 5px solid #69b2ec;
+  border-left: 5px solid #68B3B9;
   padding: 1px 15px;
   margin-bottom: 20px;
 }
@@ -763,8 +763,8 @@ kbd .cmd {
 }
 .apis a:hover,
 .apis a:focus {
-  background: #69b2ec;
-  border-color: #AAC0FA;
+  background: #68B3B9;
+  border-color: #transparent;
   color: #fff;
   outline: none;
 }
@@ -787,7 +787,7 @@ kbd .cmd {
 }
 .blue-method-syntax {
   background: #F3F2F2;
-  border-left: 5px solid #69b2ec;
+  border-left: 5px solid #68B3B9;
   /*border-left-width: 5px;*/
   padding: 0.5em 1em;
 }
@@ -851,9 +851,9 @@ h1.blue-main-title {
 .yui-overrride .yui3-skin-sam .yui3-tab-selected .yui3-tab-label,
 .yui-overrride .yui3-skin-sam .yui3-tab-selected .yui3-tab-label:focus,
 .yui-overrride .yui3-skin-sam .yui3-tab-selected .yui3-tab-label:hover {
-  background: #69b2ec;
+  background: #68B3B9;
   color: #fff;
 }
 .yui-overrride .yui3-skin-sam .yui3-tabview-list {
-  border-bottom: solid #69b2ec;
+  border-bottom: solid #68B3B9;
 }

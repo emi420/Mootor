@@ -396,7 +396,7 @@
             "tag": "module",
             "file": "js/view.js",
             "line": 1,
-            "description": "The View class handles each screen of the application. \nA list of views is specified in the applications options\nand the files are loaded from the views/ folder.\nEach view has a viewName.js and a viewName.html file.\nThe viewName.js file defines options for the view."
+            "description": "The View class handles each view of the application. \nA list of views is specified in the applications options\nand the files are loaded from the \"views\" folder.\nEach view has a viewName.js, viewName.html and viewName.css files."
         }
     },
     "classes": {
@@ -923,7 +923,7 @@
             "namespace": "",
             "file": "js/view.js",
             "line": 1,
-            "description": "The View class handles each screen of the application. \nA list of views is specified in the applications options\nand the files are loaded from the views/ folder.\nEach view has a viewName.js and a viewName.html file.\nThe viewName.js file defines options for the view.",
+            "description": "The View class handles each view of the application. \nA list of views is specified in the applications options\nand the files are loaded from the \"views\" folder.\nEach view has a viewName.js, viewName.html and viewName.css files.",
             "is_constructor": 1,
             "params": [
                 {
@@ -1805,35 +1805,35 @@
         },
         {
             "file": "js/view.js",
-            "line": 110,
+            "line": 109,
             "description": "Views collection",
             "class": "View",
             "module": "View"
         },
         {
             "file": "js/view.js",
-            "line": 115,
+            "line": 114,
             "description": "Current active view",
             "class": "View",
             "module": "View"
         },
         {
             "file": "js/view.js",
-            "line": 120,
+            "line": 119,
             "description": "Init View instance, load HTML, CSS and JavaScript files for the view",
             "class": "View",
             "module": "View"
         },
         {
             "file": "js/view.js",
-            "line": 146,
+            "line": 145,
             "description": "Get view HTML",
             "class": "View",
             "module": "View"
         },
         {
             "file": "js/view.js",
-            "line": 239,
+            "line": 238,
             "description": "Title is the friendly name for the current view.\nWhen called without parameters, returns a string containing the title. When called with parameters, sets the title.",
             "itemtype": "method",
             "name": "title",
@@ -1856,7 +1856,7 @@
         },
         {
             "file": "js/view.js",
-            "line": 263,
+            "line": 262,
             "description": "Sets an event handler for the view\nPossible values for event: load, beforeLoad, unload, beforeUnload, init\nTODO: Define which parameters are passed to the callback function.",
             "itemtype": "method",
             "name": "on",
@@ -1883,7 +1883,7 @@
         },
         {
             "file": "js/view.js",
-            "line": 286,
+            "line": 285,
             "description": "Unsets event handlers for the view\nPossible values for event: load, beforeLoad, unload, beforeUnload, init",
             "itemtype": "method",
             "name": "off",
@@ -1908,7 +1908,7 @@
         },
         {
             "file": "js/view.js",
-            "line": 304,
+            "line": 303,
             "description": "Create or get a view",
             "itemtype": "method",
             "name": "view",
@@ -1958,19 +1958,19 @@
         },
         {
             "message": "Missing item type\nViews collection",
-            "line": " js/view.js:110"
+            "line": " js/view.js:109"
         },
         {
             "message": "Missing item type\nCurrent active view",
-            "line": " js/view.js:115"
+            "line": " js/view.js:114"
         },
         {
             "message": "Missing item type\nInit View instance, load HTML, CSS and JavaScript files for the view",
-            "line": " js/view.js:120"
+            "line": " js/view.js:119"
         },
         {
             "message": "Missing item type\nGet view HTML",
-            "line": " js/view.js:146"
+            "line": " js/view.js:145"
         }
     ]
 }
