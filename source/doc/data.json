@@ -1929,7 +1929,7 @@
                 "description": "View the referenced view object"
             },
             "example": [
-                "\n   indexView = m.app.view(\"index\");"
+                "\n    indexView = m.app.view(\"index\");"
             ],
             "class": "App",
             "module": "View"
