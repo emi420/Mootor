@@ -24,10 +24,10 @@ More information:
 
 Mootor team **LOVES** design. We are working to make delightful user interfaces, and provide maximum efficiency and fully customization.
 
-*Update:* check our new icons!
+**Update:** check our new icons!
 
-https://github.com/emi420/Mootor/tree/dev/source/img/icons
-http://mootor.mobi/uiicons/
+* https://github.com/emi420/Mootor/tree/dev/source/img/icons
+* http://mootor.mobi/uiicons/
 
 ## How can I help?
 
