@@ -1354,7 +1354,16 @@
         },
         {
             "file": "js/uiform.js",
-            "line": 50,
+            "line": 51,
+            "description": "Controls",
+            "access": "private",
+            "tagname": "",
+            "class": "UIForm",
+            "module": "UI"
+        },
+        {
+            "file": "js/uiform.js",
+            "line": 69,
             "description": "Serialize form's data",
             "itemtype": "method",
             "name": "serialize",
@@ -1367,7 +1376,7 @@
         },
         {
             "file": "js/uiform.js",
-            "line": 60,
+            "line": 79,
             "description": "Clear all form fields",
             "itemtype": "method",
             "name": "clear",
@@ -1699,7 +1708,7 @@
         },
         {
             "file": "js/uipanel.js",
-            "line": 99,
+            "line": 93,
             "description": "Initialize  a panel",
             "itemtype": "method",
             "name": "_init",
@@ -1710,7 +1719,7 @@
         },
         {
             "file": "js/uipanel.js",
-            "line": 183,
+            "line": 178,
             "description": "Move the element to the specified position inside the UIApp / m-views-container. \nIf coordinates are not specified, it returns coordinates object with the current position.",
             "itemtype": "method",
             "name": "position",
@@ -1731,7 +1740,7 @@
         },
         {
             "file": "js/uipanel.js",
-            "line": 204,
+            "line": 199,
             "description": "Block/Unblock or return block status.",
             "itemtype": "method",
             "name": "blocked",
@@ -1752,7 +1761,7 @@
         },
         {
             "file": "js/uipanel.js",
-            "line": 217,
+            "line": 212,
             "description": "Set or get transition type",
             "itemtype": "method",
             "name": "transition",
@@ -1773,7 +1782,7 @@
         },
         {
             "file": "js/uipanel.js",
-            "line": 233,
+            "line": 228,
             "description": "Set callback function for an event",
             "itemtype": "method",
             "name": "on",
@@ -1792,15 +1801,6 @@
                 "\n    m.app.view(\"index\").panel.on(\"transitionEnd\", function(self) {\n        console.log(\"transition end!\")\n    });"
             ],
             "class": "UIPanel",
-            "module": "UI"
-        },
-        {
-            "file": "js/uiview.js",
-            "line": 64,
-            "description": "Element enhancements",
-            "access": "private",
-            "tagname": "",
-            "class": "UIView",
             "module": "UI"
         },
         {
@@ -1949,12 +1949,12 @@
             "line": " js/event.js:19"
         },
         {
-            "message": "Missing item type\nBack\nThe back button",
-            "line": " js/uiheader.js:129"
+            "message": "Missing item type\nControls",
+            "line": " js/uiform.js:51"
         },
         {
-            "message": "Missing item type\nElement enhancements",
-            "line": " js/uiview.js:64"
+            "message": "Missing item type\nBack\nThe back button",
+            "line": " js/uiheader.js:129"
         },
         {
             "message": "Missing item type\nViews collection",

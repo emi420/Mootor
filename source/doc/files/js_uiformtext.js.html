@@ -243,16 +243,20 @@
 
     var UIFormText,
     
-        UI;
+        UI,
+        UIForm;
 
     // Dependences
 
     UI = Mootor.UI;
+    UIForm = Mootor.UIForm;
+
+    // Event handelers
     
     // Private constructors
 
     UIFormText = function() {
-        // code here
+        // Code here
     };
 
     // Prototypal inheritance
@@ -261,13 +265,25 @@
     // Private static methods and properties
 
     $.extend(UIFormText, {
-   
+
+        _init: function(self, selector) {
+            var inputs,
+                i;
+                
+            inputs = self.$el.find(selector);
+            
+            // code here
+
+        },
+        
     });
 
     // Public methods and properties
 
     $.extend(UIFormText.prototype, {
-    });        
+    });      
+    
+    UIForm.registerControl(&quot;.m-text&quot;, UIFormText);  
 
 }(window.$, window.Mootor));
 
