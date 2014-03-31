@@ -1,6 +1,6 @@
 # Mootor
 
-## HTML5 library for application development
+## HTML5 library for mobile application development
 
 The main purpose of this project is to create a simple HTML5 library for mobile application development, that helps web professionals to build fully customizable apps, for use in browsers or embedded in mobile applications.
 
