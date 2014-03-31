@@ -43,5 +43,5 @@ You may use any Mootor project under the terms of either the MIT License or the 
 
 ## About
 
-* Mootor is under development by the Voölks (voolks.com) team.
-* Also, we recieved public founding by the MinCyT (mincyt.gob.ar)
+* Mootor is under design and development by the Voölks (voolks.com) team.
+* Also, we received public founding by the MinCyT (mincyt.gob.ar)
