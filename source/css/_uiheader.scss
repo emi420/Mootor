@@ -1,14 +1,43 @@
-header {
-    background: #072F52;
+@import "compass/css3/transition";
+
+$m-color-uiheader-bg: #68B3B9 !default;
+$m-color-uiheader-fg: #fff !default;
+        
+.m-header-container {
+    background: $m-color-uiheader-bg;
     height: 55px;
     position: relative;
-    z-index: 100;
+    width: 100%;
+        
+    header {
+        background: $m-color-uiheader-bg;
+        z-index: 100;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 55px;
 
-    h1 {
-        text-align: center;
-        color: #f1f1f1;
-        font-weight: bold;
-        line-height: 55px;
+        opacity: 1;
+        @include transition(opacity, .5s);    
+        
+        &.m-hidden {
+            display: block !important;
+            opacity: 0;
+            height: 0;
+        }
+    
+        h1 {
+            text-align: center;
+            color: $m-color-uiheader-fg;
+            font-weight: bold;
+            width: 50%;
+            margin-left: 25%;
+            line-height: 55px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
     }
 }
 
@@ -26,7 +55,8 @@ header {
     width: 2em;
     height: 2em;
     position: absolute;
-
-    // FIXME CHECK: url path of back image
-    background: url("../../examples/demo/images/back.png") no-repeat 50% 50%;
+    background: none no-repeat 50% 50%;
+    @extend .m-img-back-icon;
 }
+
+

@@ -15,6 +15,7 @@
 
     $("#btnOk").on("tap", function(e) {
         m.app.go("");
+        e.preventDefault();
     });
     
 }(window.$));

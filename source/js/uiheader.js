@@ -20,7 +20,9 @@
         View,
         UIApp,
         UINavItem,
-        App;
+        App,
+        UI,
+        headerContainerEl;
 
     // Dependences
 
@@ -30,6 +32,7 @@
     UIApp = Mootor.UIApp;
     UINavItem = Mootor.UINavItem;
     App = Mootor.App;
+    UI = Mootor.UI;
     
     // Event handlers
 
@@ -37,12 +40,19 @@
 
         // FIXME CHECK (parentElement?)
         var headerEl = self.el.parentElement.getElementsByTagName("header")[0];
+        
+        headerContainerEl = document.createElement("div");
+        headerContainerEl.setAttribute("class","m-header-container");
+        headerEl.parentElement.replaceChild(headerContainerEl, headerEl);
+        headerContainerEl.appendChild(headerEl);
 
         if (headerEl) {
             self.header = new UIHeader({
                 el: headerEl
             });
         }
+        m.app.ui.header.hide()
+        
     });
 
     UIView.on("init", function(self) {
@@ -54,27 +64,28 @@
             self.header = new UIHeader({
                 el: headerEl
             });
-
+            
             self.panel.el.removeChild(headerEl);
+            headerContainerEl.appendChild(headerEl);
+            
+            self.header.hide();
 
             self.view.on("load", function(self) {
-                var headerEl = m.app.ui.el.parentElement.getElementsByTagName("header")[0];
-                m.app.ui.el.parentElement.replaceChild(
-                    self.ui.header.el,
-                    headerEl
-                );
+               self.ui.header.show();
             });
+
+            self.view.on("unload", function(self) {
+               self.ui.header.hide();
+            });
+
         } else {
-
             self.view.on("load", function(self) {
-                var headerEl = m.app.ui.el.parentElement.getElementsByTagName("header")[0];
-                m.app.ui.el.parentElement.replaceChild(
-                    m.app.ui.header.el,
-                    headerEl
-                );
+               m.app.ui.header.show()
             });
 
-
+            self.view.on("unload", function(self) {
+                m.app.ui.header.hide()
+            });
         }
     });
     
@@ -108,9 +119,12 @@
             });
             self.back.$el.addClass("m-header-back");
             self.back.hide();
-            self.back.$el.on("tap click", function() {
+            self.back.$el.on("tap", function(e) {
                 m.app.back();
             });
+            self.back.el.onclick = function(e) {
+                return false;
+            };
             App.on("go", function(app) {
                 if (app.history.length > 1) {
                     self.back.show();
@@ -164,5 +178,6 @@
     // Prototypal inheritance
 
     $.extend(UIHeader.prototype, UINavBar.prototype);
+    $.extend(UIHeader.prototype, UI.prototype);
 
 }(window.$, window.Mootor));

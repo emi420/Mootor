@@ -1,3 +1,5 @@
+$m-color-uinavbar-fg: #fff !default;
+
 .m-nav {
     position: absolute;
     top: 0;
@@ -6,7 +8,7 @@
     .m-nav-item {
         text-decoration: none;
         float: left;
-        color: #fff;
+        color: $m-color-uinavbar-fg;
         padding: 1.4em .25em;
         font-size: .9em;
         width: auto;
@@ -14,12 +16,7 @@
         &:before {
             display: inline-block;
         }
-
-        // Hidden item
-        &.m-hidden {
-            display: none; 
-        }
-
+        
     }
 
 }

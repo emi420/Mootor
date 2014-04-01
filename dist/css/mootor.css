@@ -1,10 +1,9 @@
-@charset "UTF-8";
 /**
  * @summary Mootor CSS
  * @author Emilio Mariscal (emi420 [at] gmail.com)
  * @author Martín Szyszlican (martinsz [at] gmail.com)
  */
-/* line 17, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 17, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -26,45 +25,45 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-/* line 22, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 22, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html {
   line-height: 1;
 }
 
-/* line 24, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 24, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
-/* line 26, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 26, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 28, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 28, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
-/* line 30, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 30, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
-/* line 103, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 103, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
-/* line 32, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 32, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
-/* line 116, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 116, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
   display: block;
 }
@@ -136,21 +135,47 @@ html, body {
   -o-transform: translateX(0);
   transform: translateX(0);
 }
-/* line 1, ../../source/css/_uiheader.scss */
-.m-app header {
-  background: #072F52;
+/* line 6, ../../source/css/_uiheader.scss */
+.m-app .m-header-container {
+  background: #68b3b9;
   height: 55px;
   position: relative;
+  width: 100%;
+}
+/* line 12, ../../source/css/_uiheader.scss */
+.m-app .m-header-container header {
+  background: #68b3b9;
   z-index: 100;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 55px;
+  opacity: 1;
+  -webkit-transition: opacity, 0.5s;
+  -moz-transition: opacity, 0.5s;
+  -o-transition: opacity, 0.5s;
+  transition: opacity, 0.5s;
 }
-/* line 7, ../../source/css/_uiheader.scss */
-.m-app header h1 {
+/* line 24, ../../source/css/_uiheader.scss */
+.m-app .m-header-container header.m-hidden {
+  display: block !important;
+  opacity: 0;
+  height: 0;
+}
+/* line 30, ../../source/css/_uiheader.scss */
+.m-app .m-header-container header h1 {
   text-align: center;
-  color: #f1f1f1;
+  color: white;
   font-weight: bold;
+  width: 50%;
+  margin-left: 25%;
   line-height: 55px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
-/* line 15, ../../source/css/_uiheader.scss */
+/* line 44, ../../source/css/_uiheader.scss */
 .m-app .m-header-back {
   position: absolute;
   left: 1em;
@@ -158,37 +183,33 @@ html, body {
   width: 2em;
   height: 2em;
 }
-/* line 23, ../../source/css/_uiheader.scss */
+/* line 52, ../../source/css/_uiheader.scss */
 .m-app .m-header-back:before {
   content: " ";
   display: block;
   width: 2em;
   height: 2em;
   position: absolute;
-  background: url("../../examples/demo/images/back.png") no-repeat 50% 50%;
+  background: none no-repeat 50% 50%;
 }
-/* line 1, ../../source/css/_uinavbar.scss */
+/* line 3, ../../source/css/_uinavbar.scss */
 .m-app .m-nav {
   position: absolute;
   top: 0;
   right: 1em;
 }
-/* line 6, ../../source/css/_uinavbar.scss */
+/* line 8, ../../source/css/_uinavbar.scss */
 .m-app .m-nav .m-nav-item {
   text-decoration: none;
   float: left;
-  color: #fff;
+  color: white;
   padding: 1.4em .25em;
   font-size: .9em;
   width: auto;
 }
-/* line 14, ../../source/css/_uinavbar.scss */
+/* line 16, ../../source/css/_uinavbar.scss */
 .m-app .m-nav .m-nav-item:before {
   display: inline-block;
-}
-/* line 19, ../../source/css/_uinavbar.scss */
-.m-app .m-nav .m-nav-item.m-hidden {
-  display: none;
 }
 /* line 11, ../../source/css/_uiloading.scss */
 .m-app .m-loading {
@@ -652,4 +673,14 @@ html, body {
   100% {
     opacity: 0;
   }
+}
+
+/* line 1, ../../source/css/_sprites.scss */
+.m-img-back-icon-x2 {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABx0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzIENTNui8sowAAAF9SURBVGiB7dpRSsMwGMDxf8RHoaO5huAuIO4InsMDeQ6PUPECCl4jQcH37qWDPtTQYr7k62f+sJetrP2Rre2SuXEc+U9d1T6A0jWw9RrYeg1svQa2XgNbLwvYOfenR4zxEGMcYoxH51yOQ/q16iMcQjgAA/AADCGEo+T+qoJn2LvpqQ4YYoxi6GrgBewlUXQVcAJ7qQNeJPZdHLwCC/ANPErsvyh4A/bU9/27xDEUA2vAQiHwFqz3XgwLBcCasCAM1oYFQbBGLAiBtWJBAKwZC3Cd880m7Btwm9isGhYyjvAesJAJvBcs5BvhZ9LYHxRgQcEEQOlygZ+Az8TrNxSYzVhTFrD3/gu4J43uUIDO9pHeCzrrd3iG/khsVhWd/aQ1oU8oRYucpTWjxS5LWtGi12GNaPEbD23oIndamtDFbi23oM0stWhAF//xsAFtY6kFVqFtLLXMS6BtLLUstYC2sdSSaoZ+pcCsiGv/lzZeA1uvga3XwNZrYOs1sPXOXQPPAXNLwrEAAAAASUVORK5CYII=);
+}
+
+/* line 5, ../../source/css/_sprites.scss */
+.m-img-back-icon, .m-app .m-header-back:before {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABx0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzIENTNui8sowAAADVSURBVEiJ7dbBCcMwDEDR73aAHDRAV8ih10K7STtZu0kDvfaQEbKABBmguJcUcgiJE2QCJQIdrIMe2DJ2iDGyRuxWUTd4gwFCCKNpZqWZNWZWhhD84LFQ1RKogANQdeu8cA8tulIB5IUHUICbiDyywR7obNgLnQV7osmwqp6AtxeaBHfoE9h7oUlwrpiEReQFXIBPr3xX1WtWuIcfgdYLT95qEamBsxc+64w98dnD5YUvmmoPfPF1GsBboE5uEGMczalQ1VJVm99bPNXvl2H7V2/w38FfnyCg2NuM5fUAAAAASUVORK5CYII=);
 }
