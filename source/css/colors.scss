@@ -1,0 +1,59 @@
+/**
+ * @summary Mootor CSS
+ * @author Adriana Chionetti (designer)
+ * @author Martín Szyszlican (martinsz [at] gmail.com)
+ */
+
+$color-primary-1: #F3F3E7; 
+$color-primary-2: #A89C90; 
+$color-primary-3: #27130B; 
+$color-primary-4: #6DBCA1; 
+$color-primary-5: #ED9A3D; 
+$color-primary-6: #F04930; 
+$color-primary-7: #2F92B1; 
+$color-primary-8: #66B2B8; 
+$color-primary-9: #F1CE03;
+
+$color-secondary-1: #E6E2DF; 
+$color-secondary-2: #CCC6BF; 
+$color-secondary-3: #46ACCE; 
+$color-secondary-4: #A4D1D5; 
+$color-secondary-5: #493C36; 
+$color-secondary-6: #F0EEF0; 
+$color-secondary-7: #2F92B1; 
+$color-secondary-8: #66B2B8; 
+$color-secondary-9: #F1CE03;
+
+$color-cheerful-1: #F2F2F2; 
+$color-cheerful-2: #BBBBBB; 
+$color-cheerful-3: #444444; 
+$color-cheerful-4: #56A658; 
+$color-cheerful-5: #ED9A3D; 
+$color-cheerful-6: #EB296F; 
+$color-cheerful-7: #43ABD1; 
+$color-cheerful-8: #F2D922; 
+$color-cheerful-9: #A24285;
+
+$color-soft-1: #F2F2F2; 
+$color-soft-2: #E5E5E5; 
+$color-soft-3: #444444; 
+$color-soft-4: #EBC850; 
+$color-soft-5: #34A4F5; 
+$color-soft-6: #0A78C9; 
+$color-soft-7: #FE4949; 
+$color-soft-8: #A874E2; 
+$color-soft-9: #12CB7D;
+
+
+//Main color: $color-primary-5
+
+.m-button {
+	background: $color-primary-5;
+	color: white;
+}
+
+.m-button-outline {
+    background: none;
+	border-color: $color-primary-5;
+	color: $color-primary-5;
+}

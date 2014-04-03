@@ -1,0 +1,18 @@
+@charset "UTF-8";
+/**
+ * @summary Mootor CSS
+ * @author Adriana Chionetti (designer)
+ * @author Martín Szyszlican (martinsz [at] gmail.com)
+ */
+/* line 50, ../../source/css/colors.scss */
+.m-button {
+  background: #ed9a3d;
+  color: white;
+}
+
+/* line 55, ../../source/css/colors.scss */
+.m-button-outline {
+  background: none;
+  border-color: #ed9a3d;
+  color: #ed9a3d;
+}

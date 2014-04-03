@@ -1,0 +1,23 @@
+.m-button {
+    padding: 0.4em 2.3em;
+    font-size: 1em;
+    line-height: 2em;
+    border: none;
+    border-radius: 0.5em;
+}
+
+.m-button-small {
+    @extend .m-button;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.m-button-outline {
+    @extend .m-button;
+    border: 1px solid;
+}
+
+.m-button-outline-small {
+    @extend .m-button-outline;
+    @extend .m-button-small;
+}
