@@ -1,4 +1,5 @@
 .m-button {
+    @extend .m-bg-color-primary-1;
     padding: 0.4em 2.3em;
     font-size: 1em;
     line-height: 2em;
@@ -14,6 +15,9 @@
 
 .m-button-outline {
     @extend .m-button;
+    @extend .m-bg-color-transparent;
+    @extend .m-border-color-primary-2;
+    @extend .m-color-primary-2;
     border: 1px solid;
 }
 
