@@ -320,7 +320,30 @@
 
     $.extend(UIApp.prototype, {
     
-    });        
+    });   
+    
+    App.on(&quot;ready&quot;, function() {
+        var links = $(&quot;a&quot;),
+            i,
+            href;
+        
+        for (i = links.length; i--;) {
+            href = links[i].getAttribute(&quot;href&quot;);
+            if (href !== null) {                
+                if (m.app.route(links[i].getAttribute(&quot;href&quot;)) !== undefined) {
+                    $(links[i]).on(&quot;tap&quot;, function(e) {
+                        m.app.go(e.target.getAttribute(&quot;href&quot;));
+                    })
+                    $(links[i]).on(&quot;click&quot;, function(e) {
+                        e.stopPropagation();
+                        e.preventDefault();
+                    })
+                }
+            }
+        }
+        
+    });  
+    
 
 }(window.$, window.Mootor));
 
