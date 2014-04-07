@@ -31,6 +31,7 @@
   <script type="text/javascript" src="../../source/js/uiformtext.js"></script>
   <script type="text/javascript" src="../../source/js/uiformtextarea.js"></script>
   <script type="text/javascript" src="../../source/js/uiformselect.js"></script>
+  <script type="text/javascript" src="../../source/js/uibutton.js"></script>
 
 </head>
 
@@ -52,7 +53,8 @@
                     "testview",
                     "help",
                     "form",
-                    "about"
+                    "about",
+                    "buttons"
                 ]
             }).init();
     
@@ -61,6 +63,7 @@
             app.route("^#help", app.view("help"));
             app.route("^#about", app.view("about"));
             app.route("^#form", app.view("form"));
+            app.route("^#buttons", app.view("buttons"));
             
         }());
     

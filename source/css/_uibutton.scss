@@ -2,8 +2,27 @@
     padding: 0.4em 2.3em;
     font-size: 1em;
     line-height: 2em;
-    border: none;
+    border-width: 0;
     border-radius: 0.5em;
+    display: inline-block;
+
+    .m-icon {
+        line-height: 300px;
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+        position: relative;
+        &:first-child {
+            background: red;
+            left: -1em;
+        }
+        &:last-child {
+            background: blue;
+            left: 1em;
+        }
+        
+    }
+
 }
 
 .m-button:focus,
@@ -14,20 +33,32 @@
 }
 
 .m-button-small {
+    @extend .m-button;
     padding-top: 0;
     padding-bottom: 0;
 }
 
 .m-button-outline {
-    border: 1px solid;
+    @extend .m-button;
+    border-width: 1px;
+    border-style: solid;
 }
 
 .m-button-fullwidth {
+    @extend .m-button;
     width: 100%;
     border-radius: 0;
 }
 
 .m-button-outline-fullwidth {
+    @extend .m-button-outline;
+    @extend .m-button-fullwidth;
     border-left: none;
     border-right: none;
+}
+
+
+.m-button-outline-small {
+    @extend .m-button-outline;
+    @extend .m-button-small;
 }
