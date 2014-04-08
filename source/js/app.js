@@ -217,6 +217,9 @@
         */
         app: function(options) {
             if (App.app === undefined) {
+                if (options === undefined) {
+                    options = {};
+                }
                 App.app = new App(options);
                 App._options = options;
                 this.app = App.app;
