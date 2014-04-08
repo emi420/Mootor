@@ -49,12 +49,7 @@
 
             var app = m.app({
                 views: [
-                    "index",
-                    "testview",
-                    "help",
-                    "form",
-                    "about",
-                    "buttons"
+                    "index"
                 ]
             }).init();
     
@@ -64,6 +59,7 @@
             app.route("^#about", app.view("about"));
             app.route("^#form", app.view("form"));
             app.route("^#buttons", app.view("buttons"));
+            app.route("^#icons", app.view("icons"));
             
         }());
     

@@ -434,7 +434,7 @@ Each view has a viewName.js, viewName.html and viewName.css files.</p>
       
     
     
-      <a href="../files/js_view.js.html#l285"><code>js&#x2F;view.js:285</code></a>
+      <a href="../files/js_view.js.html#l297"><code>js&#x2F;view.js:297</code></a>
     
   </p>
 
@@ -632,8 +632,7 @@ Possible values for event: load, beforeLoad, unload, beforeUnload, init</p>
     <div class="description">
       <h3>Summary</h3>
         <p>Sets an event handler for the view
-Possible values for event: load, beforeLoad, unload, beforeUnload, init
-TODO: Define which parameters are passed to the callback function.</p>
+Possible values for event: load, beforeLoad, unload, beforeUnload, init</p>
 
     </div>
 
@@ -702,8 +701,20 @@ TODO: Define which parameters are passed to the callback function.</p>
             <h4>Example:</h4>
 
             <div class="example-content">
-                <pre class="code prettyprint"><code>m.app.view(&quot;index&quot;).on(&quot;load&quot;, function(self) {
+                <pre class="code prettyprint"><code>// Simple example
+
+m.app.route(&quot;^#index$&quot;, app.view(&quot;index&quot;));
+
+m.app.view(&quot;index&quot;).on(&quot;load&quot;, function(self) {
    console.log(&quot;Index view is loaded.&quot;); 
+});
+
+// With parameters
+
+m.app.route(&quot;^#product/(.*)&quot;, app.view(&quot;product&quot;));
+
+m.app.view(&quot;product&quot;).on(&quot;load&quot;, function(self) {
+   console.log(&quot;Product Id: &quot; + self.params[0];
 });</code></pre>
 
             </div>

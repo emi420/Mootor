@@ -262,15 +262,27 @@
         /**
         * Sets an event handler for the view
         * Possible values for event: load, beforeLoad, unload, beforeUnload, init
-        * TODO: Define which parameters are passed to the callback function.
         * 
         * @method on
         * @param {string} event Defines in which event the handler will be called
         * @param {function} callback The function to be called when the event is fired.
         * @return View
         * @example
+        *
+        *     // Simple example
+        *
+        *     m.app.route("^#index$", app.view("index"));
+        *
         *     m.app.view("index").on("load", function(self) {
         *        console.log("Index view is loaded."); 
+        *     });
+        *
+        *     // With parameters
+        *
+        *     m.app.route("^#product/(.*)", app.view("product"));
+        *   
+        *     m.app.view("product").on("load", function(self) {
+        *        console.log("Product Id: " + self.params[0];
         *     });
         */   
         on: function(event,callback) {

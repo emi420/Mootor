@@ -1363,7 +1363,7 @@
         },
         {
             "file": "js/uiform.js",
-            "line": 69,
+            "line": 68,
             "description": "Serialize form's data",
             "itemtype": "method",
             "name": "serialize",
@@ -1376,7 +1376,7 @@
         },
         {
             "file": "js/uiform.js",
-            "line": 79,
+            "line": 78,
             "description": "Clear all form fields",
             "itemtype": "method",
             "name": "clear",
@@ -1587,7 +1587,7 @@
         },
         {
             "file": "js/uiheader.js",
-            "line": 129,
+            "line": 143,
             "description": "Back\nThe back button",
             "object": "back",
             "return": {
@@ -1602,7 +1602,7 @@
         },
         {
             "file": "js/uiheader.js",
-            "line": 140,
+            "line": 154,
             "description": "Title\nThe text to display in the header\nIf called with no arguments returns the current title",
             "itemtype": "method",
             "name": "title",
@@ -1857,7 +1857,7 @@
         {
             "file": "js/view.js",
             "line": 262,
-            "description": "Sets an event handler for the view\nPossible values for event: load, beforeLoad, unload, beforeUnload, init\nTODO: Define which parameters are passed to the callback function.",
+            "description": "Sets an event handler for the view\nPossible values for event: load, beforeLoad, unload, beforeUnload, init",
             "itemtype": "method",
             "name": "on",
             "params": [
@@ -1876,14 +1876,14 @@
                 "description": "View"
             },
             "example": [
-                "\n    m.app.view(\"index\").on(\"load\", function(self) {\n       console.log(\"Index view is loaded.\"); \n    });"
+                "\n\n    // Simple example\n\n    m.app.route(\"^#index$\", app.view(\"index\"));\n\n    m.app.view(\"index\").on(\"load\", function(self) {\n       console.log(\"Index view is loaded.\"); \n    });\n\n    // With parameters\n\n    m.app.route(\"^#product/(.*)\", app.view(\"product\"));\n  \n    m.app.view(\"product\").on(\"load\", function(self) {\n       console.log(\"Product Id: \" + self.params[0];\n    });"
             ],
             "class": "View",
             "module": "View"
         },
         {
             "file": "js/view.js",
-            "line": 285,
+            "line": 297,
             "description": "Unsets event handlers for the view\nPossible values for event: load, beforeLoad, unload, beforeUnload, init",
             "itemtype": "method",
             "name": "off",
@@ -1908,7 +1908,7 @@
         },
         {
             "file": "js/view.js",
-            "line": 303,
+            "line": 315,
             "description": "Create or get a view",
             "itemtype": "method",
             "name": "view",
@@ -1938,7 +1938,7 @@
     "warnings": [
         {
             "message": "unknown tag: object",
-            "line": " js/uiheader.js:129"
+            "line": " js/uiheader.js:143"
         },
         {
             "message": "Missing item type\noff: function(event, callback) {\n    return this;\n},",
@@ -1954,7 +1954,7 @@
         },
         {
             "message": "Missing item type\nBack\nThe back button",
-            "line": " js/uiheader.js:129"
+            "line": " js/uiheader.js:143"
         },
         {
             "message": "Missing item type\nViews collection",

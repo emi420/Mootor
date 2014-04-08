@@ -1,0 +1,59 @@
+$icons-black-16: sprite-map("icons/black/16x16/*.png");
+$icons-black-32: sprite-map("icons/black/32x32/*.png");
+$icons-black-128: sprite-map("icons/black/128x128/*.png");
+
+$icons-black-16-x2: sprite-map("icons/black/16x16@x2/*.png");
+$icons-black-32-x2: sprite-map("icons/black/32x32@x2/*.png");
+$icons-black-128-x2: sprite-map("icons/black/128x128@x2/*.png");
+
+$icons-white-16: sprite-map("icons/white/16x16/*.png");
+$icons-white-32: sprite-map("icons/white/32x32/*.png");
+$icons-white-128: sprite-map("icons/white/128x128/*.png");
+
+$icons-white-16-x2: sprite-map("icons/white/16x16@x2/*.png");
+$icons-white-32-x2: sprite-map("icons/white/32x32@x2/*.png");
+$icons-white-128-x2: sprite-map("icons/white/128x128@x2/*.png");
+
+@mixin build-icon($name) {
+    
+    // Black icons
+
+    .m-icon-#{$name}-small {
+        @include m-sprite($name, $icons-black-16, $icons-black-16-x2);
+    }
+    .m-icon-#{$name} {
+        @include m-sprite($name, $icons-black-32, $icons-black-32-x2);
+    }
+    .m-icon-#{$name}-large {
+        @include m-sprite($name, $icons-black-128, $icons-black-128-x2);
+    }    
+
+    // White icons
+
+    .m-icon-#{$name}-small-white {
+        @include m-sprite($name, $icons-white-16, $icons-white-16-x2);
+    }
+    .m-icon-#{$name}-white {
+        @include m-sprite($name, $icons-white-32, $icons-white-32-x2);
+    }
+    .m-icon-#{$name}-large-white {
+        @include m-sprite($name, $icons-white-128, $icons-white-128-x2);
+    }    
+
+}
+
+@include build-icon("ok-circle");
+@include build-icon("add-circle");
+@include build-icon("add");
+@include build-icon("attention");
+
+
+
+// Temporary back button icons (will be replaced with sprites)
+.m-img-back-icon-x2 {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABx0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzIENTNui8sowAAAF9SURBVGiB7dpRSsMwGMDxf8RHoaO5huAuIO4InsMDeQ6PUPECCl4jQcH37qWDPtTQYr7k62f+sJetrP2Rre2SuXEc+U9d1T6A0jWw9RrYeg1svQa2XgNbLwvYOfenR4zxEGMcYoxH51yOQ/q16iMcQjgAA/AADCGEo+T+qoJn2LvpqQ4YYoxi6GrgBewlUXQVcAJ7qQNeJPZdHLwCC/ANPErsvyh4A/bU9/27xDEUA2vAQiHwFqz3XgwLBcCasCAM1oYFQbBGLAiBtWJBAKwZC3Cd880m7Btwm9isGhYyjvAesJAJvBcs5BvhZ9LYHxRgQcEEQOlygZ+Az8TrNxSYzVhTFrD3/gu4J43uUIDO9pHeCzrrd3iG/khsVhWd/aQ1oU8oRYucpTWjxS5LWtGi12GNaPEbD23oIndamtDFbi23oM0stWhAF//xsAFtY6kFVqFtLLXMS6BtLLUstYC2sdSSaoZ+pcCsiGv/lzZeA1uvga3XwNZrYOs1sPXOXQPPAXNLwrEAAAAASUVORK5CYII=)    
+}
+.m-img-back-icon {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABx0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzIENTNui8sowAAADVSURBVEiJ7dbBCcMwDEDR73aAHDRAV8ih10K7STtZu0kDvfaQEbKABBmguJcUcgiJE2QCJQIdrIMe2DJ2iDGyRuxWUTd4gwFCCKNpZqWZNWZWhhD84LFQ1RKogANQdeu8cA8tulIB5IUHUICbiDyywR7obNgLnQV7osmwqp6AtxeaBHfoE9h7oUlwrpiEReQFXIBPr3xX1WtWuIcfgdYLT95qEamBsxc+64w98dnD5YUvmmoPfPF1GsBboE5uEGMczalQ1VJVm99bPNXvl2H7V2/w38FfnyCg2NuM5fUAAAAASUVORK5CYII=)    
+}
+

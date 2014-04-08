@@ -265,7 +265,7 @@
     UIView.on(&quot;init&quot;, function(self) {
         var i;
         for (i in UIForm._controls) {
-            UIForm._controls[i].constructor._init(self, UIForm._controls[i].selector);
+            UIForm._controls[i].constructor._init(self);
         }
     });
 
@@ -282,9 +282,8 @@
         */
         _controls: [],
 
-        registerControl: function(selector, constructor) {
+        registerControl: function(constructor) {
             UIForm._controls.push({
-                selector:    selector, 
                 constructor: constructor
             });
         }
