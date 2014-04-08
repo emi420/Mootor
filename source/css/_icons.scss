@@ -14,6 +14,7 @@ $icons-white-16-x2: sprite-map("icons/white/16x16@x2/*.png");
 $icons-white-32-x2: sprite-map("icons/white/32x32@x2/*.png");
 $icons-white-128-x2: sprite-map("icons/white/128x128@x2/*.png");
 
+// Mixin for build icon classes for all sizes and media queries
 @mixin build-icon($name) {
     
     // Black icons
@@ -42,12 +43,94 @@ $icons-white-128-x2: sprite-map("icons/white/128x128@x2/*.png");
 
 }
 
-@include build-icon("ok-circle");
+// Icon list
+
 @include build-icon("add-circle");
 @include build-icon("add");
+@include build-icon("arrow-circle-down");
+@include build-icon("arrow-circle-left");
+@include build-icon("arrow-circle-right");
+@include build-icon("arrow-circle-up");
+@include build-icon("arrow-down");
+@include build-icon("arrow-left");
+@include build-icon("arrow-right");
+@include build-icon("arrow-up");
+@include build-icon("arrow2-down");
+@include build-icon("arrow2-left");
+@include build-icon("arrow2-right");
+@include build-icon("arrow2-up");
+@include build-icon("attachment");
+@include build-icon("attention-2");
 @include build-icon("attention");
-
-
+@include build-icon("calendar");
+@include build-icon("camera");
+@include build-icon("chat");
+@include build-icon("cloud-upload");
+@include build-icon("cloud");
+@include build-icon("comments");
+@include build-icon("credit-card");
+@include build-icon("delete-circle");
+@include build-icon("delete");
+@include build-icon("download");
+@include build-icon("drag");
+@include build-icon("edit");
+@include build-icon("erase");
+@include build-icon("fast-backward");
+@include build-icon("folder");
+@include build-icon("heart");
+@include build-icon("home");
+@include build-icon("info");
+@include build-icon("link");
+@include build-icon("loading");
+@include build-icon("login");
+@include build-icon("logout");
+@include build-icon("mail");
+@include build-icon("map-pin");
+@include build-icon("map");
+@include build-icon("menu");
+@include build-icon("minus-circle");
+@include build-icon("minus");
+@include build-icon("music");
+@include build-icon("new-document");
+@include build-icon("new-window");
+@include build-icon("ok-circle");
+@include build-icon("ok");
+@include build-icon("padlock-closed");
+@include build-icon("padlock-open");
+@include build-icon("phone");
+@include build-icon("picture-gallery");
+@include build-icon("picture");
+@include build-icon("question-circle");
+@include build-icon("question");
+@include build-icon("redo");
+@include build-icon("refresh");
+@include build-icon("repeat-circle");
+@include build-icon("repeat");
+@include build-icon("save");
+@include build-icon("scan");
+@include build-icon("search");
+@include build-icon("settings-2");
+@include build-icon("settings-3");
+@include build-icon("settings");
+@include build-icon("share");
+@include build-icon("shopping-bag");
+@include build-icon("shopping-cart");
+@include build-icon("sound");
+@include build-icon("star");
+@include build-icon("tag");
+@include build-icon("thumbnails-list");
+@include build-icon("thumbnails");
+@include build-icon("thumbs-down");
+@include build-icon("thumbs-up");
+@include build-icon("time");
+@include build-icon("trash");
+@include build-icon("undo");
+@include build-icon("user-add");
+@include build-icon("user");
+@include build-icon("users");
+@include build-icon("video");
+@include build-icon("view");
+@include build-icon("wifi");
 
 // Temporary back button icons (will be replaced with sprites)
 .m-img-back-icon-x2 {

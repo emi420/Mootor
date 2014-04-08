@@ -18,15 +18,6 @@ $m-color-uiheader-fg: #fff !default;
         width: 100%;
         height: 55px;
 
-        opacity: 1;
-        @include transition(opacity, .5s);    
-        
-        &.m-hidden {
-            display: block !important;
-            opacity: 0;
-            height: 0;
-        }
-    
         h1 {
             text-align: center;
             color: $m-color-uiheader-fg;

@@ -429,6 +429,9 @@
         */
         app: function(options) {
             if (App.app === undefined) {
+                if (options === undefined) {
+                    options = {};
+                }
                 App.app = new App(options);
                 App._options = options;
                 this.app = App.app;
@@ -703,15 +706,27 @@
         /**
         * Sets an event handler for the view
         * Possible values for event: load, beforeLoad, unload, beforeUnload, init
-        * TODO: Define which parameters are passed to the callback function.
         * 
         * @method on
         * @param {string} event Defines in which event the handler will be called
         * @param {function} callback The function to be called when the event is fired.
         * @return View
         * @example
+        *
+        *     // Simple example
+        *
+        *     m.app.route("^#index$", app.view("index"));
+        *
         *     m.app.view("index").on("load", function(self) {
         *        console.log("Index view is loaded."); 
+        *     });
+        *
+        *     // With parameters
+        *
+        *     m.app.route("^#product/(.*)", app.view("product"));
+        *   
+        *     m.app.view("product").on("load", function(self) {
+        *        console.log("Product Id: " + self.params[0];
         *     });
         */   
         on: function(event,callback) {
@@ -924,11 +939,9 @@
             };
         });
 
-
         this.$el = $("<div>").addClass("m-views-container");
         this.el = this.$el[0];        
         this.$el.appendTo($container);
-
         this.$container = $container;
 
         UIApp.dispatch("init", this);
@@ -967,9 +980,11 @@
             href = links[i].getAttribute("href");
             if (href !== null) {                
                 if (m.app.route(links[i].getAttribute("href")) !== undefined) {
-                    $(links[i]).on("tap", function(e) {
-                        m.app.go(e.target.getAttribute("href"));
-                    })
+                    (function(href) {
+                        $(links[i]).on("tap", function(e) {
+                            m.app.go(href);
+                        })
+                    }(href));
                     $(links[i]).on("click", function(e) {
                         e.stopPropagation();
                         e.preventDefault();

@@ -60,11 +60,9 @@
             };
         });
 
-
         this.$el = $("<div>").addClass("m-views-container");
         this.el = this.$el[0];        
         this.$el.appendTo($container);
-
         this.$container = $container;
 
         UIApp.dispatch("init", this);
@@ -103,9 +101,11 @@
             href = links[i].getAttribute("href");
             if (href !== null) {                
                 if (m.app.route(links[i].getAttribute("href")) !== undefined) {
-                    $(links[i]).on("tap", function(e) {
-                        m.app.go(e.target.getAttribute("href"));
-                    })
+                    (function(href) {
+                        $(links[i]).on("tap", function(e) {
+                            m.app.go(href);
+                        })
+                    }(href));
                     $(links[i]).on("click", function(e) {
                         e.stopPropagation();
                         e.preventDefault();
