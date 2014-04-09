@@ -35,7 +35,7 @@
         
         self.panel = new UIPanel(view);
         self.panel.el = self.el;
-        self.panel.$el = $(self.el)
+        self.panel.$el = $(self.el);
         self.panel.hide();
         
         UIPanel.on("transitionEnd", function(self) {
@@ -140,13 +140,23 @@
             var getStyleBySelector = function ( selector ) {
                var sheetList = document.styleSheets;
                var ruleList;
-               var i, j;
+               var i, j, ss;
 
                /* look through stylesheets in reverse order that
                   they appear in the document */
                for (i=sheetList.length-1; i >= 0; i--)
                {
+                    if (!sheetList[i].href) {
+                        continue;
+                    }
+                    ss = sheetList[i].href.split("/");
+                   
+                   if (ss[ss.length-1] != "mootor.css") {
+                        continue;
+                   }
+                   
                    ruleList = sheetList[i].cssRules;
+                   
                    for (j=0; j<ruleList.length; j++)
                    {
                        if (ruleList[j].type == CSSRule.STYLE_RULE && 

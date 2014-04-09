@@ -31,20 +31,35 @@
 
     // Event handlers
 
-    window.onpopstate = function() {
-        _appGo(window.location.hash);
-    };
-
 
     _appGo = function(url) { 
         _pendingGo = window.location.hash;
+        console.log("_pendingGo   ",_pendingGo)
     };
+
+
+    var callAppGo = function() {
+        console.log("callAppGo")
+        _appGo(window.location.hash);
+    };
+
+    window.onpopstate = callAppGo;
+
+    if ($.browser.firefox) {
+       $(callAppGo);
+    }
+
 
     App.on("ready", function() {
         _appGo = function(url) {
             m.app.go(url,true);
         };
-        m.app.go(_pendingGo);
+        if (_pendingGo !== window.undefined) {
+            m.app.go(_pendingGo);
+        }
+        else {
+            console.log("No pending go on app ready");
+        }
     });
 
     // Private static methods and properties
@@ -72,6 +87,15 @@
         *     route = m.app.route("index.html");
         */
         route: function(url, view) {
+            if (url == window.undefined && view == window.undefined) {
+                console.error("Router.route called with undefined url and view",url,view);                
+                return false;
+            }
+            if (url == window.undefined) {
+                console.error("Router.route called with undefined url for view: ",view);                
+                return false;
+            }
+
             Route = Mootor.Route;
             
             if (view === undefined) {
