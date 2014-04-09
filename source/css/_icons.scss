@@ -1,3 +1,25 @@
+.icon-16 {
+    width: 16px;
+    height: 16px;
+    @media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) {
+        @include background-size(16px 16px);
+    }
+}
+.icon-32 {
+    width: 32px;
+    height: 32px;
+    @media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) {
+        @include background-size(32px 32px);
+    }
+}
+.icon-128 {
+    width: 128px;
+    height: 128px;
+    @media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) {
+        @include background-size(128px 128px);
+    }
+}
+
 $icons-black-16: sprite-map("icons/black/16x16/*.png");
 $icons-black-32: sprite-map("icons/black/32x32/*.png");
 $icons-black-128: sprite-map("icons/black/128x128/*.png");
@@ -5,6 +27,14 @@ $icons-black-128: sprite-map("icons/black/128x128/*.png");
 $icons-black-16-x2: sprite-map("icons/black/16x16@x2/*.png");
 $icons-black-32-x2: sprite-map("icons/black/32x32@x2/*.png");
 $icons-black-128-x2: sprite-map("icons/black/128x128@x2/*.png");
+
+.icon-black-16 { background-image: $icons-black-16; }
+.icon-black-32 { background-image: $icons-black-32; }
+.icon-black-128 { background-image: $icons-black-128; }
+
+.icon-black-16-x2 { background-image: $icons-black-16-x2; }
+.icon-black-32-x2 { background-image: $icons-black-32-x2; }
+.icon-black-128-x2 { background-image: $icons-black-128-x2; }
 
 $icons-white-16: sprite-map("icons/white/16x16/*.png");
 $icons-white-32: sprite-map("icons/white/32x32/*.png");
@@ -14,6 +44,15 @@ $icons-white-16-x2: sprite-map("icons/white/16x16@x2/*.png");
 $icons-white-32-x2: sprite-map("icons/white/32x32@x2/*.png");
 $icons-white-128-x2: sprite-map("icons/white/128x128@x2/*.png");
 
+.icon-white-16 { background-image: $icons-white-16; }
+.icon-white-32 { background-image: $icons-white-32; }
+.icon-white-128 { background-image: $icons-white-128; }
+
+.icon-white-16-x2 { background-image: $icons-white-16-x2; }
+.icon-white-32-x2 { background-image: $icons-white-32-x2; }
+.icon-white-128-x2 { background-image: $icons-white-128-x2; }
+
+
 // Mixin for build icon classes for all sizes and media queries
 @mixin build-icon($name) {
     
@@ -21,24 +60,36 @@ $icons-white-128-x2: sprite-map("icons/white/128x128@x2/*.png");
 
     .m-icon-#{$name}-small {
         @include m-sprite($name, $icons-black-16, $icons-black-16-x2);
+        @extend .icon-16;
+        @extend .icon-black-16;
     }
     .m-icon-#{$name} {
         @include m-sprite($name, $icons-black-32, $icons-black-32-x2);
+        @extend .icon-32;
+        @extend .icon-black-32;
     }
     .m-icon-#{$name}-large {
         @include m-sprite($name, $icons-black-128, $icons-black-128-x2);
+        @extend .icon-128;
+        @extend .icon-black-128;
     }    
 
     // White icons
 
     .m-icon-#{$name}-small-white {
         @include m-sprite($name, $icons-white-16, $icons-white-16-x2);
+        @extend .icon-16;
+        @extend .icon-white-16;
     }
     .m-icon-#{$name}-white {
         @include m-sprite($name, $icons-white-32, $icons-white-32-x2);
+        @extend .icon-32;
+        @extend .icon-white-32;
     }
     .m-icon-#{$name}-large-white {
         @include m-sprite($name, $icons-white-128, $icons-white-128-x2);
+        @extend .icon-128;
+        @extend .icon-white-128;
     }    
 
 }

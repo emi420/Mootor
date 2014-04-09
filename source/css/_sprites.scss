@@ -1,21 +1,17 @@
 @import "compass/utilities/sprites/base";  
-@import "compass/css3/background-size";
+
+.m-sprite {
+    background-repeat: no-repeat;
+    display: inline-block;
+}
 
 @mixin m-sprite($name, $sprites, $sprites2x) {
-  background-repeat: no-repeat;
-  display: block;
-  background-image: sprite-url($sprites);
+
+  @extend .m-sprite;
   background-position: sprite-position($sprites, $name);
-  height: image-height(sprite-file($sprites, $name));
-  width: image-width(sprite-file($sprites, $name));
 
-  @media (-webkit-min-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (min-device-pixel-ratio: 1.5) {
-      background-image: sprite-url($sprites2x);
+  @media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) {
       background-position: 0 round(nth(sprite-position($sprites2x, $name), 2) / 2);
-      height: round(image-height(sprite-file($sprites2x, $name)) / 2);
-      width: round(image-width(sprite-file($sprites2x, $name)) /2 );
-
-      @include background-size(ceil(image-width(sprite-path($sprites2x)) / 2) auto);
   }
   
 }

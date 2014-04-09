@@ -9,6 +9,12 @@
     @extend .m-color-primary-1;
 }
     
+.m-button-outline {
+    @extend .m-bg-color-transparent;
+    @extend .m-border-color-primary-1;
+    @extend .m-color-primary-1;    
+}
+
 .m-button-default  {
     &.m-button-fullwidth,
     &.m-button {
@@ -18,9 +24,7 @@
     &.m-button-outline-fullwidth,
     &.m-button-outline-small,
     &.m-button-outline {
-        @extend .m-bg-color-transparent;
-        @extend .m-border-color-primary-1;
-        @extend .m-color-primary-1;
+        @extend .m-button-outline
     }
 }
 

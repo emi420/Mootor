@@ -4,7 +4,7 @@
  * @author Martín Szyszlican (martinsz [at] gmail.com)
  */
 /* line 43, ../../source/css/_colors.scss */
-.m-bg-color-primary-1, .m-button-fullwidth, .m-button-default.m-button-fullwidth, .m-button-fullwidth.m-button, .m-button-fullwidth.m-button-small, .m-button-fullwidth.m-button-outline, .m-button, .m-button-small, .m-button-outline, .m-button-default.m-button-small, .m-button-small.m-button, .m-button-small.m-button-outline {
+.m-bg-color-primary-1, .m-button-fullwidth, .m-button-default.m-button-fullwidth, .m-button-fullwidth.m-button, .m-button-fullwidth.m-button-small, .m-button-fullwidth.m-button-outline, .m-button, .m-button-small, .m-button-outline, .m-button-default.m-button-outline-fullwidth, .m-button-default.m-button-outline-small, .m-button-default.m-button-outline, .m-button-default.m-button-small, .m-button-small.m-button, .m-button-small.m-button-outline, .m-button-outline-fullwidth.m-button, .m-button-outline-fullwidth.m-button-small, .m-button-outline-fullwidth.m-button-outline, .m-button-outline-small.m-button, .m-button-outline-small.m-button-small, .m-button-outline-small.m-button-outline {
   background: #f3f3e8;
 }
 
@@ -36,7 +36,7 @@
 }
 
 /* line 67, ../../source/css/_colors.scss */
-.m-bg-color-primary-8, .m-button-secondary.m-button-fullwidth, .m-button-secondary.m-button, .m-button-secondary.m-button-small, .m-button-secondary.m-button-outline {
+.m-bg-color-primary-8, .m-button-secondary.m-button-fullwidth, .m-button-secondary.m-button, .m-button-secondary.m-button-small, .m-button-secondary.m-button-default.m-button-outline-fullwidth, .m-button-secondary.m-button-default.m-button-outline-small, .m-button-secondary.m-button-outline {
   background: #28830b;
 }
 
@@ -51,7 +51,7 @@
 }
 
 /* line 79, ../../source/css/_colors.scss */
-.m-bg-color-primary-4, .m-button-success.m-button-fullwidth, .m-button-success.m-button, .m-button-success.m-button-small, .m-button-success.m-button-outline {
+.m-bg-color-primary-4, .m-button-success.m-button-fullwidth, .m-button-success.m-button, .m-button-success.m-button-small, .m-button-success.m-button-default.m-button-outline-fullwidth, .m-button-success.m-button-default.m-button-outline-small, .m-button-success.m-button-outline {
   background: #6dbca8;
 }
 
@@ -66,7 +66,7 @@
 }
 
 /* line 91, ../../source/css/_colors.scss */
-.m-bg-color-primary-5, .m-button-info.m-button-fullwidth, .m-button-info.m-button, .m-button-info.m-button-small, .m-button-info.m-button-outline {
+.m-bg-color-primary-5, .m-button-info.m-button-fullwidth, .m-button-info.m-button, .m-button-info.m-button-small, .m-button-info.m-button-default.m-button-outline-fullwidth, .m-button-info.m-button-default.m-button-outline-small, .m-button-info.m-button-outline {
   background: #ed9a3d;
 }
 
@@ -81,7 +81,7 @@
 }
 
 /* line 103, ../../source/css/_colors.scss */
-.m-bg-color-primary-6, .m-button-danger.m-button-fullwidth, .m-button-danger.m-button, .m-button-danger.m-button-small, .m-button-danger.m-button-outline {
+.m-bg-color-primary-6, .m-button-danger.m-button-fullwidth, .m-button-danger.m-button, .m-button-danger.m-button-small, .m-button-danger.m-button-default.m-button-outline-fullwidth, .m-button-danger.m-button-default.m-button-outline-small, .m-button-danger.m-button-outline {
   background: #f04930;
 }
 
@@ -96,7 +96,7 @@
 }
 
 /* line 115, ../../source/css/_colors.scss */
-.m-bg-color-primary-7, .m-button-primary.m-button-fullwidth, .m-button-primary.m-button, .m-button-primary.m-button-small, .m-button-primary.m-button-outline {
+.m-bg-color-primary-7, .m-button-primary.m-button-fullwidth, .m-button-primary.m-button, .m-button-primary.m-button-small, .m-button-primary.m-button-default.m-button-outline-fullwidth, .m-button-primary.m-button-default.m-button-outline-small, .m-button-primary.m-button-outline {
   background: #2f92b8;
 }
 
@@ -111,7 +111,7 @@
 }
 
 /* line 127, ../../source/css/_colors.scss */
-.m-bg-color-primary-8, .m-button-secondary.m-button-fullwidth, .m-button-secondary.m-button, .m-button-secondary.m-button-small, .m-button-secondary.m-button-outline {
+.m-bg-color-primary-8, .m-button-secondary.m-button-fullwidth, .m-button-secondary.m-button, .m-button-secondary.m-button-small, .m-button-secondary.m-button-default.m-button-outline-fullwidth, .m-button-secondary.m-button-default.m-button-outline-small, .m-button-secondary.m-button-outline {
   background: #66b2b8;
 }
 
@@ -126,7 +126,7 @@
 }
 
 /* line 139, ../../source/css/_colors.scss */
-.m-bg-color-primary-9, .m-button-warning.m-button-fullwidth, .m-button-warning.m-button, .m-button-warning.m-button-small, .m-button-warning.m-button-outline {
+.m-bg-color-primary-9, .m-button-warning.m-button-fullwidth, .m-button-warning.m-button, .m-button-warning.m-button-small, .m-button-warning.m-button-default.m-button-outline-fullwidth, .m-button-warning.m-button-default.m-button-outline-small, .m-button-warning.m-button-outline {
   background: #f8ce03;
 }
 
