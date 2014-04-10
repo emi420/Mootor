@@ -1,0 +1,1 @@
+//alert($.os.tablet + " " + $.os.phone);

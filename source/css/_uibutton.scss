@@ -5,6 +5,8 @@
     border-width: 0;
     border-radius: 0.5em;
     display: inline-block;
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
     .m-icon {
         line-height: 300px;
@@ -25,9 +27,12 @@
 
 }
 
+.m-button:link {
+    text-decoration: none;
+}
+
 .m-button:focus,
-.m-button:active,
-.m-button:hover {
+.m-button:active {
     background: red;
     outline: 0;
 }

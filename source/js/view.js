@@ -95,6 +95,11 @@
     Event.extend(View, "View");
     View._dispatch = View.dispatch;
     View.dispatch = function(event, instance) {
+        if (!instance) {
+            console.error("view dispatch called with undefined instance for event: ",event);
+            return false;    
+        }
+        
         if (event !== "init" ) {
             View._dispatch(event + ":" + instance.id, instance);
         } else {
