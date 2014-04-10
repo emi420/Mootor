@@ -8,18 +8,13 @@
     -webkit-appearance: none;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
-    .m-icon {
-        line-height: 300px;
-        width: 20px;
-        height: 20px;
-        display: inline-block;
+    span {
+        top: 2px;
         position: relative;
         &:first-child {
-            background: red;
             left: -1em;
         }
         &:last-child {
-            background: blue;
             left: 1em;
         }
         
