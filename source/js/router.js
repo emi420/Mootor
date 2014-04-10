@@ -37,13 +37,16 @@
 
 
     _appGo = function(url) { 
-        _pendingGo = window.location.hash;
+        _pendingGo = url;
     };
 
     App.on("ready", function() {
         _appGo = function(url) {
-            m.app.go(url,true);
+            m.app.go(url);
         };
+        if (_pendingGo === undefined) {
+            _pendingGo = window.location.hash
+        }
         m.app.go(_pendingGo);
     });
 
@@ -78,6 +81,10 @@
                 var s,
                     route,
                     match;
+                    
+                    if (url === undefined) {
+                    //    debugger;
+                    }
 
                 for (s in Router._collection) {
                     match = url.match(new RegExp(s));

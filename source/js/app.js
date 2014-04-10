@@ -114,7 +114,7 @@
         * @example
         *     m.app.go("/product/15/");
         */
-        go: function(url,isUrlChange) {
+        go: function(url) {
             var route;
             route =  m.app.route(url);
             if (route !== undefined) {
