@@ -6,7 +6,7 @@
     border-radius: 0.5em;
     display: inline-block;
     -webkit-appearance: none;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0); 
 
     .m-icon {
         line-height: 300px;
@@ -15,11 +15,11 @@
         display: inline-block;
         position: relative;
         &:first-child {
-            background: red;
+            background: red; // FIXME CHECK: color here?
             left: -1em;
         }
         &:last-child {
-            background: blue;
+            background: blue; // FIXME CHECK: color here?
             left: 1em;
         }
         
@@ -33,7 +33,7 @@
 
 .m-button:focus,
 .m-button:active {
-    background: red;
+    background: red; // FIXME CHECK: color here?
     outline: 0;
 }
 

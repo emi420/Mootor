@@ -19,7 +19,7 @@
     &.m-button-fullwidth,
     &.m-button:link,
     &.m-button {
-        color: black;
+        color: black; // FIXME CHECK: hardcoded color?
         @extend .m-bg-color-primary-1;
     }
 
@@ -34,7 +34,7 @@
     &.m-button-fullwidth,
     &.m-button:link,
     &.m-button {
-        color: black;
+        color: black; // FIXME CHECK: hardcoded color?
         @extend .m-bg-color-primary-7;
     }
 
