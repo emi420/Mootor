@@ -84,13 +84,33 @@ $icons-white-16-x2: sprite-map("icons/white/16x16@x2/*.png", $spacing: 10px);
 $icons-white-32-x2: sprite-map("icons/white/32x32@x2/*.png", $spacing: 10px);
 $icons-white-128-x2: sprite-map("icons/white/128x128@x2/*.png", $spacing: 10px);
 
-.icon-white-16 { background-image: $icons-white-16; }
-.icon-white-32 { background-image: $icons-white-32; }
-.icon-white-128 { background-image: $icons-white-128; }
-
-.icon-white-16-x2 { background-image: $icons-white-16-x2; }
-.icon-white-32-x2 { background-image: $icons-white-32-x2; }
-.icon-white-128-x2 { background-image: $icons-white-128-x2; }
+.icon-white-16 { 
+    @media (-webkit-max-device-pixel-ratio: 1.99), (max-device-pixel-ratio: 1.99) {
+        background-image: $icons-white-16;
+    }
+    @media (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {
+        background-image: $icons-white-16-x2; 
+        background-size: $icon-16-x2-width image-height(sprite-path($icons-white-16-x2))/2;
+    }
+}
+.icon-white-32 { 
+    @media (-webkit-max-device-pixel-ratio: 1.99), (max-device-pixel-ratio: 1.99) {
+        background-image: $icons-white-32;
+    }
+    @media (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {
+        background-image: $icons-white-32-x2; 
+        background-size: $icon-32-x2-width image-height(sprite-path($icons-white-32-x2))/2;
+    }
+}
+.icon-white-128 { 
+    @media (-webkit-max-device-pixel-ratio: 1.99), (max-device-pixel-ratio: 1.99) {
+        background-image: $icons-white-128;
+    }
+    @media (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {
+        background-image: $icons-white-128-x2; 
+        background-size: $icon-128-x2-width image-height(sprite-path($icons-white-128-x2))/2;
+    }
+}
 
 
 // Mixin for build icon classes for all sizes and media queries
