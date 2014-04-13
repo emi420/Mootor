@@ -258,24 +258,25 @@ html, body {
   position: absolute;
   width: 100%;
 }
+/* line 14, ../../source/css/_uifooter.scss */
+.m-app .m-footer-container .m-nav {
+  width: 100%;
+}
 /* line 3, ../../source/css/_uinavbar.scss */
 .m-app .m-nav {
   position: absolute;
   top: 0;
+  display: table;
   right: 1em;
 }
-/* line 8, ../../source/css/_uinavbar.scss */
+/* line 9, ../../source/css/_uinavbar.scss */
 .m-app .m-nav .m-nav-item {
   text-decoration: none;
-  float: left;
+  display: table-cell;
   color: white;
-  padding: 1.4em .25em;
+  padding: .9em .75em;
   font-size: .9em;
-  width: auto;
-}
-/* line 16, ../../source/css/_uinavbar.scss */
-.m-app .m-nav .m-nav-item:before {
-  display: inline-block;
+  text-align: center;
 }
 /* line 11, ../../source/css/_uiloading.scss */
 .m-app .m-loading {

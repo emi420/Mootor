@@ -3,20 +3,16 @@ $m-color-uinavbar-fg: #fff !default;
 .m-nav {
     position: absolute;
     top: 0;
+    display: table;
     right: 1em;
 
     .m-nav-item {
         text-decoration: none;
-        float: left;
+        display: table-cell;
         color: $m-color-uinavbar-fg;
-        padding: 1.4em .25em;
+        padding: .9em .75em;
         font-size: .9em;
-        width: auto;
-
-        &:before {
-            display: inline-block;
-        }
-        
+        text-align: center;
     }
 
 }
