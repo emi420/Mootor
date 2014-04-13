@@ -228,23 +228,6 @@ html, body {
   width: 2em;
   height: 2em;
 }
-/* line 36, ../../source/css/_uiheader.scss */
-.m-app .m-header-back:before {
-  content: " ";
-  display: block;
-  width: 2em;
-  height: 2em;
-  position: absolute;
-  background: none no-repeat 50% 50%;
-}
-/* line 50, ../../source/css/_uiheader.scss */
-.m-app .m-img-back-icon-x2 {
-  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABx0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzIENTNui8sowAAAF9SURBVGiB7dpRSsMwGMDxf8RHoaO5huAuIO4InsMDeQ6PUPECCl4jQcH37qWDPtTQYr7k62f+sJetrP2Rre2SuXEc+U9d1T6A0jWw9RrYeg1svQa2XgNbLwvYOfenR4zxEGMcYoxH51yOQ/q16iMcQjgAA/AADCGEo+T+qoJn2LvpqQ4YYoxi6GrgBewlUXQVcAJ7qQNeJPZdHLwCC/ANPErsvyh4A/bU9/27xDEUA2vAQiHwFqz3XgwLBcCasCAM1oYFQbBGLAiBtWJBAKwZC3Cd880m7Btwm9isGhYyjvAesJAJvBcs5BvhZ9LYHxRgQcEEQOlygZ+Az8TrNxSYzVhTFrD3/gu4J43uUIDO9pHeCzrrd3iG/khsVhWd/aQ1oU8oRYucpTWjxS5LWtGi12GNaPEbD23oIndamtDFbi23oM0stWhAF//xsAFtY6kFVqFtLLXMS6BtLLUstYC2sdSSaoZ+pcCsiGv/lzZeA1uvga3XwNZrYOs1sPXOXQPPAXNLwrEAAAAASUVORK5CYII=);
-}
-/* line 53, ../../source/css/_uiheader.scss */
-.m-app .m-img-back-icon, .m-app .m-header-back:before {
-  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABx0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzIENTNui8sowAAADVSURBVEiJ7dbBCcMwDEDR73aAHDRAV8ih10K7STtZu0kDvfaQEbKABBmguJcUcgiJE2QCJQIdrIMe2DJ2iDGyRuxWUTd4gwFCCKNpZqWZNWZWhhD84LFQ1RKogANQdeu8cA8tulIB5IUHUICbiDyywR7obNgLnQV7osmwqp6AtxeaBHfoE9h7oUlwrpiEReQFXIBPr3xX1WtWuIcfgdYLT95qEamBsxc+64w98dnD5YUvmmoPfPF1GsBboE5uEGMczalQ1VJVm99bPNXvl2H7V2/w38FfnyCg2NuM5fUAAAAASUVORK5CYII=);
-}
 /* line 1, ../../source/css/_uifooter.scss */
 .m-app .m-footer-container {
   height: 55px;
@@ -506,8 +489,9 @@ html, body {
   color: #333;
   line-height: 2.1em;
   border-bottom: 1px solid #ddd;
+  font-weight: bold;
 }
-/* line 11, ../../source/css/_list.scss */
+/* line 12, ../../source/css/_list.scss */
 .m-app nav.m-list a span {
   margin-right: 1.5em;
   float: left;

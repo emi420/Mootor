@@ -107,8 +107,13 @@
         
         _initBackButton: function(self) {
             var backEl = document.createElement("a"),
+                backIconEl = document.createElement("icon"),
                 backNavEl = document.createElement("nav");
                 
+                // FIXME CHECK (white?)
+                backIconEl.setAttribute("class", "m-icon-arrow-left-white");
+                
+            backEl.appendChild(backIconEl);
             backNavEl.appendChild(backEl);
             backNavEl.setAttribute("class", "m-nav-header-back-container");
 
