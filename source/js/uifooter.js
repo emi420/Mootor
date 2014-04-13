@@ -57,7 +57,7 @@
                 footerEl = document.createElement("footer");
                 document.body.appendChild(footerContainerEl);
             }
-
+            
             footerContainerEl.appendChild(footerEl);
             
             self.footer = new UIFooter({
@@ -113,6 +113,11 @@
             }
             
         }
+        
+        self.view.on("load", function() {
+            self.el.style.height = (self.el.offsetHeight - footerContainerEl.offsetHeight) + "px"
+        });
+        
     });
     
     // Private constructors
