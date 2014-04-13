@@ -10,11 +10,11 @@
 
   @extend .m-sprite;
 
-  @media (-webkit-max-device-pixel-ratio: 1.99), (max-device-pixel-ratio: 1.99) {
+  @media (max-resolution: 1.99dppx), (-webkit-max-device-pixel-ratio: 1.99), (max-device-pixel-ratio: 1.99) {
       background-position: 0 nth(sprite-position($sprites, $name), 2);
   }
 
-  @media (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {
+  @media (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {
       background-position: 0 nth(sprite-position($sprites2x,  $name), 2)/ 2;
   }
   
