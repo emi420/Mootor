@@ -245,6 +245,19 @@ html, body {
 .m-app .m-img-back-icon, .m-app .m-header-back:before {
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABx0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzIENTNui8sowAAADVSURBVEiJ7dbBCcMwDEDR73aAHDRAV8ih10K7STtZu0kDvfaQEbKABBmguJcUcgiJE2QCJQIdrIMe2DJ2iDGyRuxWUTd4gwFCCKNpZqWZNWZWhhD84LFQ1RKogANQdeu8cA8tulIB5IUHUICbiDyywR7obNgLnQV7osmwqp6AtxeaBHfoE9h7oUlwrpiEReQFXIBPr3xX1WtWuIcfgdYLT95qEamBsxc+64w98dnD5YUvmmoPfPF1GsBboE5uEGMczalQ1VJVm99bPNXvl2H7V2/w38FfnyCg2NuM5fUAAAAASUVORK5CYII=);
 }
+/* line 1, ../../source/css/_uifooter.scss */
+.m-app .m-footer-container {
+  height: 55px;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+/* line 8, ../../source/css/_uifooter.scss */
+.m-app .m-footer-container footer {
+  z-index: 100;
+  position: absolute;
+  width: 100%;
+}
 /* line 3, ../../source/css/_uinavbar.scss */
 .m-app .m-nav {
   position: absolute;

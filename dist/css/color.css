@@ -51,7 +51,7 @@
 }
 
 /* line 49, ../../source/css/_colors.scss */
-.m-bg-color-primary-4, .m-button-success.m-button-fullwidth, .m-button-success.m-button:link, .m-button-success.m-button-small:link, .m-button-success.m-button-outline:link, .m-button-success.m-button, .m-button-success.m-button-small, .m-button-success.m-button-default.m-button-outline-fullwidth, .m-button-success.m-button-default.m-button-outline-small, .m-button-success.m-button-outline, .m-header-container {
+.m-bg-color-primary-4, .m-button-success.m-button-fullwidth, .m-button-success.m-button:link, .m-button-success.m-button-small:link, .m-button-success.m-button-outline:link, .m-button-success.m-button, .m-button-success.m-button-small, .m-button-success.m-button-default.m-button-outline-fullwidth, .m-button-success.m-button-default.m-button-outline-small, .m-button-success.m-button-outline, .m-header-container, .m-footer-container {
   background: #6dbca8;
 }
 
@@ -157,7 +157,7 @@
 }
 
 /* line 133, ../../source/css/_colors.scss */
-.m-color-white-fg, .m-header-container header h1 {
+.m-color-white-fg, .m-header-container header h1, .m-footer-container footer h1 {
   color: white;
 }
 

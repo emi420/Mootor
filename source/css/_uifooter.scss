@@ -1,0 +1,14 @@
+.m-footer-container {
+
+    height: 55px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+            
+    footer {
+        z-index: 100;
+        position: absolute;
+        width: 100%;
+    }
+}
+

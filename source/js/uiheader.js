@@ -1,5 +1,5 @@
 /**
-* The UIHeader class is a navigational element at the top or bottom of the page (header or footer)
+* The UIHeader class is a navigational element at the top of the page (header)
 *
 * @class UIHeader
 * @extends UI
