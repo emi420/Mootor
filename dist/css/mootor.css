@@ -498,6 +498,20 @@ html, body {
   width: calc(100% - 3em);
   height: calc(100% - 4em);
 }
+/* line 2, ../../source/css/_list.scss */
+.m-app nav.m-list a {
+  display: block;
+  padding: 1.4em;
+  text-decoration: none;
+  color: #333;
+  line-height: 2.1em;
+  border-bottom: 1px solid #ddd;
+}
+/* line 11, ../../source/css/_list.scss */
+.m-app nav.m-list a span {
+  margin-right: 1.5em;
+  float: left;
+}
 
 @keyframes m-loading-object-animation-0 {
   /* line 4, ../../source/css/_uiloading_animations.scss */
