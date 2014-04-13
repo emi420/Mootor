@@ -1,48 +1,88 @@
+@import "compass/utilities/sprites/base";  
+
+// FIXME CHECK: hardcoded values
+$icon-16-x2-width: 17px;
+$icon-32-x2-width: 34px;
+$icon-128-x2-width: 134px;
+
 .icon-16 {
-    width: 16px;
-    height: 16px;
-    @media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) {
-        @include background-size(16px 16px);
+    @media (-webkit-max-device-pixel-ratio: 1.99), (max-device-pixel-ratio: 1.99) {
+        width: 16px;
+        height: 16px;
+    }
+    @media (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {
+        width: $icon-16-x2-width;
+        height: $icon-16-x2-width;
     }
 }
 .icon-32 {
-    width: 32px;
-    height: 32px;
-    @media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) {
-        @include background-size(32px 32px);
+    @media (-webkit-max-device-pixel-ratio: 1.99), (max-device-pixel-ratio: 1.99) {
+        width: 32px;
+        height: 32px;
+    }
+    @media (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {
+        width: $icon-32-x2-width;
+        height: $icon-32-x2-width;
     }
 }
 .icon-128 {
-    width: 128px;
-    height: 128px;
-    @media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) {
-        @include background-size(128px 128px);
+    @media (-webkit-max-device-pixel-ratio: 1.99), (max-device-pixel-ratio: 1.99) {
+        width: 128px;
+        height: 128px;
+    }
+    @media (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {
+        width: $icon-128-x2-width;
+        height: $icon-128-x2-width;
     }
 }
 
-$icons-black-16: sprite-map("icons/black/16x16/*.png");
-$icons-black-32: sprite-map("icons/black/32x32/*.png");
-$icons-black-128: sprite-map("icons/black/128x128/*.png");
+$icons-black-16: sprite-map("icons/black/16x16/*.png", $spacing: 10px);
+$icons-black-32: sprite-map("icons/black/32x32/*.png", $spacing: 10px);
+$icons-black-128: sprite-map("icons/black/128x128/*.png", $spacing: 10px);
 
-$icons-black-16-x2: sprite-map("icons/black/16x16@x2/*.png");
-$icons-black-32-x2: sprite-map("icons/black/32x32@x2/*.png");
-$icons-black-128-x2: sprite-map("icons/black/128x128@x2/*.png");
+$icons-black-16-x2: sprite-map("icons/black/16x16@x2/*.png", $spacing: 10px);
+$icons-black-32-x2: sprite-map("icons/black/32x32@x2/*.png", $spacing: 10px);
+$icons-black-128-x2: sprite-map("icons/black/128x128@x2/*.png", $spacing: 10px);
 
-.icon-black-16 { background-image: $icons-black-16; }
-.icon-black-32 { background-image: $icons-black-32; }
-.icon-black-128 { background-image: $icons-black-128; }
+.icon-black-16 { 
+    @media (-webkit-max-device-pixel-ratio: 1.99), (max-device-pixel-ratio: 1.99) {
+        background-image: $icons-black-16;
+    }
+    @media (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {
+        background-image: $icons-black-16-x2; 
+        background-size: $icon-16-x2-width image-height(sprite-path($icons-black-16-x2))/2;
+    }
+}
+.icon-black-32 { 
+    @media (-webkit-max-device-pixel-ratio: 1.99), (max-device-pixel-ratio: 1.99) {
+        background-image: $icons-black-32;
+    }
+    @media (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {
+        background-image: $icons-black-32-x2; 
+        background-size: $icon-32-x2-width image-height(sprite-path($icons-black-32-x2))/2;
+    }
+}
+.icon-black-128 { 
+    @media (-webkit-max-device-pixel-ratio: 1.99), (max-device-pixel-ratio: 1.99) {
+        background-image: $icons-black-128;
+    }
+    @media (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {
+        background-image: $icons-black-128-x2; 
+        background-size: $icon-128-x2-width image-height(sprite-path($icons-black-128-x2))/2;
+    }
+}
 
 .icon-black-16-x2 { background-image: $icons-black-16-x2; }
 .icon-black-32-x2 { background-image: $icons-black-32-x2; }
 .icon-black-128-x2 { background-image: $icons-black-128-x2; }
 
-$icons-white-16: sprite-map("icons/white/16x16/*.png");
-$icons-white-32: sprite-map("icons/white/32x32/*.png");
-$icons-white-128: sprite-map("icons/white/128x128/*.png");
+$icons-white-16: sprite-map("icons/white/16x16/*.png", $spacing: 10px);
+$icons-white-32: sprite-map("icons/white/32x32/*.png", $spacing: 10px);
+$icons-white-128: sprite-map("icons/white/128x128/*.png", $spacing: 10px);
 
-$icons-white-16-x2: sprite-map("icons/white/16x16@x2/*.png");
-$icons-white-32-x2: sprite-map("icons/white/32x32@x2/*.png");
-$icons-white-128-x2: sprite-map("icons/white/128x128@x2/*.png");
+$icons-white-16-x2: sprite-map("icons/white/16x16@x2/*.png", $spacing: 10px);
+$icons-white-32-x2: sprite-map("icons/white/32x32@x2/*.png", $spacing: 10px);
+$icons-white-128-x2: sprite-map("icons/white/128x128@x2/*.png", $spacing: 10px);
 
 .icon-white-16 { background-image: $icons-white-16; }
 .icon-white-32 { background-image: $icons-white-32; }
@@ -90,7 +130,7 @@ $icons-white-128-x2: sprite-map("icons/white/128x128@x2/*.png");
         @include m-sprite($name, $icons-white-128, $icons-white-128-x2);
         @extend .icon-128;
         @extend .icon-white-128;
-    }    
+    }
 
 }
 

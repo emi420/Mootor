@@ -9,10 +9,13 @@
 @mixin m-sprite($name, $sprites, $sprites2x) {
 
   @extend .m-sprite;
-  background-position: sprite-position($sprites, $name);
 
-  @media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) {
-      background-position: 0 round(nth(sprite-position($sprites2x, $name), 2) / 2);
+  @media (-webkit-max-device-pixel-ratio: 1.99), (max-device-pixel-ratio: 1.99) {
+      background-position: 0 nth(sprite-position($sprites, $name), 2);
+  }
+
+  @media (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {
+      background-position: 0 nth(sprite-position($sprites2x,  $name), 2)/ 2;
   }
   
 }

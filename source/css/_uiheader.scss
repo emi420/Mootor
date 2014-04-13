@@ -1,16 +1,10 @@
-@import "compass/css3/transition";
-
-$m-color-uiheader-bg: #68B3B9 !default;
-$m-color-uiheader-fg: #fff !default;
-        
 .m-header-container {
-    background: $m-color-uiheader-bg;
+
     height: 55px;
     position: relative;
     width: 100%;
         
     header {
-        background: $m-color-uiheader-bg;
         z-index: 100;
         position: absolute;
         top: 0;
@@ -20,7 +14,6 @@ $m-color-uiheader-fg: #fff !default;
 
         h1 {
             text-align: center;
-            color: $m-color-uiheader-fg;
             font-weight: bold;
             width: 50%;
             margin-left: 25%;

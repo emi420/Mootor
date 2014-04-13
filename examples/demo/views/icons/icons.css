@@ -5,24 +5,9 @@
 }
 
 .icon-grid li {
-    display: block;
-    width: 25%;
-    height: 128px;
-    float: left;
+    width: 100%;
+    padding: 10px;
+    display: inline-block;
     text-align: center;
-}
-
-.icon-grid span {
-    left: 50%;
-    top: 50%;
-    position: relative;
-}
-
-.icon-grid-large {
-    margin-top: 64px;
-}
-.icon-grid-large span {
-    left: 0%;
-    top: 0%;
 }
 
