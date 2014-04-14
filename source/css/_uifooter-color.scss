@@ -1,0 +1,11 @@
+.m-footer-container {
+    // background-color: primary 4
+    @extend .m-bg-color-primary-4;
+        
+    footer {
+        h1 {
+            // color: white
+            @extend .m-color-white-fg;
+        }
+    }
+}

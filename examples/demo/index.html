@@ -25,6 +25,7 @@
   <script type="text/javascript" src="../../source/js/uinavitem.js"></script>  
   <script type="text/javascript" src="../../source/js/uinavbar.js"></script>  
   <script type="text/javascript" src="../../source/js/uiheader.js"></script>  
+  <script type="text/javascript" src="../../source/js/uifooter.js"></script>  
   <script type="text/javascript" src="../../source/js/uiloading.js"></script>
   <script type="text/javascript" src="../../source/js/router.js"></script>
   <script type="text/javascript" src="../../source/js/route.js"></script>
@@ -41,6 +42,7 @@
     <header>
         <h1>Demo</h1>
     </header>
+    
     
     <script type="text/javascript">
     
@@ -67,6 +69,7 @@
             app.route("^#form", app.view("form"));
             app.route("^#buttons", app.view("buttons"));
             app.route("^#icons", app.view("icons"));
+            app.route("^#uinavbar", app.view("uinavbar"));
             
         }());
     

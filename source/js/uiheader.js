@@ -1,5 +1,5 @@
 /**
-* The UIHeader class is a navigational element at the top or bottom of the page (header or footer)
+* The UIHeader class is a navigational element at the top of the page (header)
 *
 * @class UIHeader
 * @extends UI
@@ -97,6 +97,9 @@
         });
         this.el = this.nav.el;
         this.$el = $(this.el);
+        if (this.$el.find("nav").length < 1) {
+            this.el.appendChild(document.createElement("nav"));
+        }
         UIHeader._initBackButton(this);
     };
 
@@ -107,19 +110,29 @@
         
         _initBackButton: function(self) {
             var backEl = document.createElement("a"),
+                backIconEl = document.createElement("icon"),
                 backNavEl = document.createElement("nav");
                 
+                // FIXME CHECK (white?)
+                backIconEl.setAttribute("class", "m-icon-arrow-left-white");
+                
+            backEl.appendChild(backIconEl);
             backNavEl.appendChild(backEl);
             backNavEl.setAttribute("class", "m-nav-header-back-container");
 
-            self.el.appendChild(backNavEl);
+            if (self.el.firstChild !== undefined) {
+               self.el.insertBefore(backNavEl,self.el.firstChild) 
+            } else {
+               self.el.appendChild(backNavEl)
+               pa.appendChild(who);
+            }
             
             self.back = new UINavItem({
                 el: backEl
             });
             self.back.$el.addClass("m-header-back");
             self.back.hide();
-            self.back.$el.on("tap", function(e) {
+            self.back.$el.on("click tap", function(e) {
                 m.app.back();
             });
             self.back.el.onclick = function(e) {

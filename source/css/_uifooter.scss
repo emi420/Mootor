@@ -1,0 +1,23 @@
+.m-footer-container {
+
+    height: 55px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+            
+    footer {
+        z-index: 100;
+        position: absolute;
+        width: 100%;
+    }
+    
+    .m-nav {
+        width: 100%;
+        display: table;
+    }
+    .m-nav-item {
+        display: table-cell;
+    }
+    
+}
+

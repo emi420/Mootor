@@ -8,6 +8,7 @@ $color-primary-6: #F04930;
 $color-primary-7: #2F92B8; 
 $color-primary-8: #66B2B8; 
 $color-primary-9: #F8CE03;
+$color-white: #fff;
 
 $color-black: black; 
 
@@ -167,3 +168,6 @@ $color-soft-9: #82CB8D;
 	border-color: transparent;
 }
 
+.m-color-white-fg {
+	color: $color-white
+}

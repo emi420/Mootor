@@ -1,22 +1,12 @@
 $m-color-uinavbar-fg: #fff !default;
 
 .m-nav {
-    position: absolute;
-    top: 0;
-    right: 1em;
-
     .m-nav-item {
         text-decoration: none;
-        float: left;
         color: $m-color-uinavbar-fg;
-        padding: 1.4em .25em;
+        padding: 10px 5px;
         font-size: .9em;
-        width: auto;
-
-        &:before {
-            display: inline-block;
-        }
-        
+        text-align: center;
     }
 
 }

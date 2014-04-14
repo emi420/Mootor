@@ -1,0 +1,17 @@
+nav.m-list {
+   a {
+       display: block;
+       padding: 1.4em;
+       text-decoration: none;
+       // FIXME CHECK 
+       color: #333;
+       line-height: 2.1em;
+       border-bottom: 1px solid #ddd;
+       font-weight: bold;
+       
+       span {
+           margin-right: 1.5em;
+           float: left;
+       }
+   } 
+}

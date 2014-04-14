@@ -1,53 +1,62 @@
-@import "compass/css3/transition";
-
-$m-color-uiheader-bg: #68B3B9 !default;
-$m-color-uiheader-fg: #fff !default;
-        
 .m-header-container {
-    background: $m-color-uiheader-bg;
+
     height: 55px;
     position: relative;
     width: 100%;
         
     header {
-        background: $m-color-uiheader-bg;
         z-index: 100;
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 55px;
+        display: table;
+                
+        h1, nav {
+            display: table-cell;
+            overflow: hidden;
+        }
+
+        nav:first-child {
+            width: 33%;
+        }
+        
+        nav:last-child {
+            width: 33%;
+        }
+        nav:nth-child(2) {
+            width: 33%;
+        }
+        
+        nav:first-child {
+            padding-left: 10px;
+            text-align: left;
+        }
+        nav:last-child {
+            text-align: right;
+            padding-right: 10px;
+        }
+        
+        nav:first-child a {
+            text-align: left;
+        }
+        
+        .m-nav-item {
+            position: relative;
+            top: 10px;
+        }
+                
+        &.m-hidden {
+            display: none;
+        }
 
         h1 {
             text-align: center;
-            color: $m-color-uiheader-fg;
             font-weight: bold;
-            width: 50%;
-            margin-left: 25%;
             line-height: 55px;
             text-overflow: ellipsis;
-            overflow: hidden;
             white-space: nowrap;
         }
     }
 }
-
-.m-header-back {
-    position: absolute;
-    left: 1em;
-    top: .7em;
-    width: 2em;
-    height: 2em;    
-}
-
-.m-header-back:before {
-    content: " ";
-    display: block;
-    width: 2em;
-    height: 2em;
-    position: absolute;
-    background: none no-repeat 50% 50%;
-    @extend .m-img-back-icon;
-}
-
-
