@@ -2,40 +2,21 @@
  * @summary Mootor CSS
  * @author Emilio Mariscal (emi420 [at] gmail.com)
  * @author Martín Szyszlican (martinsz [at] gmail.com)
- * @author Natalia Petit
  */
-/* line 10, ../../source/css/mootor.scss */
-.m-html {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  width: 100%;
-  height: 100%;
-}
-
-/* line 17, ../../source/css/mootor.scss */
-.m-app {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
-}
-/* line 52, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-.m-app div, .m-app span, .m-app applet, .m-app object, .m-app iframe,
-.m-app h1, .m-app h2, .m-app h3, .m-app h4, .m-app h5, .m-app h6, .m-app p, .m-app blockquote, .m-app pre,
-.m-app a, .m-app abbr, .m-app acronym, .m-app address, .m-app big, .m-app cite, .m-app code,
-.m-app del, .m-app dfn, .m-app em, .m-app img, .m-app ins, .m-app kbd, .m-app q, .m-app s, .m-app samp,
-.m-app small, .m-app strike, .m-app strong, .m-app sub, .m-app sup, .m-app tt, .m-app var,
-.m-app b, .m-app u, .m-app i, .m-app center,
-.m-app dl, .m-app dt, .m-app dd, .m-app ol, .m-app ul, .m-app li,
-.m-app fieldset, .m-app form, .m-app label, .m-app legend,
-.m-app table, .m-app caption, .m-app tbody, .m-app tfoot, .m-app thead, .m-app tr, .m-app th, .m-app td,
-.m-app article, .m-app aside, .m-app canvas, .m-app details, .m-app embed,
-.m-app figure, .m-app figcaption, .m-app footer, .m-app header, .m-app hgroup,
-.m-app menu, .m-app nav, .m-app output, .m-app ruby, .m-app section, .m-app summary,
-.m-app time, .m-app mark, .m-app audio, .m-app video {
+/* line 17, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
   margin: 0;
   padding: 0;
   border: 0;
@@ -43,82 +24,448 @@
   font-size: 100%;
   vertical-align: baseline;
 }
-/* line 55, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-.m-app table {
+
+/* line 22, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
+
+/* line 24, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-/* line 57, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-.m-app caption, .m-app th, .m-app td {
+
+/* line 28, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
-/* line 59, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-.m-app q, .m-app blockquote {
+
+/* line 30, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
   quotes: none;
 }
 /* line 103, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-.m-app q:before, .m-app q:after, .m-app blockquote:before, .m-app blockquote:after {
+q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
-/* line 61, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
-.m-app a img {
+
+/* line 32, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+a img {
   border: none;
 }
-/* line 1, ../../source/css/_panel.scss */
+
+/* line 116, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+/* line 9, ../../source/css/mootor.scss */
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* line 1, ../../source/css/_fonts.scss */
+.m-app {
+  font-family: arial;
+}
+/* line 10, ../../source/css/_uipanel.scss */
 .m-app .m-views-container {
   position: relative;
   width: 100%;
   height: 100%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding-bottom: 55px;
 }
-/* line 7, ../../source/css/_panel.scss */
+/* line 19, ../../source/css/_uipanel.scss */
 .m-app .m-views-container .m-panel {
-  position: absolute;
-  width: 100%;
+  position: relative;
   height: 100%;
+  width: 50%;
   top: 0;
   -webkit-overflow-scrolling: touch;
-  overflow-y: scroll;
   overflow-x: hidden;
+  float: left;
 }
-/* line 19, ../../source/css/_panel.scss */
+/* line 31, ../../source/css/_uipanel.scss */
 .m-app .m-views-container .m-panel {
   -webkit-transition-duration: 0;
   -webkit-backface-visibility: hidden;
   -webkit-transform: translate3d(0, 0, 0);
   -webkit-transform: translateZ(0);
 }
-/* line 4, ../../source/css/_transitions.scss */
+/* line 43, ../../source/css/_uipanel.scss */
 .m-app .m-transition-none {
   -webkit-transition: all 0;
   -moz-transition: all 0;
   -o-transition: all 0;
   transition: all 0;
 }
-/* line 8, ../../source/css/_transitions.scss */
+/* line 47, ../../source/css/_uipanel.scss */
 .m-app .m-transition-hslide {
   -webkit-transition: -webkit-transform 0.3s ease-out;
   -moz-transition: -moz-transform 0.3s ease-out;
   -o-transition: -o-transform 0.3s ease-out;
   transition: transform 0.3s ease-out;
 }
-/* line 12, ../../source/css/_transitions.scss */
+/* line 51, ../../source/css/_uipanel.scss */
 .m-app .m-transition-hslide-left {
-  -webkit-transform: translateX(-100%);
-  -moz-transform: translateX(-100%);
-  -ms-transform: translateX(-100%);
-  -o-transform: translateX(-100%);
-  transform: translateX(-100%);
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
 }
-/* line 16, ../../source/css/_transitions.scss */
+/* line 55, ../../source/css/_uipanel.scss */
 .m-app .m-transition-hslide-right {
   -webkit-transform: translateX(0);
   -moz-transform: translateX(0);
   -ms-transform: translateX(0);
   -o-transform: translateX(0);
   transform: translateX(0);
+}
+/* line 1, ../../source/css/_uibutton.scss */
+.m-app .m-button, .m-app .m-button-small, .m-app .m-button-outline-small, .m-app .m-button-outline, .m-app .m-button-outline-fullwidth, .m-app .m-button-fullwidth {
+  padding: 0.4em 2.3em;
+  font-size: 1em;
+  line-height: 2em;
+  border-width: 0;
+  border-radius: 0.5em;
+  display: inline-block;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+/* line 11, ../../source/css/_uibutton.scss */
+.m-app .m-button span, .m-app .m-button-small span, .m-app .m-button-outline-small span, .m-app .m-button-outline span, .m-app .m-button-outline-fullwidth span, .m-app .m-button-fullwidth span {
+  top: 2px;
+  position: relative;
+}
+/* line 14, ../../source/css/_uibutton.scss */
+.m-app .m-button span:first-child, .m-app .m-button-small span:first-child, .m-app .m-button-outline-small span:first-child, .m-app .m-button-outline span:first-child, .m-app .m-button-outline-fullwidth span:first-child, .m-app .m-button-fullwidth span:first-child {
+  left: -1em;
+}
+/* line 17, ../../source/css/_uibutton.scss */
+.m-app .m-button span:last-child, .m-app .m-button-small span:last-child, .m-app .m-button-outline-small span:last-child, .m-app .m-button-outline span:last-child, .m-app .m-button-outline-fullwidth span:last-child, .m-app .m-button-fullwidth span:last-child {
+  left: 1em;
+}
+/* line 25, ../../source/css/_uibutton.scss */
+.m-app .m-button:link, .m-app .m-button-small:link, .m-app .m-button-outline-small:link, .m-app .m-button-outline:link, .m-app .m-button-outline-fullwidth:link, .m-app .m-button-fullwidth:link {
+  text-decoration: none;
+}
+/* line 30, ../../source/css/_uibutton.scss */
+.m-app .m-button:focus, .m-app .m-button-small:focus, .m-app .m-button-outline-small:focus, .m-app .m-button-outline:focus, .m-app .m-button-outline-fullwidth:focus, .m-app .m-button-fullwidth:focus,
+.m-app .m-button:active,
+.m-app .m-button-small:active,
+.m-app .m-button-outline-small:active,
+.m-app .m-button-outline:active,
+.m-app .m-button-outline-fullwidth:active,
+.m-app .m-button-fullwidth:active {
+  background: red;
+  outline: 0;
+}
+/* line 35, ../../source/css/_uibutton.scss */
+.m-app .m-button-small, .m-app .m-button-outline-small {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+/* line 41, ../../source/css/_uibutton.scss */
+.m-app .m-button-outline, .m-app .m-button-outline-fullwidth, .m-app .m-button-outline-small {
+  border-width: 1px;
+  border-style: solid;
+}
+/* line 47, ../../source/css/_uibutton.scss */
+.m-app .m-button-fullwidth, .m-app .m-button-outline-fullwidth {
+  width: 100%;
+  border-radius: 0;
+}
+/* line 53, ../../source/css/_uibutton.scss */
+.m-app .m-button-outline-fullwidth {
+  border-left: none;
+  border-right: none;
+}
+/* line 1, ../../source/css/_uiheader.scss */
+.m-app .m-header-container {
+  height: 55px;
+  position: relative;
+  width: 100%;
+}
+/* line 7, ../../source/css/_uiheader.scss */
+.m-app .m-header-container header {
+  z-index: 100;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 55px;
+  display: table;
+}
+/* line 16, ../../source/css/_uiheader.scss */
+.m-app .m-header-container header h1, .m-app .m-header-container header nav {
+  display: table-cell;
+  overflow: hidden;
+}
+/* line 21, ../../source/css/_uiheader.scss */
+.m-app .m-header-container header nav:first-child {
+  width: 33%;
+}
+/* line 25, ../../source/css/_uiheader.scss */
+.m-app .m-header-container header nav:last-child {
+  width: 33%;
+}
+/* line 28, ../../source/css/_uiheader.scss */
+.m-app .m-header-container header nav:nth-child(2) {
+  width: 33%;
+}
+/* line 32, ../../source/css/_uiheader.scss */
+.m-app .m-header-container header nav:first-child {
+  padding-left: 10px;
+  text-align: left;
+}
+/* line 36, ../../source/css/_uiheader.scss */
+.m-app .m-header-container header nav:last-child {
+  text-align: right;
+  padding-right: 10px;
+}
+/* line 41, ../../source/css/_uiheader.scss */
+.m-app .m-header-container header nav:first-child a {
+  text-align: left;
+}
+/* line 45, ../../source/css/_uiheader.scss */
+.m-app .m-header-container header .m-nav-item {
+  position: relative;
+  top: 10px;
+}
+/* line 50, ../../source/css/_uiheader.scss */
+.m-app .m-header-container header.m-hidden {
+  display: none;
+}
+/* line 54, ../../source/css/_uiheader.scss */
+.m-app .m-header-container header h1 {
+  text-align: center;
+  font-weight: bold;
+  line-height: 55px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* line 1, ../../source/css/_uifooter.scss */
+.m-app .m-footer-container {
+  height: 55px;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+/* line 8, ../../source/css/_uifooter.scss */
+.m-app .m-footer-container footer {
+  z-index: 100;
+  position: absolute;
+  width: 100%;
+}
+/* line 14, ../../source/css/_uifooter.scss */
+.m-app .m-footer-container .m-nav {
+  width: 100%;
+  display: table;
+}
+/* line 18, ../../source/css/_uifooter.scss */
+.m-app .m-footer-container .m-nav-item {
+  display: table-cell;
+}
+/* line 4, ../../source/css/_uinavbar.scss */
+.m-app .m-nav .m-nav-item {
+  text-decoration: none;
+  color: white;
+  padding: 10px 5px;
+  font-size: .9em;
+  text-align: center;
+}
+/* line 11, ../../source/css/_uiloading.scss */
+.m-app .m-loading {
+  position: absolute;
+  top: 0;
+  z-index: 100000000000;
+  width: 100%;
+  height: 100%;
+}
+/* line 19, ../../source/css/_uiloading.scss */
+.m-app .m-loading.m-loading-default-style {
+  background-color: rgba(0, 0, 0, 0.6);
+  background-image: url(../../source/img/icons/black/128x128/loading.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  opacity: 1;
+  -webkit-transition: opacity 0.3s ease-out;
+  -moz-transition: opacity 0.3s ease-out;
+  -o-transition: opacity 0.3s ease-out;
+  transition: opacity 0.3s ease-out;
+}
+/* line 29, ../../source/css/_uiloading.scss */
+.m-app .m-loading.m-loading-default-style.m-hidden {
+  opacity: 0;
+}
+/* line 35, ../../source/css/_uiloading.scss */
+.m-app .m-loading.m-loading-circles {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+/* line 39, ../../source/css/_uiloading.scss */
+.m-app .m-loading.m-loading-circles .m-loading-circle {
+  background-color: #555555;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 3em;
+  width: 3em;
+  margin-top: -1.5em;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-direction: linear;
+  -webkit-border-radius: 2.1em;
+  -webkit-animation-delay: 0;
+  -moz-animation-duration: 1s;
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-direction: linear;
+  -moz-border-radius: 2.1em;
+  -moz-animation-delay: 0;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-direction: linear;
+  border-radius: 2.1em;
+  animation-delay: 0;
+}
+/* line 67, ../../source/css/_uiloading.scss */
+.m-app .m-loading.m-loading-circles .m-loading-circle-01 {
+  -webkit-animation-name: m-loading-object-animation-0;
+  -moz-animation-name: m-loading-object-animation-0;
+  animation-name: m-loading-object-animation-0;
+  margin-left: -5.5em;
+}
+/* line 73, ../../source/css/_uiloading.scss */
+.m-app .m-loading.m-loading-circles .m-loading-circle-02 {
+  -webkit-animation-name: m-loading-object-animation-1;
+  -moz-animation-name: m-loading-object-animation-1;
+  animation-name: m-loading-object-animation-1;
+  margin-left: -1.5em;
+}
+/* line 79, ../../source/css/_uiloading.scss */
+.m-app .m-loading.m-loading-circles .m-loading-circle-03 {
+  -webkit-animation-name: m-loading-object-animation-2;
+  -moz-animation-name: m-loading-object-animation-2;
+  animation-name: m-loading-object-animation-2;
+  margin-left: 2.5em;
+}
+/* line 37, ../../source/css/_uiform.scss */
+.m-app .m-form.m-form-left-labels .m-field label {
+  float: left;
+  width: 30%;
+}
+/* line 43, ../../source/css/_uiform.scss */
+.m-app .m-form.m-form-top-labels .m-field label {
+  width: 100%;
+  display: block;
+}
+/* line 49, ../../source/css/_uiform.scss */
+.m-app .m-form .m-field {
+  padding: 1em;
+  border-bottom: 1px solid #ccc;
+  display: block;
+}
+/* line 54, ../../source/css/_uiform.scss */
+.m-app .m-form .m-field label {
+  font-weight: bold;
+  font-size: 1em;
+  line-height: 1.5em;
+}
+/* line 60, ../../source/css/_uiform.scss */
+.m-app .m-form .m-field.m-error label {
+  color: red;
+}
+/* line 3, ../../source/css/_uiform.scss */
+.m-app .m-form.m-form-left-labels .m-field .m-text {
+  width: 70%;
+}
+/* line 8, ../../source/css/_uiform.scss */
+.m-app .m-form.m-form-top-labels .m-field .m-text {
+  width: 100%;
+  display: block;
+}
+/* line 15, ../../source/css/_uiform.scss */
+.m-app .m-form .m-field .m-text {
+  font-size: 1em;
+  background-color: transparent;
+  border: none;
+  font-family: sans-serif;
+  padding: 0;
+}
+/* line 22, ../../source/css/_uiform.scss */
+.m-app .m-form .m-field .m-text:disabled {
+  opacity: 0.2;
+}
+/* line 28, ../../source/css/_uiform.scss */
+.m-app .m-form .m-field.m-error .m-text {
+  background-color: red;
+}
+/* line 3, ../../source/css/_uiformtext.scss */
+.m-app .m-form .m-text {
+  background: red;
+}
+/* line 3, ../../source/css/_uiform.scss */
+.m-app .m-form.m-form-left-labels .m-field .m-textarea {
+  width: 70%;
+}
+/* line 8, ../../source/css/_uiform.scss */
+.m-app .m-form.m-form-top-labels .m-field .m-textarea {
+  width: 100%;
+  display: block;
+}
+/* line 15, ../../source/css/_uiform.scss */
+.m-app .m-form .m-field .m-textarea {
+  font-size: 1em;
+  background-color: transparent;
+  border: none;
+  font-family: sans-serif;
+  padding: 0;
+}
+/* line 22, ../../source/css/_uiform.scss */
+.m-app .m-form .m-field .m-textarea:disabled {
+  opacity: 0.2;
+}
+/* line 28, ../../source/css/_uiform.scss */
+.m-app .m-form .m-field.m-error .m-textarea {
+  background-color: red;
+}
+/* line 3, ../../source/css/_uiform.scss */
+.m-app .m-form.m-form-left-labels .m-field .m-select {
+  width: 70%;
+}
+/* line 8, ../../source/css/_uiform.scss */
+.m-app .m-form.m-form-top-labels .m-field .m-select {
+  width: 100%;
+  display: block;
+}
+/* line 15, ../../source/css/_uiform.scss */
+.m-app .m-form .m-field .m-select {
+  font-size: 1em;
+  background-color: transparent;
+  border: none;
+  font-family: sans-serif;
+  padding: 0;
+}
+/* line 22, ../../source/css/_uiform.scss */
+.m-app .m-form .m-field .m-select:disabled {
+  opacity: 0.2;
+}
+/* line 28, ../../source/css/_uiform.scss */
+.m-app .m-form .m-field.m-error .m-select {
+  background-color: red;
 }
 /* line 1, ../../source/css/_utils.scss */
 .m-app .m-hidden {
@@ -133,31 +480,27 @@
   width: 100%;
 }
 /* line 13, ../../source/css/_utils.scss */
-.m-app .m-half-width {
-  width: 50%;
-}
-/* line 17, ../../source/css/_utils.scss */
 .m-app .m-position-left {
   left: 0;
 }
-/* line 21, ../../source/css/_utils.scss */
+/* line 17, ../../source/css/_utils.scss */
 .m-app .m-position-right {
-  left: 100%;
+  float: right !important;
 }
-/* line 26, ../../source/css/_utils.scss */
+/* line 22, ../../source/css/_utils.scss */
 .m-app .m-doc, .m-app .m-doc * {
   border: 1px solid black !important;
   padding: 0.5em !important;
   margin: 1em !important;
   background: rgba(0, 0, 0, 0.1) !important;
 }
-/* line 34, ../../source/css/_utils.scss */
+/* line 30, ../../source/css/_utils.scss */
 .m-app .m-doc.m-html,
 .m-app .m-doc .m-app {
   width: calc(100% - 4em);
   height: calc(100% - 4em);
 }
-/* line 39, ../../source/css/_utils.scss */
+/* line 35, ../../source/css/_utils.scss */
 .m-app .m-doc.m-html .m-views-container,
 .m-app .m-doc.m-html .m-panel,
 .m-app .m-doc .m-app .m-views-container,
@@ -165,31 +508,261 @@
   width: calc(100% - 3em);
   height: calc(100% - 4em);
 }
-
-/* line 32, ../../source/css/mootor.scss */
-body {
-  font-family: arial;
+/* line 2, ../../source/css/_list.scss */
+.m-app nav.m-list a {
+  display: block;
+  padding: 1.4em;
+  text-decoration: none;
+  color: #333;
+  line-height: 2.1em;
+  border-bottom: 1px solid #ddd;
+  font-weight: bold;
+}
+/* line 12, ../../source/css/_list.scss */
+.m-app nav.m-list a span {
+  margin-right: 1.5em;
+  float: left;
 }
 
-/* line 36, ../../source/css/mootor.scss */
-header {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: #072F52;
-  height: 55px;
-  z-index: 9999;
-}
-/* line 44, ../../source/css/mootor.scss */
-header h1 {
-  text-align: center;
-  color: #f1f1f1;
-  font-weight: bold !important;
-  line-height: 55px !important;
+@keyframes m-loading-object-animation-0 {
+  /* line 4, ../../source/css/_uiloading_animations.scss */
+  0% {
+    opacity: 0;
+  }
+
+  /* line 5, ../../source/css/_uiloading_animations.scss */
+  25% {
+    opacity: 1;
+  }
+
+  /* line 6, ../../source/css/_uiloading_animations.scss */
+  50% {
+    opacity: 0;
+  }
+
+  /* line 7, ../../source/css/_uiloading_animations.scss */
+  75% {
+    opacity: 0;
+  }
+
+  /* line 8, ../../source/css/_uiloading_animations.scss */
+  100% {
+    opacity: 0;
+  }
 }
 
-/* line 52, ../../source/css/mootor.scss */
-.m-panel {
-  padding-top: 55px !important;
+@-webkit-keyframes m-loading-object-animation-0 {
+  /* line 4, ../../source/css/_uiloading_animations.scss */
+  0% {
+    opacity: 0;
+  }
+
+  /* line 5, ../../source/css/_uiloading_animations.scss */
+  25% {
+    opacity: 1;
+  }
+
+  /* line 6, ../../source/css/_uiloading_animations.scss */
+  50% {
+    opacity: 0;
+  }
+
+  /* line 7, ../../source/css/_uiloading_animations.scss */
+  75% {
+    opacity: 0;
+  }
+
+  /* line 8, ../../source/css/_uiloading_animations.scss */
+  100% {
+    opacity: 0;
+  }
+}
+
+@-moz-keyframes m-loading-object-animation-0 {
+  /* line 4, ../../source/css/_uiloading_animations.scss */
+  0% {
+    opacity: 0;
+  }
+
+  /* line 5, ../../source/css/_uiloading_animations.scss */
+  25% {
+    opacity: 1;
+  }
+
+  /* line 6, ../../source/css/_uiloading_animations.scss */
+  50% {
+    opacity: 0;
+  }
+
+  /* line 7, ../../source/css/_uiloading_animations.scss */
+  75% {
+    opacity: 0;
+  }
+
+  /* line 8, ../../source/css/_uiloading_animations.scss */
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes m-loading-object-animation-1 {
+  /* line 21, ../../source/css/_uiloading_animations.scss */
+  0% {
+    opacity: 0;
+  }
+
+  /* line 22, ../../source/css/_uiloading_animations.scss */
+  25% {
+    opacity: 0;
+  }
+
+  /* line 23, ../../source/css/_uiloading_animations.scss */
+  50% {
+    opacity: 1;
+  }
+
+  /* line 24, ../../source/css/_uiloading_animations.scss */
+  75% {
+    opacity: 0;
+  }
+
+  /* line 25, ../../source/css/_uiloading_animations.scss */
+  100% {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes m-loading-object-animation-1 {
+  /* line 21, ../../source/css/_uiloading_animations.scss */
+  0% {
+    opacity: 0;
+  }
+
+  /* line 22, ../../source/css/_uiloading_animations.scss */
+  25% {
+    opacity: 0;
+  }
+
+  /* line 23, ../../source/css/_uiloading_animations.scss */
+  50% {
+    opacity: 1;
+  }
+
+  /* line 24, ../../source/css/_uiloading_animations.scss */
+  75% {
+    opacity: 0;
+  }
+
+  /* line 25, ../../source/css/_uiloading_animations.scss */
+  100% {
+    opacity: 0;
+  }
+}
+
+@-moz-keyframes m-loading-object-animation-1 {
+  /* line 21, ../../source/css/_uiloading_animations.scss */
+  0% {
+    opacity: 0;
+  }
+
+  /* line 22, ../../source/css/_uiloading_animations.scss */
+  25% {
+    opacity: 0;
+  }
+
+  /* line 23, ../../source/css/_uiloading_animations.scss */
+  50% {
+    opacity: 1;
+  }
+
+  /* line 24, ../../source/css/_uiloading_animations.scss */
+  75% {
+    opacity: 0;
+  }
+
+  /* line 25, ../../source/css/_uiloading_animations.scss */
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes m-loading-object-animation-2 {
+  /* line 38, ../../source/css/_uiloading_animations.scss */
+  0% {
+    opacity: 0;
+  }
+
+  /* line 39, ../../source/css/_uiloading_animations.scss */
+  25% {
+    opacity: 0;
+  }
+
+  /* line 40, ../../source/css/_uiloading_animations.scss */
+  50% {
+    opacity: 0;
+  }
+
+  /* line 41, ../../source/css/_uiloading_animations.scss */
+  75% {
+    opacity: 1;
+  }
+
+  /* line 42, ../../source/css/_uiloading_animations.scss */
+  100% {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes m-loading-object-animation-2 {
+  /* line 38, ../../source/css/_uiloading_animations.scss */
+  0% {
+    opacity: 0;
+  }
+
+  /* line 39, ../../source/css/_uiloading_animations.scss */
+  25% {
+    opacity: 0;
+  }
+
+  /* line 40, ../../source/css/_uiloading_animations.scss */
+  50% {
+    opacity: 0;
+  }
+
+  /* line 41, ../../source/css/_uiloading_animations.scss */
+  75% {
+    opacity: 1;
+  }
+
+  /* line 42, ../../source/css/_uiloading_animations.scss */
+  100% {
+    opacity: 0;
+  }
+}
+
+@-moz-keyframes m-loading-object-animation-2 {
+  /* line 38, ../../source/css/_uiloading_animations.scss */
+  0% {
+    opacity: 0;
+  }
+
+  /* line 39, ../../source/css/_uiloading_animations.scss */
+  25% {
+    opacity: 0;
+  }
+
+  /* line 40, ../../source/css/_uiloading_animations.scss */
+  50% {
+    opacity: 0;
+  }
+
+  /* line 41, ../../source/css/_uiloading_animations.scss */
+  75% {
+    opacity: 1;
+  }
+
+  /* line 42, ../../source/css/_uiloading_animations.scss */
+  100% {
+    opacity: 0;
+  }
 }

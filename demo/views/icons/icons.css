@@ -1,0 +1,14 @@
+
+.icon-grid {
+    width: 100%;
+    display: block;
+    overflow: hidden;
+}
+
+.icon-grid li {
+    width: 100%;
+    padding: 10px;
+    display: inline-block;
+    text-align: center;
+}
+
