@@ -1,5 +1,6 @@
 .m-button-fullwidth {
     @extend .m-bg-color-primary-1;
+    @extend .m-border-color-primary-1;
 }
 
 .m-button-outline-fullwidth,
@@ -16,25 +17,30 @@
 }
 
 .m-button-default  {
+    @extend .m-border-color-primary-1;
+
     &.m-button-fullwidth,
     &.m-button:link,
     &.m-button {
-        color: black; // FIXME CHECK: hardcoded color?
+        @extend .m-color-black; //FIXME CHECK: Customize;
         @extend .m-bg-color-primary-1;
     }
 
     &.m-button-outline-fullwidth,
     &.m-button-outline-small,
     &.m-button-outline {
-        @extend .m-button-outline
+        @extend .m-button-outline;
+        @extend .m-color-primary-1;
     }
 }
 
 .m-button-primary {
+    @extend .m-border-color-primary-7;
+
     &.m-button-fullwidth,
     &.m-button:link,
     &.m-button {
-        color: black; // FIXME CHECK: hardcoded color?
+        @extend .m-color-black; //FIXME CHECK: Customize;
         @extend .m-bg-color-primary-7;
     }
 
@@ -42,14 +48,16 @@
     &.m-button-outline-small,
     &.m-button-outline {
         @extend .m-bg-color-transparent;
-        @extend .m-border-color-primary-7;
         @extend .m-color-primary-7;
     }
 }
 .m-button-secondary {
+    @extend .m-border-color-primary-8;
+
     &.m-button-fullwidth,
     &.m-button:link,
     &.m-button {
+        @extend .m-color-black; //FIXME CHECK: Customize;
         @extend .m-bg-color-primary-8;
     }
 
@@ -57,14 +65,16 @@
     &.m-button-outline-small,
     &.m-button-outline {
         @extend .m-bg-color-transparent;
-        @extend .m-border-color-primary-8;
         @extend .m-color-primary-8;
     }
 }
 .m-button-success {
+    @extend .m-border-color-primary-4;
+
     &.m-button-fullwidth,
     &.m-button:link,
     &.m-button {
+        @extend .m-color-black; //FIXME CHECK: Customize;
         @extend .m-bg-color-primary-4;
     }
 
@@ -72,14 +82,16 @@
     &.m-button-outline-small,
     &.m-button-outline {
         @extend .m-bg-color-transparent;
-        @extend .m-border-color-primary-4;
         @extend .m-color-primary-4;
     }
 }
 .m-button-warning {
+    @extend .m-border-color-primary-9;
+
     &.m-button-fullwidth,
     &.m-button:link,
     &.m-button {
+        @extend .m-color-black; //FIXME CHECK: Customize;
         @extend .m-bg-color-primary-9;
     }
 
@@ -87,14 +99,16 @@
     &.m-button-outline-small,
     &.m-button-outline {
         @extend .m-bg-color-transparent;
-        @extend .m-border-color-primary-9;
         @extend .m-color-primary-9;
     }
 }
 .m-button-info {
+    @extend .m-border-color-primary-5;
+
     &.m-button-fullwidth,
     &.m-button:link,
     &.m-button {
+        @extend .m-color-black; //FIXME CHECK: Customize;
         @extend .m-bg-color-primary-5;
     }
 
@@ -102,14 +116,16 @@
     &.m-button-outline-small,
     &.m-button-outline {
         @extend .m-bg-color-transparent;
-        @extend .m-border-color-primary-5;
         @extend .m-color-primary-5;
     }
 }
 .m-button-danger {
+    @extend .m-border-color-primary-6;
+
     &.m-button-fullwidth,
     &.m-button:link,
     &.m-button {
+        @extend .m-color-black; //FIXME CHECK: Customize;
         @extend .m-bg-color-primary-6;
     }
 
@@ -117,9 +133,19 @@
     &.m-button-outline-small,
     &.m-button-outline {
         @extend .m-bg-color-transparent;
-        @extend .m-border-color-primary-6;
         @extend .m-color-primary-6;
     }
+
+    &.m-button-outline:active,
+    &.m-button-outline:focus {
+        @extend .m-bg-color-primary-5; //FIXME CHECK: Customize;
+    }
+
+    &.m-button:focus,
+    &.m-button:active {
+        @extend .m-bg-color-primary-5; //FIXME CHECK: Customize;
+    }
+
 }
 
 
@@ -132,6 +158,5 @@
 }
 
 .m-button-outline {
-    @extend .m-button;
     @extend .m-button-default;
 }

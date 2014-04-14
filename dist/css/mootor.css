@@ -137,7 +137,7 @@ html, body {
   transform: translateX(0);
 }
 /* line 1, ../../source/css/_uibutton.scss */
-.m-app .m-button, .m-app .m-button-small, .m-app .m-button-outline-small, .m-app .m-button-outline, .m-app .m-button-outline-fullwidth, .m-app .m-button-fullwidth {
+.m-app .m-button, .m-app .m-button-outline, .m-app .m-button-outline-fullwidth, .m-app .m-button-outline-small, .m-app .m-button-small, .m-app .m-button-fullwidth {
   padding: 0.4em 2.3em;
   font-size: 1em;
   line-height: 2em;
@@ -146,51 +146,48 @@ html, body {
   display: inline-block;
   -webkit-appearance: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  border-width: 1px;
+  border-style: solid;
+  /* For icons - FIXME CHECK: Find a better way to select icons */
 }
-/* line 11, ../../source/css/_uibutton.scss */
-.m-app .m-button span, .m-app .m-button-small span, .m-app .m-button-outline-small span, .m-app .m-button-outline span, .m-app .m-button-outline-fullwidth span, .m-app .m-button-fullwidth span {
+/* line 14, ../../source/css/_uibutton.scss */
+.m-app .m-button span, .m-app .m-button-outline span, .m-app .m-button-outline-fullwidth span, .m-app .m-button-outline-small span, .m-app .m-button-small span, .m-app .m-button-fullwidth span {
   top: 2px;
   position: relative;
 }
-/* line 14, ../../source/css/_uibutton.scss */
-.m-app .m-button span:first-child, .m-app .m-button-small span:first-child, .m-app .m-button-outline-small span:first-child, .m-app .m-button-outline span:first-child, .m-app .m-button-outline-fullwidth span:first-child, .m-app .m-button-fullwidth span:first-child {
+/* line 17, ../../source/css/_uibutton.scss */
+.m-app .m-button span:first-child, .m-app .m-button-outline span:first-child, .m-app .m-button-outline-fullwidth span:first-child, .m-app .m-button-outline-small span:first-child, .m-app .m-button-small span:first-child, .m-app .m-button-fullwidth span:first-child {
   left: -1em;
 }
-/* line 17, ../../source/css/_uibutton.scss */
-.m-app .m-button span:last-child, .m-app .m-button-small span:last-child, .m-app .m-button-outline-small span:last-child, .m-app .m-button-outline span:last-child, .m-app .m-button-outline-fullwidth span:last-child, .m-app .m-button-fullwidth span:last-child {
+/* line 20, ../../source/css/_uibutton.scss */
+.m-app .m-button span:last-child, .m-app .m-button-outline span:last-child, .m-app .m-button-outline-fullwidth span:last-child, .m-app .m-button-outline-small span:last-child, .m-app .m-button-small span:last-child, .m-app .m-button-fullwidth span:last-child {
   left: 1em;
 }
-/* line 25, ../../source/css/_uibutton.scss */
-.m-app .m-button:link, .m-app .m-button-small:link, .m-app .m-button-outline-small:link, .m-app .m-button-outline:link, .m-app .m-button-outline-fullwidth:link, .m-app .m-button-fullwidth:link {
+/* line 28, ../../source/css/_uibutton.scss */
+.m-app .m-button:link, .m-app .m-button-outline:link, .m-app .m-button-outline-fullwidth:link, .m-app .m-button-outline-small:link, .m-app .m-button-small:link, .m-app .m-button-fullwidth:link {
   text-decoration: none;
 }
-/* line 30, ../../source/css/_uibutton.scss */
-.m-app .m-button:focus, .m-app .m-button-small:focus, .m-app .m-button-outline-small:focus, .m-app .m-button-outline:focus, .m-app .m-button-outline-fullwidth:focus, .m-app .m-button-fullwidth:focus,
+/* line 39, ../../source/css/_uibutton.scss */
+.m-app .m-button:focus, .m-app .m-button-outline:focus, .m-app .m-button-outline-fullwidth:focus, .m-app .m-button-outline-small:focus, .m-app .m-button-small:focus, .m-app .m-button-fullwidth:focus,
 .m-app .m-button:active,
-.m-app .m-button-small:active,
-.m-app .m-button-outline-small:active,
 .m-app .m-button-outline:active,
 .m-app .m-button-outline-fullwidth:active,
+.m-app .m-button-outline-small:active,
+.m-app .m-button-small:active,
 .m-app .m-button-fullwidth:active {
-  background: red;
   outline: 0;
 }
-/* line 35, ../../source/css/_uibutton.scss */
+/* line 43, ../../source/css/_uibutton.scss */
 .m-app .m-button-small, .m-app .m-button-outline-small {
   padding-top: 0;
   padding-bottom: 0;
 }
-/* line 41, ../../source/css/_uibutton.scss */
-.m-app .m-button-outline, .m-app .m-button-outline-fullwidth, .m-app .m-button-outline-small {
-  border-width: 1px;
-  border-style: solid;
-}
-/* line 47, ../../source/css/_uibutton.scss */
+/* line 49, ../../source/css/_uibutton.scss */
 .m-app .m-button-fullwidth, .m-app .m-button-outline-fullwidth {
   width: 100%;
   border-radius: 0;
 }
-/* line 53, ../../source/css/_uibutton.scss */
+/* line 55, ../../source/css/_uibutton.scss */
 .m-app .m-button-outline-fullwidth {
   border-left: none;
   border-right: none;

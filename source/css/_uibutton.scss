@@ -7,7 +7,10 @@
     display: inline-block;
     -webkit-appearance: none;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0); 
+    border-width: 1px;
+    border-style: solid;
 
+    /* For icons - FIXME CHECK: Find a better way to select icons */
     span {
         top: 2px;
         position: relative;
@@ -26,9 +29,14 @@
     text-decoration: none;
 }
 
+
+.m-button-outline {
+    @extend .m-button;    
+}
+
+
 .m-button:focus,
 .m-button:active {
-    background: red; // FIXME CHECK: color here?
     outline: 0;
 }
 
@@ -36,12 +44,6 @@
     @extend .m-button;
     padding-top: 0;
     padding-bottom: 0;
-}
-
-.m-button-outline {
-    @extend .m-button;
-    border-width: 1px;
-    border-style: solid;
 }
 
 .m-button-fullwidth {
