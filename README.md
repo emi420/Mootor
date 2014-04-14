@@ -25,11 +25,11 @@ The main purpose of this project is to create a simple HTML5 library for mobile 
 
 Mootor team **LOVES** design. We are working to make delightful user interfaces, and provide maximum efficiency and fully customization.
 
-** Update! check our design drafts for Mootor UI **
+#### Update! check our design drafts for Mootor UI
 
 http://emi420.github.io/Mootor/downloads/mootor-ui-beta-ios-1.pdf
 
-** Mootor Icons ***
+#### Mootor Icons
 
 * http://mootor.mobi/uiicons/
 * https://github.com/emi420/Mootor/tree/dev/source/img/icons
