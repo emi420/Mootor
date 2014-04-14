@@ -13,6 +13,7 @@ cat overthrow.min.js \
     uinavitem.js \
     uinavbar.js \
     uiheader.js \
+    uifooter.js \
     uiloading.js \
     router.js \
     route.js \
