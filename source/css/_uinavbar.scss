@@ -1,16 +1,10 @@
 $m-color-uinavbar-fg: #fff !default;
 
 .m-nav {
-    position: absolute;
-    top: 0;
-    display: table;
-    right: 1em;
-
     .m-nav-item {
         text-decoration: none;
-        display: table-cell;
         color: $m-color-uinavbar-fg;
-        padding: .9em .75em;
+        padding: 10px 5px;
         font-size: .9em;
         text-align: center;
     }

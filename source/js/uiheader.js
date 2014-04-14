@@ -97,6 +97,9 @@
         });
         this.el = this.nav.el;
         this.$el = $(this.el);
+        if (this.$el.find("nav").length < 1) {
+            this.el.appendChild(document.createElement("nav"));
+        }
         UIHeader._initBackButton(this);
     };
 
@@ -117,7 +120,12 @@
             backNavEl.appendChild(backEl);
             backNavEl.setAttribute("class", "m-nav-header-back-container");
 
-            self.el.appendChild(backNavEl);
+            if (self.el.firstChild !== undefined) {
+               self.el.insertBefore(backNavEl,self.el.firstChild) 
+            } else {
+               self.el.appendChild(backNavEl)
+               pa.appendChild(who);
+            }
             
             self.back = new UINavItem({
                 el: backEl

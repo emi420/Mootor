@@ -11,25 +11,52 @@
         left: 0;
         width: 100%;
         height: 55px;
+        display: table;
+                
+        h1, nav {
+            display: table-cell;
+            overflow: hidden;
+        }
+
+        nav:first-child {
+            width: 33%;
+        }
+        
+        nav:last-child {
+            width: 33%;
+        }
+        nav:nth-child(2) {
+            width: 33%;
+        }
+        
+        nav:first-child {
+            padding-left: 10px;
+            text-align: left;
+        }
+        nav:last-child {
+            text-align: right;
+            padding-right: 10px;
+        }
+        
+        nav:first-child a {
+            text-align: left;
+        }
+        
+        .m-nav-item {
+            position: relative;
+            top: 10px;
+        }
+                
+        &.m-hidden {
+            display: none;
+        }
 
         h1 {
             text-align: center;
             font-weight: bold;
-            width: 50%;
-            margin-left: 25%;
             line-height: 55px;
             text-overflow: ellipsis;
-            overflow: hidden;
             white-space: nowrap;
         }
     }
 }
-
-.m-header-back {
-    position: absolute;
-    left: 1em;
-    top: .7em;
-    width: 2em;
-    height: 2em;    
-}
-

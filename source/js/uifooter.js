@@ -115,7 +115,7 @@
         }
         
         self.view.on("load", function() {
-            self.el.style.height = (self.el.offsetHeight - footerContainerEl.offsetHeight) + "px"
+            self.el.style.height = (m.app.ui.el.offsetHeight - footerContainerEl.offsetHeight*2) + "px"
         });
         
     });

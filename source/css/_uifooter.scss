@@ -13,6 +13,10 @@
     
     .m-nav {
         width: 100%;
+        display: table;
+    }
+    .m-nav-item {
+        display: table-cell;
     }
     
 }
