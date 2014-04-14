@@ -17,8 +17,9 @@
         Route,
         App,
         _appGo,
-        _pendingGo;
-            
+        _pendingGo,
+        _lastHash;
+                    
     // Dependencies
     
     App = Mootor.App;
@@ -32,7 +33,22 @@
     // Event handlers
 
     window.onpopstate = function() {
-        _appGo(window.location.hash);
+        
+        var urlBack;
+
+        if (_lastHash === window.location.hash) {
+            urlBack = m.app.history[m.app.history.length - 2];
+            if (urlBack !== undefined) {
+                _appGo(urlBack);
+            } else {
+                _appGo(window.location.hash);
+            }
+        } else {
+            _appGo(window.location.hash);
+        }
+
+        _lastHash = window.location.hash;
+
     };
 
 
