@@ -1,5 +1,12 @@
 @include m-all-fields("m-select");
 
-.m-select {
-
+select.m-select {
+	position: relative;
+	top: -1em;
+	opacity: 0.01;
 }
+
+div.m-select {
+	background: white;
+	float: left;
+}	

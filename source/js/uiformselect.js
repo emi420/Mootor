@@ -40,9 +40,21 @@
                 i;
                 
             inputs = uiview.$el.find(".m-select");
+            inputs.each(function(index,element) {
+                var $element = $(element);
+                var value = element.options[element.selectedIndex].text;
 
-            // code here
+                var $cover = element.$cover = $("<div class='m-select'>a</div").insertBefore(element);
 
+                $cover.html(value || element.placeholder);
+                $cover.on("click", function(e) {
+                    element.click();
+                });
+                $element.on("change", function() {
+                    value = element.options[element.selectedIndex].text
+                    $cover.html(value || element.placeholder);
+                })
+            });
         }
    
     });
