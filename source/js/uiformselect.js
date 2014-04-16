@@ -42,18 +42,24 @@
             inputs = uiview.$el.find(".m-select");
             inputs.each(function(index,element) {
                 var $element = $(element);
-                var value = element.options[element.selectedIndex].text;
 
-                var $cover = element.$cover = $("<div class='m-select'>a</div").insertBefore(element);
+                var coverHTML = '<div class="m-select m-select-cover">\
+                    <span class="m-value"></span>\
+                    <span class="m-icon-arrow-down-small"></span>\
+                </div>';
 
-                $cover.html(value || element.placeholder);
-                $cover.on("click", function(e) {
-                    element.click();
-                });
-                $element.on("change", function() {
-                    value = element.options[element.selectedIndex].text
-                    $cover.html(value || element.placeholder);
-                })
+                var $cover = element.$cover = $(coverHTML).insertBefore(element);
+
+                updateValue();
+                $element.on("change", updateValue);
+
+                // https://code.google.com/p/expandselect/
+
+                function updateValue() {
+                    //Value is the text of the selected option or the placeholder text
+                    var value = element.options[element.selectedIndex].text || element.placeholder;
+                    $cover.find(".m-value").html(value);
+                }
             });
         }
    

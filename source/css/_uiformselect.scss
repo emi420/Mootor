@@ -1,12 +1,25 @@
 @include m-all-fields("m-select");
 
 select.m-select {
-	position: relative;
-	top: -1em;
+	margin-top: -1.4em;
 	opacity: 0.01;
 }
 
-div.m-select {
+.m-select-cover {
 	background: white;
-	float: left;
+	position: relative;
+
+	.m-icon-arrow-down-small {
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+	.m-value {
+		height: 1em;
+		display: inline-block;
+		overflow: hidden;
+		margin-right: 21px;
+	}
 }	
+
+

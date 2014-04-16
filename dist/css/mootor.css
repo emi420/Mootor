@@ -475,14 +475,26 @@ html, body {
 }
 /* line 3, ../../source/css/_uiformselect.scss */
 .m-app .m-form select.m-select {
-  position: relative;
-  top: -1em;
+  margin-top: -1.4em;
   opacity: 0.01;
 }
-/* line 9, ../../source/css/_uiformselect.scss */
-.m-app .m-form div.m-select {
+/* line 8, ../../source/css/_uiformselect.scss */
+.m-app .m-form .m-select-cover {
   background: white;
-  float: left;
+  position: relative;
+}
+/* line 12, ../../source/css/_uiformselect.scss */
+.m-app .m-form .m-select-cover .m-icon-arrow-down-small {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+/* line 17, ../../source/css/_uiformselect.scss */
+.m-app .m-form .m-select-cover .m-value {
+  height: 1em;
+  display: inline-block;
+  overflow: hidden;
+  margin-right: 21px;
 }
 /* line 1, ../../source/css/_utils.scss */
 .m-app .m-hidden {
