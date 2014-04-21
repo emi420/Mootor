@@ -1031,6 +1031,12 @@ window.$ === undefined && (window.$ = Zepto)
     var autoRemove, delegator, $this = this
     if (event && !isString(event)) {
       $.each(event, function(type, fn){
+
+        //This line is to allow programmers to use "click" or tap and not worry about device capabilities
+        if (type == "click" || type == "tap") {
+          type = ($.os.tablet || $.os.phone) ? "tap" : "click"; 
+        }
+
         $this.on(type, selector, data, fn, one)
       })
       return $this

@@ -1,35 +1,38 @@
 @mixin m-all-fields($class) {
-    &.m-form-left-labels .m-field {
+    &.m-form-left-labels {
         .#{$class} {
             width: 70%;
         }
     }
-    &.m-form-top-labels .m-field {
+    &.m-form-top-labels {
         .#{$class} {
             width: 100%;
             display: block;
         }
     }
 
-    .m-field {
-        .#{$class} {
-            font-size: 1em;
-            background-color: transparent;
-            border: none;
-            font-family: sans-serif;
-            padding: 0;
+    .#{$class} {
+        font-size: 1em;
+        background-color: transparent;
+        border: none;
+        font-family: sans-serif;
+        padding: 0;
 
-            &:disabled {
-                opacity: 0.2;
-            }
+        &:disabled {
+            opacity: 0.2;
+        }
 
+        &:focus {
+            outline: 0;
         }
-        &.m-error {
-           .#{$class} {
-                background-color: red;
-            }        
-        }
+
     }
+    .m-field.m-error {
+       .#{$class} {
+            background-color: red;
+        }        
+    }
+
 }
 
 .m-form {

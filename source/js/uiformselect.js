@@ -40,9 +40,27 @@
                 i;
                 
             inputs = uiview.$el.find(".m-select");
+            inputs.each(function(index,element) {
+                var $element = $(element);
 
-            // code here
+                var coverHTML = '<div class="m-select m-select-cover">\
+                    <span class="m-value"></span>\
+                    <span class="m-icon-arrow-down-small"></span>\
+                </div>';
 
+                var $cover = element.$cover = $(coverHTML).insertBefore(element);
+
+                updateValue();
+                $element.on("change", updateValue);
+
+                // https://code.google.com/p/expandselect/
+
+                function updateValue() {
+                    //Value is the text of the selected option or the placeholder text
+                    var value = element.options[element.selectedIndex].text || element.placeholder;
+                    $cover.find(".m-value").html(value);
+                }
+            });
         }
    
     });
