@@ -132,8 +132,8 @@
             });
             self.back.$el.addClass("m-header-back");
             self.back.hide();
-
-            self.back.$el.on("click", function(e) {
+            
+            self.back.$el.on("tap click", function(e) {
                 m.app.back();
             });
             self.back.el.onclick = function(e) {
