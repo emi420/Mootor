@@ -112,7 +112,21 @@ html, body {
   -o-transition: all 0;
   transition: all 0;
 }
-/* line 52, ../../source/css/_uipanel.scss */
+/* line 47, ../../source/css/_uipanel.scss */
+.m-app .m-transition-hslide {
+  -webkit-transition: -webkit-transform 0.3s ease-out;
+  -moz-transition: -moz-transform 0.3s ease-out;
+  -o-transition: -o-transform 0.3s ease-out;
+  transition: transform 0.3s ease-out;
+}
+/* line 50, ../../source/css/_uipanel.scss */
+.m-app .m-no-transitions.m-stransition-hslide {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+/* line 54, ../../source/css/_uipanel.scss */
 .m-app .m-transition-hslide-left {
   -webkit-transform: translateX(-50%);
   -moz-transform: translateX(-50%);
@@ -120,13 +134,31 @@ html, body {
   -o-transform: translateX(-50%);
   transform: translateX(-50%);
 }
-/* line 56, ../../source/css/_uipanel.scss */
+/* line 58, ../../source/css/_uipanel.scss */
+.m-app .m-no-transitions.m-transition-hslide-left {
+  -webkit-transform: none;
+  -moz-transform: none;
+  -ms-transform: none;
+  -o-transform: none;
+  transform: none;
+  left: -50%;
+}
+/* line 64, ../../source/css/_uipanel.scss */
 .m-app .m-transition-hslide-right {
   -webkit-transform: translateX(0);
   -moz-transform: translateX(0);
   -ms-transform: translateX(0);
   -o-transform: translateX(0);
   transform: translateX(0);
+}
+/* line 68, ../../source/css/_uipanel.scss */
+.m-app .m-no-transitions.m-transition-hslide-right {
+  -webkit-transform: none;
+  -moz-transform: none;
+  -ms-transform: none;
+  -o-transform: none;
+  transform: none;
+  left: 0;
 }
 /* line 1, ../../source/css/_uibutton.scss */
 .m-app .m-button, .m-app .m-button-outline, .m-app .m-button-outline-fullwidth, .m-app .m-button-outline-small, .m-app .m-button-small, .m-app .m-button-fullwidth {

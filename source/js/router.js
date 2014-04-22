@@ -18,7 +18,8 @@
         App,
         _appGo,
         _pendingGo,
-        _lastHash;
+        _lastHash,
+        _onPopState;
                     
     // Dependencies
     
@@ -32,7 +33,7 @@
 
     // Event handlers
 
-    window.onpopstate = function() {
+    _onPopState = function() {
         
         var urlBack;
 
@@ -50,6 +51,12 @@
         _lastHash = window.location.hash;
 
     };
+
+    if (m.context.os.android === true) {
+        window.onhashchange = _onPopState;
+    } else {
+        window.onpopstate = _onPopState;
+    }
 
 
     _appGo = function(url) { 

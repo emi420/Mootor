@@ -45,15 +45,27 @@ $transitionDuration: .3s;
 }
 
 .m-transition-hslide {
-    // FIXME: browser crash on Android 2.2
-    //@include transition(transform $transitionDuration ease-out);
+    @include transition(transform $transitionDuration ease-out);
+}
+.m-no-transitions.m-stransition-hslide {
+    @include transition(none);
 }
 
 .m-transition-hslide-left {
-	@include transform(translateX(-50%))
+	@include transform(translateX(-50%));
 }
 
+.m-no-transitions.m-transition-hslide-left {
+	@include transform(none);
+    left: -50%;
+}
+
+
 .m-transition-hslide-right {
-	@include transform(translateX(0))
-	
+	@include transform(translateX(0));
+}
+
+.m-no-transitions.m-transition-hslide-right {
+	@include transform(none);
+    left: 0;
 }

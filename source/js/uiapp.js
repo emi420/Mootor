@@ -61,6 +61,14 @@
         });
 
         this.$el = $("<div>").addClass("m-views-container");
+
+        // Disable transitions on Android
+        m.app.settings("uipanel-transitions", m.context.os.android !== true)
+
+        if (m.app.settings("uipanel-transitions") !== true) {
+            this.$el.addClass("m-no-transitions");
+        }
+        
         this.el = this.$el[0];        
         this.$el.appendTo($container);
         this.$container = $container;

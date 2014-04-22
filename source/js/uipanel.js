@@ -49,14 +49,22 @@
             self.panel.position("right").show();
 
             UIPanel._startTransition();
-
-            window.setTimeout(function() {
-                UIPanel.dispatch("transitionEnd", self.panel);
-            }, UIPanel._transitionDuration);
+            
+            if (m.app.settings("uipanel-transitions") === true) {
+                window.setTimeout(function() {
+                    UIPanel.dispatch("transitionEnd", self.panel);
+                }, UIPanel._transitionDuration);
+            }
 
             UIPanel.on("transitionEnd", function() {
                 self.panel.position("left");
             });
+            
+
+            if (m.app.settings("uipanel-transitions") !== true) {
+                UIPanel.dispatch("transitionEnd", self.panel);
+            }
+            
         });
     
         view.on("unload", function(view) {
@@ -66,6 +74,7 @@
     });
     
     UIApp.on("init", function(self) {
+        
         UIPanel._addTransitionClass();    
         UIPanel._setTransitionDuration();  
     });
@@ -105,7 +114,7 @@
             $el = $(el);
             
             $el.addClass("m-panel overthrow");
-
+            
             self.transition(UIPanel.DEFAULT_TRANSITION);
 
             m.app.ui.$el.append(el);            
@@ -114,16 +123,18 @@
         
         _startTransition: function (self) {
             
-            // FIXME CHECK
-            
             var uiapp = m.app.ui;
-            uiapp.$el.addClass("m-transition-hslide");
-            uiapp.$el.addClass("m-transition-hslide-left").removeClass("m-transition-hslide-right");
             
+            if (m.app.settings("uipanel-transitions") === true) {
+                uiapp.$el.addClass("m-transition-hslide");
+                uiapp.$el.addClass("m-transition-hslide-left").removeClass("m-transition-hslide-right");
+            }
             
             UIPanel.on("transitionEnd", function () {
-                uiapp.$el.removeClass("m-transition-hslide");
-                uiapp.$el.addClass("m-transition-hslide-right").removeClass("m-transition-hslide-left");
+                if (m.app.settings("uipanel-transitions") === true) {
+                    uiapp.$el.removeClass("m-transition-hslide");
+                    uiapp.$el.addClass("m-transition-hslide-right").removeClass("m-transition-hslide-left");
+                }
             });
         },
         
@@ -140,10 +151,15 @@
         
         _setTransitionDuration: function() {
 
-            var getStyleBySelector = function ( selector ) {
-               var sheetList = document.styleSheets;
-               var ruleList;
-               var i, j, ss;
+            var getStyleBySelector,
+                transitionDurationCSS,
+                transitionDurationMiliseconds,
+                t;
+            
+                getStyleBySelector = function ( selector ) {
+               var sheetList = document.styleSheets,
+                   ruleList,
+                   i, j, ss;
 
                /* look through stylesheets in reverse order that
                   they appear in the document */
@@ -173,10 +189,15 @@
             };
 
 
-            var t = getStyleBySelector(".m-app .m-transition-hslide");
+            t = getStyleBySelector(".m-app .m-transition-hslide");
+            
+            if (t !== null) {
+                transitionDurationCSS = t.transitionDuration || t.webkitTransitionDuration || t.operaTransitionDuration || t.mozTransitionDuration;
+                transitionDurationMiliseconds = parseFloat(transitionDurationCSS) * 1000;
+            } else {
+                transitionDurationMiliseconds = 0;
+            }
 
-            var transitionDurationCSS = t.transitionDuration || t.webkitTransitionDuration || t.operaTransitionDuration || t.mozTransitionDuration;
-            var transitionDurationMiliseconds = parseFloat(transitionDurationCSS) * 1000;
             UIPanel._transitionDuration = transitionDurationMiliseconds;
         }        
         
@@ -255,6 +276,5 @@
         }
 
     });
-    
     
 }(window.$, window.Mootor));
