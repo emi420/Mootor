@@ -119,7 +119,14 @@ html, body {
   -o-transition: -o-transform 0.3s ease-out;
   transition: transform 0.3s ease-out;
 }
-/* line 51, ../../source/css/_uipanel.scss */
+/* line 50, ../../source/css/_uipanel.scss */
+.m-app .m-no-transitions.m-stransition-hslide {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+/* line 54, ../../source/css/_uipanel.scss */
 .m-app .m-transition-hslide-left {
   -webkit-transform: translateX(-50%);
   -moz-transform: translateX(-50%);
@@ -127,7 +134,16 @@ html, body {
   -o-transform: translateX(-50%);
   transform: translateX(-50%);
 }
-/* line 55, ../../source/css/_uipanel.scss */
+/* line 58, ../../source/css/_uipanel.scss */
+.m-app .m-no-transitions.m-transition-hslide-left {
+  -webkit-transform: none;
+  -moz-transform: none;
+  -ms-transform: none;
+  -o-transform: none;
+  transform: none;
+  left: -50%;
+}
+/* line 64, ../../source/css/_uipanel.scss */
 .m-app .m-transition-hslide-right {
   -webkit-transform: translateX(0);
   -moz-transform: translateX(0);
@@ -135,8 +151,17 @@ html, body {
   -o-transform: translateX(0);
   transform: translateX(0);
 }
+/* line 68, ../../source/css/_uipanel.scss */
+.m-app .m-no-transitions.m-transition-hslide-right {
+  -webkit-transform: none;
+  -moz-transform: none;
+  -ms-transform: none;
+  -o-transform: none;
+  transform: none;
+  left: 0;
+}
 /* line 1, ../../source/css/_uibutton.scss */
-.m-app .m-button, .m-app .m-button-small, .m-app .m-button-outline-small, .m-app .m-button-outline, .m-app .m-button-outline-fullwidth, .m-app .m-button-fullwidth {
+.m-app .m-button, .m-app .m-button-outline, .m-app .m-button-outline-fullwidth, .m-app .m-button-outline-small, .m-app .m-button-small, .m-app .m-button-fullwidth {
   padding: 0.4em 2.3em;
   font-size: 1em;
   line-height: 2em;
@@ -145,51 +170,48 @@ html, body {
   display: inline-block;
   -webkit-appearance: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  border-width: 1px;
+  border-style: solid;
+  /* For icons - FIXME CHECK: Find a better way to select icons */
 }
-/* line 11, ../../source/css/_uibutton.scss */
-.m-app .m-button span, .m-app .m-button-small span, .m-app .m-button-outline-small span, .m-app .m-button-outline span, .m-app .m-button-outline-fullwidth span, .m-app .m-button-fullwidth span {
+/* line 14, ../../source/css/_uibutton.scss */
+.m-app .m-button span, .m-app .m-button-outline span, .m-app .m-button-outline-fullwidth span, .m-app .m-button-outline-small span, .m-app .m-button-small span, .m-app .m-button-fullwidth span {
   top: 2px;
   position: relative;
 }
-/* line 14, ../../source/css/_uibutton.scss */
-.m-app .m-button span:first-child, .m-app .m-button-small span:first-child, .m-app .m-button-outline-small span:first-child, .m-app .m-button-outline span:first-child, .m-app .m-button-outline-fullwidth span:first-child, .m-app .m-button-fullwidth span:first-child {
+/* line 17, ../../source/css/_uibutton.scss */
+.m-app .m-button span:first-child, .m-app .m-button-outline span:first-child, .m-app .m-button-outline-fullwidth span:first-child, .m-app .m-button-outline-small span:first-child, .m-app .m-button-small span:first-child, .m-app .m-button-fullwidth span:first-child {
   left: -1em;
 }
-/* line 17, ../../source/css/_uibutton.scss */
-.m-app .m-button span:last-child, .m-app .m-button-small span:last-child, .m-app .m-button-outline-small span:last-child, .m-app .m-button-outline span:last-child, .m-app .m-button-outline-fullwidth span:last-child, .m-app .m-button-fullwidth span:last-child {
+/* line 20, ../../source/css/_uibutton.scss */
+.m-app .m-button span:last-child, .m-app .m-button-outline span:last-child, .m-app .m-button-outline-fullwidth span:last-child, .m-app .m-button-outline-small span:last-child, .m-app .m-button-small span:last-child, .m-app .m-button-fullwidth span:last-child {
   left: 1em;
 }
-/* line 25, ../../source/css/_uibutton.scss */
-.m-app .m-button:link, .m-app .m-button-small:link, .m-app .m-button-outline-small:link, .m-app .m-button-outline:link, .m-app .m-button-outline-fullwidth:link, .m-app .m-button-fullwidth:link {
+/* line 28, ../../source/css/_uibutton.scss */
+.m-app .m-button:link, .m-app .m-button-outline:link, .m-app .m-button-outline-fullwidth:link, .m-app .m-button-outline-small:link, .m-app .m-button-small:link, .m-app .m-button-fullwidth:link {
   text-decoration: none;
 }
-/* line 30, ../../source/css/_uibutton.scss */
-.m-app .m-button:focus, .m-app .m-button-small:focus, .m-app .m-button-outline-small:focus, .m-app .m-button-outline:focus, .m-app .m-button-outline-fullwidth:focus, .m-app .m-button-fullwidth:focus,
+/* line 39, ../../source/css/_uibutton.scss */
+.m-app .m-button:focus, .m-app .m-button-outline:focus, .m-app .m-button-outline-fullwidth:focus, .m-app .m-button-outline-small:focus, .m-app .m-button-small:focus, .m-app .m-button-fullwidth:focus,
 .m-app .m-button:active,
-.m-app .m-button-small:active,
-.m-app .m-button-outline-small:active,
 .m-app .m-button-outline:active,
 .m-app .m-button-outline-fullwidth:active,
+.m-app .m-button-outline-small:active,
+.m-app .m-button-small:active,
 .m-app .m-button-fullwidth:active {
-  background: red;
   outline: 0;
 }
-/* line 35, ../../source/css/_uibutton.scss */
+/* line 43, ../../source/css/_uibutton.scss */
 .m-app .m-button-small, .m-app .m-button-outline-small {
   padding-top: 0;
   padding-bottom: 0;
 }
-/* line 41, ../../source/css/_uibutton.scss */
-.m-app .m-button-outline, .m-app .m-button-outline-fullwidth, .m-app .m-button-outline-small {
-  border-width: 1px;
-  border-style: solid;
-}
-/* line 47, ../../source/css/_uibutton.scss */
+/* line 49, ../../source/css/_uibutton.scss */
 .m-app .m-button-fullwidth, .m-app .m-button-outline-fullwidth {
   width: 100%;
   border-radius: 0;
 }
-/* line 53, ../../source/css/_uibutton.scss */
+/* line 55, ../../source/css/_uibutton.scss */
 .m-app .m-button-outline-fullwidth {
   border-left: none;
   border-right: none;
@@ -362,110 +384,141 @@ html, body {
   animation-name: m-loading-object-animation-2;
   margin-left: 2.5em;
 }
-/* line 37, ../../source/css/_uiform.scss */
+/* line 40, ../../source/css/_uiform.scss */
 .m-app .m-form.m-form-left-labels .m-field label {
   float: left;
   width: 30%;
 }
-/* line 43, ../../source/css/_uiform.scss */
+/* line 46, ../../source/css/_uiform.scss */
 .m-app .m-form.m-form-top-labels .m-field label {
   width: 100%;
   display: block;
 }
-/* line 49, ../../source/css/_uiform.scss */
+/* line 52, ../../source/css/_uiform.scss */
 .m-app .m-form .m-field {
   padding: 1em;
   border-bottom: 1px solid #ccc;
   display: block;
 }
-/* line 54, ../../source/css/_uiform.scss */
+/* line 57, ../../source/css/_uiform.scss */
 .m-app .m-form .m-field label {
   font-weight: bold;
   font-size: 1em;
   line-height: 1.5em;
 }
-/* line 60, ../../source/css/_uiform.scss */
+/* line 63, ../../source/css/_uiform.scss */
 .m-app .m-form .m-field.m-error label {
   color: red;
 }
 /* line 3, ../../source/css/_uiform.scss */
-.m-app .m-form.m-form-left-labels .m-field .m-text {
+.m-app .m-form.m-form-left-labels .m-text {
   width: 70%;
 }
 /* line 8, ../../source/css/_uiform.scss */
-.m-app .m-form.m-form-top-labels .m-field .m-text {
+.m-app .m-form.m-form-top-labels .m-text {
   width: 100%;
   display: block;
 }
-/* line 15, ../../source/css/_uiform.scss */
-.m-app .m-form .m-field .m-text {
+/* line 14, ../../source/css/_uiform.scss */
+.m-app .m-form .m-text {
   font-size: 1em;
   background-color: transparent;
   border: none;
   font-family: sans-serif;
   padding: 0;
 }
-/* line 22, ../../source/css/_uiform.scss */
-.m-app .m-form .m-field .m-text:disabled {
+/* line 21, ../../source/css/_uiform.scss */
+.m-app .m-form .m-text:disabled {
   opacity: 0.2;
 }
-/* line 28, ../../source/css/_uiform.scss */
+/* line 25, ../../source/css/_uiform.scss */
+.m-app .m-form .m-text:focus {
+  outline: 0;
+}
+/* line 31, ../../source/css/_uiform.scss */
 .m-app .m-form .m-field.m-error .m-text {
   background-color: red;
 }
-/* line 3, ../../source/css/_uiformtext.scss */
-.m-app .m-form .m-text {
-  background: red;
-}
 /* line 3, ../../source/css/_uiform.scss */
-.m-app .m-form.m-form-left-labels .m-field .m-textarea {
+.m-app .m-form.m-form-left-labels .m-textarea {
   width: 70%;
 }
 /* line 8, ../../source/css/_uiform.scss */
-.m-app .m-form.m-form-top-labels .m-field .m-textarea {
+.m-app .m-form.m-form-top-labels .m-textarea {
   width: 100%;
   display: block;
 }
-/* line 15, ../../source/css/_uiform.scss */
-.m-app .m-form .m-field .m-textarea {
+/* line 14, ../../source/css/_uiform.scss */
+.m-app .m-form .m-textarea {
   font-size: 1em;
   background-color: transparent;
   border: none;
   font-family: sans-serif;
   padding: 0;
 }
-/* line 22, ../../source/css/_uiform.scss */
-.m-app .m-form .m-field .m-textarea:disabled {
+/* line 21, ../../source/css/_uiform.scss */
+.m-app .m-form .m-textarea:disabled {
   opacity: 0.2;
 }
-/* line 28, ../../source/css/_uiform.scss */
+/* line 25, ../../source/css/_uiform.scss */
+.m-app .m-form .m-textarea:focus {
+  outline: 0;
+}
+/* line 31, ../../source/css/_uiform.scss */
 .m-app .m-form .m-field.m-error .m-textarea {
   background-color: red;
 }
 /* line 3, ../../source/css/_uiform.scss */
-.m-app .m-form.m-form-left-labels .m-field .m-select {
+.m-app .m-form.m-form-left-labels .m-select {
   width: 70%;
 }
 /* line 8, ../../source/css/_uiform.scss */
-.m-app .m-form.m-form-top-labels .m-field .m-select {
+.m-app .m-form.m-form-top-labels .m-select {
   width: 100%;
   display: block;
 }
-/* line 15, ../../source/css/_uiform.scss */
-.m-app .m-form .m-field .m-select {
+/* line 14, ../../source/css/_uiform.scss */
+.m-app .m-form .m-select {
   font-size: 1em;
   background-color: transparent;
   border: none;
   font-family: sans-serif;
   padding: 0;
 }
-/* line 22, ../../source/css/_uiform.scss */
-.m-app .m-form .m-field .m-select:disabled {
+/* line 21, ../../source/css/_uiform.scss */
+.m-app .m-form .m-select:disabled {
   opacity: 0.2;
 }
-/* line 28, ../../source/css/_uiform.scss */
+/* line 25, ../../source/css/_uiform.scss */
+.m-app .m-form .m-select:focus {
+  outline: 0;
+}
+/* line 31, ../../source/css/_uiform.scss */
 .m-app .m-form .m-field.m-error .m-select {
   background-color: red;
+}
+/* line 3, ../../source/css/_uiformselect.scss */
+.m-app .m-form select.m-select {
+  margin-top: -1.4em;
+  opacity: 0.01;
+}
+/* line 8, ../../source/css/_uiformselect.scss */
+.m-app .m-form .m-select-cover {
+  background: white;
+  position: relative;
+}
+/* line 12, ../../source/css/_uiformselect.scss */
+.m-app .m-form .m-select-cover .m-icon-arrow-down-small {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+/* line 17, ../../source/css/_uiformselect.scss */
+.m-app .m-form .m-select-cover .m-value {
+  height: 1em;
+  display: inline-block;
+  overflow: hidden;
+  margin-right: 21px;
 }
 /* line 1, ../../source/css/_utils.scss */
 .m-app .m-hidden {
