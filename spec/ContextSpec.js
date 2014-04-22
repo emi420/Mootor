@@ -24,27 +24,11 @@ describe("Context", function() {
 	});
 
 
-
-	describe("I want to run my app a as web app", function() {
-		beforeEach(createApp);
-
-        
-		it("Should be able to detect if it is running in a browser", function(done) {
-            // Except context().browser to be true
-            expect(m.context.browser.webkit).toBe(true);
-
-            done();
-
-		});
-
-	});
-
-
 	describe("I want to run my app a as native app", function() {
 		beforeEach(createApp);
-		xit("Should be able to detect it is running in PhoneGap / Cordova", function(done) {
+		it("Should be able to detect it is running in PhoneGap / Cordova", function(done) {
             // Except context().cordova or context().phonegap to be true
-            expect(m.context.cordova || m.context.phonegap).toBe(true);
+            expect(m.context.cordova || m.context.phonegap).toBe(window.cordova !== undefined || window.phonegap !== undefined);
 
             done();
 
