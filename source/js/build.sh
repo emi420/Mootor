@@ -10,11 +10,17 @@ cat overthrow.min.js \
     uiapp.js \
     uiview.js \
     uipanel.js \
+    router.js \
+    route.js \
     uinavitem.js \
     uinavbar.js \
     uiheader.js \
     uifooter.js \
     uiloading.js \
-    router.js \
-    route.js \
+    uiform.js \
+    uiformtext.js \
+    uiformtextarea.js \
+    uiformselect.js \
+    uibutton.js \
     > ../../dist/js/mootor.js
+

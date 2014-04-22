@@ -100,29 +100,29 @@
     
     });   
     
-    // App.on("ready", function() {
-    //     var links = $("a"),
-    //         i,
-    //         href;
+    App.on("ready", function() {
+        var links = $("a"),
+            i,
+            href;
         
-    //     for (i = links.length; i--;) {
-    //         href = links[i].getAttribute("href");
-    //         if (href !== null) {                
-    //             if (m.app.route(links[i].getAttribute("href")) !== undefined) {
-    //                 (function(href) {
-    //                     $(links[i]).on("tap", function(e) {
-    //                         m.app.go(href);
-    //                     })
-    //                 }(href));
-    //                 $(links[i]).on("click", function(e) {
-    //                     e.stopPropagation();
-    //                     e.preventDefault();
-    //                 })
-    //             }
-    //         }
-    //     }
+        for (i = links.length; i--;) {
+            href = links[i].getAttribute("href");
+            if (href !== null) {                
+                if (m.app.route(links[i].getAttribute("href")) !== undefined) {
+                    (function(href) {
+                        $(links[i]).on("tap click", function(e) {
+                            m.app.go(href);
+                        })
+                    }(href));
+                    $(links[i]).on("click", function(e) {
+                        e.stopPropagation();
+                        e.preventDefault();
+                    })
+                }
+            }
+        }
         
-    // });  
+    });  
     
 
 }(window.$, window.Mootor));

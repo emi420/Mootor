@@ -75,6 +75,49 @@ html, body {
   overflow: hidden;
 }
 
+/* line 6, ../../source/css/normalize.scss */
+.m-app a, .m-app a:hover, .m-app a:focus,
+.m-app input, .m-app input:focus,
+.m-app select, .m-app select:focus,
+.m-app textarea, .m-app textarea:focus {
+  outline: none;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+/* line 14, ../../source/css/normalize.scss */
+.m-app input[type="search"]::-webkit-search-decoration,
+.m-app input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+/* line 30, ../../source/css/normalize.scss */
+.m-app article,
+.m-app aside,
+.m-app details,
+.m-app figcaption,
+.m-app figure,
+.m-app footer,
+.m-app header,
+.m-app hgroup,
+.m-app nav,
+.m-app section,
+.m-app summary {
+  display: block;
+}
+/* line 39, ../../source/css/normalize.scss */
+.m-app button,
+.m-app input[type="button"],
+.m-app input[type="reset"],
+.m-app input[type="submit"] {
+  cursor: pointer;
+  -webkit-appearance: button;
+}
+/* line 49, ../../source/css/normalize.scss */
+.m-app button,
+.m-app html input[type="button"],
+.m-app input[type="reset"],
+.m-app input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
 /* line 1, ../../source/css/_fonts.scss */
 .m-app {
   font-family: arial;

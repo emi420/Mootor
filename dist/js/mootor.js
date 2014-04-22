@@ -34,6 +34,7 @@
     
     window.Mootor = Mootor;
     window.m = m;
+    
 
 }());
 /**
@@ -945,6 +946,14 @@
         });
 
         this.$el = $("<div>").addClass("m-views-container");
+
+        // Disable transitions on Android
+        m.app.settings("uipanel-transitions", m.context.os.android !== true)
+
+        if (m.app.settings("uipanel-transitions") !== true) {
+            this.$el.addClass("m-no-transitions");
+        }
+        
         this.el = this.$el[0];        
         this.$el.appendTo($container);
         this.$container = $container;
@@ -976,29 +985,29 @@
     
     });   
     
-    // App.on("ready", function() {
-    //     var links = $("a"),
-    //         i,
-    //         href;
+    App.on("ready", function() {
+        var links = $("a"),
+            i,
+            href;
         
-    //     for (i = links.length; i--;) {
-    //         href = links[i].getAttribute("href");
-    //         if (href !== null) {                
-    //             if (m.app.route(links[i].getAttribute("href")) !== undefined) {
-    //                 (function(href) {
-    //                     $(links[i]).on("tap", function(e) {
-    //                         m.app.go(href);
-    //                     })
-    //                 }(href));
-    //                 $(links[i]).on("click", function(e) {
-    //                     e.stopPropagation();
-    //                     e.preventDefault();
-    //                 })
-    //             }
-    //         }
-    //     }
+        for (i = links.length; i--;) {
+            href = links[i].getAttribute("href");
+            if (href !== null) {                
+                if (m.app.route(links[i].getAttribute("href")) !== undefined) {
+                    (function(href) {
+                        $(links[i]).on("tap click", function(e) {
+                            m.app.go(href);
+                        })
+                    }(href));
+                    $(links[i]).on("click", function(e) {
+                        e.stopPropagation();
+                        e.preventDefault();
+                    })
+                }
+            }
+        }
         
-    // });  
+    });  
     
 
 }(window.$, window.Mootor));
@@ -1141,14 +1150,22 @@
             self.panel.position("right").show();
 
             UIPanel._startTransition();
-
-            window.setTimeout(function() {
-                UIPanel.dispatch("transitionEnd", self.panel);
-            }, UIPanel._transitionDuration);
+            
+            if (m.app.settings("uipanel-transitions") === true) {
+                window.setTimeout(function() {
+                    UIPanel.dispatch("transitionEnd", self.panel);
+                }, UIPanel._transitionDuration);
+            }
 
             UIPanel.on("transitionEnd", function() {
                 self.panel.position("left");
             });
+            
+
+            if (m.app.settings("uipanel-transitions") !== true) {
+                UIPanel.dispatch("transitionEnd", self.panel);
+            }
+            
         });
     
         view.on("unload", function(view) {
@@ -1158,6 +1175,7 @@
     });
     
     UIApp.on("init", function(self) {
+        
         UIPanel._addTransitionClass();    
         UIPanel._setTransitionDuration();  
     });
@@ -1197,7 +1215,7 @@
             $el = $(el);
             
             $el.addClass("m-panel overthrow");
-
+            
             self.transition(UIPanel.DEFAULT_TRANSITION);
 
             m.app.ui.$el.append(el);            
@@ -1205,14 +1223,19 @@
         },
         
         _startTransition: function (self) {
-            var uiapp = m.app.ui;
-            uiapp.$el.addClass("m-transition-hslide");
-            uiapp.$el.addClass("m-transition-hslide-left").removeClass("m-transition-hslide-right");
             
+            var uiapp = m.app.ui;
+            
+            if (m.app.settings("uipanel-transitions") === true) {
+                uiapp.$el.addClass("m-transition-hslide");
+                uiapp.$el.addClass("m-transition-hslide-left").removeClass("m-transition-hslide-right");
+            }
             
             UIPanel.on("transitionEnd", function () {
-                uiapp.$el.removeClass("m-transition-hslide");
-                uiapp.$el.addClass("m-transition-hslide-right").removeClass("m-transition-hslide-left");
+                if (m.app.settings("uipanel-transitions") === true) {
+                    uiapp.$el.removeClass("m-transition-hslide");
+                    uiapp.$el.addClass("m-transition-hslide-right").removeClass("m-transition-hslide-left");
+                }
             });
         },
         
@@ -1229,10 +1252,15 @@
         
         _setTransitionDuration: function() {
 
-            var getStyleBySelector = function ( selector ) {
-               var sheetList = document.styleSheets;
-               var ruleList;
-               var i, j, ss;
+            var getStyleBySelector,
+                transitionDurationCSS,
+                transitionDurationMiliseconds,
+                t;
+            
+                getStyleBySelector = function ( selector ) {
+               var sheetList = document.styleSheets,
+                   ruleList,
+                   i, j, ss;
 
                /* look through stylesheets in reverse order that
                   they appear in the document */
@@ -1262,10 +1290,15 @@
             };
 
 
-            var t = getStyleBySelector(".m-app .m-transition-hslide");
+            t = getStyleBySelector(".m-app .m-transition-hslide");
+            
+            if (t !== null) {
+                transitionDurationCSS = t.transitionDuration || t.webkitTransitionDuration || t.operaTransitionDuration || t.mozTransitionDuration;
+                transitionDurationMiliseconds = parseFloat(transitionDurationCSS) * 1000;
+            } else {
+                transitionDurationMiliseconds = 0;
+            }
 
-            var transitionDurationCSS = t.transitionDuration || t.webkitTransitionDuration || t.operaTransitionDuration || t.mozTransitionDuration;
-            var transitionDurationMiliseconds = parseFloat(transitionDurationCSS) * 1000;
             UIPanel._transitionDuration = transitionDurationMiliseconds;
         }        
         
@@ -1345,8 +1378,196 @@
 
     });
     
-    
 }(window.$, window.Mootor));/**
+* The Router class is for defining routes
+*
+* @class Router
+* @constructor
+*  @module Router
+* @author Emilio Mariscal (emi420 [at] gmail.com)
+* @author Martín Szyszlican (martinsz [at] gmail.com)
+*/
+
+(function ($, Mootor) {
+
+    "use strict";
+
+    var Router,
+
+        Route,
+        App,
+        _appGo,
+        _pendingGo,
+        _lastHash,
+        _onPopState;
+                    
+    // Dependencies
+    
+    App = Mootor.App;
+    Route = Mootor.Route;
+    
+    // Private constructors
+
+    Router = Mootor.Router = function() {
+    };
+
+    // Event handlers
+
+    _onPopState = function() {
+        
+        var urlBack;
+
+        if (_lastHash === window.location.hash) {
+            urlBack = m.app.history[m.app.history.length - 2];
+            if (urlBack !== undefined) {
+                _appGo(urlBack);
+            } else {
+                _appGo(window.location.hash);
+            }
+        } else {
+            _appGo(window.location.hash);
+        }
+
+        _lastHash = window.location.hash;
+
+    };
+
+    if (m.context.os.android === true) {
+        window.onhashchange = _onPopState;
+    } else {
+        window.onpopstate = _onPopState;
+    }
+
+
+    _appGo = function(url) { 
+        _pendingGo = url;
+    };
+
+    App.on("ready", function() {
+        _appGo = function(url) {
+            m.app.go(url);
+        };
+        if (_pendingGo === undefined) {
+            _pendingGo = window.location.hash
+        }
+        
+        m.app.go(_pendingGo);
+    });
+
+    // Private static methods and properties
+
+    $.extend(Router, {
+        _collection: {}
+    });
+
+    
+    $.extend(App.prototype, {
+        
+        /**
+        * Create a route
+        *
+        * @method route
+        * @param {string} url Regular expresion string
+        * @param {string} url URL to route
+        * @param {View} view View object
+        * @return Route
+        * @example
+        *     // Set route
+        *     m.app.route("index.html", m.app.view("index"));
+        *     /
+        *     // Get route
+        *     route = m.app.route("index.html");
+        */
+        route: function(url, view) {
+            Route = Mootor.Route;
+            
+            if (view === undefined) {
+                var s,
+                    route,
+                    match;
+                    
+                    if (url === undefined) {
+                    //    debugger;
+                    }
+
+                for (s in Router._collection) {
+                    match = url.match(new RegExp(s));
+                    if (match !== null) {
+                        route = Router._collection[s];
+                        route.view.params = match.slice(1, match.length);
+                        route.url = url;
+                        return route;
+                    }
+                }
+                return undefined;
+            } else {
+                Router._collection[url] = new Route(url, view);
+                return Router._collection[url];
+            }
+        }
+    });
+          
+}(window.$, window.Mootor));
+/**
+* The Route class is for defining a route
+*
+* @class Route
+* @constructor
+* @module Router
+* @author Emilio Mariscal (emi420 [at] gmail.com)
+* @author Martín Szyszlican (martinsz [at] gmail.com)
+*/
+
+
+(function ($, Mootor) {
+
+    "use strict";
+
+    var Route;
+
+    // Private constructors
+    
+    Route = Mootor.Route = function(regex, view) {
+        this.regex = regex;
+        this.view = view;
+    };
+    
+    // Private static methods and properties
+
+    $.extend(Route, {
+        // code here
+    });
+
+    // Public methods
+
+    $.extend(Route.prototype, {
+        
+        /**
+        * The URL regex referenced by this route
+        *
+        * @property regex
+        * @type String
+        * @example
+        *     url_regex = m.app.route("index.html").regex;
+        */
+        regex: "",
+
+        /**
+        * The view that implements this route
+        * If called with no parameters, it returns the currently set view in this route.
+        *
+        * @method view
+        * @param {View} [view] - The view that implements this route
+        * @return view
+        * @example
+        *     url_view = m.app.route("index.html").view;
+        */
+        view: {},
+
+    });        
+
+}(window.$, window.Mootor));
+/**
 * The UINavItem is an item of a UINavBar, like an action button or an anchor link
 *
 * @class UINavItem
@@ -1609,7 +1830,8 @@
             });
             self.back.$el.addClass("m-header-back");
             self.back.hide();
-            self.back.$el.on("click tap", function(e) {
+            
+            self.back.$el.on("tap click", function(e) {
                 m.app.back();
             });
             self.back.el.onclick = function(e) {
@@ -1931,183 +2153,343 @@
 
       
 }(window.$, window.Mootor));
+
+
 /**
-* The Router class is for defining routes
+* The UIForm is a form to input data
 *
-* @class Router
+* @class UIForm
+* @extends UI
 * @constructor
-*  @module Router
+* @module UI
 * @author Emilio Mariscal (emi420 [at] gmail.com)
 * @author Martín Szyszlican (martinsz [at] gmail.com)
 */
 
 (function ($, Mootor) {
-
+    
     "use strict";
 
-    var Router,
+    var UIForm,
+        UIView,
+        UI,
+        View;
+        
+    // Dependences
 
-        Route,
-        App,
-        _appGo,
-        _pendingGo,
-        _lastHash;
-                    
-    // Dependencies
-    
-    App = Mootor.App;
-    Route = Mootor.Route;
-    
+    UI = Mootor.UI;
+    UIView = Mootor.UIView;
+    View = Mootor.View;
+
     // Private constructors
 
-    Router = Mootor.Router = function() {
+    Mootor.UIForm = UIForm = function(element) {
+        console.log("UIForm",element);
     };
-
+    
     // Event handlers
 
-    window.onpopstate = function() {
-        
-        var urlBack;
-
-        if (_lastHash === window.location.hash) {
-            urlBack = m.app.history[m.app.history.length - 2];
-            if (urlBack !== undefined) {
-                _appGo(urlBack);
-            } else {
-                _appGo(window.location.hash);
-            }
-        } else {
-            _appGo(window.location.hash);
+    UIView.on("init", function(self) {
+        var i;
+        for (i in UIForm._controls) {
+            UIForm._controls[i].constructor._init(self);
         }
-
-        _lastHash = window.location.hash;
-
-    };
-
-
-    _appGo = function(url) { 
-        _pendingGo = url;
-    };
-
-    App.on("ready", function() {
-        _appGo = function(url) {
-            m.app.go(url);
-        };
-        if (_pendingGo === undefined) {
-            _pendingGo = window.location.hash
-        }
-        m.app.go(_pendingGo);
     });
+
+
+    // Prototypal inheritance
+    $.extend(UIForm.prototype, UI.prototype);
 
     // Private static methods and properties
 
-    $.extend(Router, {
-        _collection: {}
-    });
-
-    
-    $.extend(App.prototype, {
-        
+    $.extend(UIForm, {
         /**
-        * Create a route
-        *
-        * @method route
-        * @param {string} url Regular expresion string
-        * @param {string} url URL to route
-        * @param {View} view View object
-        * @return Route
-        * @example
-        *     // Set route
-        *     m.app.route("index.html", m.app.view("index"));
-        *     /
-        *     // Get route
-        *     route = m.app.route("index.html");
+        * Controls
+        * @private
         */
-        route: function(url, view) {
-            Route = Mootor.Route;
-            
-            if (view === undefined) {
-                var s,
-                    route,
-                    match;
-                    
-                    if (url === undefined) {
-                    //    debugger;
-                    }
+        _controls: [],
 
-                for (s in Router._collection) {
-                    match = url.match(new RegExp(s));
-                    if (match !== null) {
-                        route = Router._collection[s];
-                        route.view.params = match.slice(1, match.length);
-                        route.url = url;
-                        return route;
-                    }
-                }
-                return undefined;
-            } else {
-                Router._collection[url] = new Route(url, view);
-                return Router._collection[url];
-            }
+        registerControl: function(constructor) {
+            UIForm._controls.push({
+                constructor: constructor
+            });
         }
     });
-          
+
+    // Public methods and properties
+
+    $.extend(UIForm.prototype, {
+        
+        /**
+        * Serialize form's data
+        *
+        * @method serialize
+        * @return {Object} Serialized data in a JSON object
+        */
+        serialize: function() {
+            
+        },
+
+        /**
+        * Clear all form fields
+        *
+        * @method clear
+        * @chainable
+        */
+        clear: function() {
+            // code here
+        }
+    });        
 }(window.$, window.Mootor));
 /**
-* The Route class is for defining a route
+* UIFormText is a text input of a form
 *
-* @class Route
+* @class UIFormText
+* @extends UI
 * @constructor
-* @module Router
+* @module UI
 * @author Emilio Mariscal (emi420 [at] gmail.com)
 * @author Martín Szyszlican (martinsz [at] gmail.com)
 */
 
 (function ($, Mootor) {
-
+    
     "use strict";
 
-    var Route;
+    var UIFormText,
+    
+        UI,
+        UIForm;
 
+    // Dependences
+
+    UI = Mootor.UI;
+    UIForm = Mootor.UIForm;
+
+    // Event handelers
+    
     // Private constructors
-    
-    Route = Mootor.Route = function(regex, view) {
-        this.regex = regex;
-        this.view = view;
+
+    UIFormText = function() {
+        // Code here
     };
-    
+
+    // Prototypal inheritance
+    $.extend(UIFormText.prototype, UI.prototype);
+
     // Private static methods and properties
 
-    $.extend(Route, {
-        // code here
+    $.extend(UIFormText, {
+
+        _init: function(uiview) {
+            var inputs,
+                i;
+                
+            inputs = uiview.$el.find(".m-text");
+            
+            // code here
+
+        },
+        
     });
 
-    // Public methods
+    // Public methods and properties
 
-    $.extend(Route.prototype, {
-        
-        /**
-        * The URL regex referenced by this route
-        *
-        * @property regex
-        * @type String
-        * @example
-        *     url_regex = m.app.route("index.html").regex;
-        */
-        regex: "",
+    $.extend(UIFormText.prototype, {
+    });      
+    
+    UIForm.registerControl(UIFormText);  
 
-        /**
-        * The view that implements this route
-        * If called with no parameters, it returns the currently set view in this route.
-        *
-        * @method view
-        * @param {View} [view] - The view that implements this route
-        * @return view
-        * @example
-        *     url_view = m.app.route("index.html").view;
-        */
-        view: {},
+}(window.$, window.Mootor));
+/**
+* UIFormTextArea is a textarea input of a form
+*
+* @class UIFormTextArea
+* @extends UI
+* @constructor
+* @module UI
+* @author Emilio Mariscal (emi420 [at] gmail.com)
+* @author Martín Szyszlican (martinsz [at] gmail.com)
+*/
 
+(function ($, Mootor) {
+    
+    "use strict";
+
+    var UIFormTextArea,
+    
+        UI,
+        UIForm;
+
+    // Dependences
+
+    UI = Mootor.UI;
+    UIForm = Mootor.UIForm;
+    
+    // Private constructors
+
+    UIFormTextArea = function() {
+        // code here
+    };
+
+    // Prototypal inheritance
+    $.extend(UIFormTextArea.prototype, UI.prototype);
+
+    // Private static methods and properties
+
+    $.extend(UIFormTextArea, {
+        _init: function(uiview) {
+            var inputs,
+                i;
+                
+            inputs = uiview.$el.find(".m-textarea");
+
+           // code here
+        }
+   
+    });
+
+    // Public methods and properties
+
+    $.extend(UIFormTextArea.prototype, {
     });        
+
+    UIForm.registerControl(UIFormTextArea);  
+
+}(window.$, window.Mootor));
+/**
+* UIFormSelect is a select input of a form
+*
+* @class UIFormSelect
+* @extends UI
+* @constructor
+* @module UI
+* @author Emilio Mariscal (emi420 [at] gmail.com)
+* @author Martín Szyszlican (martinsz [at] gmail.com)
+*/
+
+(function ($, Mootor) {
+    
+    "use strict";
+
+    var UIFormSelect,
+    
+        UI,
+        UIForm;
+
+    // Dependences
+
+    UI = Mootor.UI;
+    UIForm = Mootor.UIForm;
+    
+    // Private constructors
+
+    UIFormSelect = function() {
+        // code here
+    };
+
+    // Prototypal inheritance
+    $.extend(UIFormSelect.prototype, UI.prototype);
+
+    // Private static methods and properties
+
+    $.extend(UIFormSelect, {
+        _init: function(uiview) {
+            var inputs,
+                i;
+                
+            inputs = uiview.$el.find(".m-select");
+            inputs.each(function(index,element) {
+                var $element = $(element);
+
+                var coverHTML = '<div class="m-select m-select-cover">\
+                    <span class="m-value"></span>\
+                    <span class="m-icon-arrow-down-small"></span>\
+                </div>';
+
+                var $cover = element.$cover = $(coverHTML).insertBefore(element);
+
+                updateValue();
+                $element.on("change", updateValue);
+
+                // https://code.google.com/p/expandselect/
+
+                function updateValue() {
+                    //Value is the text of the selected option or the placeholder text
+                    var value = element.options[element.selectedIndex].text || element.placeholder;
+                    $cover.find(".m-value").html(value);
+                }
+            });
+        }
+   
+    });
+
+    // Public methods and properties
+
+    $.extend(UIFormSelect.prototype, {
+    });        
+
+    UIForm.registerControl(UIFormSelect);  
+
+}(window.$, window.Mootor));
+/**
+* UIButton is a button element, it uses UIForm to extend elements with aria-roles
+*
+* @class UIButton
+* @extends UI
+* @constructor
+* @module UI
+* @author Emilio Mariscal (emi420 [at] gmail.com)
+* @author Martín Szyszlican (martinsz [at] gmail.com)
+*/
+
+(function ($, Mootor) {
+    
+    "use strict";
+
+    var UIButton,
+    
+        UI,
+        UIForm;
+
+    // Dependences
+
+    UI = Mootor.UI;
+    UIForm = Mootor.UIForm;
+
+    // Event handelers
+    
+    // Private constructors
+
+    UIButton = function() {
+        // Code here
+    };
+
+    // Prototypal inheritance
+    $.extend(UIButton.prototype, UI.prototype);
+
+    // Private static methods and properties
+
+    $.extend(UIButton, {
+
+        _init: function(uiview) {
+            var buttons;
+                
+            buttons = uiview.$el.find(".m-button");
+            
+            // code here
+
+            buttons.attr("aria-role","button");
+
+        },
+        
+    });
+
+    // Public methods and properties
+
+    $.extend(UIButton.prototype, {
+    });      
+    
+    UIForm.registerControl(UIButton);  
 
 }(window.$, window.Mootor));

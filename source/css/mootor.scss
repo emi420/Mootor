@@ -13,7 +13,9 @@ html, body {
 }
 
 .m-app {
-	@import "fonts";
+
+    @import "normalize";
+    @import "fonts";
 	@import "uipanel";
 	@import "uibutton";
 	@import "uiheader";
