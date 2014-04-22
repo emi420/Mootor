@@ -8,6 +8,9 @@
 * @author Martín Szyszlican (martinsz [at] gmail.com)
 */
 
+/*** FIXME: on Android 2.2 the browser crash ***/
+
+
 (function ($, Mootor) {
 
     "use strict";
