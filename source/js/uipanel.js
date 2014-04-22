@@ -48,7 +48,7 @@
 
             self.panel.position("right").show();
 
-            UIPanel._startTransition();
+            //UIPanel._startTransition();
 
             window.setTimeout(function() {
                 UIPanel.dispatch("transitionEnd", self.panel);
@@ -67,7 +67,8 @@
     
     UIApp.on("init", function(self) {
         UIPanel._addTransitionClass();    
-        UIPanel._setTransitionDuration();  
+        /*** FIXME: on Android 2.2 the browser crash ***/
+        //UIPanel._setTransitionDuration();  
     });
 
   

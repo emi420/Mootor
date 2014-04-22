@@ -119,7 +119,9 @@
             route =  m.app.route(url);
             if (route !== undefined) {
                 App._currentRoute = route;
+                
                 App.dispatch("go", this);
+                
                 if (this.history[this.history.length - 2] !== route.url) {
                     this.history.push(route.url);    
                 } else {
@@ -127,7 +129,7 @@
                 }
             } else {
                 throw(new Error("Route " + url + " is not defined"));
-            }                       
+            }
             return route;
         },        
 

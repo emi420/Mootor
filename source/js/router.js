@@ -63,6 +63,7 @@
         if (_pendingGo === undefined) {
             _pendingGo = window.location.hash
         }
+        
         m.app.go(_pendingGo);
     });
 
