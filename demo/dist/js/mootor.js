@@ -999,10 +999,11 @@
                             m.app.go(href);
                         })
                     }(href));
-                    $(links[i]).on("click", function(e) {
+                    $(links[i])[0].onclick = function(e) {
                         e.stopPropagation();
                         e.preventDefault();
-                    })
+                        return false;
+                    };
                 }
             }
         }
