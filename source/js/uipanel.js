@@ -48,7 +48,7 @@
 
             self.panel.position("right").show();
 
-            //UIPanel._startTransition();
+            UIPanel._startTransition();
 
             window.setTimeout(function() {
                 UIPanel.dispatch("transitionEnd", self.panel);
@@ -67,8 +67,7 @@
     
     UIApp.on("init", function(self) {
         UIPanel._addTransitionClass();    
-        /*** FIXME: on Android 2.2 the browser crash ***/
-        //UIPanel._setTransitionDuration();  
+        UIPanel._setTransitionDuration();  
     });
 
   
@@ -114,6 +113,9 @@
         },
         
         _startTransition: function (self) {
+            
+            // FIXME CHECK
+            
             var uiapp = m.app.ui;
             uiapp.$el.addClass("m-transition-hslide");
             uiapp.$el.addClass("m-transition-hslide-left").removeClass("m-transition-hslide-right");

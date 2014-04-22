@@ -45,7 +45,8 @@ $transitionDuration: .3s;
 }
 
 .m-transition-hslide {
-    @include transition(transform $transitionDuration ease-out);
+    // FIXME: browser crash on Android 2.2
+    //@include transition(transform $transitionDuration ease-out);
 }
 
 .m-transition-hslide-left {
