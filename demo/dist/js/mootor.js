@@ -994,16 +994,23 @@
             href = links[i].getAttribute("href");
             if (href !== null) {                
                 if (m.app.route(links[i].getAttribute("href")) !== undefined) {
-                    (function(href) {
-                        $(links[i]).on("tap click", function(e) {
-                            m.app.go(href);
-                        })
-                    }(href));
-                    $(links[i])[0].onclick = function(e) {
-                        e.stopPropagation();
-                        e.preventDefault();
-                        return false;
-                    };
+
+
+                    if ( !!('ontouchstart' in window) ) {
+
+                        links[i].onclick = function() {
+                            return false;
+                        };
+
+                        (function(href) {
+                            $(links[i]).on("tap click", function(e) {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                m.app.go(href);
+                            })
+                        }(href));
+
+                    }
                 }
             }
         }
