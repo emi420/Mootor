@@ -4,7 +4,6 @@
     // not worry about device capabilities
     
     if ( !!('ontouchstart' in window) ) {
-        console.log("toch detected");
         $.fn._on = $.fn.on;
         $.fn.on = function(event, selector, data, callback, one) {
             if (event.indexOf("click") > -1) {
