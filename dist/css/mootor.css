@@ -1,9 +1,10 @@
+@charset "UTF-8";
 /**
  * @summary Mootor CSS
  * @author Emilio Mariscal (emi420 [at] gmail.com)
  * @author Martín Szyszlican (martinsz [at] gmail.com)
  */
-/* line 17, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 17, ../../../../../.rvm/gems/ruby-2.0.0-p451/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -25,45 +26,45 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-/* line 22, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 22, ../../../../../.rvm/gems/ruby-2.0.0-p451/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html {
   line-height: 1;
 }
 
-/* line 24, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 24, ../../../../../.rvm/gems/ruby-2.0.0-p451/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
-/* line 26, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 26, ../../../../../.rvm/gems/ruby-2.0.0-p451/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 28, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 28, ../../../../../.rvm/gems/ruby-2.0.0-p451/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
-/* line 30, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 30, ../../../../../.rvm/gems/ruby-2.0.0-p451/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
-/* line 103, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 103, ../../../../../.rvm/gems/ruby-2.0.0-p451/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
-/* line 32, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 32, ../../../../../.rvm/gems/ruby-2.0.0-p451/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
-/* line 116, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 116, ../../../../../.rvm/gems/ruby-2.0.0-p451/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
   display: block;
 }
@@ -427,29 +428,33 @@ html, body {
   animation-name: m-loading-object-animation-2;
   margin-left: 2.5em;
 }
-/* line 40, ../../source/css/_uiform.scss */
+/* line 39, ../../source/css/_uiform.scss */
+.m-app .m-form.m-form-left-labels .m-field {
+  overflow: hidden;
+}
+/* line 42, ../../source/css/_uiform.scss */
 .m-app .m-form.m-form-left-labels .m-field label {
   float: left;
   width: 30%;
 }
-/* line 46, ../../source/css/_uiform.scss */
+/* line 48, ../../source/css/_uiform.scss */
 .m-app .m-form.m-form-top-labels .m-field label {
   width: 100%;
   display: block;
 }
-/* line 52, ../../source/css/_uiform.scss */
+/* line 54, ../../source/css/_uiform.scss */
 .m-app .m-form .m-field {
   padding: 1em;
   border-bottom: 1px solid #ccc;
   display: block;
 }
-/* line 57, ../../source/css/_uiform.scss */
+/* line 59, ../../source/css/_uiform.scss */
 .m-app .m-form .m-field label {
   font-weight: bold;
   font-size: 1em;
   line-height: 1.5em;
 }
-/* line 63, ../../source/css/_uiform.scss */
+/* line 65, ../../source/css/_uiform.scss */
 .m-app .m-form .m-field.m-error label {
   color: red;
 }
@@ -542,21 +547,28 @@ html, body {
 }
 /* line 3, ../../source/css/_uiformselect.scss */
 .m-app .m-form select.m-select {
-  margin-top: -1.4em;
+  top: -1.4em;
+  margin-bottom: -1.4em;
   opacity: 0.01;
-}
-/* line 8, ../../source/css/_uiformselect.scss */
-.m-app .m-form .m-select-cover {
-  background: white;
   position: relative;
 }
-/* line 12, ../../source/css/_uiformselect.scss */
+/* line 10, ../../source/css/_uiformselect.scss */
+.m-app .m-form.m-form-left-labels select.m-select {
+  float: left;
+}
+/* line 14, ../../source/css/_uiformselect.scss */
+.m-app .m-form .m-select-cover {
+  background: white;
+  float: left;
+  position: relative;
+}
+/* line 19, ../../source/css/_uiformselect.scss */
 .m-app .m-form .m-select-cover .m-icon-arrow-down-small {
   position: absolute;
   right: 0;
   top: 0;
 }
-/* line 17, ../../source/css/_uiformselect.scss */
+/* line 24, ../../source/css/_uiformselect.scss */
 .m-app .m-form .m-select-cover .m-value {
   height: 1em;
   display: inline-block;

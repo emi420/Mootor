@@ -37,6 +37,8 @@
 
 .m-form {
     &.m-form-left-labels .m-field {
+        overflow: hidden;
+
         label {
             float: left;
             width: 30%;
