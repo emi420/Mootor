@@ -57,6 +57,11 @@
             line-height: 55px;
             text-overflow: ellipsis;
             white-space: nowrap;
+            
+            img {
+                position: relative;
+                top: 4px;
+            }
         }
     }
 }
