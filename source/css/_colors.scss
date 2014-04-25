@@ -1,173 +1,37 @@
-
-$color-primary-1: #F3F3E8; 
-$color-primary-2: #A89C90; 
-$color-primary-3: #28830B; 
-$color-primary-4: #6DBCA8; 
-$color-primary-5: #ED9A3D; 
-$color-primary-6: #F04930; 
-$color-primary-7: #2F92B8; 
-$color-primary-8: #66B2B8; 
-$color-primary-9: #F8CE03;
-$color-white: #fff;
-
-$color-black: black; 
-
-
-$color-secondary-1: #E6E2DF; 
-$color-secondary-2: #CCC6BF; 
-$color-secondary-3: #46ACCE; 
-$color-secondary-4: #A4D8D5; 
-$color-secondary-5: #493C36; 
-$color-secondary-6: #F0EEF0; 
-$color-secondary-7: #2F92B8; 
-$color-secondary-8: #66B2B8; 
-$color-secondary-9: #F8CE03;
-
-$color-cheerful-1: #F2F2F2; 
-$color-cheerful-2: #BBBBBB; 
-$color-cheerful-3: #444444; 
-$color-cheerful-4: #56A658; 
-$color-cheerful-5: #ED9A3D; 
-$color-cheerful-6: #EB296F; 
-$color-cheerful-7: #43ABD8; 
-$color-cheerful-8: #F2D922; 
-$color-cheerful-9: #A24285;
-
-$color-soft-1: #F2F2F2; 
-$color-soft-2: #E5E5E5; 
-$color-soft-3: #444444; 
-$color-soft-4: #EBC850; 
-$color-soft-5: #34A4F5; 
-$color-soft-6: #0A88C9; 
-$color-soft-7: #FE4949; 
-$color-soft-8: #A884E2; 
-$color-soft-9: #82CB8D;
-
-.m-bg-color-primary-1 {
-	background: $color-primary-1;
+@mixin make_color_variants($name, $base) {
+	@include make_color($name + "-lighter",lighten($base,23%));
+	@include make_color($name + "-light",lighten($base,10%));
+	@include make_color($name,$base);
+	@include make_color($name + "-dark",darken($base,12%));
+	@include make_color($name + "-darker",darken($base,26%));
 }
 
-.m-border-color-primary-1 {
-	border-color: $color-primary-1;
+@mixin make_color($name, $base) {
+	.m-bg-color-#{$name} {
+		background: $base;
+	}
+
+	.m-border-color-#{$name} {
+		border-color: $base;
+	}
+
+	.m-color-#{$name} {
+		color: $base;
+	}
+
+	.m-color-#{$name}-fg {
+		color: $base
+	}
 }
 
-.m-color-primary-1 {
-	color: $color-primary-1;
-}
+@include make_color_variants("gray", #968E89);
+@include make_color_variants("primary", #66B2B8);
+@include make_color_variants("success", #6DBCA1);
+@include make_color_variants("warning", #F1CE03);
+@include make_color_variants("info", #ED9A3D);
+@include make_color_variants("danger", #F04930);
 
-.m-bg-color-primary-2 {
-	background: $color-primary-2;
-}
-
-.m-border-color-primary-2 {
-	border-color: $color-primary-2;
-}
-
-.m-color-primary-2 {
-	color: $color-primary-2;
-}
-
-.m-bg-color-primary-3 {
-	background: $color-primary-3;
-}
-
-.m-border-color-primary-3 {
-	border-color: $color-primary-3;
-}
-
-.m-color-primary-3 {
-	color: $color-primary-3;
-}
-
-.m-bg-color-primary-4 {
-	background: $color-primary-4;
-}
-
-.m-border-color-primary-4 {
-	border-color: $color-primary-4;
-}
-
-.m-color-primary-4 {
-	color: $color-primary-4;
-}
-
-.m-bg-color-primary-5 {
-	background: $color-primary-5;
-}
-
-.m-border-color-primary-5 {
-	border-color: $color-primary-5;
-}
-
-.m-color-primary-5 {
-	color: $color-primary-5;
-}
-
-.m-bg-color-primary-6 {
-	background: $color-primary-6;
-}
-
-.m-border-color-primary-6 {
-	border-color: $color-primary-6;
-}
-
-.m-color-primary-6 {
-	color: $color-primary-6;
-}
-
-.m-bg-color-primary-7 {
-	background: $color-primary-7;
-}
-
-.m-border-color-primary-7 {
-	border-color: $color-primary-7;
-}
-
-.m-color-primary-7 {
-	color: $color-primary-7;
-}
-
-.m-bg-color-primary-8 {
-	background: $color-primary-8;
-}
-
-.m-border-color-primary-8 {
-	border-color: $color-primary-8;
-}
-
-.m-color-primary-8 {
-	color: $color-primary-8;
-}
-
-.m-bg-color-primary-9 {
-	background: $color-primary-9;
-}
-
-.m-border-color-primary-9 {
-	border-color: $color-primary-9;
-}
-
-.m-color-primary-9 {
-	color: $color-primary-9;
-}
-
-.m-color-transparent {
-	color: transparent;
-}
-
-.m-color-black {
-	color: $color-black;
-}
-
-
-.m-bg-color-transparent {
-	background-color: transparent;
-}
-
-.m-border-color-transparent {
-	border-color: transparent;
-}
-
-.m-color-white-fg {
-	color: $color-white
-}
+@include make_color("white", #FFFFFF);
+@include make_color("cream", #F5F5F1);
+@include make_color("black", #2C2927);
+@include make_color("transparent", rgba(0,0,0,0));

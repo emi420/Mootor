@@ -1,19 +1,19 @@
-@mixin m-button($name, $color-index, $text-color-index, $active-color-index) {
+@mixin m-button($name, $text-color) {
     .m-button-#{$name}  {
-        @extend .m-border-color-primary-#{$color-index};
+        @extend .m-border-color-#{$name};
 
         &.m-button-fullwidth,
         &.m-button:link,
         &.m-button {
-            @extend .m-color-#{$text-color-index};
-            @extend .m-bg-color-primary-#{$color-index};
+            @extend .m-color-#{$text-color};
+            @extend .m-bg-color-#{$name};
         }
 
         &.m-button-outline-fullwidth,
         &.m-button-outline-small,
         &.m-button-outline {
             @extend .m-bg-color-transparent;
-            @extend .m-color-primary-#{$color-index};
+            @extend .m-color-#{$name};
         }
 
         &.m-button-outline:active,
@@ -27,22 +27,22 @@
         &.m-button:active,
         &.m-button-fullwidth:focus,
         &.m-button-fullwidth:active {
-            @extend .m-bg-color-primary-#{$active-color-index};
+            @extend .m-bg-color-#{$name}; //FIXME CHECK: LIGHTER
         }
 
     }
   
 }
 
-@include m-button("default","7", "black", "1");
-@include m-button("danger","6", "black", "5");
-@include m-button("info","5", "black", "3");
-@include m-button("warning","9", "black", "7");
-@include m-button("success","4", "black", "2");
-@include m-button("secondary","8", "black", "7");
-@include m-button("primary","7", "black", "1");
-
-
+@include m-button("gray", "black");
+@include m-button("primary", "black");
+@include m-button("success", "black");
+@include m-button("warning", "black");
+@include m-button("info", "black");
+@include m-button("danger", "black");
+@include m-button("white", "black");
+@include m-button("cream", "black");
+@include m-button("black", "white");
 
 .m-button-small {
     @extend .m-button;
