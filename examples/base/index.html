@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta name="viewport" content="initial-scale = 1.0, user-scalable = no">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+
+  <link rel="stylesheet" href="mootor/css/mootor.css">
+  <link rel="stylesheet" href="mootor/css/color.css">
+  <link rel="stylesheet" href="mootor/css/icons.css">
+
+  <script type="text/javascript" src="mootor/js/zepto.js"></script>
+  <script type="text/javascript" src="mootor/js/clickfix.js"></script>
+  <script type="text/javascript" src="mootor/js/zepto-touch.js"></script>
+  <script type="text/javascript" src="mootor/js/zepto-detect.js"></script>
+  <script type="text/javascript" src="mootor/js/mootor.js"></script>
+
+</head>
+
+<body>
+    
+    <header>
+        <h1>Base app</h1>
+    </header>
+    
+    
+    <script type="text/javascript">
+    
+        (function() {
+
+            "use strict";
+
+            var app = m.app({
+                views: [
+                    "index",
+                ]
+            }).init();
+    
+            app.route("^$", app.view("index"));
+            
+        }());
+    
+    </script>
+
+</body>
+</html>

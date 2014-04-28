@@ -1,0 +1,10 @@
+{
+  "name": "My App",
+  "description": "My app",
+  "launch_path": "/",
+  "developer": {
+    "name": "",
+    "url": ""
+  },
+  "default_locale": "en"
+}
