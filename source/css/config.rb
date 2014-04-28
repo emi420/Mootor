@@ -1,5 +1,5 @@
 # Set this to the root of your project when deployed:
-css_dir = "../../dist/css"
+css_dir = "."
 sass_dir = "."
 images_dir = "../img/"
 
