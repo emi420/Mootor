@@ -36,7 +36,7 @@
     _onPopState = function() {
         
         var urlBack;
-
+        
         if (_lastHash === window.location.hash) {
             urlBack = m.app.history[m.app.history.length - 2];
             if (urlBack !== undefined) {
@@ -51,10 +51,8 @@
         _lastHash = window.location.hash;
 
     };
-
-    if (m.context.os.android === true) {
-        window.onhashchange = _onPopState;
-    } else {
+    
+    if ("onpopstate" in window) {
         window.onpopstate = _onPopState;
     }
 
@@ -68,7 +66,7 @@
             m.app.go(url);
         };
         if (_pendingGo === undefined) {
-            _pendingGo = window.location.hash
+            _pendingGo = window.location.hash;
         }
         
         m.app.go(_pendingGo);

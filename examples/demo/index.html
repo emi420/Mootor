@@ -63,7 +63,7 @@
                     "colors",
                     "test"
                 ]
-            }).init();
+            });
     
             app.route("^$", app.view("index"));
             app.route("^#welcome/(.*)", app.view("testview"));
@@ -75,6 +75,8 @@
             app.route("^#uinavbar", app.view("uinavbar"));
             app.route("^#test", app.view("test"));
             app.route("^#colors", app.view("colors"));
+            
+            app.init();
             
         }());
     
