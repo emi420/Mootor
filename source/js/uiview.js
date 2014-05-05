@@ -53,8 +53,14 @@
                 });    
             }
         });
-    });
 
+        self.on("load", function() {
+            var footerHeight = $(".m-footer-container").height();
+            var headerHeight = $(".m-header-container").height();
+            self.ui.el.style.height = (m.app.ui.el.offsetHeight - footerHeight - headerHeight) + "px"
+        });
+
+    });
 
         
     // Private constructors
