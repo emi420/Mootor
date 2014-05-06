@@ -1,49 +1,43 @@
+/*
+button_colors = ["m-button-primary","m-button-success","m-button-warning","m-button-info","m-button-danger"]
+button_sizes = ["m-button","m-button-small"]
+button_width = ["m-button","m-button-block","m-button-fullwidth"]
+button_style = ["m-button","m-button-outline","m-button-clear"]
+*/
+
 @mixin m-button($name, $text-color) {
     .m-button-#{$name}  {
-        @extend .m-border-color-#{$name};
-
-        &.m-button-fullwidth,
-        &.m-button:link,
         &.m-button {
-            @extend .m-color-#{$text-color};
+            @extend .m-color-black;
             @extend .m-bg-color-#{$name};
+            @extend .m-border-color-transparent;
         }
 
-        &.m-button-outline-fullwidth,
-        &.m-button-outline-small,
-        &.m-button-outline {
+        &.m-button-block.m-button-outline,
+        &.m-button-fullwidth.m-button-outline,
+        &.m-button.m-button-outline {
             @extend .m-bg-color-transparent;
             @extend .m-color-#{$name};
+            @extend .m-border-color-#{$name};
         }
 
-        &.m-button-outline:active,
-        &.m-button-outline:focus,
-        &.m-button-outline-small:active,
-        &.m-button-outline-small:focus,
-        &.m-button-outline-fullwidth:active,
-        &.m-button-outline-fullwidth:focus ,
-
-        &.m-button:focus,
-        &.m-button:active,
-        &.m-button-fullwidth:focus,
-        &.m-button-fullwidth:active {
-            @extend .m-bg-color-#{$name}; //FIXME CHECK: LIGHTER
+        &.m-button-block.m-button-clear,
+        &.m-button-fullwidth.m-button-clear,
+        &.m-button.m-button-clear {
+            @extend .m-bg-color-transparent;
+            @extend .m-border-color-transparent;
+            @extend .m-color-#{$name};
         }
-
     }
   
 }
 
-@include m-button("gray", "black");
-@include m-button("primary", "black");
-@include m-button("success", "black");
-@include m-button("warning", "black");
-@include m-button("info", "black");
-@include m-button("danger", "black");
-@include m-button("white", "black");
-@include m-button("cream", "black");
-@include m-button("black", "white");
-
-.m-button-small {
-    @extend .m-button;
-}
+//@include m-button("gray", "white");
+@include m-button("primary", "white");
+@include m-button("success", "white");
+@include m-button("warning", "white");
+@include m-button("info", "white");
+@include m-button("danger", "white");
+//@include m-button("white", "white");
+//@include m-button("cream", "white");
+//@include m-button("black", "white");

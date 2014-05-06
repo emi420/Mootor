@@ -1,0 +1,9 @@
+.m-button:not(.m-button-block) {
+	margin: 1em 1em 1em 0;
+}
+
+.m-button-fullwidth,
+.m-button-block {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}

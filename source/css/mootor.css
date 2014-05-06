@@ -1,9 +1,10 @@
+@charset "UTF-8";
 /**
  * @summary Mootor CSS
  * @author Emilio Mariscal (emi420 [at] gmail.com)
  * @author Martín Szyszlican (martinsz [at] gmail.com)
  */
-/* line 17, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 17, ../../../../../.rvm/gems/ruby-2.0.0-p451/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -25,45 +26,45 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-/* line 22, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 22, ../../../../../.rvm/gems/ruby-2.0.0-p451/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html {
   line-height: 1;
 }
 
-/* line 24, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 24, ../../../../../.rvm/gems/ruby-2.0.0-p451/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
-/* line 26, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 26, ../../../../../.rvm/gems/ruby-2.0.0-p451/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 28, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 28, ../../../../../.rvm/gems/ruby-2.0.0-p451/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
-/* line 30, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 30, ../../../../../.rvm/gems/ruby-2.0.0-p451/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
-/* line 103, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 103, ../../../../../.rvm/gems/ruby-2.0.0-p451/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
-/* line 32, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 32, ../../../../../.rvm/gems/ruby-2.0.0-p451/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
-/* line 116, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 116, ../../../../../.rvm/gems/ruby-2.0.0-p451/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
   display: block;
 }
@@ -75,6 +76,16 @@ html, body {
   overflow: hidden;
 }
 
+/* line 15, mootor.scss */
+.m-app {
+  /*
+  button_sizes = ["m-button","m-button-small"]
+  button_width = ["m-button","m-button-block","m-button-fullwidth"]
+  button_style = ["m-button","m-button-outline","m-button-clear"]
+  */
+  /* SIZE */
+  /* WIDTH */
+}
 /* line 6, normalize.scss */
 .m-app a, .m-app a:hover, .m-app a:focus,
 .m-app input, .m-app input:focus,
@@ -203,9 +214,8 @@ html, body {
   transform: none;
   left: 0;
 }
-/* line 1, _uibutton.scss */
-.m-app .m-button, .m-app .m-button-outline, .m-app .m-button-outline-fullwidth, .m-app .m-button-outline-small, .m-app .m-button-small, .m-app .m-button-fullwidth {
-  padding: 0.4em 2.3em;
+/* line 7, _uibutton.scss */
+.m-app .m-button, .m-app .m-button-fullwidth, .m-app .m-button-block {
   font-size: 1em;
   line-height: 2em;
   border-width: 0;
@@ -215,49 +225,47 @@ html, body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   border-width: 1px;
   border-style: solid;
+  box-sizing: border-box;
+  padding: 4px 10px;
+  line-height: 30px;
+  min-height: 40px;
+  min-width: 130px;
   /* For icons - FIXME CHECK: Find a better way to select icons */
 }
-/* line 14, _uibutton.scss */
-.m-app .m-button span, .m-app .m-button-outline span, .m-app .m-button-outline-fullwidth span, .m-app .m-button-outline-small span, .m-app .m-button-small span, .m-app .m-button-fullwidth span {
+/* line 24, _uibutton.scss */
+.m-app .m-button span, .m-app .m-button-fullwidth span, .m-app .m-button-block span {
   top: 2px;
   position: relative;
 }
-/* line 17, _uibutton.scss */
-.m-app .m-button span:first-child, .m-app .m-button-outline span:first-child, .m-app .m-button-outline-fullwidth span:first-child, .m-app .m-button-outline-small span:first-child, .m-app .m-button-small span:first-child, .m-app .m-button-fullwidth span:first-child {
-  left: -1em;
-}
-/* line 20, _uibutton.scss */
-.m-app .m-button span:last-child, .m-app .m-button-outline span:last-child, .m-app .m-button-outline-fullwidth span:last-child, .m-app .m-button-outline-small span:last-child, .m-app .m-button-small span:last-child, .m-app .m-button-fullwidth span:last-child {
-  left: 1em;
-}
-/* line 28, _uibutton.scss */
-.m-app .m-button:link, .m-app .m-button-outline:link, .m-app .m-button-outline-fullwidth:link, .m-app .m-button-outline-small:link, .m-app .m-button-small:link, .m-app .m-button-fullwidth:link {
+/* line 38, _uibutton.scss */
+.m-app .m-button:link, .m-app .m-button-fullwidth:link, .m-app .m-button-block:link {
   text-decoration: none;
 }
-/* line 39, _uibutton.scss */
-.m-app .m-button:focus, .m-app .m-button-outline:focus, .m-app .m-button-outline-fullwidth:focus, .m-app .m-button-outline-small:focus, .m-app .m-button-small:focus, .m-app .m-button-fullwidth:focus,
+/* line 44, _uibutton.scss */
+.m-app .m-button:focus, .m-app .m-button-fullwidth:focus, .m-app .m-button-block:focus,
 .m-app .m-button:active,
-.m-app .m-button-outline:active,
-.m-app .m-button-outline-fullwidth:active,
-.m-app .m-button-outline-small:active,
-.m-app .m-button-small:active,
-.m-app .m-button-fullwidth:active {
+.m-app .m-button-fullwidth:active,
+.m-app .m-button-block:active {
   outline: 0;
 }
-/* line 43, _uibutton.scss */
-.m-app .m-button-small, .m-app .m-button-outline-small {
+/* line 49, _uibutton.scss */
+.m-app .m-button-small {
   padding-top: 0;
   padding-bottom: 0;
+  min-height: 32px;
+  min-width: 110px;
+  font-size: 0.8em;
 }
-/* line 49, _uibutton.scss */
-.m-app .m-button-fullwidth, .m-app .m-button-outline-fullwidth {
+/* line 58, _uibutton.scss */
+.m-app .m-button-fullwidth {
   width: 100%;
   border-radius: 0;
 }
-/* line 55, _uibutton.scss */
-.m-app .m-button-outline-fullwidth {
-  border-left: none;
-  border-right: none;
+/* line 64, _uibutton.scss */
+.m-app .m-button-block {
+  width: calc(100% - 20px);
+  margin-left: 10px;
+  margin-right: 10px;
 }
 /* line 1, _uiheader.scss */
 .m-app .m-header-container {

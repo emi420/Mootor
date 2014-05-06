@@ -1,5 +1,10 @@
+/*
+button_sizes = ["m-button","m-button-small"]
+button_width = ["m-button","m-button-block","m-button-fullwidth"]
+button_style = ["m-button","m-button-outline","m-button-clear"]
+*/
+
 .m-button {
-    padding: 0.4em 2.3em;
     font-size: 1em;
     line-height: 2em;
     border-width: 0;
@@ -9,17 +14,22 @@
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0); 
     border-width: 1px;
     border-style: solid;
+    box-sizing: border-box;
+    padding: 4px 10px;
+    line-height: 30px;
+    min-height: 40px;
+    min-width: 130px;
 
     /* For icons - FIXME CHECK: Find a better way to select icons */
     span {
         top: 2px;
         position: relative;
-        &:first-child {
-            left: -1em;
-        }
-        &:last-child {
-            left: 1em;
-        }
+        // &:first-child {
+        //     left: -1em;
+        // }
+        // &:last-child {
+        //     left: 1em;
+        // }
         
     }
 
@@ -30,37 +40,30 @@
 }
 
 
-.m-button-outline {
-    @extend .m-button;    
-}
-
-
 .m-button:focus,
 .m-button:active {
     outline: 0;
 }
 
+/* SIZE */ 
 .m-button-small {
-    @extend .m-button;
     padding-top: 0;
     padding-bottom: 0;
+    min-height: 32px;
+    min-width: 110px;
+    font-size: 0.8em;
 }
 
+/* WIDTH */ 
 .m-button-fullwidth {
     @extend .m-button;
     width: 100%;
     border-radius: 0;
 }
 
-.m-button-outline-fullwidth {
-    @extend .m-button-outline;
-    @extend .m-button-fullwidth;
-    border-left: none;
-    border-right: none;
-}
-
-
-.m-button-outline-small {
-    @extend .m-button-outline;
-    @extend .m-button-small;
+.m-button-block {
+    @extend .m-button;
+    width: calc(100% - 20px);
+    margin-left: 10px;
+    margin-right: 10px;
 }
