@@ -19,18 +19,12 @@ button_style = ["m-button","m-button-outline","m-button-clear"]
     line-height: 30px;
     min-height: 40px;
     min-width: 130px;
+    text-align: center;
 
     /* For icons - FIXME CHECK: Find a better way to select icons */
     span {
         top: 2px;
         position: relative;
-        // &:first-child {
-        //     left: -1em;
-        // }
-        // &:last-child {
-        //     left: 1em;
-        // }
-        
     }
 
 }

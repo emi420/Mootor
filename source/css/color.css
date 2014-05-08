@@ -615,7 +615,7 @@
 }
 
 /* line 18, _colors.scss */
-.m-color-white {
+.m-color-white, .m-button-primary.m-button, .m-button-success.m-button, .m-button-warning.m-button, .m-button-info.m-button, .m-button-danger.m-button {
   color: white;
 }
 
@@ -655,7 +655,7 @@
 }
 
 /* line 18, _colors.scss */
-.m-color-black, .m-button-primary.m-button, .m-button-success.m-button, .m-button-warning.m-button, .m-button-info.m-button, .m-button-danger.m-button {
+.m-color-black {
   color: #2c2927;
 }
 

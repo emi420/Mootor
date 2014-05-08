@@ -5,10 +5,10 @@ button_width = ["m-button","m-button-block","m-button-fullwidth"]
 button_style = ["m-button","m-button-outline","m-button-clear"]
 */
 
-@mixin m-button($name, $text-color) {
+@mixin m-button($name) {
     .m-button-#{$name}  {
         &.m-button {
-            @extend .m-color-black;
+            @extend .m-color-white;
             @extend .m-bg-color-#{$name};
             @extend .m-border-color-transparent;
         }
@@ -32,12 +32,8 @@ button_style = ["m-button","m-button-outline","m-button-clear"]
   
 }
 
-//@include m-button("gray", "white");
-@include m-button("primary", "white");
-@include m-button("success", "white");
-@include m-button("warning", "white");
-@include m-button("info", "white");
-@include m-button("danger", "white");
-//@include m-button("white", "white");
-//@include m-button("cream", "white");
-//@include m-button("black", "white");
+@include m-button("primary");
+@include m-button("success");
+@include m-button("warning");
+@include m-button("info");
+@include m-button("danger");
