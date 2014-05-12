@@ -31,6 +31,8 @@
   <script type="text/javascript" src="../../source/js/uifooter.js"></script>  
   <script type="text/javascript" src="../../source/js/uiloading.js"></script>
   <script type="text/javascript" src="../../source/js/uiform.js"></script>
+  <script type="text/javascript" src="../../source/js/uiformvirtualinput.js"></script>
+  <script type="text/javascript" src="../../source/js/uiformdraw.js"></script>
   <script type="text/javascript" src="../../source/js/uiformtext.js"></script>
   <script type="text/javascript" src="../../source/js/uiformtextarea.js"></script>
   <script type="text/javascript" src="../../source/js/uiformselect.js"></script>
@@ -62,7 +64,8 @@
                     "icons",
                     "colors",
                     "text",
-                    "test"
+                    "test",
+                    "draw"
                 ]
             });
     
@@ -77,12 +80,14 @@
             app.route("^#test", app.view("test"));
             app.route("^#colors", app.view("colors"));
             app.route("^#text", app.view("text"));
+            app.route("^#draw", app.view("draw"));
             
             app.init();
             
         }());
     
     </script>
+    
 
 </body>
 </html>

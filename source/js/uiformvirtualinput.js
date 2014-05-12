@@ -1,7 +1,7 @@
 /**
-* UIFormPseudoInput is a pseudo-input item of a form
+* UIFormVirtualInput is a virtual-input item of a form
 *
-* @class UIFormPseudoInput
+* @class UIFormVirtualInput
 * @extends UI
 * @constructor
 * @module UI
@@ -13,7 +13,7 @@
     
     "use strict";
 
-    var UIFormPseudoInput,
+    var UIFormVirtualInput,
     
         UI;
 
@@ -23,22 +23,22 @@
     
     // Private constructors
 
-    UIFormPseudoInput = function() {
+    UIFormVirtualInput = function() {
         // code here
     };
 
     // Prototypal inheritance
-    $.extend(UIFormPseudoInput.prototype, UI.prototype);
+    $.extend(UIFormVirtualInput.prototype, UI.prototype);
 
     // Private static methods and properties
 
-    $.extend(UIFormPseudoInput, {
+    $.extend(UIFormVirtualInput, {
    
     });
 
     // Public methods and properties
 
-    $.extend(UIFormPseudoInput.prototype, {
+    $.extend(UIFormVirtualInput.prototype, {
 
         /**
         * Value of the input
@@ -60,7 +60,7 @@
         }
 
     });        
-
-
+    
+    Mootor.UIFormVirtualInput = UIFormVirtualInput;
 
 }(window.$, window.Mootor));

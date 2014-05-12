@@ -1,0 +1,61 @@
+@import "colors";
+
+.m-draw-cover {
+    padding: .5em;
+    border-bottom-width: 1px;
+    border-style: solid;
+    @extend .m-border-color-gray-lighter;
+    .m-draw-icon {
+        position: absolute;
+        right: .5em;
+        margin-top: .25em;
+    }
+}
+.m-draw-cover:first-child {
+    border-top-width: 1px;
+}
+
+.m-draw-canvas {
+    
+    width: 100%;
+    background: #fff;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    box-sizing: border-box;
+    z-index: 101;
+    padding: 1em;
+    
+    canvas {
+        border-width: 1px;
+        border-style: dashed;
+        width: 100%;
+        border-radius: 1em;
+        @extend .m-border-color-gray-lighter;
+    }
+}
+
+.m-draw-canvas-header, 
+.m-draw-canvas-footer {
+    @extend .m-border-color-gray-lighter;  
+    border-style: solid;
+}    
+
+
+.m-draw-canvas-header {
+    padding-bottom: 1em;
+    margin-bottom: 1.25em;
+    border-bottom-width: 1px;
+    :last-child {
+        position: absolute;
+        right: 1em;
+    }
+}
+
+.m-draw-canvas-footer {
+    padding-top: 1em;
+    margin-top: 1em;
+    border-top-width: 1px;
+}
+
+

@@ -36,6 +36,7 @@
 
     $.extend(UIFormSelect, {
         _init: function(uiview) {
+            
             var inputs,
                 i;
                 
@@ -49,16 +50,15 @@
                 </div>';
 
                 var $cover = element.$cover = $(coverHTML).insertBefore(element);
+                var $value = $cover.find(".m-value");
 
                 updateValue();
                 $element.on("change", updateValue);
 
-                // https://code.google.com/p/expandselect/
-
                 function updateValue() {
-                    //Value is the text of the selected option or the placeholder text
+                    // Value is the text of the selected option or the placeholder text
                     var value = element.options[element.selectedIndex].text || element.placeholder;
-                    $cover.find(".m-value").html(value);
+                    $value.html(value);
                 }
             });
         }

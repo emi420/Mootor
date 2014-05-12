@@ -21,6 +21,8 @@ cat js/overthrow.min.js \
     js/uiformtext.js \
     js/uiformtextarea.js \
     js/uiformselect.js \
+    js/uiformvirtualinput.js \
+    js/uiformdraw.js \
     js/uibutton.js \
     > ../dist/js/mootor.js
 

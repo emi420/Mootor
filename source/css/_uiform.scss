@@ -68,8 +68,9 @@
         }
     }
 
-    @import "uiformtext";
-    @import "uiformtextarea";
-    @import "uiformselect";
-
 }
+
+@import "uiformtext";
+@import "uiformtextarea";
+@import "uiformselect";
+@import "uiformdraw";
