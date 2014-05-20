@@ -124,7 +124,10 @@
             self._$ctx = $canvas[0].getContext("2d");
             self._canvasOffsetLeft = 0;
             self._canvasOffsetTop = 0;
-
+            self._$ctx.strokeStyle = "black";
+            self._$ctx.lineWidth = 2;
+            self._$ctx.fillStyle = "black";
+            self._drawing = false;
         },
         
         _addListeners: function(self) {
@@ -142,6 +145,12 @@
 
     			lastX = e.changedTouches[0].clientX - self._canvasOffsetLeft;
     			lastY = e.changedTouches[0].clientY - self._canvasOffsetTop;
+
+
+    			ctx.beginPath();
+    			ctx.fillStyle = "black";
+    			ctx.fillRect(lastX, lastY, 2, 2);
+    			ctx.closePath();
                 
                 e.stopPropagation();
     			e.preventDefault();                
@@ -165,8 +174,8 @@
                 ctx.stroke();
                 ctx.closePath();
 
-                lastX = touchX - offsetLeft;
-                lastY = touchY - offsetTop;
+                lastX = x;
+                lastY = y;
 
                 e.stopPropagation();
                 e.preventDefault();

@@ -1,0 +1,19 @@
+#!/bin/bash
+
+echo "Adding view $1 ..."
+mkdir views/$1
+touch views/$1/$1.html
+touch views/$1/$1.css
+echo "(function ($) {
+    
+    \"use strict\";
+    
+    m.app.view(\"$1\").on(\"load\", function() {
+
+        // code here
+
+    });
+    
+}(window.$));" > views/$1/$1.js
+
+echo "Done."

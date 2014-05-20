@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /**
  * @summary Mootor CSS
  * @author Emilio Mariscal (emi420 [at] gmail.com)
@@ -44,17 +45,17 @@
 }
 
 /* line 10, _colors.scss */
-.m-bg-color-gray, .m-button-gray.m-button-fullwidth, .m-button-gray.m-button:link, .m-button-gray.m-button-small:link, .m-button-gray.m-button, .m-button-gray.m-button-small, .m-button-gray.m-button-outline:active, .m-button-gray.m-button-outline:focus, .m-button-gray.m-button-outline-small:active, .m-button-gray.m-button-outline-small:focus, .m-button-gray.m-button-outline-fullwidth:active, .m-button-gray.m-button-outline-fullwidth:focus, .m-button-gray.m-button:focus, .m-button-gray.m-button-small:focus, .m-button-gray.m-button:active, .m-button-gray.m-button-small:active, .m-button-gray.m-button-fullwidth:focus, .m-button-gray.m-button-fullwidth:active {
+.m-bg-color-gray {
   background: #968e89;
 }
 
 /* line 14, _colors.scss */
-.m-border-color-gray, .m-button-gray {
+.m-border-color-gray {
   border-color: #968e89;
 }
 
 /* line 18, _colors.scss */
-.m-color-gray, .m-button-gray.m-button-outline-fullwidth, .m-button-gray.m-button-outline-small, .m-button-gray.m-button-outline {
+.m-color-gray {
   color: #968e89;
 }
 
@@ -144,17 +145,17 @@
 }
 
 /* line 10, _colors.scss */
-.m-bg-color-primary, .m-button-primary.m-button-fullwidth, .m-button-primary.m-button:link, .m-button-primary.m-button-small:link, .m-button-primary.m-button, .m-button-primary.m-button-small, .m-button-primary.m-button-outline:active, .m-button-primary.m-button-outline:focus, .m-button-primary.m-button-outline-small:active, .m-button-primary.m-button-outline-small:focus, .m-button-primary.m-button-outline-fullwidth:active, .m-button-primary.m-button-outline-fullwidth:focus, .m-button-primary.m-button:focus, .m-button-primary.m-button-small:focus, .m-button-primary.m-button:active, .m-button-primary.m-button-small:active, .m-button-primary.m-button-fullwidth:focus, .m-button-primary.m-button-fullwidth:active, .m-header-container, .m-footer-container {
+.m-bg-color-primary, .m-button-primary.m-button, .m-header-container, .m-footer-container {
   background: #66b2b8;
 }
 
 /* line 14, _colors.scss */
-.m-border-color-primary, .m-button-primary {
+.m-border-color-primary, .m-button-primary.m-button-block.m-button-outline, .m-button-primary.m-button-fullwidth.m-button-outline, .m-button-primary.m-button.m-button-outline {
   border-color: #66b2b8;
 }
 
 /* line 18, _colors.scss */
-.m-color-primary, .m-button-primary.m-button-outline-fullwidth, .m-button-primary.m-button-outline-small, .m-button-primary.m-button-outline {
+.m-color-primary, .m-button-primary.m-button-block.m-button-outline, .m-button-primary.m-button-fullwidth.m-button-outline, .m-button-primary.m-button.m-button-outline, .m-button-primary.m-button-block.m-button-clear, .m-button-primary.m-button-fullwidth.m-button-clear, .m-button-primary.m-button.m-button-clear {
   color: #66b2b8;
 }
 
@@ -244,17 +245,17 @@
 }
 
 /* line 10, _colors.scss */
-.m-bg-color-success, .m-button-success.m-button-fullwidth, .m-button-success.m-button:link, .m-button-success.m-button-small:link, .m-button-success.m-button, .m-button-success.m-button-small, .m-button-success.m-button-outline:active, .m-button-success.m-button-outline:focus, .m-button-success.m-button-outline-small:active, .m-button-success.m-button-outline-small:focus, .m-button-success.m-button-outline-fullwidth:active, .m-button-success.m-button-outline-fullwidth:focus, .m-button-success.m-button:focus, .m-button-success.m-button-small:focus, .m-button-success.m-button:active, .m-button-success.m-button-small:active, .m-button-success.m-button-fullwidth:focus, .m-button-success.m-button-fullwidth:active {
+.m-bg-color-success, .m-button-success.m-button {
   background: #6dbca1;
 }
 
 /* line 14, _colors.scss */
-.m-border-color-success, .m-button-success {
+.m-border-color-success, .m-button-success.m-button-block.m-button-outline, .m-button-success.m-button-fullwidth.m-button-outline, .m-button-success.m-button.m-button-outline {
   border-color: #6dbca1;
 }
 
 /* line 18, _colors.scss */
-.m-color-success, .m-button-success.m-button-outline-fullwidth, .m-button-success.m-button-outline-small, .m-button-success.m-button-outline {
+.m-color-success, .m-button-success.m-button-block.m-button-outline, .m-button-success.m-button-fullwidth.m-button-outline, .m-button-success.m-button.m-button-outline, .m-button-success.m-button-block.m-button-clear, .m-button-success.m-button-fullwidth.m-button-clear, .m-button-success.m-button.m-button-clear {
   color: #6dbca1;
 }
 
@@ -344,17 +345,17 @@
 }
 
 /* line 10, _colors.scss */
-.m-bg-color-warning, .m-button-warning.m-button-fullwidth, .m-button-warning.m-button:link, .m-button-warning.m-button-small:link, .m-button-warning.m-button, .m-button-warning.m-button-small, .m-button-warning.m-button-outline:active, .m-button-warning.m-button-outline:focus, .m-button-warning.m-button-outline-small:active, .m-button-warning.m-button-outline-small:focus, .m-button-warning.m-button-outline-fullwidth:active, .m-button-warning.m-button-outline-fullwidth:focus, .m-button-warning.m-button:focus, .m-button-warning.m-button-small:focus, .m-button-warning.m-button:active, .m-button-warning.m-button-small:active, .m-button-warning.m-button-fullwidth:focus, .m-button-warning.m-button-fullwidth:active {
+.m-bg-color-warning, .m-button-warning.m-button {
   background: #f1ce03;
 }
 
 /* line 14, _colors.scss */
-.m-border-color-warning, .m-button-warning {
+.m-border-color-warning, .m-button-warning.m-button-block.m-button-outline, .m-button-warning.m-button-fullwidth.m-button-outline, .m-button-warning.m-button.m-button-outline {
   border-color: #f1ce03;
 }
 
 /* line 18, _colors.scss */
-.m-color-warning, .m-button-warning.m-button-outline-fullwidth, .m-button-warning.m-button-outline-small, .m-button-warning.m-button-outline {
+.m-color-warning, .m-button-warning.m-button-block.m-button-outline, .m-button-warning.m-button-fullwidth.m-button-outline, .m-button-warning.m-button.m-button-outline, .m-button-warning.m-button-block.m-button-clear, .m-button-warning.m-button-fullwidth.m-button-clear, .m-button-warning.m-button.m-button-clear {
   color: #f1ce03;
 }
 
@@ -444,17 +445,17 @@
 }
 
 /* line 10, _colors.scss */
-.m-bg-color-info, .m-button-info.m-button-fullwidth, .m-button-info.m-button:link, .m-button-info.m-button-small:link, .m-button-info.m-button, .m-button-info.m-button-small, .m-button-info.m-button-outline:active, .m-button-info.m-button-outline:focus, .m-button-info.m-button-outline-small:active, .m-button-info.m-button-outline-small:focus, .m-button-info.m-button-outline-fullwidth:active, .m-button-info.m-button-outline-fullwidth:focus, .m-button-info.m-button:focus, .m-button-info.m-button-small:focus, .m-button-info.m-button:active, .m-button-info.m-button-small:active, .m-button-info.m-button-fullwidth:focus, .m-button-info.m-button-fullwidth:active {
+.m-bg-color-info, .m-button-info.m-button {
   background: #ed9a3d;
 }
 
 /* line 14, _colors.scss */
-.m-border-color-info, .m-button-info {
+.m-border-color-info, .m-button-info.m-button-block.m-button-outline, .m-button-info.m-button-fullwidth.m-button-outline, .m-button-info.m-button.m-button-outline {
   border-color: #ed9a3d;
 }
 
 /* line 18, _colors.scss */
-.m-color-info, .m-button-info.m-button-outline-fullwidth, .m-button-info.m-button-outline-small, .m-button-info.m-button-outline {
+.m-color-info, .m-button-info.m-button-block.m-button-outline, .m-button-info.m-button-fullwidth.m-button-outline, .m-button-info.m-button.m-button-outline, .m-button-info.m-button-block.m-button-clear, .m-button-info.m-button-fullwidth.m-button-clear, .m-button-info.m-button.m-button-clear {
   color: #ed9a3d;
 }
 
@@ -544,17 +545,17 @@
 }
 
 /* line 10, _colors.scss */
-.m-bg-color-danger, .m-button-danger.m-button-fullwidth, .m-button-danger.m-button:link, .m-button-danger.m-button-small:link, .m-button-danger.m-button, .m-button-danger.m-button-small, .m-button-danger.m-button-outline:active, .m-button-danger.m-button-outline:focus, .m-button-danger.m-button-outline-small:active, .m-button-danger.m-button-outline-small:focus, .m-button-danger.m-button-outline-fullwidth:active, .m-button-danger.m-button-outline-fullwidth:focus, .m-button-danger.m-button:focus, .m-button-danger.m-button-small:focus, .m-button-danger.m-button:active, .m-button-danger.m-button-small:active, .m-button-danger.m-button-fullwidth:focus, .m-button-danger.m-button-fullwidth:active {
+.m-bg-color-danger, .m-button-danger.m-button {
   background: #f04930;
 }
 
 /* line 14, _colors.scss */
-.m-border-color-danger, .m-button-danger {
+.m-border-color-danger, .m-button-danger.m-button-block.m-button-outline, .m-button-danger.m-button-fullwidth.m-button-outline, .m-button-danger.m-button.m-button-outline {
   border-color: #f04930;
 }
 
 /* line 18, _colors.scss */
-.m-color-danger, .m-button-danger.m-button-outline-fullwidth, .m-button-danger.m-button-outline-small, .m-button-danger.m-button-outline {
+.m-color-danger, .m-button-danger.m-button-block.m-button-outline, .m-button-danger.m-button-fullwidth.m-button-outline, .m-button-danger.m-button.m-button-outline, .m-button-danger.m-button-block.m-button-clear, .m-button-danger.m-button-fullwidth.m-button-clear, .m-button-danger.m-button.m-button-clear {
   color: #f04930;
 }
 
@@ -604,17 +605,17 @@
 }
 
 /* line 10, _colors.scss */
-.m-bg-color-white, .m-button-white.m-button-fullwidth, .m-button-white.m-button:link, .m-button-white.m-button-small:link, .m-button-white.m-button, .m-button-white.m-button-small, .m-button-white.m-button-outline:active, .m-button-white.m-button-outline:focus, .m-button-white.m-button-outline-small:active, .m-button-white.m-button-outline-small:focus, .m-button-white.m-button-outline-fullwidth:active, .m-button-white.m-button-outline-fullwidth:focus, .m-button-white.m-button:focus, .m-button-white.m-button-small:focus, .m-button-white.m-button:active, .m-button-white.m-button-small:active, .m-button-white.m-button-fullwidth:focus, .m-button-white.m-button-fullwidth:active {
+.m-bg-color-white {
   background: white;
 }
 
 /* line 14, _colors.scss */
-.m-border-color-white, .m-button-white {
+.m-border-color-white {
   border-color: white;
 }
 
 /* line 18, _colors.scss */
-.m-color-white, .m-button-white.m-button-outline-fullwidth, .m-button-white.m-button-outline-small, .m-button-white.m-button-outline, .m-button-black.m-button-fullwidth, .m-button-black.m-button:link, .m-button-black.m-button-small:link, .m-button-black.m-button, .m-button-black.m-button-small {
+.m-color-white, .m-button-primary.m-button, .m-button-success.m-button, .m-button-warning.m-button, .m-button-info.m-button, .m-button-danger.m-button {
   color: white;
 }
 
@@ -624,17 +625,17 @@
 }
 
 /* line 10, _colors.scss */
-.m-bg-color-cream, .m-button-cream.m-button-fullwidth, .m-button-cream.m-button:link, .m-button-cream.m-button-small:link, .m-button-cream.m-button, .m-button-cream.m-button-small, .m-button-cream.m-button-outline:active, .m-button-cream.m-button-outline:focus, .m-button-cream.m-button-outline-small:active, .m-button-cream.m-button-outline-small:focus, .m-button-cream.m-button-outline-fullwidth:active, .m-button-cream.m-button-outline-fullwidth:focus, .m-button-cream.m-button:focus, .m-button-cream.m-button-small:focus, .m-button-cream.m-button:active, .m-button-cream.m-button-small:active, .m-button-cream.m-button-fullwidth:focus, .m-button-cream.m-button-fullwidth:active {
+.m-bg-color-cream {
   background: #f5f5f1;
 }
 
 /* line 14, _colors.scss */
-.m-border-color-cream, .m-button-cream {
+.m-border-color-cream {
   border-color: #f5f5f1;
 }
 
 /* line 18, _colors.scss */
-.m-color-cream, .m-button-cream.m-button-outline-fullwidth, .m-button-cream.m-button-outline-small, .m-button-cream.m-button-outline {
+.m-color-cream {
   color: #f5f5f1;
 }
 
@@ -644,17 +645,17 @@
 }
 
 /* line 10, _colors.scss */
-.m-bg-color-black, .m-button-black.m-button-fullwidth, .m-button-black.m-button:link, .m-button-black.m-button-small:link, .m-button-black.m-button, .m-button-black.m-button-small, .m-button-black.m-button-outline:active, .m-button-black.m-button-outline:focus, .m-button-black.m-button-outline-small:active, .m-button-black.m-button-outline-small:focus, .m-button-black.m-button-outline-fullwidth:active, .m-button-black.m-button-outline-fullwidth:focus, .m-button-black.m-button:focus, .m-button-black.m-button-small:focus, .m-button-black.m-button:active, .m-button-black.m-button-small:active, .m-button-black.m-button-fullwidth:focus, .m-button-black.m-button-fullwidth:active {
+.m-bg-color-black {
   background: #2c2927;
 }
 
 /* line 14, _colors.scss */
-.m-border-color-black, .m-button-black {
+.m-border-color-black {
   border-color: #2c2927;
 }
 
 /* line 18, _colors.scss */
-.m-color-black, .m-button-gray.m-button-fullwidth, .m-button-gray.m-button:link, .m-button-gray.m-button-small:link, .m-button-gray.m-button, .m-button-gray.m-button-small, .m-button-primary.m-button-fullwidth, .m-button-primary.m-button:link, .m-button-primary.m-button-small:link, .m-button-primary.m-button, .m-button-primary.m-button-small, .m-button-success.m-button-fullwidth, .m-button-success.m-button:link, .m-button-success.m-button-small:link, .m-button-success.m-button, .m-button-success.m-button-small, .m-button-warning.m-button-fullwidth, .m-button-warning.m-button:link, .m-button-warning.m-button-small:link, .m-button-warning.m-button, .m-button-warning.m-button-small, .m-button-info.m-button-fullwidth, .m-button-info.m-button:link, .m-button-info.m-button-small:link, .m-button-info.m-button, .m-button-info.m-button-small, .m-button-danger.m-button-fullwidth, .m-button-danger.m-button:link, .m-button-danger.m-button-small:link, .m-button-danger.m-button, .m-button-danger.m-button-small, .m-button-white.m-button-fullwidth, .m-button-white.m-button:link, .m-button-white.m-button-small:link, .m-button-white.m-button, .m-button-white.m-button-small, .m-button-cream.m-button-fullwidth, .m-button-cream.m-button:link, .m-button-cream.m-button-small:link, .m-button-cream.m-button, .m-button-cream.m-button-small, .m-button-black.m-button-outline-fullwidth, .m-button-black.m-button-outline-small, .m-button-black.m-button-outline {
+.m-color-black {
   color: #2c2927;
 }
 
@@ -664,12 +665,12 @@
 }
 
 /* line 10, _colors.scss */
-.m-bg-color-transparent, .m-button-gray.m-button-outline-fullwidth, .m-button-gray.m-button-outline-small, .m-button-gray.m-button-outline, .m-button-primary.m-button-outline-fullwidth, .m-button-primary.m-button-outline-small, .m-button-primary.m-button-outline, .m-button-success.m-button-outline-fullwidth, .m-button-success.m-button-outline-small, .m-button-success.m-button-outline, .m-button-warning.m-button-outline-fullwidth, .m-button-warning.m-button-outline-small, .m-button-warning.m-button-outline, .m-button-info.m-button-outline-fullwidth, .m-button-info.m-button-outline-small, .m-button-info.m-button-outline, .m-button-danger.m-button-outline-fullwidth, .m-button-danger.m-button-outline-small, .m-button-danger.m-button-outline, .m-button-white.m-button-outline-fullwidth, .m-button-white.m-button-outline-small, .m-button-white.m-button-outline, .m-button-cream.m-button-outline-fullwidth, .m-button-cream.m-button-outline-small, .m-button-cream.m-button-outline, .m-button-black.m-button-outline-fullwidth, .m-button-black.m-button-outline-small, .m-button-black.m-button-outline {
+.m-bg-color-transparent, .m-button-primary.m-button-block.m-button-outline, .m-button-primary.m-button-fullwidth.m-button-outline, .m-button-primary.m-button.m-button-outline, .m-button-primary.m-button-block.m-button-clear, .m-button-primary.m-button-fullwidth.m-button-clear, .m-button-primary.m-button.m-button-clear, .m-button-success.m-button-block.m-button-outline, .m-button-success.m-button-fullwidth.m-button-outline, .m-button-success.m-button.m-button-outline, .m-button-success.m-button-block.m-button-clear, .m-button-success.m-button-fullwidth.m-button-clear, .m-button-success.m-button.m-button-clear, .m-button-warning.m-button-block.m-button-outline, .m-button-warning.m-button-fullwidth.m-button-outline, .m-button-warning.m-button.m-button-outline, .m-button-warning.m-button-block.m-button-clear, .m-button-warning.m-button-fullwidth.m-button-clear, .m-button-warning.m-button.m-button-clear, .m-button-info.m-button-block.m-button-outline, .m-button-info.m-button-fullwidth.m-button-outline, .m-button-info.m-button.m-button-outline, .m-button-info.m-button-block.m-button-clear, .m-button-info.m-button-fullwidth.m-button-clear, .m-button-info.m-button.m-button-clear, .m-button-danger.m-button-block.m-button-outline, .m-button-danger.m-button-fullwidth.m-button-outline, .m-button-danger.m-button.m-button-outline, .m-button-danger.m-button-block.m-button-clear, .m-button-danger.m-button-fullwidth.m-button-clear, .m-button-danger.m-button.m-button-clear {
   background: rgba(0, 0, 0, 0);
 }
 
 /* line 14, _colors.scss */
-.m-border-color-transparent {
+.m-border-color-transparent, .m-button-primary.m-button, .m-button-primary.m-button-block.m-button-clear, .m-button-primary.m-button-fullwidth.m-button-clear, .m-button-primary.m-button.m-button-clear, .m-button-success.m-button, .m-button-success.m-button-block.m-button-clear, .m-button-success.m-button-fullwidth.m-button-clear, .m-button-success.m-button.m-button-clear, .m-button-warning.m-button, .m-button-warning.m-button-block.m-button-clear, .m-button-warning.m-button-fullwidth.m-button-clear, .m-button-warning.m-button.m-button-clear, .m-button-info.m-button, .m-button-info.m-button-block.m-button-clear, .m-button-info.m-button-fullwidth.m-button-clear, .m-button-info.m-button.m-button-clear, .m-button-danger.m-button, .m-button-danger.m-button-block.m-button-clear, .m-button-danger.m-button-fullwidth.m-button-clear, .m-button-danger.m-button.m-button-clear {
   border-color: rgba(0, 0, 0, 0);
 }
 
@@ -682,3 +683,10 @@
 .m-color-transparent-fg {
   color: rgba(0, 0, 0, 0);
 }
+
+/*
+button_colors = ["m-button-primary","m-button-success","m-button-warning","m-button-info","m-button-danger"]
+button_sizes = ["m-button","m-button-small"]
+button_width = ["m-button","m-button-block","m-button-fullwidth"]
+button_style = ["m-button","m-button-outline","m-button-clear"]
+*/
