@@ -1,14 +1,15 @@
 @include m-all-fields("m-select");
 
 select.m-select {
-	top: -1.4em;
-	margin-bottom: -1.4em;
+	top: -1.7em;
+	margin-bottom: -1.7em;
 	opacity: 0.01;
 	position: relative;
 }
 
-&.m-form-left-labels select.m-select {
-	float: left;	
+.m-form-left-labels select.m-select {
+	float: left;
+	left: 30%;
 }
 
 .m-select-cover {
@@ -19,10 +20,10 @@ select.m-select {
 	.m-icon-arrow-down-small {
 		position: absolute;
 		right: 0;
-		top: 0;
+		top: 6px;
 	}
 	.m-value {
-		height: 1em;
+		height: 1.4em;
 		display: inline-block;
 		overflow: hidden;
 		margin-right: 21px;

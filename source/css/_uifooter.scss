@@ -1,8 +1,6 @@
 .m-footer-container {
+    @extend .m-nav;
 
-    height: 55px;
-    position: fixed;
-    width: 100%;
     bottom: 0;
             
     footer {

@@ -40,19 +40,31 @@
 
     UIApp.on("init", function(self) {
 
-        // FIXME CHECK (parentElement?)
-        var footerEl = self.el.parentElement.getElementsByTagName("footer")[0];
+        var footerEl;
         
-        footerContainerEl = document.createElement("div");
-        footerContainerEl.setAttribute("class","m-footer-container");
-        footerEl.parentElement.replaceChild(footerContainerEl, footerEl);
-        footerContainerEl.appendChild(footerEl);
-        $footerContainerEl = $(footerContainerEl);
+        if (self.el !== undefined) {
+            
+            footerContainerEl = document.createElement("div");
+            $footerContainerEl = $(footerContainerEl);
+            $footerContainerEl.addClass("m-footer-container m-hidden");
 
-        if (footerEl) {
+            footerEl = self.el.parentElement.getElementsByTagName("footer")[0];
+
+            if (footerEl !== undefined) {
+                _appFooter = true;
+                footerEl.parentElement.replaceChild(footerContainerEl, footerEl);
+            } else {
+                footerEl = document.createElement("footer");
+                document.body.appendChild(footerContainerEl);
+            }
+            
+            footerContainerEl.appendChild(footerEl);
+            
             self.footer = new UIFooter({
                 el: footerEl
             });
+            
+
         }
         
     });
@@ -60,9 +72,9 @@
     UIView.on("init", function(self) {
         
         var footerEl = self.panel.el.getElementsByTagName("footer")[0];
-
-        if (footerEl) {
-
+        
+        if (footerEl !== undefined) {
+        
             self.footer = new UIFooter({
                 el: footerEl
             });
@@ -74,21 +86,33 @@
 
             self.view.on("load", function(self) {
                self.ui.footer.show();
+               $footerContainerEl.removeClass("m-hidden");
             });
 
             self.view.on("unload", function(self) {
                self.ui.footer.hide();
+               $footerContainerEl.addClass("m-hidden");
             });
-
+            
         } else {
-            self.view.on("load", function(self) {
-               m.app.ui.footer.show()
-            });
+            
+            if (_appFooter === true) {                
+                self.view.on("load", function(self) {
+                   m.app.ui.footer.show()
+                   $footerContainerEl.addClass("m-hidden");
+                });
 
-            self.view.on("unload", function(self) {
-                m.app.ui.footer.hide()
-            });
-        }     
+                self.view.on("unload", function(self) {
+                    m.app.ui.footer.hide()
+                    $footerContainerEl.removeClass("m-hidden");
+                });
+            } else {
+                self.view.on("load", function(self) {
+                    $footerContainerEl.addClass("m-hidden");
+                });
+            }
+            
+        }        
     });
     
     // Private constructors

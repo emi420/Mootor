@@ -1,6 +1,11 @@
 $m-color-uinavbar-fg: #fff !default;
 
 .m-nav {
+    height: 55px;
+    position: relative;
+    width: 100%;	
+
+
     .m-nav-item {
         text-decoration: none;
         color: $m-color-uinavbar-fg;

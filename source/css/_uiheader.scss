@@ -1,8 +1,5 @@
 .m-header-container {
-
-    height: 55px;
-    position: relative;
-    width: 100%;
+    @extend .m-nav;
         
     header {
         z-index: 100;
