@@ -16,11 +16,15 @@
     var UINavBar,
     
         UI,
-        UINavItem;
+        UIView,
+        UINavItem,
+        barEl,
+        barContainerEl = [];
         
     // Dependences
     
     UI = Mootor.UI;
+    UIView = Mootor.UIView;
     UINavItem = Mootor.UINavItem;
 
     // Private constructors
@@ -40,6 +44,10 @@
 
     $.extend(UINavBar, {
         _initNavItems: function(el) {
+            if (!el) {
+                console.error("UINavBar _initNavItems called without el");
+                return;
+            }
             var i,
                 j,
                 navGroupsElements = el.getElementsByTagName("nav"),
@@ -60,11 +68,69 @@
             
             return navGroups;
         }
+        ,
+        createBar: function(barName,uiapp,barClass) {
+
+            // FIXME CHECK (parentElement?)
+            var barEl = uiapp.el.parentElement.getElementsByTagName(barName)[0];
+
+            barContainerEl[barName] = document.createElement("div");
+            barContainerEl[barName].setAttribute("class","m-"+barName+"-container");
+
+            if (barEl) {
+                barEl.parentElement.replaceChild(barContainerEl[barName], barEl);
+                barContainerEl[barName].appendChild(barEl);
+                barEl.barClass = barClass;
+            }
+            else {
+                barEl = document.createElement("div"); /*Dummy object for footer initialization*/
+                m.app.ui.el.parentElement.appendChild(barContainerEl[barName]);                
+            }
+
+            uiapp[barName] = new barClass({el: barEl});
+            uiapp[barName].hide();
+
+
+            UIView.on("init", function(self) {
+                
+                var barEl = self.panel.el.getElementsByTagName(barName)[0];
+
+                if (barEl) {
+                 
+                    self[barName] = new barClass({
+                        el: barEl
+                    });
+                    
+                    self.panel.el.removeChild(barEl);
+                    barContainerEl[barName].appendChild(barEl);
+                    
+                    self[barName].hide();
+
+                    self.view.on("load", function(self) {
+                       self.ui[barName].show();
+                    });
+
+                    self.view.on("unload", function(self) {
+                       self.ui[barName].hide();
+                    });
+
+                } else {
+                    self.view.on("load", function(self) {
+                       m.app.ui[barName].show()
+                    });
+
+                    self.view.on("unload", function(self) {
+                        m.app.ui[barName].hide()
+                    });
+                }
+            });            
+        }
     });
 
     //Public methods
 
     $.extend(UINavBar.prototype, {
+
     });  
 
 }(window.$, window.Mootor));

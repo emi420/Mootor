@@ -2,6 +2,7 @@
     @extend .m-nav;
 
     bottom: 0;
+    position: fixed !important;
             
     footer {
         z-index: 100;

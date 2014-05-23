@@ -937,19 +937,20 @@ html, body {
 /* line 1, _uifooter.scss */
 .m-app .m-footer-container {
   bottom: 0;
+  position: fixed !important;
 }
-/* line 6, _uifooter.scss */
+/* line 7, _uifooter.scss */
 .m-app .m-footer-container footer {
   z-index: 100;
   position: absolute;
   width: 100%;
 }
-/* line 12, _uifooter.scss */
+/* line 13, _uifooter.scss */
 .m-app .m-footer-container .m-nav, .m-app .m-footer-container .m-header-container, .m-app .m-footer-container .m-footer-container {
   width: 100%;
   display: table;
 }
-/* line 16, _uifooter.scss */
+/* line 17, _uifooter.scss */
 .m-app .m-footer-container .m-nav-item {
   display: table-cell;
 }
