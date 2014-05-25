@@ -41,8 +41,10 @@
 
     UIFooter = Mootor.UIFooter = function(options) {
         this.nav = new UINavBar({
-            container: options.el
+            container: options.el,
+            type: options.type
         });
+        this.type = options.type;
         this.el = this.nav.el;
         this.$el = $(this.el);
         if (this.$el.find("nav").length < 1) {
