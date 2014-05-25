@@ -55,6 +55,12 @@
                 updateValue();
                 $element.on("change", updateValue);
 
+                $element.on("focus", function(e) {
+                    var me = document.createEvent("MouseEvents");
+                    me.initMouseEvent("mousedown", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+                    var worked = e.target.dispatchEvent(me);                
+                })
+
                 function updateValue() {
                     // Value is the text of the selected option or the placeholder text
                     var value = element.options[element.selectedIndex].text || element.placeholder;
