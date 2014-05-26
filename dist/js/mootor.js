@@ -1076,6 +1076,7 @@
         });
 
         self.on("load", function() {
+            // console.log("uiview load")
             var footerHeight = $(".m-footer-container").height();
             var headerHeight = $(".m-header-container").height();
             self.ui.el.style.height = (m.app.ui.el.offsetHeight - footerHeight - headerHeight) + "px"
@@ -1656,11 +1657,15 @@
     var UINavBar,
     
         UI,
-        UINavItem;
+        UIView,
+        UINavItem,
+        barEl,
+        barContainerEl = [];
         
     // Dependences
     
     UI = Mootor.UI;
+    UIView = Mootor.UIView;
     UINavItem = Mootor.UINavItem;
 
     // Private constructors
@@ -1669,6 +1674,7 @@
         this.el = options.container;
         this.$el = $(this.el);
         this.$el.addClass("m-navbar");
+        this.$el.addClass("m-"+options.type+"-navbar");
         this.nav = UINavBar._initNavItems(this.el);
     };
 
@@ -1680,6 +1686,10 @@
 
     $.extend(UINavBar, {
         _initNavItems: function(el) {
+            if (!el) {
+                console.error("UINavBar _initNavItems called without el");
+                return;
+            }
             var i,
                 j,
                 navGroupsElements = el.getElementsByTagName("nav"),
@@ -1700,11 +1710,90 @@
             
             return navGroups;
         }
+        ,
+        createBar: function(barName,uiapp,barClass) {
+
+            // FIXME CHECK (parentElement?)
+            var barEl = uiapp.el.parentElement.getElementsByTagName(barName)[0];
+
+            barContainerEl[barName] = document.createElement("div");
+            barContainerEl[barName].setAttribute("class","m-"+barName+"-container");
+
+            if (barEl) {
+                barEl.parentElement.replaceChild(barContainerEl[barName], barEl);
+                barContainerEl[barName].appendChild(barEl);
+                barEl.barClass = barClass;
+            }
+            else {
+                barEl = document.createElement("div"); /*Dummy object for footer initialization*/
+                m.app.ui.el.parentElement.appendChild(barContainerEl[barName]);                
+                $(barContainerEl[barName]).addClass("m-hidden");
+            }
+
+            uiapp[barName] = new barClass({
+                el: barEl,
+                type: "global"
+            });
+            uiapp[barName].hide();
+
+
+            UIView.on("init", function(self) {
+                
+                var barEl = self.panel.el.getElementsByTagName(barName)[0];
+
+                if (barEl) {
+                 
+                    self[barName] = new barClass({
+                        el: barEl,
+                        type: "view"
+                    });
+                    
+                    self.panel.el.removeChild(barEl);
+                    barContainerEl[barName].appendChild(barEl);
+                    
+                    self[barName].hideContainer();
+
+                    self.view.on("beforeLoad", function(self) {
+                       self.ui[barName].showContainer(barName);
+                    });
+
+                    self.view.on("unload", function(self) {
+                       self.ui[barName].hideContainer(barName);
+                    });
+
+                } else {
+                    self.view.on("load", function(self) {
+                        m.app.ui[barName].show()
+                    });
+
+                    self.view.on("unload", function(self) {
+                        m.app.ui[barName].hide()
+                    });
+                }
+            });            
+        }
     });
 
     //Public methods
 
     $.extend(UINavBar.prototype, {
+        hideContainer: function(barName) {
+            this.hide();
+            // console.log("hideContainer",this.el.parentElement);
+            if ($(".m-"+barName+"-container .m-global-navbar").length == 0) {
+                $(".m-"+barName+"-container").addClass("m-hidden");    
+            }
+            
+
+        },
+        showContainer: function(barName) {
+            this.show();
+            // console.log("showContainer",this.el.parentElement);
+            if ($(".m-"+barName+"-container .m-global-navbar").length == 0) {
+                $(".m-"+barName+"-container").removeClass("m-hidden");
+            }
+        }
+
     });  
 
 }(window.$, window.Mootor));
@@ -1743,68 +1832,15 @@
     UINavItem = Mootor.UINavItem;
     App = Mootor.App;
     UI = Mootor.UI;
-    
-    // Event handlers
-
-    UIApp.on("init", function(self) {
-
-        // FIXME CHECK (parentElement?)
-        var headerEl = self.el.parentElement.getElementsByTagName("header")[0];
         
-        headerContainerEl = document.createElement("div");
-        headerContainerEl.setAttribute("class","m-header-container");
-        headerEl.parentElement.replaceChild(headerContainerEl, headerEl);
-        headerContainerEl.appendChild(headerEl);
-
-        if (headerEl) {
-            self.header = new UIHeader({
-                el: headerEl
-            });
-        }
-        m.app.ui.header.hide()
-        
-    });
-
-    UIView.on("init", function(self) {
-        
-        var headerEl = self.panel.el.getElementsByTagName("header")[0];
-
-        if (headerEl) {
-
-            self.header = new UIHeader({
-                el: headerEl
-            });
-            
-            self.panel.el.removeChild(headerEl);
-            headerContainerEl.appendChild(headerEl);
-            
-            self.header.hide();
-
-            self.view.on("load", function(self) {
-               self.ui.header.show();
-            });
-
-            self.view.on("unload", function(self) {
-               self.ui.header.hide();
-            });
-
-        } else {
-            self.view.on("load", function(self) {
-               m.app.ui.header.show()
-            });
-
-            self.view.on("unload", function(self) {
-                m.app.ui.header.hide()
-            });
-        }
-    });
-    
     // Private constructors
 
     UIHeader = Mootor.UIHeader = function(options) {
         this.nav = new UINavBar({
-            container: options.el
+            container: options.el,
+            type: options.type
         });
+        this.type = options.type;
         this.el = this.nav.el;
         this.$el = $(this.el);
         if (this.$el.find("nav").length < 1) {
@@ -1812,6 +1848,11 @@
         }
         UIHeader._initBackButton(this);
     };
+
+    // Event handlers
+    UIApp.on("init", function(self) {
+        UINavBar.createBar("header",self, UIHeader);
+    });
 
     
     // Private static methods and properties
@@ -1943,71 +1984,26 @@
     App = Mootor.App;
     UI = Mootor.UI,
     
-    // Event handlers
-
-    UIApp.on("init", function(self) {
-
-        // FIXME CHECK (parentElement?)
-        var footerEl = self.el.parentElement.getElementsByTagName("footer")[0];
-        
-        footerContainerEl = document.createElement("div");
-        footerContainerEl.setAttribute("class","m-footer-container");
-        footerEl.parentElement.replaceChild(footerContainerEl, footerEl);
-        footerContainerEl.appendChild(footerEl);
-        $footerContainerEl = $(footerContainerEl);
-
-        if (footerEl) {
-            self.footer = new UIFooter({
-                el: footerEl
-            });
-        }
-        
-    });
-
-    UIView.on("init", function(self) {
-        
-        var footerEl = self.panel.el.getElementsByTagName("footer")[0];
-
-        if (footerEl) {
-
-            self.footer = new UIFooter({
-                el: footerEl
-            });
-            
-            self.panel.el.removeChild(footerEl);
-            footerContainerEl.appendChild(footerEl);
-            
-            self.footer.hide();
-
-            self.view.on("load", function(self) {
-               self.ui.footer.show();
-            });
-
-            self.view.on("unload", function(self) {
-               self.ui.footer.hide();
-            });
-
-        } else {
-            self.view.on("load", function(self) {
-               m.app.ui.footer.show()
-            });
-
-            self.view.on("unload", function(self) {
-                m.app.ui.footer.hide()
-            });
-        }     
-    });
     
     // Private constructors
 
     UIFooter = Mootor.UIFooter = function(options) {
         this.nav = new UINavBar({
-            container: options.el
+            container: options.el,
+            type: options.type
         });
+        this.type = options.type;
         this.el = this.nav.el;
         this.$el = $(this.el);
+        if (this.$el.find("nav").length < 1) {
+            this.el.appendChild(document.createElement("nav"));
+        }
     };
 
+    // Event handlers
+    UIApp.on("init", function(self) {
+        UINavBar.createBar("footer",self, UIFooter);
+    });
     
     // Private static methods and properties
 
@@ -2177,6 +2173,16 @@
         for (i in UIForm._controls) {
             UIForm._controls[i].constructor._init(self);
         }
+
+        // Assosiate automatically label to field by generating id 
+        self.$el.find(".m-field").each(function(index,element) {
+            var id;
+            id = $(element).find("input,select,textarea").attr("id");
+            if (!id) id = "field"+index;
+
+            $(element).find("label").attr("for",id);
+            $(element).find("input,select,textarea").attr("id",id);
+        });
     });
 
 
@@ -2397,6 +2403,12 @@
                 updateValue();
                 $element.on("change", updateValue);
 
+                $element.on("focus", function(e) {
+                    var me = document.createEvent("MouseEvents");
+                    me.initMouseEvent("mousedown", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+                    var worked = e.target.dispatchEvent(me);                
+                })
+
                 function updateValue() {
                     // Value is the text of the selected option or the placeholder text
                     var value = element.options[element.selectedIndex].text || element.placeholder;
@@ -2607,7 +2619,10 @@
             self._$ctx = $canvas[0].getContext("2d");
             self._canvasOffsetLeft = 0;
             self._canvasOffsetTop = 0;
-
+            self._$ctx.strokeStyle = "black";
+            self._$ctx.lineWidth = 2;
+            self._$ctx.fillStyle = "black";
+            self._drawing = false;
         },
         
         _addListeners: function(self) {
@@ -2625,6 +2640,12 @@
 
     			lastX = e.changedTouches[0].clientX - self._canvasOffsetLeft;
     			lastY = e.changedTouches[0].clientY - self._canvasOffsetTop;
+
+
+    			ctx.beginPath();
+    			ctx.fillStyle = "black";
+    			ctx.fillRect(lastX, lastY, 2, 2);
+    			ctx.closePath();
                 
                 e.stopPropagation();
     			e.preventDefault();                
