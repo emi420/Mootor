@@ -17,6 +17,9 @@
         border: none;
         font-family: sans-serif;
         padding: 0;
+        margin: 0.67em 0 0 0;
+        height: 1.43em;
+        line-height: 1.43em;
 
         &:disabled {
             opacity: 0.2;
@@ -26,13 +29,11 @@
             outline: 0;
         }
 
-    }
-    .m-field.m-error {
-       .#{$class} {
-            background-color: red;
-        }        
-    }
+        &::-webkit-input-placeholder { /* WebKit browsers */
+            @extend .m-color-gray;
+        }
 
+    }
 }
 
 .m-form {
@@ -42,6 +43,8 @@
         label {
             float: left;
             width: 30%;
+            height: 2.15em;
+            line-height: 2.86em;
         }  
     } 
     .m-form-top-labels .m-field {
@@ -52,21 +55,28 @@
     }
 
     .m-field {
-        padding: 1em;
-        border-bottom: 1px solid #ccc;
+        padding: 0 0.67em 0.67em 0.67em;
+        border-bottom: 1px solid;
+        @extend .m-border-color-gray-lighter;
         display: block;
 
         label {
             font-weight: bold;
             font-size: 1em;
-            line-height: 1.5em;
+            line-height: 2em;
+            height: 1.43em;
             overflow-wrap: break-word;
         }
         &.m-error {
-           label {
-                color: red;
-            }        
+            @extend .m-bg-color-danger-lighter;
         }
+        &.m-warning {
+            @extend .m-bg-color-warning-lighter;
+        }
+        &.m-success {
+            @extend .m-bg-color-success-lighter;
+        }
+
     }
 
 }

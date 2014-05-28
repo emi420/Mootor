@@ -6,7 +6,7 @@
 p {
     font-family: 'Helvetica Neue Light', Roboto, sans-serif;
     font-weight: 300;
-    font-size: 14pt;
+    font-size: 14px;
     line-height: 140%;
     @extend .m-color-black;
 }
@@ -19,7 +19,7 @@ q, blockquote {
     font-family: 'Helvetica Neue Light Italic', Roboto, sans-serif;
    	font-style: italic;
     font-weight: 100;	
-    font-size: 12pt;
+    font-size: 12px;
 }
 
 a {
@@ -35,13 +35,13 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 h1 {
-    font-size: 16pt;
+    font-size: 16px;
     font-weight: 400;
     font-family: 'Helvetica Neue Medium', Roboto, sans-serif;
 }
 
 h2 {
-    font-size: 14pt;
+    font-size: 14px;
     font-weight: 400;
     font-family: 'Helvetica Neue Medium', Roboto, sans-serif;
 }
@@ -52,18 +52,18 @@ h3 {
 
 
 h4 {
-    font-size: 12pt;
+    font-size: 12px;
     font-weight: 300;
 }
 
 h5 {
-    font-size: 12pt;
+    font-size: 12px;
     color: #666;
     font-weight: 300;
 }
 
 h6 {
-    font-size: 11pt;
+    font-size: 11px;
     font-family: 'Helvetica Neue Roman', Roboto, sans-serif;
     color: #666;
     font-weight: 100;

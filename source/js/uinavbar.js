@@ -113,19 +113,23 @@
                     self[barName].hideContainer();
 
                     self.view.on("beforeLoad", function(self) {
+                        console.log("beforeLoad showContainer",barName);
                        self.ui[barName].showContainer(barName);
                     });
 
                     self.view.on("unload", function(self) {
+                        console.log("unload hideContainer",barName);
                        self.ui[barName].hideContainer(barName);
                     });
 
                 } else {
                     self.view.on("load", function(self) {
+                        //console.log("load show",barName);
                         m.app.ui[barName].show()
                     });
 
                     self.view.on("unload", function(self) {
+                        //console.log("unload hide",barName);
                         m.app.ui[barName].hide()
                     });
                 }
