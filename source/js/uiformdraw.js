@@ -209,7 +209,7 @@
         * @param {Array} options A list of options
         * @chainable
         */
-        export: function(options) {
+        "export": function(options) {
             // code here
         },
 
