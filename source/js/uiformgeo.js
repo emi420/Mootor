@@ -6,7 +6,6 @@
 * @constructor
 * @module UI
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
 */
 
 (function ($, Mootor) {
@@ -29,7 +28,6 @@
 
     // Prototypal inheritance
     $.extend(UIFormGeo.prototype, UI.prototype);
-    $.extend(UIFormGeo.prototype, UIFormPseudoInput.prototype);
 
     // Private static methods and properties
 

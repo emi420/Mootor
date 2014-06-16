@@ -6,10 +6,10 @@
 * @module UI
 * @constructor
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
-(function ($, Mootor) {
+(function ($, Mootor, m) {
 
     "use strict";
 
@@ -21,8 +21,7 @@
         UIApp,
         UINavItem,
         App,
-        UI,
-        headerContainerEl;
+        UI;
 
     // Dependences
 
@@ -73,10 +72,9 @@
             backNavEl.setAttribute("class", "m-nav-header-back-container");
 
             if (self.el.firstChild !== undefined) {
-               self.el.insertBefore(backNavEl,self.el.firstChild) 
+               self.el.insertBefore(backNavEl,self.el.firstChild); 
             } else {
-               self.el.appendChild(backNavEl)
-               pa.appendChild(who);
+               self.el.appendChild(backNavEl);
             }
             
             self.back = new UINavItem({
@@ -85,10 +83,10 @@
             self.back.$el.addClass("m-header-back");
             self.back.hide();
             
-            self.back.$el.on("tap click", function(e) {
+            self.back.$el.on("tap click", function() {
                 m.app.back();
             });
-            self.back.el.onclick = function(e) {
+            self.back.el.onclick = function() {
                 return false;
             };
             App.on("go", function(app) {
@@ -146,4 +144,4 @@
     $.extend(UIHeader.prototype, UINavBar.prototype);
     $.extend(UIHeader.prototype, UI.prototype);
 
-}(window.$, window.Mootor));
+}(window.$, window.Mootor, window.m));

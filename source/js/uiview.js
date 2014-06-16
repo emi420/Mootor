@@ -6,7 +6,7 @@
 * @constructor
 * @module UI
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
 (function ($, Mootor, document) {
@@ -28,6 +28,11 @@
     // Event handlers
     
     View.on("init", function(self) {
+        
+        var applyEnhancements = function (index,element) {
+            new UIView._enhancements[index].className(element);    
+        };
+        
         self.ui = new UIView(self);
 
         self.ui.el = document.createElement("div");
@@ -45,12 +50,11 @@
             UIView.dispatch("init", self.ui);
         });
 
-
         self.on("ready", function() {
             for (var index in UIView._enhancements) {
-                $(UIView._enhancements[index].selector).each(function (i,element) {
-                    new UIView._enhancements[index].className(element);    
-                });    
+                $(UIView._enhancements[index].selector).each(
+                    applyEnhancementsÒ(index, this)
+                );    
             }
         });
 
@@ -58,7 +62,7 @@
             // console.log("uiview load")
             var footerHeight = $(".m-footer-container").height();
             var headerHeight = $(".m-header-container").height();
-            self.ui.el.style.height = (m.app.ui.el.offsetHeight - footerHeight - headerHeight) + "px"
+            self.ui.el.style.height = (m.app.ui.el.offsetHeight - footerHeight - headerHeight) + "px";
         });
 
     });

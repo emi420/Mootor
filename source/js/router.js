@@ -5,10 +5,10 @@
 * @constructor
 *  @module Router
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
-(function ($, Mootor) {
+(function ($, Mootor, m) {
 
     "use strict";
 
@@ -125,4 +125,4 @@
         }
     });
           
-}(window.$, window.Mootor));
+}(window.$, window.Mootor, window.m));

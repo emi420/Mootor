@@ -8,7 +8,7 @@
 * @author Emilio Mariscal (emi420 [at] gmail.com)
 */
 
-(function ($, Mootor) {
+(function ($, Mootor, m) {
     
     "use strict";
 
@@ -55,7 +55,6 @@
                 coverHTML,
                 $cover,
                 $label,
-                $icon,
                 $canvas,
                 $canvasContainer,
                 h,
@@ -66,23 +65,24 @@
 
             $label = $("label[for=" + element.getAttribute("id") + "]");
 
-            coverHTML = '<div class="m-draw m-draw-cover">\
-                <span class="m-draw-icon m-icon-arrow-right-small"></span>\
+            /*jshint multistr: true */
+            coverHTML = '<div class="m-draw m-draw-cover"> \
+                <span class="m-draw-icon m-icon-arrow-right-small"></span> \
             </div>';
         
             $cover = element.$cover = $(coverHTML).insertBefore(element);
-            $label.insertBefore($cover.find(".m-draw-icon"))
+            $label.insertBefore($cover.find(".m-draw-icon"));
             $element.hide();
         
-            $canvasContainer = $('<div class="m-draw-canvas">\
-                    <div class="m-draw-canvas-header">\
-                        <span class="m-draw-cancel">Cancel</span>\
-                        <span class="m-draw-done">Done</span>\
-                    </div>\
-                    <canvas></canvas>\
-                    <div class="m-draw-canvas-footer">\
-                        <span class="m-draw-erase m-icon-erase"></span>\
-                    </div>\
+            $canvasContainer = $('<div class="m-draw-canvas"> \
+                    <div class="m-draw-canvas-header"> \
+                        <span class="m-draw-cancel">Cancel</span> \
+                        <span class="m-draw-done">Done</span> \
+                    </div> \
+                    <canvas></canvas> \
+                    <div class="m-draw-canvas-footer"> \
+                        <span class="m-draw-erase m-icon-erase"></span> \
+                    </div> \
                 </div>');
         
             $canvasContainer.hide();
@@ -111,7 +111,7 @@
         
             $label[0].onclick = function() {
                 return false;
-            }
+            };
             // FICKE CHECK
             $cover.on("click tap", function() {
                 $canvasContainer.show();
@@ -140,20 +140,20 @@
                 offsetTop;
                 
             $canvas.on("touchstart", function(e) {
-    			self._canvasOffsetLeft = $canvas.offset().left - $(window).scrollLeft();
-    			self._canvasOffsetTop = $canvas.offset().top - $(window).scrollTop();
+                self._canvasOffsetLeft = $canvas.offset().left - $(window).scrollLeft();
+                self._canvasOffsetTop = $canvas.offset().top - $(window).scrollTop();
 
-    			lastX = e.changedTouches[0].clientX - self._canvasOffsetLeft;
-    			lastY = e.changedTouches[0].clientY - self._canvasOffsetTop;
+                lastX = e.changedTouches[0].clientX - self._canvasOffsetLeft;
+                lastY = e.changedTouches[0].clientY - self._canvasOffsetTop;
 
 
-    			ctx.beginPath();
-    			ctx.fillStyle = "black";
-    			ctx.fillRect(lastX, lastY, 2, 2);
-    			ctx.closePath();
-                
+                ctx.beginPath();
+                ctx.fillStyle = "black";
+                ctx.fillRect(lastX, lastY, 2, 2);
+                ctx.closePath();
+
                 e.stopPropagation();
-    			e.preventDefault();                
+                e.preventDefault();                
 
                 offsetLeft = self._canvasOffsetLeft;
                 offsetTop = self._canvasOffsetTop;
@@ -209,7 +209,7 @@
         * @param {Array} options A list of options
         * @chainable
         */
-        "export": function(options) {
+        "export": function() {
             // code here
         },
 
@@ -242,4 +242,4 @@
     
     UIForm.registerControl(UIFormDraw);  
 
-}(window.$, window.Mootor));
+}(window.$, window.Mootor, window.m));

@@ -6,10 +6,10 @@
 * @constructor
 * @module UI
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
-(function ($, Mootor) {
+(function ($, Mootor, m) {
 
     "use strict";
 
@@ -30,9 +30,7 @@
     // Private constructors
 
     UIApp = Mootor.UIApp = function() {
-        var $container,
-            app = m.app,
-            self = this;
+        var $container;
 
         App = Mootor.App;
 
@@ -63,7 +61,7 @@
         this.$el = $("<div>").addClass("m-views-container");
 
         // Disable transitions on Android
-        m.app.settings("uipanel-transitions", m.context.os.android !== true)
+        m.app.settings("uipanel-transitions", m.context.os.android !== true);
 
         if (m.app.settings("uipanel-transitions") !== true) {
             this.$el.addClass("m-no-transitions");
@@ -103,27 +101,32 @@
     App.on("ready", function() {
         var links = $("a"),
             i,
-            href;
+            href,
+            setEvent,
+            onClick;
+            
+        setEvent = function(el, href) {
+            $(el).on("tap click", function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                m.app.go(href);
+            });
+        };
+        
+        onClick = function() {
+            return false;
+        };
         
         for (i = links.length; i--;) {
             href = links[i].getAttribute("href");
             if (href !== null) {                
                 if (m.app.route(links[i].getAttribute("href")) !== undefined) {
 
-
                     if ( !!('ontouchstart' in window) ) {
 
-                        links[i].onclick = function() {
-                            return false;
-                        };
-
-                        (function(href) {
-                            $(links[i]).on("tap click", function(e) {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                m.app.go(href);
-                            })
-                        }(href));
+                        links[i].onclick = onClick;
+                        
+                        setEvent(links[i], href);
 
                     }
                 }
@@ -133,4 +136,4 @@
     });  
     
 
-}(window.$, window.Mootor));
+}(window.$, window.Mootor, window.m));

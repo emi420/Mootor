@@ -11,10 +11,10 @@
 * * constructor - A function that will be run after the view has loaded (optional).
 * * animation - a string defining the type of animation used to show this view (one of: "slide-left", "slide-right", "none").
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
-(function ($, Mootor, document) {
+(function ($, Mootor, m) {
 
     "use strict";
     
@@ -30,7 +30,7 @@
     
     // Event handlers
     
-    App.on("init", function(self) {
+    App.on("init", function() {
 
         var views = App._options.views,
             viewCount = views.length,
@@ -41,17 +41,16 @@
             view = m.app.view(views[i]);
         }
         
-        view.on("ready", function(self) {
+        view.on("ready", function() {
             App.dispatch("ready");
         });
         
     });   
     
-    App.on("go", function(self) {
+    App.on("go", function() {
         
         var view,
             currentView,
-            app,
             stateObj,
             router = App._currentRoute,
             url = router.url;
@@ -75,9 +74,9 @@
         if (currentView != view) {
 
             if (url !== "") {
-                history.pushState(stateObj, view.id, url);
+                window.history.pushState(stateObj, view.id, url);
             } else {
-                history.pushState(stateObj, view.id, window.location.pathname);                    
+                window.history.pushState(stateObj, view.id, window.location.pathname);                    
             }
 
         }
@@ -129,7 +128,7 @@
 
             View.dispatch("init", self);
 
-            self.on("getHtml", function(view) {
+            self.on("getHtml", function() {
                 window.setTimeout(function() {
                     View._getScript(self);
                 }, 1);
@@ -140,7 +139,7 @@
             });
 
             // Load Html, Css and JavaScript
-            setTimeout(function() {
+            window.setTimeout(function() {
                 View._getHtml(self);
             }, 1);
             View._getCss(self);
@@ -297,7 +296,7 @@
                 View.on(event, callback);
             }
             return this;
-        },
+        }
 
         /**
         * Unsets event handlers for the view
@@ -329,8 +328,7 @@
         *     indexView = m.app.view("index");
         */
         view: function(id, options) {
-            var i,
-                views = View._collection,
+            var views = View._collection,
                 view;
             
             if (id !== "" && id !== undefined) {
@@ -349,8 +347,8 @@
             }
 
             return view;
-        },
+        }
         
     });
 
-}(window.$, window.Mootor, window.document));
+}(window.$, window.Mootor, window.m));

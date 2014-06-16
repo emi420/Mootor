@@ -5,10 +5,10 @@
 * @extends UI
 * @module UI
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
-(function ($, Mootor) {
+(function ($, Mootor, m) {
 
     "use strict";
 
@@ -38,13 +38,13 @@
         self.panel.$el = $(self.el);
         self.panel.hide();
         
-        UIPanel.on("transitionEnd", function(self) {
+        UIPanel.on("transitionEnd", function() {
             if (Mootor.App._currentView !== view) {
                 view.ui.panel.hide();    
             } 
         });
         
-        view.on("load", function(view) {
+        view.on("load", function() {
 
             self.panel.position("right").show();
 
@@ -67,13 +67,13 @@
             
         });
     
-        view.on("unload", function(view) {
+        view.on("unload", function() {
             self.panel.position("left");
         }); 
                 
     });
     
-    UIApp.on("init", function(self) {
+    UIApp.on("init", function() {
         
         UIPanel._addTransitionClass();    
         UIPanel._setTransitionDuration();  
@@ -121,7 +121,7 @@
             
         },
         
-        _startTransition: function (self) {
+        _startTransition: function () {
             
             var uiapp = m.app.ui;
             
@@ -138,7 +138,7 @@
             });
         },
         
-        _addTransitionClass: function (self) {
+        _addTransitionClass: function () {
             var uiapp = m.app.ui;
 
             if (UIPanel.DEFAULT_TRANSITION == "hslide") {
@@ -178,7 +178,7 @@
                    
                    for (j=0; j<ruleList.length; j++)
                    {
-                       if (ruleList[j].type == CSSRule.STYLE_RULE && 
+                       if (ruleList[j].type == window.CSSRule.STYLE_RULE && 
                            ruleList[j].selectorText == selector)
                        {
                            return ruleList[j].style;
@@ -277,4 +277,4 @@
 
     });
     
-}(window.$, window.Mootor));
+}(window.$, window.Mootor, window.m));

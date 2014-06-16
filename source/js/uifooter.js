@@ -6,7 +6,7 @@
 * @module UI
 * @constructor
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
 (function ($, Mootor) {
@@ -21,10 +21,7 @@
         UIApp,
         UINavItem,
         App,
-        UI,
-        footerContainerEl,
-        $footerContainerEl,
-        _appFooter = false;
+        UI;
 
     // Dependences
 

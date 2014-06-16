@@ -5,7 +5,7 @@
 * @constructor
 * @module Router
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
 
@@ -52,7 +52,7 @@
         * @example
         *     url_view = m.app.route("index.html").view;
         */
-        view: {},
+        view: {}
 
     });        
 

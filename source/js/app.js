@@ -1,9 +1,9 @@
 /*
  *  @author Emilio Mariscal (emi420 [at] gmail.com)
- *  @author Martín Szyszlican (martinsz [at] gmail.com)
+ *  @author Martin Szyszlican (martinsz [at] gmail.com)
  */
 
-(function ($, Mootor) {
+(function ($, Mootor, m) {
 
     "use strict";
 
@@ -29,7 +29,7 @@
     * @param {Object} options An object defining options for the application.
     * * views - An array with a list of view names
     */
-    App = Mootor.App = function(options) {
+    App = Mootor.App = function() {
     };
 
     // Private static 
@@ -196,7 +196,7 @@
         
     };
     
-    $.extend(window.m, {        
+    $.extend(m, {        
         /**
         * Creates a new app with the defined options.
         * If the app is already created, it can be called without options to have a reference to the Mootor app. 
@@ -229,4 +229,4 @@
     });
 
 
-}(window.$, window.Mootor));
+}(window.$, window.Mootor, window.m));

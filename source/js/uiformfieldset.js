@@ -6,7 +6,6 @@
 * @constructor
 * @module UI
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
 */
 
 (function ($, Mootor) {
@@ -47,8 +46,8 @@
         * @param {boolean} state State of the input, true if disabled false if enabled 
         * @return {boolean} Boolean state
         */
-        disabled: function(state) {
-            
+        disabled: function() {
+            // code here
         }
 
     });        

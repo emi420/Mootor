@@ -6,7 +6,7 @@
 * @constructor
 * @module UI
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
 (function ($, Mootor) {
@@ -47,7 +47,7 @@
 
             buttons.attr("aria-role","button");
 
-        },
+        }
         
     });
 

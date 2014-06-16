@@ -5,7 +5,7 @@
 * @private
 * @module Mootor
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
 (function ($, Mootor) {
@@ -54,17 +54,19 @@
                 count = 0,
                 callbacks = Event._collection[event],
                 callback;
-                
+                                
             if (callbacks !== undefined) {
                 count = callbacks.length ;
             }
             
+            callback = function(cb) {
+                window.setTimeout(function() {
+                    cb(instance);
+                }, 1);
+            };
+            
             for (i = 0; i < count; i++) {
-                (function(callback) {
-                    window.setTimeout(function() {
-                        callback(instance);
-                    }, 1);
-                }(callbacks[i]));
+                callback(callbacks[i]);
             }
         }, 
 

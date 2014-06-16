@@ -6,10 +6,10 @@
 * @module UI
 * @constructor
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
-(function ($, Mootor) {
+(function ($, Mootor, m) {
 
     "use strict";
 
@@ -18,7 +18,6 @@
         UI,
         UIView,
         UINavItem,
-        barEl,
         barContainerEl = [];
         
     // Dependences
@@ -68,9 +67,9 @@
             }
             
             return navGroups;
-        }
-        ,
-        createBar: function(barName,uiapp,barClass) {
+        },
+        
+        createBar: function(barName,uiapp,BarClass) {
 
             // FIXME CHECK (parentElement?)
             var barEl = uiapp.el.parentElement.getElementsByTagName(barName)[0];
@@ -81,7 +80,7 @@
             if (barEl) {
                 barEl.parentElement.replaceChild(barContainerEl[barName], barEl);
                 barContainerEl[barName].appendChild(barEl);
-                barEl.barClass = barClass;
+                barEl.barClass = BarClass;
             }
             else {
                 barEl = document.createElement("div"); /*Dummy object for footer initialization*/
@@ -89,7 +88,7 @@
                 $(barContainerEl[barName]).addClass("m-hidden");
             }
 
-            uiapp[barName] = new barClass({
+            uiapp[barName] = new BarClass({
                 el: barEl,
                 type: "global"
             });
@@ -102,7 +101,7 @@
 
                 if (barEl) {
                  
-                    self[barName] = new barClass({
+                    self[barName] = new BarClass({
                         el: barEl,
                         type: "view"
                     });
@@ -123,14 +122,12 @@
                     });
 
                 } else {
-                    self.view.on("load", function(self) {
-                        //console.log("load show",barName);
-                        m.app.ui[barName].show()
+                    self.view.on("load", function() {
+                        m.app.ui[barName].show();
                     });
 
-                    self.view.on("unload", function(self) {
-                        //console.log("unload hide",barName);
-                        m.app.ui[barName].hide()
+                    self.view.on("unload", function() {
+                        m.app.ui[barName].hide();
                     });
                 }
             });            
@@ -142,8 +139,7 @@
     $.extend(UINavBar.prototype, {
         hideContainer: function(barName) {
             this.hide();
-            // console.log("hideContainer",this.el.parentElement);
-            if ($(".m-"+barName+"-container .m-global-navbar").length == 0) {
+            if ($(".m-"+barName+"-container .m-global-navbar").length === 0) {
                 $(".m-"+barName+"-container").addClass("m-hidden");    
             }
             
@@ -152,11 +148,11 @@
         showContainer: function(barName) {
             this.show();
             // console.log("showContainer",this.el.parentElement);
-            if ($(".m-"+barName+"-container .m-global-navbar").length == 0) {
+            if ($(".m-"+barName+"-container .m-global-navbar").length === 0) {
                 $(".m-"+barName+"-container").removeClass("m-hidden");
             }
         }
 
     });  
 
-}(window.$, window.Mootor));
+}(window.$, window.Mootor, window.m));

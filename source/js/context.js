@@ -3,9 +3,11 @@
 * @class Context
 * @return object
 * @static
+* @author Emilio Mariscal (emi420 [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
-(function ($, Mootor) {
+(function ($, Mootor, m) {
 
     "use strict";
 
@@ -51,7 +53,7 @@
             },
             
             cordova: (window.Cordova !== undefined),
-            phonegap: (window.PhoneGap !== undefined),
+            phonegap: (window.PhoneGap !== undefined)
 
         });
     };
@@ -69,4 +71,4 @@
         context: new Context()
     });
 
-}(window.$, window.Mootor));
+}(window.$, window.Mootor, window.m));

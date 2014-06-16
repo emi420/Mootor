@@ -6,7 +6,6 @@
 * @constructor
 * @module UI
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
 */
 
 (function ($, Mootor) {
@@ -28,9 +27,9 @@
         // code here
     };
 
-    UIFormCameraPicture = functon() {
-        UIFormCameraPicture,
-    }
+    UIFormCameraPicture = function() {
+        // code here
+    };
 
     // Prototypal inheritance
     $.extend(UIFormCamera.prototype, UI.prototype);
@@ -102,7 +101,7 @@
         * @param {Array} options A list of options
         * @chainable
         */
-        export: function(options) {
+        "export": function(options) {
              // code here
         }                
     });    

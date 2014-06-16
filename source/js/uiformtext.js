@@ -6,7 +6,7 @@
 * @constructor
 * @module UI
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
 (function ($, Mootor) {
@@ -39,14 +39,11 @@
     $.extend(UIFormText, {
 
         _init: function(uiview) {
-            var inputs,
-                i;
+            var inputs;
                 
             inputs = uiview.$el.find(".m-text");
-            
-            // code here
 
-        },
+        }
         
     });
 

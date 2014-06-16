@@ -6,10 +6,10 @@
 * @module UI
 * @constructor
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
-(function ($, Mootor) {
+(function ($, Mootor, m) {
 
     // Force strict mode for ECMAScript
     "use strict";
@@ -25,7 +25,7 @@
     UIApp = Mootor.UIApp;
 
     // Event handlers
-    UIApp.on("init", function(self) {
+    UIApp.on("init", function() {
         var uiloading = new UILoading();
 
         $.extend(UIApp.prototype, {
@@ -60,7 +60,6 @@
     UILoading = Mootor.UILoading = function() {
         var $el = this.$el = UILoading.create();
         $el.appendTo(m.app.ui.$container);
-        //debugger;
         this.hide();
     };
 
@@ -112,4 +111,4 @@
     });      
 
       
-}(window.$, window.Mootor));
+}(window.$, window.Mootor, window.m));

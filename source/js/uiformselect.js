@@ -6,7 +6,7 @@
 * @constructor
 * @module UI
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
 (function ($, Mootor) {
@@ -37,13 +37,13 @@
     $.extend(UIFormSelect, {
         _init: function(uiview) {
             
-            var inputs,
-                i;
+            var inputs;
                 
             inputs = uiview.$el.find(".m-select");
             inputs.each(function(index,element) {
                 var $element = $(element);
-
+                
+                /*jshint multistr: true */
                 var coverHTML = '<div class="m-select m-select-cover">\
                     <span class="m-value"></span>\
                     <span class="m-icon-arrow-down-small"></span>\
@@ -55,11 +55,10 @@
                 updateValue();
                 $element.on("change", updateValue);
 
-                $element.on("focus", function(e) {
+                $element.on("focus", function() {
                     var me = document.createEvent("MouseEvents");
                     me.initMouseEvent("mousedown", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-                    var worked = e.target.dispatchEvent(me);                
-                })
+                });
 
                 function updateValue() {
                     // Value is the text of the selected option or the placeholder text

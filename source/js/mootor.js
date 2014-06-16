@@ -1,9 +1,9 @@
 /**
-* The Mootor module handles the creation of Namespaces and global objects
+* Mootor public objects
 *
 * @module Mootor
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
 (function () {
