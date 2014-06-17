@@ -50,8 +50,12 @@
     };
 
     // Event handlers
-    UIApp.on("init", function(self) {
+    UIView.on("init", function(self) {
         UINavBar.createBar("header",self, UIHeader);
+    });
+
+    UIApp.on("init", function(self) {
+        UINavBar.initBar("header",self, UIHeader);
     });
 
     

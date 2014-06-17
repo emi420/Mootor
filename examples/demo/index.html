@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
   <meta name="viewport" content="initial-scale = 1.0, user-scalable = no">
@@ -8,85 +9,44 @@
 
   <link rel="stylesheet" href="../../source/css/mootor.css">
   <link rel="stylesheet" href="../../source/css/color.css">
+  
 
-  <script type="text/javascript" src="../../dist/js/zepto.js"></script>
-  <script type="text/javascript" src="../../dist/js/clickfix.js"></script>
-  <script type="text/javascript" src="../../dist/js/zepto-touch.js"></script>
-  <script type="text/javascript" src="../../dist/js/zepto-detect.js"></script>
-  <script type="text/javascript" src="../../source/js/overthrow.min.js"></script>
-  <script type="text/javascript" src="../../source/js/mootor.js"></script>
-  <script type="text/javascript" src="../../source/js/event.js"></script>
-  <script type="text/javascript" src="../../source/js/context.js"></script>
-  <script type="text/javascript" src="../../source/js/app.js"></script>
-  <script type="text/javascript" src="../../source/js/view.js"></script>
-  <script type="text/javascript" src="../../source/js/ui.js"></script>
-  <script type="text/javascript" src="../../source/js/uiapp.js"></script>
-  <script type="text/javascript" src="../../source/js/uiview.js"></script>
-  <script type="text/javascript" src="../../source/js/uipanel.js"></script>  
-  <script type="text/javascript" src="../../source/js/router.js"></script>
-  <script type="text/javascript" src="../../source/js/route.js"></script>
-  <script type="text/javascript" src="../../source/js/uinavitem.js"></script>  
-  <script type="text/javascript" src="../../source/js/uinavbar.js"></script>  
-  <script type="text/javascript" src="../../source/js/uiheader.js"></script>  
-  <script type="text/javascript" src="../../source/js/uifooter.js"></script>  
-  <script type="text/javascript" src="../../source/js/uiloading.js"></script>
-  <script type="text/javascript" src="../../source/js/uiform.js"></script>
-  <script type="text/javascript" src="../../source/js/uiformvirtualinput.js"></script>
-  <script type="text/javascript" src="../../source/js/uiformdraw.js"></script>
-  <script type="text/javascript" src="../../source/js/uiformtext.js"></script>
-  <script type="text/javascript" src="../../source/js/uiformtextarea.js"></script>
-  <script type="text/javascript" src="../../source/js/uiformselect.js"></script>
-  <script type="text/javascript" src="../../source/js/uibutton.js"></script>
+  <script defer type="text/javascript" src="../../dist/js/zepto.js"></script>
+  <script defer type="text/javascript" src="../../dist/js/clickfix.js"></script>
+  <script defer type="text/javascript" src="../../dist/js/zepto-touch.js"></script>
+  <script defer type="text/javascript" src="../../dist/js/zepto-detect.js"></script>
+  <script defer type="text/javascript" src="../../source/js/overthrow.min.js"></script>
+  <script defer type="text/javascript" src="../../source/js/mootor.js"></script>
+  <script defer type="text/javascript" src="../../source/js/event.js"></script>
+  <script defer type="text/javascript" src="../../source/js/context.js"></script>
+  <script defer type="text/javascript" src="../../source/js/app.js"></script>
+  <script defer type="text/javascript" src="../../source/js/view.js"></script>
+  <script defer type="text/javascript" src="../../source/js/ui.js"></script>
+  <script defer type="text/javascript" src="../../source/js/uiapp.js"></script>
+  <script defer type="text/javascript" src="../../source/js/uiview.js"></script>
+  <script defer type="text/javascript" src="../../source/js/uipanel.js"></script>  
+  <script defer type="text/javascript" src="../../source/js/router.js"></script>
+  <script defer type="text/javascript" src="../../source/js/route.js"></script>
+  <script defer type="text/javascript" src="../../source/js/uinavitem.js"></script>  
+  <script defer type="text/javascript" src="../../source/js/uinavbar.js"></script>  
+  <script defer type="text/javascript" src="../../source/js/uiheader.js"></script>  
+  <script defer type="text/javascript" src="../../source/js/uifooter.js"></script>  
+  <script defer type="text/javascript" src="../../source/js/uiloading.js"></script>
+  <script defer type="text/javascript" src="../../source/js/uiform.js"></script>
+  <script defer type="text/javascript" src="../../source/js/uiformvirtualinput.js"></script>
+  <script defer type="text/javascript" src="../../source/js/uiformdraw.js"></script>
+  <script defer type="text/javascript" src="../../source/js/uiformtext.js"></script>
+  <script defer type="text/javascript" src="../../source/js/uiformtextarea.js"></script>
+  <script defer type="text/javascript" src="../../source/js/uiformselect.js"></script>
+  <script defer type="text/javascript" src="../../source/js/uibutton.js"></script>
+  <script defer type="text/javascript" src="index.js"></script>
+ <!-- <script defer src="http://192.168.1.33:8080/target/target-script-min.js#anonymous"></script>-->
 
 </head>
 
 <body>
-    
     <header>
         <h1><img src="img/logo.png" /></h1>
     </header>
-        
-    <script type="text/javascript">
-    
-        (function() {
-
-            "use strict";
-
-            var app = m.app({
-                views: [
-                    "index",
-                    "testview",
-                    "help",
-                    "about",
-                    "form",
-                    "buttons",
-                    "icons",
-                    "colors",
-                    "text",
-                    "test",
-                    "draw"
-                ]
-            });
-    
-            app.route("^$", app.view("index"));
-            app.route("^#welcome/(.*)", app.view("testview"));
-            app.route("^#help", app.view("help"));
-            app.route("^#about", app.view("about"));
-            app.route("^#form", app.view("form"));
-            app.route("^#buttons", app.view("buttons"));
-            app.route("^#icons", app.view("icons"));
-            app.route("^#uinavbar", app.view("uinavbar"));
-            app.route("^#test", app.view("test"));
-            app.route("^#colors", app.view("colors"));
-            app.route("^#text", app.view("text"));
-            app.route("^#draw", app.view("draw"));
-            
-            app.init();
-            
-        }());
-    
-    </script>
-    
-
 </body>
 </html>

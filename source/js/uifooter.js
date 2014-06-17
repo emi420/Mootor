@@ -50,10 +50,13 @@
     };
 
     // Event handlers
-    UIApp.on("init", function(self) {
+    UIView.on("init", function(self) {
         UINavBar.createBar("footer",self, UIFooter);
     });
-    
+
+    UIApp.on("init", function(self) {
+        UINavBar.initBar("footer",self, UIFooter);
+    });
     // Private static methods and properties
 
     $.extend(UIFooter, {

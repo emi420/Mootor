@@ -68,69 +68,71 @@
             
             return navGroups;
         },
-        
-        createBar: function(barName,uiapp,BarClass) {
 
-            // FIXME CHECK (parentElement?)
-            var barEl = uiapp.el.parentElement.getElementsByTagName(barName)[0];
-
+        // self = uiapp
+        initBar: function(barName, self, BarClass) {
+            
+            var barEl = self.el.parentElement.getElementsByTagName(barName)[0];
+            
             barContainerEl[barName] = document.createElement("div");
-            barContainerEl[barName].setAttribute("class","m-"+barName+"-container");
+            barContainerEl[barName].setAttribute("class","m-" + barName + "-container");
 
             if (barEl) {
                 barEl.parentElement.replaceChild(barContainerEl[barName], barEl);
                 barContainerEl[barName].appendChild(barEl);
                 barEl.barClass = BarClass;
-            }
-            else {
-                barEl = document.createElement("div"); /*Dummy object for footer initialization*/
+            } else {
+                barEl = document.createElement("div");
                 m.app.ui.el.parentElement.appendChild(barContainerEl[barName]);                
                 $(barContainerEl[barName]).addClass("m-hidden");
             }
 
-            uiapp[barName] = new BarClass({
+            self[barName] = new BarClass({
                 el: barEl,
                 type: "global"
             });
-            uiapp[barName].hide();
+            self[barName].hide();
+        },
+                    
+        // self = uiview
+        createBar: function(barName, self, BarClass) {
 
+            // FIXME CHECK (parentElement?)
+            var barEl = self.el.parentElement.getElementsByTagName(barName)[0];
+            
+            console.log("view " + self.view.id + " init event for " + barName);
+            
+            var barEl = self.panel.el.getElementsByTagName(barName)[0];
 
-            UIView.on("init", function(self) {
+            if (barEl) {
+             
+                self[barName] = new BarClass({
+                    el: barEl,
+                    type: "view"
+                });
                 
-                var barEl = self.panel.el.getElementsByTagName(barName)[0];
+                self.panel.el.removeChild(barEl);
+                barContainerEl[barName].appendChild(barEl);
+                
+                self[barName].hideContainer();
 
-                if (barEl) {
-                 
-                    self[barName] = new BarClass({
-                        el: barEl,
-                        type: "view"
-                    });
-                    
-                    self.panel.el.removeChild(barEl);
-                    barContainerEl[barName].appendChild(barEl);
-                    
-                    self[barName].hideContainer();
+                self.view.on("load", function(self) {
+                   self.ui[barName].showContainer(barName);
+                });
 
-                    self.view.on("beforeLoad", function(self) {
-                        console.log("beforeLoad showContainer",barName);
-                       self.ui[barName].showContainer(barName);
-                    });
+                self.view.on("unload", function(self) {
+                   self.ui[barName].hideContainer(barName);
+                });
 
-                    self.view.on("unload", function(self) {
-                        console.log("unload hideContainer",barName);
-                       self.ui[barName].hideContainer(barName);
-                    });
+            } else {
+                self.view.on("load", function(self) {
+                    m.app.ui[barName].show();
+                });
 
-                } else {
-                    self.view.on("load", function() {
-                        m.app.ui[barName].show();
-                    });
-
-                    self.view.on("unload", function() {
-                        m.app.ui[barName].hide();
-                    });
-                }
-            });            
+                self.view.on("unload", function(self) {
+                    m.app.ui[barName].hide();
+                });
+            }
         }
     });
 
@@ -139,6 +141,7 @@
     $.extend(UINavBar.prototype, {
         hideContainer: function(barName) {
             this.hide();
+            // FIXME CHECK: DOM query
             if ($(".m-"+barName+"-container .m-global-navbar").length === 0) {
                 $(".m-"+barName+"-container").addClass("m-hidden");    
             }
@@ -147,7 +150,7 @@
         },
         showContainer: function(barName) {
             this.show();
-            // console.log("showContainer",this.el.parentElement);
+            // FIXME CHECK: DOM query
             if ($(".m-"+barName+"-container .m-global-navbar").length === 0) {
                 $(".m-"+barName+"-container").removeClass("m-hidden");
             }
