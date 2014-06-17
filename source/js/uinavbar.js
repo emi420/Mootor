@@ -32,7 +32,7 @@
         this.el = options.container;
         this.$el = $(this.el);
         this.$el.addClass("m-navbar");
-        this.$el.addClass("m-"+options.type+"-navbar");
+        this.$el.addClass("m-" + options.type + "-navbar");
         this.nav = UINavBar._initNavItems(this.el);
     };
 
@@ -72,7 +72,8 @@
         // self = uiapp
         initBar: function(barName, self, BarClass) {
             
-            var barEl = self.el.parentElement.getElementsByTagName(barName)[0];
+            var barEl = self.el.parentElement.getElementsByTagName(barName)[0],
+                _emptyContainer = false;
             
             barContainerEl[barName] = document.createElement("div");
             barContainerEl[barName].setAttribute("class","m-" + barName + "-container");
@@ -80,28 +81,25 @@
             if (barEl) {
                 barEl.parentElement.replaceChild(barContainerEl[barName], barEl);
                 barContainerEl[barName].appendChild(barEl);
-                barEl.barClass = BarClass;
             } else {
                 barEl = document.createElement("div");
-                m.app.ui.el.parentElement.appendChild(barContainerEl[barName]);                
-                $(barContainerEl[barName]).addClass("m-hidden");
+                self.el.parentElement.insertBefore(barContainerEl[barName], self.el);
+                $(barContainerEl[barName]).hide();
+                _emptyContainer = true;
             }
 
             self[barName] = new BarClass({
                 el: barEl,
-                type: "global"
+                type: "global",
             });
+            
+            self[barName]._emptyContainer = _emptyContainer;
             self[barName].hide();
         },
                     
         // self = uiview
         createBar: function(barName, self, BarClass) {
 
-            // FIXME CHECK (parentElement?)
-            var barEl = self.el.parentElement.getElementsByTagName(barName)[0];
-            
-            console.log("view " + self.view.id + " init event for " + barName);
-            
             var barEl = self.panel.el.getElementsByTagName(barName)[0];
 
             if (barEl) {
@@ -118,10 +116,17 @@
 
                 self.view.on("load", function(self) {
                    self.ui[barName].showContainer(barName);
+                   if (m.app.ui[barName]._emptyContainer === true) {
+                       $(barContainerEl[barName]).show();
+                   }
+                   $(barContainerEl[barName]).show();
                 });
 
                 self.view.on("unload", function(self) {
                    self.ui[barName].hideContainer(barName);
+                   if (m.app.ui[barName]._emptyContainer === true) {
+                       $(barContainerEl[barName]).hide();
+                   }
                 });
 
             } else {
@@ -140,20 +145,12 @@
 
     $.extend(UINavBar.prototype, {
         hideContainer: function(barName) {
-            this.hide();
-            // FIXME CHECK: DOM query
-            if ($(".m-"+barName+"-container .m-global-navbar").length === 0) {
-                $(".m-"+barName+"-container").addClass("m-hidden");    
-            }
             
-
+            this.hide();
         },
         showContainer: function(barName) {
+            
             this.show();
-            // FIXME CHECK: DOM query
-            if ($(".m-"+barName+"-container .m-global-navbar").length === 0) {
-                $(".m-"+barName+"-container").removeClass("m-hidden");
-            }
         }
 
     });  
