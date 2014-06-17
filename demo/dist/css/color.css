@@ -4,162 +4,689 @@
  * @author Emilio Mariscal (emi420 [at] gmail.com)
  * @author Martín Szyszlican (martinsz [at] gmail.com)
  */
-/* line 46, ../../source/css/_colors.scss */
-.m-bg-color-primary-1, .m-button-default.m-button-outline:active, .m-button-default.m-button-outline:focus, .m-button-default.m-button-outline-small:active, .m-button-default.m-button-outline-small:focus, .m-button-default.m-button-outline-fullwidth:active, .m-button-default.m-button-outline-fullwidth:focus, .m-button-default.m-button:focus, .m-button-default.m-button-small:focus, .m-button-default.m-button:active, .m-button-default.m-button-small:active, .m-button-default.m-button-fullwidth:focus, .m-button-default.m-button-fullwidth:active, .m-button-primary.m-button-outline:active, .m-button-primary.m-button-outline:focus, .m-button-primary.m-button-outline-small:active, .m-button-primary.m-button-outline-small:focus, .m-button-primary.m-button-outline-fullwidth:active, .m-button-primary.m-button-outline-fullwidth:focus, .m-button-primary.m-button:focus, .m-button-primary.m-button-small:focus, .m-button-primary.m-button:active, .m-button-primary.m-button-small:active, .m-button-primary.m-button-fullwidth:focus, .m-button-primary.m-button-fullwidth:active {
-  background: #f3f3e8;
+/* line 10, _colors.scss */
+.m-bg-color-gray-lighter {
+  background: #cdc9c7;
 }
 
-/* line 50, ../../source/css/_colors.scss */
-.m-border-color-primary-1 {
-  border-color: #f3f3e8;
+/* line 14, _colors.scss */
+.m-border-color-gray-lighter {
+  border-color: #cdc9c7;
 }
 
-/* line 54, ../../source/css/_colors.scss */
-.m-color-primary-1 {
-  color: #f3f3e8;
+/* line 18, _colors.scss */
+.m-color-gray-lighter {
+  color: #cdc9c7;
 }
 
-/* line 58, ../../source/css/_colors.scss */
-.m-bg-color-primary-2, .m-button-success.m-button-outline:active, .m-button-success.m-button-outline:focus, .m-button-success.m-button-outline-small:active, .m-button-success.m-button-outline-small:focus, .m-button-success.m-button-outline-fullwidth:active, .m-button-success.m-button-outline-fullwidth:focus, .m-button-success.m-button:focus, .m-button-success.m-button-small:focus, .m-button-success.m-button:active, .m-button-success.m-button-small:active, .m-button-success.m-button-fullwidth:focus, .m-button-success.m-button-fullwidth:active {
-  background: #a89c90;
+/* line 22, _colors.scss */
+.m-color-gray-lighter-fg {
+  color: #cdc9c7;
 }
 
-/* line 62, ../../source/css/_colors.scss */
-.m-border-color-primary-2 {
-  border-color: #a89c90;
+/* line 10, _colors.scss */
+.m-bg-color-gray-light {
+  background: #aea8a4;
 }
 
-/* line 66, ../../source/css/_colors.scss */
-.m-color-primary-2 {
-  color: #a89c90;
+/* line 14, _colors.scss */
+.m-border-color-gray-light {
+  border-color: #aea8a4;
 }
 
-/* line 70, ../../source/css/_colors.scss */
-.m-bg-color-primary-3, .m-button-info.m-button-outline:active, .m-button-info.m-button-outline:focus, .m-button-info.m-button-outline-small:active, .m-button-info.m-button-outline-small:focus, .m-button-info.m-button-outline-fullwidth:active, .m-button-info.m-button-outline-fullwidth:focus, .m-button-info.m-button:focus, .m-button-info.m-button-small:focus, .m-button-info.m-button:active, .m-button-info.m-button-small:active, .m-button-info.m-button-fullwidth:focus, .m-button-info.m-button-fullwidth:active {
-  background: #28830b;
+/* line 18, _colors.scss */
+.m-color-gray-light {
+  color: #aea8a4;
 }
 
-/* line 74, ../../source/css/_colors.scss */
-.m-border-color-primary-3 {
-  border-color: #28830b;
+/* line 22, _colors.scss */
+.m-color-gray-light-fg {
+  color: #aea8a4;
 }
 
-/* line 78, ../../source/css/_colors.scss */
-.m-color-primary-3 {
-  color: #28830b;
+/* line 10, _colors.scss */
+.m-bg-color-gray {
+  background: #968e89;
 }
 
-/* line 82, ../../source/css/_colors.scss */
-.m-bg-color-primary-4, .m-button-success.m-button-fullwidth, .m-button-success.m-button:link, .m-button-success.m-button-small:link, .m-button-success.m-button, .m-button-success.m-button-small, .m-header-container, .m-footer-container {
-  background: #6dbca8;
+/* line 14, _colors.scss */
+.m-border-color-gray {
+  border-color: #968e89;
 }
 
-/* line 86, ../../source/css/_colors.scss */
-.m-border-color-primary-4, .m-button-success {
-  border-color: #6dbca8;
+/* line 18, _colors.scss */
+.m-color-gray {
+  color: #968e89;
 }
 
-/* line 90, ../../source/css/_colors.scss */
-.m-color-primary-4, .m-button-success.m-button-outline-fullwidth, .m-button-success.m-button-outline-small, .m-button-success.m-button-outline {
-  color: #6dbca8;
+/* line 22, _colors.scss */
+.m-color-gray-fg {
+  color: #968e89;
 }
 
-/* line 94, ../../source/css/_colors.scss */
-.m-bg-color-primary-5, .m-button-danger.m-button-outline:active, .m-button-danger.m-button-outline:focus, .m-button-danger.m-button-outline-small:active, .m-button-danger.m-button-outline-small:focus, .m-button-danger.m-button-outline-fullwidth:active, .m-button-danger.m-button-outline-fullwidth:focus, .m-button-danger.m-button:focus, .m-button-danger.m-button-small:focus, .m-button-danger.m-button:active, .m-button-danger.m-button-small:active, .m-button-danger.m-button-fullwidth:focus, .m-button-danger.m-button-fullwidth:active, .m-button-info.m-button-fullwidth, .m-button-info.m-button:link, .m-button-info.m-button-small:link, .m-button-info.m-button, .m-button-info.m-button-small {
-  background: #ed9a3d;
+/* line 10, _colors.scss */
+.m-bg-color-gray-dark {
+  background: #776f6a;
 }
 
-/* line 98, ../../source/css/_colors.scss */
-.m-border-color-primary-5, .m-button-info {
-  border-color: #ed9a3d;
+/* line 14, _colors.scss */
+.m-border-color-gray-dark {
+  border-color: #776f6a;
 }
 
-/* line 102, ../../source/css/_colors.scss */
-.m-color-primary-5, .m-button-info.m-button-outline-fullwidth, .m-button-info.m-button-outline-small, .m-button-info.m-button-outline {
-  color: #ed9a3d;
+/* line 18, _colors.scss */
+.m-color-gray-dark {
+  color: #776f6a;
 }
 
-/* line 106, ../../source/css/_colors.scss */
-.m-bg-color-primary-6, .m-button-danger.m-button-fullwidth, .m-button-danger.m-button:link, .m-button-danger.m-button-small:link, .m-button-danger.m-button, .m-button-danger.m-button-small {
-  background: #f04930;
+/* line 22, _colors.scss */
+.m-color-gray-dark-fg {
+  color: #776f6a;
 }
 
-/* line 110, ../../source/css/_colors.scss */
-.m-border-color-primary-6, .m-button-danger {
-  border-color: #f04930;
+/* line 10, _colors.scss */
+.m-bg-color-gray-darker {
+  background: #524c49;
 }
 
-/* line 114, ../../source/css/_colors.scss */
-.m-color-primary-6, .m-button-danger.m-button-outline-fullwidth, .m-button-danger.m-button-outline-small, .m-button-danger.m-button-outline {
-  color: #f04930;
+/* line 14, _colors.scss */
+.m-border-color-gray-darker {
+  border-color: #524c49;
 }
 
-/* line 118, ../../source/css/_colors.scss */
-.m-bg-color-primary-7, .m-button-default.m-button-fullwidth, .m-button-default.m-button:link, .m-button-default.m-button-small:link, .m-button-default.m-button, .m-button-default.m-button-small, .m-button-warning.m-button-outline:active, .m-button-warning.m-button-outline:focus, .m-button-warning.m-button-outline-small:active, .m-button-warning.m-button-outline-small:focus, .m-button-warning.m-button-outline-fullwidth:active, .m-button-warning.m-button-outline-fullwidth:focus, .m-button-warning.m-button:focus, .m-button-warning.m-button-small:focus, .m-button-warning.m-button:active, .m-button-warning.m-button-small:active, .m-button-warning.m-button-fullwidth:focus, .m-button-warning.m-button-fullwidth:active, .m-button-secondary.m-button-outline:active, .m-button-secondary.m-button-outline:focus, .m-button-secondary.m-button-outline-small:active, .m-button-secondary.m-button-outline-small:focus, .m-button-secondary.m-button-outline-fullwidth:active, .m-button-secondary.m-button-outline-fullwidth:focus, .m-button-secondary.m-button:focus, .m-button-secondary.m-button-small:focus, .m-button-secondary.m-button:active, .m-button-secondary.m-button-small:active, .m-button-secondary.m-button-fullwidth:focus, .m-button-secondary.m-button-fullwidth:active, .m-button-primary.m-button-fullwidth, .m-button-primary.m-button:link, .m-button-primary.m-button-small:link, .m-button-primary.m-button, .m-button-primary.m-button-small {
-  background: #2f92b8;
+/* line 18, _colors.scss */
+.m-color-gray-darker {
+  color: #524c49;
 }
 
-/* line 122, ../../source/css/_colors.scss */
-.m-border-color-primary-7, .m-button-default, .m-button-primary {
-  border-color: #2f92b8;
+/* line 22, _colors.scss */
+.m-color-gray-darker-fg {
+  color: #524c49;
 }
 
-/* line 126, ../../source/css/_colors.scss */
-.m-color-primary-7, .m-button-default.m-button-outline-fullwidth, .m-button-default.m-button-outline-small, .m-button-default.m-button-outline, .m-button-primary.m-button-outline-fullwidth, .m-button-primary.m-button-outline-small, .m-button-primary.m-button-outline {
-  color: #2f92b8;
+/* line 10, _colors.scss */
+.m-bg-color-primary-lighter {
+  background: #b6dadd;
 }
 
-/* line 130, ../../source/css/_colors.scss */
-.m-bg-color-primary-8, .m-button-secondary.m-button-fullwidth, .m-button-secondary.m-button:link, .m-button-secondary.m-button-small:link, .m-button-secondary.m-button, .m-button-secondary.m-button-small {
+/* line 14, _colors.scss */
+.m-border-color-primary-lighter {
+  border-color: #b6dadd;
+}
+
+/* line 18, _colors.scss */
+.m-color-primary-lighter {
+  color: #b6dadd;
+}
+
+/* line 22, _colors.scss */
+.m-color-primary-lighter-fg {
+  color: #b6dadd;
+}
+
+/* line 10, _colors.scss */
+.m-bg-color-primary-light {
+  background: #89c4c8;
+}
+
+/* line 14, _colors.scss */
+.m-border-color-primary-light {
+  border-color: #89c4c8;
+}
+
+/* line 18, _colors.scss */
+.m-color-primary-light {
+  color: #89c4c8;
+}
+
+/* line 22, _colors.scss */
+.m-color-primary-light-fg {
+  color: #89c4c8;
+}
+
+/* line 10, _colors.scss */
+.m-bg-color-primary, .m-button-primary.m-button, .m-header-container, .m-footer-container {
   background: #66b2b8;
 }
 
-/* line 134, ../../source/css/_colors.scss */
-.m-border-color-primary-8, .m-button-secondary {
+/* line 14, _colors.scss */
+.m-border-color-primary, .m-button-primary.m-button-block.m-button-outline, .m-button-primary.m-button-fullwidth.m-button-outline, .m-button-primary.m-button.m-button-outline {
   border-color: #66b2b8;
 }
 
-/* line 138, ../../source/css/_colors.scss */
-.m-color-primary-8, .m-button-secondary.m-button-outline-fullwidth, .m-button-secondary.m-button-outline-small, .m-button-secondary.m-button-outline {
+/* line 18, _colors.scss */
+.m-color-primary, .m-button-primary.m-button-block.m-button-outline, .m-button-primary.m-button-fullwidth.m-button-outline, .m-button-primary.m-button.m-button-outline, .m-button-primary.m-button-block.m-button-clear, .m-button-primary.m-button-fullwidth.m-button-clear, .m-button-primary.m-button.m-button-clear {
   color: #66b2b8;
 }
 
-/* line 142, ../../source/css/_colors.scss */
-.m-bg-color-primary-9, .m-button-warning.m-button-fullwidth, .m-button-warning.m-button:link, .m-button-warning.m-button-small:link, .m-button-warning.m-button, .m-button-warning.m-button-small {
-  background: #f8ce03;
+/* line 22, _colors.scss */
+.m-color-primary-fg {
+  color: #66b2b8;
 }
 
-/* line 146, ../../source/css/_colors.scss */
-.m-border-color-primary-9, .m-button-warning {
-  border-color: #f8ce03;
+/* line 10, _colors.scss */
+.m-bg-color-primary-dark {
+  background: #47949a;
 }
 
-/* line 150, ../../source/css/_colors.scss */
-.m-color-primary-9, .m-button-warning.m-button-outline-fullwidth, .m-button-warning.m-button-outline-small, .m-button-warning.m-button-outline {
-  color: #f8ce03;
+/* line 14, _colors.scss */
+.m-border-color-primary-dark {
+  border-color: #47949a;
 }
 
-/* line 154, ../../source/css/_colors.scss */
-.m-color-transparent {
-  color: transparent;
+/* line 18, _colors.scss */
+.m-color-primary-dark {
+  color: #47949a;
 }
 
-/* line 158, ../../source/css/_colors.scss */
-.m-color-black, .m-button-default.m-button-fullwidth, .m-button-default.m-button:link, .m-button-default.m-button-small:link, .m-button-default.m-button, .m-button-default.m-button-small, .m-button-danger.m-button-fullwidth, .m-button-danger.m-button:link, .m-button-danger.m-button-small:link, .m-button-danger.m-button, .m-button-danger.m-button-small, .m-button-info.m-button-fullwidth, .m-button-info.m-button:link, .m-button-info.m-button-small:link, .m-button-info.m-button, .m-button-info.m-button-small, .m-button-warning.m-button-fullwidth, .m-button-warning.m-button:link, .m-button-warning.m-button-small:link, .m-button-warning.m-button, .m-button-warning.m-button-small, .m-button-success.m-button-fullwidth, .m-button-success.m-button:link, .m-button-success.m-button-small:link, .m-button-success.m-button, .m-button-success.m-button-small, .m-button-secondary.m-button-fullwidth, .m-button-secondary.m-button:link, .m-button-secondary.m-button-small:link, .m-button-secondary.m-button, .m-button-secondary.m-button-small, .m-button-primary.m-button-fullwidth, .m-button-primary.m-button:link, .m-button-primary.m-button-small:link, .m-button-primary.m-button, .m-button-primary.m-button-small {
-  color: black;
+/* line 22, _colors.scss */
+.m-color-primary-dark-fg {
+  color: #47949a;
 }
 
-/* line 163, ../../source/css/_colors.scss */
-.m-bg-color-transparent, .m-button-default.m-button-outline-fullwidth, .m-button-default.m-button-outline-small, .m-button-default.m-button-outline, .m-button-danger.m-button-outline-fullwidth, .m-button-danger.m-button-outline-small, .m-button-danger.m-button-outline, .m-button-info.m-button-outline-fullwidth, .m-button-info.m-button-outline-small, .m-button-info.m-button-outline, .m-button-warning.m-button-outline-fullwidth, .m-button-warning.m-button-outline-small, .m-button-warning.m-button-outline, .m-button-success.m-button-outline-fullwidth, .m-button-success.m-button-outline-small, .m-button-success.m-button-outline, .m-button-secondary.m-button-outline-fullwidth, .m-button-secondary.m-button-outline-small, .m-button-secondary.m-button-outline, .m-button-primary.m-button-outline-fullwidth, .m-button-primary.m-button-outline-small, .m-button-primary.m-button-outline {
-  background-color: transparent;
+/* line 10, _colors.scss */
+.m-bg-color-primary-darker {
+  background: #316569;
 }
 
-/* line 167, ../../source/css/_colors.scss */
-.m-border-color-transparent {
-  border-color: transparent;
+/* line 14, _colors.scss */
+.m-border-color-primary-darker {
+  border-color: #316569;
 }
 
-/* line 171, ../../source/css/_colors.scss */
+/* line 18, _colors.scss */
+.m-color-primary-darker {
+  color: #316569;
+}
+
+/* line 22, _colors.scss */
+.m-color-primary-darker-fg {
+  color: #316569;
+}
+
+/* line 10, _colors.scss */
+.m-bg-color-success-lighter {
+  background: #bde1d5;
+}
+
+/* line 14, _colors.scss */
+.m-border-color-success-lighter {
+  border-color: #bde1d5;
+}
+
+/* line 18, _colors.scss */
+.m-color-success-lighter {
+  color: #bde1d5;
+}
+
+/* line 22, _colors.scss */
+.m-color-success-lighter-fg {
+  color: #bde1d5;
+}
+
+/* line 10, _colors.scss */
+.m-bg-color-success-light {
+  background: #90ccb8;
+}
+
+/* line 14, _colors.scss */
+.m-border-color-success-light {
+  border-color: #90ccb8;
+}
+
+/* line 18, _colors.scss */
+.m-color-success-light {
+  color: #90ccb8;
+}
+
+/* line 22, _colors.scss */
+.m-color-success-light-fg {
+  color: #90ccb8;
+}
+
+/* line 10, _colors.scss */
+.m-bg-color-success, .m-button-success.m-button {
+  background: #6dbca1;
+}
+
+/* line 14, _colors.scss */
+.m-border-color-success, .m-button-success.m-button-block.m-button-outline, .m-button-success.m-button-fullwidth.m-button-outline, .m-button-success.m-button.m-button-outline {
+  border-color: #6dbca1;
+}
+
+/* line 18, _colors.scss */
+.m-color-success, .m-button-success.m-button-block.m-button-outline, .m-button-success.m-button-fullwidth.m-button-outline, .m-button-success.m-button.m-button-outline, .m-button-success.m-button-block.m-button-clear, .m-button-success.m-button-fullwidth.m-button-clear, .m-button-success.m-button.m-button-clear {
+  color: #6dbca1;
+}
+
+/* line 22, _colors.scss */
+.m-color-success-fg {
+  color: #6dbca1;
+}
+
+/* line 10, _colors.scss */
+.m-bg-color-success-dark {
+  background: #4aa284;
+}
+
+/* line 14, _colors.scss */
+.m-border-color-success-dark {
+  border-color: #4aa284;
+}
+
+/* line 18, _colors.scss */
+.m-color-success-dark {
+  color: #4aa284;
+}
+
+/* line 22, _colors.scss */
+.m-color-success-dark-fg {
+  color: #4aa284;
+}
+
+/* line 10, _colors.scss */
+.m-bg-color-success-darker {
+  background: #34715c;
+}
+
+/* line 14, _colors.scss */
+.m-border-color-success-darker {
+  border-color: #34715c;
+}
+
+/* line 18, _colors.scss */
+.m-color-success-darker {
+  color: #34715c;
+}
+
+/* line 22, _colors.scss */
+.m-color-success-darker-fg {
+  color: #34715c;
+}
+
+/* line 10, _colors.scss */
+.m-bg-color-warning-lighter {
+  background: #fde86c;
+}
+
+/* line 14, _colors.scss */
+.m-border-color-warning-lighter {
+  border-color: #fde86c;
+}
+
+/* line 18, _colors.scss */
+.m-color-warning-lighter {
+  color: #fde86c;
+}
+
+/* line 22, _colors.scss */
+.m-color-warning-lighter-fg {
+  color: #fde86c;
+}
+
+/* line 10, _colors.scss */
+.m-bg-color-warning-light {
+  background: #fcde2b;
+}
+
+/* line 14, _colors.scss */
+.m-border-color-warning-light {
+  border-color: #fcde2b;
+}
+
+/* line 18, _colors.scss */
+.m-color-warning-light {
+  color: #fcde2b;
+}
+
+/* line 22, _colors.scss */
+.m-color-warning-light-fg {
+  color: #fcde2b;
+}
+
+/* line 10, _colors.scss */
+.m-bg-color-warning, .m-button-warning.m-button {
+  background: #f1ce03;
+}
+
+/* line 14, _colors.scss */
+.m-border-color-warning, .m-button-warning.m-button-block.m-button-outline, .m-button-warning.m-button-fullwidth.m-button-outline, .m-button-warning.m-button.m-button-outline {
+  border-color: #f1ce03;
+}
+
+/* line 18, _colors.scss */
+.m-color-warning, .m-button-warning.m-button-block.m-button-outline, .m-button-warning.m-button-fullwidth.m-button-outline, .m-button-warning.m-button.m-button-outline, .m-button-warning.m-button-block.m-button-clear, .m-button-warning.m-button-fullwidth.m-button-clear, .m-button-warning.m-button.m-button-clear {
+  color: #f1ce03;
+}
+
+/* line 22, _colors.scss */
+.m-color-warning-fg {
+  color: #f1ce03;
+}
+
+/* line 10, _colors.scss */
+.m-bg-color-warning-dark {
+  background: #b59a02;
+}
+
+/* line 14, _colors.scss */
+.m-border-color-warning-dark {
+  border-color: #b59a02;
+}
+
+/* line 18, _colors.scss */
+.m-color-warning-dark {
+  color: #b59a02;
+}
+
+/* line 22, _colors.scss */
+.m-color-warning-dark-fg {
+  color: #b59a02;
+}
+
+/* line 10, _colors.scss */
+.m-bg-color-warning-darker {
+  background: #6e5e01;
+}
+
+/* line 14, _colors.scss */
+.m-border-color-warning-darker {
+  border-color: #6e5e01;
+}
+
+/* line 18, _colors.scss */
+.m-color-warning-darker {
+  color: #6e5e01;
+}
+
+/* line 22, _colors.scss */
+.m-color-warning-darker-fg {
+  color: #6e5e01;
+}
+
+/* line 10, _colors.scss */
+.m-bg-color-info-lighter {
+  background: #f7d2a8;
+}
+
+/* line 14, _colors.scss */
+.m-border-color-info-lighter {
+  border-color: #f7d2a8;
+}
+
+/* line 18, _colors.scss */
+.m-color-info-lighter {
+  color: #f7d2a8;
+}
+
+/* line 22, _colors.scss */
+.m-color-info-lighter-fg {
+  color: #f7d2a8;
+}
+
+/* line 10, _colors.scss */
+.m-bg-color-info-light {
+  background: #f1b26c;
+}
+
+/* line 14, _colors.scss */
+.m-border-color-info-light {
+  border-color: #f1b26c;
+}
+
+/* line 18, _colors.scss */
+.m-color-info-light {
+  color: #f1b26c;
+}
+
+/* line 22, _colors.scss */
+.m-color-info-light-fg {
+  color: #f1b26c;
+}
+
+/* line 10, _colors.scss */
+.m-bg-color-info, .m-button-info.m-button {
+  background: #ed9a3d;
+}
+
+/* line 14, _colors.scss */
+.m-border-color-info, .m-button-info.m-button-block.m-button-outline, .m-button-info.m-button-fullwidth.m-button-outline, .m-button-info.m-button.m-button-outline {
+  border-color: #ed9a3d;
+}
+
+/* line 18, _colors.scss */
+.m-color-info, .m-button-info.m-button-block.m-button-outline, .m-button-info.m-button-fullwidth.m-button-outline, .m-button-info.m-button.m-button-outline, .m-button-info.m-button-block.m-button-clear, .m-button-info.m-button-fullwidth.m-button-clear, .m-button-info.m-button.m-button-clear {
+  color: #ed9a3d;
+}
+
+/* line 22, _colors.scss */
+.m-color-info-fg {
+  color: #ed9a3d;
+}
+
+/* line 10, _colors.scss */
+.m-bg-color-info-dark {
+  background: #d97c14;
+}
+
+/* line 14, _colors.scss */
+.m-border-color-info-dark {
+  border-color: #d97c14;
+}
+
+/* line 18, _colors.scss */
+.m-color-info-dark {
+  color: #d97c14;
+}
+
+/* line 22, _colors.scss */
+.m-color-info-dark-fg {
+  color: #d97c14;
+}
+
+/* line 10, _colors.scss */
+.m-bg-color-info-darker {
+  background: #97570e;
+}
+
+/* line 14, _colors.scss */
+.m-border-color-info-darker {
+  border-color: #97570e;
+}
+
+/* line 18, _colors.scss */
+.m-color-info-darker {
+  color: #97570e;
+}
+
+/* line 22, _colors.scss */
+.m-color-info-darker-fg {
+  color: #97570e;
+}
+
+/* line 10, _colors.scss */
+.m-bg-color-danger-lighter {
+  background: #f8a99d;
+}
+
+/* line 14, _colors.scss */
+.m-border-color-danger-lighter {
+  border-color: #f8a99d;
+}
+
+/* line 18, _colors.scss */
+.m-color-danger-lighter {
+  color: #f8a99d;
+}
+
+/* line 22, _colors.scss */
+.m-color-danger-lighter-fg {
+  color: #f8a99d;
+}
+
+/* line 10, _colors.scss */
+.m-bg-color-danger-light {
+  background: #f37360;
+}
+
+/* line 14, _colors.scss */
+.m-border-color-danger-light {
+  border-color: #f37360;
+}
+
+/* line 18, _colors.scss */
+.m-color-danger-light {
+  color: #f37360;
+}
+
+/* line 22, _colors.scss */
+.m-color-danger-light-fg {
+  color: #f37360;
+}
+
+/* line 10, _colors.scss */
+.m-bg-color-danger, .m-button-danger.m-button {
+  background: #f04930;
+}
+
+/* line 14, _colors.scss */
+.m-border-color-danger, .m-button-danger.m-button-block.m-button-outline, .m-button-danger.m-button-fullwidth.m-button-outline, .m-button-danger.m-button.m-button-outline {
+  border-color: #f04930;
+}
+
+/* line 18, _colors.scss */
+.m-color-danger, .m-button-danger.m-button-block.m-button-outline, .m-button-danger.m-button-fullwidth.m-button-outline, .m-button-danger.m-button.m-button-outline, .m-button-danger.m-button-block.m-button-clear, .m-button-danger.m-button-fullwidth.m-button-clear, .m-button-danger.m-button.m-button-clear {
+  color: #f04930;
+}
+
+/* line 22, _colors.scss */
+.m-color-danger-fg {
+  color: #f04930;
+}
+
+/* line 10, _colors.scss */
+.m-bg-color-danger-dark {
+  background: #d3290f;
+}
+
+/* line 14, _colors.scss */
+.m-border-color-danger-dark {
+  border-color: #d3290f;
+}
+
+/* line 18, _colors.scss */
+.m-color-danger-dark {
+  color: #d3290f;
+}
+
+/* line 22, _colors.scss */
+.m-color-danger-dark-fg {
+  color: #d3290f;
+}
+
+/* line 10, _colors.scss */
+.m-bg-color-danger-darker {
+  background: #911c0a;
+}
+
+/* line 14, _colors.scss */
+.m-border-color-danger-darker {
+  border-color: #911c0a;
+}
+
+/* line 18, _colors.scss */
+.m-color-danger-darker {
+  color: #911c0a;
+}
+
+/* line 22, _colors.scss */
+.m-color-danger-darker-fg {
+  color: #911c0a;
+}
+
+/* line 10, _colors.scss */
+.m-bg-color-white {
+  background: white;
+}
+
+/* line 14, _colors.scss */
+.m-border-color-white {
+  border-color: white;
+}
+
+/* line 18, _colors.scss */
+.m-color-white, .m-button-primary.m-button, .m-button-success.m-button, .m-button-warning.m-button, .m-button-info.m-button, .m-button-danger.m-button {
+  color: white;
+}
+
+/* line 22, _colors.scss */
 .m-color-white-fg, .m-header-container header h1, .m-footer-container footer h1 {
   color: white;
 }
+
+/* line 10, _colors.scss */
+.m-bg-color-cream {
+  background: #f5f5f1;
+}
+
+/* line 14, _colors.scss */
+.m-border-color-cream {
+  border-color: #f5f5f1;
+}
+
+/* line 18, _colors.scss */
+.m-color-cream {
+  color: #f5f5f1;
+}
+
+/* line 22, _colors.scss */
+.m-color-cream-fg {
+  color: #f5f5f1;
+}
+
+/* line 10, _colors.scss */
+.m-bg-color-black {
+  background: #2c2927;
+}
+
+/* line 14, _colors.scss */
+.m-border-color-black {
+  border-color: #2c2927;
+}
+
+/* line 18, _colors.scss */
+.m-color-black {
+  color: #2c2927;
+}
+
+/* line 22, _colors.scss */
+.m-color-black-fg {
+  color: #2c2927;
+}
+
+/* line 10, _colors.scss */
+.m-bg-color-transparent, .m-button-primary.m-button-block.m-button-outline, .m-button-primary.m-button-fullwidth.m-button-outline, .m-button-primary.m-button.m-button-outline, .m-button-primary.m-button-block.m-button-clear, .m-button-primary.m-button-fullwidth.m-button-clear, .m-button-primary.m-button.m-button-clear, .m-button-success.m-button-block.m-button-outline, .m-button-success.m-button-fullwidth.m-button-outline, .m-button-success.m-button.m-button-outline, .m-button-success.m-button-block.m-button-clear, .m-button-success.m-button-fullwidth.m-button-clear, .m-button-success.m-button.m-button-clear, .m-button-warning.m-button-block.m-button-outline, .m-button-warning.m-button-fullwidth.m-button-outline, .m-button-warning.m-button.m-button-outline, .m-button-warning.m-button-block.m-button-clear, .m-button-warning.m-button-fullwidth.m-button-clear, .m-button-warning.m-button.m-button-clear, .m-button-info.m-button-block.m-button-outline, .m-button-info.m-button-fullwidth.m-button-outline, .m-button-info.m-button.m-button-outline, .m-button-info.m-button-block.m-button-clear, .m-button-info.m-button-fullwidth.m-button-clear, .m-button-info.m-button.m-button-clear, .m-button-danger.m-button-block.m-button-outline, .m-button-danger.m-button-fullwidth.m-button-outline, .m-button-danger.m-button.m-button-outline, .m-button-danger.m-button-block.m-button-clear, .m-button-danger.m-button-fullwidth.m-button-clear, .m-button-danger.m-button.m-button-clear {
+  background: rgba(0, 0, 0, 0);
+}
+
+/* line 14, _colors.scss */
+.m-border-color-transparent, .m-button-primary.m-button, .m-button-primary.m-button-block.m-button-clear, .m-button-primary.m-button-fullwidth.m-button-clear, .m-button-primary.m-button.m-button-clear, .m-button-success.m-button, .m-button-success.m-button-block.m-button-clear, .m-button-success.m-button-fullwidth.m-button-clear, .m-button-success.m-button.m-button-clear, .m-button-warning.m-button, .m-button-warning.m-button-block.m-button-clear, .m-button-warning.m-button-fullwidth.m-button-clear, .m-button-warning.m-button.m-button-clear, .m-button-info.m-button, .m-button-info.m-button-block.m-button-clear, .m-button-info.m-button-fullwidth.m-button-clear, .m-button-info.m-button.m-button-clear, .m-button-danger.m-button, .m-button-danger.m-button-block.m-button-clear, .m-button-danger.m-button-fullwidth.m-button-clear, .m-button-danger.m-button.m-button-clear {
+  border-color: rgba(0, 0, 0, 0);
+}
+
+/* line 18, _colors.scss */
+.m-color-transparent {
+  color: rgba(0, 0, 0, 0);
+}
+
+/* line 22, _colors.scss */
+.m-color-transparent-fg {
+  color: rgba(0, 0, 0, 0);
+}
+
+/*
+button_colors = ["m-button-primary","m-button-success","m-button-warning","m-button-info","m-button-danger"]
+button_sizes = ["m-button","m-button-small"]
+button_width = ["m-button","m-button-block","m-button-fullwidth"]
+button_style = ["m-button","m-button-outline","m-button-clear"]
+*/

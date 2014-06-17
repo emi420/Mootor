@@ -1074,8 +1074,15 @@
                 });    
             }
         });
-    });
 
+        self.on("load", function() {
+            // console.log("uiview load")
+            var footerHeight = $(".m-footer-container").height();
+            var headerHeight = $(".m-header-container").height();
+            self.ui.el.style.height = (m.app.ui.el.offsetHeight - footerHeight - headerHeight) + "px"
+        });
+
+    });
 
         
     // Private constructors
@@ -1424,7 +1431,7 @@
     _onPopState = function() {
         
         var urlBack;
-
+        
         if (_lastHash === window.location.hash) {
             urlBack = m.app.history[m.app.history.length - 2];
             if (urlBack !== undefined) {
@@ -1439,10 +1446,8 @@
         _lastHash = window.location.hash;
 
     };
-
-    if (m.context.os.android === true) {
-        window.onhashchange = _onPopState;
-    } else {
+    
+    if ("onpopstate" in window) {
         window.onpopstate = _onPopState;
     }
 
@@ -1456,7 +1461,7 @@
             m.app.go(url);
         };
         if (_pendingGo === undefined) {
-            _pendingGo = window.location.hash
+            _pendingGo = window.location.hash;
         }
         
         m.app.go(_pendingGo);
@@ -1652,11 +1657,15 @@
     var UINavBar,
     
         UI,
-        UINavItem;
+        UIView,
+        UINavItem,
+        barEl,
+        barContainerEl = [];
         
     // Dependences
     
     UI = Mootor.UI;
+    UIView = Mootor.UIView;
     UINavItem = Mootor.UINavItem;
 
     // Private constructors
@@ -1665,6 +1674,7 @@
         this.el = options.container;
         this.$el = $(this.el);
         this.$el.addClass("m-navbar");
+        this.$el.addClass("m-"+options.type+"-navbar");
         this.nav = UINavBar._initNavItems(this.el);
     };
 
@@ -1676,6 +1686,10 @@
 
     $.extend(UINavBar, {
         _initNavItems: function(el) {
+            if (!el) {
+                console.error("UINavBar _initNavItems called without el");
+                return;
+            }
             var i,
                 j,
                 navGroupsElements = el.getElementsByTagName("nav"),
@@ -1696,11 +1710,90 @@
             
             return navGroups;
         }
+        ,
+        createBar: function(barName,uiapp,barClass) {
+
+            // FIXME CHECK (parentElement?)
+            var barEl = uiapp.el.parentElement.getElementsByTagName(barName)[0];
+
+            barContainerEl[barName] = document.createElement("div");
+            barContainerEl[barName].setAttribute("class","m-"+barName+"-container");
+
+            if (barEl) {
+                barEl.parentElement.replaceChild(barContainerEl[barName], barEl);
+                barContainerEl[barName].appendChild(barEl);
+                barEl.barClass = barClass;
+            }
+            else {
+                barEl = document.createElement("div"); /*Dummy object for footer initialization*/
+                m.app.ui.el.parentElement.appendChild(barContainerEl[barName]);                
+                $(barContainerEl[barName]).addClass("m-hidden");
+            }
+
+            uiapp[barName] = new barClass({
+                el: barEl,
+                type: "global"
+            });
+            uiapp[barName].hide();
+
+
+            UIView.on("init", function(self) {
+                
+                var barEl = self.panel.el.getElementsByTagName(barName)[0];
+
+                if (barEl) {
+                 
+                    self[barName] = new barClass({
+                        el: barEl,
+                        type: "view"
+                    });
+                    
+                    self.panel.el.removeChild(barEl);
+                    barContainerEl[barName].appendChild(barEl);
+                    
+                    self[barName].hideContainer();
+
+                    self.view.on("beforeLoad", function(self) {
+                       self.ui[barName].showContainer(barName);
+                    });
+
+                    self.view.on("unload", function(self) {
+                       self.ui[barName].hideContainer(barName);
+                    });
+
+                } else {
+                    self.view.on("load", function(self) {
+                        m.app.ui[barName].show()
+                    });
+
+                    self.view.on("unload", function(self) {
+                        m.app.ui[barName].hide()
+                    });
+                }
+            });            
+        }
     });
 
     //Public methods
 
     $.extend(UINavBar.prototype, {
+        hideContainer: function(barName) {
+            this.hide();
+            // console.log("hideContainer",this.el.parentElement);
+            if ($(".m-"+barName+"-container .m-global-navbar").length == 0) {
+                $(".m-"+barName+"-container").addClass("m-hidden");    
+            }
+            
+
+        },
+        showContainer: function(barName) {
+            this.show();
+            // console.log("showContainer",this.el.parentElement);
+            if ($(".m-"+barName+"-container .m-global-navbar").length == 0) {
+                $(".m-"+barName+"-container").removeClass("m-hidden");
+            }
+        }
+
     });  
 
 }(window.$, window.Mootor));
@@ -1739,68 +1832,15 @@
     UINavItem = Mootor.UINavItem;
     App = Mootor.App;
     UI = Mootor.UI;
-    
-    // Event handlers
-
-    UIApp.on("init", function(self) {
-
-        // FIXME CHECK (parentElement?)
-        var headerEl = self.el.parentElement.getElementsByTagName("header")[0];
         
-        headerContainerEl = document.createElement("div");
-        headerContainerEl.setAttribute("class","m-header-container");
-        headerEl.parentElement.replaceChild(headerContainerEl, headerEl);
-        headerContainerEl.appendChild(headerEl);
-
-        if (headerEl) {
-            self.header = new UIHeader({
-                el: headerEl
-            });
-        }
-        m.app.ui.header.hide()
-        
-    });
-
-    UIView.on("init", function(self) {
-        
-        var headerEl = self.panel.el.getElementsByTagName("header")[0];
-
-        if (headerEl) {
-
-            self.header = new UIHeader({
-                el: headerEl
-            });
-            
-            self.panel.el.removeChild(headerEl);
-            headerContainerEl.appendChild(headerEl);
-            
-            self.header.hide();
-
-            self.view.on("load", function(self) {
-               self.ui.header.show();
-            });
-
-            self.view.on("unload", function(self) {
-               self.ui.header.hide();
-            });
-
-        } else {
-            self.view.on("load", function(self) {
-               m.app.ui.header.show()
-            });
-
-            self.view.on("unload", function(self) {
-                m.app.ui.header.hide()
-            });
-        }
-    });
-    
     // Private constructors
 
     UIHeader = Mootor.UIHeader = function(options) {
         this.nav = new UINavBar({
-            container: options.el
+            container: options.el,
+            type: options.type
         });
+        this.type = options.type;
         this.el = this.nav.el;
         this.$el = $(this.el);
         if (this.$el.find("nav").length < 1) {
@@ -1808,6 +1848,11 @@
         }
         UIHeader._initBackButton(this);
     };
+
+    // Event handlers
+    UIApp.on("init", function(self) {
+        UINavBar.createBar("header",self, UIHeader);
+    });
 
     
     // Private static methods and properties
@@ -1939,100 +1984,26 @@
     App = Mootor.App;
     UI = Mootor.UI,
     
-    // Event handlers
-
-    UIApp.on("init", function(self) {
-
-        var footerEl;
-        
-        if (self.el !== undefined) {
-            
-            footerContainerEl = document.createElement("div");
-            $footerContainerEl = $(footerContainerEl);
-            $footerContainerEl.addClass("m-footer-container m-hidden");
-
-            footerEl = self.el.parentElement.getElementsByTagName("footer")[0];
-
-            if (footerEl !== undefined) {
-                _appFooter = true;
-                footerEl.parentElement.replaceChild(footerContainerEl, footerEl);
-            } else {
-                footerEl = document.createElement("footer");
-                document.body.appendChild(footerContainerEl);
-            }
-            
-            footerContainerEl.appendChild(footerEl);
-            
-            self.footer = new UIFooter({
-                el: footerEl
-            });
-            
-
-        }
-        
-    });
-
-    UIView.on("init", function(self) {
-        
-        var footerEl = self.panel.el.getElementsByTagName("footer")[0];
-        
-        if (footerEl !== undefined) {
-        
-            self.footer = new UIFooter({
-                el: footerEl
-            });
-            
-            self.panel.el.removeChild(footerEl);
-            footerContainerEl.appendChild(footerEl);
-            
-            self.footer.hide();
-
-            self.view.on("load", function(self) {
-               self.ui.footer.show();
-               $footerContainerEl.removeClass("m-hidden");
-            });
-
-            self.view.on("unload", function(self) {
-               self.ui.footer.hide();
-               $footerContainerEl.addClass("m-hidden");
-            });
-            
-        } else {
-            
-            if (_appFooter === true) {                
-                self.view.on("load", function(self) {
-                   m.app.ui.footer.show()
-                   $footerContainerEl.addClass("m-hidden");
-                });
-
-                self.view.on("unload", function(self) {
-                    m.app.ui.footer.hide()
-                    $footerContainerEl.removeClass("m-hidden");
-                });
-            } else {
-                self.view.on("load", function(self) {
-                    $footerContainerEl.addClass("m-hidden");
-                });
-            }
-            
-        }
-        
-        self.view.on("load", function() {
-            self.el.style.height = (m.app.ui.el.offsetHeight - footerContainerEl.offsetHeight*2) + "px"
-        });
-        
-    });
     
     // Private constructors
 
     UIFooter = Mootor.UIFooter = function(options) {
         this.nav = new UINavBar({
-            container: options.el
+            container: options.el,
+            type: options.type
         });
+        this.type = options.type;
         this.el = this.nav.el;
         this.$el = $(this.el);
+        if (this.$el.find("nav").length < 1) {
+            this.el.appendChild(document.createElement("nav"));
+        }
     };
 
+    // Event handlers
+    UIApp.on("init", function(self) {
+        UINavBar.createBar("footer",self, UIFooter);
+    });
     
     // Private static methods and properties
 
@@ -2202,6 +2173,16 @@
         for (i in UIForm._controls) {
             UIForm._controls[i].constructor._init(self);
         }
+
+        // Assosiate automatically label to field by generating id 
+        self.$el.find(".m-field").each(function(index,element) {
+            var id;
+            id = $(element).find("input,select,textarea").attr("id");
+            if (!id) id = "field"+index;
+
+            $(element).find("label").attr("for",id);
+            $(element).find("input,select,textarea").attr("id",id);
+        });
     });
 
 
@@ -2403,6 +2384,7 @@
 
     $.extend(UIFormSelect, {
         _init: function(uiview) {
+            
             var inputs,
                 i;
                 
@@ -2416,16 +2398,21 @@
                 </div>';
 
                 var $cover = element.$cover = $(coverHTML).insertBefore(element);
+                var $value = $cover.find(".m-value");
 
                 updateValue();
                 $element.on("change", updateValue);
 
-                // https://code.google.com/p/expandselect/
+                $element.on("focus", function(e) {
+                    var me = document.createEvent("MouseEvents");
+                    me.initMouseEvent("mousedown", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+                    var worked = e.target.dispatchEvent(me);                
+                })
 
                 function updateValue() {
-                    //Value is the text of the selected option or the placeholder text
+                    // Value is the text of the selected option or the placeholder text
                     var value = element.options[element.selectedIndex].text || element.placeholder;
-                    $cover.find(".m-value").html(value);
+                    $value.html(value);
                 }
             });
         }
@@ -2438,6 +2425,317 @@
     });        
 
     UIForm.registerControl(UIFormSelect);  
+
+}(window.$, window.Mootor));
+/**
+* UIFormVirtualInput is a virtual-input item of a form
+*
+* @class UIFormVirtualInput
+* @extends UI
+* @constructor
+* @module UI
+* @author Emilio Mariscal (emi420 [at] gmail.com)
+* @author Martín Szyszlican (martinsz [at] gmail.com)
+*/
+
+(function ($, Mootor) {
+    
+    "use strict";
+
+    var UIFormVirtualInput,
+    
+        UI;
+
+    // Dependences
+
+    UI = Mootor.UI;
+    
+    // Private constructors
+
+    UIFormVirtualInput = function() {
+        // code here
+    };
+
+    // Prototypal inheritance
+    $.extend(UIFormVirtualInput.prototype, UI.prototype);
+
+    // Private static methods and properties
+
+    $.extend(UIFormVirtualInput, {
+   
+    });
+
+    // Public methods and properties
+
+    $.extend(UIFormVirtualInput.prototype, {
+
+        /**
+        * Value of the input
+        *
+        * @property value
+        */         
+        value: undefined,
+
+        /**
+        * Sets an event handler for the input
+        *
+        * @method on
+        * @param {string} event Defines in which event the handler will be called
+        * @param {function} callback The function to be called when the event is fired.
+        * @return this
+        */ 
+        on: function(event, callback) {
+            // code here
+        }
+
+    });        
+    
+    Mootor.UIFormVirtualInput = UIFormVirtualInput;
+
+}(window.$, window.Mootor));
+/**
+* UIFormDraw is a draw pseudo-input of a form
+*
+* @class UIFormDraw
+* @extends UI
+* @constructor
+* @module UI
+* @author Emilio Mariscal (emi420 [at] gmail.com)
+*/
+
+(function ($, Mootor) {
+    
+    "use strict";
+
+    var UIFormDraw,
+    
+        UI,
+        UIForm,
+        UIFormVirtualInput;
+
+    // Dependences
+
+    UI = Mootor.UI;
+    UIForm = Mootor.UIForm;
+    UIFormVirtualInput = Mootor.UIFormVirtualInput;
+    
+    // Private constructors
+
+    UIFormDraw = function() {
+        // code here
+    };
+
+    // Prototypal inheritance
+    $.extend(UIFormDraw.prototype, UI.prototype);
+    $.extend(UIFormDraw.prototype, UIFormVirtualInput.prototype);
+
+    // Private static methods and properties
+
+    $.extend(UIFormDraw, {
+        
+        _init: function(uiview) {
+            
+            var inputs = uiview.$el.find(".m-draw");
+            inputs.each(function(index,element) {
+                var self = new UIFormDraw();
+                UIFormDraw._makeUI(self, element);
+                UIFormDraw._addListeners(self);
+            });
+            
+        },
+        
+        _makeUI: function(self, element) {
+
+            var $element,
+                coverHTML,
+                $cover,
+                $label,
+                $icon,
+                $canvas,
+                $canvasContainer,
+                h,
+                w;
+                        
+            
+            $element = $(element);
+
+            $label = $("label[for=" + element.getAttribute("id") + "]");
+
+            coverHTML = '<div class="m-draw m-draw-cover">\
+                <span class="m-draw-icon m-icon-arrow-right-small"></span>\
+            </div>';
+        
+            $cover = element.$cover = $(coverHTML).insertBefore(element);
+            $label.insertBefore($cover.find(".m-draw-icon"))
+            $element.hide();
+        
+            $canvasContainer = $('<div class="m-draw-canvas">\
+                    <div class="m-draw-canvas-header">\
+                        <span class="m-draw-cancel">Cancel</span>\
+                        <span class="m-draw-done">Done</span>\
+                    </div>\
+                    <canvas></canvas>\
+                    <div class="m-draw-canvas-footer">\
+                        <span class="m-draw-erase m-icon-erase"></span>\
+                    </div>\
+                </div>');
+        
+            $canvasContainer.hide();
+            
+            $canvasContainer.insertBefore(document.body.lastChild);
+        
+            // FIXME CHECK: hardcoded values (pixels)
+            $canvas = $canvasContainer.find("canvas");
+
+            h = m.app.ui.$container.height() - 190;
+            w = m.app.ui.$container.width() - 40;
+            
+            $canvas.css("height",  h + "px");
+            $canvas[0].setAttribute("height",  h + "px");
+
+            $canvas.css("width", w + "px");
+            $canvas[0].setAttribute("width",  w + "px");
+
+            $(".m-draw-cancel").on("tap click", function() {
+                $canvasContainer.hide();
+            });
+
+            $(".m-draw-erase").on("tap click", function() {
+                self.clear();
+            });
+        
+            $label[0].onclick = function() {
+                return false;
+            }
+            // FICKE CHECK
+            $cover.on("click tap", function() {
+                $canvasContainer.show();
+            });
+        
+            self._$cover = $cover;
+            self._$canvasContainer = $canvasContainer;
+            self._$canvas = $canvas;
+            self._$label = $label;
+            self._$ctx = $canvas[0].getContext("2d");
+            self._canvasOffsetLeft = 0;
+            self._canvasOffsetTop = 0;
+            self._$ctx.strokeStyle = "black";
+            self._$ctx.lineWidth = 2;
+            self._$ctx.fillStyle = "black";
+            self._drawing = false;
+        },
+        
+        _addListeners: function(self) {
+            
+            var $canvas = self._$canvas,
+                ctx = self._$ctx,
+                lastX,
+                lastY,
+                offsetLeft,
+                offsetTop;
+                
+            $canvas.on("touchstart", function(e) {
+    			self._canvasOffsetLeft = $canvas.offset().left - $(window).scrollLeft();
+    			self._canvasOffsetTop = $canvas.offset().top - $(window).scrollTop();
+
+    			lastX = e.changedTouches[0].clientX - self._canvasOffsetLeft;
+    			lastY = e.changedTouches[0].clientY - self._canvasOffsetTop;
+
+
+    			ctx.beginPath();
+    			ctx.fillStyle = "black";
+    			ctx.fillRect(lastX, lastY, 2, 2);
+    			ctx.closePath();
+                
+                e.stopPropagation();
+    			e.preventDefault();                
+
+                offsetLeft = self._canvasOffsetLeft;
+                offsetTop = self._canvasOffsetTop;
+            });
+            
+            $canvas.on("touchmove", function(e) {
+                var x,
+                    y,
+                    touchX = e.changedTouches[0].clientX,
+                    touchY = e.changedTouches[0].clientY;
+
+                x = touchX - offsetLeft;
+				y = touchY - offsetTop;
+
+                ctx.beginPath();
+                ctx.moveTo(lastX,lastY);
+                ctx.lineTo(x,y);
+                ctx.stroke();
+                ctx.closePath();
+
+                lastX = x;
+                lastY = y;
+
+                e.stopPropagation();
+                e.preventDefault();
+
+            });
+            
+            $canvas.on("touchend", function(e) {
+
+                e.stopPropagation();
+                e.preventDefault();
+                
+            });
+        }
+        
+    });
+
+    // Public methods and properties
+
+    $.extend(UIFormDraw.prototype, {
+        
+        _$canvas: undefined,
+        _$cover: undefined,
+        _$label: undefined,
+        
+
+        /**
+        * Export draw data
+        *
+        * @method export
+        * @return {String} Exported data (ej: base 64 string)
+        * @param {Array} options A list of options
+        * @chainable
+        */
+        export: function(options) {
+            // code here
+        },
+
+        /**
+        * Clear draw
+        *
+        * @method clear
+        * @chainable
+        */
+        clear: function() {
+            
+            var ctx = this._$ctx,
+                $canvas = this._$canvas,
+                w = $canvas.width(),
+                h = $canvas.height();
+      
+            // Store the current transformation matrix
+            ctx.save();
+        
+            // Use the identity matrix while clearing the canvas
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+            ctx.clearRect(0, 0, w, h);
+            ctx.beginPath();
+        
+            // Restore the transform
+            ctx.restore();
+        }
+        
+    });        
+    
+    UIForm.registerControl(UIFormDraw);  
 
 }(window.$, window.Mootor));
 /**
