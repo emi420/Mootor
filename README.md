@@ -27,7 +27,7 @@ Mootor team **LOVES** design. We are working to make delightful user interfaces,
 
 #### Update! check our design drafts for Mootor UI
 
-http://emi420.github.io/Mootor/downloads/mootor-ui-beta-ios-1.pdf
+http://emi420.github.io/Mootor/downloads/mootor-ui.pdf
 
 #### Mootor Icons
 
