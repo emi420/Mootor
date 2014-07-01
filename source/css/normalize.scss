@@ -50,3 +50,9 @@ input[type="submit"] {
    -webkit-appearance: button; // 2 
    cursor: pointer; // 3
 }
+
+html,body {
+    display: block;
+    width: 100%;
+    height: 100%;
+}

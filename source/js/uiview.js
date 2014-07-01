@@ -36,6 +36,20 @@
         self.ui = new UIView(self);
 
         self.ui.el = document.createElement("div");
+        
+        // Prevent iOS native bounce
+        if (m.context.os.iphone === true || m.context.os.ipad === true) {
+            self.ui.el.addEventListener('scroll', function(e) {
+                var scrollTop = self.ui.el.scrollTop,
+                    offsetHeight = self.ui.el.scrollHeight - self.ui.el.offsetHeight;
+                if (scrollTop < 1) {
+                    self.ui.el.scrollTop = 1;
+                } else if (scrollTop > (offsetHeight - 1)) {
+                    self.ui.el.scrollTop = offsetHeight - 1;
+                }
+            }, false);
+        }
+        
         self.ui.$el = $(self.ui.el);
 
         if (View._getHtmlPath(self) !== undefined) {
@@ -53,16 +67,20 @@
         self.on("ready", function() {
             for (var index in UIView._enhancements) {
                 $(UIView._enhancements[index].selector).each(
-                    applyEnhancementsÒ(index, this)
+                    applyEnhancements(index, this)
                 );    
             }
         });
 
         self.on("load", function() {
-            // console.log("uiview load")
-            var footerHeight = $(".m-footer-container").height();
-            var headerHeight = $(".m-header-container").height();
-            self.ui.el.style.height = (m.app.ui.el.offsetHeight - footerHeight - headerHeight) + "px";
+            window.setTimeout(function() {
+                var footerHeight = $(".m-footer-container").height();
+                var headerHeight = $(".m-header-container").height();
+                self.ui.el.style.height = (m.app.ui.el.offsetHeight - footerHeight - headerHeight) + "px";
+                if (self.ui.el.scrollTop < 1) {
+                    self.ui.el.scrollTop = 1;
+                }
+            }, Mootor.UIPanel._transitionDuration);
         });
 
     });

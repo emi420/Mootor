@@ -87,7 +87,11 @@
                 $(barContainerEl[barName]).hide();
                 _emptyContainer = true;
             }
-
+            
+            barContainerEl[barName].addEventListener('touchmove', function(e) {
+                e.preventDefault();
+            });
+            
             self[barName] = new BarClass({
                 el: barEl,
                 type: "global",
