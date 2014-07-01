@@ -77,8 +77,10 @@
                 var footerHeight = $(".m-footer-container").height();
                 var headerHeight = $(".m-header-container").height();
                 self.ui.el.style.height = (m.app.ui.el.offsetHeight - footerHeight - headerHeight) + "px";
-                if (self.ui.el.scrollTop < 1) {
-                    self.ui.el.scrollTop = 1;
+                if (m.context.os.iphone === true || m.context.os.ipad === true) {
+                    if (self.ui.el.scrollTop < 1) {
+                        self.ui.el.scrollTop = 1;
+                    }
                 }
             }, Mootor.UIPanel._transitionDuration);
         });
