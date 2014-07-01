@@ -26,17 +26,19 @@ $transitionDuration: .3s;
         float: left;
     }
 
-    // Hacks
-
-    .m-panel {
-        // Prevents flicker on transform3d (iOS)    
-        -webkit-transition-duration:0;
-        -webkit-backface-visibility: hidden;
-        -webkit-transform:translate3d(0,0,0);
-        -webkit-transform: translateZ(0);
-    }
-
 }
+
+// Hacks
+
+.m-views-container,
+.m-panel {
+    // Prevents flicker on transform3d (iOS)    
+    -webkit-transition-duration:0;
+    -webkit-backface-visibility: hidden;
+    -webkit-transform:translate3d(0,0,0);
+    -webkit-transform: translateZ(0);
+}
+
 
 // Transitions
 

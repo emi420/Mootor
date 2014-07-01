@@ -4,6 +4,16 @@ $default-padding: .5em 1em;
 	display: none;
 }
 
+.m-ios {
+    .m-panel {
+        width: 50%;
+    }
+    .m-panel.m-hidden {
+        width: 0;
+        display: block;
+    }
+}
+
 .m-double-width {
     width: 200%;
 }

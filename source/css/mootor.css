@@ -754,35 +754,36 @@ html, body {
   overflow-x: hidden;
   float: left;
 }
-/* line 31, _uipanel.scss */
-.m-app .m-views-container .m-panel {
+/* line 34, _uipanel.scss */
+.m-app .m-views-container,
+.m-app .m-panel {
   -webkit-transition-duration: 0;
   -webkit-backface-visibility: hidden;
   -webkit-transform: translate3d(0, 0, 0);
   -webkit-transform: translateZ(0);
 }
-/* line 43, _uipanel.scss */
+/* line 45, _uipanel.scss */
 .m-app .m-transition-none {
   -webkit-transition: all 0;
   -moz-transition: all 0;
   -o-transition: all 0;
   transition: all 0;
 }
-/* line 47, _uipanel.scss */
+/* line 49, _uipanel.scss */
 .m-app .m-transition-hslide {
   -webkit-transition: -webkit-transform 0.3s ease-out;
   -moz-transition: -moz-transform 0.3s ease-out;
   -o-transition: -o-transform 0.3s ease-out;
   transition: transform 0.3s ease-out;
 }
-/* line 50, _uipanel.scss */
+/* line 52, _uipanel.scss */
 .m-app .m-no-transitions.m-stransition-hslide {
   -webkit-transition: none;
   -moz-transition: none;
   -o-transition: none;
   transition: none;
 }
-/* line 54, _uipanel.scss */
+/* line 56, _uipanel.scss */
 .m-app .m-transition-hslide-left {
   -webkit-transform: translateX(-50%);
   -moz-transform: translateX(-50%);
@@ -790,7 +791,7 @@ html, body {
   -o-transform: translateX(-50%);
   transform: translateX(-50%);
 }
-/* line 58, _uipanel.scss */
+/* line 60, _uipanel.scss */
 .m-app .m-no-transitions.m-transition-hslide-left {
   -webkit-transform: none;
   -moz-transform: none;
@@ -799,7 +800,7 @@ html, body {
   transform: none;
   left: -50%;
 }
-/* line 64, _uipanel.scss */
+/* line 66, _uipanel.scss */
 .m-app .m-transition-hslide-right {
   -webkit-transform: translateX(0);
   -moz-transform: translateX(0);
@@ -807,7 +808,7 @@ html, body {
   -o-transform: translateX(0);
   transform: translateX(0);
 }
-/* line 68, _uipanel.scss */
+/* line 70, _uipanel.scss */
 .m-app .m-no-transitions.m-transition-hslide-right {
   -webkit-transform: none;
   -moz-transform: none;
@@ -1798,40 +1799,49 @@ html, body {
 .m-app .m-hidden {
   display: none;
 }
-/* line 7, _utils.scss */
+/* line 8, _utils.scss */
+.m-app .m-ios .m-panel {
+  width: 50%;
+}
+/* line 11, _utils.scss */
+.m-app .m-ios .m-panel.m-hidden {
+  width: 0;
+  display: block;
+}
+/* line 17, _utils.scss */
 .m-app .m-double-width {
   width: 200%;
 }
-/* line 11, _utils.scss */
+/* line 21, _utils.scss */
 .m-app .m-full-width {
   width: 100%;
 }
-/* line 15, _utils.scss */
+/* line 25, _utils.scss */
 .m-app .m-position-left {
   left: 0;
 }
-/* line 19, _utils.scss */
+/* line 29, _utils.scss */
 .m-app .m-position-right {
   float: right !important;
 }
-/* line 23, _utils.scss */
+/* line 33, _utils.scss */
 .m-app .m-padding {
   padding: 0.5em 1em;
 }
-/* line 28, _utils.scss */
+/* line 38, _utils.scss */
 .m-app .m-doc, .m-app .m-doc * {
   border: 1px solid black !important;
   padding: 0.5em !important;
   margin: 1em !important;
   background: rgba(0, 0, 0, 0.1) !important;
 }
-/* line 36, _utils.scss */
+/* line 46, _utils.scss */
 .m-app .m-doc.m-html,
 .m-app .m-doc .m-app {
   width: calc(100% - 4em);
   height: calc(100% - 4em);
 }
-/* line 41, _utils.scss */
+/* line 51, _utils.scss */
 .m-app .m-doc.m-html .m-views-container,
 .m-app .m-doc.m-html .m-panel,
 .m-app .m-doc .m-app .m-views-container,

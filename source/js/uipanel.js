@@ -27,7 +27,7 @@
     View = Mootor.View;
     UIView = Mootor.UIView;
     UIApp = Mootor.UIApp;
-
+    
     // Event handlers
 
     UIView.on("init", function(self) {
@@ -76,7 +76,11 @@
     UIApp.on("init", function() {
         
         UIPanel._addTransitionClass();    
-        UIPanel._setTransitionDuration();  
+        UIPanel._setTransitionDuration();
+        if (m.context.os.ipad === true || m.context.os.iphone === true) {
+            m.app.ui.$el.addClass("m-ios");
+        }
+          
     });
 
   
@@ -90,6 +94,7 @@
 
     $.extend(UIPanel.prototype, UI.prototype);
     Event.extend(UIPanel, "UIPanel");
+    
     
     // Private static methods and properties
         
