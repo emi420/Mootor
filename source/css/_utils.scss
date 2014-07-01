@@ -1,3 +1,5 @@
+$default-padding: .5em 1em;
+
 .m-hidden {
 	display: none;
 }
@@ -16,6 +18,10 @@
 
 .m-position-right {
     float: right !important;
+}
+
+.m-padding {
+    padding: $default-padding;
 }
 
 .m-doc {

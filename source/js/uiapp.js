@@ -106,10 +106,12 @@
             onClick;
             
         setEvent = function(el, href) {
-            $(el).on("tap click", function(e) {
-                e.preventDefault();
-                e.stopPropagation();
+            $(el).on("tap", function(e) {
                 m.app.go(href);
+            });
+            // iOS/Android fix
+            el.addEventListener("touchend", function(e) {
+                e.preventDefault();
             });
         };
         
@@ -117,18 +119,12 @@
             return false;
         };
         
-        for (i = links.length; i--;) {
-            href = links[i].getAttribute("href");
-            if (href !== null) {                
-                if (m.app.route(links[i].getAttribute("href")) !== undefined) {
-
-                    if ( !!('ontouchstart' in window) ) {
-
-                        links[i].onclick = onClick;
-                        
-                        setEvent(links[i], href);
-
-                    }
+        if ( 'ontouchstart' in window ) {
+            for (i = links.length; i--;) {
+                href = links[i].getAttribute("href");
+                links[i].onclick = onClick;
+                if (href !== null && m.app.route(links[i].getAttribute("href")) !== undefined) {                
+                    setEvent(links[i], href);
                 }
             }
         }

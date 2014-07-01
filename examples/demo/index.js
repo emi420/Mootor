@@ -22,5 +22,5 @@
     app.route("^#draw", app.view("draw"));
     
     app.init();
-    
+        
 }());

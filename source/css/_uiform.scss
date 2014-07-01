@@ -1,4 +1,4 @@
-@mixin m-all-fields($class) {
+@mixin m-all-fields($class, $height: 1.43em) {
     .m-form-left-labels {
         .#{$class} {
             width: 70%;
@@ -18,7 +18,7 @@
         font-family: sans-serif;
         padding: 0;
         margin: 0.67em 0 0 0;
-        height: 1.43em;
+        height: $height;
         line-height: 1.43em;
 
         &:disabled {
@@ -29,7 +29,7 @@
             outline: 0;
         }
 
-        &::-webkit-input-placeholder { /* WebKit browsers */
+        &::-webkit-input-placeholder { 
             @extend .m-color-gray;
         }
 
@@ -44,7 +44,8 @@
             float: left;
             width: 30%;
             height: 2.15em;
-            line-height: 2.86em;
+            margin-top: .75em;
+            line-height: 1.5em;
         }  
     } 
     .m-form-top-labels .m-field {

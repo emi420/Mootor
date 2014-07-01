@@ -35,6 +35,8 @@
 
     _onPopState = function() {
         
+        // FIXME CHECK
+        
         var urlBack;
         
         if (_lastHash === window.location.hash) {

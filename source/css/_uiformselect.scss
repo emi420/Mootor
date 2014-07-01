@@ -2,14 +2,14 @@
 
 select.m-select {
 	top: -1.4em;
+    left: 0;
 	margin-bottom: -1.4em;
-	opacity: 0.01;
+	opacity: 0.001;
 	position: relative;
 }
 
 .m-form-left-labels select.m-select {
 	float: left;
-	left: 30%;
 }
 
 .m-select-cover {
@@ -20,7 +20,7 @@ select.m-select {
 	.m-icon-arrow-down-small {
 		position: absolute;
 		right: 0;
-		top: 6px;
+		top: 2px;
 	}
 	.m-value {
 		height: 1.4em;
@@ -29,5 +29,12 @@ select.m-select {
 		margin-right: 21px;
 	}
 }	
+
+.m-form-left-labels {
+    select.m-select {
+    	top: -2em;
+    }    
+}
+
 
 

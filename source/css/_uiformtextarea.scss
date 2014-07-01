@@ -1,4 +1,4 @@
-@include m-all-fields("m-textarea");
+@include m-all-fields("m-textarea", $height: 3em);
 
 .m-text {
 
