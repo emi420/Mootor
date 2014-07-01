@@ -15,7 +15,6 @@
               lastY = e.touches[0].clientY;
               m.app.view().ui.el.scrollTop -= (lastY - startY);
           });
-          m.app.ui.el.style.margin = "20px 0 0 0"
       }
     }
     
