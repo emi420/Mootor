@@ -1,10 +1,9 @@
-@charset "UTF-8";
 /**
  * @summary Mootor CSS
  * @author Emilio Mariscal (emi420 [at] gmail.com)
  * @author Martín Szyszlican (martinsz [at] gmail.com)
  */
-/* line 17, ../../../../../.rvm/gems/ruby-2.0.0-p451/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 17, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -26,45 +25,45 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-/* line 22, ../../../../../.rvm/gems/ruby-2.0.0-p451/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 22, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html {
   line-height: 1;
 }
 
-/* line 24, ../../../../../.rvm/gems/ruby-2.0.0-p451/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 24, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
-/* line 26, ../../../../../.rvm/gems/ruby-2.0.0-p451/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 26, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 28, ../../../../../.rvm/gems/ruby-2.0.0-p451/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 28, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
-/* line 30, ../../../../../.rvm/gems/ruby-2.0.0-p451/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 30, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
-/* line 103, ../../../../../.rvm/gems/ruby-2.0.0-p451/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 103, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
-/* line 32, ../../../../../.rvm/gems/ruby-2.0.0-p451/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 32, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
-/* line 116, ../../../../../.rvm/gems/ruby-2.0.0-p451/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+/* line 116, ../../../../../Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
   display: block;
 }
@@ -755,35 +754,36 @@ html, body {
   overflow-x: hidden;
   float: left;
 }
-/* line 31, _uipanel.scss */
-.m-app .m-views-container .m-panel {
+/* line 34, _uipanel.scss */
+.m-app .m-views-container,
+.m-app .m-panel {
   -webkit-transition-duration: 0;
   -webkit-backface-visibility: hidden;
   -webkit-transform: translate3d(0, 0, 0);
   -webkit-transform: translateZ(0);
 }
-/* line 43, _uipanel.scss */
+/* line 45, _uipanel.scss */
 .m-app .m-transition-none {
   -webkit-transition: all 0;
   -moz-transition: all 0;
   -o-transition: all 0;
   transition: all 0;
 }
-/* line 47, _uipanel.scss */
+/* line 49, _uipanel.scss */
 .m-app .m-transition-hslide {
   -webkit-transition: -webkit-transform 0.3s ease-out;
   -moz-transition: -moz-transform 0.3s ease-out;
   -o-transition: -o-transform 0.3s ease-out;
   transition: transform 0.3s ease-out;
 }
-/* line 50, _uipanel.scss */
+/* line 52, _uipanel.scss */
 .m-app .m-no-transitions.m-stransition-hslide {
   -webkit-transition: none;
   -moz-transition: none;
   -o-transition: none;
   transition: none;
 }
-/* line 54, _uipanel.scss */
+/* line 56, _uipanel.scss */
 .m-app .m-transition-hslide-left {
   -webkit-transform: translateX(-50%);
   -moz-transform: translateX(-50%);
@@ -791,7 +791,7 @@ html, body {
   -o-transform: translateX(-50%);
   transform: translateX(-50%);
 }
-/* line 58, _uipanel.scss */
+/* line 60, _uipanel.scss */
 .m-app .m-no-transitions.m-transition-hslide-left {
   -webkit-transform: none;
   -moz-transform: none;
@@ -800,7 +800,7 @@ html, body {
   transform: none;
   left: -50%;
 }
-/* line 64, _uipanel.scss */
+/* line 66, _uipanel.scss */
 .m-app .m-transition-hslide-right {
   -webkit-transform: translateX(0);
   -moz-transform: translateX(0);
@@ -808,7 +808,7 @@ html, body {
   -o-transform: translateX(0);
   transform: translateX(0);
 }
-/* line 68, _uipanel.scss */
+/* line 70, _uipanel.scss */
 .m-app .m-no-transitions.m-transition-hslide-right {
   -webkit-transform: none;
   -moz-transform: none;
@@ -1052,20 +1052,21 @@ html, body {
   float: left;
   width: 30%;
   height: 2.15em;
-  line-height: 2.86em;
+  margin-top: .75em;
+  line-height: 1.5em;
 }
-/* line 51, _uiform.scss */
+/* line 52, _uiform.scss */
 .m-app .m-form .m-form-top-labels .m-field label {
   width: 100%;
   display: block;
 }
-/* line 57, _uiform.scss */
+/* line 58, _uiform.scss */
 .m-app .m-form .m-field {
   padding: 0 0.67em 0.67em 0.67em;
   border-bottom: 1px solid;
   display: block;
 }
-/* line 63, _uiform.scss */
+/* line 64, _uiform.scss */
 .m-app .m-form .m-field label {
   font-weight: bold;
   font-size: 1em;
@@ -1101,10 +1102,6 @@ html, body {
 .m-app .m-text:focus {
   outline: 0;
 }
-/* line 32, _uiform.scss */
-.m-app .m-text::-webkit-input-placeholder {
-  /* WebKit browsers */
-}
 /* line 3, _uiform.scss */
 .m-app .m-form-left-labels .m-textarea {
   width: 70%;
@@ -1122,7 +1119,7 @@ html, body {
   font-family: sans-serif;
   padding: 0;
   margin: 0.67em 0 0 0;
-  height: 1.43em;
+  height: 3em;
   line-height: 1.43em;
 }
 /* line 24, _uiform.scss */
@@ -1132,10 +1129,6 @@ html, body {
 /* line 28, _uiform.scss */
 .m-app .m-textarea:focus {
   outline: 0;
-}
-/* line 32, _uiform.scss */
-.m-app .m-textarea::-webkit-input-placeholder {
-  /* WebKit browsers */
 }
 /* line 3, _uiform.scss */
 .m-app .m-form-left-labels .m-select {
@@ -1165,21 +1158,17 @@ html, body {
 .m-app .m-select:focus {
   outline: 0;
 }
-/* line 32, _uiform.scss */
-.m-app .m-select::-webkit-input-placeholder {
-  /* WebKit browsers */
-}
 /* line 3, _uiformselect.scss */
 .m-app select.m-select {
   top: -1.4em;
+  left: 0;
   margin-bottom: -1.4em;
-  opacity: 0.01;
+  opacity: 0.001;
   position: relative;
 }
-/* line 10, _uiformselect.scss */
+/* line 11, _uiformselect.scss */
 .m-app .m-form-left-labels select.m-select {
   float: left;
-  left: 30%;
 }
 /* line 15, _uiformselect.scss */
 .m-app .m-select-cover {
@@ -1191,7 +1180,7 @@ html, body {
 .m-app .m-select-cover .m-icon-arrow-down-small {
   position: absolute;
   right: 0;
-  top: 6px;
+  top: 2px;
 }
 /* line 25, _uiformselect.scss */
 .m-app .m-select-cover .m-value {
@@ -1199,6 +1188,10 @@ html, body {
   display: inline-block;
   overflow: hidden;
   margin-right: 21px;
+}
+/* line 34, _uiformselect.scss */
+.m-app .m-form-left-labels select.m-select {
+  top: -2em;
 }
 /* line 10, _colors.scss */
 .m-app .m-bg-color-gray-lighter {
@@ -1802,40 +1795,53 @@ html, body {
   margin-top: 1em;
   border-top-width: 1px;
 }
-/* line 1, _utils.scss */
+/* line 3, _utils.scss */
 .m-app .m-hidden {
   display: none;
 }
-/* line 5, _utils.scss */
+/* line 8, _utils.scss */
+.m-app .m-ios .m-panel {
+  width: 50%;
+}
+/* line 11, _utils.scss */
+.m-app .m-ios .m-panel.m-hidden {
+  width: 0;
+  display: block;
+}
+/* line 17, _utils.scss */
 .m-app .m-double-width {
   width: 200%;
 }
-/* line 9, _utils.scss */
+/* line 21, _utils.scss */
 .m-app .m-full-width {
   width: 100%;
 }
-/* line 13, _utils.scss */
+/* line 25, _utils.scss */
 .m-app .m-position-left {
   left: 0;
 }
-/* line 17, _utils.scss */
+/* line 29, _utils.scss */
 .m-app .m-position-right {
   float: right !important;
 }
-/* line 22, _utils.scss */
+/* line 33, _utils.scss */
+.m-app .m-padding {
+  padding: 0.5em 1em;
+}
+/* line 38, _utils.scss */
 .m-app .m-doc, .m-app .m-doc * {
   border: 1px solid black !important;
   padding: 0.5em !important;
   margin: 1em !important;
   background: rgba(0, 0, 0, 0.1) !important;
 }
-/* line 30, _utils.scss */
+/* line 46, _utils.scss */
 .m-app .m-doc.m-html,
 .m-app .m-doc .m-app {
   width: calc(100% - 4em);
   height: calc(100% - 4em);
 }
-/* line 35, _utils.scss */
+/* line 51, _utils.scss */
 .m-app .m-doc.m-html .m-views-container,
 .m-app .m-doc.m-html .m-panel,
 .m-app .m-doc .m-app .m-views-container,

@@ -3,7 +3,7 @@
     // Allow to use "click" or tap and 
     // not worry about device capabilities
     
-    if ( !!('ontouchstart' in window) ) {
+    if ( 'ontouchstart' in window ) {
         $.fn._on = $.fn.on;
         $.fn.on = function(event, selector, data, callback, one) {
             if (event.indexOf("click") > -1) {
