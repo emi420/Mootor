@@ -1,11 +1,46 @@
-/*! overthrow - An overflow:auto polyfill for responsive design. - v0.7.0 - 2013-11-04
-* Copyright (c) 2013 Scott Jehl, Filament Group, Inc.; Licensed MIT */
-!function(a){var b=a.document,c=b.documentElement,d="overthrow-enabled",e="ontouchmove"in b,f="WebkitOverflowScrolling"in c.style||"msOverflowStyle"in c.style||!e&&a.screen.width>800||function(){var b=a.navigator.userAgent,c=b.match(/AppleWebKit\/([0-9]+)/),d=c&&c[1],e=c&&d>=534;return b.match(/Android ([0-9]+)/)&&RegExp.$1>=3&&e||b.match(/ Version\/([0-9]+)/)&&RegExp.$1>=0&&a.blackberry&&e||b.indexOf("PlayBook")>-1&&e&&-1===!b.indexOf("Android 2")||b.match(/Firefox\/([0-9]+)/)&&RegExp.$1>=4||b.match(/wOSBrowser\/([0-9]+)/)&&RegExp.$1>=233&&e||b.match(/NokiaBrowser\/([0-9\.]+)/)&&7.3===parseFloat(RegExp.$1)&&c&&d>=533}();a.overthrow={},a.overthrow.enabledClassName=d,a.overthrow.addClass=function(){-1===c.className.indexOf(a.overthrow.enabledClassName)&&(c.className+=" "+a.overthrow.enabledClassName)},a.overthrow.removeClass=function(){c.className=c.className.replace(a.overthrow.enabledClassName,"")},a.overthrow.set=function(){f&&a.overthrow.addClass()},a.overthrow.canBeFilledWithPoly=e,a.overthrow.forget=function(){a.overthrow.removeClass()},a.overthrow.support=f?"native":"none"}(this),function(a,b,c){if(b!==c){b.easing=function(a,b,c,d){return c*((a=a/d-1)*a*a+1)+b},b.tossing=!1;var d;b.toss=function(a,e){b.intercept();var f,g,h=0,i=a.scrollLeft,j=a.scrollTop,k={top:"+0",left:"+0",duration:50,easing:b.easing,finished:function(){}},l=!1;if(e)for(var m in k)e[m]!==c&&(k[m]=e[m]);return"string"==typeof k.left?(k.left=parseFloat(k.left),f=k.left+i):(f=k.left,k.left=k.left-i),"string"==typeof k.top?(k.top=parseFloat(k.top),g=k.top+j):(g=k.top,k.top=k.top-j),b.tossing=!0,d=setInterval(function(){h++<k.duration?(a.scrollLeft=k.easing(h,i,k.left,k.duration),a.scrollTop=k.easing(h,j,k.top,k.duration)):(f!==a.scrollLeft?a.scrollLeft=f:(l&&k.finished(),l=!0),g!==a.scrollTop?a.scrollTop=g:(l&&k.finished(),l=!0),b.intercept())},1),{top:g,left:f,duration:b.duration,easing:b.easing}},b.intercept=function(){clearInterval(d),b.tossing=!1}}}(this,this.overthrow),function(a,b,c){if(b!==c){b.scrollIndicatorClassName="overthrow";var d=a.document,e=d.documentElement,f="native"===b.support,g=b.canBeFilledWithPoly,h=(b.configure,b.set),i=b.forget,j=b.scrollIndicatorClassName;b.closest=function(a,c){return!c&&a.className&&a.className.indexOf(j)>-1&&a||b.closest(a.parentNode)};var k=!1;b.set=function(){if(h(),!k&&!f&&g){a.overthrow.addClass(),k=!0,b.support="polyfilled",b.forget=function(){i(),k=!1,d.removeEventListener&&d.removeEventListener("touchstart",u,!1)};var j,l,m,n,o=[],p=[],q=function(){o=[],l=null},r=function(){p=[],m=null},s=function(a){n=j.querySelectorAll("textarea, input");for(var b=0,c=n.length;c>b;b++)n[b].style.pointerEvents=a},t=function(a,b){if(d.createEvent){var e,f=(!b||b===c)&&j.parentNode||j.touchchild||j;f!==j&&(e=d.createEvent("HTMLEvents"),e.initEvent("touchend",!0,!0),j.dispatchEvent(e),f.touchchild=j,j=f,f.dispatchEvent(a))}},u=function(a){if(b.intercept&&b.intercept(),q(),r(),j=b.closest(a.target),j&&j!==e&&!(a.touches.length>1)){s("none");var c=a,d=j.scrollTop,f=j.scrollLeft,g=j.offsetHeight,h=j.offsetWidth,i=a.touches[0].pageY,k=a.touches[0].pageX,n=j.scrollHeight,u=j.scrollWidth,v=function(a){var b=d+i-a.touches[0].pageY,e=f+k-a.touches[0].pageX,s=b>=(o.length?o[0]:0),v=e>=(p.length?p[0]:0);b>0&&n-g>b||e>0&&u-h>e?a.preventDefault():t(c),l&&s!==l&&q(),m&&v!==m&&r(),l=s,m=v,j.scrollTop=b,j.scrollLeft=e,o.unshift(b),p.unshift(e),o.length>3&&o.pop(),p.length>3&&p.pop()},w=function(){s("auto"),setTimeout(function(){s("none")},450),j.removeEventListener("touchmove",v,!1),j.removeEventListener("touchend",w,!1)};j.addEventListener("touchmove",v,!1),j.addEventListener("touchend",w,!1)}};d.addEventListener("touchstart",u,!1)}}}}(this,this.overthrow),function(a){a.overthrow.set()}(this);/**
-* The Mootor module handles the creation of Namespaces and global objects
+(function($) {
+
+    // Allow to use "click" or tap and 
+    // not worry about device capabilities
+    
+    if ( 'ontouchstart' in window ) {
+        $.fn._on = $.fn.on;
+        $.fn.on = function(event, selector, data, callback, one) {
+            if (event.indexOf("click") > -1) {
+                event = event.replace("click","");
+            }
+            return $.fn._on.call(this, event, selector, data, callback, one);
+        };
+    }
+
+}(window.$));
+(function($) {
+
+    var ua = navigator.userAgent,
+        androidversion,
+        startY,
+        lastY;
+    
+    if( ua.indexOf("Android") >= 0 ) {
+      androidversion = parseFloat(ua.slice(ua.indexOf("Android")+8)); 
+      if (androidversion <= 2.3) {
+          document.addEventListener("touchstart", function(e) {
+             startY = e.touches[0].clientY;
+          });
+          document.addEventListener("touchmove", function(e) {
+              lastY = e.touches[0].clientY;
+              m.app.view().ui.el.scrollTop -= (lastY - startY);
+          });
+      }
+    }
+    
+}(window.$));
+/**
+* Mootor public objects
 *
 * @module Mootor
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
 (function () {
@@ -44,7 +79,7 @@
 * @private
 * @module Mootor
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
 (function ($, Mootor) {
@@ -93,17 +128,19 @@
                 count = 0,
                 callbacks = Event._collection[event],
                 callback;
-                
+                                
             if (callbacks !== undefined) {
                 count = callbacks.length ;
             }
             
+            callback = function(cb) {
+                window.setTimeout(function() {
+                    cb(instance);
+                }, 1);
+            };
+            
             for (i = 0; i < count; i++) {
-                (function(callback) {
-                    window.setTimeout(function() {
-                        callback(instance);
-                    }, 1);
-                }(callbacks[i]));
+                callback(callbacks[i]);
             }
         }, 
 
@@ -145,9 +182,11 @@
 * @class Context
 * @return object
 * @static
+* @author Emilio Mariscal (emi420 [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
-(function ($, Mootor) {
+(function ($, Mootor, m) {
 
     "use strict";
 
@@ -193,7 +232,7 @@
             },
             
             cordova: (window.Cordova !== undefined),
-            phonegap: (window.PhoneGap !== undefined),
+            phonegap: (window.PhoneGap !== undefined)
 
         });
     };
@@ -211,12 +250,12 @@
         context: new Context()
     });
 
-}(window.$, window.Mootor));/*
+}(window.$, window.Mootor, window.m));/*
  *  @author Emilio Mariscal (emi420 [at] gmail.com)
- *  @author Martín Szyszlican (martinsz [at] gmail.com)
+ *  @author Martin Szyszlican (martinsz [at] gmail.com)
  */
 
-(function ($, Mootor) {
+(function ($, Mootor, m) {
 
     "use strict";
 
@@ -242,7 +281,7 @@
     * @param {Object} options An object defining options for the application.
     * * views - An array with a list of view names
     */
-    App = Mootor.App = function(options) {
+    App = Mootor.App = function() {
     };
 
     // Private static 
@@ -409,7 +448,7 @@
         
     };
     
-    $.extend(window.m, {        
+    $.extend(m, {        
         /**
         * Creates a new app with the defined options.
         * If the app is already created, it can be called without options to have a reference to the Mootor app. 
@@ -442,7 +481,7 @@
     });
 
 
-}(window.$, window.Mootor));
+}(window.$, window.Mootor, window.m));
 /**
 * The View class handles each view of the application. 
 * A list of views is specified in the applications options
@@ -456,10 +495,10 @@
 * * constructor - A function that will be run after the view has loaded (optional).
 * * animation - a string defining the type of animation used to show this view (one of: "slide-left", "slide-right", "none").
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
-(function ($, Mootor, document) {
+(function ($, Mootor, m) {
 
     "use strict";
     
@@ -475,7 +514,7 @@
     
     // Event handlers
     
-    App.on("init", function(self) {
+    App.on("init", function() {
 
         var views = App._options.views,
             viewCount = views.length,
@@ -486,17 +525,16 @@
             view = m.app.view(views[i]);
         }
         
-        view.on("ready", function(self) {
+        view.on("ready", function() {
             App.dispatch("ready");
         });
         
     });   
     
-    App.on("go", function(self) {
+    App.on("go", function() {
         
         var view,
             currentView,
-            app,
             stateObj,
             router = App._currentRoute,
             url = router.url;
@@ -520,9 +558,9 @@
         if (currentView != view) {
 
             if (url !== "") {
-                history.pushState(stateObj, view.id, url);
+                window.history.pushState(stateObj, view.id, url);
             } else {
-                history.pushState(stateObj, view.id, window.location.pathname);                    
+                window.history.pushState(stateObj, view.id, window.location.pathname);                    
             }
 
         }
@@ -574,7 +612,7 @@
 
             View.dispatch("init", self);
 
-            self.on("getHtml", function(view) {
+            self.on("getHtml", function() {
                 window.setTimeout(function() {
                     View._getScript(self);
                 }, 1);
@@ -585,7 +623,7 @@
             });
 
             // Load Html, Css and JavaScript
-            setTimeout(function() {
+            window.setTimeout(function() {
                 View._getHtml(self);
             }, 1);
             View._getCss(self);
@@ -742,7 +780,7 @@
                 View.on(event, callback);
             }
             return this;
-        },
+        }
 
         /**
         * Unsets event handlers for the view
@@ -774,8 +812,7 @@
         *     indexView = m.app.view("index");
         */
         view: function(id, options) {
-            var i,
-                views = View._collection,
+            var views = View._collection,
                 view;
             
             if (id !== "" && id !== undefined) {
@@ -794,11 +831,11 @@
             }
 
             return view;
-        },
+        }
         
     });
 
-}(window.$, window.Mootor, window.document));
+}(window.$, window.Mootor, window.m));
 /**
 * The UI class is the class for all user interface elements.
 * It is not directly used, but extended by many other classes.
@@ -807,7 +844,7 @@
 * @constructor
 * @module UI
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
 (function ($, Mootor) {
@@ -891,10 +928,10 @@
 * @constructor
 * @module UI
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
-(function ($, Mootor) {
+(function ($, Mootor, m) {
 
     "use strict";
 
@@ -915,9 +952,7 @@
     // Private constructors
 
     UIApp = Mootor.UIApp = function() {
-        var $container,
-            app = m.app,
-            self = this;
+        var $container;
 
         App = Mootor.App;
 
@@ -948,7 +983,7 @@
         this.$el = $("<div>").addClass("m-views-container");
 
         // Disable transitions on Android
-        m.app.settings("uipanel-transitions", m.context.os.android !== true)
+        m.app.settings("uipanel-transitions", m.context.os.android !== true);
 
         if (m.app.settings("uipanel-transitions") !== true) {
             this.$el.addClass("m-no-transitions");
@@ -988,29 +1023,30 @@
     App.on("ready", function() {
         var links = $("a"),
             i,
-            href;
+            href,
+            setEvent,
+            onClick;
+            
+        setEvent = function(el, href) {
+            $(el).on("tap", function(e) {
+                m.app.go(href);
+            });
+            // iOS/Android fix
+            el.addEventListener("touchend", function(e) {
+                e.preventDefault();
+            });
+        };
         
-        for (i = links.length; i--;) {
-            href = links[i].getAttribute("href");
-            if (href !== null) {                
-                if (m.app.route(links[i].getAttribute("href")) !== undefined) {
-
-
-                    if ( !!('ontouchstart' in window) ) {
-
-                        links[i].onclick = function() {
-                            return false;
-                        };
-
-                        (function(href) {
-                            $(links[i]).on("tap click", function(e) {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                m.app.go(href);
-                            })
-                        }(href));
-
-                    }
+        onClick = function() {
+            return false;
+        };
+        
+        if ( 'ontouchstart' in window ) {
+            for (i = links.length; i--;) {
+                href = links[i].getAttribute("href");
+                links[i].onclick = onClick;
+                if (href !== null && m.app.route(links[i].getAttribute("href")) !== undefined) {                
+                    setEvent(links[i], href);
                 }
             }
         }
@@ -1018,7 +1054,7 @@
     });  
     
 
-}(window.$, window.Mootor));
+}(window.$, window.Mootor, window.m));
 /**
 * The UIView class is the UI representation of a view
 *
@@ -1027,7 +1063,7 @@
 * @constructor
 * @module UI
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
 (function ($, Mootor, document) {
@@ -1049,9 +1085,28 @@
     // Event handlers
     
     View.on("init", function(self) {
+        
+        var applyEnhancements = function (index,element) {
+            new UIView._enhancements[index].className(element);    
+        };
+        
         self.ui = new UIView(self);
 
         self.ui.el = document.createElement("div");
+        
+        // Prevent iOS native bounce
+        if (m.context.os.iphone === true || m.context.os.ipad === true) {
+            self.ui.el.addEventListener('scroll', function(e) {
+                var scrollTop = self.ui.el.scrollTop,
+                    offsetHeight = self.ui.el.scrollHeight - self.ui.el.offsetHeight;
+                if (scrollTop < 1) {
+                    self.ui.el.scrollTop = 1;
+                } else if (scrollTop > (offsetHeight - 1)) {
+                    self.ui.el.scrollTop = offsetHeight - 1;
+                }
+            }, false);
+        }
+        
         self.ui.$el = $(self.ui.el);
 
         if (View._getHtmlPath(self) !== undefined) {
@@ -1066,20 +1121,41 @@
             UIView.dispatch("init", self.ui);
         });
 
-
         self.on("ready", function() {
             for (var index in UIView._enhancements) {
-                $(UIView._enhancements[index].selector).each(function (i,element) {
-                    new UIView._enhancements[index].className(element);    
-                });    
+                $(UIView._enhancements[index].selector).each(
+                    applyEnhancements(index, this)
+                );    
             }
         });
-
+        
+        var stopEvent = function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        
         self.on("load", function() {
-            // console.log("uiview load")
-            var footerHeight = $(".m-footer-container").height();
-            var headerHeight = $(".m-header-container").height();
-            self.ui.el.style.height = (m.app.ui.el.offsetHeight - footerHeight - headerHeight) + "px"
+            window.setTimeout(function() {
+                var footerHeight = $(".m-footer-container").height();
+                var headerHeight = $(".m-header-container").height();
+                self.ui.el.style.height = (m.app.ui.el.offsetHeight - footerHeight - headerHeight) + "px";
+                if (m.context.os.iphone === true || m.context.os.ipad === true) {
+                    if (self.ui.el.scrollHeight > self.ui.el.offsetHeight) {
+                        if (self.ui.el.scrollTop < 1) {
+                            self.ui.el.scrollTop = 1;
+                        }
+                    } else {
+                        document.addEventListener("touchmove", stopEvent);
+                    }
+                }
+            }, Mootor.UIPanel._transitionDuration);
+        });
+        self.on("unload", function() {
+            if (m.context.os.iphone === true || m.context.os.ipad === true) {
+                if (self.ui.el.scrollHeight <= self.ui.el.offsetHeight) {
+                    document.removeEventListener("touchmove", stopEvent);
+                }
+            }
         });
 
     });
@@ -1121,10 +1197,10 @@
 * @extends UI
 * @module UI
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
-(function ($, Mootor) {
+(function ($, Mootor, m) {
 
     "use strict";
 
@@ -1143,7 +1219,7 @@
     View = Mootor.View;
     UIView = Mootor.UIView;
     UIApp = Mootor.UIApp;
-
+    
     // Event handlers
 
     UIView.on("init", function(self) {
@@ -1154,13 +1230,13 @@
         self.panel.$el = $(self.el);
         self.panel.hide();
         
-        UIPanel.on("transitionEnd", function(self) {
+        UIPanel.on("transitionEnd", function() {
             if (Mootor.App._currentView !== view) {
                 view.ui.panel.hide();    
             } 
         });
         
-        view.on("load", function(view) {
+        view.on("load", function() {
 
             self.panel.position("right").show();
 
@@ -1183,16 +1259,20 @@
             
         });
     
-        view.on("unload", function(view) {
+        view.on("unload", function() {
             self.panel.position("left");
         }); 
                 
     });
     
-    UIApp.on("init", function(self) {
+    UIApp.on("init", function() {
         
         UIPanel._addTransitionClass();    
-        UIPanel._setTransitionDuration();  
+        UIPanel._setTransitionDuration();
+        if (m.context.os.ipad === true || m.context.os.iphone === true) {
+            m.app.ui.$el.addClass("m-ios");
+        }
+          
     });
 
   
@@ -1206,6 +1286,7 @@
 
     $.extend(UIPanel.prototype, UI.prototype);
     Event.extend(UIPanel, "UIPanel");
+    
     
     // Private static methods and properties
         
@@ -1237,7 +1318,7 @@
             
         },
         
-        _startTransition: function (self) {
+        _startTransition: function () {
             
             var uiapp = m.app.ui;
             
@@ -1254,7 +1335,7 @@
             });
         },
         
-        _addTransitionClass: function (self) {
+        _addTransitionClass: function () {
             var uiapp = m.app.ui;
 
             if (UIPanel.DEFAULT_TRANSITION == "hslide") {
@@ -1294,7 +1375,7 @@
                    
                    for (j=0; j<ruleList.length; j++)
                    {
-                       if (ruleList[j].type == CSSRule.STYLE_RULE && 
+                       if (ruleList[j].type == window.CSSRule.STYLE_RULE && 
                            ruleList[j].selectorText == selector)
                        {
                            return ruleList[j].style;
@@ -1393,17 +1474,17 @@
 
     });
     
-}(window.$, window.Mootor));/**
+}(window.$, window.Mootor, window.m));/**
 * The Router class is for defining routes
 *
 * @class Router
 * @constructor
 *  @module Router
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
-(function ($, Mootor) {
+(function ($, Mootor, m) {
 
     "use strict";
 
@@ -1429,6 +1510,8 @@
     // Event handlers
 
     _onPopState = function() {
+        
+        // FIXME CHECK
         
         var urlBack;
         
@@ -1520,7 +1603,7 @@
         }
     });
           
-}(window.$, window.Mootor));
+}(window.$, window.Mootor, window.m));
 /**
 * The Route class is for defining a route
 *
@@ -1528,7 +1611,7 @@
 * @constructor
 * @module Router
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
 
@@ -1575,7 +1658,7 @@
         * @example
         *     url_view = m.app.route("index.html").view;
         */
-        view: {},
+        view: {}
 
     });        
 
@@ -1588,7 +1671,7 @@
 * @constructor
 * @module UI
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
 (function ($, Mootor) {
@@ -1647,10 +1730,10 @@
 * @module UI
 * @constructor
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
-(function ($, Mootor) {
+(function ($, Mootor, m) {
 
     "use strict";
 
@@ -1659,7 +1742,6 @@
         UI,
         UIView,
         UINavItem,
-        barEl,
         barContainerEl = [];
         
     // Dependences
@@ -1674,7 +1756,7 @@
         this.el = options.container;
         this.$el = $(this.el);
         this.$el.addClass("m-navbar");
-        this.$el.addClass("m-"+options.type+"-navbar");
+        this.$el.addClass("m-" + options.type + "-navbar");
         this.nav = UINavBar._initNavItems(this.el);
     };
 
@@ -1709,68 +1791,81 @@
             }
             
             return navGroups;
-        }
-        ,
-        createBar: function(barName,uiapp,barClass) {
+        },
 
-            // FIXME CHECK (parentElement?)
-            var barEl = uiapp.el.parentElement.getElementsByTagName(barName)[0];
-
+        // self = uiapp
+        initBar: function(barName, self, BarClass) {
+            
+            var barEl = self.el.parentElement.getElementsByTagName(barName)[0],
+                _emptyContainer = false;
+            
             barContainerEl[barName] = document.createElement("div");
-            barContainerEl[barName].setAttribute("class","m-"+barName+"-container");
+            barContainerEl[barName].setAttribute("class","m-" + barName + "-container");
 
             if (barEl) {
                 barEl.parentElement.replaceChild(barContainerEl[barName], barEl);
                 barContainerEl[barName].appendChild(barEl);
-                barEl.barClass = barClass;
+            } else {
+                barEl = document.createElement("div");
+                self.el.parentElement.insertBefore(barContainerEl[barName], self.el);
+                $(barContainerEl[barName]).hide();
+                _emptyContainer = true;
             }
-            else {
-                barEl = document.createElement("div"); /*Dummy object for footer initialization*/
-                m.app.ui.el.parentElement.appendChild(barContainerEl[barName]);                
-                $(barContainerEl[barName]).addClass("m-hidden");
-            }
-
-            uiapp[barName] = new barClass({
-                el: barEl,
-                type: "global"
+            
+            barContainerEl[barName].addEventListener('touchmove', function(e) {
+                e.preventDefault();
             });
-            uiapp[barName].hide();
+            
+            self[barName] = new BarClass({
+                el: barEl,
+                type: "global",
+            });
+            
+            self[barName]._emptyContainer = _emptyContainer;
+            self[barName].hide();
+        },
+                    
+        // self = uiview
+        createBar: function(barName, self, BarClass) {
 
+            var barEl = self.panel.el.getElementsByTagName(barName)[0];
 
-            UIView.on("init", function(self) {
+            if (barEl) {
+             
+                self[barName] = new BarClass({
+                    el: barEl,
+                    type: "view"
+                });
                 
-                var barEl = self.panel.el.getElementsByTagName(barName)[0];
+                self.panel.el.removeChild(barEl);
+                barContainerEl[barName].appendChild(barEl);
+                
+                self[barName].hideContainer();
 
-                if (barEl) {
-                 
-                    self[barName] = new barClass({
-                        el: barEl,
-                        type: "view"
-                    });
-                    
-                    self.panel.el.removeChild(barEl);
-                    barContainerEl[barName].appendChild(barEl);
-                    
-                    self[barName].hideContainer();
+                self.view.on("load", function(self) {
+                   self.ui[barName].showContainer(barName);
+                   if (m.app.ui[barName]._emptyContainer === true) {
+                       $(barContainerEl[barName]).show();
+                   }
+                   $(barContainerEl[barName]).show();
+                });
 
-                    self.view.on("beforeLoad", function(self) {
-                       self.ui[barName].showContainer(barName);
-                    });
+                self.view.on("unload", function(self) {
+                   self.ui[barName].hideContainer(barName);
+                   if (m.app.ui[barName]._emptyContainer === true) {
+                       $(barContainerEl[barName]).hide();
+                   }
+                });
 
-                    self.view.on("unload", function(self) {
-                       self.ui[barName].hideContainer(barName);
-                    });
+            } else {
+                self.view.on("load", function(self) {
+                    m.app.ui[barName].show();
+                });
 
-                } else {
-                    self.view.on("load", function(self) {
-                        m.app.ui[barName].show()
-                    });
-
-                    self.view.on("unload", function(self) {
-                        m.app.ui[barName].hide()
-                    });
-                }
-            });            
+                self.view.on("unload", function(self) {
+                    m.app.ui[barName].hide();
+                });
+            }
         }
     });
 
@@ -1778,25 +1873,17 @@
 
     $.extend(UINavBar.prototype, {
         hideContainer: function(barName) {
-            this.hide();
-            // console.log("hideContainer",this.el.parentElement);
-            if ($(".m-"+barName+"-container .m-global-navbar").length == 0) {
-                $(".m-"+barName+"-container").addClass("m-hidden");    
-            }
             
-
+            this.hide();
         },
         showContainer: function(barName) {
+            
             this.show();
-            // console.log("showContainer",this.el.parentElement);
-            if ($(".m-"+barName+"-container .m-global-navbar").length == 0) {
-                $(".m-"+barName+"-container").removeClass("m-hidden");
-            }
         }
 
     });  
 
-}(window.$, window.Mootor));
+}(window.$, window.Mootor, window.m));
 /**
 * The UIHeader class is a navigational element at the top of the page (header)
 *
@@ -1805,10 +1892,10 @@
 * @module UI
 * @constructor
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
-(function ($, Mootor) {
+(function ($, Mootor, m) {
 
     "use strict";
 
@@ -1820,8 +1907,7 @@
         UIApp,
         UINavItem,
         App,
-        UI,
-        headerContainerEl;
+        UI;
 
     // Dependences
 
@@ -1850,8 +1936,12 @@
     };
 
     // Event handlers
-    UIApp.on("init", function(self) {
+    UIView.on("init", function(self) {
         UINavBar.createBar("header",self, UIHeader);
+    });
+
+    UIApp.on("init", function(self) {
+        UINavBar.initBar("header",self, UIHeader);
     });
 
     
@@ -1872,10 +1962,9 @@
             backNavEl.setAttribute("class", "m-nav-header-back-container");
 
             if (self.el.firstChild !== undefined) {
-               self.el.insertBefore(backNavEl,self.el.firstChild) 
+               self.el.insertBefore(backNavEl,self.el.firstChild); 
             } else {
-               self.el.appendChild(backNavEl)
-               pa.appendChild(who);
+               self.el.appendChild(backNavEl);
             }
             
             self.back = new UINavItem({
@@ -1884,10 +1973,10 @@
             self.back.$el.addClass("m-header-back");
             self.back.hide();
             
-            self.back.$el.on("tap click", function(e) {
+            self.back.$el.on("tap click", function() {
                 m.app.back();
             });
-            self.back.el.onclick = function(e) {
+            self.back.el.onclick = function() {
                 return false;
             };
             App.on("go", function(app) {
@@ -1945,7 +2034,7 @@
     $.extend(UIHeader.prototype, UINavBar.prototype);
     $.extend(UIHeader.prototype, UI.prototype);
 
-}(window.$, window.Mootor));
+}(window.$, window.Mootor, window.m));
 /**
 * The UIFooter class is a navigational element at the bottom of the page (footer)
 *
@@ -1954,7 +2043,7 @@
 * @module UI
 * @constructor
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
 (function ($, Mootor) {
@@ -1969,10 +2058,7 @@
         UIApp,
         UINavItem,
         App,
-        UI,
-        footerContainerEl,
-        $footerContainerEl,
-        _appFooter = false;
+        UI;
 
     // Dependences
 
@@ -2001,10 +2087,13 @@
     };
 
     // Event handlers
-    UIApp.on("init", function(self) {
+    UIView.on("init", function(self) {
         UINavBar.createBar("footer",self, UIFooter);
     });
-    
+
+    UIApp.on("init", function(self) {
+        UINavBar.initBar("footer",self, UIFooter);
+    });
     // Private static methods and properties
 
     $.extend(UIFooter, {
@@ -2025,10 +2114,10 @@
 * @module UI
 * @constructor
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
-(function ($, Mootor) {
+(function ($, Mootor, m) {
 
     // Force strict mode for ECMAScript
     "use strict";
@@ -2044,7 +2133,7 @@
     UIApp = Mootor.UIApp;
 
     // Event handlers
-    UIApp.on("init", function(self) {
+    UIApp.on("init", function() {
         var uiloading = new UILoading();
 
         $.extend(UIApp.prototype, {
@@ -2079,7 +2168,6 @@
     UILoading = Mootor.UILoading = function() {
         var $el = this.$el = UILoading.create();
         $el.appendTo(m.app.ui.$container);
-        //debugger;
         this.hide();
     };
 
@@ -2131,7 +2219,7 @@
     });      
 
       
-}(window.$, window.Mootor));
+}(window.$, window.Mootor, window.m));
 
 
 /**
@@ -2142,7 +2230,7 @@
 * @constructor
 * @module UI
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
 (function ($, Mootor) {
@@ -2159,11 +2247,10 @@
     UI = Mootor.UI;
     UIView = Mootor.UIView;
     View = Mootor.View;
-
+    
     // Private constructors
 
     Mootor.UIForm = UIForm = function(element) {
-        console.log("UIForm",element);
     };
     
     // Event handlers
@@ -2231,203 +2318,6 @@
     });        
 }(window.$, window.Mootor));
 /**
-* UIFormText is a text input of a form
-*
-* @class UIFormText
-* @extends UI
-* @constructor
-* @module UI
-* @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
-*/
-
-(function ($, Mootor) {
-    
-    "use strict";
-
-    var UIFormText,
-    
-        UI,
-        UIForm;
-
-    // Dependences
-
-    UI = Mootor.UI;
-    UIForm = Mootor.UIForm;
-
-    // Event handelers
-    
-    // Private constructors
-
-    UIFormText = function() {
-        // Code here
-    };
-
-    // Prototypal inheritance
-    $.extend(UIFormText.prototype, UI.prototype);
-
-    // Private static methods and properties
-
-    $.extend(UIFormText, {
-
-        _init: function(uiview) {
-            var inputs,
-                i;
-                
-            inputs = uiview.$el.find(".m-text");
-            
-            // code here
-
-        },
-        
-    });
-
-    // Public methods and properties
-
-    $.extend(UIFormText.prototype, {
-    });      
-    
-    UIForm.registerControl(UIFormText);  
-
-}(window.$, window.Mootor));
-/**
-* UIFormTextArea is a textarea input of a form
-*
-* @class UIFormTextArea
-* @extends UI
-* @constructor
-* @module UI
-* @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
-*/
-
-(function ($, Mootor) {
-    
-    "use strict";
-
-    var UIFormTextArea,
-    
-        UI,
-        UIForm;
-
-    // Dependences
-
-    UI = Mootor.UI;
-    UIForm = Mootor.UIForm;
-    
-    // Private constructors
-
-    UIFormTextArea = function() {
-        // code here
-    };
-
-    // Prototypal inheritance
-    $.extend(UIFormTextArea.prototype, UI.prototype);
-
-    // Private static methods and properties
-
-    $.extend(UIFormTextArea, {
-        _init: function(uiview) {
-            var inputs,
-                i;
-                
-            inputs = uiview.$el.find(".m-textarea");
-
-           // code here
-        }
-   
-    });
-
-    // Public methods and properties
-
-    $.extend(UIFormTextArea.prototype, {
-    });        
-
-    UIForm.registerControl(UIFormTextArea);  
-
-}(window.$, window.Mootor));
-/**
-* UIFormSelect is a select input of a form
-*
-* @class UIFormSelect
-* @extends UI
-* @constructor
-* @module UI
-* @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
-*/
-
-(function ($, Mootor) {
-    
-    "use strict";
-
-    var UIFormSelect,
-    
-        UI,
-        UIForm;
-
-    // Dependences
-
-    UI = Mootor.UI;
-    UIForm = Mootor.UIForm;
-    
-    // Private constructors
-
-    UIFormSelect = function() {
-        // code here
-    };
-
-    // Prototypal inheritance
-    $.extend(UIFormSelect.prototype, UI.prototype);
-
-    // Private static methods and properties
-
-    $.extend(UIFormSelect, {
-        _init: function(uiview) {
-            
-            var inputs,
-                i;
-                
-            inputs = uiview.$el.find(".m-select");
-            inputs.each(function(index,element) {
-                var $element = $(element);
-
-                var coverHTML = '<div class="m-select m-select-cover">\
-                    <span class="m-value"></span>\
-                    <span class="m-icon-arrow-down-small"></span>\
-                </div>';
-
-                var $cover = element.$cover = $(coverHTML).insertBefore(element);
-                var $value = $cover.find(".m-value");
-
-                updateValue();
-                $element.on("change", updateValue);
-
-                $element.on("focus", function(e) {
-                    var me = document.createEvent("MouseEvents");
-                    me.initMouseEvent("mousedown", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-                    var worked = e.target.dispatchEvent(me);                
-                })
-
-                function updateValue() {
-                    // Value is the text of the selected option or the placeholder text
-                    var value = element.options[element.selectedIndex].text || element.placeholder;
-                    $value.html(value);
-                }
-            });
-        }
-   
-    });
-
-    // Public methods and properties
-
-    $.extend(UIFormSelect.prototype, {
-    });        
-
-    UIForm.registerControl(UIFormSelect);  
-
-}(window.$, window.Mootor));
-/**
 * UIFormVirtualInput is a virtual-input item of a form
 *
 * @class UIFormVirtualInput
@@ -2435,7 +2325,6 @@
 * @constructor
 * @module UI
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
 */
 
 (function ($, Mootor) {
@@ -2503,7 +2392,7 @@
 * @author Emilio Mariscal (emi420 [at] gmail.com)
 */
 
-(function ($, Mootor) {
+(function ($, Mootor, m) {
     
     "use strict";
 
@@ -2550,7 +2439,6 @@
                 coverHTML,
                 $cover,
                 $label,
-                $icon,
                 $canvas,
                 $canvasContainer,
                 h,
@@ -2561,23 +2449,24 @@
 
             $label = $("label[for=" + element.getAttribute("id") + "]");
 
-            coverHTML = '<div class="m-draw m-draw-cover">\
-                <span class="m-draw-icon m-icon-arrow-right-small"></span>\
+            /*jshint multistr: true */
+            coverHTML = '<div class="m-draw m-draw-cover"> \
+                <span class="m-draw-icon m-icon-arrow-right-small"></span> \
             </div>';
         
             $cover = element.$cover = $(coverHTML).insertBefore(element);
-            $label.insertBefore($cover.find(".m-draw-icon"))
+            $label.insertBefore($cover.find(".m-draw-icon"));
             $element.hide();
         
-            $canvasContainer = $('<div class="m-draw-canvas">\
-                    <div class="m-draw-canvas-header">\
-                        <span class="m-draw-cancel">Cancel</span>\
-                        <span class="m-draw-done">Done</span>\
-                    </div>\
-                    <canvas></canvas>\
-                    <div class="m-draw-canvas-footer">\
-                        <span class="m-draw-erase m-icon-erase"></span>\
-                    </div>\
+            $canvasContainer = $('<div class="m-draw-canvas"> \
+                    <div class="m-draw-canvas-header"> \
+                        <span class="m-draw-cancel">Cancel</span> \
+                        <span class="m-draw-done">Done</span> \
+                    </div> \
+                    <canvas></canvas> \
+                    <div class="m-draw-canvas-footer"> \
+                        <span class="m-draw-erase m-icon-erase"></span> \
+                    </div> \
                 </div>');
         
             $canvasContainer.hide();
@@ -2606,7 +2495,7 @@
         
             $label[0].onclick = function() {
                 return false;
-            }
+            };
             // FICKE CHECK
             $cover.on("click tap", function() {
                 $canvasContainer.show();
@@ -2635,20 +2524,20 @@
                 offsetTop;
                 
             $canvas.on("touchstart", function(e) {
-    			self._canvasOffsetLeft = $canvas.offset().left - $(window).scrollLeft();
-    			self._canvasOffsetTop = $canvas.offset().top - $(window).scrollTop();
+                self._canvasOffsetLeft = $canvas.offset().left - $(window).scrollLeft();
+                self._canvasOffsetTop = $canvas.offset().top - $(window).scrollTop();
 
-    			lastX = e.changedTouches[0].clientX - self._canvasOffsetLeft;
-    			lastY = e.changedTouches[0].clientY - self._canvasOffsetTop;
+                lastX = e.changedTouches[0].clientX - self._canvasOffsetLeft;
+                lastY = e.changedTouches[0].clientY - self._canvasOffsetTop;
 
 
-    			ctx.beginPath();
-    			ctx.fillStyle = "black";
-    			ctx.fillRect(lastX, lastY, 2, 2);
-    			ctx.closePath();
-                
+                ctx.beginPath();
+                ctx.fillStyle = "black";
+                ctx.fillRect(lastX, lastY, 2, 2);
+                ctx.closePath();
+
                 e.stopPropagation();
-    			e.preventDefault();                
+                e.preventDefault();                
 
                 offsetLeft = self._canvasOffsetLeft;
                 offsetTop = self._canvasOffsetTop;
@@ -2704,7 +2593,7 @@
         * @param {Array} options A list of options
         * @chainable
         */
-        export: function(options) {
+        "export": function() {
             // code here
         },
 
@@ -2737,6 +2626,197 @@
     
     UIForm.registerControl(UIFormDraw);  
 
+}(window.$, window.Mootor, window.m));
+/**
+* UIFormText is a text input of a form
+*
+* @class UIFormText
+* @extends UI
+* @constructor
+* @module UI
+* @author Emilio Mariscal (emi420 [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
+*/
+
+(function ($, Mootor) {
+    
+    "use strict";
+
+    var UIFormText,
+    
+        UI,
+        UIForm;
+
+    // Dependences
+
+    UI = Mootor.UI;
+    UIForm = Mootor.UIForm;
+
+    // Event handelers
+    
+    // Private constructors
+
+    UIFormText = function() {
+        // Code here
+    };
+
+    // Prototypal inheritance
+    $.extend(UIFormText.prototype, UI.prototype);
+
+    // Private static methods and properties
+
+    $.extend(UIFormText, {
+
+        _init: function(uiview) {
+            var inputs;
+                
+            inputs = uiview.$el.find(".m-text");
+
+        }
+        
+    });
+
+    // Public methods and properties
+
+    $.extend(UIFormText.prototype, {
+    });      
+    
+    UIForm.registerControl(UIFormText);  
+
+}(window.$, window.Mootor));
+/**
+* UIFormTextArea is a textarea input of a form
+*
+* @class UIFormTextArea
+* @extends UI
+* @constructor
+* @module UI
+* @author Emilio Mariscal (emi420 [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
+*/
+
+(function ($, Mootor) {
+    
+    "use strict";
+
+    var UIFormTextArea,
+    
+        UI,
+        UIForm;
+
+    // Dependences
+
+    UI = Mootor.UI;
+    UIForm = Mootor.UIForm;
+    
+    // Private constructors
+
+    UIFormTextArea = function() {
+        // code here
+    };
+
+    // Prototypal inheritance
+    $.extend(UIFormTextArea.prototype, UI.prototype);
+
+    // Private static methods and properties
+
+    $.extend(UIFormTextArea, {
+        _init: function(uiview) {
+            var inputs;
+                
+            inputs = uiview.$el.find(".m-textarea");
+
+        }
+   
+    });
+
+    // Public methods and properties
+
+    $.extend(UIFormTextArea.prototype, {
+    });        
+
+    UIForm.registerControl(UIFormTextArea);  
+
+}(window.$, window.Mootor));
+/**
+* UIFormSelect is a select input of a form
+*
+* @class UIFormSelect
+* @extends UI
+* @constructor
+* @module UI
+* @author Emilio Mariscal (emi420 [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
+*/
+
+(function ($, Mootor) {
+    
+    "use strict";
+
+    var UIFormSelect,
+    
+        UI,
+        UIForm;
+
+    // Dependences
+
+    UI = Mootor.UI;
+    UIForm = Mootor.UIForm;
+    
+    // Private constructors
+
+    UIFormSelect = function() {
+        // code here
+    };
+
+    // Prototypal inheritance
+    $.extend(UIFormSelect.prototype, UI.prototype);
+
+    // Private static methods and properties
+
+    $.extend(UIFormSelect, {
+        _init: function(uiview) {
+            
+            var inputs;
+                
+            inputs = uiview.$el.find(".m-select");
+            inputs.each(function(index,element) {
+                var $element = $(element);
+                
+                /*jshint multistr: true */
+                var coverHTML = '<div class="m-select m-select-cover">\
+                    <span class="m-value"></span>\
+                    <span class="m-icon-arrow-down-small"></span>\
+                </div>';
+
+                var $cover = element.$cover = $(coverHTML).insertBefore(element);
+                var $value = $cover.find(".m-value");
+
+                updateValue();
+                $element.on("change", updateValue);
+
+                $element.on("focus", function() {
+                    var me = document.createEvent("MouseEvents");
+                    me.initMouseEvent("mousedown", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+                });
+
+                function updateValue() {
+                    // Value is the text of the selected option or the placeholder text
+                    var value = element.options[element.selectedIndex].text || element.placeholder;
+                    $value.html(value);
+                }
+            });
+        }
+   
+    });
+
+    // Public methods and properties
+
+    $.extend(UIFormSelect.prototype, {
+    });        
+
+    UIForm.registerControl(UIFormSelect);  
+
 }(window.$, window.Mootor));
 /**
 * UIButton is a button element, it uses UIForm to extend elements with aria-roles
@@ -2746,7 +2826,7 @@
 * @constructor
 * @module UI
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
 (function ($, Mootor) {
@@ -2787,7 +2867,7 @@
 
             buttons.attr("aria-role","button");
 
-        },
+        }
         
     });
 

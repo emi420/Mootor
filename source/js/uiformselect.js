@@ -55,6 +55,9 @@
                 updateValue();
                 $element.on("change", updateValue);
 
+                $element.on("touchend", function() {
+                    $element.focus();
+                });
                 $element.on("focus", function() {
                     var me = document.createEvent("MouseEvents");
                     me.initMouseEvent("mousedown", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);

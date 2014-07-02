@@ -135,7 +135,7 @@ html, body {
   background: #cdc9c7;
 }
 /* line 14, _colors.scss */
-.m-app .m-border-color-gray-lighter, .m-app .m-draw-cover, .m-app .m-draw-canvas canvas, .m-app .m-draw-canvas-header,
+.m-app .m-border-color-gray-lighter, .m-app .m-form .m-field, .m-app .m-draw-cover, .m-app .m-draw-canvas canvas, .m-app .m-draw-canvas-header,
 .m-app .m-draw-canvas-footer {
   border-color: #cdc9c7;
 }
@@ -172,7 +172,7 @@ html, body {
   border-color: #968e89;
 }
 /* line 18, _colors.scss */
-.m-app .m-color-gray {
+.m-app .m-color-gray, .m-app .m-text::-webkit-input-placeholder, .m-app .m-textarea::-webkit-input-placeholder, .m-app .m-select::-webkit-input-placeholder {
   color: #968e89;
 }
 /* line 22, _colors.scss */
@@ -292,7 +292,7 @@ html, body {
   color: #316569;
 }
 /* line 10, _colors.scss */
-.m-app .m-bg-color-success-lighter {
+.m-app .m-bg-color-success-lighter, .m-app .m-form .m-field.m-success {
   background: #bde1d5;
 }
 /* line 14, _colors.scss */
@@ -372,7 +372,7 @@ html, body {
   color: #34715c;
 }
 /* line 10, _colors.scss */
-.m-app .m-bg-color-warning-lighter {
+.m-app .m-bg-color-warning-lighter, .m-app .m-form .m-field.m-warning {
   background: #fde86c;
 }
 /* line 14, _colors.scss */
@@ -532,7 +532,7 @@ html, body {
   color: #97570e;
 }
 /* line 10, _colors.scss */
-.m-app .m-bg-color-danger-lighter {
+.m-app .m-bg-color-danger-lighter, .m-app .m-form .m-field.m-error {
   background: #f8a99d;
 }
 /* line 14, _colors.scss */
@@ -681,7 +681,7 @@ html, body {
 .m-app p {
   font-family: 'Helvetica Neue Light', Roboto, sans-serif;
   font-weight: 300;
-  font-size: 14pt;
+  font-size: 14px;
   line-height: 140%;
 }
 /* line 14, _fonts.scss */
@@ -693,7 +693,7 @@ html, body {
   font-family: 'Helvetica Neue Light Italic', Roboto, sans-serif;
   font-style: italic;
   font-weight: 100;
-  font-size: 12pt;
+  font-size: 12px;
 }
 /* line 25, _fonts.scss */
 .m-app a {
@@ -707,30 +707,30 @@ html, body {
 }
 /* line 37, _fonts.scss */
 .m-app h1 {
-  font-size: 16pt;
+  font-size: 16px;
   font-weight: 400;
   font-family: 'Helvetica Neue Medium', Roboto, sans-serif;
 }
 /* line 43, _fonts.scss */
 .m-app h2 {
-  font-size: 14pt;
+  font-size: 14px;
   font-weight: 400;
   font-family: 'Helvetica Neue Medium', Roboto, sans-serif;
 }
 /* line 54, _fonts.scss */
 .m-app h4 {
-  font-size: 12pt;
+  font-size: 12px;
   font-weight: 300;
 }
 /* line 59, _fonts.scss */
 .m-app h5 {
-  font-size: 12pt;
+  font-size: 12px;
   color: #666;
   font-weight: 300;
 }
 /* line 65, _fonts.scss */
 .m-app h6 {
-  font-size: 11pt;
+  font-size: 11px;
   font-family: 'Helvetica Neue Roman', Roboto, sans-serif;
   color: #666;
   font-weight: 100;
@@ -754,35 +754,36 @@ html, body {
   overflow-x: hidden;
   float: left;
 }
-/* line 31, _uipanel.scss */
-.m-app .m-views-container .m-panel {
+/* line 34, _uipanel.scss */
+.m-app .m-views-container,
+.m-app .m-panel {
   -webkit-transition-duration: 0;
   -webkit-backface-visibility: hidden;
   -webkit-transform: translate3d(0, 0, 0);
   -webkit-transform: translateZ(0);
 }
-/* line 43, _uipanel.scss */
+/* line 45, _uipanel.scss */
 .m-app .m-transition-none {
   -webkit-transition: all 0;
   -moz-transition: all 0;
   -o-transition: all 0;
   transition: all 0;
 }
-/* line 47, _uipanel.scss */
+/* line 49, _uipanel.scss */
 .m-app .m-transition-hslide {
   -webkit-transition: -webkit-transform 0.3s ease-out;
   -moz-transition: -moz-transform 0.3s ease-out;
   -o-transition: -o-transform 0.3s ease-out;
   transition: transform 0.3s ease-out;
 }
-/* line 50, _uipanel.scss */
+/* line 52, _uipanel.scss */
 .m-app .m-no-transitions.m-stransition-hslide {
   -webkit-transition: none;
   -moz-transition: none;
   -o-transition: none;
   transition: none;
 }
-/* line 54, _uipanel.scss */
+/* line 56, _uipanel.scss */
 .m-app .m-transition-hslide-left {
   -webkit-transform: translateX(-50%);
   -moz-transform: translateX(-50%);
@@ -790,7 +791,7 @@ html, body {
   -o-transform: translateX(-50%);
   transform: translateX(-50%);
 }
-/* line 58, _uipanel.scss */
+/* line 60, _uipanel.scss */
 .m-app .m-no-transitions.m-transition-hslide-left {
   -webkit-transform: none;
   -moz-transform: none;
@@ -799,7 +800,7 @@ html, body {
   transform: none;
   left: -50%;
 }
-/* line 64, _uipanel.scss */
+/* line 66, _uipanel.scss */
 .m-app .m-transition-hslide-right {
   -webkit-transform: translateX(0);
   -moz-transform: translateX(0);
@@ -807,7 +808,7 @@ html, body {
   -o-transform: translateX(0);
   transform: translateX(0);
 }
-/* line 68, _uipanel.scss */
+/* line 70, _uipanel.scss */
 .m-app .m-no-transitions.m-transition-hslide-right {
   -webkit-transform: none;
   -moz-transform: none;
@@ -1042,36 +1043,36 @@ html, body {
   animation-name: m-loading-object-animation-2;
   margin-left: 2.5em;
 }
-/* line 39, _uiform.scss */
+/* line 40, _uiform.scss */
 .m-app .m-form .m-form-left-labels .m-field {
   overflow: hidden;
 }
-/* line 42, _uiform.scss */
+/* line 43, _uiform.scss */
 .m-app .m-form .m-form-left-labels .m-field label {
   float: left;
   width: 30%;
+  height: 2.15em;
+  margin-top: .75em;
+  line-height: 1.5em;
 }
-/* line 48, _uiform.scss */
+/* line 52, _uiform.scss */
 .m-app .m-form .m-form-top-labels .m-field label {
   width: 100%;
   display: block;
 }
-/* line 54, _uiform.scss */
+/* line 58, _uiform.scss */
 .m-app .m-form .m-field {
-  padding: 1em;
-  border-bottom: 1px solid #ccc;
+  padding: 0 0.67em 0.67em 0.67em;
+  border-bottom: 1px solid;
   display: block;
 }
-/* line 59, _uiform.scss */
+/* line 64, _uiform.scss */
 .m-app .m-form .m-field label {
   font-weight: bold;
   font-size: 1em;
-  line-height: 1.5em;
+  line-height: 2em;
+  height: 1.43em;
   overflow-wrap: break-word;
-}
-/* line 66, _uiform.scss */
-.m-app .m-form .m-field.m-error label {
-  color: red;
 }
 /* line 3, _uiform.scss */
 .m-app .m-form-left-labels .m-text {
@@ -1089,18 +1090,17 @@ html, body {
   border: none;
   font-family: sans-serif;
   padding: 0;
+  margin: 0.67em 0 0 0;
+  height: 1.43em;
+  line-height: 1.43em;
 }
-/* line 21, _uiform.scss */
+/* line 24, _uiform.scss */
 .m-app .m-text:disabled {
   opacity: 0.2;
 }
-/* line 25, _uiform.scss */
+/* line 28, _uiform.scss */
 .m-app .m-text:focus {
   outline: 0;
-}
-/* line 31, _uiform.scss */
-.m-app .m-field.m-error .m-text {
-  background-color: red;
 }
 /* line 3, _uiform.scss */
 .m-app .m-form-left-labels .m-textarea {
@@ -1118,18 +1118,17 @@ html, body {
   border: none;
   font-family: sans-serif;
   padding: 0;
+  margin: 0.67em 0 0 0;
+  height: 3em;
+  line-height: 1.43em;
 }
-/* line 21, _uiform.scss */
+/* line 24, _uiform.scss */
 .m-app .m-textarea:disabled {
   opacity: 0.2;
 }
-/* line 25, _uiform.scss */
+/* line 28, _uiform.scss */
 .m-app .m-textarea:focus {
   outline: 0;
-}
-/* line 31, _uiform.scss */
-.m-app .m-field.m-error .m-textarea {
-  background-color: red;
 }
 /* line 3, _uiform.scss */
 .m-app .m-form-left-labels .m-select {
@@ -1147,30 +1146,29 @@ html, body {
   border: none;
   font-family: sans-serif;
   padding: 0;
+  margin: 0.67em 0 0 0;
+  height: 1.43em;
+  line-height: 1.43em;
 }
-/* line 21, _uiform.scss */
+/* line 24, _uiform.scss */
 .m-app .m-select:disabled {
   opacity: 0.2;
 }
-/* line 25, _uiform.scss */
+/* line 28, _uiform.scss */
 .m-app .m-select:focus {
   outline: 0;
 }
-/* line 31, _uiform.scss */
-.m-app .m-field.m-error .m-select {
-  background-color: red;
-}
 /* line 3, _uiformselect.scss */
 .m-app select.m-select {
-  top: -1.7em;
-  margin-bottom: -1.7em;
-  opacity: 0.01;
+  top: -1.4em;
+  left: 0;
+  margin-bottom: -1.4em;
+  opacity: 0.001;
   position: relative;
 }
-/* line 10, _uiformselect.scss */
+/* line 11, _uiformselect.scss */
 .m-app .m-form-left-labels select.m-select {
   float: left;
-  left: 30%;
 }
 /* line 15, _uiformselect.scss */
 .m-app .m-select-cover {
@@ -1182,7 +1180,7 @@ html, body {
 .m-app .m-select-cover .m-icon-arrow-down-small {
   position: absolute;
   right: 0;
-  top: 6px;
+  top: 2px;
 }
 /* line 25, _uiformselect.scss */
 .m-app .m-select-cover .m-value {
@@ -1191,12 +1189,16 @@ html, body {
   overflow: hidden;
   margin-right: 21px;
 }
+/* line 34, _uiformselect.scss */
+.m-app .m-form-left-labels select.m-select {
+  top: -2em;
+}
 /* line 10, _colors.scss */
 .m-app .m-bg-color-gray-lighter {
   background: #cdc9c7;
 }
 /* line 14, _colors.scss */
-.m-app .m-border-color-gray-lighter, .m-app .m-draw-cover, .m-app .m-draw-canvas canvas, .m-app .m-draw-canvas-header,
+.m-app .m-border-color-gray-lighter, .m-app .m-form .m-field, .m-app .m-draw-cover, .m-app .m-draw-canvas canvas, .m-app .m-draw-canvas-header,
 .m-app .m-draw-canvas-footer {
   border-color: #cdc9c7;
 }
@@ -1233,7 +1235,7 @@ html, body {
   border-color: #968e89;
 }
 /* line 18, _colors.scss */
-.m-app .m-color-gray {
+.m-app .m-color-gray, .m-app .m-text::-webkit-input-placeholder, .m-app .m-textarea::-webkit-input-placeholder, .m-app .m-select::-webkit-input-placeholder {
   color: #968e89;
 }
 /* line 22, _colors.scss */
@@ -1353,7 +1355,7 @@ html, body {
   color: #316569;
 }
 /* line 10, _colors.scss */
-.m-app .m-bg-color-success-lighter {
+.m-app .m-bg-color-success-lighter, .m-app .m-form .m-field.m-success {
   background: #bde1d5;
 }
 /* line 14, _colors.scss */
@@ -1433,7 +1435,7 @@ html, body {
   color: #34715c;
 }
 /* line 10, _colors.scss */
-.m-app .m-bg-color-warning-lighter {
+.m-app .m-bg-color-warning-lighter, .m-app .m-form .m-field.m-warning {
   background: #fde86c;
 }
 /* line 14, _colors.scss */
@@ -1593,7 +1595,7 @@ html, body {
   color: #97570e;
 }
 /* line 10, _colors.scss */
-.m-app .m-bg-color-danger-lighter {
+.m-app .m-bg-color-danger-lighter, .m-app .m-form .m-field.m-error {
   background: #f8a99d;
 }
 /* line 14, _colors.scss */
@@ -1793,40 +1795,53 @@ html, body {
   margin-top: 1em;
   border-top-width: 1px;
 }
-/* line 1, _utils.scss */
+/* line 3, _utils.scss */
 .m-app .m-hidden {
   display: none;
 }
-/* line 5, _utils.scss */
+/* line 8, _utils.scss */
+.m-app .m-ios .m-panel {
+  width: 50%;
+}
+/* line 11, _utils.scss */
+.m-app .m-ios .m-panel.m-hidden {
+  width: 0;
+  display: block;
+}
+/* line 17, _utils.scss */
 .m-app .m-double-width {
   width: 200%;
 }
-/* line 9, _utils.scss */
+/* line 21, _utils.scss */
 .m-app .m-full-width {
   width: 100%;
 }
-/* line 13, _utils.scss */
+/* line 25, _utils.scss */
 .m-app .m-position-left {
   left: 0;
 }
-/* line 17, _utils.scss */
+/* line 29, _utils.scss */
 .m-app .m-position-right {
   float: right !important;
 }
-/* line 22, _utils.scss */
+/* line 33, _utils.scss */
+.m-app .m-padding {
+  padding: 0.5em 1em;
+}
+/* line 38, _utils.scss */
 .m-app .m-doc, .m-app .m-doc * {
   border: 1px solid black !important;
   padding: 0.5em !important;
   margin: 1em !important;
   background: rgba(0, 0, 0, 0.1) !important;
 }
-/* line 30, _utils.scss */
+/* line 46, _utils.scss */
 .m-app .m-doc.m-html,
 .m-app .m-doc .m-app {
   width: calc(100% - 4em);
   height: calc(100% - 4em);
 }
-/* line 35, _utils.scss */
+/* line 51, _utils.scss */
 .m-app .m-doc.m-html .m-views-container,
 .m-app .m-doc.m-html .m-panel,
 .m-app .m-doc .m-app .m-views-container,

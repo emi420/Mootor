@@ -45,3 +45,8 @@ input[type="submit"] {
   -webkit-appearance: button;
   cursor: pointer;
 }
+
+/* line 55, normalize.scss */
+label {
+  -webkit-appearance: none;
+}

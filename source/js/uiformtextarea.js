@@ -36,9 +36,15 @@
 
     $.extend(UIFormTextArea, {
         _init: function(uiview) {
-            var inputs;
+            var inputs,
+                i;
                 
             inputs = uiview.$el.find(".m-textarea");
+            for (i = inputs.length; i--;) {
+                $(inputs[i]).on("touchend", function() {
+                    this.focus();
+                });
+            }
 
         }
    

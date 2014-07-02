@@ -1,6 +1,7 @@
 #!/bin/bash 
 
-cat js/overthrow.min.js \
+cat js/clickfix.js \
+    js/scrollfix.js \
     js/mootor.js \
     js/event.js \
     js/context.js \
@@ -18,11 +19,11 @@ cat js/overthrow.min.js \
     js/uifooter.js \
     js/uiloading.js \
     js/uiform.js \
+    js/uiformvirtualinput.js \
+    js/uiformdraw.js \
     js/uiformtext.js \
     js/uiformtextarea.js \
     js/uiformselect.js \
-    js/uiformvirtualinput.js \
-    js/uiformdraw.js \
     js/uibutton.js \
     > ../dist/js/mootor.js
 

@@ -39,9 +39,15 @@
     $.extend(UIFormText, {
 
         _init: function(uiview) {
-            var inputs;
+            var inputs,
+                i;
                 
             inputs = uiview.$el.find(".m-text");
+            for (i = inputs.length; i--;) {
+                $(inputs[i]).on("touchend", function() {
+                    this.focus();
+                });
+            }
 
         }
         
