@@ -130,6 +130,10 @@ html, body {
   -webkit-appearance: button;
   cursor: pointer;
 }
+/* line 55, normalize.scss */
+.m-app label {
+  -webkit-appearance: none;
+}
 /* line 10, _colors.scss */
 .m-app .m-bg-color-gray-lighter {
   background: #cdc9c7;

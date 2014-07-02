@@ -2668,9 +2668,15 @@
     $.extend(UIFormText, {
 
         _init: function(uiview) {
-            var inputs;
+            var inputs,
+                i;
                 
             inputs = uiview.$el.find(".m-text");
+            for (i = inputs.length; i--;) {
+                $(inputs[i]).on("touchend", function() {
+                    this.focus();
+                });
+            }
 
         }
         
@@ -2722,9 +2728,15 @@
 
     $.extend(UIFormTextArea, {
         _init: function(uiview) {
-            var inputs;
+            var inputs,
+                i;
                 
             inputs = uiview.$el.find(".m-textarea");
+            for (i = inputs.length; i--;) {
+                $(inputs[i]).on("touchend", function() {
+                    this.focus();
+                });
+            }
 
         }
    
@@ -2795,6 +2807,9 @@
                 updateValue();
                 $element.on("change", updateValue);
 
+                $element.on("touchend", function() {
+                    $element.focus();
+                });
                 $element.on("focus", function() {
                     var me = document.createEvent("MouseEvents");
                     me.initMouseEvent("mousedown", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
