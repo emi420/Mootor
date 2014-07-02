@@ -1083,6 +1083,22 @@
     View = Mootor.View;
 
     // Event handlers
+
+    var stopEvent = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+        
+    var onLoadView = function(self) {
+        var footerHeight = $(".m-footer-container").height();
+        var headerHeight = $(".m-header-container").height();
+        self.ui.el.style.height = (m.app.ui.el.offsetHeight - footerHeight - headerHeight) + "px";
+        if (m.context.os.iphone === true || m.context.os.ipad === true) {
+            if (self.ui.el.scrollHeight <= self.ui.el.offsetHeight) {
+                document.addEventListener("touchmove", stopEvent);
+            }
+        }
+    }
     
     View.on("init", function(self) {
         
@@ -1129,27 +1145,12 @@
             }
         });
         
-        var stopEvent = function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-        }
-        
         self.on("load", function() {
             window.setTimeout(function() {
-                var footerHeight = $(".m-footer-container").height();
-                var headerHeight = $(".m-header-container").height();
-                self.ui.el.style.height = (m.app.ui.el.offsetHeight - footerHeight - headerHeight) + "px";
-                if (m.context.os.iphone === true || m.context.os.ipad === true) {
-                    if (self.ui.el.scrollHeight > self.ui.el.offsetHeight) {
-                        if (self.ui.el.scrollTop < 1) {
-                            self.ui.el.scrollTop = 1;
-                        }
-                    } else {
-                        document.addEventListener("touchmove", stopEvent);
-                    }
-                }
+                onLoadView(self);
             }, Mootor.UIPanel._transitionDuration);
         });
+        
         self.on("unload", function() {
             if (m.context.os.iphone === true || m.context.os.ipad === true) {
                 if (self.ui.el.scrollHeight <= self.ui.el.offsetHeight) {
@@ -1159,7 +1160,15 @@
         });
 
     });
-
+    
+    window.addEventListener("resize", function() {
+        if (m.context.os.iphone === true || m.context.os.ipad === true) {
+            if (self.ui.el.scrollHeight <= self.ui.el.offsetHeight) {
+                document.removeEventListener("touchmove", stopEvent);
+            }
+        }
+        onLoadView(m.app.view());
+    });
         
     // Private constructors
 
@@ -2673,7 +2682,7 @@
                 
             inputs = uiview.$el.find(".m-text");
             for (i = inputs.length; i--;) {
-                $(inputs[i]).on("touchend", function() {
+                $(inputs[i]).on("tap", function() {
                     this.focus();
                 });
             }
@@ -2733,7 +2742,7 @@
                 
             inputs = uiview.$el.find(".m-textarea");
             for (i = inputs.length; i--;) {
-                $(inputs[i]).on("touchend", function() {
+                $(inputs[i]).on("tap", function() {
                     this.focus();
                 });
             }
@@ -2807,7 +2816,7 @@
                 updateValue();
                 $element.on("change", updateValue);
 
-                $element.on("touchend", function() {
+                $element.on("tap", function() {
                     $element.focus();
                 });
                 $element.on("focus", function() {
