@@ -41,7 +41,7 @@
                 
             inputs = uiview.$el.find(".m-textarea");
             for (i = inputs.length; i--;) {
-                $(inputs[i]).on("touchend", function() {
+                $(inputs[i]).on("tap", function() {
                     this.focus();
                 });
             }

@@ -55,7 +55,7 @@
                 updateValue();
                 $element.on("change", updateValue);
 
-                $element.on("touchend", function() {
+                $element.on("tap", function() {
                     $element.focus();
                 });
                 $element.on("focus", function() {

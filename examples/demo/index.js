@@ -20,6 +20,7 @@
     app.route("^#colors", app.view("colors"));
     app.route("^#text", app.view("text"));
     app.route("^#draw", app.view("draw"));
+    app.route("^#camera", app.view("camera"));
     
     app.init();
 
