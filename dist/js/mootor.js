@@ -1018,7 +1018,7 @@
 
     $.extend(UIApp.prototype, {
     
-    });   
+    });  
     
     App.on("ready", function() {
         var links = $("a"),
@@ -1027,19 +1027,29 @@
             setEvent,
             onClick;
             
+            
+        // Android/iOS fixes
         setEvent = function(el, href) {
-            $(el).on("tap", function(e) {
-                m.app.go(href);
-            });
-            // iOS/Android fix
+            if (m.context.os.ipad === true || m.context.os.iphone === true) {
+                $(el).on("tap", function(e) {
+                    m.app.go(href);
+                });
+            }
             el.addEventListener("touchend", function(e) {
                 e.preventDefault();
             });
         };
-        
-        onClick = function() {
-            return false;
-        };
+        if (m.context.os.ipad === true || m.context.os.iphone === true) {
+            onClick = function() {
+                return false;
+            };
+        } else {
+            onClick = function() {
+                m.app.go(href);
+                return false;
+                
+            };
+        }
         
         if ( 'ontouchstart' in window ) {
             for (i = links.length; i--;) {
@@ -1074,107 +1084,42 @@
     
         UI,
         Event,
-        View;
+        View,
+        UIApp;
 
     // Dependences
 
     Event = Mootor.Event;
     UI = Mootor.UI;
     View = Mootor.View;
+    UIApp = Mootor.UIApp;
 
     // Event handlers
 
-    var stopEvent = function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-    }
-        
-    var onLoadView = function(self) {
-        var footerHeight = $(".m-footer-container").height();
-        var headerHeight = $(".m-header-container").height();
-        self.ui.el.style.height = (m.app.ui.el.offsetHeight - footerHeight - headerHeight) + "px";
-        if (m.context.os.iphone === true || m.context.os.ipad === true) {
-            if (self.ui.el.scrollHeight <= self.ui.el.offsetHeight) {
-                document.addEventListener("touchmove", stopEvent);
-            }
-        }
-    }
-    
     View.on("init", function(self) {
-        
-        var applyEnhancements = function (index,element) {
-            new UIView._enhancements[index].className(element);    
-        };
-        
         self.ui = new UIView(self);
-
-        self.ui.el = document.createElement("div");
-        
-        // Prevent iOS native bounce
-        if (m.context.os.iphone === true || m.context.os.ipad === true) {
-            self.ui.el.addEventListener('scroll', function(e) {
-                var scrollTop = self.ui.el.scrollTop,
-                    offsetHeight = self.ui.el.scrollHeight - self.ui.el.offsetHeight;
-                if (scrollTop < 1) {
-                    self.ui.el.scrollTop = 1;
-                } else if (scrollTop > (offsetHeight - 1)) {
-                    self.ui.el.scrollTop = offsetHeight - 1;
-                }
-            }, false);
-        }
-        
-        self.ui.$el = $(self.ui.el);
-
-        if (View._getHtmlPath(self) !== undefined) {
-            self.ui.el.innerHTML = View._getHtmlPath(self);                
-        } else {
-            self.on("getHtml", function(self) {
-                self.ui.el.innerHTML = View._getHtmlPath(self);
-            });
-        }
-
-        self.on("getHtml", function() {
-            UIView.dispatch("init", self.ui);
-        });
-
-        self.on("ready", function() {
-            for (var index in UIView._enhancements) {
-                $(UIView._enhancements[index].selector).each(
-                    applyEnhancements(index, this)
-                );    
-            }
-        });
-        
-        self.on("load", function() {
-            window.setTimeout(function() {
-                onLoadView(self);
-            }, Mootor.UIPanel._transitionDuration);
-        });
-        
-        self.on("unload", function() {
-            if (m.context.os.iphone === true || m.context.os.ipad === true) {
-                if (self.ui.el.scrollHeight <= self.ui.el.offsetHeight) {
-                    document.removeEventListener("touchmove", stopEvent);
-                }
-            }
-        });
-
     });
     
-    window.addEventListener("resize", function() {
-        if (m.context.os.iphone === true || m.context.os.ipad === true) {
-            if (self.ui.el.scrollHeight <= self.ui.el.offsetHeight) {
-                document.removeEventListener("touchmove", stopEvent);
-            }
-        }
-        onLoadView(m.app.view());
-    });
-        
     // Private constructors
 
     UIView = Mootor.UIView = function(view) {
         var self = this;
-        self.view = view;
+        this.view = view;
+        this.el = document.createElement("div");
+        this.$el = $(this.el);
+
+        view.on("getHtml", function() {
+            UIView._loadHTML(self, View._getHtmlPath(view))
+        });
+
+        // Apply enhacements (ie: controls like UIFormSelect, etc..)
+        view.on("ready", function() {
+            UIView._applyEnhancements(self);
+            if (m.context.os.iphone === true || m.context.os.ipad === true) {
+                UIView._preventiOSNativeBounce(self);
+            }
+        });
+        
     };
 
 
@@ -1185,13 +1130,79 @@
     // Private static methods and properties
 
     $.extend(UIView, {
-        // code here
+        
+        _applyEnhancements: function(self) {
+            var i,
+                applyEnhancements;
+                
+            applyEnhancements = function (i, element) {
+                new UIView._enhancements[i].className(element);    
+            };
+            for (i in UIView._enhancements) {
+                $(UIView._enhancements[i].selector).each(
+                    applyEnhancements(i, self)
+                );    
+            }
+        },
+        
+        _preventiOSNativeBounce: function(self) {
+            var el = self.el,
+                blockScroll,
+                unblockScroll,
+                _stopEvent,
+                view = self.view;
+            
+            _stopEvent = function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            // Block/unblock scroll
+            blockScroll = function() {
+                window.setTimeout(function() {
+                    if (el.scrollHeight <= el.offsetHeight) {
+                        document.addEventListener("touchmove", _stopEvent);
+                    }
+                }, Mootor.UIPanel._transitionDuration);
+            };
+            unblockScroll = function() {
+                if (el.scrollHeight >= el.offsetHeight) {
+                    document.removeEventListener("touchmove", _stopEvent);
+                }
+            };
+            view.on("load", function() {
+                blockScroll();
+            });
+            view.on("unload", function() {
+                unblockScroll();
+            });
+            window.addEventListener("resize", unblockScroll);
+
+            // Only for webkit
+            el.addEventListener("overflowchanged", unblockScroll);            
+            
+            // Prevent iOS bounce
+            el.addEventListener('scroll', function(e) {
+                var scrollTop = el.scrollTop,
+                    offsetHeight = el.scrollHeight - el.offsetHeight;
+                    
+                if (scrollTop < 1) {
+                    el.scrollTop = 1;
+                } else if (scrollTop > (offsetHeight - 1)) {
+                    el.scrollTop = offsetHeight - 1;
+                }
+            }, false);
+
+            
+        },
+        _loadHTML: function(self, html) {
+            self.el.innerHTML = html;
+            UIView.dispatch("init", self);
+        }
     });
 
     // Public methods
 
     UIView.prototype = {
-        // code here
     };
 
     // Prototypal inheritance

@@ -17,13 +17,15 @@
     
         UI,
         Event,
-        View;
+        View,
+        UIApp;
 
     // Dependences
 
     Event = Mootor.Event;
     UI = Mootor.UI;
     View = Mootor.View;
+    UIApp = Mootor.UIApp;
 
     // Event handlers
 
@@ -50,7 +52,7 @@
                 UIView._preventiOSNativeBounce(self);
             }
         });
-
+        
     };
 
 

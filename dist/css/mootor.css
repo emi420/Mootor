@@ -1799,6 +1799,55 @@ html, body {
   margin-top: 1em;
   border-top-width: 1px;
 }
+/* line 1, _uiformcamera.scss */
+.m-app .m-camera-container {
+  text-align: center;
+  height: 80%;
+  width: 96%;
+  padding: 4% 0 4% 4%;
+  overflow: scroll;
+}
+/* line 8, _uiformcamera.scss */
+.m-app .m-camera-container .m-camera-img {
+  width: 46%;
+  height: 37%;
+  margin-bottom: 4%;
+  background: #ccc;
+  float: left;
+  margin-right: 4%;
+  overflow: hidden;
+}
+/* line 18, _uiformcamera.scss */
+.m-app .m-camera-container .m-camera-message {
+  margin-top: 40%;
+}
+/* line 23, _uiformcamera.scss */
+.m-app #camera-btns {
+  width: 100%;
+  height: 50px;
+  padding-top: 10px;
+  position: absolute;
+  bottom: 0px;
+}
+/* line 30, _uiformcamera.scss */
+.m-app #camera-btns .m-choose-image, .m-app #camera-btns .m-take-image {
+  width: 45%;
+  float: left;
+  text-align: center;
+  color: #fff;
+  background: #65b2b7;
+  padding: 8px 0px;
+}
+/* line 39, _uiformcamera.scss */
+.m-app #camera-btns .m-choose-image {
+  border-right: 1px solid #fff;
+  margin-left: 5%;
+  border-radius: 5px 0px 0px 5px;
+}
+/* line 45, _uiformcamera.scss */
+.m-app #camera-btns .m-take-image {
+  border-radius: 0px 5px 5px 0px;
+}
 /* line 3, _utils.scss */
 .m-app .m-hidden {
   display: none;
