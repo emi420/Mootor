@@ -9,7 +9,6 @@
     });
 
     app.route("^$", app.view("index"));
-    app.route("^#welcome/(.*)", app.view("testview"));
     app.route("^#help", app.view("help"));
     app.route("^#about", app.view("about"));
     app.route("^#form", app.view("form"));

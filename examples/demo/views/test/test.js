@@ -2,14 +2,18 @@
 
     "use strict";
     
-    var view = m.app.view("index");
-    
+    var view = m.app.view("test"),
+        _hidden = true;
+        
     view.on("ready", function() {
-        $("#testClick").on("tap", function() {
-            console.log("tap");
-        });
-        $("#testClick").on("click", function() {
-            console.log("click");
+        $("#testClick").on("tap click", function() {
+            if (_hidden === true) {
+                $("#testP").show();
+                _hidden = false;
+            } else {
+                $("#testP").hide();                
+                _hidden = true;
+            }
         });
     });
     
