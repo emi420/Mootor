@@ -1027,19 +1027,29 @@
             setEvent,
             onClick;
             
+            
+        // Android/iOS fixes
         setEvent = function(el, href) {
-            $(el).on("tap", function(e) {
-                m.app.go(href);
-            });
-            // iOS/Android fix
+            if (m.context.os.ipad === true || m.context.os.iphone === true) {
+                $(el).on("tap", function(e) {
+                    m.app.go(href);
+                });
+            }
             el.addEventListener("touchend", function(e) {
                 e.preventDefault();
             });
         };
-        
-        onClick = function() {
-            return false;
-        };
+        if (m.context.os.ipad === true || m.context.os.iphone === true) {
+            onClick = function() {
+                return false;
+            };
+        } else {
+            onClick = function() {
+                m.app.go(href);
+                return false;
+                
+            };
+        }
         
         if ( 'ontouchstart' in window ) {
             for (i = links.length; i--;) {
