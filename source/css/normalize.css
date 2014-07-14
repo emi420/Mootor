@@ -5,15 +5,16 @@ select, select:focus,
 textarea, textarea:focus {
   outline: none;
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  background: linear-gradient(to bottom, transparent, transparent);
 }
 
-/* line 14, normalize.scss */
+/* line 16, normalize.scss */
 input[type="search"]::-webkit-search-decoration,
 input[type="search"]::-webkit-search-cancel-button {
   -webkit-appearance: none;
 }
 
-/* line 30, normalize.scss */
+/* line 32, normalize.scss */
 article,
 aside,
 details,
@@ -28,7 +29,7 @@ summary {
   display: block;
 }
 
-/* line 39, normalize.scss */
+/* line 41, normalize.scss */
 button,
 input[type="button"],
 input[type="reset"],
@@ -37,7 +38,7 @@ input[type="submit"] {
   -webkit-appearance: button;
 }
 
-/* line 49, normalize.scss */
+/* line 51, normalize.scss */
 button,
 html input[type="button"],
 input[type="reset"],
@@ -46,7 +47,7 @@ input[type="submit"] {
   cursor: pointer;
 }
 
-/* line 55, normalize.scss */
+/* line 57, normalize.scss */
 label {
   -webkit-appearance: none;
 }

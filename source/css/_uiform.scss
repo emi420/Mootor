@@ -43,6 +43,9 @@
 }
 
 .m-form {
+    border-sizing: border-box;
+    width: 100%;
+    overflow: hidden;
     .m-form-left-labels .m-field {
         overflow: hidden;
 
