@@ -2913,7 +2913,7 @@
                 });
                 
                 function updateValue() {
-                    var checked = element.checked;
+                    var checked = element.getAttribute("checked");
                     if (checked) {
                         $icon.removeClass("m-hidden");
                     } else {
