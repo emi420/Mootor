@@ -2903,7 +2903,7 @@
 
                 updateValue();
                 $element.on("change", updateValue);
-                $cover.on("tap", function() {
+                $cover.on("tap click", function() {
                     if (element.getAttribute("checked")) {
                         element.removeAttribute("checked");
                     } else {
