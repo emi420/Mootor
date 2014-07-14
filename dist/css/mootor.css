@@ -140,14 +140,14 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-gray-lighter, .m-app .m-form .m-field, .m-app .m-draw-cover, .m-app .m-draw-canvas canvas, .m-app .m-draw-canvas-header,
-.m-app .m-draw-canvas-footer {
-  border-color: #cdc9c7;
+.m-app .m-draw-canvas-footer, .m-app .m-checkbox-cover {
+  border-color: #cdc9c7 !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-gray-lighter {
   color: #cdc9c7;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-gray-lighter-fg {
   color: #cdc9c7;
 }
@@ -157,13 +157,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-gray-light {
-  border-color: #aea8a4;
+  border-color: #aea8a4 !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-gray-light {
   color: #aea8a4;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-gray-light-fg {
   color: #aea8a4;
 }
@@ -173,13 +173,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-gray {
-  border-color: #968e89;
+  border-color: #968e89 !important;
 }
-/* line 18, _colors.scss */
-.m-app .m-color-gray, .m-app .m-text::-webkit-input-placeholder, .m-app .m-textarea::-webkit-input-placeholder, .m-app .m-select::-webkit-input-placeholder {
+/* line 19, _colors.scss */
+.m-app .m-color-gray, .m-app .m-text::-webkit-input-placeholder, .m-app .m-textarea::-webkit-input-placeholder, .m-app .m-select::-webkit-input-placeholder, .m-app .m-checkbox::-webkit-input-placeholder {
   color: #968e89;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-gray-fg {
   color: #968e89;
 }
@@ -189,13 +189,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-gray-dark {
-  border-color: #776f6a;
+  border-color: #776f6a !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-gray-dark {
   color: #776f6a;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-gray-dark-fg {
   color: #776f6a;
 }
@@ -205,13 +205,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-gray-darker {
-  border-color: #524c49;
+  border-color: #524c49 !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-gray-darker {
   color: #524c49;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-gray-darker-fg {
   color: #524c49;
 }
@@ -221,13 +221,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-primary-lighter {
-  border-color: #b6dadd;
+  border-color: #b6dadd !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-primary-lighter {
   color: #b6dadd;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-primary-lighter-fg {
   color: #b6dadd;
 }
@@ -237,13 +237,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-primary-light {
-  border-color: #89c4c8;
+  border-color: #89c4c8 !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-primary-light {
   color: #89c4c8;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-primary-light-fg {
   color: #89c4c8;
 }
@@ -253,13 +253,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-primary {
-  border-color: #66b2b8;
+  border-color: #66b2b8 !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-primary, .m-app a {
   color: #66b2b8;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-primary-fg {
   color: #66b2b8;
 }
@@ -269,13 +269,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-primary-dark {
-  border-color: #47949a;
+  border-color: #47949a !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-primary-dark {
   color: #47949a;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-primary-dark-fg {
   color: #47949a;
 }
@@ -285,13 +285,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-primary-darker {
-  border-color: #316569;
+  border-color: #316569 !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-primary-darker {
   color: #316569;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-primary-darker-fg {
   color: #316569;
 }
@@ -301,13 +301,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-success-lighter {
-  border-color: #bde1d5;
+  border-color: #bde1d5 !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-success-lighter {
   color: #bde1d5;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-success-lighter-fg {
   color: #bde1d5;
 }
@@ -317,13 +317,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-success-light {
-  border-color: #90ccb8;
+  border-color: #90ccb8 !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-success-light {
   color: #90ccb8;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-success-light-fg {
   color: #90ccb8;
 }
@@ -333,13 +333,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-success {
-  border-color: #6dbca1;
+  border-color: #6dbca1 !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-success {
   color: #6dbca1;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-success-fg {
   color: #6dbca1;
 }
@@ -349,13 +349,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-success-dark {
-  border-color: #4aa284;
+  border-color: #4aa284 !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-success-dark {
   color: #4aa284;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-success-dark-fg {
   color: #4aa284;
 }
@@ -365,13 +365,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-success-darker {
-  border-color: #34715c;
+  border-color: #34715c !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-success-darker {
   color: #34715c;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-success-darker-fg {
   color: #34715c;
 }
@@ -381,13 +381,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-warning-lighter {
-  border-color: #fde86c;
+  border-color: #fde86c !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-warning-lighter {
   color: #fde86c;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-warning-lighter-fg {
   color: #fde86c;
 }
@@ -397,13 +397,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-warning-light {
-  border-color: #fcde2b;
+  border-color: #fcde2b !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-warning-light {
   color: #fcde2b;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-warning-light-fg {
   color: #fcde2b;
 }
@@ -413,13 +413,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-warning {
-  border-color: #f1ce03;
+  border-color: #f1ce03 !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-warning {
   color: #f1ce03;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-warning-fg {
   color: #f1ce03;
 }
@@ -429,13 +429,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-warning-dark {
-  border-color: #b59a02;
+  border-color: #b59a02 !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-warning-dark {
   color: #b59a02;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-warning-dark-fg {
   color: #b59a02;
 }
@@ -445,13 +445,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-warning-darker {
-  border-color: #6e5e01;
+  border-color: #6e5e01 !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-warning-darker {
   color: #6e5e01;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-warning-darker-fg {
   color: #6e5e01;
 }
@@ -461,13 +461,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-info-lighter {
-  border-color: #f7d2a8;
+  border-color: #f7d2a8 !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-info-lighter {
   color: #f7d2a8;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-info-lighter-fg {
   color: #f7d2a8;
 }
@@ -477,13 +477,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-info-light {
-  border-color: #f1b26c;
+  border-color: #f1b26c !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-info-light {
   color: #f1b26c;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-info-light-fg {
   color: #f1b26c;
 }
@@ -493,13 +493,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-info {
-  border-color: #ed9a3d;
+  border-color: #ed9a3d !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-info {
   color: #ed9a3d;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-info-fg {
   color: #ed9a3d;
 }
@@ -509,13 +509,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-info-dark {
-  border-color: #d97c14;
+  border-color: #d97c14 !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-info-dark {
   color: #d97c14;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-info-dark-fg {
   color: #d97c14;
 }
@@ -525,13 +525,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-info-darker {
-  border-color: #97570e;
+  border-color: #97570e !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-info-darker {
   color: #97570e;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-info-darker-fg {
   color: #97570e;
 }
@@ -541,13 +541,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-danger-lighter {
-  border-color: #f8a99d;
+  border-color: #f8a99d !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-danger-lighter {
   color: #f8a99d;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-danger-lighter-fg {
   color: #f8a99d;
 }
@@ -557,13 +557,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-danger-light {
-  border-color: #f37360;
+  border-color: #f37360 !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-danger-light {
   color: #f37360;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-danger-light-fg {
   color: #f37360;
 }
@@ -573,13 +573,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-danger {
-  border-color: #f04930;
+  border-color: #f04930 !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-danger {
   color: #f04930;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-danger-fg {
   color: #f04930;
 }
@@ -589,13 +589,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-danger-dark {
-  border-color: #d3290f;
+  border-color: #d3290f !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-danger-dark {
   color: #d3290f;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-danger-dark-fg {
   color: #d3290f;
 }
@@ -605,13 +605,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-danger-darker {
-  border-color: #911c0a;
+  border-color: #911c0a !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-danger-darker {
   color: #911c0a;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-danger-darker-fg {
   color: #911c0a;
 }
@@ -621,13 +621,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-white {
-  border-color: white;
+  border-color: white !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-white {
   color: white;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-white-fg {
   color: white;
 }
@@ -637,13 +637,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-cream {
-  border-color: #f5f5f1;
+  border-color: #f5f5f1 !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-cream {
   color: #f5f5f1;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-cream-fg {
   color: #f5f5f1;
 }
@@ -653,14 +653,14 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-black {
-  border-color: #2c2927;
+  border-color: #2c2927 !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-black, .m-app .m-app,
 .m-app p {
   color: #2c2927;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-black-fg {
   color: #2c2927;
 }
@@ -670,13 +670,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-transparent {
-  border-color: rgba(0, 0, 0, 0);
+  border-color: rgba(0, 0, 0, 0) !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-transparent {
   color: rgba(0, 0, 0, 0);
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-transparent-fg {
   color: rgba(0, 0, 0, 0);
 }
@@ -1047,35 +1047,32 @@ html, body {
   animation-name: m-loading-object-animation-2;
   margin-left: 2.5em;
 }
-/* line 40, _uiform.scss */
+/* line 46, _uiform.scss */
 .m-app .m-form .m-form-left-labels .m-field {
   overflow: hidden;
 }
-/* line 43, _uiform.scss */
+/* line 49, _uiform.scss */
 .m-app .m-form .m-form-left-labels .m-field label {
   float: left;
   width: 30%;
-  height: 2.15em;
-  margin-top: .75em;
-  line-height: 1.5em;
 }
-/* line 52, _uiform.scss */
+/* line 55, _uiform.scss */
 .m-app .m-form .m-form-top-labels .m-field label {
   width: 100%;
   display: block;
 }
-/* line 58, _uiform.scss */
+/* line 61, _uiform.scss */
 .m-app .m-form .m-field {
-  padding: 0 0.67em 0.67em 0.67em;
+  position: relative;
   border-bottom: 1px solid;
   display: block;
 }
-/* line 64, _uiform.scss */
+/* line 67, _uiform.scss */
 .m-app .m-form .m-field label {
   font-weight: bold;
+  box-sizing: border-box;
+  padding: 0.67em 0.67em 0;
   font-size: 1em;
-  line-height: 2em;
-  height: 1.43em;
   overflow-wrap: break-word;
 }
 /* line 3, _uiform.scss */
@@ -1094,15 +1091,17 @@ html, body {
   border: none;
   font-family: sans-serif;
   padding: 0;
-  margin: 0.67em 0 0 0;
-  height: 1.43em;
-  line-height: 1.43em;
+  box-sizing: border-box;
+  padding-top: 0.5em;
+  padding-bottom: 1em;
+  padding-left: 0.67em;
+  height: auto;
 }
-/* line 24, _uiform.scss */
+/* line 30, _uiform.scss */
 .m-app .m-text:disabled {
   opacity: 0.2;
 }
-/* line 28, _uiform.scss */
+/* line 34, _uiform.scss */
 .m-app .m-text:focus {
   outline: 0;
 }
@@ -1122,15 +1121,17 @@ html, body {
   border: none;
   font-family: sans-serif;
   padding: 0;
-  margin: 0.67em 0 0 0;
-  height: 3em;
-  line-height: 1.43em;
+  box-sizing: border-box;
+  padding-top: 0.5em;
+  padding-bottom: 1em;
+  padding-left: 0.67em;
+  height: 5em;
 }
-/* line 24, _uiform.scss */
+/* line 30, _uiform.scss */
 .m-app .m-textarea:disabled {
   opacity: 0.2;
 }
-/* line 28, _uiform.scss */
+/* line 34, _uiform.scss */
 .m-app .m-textarea:focus {
   outline: 0;
 }
@@ -1150,52 +1151,54 @@ html, body {
   border: none;
   font-family: sans-serif;
   padding: 0;
-  margin: 0.67em 0 0 0;
-  height: 1.43em;
-  line-height: 1.43em;
+  box-sizing: border-box;
+  padding-top: 0.5em;
+  padding-bottom: 1em;
+  padding-left: 0.67em;
+  height: auto;
 }
-/* line 24, _uiform.scss */
+/* line 30, _uiform.scss */
 .m-app .m-select:disabled {
   opacity: 0.2;
 }
-/* line 28, _uiform.scss */
+/* line 34, _uiform.scss */
 .m-app .m-select:focus {
   outline: 0;
 }
 /* line 3, _uiformselect.scss */
 .m-app select.m-select {
-  top: -1.4em;
-  left: 0;
-  margin-bottom: -1.4em;
   opacity: 0.001;
-  position: relative;
+  top: 0;
+  position: absolute;
+  top: 2.4em;
 }
-/* line 11, _uiformselect.scss */
+/* line 10, _uiformselect.scss */
 .m-app .m-form-left-labels select.m-select {
   float: left;
+  left: 30%;
+  top: 0.4em;
 }
-/* line 15, _uiformselect.scss */
+/* line 16, _uiformselect.scss */
+.m-app .m-form-left-labels .m-select-cover {
+  float: left;
+}
+/* line 21, _uiformselect.scss */
 .m-app .m-select-cover {
   background: white;
-  float: left;
   position: relative;
 }
-/* line 20, _uiformselect.scss */
+/* line 25, _uiformselect.scss */
 .m-app .m-select-cover .m-icon-arrow-down-small {
   position: absolute;
-  right: 0;
-  top: 2px;
+  right: 10px;
+  top: 7px;
 }
-/* line 25, _uiformselect.scss */
+/* line 30, _uiformselect.scss */
 .m-app .m-select-cover .m-value {
   height: 1.4em;
   display: inline-block;
   overflow: hidden;
   margin-right: 21px;
-}
-/* line 34, _uiformselect.scss */
-.m-app .m-form-left-labels select.m-select {
-  top: -2em;
 }
 /* line 10, _colors.scss */
 .m-app .m-bg-color-gray-lighter {
@@ -1203,14 +1206,14 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-gray-lighter, .m-app .m-form .m-field, .m-app .m-draw-cover, .m-app .m-draw-canvas canvas, .m-app .m-draw-canvas-header,
-.m-app .m-draw-canvas-footer {
-  border-color: #cdc9c7;
+.m-app .m-draw-canvas-footer, .m-app .m-checkbox-cover {
+  border-color: #cdc9c7 !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-gray-lighter {
   color: #cdc9c7;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-gray-lighter-fg {
   color: #cdc9c7;
 }
@@ -1220,13 +1223,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-gray-light {
-  border-color: #aea8a4;
+  border-color: #aea8a4 !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-gray-light {
   color: #aea8a4;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-gray-light-fg {
   color: #aea8a4;
 }
@@ -1236,13 +1239,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-gray {
-  border-color: #968e89;
+  border-color: #968e89 !important;
 }
-/* line 18, _colors.scss */
-.m-app .m-color-gray, .m-app .m-text::-webkit-input-placeholder, .m-app .m-textarea::-webkit-input-placeholder, .m-app .m-select::-webkit-input-placeholder {
+/* line 19, _colors.scss */
+.m-app .m-color-gray, .m-app .m-text::-webkit-input-placeholder, .m-app .m-textarea::-webkit-input-placeholder, .m-app .m-select::-webkit-input-placeholder, .m-app .m-checkbox::-webkit-input-placeholder {
   color: #968e89;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-gray-fg {
   color: #968e89;
 }
@@ -1252,13 +1255,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-gray-dark {
-  border-color: #776f6a;
+  border-color: #776f6a !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-gray-dark {
   color: #776f6a;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-gray-dark-fg {
   color: #776f6a;
 }
@@ -1268,13 +1271,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-gray-darker {
-  border-color: #524c49;
+  border-color: #524c49 !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-gray-darker {
   color: #524c49;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-gray-darker-fg {
   color: #524c49;
 }
@@ -1284,13 +1287,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-primary-lighter {
-  border-color: #b6dadd;
+  border-color: #b6dadd !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-primary-lighter {
   color: #b6dadd;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-primary-lighter-fg {
   color: #b6dadd;
 }
@@ -1300,13 +1303,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-primary-light {
-  border-color: #89c4c8;
+  border-color: #89c4c8 !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-primary-light {
   color: #89c4c8;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-primary-light-fg {
   color: #89c4c8;
 }
@@ -1316,13 +1319,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-primary {
-  border-color: #66b2b8;
+  border-color: #66b2b8 !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-primary, .m-app a {
   color: #66b2b8;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-primary-fg {
   color: #66b2b8;
 }
@@ -1332,13 +1335,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-primary-dark {
-  border-color: #47949a;
+  border-color: #47949a !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-primary-dark {
   color: #47949a;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-primary-dark-fg {
   color: #47949a;
 }
@@ -1348,13 +1351,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-primary-darker {
-  border-color: #316569;
+  border-color: #316569 !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-primary-darker {
   color: #316569;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-primary-darker-fg {
   color: #316569;
 }
@@ -1364,13 +1367,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-success-lighter {
-  border-color: #bde1d5;
+  border-color: #bde1d5 !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-success-lighter {
   color: #bde1d5;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-success-lighter-fg {
   color: #bde1d5;
 }
@@ -1380,13 +1383,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-success-light {
-  border-color: #90ccb8;
+  border-color: #90ccb8 !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-success-light {
   color: #90ccb8;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-success-light-fg {
   color: #90ccb8;
 }
@@ -1396,13 +1399,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-success {
-  border-color: #6dbca1;
+  border-color: #6dbca1 !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-success {
   color: #6dbca1;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-success-fg {
   color: #6dbca1;
 }
@@ -1412,13 +1415,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-success-dark {
-  border-color: #4aa284;
+  border-color: #4aa284 !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-success-dark {
   color: #4aa284;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-success-dark-fg {
   color: #4aa284;
 }
@@ -1428,13 +1431,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-success-darker {
-  border-color: #34715c;
+  border-color: #34715c !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-success-darker {
   color: #34715c;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-success-darker-fg {
   color: #34715c;
 }
@@ -1444,13 +1447,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-warning-lighter {
-  border-color: #fde86c;
+  border-color: #fde86c !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-warning-lighter {
   color: #fde86c;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-warning-lighter-fg {
   color: #fde86c;
 }
@@ -1460,13 +1463,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-warning-light {
-  border-color: #fcde2b;
+  border-color: #fcde2b !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-warning-light {
   color: #fcde2b;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-warning-light-fg {
   color: #fcde2b;
 }
@@ -1476,13 +1479,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-warning {
-  border-color: #f1ce03;
+  border-color: #f1ce03 !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-warning {
   color: #f1ce03;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-warning-fg {
   color: #f1ce03;
 }
@@ -1492,13 +1495,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-warning-dark {
-  border-color: #b59a02;
+  border-color: #b59a02 !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-warning-dark {
   color: #b59a02;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-warning-dark-fg {
   color: #b59a02;
 }
@@ -1508,13 +1511,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-warning-darker {
-  border-color: #6e5e01;
+  border-color: #6e5e01 !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-warning-darker {
   color: #6e5e01;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-warning-darker-fg {
   color: #6e5e01;
 }
@@ -1524,13 +1527,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-info-lighter {
-  border-color: #f7d2a8;
+  border-color: #f7d2a8 !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-info-lighter {
   color: #f7d2a8;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-info-lighter-fg {
   color: #f7d2a8;
 }
@@ -1540,13 +1543,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-info-light {
-  border-color: #f1b26c;
+  border-color: #f1b26c !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-info-light {
   color: #f1b26c;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-info-light-fg {
   color: #f1b26c;
 }
@@ -1556,13 +1559,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-info {
-  border-color: #ed9a3d;
+  border-color: #ed9a3d !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-info {
   color: #ed9a3d;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-info-fg {
   color: #ed9a3d;
 }
@@ -1572,13 +1575,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-info-dark {
-  border-color: #d97c14;
+  border-color: #d97c14 !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-info-dark {
   color: #d97c14;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-info-dark-fg {
   color: #d97c14;
 }
@@ -1588,13 +1591,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-info-darker {
-  border-color: #97570e;
+  border-color: #97570e !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-info-darker {
   color: #97570e;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-info-darker-fg {
   color: #97570e;
 }
@@ -1604,13 +1607,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-danger-lighter {
-  border-color: #f8a99d;
+  border-color: #f8a99d !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-danger-lighter {
   color: #f8a99d;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-danger-lighter-fg {
   color: #f8a99d;
 }
@@ -1620,13 +1623,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-danger-light {
-  border-color: #f37360;
+  border-color: #f37360 !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-danger-light {
   color: #f37360;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-danger-light-fg {
   color: #f37360;
 }
@@ -1636,13 +1639,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-danger {
-  border-color: #f04930;
+  border-color: #f04930 !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-danger {
   color: #f04930;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-danger-fg {
   color: #f04930;
 }
@@ -1652,13 +1655,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-danger-dark {
-  border-color: #d3290f;
+  border-color: #d3290f !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-danger-dark {
   color: #d3290f;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-danger-dark-fg {
   color: #d3290f;
 }
@@ -1668,13 +1671,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-danger-darker {
-  border-color: #911c0a;
+  border-color: #911c0a !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-danger-darker {
   color: #911c0a;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-danger-darker-fg {
   color: #911c0a;
 }
@@ -1684,13 +1687,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-white {
-  border-color: white;
+  border-color: white !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-white {
   color: white;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-white-fg {
   color: white;
 }
@@ -1700,13 +1703,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-cream {
-  border-color: #f5f5f1;
+  border-color: #f5f5f1 !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-cream {
   color: #f5f5f1;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-cream-fg {
   color: #f5f5f1;
 }
@@ -1716,14 +1719,14 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-black {
-  border-color: #2c2927;
+  border-color: #2c2927 !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-black, .m-app .m-app,
 .m-app p {
   color: #2c2927;
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-black-fg {
   color: #2c2927;
 }
@@ -1733,13 +1736,13 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-transparent {
-  border-color: rgba(0, 0, 0, 0);
+  border-color: rgba(0, 0, 0, 0) !important;
 }
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-app .m-color-transparent {
   color: rgba(0, 0, 0, 0);
 }
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-app .m-color-transparent-fg {
   color: rgba(0, 0, 0, 0);
 }
@@ -1798,6 +1801,73 @@ html, body {
   padding-top: 1em;
   margin-top: 1em;
   border-top-width: 1px;
+}
+/* line 3, _uiform.scss */
+.m-app .m-form-left-labels .m-checkbox {
+  width: 70%;
+}
+/* line 8, _uiform.scss */
+.m-app .m-form-top-labels .m-checkbox {
+  width: 100%;
+  display: block;
+}
+/* line 14, _uiform.scss */
+.m-app .m-checkbox {
+  font-size: 1em;
+  background-color: transparent;
+  border: none;
+  font-family: sans-serif;
+  padding: 0;
+  box-sizing: border-box;
+  padding-top: 0.5em;
+  padding-bottom: 1em;
+  height: auto;
+}
+/* line 30, _uiform.scss */
+.m-app .m-checkbox:disabled {
+  opacity: 0.2;
+}
+/* line 34, _uiform.scss */
+.m-app .m-checkbox:focus {
+  outline: 0;
+}
+/* line 3, _uiformcheckbox.scss */
+.m-app .m-checkbox-hidden {
+  display: none;
+}
+/* line 7, _uiformcheckbox.scss */
+.m-app .m-checkbox-icon {
+  position: absolute;
+  right: 10px;
+  margin-top: 10px;
+}
+/* line 13, _uiformcheckbox.scss */
+.m-app .m-checkbox-cover {
+  border-top: 1px solid;
+}
+/* line 16, _uiformcheckbox.scss */
+.m-app .m-checkbox-cover:first-child {
+  border: none;
+}
+/* line 19, _uiformcheckbox.scss */
+.m-app .m-checkbox-cover label {
+  width: auto !important;
+  display: inline-block !important;
+}
+/* line 27, _uiformcheckbox.scss */
+.m-app .m-form-left-labels input.m-checkbox {
+  float: left;
+}
+/* line 30, _uiformcheckbox.scss */
+.m-app .m-form-left-labels input.m-checkbox .m-checkbox-cover-item {
+  height: 1.4em;
+  display: inline-block;
+  overflow: hidden;
+  margin-right: 21px;
+}
+/* line 39, _uiformcheckbox.scss */
+.m-app .m-form-left-labels input.m-checkbox {
+  top: -2em;
 }
 /* line 1, _uiformcamera.scss */
 .m-app .m-camera-container {
@@ -1881,20 +1951,20 @@ html, body {
 .m-app .m-padding {
   padding: 0.5em 1em;
 }
-/* line 38, _utils.scss */
+/* line 39, _utils.scss */
 .m-app .m-doc, .m-app .m-doc * {
   border: 1px solid black !important;
   padding: 0.5em !important;
   margin: 1em !important;
   background: rgba(0, 0, 0, 0.1) !important;
 }
-/* line 46, _utils.scss */
+/* line 47, _utils.scss */
 .m-app .m-doc.m-html,
 .m-app .m-doc .m-app {
   width: calc(100% - 4em);
   height: calc(100% - 4em);
 }
-/* line 51, _utils.scss */
+/* line 52, _utils.scss */
 .m-app .m-doc.m-html .m-views-container,
 .m-app .m-doc.m-html .m-panel,
 .m-app .m-doc .m-app .m-views-container,

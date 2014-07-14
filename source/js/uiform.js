@@ -38,16 +38,6 @@
         for (i in UIForm._controls) {
             UIForm._controls[i].constructor._init(self);
         }
-
-        // Assosiate automatically label to field by generating id 
-        self.$el.find(".m-field").each(function(index,element) {
-            var id;
-            id = $(element).find("input,select,textarea").attr("id");
-            if (!id) id = "field"+index;
-
-            $(element).find("label").attr("for",id);
-            $(element).find("input,select,textarea").attr("id",id);
-        });
     });
 
 

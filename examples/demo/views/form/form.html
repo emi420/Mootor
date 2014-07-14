@@ -2,16 +2,26 @@
     <fieldset class="m-form-top-labels">
 
         <div class="m-field">
+            <input id="checkbox0" checked="checked" value="Check value 1" type="checkbox" class="m-checkbox" />
+            <label for="checkbox0">Single checkbox</label>
+        </div>
+
+        <div class="m-field">
+            <input id="checkbox1" checked="checked" value="Check value 2" type="checkbox" class="m-checkbox" />
+            <label for="checkbox1">Multiple check 1</label>
+            <input id="checkbox2" value="Check value 2" type="checkbox" class="m-checkbox" />
+            <label for="checkbox2">Multiple check 2</label>
+            <input id="checkbox3" value="Check value 3" type="checkbox" class="m-checkbox" />
+            <label for="checkbox3">Multiple check 2</label>
+        </div>
+
+        <div class="m-field">
             <label for="select2">Select</label>
             <select class="m-select" id="select2">
                 <option value="01">Option 1</option>
                 <option value="02" selected>Option 2</option>
                 <option value="03">Option 3</option>
             </select>
-        </div>
-
-        <div class="m-field">
-            <input class="m-text" placeholder="Text without label" />
         </div>
 
         <div class="m-field">
@@ -60,4 +70,9 @@
         </div>
 
     </fieldset>
+
+    <div class="m-field">
+        <input class="m-text" placeholder="Text without label" />
+    </div>
+
 </form>

@@ -12,9 +12,10 @@
 	}
 
 	.m-border-color-#{$name} {
-		border-color: $base;
+        // FIXME CHECK: important
+		border-color: $base !important;
 	}
-
+    
 	.m-color-#{$name} {
 		color: $base;
 	}
@@ -35,3 +36,4 @@
 @include make_color("cream", #F5F5F1);
 @include make_color("black", #2C2927);
 @include make_color("transparent", rgba(0,0,0,0));
+

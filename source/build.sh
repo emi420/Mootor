@@ -24,6 +24,7 @@ cat js/clickfix.js \
     js/uiformtext.js \
     js/uiformtextarea.js \
     js/uiformselect.js \
+    js/uiformcheckbox.js \
     js/uibutton.js \
     > ../dist/js/mootor.js
 

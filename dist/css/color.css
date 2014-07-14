@@ -1,4 +1,3 @@
-@charset "UTF-8";
 /**
  * @summary Mootor CSS
  * @author Emilio Mariscal (emi420 [at] gmail.com)
@@ -11,15 +10,15 @@
 
 /* line 14, _colors.scss */
 .m-border-color-gray-lighter {
-  border-color: #cdc9c7;
+  border-color: #cdc9c7 !important;
 }
 
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-color-gray-lighter {
   color: #cdc9c7;
 }
 
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-color-gray-lighter-fg {
   color: #cdc9c7;
 }
@@ -31,15 +30,15 @@
 
 /* line 14, _colors.scss */
 .m-border-color-gray-light {
-  border-color: #aea8a4;
+  border-color: #aea8a4 !important;
 }
 
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-color-gray-light {
   color: #aea8a4;
 }
 
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-color-gray-light-fg {
   color: #aea8a4;
 }
@@ -51,15 +50,15 @@
 
 /* line 14, _colors.scss */
 .m-border-color-gray {
-  border-color: #968e89;
+  border-color: #968e89 !important;
 }
 
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-color-gray {
   color: #968e89;
 }
 
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-color-gray-fg {
   color: #968e89;
 }
@@ -71,15 +70,15 @@
 
 /* line 14, _colors.scss */
 .m-border-color-gray-dark {
-  border-color: #776f6a;
+  border-color: #776f6a !important;
 }
 
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-color-gray-dark {
   color: #776f6a;
 }
 
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-color-gray-dark-fg {
   color: #776f6a;
 }
@@ -91,15 +90,15 @@
 
 /* line 14, _colors.scss */
 .m-border-color-gray-darker {
-  border-color: #524c49;
+  border-color: #524c49 !important;
 }
 
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-color-gray-darker {
   color: #524c49;
 }
 
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-color-gray-darker-fg {
   color: #524c49;
 }
@@ -111,15 +110,15 @@
 
 /* line 14, _colors.scss */
 .m-border-color-primary-lighter {
-  border-color: #b6dadd;
+  border-color: #b6dadd !important;
 }
 
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-color-primary-lighter {
   color: #b6dadd;
 }
 
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-color-primary-lighter-fg {
   color: #b6dadd;
 }
@@ -131,15 +130,15 @@
 
 /* line 14, _colors.scss */
 .m-border-color-primary-light {
-  border-color: #89c4c8;
+  border-color: #89c4c8 !important;
 }
 
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-color-primary-light {
   color: #89c4c8;
 }
 
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-color-primary-light-fg {
   color: #89c4c8;
 }
@@ -151,15 +150,15 @@
 
 /* line 14, _colors.scss */
 .m-border-color-primary, .m-button-primary.m-button-block.m-button-outline, .m-button-primary.m-button-fullwidth.m-button-outline, .m-button-primary.m-button.m-button-outline {
-  border-color: #66b2b8;
+  border-color: #66b2b8 !important;
 }
 
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-color-primary, .m-button-primary.m-button-block.m-button-outline, .m-button-primary.m-button-fullwidth.m-button-outline, .m-button-primary.m-button.m-button-outline, .m-button-primary.m-button-block.m-button-clear, .m-button-primary.m-button-fullwidth.m-button-clear, .m-button-primary.m-button.m-button-clear {
   color: #66b2b8;
 }
 
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-color-primary-fg {
   color: #66b2b8;
 }
@@ -171,15 +170,15 @@
 
 /* line 14, _colors.scss */
 .m-border-color-primary-dark {
-  border-color: #47949a;
+  border-color: #47949a !important;
 }
 
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-color-primary-dark {
   color: #47949a;
 }
 
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-color-primary-dark-fg {
   color: #47949a;
 }
@@ -191,15 +190,15 @@
 
 /* line 14, _colors.scss */
 .m-border-color-primary-darker {
-  border-color: #316569;
+  border-color: #316569 !important;
 }
 
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-color-primary-darker {
   color: #316569;
 }
 
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-color-primary-darker-fg {
   color: #316569;
 }
@@ -211,15 +210,15 @@
 
 /* line 14, _colors.scss */
 .m-border-color-success-lighter {
-  border-color: #bde1d5;
+  border-color: #bde1d5 !important;
 }
 
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-color-success-lighter {
   color: #bde1d5;
 }
 
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-color-success-lighter-fg {
   color: #bde1d5;
 }
@@ -231,15 +230,15 @@
 
 /* line 14, _colors.scss */
 .m-border-color-success-light {
-  border-color: #90ccb8;
+  border-color: #90ccb8 !important;
 }
 
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-color-success-light {
   color: #90ccb8;
 }
 
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-color-success-light-fg {
   color: #90ccb8;
 }
@@ -251,15 +250,15 @@
 
 /* line 14, _colors.scss */
 .m-border-color-success, .m-button-success.m-button-block.m-button-outline, .m-button-success.m-button-fullwidth.m-button-outline, .m-button-success.m-button.m-button-outline {
-  border-color: #6dbca1;
+  border-color: #6dbca1 !important;
 }
 
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-color-success, .m-button-success.m-button-block.m-button-outline, .m-button-success.m-button-fullwidth.m-button-outline, .m-button-success.m-button.m-button-outline, .m-button-success.m-button-block.m-button-clear, .m-button-success.m-button-fullwidth.m-button-clear, .m-button-success.m-button.m-button-clear {
   color: #6dbca1;
 }
 
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-color-success-fg {
   color: #6dbca1;
 }
@@ -271,15 +270,15 @@
 
 /* line 14, _colors.scss */
 .m-border-color-success-dark {
-  border-color: #4aa284;
+  border-color: #4aa284 !important;
 }
 
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-color-success-dark {
   color: #4aa284;
 }
 
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-color-success-dark-fg {
   color: #4aa284;
 }
@@ -291,15 +290,15 @@
 
 /* line 14, _colors.scss */
 .m-border-color-success-darker {
-  border-color: #34715c;
+  border-color: #34715c !important;
 }
 
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-color-success-darker {
   color: #34715c;
 }
 
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-color-success-darker-fg {
   color: #34715c;
 }
@@ -311,15 +310,15 @@
 
 /* line 14, _colors.scss */
 .m-border-color-warning-lighter {
-  border-color: #fde86c;
+  border-color: #fde86c !important;
 }
 
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-color-warning-lighter {
   color: #fde86c;
 }
 
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-color-warning-lighter-fg {
   color: #fde86c;
 }
@@ -331,15 +330,15 @@
 
 /* line 14, _colors.scss */
 .m-border-color-warning-light {
-  border-color: #fcde2b;
+  border-color: #fcde2b !important;
 }
 
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-color-warning-light {
   color: #fcde2b;
 }
 
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-color-warning-light-fg {
   color: #fcde2b;
 }
@@ -351,15 +350,15 @@
 
 /* line 14, _colors.scss */
 .m-border-color-warning, .m-button-warning.m-button-block.m-button-outline, .m-button-warning.m-button-fullwidth.m-button-outline, .m-button-warning.m-button.m-button-outline {
-  border-color: #f1ce03;
+  border-color: #f1ce03 !important;
 }
 
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-color-warning, .m-button-warning.m-button-block.m-button-outline, .m-button-warning.m-button-fullwidth.m-button-outline, .m-button-warning.m-button.m-button-outline, .m-button-warning.m-button-block.m-button-clear, .m-button-warning.m-button-fullwidth.m-button-clear, .m-button-warning.m-button.m-button-clear {
   color: #f1ce03;
 }
 
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-color-warning-fg {
   color: #f1ce03;
 }
@@ -371,15 +370,15 @@
 
 /* line 14, _colors.scss */
 .m-border-color-warning-dark {
-  border-color: #b59a02;
+  border-color: #b59a02 !important;
 }
 
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-color-warning-dark {
   color: #b59a02;
 }
 
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-color-warning-dark-fg {
   color: #b59a02;
 }
@@ -391,15 +390,15 @@
 
 /* line 14, _colors.scss */
 .m-border-color-warning-darker {
-  border-color: #6e5e01;
+  border-color: #6e5e01 !important;
 }
 
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-color-warning-darker {
   color: #6e5e01;
 }
 
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-color-warning-darker-fg {
   color: #6e5e01;
 }
@@ -411,15 +410,15 @@
 
 /* line 14, _colors.scss */
 .m-border-color-info-lighter {
-  border-color: #f7d2a8;
+  border-color: #f7d2a8 !important;
 }
 
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-color-info-lighter {
   color: #f7d2a8;
 }
 
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-color-info-lighter-fg {
   color: #f7d2a8;
 }
@@ -431,15 +430,15 @@
 
 /* line 14, _colors.scss */
 .m-border-color-info-light {
-  border-color: #f1b26c;
+  border-color: #f1b26c !important;
 }
 
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-color-info-light {
   color: #f1b26c;
 }
 
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-color-info-light-fg {
   color: #f1b26c;
 }
@@ -451,15 +450,15 @@
 
 /* line 14, _colors.scss */
 .m-border-color-info, .m-button-info.m-button-block.m-button-outline, .m-button-info.m-button-fullwidth.m-button-outline, .m-button-info.m-button.m-button-outline {
-  border-color: #ed9a3d;
+  border-color: #ed9a3d !important;
 }
 
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-color-info, .m-button-info.m-button-block.m-button-outline, .m-button-info.m-button-fullwidth.m-button-outline, .m-button-info.m-button.m-button-outline, .m-button-info.m-button-block.m-button-clear, .m-button-info.m-button-fullwidth.m-button-clear, .m-button-info.m-button.m-button-clear {
   color: #ed9a3d;
 }
 
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-color-info-fg {
   color: #ed9a3d;
 }
@@ -471,15 +470,15 @@
 
 /* line 14, _colors.scss */
 .m-border-color-info-dark {
-  border-color: #d97c14;
+  border-color: #d97c14 !important;
 }
 
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-color-info-dark {
   color: #d97c14;
 }
 
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-color-info-dark-fg {
   color: #d97c14;
 }
@@ -491,15 +490,15 @@
 
 /* line 14, _colors.scss */
 .m-border-color-info-darker {
-  border-color: #97570e;
+  border-color: #97570e !important;
 }
 
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-color-info-darker {
   color: #97570e;
 }
 
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-color-info-darker-fg {
   color: #97570e;
 }
@@ -511,15 +510,15 @@
 
 /* line 14, _colors.scss */
 .m-border-color-danger-lighter {
-  border-color: #f8a99d;
+  border-color: #f8a99d !important;
 }
 
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-color-danger-lighter {
   color: #f8a99d;
 }
 
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-color-danger-lighter-fg {
   color: #f8a99d;
 }
@@ -531,15 +530,15 @@
 
 /* line 14, _colors.scss */
 .m-border-color-danger-light {
-  border-color: #f37360;
+  border-color: #f37360 !important;
 }
 
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-color-danger-light {
   color: #f37360;
 }
 
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-color-danger-light-fg {
   color: #f37360;
 }
@@ -551,15 +550,15 @@
 
 /* line 14, _colors.scss */
 .m-border-color-danger, .m-button-danger.m-button-block.m-button-outline, .m-button-danger.m-button-fullwidth.m-button-outline, .m-button-danger.m-button.m-button-outline {
-  border-color: #f04930;
+  border-color: #f04930 !important;
 }
 
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-color-danger, .m-button-danger.m-button-block.m-button-outline, .m-button-danger.m-button-fullwidth.m-button-outline, .m-button-danger.m-button.m-button-outline, .m-button-danger.m-button-block.m-button-clear, .m-button-danger.m-button-fullwidth.m-button-clear, .m-button-danger.m-button.m-button-clear {
   color: #f04930;
 }
 
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-color-danger-fg {
   color: #f04930;
 }
@@ -571,15 +570,15 @@
 
 /* line 14, _colors.scss */
 .m-border-color-danger-dark {
-  border-color: #d3290f;
+  border-color: #d3290f !important;
 }
 
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-color-danger-dark {
   color: #d3290f;
 }
 
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-color-danger-dark-fg {
   color: #d3290f;
 }
@@ -591,15 +590,15 @@
 
 /* line 14, _colors.scss */
 .m-border-color-danger-darker {
-  border-color: #911c0a;
+  border-color: #911c0a !important;
 }
 
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-color-danger-darker {
   color: #911c0a;
 }
 
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-color-danger-darker-fg {
   color: #911c0a;
 }
@@ -611,15 +610,15 @@
 
 /* line 14, _colors.scss */
 .m-border-color-white {
-  border-color: white;
+  border-color: white !important;
 }
 
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-color-white, .m-button-primary.m-button, .m-button-success.m-button, .m-button-warning.m-button, .m-button-info.m-button, .m-button-danger.m-button {
   color: white;
 }
 
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-color-white-fg, .m-header-container header h1, .m-footer-container footer h1 {
   color: white;
 }
@@ -631,15 +630,15 @@
 
 /* line 14, _colors.scss */
 .m-border-color-cream {
-  border-color: #f5f5f1;
+  border-color: #f5f5f1 !important;
 }
 
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-color-cream {
   color: #f5f5f1;
 }
 
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-color-cream-fg {
   color: #f5f5f1;
 }
@@ -651,15 +650,15 @@
 
 /* line 14, _colors.scss */
 .m-border-color-black {
-  border-color: #2c2927;
+  border-color: #2c2927 !important;
 }
 
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-color-black {
   color: #2c2927;
 }
 
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-color-black-fg {
   color: #2c2927;
 }
@@ -671,15 +670,15 @@
 
 /* line 14, _colors.scss */
 .m-border-color-transparent, .m-button-primary.m-button, .m-button-primary.m-button-block.m-button-clear, .m-button-primary.m-button-fullwidth.m-button-clear, .m-button-primary.m-button.m-button-clear, .m-button-success.m-button, .m-button-success.m-button-block.m-button-clear, .m-button-success.m-button-fullwidth.m-button-clear, .m-button-success.m-button.m-button-clear, .m-button-warning.m-button, .m-button-warning.m-button-block.m-button-clear, .m-button-warning.m-button-fullwidth.m-button-clear, .m-button-warning.m-button.m-button-clear, .m-button-info.m-button, .m-button-info.m-button-block.m-button-clear, .m-button-info.m-button-fullwidth.m-button-clear, .m-button-info.m-button.m-button-clear, .m-button-danger.m-button, .m-button-danger.m-button-block.m-button-clear, .m-button-danger.m-button-fullwidth.m-button-clear, .m-button-danger.m-button.m-button-clear {
-  border-color: rgba(0, 0, 0, 0);
+  border-color: rgba(0, 0, 0, 0) !important;
 }
 
-/* line 18, _colors.scss */
+/* line 19, _colors.scss */
 .m-color-transparent {
   color: rgba(0, 0, 0, 0);
 }
 
-/* line 22, _colors.scss */
+/* line 23, _colors.scss */
 .m-color-transparent-fg {
   color: rgba(0, 0, 0, 0);
 }

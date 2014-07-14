@@ -1,26 +1,31 @@
 @include m-all-fields("m-select");
 
 select.m-select {
-	top: -1.4em;
-    left: 0;
-	margin-bottom: -1.4em;
 	opacity: 0.001;
-	position: relative;
+    top: 0;
+    position: absolute;
+    top: 2.4em;
 }
 
 .m-form-left-labels select.m-select {
 	float: left;
+    left: 30%;
+    top: 0.4em;
 }
+
+.m-form-left-labels .m-select-cover {
+    float: left;
+}
+
 
 .m-select-cover {
 	background: white;
-	float: left;
 	position: relative;
 
 	.m-icon-arrow-down-small {
 		position: absolute;
-		right: 0;
-		top: 2px;
+		right: 10px;
+		top: 7px;
 	}
 	.m-value {
 		height: 1.4em;
@@ -29,12 +34,3 @@ select.m-select {
 		margin-right: 21px;
 	}
 }	
-
-.m-form-left-labels {
-    select.m-select {
-    	top: -2em;
-    }    
-}
-
-
-

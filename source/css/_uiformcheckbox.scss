@@ -1,0 +1,42 @@
+@include m-all-fields("m-checkbox");
+
+.m-checkbox-hidden {
+    display: none;
+}
+
+.m-checkbox-icon {
+	position: absolute;
+	right: 10px;
+    margin-top: 10px;
+}
+
+.m-checkbox-cover {
+    border-top: 1px solid;
+    @extend .m-border-color-gray-lighter;
+    &:first-child {
+        border: none;
+    }
+    label {
+        // FIXME CHECK: important
+        width: auto !important;
+        display: inline-block !important;
+    }
+}
+
+
+.m-form-left-labels input.m-checkbox {
+	float: left;
+
+    .m-checkbox-cover-item {
+		height: 1.4em;
+		display: inline-block;
+		overflow: hidden;
+		margin-right: 21px;
+	}
+}	
+
+.m-form-left-labels {
+    input.m-checkbox {
+    	top: -2em;
+    }    
+}

@@ -1,4 +1,4 @@
-@mixin m-all-fields($class, $height: 1.43em) {
+@mixin m-all-fields($class, $height: auto) {
     .m-form-left-labels {
         .#{$class} {
             width: 70%;
@@ -17,10 +17,16 @@
         border: none;
         font-family: sans-serif;
         padding: 0;
-        margin: 0.67em 0 0 0;
-        height: $height;
-        line-height: 1.43em;
+        box-sizing: border-box;
+        padding-top: 0.5em;
+        padding-bottom: 1em;
+        
+        @if $class != "m-checkbox" {
+            padding-left: 0.67em;
+        } 
 
+        height: $height;
+        
         &:disabled {
             opacity: 0.2;
         }
@@ -43,9 +49,6 @@
         label {
             float: left;
             width: 30%;
-            height: 2.15em;
-            margin-top: .75em;
-            line-height: 1.5em;
         }  
     } 
     .m-form-top-labels .m-field {
@@ -56,16 +59,16 @@
     }
 
     .m-field {
-        padding: 0 0.67em 0.67em 0.67em;
+        position: relative;
         border-bottom: 1px solid;
         @extend .m-border-color-gray-lighter;
         display: block;
 
         label {
             font-weight: bold;
+            box-sizing: border-box;
+            padding: 0.67em 0.67em 0;
             font-size: 1em;
-            line-height: 2em;
-            height: 1.43em;
             overflow-wrap: break-word;
         }
         &.m-error {
@@ -86,3 +89,7 @@
 @import "uiformtextarea";
 @import "uiformselect";
 @import "uiformdraw";
+@import "uiformcheckbox";
+//@import "uiformoption";
+
+
