@@ -21,7 +21,7 @@
         padding-top: 0.5em;
         padding-bottom: 1em;
         
-        @if $class != "m-checkbox" {
+        @if $class != "m-checkbox" and $class != "m-option"{
             padding-left: 0.67em;
         } 
 
@@ -90,6 +90,6 @@
 @import "uiformselect";
 @import "uiformdraw";
 @import "uiformcheckbox";
-//@import "uiformoption";
+@import "uiformoption";
 
 
