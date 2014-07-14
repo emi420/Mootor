@@ -140,7 +140,7 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-gray-lighter, .m-app .m-form .m-field, .m-app .m-draw-cover, .m-app .m-draw-canvas canvas, .m-app .m-draw-canvas-header,
-.m-app .m-draw-canvas-footer, .m-app .m-checkbox-cover {
+.m-app .m-draw-canvas-footer, .m-app .m-checkbox-cover, .m-app .m-option-cover {
   border-color: #cdc9c7 !important;
 }
 /* line 19, _colors.scss */
@@ -176,7 +176,7 @@ html, body {
   border-color: #968e89 !important;
 }
 /* line 19, _colors.scss */
-.m-app .m-color-gray, .m-app .m-text::-webkit-input-placeholder, .m-app .m-textarea::-webkit-input-placeholder, .m-app .m-select::-webkit-input-placeholder, .m-app .m-checkbox::-webkit-input-placeholder {
+.m-app .m-color-gray, .m-app .m-text::-webkit-input-placeholder, .m-app .m-textarea::-webkit-input-placeholder, .m-app .m-select::-webkit-input-placeholder, .m-app .m-checkbox::-webkit-input-placeholder, .m-app .m-option::-webkit-input-placeholder {
   color: #968e89;
 }
 /* line 23, _colors.scss */
@@ -1206,7 +1206,7 @@ html, body {
 }
 /* line 14, _colors.scss */
 .m-app .m-border-color-gray-lighter, .m-app .m-form .m-field, .m-app .m-draw-cover, .m-app .m-draw-canvas canvas, .m-app .m-draw-canvas-header,
-.m-app .m-draw-canvas-footer, .m-app .m-checkbox-cover {
+.m-app .m-draw-canvas-footer, .m-app .m-checkbox-cover, .m-app .m-option-cover {
   border-color: #cdc9c7 !important;
 }
 /* line 19, _colors.scss */
@@ -1242,7 +1242,7 @@ html, body {
   border-color: #968e89 !important;
 }
 /* line 19, _colors.scss */
-.m-app .m-color-gray, .m-app .m-text::-webkit-input-placeholder, .m-app .m-textarea::-webkit-input-placeholder, .m-app .m-select::-webkit-input-placeholder, .m-app .m-checkbox::-webkit-input-placeholder {
+.m-app .m-color-gray, .m-app .m-text::-webkit-input-placeholder, .m-app .m-textarea::-webkit-input-placeholder, .m-app .m-select::-webkit-input-placeholder, .m-app .m-checkbox::-webkit-input-placeholder, .m-app .m-option::-webkit-input-placeholder {
   color: #968e89;
 }
 /* line 23, _colors.scss */
@@ -1867,6 +1867,73 @@ html, body {
 }
 /* line 39, _uiformcheckbox.scss */
 .m-app .m-form-left-labels input.m-checkbox {
+  top: -2em;
+}
+/* line 3, _uiform.scss */
+.m-app .m-form-left-labels .m-option {
+  width: 70%;
+}
+/* line 8, _uiform.scss */
+.m-app .m-form-top-labels .m-option {
+  width: 100%;
+  display: block;
+}
+/* line 14, _uiform.scss */
+.m-app .m-option {
+  font-size: 1em;
+  background-color: transparent;
+  border: none;
+  font-family: sans-serif;
+  padding: 0;
+  box-sizing: border-box;
+  padding-top: 0.5em;
+  padding-bottom: 1em;
+  height: auto;
+}
+/* line 30, _uiform.scss */
+.m-app .m-option:disabled {
+  opacity: 0.2;
+}
+/* line 34, _uiform.scss */
+.m-app .m-option:focus {
+  outline: 0;
+}
+/* line 3, _uiformoption.scss */
+.m-app .m-option-hidden {
+  display: none;
+}
+/* line 7, _uiformoption.scss */
+.m-app .m-option-icon {
+  position: absolute;
+  right: 10px;
+  margin-top: 10px;
+}
+/* line 13, _uiformoption.scss */
+.m-app .m-option-cover {
+  border-top: 1px solid;
+}
+/* line 16, _uiformoption.scss */
+.m-app .m-option-cover:first-child {
+  border: none;
+}
+/* line 19, _uiformoption.scss */
+.m-app .m-option-cover label {
+  width: auto !important;
+  display: inline-block !important;
+}
+/* line 27, _uiformoption.scss */
+.m-app .m-form-left-labels input.m-option {
+  float: left;
+}
+/* line 30, _uiformoption.scss */
+.m-app .m-form-left-labels input.m-option .m-option-cover-item {
+  height: 1.4em;
+  display: inline-block;
+  overflow: hidden;
+  margin-right: 21px;
+}
+/* line 39, _uiformoption.scss */
+.m-app .m-form-left-labels input.m-option {
   top: -2em;
 }
 /* line 1, _uiformcamera.scss */
