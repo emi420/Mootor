@@ -21,6 +21,7 @@ cat js/clickfix.js \
     js/uiform.js \
     js/uiformvirtualinput.js \
     js/uiformdraw.js \
+    js/uiformcamera.js \
     js/uiformtext.js \
     js/uiformtextarea.js \
     js/uiformselect.js \

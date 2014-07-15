@@ -108,6 +108,10 @@
             $(".m-draw-erase").on("tap click", function() {
                 self.clear();
             });
+
+            $(".m-draw-done").on("tap click", function() {
+                $canvasContainer.hide();
+            });
         
             $label[0].onclick = function() {
                 return false;

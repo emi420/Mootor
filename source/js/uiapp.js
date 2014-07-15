@@ -108,27 +108,16 @@
             
         // Android/iOS fixes
         setEvent = function(el, href) {
-            if (m.context.os.ipad === true || m.context.os.iphone === true) {
-                $(el).on("tap", function(e) {
-                    m.app.go(href);
-                });
-            }
+            $(el).on("tap", function(e) {
+                m.app.go(href);
+            });
             el.addEventListener("touchend", function(e) {
                 e.preventDefault();
             });
         };
-        if (m.context.os.ipad === true || m.context.os.iphone === true) {
-            onClick = function() {
-                return false;
-            };
-        } else {
-            onClick = function() {
-                m.app.go(href);
-                return false;
-                
-            };
-        }
-        
+        onClick = function() {
+            return false;
+        };
         if ( 'ontouchstart' in window ) {
             for (i = links.length; i--;) {
                 href = links[i].getAttribute("href");

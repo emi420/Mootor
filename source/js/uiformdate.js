@@ -13,12 +13,14 @@
     "use strict";
 
     var UIFormDate,
+        UIForm,
     
         UI;
 
     // Dependences
 
     UI = Mootor.UI;
+    UIForm = Mootor.UIForm;
     
     // Private constructors
 
@@ -32,12 +34,47 @@
     // Private static methods and properties
 
     $.extend(UIFormDate, {
-   
+        _init: function(uiview) {
+            
+            var inputs;
+                
+            inputs = uiview.$el.find(".m-date");
+            inputs.each(function(index,element) {
+                var $element = $(element);
+                
+                /*jshint multistr: true */
+                var coverHTML = '<div class="m-select m-select-cover">\
+                    <span class="m-value">Select ...</span>\
+                    <span class="m-icon-arrow-down-small"></span>\
+                </div>';
+
+                var $cover = element.$cover = $(coverHTML).insertBefore(element);
+                var $value = $cover.find(".m-value");
+
+                $element.on("change", updateValue);
+
+                $element.on("tap", function() {
+                    $element.focus();
+                });
+                $element.on("focus", function() {
+                    var me = document.createEvent("MouseEvents");
+                    me.initMouseEvent("mousedown", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+                });
+
+                function updateValue() {
+                    // Value is the text of the selected option or the placeholder text
+                    var value = element.value;
+                    $value.html(value);
+                }
+            });
+        }   
     });
 
     // Public methods and properties
 
     $.extend(UIFormDate.prototype, {
     });        
+
+    UIForm.registerControl(UIFormDate);  
 
 }(window.$, window.Mootor));

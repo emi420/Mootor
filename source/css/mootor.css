@@ -1943,6 +1943,22 @@ html, body {
 .m-app .m-form-left-labels input.m-option {
   top: -2em;
 }
+/* line 1, _uiformdate.scss */
+.m-app input[type=date].m-date {
+  opacity: 0.001;
+  top: 0;
+  width: 100%;
+  position: absolute;
+  top: 2.4em;
+}
+/* line 1, _uiformtime.scss */
+.m-app input[type=time].m-time {
+  opacity: 0.001;
+  top: 0;
+  width: 100%;
+  position: absolute;
+  top: 2.4em;
+}
 /* line 1, _uiformcamera.scss */
 .m-app .m-camera-container {
   text-align: center;
