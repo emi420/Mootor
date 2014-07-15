@@ -212,6 +212,8 @@
         * @return {String} Exported data (ej: base 64 string)
         * @param {Array} options A list of options
         * @chainable
+        * @example
+        *   var sign = $("#myDrawInput").m.formDraw.export();
         */
         "export": function() {
             // code here

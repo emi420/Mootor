@@ -125,6 +125,10 @@
             
                 <li><a href="../classes/UIApp.html">UIApp</a></li>
             
+                <li><a href="../classes/UIButton.html">UIButton</a></li>
+            
+                <li><a href="../classes/UIFooter.html">UIFooter</a></li>
+            
                 <li><a href="../classes/UIForm.html">UIForm</a></li>
             
                 <li><a href="../classes/UIFormCamera.html">UIFormCamera</a></li>
@@ -145,8 +149,6 @@
             
                 <li><a href="../classes/UIFormPassword.html">UIFormPassword</a></li>
             
-                <li><a href="../classes/UIFormPseudoInput.html">UIFormPseudoInput</a></li>
-            
                 <li><a href="../classes/UIFormSelect.html">UIFormSelect</a></li>
             
                 <li><a href="../classes/UIFormText.html">UIFormText</a></li>
@@ -156,6 +158,8 @@
                 <li><a href="../classes/UIFormTime.html">UIFormTime</a></li>
             
                 <li><a href="../classes/UIFormToggleSwitch.html">UIFormToggleSwitch</a></li>
+            
+                <li><a href="../classes/UIFormVirtualInput.html">UIFormVirtualInput</a></li>
             
                 <li><a href="../classes/UIHeader.html">UIHeader</a></li>
             
@@ -234,20 +238,23 @@
 * @constructor
 * @module UI
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
 */
 
-(function ($, Mootor) {
+(function ($, Mootor, m) {
     
     &quot;use strict&quot;;
 
     var UIFormDraw,
     
-        UI;
+        UI,
+        UIForm,
+        UIFormVirtualInput;
 
     // Dependences
 
     UI = Mootor.UI;
+    UIForm = Mootor.UIForm;
+    UIFormVirtualInput = Mootor.UIFormVirtualInput;
     
     // Private constructors
 
@@ -257,17 +264,178 @@
 
     // Prototypal inheritance
     $.extend(UIFormDraw.prototype, UI.prototype);
-    $.extend(UIFormDraw.prototype, UIFormPseudoInput.prototype);
+    $.extend(UIFormDraw.prototype, UIFormVirtualInput.prototype);
 
     // Private static methods and properties
 
     $.extend(UIFormDraw, {
-   
+        
+        _init: function(uiview) {
+            
+            var inputs = uiview.$el.find(&quot;.m-draw&quot;);
+            inputs.each(function(index,element) {
+                var self = new UIFormDraw();
+                UIFormDraw._makeUI(self, element);
+                UIFormDraw._addListeners(self);
+            });
+            
+        },
+        
+        _makeUI: function(self, element) {
+
+            var $element,
+                coverHTML,
+                $cover,
+                $label,
+                $canvas,
+                $canvasContainer,
+                h,
+                w;
+                        
+            
+            $element = $(element);
+
+            $label = $(&quot;label[for=&quot; + element.getAttribute(&quot;id&quot;) + &quot;]&quot;);
+
+            /*jshint multistr: true */
+            coverHTML = &#x27;&lt;div class=&quot;m-draw m-draw-cover&quot;&gt; \
+                &lt;span class=&quot;m-draw-icon m-icon-arrow-right-small&quot;&gt;&lt;/span&gt; \
+            &lt;/div&gt;&#x27;;
+        
+            $cover = element.$cover = $(coverHTML).insertBefore(element);
+            $label.insertBefore($cover.find(&quot;.m-draw-icon&quot;));
+            $element.hide();
+        
+            $canvasContainer = $(&#x27;&lt;div class=&quot;m-draw-canvas&quot;&gt; \
+                    &lt;div class=&quot;m-draw-canvas-header&quot;&gt; \
+                        &lt;span class=&quot;m-draw-cancel&quot;&gt;Cancel&lt;/span&gt; \
+                        &lt;span class=&quot;m-draw-done&quot;&gt;Done&lt;/span&gt; \
+                    &lt;/div&gt; \
+                    &lt;canvas&gt;&lt;/canvas&gt; \
+                    &lt;div class=&quot;m-draw-canvas-footer&quot;&gt; \
+                        &lt;span class=&quot;m-draw-erase m-icon-erase&quot;&gt;&lt;/span&gt; \
+                    &lt;/div&gt; \
+                &lt;/div&gt;&#x27;);
+        
+            $canvasContainer.hide();
+            
+            $canvasContainer.insertBefore(document.body.lastChild);
+        
+            // FIXME CHECK: hardcoded values (pixels)
+            $canvas = $canvasContainer.find(&quot;canvas&quot;);
+
+            h = m.app.ui.$container.height() - 190;
+            w = m.app.ui.$container.width() - 40;
+            
+            $canvas.css(&quot;height&quot;,  h + &quot;px&quot;);
+            $canvas[0].setAttribute(&quot;height&quot;,  h + &quot;px&quot;);
+
+            $canvas.css(&quot;width&quot;, w + &quot;px&quot;);
+            $canvas[0].setAttribute(&quot;width&quot;,  w + &quot;px&quot;);
+
+            $(&quot;.m-draw-cancel&quot;).on(&quot;tap click&quot;, function() {
+                $canvasContainer.hide();
+            });
+
+            $(&quot;.m-draw-erase&quot;).on(&quot;tap click&quot;, function() {
+                self.clear();
+            });
+
+            $(&quot;.m-draw-done&quot;).on(&quot;tap click&quot;, function() {
+                $canvasContainer.hide();
+            });
+        
+            $label[0].onclick = function() {
+                return false;
+            };
+            // FICKE CHECK
+            $cover.on(&quot;click tap&quot;, function() {
+                $canvasContainer.show();
+            });
+        
+            self._$cover = $cover;
+            self._$canvasContainer = $canvasContainer;
+            self._$canvas = $canvas;
+            self._$label = $label;
+            self._$ctx = $canvas[0].getContext(&quot;2d&quot;);
+            self._canvasOffsetLeft = 0;
+            self._canvasOffsetTop = 0;
+            self._$ctx.strokeStyle = &quot;black&quot;;
+            self._$ctx.lineWidth = 2;
+            self._$ctx.fillStyle = &quot;black&quot;;
+            self._drawing = false;
+        },
+        
+        _addListeners: function(self) {
+            
+            var $canvas = self._$canvas,
+                ctx = self._$ctx,
+                lastX,
+                lastY,
+                offsetLeft,
+                offsetTop;
+                
+            $canvas.on(&quot;touchstart&quot;, function(e) {
+                self._canvasOffsetLeft = $canvas.offset().left - $(window).scrollLeft();
+                self._canvasOffsetTop = $canvas.offset().top - $(window).scrollTop();
+
+                lastX = e.changedTouches[0].clientX - self._canvasOffsetLeft;
+                lastY = e.changedTouches[0].clientY - self._canvasOffsetTop;
+
+
+                ctx.beginPath();
+                ctx.fillStyle = &quot;black&quot;;
+                ctx.fillRect(lastX, lastY, 2, 2);
+                ctx.closePath();
+
+                e.stopPropagation();
+                e.preventDefault();                
+
+                offsetLeft = self._canvasOffsetLeft;
+                offsetTop = self._canvasOffsetTop;
+            });
+            
+            $canvas.on(&quot;touchmove&quot;, function(e) {
+                var x,
+                    y,
+                    touchX = e.changedTouches[0].clientX,
+                    touchY = e.changedTouches[0].clientY;
+
+                x = touchX - offsetLeft;
+				y = touchY - offsetTop;
+
+                ctx.beginPath();
+                ctx.moveTo(lastX,lastY);
+                ctx.lineTo(x,y);
+                ctx.stroke();
+                ctx.closePath();
+
+                lastX = x;
+                lastY = y;
+
+                e.stopPropagation();
+                e.preventDefault();
+
+            });
+            
+            $canvas.on(&quot;touchend&quot;, function(e) {
+
+                e.stopPropagation();
+                e.preventDefault();
+                
+            });
+        }
+        
     });
 
     // Public methods and properties
 
     $.extend(UIFormDraw.prototype, {
+        
+        _$canvas: undefined,
+        _$cover: undefined,
+        _$label: undefined,
+        
 
         /**
         * Export draw data
@@ -276,9 +444,11 @@
         * @return {String} Exported data (ej: base 64 string)
         * @param {Array} options A list of options
         * @chainable
+        * @example
+        *   var sign = $(&quot;#myDrawInput&quot;).m.formDraw.export();
         */
-        export: function(options) {
-             // code here
+        &quot;export&quot;: function() {
+            // code here
         },
 
         /**
@@ -288,12 +458,29 @@
         * @chainable
         */
         clear: function() {
-            // code here
+            
+            var ctx = this._$ctx,
+                $canvas = this._$canvas,
+                w = $canvas.width(),
+                h = $canvas.height();
+      
+            // Store the current transformation matrix
+            ctx.save();
+        
+            // Use the identity matrix while clearing the canvas
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+            ctx.clearRect(0, 0, w, h);
+            ctx.beginPath();
+        
+            // Restore the transform
+            ctx.restore();
         }
         
     });        
+    
+    UIForm.registerControl(UIFormDraw);  
 
-}(window.$, window.Mootor));
+}(window.$, window.Mootor, window.m));
 
     </pre>
 </div>

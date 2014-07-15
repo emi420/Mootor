@@ -125,6 +125,10 @@
             
                 <li><a href="../classes/UIApp.html">UIApp</a></li>
             
+                <li><a href="../classes/UIButton.html">UIButton</a></li>
+            
+                <li><a href="../classes/UIFooter.html">UIFooter</a></li>
+            
                 <li><a href="../classes/UIForm.html">UIForm</a></li>
             
                 <li><a href="../classes/UIFormCamera.html">UIFormCamera</a></li>
@@ -145,8 +149,6 @@
             
                 <li><a href="../classes/UIFormPassword.html">UIFormPassword</a></li>
             
-                <li><a href="../classes/UIFormPseudoInput.html">UIFormPseudoInput</a></li>
-            
                 <li><a href="../classes/UIFormSelect.html">UIFormSelect</a></li>
             
                 <li><a href="../classes/UIFormText.html">UIFormText</a></li>
@@ -156,6 +158,8 @@
                 <li><a href="../classes/UIFormTime.html">UIFormTime</a></li>
             
                 <li><a href="../classes/UIFormToggleSwitch.html">UIFormToggleSwitch</a></li>
+            
+                <li><a href="../classes/UIFormVirtualInput.html">UIFormVirtualInput</a></li>
             
                 <li><a href="../classes/UIHeader.html">UIHeader</a></li>
             
@@ -227,17 +231,17 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
-* The UIHeader class is a navigational element at the top or bottom of the page (header or footer)
+* The UIHeader class is a navigational element at the top of the page (header)
 *
 * @class UIHeader
 * @extends UI
 * @module UI
 * @constructor
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
-(function ($, Mootor) {
+(function ($, Mootor, m) {
 
     &quot;use strict&quot;;
 
@@ -249,8 +253,7 @@
         UIApp,
         UINavItem,
         App,
-        UI,
-        headerContainerEl;
+        UI;
 
     // Dependences
 
@@ -261,72 +264,31 @@
     UINavItem = Mootor.UINavItem;
     App = Mootor.App;
     UI = Mootor.UI;
-    
-    // Event handlers
-
-    UIApp.on(&quot;init&quot;, function(self) {
-
-        // FIXME CHECK (parentElement?)
-        var headerEl = self.el.parentElement.getElementsByTagName(&quot;header&quot;)[0];
         
-        headerContainerEl = document.createElement(&quot;div&quot;);
-        headerContainerEl.setAttribute(&quot;class&quot;,&quot;m-header-container&quot;);
-        headerEl.parentElement.replaceChild(headerContainerEl, headerEl);
-        headerContainerEl.appendChild(headerEl);
-
-        if (headerEl) {
-            self.header = new UIHeader({
-                el: headerEl
-            });
-        }
-        m.app.ui.header.hide()
-        
-    });
-
-    UIView.on(&quot;init&quot;, function(self) {
-        
-        var headerEl = self.panel.el.getElementsByTagName(&quot;header&quot;)[0];
-
-        if (headerEl) {
-
-            self.header = new UIHeader({
-                el: headerEl
-            });
-            
-            self.panel.el.removeChild(headerEl);
-            headerContainerEl.appendChild(headerEl);
-            
-            self.header.hide();
-
-            self.view.on(&quot;load&quot;, function(self) {
-               self.ui.header.show();
-            });
-
-            self.view.on(&quot;unload&quot;, function(self) {
-               self.ui.header.hide();
-            });
-
-        } else {
-            self.view.on(&quot;load&quot;, function(self) {
-               m.app.ui.header.show()
-            });
-
-            self.view.on(&quot;unload&quot;, function(self) {
-                m.app.ui.header.hide()
-            });
-        }
-    });
-    
     // Private constructors
 
     UIHeader = Mootor.UIHeader = function(options) {
         this.nav = new UINavBar({
-            container: options.el
+            container: options.el,
+            type: options.type
         });
+        this.type = options.type;
         this.el = this.nav.el;
         this.$el = $(this.el);
+        if (this.$el.find(&quot;nav&quot;).length &lt; 1) {
+            this.el.appendChild(document.createElement(&quot;nav&quot;));
+        }
         UIHeader._initBackButton(this);
     };
+
+    // Event handlers
+    UIView.on(&quot;init&quot;, function(self) {
+        UINavBar.createBar(&quot;header&quot;,self, UIHeader);
+    });
+
+    UIApp.on(&quot;init&quot;, function(self) {
+        UINavBar.initBar(&quot;header&quot;,self, UIHeader);
+    });
 
     
     // Private static methods and properties
@@ -335,22 +297,32 @@
         
         _initBackButton: function(self) {
             var backEl = document.createElement(&quot;a&quot;),
+                backIconEl = document.createElement(&quot;icon&quot;),
                 backNavEl = document.createElement(&quot;nav&quot;);
                 
+                // FIXME CHECK (white?)
+                backIconEl.setAttribute(&quot;class&quot;, &quot;m-icon-arrow-left-white&quot;);
+                
+            backEl.appendChild(backIconEl);
             backNavEl.appendChild(backEl);
             backNavEl.setAttribute(&quot;class&quot;, &quot;m-nav-header-back-container&quot;);
 
-            self.el.appendChild(backNavEl);
+            if (self.el.firstChild !== undefined) {
+               self.el.insertBefore(backNavEl,self.el.firstChild); 
+            } else {
+               self.el.appendChild(backNavEl);
+            }
             
             self.back = new UINavItem({
                 el: backEl
             });
             self.back.$el.addClass(&quot;m-header-back&quot;);
             self.back.hide();
-            self.back.$el.on(&quot;tap&quot;, function(e) {
+            
+            self.back.$el.on(&quot;tap click&quot;, function() {
                 m.app.back();
             });
-            self.back.el.onclick = function(e) {
+            self.back.el.onclick = function() {
                 return false;
             };
             App.on(&quot;go&quot;, function(app) {
@@ -408,7 +380,7 @@
     $.extend(UIHeader.prototype, UINavBar.prototype);
     $.extend(UIHeader.prototype, UI.prototype);
 
-}(window.$, window.Mootor));
+}(window.$, window.Mootor, window.m));
 
     </pre>
 </div>

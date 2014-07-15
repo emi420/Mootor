@@ -125,6 +125,10 @@
             
                 <li><a href="../classes/UIApp.html">UIApp</a></li>
             
+                <li><a href="../classes/UIButton.html">UIButton</a></li>
+            
+                <li><a href="../classes/UIFooter.html">UIFooter</a></li>
+            
                 <li><a href="../classes/UIForm.html">UIForm</a></li>
             
                 <li><a href="../classes/UIFormCamera.html">UIFormCamera</a></li>
@@ -145,8 +149,6 @@
             
                 <li><a href="../classes/UIFormPassword.html">UIFormPassword</a></li>
             
-                <li><a href="../classes/UIFormPseudoInput.html">UIFormPseudoInput</a></li>
-            
                 <li><a href="../classes/UIFormSelect.html">UIFormSelect</a></li>
             
                 <li><a href="../classes/UIFormText.html">UIFormText</a></li>
@@ -156,6 +158,8 @@
                 <li><a href="../classes/UIFormTime.html">UIFormTime</a></li>
             
                 <li><a href="../classes/UIFormToggleSwitch.html">UIFormToggleSwitch</a></li>
+            
+                <li><a href="../classes/UIFormVirtualInput.html">UIFormVirtualInput</a></li>
             
                 <li><a href="../classes/UIHeader.html">UIHeader</a></li>
             
@@ -234,7 +238,7 @@
 * @constructor
 * @module UI
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
 (function ($, Mootor) {
@@ -264,13 +268,44 @@
 
     $.extend(UIFormSelect, {
         _init: function(uiview) {
-            var inputs,
-                i;
+            
+            var inputs;
                 
             inputs = uiview.$el.find(&quot;.m-select&quot;);
+            inputs.each(function(index,element) {
+                var $element = $(element),
+                    coverHTML,
+                    $cover,
+                    $value,
+                    updateValue;
 
-            // code here
+                updateValue = function() {
+                    // Value is the text of the selected option or the placeholder text
+                    var value = element.options[element.selectedIndex].text || element.placeholder;
+                    $value.html(value);
+                }
+                
+                /*jshint multistr: true */
+                coverHTML = &#x27;&lt;div class=&quot;m-select m-select-cover&quot;&gt;\
+                    &lt;span class=&quot;m-value&quot;&gt;&lt;/span&gt;\
+                    &lt;span class=&quot;m-icon-arrow-down-small&quot;&gt;&lt;/span&gt;\
+                &lt;/div&gt;&#x27;;
 
+                $cover = element.$cover = $(coverHTML).insertBefore(element);
+                $value = $cover.find(&quot;.m-value&quot;);
+
+                updateValue();
+                $element.on(&quot;change&quot;, updateValue);
+
+                $element.on(&quot;tap&quot;, function() {
+                    $element.focus();
+                });
+                $element.on(&quot;focus&quot;, function() {
+                    var me = document.createEvent(&quot;MouseEvents&quot;);
+                    me.initMouseEvent(&quot;mousedown&quot;, true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+                });
+
+            });
         }
    
     });

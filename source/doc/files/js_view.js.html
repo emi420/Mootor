@@ -125,6 +125,10 @@
             
                 <li><a href="../classes/UIApp.html">UIApp</a></li>
             
+                <li><a href="../classes/UIButton.html">UIButton</a></li>
+            
+                <li><a href="../classes/UIFooter.html">UIFooter</a></li>
+            
                 <li><a href="../classes/UIForm.html">UIForm</a></li>
             
                 <li><a href="../classes/UIFormCamera.html">UIFormCamera</a></li>
@@ -145,8 +149,6 @@
             
                 <li><a href="../classes/UIFormPassword.html">UIFormPassword</a></li>
             
-                <li><a href="../classes/UIFormPseudoInput.html">UIFormPseudoInput</a></li>
-            
                 <li><a href="../classes/UIFormSelect.html">UIFormSelect</a></li>
             
                 <li><a href="../classes/UIFormText.html">UIFormText</a></li>
@@ -156,6 +158,8 @@
                 <li><a href="../classes/UIFormTime.html">UIFormTime</a></li>
             
                 <li><a href="../classes/UIFormToggleSwitch.html">UIFormToggleSwitch</a></li>
+            
+                <li><a href="../classes/UIFormVirtualInput.html">UIFormVirtualInput</a></li>
             
                 <li><a href="../classes/UIHeader.html">UIHeader</a></li>
             
@@ -239,10 +243,10 @@
 * * constructor - A function that will be run after the view has loaded (optional).
 * * animation - a string defining the type of animation used to show this view (one of: &quot;slide-left&quot;, &quot;slide-right&quot;, &quot;none&quot;).
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
-(function ($, Mootor, document) {
+(function ($, Mootor, m) {
 
     &quot;use strict&quot;;
     
@@ -258,7 +262,7 @@
     
     // Event handlers
     
-    App.on(&quot;init&quot;, function(self) {
+    App.on(&quot;init&quot;, function() {
 
         var views = App._options.views,
             viewCount = views.length,
@@ -269,17 +273,16 @@
             view = m.app.view(views[i]);
         }
         
-        view.on(&quot;ready&quot;, function(self) {
+        view.on(&quot;ready&quot;, function() {
             App.dispatch(&quot;ready&quot;);
         });
         
     });   
     
-    App.on(&quot;go&quot;, function(self) {
+    App.on(&quot;go&quot;, function() {
         
         var view,
             currentView,
-            app,
             stateObj,
             router = App._currentRoute,
             url = router.url;
@@ -303,9 +306,9 @@
         if (currentView != view) {
 
             if (url !== &quot;&quot;) {
-                history.pushState(stateObj, view.id, url);
+                window.history.pushState(stateObj, view.id, url);
             } else {
-                history.pushState(stateObj, view.id, window.location.pathname);                    
+                window.history.pushState(stateObj, view.id, window.location.pathname);                    
             }
 
         }
@@ -323,6 +326,11 @@
     Event.extend(View, &quot;View&quot;);
     View._dispatch = View.dispatch;
     View.dispatch = function(event, instance) {
+        if (!instance) {
+            console.error(&quot;view dispatch called with undefined instance for event: &quot;,event);
+            return false;    
+        }
+        
         if (event !== &quot;init&quot; ) {
             View._dispatch(event + &quot;:&quot; + instance.id, instance);
         } else {
@@ -352,7 +360,7 @@
 
             View.dispatch(&quot;init&quot;, self);
 
-            self.on(&quot;getHtml&quot;, function(view) {
+            self.on(&quot;getHtml&quot;, function() {
                 window.setTimeout(function() {
                     View._getScript(self);
                 }, 1);
@@ -363,7 +371,7 @@
             });
 
             // Load Html, Css and JavaScript
-            setTimeout(function() {
+            window.setTimeout(function() {
                 View._getHtml(self);
             }, 1);
             View._getCss(self);
@@ -520,7 +528,7 @@
                 View.on(event, callback);
             }
             return this;
-        },
+        }
 
         /**
         * Unsets event handlers for the view
@@ -552,8 +560,7 @@
         *     indexView = m.app.view(&quot;index&quot;);
         */
         view: function(id, options) {
-            var i,
-                views = View._collection,
+            var views = View._collection,
                 view;
             
             if (id !== &quot;&quot; &amp;&amp; id !== undefined) {
@@ -572,11 +579,11 @@
             }
 
             return view;
-        },
+        }
         
     });
 
-}(window.$, window.Mootor, window.document));
+}(window.$, window.Mootor, window.m));
 
     </pre>
 </div>

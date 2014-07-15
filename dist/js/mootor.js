@@ -2291,6 +2291,13 @@
         */
         _controls: [],
 
+        /**
+         * @method registerControl
+         * @param {Object} Constructor An object with a private _init method
+         * @example
+         *     UIForm.registerControl(UIFormText);  
+         *
+         */
         registerControl: function(constructor) {
             UIForm._controls.push({
                 constructor: constructor
@@ -2298,30 +2305,6 @@
         }
     });
 
-    // Public methods and properties
-
-    $.extend(UIForm.prototype, {
-        
-        /**
-        * Serialize form's data
-        *
-        * @method serialize
-        * @return {Object} Serialized data in a JSON object
-        */
-        serialize: function() {
-            
-        },
-
-        /**
-        * Clear all form fields
-        *
-        * @method clear
-        * @chainable
-        */
-        clear: function() {
-            // code here
-        }
-    });        
 }(window.$, window.Mootor));
 /**
 * UIFormVirtualInput is a virtual-input item of a form
@@ -2602,6 +2585,8 @@
         * @return {String} Exported data (ej: base 64 string)
         * @param {Array} options A list of options
         * @chainable
+        * @example
+        *   var sign = $("#myDrawInput").m.formDraw.export();
         */
         "export": function() {
             // code here
@@ -2883,6 +2868,8 @@
         * @return {String} Exported data (ej: base 64 string)
         * @param {Array} options A list of options
         * @chainable
+        * @example
+        *   var sign = $("#myCameraInput").m.formCamera.export();
         */
         "export": function(options) {
              // code here
@@ -3058,16 +3045,26 @@
                 
             inputs = uiview.$el.find(".m-select");
             inputs.each(function(index,element) {
-                var $element = $(element);
+                var $element = $(element),
+                    coverHTML,
+                    $cover,
+                    $value,
+                    updateValue;
+
+                updateValue = function() {
+                    // Value is the text of the selected option or the placeholder text
+                    var value = element.options[element.selectedIndex].text || element.placeholder;
+                    $value.html(value);
+                }
                 
                 /*jshint multistr: true */
-                var coverHTML = '<div class="m-select m-select-cover">\
+                coverHTML = '<div class="m-select m-select-cover">\
                     <span class="m-value"></span>\
                     <span class="m-icon-arrow-down-small"></span>\
                 </div>';
 
-                var $cover = element.$cover = $(coverHTML).insertBefore(element);
-                var $value = $cover.find(".m-value");
+                $cover = element.$cover = $(coverHTML).insertBefore(element);
+                $value = $cover.find(".m-value");
 
                 updateValue();
                 $element.on("change", updateValue);
@@ -3080,11 +3077,6 @@
                     me.initMouseEvent("mousedown", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
                 });
 
-                function updateValue() {
-                    // Value is the text of the selected option or the placeholder text
-                    var value = element.options[element.selectedIndex].text || element.placeholder;
-                    $value.html(value);
-                }
             });
         }
    
@@ -3139,18 +3131,32 @@
                 
             inputs = uiview.$el.find(".m-checkbox");
             inputs.each(function(index,element) {
-                var $element = $(element);
+                var $element = $(element),
+                    coverHTML,
+                    $cover,
+                    $label,
+                    $icon,
+                    updateValue;
+
+                updateValue = function() {
+                    var checked = element.getAttribute("checked");
+                    if (checked) {
+                        $icon.removeClass("m-hidden");
+                    } else {
+                        $icon.addClass("m-hidden");
+                    }
+                }
                 
                 /*jshint multistr: true */
-                var coverHTML = '<div class="m-checkbox m-checkbox-cover">\
+                coverHTML = '<div class="m-checkbox m-checkbox-cover">\
                     <span class="m-checkbox-icon m-icon-ok-small m-hidden"></span>\
                 </div>';
 
 
-                var $cover = element.$cover = $(coverHTML).insertBefore(element);
+                $cover = element.$cover = $(coverHTML).insertBefore(element);
                 
-                var $label = $("label[for=" + element.id + "]");
-                var $icon = $cover.find(".m-checkbox-icon");
+                $label = $("label[for=" + element.id + "]");
+                $icon = $cover.find(".m-checkbox-icon");
                 $cover[0].appendChild($label[0]);
                 
                 $element.removeClass("m-checkbox")
@@ -3167,14 +3173,6 @@
                     updateValue();
                 });
                 
-                function updateValue() {
-                    var checked = element.getAttribute("checked");
-                    if (checked) {
-                        $icon.removeClass("m-hidden");
-                    } else {
-                        $icon.addClass("m-hidden");
-                    }
-                }
             });
         }   
     });
@@ -3237,18 +3235,35 @@
                 
             inputs = uiview.$el.find(".m-option");
             inputs.each(function(index,element) {
-                var $element = $(element);
-                
+                var $element = $(element),
+                    coverHTML,
+                    $cover,
+                    $label,
+                    $icon,
+                    updateValue;
+
+                updateValue = function(norefresh) {
+                    if (!norefresh) {
+                        iconsRefresh();
+                    }
+                    var checked = element.checked;
+                    if (checked === true) {
+                        $icon.removeClass("m-hidden");
+                    } else {
+                        $icon.addClass("m-hidden");
+                    }
+                } 
+                               
                 /*jshint multistr: true */
-                var coverHTML = '<div class="m-option m-option-cover">\
+                coverHTML = '<div class="m-option m-option-cover">\
                     <span class="m-option-icon m-icon-ok-small m-hidden"></span>\
                 </div>';
 
 
-                var $cover = element.$cover = $(coverHTML).insertBefore(element);
+                $cover = element.$cover = $(coverHTML).insertBefore(element);
                 
-                var $label = $("label[for=" + element.id + "]");
-                var $icon = $cover.find(".m-option-icon");
+                $label = $("label[for=" + element.id + "]");
+                $icon = $cover.find(".m-option-icon");
                 iconsArray.push($icon);
                 $cover[0].appendChild($label[0]);
                 
@@ -3264,17 +3279,7 @@
 
                 updateValue(true);
                 
-                function updateValue(norefresh) {
-                    if (!norefresh) {
-                        iconsRefresh();
-                    }
-                    var checked = element.checked;
-                    if (checked === true) {
-                        $icon.removeClass("m-hidden");
-                    } else {
-                        $icon.addClass("m-hidden");
-                    }
-                }
+
             });
         }   
     });
@@ -3329,16 +3334,26 @@
                 
             inputs = uiview.$el.find(".m-date");
             inputs.each(function(index,element) {
-                var $element = $(element);
+                var $element = $(element),
+                    coverHTML,
+                    $cover,
+                    $value,
+                    updateValue;
                 
+                updateValue = function() {
+                    // Value is the text of the selected option or the placeholder text
+                    var value = element.value;
+                    $value.html(value);
+                }
+
                 /*jshint multistr: true */
-                var coverHTML = '<div class="m-select m-select-cover">\
+                coverHTML = '<div class="m-select m-select-cover">\
                     <span class="m-value">Select ...</span>\
                     <span class="m-icon-arrow-down-small"></span>\
                 </div>';
 
-                var $cover = element.$cover = $(coverHTML).insertBefore(element);
-                var $value = $cover.find(".m-value");
+                $cover = element.$cover = $(coverHTML).insertBefore(element);
+                $value = $cover.find(".m-value");
                 inputs.addClass("m-date-hidden");      
                 inputs.removeClass("m-date");                   
 
@@ -3352,11 +3367,6 @@
                     me.initMouseEvent("mousedown", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
                 });
 
-                function updateValue() {
-                    // Value is the text of the selected option or the placeholder text
-                    var value = element.value;
-                    $value.html(value);
-                }
             });
         }   
     });
@@ -3416,28 +3426,34 @@
             inputs.addClass("m-time-hidden");                
             inputs.removeClass("m-time");                   
             inputs.each(function(index,element) {
-                var $element = $(element);
+                var $element = $(element),
+                    coverHTML,
+                    $cover,
+                    $value,
+                    updateValue;
                 
+
+                updateValue = function() {
+                    // Value is the text of the selected option or the placeholder text
+                    var value = element.value;
+                    $value.html(value);
+                }
+
                 /*jshint multistr: true */
-                var coverHTML = '<div class="m-select m-select-cover">\
+                coverHTML = '<div class="m-select m-select-cover">\
                     <span class="m-value">Select ...</span>\
                     <span class="m-icon-arrow-down-small"></span>\
                 </div>';
 
-                var $cover = element.$cover = $(coverHTML).insertBefore(element);
-                var $value = $cover.find(".m-value");
+                $cover = element.$cover = $(coverHTML).insertBefore(element);
+                $value = $cover.find(".m-value");
 
-                $element.on("change", uptimeValue);
+                $element.on("change", updateValue);
 
                 $element.on("tap", function() {
                     $element.focus();
                 });
 
-                function uptimeValue() {
-                    // Value is the text of the selected option or the placeholder text
-                    var value = element.value;
-                    $value.html(value);
-                }
             });
         }   
     });

@@ -53,6 +53,13 @@
         */
         _controls: [],
 
+        /**
+         * @method registerControl
+         * @param {Object} Constructor An object with a private _init method
+         * @example
+         *     UIForm.registerControl(UIFormText);  
+         *
+         */
         registerControl: function(constructor) {
             UIForm._controls.push({
                 constructor: constructor
@@ -60,28 +67,4 @@
         }
     });
 
-    // Public methods and properties
-
-    $.extend(UIForm.prototype, {
-        
-        /**
-        * Serialize form's data
-        *
-        * @method serialize
-        * @return {Object} Serialized data in a JSON object
-        */
-        serialize: function() {
-            
-        },
-
-        /**
-        * Clear all form fields
-        *
-        * @method clear
-        * @chainable
-        */
-        clear: function() {
-            // code here
-        }
-    });        
 }(window.$, window.Mootor));

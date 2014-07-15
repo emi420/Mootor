@@ -125,6 +125,10 @@
             
                 <li><a href="../classes/UIApp.html">UIApp</a></li>
             
+                <li><a href="../classes/UIButton.html">UIButton</a></li>
+            
+                <li><a href="../classes/UIFooter.html">UIFooter</a></li>
+            
                 <li><a href="../classes/UIForm.html">UIForm</a></li>
             
                 <li><a href="../classes/UIFormCamera.html">UIFormCamera</a></li>
@@ -145,8 +149,6 @@
             
                 <li><a href="../classes/UIFormPassword.html">UIFormPassword</a></li>
             
-                <li><a href="../classes/UIFormPseudoInput.html">UIFormPseudoInput</a></li>
-            
                 <li><a href="../classes/UIFormSelect.html">UIFormSelect</a></li>
             
                 <li><a href="../classes/UIFormText.html">UIFormText</a></li>
@@ -156,6 +158,8 @@
                 <li><a href="../classes/UIFormTime.html">UIFormTime</a></li>
             
                 <li><a href="../classes/UIFormToggleSwitch.html">UIFormToggleSwitch</a></li>
+            
+                <li><a href="../classes/UIFormVirtualInput.html">UIFormVirtualInput</a></li>
             
                 <li><a href="../classes/UIHeader.html">UIHeader</a></li>
             
@@ -233,10 +237,10 @@
 * @constructor
 *  @module Router
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
-(function ($, Mootor) {
+(function ($, Mootor, m) {
 
     &quot;use strict&quot;;
 
@@ -245,8 +249,10 @@
         Route,
         App,
         _appGo,
-        _pendingGo;
-            
+        _pendingGo,
+        _lastHash,
+        _onPopState;
+                    
     // Dependencies
     
     App = Mootor.App;
@@ -259,19 +265,44 @@
 
     // Event handlers
 
-    window.onpopstate = function() {
-        _appGo(window.location.hash);
+    _onPopState = function() {
+        
+        // FIXME CHECK
+        
+        var urlBack;
+        
+        if (_lastHash === window.location.hash) {
+            urlBack = m.app.history[m.app.history.length - 2];
+            if (urlBack !== undefined) {
+                _appGo(urlBack);
+            } else {
+                _appGo(window.location.hash);
+            }
+        } else {
+            _appGo(window.location.hash);
+        }
+
+        _lastHash = window.location.hash;
+
     };
+    
+    if (&quot;onpopstate&quot; in window) {
+        window.onpopstate = _onPopState;
+    }
 
 
     _appGo = function(url) { 
-        _pendingGo = window.location.hash;
+        _pendingGo = url;
     };
 
     App.on(&quot;ready&quot;, function() {
         _appGo = function(url) {
-            m.app.go(url,true);
+            m.app.go(url);
         };
+        if (_pendingGo === undefined) {
+            _pendingGo = window.location.hash;
+        }
+        
         m.app.go(_pendingGo);
     });
 
@@ -306,6 +337,10 @@
                 var s,
                     route,
                     match;
+                    
+                    if (url === undefined) {
+                    //    debugger;
+                    }
 
                 for (s in Router._collection) {
                     match = url.match(new RegExp(s));
@@ -324,7 +359,7 @@
         }
     });
           
-}(window.$, window.Mootor));
+}(window.$, window.Mootor, window.m));
 
     </pre>
 </div>

@@ -125,6 +125,10 @@
             
                 <li><a href="../classes/UIApp.html">UIApp</a></li>
             
+                <li><a href="../classes/UIButton.html">UIButton</a></li>
+            
+                <li><a href="../classes/UIFooter.html">UIFooter</a></li>
+            
                 <li><a href="../classes/UIForm.html">UIForm</a></li>
             
                 <li><a href="../classes/UIFormCamera.html">UIFormCamera</a></li>
@@ -145,8 +149,6 @@
             
                 <li><a href="../classes/UIFormPassword.html">UIFormPassword</a></li>
             
-                <li><a href="../classes/UIFormPseudoInput.html">UIFormPseudoInput</a></li>
-            
                 <li><a href="../classes/UIFormSelect.html">UIFormSelect</a></li>
             
                 <li><a href="../classes/UIFormText.html">UIFormText</a></li>
@@ -156,6 +158,8 @@
                 <li><a href="../classes/UIFormTime.html">UIFormTime</a></li>
             
                 <li><a href="../classes/UIFormToggleSwitch.html">UIFormToggleSwitch</a></li>
+            
+                <li><a href="../classes/UIFormVirtualInput.html">UIFormVirtualInput</a></li>
             
                 <li><a href="../classes/UIHeader.html">UIHeader</a></li>
             
@@ -227,14 +231,13 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
-* UIFormOption is an option input of a form
+* UIFormOption is a option input of a form
 *
 * @class UIFormOption
 * @extends UI
 * @constructor
 * @module UI
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
 */
 
 (function ($, Mootor) {
@@ -242,12 +245,13 @@
     &quot;use strict&quot;;
 
     var UIFormOption,
-    
+        UIForm,
         UI;
 
     // Dependences
 
-    UI = Mootor.UI;
+    UI = Mootor.UI,
+    UIForm = Mootor.UIForm;
     
     // Private constructors
 
@@ -261,13 +265,76 @@
     // Private static methods and properties
 
     $.extend(UIFormOption, {
-   
+        _init: function(uiview) {
+            
+            var inputs,
+                iconsRefresh,
+                iconsArray = [];
+                
+            iconsRefresh = function() {
+                var i;
+                for (i = iconsArray.length;i--;) {
+                    iconsArray[i].addClass(&quot;m-hidden&quot;);
+                }
+            }
+                
+            inputs = uiview.$el.find(&quot;.m-option&quot;);
+            inputs.each(function(index,element) {
+                var $element = $(element),
+                    coverHTML,
+                    $cover,
+                    $label,
+                    $icon,
+                    updateValue;
+
+                updateValue = function(norefresh) {
+                    if (!norefresh) {
+                        iconsRefresh();
+                    }
+                    var checked = element.checked;
+                    if (checked === true) {
+                        $icon.removeClass(&quot;m-hidden&quot;);
+                    } else {
+                        $icon.addClass(&quot;m-hidden&quot;);
+                    }
+                } 
+                               
+                /*jshint multistr: true */
+                coverHTML = &#x27;&lt;div class=&quot;m-option m-option-cover&quot;&gt;\
+                    &lt;span class=&quot;m-option-icon m-icon-ok-small m-hidden&quot;&gt;&lt;/span&gt;\
+                &lt;/div&gt;&#x27;;
+
+
+                $cover = element.$cover = $(coverHTML).insertBefore(element);
+                
+                $label = $(&quot;label[for=&quot; + element.id + &quot;]&quot;);
+                $icon = $cover.find(&quot;.m-option-icon&quot;);
+                iconsArray.push($icon);
+                $cover[0].appendChild($label[0]);
+                
+                $element.removeClass(&quot;m-option&quot;)
+                $element.addClass(&quot;m-option-hidden&quot;);
+
+                $element.on(&quot;change&quot;, updateValue);
+                
+                $cover.on(&quot;tap click&quot;, function() {
+                    element.checked = true;
+                    updateValue();
+                });
+
+                updateValue(true);
+                
+
+            });
+        }   
     });
 
     // Public methods and properties
 
     $.extend(UIFormOption.prototype, {
     });        
+
+   UIForm.registerControl(UIFormOption);  
 
 }(window.$, window.Mootor));
 

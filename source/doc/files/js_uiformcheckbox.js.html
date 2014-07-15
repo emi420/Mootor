@@ -125,6 +125,10 @@
             
                 <li><a href="../classes/UIApp.html">UIApp</a></li>
             
+                <li><a href="../classes/UIButton.html">UIButton</a></li>
+            
+                <li><a href="../classes/UIFooter.html">UIFooter</a></li>
+            
                 <li><a href="../classes/UIForm.html">UIForm</a></li>
             
                 <li><a href="../classes/UIFormCamera.html">UIFormCamera</a></li>
@@ -145,8 +149,6 @@
             
                 <li><a href="../classes/UIFormPassword.html">UIFormPassword</a></li>
             
-                <li><a href="../classes/UIFormPseudoInput.html">UIFormPseudoInput</a></li>
-            
                 <li><a href="../classes/UIFormSelect.html">UIFormSelect</a></li>
             
                 <li><a href="../classes/UIFormText.html">UIFormText</a></li>
@@ -156,6 +158,8 @@
                 <li><a href="../classes/UIFormTime.html">UIFormTime</a></li>
             
                 <li><a href="../classes/UIFormToggleSwitch.html">UIFormToggleSwitch</a></li>
+            
+                <li><a href="../classes/UIFormVirtualInput.html">UIFormVirtualInput</a></li>
             
                 <li><a href="../classes/UIHeader.html">UIHeader</a></li>
             
@@ -234,7 +238,6 @@
 * @constructor
 * @module UI
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
 */
 
 (function ($, Mootor) {
@@ -242,12 +245,13 @@
     &quot;use strict&quot;;
 
     var UIFormCheckbox,
-    
+        UIForm,
         UI;
 
     // Dependences
 
-    UI = Mootor.UI;
+    UI = Mootor.UI,
+    UIForm = Mootor.UIForm;
     
     // Private constructors
 
@@ -261,13 +265,64 @@
     // Private static methods and properties
 
     $.extend(UIFormCheckbox, {
-   
+        _init: function(uiview) {
+            
+            var inputs;
+                
+            inputs = uiview.$el.find(&quot;.m-checkbox&quot;);
+            inputs.each(function(index,element) {
+                var $element = $(element),
+                    coverHTML,
+                    $cover,
+                    $label,
+                    $icon,
+                    updateValue;
+
+                updateValue = function() {
+                    var checked = element.getAttribute(&quot;checked&quot;);
+                    if (checked) {
+                        $icon.removeClass(&quot;m-hidden&quot;);
+                    } else {
+                        $icon.addClass(&quot;m-hidden&quot;);
+                    }
+                }
+                
+                /*jshint multistr: true */
+                coverHTML = &#x27;&lt;div class=&quot;m-checkbox m-checkbox-cover&quot;&gt;\
+                    &lt;span class=&quot;m-checkbox-icon m-icon-ok-small m-hidden&quot;&gt;&lt;/span&gt;\
+                &lt;/div&gt;&#x27;;
+
+
+                $cover = element.$cover = $(coverHTML).insertBefore(element);
+                
+                $label = $(&quot;label[for=&quot; + element.id + &quot;]&quot;);
+                $icon = $cover.find(&quot;.m-checkbox-icon&quot;);
+                $cover[0].appendChild($label[0]);
+                
+                $element.removeClass(&quot;m-checkbox&quot;)
+                $element.addClass(&quot;m-checkbox-hidden&quot;);
+
+                updateValue();
+                $element.on(&quot;change&quot;, updateValue);
+                $cover.on(&quot;tap click&quot;, function() {
+                    if (element.getAttribute(&quot;checked&quot;)) {
+                        element.removeAttribute(&quot;checked&quot;);
+                    } else {
+                        element.setAttribute(&quot;checked&quot;, &quot;checked&quot;);                      
+                    }
+                    updateValue();
+                });
+                
+            });
+        }   
     });
 
     // Public methods and properties
 
     $.extend(UIFormCheckbox.prototype, {
     });        
+
+    UIForm.registerControl(UIFormCheckbox);  
 
 }(window.$, window.Mootor));
 

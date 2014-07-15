@@ -77,8 +77,6 @@ html, body {
 
 /* line 15, mootor.scss */
 .m-app {
-  /* This is temporary! */
-  @import url(http://fonts.googleapis.com/css?family=Roboto:100,Roboto:300,300italic,400italic,400,700,700italic);
   /*
   button_sizes = ["m-button","m-button-small"]
   button_width = ["m-button","m-button-block","m-button-fullwidth"]
@@ -681,59 +679,73 @@ html, body {
 .m-app .m-color-transparent-fg {
   color: rgba(0, 0, 0, 0);
 }
-/* line 6, _fonts.scss */
+/* line 4, _text.scss */
 .m-app,
 .m-app p {
   font-family: 'Helvetica Neue Light', Roboto, sans-serif;
   font-weight: 300;
   font-size: 14px;
+  margin-bottom: 1em;
   line-height: 140%;
 }
-/* line 14, _fonts.scss */
+/* line 13, _text.scss */
 .m-app strong {
   font-weight: 700;
 }
-/* line 18, _fonts.scss */
+/* line 17, _text.scss */
 .m-app q, .m-app blockquote {
   font-family: 'Helvetica Neue Light Italic', Roboto, sans-serif;
   font-style: italic;
   font-weight: 100;
   font-size: 12px;
 }
-/* line 25, _fonts.scss */
+/* line 24, _text.scss */
 .m-app a {
   font-family: 'Helvetica Neue Bold', Roboto, sans-serif;
   font-weight: 700;
   text-decoration: underline;
 }
-/* line 33, _fonts.scss */
-.m-app h1, .m-app h2, .m-app h3, .m-app h4, .m-app h5, .m-app h6 {
-  line-height: 200%;
+/* line 32, _text.scss */
+.m-app h2, .m-app h3, .m-app h4, .m-app h5, .m-app h6 {
+  margin-bottom: .7em;
+  line-height: 150%;
 }
-/* line 37, _fonts.scss */
+/* line 37, _text.scss */
 .m-app h1 {
-  font-size: 16px;
+  font-size: 1.6em;
+  margin-bottom: .7em;
+  margin-top: .5em;
+  line-height: 140%;
   font-weight: 400;
   font-family: 'Helvetica Neue Medium', Roboto, sans-serif;
 }
-/* line 43, _fonts.scss */
+/* line 45, _text.scss */
+.m-app h1 strong {
+  font-weight: 800;
+}
+/* line 50, _text.scss */
 .m-app h2 {
-  font-size: 14px;
+  font-size: 1.3em;
   font-weight: 400;
   font-family: 'Helvetica Neue Medium', Roboto, sans-serif;
 }
-/* line 54, _fonts.scss */
+/* line 56, _text.scss */
+.m-app h3 {
+  font-size: 1.1em;
+  font-weight: 400;
+}
+/* line 62, _text.scss */
 .m-app h4 {
-  font-size: 12px;
+  font-size: 1em;
   font-weight: 300;
 }
-/* line 59, _fonts.scss */
+/* line 67, _text.scss */
 .m-app h5 {
-  font-size: 12px;
+  font-size: .9em;
   color: #666;
   font-weight: 300;
 }
-/* line 65, _fonts.scss */
+/* line 73, _text.scss */
 .m-app h6 {
   font-size: 11px;
   font-family: 'Helvetica Neue Roman', Roboto, sans-serif;
@@ -1082,6 +1094,10 @@ html, body {
   font-size: 1em;
   overflow-wrap: break-word;
 }
+/* line 78, _uiform.scss */
+.m-app .m-form .m-field a, .m-app .m-form .m-field button, .m-app .m-form .m-field h1, .m-app .m-form .m-field h2, .m-app .m-form .m-field h3, .m-app .m-form .m-field h4, .m-app .m-form .m-field h5, .m-app .m-form .m-field h6, .m-app .m-form .m-field legend, .m-app .m-form .m-field span {
+  margin-left: 0.67em;
+}
 /* line 3, _uiform.scss */
 .m-app .m-form-left-labels .m-text {
   width: 70%;
@@ -1161,7 +1177,6 @@ html, body {
   box-sizing: border-box;
   padding-top: 0.5em;
   padding-bottom: 1em;
-  padding-left: 0.67em;
   height: auto;
 }
 /* line 30, _uiform.scss */
@@ -1205,7 +1220,7 @@ html, body {
   height: 1.4em;
   display: inline-block;
   overflow: hidden;
-  margin-right: 21px;
+  margin-right: 11px;
 }
 /* line 10, _colors.scss */
 .m-app .m-bg-color-gray-lighter {

@@ -2,7 +2,7 @@
 <html lang="en" class="yui-overrride">
 <head>
     <meta charset="utf-8">
-    <title>js/uiformfieldset.js</title>
+    <title>js/uibutton.js</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet' type='text/css'>
@@ -226,63 +226,70 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: js/uiformfieldset.js</h1>
+                        <h1 class="file-heading">File: js/uibutton.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
-* UIFormFieldset is a fieldset item of a form
+* UIButton is a button element, it uses UIForm to extend elements with aria-roles
 *
-* @class UIFormFieldset
+* @class UIButton
 * @extends UI
 * @constructor
 * @module UI
 * @author Emilio Mariscal (emi420 [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
 (function ($, Mootor) {
     
     &quot;use strict&quot;;
 
-    var UIFormFieldset,
+    var UIButton,
     
-        UI;
+        UI,
+        UIForm;
 
     // Dependences
 
     UI = Mootor.UI;
+    UIForm = Mootor.UIForm;
+
+    // Event handelers
     
     // Private constructors
 
-    UIFormFieldset = function() {
-        // code here
+    UIButton = function() {
+        // Code here
     };
 
     // Prototypal inheritance
-    $.extend(UIFormFieldset.prototype, UI.prototype);
+    $.extend(UIButton.prototype, UI.prototype);
 
     // Private static methods and properties
 
-    $.extend(UIFormFieldset, {
-   
+    $.extend(UIButton, {
+
+        _init: function(uiview) {
+            var buttons;
+                
+            buttons = uiview.$el.find(&quot;.m-button&quot;);
+            
+            // code here
+
+            buttons.attr(&quot;aria-role&quot;,&quot;button&quot;);
+
+        }
+        
     });
 
     // Public methods and properties
 
-    $.extend(UIFormFieldset.prototype, {
-        
-        /**
-        * Disable/enable input field
-        *
-        * @method disabled
-        * @param {boolean} state State of the input, true if disabled false if enabled 
-        * @return {boolean} Boolean state
-        */
-        disabled: function() {
-            // code here
-        }
+    $.extend(UIButton.prototype, {
+    });      
+    
+    UIForm.registerControl(UIButton);  
 
-    });        
 }(window.$, window.Mootor));
 
     </pre>

@@ -125,6 +125,10 @@
             
                 <li><a href="../classes/UIApp.html">UIApp</a></li>
             
+                <li><a href="../classes/UIButton.html">UIButton</a></li>
+            
+                <li><a href="../classes/UIFooter.html">UIFooter</a></li>
+            
                 <li><a href="../classes/UIForm.html">UIForm</a></li>
             
                 <li><a href="../classes/UIFormCamera.html">UIFormCamera</a></li>
@@ -145,8 +149,6 @@
             
                 <li><a href="../classes/UIFormPassword.html">UIFormPassword</a></li>
             
-                <li><a href="../classes/UIFormPseudoInput.html">UIFormPseudoInput</a></li>
-            
                 <li><a href="../classes/UIFormSelect.html">UIFormSelect</a></li>
             
                 <li><a href="../classes/UIFormText.html">UIFormText</a></li>
@@ -156,6 +158,8 @@
                 <li><a href="../classes/UIFormTime.html">UIFormTime</a></li>
             
                 <li><a href="../classes/UIFormToggleSwitch.html">UIFormToggleSwitch</a></li>
+            
+                <li><a href="../classes/UIFormVirtualInput.html">UIFormVirtualInput</a></li>
             
                 <li><a href="../classes/UIHeader.html">UIHeader</a></li>
             
@@ -234,50 +238,190 @@
 * @constructor
 * @module UI
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
 */
 
 (function ($, Mootor) {
-    
+
     &quot;use strict&quot;;
 
     var UIFormCamera,
         UIFormCameraPicture,
-    
-        UI;
 
+        UI,
+		UIForm,
+		_aaFiles = {};
+        
     // Dependences
 
     UI = Mootor.UI;
-    
+	UIForm = Mootor.UIForm;
+
     // Private constructors
 
     UIFormCamera = function() {
         // code here
     };
 
-    UIFormCameraPicture = functon() {
-        UIFormCameraPicture,
-    }
+    UIFormCameraPicture = function(file) {
+		// code here
+        this.image = file;
+    };
 
     // Prototypal inheritance
     $.extend(UIFormCamera.prototype, UI.prototype);
-    $.extend(UIFormCamera.prototype, UIFormPseudoInput.prototype);
+    //$.extend(UIFormCamera.prototype, UIFormPseudoInput.prototype);
 
     // Private static methods and properties
 
     $.extend(UIFormCamera, {
-   
+
+		_init: function(uiview) {
+
+			var inputs = uiview.$el.find(&quot;.m-camera&quot;);
+            inputs.each(function(index,element) {
+                var self = new UIFormCamera();
+                UIFormCamera._makeUI(self, element);
+                //UIFormCamera._addListeners(self);
+            });
+		},
+
+		_makeUI: function(self, element) {
+			var $element,
+                coverHTML,
+                $cover,
+                $label,
+                $canvas,
+                $canvasContainer,
+                h,
+                w;
+
+			$element = $(element);
+            
+            // Inherits UIFormCamera prototype
+            $.extend(element, UIFormCamera.prototype);
+
+            $label = $(&quot;label[for=&quot; + element.getAttribute(&quot;id&quot;) + &quot;]&quot;);
+
+			// TODO: Agregar estilos a m-camera-cover
+
+            /*jshint multistr: true */
+            coverHTML = &#x27;&lt;div class=&quot;m-camera m-camera-cover m-camera-btn&quot;&gt; \
+                &lt;span class=&quot;m-camera-icon m-icon-arrow-right-small&quot;&gt;&lt;/span&gt; \
+            &lt;/div&gt;&#x27;;
+
+			//$cover = element.$cover = $(coverHTML).insertBefore(element);
+			//$label.insertBefore($cover.find(&quot;.m-camera-icon&quot;));
+			$element.hide();
+
+			// contenedor
+			$canvasContainer = $(&#x27;\
+				&lt;div class=&quot;m-camera-container&quot;&gt; \
+					&lt;div class=&quot;m-camera-message&quot;&gt;\
+                    &lt;span class=&quot;m-icon-camera&quot;&gt;&lt;/span&gt;&lt;br/&gt; \
+						&lt;strong class=&quot;m-camera-no-pics&quot;&gt;No pictures yet.&lt;/strong&gt; \
+						&lt;p&gt;Choose or take a picture&lt;/p&gt; \
+                    &lt;/div&gt; \
+                    &lt;div class=&quot;m-tmp&quot;&gt;&amp;nbsp;&lt;/div&gt; \
+                    &lt;div id=&quot;camera-btns&quot;&gt; \
+                    &lt;div class=&quot;m-choose-image&quot;&gt;Choose a picture&lt;/div&gt; \
+                    &lt;div class=&quot;m-take-image&quot;&gt;Take a picture&lt;/div&gt; \
+                &lt;/div&gt;&lt;/div&gt; \
+                &#x27;);
+                
+			if (!$(&quot;.m-camera-canvas&quot;).length) {
+				$canvasContainer.insertBefore(document.body.lastChild);
+				//$canvasContainer.prependTo($(&#x27;.m-camera-container&#x27;));
+			}
+
+            $canvasContainer.insertBefore($element);
+            $canvasContainer[0].replaceChild(element, $canvasContainer.find(&quot;.m-tmp&quot;)[0]);
+            
+            //$(&#x27;#choose-picture&#x27;).hide();
+
+			// test
+			$(&#x27;.m-camera-message&#x27;).hide();
+			if ($(&#x27;.m-camera-container&#x27;).find(&#x27;m-camera-images&#x27;).length === 0) {
+				$(&#x27;.m-camera-message&#x27;).show();
+			}
+
+			var $cameraContainer = $(&#x27;.m-camera-container&#x27;);
+            
+            _aaFiles[element.id] = [];
+
+
+			// files
+			var i;
+			var $imageFiles = $element;
+
+			$imageFiles.on(&#x27;change&#x27;, function(event) {
+				var files = event.target.files;
+				var output = $(&#x27;.m-camera-container&#x27;);
+
+				for (i = 0; i &lt; files.length; i++) {
+					var file = files[i];
+
+					if (!file.type.match(&#x27;image&#x27;)) {
+						continue;
+					}
+
+					var picReader = new FileReader();
+
+					picReader.addEventListener(&#x27;load&#x27;, function(event) {
+						var picFile = event.target;
+
+						var div = $(&#x27;&lt;div class=&quot;m-camera-img&quot;&gt;&lt;/div&gt;&#x27;);
+
+						div.append(&quot;&lt;img class=&#x27;thumbnail&#x27; src=&#x27;&quot; + picFile.result + &quot;&#x27;&quot; +
+                            &quot;title=&#x27;&quot; + picFile.name + &quot;&#x27;/&gt;&quot;);
+
+
+						output.append(div,null);
+						$(&#x27;.m-camera-message&#x27;).hide();
+					});
+
+					picReader.readAsDataURL(file);
+
+					_aaFiles[this.id].push(new UIFormCameraPicture(file));
+
+				}
+
+				//console.log(this._aaPictures);
+			});
+
+			// end files
+
+
+
+			h = m.app.ui.$container.height();
+
+			//$(&#x27;.m-camera-canvas&#x27;).css(&#x27;padding-top&#x27;, h / 2);
+
+			//$(&#x27;.m-camera-container&#x27;).height(h - 55 + &#x27;px&#x27;);
+
+			$label[0].onclick = function() {
+				//alert(&#x27;Choose a picture&#x27;);
+				return false;
+            };
+
+            $(&quot;.m-choose-image&quot;).on(&quot;tap click&quot;, function() {
+                $element.trigger(&#x27;click&#x27;);
+            });
+
+            $(&quot;.m-take-image&quot;).on(&quot;tap click&quot;, function() {
+                $element.trigger(&#x27;click&#x27;);
+            });
+
+		}
     });
 
     $.extend(UIFormCameraPicture, {
-   
+
     });
 
     // Public methods and properties
 
     $.extend(UIFormCamera.prototype, {
-        
+
         /**
         * Take a picture
         *
@@ -296,8 +440,11 @@
         */
         choose: function(){
             // code here
+
+
+
         },
-        
+
         /**
         * Returns all pictures paths
         *
@@ -306,9 +453,9 @@
         * @chainable
         */
         all: function() {
-             // code here
+             return _aaFiles[this.id];
         },
-        
+
         /**
         * Remove picture from input
         *
@@ -318,9 +465,9 @@
         remove: function(picture) {
             // code here
         }
-        
-    }); 
-    
+
+    });
+
     $.extend(UIFormCameraPicture.prototype, {
         /**
         * Export picture data
@@ -329,11 +476,15 @@
         * @return {String} Exported data (ej: base 64 string)
         * @param {Array} options A list of options
         * @chainable
+        * @example
+        *   var sign = $(&quot;#myCameraInput&quot;).m.formCamera.export();
         */
-        export: function(options) {
+        &quot;export&quot;: function(options) {
              // code here
-        }                
-    });    
+        }
+    });
+
+	UIForm.registerControl(UIFormCamera);
 
 }(window.$, window.Mootor));
 

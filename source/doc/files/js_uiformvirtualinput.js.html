@@ -2,7 +2,7 @@
 <html lang="en" class="yui-overrride">
 <head>
     <meta charset="utf-8">
-    <title>js/uiformfieldset.js</title>
+    <title>js/uiformvirtualinput.js</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet' type='text/css'>
@@ -226,14 +226,14 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: js/uiformfieldset.js</h1>
+                        <h1 class="file-heading">File: js/uiformvirtualinput.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
-* UIFormFieldset is a fieldset item of a form
+* UIFormVirtualInput is a virtual-input item of a form
 *
-* @class UIFormFieldset
+* @class UIFormVirtualInput
 * @extends UI
 * @constructor
 * @module UI
@@ -244,7 +244,7 @@
     
     &quot;use strict&quot;;
 
-    var UIFormFieldset,
+    var UIFormVirtualInput,
     
         UI;
 
@@ -254,35 +254,46 @@
     
     // Private constructors
 
-    UIFormFieldset = function() {
+    UIFormVirtualInput = function() {
         // code here
     };
 
     // Prototypal inheritance
-    $.extend(UIFormFieldset.prototype, UI.prototype);
+    $.extend(UIFormVirtualInput.prototype, UI.prototype);
 
     // Private static methods and properties
 
-    $.extend(UIFormFieldset, {
+    $.extend(UIFormVirtualInput, {
    
     });
 
     // Public methods and properties
 
-    $.extend(UIFormFieldset.prototype, {
-        
+    $.extend(UIFormVirtualInput.prototype, {
+
         /**
-        * Disable/enable input field
+        * Value of the input
         *
-        * @method disabled
-        * @param {boolean} state State of the input, true if disabled false if enabled 
-        * @return {boolean} Boolean state
-        */
-        disabled: function() {
+        * @property value
+        */         
+        value: undefined,
+
+        /**
+        * Sets an event handler for the input
+        *
+        * @method on
+        * @param {string} event Defines in which event the handler will be called
+        * @param {function} callback The function to be called when the event is fired.
+        * @return this
+        */ 
+        on: function(event, callback) {
             // code here
         }
 
     });        
+    
+    Mootor.UIFormVirtualInput = UIFormVirtualInput;
+
 }(window.$, window.Mootor));
 
     </pre>

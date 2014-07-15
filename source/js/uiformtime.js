@@ -42,28 +42,34 @@
             inputs.addClass("m-time-hidden");                
             inputs.removeClass("m-time");                   
             inputs.each(function(index,element) {
-                var $element = $(element);
+                var $element = $(element),
+                    coverHTML,
+                    $cover,
+                    $value,
+                    updateValue;
                 
+
+                updateValue = function() {
+                    // Value is the text of the selected option or the placeholder text
+                    var value = element.value;
+                    $value.html(value);
+                }
+
                 /*jshint multistr: true */
-                var coverHTML = '<div class="m-select m-select-cover">\
+                coverHTML = '<div class="m-select m-select-cover">\
                     <span class="m-value">Select ...</span>\
                     <span class="m-icon-arrow-down-small"></span>\
                 </div>';
 
-                var $cover = element.$cover = $(coverHTML).insertBefore(element);
-                var $value = $cover.find(".m-value");
+                $cover = element.$cover = $(coverHTML).insertBefore(element);
+                $value = $cover.find(".m-value");
 
-                $element.on("change", uptimeValue);
+                $element.on("change", updateValue);
 
                 $element.on("tap", function() {
                     $element.focus();
                 });
 
-                function uptimeValue() {
-                    // Value is the text of the selected option or the placeholder text
-                    var value = element.value;
-                    $value.html(value);
-                }
             });
         }   
     });

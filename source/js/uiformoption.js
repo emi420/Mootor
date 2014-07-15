@@ -48,18 +48,35 @@
                 
             inputs = uiview.$el.find(".m-option");
             inputs.each(function(index,element) {
-                var $element = $(element);
-                
+                var $element = $(element),
+                    coverHTML,
+                    $cover,
+                    $label,
+                    $icon,
+                    updateValue;
+
+                updateValue = function(norefresh) {
+                    if (!norefresh) {
+                        iconsRefresh();
+                    }
+                    var checked = element.checked;
+                    if (checked === true) {
+                        $icon.removeClass("m-hidden");
+                    } else {
+                        $icon.addClass("m-hidden");
+                    }
+                } 
+                               
                 /*jshint multistr: true */
-                var coverHTML = '<div class="m-option m-option-cover">\
+                coverHTML = '<div class="m-option m-option-cover">\
                     <span class="m-option-icon m-icon-ok-small m-hidden"></span>\
                 </div>';
 
 
-                var $cover = element.$cover = $(coverHTML).insertBefore(element);
+                $cover = element.$cover = $(coverHTML).insertBefore(element);
                 
-                var $label = $("label[for=" + element.id + "]");
-                var $icon = $cover.find(".m-option-icon");
+                $label = $("label[for=" + element.id + "]");
+                $icon = $cover.find(".m-option-icon");
                 iconsArray.push($icon);
                 $cover[0].appendChild($label[0]);
                 
@@ -75,17 +92,7 @@
 
                 updateValue(true);
                 
-                function updateValue(norefresh) {
-                    if (!norefresh) {
-                        iconsRefresh();
-                    }
-                    var checked = element.checked;
-                    if (checked === true) {
-                        $icon.removeClass("m-hidden");
-                    } else {
-                        $icon.addClass("m-hidden");
-                    }
-                }
+
             });
         }   
     });

@@ -2,7 +2,7 @@
 <html lang="en" class="yui-overrride">
 <head>
     <meta charset="utf-8">
-    <title>js/uiformfieldset.js</title>
+    <title>UIFooter</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet' type='text/css'>
@@ -226,67 +226,506 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: js/uiformfieldset.js</h1>
-
-<div class="file">
-    <pre class="code prettyprint linenums">
-/**
-* UIFormFieldset is a fieldset item of a form
-*
-* @class UIFormFieldset
-* @extends UI
-* @constructor
-* @module UI
-* @author Emilio Mariscal (emi420 [at] gmail.com)
-*/
-
-(function ($, Mootor) {
+                        <h1>UIFooter</h1>
+<div class="meta">
     
-    &quot;use strict&quot;;
 
-    var UIFormFieldset,
     
-        UI;
-
-    // Dependences
-
-    UI = Mootor.UI;
+        <div class="extends">
+            Extends <a href="../classes/UI.html" class="crosslink">UI</a>
+        </div>
     
-    // Private constructors
 
-    UIFormFieldset = function() {
-        // code here
-    };
+    
+        <div class="foundat">
+            Defined in: <a href="../files/js_uifooter.js.html#l1"><code>js&#x2F;uifooter.js:1</code></a>
+        </div>
+    
 
-    // Prototypal inheritance
-    $.extend(UIFormFieldset.prototype, UI.prototype);
-
-    // Private static methods and properties
-
-    $.extend(UIFormFieldset, {
-   
-    });
-
-    // Public methods and properties
-
-    $.extend(UIFormFieldset.prototype, {
+    
         
-        /**
-        * Disable/enable input field
-        *
-        * @method disabled
-        * @param {boolean} state State of the input, true if disabled false if enabled 
-        * @return {boolean} Boolean state
-        */
-        disabled: function() {
-            // code here
-        }
+            Module: <a href="../modules/UI.html">UI</a>
+        
+    
 
-    });        
-}(window.$, window.Mootor));
-
-    </pre>
+    
+    
 </div>
+
+
+
+<h3>Summary</h3>
+<div class="intro">
+    <p>The UIFooter class is a navigational element at the bottom of the page (footer)</p>
+
+</div>
+
+
+    <div class="constructor">
+        <h2>Constructor</h2>
+        <div id="method_UIFooter" class="method item">
+  <h3 class="blue-method-name">UIFooter</h3>
+
+  <div class="meta method-meta">
+    
+      
+        
+      <p>
+        
+          Defined in
+        
+      
+    
+    
+      <a href="../files/js_uifooter.js.html#l1"><code>js&#x2F;uifooter.js:1</code></a>
+    
+  </p>
+
+
+    
+
+    
+  </div>
+
+  <h3>Syntax</h3>
+  <div class="blue-method-syntax">
+  <h3 class="name"><code>UIFooter</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </div>
+    <div class="description">
+      <h3>Summary</h3>
+        
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+</div>
+
+    </div>
+
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+        
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+        
+        
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+        
+        
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+            
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods extends">
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_hide">hide</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method_show">show</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties extends">
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_$el">$el</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_el">el</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+
+            
+        </div>
+
+        
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method_hide" class="method item inherited">
+  <h3 class="blue-method-name">hide</h3>
+
+  <div class="meta method-meta">
+    
+      
+      <p>Inherited from
+        <a href="../classes/UI.html#method_hide">UI</a>:
+      
+    
+    
+      <a href="../files/js_ui.js.html#l71"><code>js&#x2F;ui.js:71</code></a>
+    
+  </p>
+
+
+    
+
+    
+  </div>
+
+  <h3>Syntax</h3>
+  <div class="blue-method-syntax">
+  <h3 class="name"><code>hide</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/UI.html" class="crosslink">UI</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </div>
+    <div class="description">
+      <h3>Summary</h3>
+        <p>Hides element from view</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+              
+                <span class="type"><a href="../classes/UI.html" class="crosslink">UI</a></span>:
+              
+              
+
+
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>m.app.ui.hide();</code></pre>
+
+            </div>
+        </div>
+    
+
+    
+
+</div>
+
+                
+                    <div id="method_show" class="method item inherited">
+  <h3 class="blue-method-name">show</h3>
+
+  <div class="meta method-meta">
+    
+      
+      <p>Inherited from
+        <a href="../classes/UI.html#method_show">UI</a>:
+      
+    
+    
+      <a href="../files/js_ui.js.html#l59"><code>js&#x2F;ui.js:59</code></a>
+    
+  </p>
+
+
+    
+
+    
+  </div>
+
+  <h3>Syntax</h3>
+  <div class="blue-method-syntax">
+  <h3 class="name"><code>show</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/UI.html" class="crosslink">UI</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </div>
+    <div class="description">
+      <h3>Summary</h3>
+        <p>Shows element (not necesarily, since the element&#39;s parent might be hidden or out of view)</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+              
+                <span class="type"><a href="../classes/UI.html" class="crosslink">UI</a></span>:
+              
+              
+
+
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>m.app.ui.show();</code></pre>
+
+            </div>
+        </div>
+    
+
+    
+
+</div>
+
+                
+            </div>
+        
+
+        
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+                
+                    <div id="property_$el" class="property item inherited">
+
+  <h3 class="blue-method-name">$el</h3>
+  <div class="meta method-meta">
+    
+      
+      <p>Inherited from
+        <a href="../classes/UI.html#property_$el">UI</a>:
+      
+    
+    
+      <a href="../files/js_ui.js.html#l46"><code>js&#x2F;ui.js:46</code></a>
+    
+  </p>
+
+    
+
+    
+  </div>
+
+  <h3>Syntax</h3>
+  <div class="blue-method-syntax">
+    <h3 class="name"><code>$el</code></h3>
+    <span class="type">Unknown</span>
+
+    
+
+    
+
+    
+
+    
+
+    </div>
+
+    <div class="description">
+      <h3>Summary</h3>
+        <p>Zepto/jQuery object for DOM element</p>
+
+    </div>
+
+    
+
+    
+
+  
+    <div class="example">
+      <h4>Example:</h4>
+
+      <div class="example-content">
+        <pre class="code prettyprint"><code>$appDOMElement = m.app.ui.$el;
+$appDOMElement.on(&quot;tap&quot;, function() {
+    console.log(&quot;Header was tapped.&quot;);
+});</code></pre>
+
+      </div>
+    </div>
+  
+
+  
+
+</div>
+
+                
+                    <div id="property_el" class="property item inherited">
+
+  <h3 class="blue-method-name">el</h3>
+  <div class="meta method-meta">
+    
+      
+      <p>Inherited from
+        <a href="../classes/UI.html#property_el">UI</a>:
+      
+    
+    
+      <a href="../files/js_ui.js.html#l33"><code>js&#x2F;ui.js:33</code></a>
+    
+  </p>
+
+    
+
+    
+  </div>
+
+  <h3>Syntax</h3>
+  <div class="blue-method-syntax">
+    <h3 class="name"><code>el</code></h3>
+    <span class="type">Unknown</span>
+
+    
+
+    
+
+    
+
+    
+
+    </div>
+
+    <div class="description">
+      <h3>Summary</h3>
+        <p>DOM element</p>
+
+    </div>
+
+    
+
+    
+
+  
+    <div class="example">
+      <h4>Example:</h4>
+
+      <div class="example-content">
+        <pre class="code prettyprint"><code>appDOMElement = m.app.ui.el;
+appDOMElement.addEventListener(&quot;touchend&quot;, function() {
+    console.log(&quot;Header was touched.&quot;);
+});</code></pre>
+
+      </div>
+    </div>
+  
+
+  
+
+</div>
+
+                
+            </div>
+        
+
+        
+
+        
+    </div>
+</div>
+
+
+
+
 
                     </div>
                 </div>

@@ -39,18 +39,32 @@
                 
             inputs = uiview.$el.find(".m-checkbox");
             inputs.each(function(index,element) {
-                var $element = $(element);
+                var $element = $(element),
+                    coverHTML,
+                    $cover,
+                    $label,
+                    $icon,
+                    updateValue;
+
+                updateValue = function() {
+                    var checked = element.getAttribute("checked");
+                    if (checked) {
+                        $icon.removeClass("m-hidden");
+                    } else {
+                        $icon.addClass("m-hidden");
+                    }
+                }
                 
                 /*jshint multistr: true */
-                var coverHTML = '<div class="m-checkbox m-checkbox-cover">\
+                coverHTML = '<div class="m-checkbox m-checkbox-cover">\
                     <span class="m-checkbox-icon m-icon-ok-small m-hidden"></span>\
                 </div>';
 
 
-                var $cover = element.$cover = $(coverHTML).insertBefore(element);
+                $cover = element.$cover = $(coverHTML).insertBefore(element);
                 
-                var $label = $("label[for=" + element.id + "]");
-                var $icon = $cover.find(".m-checkbox-icon");
+                $label = $("label[for=" + element.id + "]");
+                $icon = $cover.find(".m-checkbox-icon");
                 $cover[0].appendChild($label[0]);
                 
                 $element.removeClass("m-checkbox")
@@ -67,14 +81,6 @@
                     updateValue();
                 });
                 
-                function updateValue() {
-                    var checked = element.getAttribute("checked");
-                    if (checked) {
-                        $icon.removeClass("m-hidden");
-                    } else {
-                        $icon.addClass("m-hidden");
-                    }
-                }
             });
         }   
     });
