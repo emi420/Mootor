@@ -50,6 +50,8 @@
 
                 var $cover = element.$cover = $(coverHTML).insertBefore(element);
                 var $value = $cover.find(".m-value");
+                inputs.addClass("m-date-hidden");      
+                inputs.removeClass("m-date");                   
 
                 $element.on("change", updateValue);
 
@@ -75,6 +77,9 @@
     $.extend(UIFormDate.prototype, {
     });        
 
-    UIForm.registerControl(UIFormDate);  
+    if (m.context.os.ios === true) {
+        UIForm.registerControl(UIFormDate);  
+    }
+
 
 }(window.$, window.Mootor));

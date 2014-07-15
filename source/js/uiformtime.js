@@ -39,6 +39,8 @@
             var inputs;
                 
             inputs = uiview.$el.find(".m-time");
+            inputs.addClass("m-time-hidden");                
+            inputs.removeClass("m-time");                   
             inputs.each(function(index,element) {
                 var $element = $(element);
                 
@@ -71,6 +73,8 @@
     $.extend(UIFormTime.prototype, {
     });        
 
-    UIForm.registerControl(UIFormTime);  
+    if (m.context.os.ios === true) {
+        UIForm.registerControl(UIFormTime);  
+    }
 
 }(window.$, window.Mootor));

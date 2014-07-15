@@ -27,6 +27,8 @@ cat js/clickfix.js \
     js/uiformselect.js \
     js/uiformcheckbox.js \
     js/uiformoption.js \
+    js/uiformdate.js \
+    js/uiformtime.js \
     js/uibutton.js \
     > ../dist/js/mootor.js
 

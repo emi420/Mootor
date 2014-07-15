@@ -1,4 +1,4 @@
-input[type=time].m-time {
+input[type=time].m-time-hidden {
 	opacity: 0.001;
     top: 0;
     width: 100%;
@@ -6,3 +6,11 @@ input[type=time].m-time {
     top: 2.4em;
 }
 
+input[type=time].m-time {
+    margin-left: 10px;
+    width: 100%;
+    border: 0;
+    margin-bottom: 10px;
+    padding: 0;
+    font-size: 1em;
+}

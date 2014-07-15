@@ -53,11 +53,18 @@
             },
             
             cordova: (window.Cordova !== undefined),
-            phonegap: (window.PhoneGap !== undefined)
+            phonegap: (window.PhoneGap !== undefined),
+            
+            _androidversion: function() {
+                var ua = navigator.userAgent;
+                if( ua.indexOf("Android") >= 0 ) {
+                  var androidversion = parseFloat(ua.slice(ua.indexOf("Android")+8)); 
+                }
+                return androidversion;
+            }
 
         });
     };
-    
 
     // Static global objects
     
