@@ -232,11 +232,18 @@
             },
             
             cordova: (window.Cordova !== undefined),
-            phonegap: (window.PhoneGap !== undefined)
+            phonegap: (window.PhoneGap !== undefined),
+            
+            _androidversion: function() {
+                var ua = navigator.userAgent;
+                if( ua.indexOf("Android") >= 0 ) {
+                  var androidversion = parseFloat(ua.slice(ua.indexOf("Android")+8)); 
+                }
+                return androidversion;
+            }
 
         });
     };
-    
 
     // Static global objects
     
@@ -3278,6 +3285,171 @@
     });        
 
    UIForm.registerControl(UIFormOption);  
+
+}(window.$, window.Mootor));
+/**
+* UIFormDate is a date input of a form
+*
+* @class UIFormDate
+* @extends UI
+* @constructor
+* @module UI
+* @author Emilio Mariscal (emi420 [at] gmail.com)
+*/
+
+(function ($, Mootor) {
+    
+    "use strict";
+
+    var UIFormDate,
+        UIForm,
+    
+        UI;
+
+    // Dependences
+
+    UI = Mootor.UI;
+    UIForm = Mootor.UIForm;
+    
+    // Private constructors
+
+    UIFormDate = function() {
+        // code here
+    };
+
+    // Prototypal inheritance
+    $.extend(UIFormDate.prototype, UI.prototype);
+
+    // Private static methods and properties
+
+    $.extend(UIFormDate, {
+        _init: function(uiview) {
+            
+            var inputs;
+                
+            inputs = uiview.$el.find(".m-date");
+            inputs.each(function(index,element) {
+                var $element = $(element);
+                
+                /*jshint multistr: true */
+                var coverHTML = '<div class="m-select m-select-cover">\
+                    <span class="m-value">Select ...</span>\
+                    <span class="m-icon-arrow-down-small"></span>\
+                </div>';
+
+                var $cover = element.$cover = $(coverHTML).insertBefore(element);
+                var $value = $cover.find(".m-value");
+                inputs.addClass("m-date-hidden");      
+                inputs.removeClass("m-date");                   
+
+                $element.on("change", updateValue);
+
+                $element.on("tap", function() {
+                    $element.focus();
+                });
+                $element.on("focus", function() {
+                    var me = document.createEvent("MouseEvents");
+                    me.initMouseEvent("mousedown", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+                });
+
+                function updateValue() {
+                    // Value is the text of the selected option or the placeholder text
+                    var value = element.value;
+                    $value.html(value);
+                }
+            });
+        }   
+    });
+
+    // Public methods and properties
+
+    $.extend(UIFormDate.prototype, {
+    });        
+
+    if (m.context.os.ios === true) {
+        UIForm.registerControl(UIFormDate);  
+    }
+
+
+}(window.$, window.Mootor));
+/**
+* UIFormTime is a time input of a form
+*
+* @class UIFormTime
+* @extends UI
+* @constructor
+* @module UI
+* @author Emilio Mariscal (emi420 [at] gmail.com)
+*/
+
+(function ($, Mootor) {
+    
+    "use strict";
+
+    var UIFormTime,
+        UIForm,
+    
+        UI;
+
+    // Dependences
+
+    UI = Mootor.UI;
+    UIForm = Mootor.UIForm;
+    
+    // Private constructors
+
+    UIFormTime = function() {
+        // code here
+    };
+
+    // Prototypal inheritance
+    $.extend(UIFormTime.prototype, UI.prototype);
+
+    // Private static methods and properties
+
+    $.extend(UIFormTime, {
+        _init: function(uiview) {
+            
+            var inputs;
+                
+            inputs = uiview.$el.find(".m-time");
+            inputs.addClass("m-time-hidden");                
+            inputs.removeClass("m-time");                   
+            inputs.each(function(index,element) {
+                var $element = $(element);
+                
+                /*jshint multistr: true */
+                var coverHTML = '<div class="m-select m-select-cover">\
+                    <span class="m-value">Select ...</span>\
+                    <span class="m-icon-arrow-down-small"></span>\
+                </div>';
+
+                var $cover = element.$cover = $(coverHTML).insertBefore(element);
+                var $value = $cover.find(".m-value");
+
+                $element.on("change", uptimeValue);
+
+                $element.on("tap", function() {
+                    $element.focus();
+                });
+
+                function uptimeValue() {
+                    // Value is the text of the selected option or the placeholder text
+                    var value = element.value;
+                    $value.html(value);
+                }
+            });
+        }   
+    });
+
+    // Public methods and properties
+
+    $.extend(UIFormTime.prototype, {
+    });        
+
+    if (m.context.os.ios === true) {
+        UIForm.registerControl(UIFormTime);  
+    }
 
 }(window.$, window.Mootor));
 /**
