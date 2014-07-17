@@ -71,15 +71,6 @@
     
         stateObj = { view: view.id };
         
-        if (currentView != view) {
-
-            if (url !== "") {
-                window.history.pushState(stateObj, view.id, url);
-            } else {
-                window.history.pushState(stateObj, view.id, window.location.pathname);                    
-            }
-
-        }
         View.dispatch("load", view);
         
     });

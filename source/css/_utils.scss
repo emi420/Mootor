@@ -1,4 +1,4 @@
-$default-padding: .5em 1em;
+@import "variables";
 
 .m-hidden {
 	display: none;
@@ -31,29 +31,6 @@ $default-padding: .5em 1em;
 }
 
 .m-padding {
-    padding: $default-padding;
-}
-
-// FIXME CHECK
-.m-doc {
-	&,* {
-		border: 1px solid black !important;
-		padding: 0.5em !important;
-		margin: 1em !important;
-		background: rgba(0,0,0,0.1) !important;
-	}
-
-	&.m-html,
-	.m-app {
-		width: calc(100% - 4em);
-		height: calc(100% - 4em);
-
-		.m-views-container,
-		.m-panel {
-			width: calc(100% - 3em);
-			height: calc(100% - 4em);
-		}
-
-	}
-
+    padding: $default-padding ($default-padding*2);
+    box-sizing: border-box;
 }

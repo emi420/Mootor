@@ -32,45 +32,25 @@
     };
 
     // Event handlers
-
-    _onPopState = function() {
-        
-        // FIXME CHECK
-        
-        var urlBack;
-        
-        if (_lastHash === window.location.hash) {
-            urlBack = m.app.history[m.app.history.length - 2];
-            if (urlBack !== undefined) {
-                _appGo(urlBack);
-            } else {
-                _appGo(window.location.hash);
-            }
-        } else {
-            _appGo(window.location.hash);
-        }
-
-        _lastHash = window.location.hash;
-
-    };
     
     if ("onpopstate" in window) {
-        window.onpopstate = _onPopState;
+        window.onpopstate = function(e) {
+            _appGo(window.location.hash, true);
+        };
     }
-
 
     _appGo = function(url) { 
         _pendingGo = url;
     };
 
     App.on("ready", function() {
-        _appGo = function(url) {
-            m.app.go(url);
+        _appGo = function(url, _noPushState) {
+            m.app.go(url, _noPushState);
         };
         if (_pendingGo === undefined) {
             _pendingGo = window.location.hash;
         }
-        
+        m.app._firstHash = _pendingGo;
         m.app.go(_pendingGo);
     });
 
@@ -106,10 +86,6 @@
                     route,
                     match;
                     
-                    if (url === undefined) {
-                    //    debugger;
-                    }
-
                 for (s in Router._collection) {
                     match = url.match(new RegExp(s));
                     if (match !== null) {

@@ -85,7 +85,7 @@
                 el: backEl
             });
             self.back.$el.addClass("m-header-back");
-            self.back.hide();
+            //self.back.hide();
             
             self.back.$el.on("tap click", function() {
                 m.app.back();
@@ -93,13 +93,15 @@
             self.back.el.onclick = function() {
                 return false;
             };
+            
+            // FIXME CHECK
             App.on("go", function(app) {
-                if (app.history.length > 1) {
-                    self.back.show();
-                } else {
+                if (m.app._firstHash === window.location.hash) {
                     self.back.hide();
+                } else {
+                    self.back.show();
                 }
-            });            
+            });         
         }
         
     });

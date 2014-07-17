@@ -1,14 +1,11 @@
-/*
-button_sizes = ["m-button","m-button-small"]
-button_width = ["m-button","m-button-block","m-button-fullwidth"]
-button_style = ["m-button","m-button-outline","m-button-clear"]
-*/
+@import "variables";
 
 .m-button {
     font-size: 1em;
     line-height: 2em;
     border-width: 0;
     border-radius: 0.5em;
+    margin: $default-margin 0;
     display: inline-block;
     -webkit-appearance: none;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0); 
@@ -57,7 +54,7 @@ button_style = ["m-button","m-button-outline","m-button-clear"]
 
 .m-button-block {
     @extend .m-button;
-    width: calc(100% - 20px);
-    margin-left: 10px;
-    margin-right: 10px;
+    width: 100%;
+    //margin-left: 10px;
+    //margin-right: 10px;
 }

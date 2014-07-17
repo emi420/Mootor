@@ -50,7 +50,9 @@
                 updateValue = function() {
                     // Value is the text of the selected option or the placeholder text
                     var value = element.options[element.selectedIndex].text || element.placeholder;
-                    $value.html(value);
+                    if (value !== undefined) {
+                        $value.html(value);
+                    }
                 }
                 
                 /*jshint multistr: true */
@@ -63,7 +65,11 @@
                 $value = $cover.find(".m-value");
 
                 updateValue();
-                $element.on("change", updateValue);
+                $element.on("change", function() {
+                    if (this === element) {
+                        updateValue();
+                    }
+                });
 
                 $element.on("tap", function() {
                     $element.focus();

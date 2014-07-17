@@ -16,14 +16,10 @@
         background-color: transparent;
         border: none;
         font-family: sans-serif;
-        padding: 0;
         box-sizing: border-box;
         padding-top: 0.5em;
         padding-bottom: 1em;
-        
-        @if $class != "m-checkbox" and $class != "m-option" and $class != "m-select"{
-            padding-left: 0.67em;
-        } 
+        padding-left: 0;
 
         height: $height;
         
@@ -48,7 +44,7 @@
     overflow: hidden;
     .m-form-left-labels .m-field {
         overflow: hidden;
-
+        padding-top: 0.67em;
         label {
             float: left;
             width: 30%;
@@ -70,13 +66,9 @@
         label {
             font-weight: bold;
             box-sizing: border-box;
-            padding: 0.67em 0.67em 0;
+            padding: 0.67em 0 0;
             font-size: 1em;
             overflow-wrap: break-word;
-        }
-        
-        a,button,h1,h2,h3,h4,h5,h6,legend,span {
-            margin-left: 0.67em;
         }
         
         &.m-error {

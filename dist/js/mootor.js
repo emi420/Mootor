@@ -305,20 +305,6 @@
     // Public methods
 
     App.prototype = {
-        
-        /**
-        * Stores the navigation history. 
-        * An array of views, ordered in the sequence that they were visited by the user.
-        *
-        * @property history
-        * @type array
-        * @example
-        *     if (m.app.history.length === 1) {
-        *          console.log("You are on the first view")
-        *     }
-        */
-        history: [],
-       
 
         /**
         * The application's version number
@@ -373,17 +359,22 @@
         * @example
         *     m.app.go("/product/15/");
         */
-        go: function(url) {
-            var route;
+        go: function(url, _noPushState) {
+            var route,
+                stateObj;
+                
             route =  m.app.route(url);
+            
             if (route !== undefined) {
                 App._currentRoute = route;
                 App.dispatch("go", this);
-                if (this.history[this.history.length - 2] !== route.url) {
-                    this.history.push(route.url);    
-                } else {
-                    this.history.pop();
+                
+                stateObj = { view: route.view.id };
+        
+                if (_noPushState !== true) {
+                    window.history.pushState(stateObj, route.view.id, route.url);
                 }
+                                    
             } else {
                 throw(new Error("Route " + url + " is not defined"));
             }                       
@@ -400,10 +391,7 @@
         *     m.app.back();
         */
         back: function() {
-            var url = m.app.history[m.app.history.length - 2];
-            if (url !== undefined) {
-                m.app.go(url);
-            }
+            window.history.back();
             return this;
         },        
 
@@ -562,15 +550,6 @@
     
         stateObj = { view: view.id };
         
-        if (currentView != view) {
-
-            if (url !== "") {
-                window.history.pushState(stateObj, view.id, url);
-            } else {
-                window.history.pushState(stateObj, view.id, window.location.pathname);                    
-            }
-
-        }
         View.dispatch("load", view);
         
     });
@@ -1039,6 +1018,7 @@
         setEvent = function(el, href) {
             $(el).on("tap", function(e) {
                 m.app.go(href);
+                return false;
             });
             el.addEventListener("touchend", function(e) {
                 e.preventDefault();
@@ -1524,45 +1504,25 @@
     };
 
     // Event handlers
-
-    _onPopState = function() {
-        
-        // FIXME CHECK
-        
-        var urlBack;
-        
-        if (_lastHash === window.location.hash) {
-            urlBack = m.app.history[m.app.history.length - 2];
-            if (urlBack !== undefined) {
-                _appGo(urlBack);
-            } else {
-                _appGo(window.location.hash);
-            }
-        } else {
-            _appGo(window.location.hash);
-        }
-
-        _lastHash = window.location.hash;
-
-    };
     
     if ("onpopstate" in window) {
-        window.onpopstate = _onPopState;
+        window.onpopstate = function(e) {
+            _appGo(window.location.hash, true);
+        };
     }
-
 
     _appGo = function(url) { 
         _pendingGo = url;
     };
 
     App.on("ready", function() {
-        _appGo = function(url) {
-            m.app.go(url);
+        _appGo = function(url, _noPushState) {
+            m.app.go(url, _noPushState);
         };
         if (_pendingGo === undefined) {
             _pendingGo = window.location.hash;
         }
-        
+        m.app._firstHash = _pendingGo;
         m.app.go(_pendingGo);
     });
 
@@ -1598,10 +1558,6 @@
                     route,
                     match;
                     
-                    if (url === undefined) {
-                    //    debugger;
-                    }
-
                 for (s in Router._collection) {
                     match = url.match(new RegExp(s));
                     if (match !== null) {
@@ -1987,7 +1943,7 @@
                 el: backEl
             });
             self.back.$el.addClass("m-header-back");
-            self.back.hide();
+            //self.back.hide();
             
             self.back.$el.on("tap click", function() {
                 m.app.back();
@@ -1995,13 +1951,15 @@
             self.back.el.onclick = function() {
                 return false;
             };
+            
+            // FIXME CHECK
             App.on("go", function(app) {
-                if (app.history.length > 1) {
-                    self.back.show();
-                } else {
+                if (m.app._firstHash === window.location.hash) {
                     self.back.hide();
+                } else {
+                    self.back.show();
                 }
-            });            
+            });         
         }
         
     });
@@ -2303,6 +2261,7 @@
                 constructor: constructor
             });
         }
+
     });
 
 }(window.$, window.Mootor));
@@ -3054,7 +3013,9 @@
                 updateValue = function() {
                     // Value is the text of the selected option or the placeholder text
                     var value = element.options[element.selectedIndex].text || element.placeholder;
-                    $value.html(value);
+                    if (value !== undefined) {
+                        $value.html(value);
+                    }
                 }
                 
                 /*jshint multistr: true */
@@ -3067,7 +3028,11 @@
                 $value = $cover.find(".m-value");
 
                 updateValue();
-                $element.on("change", updateValue);
+                $element.on("change", function() {
+                    if (this === element) {
+                        updateValue();
+                    }
+                });
 
                 $element.on("tap", function() {
                     $element.focus();

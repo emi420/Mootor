@@ -110,6 +110,7 @@
         setEvent = function(el, href) {
             $(el).on("tap", function(e) {
                 m.app.go(href);
+                return false;
             });
             el.addEventListener("touchend", function(e) {
                 e.preventDefault();

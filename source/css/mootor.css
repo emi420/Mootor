@@ -77,11 +77,6 @@ html, body {
 
 /* line 15, mootor.scss */
 .m-app {
-  /*
-  button_sizes = ["m-button","m-button-small"]
-  button_width = ["m-button","m-button-block","m-button-fullwidth"]
-  button_style = ["m-button","m-button-outline","m-button-clear"]
-  */
   /* SIZE */
   /* WIDTH */
 }
@@ -707,45 +702,43 @@ html, body {
 }
 /* line 32, _text.scss */
 .m-app h2, .m-app h3, .m-app h4, .m-app h5, .m-app h6 {
-  margin-bottom: .7em;
+  margin: .35em 0 .35em;
   line-height: 150%;
 }
 /* line 37, _text.scss */
 .m-app h1 {
   font-size: 1.6em;
-  margin-bottom: .7em;
-  margin-top: .5em;
   line-height: 140%;
   font-weight: 400;
   font-family: 'Helvetica Neue Medium', Roboto, sans-serif;
 }
-/* line 45, _text.scss */
+/* line 42, _text.scss */
 .m-app h1 strong {
   font-weight: 800;
 }
-/* line 50, _text.scss */
+/* line 47, _text.scss */
 .m-app h2 {
   font-size: 1.3em;
   font-weight: 400;
   font-family: 'Helvetica Neue Medium', Roboto, sans-serif;
 }
-/* line 56, _text.scss */
+/* line 53, _text.scss */
 .m-app h3 {
   font-size: 1.1em;
   font-weight: 400;
 }
-/* line 62, _text.scss */
+/* line 59, _text.scss */
 .m-app h4 {
   font-size: 1em;
   font-weight: 300;
 }
-/* line 67, _text.scss */
+/* line 64, _text.scss */
 .m-app h5 {
   font-size: .9em;
   color: #666;
   font-weight: 300;
 }
-/* line 73, _text.scss */
+/* line 70, _text.scss */
 .m-app h6 {
   font-size: 11px;
   font-family: 'Helvetica Neue Roman', Roboto, sans-serif;
@@ -834,12 +827,13 @@ html, body {
   transform: none;
   left: 0;
 }
-/* line 7, _uibutton.scss */
+/* line 3, _uibutton.scss */
 .m-app .m-button, .m-app .m-button-fullwidth, .m-app .m-button-block {
   font-size: 1em;
   line-height: 2em;
   border-width: 0;
   border-radius: 0.5em;
+  margin: 0.5em 0;
   display: inline-block;
   -webkit-appearance: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -853,23 +847,23 @@ html, body {
   text-align: center;
   /* For icons - FIXME CHECK: Find a better way to select icons */
 }
-/* line 25, _uibutton.scss */
+/* line 22, _uibutton.scss */
 .m-app .m-button span, .m-app .m-button-fullwidth span, .m-app .m-button-block span {
   top: 2px;
   position: relative;
 }
-/* line 32, _uibutton.scss */
+/* line 29, _uibutton.scss */
 .m-app .m-button:link, .m-app .m-button-fullwidth:link, .m-app .m-button-block:link {
   text-decoration: none;
 }
-/* line 38, _uibutton.scss */
+/* line 35, _uibutton.scss */
 .m-app .m-button:focus, .m-app .m-button-fullwidth:focus, .m-app .m-button-block:focus,
 .m-app .m-button:active,
 .m-app .m-button-fullwidth:active,
 .m-app .m-button-block:active {
   outline: 0;
 }
-/* line 43, _uibutton.scss */
+/* line 40, _uibutton.scss */
 .m-app .m-button-small {
   padding-top: 0;
   padding-bottom: 0;
@@ -877,16 +871,14 @@ html, body {
   min-width: 110px;
   font-size: 0.8em;
 }
-/* line 52, _uibutton.scss */
+/* line 49, _uibutton.scss */
 .m-app .m-button-fullwidth {
   width: 100%;
   border-radius: 0;
 }
-/* line 58, _uibutton.scss */
+/* line 55, _uibutton.scss */
 .m-app .m-button-block {
-  width: calc(100% - 20px);
-  margin-left: 10px;
-  margin-right: 10px;
+  width: 100%;
 }
 /* line 4, _uiheader.scss */
 .m-app .m-header-container header {
@@ -1060,43 +1052,40 @@ html, body {
   animation-name: m-loading-object-animation-2;
   margin-left: 2.5em;
 }
-/* line 45, _uiform.scss */
+/* line 41, _uiform.scss */
 .m-app .m-form {
   border-sizing: border-box;
   width: 100%;
   overflow: hidden;
 }
-/* line 49, _uiform.scss */
+/* line 45, _uiform.scss */
 .m-app .m-form .m-form-left-labels .m-field {
   overflow: hidden;
+  padding-top: 0.67em;
 }
-/* line 52, _uiform.scss */
+/* line 48, _uiform.scss */
 .m-app .m-form .m-form-left-labels .m-field label {
   float: left;
   width: 30%;
 }
-/* line 58, _uiform.scss */
+/* line 54, _uiform.scss */
 .m-app .m-form .m-form-top-labels .m-field label {
   width: 100%;
   display: block;
 }
-/* line 64, _uiform.scss */
+/* line 60, _uiform.scss */
 .m-app .m-form .m-field {
   position: relative;
   border-bottom: 1px solid;
   display: block;
 }
-/* line 70, _uiform.scss */
+/* line 66, _uiform.scss */
 .m-app .m-form .m-field label {
   font-weight: bold;
   box-sizing: border-box;
-  padding: 0.67em 0.67em 0;
+  padding: 0.67em 0 0;
   font-size: 1em;
   overflow-wrap: break-word;
-}
-/* line 78, _uiform.scss */
-.m-app .m-form .m-field a, .m-app .m-form .m-field button, .m-app .m-form .m-field h1, .m-app .m-form .m-field h2, .m-app .m-form .m-field h3, .m-app .m-form .m-field h4, .m-app .m-form .m-field h5, .m-app .m-form .m-field h6, .m-app .m-form .m-field legend, .m-app .m-form .m-field span {
-  margin-left: 0.67em;
 }
 /* line 3, _uiform.scss */
 .m-app .m-form-left-labels .m-text {
@@ -1113,18 +1102,17 @@ html, body {
   background-color: transparent;
   border: none;
   font-family: sans-serif;
-  padding: 0;
   box-sizing: border-box;
   padding-top: 0.5em;
   padding-bottom: 1em;
-  padding-left: 0.67em;
+  padding-left: 0;
   height: auto;
 }
-/* line 30, _uiform.scss */
+/* line 26, _uiform.scss */
 .m-app .m-text:disabled {
   opacity: 0.2;
 }
-/* line 34, _uiform.scss */
+/* line 30, _uiform.scss */
 .m-app .m-text:focus {
   outline: 0;
 }
@@ -1143,18 +1131,17 @@ html, body {
   background-color: transparent;
   border: none;
   font-family: sans-serif;
-  padding: 0;
   box-sizing: border-box;
   padding-top: 0.5em;
   padding-bottom: 1em;
-  padding-left: 0.67em;
+  padding-left: 0;
   height: 5em;
 }
-/* line 30, _uiform.scss */
+/* line 26, _uiform.scss */
 .m-app .m-textarea:disabled {
   opacity: 0.2;
 }
-/* line 34, _uiform.scss */
+/* line 30, _uiform.scss */
 .m-app .m-textarea:focus {
   outline: 0;
 }
@@ -1173,17 +1160,17 @@ html, body {
   background-color: transparent;
   border: none;
   font-family: sans-serif;
-  padding: 0;
   box-sizing: border-box;
   padding-top: 0.5em;
   padding-bottom: 1em;
+  padding-left: 0;
   height: auto;
 }
-/* line 30, _uiform.scss */
+/* line 26, _uiform.scss */
 .m-app .m-select:disabled {
   opacity: 0.2;
 }
-/* line 34, _uiform.scss */
+/* line 30, _uiform.scss */
 .m-app .m-select:focus {
   outline: 0;
 }
@@ -1198,29 +1185,33 @@ html, body {
 .m-app .m-form-left-labels select.m-select {
   float: left;
   left: 30%;
-  top: 0.4em;
+  top: 0.67em;
 }
 /* line 16, _uiformselect.scss */
 .m-app .m-form-left-labels .m-select-cover {
   float: left;
+  width: 70%;
 }
-/* line 21, _uiformselect.scss */
+/* line 22, _uiformselect.scss */
+.m-app .m-select-cover {
+  padding-right: 10px;
+}
+/* line 27, _uiformselect.scss */
 .m-app .m-select-cover {
   background: white;
   position: relative;
 }
-/* line 25, _uiformselect.scss */
+/* line 31, _uiformselect.scss */
 .m-app .m-select-cover .m-icon-arrow-down-small {
   position: absolute;
-  right: 10px;
+  right: 0;
   top: 7px;
 }
-/* line 30, _uiformselect.scss */
+/* line 36, _uiformselect.scss */
 .m-app .m-select-cover .m-value {
   height: 1.4em;
   display: inline-block;
   overflow: hidden;
-  margin-right: 11px;
 }
 /* line 10, _colors.scss */
 .m-app .m-bg-color-gray-lighter {
@@ -1839,17 +1830,17 @@ html, body {
   background-color: transparent;
   border: none;
   font-family: sans-serif;
-  padding: 0;
   box-sizing: border-box;
   padding-top: 0.5em;
   padding-bottom: 1em;
+  padding-left: 0;
   height: auto;
 }
-/* line 30, _uiform.scss */
+/* line 26, _uiform.scss */
 .m-app .m-checkbox:disabled {
   opacity: 0.2;
 }
-/* line 34, _uiform.scss */
+/* line 30, _uiform.scss */
 .m-app .m-checkbox:focus {
   outline: 0;
 }
@@ -1860,7 +1851,7 @@ html, body {
 /* line 7, _uiformcheckbox.scss */
 .m-app .m-checkbox-icon {
   position: absolute;
-  right: 10px;
+  right: 0;
   margin-top: 10px;
 }
 /* line 13, _uiformcheckbox.scss */
@@ -1885,9 +1876,8 @@ html, body {
   height: 1.4em;
   display: inline-block;
   overflow: hidden;
-  margin-right: 21px;
 }
-/* line 39, _uiformcheckbox.scss */
+/* line 38, _uiformcheckbox.scss */
 .m-app .m-form-left-labels input.m-checkbox {
   top: -2em;
 }
@@ -1906,17 +1896,17 @@ html, body {
   background-color: transparent;
   border: none;
   font-family: sans-serif;
-  padding: 0;
   box-sizing: border-box;
   padding-top: 0.5em;
   padding-bottom: 1em;
+  padding-left: 0;
   height: auto;
 }
-/* line 30, _uiform.scss */
+/* line 26, _uiform.scss */
 .m-app .m-option:disabled {
   opacity: 0.2;
 }
-/* line 34, _uiform.scss */
+/* line 30, _uiform.scss */
 .m-app .m-option:focus {
   outline: 0;
 }
@@ -1927,7 +1917,7 @@ html, body {
 /* line 7, _uiformoption.scss */
 .m-app .m-option-icon {
   position: absolute;
-  right: 10px;
+  right: 0;
   margin-top: 10px;
 }
 /* line 13, _uiformoption.scss */
@@ -1952,9 +1942,8 @@ html, body {
   height: 1.4em;
   display: inline-block;
   overflow: hidden;
-  margin-right: 21px;
 }
-/* line 39, _uiformoption.scss */
+/* line 38, _uiformoption.scss */
 .m-app .m-form-left-labels input.m-option {
   top: -2em;
 }
@@ -1970,7 +1959,6 @@ html, body {
 /* line 12, _uiformdate.scss */
 .m-app input[type=date].m-date,
 .m-app input[type=month].m-date {
-  margin-left: 10px;
   width: 100%;
   border: 0;
   margin-bottom: 10px;
@@ -1987,7 +1975,6 @@ html, body {
 }
 /* line 9, _uiformtime.scss */
 .m-app input[type=time].m-time {
-  margin-left: 10px;
   width: 100%;
   border: 0;
   margin-bottom: 10px;
@@ -2075,27 +2062,7 @@ html, body {
 /* line 33, _utils.scss */
 .m-app .m-padding {
   padding: 0.5em 1em;
-}
-/* line 39, _utils.scss */
-.m-app .m-doc, .m-app .m-doc * {
-  border: 1px solid black !important;
-  padding: 0.5em !important;
-  margin: 1em !important;
-  background: rgba(0, 0, 0, 0.1) !important;
-}
-/* line 47, _utils.scss */
-.m-app .m-doc.m-html,
-.m-app .m-doc .m-app {
-  width: calc(100% - 4em);
-  height: calc(100% - 4em);
-}
-/* line 52, _utils.scss */
-.m-app .m-doc.m-html .m-views-container,
-.m-app .m-doc.m-html .m-panel,
-.m-app .m-doc .m-app .m-views-container,
-.m-app .m-doc .m-app .m-panel {
-  width: calc(100% - 3em);
-  height: calc(100% - 4em);
+  box-sizing: border-box;
 }
 /* line 2, _list.scss */
 .m-app nav.m-list a {

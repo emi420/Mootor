@@ -10,11 +10,17 @@ select.m-select {
 .m-form-left-labels select.m-select {
 	float: left;
     left: 30%;
-    top: 0.4em;
+    top: 0.67em;
 }
 
 .m-form-left-labels .m-select-cover {
     float: left;
+    width: 70%;
+}
+
+
+.m-select-cover {
+    padding-right: 10px;
 }
 
 
@@ -24,13 +30,12 @@ select.m-select {
 
 	.m-icon-arrow-down-small {
 		position: absolute;
-		right: 10px;
+		right: 0;
 		top: 7px;
 	}
 	.m-value {
 		height: 1.4em;
 		display: inline-block;
 		overflow: hidden;
-		margin-right: 11px;
 	}
 }	

@@ -65,6 +65,7 @@
                 constructor: constructor
             });
         }
+
     });
 
 }(window.$, window.Mootor));

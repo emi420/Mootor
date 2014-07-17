@@ -46,20 +46,6 @@
     // Public methods
 
     App.prototype = {
-        
-        /**
-        * Stores the navigation history. 
-        * An array of views, ordered in the sequence that they were visited by the user.
-        *
-        * @property history
-        * @type array
-        * @example
-        *     if (m.app.history.length === 1) {
-        *          console.log("You are on the first view")
-        *     }
-        */
-        history: [],
-       
 
         /**
         * The application's version number
@@ -114,17 +100,22 @@
         * @example
         *     m.app.go("/product/15/");
         */
-        go: function(url) {
-            var route;
+        go: function(url, _noPushState) {
+            var route,
+                stateObj;
+                
             route =  m.app.route(url);
+            
             if (route !== undefined) {
                 App._currentRoute = route;
                 App.dispatch("go", this);
-                if (this.history[this.history.length - 2] !== route.url) {
-                    this.history.push(route.url);    
-                } else {
-                    this.history.pop();
+                
+                stateObj = { view: route.view.id };
+        
+                if (_noPushState !== true) {
+                    window.history.pushState(stateObj, route.view.id, route.url);
                 }
+                                    
             } else {
                 throw(new Error("Route " + url + " is not defined"));
             }                       
@@ -141,10 +132,7 @@
         *     m.app.back();
         */
         back: function() {
-            var url = m.app.history[m.app.history.length - 2];
-            if (url !== undefined) {
-                m.app.go(url);
-            }
+            window.history.back();
             return this;
         },        
 
