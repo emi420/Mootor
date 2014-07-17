@@ -3205,24 +3205,27 @@
                     $cover,
                     $label,
                     $icon,
-                    updateValue;
+                    updateValue,
+                    iconElementName = element.name.replace(".","_");
 
                 updateValue = function(norefresh) {
                     if (!norefresh) {
-                        $(".m-option-icon-name-" + element.name).addClass("m-hidden");
+                        $(".m-option-icon-name-" + iconElementName).addClass("m-hidden");
                     }
                     var checked = element.checked;
                     if (checked === true) {
                         $icon.removeClass("m-hidden");
+                    } else {
+                        $icon.addClass("m-hidden");
                     }
                 } 
                                
                 /*jshint multistr: true */
                 coverHTML = '<div class="m-option m-option-cover">\
-                    <span class="m-option-icon m-icon-ok-small m-hidden m-option-icon-name-$elementName" id="d"></span>\
+                    <span class="m-option-icon m-icon-ok-small m-hidden m-option-icon-name-$elementName"></span>\
                 </div>';
 
-                $cover = element.$cover = $(coverHTML.replace("$elementName", element.name)).insertBefore(element);
+                $cover = element.$cover = $(coverHTML.replace("$elementName", iconElementName)).insertBefore(element);
                 
                 $label = $("label[for=" + element.id + "]");
                 $icon = $cover.find(".m-option-icon");
@@ -3231,6 +3234,9 @@
                 
                 $element.removeClass("m-option")
                 $element.addClass("m-option-hidden");
+
+                $element.on("change", updateValue);
+
                 
                 $cover.on("tap click", function() {
                     element.checked = true;
