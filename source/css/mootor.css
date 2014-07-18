@@ -1202,7 +1202,7 @@ html, body {
   position: relative;
 }
 /* line 31, _uiformselect.scss */
-.m-app .m-select-cover .m-icon-arrow-down-small {
+.m-app .m-select-cover .m-select-icon {
   position: absolute;
   right: 0;
   top: 7px;

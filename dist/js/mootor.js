@@ -1007,38 +1007,46 @@
     });  
     
     App.on("ready", function() {
-        var links = $("a"),
-            i,
-            href,
-            setEvent,
-            onClick;
+           var links = $("a"),
+               i,
+               href,
+               setEvent,
+               onClick;
             
-            
-        // Android/iOS fixes
-        setEvent = function(el, href) {
-            $(el).on("tap", function(e) {
-                m.app.go(href);
-                return false;
-            });
-            el.addEventListener("touchend", function(e) {
-                e.preventDefault();
-            });
-        };
-        onClick = function() {
-            return false;
-        };
-        if ( 'ontouchstart' in window ) {
-            for (i = links.length; i--;) {
-                href = links[i].getAttribute("href");
-                links[i].onclick = onClick;
-                if (href !== null && m.app.route(links[i].getAttribute("href")) !== undefined) {                
-                    setEvent(links[i], href);
-                }
-            }
-        }
         
-    });  
+       // Android/iOS fixes
+       setEvent = function(el, href) {
+           if (m.context.os.ipad === true || m.context.os.iphone === true) {
+               $(el).on("tap", function(e) {
+                   m.app.go(href);
+               });
+           }
+           el.addEventListener("touchend", function(e) {
+               e.preventDefault();
+           });
+       };
+       if (m.context.os.ipad === true || m.context.os.iphone === true) {
+           onClick = function() {
+               return false;
+           };
+       } else {
+           onClick = function() {
+               m.app.go(href);
+               return false;
+            
+           };
+       }
     
+       if ( 'ontouchstart' in window ) {
+           for (i = links.length; i--;) {
+               href = links[i].getAttribute("href");
+               links[i].onclick = onClick;
+               if (href !== null && m.app.route(links[i].getAttribute("href")) !== undefined) {
+                   setEvent(links[i], href);
+               }
+           }
+       } 
+
 
 }(window.$, window.Mootor, window.m));
 /**
@@ -3021,7 +3029,7 @@
                 /*jshint multistr: true */
                 coverHTML = '<div class="m-select m-select-cover">\
                     <span class="m-value"></span>\
-                    <span class="m-icon-arrow-down-small"></span>\
+                    <span class="m-icon-arrow-down-small m-select-icon"></span>\
                 </div>';
 
                 $cover = element.$cover = $(coverHTML).insertBefore(element);
