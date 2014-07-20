@@ -364,6 +364,7 @@
                 stateObj;
                 
             route =  m.app.route(url);
+
             
             if (route !== undefined) {
                 App._currentRoute = route;
@@ -372,6 +373,9 @@
                 stateObj = { view: route.view.id };
         
                 if (_noPushState !== true) {
+                    if (route.url === "") {
+                        route.url = " ";
+                    }
                     window.history.pushState(stateObj, route.view.id, route.url);
                 }
                                     
@@ -1046,6 +1050,8 @@
                }
            }
        } 
+       
+   });
 
 
 }(window.$, window.Mootor, window.m));
