@@ -5,25 +5,49 @@ button_width = ["m-button","m-button-block","m-button-fullwidth"]
 button_style = ["m-button","m-button-outline","m-button-clear"]
 */
 
+.m-button {
+    &.m-button, &.m-button:focus {
+        @extend .m-color-white;
+        @extend .m-bg-color-black;
+        @extend .m-border-color-transparent;
+    }
+
+    &.m-button-block.m-button-outline, &.m-button-block.m-button-outline:focus,
+    &.m-button-fullwidth.m-button-outline, &.m-button-fullwidth.m-button-outline:focus,
+    &.m-button.m-button-outline, &.m-button.m-button-outline:focus {
+        @extend .m-bg-color-transparent;
+        @extend .m-color-black;
+        @extend .m-border-color-black;
+    }
+
+    &.m-button-block.m-button-clear, &.m-button-block.m-button-clear:focus,
+    &.m-button-fullwidth.m-button-clear, &.m-button-fullwidth.m-button-clear:focus,
+    &.m-button.m-button-clear, &.m-button.m-button-clear:focus {
+        @extend .m-bg-color-transparent;
+        @extend .m-border-color-transparent;
+        @extend .m-color-black;
+    }
+}
+
 @mixin m-button($name) {
-    .m-button-#{$name}  {
-        &.m-button {
+    .m-button.m-button-#{$name}  {
+        &.m-button, &.m-button:focus {
             @extend .m-color-white;
             @extend .m-bg-color-#{$name};
             @extend .m-border-color-transparent;
         }
 
-        &.m-button-block.m-button-outline,
-        &.m-button-fullwidth.m-button-outline,
-        &.m-button.m-button-outline {
+        &.m-button-block.m-button-outline, &.m-button-block.m-button-outline:focus,
+        &.m-button-fullwidth.m-button-outline, &.m-button-fullwidth.m-button-outline:focus,
+        &.m-button.m-button-outline, &.m-button.m-button-outline:focus {
             @extend .m-bg-color-transparent;
             @extend .m-color-#{$name};
             @extend .m-border-color-#{$name};
         }
 
-        &.m-button-block.m-button-clear,
-        &.m-button-fullwidth.m-button-clear,
-        &.m-button.m-button-clear {
+        &.m-button-block.m-button-clear, &.m-button-block.m-button-clear:focus,
+        &.m-button-fullwidth.m-button-clear, &.m-button-fullwidth.m-button-clear:focus,
+        &.m-button.m-button-clear, &.m-button.m-button-clear:focus {
             @extend .m-bg-color-transparent;
             @extend .m-border-color-transparent;
             @extend .m-color-#{$name};

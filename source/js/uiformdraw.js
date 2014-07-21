@@ -57,6 +57,7 @@
                 $label,
                 $canvas,
                 $canvasContainer,
+                $canvasHeader,
                 h,
                 w;
                         
@@ -73,7 +74,7 @@
             $cover = element.$cover = $(coverHTML).insertBefore(element);
             $label.insertBefore($cover.find(".m-draw-icon"));
             $element.hide();
-        
+            
             $canvasContainer = $('<div class="m-draw-canvas"> \
                     <div class="m-draw-canvas-header"> \
                         <span class="m-draw-cancel">Cancel</span> \
@@ -86,39 +87,116 @@
                 </div>');
         
             $canvasContainer.hide();
+            $canvasHeader = $canvasContainer.find(".m-draw-canvas-header");
             
             $canvasContainer.insertBefore(document.body.lastChild);
+            
+             $canvasContainer[0].addEventListener("touchmove", function(e) {
+                 e.preventDefault();
+                 e.stopPropagation();
+             })
         
-            // FIXME CHECK: hardcoded values (pixels)
             $canvas = $canvasContainer.find("canvas");
 
-            h = m.app.ui.$container.height() - 190;
+            h = m.app.ui.$container.height();
             w = m.app.ui.$container.width() - 40;
-            
+
+            if (w > h) {
+                h = m.app.ui.$container.height() - 30;
+                $canvasHeader.hide();
+            } else {
+                h = m.app.ui.$container.height() - 85;
+                $canvasHeader.show();
+            }
+
             $canvas.css("height",  h + "px");
-            $canvas[0].setAttribute("height",  h + "px");
-
             $canvas.css("width", w + "px");
+
+            $canvas[0].setAttribute("height",  h + "px");
             $canvas[0].setAttribute("width",  w + "px");
+            
+            var image = new Image();
 
-            $(".m-draw-cancel").on("tap click", function() {
+            $.extend(element, 
+                {"export": function() { return image.src } },
+                {
+                    "import": function(data) { 
+                        self._image.src = data;
+                    }
+                }
+                ,{"clear": function() { 
+                   var encodedImageData = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";                
+                   self._image.src = encodedImageData;
+                   self.clear();
+                }}
+            );
+
+            window.onresize = function() {
+                
+                self._$ctx.save();
+                
+                w = m.app.ui.$container.width() - 40;
+                h = m.app.ui.$container.height();
+                
+                if (w > h) {
+                    h = m.app.ui.$container.height() - 30;
+                    $canvas[0].setAttribute("height",  h + "px");
+                    $canvas[0].setAttribute("width",  w + "px");
+                    $canvasHeader.hide();
+                } else {
+                    h = m.app.ui.$container.height() - 85;
+                    $canvasHeader.show();
+                }
+
+                $canvas.css("width", w + "px");
+                $canvas.css("height", h + "px");
+                $canvas[0].setAttribute("height",  h + "px");
+                $canvas[0].setAttribute("width",  w + "px");
+                
+                self._$ctx.drawImage(image,0,0);
+                
+                self._$ctx.restore();
+                
+                
+
+            }
+
+            $(".m-draw-cancel").on("tap click", function(e) {
                 $canvasContainer.hide();
+                e.stopPropagation();
+                e.preventDefault();
+                return false;
             });
 
-            $(".m-draw-erase").on("tap click", function() {
+            $(".m-draw-erase").on("tap click", function(e) {
+                e.stopPropagation();
+                e.preventDefault();
                 self.clear();
+                return false;
             });
 
-            $(".m-draw-done").on("tap click", function() {
+            $(".m-draw-done").on("tap click", function(e) {
+                e.stopPropagation();
+                e.preventDefault();
+
+                var encodedImageData = $canvas[0].toDataURL();                
+                image.src = encodedImageData;
+
                 $canvasContainer.hide();
+                return false;
             });
         
             $label[0].onclick = function() {
                 return false;
             };
             // FICKE CHECK
-            $cover.on("click tap", function() {
+            $cover.on("click tap", function(e) {
+                e.stopPropagation();
+                e.preventDefault();
                 $canvasContainer.show();
+                self.clear();
+                self._$ctx.drawImage(self._image,0,0);
+                return false;
             });
         
             self._$cover = $cover;
@@ -132,6 +210,7 @@
             self._$ctx.lineWidth = 2;
             self._$ctx.fillStyle = "black";
             self._drawing = false;
+            self._image = image;
         },
         
         _addListeners: function(self) {

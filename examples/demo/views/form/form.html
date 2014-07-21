@@ -1,6 +1,24 @@
 <form id="myForm" class="m-form m-padding">
     <fieldset class="m-form-top-labels">
 
+        <h2>Special form controls</h2>
+        
+        <div class="m-field">
+            <label>Camera single</label>
+            <input id="itemPicture" type="file" class="m-camera-single" accept="image/*" placeholder="Sample picture" />
+            <img class="m-camera-single-img" m-for="itemPicture" src="" />
+        </div>
+
+        <div class="m-field">
+            <label>Geolocation</label>
+            <input type="text" class="m-geo m-button-block m-button-outline m-button" value="Search location" />
+        </div>
+        
+        <div class="m-field">
+            <label for="signHere">Draw</label>
+            <input id="signHere" ng-model="item.sign" class="m-draw" type="file" />
+        </div>
+
         <h2>Radio buttons</h2>
 
         <div class="m-field">

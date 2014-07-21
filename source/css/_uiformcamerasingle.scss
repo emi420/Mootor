@@ -1,0 +1,98 @@
+/* UIFormCameraSingle */
+
+@import "colors"; 
+
+.m-camerasingle-cover {
+    padding: .5em;
+    border-bottom-width: 1px;
+    border-style: solid;
+    @extend .m-border-color-gray-lighter;
+    .m-camerasingle-icon {
+        position: absolute;
+        right: .5em;
+        margin-top: .25em;
+    }
+}
+.m-camerasingle-cover:first-child {
+    border-top-width: 1px;
+}
+
+.m-camerasingle-modal {
+    
+    width: 100%;
+    background: #fff;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    box-sizing: border-box;
+    z-index: 101;
+    padding: 1em;
+
+}
+
+.m-camerasingle-modal-header, 
+.m-camerasingle-modal-footer {
+    @extend .m-border-color-gray-lighter;  
+    border-style: solid;
+}    
+
+
+.m-camerasingle-modal-header {
+    padding-bottom: 1em;
+    margin-bottom: 1.25em;
+    border-bottom-width: 1px;
+    &:last-child {
+        position: absolute;
+        right: 1em;
+    }
+}
+
+.m-camerasingle-modal-footer {
+    padding-top: 1em;
+    margin-top: 1em;
+    border-top-width: 1px;
+}
+
+
+.m-camerasingle-modal-header:last-child {
+    right: auto;
+}
+
+.m-camerasingle-modal-header .m-camerasingle-done {
+    right: 4em;
+}
+
+.m-camerasingle-modal-header {
+    border-bottom: 0;
+    height: 1em;
+    width: 90%;
+}
+
+.m-camera-single-img {
+    height: 100%;
+    min-width: 100%;
+    max-height: 100%;
+}
+
+
+.m-camerasingle-img-container {
+    height: 93%;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    background: #f1f1f1;
+    overflow:hidden;
+}
+
+.m-camerasingle-img-container .m-button {
+    position: absolute;
+    z-index: 99;
+    bottom: .25em;
+    width: 50px;
+    right: .95em;
+}
+
+.m-camerasingle-img-container .m-button-danger {
+    left: .95em;
+}
+

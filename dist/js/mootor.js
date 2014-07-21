@@ -1020,16 +1020,14 @@
         
        // Android/iOS fixes
        setEvent = function(el, href) {
-           if (m.context.os.ipad === true || m.context.os.iphone === true) {
-               $(el).on("tap", function(e) {
-                   m.app.go(href);
-               });
-           }
+           $(el).on("tap", function(e) {
+               m.app.go(href);
+           });
            el.addEventListener("touchend", function(e) {
                e.preventDefault();
            });
        };
-       if (m.context.os.ipad === true || m.context.os.iphone === true) {
+      if ( 'ontouchstart' in window ) {
            onClick = function() {
                return false;
            };
@@ -2345,260 +2343,9 @@
 
 }(window.$, window.Mootor));
 /**
-* UIFormDraw is a draw pseudo-input of a form
+* UIFormGeo detect geolocation
 *
-* @class UIFormDraw
-* @extends UI
-* @constructor
-* @module UI
-* @author Emilio Mariscal (emi420 [at] gmail.com)
-*/
-
-(function ($, Mootor, m) {
-    
-    "use strict";
-
-    var UIFormDraw,
-    
-        UI,
-        UIForm,
-        UIFormVirtualInput;
-
-    // Dependences
-
-    UI = Mootor.UI;
-    UIForm = Mootor.UIForm;
-    UIFormVirtualInput = Mootor.UIFormVirtualInput;
-    
-    // Private constructors
-
-    UIFormDraw = function() {
-        // code here
-    };
-
-    // Prototypal inheritance
-    $.extend(UIFormDraw.prototype, UI.prototype);
-    $.extend(UIFormDraw.prototype, UIFormVirtualInput.prototype);
-
-    // Private static methods and properties
-
-    $.extend(UIFormDraw, {
-        
-        _init: function(uiview) {
-            
-            var inputs = uiview.$el.find(".m-draw");
-            inputs.each(function(index,element) {
-                var self = new UIFormDraw();
-                UIFormDraw._makeUI(self, element);
-                UIFormDraw._addListeners(self);
-            });
-            
-        },
-        
-        _makeUI: function(self, element) {
-
-            var $element,
-                coverHTML,
-                $cover,
-                $label,
-                $canvas,
-                $canvasContainer,
-                h,
-                w;
-                        
-            
-            $element = $(element);
-
-            $label = $("label[for=" + element.getAttribute("id") + "]");
-
-            /*jshint multistr: true */
-            coverHTML = '<div class="m-draw m-draw-cover"> \
-                <span class="m-draw-icon m-icon-arrow-right-small"></span> \
-            </div>';
-        
-            $cover = element.$cover = $(coverHTML).insertBefore(element);
-            $label.insertBefore($cover.find(".m-draw-icon"));
-            $element.hide();
-        
-            $canvasContainer = $('<div class="m-draw-canvas"> \
-                    <div class="m-draw-canvas-header"> \
-                        <span class="m-draw-cancel">Cancel</span> \
-                        <span class="m-draw-done">Done</span> \
-                    </div> \
-                    <canvas></canvas> \
-                    <div class="m-draw-canvas-footer"> \
-                        <span class="m-draw-erase m-icon-erase"></span> \
-                    </div> \
-                </div>');
-        
-            $canvasContainer.hide();
-            
-            $canvasContainer.insertBefore(document.body.lastChild);
-        
-            // FIXME CHECK: hardcoded values (pixels)
-            $canvas = $canvasContainer.find("canvas");
-
-            h = m.app.ui.$container.height() - 190;
-            w = m.app.ui.$container.width() - 40;
-            
-            $canvas.css("height",  h + "px");
-            $canvas[0].setAttribute("height",  h + "px");
-
-            $canvas.css("width", w + "px");
-            $canvas[0].setAttribute("width",  w + "px");
-
-            $(".m-draw-cancel").on("tap click", function() {
-                $canvasContainer.hide();
-            });
-
-            $(".m-draw-erase").on("tap click", function() {
-                self.clear();
-            });
-
-            $(".m-draw-done").on("tap click", function() {
-                $canvasContainer.hide();
-            });
-        
-            $label[0].onclick = function() {
-                return false;
-            };
-            // FICKE CHECK
-            $cover.on("click tap", function() {
-                $canvasContainer.show();
-            });
-        
-            self._$cover = $cover;
-            self._$canvasContainer = $canvasContainer;
-            self._$canvas = $canvas;
-            self._$label = $label;
-            self._$ctx = $canvas[0].getContext("2d");
-            self._canvasOffsetLeft = 0;
-            self._canvasOffsetTop = 0;
-            self._$ctx.strokeStyle = "black";
-            self._$ctx.lineWidth = 2;
-            self._$ctx.fillStyle = "black";
-            self._drawing = false;
-        },
-        
-        _addListeners: function(self) {
-            
-            var $canvas = self._$canvas,
-                ctx = self._$ctx,
-                lastX,
-                lastY,
-                offsetLeft,
-                offsetTop;
-                
-            $canvas.on("touchstart", function(e) {
-                self._canvasOffsetLeft = $canvas.offset().left - $(window).scrollLeft();
-                self._canvasOffsetTop = $canvas.offset().top - $(window).scrollTop();
-
-                lastX = e.changedTouches[0].clientX - self._canvasOffsetLeft;
-                lastY = e.changedTouches[0].clientY - self._canvasOffsetTop;
-
-
-                ctx.beginPath();
-                ctx.fillStyle = "black";
-                ctx.fillRect(lastX, lastY, 2, 2);
-                ctx.closePath();
-
-                e.stopPropagation();
-                e.preventDefault();                
-
-                offsetLeft = self._canvasOffsetLeft;
-                offsetTop = self._canvasOffsetTop;
-            });
-            
-            $canvas.on("touchmove", function(e) {
-                var x,
-                    y,
-                    touchX = e.changedTouches[0].clientX,
-                    touchY = e.changedTouches[0].clientY;
-
-                x = touchX - offsetLeft;
-				y = touchY - offsetTop;
-
-                ctx.beginPath();
-                ctx.moveTo(lastX,lastY);
-                ctx.lineTo(x,y);
-                ctx.stroke();
-                ctx.closePath();
-
-                lastX = x;
-                lastY = y;
-
-                e.stopPropagation();
-                e.preventDefault();
-
-            });
-            
-            $canvas.on("touchend", function(e) {
-
-                e.stopPropagation();
-                e.preventDefault();
-                
-            });
-        }
-        
-    });
-
-    // Public methods and properties
-
-    $.extend(UIFormDraw.prototype, {
-        
-        _$canvas: undefined,
-        _$cover: undefined,
-        _$label: undefined,
-        
-
-        /**
-        * Export draw data
-        *
-        * @method export
-        * @return {String} Exported data (ej: base 64 string)
-        * @param {Array} options A list of options
-        * @chainable
-        * @example
-        *   var sign = $("#myDrawInput").m.formDraw.export();
-        */
-        "export": function() {
-            // code here
-        },
-
-        /**
-        * Clear draw
-        *
-        * @method clear
-        * @chainable
-        */
-        clear: function() {
-            
-            var ctx = this._$ctx,
-                $canvas = this._$canvas,
-                w = $canvas.width(),
-                h = $canvas.height();
-      
-            // Store the current transformation matrix
-            ctx.save();
-        
-            // Use the identity matrix while clearing the canvas
-            ctx.setTransform(1, 0, 0, 1, 0, 0);
-            ctx.clearRect(0, 0, w, h);
-            ctx.beginPath();
-        
-            // Restore the transform
-            ctx.restore();
-        }
-        
-    });        
-    
-    UIForm.registerControl(UIFormDraw);  
-
-}(window.$, window.Mootor, window.m));
-/**
-* UIFormCamera is a camera pseudo-input of a form
-*
-* @class UIFormCamera
+* @class UIFormGeo
 * @extends UI
 * @constructor
 * @module UI
@@ -2606,250 +2353,102 @@
 */
 
 (function ($, Mootor) {
-
+    
     "use strict";
 
-    var UIFormCamera,
-        UIFormCameraPicture,
-
+    var UIFormGeo,
+    
         UI,
-		UIForm,
-		_aaFiles = {};
-        
+        UIForm;
+
     // Dependences
 
     UI = Mootor.UI;
-	UIForm = Mootor.UIForm;
-
+    UIForm = Mootor.UIForm;
+    
     // Private constructors
 
-    UIFormCamera = function() {
+    UIFormGeo = function() {
         // code here
     };
 
-    UIFormCameraPicture = function(file) {
-		// code here
-        this.image = file;
-    };
-
     // Prototypal inheritance
-    $.extend(UIFormCamera.prototype, UI.prototype);
-    //$.extend(UIFormCamera.prototype, UIFormPseudoInput.prototype);
+    $.extend(UIFormGeo.prototype, UI.prototype);
 
     // Private static methods and properties
 
-    $.extend(UIFormCamera, {
-
-		_init: function(uiview) {
-
-			var inputs = uiview.$el.find(".m-camera");
-            inputs.each(function(index,element) {
-                var self = new UIFormCamera();
-                UIFormCamera._makeUI(self, element);
-                //UIFormCamera._addListeners(self);
-            });
-		},
-
-		_makeUI: function(self, element) {
-			var $element,
-                coverHTML,
-                $cover,
-                $label,
-                $canvas,
-                $canvasContainer,
-                h,
-                w;
-
-			$element = $(element);
+    $.extend(UIFormGeo, {
+        _init: function(uiview) {
             
-            // Inherits UIFormCamera prototype
-            $.extend(element, UIFormCamera.prototype);
-
-            $label = $("label[for=" + element.getAttribute("id") + "]");
-
-			// TODO: Agregar estilos a m-camera-cover
-
-            /*jshint multistr: true */
-            coverHTML = '<div class="m-camera m-camera-cover m-camera-btn"> \
-                <span class="m-camera-icon m-icon-arrow-right-small"></span> \
-            </div>';
-
-			//$cover = element.$cover = $(coverHTML).insertBefore(element);
-			//$label.insertBefore($cover.find(".m-camera-icon"));
-			$element.hide();
-
-			// contenedor
-			$canvasContainer = $('\
-				<div class="m-camera-container"> \
-					<div class="m-camera-message">\
-                    <span class="m-icon-camera"></span><br/> \
-						<strong class="m-camera-no-pics">No pictures yet.</strong> \
-						<p>Choose or take a picture</p> \
-                    </div> \
-                    <div class="m-tmp">&nbsp;</div> \
-                    <div id="camera-btns"> \
-                    <div class="m-choose-image">Choose a picture</div> \
-                    <div class="m-take-image">Take a picture</div> \
-                </div></div> \
-                ');
+            var inputs;
                 
-			if (!$(".m-camera-canvas").length) {
-				$canvasContainer.insertBefore(document.body.lastChild);
-				//$canvasContainer.prependTo($('.m-camera-container'));
-			}
-
-            $canvasContainer.insertBefore($element);
-            $canvasContainer[0].replaceChild(element, $canvasContainer.find(".m-tmp")[0]);
+            inputs = uiview.$el.find(".m-geo");
+            inputs.each(function(index,element) {
+                var $element,
+                    $coverHTML,
+                    $cover,
+                    $value,
+                    $button,
+                    onSuccess,
+                    onError,
+                    originalHtml;
             
-            //$('#choose-picture').hide();
-
-			// test
-			$('.m-camera-message').hide();
-			if ($('.m-camera-container').find('m-camera-images').length === 0) {
-				$('.m-camera-message').show();
-			}
-
-			var $cameraContainer = $('.m-camera-container');
+    			$element = $(element);
             
-            _aaFiles[element.id] = [];
+                $coverHTML = $('<button class="' + element.className + '"><span class="m-icon m-icon-map-pin-small"></span> ' + element.value + '</button>');
+                $button = $coverHTML.find("button");
+                $element.addClass("m-hidden");
+                
+                $coverHTML.insertBefore(element);
+                originalHtml = $coverHTML[0].innerHTML;
+                
+                onSuccess = function(position) {
+                    var coords,
+                        strCoords;
+                    coords = position.coords;
+                    strCoords = (Math.ceil(coords.latitude * 100) / 100) + "," + (Math.ceil(coords.longitude * 100) / 100);
+                    $element[0].value = strCoords;
+                    $element.change();
+                }
 
+                onError = function() {
+                    alert("Error");
+                    $coverHTML[0].innerHTML = originalHtml;
+                }
+                $coverHTML[0].onclick = function(){return false};
+                $coverHTML.on("tap click", function(e) {
+                    this.innerHTML = '<span class="m-icon m-icon-loading-small"></span>';
+                    navigator.geolocation.getCurrentPosition(
+                        onSuccess, 
+                        onError,
+                        { timeout: 10000, enableHighAccuracy: true }
+                    );
+                    e.stopPropagation();
+                    e.preventDefault();
+                    return false;
+                });
+                
+                $element.on("change", function() {
+                    var strValue =  $element[0].value;
+                    if (strValue) {
+                        $coverHTML[0].innerHTML = '<span class="m-icon m-icon-map-pin-small"></span> ' + strValue;
+                    } else {
+                        $coverHTML[0].innerHTML = originalHtml;
+                    }
+                });
 
-			// files
-			var i;
-			var $imageFiles = $element;
-
-			$imageFiles.on('change', function(event) {
-				var files = event.target.files;
-				var output = $('.m-camera-container');
-
-				for (i = 0; i < files.length; i++) {
-					var file = files[i];
-
-					if (!file.type.match('image')) {
-						continue;
-					}
-
-					var picReader = new FileReader();
-
-					picReader.addEventListener('load', function(event) {
-						var picFile = event.target;
-
-						var div = $('<div class="m-camera-img"></div>');
-
-						div.append("<img class='thumbnail' src='" + picFile.result + "'" +
-                            "title='" + picFile.name + "'/>");
-
-
-						output.append(div,null);
-						$('.m-camera-message').hide();
-					});
-
-					picReader.readAsDataURL(file);
-
-					_aaFiles[this.id].push(new UIFormCameraPicture(file));
-
-				}
-
-				//console.log(this._aaPictures);
-			});
-
-			// end files
-
-
-
-			h = m.app.ui.$container.height();
-
-			//$('.m-camera-canvas').css('padding-top', h / 2);
-
-			//$('.m-camera-container').height(h - 55 + 'px');
-
-			$label[0].onclick = function() {
-				//alert('Choose a picture');
-				return false;
-            };
-
-            $(".m-choose-image").on("tap click", function() {
-                $element.trigger('click');
             });
-
-            $(".m-take-image").on("tap click", function() {
-                $element.trigger('click');
-            });
-
-		}
-    });
-
-    $.extend(UIFormCameraPicture, {
-
+        }
+   
     });
 
     // Public methods and properties
 
-    $.extend(UIFormCamera.prototype, {
+    $.extend(UIFormGeo.prototype, {
+    });        
 
-        /**
-        * Take a picture
-        *
-        * @method take
-        * @chainable
-        */
-        take: function(){
-            // code here
-        },
+    UIForm.registerControl(UIFormGeo);  
 
-        /**
-        * Choose a picture
-        *
-        * @method choose
-        * @chainable
-        */
-        choose: function(){
-            // code here
-
-
-
-        },
-
-        /**
-        * Returns all pictures paths
-        *
-        * @method all
-        * @return {Array} Array of pictures paths
-        * @chainable
-        */
-        all: function() {
-             return _aaFiles[this.id];
-        },
-
-        /**
-        * Remove picture from input
-        *
-        * @param {UIFormCameraPicture} picture Picture to be removed
-        * @method remove
-        */
-        remove: function(picture) {
-            // code here
-        }
-
-    });
-
-    $.extend(UIFormCameraPicture.prototype, {
-        /**
-        * Export picture data
-        *
-        * @method export
-        * @return {String} Exported data (ej: base 64 string)
-        * @param {Array} options A list of options
-        * @chainable
-        * @example
-        *   var sign = $("#myCameraInput").m.formCamera.export();
-        */
-        "export": function(options) {
-             // code here
-        }
-    });
-
-	UIForm.registerControl(UIFormCamera);
 
 }(window.$, window.Mootor));
 /**
@@ -3507,5 +3106,781 @@
     });      
     
     UIForm.registerControl(UIButton);  
+
+}(window.$, window.Mootor));
+/**
+* UIFormDraw is a draw pseudo-input of a form
+*
+* @class UIFormDraw
+* @extends UI
+* @constructor
+* @module UI
+* @author Emilio Mariscal (emi420 [at] gmail.com)
+*/
+
+(function ($, Mootor, m) {
+    
+    "use strict";
+
+    var UIFormDraw,
+    
+        UI,
+        UIForm,
+        UIFormVirtualInput;
+
+    // Dependences
+
+    UI = Mootor.UI;
+    UIForm = Mootor.UIForm;
+    UIFormVirtualInput = Mootor.UIFormVirtualInput;
+    
+    // Private constructors
+
+    UIFormDraw = function() {
+        // code here
+    };
+
+    // Prototypal inheritance
+    $.extend(UIFormDraw.prototype, UI.prototype);
+    $.extend(UIFormDraw.prototype, UIFormVirtualInput.prototype);
+
+    // Private static methods and properties
+
+    $.extend(UIFormDraw, {
+        
+        _init: function(uiview) {
+            
+            var inputs = uiview.$el.find(".m-draw");
+            inputs.each(function(index,element) {
+                var self = new UIFormDraw();
+                UIFormDraw._makeUI(self, element);
+                UIFormDraw._addListeners(self);
+            });
+            
+        },
+        
+        _makeUI: function(self, element) {
+
+            var $element,
+                coverHTML,
+                $cover,
+                $label,
+                $canvas,
+                $canvasContainer,
+                $canvasHeader,
+                h,
+                w;
+                        
+            
+            $element = $(element);
+
+            $label = $("label[for=" + element.getAttribute("id") + "]");
+
+            /*jshint multistr: true */
+            coverHTML = '<div class="m-draw m-draw-cover"> \
+                <span class="m-draw-icon m-icon-arrow-right-small"></span> \
+            </div>';
+        
+            $cover = element.$cover = $(coverHTML).insertBefore(element);
+            $label.insertBefore($cover.find(".m-draw-icon"));
+            $element.hide();
+            
+            $canvasContainer = $('<div class="m-draw-canvas"> \
+                    <div class="m-draw-canvas-header"> \
+                        <span class="m-draw-cancel">Cancel</span> \
+                        <span class="m-draw-done">Done</span> \
+                    </div> \
+                    <canvas></canvas> \
+                    <div class="m-draw-canvas-footer"> \
+                        <span class="m-draw-erase m-icon-erase"></span> \
+                    </div> \
+                </div>');
+        
+            $canvasContainer.hide();
+            $canvasHeader = $canvasContainer.find(".m-draw-canvas-header");
+            
+            $canvasContainer.insertBefore(document.body.lastChild);
+            
+             $canvasContainer[0].addEventListener("touchmove", function(e) {
+                 e.preventDefault();
+                 e.stopPropagation();
+             })
+        
+            $canvas = $canvasContainer.find("canvas");
+
+            h = m.app.ui.$container.height();
+            w = m.app.ui.$container.width() - 40;
+
+            if (w > h) {
+                h = m.app.ui.$container.height() - 30;
+                $canvasHeader.hide();
+            } else {
+                h = m.app.ui.$container.height() - 85;
+                $canvasHeader.show();
+            }
+
+            $canvas.css("height",  h + "px");
+            $canvas.css("width", w + "px");
+
+            $canvas[0].setAttribute("height",  h + "px");
+            $canvas[0].setAttribute("width",  w + "px");
+            
+            var image = new Image();
+
+            $.extend(element, 
+                {"export": function() { return image.src } },
+                {
+                    "import": function(data) { 
+                        self._image.src = data;
+                    }
+                }
+                ,{"clear": function() { 
+                   var encodedImageData = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";                
+                   self._image.src = encodedImageData;
+                   self.clear();
+                }}
+            );
+
+            window.onresize = function() {
+                
+                self._$ctx.save();
+                
+                w = m.app.ui.$container.width() - 40;
+                h = m.app.ui.$container.height();
+                
+                if (w > h) {
+                    h = m.app.ui.$container.height() - 30;
+                    $canvas[0].setAttribute("height",  h + "px");
+                    $canvas[0].setAttribute("width",  w + "px");
+                    $canvasHeader.hide();
+                } else {
+                    h = m.app.ui.$container.height() - 85;
+                    $canvasHeader.show();
+                }
+
+                $canvas.css("width", w + "px");
+                $canvas.css("height", h + "px");
+                $canvas[0].setAttribute("height",  h + "px");
+                $canvas[0].setAttribute("width",  w + "px");
+                
+                self._$ctx.drawImage(image,0,0);
+                
+                self._$ctx.restore();
+                
+                
+
+            }
+
+            $(".m-draw-cancel").on("tap click", function(e) {
+                $canvasContainer.hide();
+                e.stopPropagation();
+                e.preventDefault();
+                return false;
+            });
+
+            $(".m-draw-erase").on("tap click", function(e) {
+                e.stopPropagation();
+                e.preventDefault();
+                self.clear();
+                return false;
+            });
+
+            $(".m-draw-done").on("tap click", function(e) {
+                e.stopPropagation();
+                e.preventDefault();
+
+                var encodedImageData = $canvas[0].toDataURL();                
+                image.src = encodedImageData;
+
+                $canvasContainer.hide();
+                return false;
+            });
+        
+            $label[0].onclick = function() {
+                return false;
+            };
+            // FICKE CHECK
+            $cover.on("click tap", function(e) {
+                e.stopPropagation();
+                e.preventDefault();
+                $canvasContainer.show();
+                self.clear();
+                self._$ctx.drawImage(self._image,0,0);
+                return false;
+            });
+        
+            self._$cover = $cover;
+            self._$canvasContainer = $canvasContainer;
+            self._$canvas = $canvas;
+            self._$label = $label;
+            self._$ctx = $canvas[0].getContext("2d");
+            self._canvasOffsetLeft = 0;
+            self._canvasOffsetTop = 0;
+            self._$ctx.strokeStyle = "black";
+            self._$ctx.lineWidth = 2;
+            self._$ctx.fillStyle = "black";
+            self._drawing = false;
+            self._image = image;
+        },
+        
+        _addListeners: function(self) {
+            
+            var $canvas = self._$canvas,
+                ctx = self._$ctx,
+                lastX,
+                lastY,
+                offsetLeft,
+                offsetTop;
+                
+            $canvas.on("touchstart", function(e) {
+                self._canvasOffsetLeft = $canvas.offset().left - $(window).scrollLeft();
+                self._canvasOffsetTop = $canvas.offset().top - $(window).scrollTop();
+
+                lastX = e.changedTouches[0].clientX - self._canvasOffsetLeft;
+                lastY = e.changedTouches[0].clientY - self._canvasOffsetTop;
+
+
+                ctx.beginPath();
+                ctx.fillStyle = "black";
+                ctx.fillRect(lastX, lastY, 2, 2);
+                ctx.closePath();
+
+                e.stopPropagation();
+                e.preventDefault();                
+
+                offsetLeft = self._canvasOffsetLeft;
+                offsetTop = self._canvasOffsetTop;
+            });
+            
+            $canvas.on("touchmove", function(e) {
+                var x,
+                    y,
+                    touchX = e.changedTouches[0].clientX,
+                    touchY = e.changedTouches[0].clientY;
+
+                x = touchX - offsetLeft;
+				y = touchY - offsetTop;
+
+                ctx.beginPath();
+                ctx.moveTo(lastX,lastY);
+                ctx.lineTo(x,y);
+                ctx.stroke();
+                ctx.closePath();
+
+                lastX = x;
+                lastY = y;
+
+                e.stopPropagation();
+                e.preventDefault();
+
+            });
+            
+            $canvas.on("touchend", function(e) {
+
+                e.stopPropagation();
+                e.preventDefault();
+                
+            });
+        }
+        
+    });
+
+    // Public methods and properties
+
+    $.extend(UIFormDraw.prototype, {
+        
+        _$canvas: undefined,
+        _$cover: undefined,
+        _$label: undefined,
+        
+
+        /**
+        * Export draw data
+        *
+        * @method export
+        * @return {String} Exported data (ej: base 64 string)
+        * @param {Array} options A list of options
+        * @chainable
+        * @example
+        *   var sign = $("#myDrawInput").m.formDraw.export();
+        */
+        "export": function() {
+            // code here
+        },
+
+        /**
+        * Clear draw
+        *
+        * @method clear
+        * @chainable
+        */
+        clear: function() {
+            
+            var ctx = this._$ctx,
+                $canvas = this._$canvas,
+                w = $canvas.width(),
+                h = $canvas.height();
+      
+            // Store the current transformation matrix
+            ctx.save();
+        
+            // Use the identity matrix while clearing the canvas
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+            ctx.clearRect(0, 0, w, h);
+            ctx.beginPath();
+        
+            // Restore the transform
+            ctx.restore();
+        }
+        
+    });        
+    
+    UIForm.registerControl(UIFormDraw);  
+
+}(window.$, window.Mootor, window.m));
+/**
+* UIFormCamera is a camera pseudo-input of a form
+*
+* @class UIFormCamera
+* @extends UI
+* @constructor
+* @module UI
+* @author Emilio Mariscal (emi420 [at] gmail.com)
+* @author Federico Palma (federico.palma [at] hotmail.com)
+*/
+
+(function ($, Mootor) {
+
+    "use strict";
+
+    var UIFormCamera,
+        UIFormCameraPicture,
+        UI,
+        UIForm;
+
+    // Dependences
+
+    UI = Mootor.UI;
+    UIForm = Mootor.UIForm;
+
+    // Private constructors
+
+    UIFormCamera = function() {
+
+        this.pictures = [];
+
+    };
+
+    UIFormCameraPicture = function(file) {
+
+        this.image = file;
+
+    };
+
+    // Prototypal inheritance
+    $.extend(UIFormCamera.prototype, UI.prototype);
+    //$.extend(UIFormCamera.prototype, UIFormPseudoInput.prototype);
+
+    // Private static methods and properties
+
+    $.extend(UIFormCamera, {
+
+        _pictures: [],
+
+        _init: function(uiview) {
+            var inputs = uiview.$el.find(".m-camera");
+            
+            inputs.each(function(index, element) {
+
+                var self = new UIFormCamera();
+                UIFormCamera._makeUI(self, element);               
+                $.extend(element, UIFormCamera.prototype);
+            });
+        },
+
+        _makeUI: function(self, element) {
+            var $element,
+                coverHTML,
+                $cover,
+                $label,
+                $cameraContainer,
+                $cameraImgContainer,
+                $cameraMessage;
+
+            $element = $(element);
+
+            
+            
+            $label = $("label[for=" + element.getAttribute("id") + "]");
+
+            coverHTML = '<div class="m-camera m-camera-cover m-camera-btn">\
+                <span class="m-camera-icon m-icon-arrow-right-small"></span>\
+            </div>';
+            
+            $cover = element.$cover = $(coverHTML).insertBefore(element);
+            $label.insertBefore($cover.find(".m-camera-icon"));
+            $element.hide();
+            
+            $cameraContainer = $('\
+                <div class="m-camera-container">\
+                    <div class="m-header-container">\
+                        <header>\
+                            <nav class="m-nav-header-back-container">\
+                                <a class="m-nav-item m-camera-back">\
+                                    <icon class="m-icon-arrow-left-white"></icon>\
+                                </a>\
+                            </nav>\
+                            <h1 class="m-camera-title">Pictures</h1>\
+                            <nav>\
+                            </nav>\
+                        </header>\
+                    </div>\
+                    <div class="m-camera-message">\
+                        <span class="m-icon-camera"></span><br/>\
+                        <strong class="m-camera-no-pics">No pictures yet.</strong>\
+                        <p>Choose or take a picture</p>\
+                    </div> \
+                    <div class="m-img-container"></div>\
+                    <div class="m-camera-btns"> \
+                        <div class="m-choose-image">Choose a picture</div> \
+                        <div class="m-take-image">Take a picture</div> \
+                    </div> \
+                </div> \
+                ');
+
+            $cameraContainer.hide();
+            
+            $cameraContainer.insertBefore(document.body.lastChild);
+            
+            $cameraMessage = $('.m-camera-message');
+
+            $cameraMessage.hide();
+
+            if ($cameraContainer.find('m-camera-images').length === 0) {
+
+                $cameraMessage.show();
+
+            }
+            
+            $cameraImgContainer = $('.m-img-container');
+            
+            $label[0].onclick = function() {
+                return false;
+            };
+
+            var $choosePicture = $(".m-choose-image");
+            
+            UIFormCamera._addFiles(self, $element);
+            
+            
+            $cover.on("click tap", function() {
+
+                UIFormCamera._addListeners(self);
+                $cameraContainer.show();
+                
+                var $closeButton = $cameraContainer.find('.m-camera-back');
+                $closeButton.click(function() {
+                    self._$cameraContainer.hide();
+                });
+            });
+            
+                       
+            
+            self._$cameraContainer = $cameraContainer;
+            self._$pictures = $element;
+            self._$backButton = $('.m-camera-back');
+            self._$choosePicture = $choosePicture;
+            self._$cameraImgContainer = $cameraImgContainer;
+        },
+
+        _addListeners: function(self) {
+
+            self._$choosePicture.on('tap click', function(e) {
+
+                self._$pictures.trigger("click");
+
+            });
+        },
+        
+        _addFiles: function(self, $element) {
+            $element.on('change', function(event) {
+                var files = event.target.files,
+                    output = self._$cameraImgContainer,
+                    picture;
+
+                for (var i = 0; i < files.length; i++) {
+                    var file = files[i];
+
+                    if (!file.type.match('image')) {
+                        continue;
+                    }
+
+                    var picReader = new FileReader();
+
+                    picReader.addEventListener('load', function(event) {
+                        var picFile = event.target;
+
+                        picture = $('<div class="m-camera-img"></div>');
+                        picture.append("<img class='thumbnail' src='" + picFile.result + "'" +
+                            "title='" + picFile.name + "'/>");
+
+                        output.append(picture, null);
+                        
+                        $('.m-camera-message').hide();
+                    });
+
+                    picReader.readAsDataURL(file);
+
+                    picture = new UIFormCameraPicture(file);
+                    
+                    var obj = $element[0];
+                    if (obj.pictures === undefined) {
+                        obj.pictures = [];
+                        obj.pictures.push(picture);
+                    } else {
+                        var arrPicturesLength = obj.pictures.length;
+                        obj.pictures[arrPicturesLength] = picture;
+                    }
+                }
+            });
+        }
+
+    });
+
+    $.extend(UIFormCameraPicture, {
+
+    });
+
+    // Public methods and properties
+
+    $.extend(UIFormCamera.prototype, {
+        
+        /**
+        * Take a picture
+        *
+        * @method take
+        * @chainable
+        */
+        take: function(){
+            // code here
+        },
+
+        /**
+        * Choose a picture
+        *
+        * @method choose
+        * @chainable
+        */
+        choose: function(){
+            // code here
+        },
+
+        /**
+        * Returns all pictures paths
+        *
+        * @method all
+        * @return {Array} Array of pictures paths
+        * @chainable
+        */
+        all: function() {
+
+            $.each(this.pictures, function(item, val) {
+                console.log(val);
+            });
+        },
+
+        /**
+        * Remove picture from input
+        *
+        * @param {UIFormCameraPicture} picture Picture to be removed
+        * @method remove
+        */
+        remove: function(picture) {
+
+            var index = this.pictures.indexOf(picture);
+
+            if (index > -1) {
+                this.pictures.splice(index, 1);
+            }
+        }
+    });
+
+    $.extend(UIFormCameraPicture.prototype, {
+        /**
+        * Export picture data
+        *
+        * @method export
+        * @return {String} Exported data (ej: base 64 string)
+        * @param {Array} options A list of options
+        * @chainable
+        */
+        "export": function(options) {
+        
+            var reader = new FileReader();
+            reader.readAsDataURL(this.image)
+
+            reader.onerror = function() {
+                return 'error';
+            }
+            
+            reader.onloadend = function() {
+                return reader.result;
+            }
+        }
+    });
+
+    UIForm.registerControl(UIFormCamera);
+
+}(window.$, window.Mootor));
+/**
+* UIFormCameraSingle take or choose a single picture
+*
+* @class UIFormCameraSingle
+* @extends UI
+* @constructor
+* @module UI
+* @author Emilio Mariscal (emi420 [at] gmail.com)
+*/
+
+(function ($, Mootor) {
+    
+    "use strict";
+
+    var UIFormCameraSingle,
+    
+        UI,
+        UIForm;
+
+    // Dependences
+
+    UI = Mootor.UI;
+    UIForm = Mootor.UIForm;
+    
+    // Private constructors
+
+    UIFormCameraSingle = function() {
+        // code here
+    };
+
+    // Prototypal inheritance
+    $.extend(UIFormCameraSingle.prototype, UI.prototype);
+
+    // Private static methods and properties
+
+    $.extend(UIFormCameraSingle, {
+        _init: function(uiview) {
+            
+            var inputs;
+                
+            inputs = uiview.$el.find(".m-camera-single");
+            inputs.each(function(index,element) {
+                var $element,
+                    $coverHTML,
+                    $cover,
+                    $value,
+                    $modalContainer,
+                    $modal,
+                    $img,
+                    $deleteBtn,
+                    $changeBtn,
+                    $imgContainer,
+                    $originalImgContainer;
+            
+    			$element = $(element);
+            
+                $coverHTML = $('<div class="m-select m-select-cover">\
+                    <span class="m-value"></span>\
+                    <span class="m-icon-arrow-right-small m-select-icon"></span>\
+                </div>');
+                
+                $element.addClass("m-hidden");
+                $coverHTML.insertBefore(element);
+                $value = $coverHTML.find(".m-value");
+                $value.html(element.placeholder);
+                
+
+                $modalContainer = $('<div class="m-camerasingle-modal"> \
+                        <div class="m-camerasingle-modal-header"> \
+                            <span class="m-canvas-cancel m-camerasingle-cancel"><span class="m-icon-arrow-left"></span></span> \
+                        </div> \
+                        <div class="m-camerasingle-img-container"> \
+                        <button class="m-camerasingle-button-change m-button m-button m-button-primary"><span class="m-icon-refresh-small-white"></span></button> \
+                        <button class="m-camerasingle-button-delete m-button m-button m-button-danger"><span class="m-icon-delete-small-white"></span></button> \
+                        </div> \
+                        <div class="m-camerasingle-modal-footer"> \
+                        </div> \
+                    </div>');
+        
+                
+                $modalContainer.hide();
+                $modalContainer.on("tap click", function() {
+                    $img.detach().appendTo($originalImgContainer);
+                    $img.hide();
+                    $modalContainer.hide();
+                });
+                
+                $imgContainer = $modalContainer.find(".m-camerasingle-img-container");
+                $img = $("img[m-for='" + element.id + "']");
+                $originalImgContainer = $img.parent();
+                
+                $img.hide();
+
+                $modalContainer.insertBefore(document.body.lastChild);
+        
+                $deleteBtn = $modalContainer.find(".m-camerasingle-button-delete");
+                $changeBtn = $modalContainer.find(".m-camerasingle-button-change");
+                
+                $deleteBtn.on("tap click", function() {
+                   element.mvalue = function() {
+                        return "";
+                   };
+                   $img[0].setAttribute("src", "");
+                });
+
+                $changeBtn.on("tap click", function() {
+                    $element.click();
+                });
+
+                $element.on("change", function(event) {
+                    var file,
+                        picReader;
+                    file = event.target.files[0];
+					if (file && file.type.match('image')) {
+                        picReader = new FileReader();
+                        picReader.addEventListener('load', function(event) {
+                            var picFile = event.target;
+                            $img[0].src=picFile.result;
+                            element.mvalue = function() {
+                                return $img[0].src;
+                            };
+                        });
+                        picReader.readAsDataURL(file);
+                    } 
+                });
+                
+                $coverHTML.on("tap click", function () {
+                    $img.detach().appendTo($imgContainer);
+                    $img.show();
+                    if ($img[0].getAttribute("src") !== "") {
+                        $modalContainer.show();
+                    } else {
+                        $element.click();
+                    }
+                });
+                
+                $.extend(element, UIFormCameraSingle.prototype);
+
+            });
+        }
+   
+    });
+
+    // Public methods and properties
+
+    $.extend(UIFormCameraSingle.prototype, {
+    });        
+
+    UIForm.registerControl(UIFormCameraSingle);  
+
 
 }(window.$, window.Mootor));

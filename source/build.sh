@@ -20,8 +20,7 @@ cat js/clickfix.js \
     js/uiloading.js \
     js/uiform.js \
     js/uiformvirtualinput.js \
-    js/uiformdraw.js \
-    js/uiformcamera.js \
+    js/uiformgeo.js \
     js/uiformtext.js \
     js/uiformtextarea.js \
     js/uiformselect.js \
@@ -30,6 +29,9 @@ cat js/clickfix.js \
     js/uiformdate.js \
     js/uiformtime.js \
     js/uibutton.js \
+    js/uiformdraw.js \
+    js/uiformcamera.js \
+    js/uiformcamerasingle.js \
     > ../dist/js/mootor.js
 
 rm -rf ../dist/img/*

@@ -1,14 +1,16 @@
 @import "colors";
 
 .m-draw-cover {
-    padding: .5em;
-    border-bottom-width: 1px;
-    border-style: solid;
+    border-bottom-width: 0;
+    border-style: none;
+    line-height: auto;
+    padding: 0.35em 0 .95em 0;
     @extend .m-border-color-gray-lighter;
+    
     .m-draw-icon {
+        top: 1.05em;
         position: absolute;
         right: .5em;
-        margin-top: .25em;
     }
 }
 .m-draw-cover:first-child {
@@ -28,6 +30,7 @@
     
     canvas {
         border-width: 1px;
+        position: absolute;
         border-style: dashed;
         width: 100%;
         border-radius: 1em;
@@ -53,9 +56,10 @@
 }
 
 .m-draw-canvas-footer {
-    padding-top: 1em;
-    margin-top: 1em;
-    border-top-width: 1px;
+    position: absolute;
+    bottom: 30px;
+    right: 42px;
+    border: 0;
 }
 
 

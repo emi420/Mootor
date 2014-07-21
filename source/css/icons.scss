@@ -244,3 +244,21 @@ $icons-white-128-x2: sprite-map("icons/white/128x128@x2/*.png", $spacing: 10px);
 @include build-icon("view");
 @include build-icon("wifi");
 
+// Animations
+
+@-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
+
+.m-icon-loading-small {
+    -webkit-animation: spin 1.5s linear infinite;
+}

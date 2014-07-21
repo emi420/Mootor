@@ -6855,3 +6855,44 @@
     background-position: 0 -5263px;
   }
 }
+
+@-moz-keyframes spin {
+  /* line 250, icons.scss */
+  from {
+    -moz-transform: rotate(0deg);
+  }
+
+  /* line 251, icons.scss */
+  to {
+    -moz-transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes spin {
+  /* line 254, icons.scss */
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+
+  /* line 255, icons.scss */
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  /* line 258, icons.scss */
+  from {
+    transform: rotate(0deg);
+  }
+
+  /* line 259, icons.scss */
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* line 262, icons.scss */
+.m-icon-loading-small {
+  -webkit-animation: spin 1.5s linear infinite;
+}
