@@ -1,6 +1,46 @@
-<form id="myForm" class="m-form">
+<form id="myForm" class="m-form m-padding">
     <fieldset class="m-form-top-labels">
 
+        <h2>Special form controls</h2>
+        
+        <div class="m-field">
+            <label>Camera single</label>
+            <input id="itemPicture" type="file" class="m-camera-single" accept="image/*" placeholder="Sample picture" />
+            <img class="m-camera-single-img" m-for="itemPicture" src="" />
+        </div>
+
+        <div class="m-field">
+            <label>Geolocation</label>
+            <input type="text" class="m-geo m-button-block m-button-outline m-button" value="Search location" />
+        </div>
+        
+        <div class="m-field">
+            <label for="signHere">Draw</label>
+            <input id="signHere" ng-model="item.sign" class="m-draw" type="file" />
+        </div>
+
+        <h2>Radio buttons</h2>
+
+        <div class="m-field">
+            <input name="radiogroup" id="radio1" checked="true" value="01" type="radio" class="m-option" />
+            <label for="radio1">Radio 1</label>
+            <input name="radiogroup" id="radio2" value="02" type="radio" class="m-option" />
+            <label for="radio2">Radio 2</label>
+            <input name="radiogroup" id="radio3" value="03" type="radio" class="m-option" />
+            <label for="radio3">Radio 3</label>
+        </div>
+
+o buttons</h2>
+
+        <div class="m-field">
+            <input name="radiogroup2" id="radio4" checked="true" value="01" type="radio" class="m-option" />
+            <label for="radio4">Other radio 1</label>
+            <input name="radiogroup2" id="radio5" value="02" type="radio" class="m-option" />
+            <label for="radio5">Other radio 2</label>
+        </div>
+
+        <h2>Other controls</h2>
+        
         <div class="m-field">
             <label>Date</label>
             <input type="date" class="m-date" placeholder="Date here" />
@@ -43,23 +83,13 @@
 
         <div class="m-field">
             <label for="select2">Select</label>
-            <select class="m-select" id="select2">
+            <select class="m-select" id="select2" placeholder="Select...">
                 <option value="01">Option 1</option>
-                <option value="02" selected>Option 2</option>
+                <option value="02">Option 2</option>
                 <option value="03">Option 3</option>
             </select>
         </div>
 
-
-        <div class="m-field">
-            <input name="radiogroup" id="radio1" checked="true" value="01" type="radio" class="m-option" />
-            <label for="radio1">Radio 1</label>
-            <input name="radiogroup" id="radio2" value="02" type="radio" class="m-option" />
-            <label for="radio2">Radio 2</label>
-            <input name="radiogroup" id="radio3" value="03" type="radio" class="m-option" />
-            <label for="radio3">Radio 3</label>
-        </div>
-        
         <div class="m-field">
             <label>Text</label>
             <input class="m-text" placeholder="Text here" />
@@ -95,18 +125,6 @@
             <label>TextArea</label>
             <textarea class="m-textarea" placeholder="Text here"></textarea>
         </div>
-        <div class="m-field m-error">
-            <label>TextArea with error</label>
-            <textarea class="m-textarea" placeholder="Text here"></textarea>
-        </div>
-        <div class="m-field m-warning">
-            <label>TextArea with warning</label>
-            <textarea class="m-textarea" placeholder="Text here"></textarea>
-        </div>
-        <div class="m-field m-success">
-            <label>TextArea with success</label>
-            <textarea class="m-textarea" placeholder="Text here"></textarea>
-        </div>
 
     </fieldset>
 
@@ -114,8 +132,6 @@
         <input class="m-text" placeholder="Text without label" />
     </div>
     
-    <div class="m-field">
-        <button type="submit" class="m-button m-button-success m-button-block">Submit this form</button>
-    </div>
+    <button type="submit" class="m-button m-button-success m-button-block">Submit this form</button>
 
 </form>
