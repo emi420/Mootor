@@ -927,12 +927,14 @@ html, body {
 .m-app .m-header-container header .m-nav-item {
   position: relative;
   top: 10px;
+  padding: 0;
+  display: inline-block;
 }
-/* line 47, _uiheader.scss */
+/* line 49, _uiheader.scss */
 .m-app .m-header-container header.m-hidden {
   display: none;
 }
-/* line 51, _uiheader.scss */
+/* line 53, _uiheader.scss */
 .m-app .m-header-container header h1 {
   text-align: center;
   font-weight: bold;
@@ -940,7 +942,7 @@ html, body {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-/* line 58, _uiheader.scss */
+/* line 60, _uiheader.scss */
 .m-app .m-header-container header h1 img {
   position: relative;
   top: 4px;

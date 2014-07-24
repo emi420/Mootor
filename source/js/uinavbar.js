@@ -113,7 +113,7 @@
                     type: "view"
                 });
                 
-                self.panel.el.removeChild(barEl);
+                barEl.parentElement.removeChild(barEl);
                 barContainerEl[barName].appendChild(barEl);
                 
                 self[barName].hideContainer();

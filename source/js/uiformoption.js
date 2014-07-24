@@ -35,17 +35,8 @@
     $.extend(UIFormOption, {
         _init: function(uiview) {
             
-            var inputs,
-                iconsRefresh,
-                iconsArray = [];
-                
-            iconsRefresh = function() {
-                var i;
-                for (i = iconsArray.length;i--;) {
-                    iconsArray[i].addClass("m-hidden");
-                }
-            }
-                
+            var inputs;
+                 
             inputs = uiview.$el.find(".m-option");
             inputs.each(function(index,element) {
                 var $element = $(element),
@@ -56,11 +47,10 @@
                     updateValue,
                     iconElementName = element.name.replace(".","_");
 
-                updateValue = function(norefresh) {
-                    if (!norefresh) {
-                        $(".m-option-icon-name-" + iconElementName).addClass("m-hidden");
-                    }
-                    var checked = element.checked;
+                updateValue = function() {
+                    var checked = element.checked,
+                        $icon = $(".m-option-icon-name-" + iconElementName + "-" + element.getAttribute("m-option-index"));
+
                     if (checked === true) {
                         $icon.removeClass("m-hidden");
                     } else {
@@ -70,25 +60,25 @@
                                
                 /*jshint multistr: true */
                 coverHTML = '<div class="m-option m-option-cover">\
-                    <span class="m-option-icon m-icon-ok-small m-hidden m-option-icon-name-$elementName"></span>\
+                    <span class="m-option-icon m-icon-ok-small m-hidden m-option-icon-name-$elementName m-option-icon-name-$elementName-$index"></span>\
                 </div>';
 
-                $cover = element.$cover = $(coverHTML.replace("$elementName", iconElementName)).insertBefore(element);
+                $cover = element.$cover = $(coverHTML.replace("$elementName", iconElementName).replace("$elementName", iconElementName).replace("$index", index)).insertBefore(element);
+                element.setAttribute("m-option-index",  index);
                 
                 $label = $("label[for=" + element.id + "]");
                 $icon = $cover.find(".m-option-icon");
-                iconsArray.push($icon);
                 $cover[0].appendChild($label[0]);
                 
                 $element.removeClass("m-option")
                 $element.addClass("m-option-hidden");
 
                 $element.on("change", updateValue);
-
                 
                 $cover.on("tap click", function() {
+                    $(".m-option-icon-name-" + iconElementName).addClass("m-hidden");
                     element.checked = true;
-                    updateValue();
+                    $element.change();
                 });
 
                 updateValue(true);

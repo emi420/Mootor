@@ -58,7 +58,7 @@
                 /*jshint multistr: true */
                 coverHTML = '<div class="m-select m-select-cover">\
                     <span class="m-value">Select ...</span>\
-                    <span class="m-icon-arrow-down-small"></span>\
+                    <span class="m-icon-arrow-down-small m-select-icon"></span>\
                 </div>';
 
                 $cover = element.$cover = $(coverHTML).insertBefore(element);

@@ -42,6 +42,8 @@
         .m-nav-item {
             position: relative;
             top: 10px;
+            padding: 0;
+            display: inline-block;
         }
                 
         &.m-hidden {

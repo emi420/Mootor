@@ -1012,8 +1012,6 @@
     
     App.on("ready", function() {
            var links = $("a"),
-               i,
-               href,
                setEvent,
                onClick;
             
@@ -1035,19 +1033,26 @@
            onClick = function() {
                m.app.go(href);
                return false;
-            
            };
        }
     
-       if ( 'ontouchstart' in window ) {
-           for (i = links.length; i--;) {
-               href = links[i].getAttribute("href");
-               links[i].onclick = onClick;
-               if (href !== null && m.app.route(links[i].getAttribute("href")) !== undefined) {
-                   setEvent(links[i], href);
-               }
+       $.extend(UIApp, {
+           _improveLinksForTouch: function(links) {
+               var i,
+                   href;
+               if ( 'ontouchstart' in window ) {
+                   for (i = links.length; i--;) {
+                       href = links[i].getAttribute("href");
+                       links[i].onclick = onClick;
+                       if (href !== null && m.app.route(links[i].getAttribute("href")) !== undefined) {
+                           setEvent(links[i], href);
+                       }
+                   }
+               } 
            }
-       } 
+       });
+       
+       UIApp._improveLinksForTouch(links);
        
    });
 
@@ -1821,7 +1826,7 @@
                     type: "view"
                 });
                 
-                self.panel.el.removeChild(barEl);
+                barEl.parentElement.removeChild(barEl);
                 barContainerEl[barName].appendChild(barEl);
                 
                 self[barName].hideContainer();
@@ -2800,17 +2805,8 @@
     $.extend(UIFormOption, {
         _init: function(uiview) {
             
-            var inputs,
-                iconsRefresh,
-                iconsArray = [];
-                
-            iconsRefresh = function() {
-                var i;
-                for (i = iconsArray.length;i--;) {
-                    iconsArray[i].addClass("m-hidden");
-                }
-            }
-                
+            var inputs;
+                 
             inputs = uiview.$el.find(".m-option");
             inputs.each(function(index,element) {
                 var $element = $(element),
@@ -2821,11 +2817,10 @@
                     updateValue,
                     iconElementName = element.name.replace(".","_");
 
-                updateValue = function(norefresh) {
-                    if (!norefresh) {
-                        $(".m-option-icon-name-" + iconElementName).addClass("m-hidden");
-                    }
-                    var checked = element.checked;
+                updateValue = function() {
+                    var checked = element.checked,
+                        $icon = $(".m-option-icon-name-" + iconElementName + "-" + element.getAttribute("m-option-index"));
+
                     if (checked === true) {
                         $icon.removeClass("m-hidden");
                     } else {
@@ -2835,25 +2830,25 @@
                                
                 /*jshint multistr: true */
                 coverHTML = '<div class="m-option m-option-cover">\
-                    <span class="m-option-icon m-icon-ok-small m-hidden m-option-icon-name-$elementName"></span>\
+                    <span class="m-option-icon m-icon-ok-small m-hidden m-option-icon-name-$elementName m-option-icon-name-$elementName-$index"></span>\
                 </div>';
 
-                $cover = element.$cover = $(coverHTML.replace("$elementName", iconElementName)).insertBefore(element);
+                $cover = element.$cover = $(coverHTML.replace("$elementName", iconElementName).replace("$elementName", iconElementName).replace("$index", index)).insertBefore(element);
+                element.setAttribute("m-option-index",  index);
                 
                 $label = $("label[for=" + element.id + "]");
                 $icon = $cover.find(".m-option-icon");
-                iconsArray.push($icon);
                 $cover[0].appendChild($label[0]);
                 
                 $element.removeClass("m-option")
                 $element.addClass("m-option-hidden");
 
                 $element.on("change", updateValue);
-
                 
                 $cover.on("tap click", function() {
+                    $(".m-option-icon-name-" + iconElementName).addClass("m-hidden");
                     element.checked = true;
-                    updateValue();
+                    $element.change();
                 });
 
                 updateValue(true);
@@ -2928,7 +2923,7 @@
                 /*jshint multistr: true */
                 coverHTML = '<div class="m-select m-select-cover">\
                     <span class="m-value">Select ...</span>\
-                    <span class="m-icon-arrow-down-small"></span>\
+                    <span class="m-icon-arrow-down-small m-select-icon"></span>\
                 </div>';
 
                 $cover = element.$cover = $(coverHTML).insertBefore(element);
@@ -3021,7 +3016,7 @@
                 /*jshint multistr: true */
                 coverHTML = '<div class="m-select m-select-cover">\
                     <span class="m-value">Select ...</span>\
-                    <span class="m-icon-arrow-down-small"></span>\
+                    <span class="m-icon-arrow-down-small m-select-icon"></span>\
                 </div>';
 
                 $cover = element.$cover = $(coverHTML).insertBefore(element);
@@ -3831,9 +3826,6 @@
                 $changeBtn = $modalContainer.find(".m-camerasingle-button-change");
                 
                 $deleteBtn.on("tap click", function() {
-                   element.mvalue = function() {
-                        return "";
-                   };
                    $img[0].setAttribute("src", "");
                 });
 
@@ -3850,9 +3842,6 @@
                         picReader.addEventListener('load', function(event) {
                             var picFile = event.target;
                             $img[0].src=picFile.result;
-                            element.mvalue = function() {
-                                return $img[0].src;
-                            };
                         });
                         picReader.readAsDataURL(file);
                     } 

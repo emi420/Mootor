@@ -97,9 +97,6 @@
                 $changeBtn = $modalContainer.find(".m-camerasingle-button-change");
                 
                 $deleteBtn.on("tap click", function() {
-                   element.mvalue = function() {
-                        return "";
-                   };
                    $img[0].setAttribute("src", "");
                 });
 
@@ -116,9 +113,6 @@
                         picReader.addEventListener('load', function(event) {
                             var picFile = event.target;
                             $img[0].src=picFile.result;
-                            element.mvalue = function() {
-                                return $img[0].src;
-                            };
                         });
                         picReader.readAsDataURL(file);
                     } 

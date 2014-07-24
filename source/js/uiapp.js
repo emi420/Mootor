@@ -100,8 +100,6 @@
     
     App.on("ready", function() {
            var links = $("a"),
-               i,
-               href,
                setEvent,
                onClick;
             
@@ -123,19 +121,26 @@
            onClick = function() {
                m.app.go(href);
                return false;
-            
            };
        }
     
-       if ( 'ontouchstart' in window ) {
-           for (i = links.length; i--;) {
-               href = links[i].getAttribute("href");
-               links[i].onclick = onClick;
-               if (href !== null && m.app.route(links[i].getAttribute("href")) !== undefined) {
-                   setEvent(links[i], href);
-               }
+       $.extend(UIApp, {
+           _improveLinksForTouch: function(links) {
+               var i,
+                   href;
+               if ( 'ontouchstart' in window ) {
+                   for (i = links.length; i--;) {
+                       href = links[i].getAttribute("href");
+                       links[i].onclick = onClick;
+                       if (href !== null && m.app.route(links[i].getAttribute("href")) !== undefined) {
+                           setEvent(links[i], href);
+                       }
+                   }
+               } 
            }
-       } 
+       });
+       
+       UIApp._improveLinksForTouch(links);
        
    });
 
