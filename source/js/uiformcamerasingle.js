@@ -108,11 +108,19 @@
                     var file,
                         picReader;
                     file = event.target.files[0];
+
+                    // FIXME CHECK (loading)
+                    m.app.ui.loading(true);
+
 					if (file && file.type.match('image')) {
                         picReader = new FileReader();
                         picReader.addEventListener('load', function(event) {
                             var picFile = event.target;
                             $img[0].src=picFile.result;
+
+                            // FIXME CHECK (loading)
+                            m.app.ui.loading();
+
                         });
                         picReader.readAsDataURL(file);
                     } 

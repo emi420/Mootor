@@ -133,49 +133,54 @@
 
             window.onresize = function() {
                 
-                self._$ctx.save();
+                image.onload = function() {
+                    
+                    self._$ctx.save();
                 
-                w = m.app.ui.$container.width() - 40;
-                h = m.app.ui.$container.height();
-                
-                if (w > h) {
-                    h = m.app.ui.$container.height() - 30;
+                    w = m.app.ui.$container.width() - 40;
+                    h = m.app.ui.$container.height();
+            
+                    if (w > h) {
+                        h = m.app.ui.$container.height() - 30;
+                        $canvas[0].setAttribute("height",  h + "px");
+                        $canvas[0].setAttribute("width",  w + "px");
+                        $canvasHeader.hide();
+                    } else {
+                        h = m.app.ui.$container.height() - 85;
+                        $canvasHeader.show();
+                    }
+
+                    $canvas.css("width", w + "px");
+                    $canvas.css("height", h + "px");
                     $canvas[0].setAttribute("height",  h + "px");
                     $canvas[0].setAttribute("width",  w + "px");
-                    $canvasHeader.hide();
-                } else {
-                    h = m.app.ui.$container.height() - 85;
-                    $canvasHeader.show();
+            
+                    self._$ctx.drawImage(image,0,0);
+            
+                    self._$ctx.lineWidth = 2;
+                    self._$ctx.restore();
+
                 }
 
-                $canvas.css("width", w + "px");
-                $canvas.css("height", h + "px");
-                $canvas[0].setAttribute("height",  h + "px");
-                $canvas[0].setAttribute("width",  w + "px");
-                
-                self._$ctx.drawImage(image,0,0);
-                
-                self._$ctx.restore();
-                
-                
+                image.src = $canvas[0].toDataURL();
 
             }
 
-            $(".m-draw-cancel").on("tap click", function(e) {
+            $(".m-draw-cancel").on("tap", function(e) {
                 $canvasContainer.hide();
                 e.stopPropagation();
                 e.preventDefault();
                 return false;
             });
 
-            $(".m-draw-erase").on("tap click", function(e) {
+            $(".m-draw-erase").on("tap", function(e) {
                 e.stopPropagation();
                 e.preventDefault();
                 self.clear();
                 return false;
             });
 
-            $(".m-draw-done").on("tap click", function(e) {
+            $(".m-draw-done").on("tap", function(e) {
                 e.stopPropagation();
                 e.preventDefault();
 
@@ -190,7 +195,7 @@
                 return false;
             };
             // FICKE CHECK
-            $cover.on("click tap", function(e) {
+            $cover.on("tap", function(e) {
                 e.stopPropagation();
                 e.preventDefault();
                 $canvasContainer.show();
