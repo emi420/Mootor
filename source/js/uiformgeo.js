@@ -41,12 +41,12 @@
             var elements;
             elements = uiview.$el.find(".m-geo");
             elements.each(function(index,element) {
-                new UIFormGeo([element]);
+                new UIFormGeo(element);
             });
         },
         
         __init: function(self, element) {
-            self._$coverHTML = element[0];
+            self._$coverHTML = element;
             self._$icon = self._$coverHTML.parentElement.getElementsByClassName("m-geo-icon")[0];
             self._$originalHtml = self._$coverHTML.innerHTML;
             UIFormGeo._addEventListeners(self);
@@ -89,18 +89,25 @@
 
         _getCurrentPosition: function(self) {
 
+            // Ionic compatibility
             $(self._$icon).removeClass("ion-location");
             $(self._$icon).addClass("ion-loading-c");
 
             navigator.geolocation.getCurrentPosition(
                 function(position) {
+
+                    // Ionic compatibility
                     $(self._$icon).addClass("ion-location");
                     $(self._$icon).removeClass("ion-loading-c");
+
                     UIFormGeo._onSuccess(self, position);
                 },
                 function(e) {
+                    
+                    // Ionic compatibility
                     $(self._$icon).addClass("ion-location");
                     $(self._$icon).removeClass("ion-loading-c");
+
                     UIFormGeo._onError(self);
                 },
                 { timeout: 10000, enableHighAccuracy: true }
