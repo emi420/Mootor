@@ -172,6 +172,7 @@
                 e.preventDefault();
                 return false;
             });
+            
 
             $(".m-draw-erase").on("tap", function(e) {
                 e.stopPropagation();
@@ -180,17 +181,15 @@
                 return false;
             });
 
-            $(".m-draw-done").on("tap", function(e) {
-                e.stopPropagation();
-                e.preventDefault();
+            // FIXME CHECK
+            $(".m-draw-done").on("click", function(e) {
 
                 var encodedImageData = $canvas[0].toDataURL();                
                 image.src = encodedImageData;
 
                 $canvasContainer.hide();
-                return false;
             });
-        
+            
             $label[0].onclick = function() {
                 return false;
             };

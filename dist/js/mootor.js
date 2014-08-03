@@ -6,7 +6,7 @@
     if ( 'ontouchstart' in window ) {
         $.fn._on = $.fn.on;
         $.fn.on = function(event, selector, data, callback, one) {
-            if (event.indexOf("click") > -1) {
+            if (event.indexOf("click") > -1 && event.indexOf("tap") > -1) {
                 event = event.replace("click","");
             }
             return $.fn._on.call(this, event, selector, data, callback, one);
@@ -3277,6 +3277,7 @@
                 e.preventDefault();
                 return false;
             });
+            
 
             $(".m-draw-erase").on("tap", function(e) {
                 e.stopPropagation();
@@ -3285,17 +3286,15 @@
                 return false;
             });
 
-            $(".m-draw-done").on("tap", function(e) {
-                e.stopPropagation();
-                e.preventDefault();
+            // FIXME CHECK
+            $(".m-draw-done").on("click", function(e) {
 
                 var encodedImageData = $canvas[0].toDataURL();                
                 image.src = encodedImageData;
 
                 $canvasContainer.hide();
-                return false;
             });
-        
+            
             $label[0].onclick = function() {
                 return false;
             };
@@ -3843,10 +3842,10 @@
                         picReader;
                     file = event.target.files[0];
 
-                    // FIXME CHECK (loading)
-                    m.app.ui.loading(true);
-
 					if (file && file.type.match('image')) {
+                        // FIXME CHECK (loading)
+                        m.app.ui.loading(true);
+
                         picReader = new FileReader();
                         picReader.addEventListener('load', function(event) {
                             var picFile = event.target;

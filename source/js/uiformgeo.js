@@ -24,76 +24,95 @@
     
     // Private constructors
 
-    UIFormGeo = function() {
-        // code here
+    UIFormGeo = Mootor.UIFormGeo = function(element) {
+        UIFormGeo.__init(this, element);
     };
 
     // Prototypal inheritance
-    $.extend(UIFormGeo.prototype, UI.prototype);
+    if (UI) {
+        $.extend(UIFormGeo.prototype, UI.prototype);
+    }
 
     // Private static methods and properties
 
     $.extend(UIFormGeo, {
+
         _init: function(uiview) {
-            
-            var inputs;
-                
-            inputs = uiview.$el.find(".m-geo");
-            inputs.each(function(index,element) {
-                var $element,
-                    $coverHTML,
-                    $cover,
-                    $value,
-                    $button,
-                    onSuccess,
-                    onError,
-                    originalHtml;
-            
-    			$element = $(element);
-            
-                $coverHTML = $('<button class="' + element.className + '"><span class="m-icon m-icon-map-pin-small"></span> ' + element.value + '</button>');
-                $button = $coverHTML.find("button");
-                $element.addClass("m-hidden");
-                
-                $coverHTML.insertBefore(element);
-                originalHtml = $coverHTML[0].innerHTML;
-                
-                onSuccess = function(position) {
-                    var coords,
-                        strCoords;
-                    coords = position.coords;
-                    strCoords = (Math.ceil(coords.latitude * 100) / 100) + "," + (Math.ceil(coords.longitude * 100) / 100);
-                    $element[0].value = strCoords;
-                    $element.change();
-                }
-
-                onError = function() {
-                    alert("Error");
-                    $coverHTML[0].innerHTML = originalHtml;
-                }
-                $coverHTML[0].onclick = function(){return false};
-                $coverHTML.on("tap click", function(e) {
-                    this.innerHTML = '<span class="m-icon m-icon-loading-small"></span>';
-                    navigator.geolocation.getCurrentPosition(
-                        onSuccess, 
-                        onError,
-                        { timeout: 10000, enableHighAccuracy: true }
-                    );
-                    e.stopPropagation();
-                    e.preventDefault();
-                    return false;
-                });
-                
-                $element.on("change", function() {
-                    var strValue =  $element[0].value;
-                    if (strValue) {
-                        $coverHTML[0].innerHTML = '<span class="m-icon m-icon-map-pin-small"></span> ' + strValue;
-                    } else {
-                        $coverHTML[0].innerHTML = originalHtml;
-                    }
-                });
-
+            var elements;
+            elements = uiview.$el.find(".m-geo");
+            elements.each(function(index,element) {
+                new UIFormGeo([element]);
             });
+        },
+        
+        __init: function(self, element) {
+            self._$coverHTML = element[0];
+            self._$icon = self._$coverHTML.parentElement.getElementsByClassName("m-geo-icon")[0];
+            self._$originalHtml = self._$coverHTML.innerHTML;
+            UIFormGeo._addEventListeners(self);
+            $(self._$coverHTML).addClass("m-geo-input"); 
+            
+        },
+                
+        _addEventListeners: function(self) {
+            var self = self;
+            self._$coverHTML.parentElement.addEventListener("click", function() {
+               UIFormGeo._getCurrentPosition(self); 
+               window.setTimeout(function() {
+                   self._$coverHTML.setAttribute("disabled", "disabled");
+               }, 200);
+            });
+        },
+
+        _onSuccess: function(self, position) {
+            var coords,
+                strCoords;
+
+            coords = position.coords;
+            strCoords = (Math.ceil(coords.latitude * 10000) / 10000) + "," + (Math.ceil(coords.longitude * 10000) / 10000);
+            $(self._$coverHTML).addClass("m-geo-located");
+            self._$coverHTML.value = strCoords;
+
+            // FIXME CHECK
+            // Move this code to ngMootor (Mootor Angular JS module)
+            
+            /*var oModel = self._attrs['ngModel'].split("."),
+                // FIXME CHECK
+                modelName = oModel[0],
+                modelField = oModel[1];
+        
+            self._scope[modelName][modelField] = strCoords;
+            self._fn(self._scope);*/
+            
+            
+        },
+
+        _onError: function(self) {
+            $(self._$coverHTML).removeClass("m-geo-located");
+            self._$coverHTML.innerHTML = self._$originalHtml;
+            window.setTimeout(function() {
+                self._$coverHTML.removeAttribute("disabled");
+            }, 200);
+        },
+
+        _getCurrentPosition: function(self) {
+
+            $(self._$icon).removeClass("ion-location");
+            $(self._$icon).addClass("ion-loading-c");
+
+            navigator.geolocation.getCurrentPosition(
+                function(position) {
+                    $(self._$icon).addClass("ion-location");
+                    $(self._$icon).removeClass("ion-loading-c");
+                    UIFormGeo._onSuccess(self, position);
+                },
+                function(e) {
+                    $(self._$icon).addClass("ion-location");
+                    $(self._$icon).removeClass("ion-loading-c");
+                    UIFormGeo._onError(self);
+                },
+                { timeout: 10000, enableHighAccuracy: true }
+            );
         }
    
     });
@@ -101,9 +120,12 @@
     // Public methods and properties
 
     $.extend(UIFormGeo.prototype, {
+        // code here
     });        
 
-    UIForm.registerControl(UIFormGeo);  
+    if (UIForm) {
+        UIForm.registerControl(UIFormGeo);  
+    }
 
 
 }(window.$, window.Mootor));

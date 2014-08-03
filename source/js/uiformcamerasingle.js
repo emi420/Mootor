@@ -109,10 +109,10 @@
                         picReader;
                     file = event.target.files[0];
 
-                    // FIXME CHECK (loading)
-                    m.app.ui.loading(true);
-
 					if (file && file.type.match('image')) {
+                        // FIXME CHECK (loading)
+                        m.app.ui.loading(true);
+
                         picReader = new FileReader();
                         picReader.addEventListener('load', function(event) {
                             var picFile = event.target;
