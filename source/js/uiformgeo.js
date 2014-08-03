@@ -63,8 +63,8 @@
                }, 200);
             });
         },
-
-        _onSuccess: function(self, position) {
+        
+        __onSuccess: function(self, position) {
             var coords,
                 strCoords;
 
@@ -72,19 +72,11 @@
             strCoords = (Math.ceil(coords.latitude * 10000) / 10000) + "," + (Math.ceil(coords.longitude * 10000) / 10000);
             $(self._$coverHTML).addClass("m-geo-located");
             self._$coverHTML.value = strCoords;
+            return strCoords;
+        },
 
-            // FIXME CHECK
-            // Move this code to ngMootor (Mootor Angular JS module)
-            
-            /*var oModel = self._attrs['ngModel'].split("."),
-                // FIXME CHECK
-                modelName = oModel[0],
-                modelField = oModel[1];
-        
-            self._scope[modelName][modelField] = strCoords;
-            self._fn(self._scope);*/
-            
-            
+        _onSuccess: function(self, position) {
+            UIFormGeo.__onSuccess(self, position);
         },
 
         _onError: function(self) {
