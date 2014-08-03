@@ -25,7 +25,7 @@
     // Private constructors
 
     UIFormCameraSingle = Mootor.UIFormCameraSingle = function(element) {
-        UIFormDraw.__init(this, element, {template: false});
+        UIFormCameraSingle.__init(this, element, {template: false});
     };
 
     // Prototypal inheritance
@@ -70,7 +70,7 @@
         },
 
         __init: function(self, element, options) {
-            
+            self.options = options;
             if (self.options && self.options.template === false) {
                 self._$coverHTML = $(UIFormCameraSingle._template)[0];
                 $(element).replaceWith(self._$coverHTML);
@@ -202,7 +202,7 @@
                 $(self._$modalContainer).removeClass("m-hidden");
                 $(self._$img).removeClass("m-hidden");
             } else {
-                self._openFileSelector();
+                UIFormCameraSingle._openFileSelector(self);
             }
         },
     
@@ -215,7 +215,7 @@
         // Change current selected file
         change: function() {
             var self = this;
-            self._openFileSelector();
+            UIFormCameraSingle._openFileSelector(self);
         },
     
         // Close modal
@@ -234,7 +234,23 @@
         _$img: {} ,
         _$placeholder: {},
 
-    });        
+    });       
+    
+    UIFormCameraSingle._template = '<div class="m-camerasingle m-camerasingle-cover"> \
+        <input class="m-hidden" type="file" class="m-camera-single" accept="image/*" /> \
+        <span class="m-camerasingle-placeholder">...</span> \
+        <div class="m-camerasingle-modal m-hidden"> \
+            <div class="m-camerasingle-modal-header"> \
+                <span class="m-canvas-cancel m-camerasingle-cancel"><span class="m-icon-arrow-left"></span></span> \
+            </div> \
+            <div class="m-camerasingle-img-container"> \
+                <button class="button button-positive button-block m-camerasingle-button-change m-button m-button m-button-primary"><span class="m-icon-refresh-small-white"></span></button> \
+                <button class="button button-assertive button-block m-camerasingle-button-delete m-button m-button m-button-danger"><span class="m-icon-delete-small-white"></span></button> \
+            </div> \
+            <div class="m-camerasingle-modal-footer"> \
+            </div> \
+        </div> \
+    </div>'; 
 
     if (UIForm) {
         UIForm.registerControl(UIFormCameraSingle);  
