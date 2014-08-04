@@ -71,6 +71,7 @@
 
         __init: function(self, element, options) {
             self.options = options;
+            self._$originalElement = element;
             if (self.options && self.options.template === false) {
                 self._$coverHTML = $(UIFormCameraSingle._template)[0];
                 $(element).replaceWith(self._$coverHTML);
@@ -195,6 +196,7 @@
         "open": function() {
             var self = this;
 
+            self._$imgParentElement = self._$img.parentElement;
             self._$img.parentElement.removeChild(self._$img);
             $(self._$imgContainer).prepend(self._$img);
 
@@ -221,6 +223,9 @@
         // Close modal
         "close": function() {
             var self = this;
+            self._$img.parentElement.removeChild(self._$img);
+            self._$imgParentElement.appendChild(self._$img);
+
             $(self._$modalContainer).addClass("m-hidden");
         },
 
