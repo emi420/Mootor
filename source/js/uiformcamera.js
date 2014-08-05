@@ -124,22 +124,22 @@
             
             $cameraImgContainer = $('.m-img-container');
             
-            $label[0].onclick = function() {
+            $label[0].on('tap', function() {
                 return false;
-            };
+            });
 
             var $choosePicture = $(".m-choose-image");
             
             UIFormCamera._addFiles(self, $element);
             
             
-            $cover.on("click tap", function() {
+            $cover.on('tap', function() {
 
                 UIFormCamera._addListeners(self);
                 $cameraContainer.show();
                 
                 var $closeButton = $cameraContainer.find('.m-camera-back');
-                $closeButton.click(function() {
+                $closeButton.on('tap', function() {
                     self._$cameraContainer.hide();
                 });
             });
@@ -155,7 +155,7 @@
 
         _addListeners: function(self) {
 
-            self._$choosePicture.on('tap click', function(e) {
+            self._$choosePicture.on('tap', function(e) {
 
                 self._$pictures.trigger("click");
 
