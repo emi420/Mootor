@@ -49,11 +49,11 @@
 
         _init: function(uiview) {
             var inputs = uiview.$el.find(".m-camera");
-            
+
             inputs.each(function(index, element) {
 
                 var self = new UIFormCamera();
-                UIFormCamera._makeUI(self, element);               
+                UIFormCamera._makeUI(self, element);
                 $.extend(element, UIFormCamera.prototype);
             });
         },
@@ -69,18 +69,17 @@
 
             $element = $(element);
 
-            
-            
+
             $label = $("label[for=" + element.getAttribute("id") + "]");
 
             coverHTML = '<div class="m-camera m-camera-cover m-camera-btn">\
                 <span class="m-camera-icon m-icon-arrow-right-small"></span>\
             </div>';
-            
+
             $cover = element.$cover = $(coverHTML).insertBefore(element);
             $label.insertBefore($cover.find(".m-camera-icon"));
             $element.hide();
-            
+
             $cameraContainer = $('\
                 <div class="m-camera-container">\
                     <div class="m-header-container">\
@@ -109,11 +108,8 @@
                 ');
 
             $cameraContainer.hide();
-            
             $cameraContainer.insertBefore(document.body.lastChild);
-            
             $cameraMessage = $('.m-camera-message');
-
             $cameraMessage.hide();
 
             if ($cameraContainer.find('m-camera-images').length === 0) {
@@ -121,31 +117,32 @@
                 $cameraMessage.show();
 
             }
-            
+
             $cameraImgContainer = $('.m-img-container');
-            
-            $label[0].on('tap', function() {
+
+            $label[0].click(function() {
                 return false;
             });
 
+
             var $choosePicture = $(".m-choose-image");
-            
+
+
             UIFormCamera._addFiles(self, $element);
-            
-            
+
             $cover.on('tap', function() {
 
                 UIFormCamera._addListeners(self);
                 $cameraContainer.show();
-                
+
                 var $closeButton = $cameraContainer.find('.m-camera-back');
                 $closeButton.on('tap', function() {
                     self._$cameraContainer.hide();
                 });
             });
-            
-                       
-            
+
+
+
             self._$cameraContainer = $cameraContainer;
             self._$pictures = $element;
             self._$backButton = $('.m-camera-back');
@@ -161,7 +158,7 @@
 
             });
         },
-        
+
         _addFiles: function(self, $element) {
             $element.on('change', function(event) {
                 var files = event.target.files,
@@ -185,14 +182,14 @@
                             "title='" + picFile.name + "'/>");
 
                         output.append(picture, null);
-                        
+
                         $('.m-camera-message').hide();
                     });
 
                     picReader.readAsDataURL(file);
 
                     picture = new UIFormCameraPicture(file);
-                    
+
                     var obj = $element[0];
                     if (obj.pictures === undefined) {
                         obj.pictures = [];
@@ -214,7 +211,7 @@
     // Public methods and properties
 
     $.extend(UIFormCamera.prototype, {
-        
+
         /**
         * Take a picture
         *
@@ -275,14 +272,14 @@
         * @chainable
         */
         "export": function(options) {
-        
+
             var reader = new FileReader();
             reader.readAsDataURL(this.image)
 
             reader.onerror = function() {
                 return 'error';
             }
-            
+
             reader.onloadend = function() {
                 return reader.result;
             }

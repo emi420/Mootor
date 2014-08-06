@@ -15,6 +15,7 @@
     app.route("^#uinavbar", app.view("uinavbar"));
     app.route("^#colors", app.view("colors"));
     app.route("^#text", app.view("text"));
+    app.route("^#camera", app.view("camera"));
     
     app.init();
 
