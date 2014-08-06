@@ -127,9 +127,6 @@
             var $choosePicture = $cameraContainer.find(".m-choose-image"),
                 $takePicture = $cameraContainer.find(".m-take-image");
 
-            // UIFormCamera._addFiles(self, $element);
-
-
             $cover.on('tap', function(e) {
                 e.stopPropagation();
                 e.preventDefault();
@@ -163,51 +160,6 @@
                 self.take();
             });
         },
-        /*
-        _addFiles: function(self, $element) {
-            $element.on('change', function(event) {
-                var files = event.target.files,
-                    output = self._$cameraImgContainer,
-                    picture;
-
-                for (var i = 0; i < files.length; i++) {
-                    var file = files[i];
-
-                    if (!file.type.match('image')) {
-                        continue;
-                    }
-
-                    var picReader = new FileReader();
-
-                    picReader.addEventListener('load', function(event) {
-                        var picFile = event.target;
-
-                        picture = $('<div class="m-camera-img"></div>');
-                        picture.append("<img class='thumbnail' src='" + picFile.result + "'" +
-                            "title='" + picFile.name + "'/>");
-
-                        output.append(picture, null);
-
-                        $('.m-camera-message').hide();
-                    });
-
-                    picReader.readAsDataURL(file);
-
-                    picture = new UIFormCameraPicture(file);
-
-                    var obj = $element[0];
-                    if (obj.pictures === undefined) {
-                        obj.pictures = [];
-                        obj.pictures.push(picture);
-                    } else {
-                        var arrPicturesLength = obj.pictures.length;
-                        obj.pictures[arrPicturesLength] = picture;
-                    }
-                }
-            });
-        }
-        */
-
     });
 
     $.extend(UIFormCameraPicture, {
