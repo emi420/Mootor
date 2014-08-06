@@ -31,9 +31,9 @@
 
     };
 
-    UIFormCameraPicture = function(file) {
+    UIFormCameraPicture = function(path) {
 
-        this.image = file;
+        this.path = path;
 
     };
 
@@ -55,6 +55,7 @@
                 var self = new UIFormCamera();
                 UIFormCamera._makeUI(self, element);
                 $.extend(element, UIFormCamera.prototype);
+
             });
         },
 
@@ -109,30 +110,30 @@
 
             $cameraContainer.hide();
             $cameraContainer.insertBefore(document.body.lastChild);
-            $cameraMessage = $('.m-camera-message');
+            $cameraMessage = $cameraContainer.find('.m-camera-message');
             $cameraMessage.hide();
 
             if ($cameraContainer.find('m-camera-images').length === 0) {
-
                 $cameraMessage.show();
-
             }
 
-            $cameraImgContainer = $('.m-img-container');
+            $cameraImgContainer = $cameraContainer.find('.m-img-container');
 
             $label[0].click(function() {
                 return false;
             });
 
 
-            var $choosePicture = $(".m-choose-image");
+            var $choosePicture = $cameraContainer.find(".m-choose-image"),
+                $takePicture = $cameraContainer.find(".m-take-image");
+
+            // UIFormCamera._addFiles(self, $element);
 
 
-            UIFormCamera._addFiles(self, $element);
+            $cover.on('tap', function(e) {
+                e.stopPropagation();
+                e.preventDefault();
 
-            $cover.on('tap', function() {
-
-                UIFormCamera._addListeners(self);
                 $cameraContainer.show();
 
                 var $closeButton = $cameraContainer.find('.m-camera-back');
@@ -142,23 +143,27 @@
             });
 
 
-
             self._$cameraContainer = $cameraContainer;
             self._$pictures = $element;
-            self._$backButton = $('.m-camera-back');
             self._$choosePicture = $choosePicture;
+            self._$takePicture = $takePicture;
+            self._$cameraMessage = $cameraMessage;
             self._$cameraImgContainer = $cameraImgContainer;
+            UIFormCamera._addListeners(self);
+
         },
 
         _addListeners: function(self) {
 
             self._$choosePicture.on('tap', function(e) {
+                self.choose();
+            });
 
-                self._$pictures.trigger("click");
-
+            self._$takePicture.on('tap', function(e) {
+                self.take();
             });
         },
-
+        /*
         _addFiles: function(self, $element) {
             $element.on('change', function(event) {
                 var files = event.target.files,
@@ -201,6 +206,7 @@
                 }
             });
         }
+        */
 
     });
 
@@ -219,7 +225,29 @@
         * @chainable
         */
         take: function(){
-            // code here
+            var self = this,
+                $imgContainer = this._$cameraImgContainer,
+                picture = $('<div class="m-camera-img"></div>');
+
+
+            navigator.camera.getPicture(onSuccess, onFail, {
+                quality: 50,
+                destinationType: Camera.DestinationType.NATIVE_URI
+            });
+
+            function onSuccess(imageData) {
+
+                picture.append("<img class='thumbnail' src='" + imageData + "' />");
+                $imgContainer.append(picture, null);
+                self._$cameraMessage.hide();
+
+                self.pictures.push(new UIFormCameraPicture(imageData));
+
+            }
+
+            function onFail(message) {
+                console.log(message);
+            }
         },
 
         /**
@@ -229,7 +257,27 @@
         * @chainable
         */
         choose: function(){
-            // code here
+            var self = this,
+                picture = $('<div class="m-camera-img"></div>');
+                $imgContainer = this._$cameraImgContainer;
+
+            navigator.camera.getPicture(onSuccess, onFail, {
+                quality: 50,
+                destinationType: Camera.destinationType.NATIVE_URI,
+                sourceType: Camera.pictureSource.PHOTOLIBRARY
+            });
+
+            function onSuccess(imageData) {
+
+                picture.append("<img class='thumbnail' src='" + imageData + "' />");
+                $imgContainer.append(picture, null);
+                self._$cameraMessage.hide();
+
+            }
+
+            function onFail(message) {
+                console.log(message);
+            }
         },
 
         /**
@@ -240,10 +288,13 @@
         * @chainable
         */
         all: function() {
+            var paths = [];
 
             $.each(this.pictures, function(item, val) {
-                console.log(val);
+                paths.push(val);
             });
+
+            return paths;
         },
 
         /**
