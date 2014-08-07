@@ -231,9 +231,12 @@
                 height: window.screen.height
             },
             
-            cordova: (window.Cordova !== undefined),
-            phonegap: (window.PhoneGap !== undefined),
-            
+            cordova: function() {
+                return window.Cordova !== undefined
+            },
+            phonegap:function() {
+                return window.PhoneGap !== undefined
+            },
             _androidversion: function() {
                 var ua = navigator.userAgent;
                 if( ua.indexOf("Android") >= 0 ) {
@@ -1519,6 +1522,8 @@
 
     Router = Mootor.Router = function() {
     };
+    
+    Router._initialized = false;
 
     // Event handlers
     
@@ -1540,7 +1545,12 @@
             _pendingGo = window.location.hash;
         }
         m.app._firstHash = _pendingGo;
-        m.app.go(_pendingGo);
+        
+        if ($.os.ios === true && window.cordova !== undefined && Router._initialized === false) {
+            Router._initialized = true;
+        } else {
+            m.app.go(_pendingGo);
+        }
     });
 
     // Private static methods and properties
@@ -2396,7 +2406,8 @@
         
         __init: function(self, element) {
             self._$coverHTML = element;
-            self._$icon = self._$coverHTML.parentElement.getElementsByClassName("m-geo-icon")[0];
+            self._$input = element;
+            self._$icon = self._$coverHTML.parentElement.getElementsByClassName("m-icon")[0];
             self._$originalHtml = self._$coverHTML.innerHTML;
             UIFormGeo._addEventListeners(self);
             $(self._$coverHTML).addClass("m-geo-input"); 
@@ -2404,13 +2415,16 @@
         },
                 
         _addEventListeners: function(self) {
-            var self = self;
-            self._$coverHTML.parentElement.addEventListener("click", function() {
+            self._$input.addEventListener("click", function() {
                UIFormGeo._getCurrentPosition(self); 
+               self._$input.setAttribute("disabled", "disabled");
+            });
+            self._$input.addEventListener("blur", function() {
                window.setTimeout(function() {
-                   self._$coverHTML.setAttribute("disabled", "disabled");
+                   self._$input.removeAttribute("disabled");
                }, 200);
             });
+            
         },
         
         __onSuccess: function(self, position) {
@@ -2420,7 +2434,7 @@
             coords = position.coords;
             strCoords = (Math.ceil(coords.latitude * 10000) / 10000) + "," + (Math.ceil(coords.longitude * 10000) / 10000);
             $(self._$coverHTML).addClass("m-geo-located");
-            self._$coverHTML.value = strCoords;
+            self._$input.value = strCoords;
             return strCoords;
         },
 
@@ -2431,33 +2445,26 @@
         _onError: function(self) {
             $(self._$coverHTML).removeClass("m-geo-located");
             self._$coverHTML.innerHTML = self._$originalHtml;
-            window.setTimeout(function() {
-                self._$coverHTML.removeAttribute("disabled");
-            }, 200);
+            self._$input.value = "";
         },
 
         _getCurrentPosition: function(self) {
-
-            // Ionic compatibility
-            $(self._$icon).removeClass("ion-location");
-            $(self._$icon).addClass("ion-loading-c");
+            
+            var $icon = $(self._$icon);
+            
+            $icon.addClass("m-icon-anim-blink");
 
             navigator.geolocation.getCurrentPosition(
                 function(position) {
 
-                    // Ionic compatibility
-                    $(self._$icon).addClass("ion-location");
-                    $(self._$icon).removeClass("ion-loading-c");
-
                     UIFormGeo._onSuccess(self, position);
+                    $icon.removeClass("m-icon-anim-blink");
+                    
                 },
                 function(e) {
-                    
-                    // Ionic compatibility
-                    $(self._$icon).addClass("ion-location");
-                    $(self._$icon).removeClass("ion-loading-c");
 
                     UIFormGeo._onError(self);
+                    $icon.removeClass("m-icon-anim-blink");
                 },
                 { timeout: 10000, enableHighAccuracy: true }
             );
@@ -3314,7 +3321,6 @@
 
             self._$saveBtn.addEventListener("click", function() {
                 self.save();
-               // self.close();
             });
 
                 
@@ -3793,6 +3799,7 @@
         
         _init: function(uiview) {
             var elements;
+            
             elements = uiview.$el.find(".m-camera-single");
             elements.each(function(index,element) {
                  new UIFormCameraSingle(element);
@@ -3800,10 +3807,9 @@
         },
 
         _openFileSelector: function(self) {
-            if (window.Camera !== undefined) {
+            if (window.cordova !== undefined) {
                 navigator.camera.getPicture(           
                    function(data) {
-                       console.log(data);
                        self._$img.setAttribute("src", data);
                    },
                    function() {
@@ -3818,12 +3824,14 @@
                    }
                 );
             } else {
-                self._$input.dispatchEvent(new Event("click"));
+                self._$input.click();
             }
         
         },
 
         __init: function(self, element, options) {
+            
+            
             self.options = options;
             self._$originalElement = element;
             if (self.options && self.options.template === false) {
@@ -3836,7 +3844,12 @@
             self._$img = self._$coverHTML.parentElement.getElementsByTagName("img")[0];
             
             self._$input = self._$coverHTML.getElementsByTagName("input")[0];
-            self._$modalContainer = self._$coverHTML.getElementsByClassName("m-camerasingle-modal")[0];
+            
+            if (UIFormCameraSingle._initialized) {
+                self._$modalContainer = UIFormCameraSingle._$modalContainer;
+            } else {
+                self._$modalContainer = UIFormCameraSingle._$modalContainer = self._$coverHTML.getElementsByClassName("m-camerasingle-modal")[0];
+            }
 
             self._$imgContainer = self._$modalContainer.getElementsByClassName("m-camerasingle-img-container")[0];
             self._$originalImgContainer = self._$img.parentElement;
@@ -3848,6 +3861,7 @@
             self._$placeholder.innerHTML = self._$img.getAttribute("title");
             $(self._$img).addClass("m-hidden");
             
+            UIFormCameraSingle._initialized = true;
         },
     
         _initModal: function(self) {
@@ -3857,7 +3871,6 @@
             if (UIFormCameraSingle._initialized !== true) {
                 document.body.appendChild(self._$modalContainer);
                 UIFormCameraSingle._$modalContainer = self._$modalContainer;
-                UIFormCameraSingle._initialized = true;
             } else {
                 self._$modalContainer = UIFormCameraSingle._$modalContainer;
             }
@@ -3882,7 +3895,7 @@
             self._$input.setAttribute("accept", aAttrs.accept);
         },
     
-        _onChange: function(self) {
+        _onChange: function(event, self) {
           var file,
               picReader;
     
@@ -3919,14 +3932,16 @@
             self._$changeBtn.addEventListener("click", function() {
                 self.change();
             });
+            
+            if (UIFormCameraSingle._initialized !== true) {
+                self._$modalContainer.addEventListener("click", function() {
+                    self.close();
+                });
+            }
 
-            self._$modalContainer.addEventListener("click", function() {
-                self.close();
-            });
-
-            if (window.Camera === undefined) {
+            if (window.cordova === undefined) {
                 self._$input.addEventListener("change", function(event) {
-                    UIFormCameraSingle._onChange(self);
+                    UIFormCameraSingle._onChange(event, self);
                 });
             }
 
@@ -3950,13 +3965,15 @@
         "open": function() {
             var self = this;
 
-            self._$imgParentElement = self._$img.parentElement;
-            self._$img.parentElement.removeChild(self._$img);
-            $(self._$imgContainer).prepend(self._$img);
-
             if (self._$img.getAttribute("src") !== "") {
-                $(self._$modalContainer).removeClass("m-hidden");
+                
+                $(UIFormCameraSingle._$modalContainer).removeClass("m-hidden");
                 $(self._$img).removeClass("m-hidden");
+
+                self._$imgParentElement = self._$img.parentElement;
+                self._$img.parentElement.removeChild(self._$img);
+                self._$imgContainer.appendChild(self._$img);
+
             } else {
                 UIFormCameraSingle._openFileSelector(self);
             }
@@ -3977,10 +3994,12 @@
         // Close modal
         "close": function() {
             var self = this;
+            $(self._$img).addClass("m-hidden");
+            $(UIFormCameraSingle._$modalContainer).addClass("m-hidden");
+            
             self._$img.parentElement.removeChild(self._$img);
             self._$imgParentElement.appendChild(self._$img);
 
-            $(self._$modalContainer).addClass("m-hidden");
         },
 
         _$coverHTML: {} ,

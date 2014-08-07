@@ -39,6 +39,7 @@
         
         _init: function(uiview) {
             var elements;
+            
             elements = uiview.$el.find(".m-camera-single");
             elements.each(function(index,element) {
                  new UIFormCameraSingle(element);
@@ -46,10 +47,9 @@
         },
 
         _openFileSelector: function(self) {
-            if (window.Camera !== undefined) {
+            if (window.cordova !== undefined) {
                 navigator.camera.getPicture(           
                    function(data) {
-                       console.log(data);
                        self._$img.setAttribute("src", data);
                    },
                    function() {
@@ -64,12 +64,14 @@
                    }
                 );
             } else {
-                self._$input.dispatchEvent(new Event("click"));
+                self._$input.click();
             }
         
         },
 
         __init: function(self, element, options) {
+            
+            
             self.options = options;
             self._$originalElement = element;
             if (self.options && self.options.template === false) {
@@ -82,7 +84,12 @@
             self._$img = self._$coverHTML.parentElement.getElementsByTagName("img")[0];
             
             self._$input = self._$coverHTML.getElementsByTagName("input")[0];
-            self._$modalContainer = self._$coverHTML.getElementsByClassName("m-camerasingle-modal")[0];
+            
+            if (UIFormCameraSingle._initialized) {
+                self._$modalContainer = UIFormCameraSingle._$modalContainer;
+            } else {
+                self._$modalContainer = UIFormCameraSingle._$modalContainer = self._$coverHTML.getElementsByClassName("m-camerasingle-modal")[0];
+            }
 
             self._$imgContainer = self._$modalContainer.getElementsByClassName("m-camerasingle-img-container")[0];
             self._$originalImgContainer = self._$img.parentElement;
@@ -94,6 +101,7 @@
             self._$placeholder.innerHTML = self._$img.getAttribute("title");
             $(self._$img).addClass("m-hidden");
             
+            UIFormCameraSingle._initialized = true;
         },
     
         _initModal: function(self) {
@@ -103,7 +111,6 @@
             if (UIFormCameraSingle._initialized !== true) {
                 document.body.appendChild(self._$modalContainer);
                 UIFormCameraSingle._$modalContainer = self._$modalContainer;
-                UIFormCameraSingle._initialized = true;
             } else {
                 self._$modalContainer = UIFormCameraSingle._$modalContainer;
             }
@@ -128,7 +135,7 @@
             self._$input.setAttribute("accept", aAttrs.accept);
         },
     
-        _onChange: function(self) {
+        _onChange: function(event, self) {
           var file,
               picReader;
     
@@ -165,14 +172,16 @@
             self._$changeBtn.addEventListener("click", function() {
                 self.change();
             });
+            
+            if (UIFormCameraSingle._initialized !== true) {
+                self._$modalContainer.addEventListener("click", function() {
+                    self.close();
+                });
+            }
 
-            self._$modalContainer.addEventListener("click", function() {
-                self.close();
-            });
-
-            if (window.Camera === undefined) {
+            if (window.cordova === undefined) {
                 self._$input.addEventListener("change", function(event) {
-                    UIFormCameraSingle._onChange(self);
+                    UIFormCameraSingle._onChange(event, self);
                 });
             }
 
@@ -196,13 +205,15 @@
         "open": function() {
             var self = this;
 
-            self._$imgParentElement = self._$img.parentElement;
-            self._$img.parentElement.removeChild(self._$img);
-            $(self._$imgContainer).prepend(self._$img);
-
             if (self._$img.getAttribute("src") !== "") {
-                $(self._$modalContainer).removeClass("m-hidden");
+                
+                $(UIFormCameraSingle._$modalContainer).removeClass("m-hidden");
                 $(self._$img).removeClass("m-hidden");
+
+                self._$imgParentElement = self._$img.parentElement;
+                self._$img.parentElement.removeChild(self._$img);
+                self._$imgContainer.appendChild(self._$img);
+
             } else {
                 UIFormCameraSingle._openFileSelector(self);
             }
@@ -223,10 +234,12 @@
         // Close modal
         "close": function() {
             var self = this;
+            $(self._$img).addClass("m-hidden");
+            $(UIFormCameraSingle._$modalContainer).addClass("m-hidden");
+            
             self._$img.parentElement.removeChild(self._$img);
             self._$imgParentElement.appendChild(self._$img);
 
-            $(self._$modalContainer).addClass("m-hidden");
         },
 
         _$coverHTML: {} ,

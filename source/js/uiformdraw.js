@@ -188,7 +188,6 @@
 
             self._$saveBtn.addEventListener("click", function() {
                 self.save();
-               // self.close();
             });
 
                 

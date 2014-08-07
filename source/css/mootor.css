@@ -1955,8 +1955,9 @@ html, body {
 .m-app .m-form-left-labels input.m-option {
   top: -2em;
 }
-/* line 2, _uiformdate.scss */
+/* line 3, _uiformdate.scss */
 .m-app input[type=date].m-date-hidden,
+.m-app input[type=datetime-local].m-date-hidden,
 .m-app input[type=month].m-date-hidden {
   opacity: 0.001;
   top: 0;
@@ -1964,8 +1965,9 @@ html, body {
   position: absolute;
   top: 2.4em;
 }
-/* line 12, _uiformdate.scss */
+/* line 14, _uiformdate.scss */
 .m-app input[type=date].m-date,
+.m-app input[type=datetime-local].m-date,
 .m-app input[type=month].m-date {
   width: 100%;
   border: 0;

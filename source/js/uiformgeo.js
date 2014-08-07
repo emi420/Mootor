@@ -47,7 +47,8 @@
         
         __init: function(self, element) {
             self._$coverHTML = element;
-            self._$icon = self._$coverHTML.parentElement.getElementsByClassName("m-geo-icon")[0];
+            self._$input = element;
+            self._$icon = self._$coverHTML.parentElement.getElementsByClassName("m-icon")[0];
             self._$originalHtml = self._$coverHTML.innerHTML;
             UIFormGeo._addEventListeners(self);
             $(self._$coverHTML).addClass("m-geo-input"); 
@@ -55,13 +56,16 @@
         },
                 
         _addEventListeners: function(self) {
-            var self = self;
-            self._$coverHTML.parentElement.addEventListener("click", function() {
+            self._$input.addEventListener("click", function() {
                UIFormGeo._getCurrentPosition(self); 
+               self._$input.setAttribute("disabled", "disabled");
+            });
+            self._$input.addEventListener("blur", function() {
                window.setTimeout(function() {
-                   self._$coverHTML.setAttribute("disabled", "disabled");
+                   self._$input.removeAttribute("disabled");
                }, 200);
             });
+            
         },
         
         __onSuccess: function(self, position) {
@@ -71,7 +75,7 @@
             coords = position.coords;
             strCoords = (Math.ceil(coords.latitude * 10000) / 10000) + "," + (Math.ceil(coords.longitude * 10000) / 10000);
             $(self._$coverHTML).addClass("m-geo-located");
-            self._$coverHTML.value = strCoords;
+            self._$input.value = strCoords;
             return strCoords;
         },
 
@@ -82,33 +86,26 @@
         _onError: function(self) {
             $(self._$coverHTML).removeClass("m-geo-located");
             self._$coverHTML.innerHTML = self._$originalHtml;
-            window.setTimeout(function() {
-                self._$coverHTML.removeAttribute("disabled");
-            }, 200);
+            self._$input.value = "";
         },
 
         _getCurrentPosition: function(self) {
-
-            // Ionic compatibility
-            $(self._$icon).removeClass("ion-location");
-            $(self._$icon).addClass("ion-loading-c");
+            
+            var $icon = $(self._$icon);
+            
+            $icon.addClass("m-icon-anim-blink");
 
             navigator.geolocation.getCurrentPosition(
                 function(position) {
 
-                    // Ionic compatibility
-                    $(self._$icon).addClass("ion-location");
-                    $(self._$icon).removeClass("ion-loading-c");
-
                     UIFormGeo._onSuccess(self, position);
+                    $icon.removeClass("m-icon-anim-blink");
+                    
                 },
                 function(e) {
-                    
-                    // Ionic compatibility
-                    $(self._$icon).addClass("ion-location");
-                    $(self._$icon).removeClass("ion-loading-c");
 
                     UIFormGeo._onError(self);
+                    $icon.removeClass("m-icon-anim-blink");
                 },
                 { timeout: 10000, enableHighAccuracy: true }
             );
