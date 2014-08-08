@@ -30,8 +30,6 @@
 
     Router = Mootor.Router = function() {
     };
-    
-    Router._initialized = false;
 
     // Event handlers
     
@@ -53,12 +51,8 @@
             _pendingGo = window.location.hash;
         }
         m.app._firstHash = _pendingGo;
-        
-        if ($.os.ios === true && window.cordova !== undefined && Router._initialized === false) {
-            Router._initialized = true;
-        } else {
-            m.app.go(_pendingGo);
-        }
+
+        m.app.go(_pendingGo);
     });
 
     // Private static methods and properties
