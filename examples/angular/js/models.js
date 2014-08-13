@@ -7,7 +7,7 @@
        this._updatedAt = d.getDate() + "/" + (d.getMonth() + 1) + '/' + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes();
        this.picture = options.picture || "img/no-picture.png";
        this.description = options.description || "";
-       this.type = options.type || "Semáforo roto";
+       this.type = options.type || "The option number one";
        this.street = options.street || "";
        this.streetN = options.streetN || "";
        this.geo = options.geo || "";
