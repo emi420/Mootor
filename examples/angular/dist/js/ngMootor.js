@@ -37,7 +37,7 @@
                             $viewElement.find("input.m-geo").change();
                             $viewElement.find("input.m-option-hidden").change();
                             $viewElement.find("select.m-select").change();
-                        }, 1000);
+                        }, 350);
                     });
                         
 
