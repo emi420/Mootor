@@ -1,0 +1,91 @@
+    <header ng-controller="FormHeaderCtrl">
+            <h1><img class="applogo" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /></h1>
+        <nav class="m-nav">
+            <a ng-click="submitForm()" id="header-nav-form-save" class="m-nav-item"><span class="m-icon-arrow-right-white"></span></a>
+        </nav>
+    </header>
+
+    <form ng-controller="FormCtrl" class="m-form m-padding">
+        
+        <h2><span class="m-icon m-icon-sound"></span> <strong>Report</strong></h2>
+
+        <fieldset class="m-form-top-labels">
+
+            <div class="m-field">
+                <label>List of options</label>
+                <select ng-model="item.type"  class="m-select">
+               <option value="The option number one">The option number one</option>
+               <option value="Another option, the two">Another option, the two</option>
+               <option value="This is the option three">This is the option three</option>
+                </select>
+            </div>
+
+            <div class="m-field m-field-picture">
+                <label>Camera picture</label>
+                <input ng-draw ng-model="item.picture" type="file" class="m-camera-single" accept="image/*" placeholder="Put some picture" />
+                <img class="m-camera-single-img" src="{{item.picture}}"  />
+            </div>
+
+            <div class="m-field">
+                <label>Description</label>
+                <textarea ng-model="item.description" placeholder="Here you can write."  class="m-textarea"></textarea>
+            </div>
+
+            <div class="m-field">
+                <label>Street</label>
+                <input ng-model="item.street" placeholder="The street name." class="m-text" />
+            </div>
+
+            <div class="m-field">
+                <label>Number</label>
+                <input ng-model="item.streetN" placeholder="The number of the street" class="m-text" />
+            </div>
+
+            <div class="m-field m-field-geo">
+                <label>Geolocation</label>
+                <span class="m-icon m-icon-map-pin-small"></span>
+                <input ng-geo type="text" class="m-geo m-button-block m-bg-color-white" ng-model="item.geo" placeholder="Search location"  />
+            </div>
+
+            <h2 class="no-margin-bottom">Calification</h2>
+
+            <div class="m-field">
+                <input id="calification1" type="radio" name="calification" ng-model="item.calification" value="Green" class="m-option"/> 
+                <label for="calification1">Green</label>
+                <input id="calification2" type="radio" name="calification" ng-model="item.calification" value="Yellow" class="m-option"/> 
+                <label for="calification2">Yellow</label>
+                <input id="calification3" type="radio" name="calification" ng-model="item.calification" value="Red" class="m-option"/> 
+                <label for="calification3">Red</label>
+            </div>
+
+        </fieldset>
+
+        <h2><span class="m-icon m-icon-user"></span> <strong>More data<strong></h2>
+
+        <fieldset class="m-form-top-labels">
+            <div class="m-field">
+                <label>Name</label>
+                <input ng-model="item.name" placeholder="First name" class="m-text" />
+            </div>
+
+            <div class="m-field">
+                <label>Last name</label>
+                <input ng-model="item.lastname" placeholder="Yes, that too" class="m-text" />
+            </div>
+
+            <div class="m-field">
+                <label>Some ID</label>
+                <input ng-model="item.govid" type="number" placeholder="Type any number" class="m-text" />
+            </div>
+
+            <div class="m-field">
+                <label>Sign</label>
+                <input ng-draw ng-model="item.sign" class="m-draw" type="file" />
+                <img src="{{item.sign}}" />
+            </div>
+
+        </fieldset>
+
+        <input type="submit" ng-click="save(item)" id="btnFormSubmit" class="m-button-block" value="Save" />
+
+    </form>

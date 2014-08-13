@@ -1,0 +1,54 @@
+
+.index-view .m-list > div {
+    position: relative;
+}
+
+.index-view .m-list .m-nav-delete,
+.index-view .m-list .m-nav-pdf {
+    position: absolute;
+    display: block;
+    opacity: .6;
+    margin: 0;
+    top: 0;
+    min-height: 100%;
+    box-sizing: border-box;
+    padding-top: .5em;
+}
+
+.index-view .m-list .m-nav-delete {
+    right: 0;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 1.75em;
+}
+
+.m-app .index-view nav.m-list a {
+    padding: .5em 1.3em 2em;
+}
+
+.index-view .m-list .m-nav-pdf {
+    right: 3.25em;
+}
+
+.messageEmptyList {
+    margin-top: 1em;
+}
+
+.index-view .m-list  a {
+    position: relative;
+}
+
+.index-view .m-list small {
+    display: block;
+    position: absolute;
+    bottom: .5em;
+    font-size: .9em;
+    font-weight: normal;
+    color: #666;
+}
+
+.index-view ul li {
+    list-style: disc;
+    list-style-position: inside;
+    margin-bottom: 1em;
+}

@@ -1,0 +1,25 @@
+.m-form h2 {
+    line-height: 32px;
+    margin-bottom: 1em;
+} 
+
+.m-form h2 .m-icon {
+    display: block;
+    float: left;
+    margin-right: .67em;
+}
+
+.m-form fieldset {
+    margin-bottom: 2.1em;
+}
+
+.m-form h2.no-margin-bottom {
+    margin-bottom: 0;
+}
+
+.m-field-geo .m-icon {
+    position: absolute;
+    top: 46.3px;
+    left: 12.3px;
+    opacity: .5;
+}
