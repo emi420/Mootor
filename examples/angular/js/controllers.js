@@ -32,7 +32,8 @@
           
               $scope.delete = function(item) {
                   window.setTimeout(function() {
-                      if (confirm("¿Estás seguro?") === true) {
+                      // FIXME CHECK
+                      if (confirm("¿Are you sure?") === true) {
                           Item.destroy(item.id);
                           $scope.items = Item.all();
                           $scope.$digest();
@@ -104,7 +105,7 @@
                     m.app.go("");
         
                 } catch(e) {
-                    alert("Ha ocurrido un problema: puede que no haya más espacio. Prueba borrando otro item.");
+                    alert("Oops! something went wrong. Maybe you have not free space on your device browser.");
                 }
             
             };        
