@@ -3777,7 +3777,7 @@
     
     // Private constructors
 
-    UIFormCameraSingle = Mootor.UIFormCameraSingle = function(element) {
+    UIFormCameraSingle = Mootor.UIFormCameraSingle = function (element) {
         UIFormCameraSingle.__init(this, element, {template: false});
     };
 
@@ -3790,11 +3790,11 @@
 
     $.extend(UIFormCameraSingle, {
         
-        _init: function(uiview) {
+        _init: function (uiview) {
             var elements;
             
             elements = uiview.$el.find(".m-camera-single");
-            elements.each(function(index,element) {
+            elements.each(function (index ,element) {
                  new UIFormCameraSingle(element);
             });
         },
@@ -3824,9 +3824,10 @@
 
         __init: function(self, element, options) {
             
-            
             self.options = options;
-            self._$originalElement = element;
+
+            // Use internal template (Mootor)
+            // or element (Angular)
             if (self.options && self.options.template === false) {
                 self._$coverHTML = $(UIFormCameraSingle._template)[0];
                 $(element).replaceWith(self._$coverHTML);
@@ -3834,39 +3835,61 @@
                 self._$coverHTML = element;
             }
             
+            // Original element
+            self._$originalElement = element;
+            
+            // Image element
             self._$img = self._$coverHTML.parentElement.getElementsByTagName("img")[0];
-            
+            // File input element
             self._$input = self._$coverHTML.getElementsByTagName("input")[0];
-            
+            // Placeholder element
+            self._$placeholder = self._$coverHTML.getElementsByClassName("m-camerasingle-placeholder")[0];
+            // Modal container element
+            self.__$modalContainer = self._$coverHTML.getElementsByClassName("m-camerasingle-modal")[0];
             if (UIFormCameraSingle._initialized) {
                 self._$modalContainer = UIFormCameraSingle._$modalContainer;
             } else {
-                self._$modalContainer = UIFormCameraSingle._$modalContainer = self._$coverHTML.getElementsByClassName("m-camerasingle-modal")[0];
+                self._$modalContainer = UIFormCameraSingle._$modalContainer =  self.__$modalContainer;
             }
 
-            self._$imgContainer = self._$modalContainer.getElementsByClassName("m-camerasingle-img-container")[0];
-            self._$originalImgContainer = self._$img.parentElement;
-            self._$placeholder = self._$coverHTML.getElementsByClassName("m-camerasingle-placeholder")[0];
-
+            // Move attributes
             UIFormCameraSingle._moveAttrs(self);
+            
+            // Initialize modal
             UIFormCameraSingle._initModal(self);
+            
+            // Add event listeners
             UIFormCameraSingle._addEventListeners(self);
+            
+            // Put title text in the placeholder
             self._$placeholder.innerHTML = self._$img.getAttribute("title");
+            
+            // Hide picture element
             $(self._$img).addClass("m-hidden");
             
+            // UIFormCameraSingle was initialized once
             UIFormCameraSingle._initialized = true;
         },
     
         _initModal: function(self) {
             
-            self._$modalContainer.parentElement.removeChild(self._$modalContainer);
+            var $modalPicture,
+                $modalContainer,
+                $modalPictureContainer;
             
             if (UIFormCameraSingle._initialized !== true) {
                 document.body.appendChild(self._$modalContainer);
                 UIFormCameraSingle._$modalContainer = self._$modalContainer;
-            } else {
-                self._$modalContainer = UIFormCameraSingle._$modalContainer;
-            }
+                $modalPicture = document.createElement("img");
+                $modalPictureContainer = self._$modalContainer.getElementsByClassName("m-camerasingle-img-container")[0];
+                $modalPictureContainer.appendChild($modalPicture);
+                UIFormCameraSingle._$modalPicture = $modalPicture;
+                UIFormCameraSingle._$modalPictureContainer = $modalPictureContainer;
+            } 
+            
+            self._$modalContainer = UIFormCameraSingle._$modalContainer;
+            self._$modalPicture = UIFormCameraSingle._$modalPicture;
+            self._$modalPictureContainer =  UIFormCameraSingle._$modalPictureContainer;
             
             self._$deleteBtn = self._$modalContainer.getElementsByClassName("m-camerasingle-button-delete")[0];
             self._$changeBtn = self._$modalContainer.getElementsByClassName("m-camerasingle-button-change")[0];
@@ -3961,11 +3984,7 @@
             if (self._$img.getAttribute("src") !== "") {
                 
                 $(UIFormCameraSingle._$modalContainer).removeClass("m-hidden");
-                $(self._$img).removeClass("m-hidden");
-
-                self._$imgParentElement = self._$img.parentElement;
-                self._$img.parentElement.removeChild(self._$img);
-                self._$imgContainer.appendChild(self._$img);
+                self._$modalPicture.src = self._$img.src;
 
             } else {
                 UIFormCameraSingle._openFileSelector(self);
@@ -3987,11 +4006,10 @@
         // Close modal
         "close": function() {
             var self = this;
-            $(self._$img).addClass("m-hidden");
+            $(self._$coverHTML.parentElement).append(self._$img);
             $(UIFormCameraSingle._$modalContainer).addClass("m-hidden");
             
-            self._$img.parentElement.removeChild(self._$img);
-            self._$imgParentElement.appendChild(self._$img);
+            self._$modalPicture.src = "";            
 
         },
 
