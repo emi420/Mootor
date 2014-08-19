@@ -8,228 +8,193 @@
 * @author Emilio Mariscal (emi420 [at] gmail.com)
 */
 
-(function ($, Mootor, m) {
+(function ($, Mootor) {
     
     "use strict";
 
     var UIFormDraw,
     
         UI,
-        UIForm,
-        UIFormVirtualInput;
+        UIForm;
 
     // Dependences
 
     UI = Mootor.UI;
     UIForm = Mootor.UIForm;
-    UIFormVirtualInput = Mootor.UIFormVirtualInput;
     
     // Private constructors
 
-    UIFormDraw = function() {
-        // code here
+    UIFormDraw = Mootor.UIFormDraw = function(element) {
+        UIFormDraw.__init(this, element, {template: false});
     };
 
     // Prototypal inheritance
-    $.extend(UIFormDraw.prototype, UI.prototype);
-    $.extend(UIFormDraw.prototype, UIFormVirtualInput.prototype);
+    if (UI) {
+        $.extend(UIFormDraw.prototype, UI.prototype);
+    }
 
     // Private static methods and properties
 
     $.extend(UIFormDraw, {
         
         _init: function(uiview) {
-            
-            var inputs = uiview.$el.find(".m-draw");
-            inputs.each(function(index,element) {
-                var self = new UIFormDraw();
-                UIFormDraw._makeUI(self, element);
-                UIFormDraw._addListeners(self);
+            var elements;
+            elements = uiview.$el.find(".m-draw");
+            elements.each(function(index,element) {
+                new UIFormDraw(element);
             });
-            
         },
         
-        _makeUI: function(self, element) {
-
-            var $element,
-                coverHTML,
-                $cover,
-                $label,
-                $canvas,
-                $canvasContainer,
-                $canvasHeader,
-                h,
-                w;
-                        
-            
-            $element = $(element);
-
-            $label = $("label[for=" + element.getAttribute("id") + "]");
-
-            /*jshint multistr: true */
-            coverHTML = '<div class="m-draw m-draw-cover"> \
-                <span class="m-draw-icon m-icon-arrow-right-small"></span> \
-            </div>';
+        __init: function(self, element, options) {
+            self._$originalElement = element;
+            self.options = options;
+            UIFormDraw._build(self, element);
+            UIFormDraw._addEventListeners(self);            
+        },
         
-            $cover = element.$cover = $(coverHTML).insertBefore(element);
-            $label.insertBefore($cover.find(".m-draw-icon"));
-            $element.hide();
-            
-            $canvasContainer = $('<div class="m-draw-canvas"> \
-                    <div class="m-draw-canvas-header"> \
-                        <span class="m-draw-cancel">Cancel</span> \
-                        <span class="m-draw-done">Done</span> \
-                    </div> \
-                    <canvas></canvas> \
-                    <div class="m-draw-canvas-footer"> \
-                        <span class="m-draw-erase m-icon-erase"></span> \
-                    </div> \
-                </div>');
-        
-            $canvasContainer.hide();
-            $canvasHeader = $canvasContainer.find(".m-draw-canvas-header");
-            
-            $canvasContainer.insertBefore(document.body.lastChild);
-            
-             $canvasContainer[0].addEventListener("touchmove", function(e) {
-                 e.preventDefault();
-                 e.stopPropagation();
-             })
-        
-            $canvas = $canvasContainer.find("canvas");
-
-            h = m.app.ui.$container.height();
-            w = m.app.ui.$container.width() - 40;
-
-            if (w > h) {
-                h = m.app.ui.$container.height() - 30;
-                $canvasHeader.hide();
+        _build: function(self, element) {
+            if (self.options && self.options.template === false) {
+                self._$coverHTML = $(UIFormDraw._template)[0];
+                $(element).replaceWith(self._$coverHTML);
             } else {
-                h = m.app.ui.$container.height() - 85;
-                $canvasHeader.show();
+                self._$coverHTML = element;
             }
-
-            $canvas.css("height",  h + "px");
-            $canvas.css("width", w + "px");
-
-            $canvas[0].setAttribute("height",  h + "px");
-            $canvas[0].setAttribute("width",  w + "px");
+            self._$img = self._$coverHTML.parentElement.getElementsByTagName("img")[0];
+            $(self._$img).addClass("m-hidden");
+            self._$input = self._$coverHTML.getElementsByTagName("input")[0];
+            self._$placeholder = self._$coverHTML.getElementsByClassName("m-draw-placeholder")[0];
             
-            var image = new Image();
+            self._$modalContainer = self._$coverHTML.getElementsByClassName("m-draw-canvas")[0];
 
-            $.extend(element, 
-                {"export": function() { return image.src } },
-                {
-                    "import": function(data) { 
-                        self._image.src = data;
-                    }
-                }
-                ,{"clear": function() { 
-                   var encodedImageData = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";                
-                   self._image.src = encodedImageData;
-                   self.clear();
-                }}
-            );
-
+            
+            UIFormDraw._moveAttrs(self);
+            UIFormDraw._initModal(self);
+            UIFormDraw._initCanvas(self);
+            UIFormDraw._setCanvasSize(self);
+            UIFormDraw._addEventListeners(self);
+            
+            self.clear()
+            
             window.onresize = function() {
-                
-                image.onload = function() {
-                    
-                    self._$ctx.save();
-                
-                    w = m.app.ui.$container.width() - 40;
-                    h = m.app.ui.$container.height();
-            
-                    if (w > h) {
-                        h = m.app.ui.$container.height() - 30;
-                        $canvas[0].setAttribute("height",  h + "px");
-                        $canvas[0].setAttribute("width",  w + "px");
-                        $canvasHeader.hide();
-                    } else {
-                        h = m.app.ui.$container.height() - 85;
-                        $canvasHeader.show();
-                    }
-
-                    $canvas.css("width", w + "px");
-                    $canvas.css("height", h + "px");
-                    $canvas[0].setAttribute("height",  h + "px");
-                    $canvas[0].setAttribute("width",  w + "px");
-            
-                    self._$ctx.drawImage(image,0,0);
-            
-                    self._$ctx.lineWidth = 2;
-                    self._$ctx.restore();
-
-                }
-
-                image.src = $canvas[0].toDataURL();
-
-            }
-
-            $(".m-draw-cancel").on("tap", function(e) {
-                $canvasContainer.hide();
-                e.stopPropagation();
-                e.preventDefault();
-                return false;
-            });
-
-            $(".m-draw-erase").on("tap", function(e) {
-                e.stopPropagation();
-                e.preventDefault();
-                self.clear();
-                return false;
-            });
-
-            $(".m-draw-done").on("tap", function(e) {
-                e.stopPropagation();
-                e.preventDefault();
-
-                var encodedImageData = $canvas[0].toDataURL();                
-                image.src = encodedImageData;
-
-                $canvasContainer.hide();
-                return false;
-            });
-        
-            $label[0].onclick = function() {
-                return false;
+                UIFormDraw._onResize(self);
             };
-            // FICKE CHECK
-            $cover.on("tap", function(e) {
-                e.stopPropagation();
-                e.preventDefault();
-                $canvasContainer.show();
-                self.clear();
-                self._$ctx.drawImage(self._image,0,0);
-                return false;
-            });
-        
-            self._$cover = $cover;
-            self._$canvasContainer = $canvasContainer;
-            self._$canvas = $canvas;
-            self._$label = $label;
-            self._$ctx = $canvas[0].getContext("2d");
-            self._canvasOffsetLeft = 0;
-            self._canvasOffsetTop = 0;
+
+            self._$placeholder.innerHTML = self._$img.getAttribute("title");
+
+        },
+    
+        _initModal: function(self) {
+            self._$modalContainer.parentElement.removeChild(self._$modalContainer);
+            if (UIFormDraw._initialized !== true) {
+                document.body.appendChild(self._$modalContainer);
+                UIFormDraw._initialized  = true;
+                UIFormDraw._$modalContainer = self._$modalContainer;
+            } else {
+                self._$modalContainer = UIFormDraw._$modalContainer;
+            }
+        },
+
+
+        _initCanvas: function(self) {
+            self._$canvas = self._$modalContainer.getElementsByTagName("canvas")[0];
+            self._$ctx = self._$canvas.getContext("2d");
             self._$ctx.strokeStyle = "black";
             self._$ctx.lineWidth = 2;
             self._$ctx.fillStyle = "black";
-            self._drawing = false;
-            self._image = image;
+            self._$canvasHeader = self._$modalContainer.getElementsByClassName("m-draw-canvas-header")[0];
+            self._$clearBtn = self._$modalContainer.getElementsByClassName("m-draw-erase")[0];
+            self._$saveBtn = self._$modalContainer.getElementsByClassName("m-draw-done")[0];
+            self._$cancelBtn = self._$modalContainer.getElementsByClassName("m-draw-cancel")[0];
         },
         
-        _addListeners: function(self) {
+        _setCanvasSize: function(self) {
+            var h = window.innerHeight;
+            var w = window.innerWidth - 40;
+
+            if (w > h) {
+                h = h - 30;
+                $(self._$canvasHeader).addClass("m-hidden")
+            } else {
+                h = h - 85;
+                $(self._$canvasHeader).removeClass("m-hidden")
+            }
+
+            self._$canvas.style.height = h + "px";
+            self._$canvas.style.width = w + "px";
+
+            self._$canvas.setAttribute("height",  h + "px");
+            self._$canvas.setAttribute("width",  w + "px");            
+        },
+
+        _moveAttrs: function(self) {
+        
+            var aAttrs = {
+                type:         self._$input.getAttribute("type"),
+                accept:       self._$input.getAttribute("accept"),
+            }
+
+            self._$coverHTML.removeAttribute("type");
+            self._$coverHTML.removeAttribute("accept");
+            self._$coverHTML.removeAttribute("placeholder");
+
+            self._$input.setAttribute("type", aAttrs.type);
+            self._$input.setAttribute("accept", aAttrs.accept);
+        },
+    
+        _onResize: function(self) {
             
-            var $canvas = self._$canvas,
+            
+            // FIXME CHECK
+            
+            UIFormDraw._setCanvasSize(self);
+            
+            /*var self = self;
+            
+            self._$img.onload = function() {
+                
+                self._setCanvasSize();
+
+                self._$ctx.drawImage( self._$img,0,0);
+                self._$ctx.lineWidth = 2;
+                self._$ctx.restore();
+
+             }
+
+             self._$img.src = self._$canvas.toDataURL();*/
+            
+        },
+    
+        _addEventListeners: function(self) {
+        
+            var 
+                $canvas = self._$canvas,
                 ctx = self._$ctx,
                 lastX,
                 lastY,
                 offsetLeft,
                 offsetTop;
+        
+            self._$coverHTML.parentElement.addEventListener("click", function() {
+                self.open();
+            });
+
+            self._$cancelBtn.addEventListener("click", function() {
+                self.close();
+            });
+
+            self._$clearBtn.addEventListener("click", function() {
+                self.clear();
+            });
+
+            self._$saveBtn.addEventListener("click", function() {
+                self.save();
+            });
+
                 
-            $canvas.on("touchstart", function(e) {
-                self._canvasOffsetLeft = $canvas.offset().left - $(window).scrollLeft();
-                self._canvasOffsetTop = $canvas.offset().top - $(window).scrollTop();
+            $canvas.addEventListener("touchstart", function(e) {
+                
+                self._canvasOffsetLeft = $canvas.offsetLeft - window.scrollX;
+                self._canvasOffsetTop = $canvas.offsetTop - window.scrollY;
 
                 lastX = e.changedTouches[0].clientX - self._canvasOffsetLeft;
                 lastY = e.changedTouches[0].clientY - self._canvasOffsetTop;
@@ -247,7 +212,7 @@
                 offsetTop = self._canvasOffsetTop;
             });
             
-            $canvas.on("touchmove", function(e) {
+            $canvas.addEventListener("touchmove", function(e) {
                 var x,
                     y,
                     touchX = e.changedTouches[0].clientX,
@@ -270,12 +235,20 @@
 
             });
             
-            $canvas.on("touchend", function(e) {
+            $canvas.addEventListener("touchend", function(e) {
 
                 e.stopPropagation();
                 e.preventDefault();
                 
             });
+
+        },
+        
+        _save: function(self) {
+            self._$img.onload = function() {
+                self.close();
+            }
+            self._$img.src = self._$canvas.toDataURL();
         }
         
     });
@@ -284,37 +257,23 @@
 
     $.extend(UIFormDraw.prototype, {
         
-        _$canvas: undefined,
-        _$cover: undefined,
-        _$label: undefined,
-        
-
-        /**
-        * Export draw data
-        *
-        * @method export
-        * @return {String} Exported data (ej: base 64 string)
-        * @param {Array} options A list of options
-        * @chainable
-        * @example
-        *   var sign = $("#myDrawInput").m.formDraw.export();
-        */
-        "export": function() {
-            // code here
+        // Open modal or file selector
+        "open": function() {
+            var self = this;
+            self.clear();
+            self._$ctx.drawImage( self._$img,0,0);
+            self._$ctx.lineWidth = 2;
+            self._$ctx.restore();
+            $(self._$modalContainer).removeClass("m-hidden");
         },
-
-        /**
-        * Clear draw
-        *
-        * @method clear
-        * @chainable
-        */
-        clear: function() {
-            
-            var ctx = this._$ctx,
-                $canvas = this._$canvas,
-                w = $canvas.width(),
-                h = $canvas.height();
+    
+        // Clear current draw
+        "clear": function() {
+            var self = this,
+                ctx = self._$ctx,
+                $canvas = self._$canvas,
+                w = $canvas.offsetWidth,
+                h = $canvas.offsetHeight;
       
             // Store the current transformation matrix
             ctx.save();
@@ -326,10 +285,49 @@
         
             // Restore the transform
             ctx.restore();
-        }
+        },
         
+        // Close modal
+        "close": function() {
+            var self = this;
+            $(self._$modalContainer).addClass("m-hidden");
+        },
+        
+        save: function() {
+            var self = this;
+            UIFormDraw._save(self);
+        },
+
+        options: {},
+        
+        _$coverHTML: {} ,
+        _$canvas: {} ,
+        _$modalContainer: {} ,
+        _$clearBtn: {} ,
+        _$saveBtn: {} ,
+        _$input: {},
+        _canvasOffsetLeft: 0,
+        _canvasOffsetTop: 0,
+
     });        
     
-    UIForm.registerControl(UIFormDraw);  
+    UIFormDraw._template = '<div class="m-draw m-draw-cover"> \
+        <input class="m-hidden" type="file" class="m-draw" accept="image/*" /> \
+       <span class="m-draw-placeholder">...</span> \
+        <div class="m-hidden m-draw-canvas"> \
+            <div class="m-draw-canvas-header"> \
+                <span class="m-draw-cancel m-icon-delete-circle"></span> \
+                <span class="m-draw-done m-icon-ok-circle"></span> \
+            </div> \
+            <canvas></canvas> \
+            <div class="m-draw-canvas-footer"> \
+                <span class="m-draw-erase m-icon-erase"></span> \
+            </div> \
+        </div> \
+    </div>';
+    
+    if (UIForm) {
+        UIForm.registerControl(UIFormDraw);  
+    }
 
-}(window.$, window.Mootor, window.m));
+}(window.$, window.Mootor));

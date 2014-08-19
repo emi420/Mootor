@@ -1,0 +1,33 @@
+<header>
+        <h1><img class="applogo" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" /></h1>
+        <nav class="m-nav">
+            <a class="m-nav-item" ng-click="create()" ng-controller="IndexHeaderCtrl"><span class="m-icon-add-circle-white"></span></a>
+        </nav>
+</header>
+
+<div class="index-view" ng-controller="IndexCtrl">
+    <div class="messageEmptyList m-padding" ng-show="(items.length < 1)">
+        <h1><strong>Welcome</strong> to this app!</h1>
+        <h2>You can do these things:</h2> 
+
+               <ul>
+           <li>Collect data, <strong>offine</strong></li>
+           <li>Take pictures from the camera</li>
+           <li>Save your geolocation</li>
+           <li>Draw your sign as in paper!</li>
+       </ul>
+
+        </p>
+
+
+    </div>
+    <nav class="m-list" ng-show="(items.length > 0)">
+        <div ng-repeat="item in items">
+            <a href="#form/{{item.id}}">
+                {{item.type}}
+                <small>{{ item._updatedAt }}</small>
+            </a>
+            <div ng-click="delete(item)" class="m-nav-delete"><span class="m-icon m-icon-delete-circle-small"></span></div>
+        </div>
+    </nav>
+</div>

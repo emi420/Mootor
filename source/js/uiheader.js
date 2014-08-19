@@ -85,7 +85,6 @@
                 el: backEl
             });
             self.back.$el.addClass("m-header-back");
-            //self.back.hide();
             
             self.back.$el.on("tap click", function() {
                 m.app.back();

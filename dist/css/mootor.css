@@ -1955,8 +1955,9 @@ html, body {
 .m-app .m-form-left-labels input.m-option {
   top: -2em;
 }
-/* line 2, _uiformdate.scss */
+/* line 3, _uiformdate.scss */
 .m-app input[type=date].m-date-hidden,
+.m-app input[type=datetime-local].m-date-hidden,
 .m-app input[type=month].m-date-hidden {
   opacity: 0.001;
   top: 0;
@@ -1964,8 +1965,9 @@ html, body {
   position: absolute;
   top: 2.4em;
 }
-/* line 12, _uiformdate.scss */
+/* line 14, _uiformdate.scss */
 .m-app input[type=date].m-date,
+.m-app input[type=datetime-local].m-date,
 .m-app input[type=month].m-date {
   width: 100%;
   border: 0;
@@ -3871,11 +3873,16 @@ html, body {
 }
 /* line 71, _uiformcamerasingle.scss */
 .m-app .m-camera-single-img {
+  display: none;
   height: 100%;
   min-width: 100%;
   max-height: 100%;
 }
 /* line 78, _uiformcamerasingle.scss */
+.m-app .m-camerasingle-modal .m-camera-single-img {
+  display: block;
+}
+/* line 82, _uiformcamerasingle.scss */
 .m-app .m-camerasingle-img-container {
   height: 93%;
   width: 100%;
@@ -3884,7 +3891,7 @@ html, body {
   background: #f1f1f1;
   overflow: hidden;
 }
-/* line 87, _uiformcamerasingle.scss */
+/* line 91, _uiformcamerasingle.scss */
 .m-app .m-camerasingle-img-container .m-button, .m-app .m-camerasingle-img-container .m-button-fullwidth, .m-app .m-camerasingle-img-container .m-button-block {
   position: absolute;
   z-index: 99;
@@ -3892,7 +3899,7 @@ html, body {
   width: 50px;
   right: .95em;
 }
-/* line 95, _uiformcamerasingle.scss */
+/* line 99, _uiformcamerasingle.scss */
 .m-app .m-camerasingle-img-container .m-button-danger {
   left: .95em;
 }

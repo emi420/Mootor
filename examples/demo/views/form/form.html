@@ -5,8 +5,8 @@
         
         <div class="m-field">
             <label>Camera single</label>
-            <input id="itemPicture" type="file" class="m-camera-single" accept="image/*" placeholder="Sample picture" />
-            <img class="m-camera-single-img" m-for="itemPicture" src="" />
+            <input type="file" class="m-camera-single" accept="image/*" placeholder="Sample picture" />
+            <img class="m-camera-single-img" src="" />
         </div>
 
         <div class="m-field">
@@ -15,8 +15,9 @@
         </div>
         
         <div class="m-field">
-            <label for="signHere">Draw</label>
-            <input id="signHere" ng-model="item.sign" class="m-draw" type="file" />
+            <label>Firma</label>
+            <input class="m-draw" accept="image/*" type="file" />
+            <img src="" title="Firma" />
         </div>
 
         <h2>Radio buttons</h2>

@@ -1,0 +1,52 @@
+
+/* Logo */
+
+.applogo {
+    width: 76px;
+    height: 22px;
+}
+
+.m-app .m-header-container header h1 img {
+    top: 4px;
+}
+
+@media (max-resolution: 1.99dppx), (-webkit-max-device-pixel-ratio: 1.99), (max-device-pixel-ratio: 1.99) {
+    .applogo {
+        width: 76px;
+        height: 22px;
+        background: url("../img/logo.png") no-repeat 0 0;
+    }
+}
+
+@media (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {
+    .applogo {
+        width: 76px;
+        height: 22px;
+        background: url("../img/logo@2x.png") no-repeat 0 0;
+        background-size: 76px 22px;
+    }
+}
+
+
+/* Override Angular ng-hide */
+
+.ng-hide {
+  display: none;
+}
+
+
+.m-icon-anim-blink {
+    -webkit-animation-name: blinker;  
+    -webkit-animation-iteration-count: infinite;  
+    -webkit-animation-timing-function: cubic-bezier(.5, 0, 1, 1);
+    -webkit-animation-duration: 1s; 
+}
+
+
+@-webkit-keyframes blinker {  
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
+}   
+
+

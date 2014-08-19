@@ -52,9 +52,12 @@
                 height: window.screen.height
             },
             
-            cordova: (window.Cordova !== undefined),
-            phonegap: (window.PhoneGap !== undefined),
-            
+            cordova: function() {
+                return window.Cordova !== undefined
+            },
+            phonegap:function() {
+                return window.PhoneGap !== undefined
+            },
             _androidversion: function() {
                 var ua = navigator.userAgent;
                 if( ua.indexOf("Android") >= 0 ) {

@@ -51,6 +51,7 @@
             _pendingGo = window.location.hash;
         }
         m.app._firstHash = _pendingGo;
+
         m.app.go(_pendingGo);
     });
 

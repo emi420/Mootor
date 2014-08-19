@@ -69,11 +69,15 @@
 }
 
 .m-camera-single-img {
+    display: none;
     height: 100%;
     min-width: 100%;
     max-height: 100%;
 }
 
+.m-camerasingle-modal .m-camera-single-img  {
+    display: block;
+}
 
 .m-camerasingle-img-container {
     height: 93%;
