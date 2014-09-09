@@ -1821,8 +1821,9 @@
         // self = uiview
         createBar: function(barName, self, BarClass) {
             
+            // FIXME CHECK
             if (self.panel) {
-
+                
                 var barEl = self.panel.el.getElementsByTagName(barName)[0];
 
                 if (barEl) {
@@ -1860,9 +1861,10 @@
                     self.view.on("unload", function(self) {
                         m.app.ui[barName].hide();
                     });
-                }                
+                }
+            
             }
-
+            
         }
     });
 

@@ -15,14 +15,6 @@ describe("Context", function() {
 	});
 
 
-	describe("I want to take action when the device is rotated", function() {
-
-		xit("Should be able to set an event callback when the device is rotated", function() {
-
-		});
-
-	});
-
 
 	describe("I want to run my app a as native app", function() {
 		beforeEach(createApp);
@@ -33,32 +25,9 @@ describe("Context", function() {
             done();
 
 		});
-		xit("Should be able to detect hardware buttons", function(done) {
-            // Except context().device.backButton
-            expect(m.context.device.backButton).toBeDefined();
 
-            done();
 
-		});
 
-		xit("Should be able to define a method callback run on back button event", function(done) {
-            // TODO
-
-            done();
-
-		});
-		xit("Should be able to define a method callback run on home button event", function(done) {
-            // TODO
-
-            done();
-
-		});
-		xit("Should be able to define a method callback run on menu button event", function(done) {
-            // TODO
-
-            done();
-
-		});
 	});
 
 });

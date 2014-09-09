@@ -27,12 +27,6 @@ describe("Event", function() {
             }, 15);
 		});
         
-		xit("I should be able to tell wether one-time events have already fired (such as init event)", function(done) {
-
-            done();
-
-		});
-
 	});
 });
 
