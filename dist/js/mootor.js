@@ -1820,45 +1820,49 @@
                     
         // self = uiview
         createBar: function(barName, self, BarClass) {
+            
+            if (self.panel) {
 
-            var barEl = self.panel.el.getElementsByTagName(barName)[0];
+                var barEl = self.panel.el.getElementsByTagName(barName)[0];
 
-            if (barEl) {
+                if (barEl) {
              
-                self[barName] = new BarClass({
-                    el: barEl,
-                    type: "view"
-                });
+                    self[barName] = new BarClass({
+                        el: barEl,
+                        type: "view"
+                    });
                 
-                barEl.parentElement.removeChild(barEl);
-                barContainerEl[barName].appendChild(barEl);
+                    barEl.parentElement.removeChild(barEl);
+                    barContainerEl[barName].appendChild(barEl);
                 
-                self[barName].hideContainer();
+                    self[barName].hideContainer();
 
-                self.view.on("load", function(self) {
-                   self.ui[barName].showContainer(barName);
-                   if (m.app.ui[barName]._emptyContainer === true) {
+                    self.view.on("load", function(self) {
+                       self.ui[barName].showContainer(barName);
+                       if (m.app.ui[barName]._emptyContainer === true) {
+                           $(barContainerEl[barName]).show();
+                       }
                        $(barContainerEl[barName]).show();
-                   }
-                   $(barContainerEl[barName]).show();
-                });
+                    });
 
-                self.view.on("unload", function(self) {
-                   self.ui[barName].hideContainer(barName);
-                   if (m.app.ui[barName]._emptyContainer === true) {
-                       $(barContainerEl[barName]).hide();
-                   }
-                });
+                    self.view.on("unload", function(self) {
+                       self.ui[barName].hideContainer(barName);
+                       if (m.app.ui[barName]._emptyContainer === true) {
+                           $(barContainerEl[barName]).hide();
+                       }
+                    });
 
-            } else {
-                self.view.on("load", function(self) {
-                    m.app.ui[barName].show();
-                });
+                } else {
+                    self.view.on("load", function(self) {
+                        m.app.ui[barName].show();
+                    });
 
-                self.view.on("unload", function(self) {
-                    m.app.ui[barName].hide();
-                });
+                    self.view.on("unload", function(self) {
+                        m.app.ui[barName].hide();
+                    });
+                }                
             }
+
         }
     });
 

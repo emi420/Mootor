@@ -28,7 +28,7 @@ describe("Context", function() {
 		beforeEach(createApp);
 		it("Should be able to detect it is running in PhoneGap / Cordova", function(done) {
             // Except context().cordova or context().phonegap to be true
-            expect(m.context.cordova || m.context.phonegap).toBe(window.cordova !== undefined || window.phonegap !== undefined);
+            expect(m.context.cordova() || m.context.phonegap()).toBe(window.cordova !== undefined || window.phonegap !== undefined);
 
             done();
 
