@@ -927,12 +927,14 @@ html, body {
 .m-app .m-header-container header .m-nav-item {
   position: relative;
   top: 10px;
+  padding: 0;
+  display: inline-block;
 }
-/* line 47, _uiheader.scss */
+/* line 49, _uiheader.scss */
 .m-app .m-header-container header.m-hidden {
   display: none;
 }
-/* line 51, _uiheader.scss */
+/* line 53, _uiheader.scss */
 .m-app .m-header-container header h1 {
   text-align: center;
   font-weight: bold;
@@ -940,7 +942,7 @@ html, body {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-/* line 58, _uiheader.scss */
+/* line 60, _uiheader.scss */
 .m-app .m-header-container header h1 img {
   position: relative;
   top: 4px;
@@ -1953,8 +1955,9 @@ html, body {
 .m-app .m-form-left-labels input.m-option {
   top: -2em;
 }
-/* line 2, _uiformdate.scss */
+/* line 3, _uiformdate.scss */
 .m-app input[type=date].m-date-hidden,
+.m-app input[type=datetime-local].m-date-hidden,
 .m-app input[type=month].m-date-hidden {
   opacity: 0.001;
   top: 0;
@@ -1962,8 +1965,9 @@ html, body {
   position: absolute;
   top: 2.4em;
 }
-/* line 12, _uiformdate.scss */
+/* line 14, _uiformdate.scss */
 .m-app input[type=date].m-date,
+.m-app input[type=datetime-local].m-date,
 .m-app input[type=month].m-date {
   width: 100%;
   border: 0;
@@ -3869,11 +3873,16 @@ html, body {
 }
 /* line 71, _uiformcamerasingle.scss */
 .m-app .m-camera-single-img {
+  display: none;
   height: 100%;
   min-width: 100%;
   max-height: 100%;
 }
 /* line 78, _uiformcamerasingle.scss */
+.m-app .m-camerasingle-modal .m-camera-single-img {
+  display: block;
+}
+/* line 82, _uiformcamerasingle.scss */
 .m-app .m-camerasingle-img-container {
   height: 93%;
   width: 100%;
@@ -3882,7 +3891,7 @@ html, body {
   background: #f1f1f1;
   overflow: hidden;
 }
-/* line 87, _uiformcamerasingle.scss */
+/* line 91, _uiformcamerasingle.scss */
 .m-app .m-camerasingle-img-container .m-button, .m-app .m-camerasingle-img-container .m-button-fullwidth, .m-app .m-camerasingle-img-container .m-button-block {
   position: absolute;
   z-index: 99;
@@ -3890,7 +3899,7 @@ html, body {
   width: 50px;
   right: .95em;
 }
-/* line 95, _uiformcamerasingle.scss */
+/* line 99, _uiformcamerasingle.scss */
 .m-app .m-camerasingle-img-container .m-button-danger {
   left: .95em;
 }

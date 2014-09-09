@@ -1,13 +1,10 @@
 {
-  "name": "Voolks Demo",
-  "description": "Mootor demo app from Voölks",
-  "launch_path": "/Mootor/demo/",
+  "name": "Mootor Demo App",
+  "description": "Demo app",
+  "launch_path": "/mootor/examples/demo/",
   "developer": {
-    "name": "Voölks",
-    "url": "https://www.voolks.com"
+    "name": "Voolks",
+    "url": "http://www.voolks.com"
   },
-  "icons": {
-    "128": "https://store.voolks.com/downloads/reclamos-128.png"
-  },
-  "default_locale": "es"
+  "default_locale": "en"
 }
