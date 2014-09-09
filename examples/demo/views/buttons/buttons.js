@@ -1,4 +1,4 @@
-(function() {
+(function($) {
 
     "use strict";
 
@@ -47,4 +47,4 @@
     	}
     }
     
-}());
+}(window.$));
