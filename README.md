@@ -8,6 +8,8 @@ The main purpose of this project is to create a simple HTML5 library for mobile 
 
 * http://emi420.github.io/Mootor/demo/
 
+Source: https://github.com/emi420/Mootor/tree/master/examples/demo
+
 ## About
 
 * Mootor is under design and development by the Voölks (voolks.com) team.
