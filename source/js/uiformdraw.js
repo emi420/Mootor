@@ -49,17 +49,19 @@
             self._$originalElement = element;
             self.options = options;
             UIFormDraw._build(self, element);
-            UIFormDraw._addEventListeners(self);            
         },
         
         _build: function(self, element) {
+            
+            self._$img = element.parentElement.getElementsByTagName("img")[0];
+            
             if (self.options && self.options.template === false) {
                 self._$coverHTML = $(UIFormDraw._template)[0];
                 $(element).replaceWith(self._$coverHTML);
             } else {
                 self._$coverHTML = element;
             }
-            self._$img = self._$coverHTML.parentElement.getElementsByTagName("img")[0];
+
             $(self._$img).addClass("m-hidden");
             self._$input = self._$coverHTML.getElementsByTagName("input")[0];
             self._$placeholder = self._$coverHTML.getElementsByClassName("m-draw-placeholder")[0];
@@ -67,7 +69,11 @@
             self._$modalContainer = self._$coverHTML.getElementsByClassName("m-draw-canvas")[0];
 
             
+            // FIXME CHECK
+            // init modal and add event listeners to it only once
+            
             UIFormDraw._moveAttrs(self);
+            
             UIFormDraw._initModal(self);
             UIFormDraw._initCanvas(self);
             UIFormDraw._setCanvasSize(self);
@@ -173,8 +179,8 @@
                 lastY,
                 offsetLeft,
                 offsetTop;
-        
-            self._$coverHTML.parentElement.addEventListener("click", function() {
+                
+            self._$coverHTML.parentElement.addEventListener("click", function(e) {
                 self.open();
             });
 
@@ -245,10 +251,14 @@
         },
         
         _save: function(self) {
-            self._$img.onload = function() {
-                self.close();
+            var instance = UIFormDraw._activeInstance;
+            var $img = instance._$img;
+
+
+            $img.onload = function() {
+                instance.close();
             }
-            self._$img.src = self._$canvas.toDataURL();
+            $img.src = instance._$canvas.toDataURL();
         }
         
     });
@@ -259,12 +269,16 @@
         
         // Open modal or file selector
         "open": function() {
+            
             var self = this;
+            $(self._$modalContainer).removeClass("m-hidden");
             self.clear();
             self._$ctx.drawImage( self._$img,0,0);
             self._$ctx.lineWidth = 2;
             self._$ctx.restore();
-            $(self._$modalContainer).removeClass("m-hidden");
+            
+            UIFormDraw._activeInstance = self;
+            
         },
     
         // Clear current draw
