@@ -184,19 +184,21 @@
     
         _addEventListeners: function(self) {
         
+        
             self._$coverHTML.parentElement.addEventListener("click", function() {
+                UIFormCameraSingle._currentInstance = self;
                 self.open();
             });
 
-            self._$deleteBtn.addEventListener("click", function() {
-               self.delete();
-            });
-
-            self._$changeBtn.addEventListener("click", function() {
-                self.change();
-            });
-            
             if (UIFormCameraSingle._initialized !== true) {
+                self._$deleteBtn.addEventListener("click", function() {
+                   self.delete();
+                });
+
+                self._$changeBtn.addEventListener("click", function() {
+                    self.change();
+                });
+
                 self._$modalContainer.addEventListener("click", function() {
                     self.close();
                 });
@@ -226,7 +228,7 @@
         
         // Open modal or file selector
         "open": function() {
-            var self = this;
+            var self = UIFormCameraSingle._currentInstance;
 
             if (self._$img.getAttribute("src") !== "") {
                 
@@ -240,19 +242,19 @@
     
         // Delete current selected file
         "delete": function() {
-            var self = this;
+            var self = UIFormCameraSingle._currentInstance;
             self._$img.setAttribute("src", "");                      
         },
     
         // Change current selected file
         change: function() {
-            var self = this;
+            var self = UIFormCameraSingle._currentInstance;
             UIFormCameraSingle._openFileSelector(self);
         },
     
         // Close modal
         "close": function() {
-            var self = this;
+            var self = UIFormCameraSingle._currentInstance;
             $(self._$coverHTML.parentElement).append(self._$img);
             $(UIFormCameraSingle._$modalContainer).addClass("m-hidden");
             
