@@ -30,7 +30,7 @@ This *base* is composed of several files:
 
 Let's see what this file is doing.
 
-#### Header
+##### Header
 
 Includes Mootor css and the color system:
 
@@ -47,9 +47,9 @@ And includes Mootor:
 
   <script type="text/javascript" src="mootor/js/mootor.js"></script>
   
-#### Script
+##### Script
 
-##### App instance initialization
+###### App instance initialization
 
 First, create and *app* instance, with an array of views ids and initialize it:
   
@@ -64,7 +64,7 @@ First, create and *app* instance, with an array of views ids and initialize it:
 * views: [] is an array of views ids, you will need .js, .css and .html files on views/<view id>/ folder
 * .init() is a method for initialized the application. You can initialize now or later if you need.
 
-##### URL routing
+###### URL routing
 
 Route URL to index view:
 
