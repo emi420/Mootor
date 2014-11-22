@@ -16,12 +16,10 @@
 		border-color: $base !important;
 	}
     
-	.m-color-#{$name} {
+    // FIXME CHECK: the same?
+	.m-color-#{$name},
+    .m-color-#{$name}-fg {
 		color: $base;
-	}
-
-	.m-color-#{$name}-fg {
-		color: $base
 	}
 }
 
