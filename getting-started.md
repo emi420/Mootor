@@ -28,7 +28,7 @@ This *base app* is composed of several files:
 * views/my-view/my-view.css - CSS styles for the view
 * views/my-view/my-view.js - JavaScript code for the view
 
-On *views/index/my-view.html* you can add some HTML code for testing.
+On *views/my-view/my-view.html* you can add some HTML code for testing.
 
 The scripting of this view will be on *views/my-view/my-view.js* , for example:
 
