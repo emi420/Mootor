@@ -58,6 +58,15 @@ var createApp = function(done) {
             }).click();
         });
         
+        
+        Mootor.UIFormGeo._onSuccess = function() {
+            return true;
+        }
+
+        Mootor.UIFormGeo._onError = function() {
+            return false;
+        }
+        
         _appIsInitTest = true;
         
         app.init()
