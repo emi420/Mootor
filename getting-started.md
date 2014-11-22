@@ -9,10 +9,9 @@ You must run the app on a webserver, for example:
 
 * http://localhost/mootor-app/
 
-This *base app* is composed of several files:
+This *base app* is composed of several important files:
 
 * index.html  *main HTML file*
-* manifest.webapp *example of webapp manifest*
 * views/index/index.js *index view script*
 * views/index/index.html *index view template*
 * views/index/index.css *index view styles*
