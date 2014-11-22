@@ -38,8 +38,6 @@ The scripting of this view will be on *views/my-view/my-view.js* , for example:
 
 Using *m.app.view* you can get the View instance and with the *on* method run code when the view is loaded.  This method support parameters too, for example:
 
-    m.app.route("^#my-view/(.*)", app.view("my-view"));
-
     m.app.view("my-view").on("load", function(self) {
        console.log("Value: " + self.params[0];
     });
