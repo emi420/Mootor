@@ -16,14 +16,13 @@ Mootor is minimalist HTML5 library for mobile application development.
 * https://itunes.apple.com/us/app/reclamos/id904615428?ls=1&mt=8
 * https://play.google.com/store/apps/details?id=com.voolks.reclamos
 
-## About
-
-* Mootor is under design and development by the Voölks (voolks.com) team.
-* Also, we received public founding by the MinCyT (mincyt.gob.ar)
-
 ## Documentation
 
 * http://emi420.github.io/Mootor/
+
+#### Getting started
+
+* https://github.com/emi420/Mootor/blob/master/getting-started.md
 
 ## Work plan
 
@@ -41,6 +40,11 @@ http://emi420.github.io/Mootor/downloads/mootor-ui.pdf
 
 * http://mootor.mobi/uiicons/
 * https://github.com/emi420/Mootor/tree/dev/source/img/icons
+
+## About
+
+* Mootor is under design and development by the Voölks (voolks.com) team.
+* Also, we received public founding by the MinCyT (mincyt.gob.ar)
 
 ## License
 
