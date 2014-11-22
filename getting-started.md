@@ -95,9 +95,26 @@ Documentation:
 
 * http://emi420.github.io/Mootor/classes/View.html#method_on
 
+##### Adding a view
+
+1.Create the files
+
+* views/my-view/my-view.html - HTML content for the view
+* views/my-view/my-view.css - CSS styles for the view
+* views/my-view/my-view.js - JavaScript code for the view
+
+2.Add view on app init
+
+    var app = m.app({
+        views: [
+            "index",
+            "my-view",
 
 
+3.Add a route
 
+    app.route("^#my-view$", app.view("my-view"));
 
+Now you can load the view on the browser, for example:
 
-
+* http://localhost/mootor-app/#my-view
