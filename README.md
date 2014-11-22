@@ -2,16 +2,16 @@
 
 ## HTML5 library for mobile application development
 
-The main purpose of this project is to create a simple HTML5 library for mobile application development, that helps web professionals to build fully customizable apps, for use in browsers or embedded in mobile applications.
+Mootor is minimalist HTML5 library for mobile application development.
 
 ## Demo
 
 * http://emi420.github.io/Mootor/demo/
 * Source: https://github.com/emi420/Mootor/tree/master/examples/demo
 
-#### Update! download a demo app by the Voölks team 
+#### Update! download a demo app for iOS/Android
 
-##### Reclamos (spanish)
+##### Reclamos (spanish) by the Voölks team 
 
 * https://itunes.apple.com/us/app/reclamos/id904615428?ls=1&mt=8
 * https://play.google.com/store/apps/details?id=com.voolks.reclamos
@@ -48,4 +48,4 @@ You may use any Mootor project under the terms of either the MIT License or the 
 
 (c) 2012 Emilio Mariscal
 
-Want to contribute? fork the project, write us to mootor [at] voolks.com
+Want to contribute? or use this software? fork the project, or write us to mootor [at] voolks.com
