@@ -33,22 +33,22 @@ http://emi420.github.io/Mootor/demo/#uinavbar
 
 Add the *m-button* class to an element and use the color and styles system, this way:
 
-*.m-button.m-button-primary.m-button-outline
+* .m-button.m-button-primary.m-button-outline
 
 You can combine all this options for buttons:
 
-* .m-button
-* .m-button-primary
-* .m-button-success
-* .m-button-warning
-* .m-button-info
-* .m-button-danger
-* .m-button-clear
-* .m-button-block
-* .m-button-outline
-* .m-button-block
-* .m-button-fullwidth
-* .m-button-small
+* m-button
+* m-button-primary
+* m-button-success
+* m-button-warning
+* m-button-info
+* m-button-danger
+* m-button-clear
+* m-button-block
+* m-button-outline
+* m-button-block
+* m-button-fullwidth
+* m-button-small
 
 http://emi420.github.io/Mootor/demo/#buttons
 
@@ -72,9 +72,9 @@ Header and Footer are Mootor.UINavBar components and can be used this way to cre
 
 You can add foreground, background or border colors, this way:
 
-* .m-bg-color-<background color>
-* .m-border-color-<border color>
-* .m-color-<foreground color>
+* m-bg-color-<background color>
+* m-border-color-<border color>
+* m-color-<foreground color>
 
 The color name must be one of each:
 
