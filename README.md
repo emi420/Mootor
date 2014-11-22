@@ -7,44 +7,33 @@ Mootor is minimalist HTML5 library for mobile application development.
 ## Demo
 
 * http://emi420.github.io/Mootor/demo/
-* Source: https://github.com/emi420/Mootor/tree/master/examples/demo
-
-#### Update! download a demo app for iOS/Android
-
-##### Reclamos (spanish) by the Voölks team 
-
-* https://itunes.apple.com/us/app/reclamos/id904615428?ls=1&mt=8
-* https://play.google.com/store/apps/details?id=com.voolks.reclamos
 
 ## Documentation
 
-* http://emi420.github.io/Mootor/
-
-#### Getting started
-
 * https://github.com/emi420/Mootor/blob/master/getting-started.md
+* https://github.com/emi420/Mootor/blob/master/doc-ui.md
 
 ## Work plan
 
 * https://github.com/emi420/Mootor/issues
 
-## Design
+## Design drafts
 
-Mootor team **LOVES** design. We are working to make delightful user interfaces, and provide maximum efficiency and fully customization.
-
-#### Update! check our design drafts for Mootor UI
-
-http://emi420.github.io/Mootor/downloads/mootor-ui.pdf
-
-#### Mootor Icons
-
+* http://emi420.github.io/Mootor/downloads/mootor-ui.pdf
 * http://mootor.mobi/uiicons/
 * https://github.com/emi420/Mootor/tree/dev/source/img/icons
 
+## Update!
+### iOS/Android demo app (spanish)
+#### By the Voölks Team
+
+* https://itunes.apple.com/us/app/reclamos/id904615428?ls=1&mt=8
+* https://play.google.com/store/apps/details?id=com.voolks.reclamos
+
 ## About
 
-* Mootor is under design and development by the Voölks (voolks.com) team.
-* Also, we received public founding by the MinCyT (mincyt.gob.ar)
+* Mootor is under design and development by the Voölks ([voolks.com](voolks.com)) team.
+* We received public founding by the MinCyT ([mincyt.gob.ar](mincyt.gob.ar))
 
 ## License
 
