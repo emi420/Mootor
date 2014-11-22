@@ -72,9 +72,9 @@ Header and Footer are Mootor.UINavBar components and can be used this way to cre
 
 You can add foreground, background or border colors, this way:
 
-* m-bg-color-<background color>
-* m-border-color-<border color>
-* m-color-<foreground color>
+* m-bg-color-\<background color>
+* m-border-color-\<border color>
+* m-color-\<foreground color>
 
 The color name must be one of each:
 
@@ -118,20 +118,20 @@ You can add an icon using *m-icon-<icon>* class, this way:
 
 White color:
 
-* m-icon-<icon>-white
+* m-icon-\<icon>-white
 
     <span class="m-icon-map-white"></span>
 
 2 more sizes:
 
-* m-icon-<icon>-small
-* m-icon-<icon>-large
+* m-icon-\<icon>-small
+* m-icon-\<icon>-large
 
     <span class="m-icon-map-large"></span>
 
 Color and size:
 
-* m-icon-<icon>-large-white
+* m-icon-\<icon>-large-white
 
     <span class="m-icon-map-large-white"></span>
 
