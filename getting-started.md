@@ -4,25 +4,23 @@
 ## First setup
 
 
-###1. Clone the project
+###1. Download
 
-* git@github.com:emi420/Mootor.git
+* https://github.com/emi420/Mootor/blob/master/dist/mootor-beta-v0.1.zip?raw=true
 
 ### 2. Open base app
 
 You must run the app on a webserver, for example:
 
-* http://localhost/Mootor/examples/base/
+* http://localhost/mootor-app/
 
-This *base* is composed of several files:
+This *base app* is composed of several files:
 
 * index.html  *main HTML file*
 * manifest.webapp *example of webapp manifest*
-* addview *bash utility for add views*
 * views/index/index.js *index view script*
 * views/index/index.html *index view template*
 * views/index/index.css *index view styles*
-* mootor *link to Mootor library*
 
 ### 3. Edit the files
 
