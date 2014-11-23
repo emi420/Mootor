@@ -1,6 +1,12 @@
 # Mootor UI components
 
-## Header
+## NavBar
+
+Navigation bar for header and footer.
+
+http://emi420.github.io/Mootor/demo/#uinavbar
+
+### Header
 
     <header>
         <h1>Header</h1>
@@ -9,13 +15,7 @@
 * If you place a *<header>* HTML object the main html file (index.html), that will be the default header for all the views that dont have one.
 * Check UINavBar for navigation elements.
 
-## Text
-
-You can put text on the content area and use the default styles for H1, H2, H3 ,H4, H5, H6, p, a, strong, q and blockquote.
-
-http://emi420.github.io/Mootor/demo/#text
-
-## Footer
+### Footer
 
 Same way you add a header, you can add a footer:
 
@@ -26,8 +26,27 @@ Same way you add a header, you can add a footer:
             </a>
         </nav>>
     </footer>
+    
+### Icons
 
-http://emi420.github.io/Mootor/demo/#uinavbar
+Create navigation bars with icons:
+
+    <header or footer>
+        <nav>
+            <a href="#icons">
+                <span class="m-icon-map-white">
+            </a>
+            <a href="#icons">
+                <span class="m-icon-cloud-upload-white">
+            </a>
+        </nav>
+    </header or footer>
+        
+## Text
+
+You can put text on the content area and use the default styles for H1, H2, H3 ,H4, H5, H6, p, a, strong, q and blockquote.
+
+http://emi420.github.io/Mootor/demo/#text
 
 ## Buttons
 
@@ -52,21 +71,6 @@ You can combine all this options for buttons:
 
 http://emi420.github.io/Mootor/demo/#buttons
 
-
-### UINavBar buttons
-
-Header and Footer are Mootor.UINavBar components and can be used this way to create navigation bars with icons:
-
-    <header or footer>
-        <nav>
-            <a href="#icons">
-                <span class="m-icon-map-white">
-            </a>
-            <a href="#icons">
-                <span class="m-icon-cloud-upload-white">
-            </a>
-        </nav>
-    </header or footer>
 
 ## Colors
 
