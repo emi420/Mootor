@@ -98,7 +98,7 @@ And each one has 4 more options:
 
 For example:
 
-    <button class="m-button m-bg-success-lighter">Success!</h2>
+    <button class="m-button m-bg-success-lighter">Success!</button>
 
 Other useful colors are:
 
