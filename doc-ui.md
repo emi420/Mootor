@@ -45,7 +45,11 @@ Create navigation bars with icons:
 
 ## Icons
 
-You can add an icon using *m-icon-<icon>* class, this way:
+Include the icons CSS:
+
+    <link rel="stylesheet" href="css/icons.css">
+
+Add an icon using *m-icon-<icon>* class, this way:
 
     <span class="m-icon-map"></span>
 
@@ -103,6 +107,13 @@ You can combine all this options for buttons:
 * m-button-small
 
 http://emi420.github.io/Mootor/demo/#buttons
+
+### Icons
+
+    <button class="m-button m-button-danger">
+      <span class="m-icon-chat-small-white"></span>
+      Add a comment
+    </button>
 
 
 ## Colors
