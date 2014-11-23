@@ -20,6 +20,10 @@ Mootor is minimalist HTML5 library for mobile application development.
 
 * https://github.com/emi420/Mootor/blob/master/doc-ui.md
 
+### JavaScript
+
+* https://github.com/emi420/Mootor/blob/master/doc-js.md
+
 ## About
 
 * Mootor is under design and development by the Voölks ([voolks.com](voolks.com)) team.
