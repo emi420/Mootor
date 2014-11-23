@@ -229,34 +229,10 @@
     // Public instance prototype
     
     $.extend(View.prototype, {
-        
-        /**
-        * Title is the friendly name for the current view.
-        * When called without parameters, returns a string containing the title. When called with parameters, sets the title.
-        * 
-        * @method title
-        * @param {string} [title] New title for this view.
-        * @return string
-        * @example
-        *     // Get title
-        *     m.app.view("index").title();
-        *    
-        *     // Get title
-        *     m.app.view("index").title("My title");
-        */  
-        title: function(title) {
-            var view = View._collection[this.id];
-            if (title === undefined) {
-                return view.title;
-            } else {
-                view.title = title;
-                return this;
-            }
-        },
 
         /**
         * Sets an event handler for the view
-        * Possible values for event: load, beforeLoad, unload, beforeUnload, init
+        * Possible values for event: load, beforeLoad, unload, beforeUnload, ready
         * 
         * @method on
         * @param {string} event Defines in which event the handler will be called
@@ -288,20 +264,6 @@
             }
             return this;
         }
-
-        /**
-        * Unsets event handlers for the view
-        * Possible values for event: load, beforeLoad, unload, beforeUnload, init
-        * 
-        * @method off
-        * @param {string} event Defines in which event we want to unset handlers
-        * @param {function} [callback] If this parameter is specified, only that function is removed. Otherwise all callbacks for this event are removed.
-        * @return View
-        */  
-        /*
-        off: function(event,callback) {
-
-        }*/
 
     });    
     

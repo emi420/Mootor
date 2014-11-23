@@ -112,11 +112,6 @@
         /**
         * Back
         * The back button
-        *
-        * @object back
-        * @return {UINavItem} 
-        * @example
-        *     m.app.view("index").ui.header.back.hide();
         */
         back: {},
         

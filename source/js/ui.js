@@ -61,6 +61,7 @@
         *
         * @method show
         * @return {UI}
+        * @private
         * @example
         *     m.app.ui.show();
         */
@@ -72,6 +73,7 @@
         * Hides element from view
         *
         * @method hide
+        * @private
         * @return {UI}
         * @example
         *     m.app.ui.hide();

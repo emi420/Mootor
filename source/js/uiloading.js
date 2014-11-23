@@ -82,7 +82,7 @@
             var el = document.createElement("div");
             var $el = $(el);
             $el.addClass("m-loading");
-            $el.addClass("m-loading-circles");//m-loading-default-style
+            $el.addClass("m-loading-circles");
 
             $("<div>").addClass("m-loading-circle m-loading-circle-01").appendTo($el);
             $("<div>").addClass("m-loading-circle m-loading-circle-02").appendTo($el);
@@ -95,19 +95,7 @@
     // Public methods
 
     $.extend(UILoading.prototype, {
-        
-        /**
-        * Set the style for the loading animation
-        *
-        * @method style
-        * @param {object} [options] Style options TODO: Define this object's structure
-        * @return {UILoading} 
-        * @chainable
-        */
-        /*
-        style: function(options) {
-            
-        }*/
+        // code here
     });      
 
       

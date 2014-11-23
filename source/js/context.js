@@ -52,12 +52,38 @@
                 height: window.screen.height
             },
             
+            /**
+            * Apache Cordova info
+            * @property cordova
+            * @type object
+            * @example
+            *     if (m.context.cordova) {
+            *         console.log("Your app is running on Cordova");
+            *     }
+            */            
             cordova: function() {
                 return window.Cordova !== undefined
             },
+
+            /**
+            * PhoneGap info
+            * @property phonegap
+            * @type object
+            * @example
+            *     if (m.context.cordova) {
+            *         console.log("Your app is running on PhoneGap");
+            *     }
+            */            
             phonegap:function() {
                 return window.PhoneGap !== undefined
             },
+            
+            /**
+            * Android version info
+            * @property _androidversion
+            * @type object
+            * @private
+            */ 
             _androidversion: function() {
                 var ua = navigator.userAgent;
                 if( ua.indexOf("Android") >= 0 ) {

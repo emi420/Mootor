@@ -25,14 +25,6 @@ The scripting of this view will be on *views/my-view/my-view.js* , for example:
         // code here
     });
 
-Using *m.app.view* you can get the View instance and with the *on* method run code when the view is loaded.  This method support parameters too, for example:
-
-    m.app.view("my-view").on("load", function(self) {
-       console.log("Value: " + self.params[0];
-    });
-
-* http://emi420.github.io/Mootor/classes/View.html#method_on
-
 ##### 2.Add view on app init
 
     var app = m.app({
@@ -47,12 +39,13 @@ Using *m.app.view* you can get the View instance and with the *on* method run co
 
 Now you can load the view on the browser, for example:
 
-* http://localhost/mootor-app/#my-view
+## Read the docs
 
-*app.route()* takes a regular expresion and a view as parameters.
+### UI Components
 
-* http://emi420.github.io/Mootor/classes/Router.html#method_route
+https://github.com/emi420/Mootor/doc-ui.md
 
+### JavaScript 
 
-
+https://github.com/emi420/Mootor/doc-js.md
 
