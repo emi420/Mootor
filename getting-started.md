@@ -49,3 +49,8 @@ https://github.com/emi420/Mootor/doc-ui.md
 
 https://github.com/emi420/Mootor/doc-js.md
 
+## Angular
+
+You can implement a Mootor app with Angular, check out this example:
+
+https://github.com/emi420/Mootor/tree/master/examples/angular
