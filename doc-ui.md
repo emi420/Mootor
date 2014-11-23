@@ -42,6 +42,39 @@ Create navigation bars with icons:
         </nav>
     </header or footer>
         
+
+## Icons
+
+You can add an icon using *m-icon-<icon>* class, this way:
+
+    <span class="m-icon-map"></span>
+
+White color:
+
+* m-icon-\<icon>-white
+
+    <span class="m-icon-map-white"></span>
+
+2 more sizes:
+
+* m-icon-\<icon>-small
+* m-icon-\<icon>-large
+
+    <span class="m-icon-map-large"></span>
+
+Color and size:
+
+* m-icon-\<icon>-large-white
+
+    <span class="m-icon-map-large-white"></span>
+
+
+A **free collection of 87 icons**, 2 colors, 3 sizes, with media queries for HD screens.
+
+* https://mootor.voolks.com/uiicons/
+* https://github.com/emi420/Mootor/tree/master/source/img/icons/black/32x32
+* http://emi420.github.io/Mootor/demo/#icons
+
 ## Text
 
 You can put text on the content area and use the default styles for H1, H2, H3 ,H4, H5, H6, p, a, strong, q and blockquote.
@@ -113,39 +146,6 @@ Other useful colors are:
 
 
 http://emi420.github.io/Mootor/demo/#colors
-
-## Icons
-
-You can add an icon using *m-icon-<icon>* class, this way:
-
-    <span class="m-icon-map"></span>
-
-White color:
-
-* m-icon-\<icon>-white
-
-    <span class="m-icon-map-white"></span>
-
-2 more sizes:
-
-* m-icon-\<icon>-small
-* m-icon-\<icon>-large
-
-    <span class="m-icon-map-large"></span>
-
-Color and size:
-
-* m-icon-\<icon>-large-white
-
-    <span class="m-icon-map-large-white"></span>
-
-
-A **free collection of 87 icons**, 2 colors, 3 sizes, with media queries for HD screens.
-
-* https://mootor.voolks.com/uiicons/
-* https://github.com/emi420/Mootor/tree/master/source/img/icons/black/32x32
-* http://emi420.github.io/Mootor/demo/#icons
-
 
 ## Navigation list
 
