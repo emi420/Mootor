@@ -131,7 +131,7 @@
             
                 <li><a href="../classes/UIForm.html">UIForm</a></li>
             
-                <li><a href="../classes/UIFormCamera.html">UIFormCamera</a></li>
+                <li><a href="../classes/UIFormCameraSingle.html">UIFormCameraSingle</a></li>
             
                 <li><a href="../classes/UIFormCheckbox.html">UIFormCheckbox</a></li>
             
@@ -267,17 +267,8 @@
     $.extend(UIFormOption, {
         _init: function(uiview) {
             
-            var inputs,
-                iconsRefresh,
-                iconsArray = [];
-                
-            iconsRefresh = function() {
-                var i;
-                for (i = iconsArray.length;i--;) {
-                    iconsArray[i].addClass(&quot;m-hidden&quot;);
-                }
-            }
-                
+            var inputs;
+                 
             inputs = uiview.$el.find(&quot;.m-option&quot;);
             inputs.each(function(index,element) {
                 var $element = $(element),
@@ -285,13 +276,13 @@
                     $cover,
                     $label,
                     $icon,
-                    updateValue;
+                    updateValue,
+                    iconElementName = element.name.replace(&quot;.&quot;,&quot;_&quot;);
 
-                updateValue = function(norefresh) {
-                    if (!norefresh) {
-                        iconsRefresh();
-                    }
-                    var checked = element.checked;
+                updateValue = function() {
+                    var checked = element.checked,
+                        $icon = $(&quot;.m-option-icon-name-&quot; + iconElementName + &quot;-&quot; + element.getAttribute(&quot;m-option-index&quot;));
+
                     if (checked === true) {
                         $icon.removeClass(&quot;m-hidden&quot;);
                     } else {
@@ -301,15 +292,14 @@
                                
                 /*jshint multistr: true */
                 coverHTML = &#x27;&lt;div class=&quot;m-option m-option-cover&quot;&gt;\
-                    &lt;span class=&quot;m-option-icon m-icon-ok-small m-hidden&quot;&gt;&lt;/span&gt;\
+                    &lt;span class=&quot;m-option-icon m-icon-ok-small m-hidden m-option-icon-name-$elementName m-option-icon-name-$elementName-$index&quot;&gt;&lt;/span&gt;\
                 &lt;/div&gt;&#x27;;
 
-
-                $cover = element.$cover = $(coverHTML).insertBefore(element);
+                $cover = element.$cover = $(coverHTML.replace(&quot;$elementName&quot;, iconElementName).replace(&quot;$elementName&quot;, iconElementName).replace(&quot;$index&quot;, index)).insertBefore(element);
+                element.setAttribute(&quot;m-option-index&quot;,  index);
                 
                 $label = $(&quot;label[for=&quot; + element.id + &quot;]&quot;);
                 $icon = $cover.find(&quot;.m-option-icon&quot;);
-                iconsArray.push($icon);
                 $cover[0].appendChild($label[0]);
                 
                 $element.removeClass(&quot;m-option&quot;)
@@ -318,8 +308,9 @@
                 $element.on(&quot;change&quot;, updateValue);
                 
                 $cover.on(&quot;tap click&quot;, function() {
+                    $(&quot;.m-option-icon-name-&quot; + iconElementName).addClass(&quot;m-hidden&quot;);
                     element.checked = true;
-                    updateValue();
+                    $element.change();
                 });
 
                 updateValue(true);

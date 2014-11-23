@@ -131,7 +131,7 @@
             
                 <li><a href="../classes/UIForm.html">UIForm</a></li>
             
-                <li><a href="../classes/UIFormCamera.html">UIFormCamera</a></li>
+                <li><a href="../classes/UIFormCameraSingle.html">UIFormCameraSingle</a></li>
             
                 <li><a href="../classes/UIFormCheckbox.html">UIFormCheckbox</a></li>
             
@@ -331,37 +331,51 @@
     });  
     
     App.on(&quot;ready&quot;, function() {
-        var links = $(&quot;a&quot;),
-            i,
-            href,
-            setEvent,
-            onClick;
+           var links = $(&quot;a&quot;),
+               setEvent,
+               onClick;
             
-            
-        // Android/iOS fixes
-        setEvent = function(el, href) {
-            $(el).on(&quot;tap&quot;, function(e) {
-                m.app.go(href);
-            });
-            el.addEventListener(&quot;touchend&quot;, function(e) {
-                e.preventDefault();
-            });
-        };
-        onClick = function() {
-            return false;
-        };
-        if ( &#x27;ontouchstart&#x27; in window ) {
-            for (i = links.length; i--;) {
-                href = links[i].getAttribute(&quot;href&quot;);
-                links[i].onclick = onClick;
-                if (href !== null &amp;&amp; m.app.route(links[i].getAttribute(&quot;href&quot;)) !== undefined) {                
-                    setEvent(links[i], href);
-                }
-            }
-        }
         
-    });  
+       // Android/iOS fixes
+       setEvent = function(el, href) {
+           $(el).on(&quot;tap&quot;, function(e) {
+               m.app.go(href);
+           });
+           el.addEventListener(&quot;touchend&quot;, function(e) {
+               e.preventDefault();
+           });
+       };
+      if ( &#x27;ontouchstart&#x27; in window ) {
+           onClick = function() {
+               return false;
+           };
+       } else {
+           onClick = function() {
+               m.app.go(href);
+               return false;
+           };
+       }
     
+       $.extend(UIApp, {
+           _improveLinksForTouch: function(links) {
+               var i,
+                   href;
+               if ( &#x27;ontouchstart&#x27; in window ) {
+                   for (i = links.length; i--;) {
+                       href = links[i].getAttribute(&quot;href&quot;);
+                       links[i].onclick = onClick;
+                       if (href !== null &amp;&amp; m.app.route(links[i].getAttribute(&quot;href&quot;)) !== undefined) {
+                           setEvent(links[i], href);
+                       }
+                   }
+               } 
+           }
+       });
+       
+       UIApp._improveLinksForTouch(links);
+       
+   });
+
 
 }(window.$, window.Mootor, window.m));
 

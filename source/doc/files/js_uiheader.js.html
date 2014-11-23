@@ -131,7 +131,7 @@
             
                 <li><a href="../classes/UIForm.html">UIForm</a></li>
             
-                <li><a href="../classes/UIFormCamera.html">UIFormCamera</a></li>
+                <li><a href="../classes/UIFormCameraSingle.html">UIFormCameraSingle</a></li>
             
                 <li><a href="../classes/UIFormCheckbox.html">UIFormCheckbox</a></li>
             
@@ -317,7 +317,6 @@
                 el: backEl
             });
             self.back.$el.addClass(&quot;m-header-back&quot;);
-            self.back.hide();
             
             self.back.$el.on(&quot;tap click&quot;, function() {
                 m.app.back();
@@ -325,13 +324,15 @@
             self.back.el.onclick = function() {
                 return false;
             };
+            
+            // FIXME CHECK
             App.on(&quot;go&quot;, function(app) {
-                if (app.history.length &gt; 1) {
-                    self.back.show();
-                } else {
+                if (m.app._firstHash === window.location.hash) {
                     self.back.hide();
+                } else {
+                    self.back.show();
                 }
-            });            
+            });         
         }
         
     });
@@ -343,11 +344,6 @@
         /**
         * Back
         * The back button
-        *
-        * @object back
-        * @return {UINavItem} 
-        * @example
-        *     m.app.view(&quot;index&quot;).ui.header.back.hide();
         */
         back: {},
         

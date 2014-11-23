@@ -2,7 +2,6 @@
 * The Event class defines and manage events
 *
 * @class Event
-* @private
 * @module Mootor
 * @author Emilio Mariscal (emi420 [at] gmail.com)
 * @author Martin Szyszlican (martinsz [at] gmail.com)
@@ -31,7 +30,6 @@
         *     Mootor.on("myCustomEvent", function(self) {
         *         console.log("Event fired!");
         *     });
-        * @private
         */
         on: function(event, callback) {
             if (Event._collection[event] === undefined) {
@@ -45,7 +43,6 @@
         * @method dispatch
         * @param {string} event Name of the event
         * @param {object} instance Instance for scope
-        * @private
         * @example
         *     Mootor.dispatch("myCustomEvent", myInstance);
         */
@@ -75,7 +72,6 @@
         * @method extend
         * @param {object} object Object to extend
         * @param {string} objectName String name of the object
-        * @private
         * @example
         *     Person = function(name) {
         *         this.name = name;

@@ -131,7 +131,7 @@
             
                 <li><a href="../classes/UIForm.html">UIForm</a></li>
             
-                <li><a href="../classes/UIFormCamera.html">UIFormCamera</a></li>
+                <li><a href="../classes/UIFormCameraSingle.html">UIFormCameraSingle</a></li>
             
                 <li><a href="../classes/UIFormCheckbox.html">UIFormCheckbox</a></li>
             
@@ -335,45 +335,51 @@
                     
         // self = uiview
         createBar: function(barName, self, BarClass) {
+            
+            // FIXME CHECK
+            if (self.panel) {
+                
+                var barEl = self.panel.el.getElementsByTagName(barName)[0];
 
-            var barEl = self.panel.el.getElementsByTagName(barName)[0];
-
-            if (barEl) {
+                if (barEl) {
              
-                self[barName] = new BarClass({
-                    el: barEl,
-                    type: &quot;view&quot;
-                });
+                    self[barName] = new BarClass({
+                        el: barEl,
+                        type: &quot;view&quot;
+                    });
                 
-                self.panel.el.removeChild(barEl);
-                barContainerEl[barName].appendChild(barEl);
+                    barEl.parentElement.removeChild(barEl);
+                    barContainerEl[barName].appendChild(barEl);
                 
-                self[barName].hideContainer();
+                    self[barName].hideContainer();
 
-                self.view.on(&quot;load&quot;, function(self) {
-                   self.ui[barName].showContainer(barName);
-                   if (m.app.ui[barName]._emptyContainer === true) {
+                    self.view.on(&quot;load&quot;, function(self) {
+                       self.ui[barName].showContainer(barName);
+                       if (m.app.ui[barName]._emptyContainer === true) {
+                           $(barContainerEl[barName]).show();
+                       }
                        $(barContainerEl[barName]).show();
-                   }
-                   $(barContainerEl[barName]).show();
-                });
+                    });
 
-                self.view.on(&quot;unload&quot;, function(self) {
-                   self.ui[barName].hideContainer(barName);
-                   if (m.app.ui[barName]._emptyContainer === true) {
-                       $(barContainerEl[barName]).hide();
-                   }
-                });
+                    self.view.on(&quot;unload&quot;, function(self) {
+                       self.ui[barName].hideContainer(barName);
+                       if (m.app.ui[barName]._emptyContainer === true) {
+                           $(barContainerEl[barName]).hide();
+                       }
+                    });
 
-            } else {
-                self.view.on(&quot;load&quot;, function(self) {
-                    m.app.ui[barName].show();
-                });
+                } else {
+                    self.view.on(&quot;load&quot;, function(self) {
+                        m.app.ui[barName].show();
+                    });
 
-                self.view.on(&quot;unload&quot;, function(self) {
-                    m.app.ui[barName].hide();
-                });
+                    self.view.on(&quot;unload&quot;, function(self) {
+                        m.app.ui[barName].hide();
+                    });
+                }
+            
             }
+            
         }
     });
 

@@ -38,26 +38,7 @@
     // Public methods and properties
 
     $.extend(UIFormVirtualInput.prototype, {
-
-        /**
-        * Value of the input
-        *
-        * @property value
-        */         
-        value: undefined,
-
-        /**
-        * Sets an event handler for the input
-        *
-        * @method on
-        * @param {string} event Defines in which event the handler will be called
-        * @param {function} callback The function to be called when the event is fired.
-        * @return this
-        */ 
-        on: function(event, callback) {
-            // code here
-        }
-
+        // code here
     });        
     
     Mootor.UIFormVirtualInput = UIFormVirtualInput;

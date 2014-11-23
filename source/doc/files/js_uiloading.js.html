@@ -131,7 +131,7 @@
             
                 <li><a href="../classes/UIForm.html">UIForm</a></li>
             
-                <li><a href="../classes/UIFormCamera.html">UIFormCamera</a></li>
+                <li><a href="../classes/UIFormCameraSingle.html">UIFormCameraSingle</a></li>
             
                 <li><a href="../classes/UIFormCheckbox.html">UIFormCheckbox</a></li>
             
@@ -307,6 +307,7 @@
         * Create and add the loading indicator&#x27;s elements to the DOM
         *
         * @method create
+        * @private
         * @return {Zepto} Zeptified element
         */
 
@@ -314,7 +315,7 @@
             var el = document.createElement(&quot;div&quot;);
             var $el = $(el);
             $el.addClass(&quot;m-loading&quot;);
-            $el.addClass(&quot;m-loading-circles&quot;);//m-loading-default-style
+            $el.addClass(&quot;m-loading-circles&quot;);
 
             $(&quot;&lt;div&gt;&quot;).addClass(&quot;m-loading-circle m-loading-circle-01&quot;).appendTo($el);
             $(&quot;&lt;div&gt;&quot;).addClass(&quot;m-loading-circle m-loading-circle-02&quot;).appendTo($el);
@@ -327,19 +328,7 @@
     // Public methods
 
     $.extend(UILoading.prototype, {
-        
-        /**
-        * Set the style for the loading animation
-        *
-        * @method style
-        * @param {object} [options] Style options TODO: Define this object&#x27;s structure
-        * @return {UILoading} 
-        * @chainable
-        */
-        /*
-        style: function(options) {
-            
-        }*/
+        // code here
     });      
 
       

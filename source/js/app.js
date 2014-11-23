@@ -155,19 +155,6 @@
             return this;
         },
         
-        /* 
-        * Remove callbacks for app events
-        * @method off
-        * @chainable
-        * @return App instance
-        */    
-        
-        /** TODO
-        off: function(event, callback) {
-            return this;
-        },
-        */
-        
         /*
         * Initialize app
         * @chainable

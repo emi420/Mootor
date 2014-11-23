@@ -219,6 +219,7 @@
         * If coordinates are not specified, it returns coordinates object with the current position.
         *
         * @method position
+        * @private
         * @param {object} [coordinates] Object with coordinates. Example: {x: 0, y: 0}
         * @return {object} Object with coordinates. Example: {x: 0, y: 0}
         */
@@ -236,22 +237,10 @@
         },
 
         /**
-        * Block/Unblock or return block status.
-        *
-        * @method blocked
-        * @param {Boolean} [blocked] Whether the panel is blocked
-        * @return {Boolean} Whether the panel is blocked
-        */
-        /*
-        blocked: function(blocked) {
-            
-        },
-        */
-
-        /**
         * Set or get transition type
         *
         * @method transition
+        * @private
         * @param {String} [transition] Transition type. MUST be one of: slide-left, slide-right, none
         * @return {String} Transition type
         */

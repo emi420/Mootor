@@ -11,7 +11,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "UIButton",
         "UIFooter",
         "UIForm",
-        "UIFormCamera",
+        "UIFormCameraSingle",
         "UIFormCheckbox",
         "UIFormDate",
         "UIFormDraw",

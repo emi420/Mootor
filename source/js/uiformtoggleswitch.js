@@ -38,17 +38,7 @@
     // Public methods and properties
 
     $.extend(UIFormToggleSwitch.prototype, {
-
-        /**
-        * Set/get input toggle switch value
-        *
-        * @method value
-        * @param {Boolean} value Value of the input
-        */
-        value: function(value) {
             // code here
-        }  
-        
     });        
 
 }(window.$, window.Mootor));

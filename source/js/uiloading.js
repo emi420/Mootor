@@ -75,6 +75,7 @@
         * Create and add the loading indicator's elements to the DOM
         *
         * @method create
+        * @private
         * @return {Zepto} Zeptified element
         */
 

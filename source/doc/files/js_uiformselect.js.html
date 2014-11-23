@@ -131,7 +131,7 @@
             
                 <li><a href="../classes/UIForm.html">UIForm</a></li>
             
-                <li><a href="../classes/UIFormCamera.html">UIFormCamera</a></li>
+                <li><a href="../classes/UIFormCameraSingle.html">UIFormCameraSingle</a></li>
             
                 <li><a href="../classes/UIFormCheckbox.html">UIFormCheckbox</a></li>
             
@@ -282,20 +282,26 @@
                 updateValue = function() {
                     // Value is the text of the selected option or the placeholder text
                     var value = element.options[element.selectedIndex].text || element.placeholder;
-                    $value.html(value);
+                    if (value !== undefined) {
+                        $value.html(value);
+                    }
                 }
                 
                 /*jshint multistr: true */
                 coverHTML = &#x27;&lt;div class=&quot;m-select m-select-cover&quot;&gt;\
                     &lt;span class=&quot;m-value&quot;&gt;&lt;/span&gt;\
-                    &lt;span class=&quot;m-icon-arrow-down-small&quot;&gt;&lt;/span&gt;\
+                    &lt;span class=&quot;m-icon-arrow-down-small m-select-icon&quot;&gt;&lt;/span&gt;\
                 &lt;/div&gt;&#x27;;
 
                 $cover = element.$cover = $(coverHTML).insertBefore(element);
                 $value = $cover.find(&quot;.m-value&quot;);
 
                 updateValue();
-                $element.on(&quot;change&quot;, updateValue);
+                $element.on(&quot;change&quot;, function() {
+                    if (this === element) {
+                        updateValue();
+                    }
+                });
 
                 $element.on(&quot;tap&quot;, function() {
                     $element.focus();

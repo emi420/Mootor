@@ -41,19 +41,6 @@
     // Public methods and properties
 
     $.extend(UINavItem.prototype, {
-        
-        /**
-        * Block/Unblock or return block status.
-        *
-        * @method blocked
-        * @param {Boolean} [blocked] Whether the item is blocked
-        * @return {Boolean} Whether the panel is blocked
-        * @chainable
-        */
-        /*
-        blocked: function(blocked) {
-            // code here
-        }*/
-
+        // code here
     });        
 }(window.$, window.Mootor));

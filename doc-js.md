@@ -145,4 +145,19 @@ http://emi420.github.io/Mootor/classes/UIApp.html#method_loading
     // Hide
     m.app.ui.loading()
 
+### .panel
+
+HTML panel where the view is loaded.
+
+#### .on(event, callback)
+
+Events for the panel. 
+
+* transitionEnd
+
+http://emi420.github.io/Mootor/classes/UIPanel.html#method_on
+
+    m.app.view("index").ui.panel.on("transitionEnd", function(){
+        console.log("transition end!")
+    });
 

@@ -131,7 +131,7 @@
             
                 <li><a href="../classes/UIForm.html">UIForm</a></li>
             
-                <li><a href="../classes/UIFormCamera.html">UIFormCamera</a></li>
+                <li><a href="../classes/UIFormCameraSingle.html">UIFormCameraSingle</a></li>
             
                 <li><a href="../classes/UIFormCheckbox.html">UIFormCheckbox</a></li>
             
@@ -388,21 +388,7 @@ Each view has a viewName.js, viewName.html and viewName.css files.</p>
                     <ul class="index-list methods">
                         
                             <li class="index-item method">
-                                <a href="#method_off">off</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
                                 <a href="#method_on">on</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_title">title</a>
 
                                 
                                 
@@ -424,148 +410,6 @@ Each view has a viewName.js, viewName.html and viewName.css files.</p>
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_off" class="method item">
-  <h3 class="blue-method-name">off</h3>
-
-  <div class="meta method-meta">
-    
-      
-        
-      <p>
-        
-          Defined in
-        
-      
-    
-    
-      <a href="../files/js_view.js.html#l301"><code>js&#x2F;view.js:301</code></a>
-    
-  </p>
-
-
-    
-
-    
-  </div>
-
-  <h3>Syntax</h3>
-  <div class="blue-method-syntax">
-  <h3 class="name"><code>off</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>event</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code class="optional">[callback]</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type"></span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-  </div>
-    <div class="description">
-      <h3>Summary</h3>
-        <p>Unsets event handlers for the view
-Possible values for event: load, beforeLoad, unload, beforeUnload, init</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">event</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Defines in which event we want to unset handlers</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name optional">[callback]</code>
-                        <span class="type">Function</span>
-                        <span class="flag optional" title="This parameter is optional.">optional</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>If this parameter is specified, only that function is removed. Otherwise all callbacks for this event are removed.</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-              
-              
-                <div class="blue-return-desc">
-                    <p>View</p>
-
-                </div>
-              
-
-
-            </div>
-        </div>
-    
-
-    
-
-    
-
-</div>
-
-                
                     <div id="method_on" class="method item">
   <h3 class="blue-method-name">on</h3>
 
@@ -580,7 +424,7 @@ Possible values for event: load, beforeLoad, unload, beforeUnload, init</p>
       
     
     
-      <a href="../files/js_view.js.html#l266"><code>js&#x2F;view.js:266</code></a>
+      <a href="../files/js_view.js.html#l233"><code>js&#x2F;view.js:233</code></a>
     
   </p>
 
@@ -636,7 +480,7 @@ Possible values for event: load, beforeLoad, unload, beforeUnload, init</p>
     <div class="description">
       <h3>Summary</h3>
         <p>Sets an event handler for the view
-Possible values for event: load, beforeLoad, unload, beforeUnload, init</p>
+Possible values for event: load, beforeLoad, unload, beforeUnload, ready</p>
 
     </div>
 
@@ -720,139 +564,6 @@ m.app.route(&quot;^#product/(.*)&quot;, app.view(&quot;product&quot;));
 m.app.view(&quot;product&quot;).on(&quot;load&quot;, function(self) {
    console.log(&quot;Product Id: &quot; + self.params[0];
 });</code></pre>
-
-            </div>
-        </div>
-    
-
-    
-
-</div>
-
-                
-                    <div id="method_title" class="method item">
-  <h3 class="blue-method-name">title</h3>
-
-  <div class="meta method-meta">
-    
-      
-        
-      <p>
-        
-          Defined in
-        
-      
-    
-    
-      <a href="../files/js_view.js.html#l242"><code>js&#x2F;view.js:242</code></a>
-    
-  </p>
-
-
-    
-
-    
-  </div>
-
-  <h3>Syntax</h3>
-  <div class="blue-method-syntax">
-  <h3 class="name"><code>title</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code class="optional">[title]</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type"></span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-  </div>
-    <div class="description">
-      <h3>Summary</h3>
-        <p>Title is the friendly name for the current view.
-When called without parameters, returns a string containing the title. When called with parameters, sets the title.</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name optional">[title]</code>
-                        <span class="type">String</span>
-                        <span class="flag optional" title="This parameter is optional.">optional</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>New title for this view.</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-              
-              
-                <div class="blue-return-desc">
-                    <p>string</p>
-
-                </div>
-              
-
-
-            </div>
-        </div>
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>// Get title
-m.app.view(&quot;index&quot;).title();
-
-// Get title
-m.app.view(&quot;index&quot;).title(&quot;My title&quot;);</code></pre>
 
             </div>
         </div>

@@ -131,7 +131,7 @@
             
                 <li><a href="../classes/UIForm.html">UIForm</a></li>
             
-                <li><a href="../classes/UIFormCamera.html">UIFormCamera</a></li>
+                <li><a href="../classes/UIFormCameraSingle.html">UIFormCameraSingle</a></li>
             
                 <li><a href="../classes/UIFormCheckbox.html">UIFormCheckbox</a></li>
             
@@ -284,9 +284,38 @@
                 height: window.screen.height
             },
             
-            cordova: (window.Cordova !== undefined),
-            phonegap: (window.PhoneGap !== undefined),
+            /**
+            * Apache Cordova info
+            * @property cordova
+            * @type object
+            * @example
+            *     if (m.context.cordova) {
+            *         console.log(&quot;Your app is running on Cordova&quot;);
+            *     }
+            */            
+            cordova: function() {
+                return window.Cordova !== undefined
+            },
+
+            /**
+            * PhoneGap info
+            * @property phonegap
+            * @type object
+            * @example
+            *     if (m.context.cordova) {
+            *         console.log(&quot;Your app is running on PhoneGap&quot;);
+            *     }
+            */            
+            phonegap:function() {
+                return window.PhoneGap !== undefined
+            },
             
+            /**
+            * Android version info
+            * @property _androidversion
+            * @type object
+            * @private
+            */ 
             _androidversion: function() {
                 var ua = navigator.userAgent;
                 if( ua.indexOf(&quot;Android&quot;) &gt;= 0 ) {
