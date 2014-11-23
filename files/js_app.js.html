@@ -125,9 +125,13 @@
             
                 <li><a href="../classes/UIApp.html">UIApp</a></li>
             
+                <li><a href="../classes/UIButton.html">UIButton</a></li>
+            
+                <li><a href="../classes/UIFooter.html">UIFooter</a></li>
+            
                 <li><a href="../classes/UIForm.html">UIForm</a></li>
             
-                <li><a href="../classes/UIFormCamera.html">UIFormCamera</a></li>
+                <li><a href="../classes/UIFormCameraSingle.html">UIFormCameraSingle</a></li>
             
                 <li><a href="../classes/UIFormCheckbox.html">UIFormCheckbox</a></li>
             
@@ -145,8 +149,6 @@
             
                 <li><a href="../classes/UIFormPassword.html">UIFormPassword</a></li>
             
-                <li><a href="../classes/UIFormPseudoInput.html">UIFormPseudoInput</a></li>
-            
                 <li><a href="../classes/UIFormSelect.html">UIFormSelect</a></li>
             
                 <li><a href="../classes/UIFormText.html">UIFormText</a></li>
@@ -156,6 +158,8 @@
                 <li><a href="../classes/UIFormTime.html">UIFormTime</a></li>
             
                 <li><a href="../classes/UIFormToggleSwitch.html">UIFormToggleSwitch</a></li>
+            
+                <li><a href="../classes/UIFormVirtualInput.html">UIFormVirtualInput</a></li>
             
                 <li><a href="../classes/UIHeader.html">UIHeader</a></li>
             
@@ -228,10 +232,10 @@
     <pre class="code prettyprint linenums">
 /*
  *  @author Emilio Mariscal (emi420 [at] gmail.com)
- *  @author Martín Szyszlican (martinsz [at] gmail.com)
+ *  @author Martin Szyszlican (martinsz [at] gmail.com)
  */
 
-(function ($, Mootor) {
+(function ($, Mootor, m) {
 
     &quot;use strict&quot;;
 
@@ -257,7 +261,7 @@
     * @param {Object} options An object defining options for the application.
     * * views - An array with a list of view names
     */
-    App = Mootor.App = function(options) {
+    App = Mootor.App = function() {
     };
 
     // Private static 
@@ -274,20 +278,6 @@
     // Public methods
 
     App.prototype = {
-        
-        /**
-        * Stores the navigation history. 
-        * An array of views, ordered in the sequence that they were visited by the user.
-        *
-        * @property history
-        * @type array
-        * @example
-        *     if (m.app.history.length === 1) {
-        *          console.log(&quot;You are on the first view&quot;)
-        *     }
-        */
-        history: [],
-       
 
         /**
         * The application&#x27;s version number
@@ -342,17 +332,26 @@
         * @example
         *     m.app.go(&quot;/product/15/&quot;);
         */
-        go: function(url,isUrlChange) {
-            var route;
+        go: function(url, _noPushState) {
+            var route,
+                stateObj;
+                
             route =  m.app.route(url);
+
+            
             if (route !== undefined) {
                 App._currentRoute = route;
                 App.dispatch(&quot;go&quot;, this);
-                if (this.history[this.history.length - 2] !== route.url) {
-                    this.history.push(route.url);    
-                } else {
-                    this.history.pop();
+                
+                stateObj = { view: route.view.id };
+        
+                if (_noPushState !== true) {
+                    if (route.url === &quot;&quot;) {
+                        route.url = &quot; &quot;;
+                    }
+                    window.history.pushState(stateObj, route.view.id, route.url);
                 }
+                                    
             } else {
                 throw(new Error(&quot;Route &quot; + url + &quot; is not defined&quot;));
             }                       
@@ -369,10 +368,7 @@
         *     m.app.back();
         */
         back: function() {
-            var url = m.app.history[m.app.history.length - 2];
-            if (url !== undefined) {
-                m.app.go(url);
-            }
+            window.history.back();
             return this;
         },        
 
@@ -390,19 +386,6 @@
             App.on(event, callback);
             return this;
         },
-        
-        /* 
-        * Remove callbacks for app events
-        * @method off
-        * @chainable
-        * @return App instance
-        */    
-        
-        /** TODO
-        off: function(event, callback) {
-            return this;
-        },
-        */
         
         /*
         * Initialize app
@@ -424,7 +407,7 @@
         
     };
     
-    $.extend(window.m, {        
+    $.extend(m, {        
         /**
         * Creates a new app with the defined options.
         * If the app is already created, it can be called without options to have a reference to the Mootor app. 
@@ -445,6 +428,9 @@
         */
         app: function(options) {
             if (App.app === undefined) {
+                if (options === undefined) {
+                    options = {};
+                }
                 App.app = new App(options);
                 App._options = options;
                 this.app = App.app;
@@ -454,7 +440,7 @@
     });
 
 
-}(window.$, window.Mootor));
+}(window.$, window.Mootor, window.m));
 
     </pre>
 </div>

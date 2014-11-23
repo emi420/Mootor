@@ -125,9 +125,13 @@
             
                 <li><a href="../classes/UIApp.html">UIApp</a></li>
             
+                <li><a href="../classes/UIButton.html">UIButton</a></li>
+            
+                <li><a href="../classes/UIFooter.html">UIFooter</a></li>
+            
                 <li><a href="../classes/UIForm.html">UIForm</a></li>
             
-                <li><a href="../classes/UIFormCamera.html">UIFormCamera</a></li>
+                <li><a href="../classes/UIFormCameraSingle.html">UIFormCameraSingle</a></li>
             
                 <li><a href="../classes/UIFormCheckbox.html">UIFormCheckbox</a></li>
             
@@ -145,8 +149,6 @@
             
                 <li><a href="../classes/UIFormPassword.html">UIFormPassword</a></li>
             
-                <li><a href="../classes/UIFormPseudoInput.html">UIFormPseudoInput</a></li>
-            
                 <li><a href="../classes/UIFormSelect.html">UIFormSelect</a></li>
             
                 <li><a href="../classes/UIFormText.html">UIFormText</a></li>
@@ -156,6 +158,8 @@
                 <li><a href="../classes/UIFormTime.html">UIFormTime</a></li>
             
                 <li><a href="../classes/UIFormToggleSwitch.html">UIFormToggleSwitch</a></li>
+            
+                <li><a href="../classes/UIFormVirtualInput.html">UIFormVirtualInput</a></li>
             
                 <li><a href="../classes/UIHeader.html">UIHeader</a></li>
             
@@ -280,6 +284,13 @@
 
                     <ul class="index-list properties">
                         
+                            <li class="index-item property private">
+                                <a href="#property__androidversion">_androidversion</a>
+
+                                
+                                
+                            </li>
+                        
                             <li class="index-item property">
                                 <a href="#property_browser">browser</a>
 
@@ -288,7 +299,21 @@
                             </li>
                         
                             <li class="index-item property">
+                                <a href="#property_cordova">cordova</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
                                 <a href="#property_os">os</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_phonegap">phonegap</a>
 
                                 
                                 
@@ -317,6 +342,63 @@
                 <h2 class="off-left">Properties</h2>
 
                 
+                    <div id="property__androidversion" class="property item private">
+
+  <h3 class="blue-method-name">_androidversion</h3>
+  <div class="meta method-meta">
+    
+      
+        
+      <p>
+        
+          Defined in
+        
+      
+    
+    
+      <a href="../files/js_context.js.html#l81"><code>js&#x2F;context.js:81</code></a>
+    
+  </p>
+
+    
+
+    
+  </div>
+
+  <h3>Syntax</h3>
+  <div class="blue-method-syntax">
+    <h3 class="name"><code>_androidversion</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    </div>
+
+    <div class="description">
+      <h3>Summary</h3>
+        <p>Android version info</p>
+
+    </div>
+
+    
+
+    
+
+  
+
+  
+
+</div>
+
+                
                     <div id="property_browser" class="property item">
 
   <h3 class="blue-method-name">browser</h3>
@@ -331,7 +413,7 @@
       
     
     
-      <a href="../files/js_context.js.html#l29"><code>js&#x2F;context.js:29</code></a>
+      <a href="../files/js_context.js.html#l31"><code>js&#x2F;context.js:31</code></a>
     
   </p>
 
@@ -383,6 +465,72 @@
 </div>
 
                 
+                    <div id="property_cordova" class="property item">
+
+  <h3 class="blue-method-name">cordova</h3>
+  <div class="meta method-meta">
+    
+      
+        
+      <p>
+        
+          Defined in
+        
+      
+    
+    
+      <a href="../files/js_context.js.html#l55"><code>js&#x2F;context.js:55</code></a>
+    
+  </p>
+
+    
+
+    
+  </div>
+
+  <h3>Syntax</h3>
+  <div class="blue-method-syntax">
+    <h3 class="name"><code>cordova</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    </div>
+
+    <div class="description">
+      <h3>Summary</h3>
+        <p>Apache Cordova info</p>
+
+    </div>
+
+    
+
+    
+
+  
+    <div class="example">
+      <h4>Example:</h4>
+
+      <div class="example-content">
+        <pre class="code prettyprint"><code>if (m.context.cordova) {
+    console.log(&quot;Your app is running on Cordova&quot;);
+}</code></pre>
+
+      </div>
+    </div>
+  
+
+  
+
+</div>
+
+                
                     <div id="property_os" class="property item">
 
   <h3 class="blue-method-name">os</h3>
@@ -397,7 +545,7 @@
       
     
     
-      <a href="../files/js_context.js.html#l18"><code>js&#x2F;context.js:18</code></a>
+      <a href="../files/js_context.js.html#l20"><code>js&#x2F;context.js:20</code></a>
     
   </p>
 
@@ -449,6 +597,72 @@
 </div>
 
                 
+                    <div id="property_phonegap" class="property item">
+
+  <h3 class="blue-method-name">phonegap</h3>
+  <div class="meta method-meta">
+    
+      
+        
+      <p>
+        
+          Defined in
+        
+      
+    
+    
+      <a href="../files/js_context.js.html#l68"><code>js&#x2F;context.js:68</code></a>
+    
+  </p>
+
+    
+
+    
+  </div>
+
+  <h3>Syntax</h3>
+  <div class="blue-method-syntax">
+    <h3 class="name"><code>phonegap</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    </div>
+
+    <div class="description">
+      <h3>Summary</h3>
+        <p>PhoneGap info</p>
+
+    </div>
+
+    
+
+    
+
+  
+    <div class="example">
+      <h4>Example:</h4>
+
+      <div class="example-content">
+        <pre class="code prettyprint"><code>if (m.context.cordova) {
+    console.log(&quot;Your app is running on PhoneGap&quot;);
+}</code></pre>
+
+      </div>
+    </div>
+  
+
+  
+
+</div>
+
+                
                     <div id="property_viewport" class="property item">
 
   <h3 class="blue-method-name">viewport</h3>
@@ -463,7 +677,7 @@
       
     
     
-      <a href="../files/js_context.js.html#l40"><code>js&#x2F;context.js:40</code></a>
+      <a href="../files/js_context.js.html#l42"><code>js&#x2F;context.js:42</code></a>
     
   </p>
 

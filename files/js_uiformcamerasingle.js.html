@@ -2,7 +2,7 @@
 <html lang="en" class="yui-overrride">
 <head>
     <meta charset="utf-8">
-    <title>js/uiformdraw.js</title>
+    <title>js/uiformcamerasingle.js</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet' type='text/css'>
@@ -226,14 +226,14 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: js/uiformdraw.js</h1>
+                        <h1 class="file-heading">File: js/uiformcamerasingle.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
-* UIFormDraw is a draw pseudo-input of a form
+* UIFormCameraSingle take or choose a single picture
 *
-* @class UIFormDraw
+* @class UIFormCameraSingle
 * @extends UI
 * @constructor
 * @module UI
@@ -244,7 +244,7 @@
     
     &quot;use strict&quot;;
 
-    var UIFormDraw,
+    var UIFormCameraSingle,
     
         UI,
         UIForm;
@@ -256,112 +256,123 @@
     
     // Private constructors
 
-    UIFormDraw = Mootor.UIFormDraw = function(element) {
-        UIFormDraw.__init(this, element, {template: false});
+    UIFormCameraSingle = Mootor.UIFormCameraSingle = function (element) {
+        UIFormCameraSingle.__init(this, element, {template: false});
     };
 
     // Prototypal inheritance
     if (UI) {
-        $.extend(UIFormDraw.prototype, UI.prototype);
+        $.extend(UIFormCameraSingle.prototype, UI.prototype);
     }
 
     // Private static methods and properties
 
-    $.extend(UIFormDraw, {
+    $.extend(UIFormCameraSingle, {
         
-        _init: function(uiview) {
+        _init: function (uiview) {
             var elements;
-            elements = uiview.$el.find(&quot;.m-draw&quot;);
-            elements.each(function(index,element) {
-                new UIFormDraw(element);
+            
+            elements = uiview.$el.find(&quot;.m-camera-single&quot;);
+            elements.each(function (index ,element) {
+                 new UIFormCameraSingle(element);
             });
         },
+
+        _openFileSelector: function(self) {
+            if (window.cordova !== undefined) {
+                navigator.camera.getPicture(           
+                   function(data) {
+                       self._$img.setAttribute(&quot;src&quot;, data);
+                   },
+                   function() {
+                       console.log(&quot;Error&quot;);
+                   }, 
+                   { 
+                       quality: self.quality || 50, 
+                       destinationType: window.Camera.DestinationType.FILE_URI,
+                       sourceType: self.source || window.Camera.PictureSourceType.CAMERA,
+                       targetWidth: self.width || 1024,
+                       targetHeight: self.height || 768
+                   }
+                );
+            } else {
+                self._$input.click();
+            }
         
-        __init: function(self, element, options) {
-            self._$originalElement = element;
-            self.options = options;
-            UIFormDraw._build(self, element);
         },
-        
-        _build: function(self, element) {
+
+        __init: function(self, element, options) {
             
-            self._$img = element.parentElement.getElementsByTagName(&quot;img&quot;)[0];
-            
+            self.options = options;
+
+            // Use internal template (Mootor)
+            // or element (Angular)
             if (self.options &amp;&amp; self.options.template === false) {
-                self._$coverHTML = $(UIFormDraw._template)[0];
+                self._$coverHTML = $(UIFormCameraSingle._template)[0];
                 $(element).replaceWith(self._$coverHTML);
             } else {
                 self._$coverHTML = element;
             }
-
-            $(self._$img).addClass(&quot;m-hidden&quot;);
+            
+            // Original element
+            self._$originalElement = element;
+            
+            // Image element
+            self._$img = self._$coverHTML.parentElement.getElementsByTagName(&quot;img&quot;)[0];
+            // File input element
             self._$input = self._$coverHTML.getElementsByTagName(&quot;input&quot;)[0];
-            self._$placeholder = self._$coverHTML.getElementsByClassName(&quot;m-draw-placeholder&quot;)[0];
-            
-            self._$modalContainer = self._$coverHTML.getElementsByClassName(&quot;m-draw-canvas&quot;)[0];
+            // Placeholder element
+            self._$placeholder = self._$coverHTML.getElementsByClassName(&quot;m-camerasingle-placeholder&quot;)[0];
+            // Modal container element
+            self.__$modalContainer = self._$coverHTML.getElementsByClassName(&quot;m-camerasingle-modal&quot;)[0];
+            if (UIFormCameraSingle._initialized) {
+                self._$modalContainer = UIFormCameraSingle._$modalContainer;
+            } else {
+                self._$modalContainer = UIFormCameraSingle._$modalContainer =  self.__$modalContainer;
+            }
 
+            // Move attributes
+            UIFormCameraSingle._moveAttrs(self);
             
-            // FIXME CHECK
-            // init modal and add event listeners to it only once
+            // Initialize modal
+            UIFormCameraSingle._initModal(self);
             
-            UIFormDraw._moveAttrs(self);
+            // Add event listeners
+            UIFormCameraSingle._addEventListeners(self);
             
-            UIFormDraw._initModal(self);
-            UIFormDraw._initCanvas(self);
-            UIFormDraw._setCanvasSize(self);
-            UIFormDraw._addEventListeners(self);
-            
-            self.clear()
-            
-            window.onresize = function() {
-                UIFormDraw._onResize(self);
-            };
-
+            // Put title text in the placeholder
             self._$placeholder.innerHTML = self._$img.getAttribute(&quot;title&quot;);
-
+            
+            // Hide picture element
+            $(self._$img).addClass(&quot;m-hidden&quot;);
+            
+            // UIFormCameraSingle was initialized once
+            UIFormCameraSingle._initialized = true;
         },
     
         _initModal: function(self) {
-            self._$modalContainer.parentElement.removeChild(self._$modalContainer);
-            if (UIFormDraw._initialized !== true) {
+            
+            var $modalPicture,
+                $modalContainer,
+                $modalPictureContainer;
+            
+            if (UIFormCameraSingle._initialized !== true) {
                 document.body.appendChild(self._$modalContainer);
-                UIFormDraw._initialized  = true;
-                UIFormDraw._$modalContainer = self._$modalContainer;
-            } else {
-                self._$modalContainer = UIFormDraw._$modalContainer;
-            }
-        },
-
-
-        _initCanvas: function(self) {
-            self._$canvas = self._$modalContainer.getElementsByTagName(&quot;canvas&quot;)[0];
-            self._$ctx = self._$canvas.getContext(&quot;2d&quot;);
-            self._$ctx.strokeStyle = &quot;black&quot;;
-            self._$ctx.lineWidth = 2;
-            self._$ctx.fillStyle = &quot;black&quot;;
-            self._$canvasHeader = self._$modalContainer.getElementsByClassName(&quot;m-draw-canvas-header&quot;)[0];
-            self._$clearBtn = self._$modalContainer.getElementsByClassName(&quot;m-draw-erase&quot;)[0];
-            self._$saveBtn = self._$modalContainer.getElementsByClassName(&quot;m-draw-done&quot;)[0];
-            self._$cancelBtn = self._$modalContainer.getElementsByClassName(&quot;m-draw-cancel&quot;)[0];
-        },
-        
-        _setCanvasSize: function(self) {
-            var h = window.innerHeight;
-            var w = window.innerWidth - 40;
-
-            if (w &gt; h) {
-                h = h - 30;
-                $(self._$canvasHeader).addClass(&quot;m-hidden&quot;)
-            } else {
-                h = h - 85;
-                $(self._$canvasHeader).removeClass(&quot;m-hidden&quot;)
-            }
-
-            self._$canvas.style.height = h + &quot;px&quot;;
-            self._$canvas.style.width = w + &quot;px&quot;;
-
-            self._$canvas.setAttribute(&quot;height&quot;,  h + &quot;px&quot;);
-            self._$canvas.setAttribute(&quot;width&quot;,  w + &quot;px&quot;);            
+                UIFormCameraSingle._$modalContainer = self._$modalContainer;
+                $modalPicture = document.createElement(&quot;img&quot;);
+                $modalPictureContainer = self._$modalContainer.getElementsByClassName(&quot;m-camerasingle-img-container&quot;)[0];
+                $modalPictureContainer.appendChild($modalPicture);
+                UIFormCameraSingle._$modalPicture = $modalPicture;
+                UIFormCameraSingle._$modalPictureContainer = $modalPictureContainer;
+            } 
+            
+            self._$modalContainer = UIFormCameraSingle._$modalContainer;
+            self._$modalPicture = UIFormCameraSingle._$modalPicture;
+            self._$modalPictureContainer =  UIFormCameraSingle._$modalPictureContainer;
+            
+            self._$deleteBtn = self._$modalContainer.getElementsByClassName(&quot;m-camerasingle-button-delete&quot;)[0];
+            self._$changeBtn = self._$modalContainer.getElementsByClassName(&quot;m-camerasingle-button-change&quot;)[0];
+            
         },
 
         _moveAttrs: function(self) {
@@ -379,202 +390,142 @@
             self._$input.setAttribute(&quot;accept&quot;, aAttrs.accept);
         },
     
-        _onResize: function(self) {
-            
-            
-            // FIXME CHECK
-            
-            UIFormDraw._setCanvasSize(self);
-            
-            /*var self = self;
-            
-            self._$img.onload = function() {
-                
-                self._setCanvasSize();
+        _onChange: function(event, self) {
+          var file,
+              picReader;
+    
+          file = event.target.files[0];
 
-                self._$ctx.drawImage( self._$img,0,0);
-                self._$ctx.lineWidth = 2;
-                self._$ctx.restore();
-
-             }
-
-             self._$img.src = self._$canvas.toDataURL();*/
-            
+    	  if (file &amp;&amp; file.type.match(&#x27;image&#x27;)) {
+              picReader = new FileReader();
+                picReader.addEventListener(&#x27;load&#x27;, function(event) {
+                    var picFile = event.target;
+                    self._$img.src=picFile.result;
+                });
+                picReader.readAsDataURL(file);
+            } 
+        },
+    
+        _onImgLoad: function(self) {
+            // Overrides me
+        },
+    
+        _onImgLoadError: function(self) {
+            // Overrides me
         },
     
         _addEventListeners: function(self) {
         
-            var 
-                $canvas = self._$canvas,
-                ctx = self._$ctx,
-                lastX,
-                lastY,
-                offsetLeft,
-                offsetTop;
-                
-            self._$coverHTML.parentElement.addEventListener(&quot;click&quot;, function(e) {
+        
+            self._$coverHTML.parentElement.addEventListener(&quot;click&quot;, function() {
+                UIFormCameraSingle._currentInstance = self;
                 self.open();
             });
 
-            self._$cancelBtn.addEventListener(&quot;click&quot;, function() {
-                self.close();
-            });
+            if (UIFormCameraSingle._initialized !== true) {
+                self._$deleteBtn.addEventListener(&quot;click&quot;, function() {
+                   self.delete();
+                });
 
-            self._$clearBtn.addEventListener(&quot;click&quot;, function() {
-                self.clear();
-            });
+                self._$changeBtn.addEventListener(&quot;click&quot;, function() {
+                    self.change();
+                });
 
-            self._$saveBtn.addEventListener(&quot;click&quot;, function() {
-                self.save();
-            });
-
-                
-            $canvas.addEventListener(&quot;touchstart&quot;, function(e) {
-                
-                self._canvasOffsetLeft = $canvas.offsetLeft - window.scrollX;
-                self._canvasOffsetTop = $canvas.offsetTop - window.scrollY;
-
-                lastX = e.changedTouches[0].clientX - self._canvasOffsetLeft;
-                lastY = e.changedTouches[0].clientY - self._canvasOffsetTop;
-
-
-                ctx.beginPath();
-                ctx.fillStyle = &quot;black&quot;;
-                ctx.fillRect(lastX, lastY, 2, 2);
-                ctx.closePath();
-
-                e.stopPropagation();
-                e.preventDefault();                
-
-                offsetLeft = self._canvasOffsetLeft;
-                offsetTop = self._canvasOffsetTop;
-            });
-            
-            $canvas.addEventListener(&quot;touchmove&quot;, function(e) {
-                var x,
-                    y,
-                    touchX = e.changedTouches[0].clientX,
-                    touchY = e.changedTouches[0].clientY;
-
-                x = touchX - offsetLeft;
-				y = touchY - offsetTop;
-
-                ctx.beginPath();
-                ctx.moveTo(lastX,lastY);
-                ctx.lineTo(x,y);
-                ctx.stroke();
-                ctx.closePath();
-
-                lastX = x;
-                lastY = y;
-
-                e.stopPropagation();
-                e.preventDefault();
-
-            });
-            
-            $canvas.addEventListener(&quot;touchend&quot;, function(e) {
-
-                e.stopPropagation();
-                e.preventDefault();
-                
-            });
-
-        },
-        
-        _save: function(self) {
-            var instance = UIFormDraw._activeInstance;
-            var $img = instance._$img;
-
-
-            $img.onload = function() {
-                instance.close();
+                self._$modalContainer.addEventListener(&quot;click&quot;, function() {
+                    self.close();
+                });
             }
-            $img.src = instance._$canvas.toDataURL();
-        }
-        
+
+            if (window.cordova === undefined) {
+                self._$input.addEventListener(&quot;change&quot;, function(event) {
+                    UIFormCameraSingle._onChange(event, self);
+                });
+            }
+
+            self._$img.addEventListener(&quot;load&quot;, function() {
+                UIFormCameraSingle._onImgLoad(self);
+            });
+
+            self._$img.addEventListener(&quot;error&quot;, function() {
+                UIFormCameraSingle._onImgLoadError(self);
+            });
+
+        }        
+   
     });
 
     // Public methods and properties
 
-    $.extend(UIFormDraw.prototype, {
+    $.extend(UIFormCameraSingle.prototype, {
         
         // Open modal or file selector
         &quot;open&quot;: function() {
-            
-            var self = this;
-            $(self._$modalContainer).removeClass(&quot;m-hidden&quot;);
-            self.clear();
-            self._$ctx.drawImage( self._$img,0,0);
-            self._$ctx.lineWidth = 2;
-            self._$ctx.restore();
-            
-            UIFormDraw._activeInstance = self;
-            
+            var self = UIFormCameraSingle._currentInstance;
+
+            if (self._$img.getAttribute(&quot;src&quot;) !== &quot;&quot;) {
+                
+                $(UIFormCameraSingle._$modalContainer).removeClass(&quot;m-hidden&quot;);
+                self._$modalPicture.src = self._$img.src;
+
+            } else {
+                UIFormCameraSingle._openFileSelector(self);
+            }
         },
     
-        // Clear current draw
-        &quot;clear&quot;: function() {
-            var self = this,
-                ctx = self._$ctx,
-                $canvas = self._$canvas,
-                w = $canvas.offsetWidth,
-                h = $canvas.offsetHeight;
-      
-            // Store the current transformation matrix
-            ctx.save();
-        
-            // Use the identity matrix while clearing the canvas
-            ctx.setTransform(1, 0, 0, 1, 0, 0);
-            ctx.clearRect(0, 0, w, h);
-            ctx.beginPath();
-        
-            // Restore the transform
-            ctx.restore();
+        // Delete current selected file
+        &quot;delete&quot;: function() {
+            var self = UIFormCameraSingle._currentInstance;
+            self._$img.setAttribute(&quot;src&quot;, &quot;&quot;);                      
         },
-        
+    
+        // Change current selected file
+        change: function() {
+            var self = UIFormCameraSingle._currentInstance;
+            UIFormCameraSingle._openFileSelector(self);
+        },
+    
         // Close modal
         &quot;close&quot;: function() {
-            var self = this;
-            $(self._$modalContainer).addClass(&quot;m-hidden&quot;);
-        },
-        
-        save: function() {
-            var self = this;
-            UIFormDraw._save(self);
+            var self = UIFormCameraSingle._currentInstance;
+            $(self._$coverHTML.parentElement).append(self._$img);
+            $(UIFormCameraSingle._$modalContainer).addClass(&quot;m-hidden&quot;);
+            
+            self._$modalPicture.src = &quot;&quot;;            
+
         },
 
-        options: {},
-        
         _$coverHTML: {} ,
-        _$canvas: {} ,
+        _$input: {} ,
         _$modalContainer: {} ,
-        _$clearBtn: {} ,
-        _$saveBtn: {} ,
-        _$input: {},
-        _canvasOffsetLeft: 0,
-        _canvasOffsetTop: 0,
+        _$imgContainer: {} ,
+        _$originalImgContainer: {} ,
+        _$deleteBtn: {} ,
+        _$changeBtn: {} ,
+        _$img: {} ,
+        _$placeholder: {},
 
-    });        
+    });       
     
-    UIFormDraw._template = &#x27;&lt;div class=&quot;m-draw m-draw-cover&quot;&gt; \
-        &lt;input class=&quot;m-hidden&quot; type=&quot;file&quot; class=&quot;m-draw&quot; accept=&quot;image/*&quot; /&gt; \
-       &lt;span class=&quot;m-draw-placeholder&quot;&gt;...&lt;/span&gt; \
-        &lt;div class=&quot;m-hidden m-draw-canvas&quot;&gt; \
-            &lt;div class=&quot;m-draw-canvas-header&quot;&gt; \
-                &lt;span class=&quot;m-draw-cancel m-icon-delete-circle&quot;&gt;&lt;/span&gt; \
-                &lt;span class=&quot;m-draw-done m-icon-ok-circle&quot;&gt;&lt;/span&gt; \
+    UIFormCameraSingle._template = &#x27;&lt;div class=&quot;m-camerasingle m-camerasingle-cover&quot;&gt; \
+        &lt;input class=&quot;m-hidden&quot; type=&quot;file&quot; class=&quot;m-camera-single&quot; accept=&quot;image/*&quot; /&gt; \
+        &lt;span class=&quot;m-camerasingle-placeholder&quot;&gt;...&lt;/span&gt; \
+        &lt;div class=&quot;m-camerasingle-modal m-hidden&quot;&gt; \
+            &lt;div class=&quot;m-camerasingle-modal-header&quot;&gt; \
+                &lt;span class=&quot;m-canvas-cancel m-camerasingle-cancel&quot;&gt;&lt;span class=&quot;m-icon-arrow-left&quot;&gt;&lt;/span&gt;&lt;/span&gt; \
             &lt;/div&gt; \
-            &lt;canvas&gt;&lt;/canvas&gt; \
-            &lt;div class=&quot;m-draw-canvas-footer&quot;&gt; \
-                &lt;span class=&quot;m-draw-erase m-icon-erase&quot;&gt;&lt;/span&gt; \
+            &lt;div class=&quot;m-camerasingle-img-container&quot;&gt; \
+                &lt;button class=&quot;button button-positive button-block m-camerasingle-button-change m-button m-button m-button-primary&quot;&gt;&lt;span class=&quot;m-icon-refresh-small-white&quot;&gt;&lt;/span&gt;&lt;/button&gt; \
+                &lt;button class=&quot;button button-assertive button-block m-camerasingle-button-delete m-button m-button m-button-danger&quot;&gt;&lt;span class=&quot;m-icon-delete-small-white&quot;&gt;&lt;/span&gt;&lt;/button&gt; \
+            &lt;/div&gt; \
+            &lt;div class=&quot;m-camerasingle-modal-footer&quot;&gt; \
             &lt;/div&gt; \
         &lt;/div&gt; \
-    &lt;/div&gt;&#x27;;
-    
+    &lt;/div&gt;&#x27;; 
+
     if (UIForm) {
-        UIForm.registerControl(UIFormDraw);  
+        UIForm.registerControl(UIFormCameraSingle);  
     }
+
 
 }(window.$, window.Mootor));
 

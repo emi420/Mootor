@@ -125,9 +125,13 @@
             
                 <li><a href="../classes/UIApp.html">UIApp</a></li>
             
+                <li><a href="../classes/UIButton.html">UIButton</a></li>
+            
+                <li><a href="../classes/UIFooter.html">UIFooter</a></li>
+            
                 <li><a href="../classes/UIForm.html">UIForm</a></li>
             
-                <li><a href="../classes/UIFormCamera.html">UIFormCamera</a></li>
+                <li><a href="../classes/UIFormCameraSingle.html">UIFormCameraSingle</a></li>
             
                 <li><a href="../classes/UIFormCheckbox.html">UIFormCheckbox</a></li>
             
@@ -145,8 +149,6 @@
             
                 <li><a href="../classes/UIFormPassword.html">UIFormPassword</a></li>
             
-                <li><a href="../classes/UIFormPseudoInput.html">UIFormPseudoInput</a></li>
-            
                 <li><a href="../classes/UIFormSelect.html">UIFormSelect</a></li>
             
                 <li><a href="../classes/UIFormText.html">UIFormText</a></li>
@@ -156,6 +158,8 @@
                 <li><a href="../classes/UIFormTime.html">UIFormTime</a></li>
             
                 <li><a href="../classes/UIFormToggleSwitch.html">UIFormToggleSwitch</a></li>
+            
+                <li><a href="../classes/UIFormVirtualInput.html">UIFormVirtualInput</a></li>
             
                 <li><a href="../classes/UIHeader.html">UIHeader</a></li>
             
@@ -234,7 +238,7 @@
 * @constructor
 * @module UI
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
 (function ($, Mootor, document) {
@@ -245,51 +249,42 @@
     
         UI,
         Event,
-        View;
+        View,
+        UIApp;
 
     // Dependences
 
     Event = Mootor.Event;
     UI = Mootor.UI;
     View = Mootor.View;
+    UIApp = Mootor.UIApp;
 
     // Event handlers
-    
+
     View.on(&quot;init&quot;, function(self) {
         self.ui = new UIView(self);
-
-        self.ui.el = document.createElement(&quot;div&quot;);
-        self.ui.$el = $(self.ui.el);
-
-        if (View._getHtmlPath(self) !== undefined) {
-            self.ui.el.innerHTML = View._getHtmlPath(self);                
-        } else {
-            self.on(&quot;getHtml&quot;, function(self) {
-                self.ui.el.innerHTML = View._getHtmlPath(self);
-            });
-        }
-
-        self.on(&quot;getHtml&quot;, function() {
-            UIView.dispatch(&quot;init&quot;, self.ui);
-        });
-
-
-        self.on(&quot;ready&quot;, function() {
-            for (var index in UIView._enhancements) {
-                $(UIView._enhancements[index].selector).each(function (i,element) {
-                    new UIView._enhancements[index].className(element);    
-                });    
-            }
-        });
     });
-
-
-        
+    
     // Private constructors
 
     UIView = Mootor.UIView = function(view) {
         var self = this;
-        self.view = view;
+        this.view = view;
+        this.el = document.createElement(&quot;div&quot;);
+        this.$el = $(this.el);
+
+        view.on(&quot;getHtml&quot;, function() {
+            UIView._loadHTML(self, View._getHtmlPath(view))
+        });
+
+        // Apply enhacements (ie: controls like UIFormSelect, etc..)
+        view.on(&quot;ready&quot;, function() {
+            UIView._applyEnhancements(self);
+            if (m.context.os.iphone === true || m.context.os.ipad === true) {
+                UIView._preventiOSNativeBounce(self);
+            }
+        });
+        
     };
 
 
@@ -300,13 +295,79 @@
     // Private static methods and properties
 
     $.extend(UIView, {
-        // code here
+        
+        _applyEnhancements: function(self) {
+            var i,
+                applyEnhancements;
+                
+            applyEnhancements = function (i, element) {
+                new UIView._enhancements[i].className(element);    
+            };
+            for (i in UIView._enhancements) {
+                $(UIView._enhancements[i].selector).each(
+                    applyEnhancements(i, self)
+                );    
+            }
+        },
+        
+        _preventiOSNativeBounce: function(self) {
+            var el = self.el,
+                blockScroll,
+                unblockScroll,
+                _stopEvent,
+                view = self.view;
+            
+            _stopEvent = function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            // Block/unblock scroll
+            blockScroll = function() {
+                window.setTimeout(function() {
+                    if (el.scrollHeight &lt;= el.offsetHeight) {
+                        document.addEventListener(&quot;touchmove&quot;, _stopEvent);
+                    }
+                }, Mootor.UIPanel._transitionDuration);
+            };
+            unblockScroll = function() {
+                if (el.scrollHeight &gt;= el.offsetHeight) {
+                    document.removeEventListener(&quot;touchmove&quot;, _stopEvent);
+                }
+            };
+            view.on(&quot;load&quot;, function() {
+                blockScroll();
+            });
+            view.on(&quot;unload&quot;, function() {
+                unblockScroll();
+            });
+            window.addEventListener(&quot;resize&quot;, unblockScroll);
+
+            // Only for webkit
+            el.addEventListener(&quot;overflowchanged&quot;, unblockScroll);            
+            
+            // Prevent iOS bounce
+            el.addEventListener(&#x27;scroll&#x27;, function(e) {
+                var scrollTop = el.scrollTop,
+                    offsetHeight = el.scrollHeight - el.offsetHeight;
+                    
+                if (scrollTop &lt; 1) {
+                    el.scrollTop = 1;
+                } else if (scrollTop &gt; (offsetHeight - 1)) {
+                    el.scrollTop = offsetHeight - 1;
+                }
+            }, false);
+
+            
+        },
+        _loadHTML: function(self, html) {
+            self.el.innerHTML = html;
+            UIView.dispatch(&quot;init&quot;, self);
+        }
     });
 
     // Public methods
 
     UIView.prototype = {
-        // code here
     };
 
     // Prototypal inheritance

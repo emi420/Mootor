@@ -125,9 +125,13 @@
             
                 <li><a href="../classes/UIApp.html">UIApp</a></li>
             
+                <li><a href="../classes/UIButton.html">UIButton</a></li>
+            
+                <li><a href="../classes/UIFooter.html">UIFooter</a></li>
+            
                 <li><a href="../classes/UIForm.html">UIForm</a></li>
             
-                <li><a href="../classes/UIFormCamera.html">UIFormCamera</a></li>
+                <li><a href="../classes/UIFormCameraSingle.html">UIFormCameraSingle</a></li>
             
                 <li><a href="../classes/UIFormCheckbox.html">UIFormCheckbox</a></li>
             
@@ -145,8 +149,6 @@
             
                 <li><a href="../classes/UIFormPassword.html">UIFormPassword</a></li>
             
-                <li><a href="../classes/UIFormPseudoInput.html">UIFormPseudoInput</a></li>
-            
                 <li><a href="../classes/UIFormSelect.html">UIFormSelect</a></li>
             
                 <li><a href="../classes/UIFormText.html">UIFormText</a></li>
@@ -156,6 +158,8 @@
                 <li><a href="../classes/UIFormTime.html">UIFormTime</a></li>
             
                 <li><a href="../classes/UIFormToggleSwitch.html">UIFormToggleSwitch</a></li>
+            
+                <li><a href="../classes/UIFormVirtualInput.html">UIFormVirtualInput</a></li>
             
                 <li><a href="../classes/UIHeader.html">UIHeader</a></li>
             
@@ -231,9 +235,11 @@
 * @class Context
 * @return object
 * @static
+* @author Emilio Mariscal (emi420 [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
-(function ($, Mootor) {
+(function ($, Mootor, m) {
 
     &quot;use strict&quot;;
 
@@ -278,12 +284,48 @@
                 height: window.screen.height
             },
             
-            cordova: (window.Cordova !== undefined),
-            phonegap: (window.PhoneGap !== undefined),
+            /**
+            * Apache Cordova info
+            * @property cordova
+            * @type object
+            * @example
+            *     if (m.context.cordova) {
+            *         console.log(&quot;Your app is running on Cordova&quot;);
+            *     }
+            */            
+            cordova: function() {
+                return window.Cordova !== undefined
+            },
+
+            /**
+            * PhoneGap info
+            * @property phonegap
+            * @type object
+            * @example
+            *     if (m.context.cordova) {
+            *         console.log(&quot;Your app is running on PhoneGap&quot;);
+            *     }
+            */            
+            phonegap:function() {
+                return window.PhoneGap !== undefined
+            },
+            
+            /**
+            * Android version info
+            * @property _androidversion
+            * @type object
+            * @private
+            */ 
+            _androidversion: function() {
+                var ua = navigator.userAgent;
+                if( ua.indexOf(&quot;Android&quot;) &gt;= 0 ) {
+                  var androidversion = parseFloat(ua.slice(ua.indexOf(&quot;Android&quot;)+8)); 
+                }
+                return androidversion;
+            }
 
         });
     };
-    
 
     // Static global objects
     
@@ -297,7 +339,7 @@
         context: new Context()
     });
 
-}(window.$, window.Mootor));
+}(window.$, window.Mootor, window.m));
     </pre>
 </div>
 

@@ -125,9 +125,13 @@
             
                 <li><a href="../classes/UIApp.html">UIApp</a></li>
             
+                <li><a href="../classes/UIButton.html">UIButton</a></li>
+            
+                <li><a href="../classes/UIFooter.html">UIFooter</a></li>
+            
                 <li><a href="../classes/UIForm.html">UIForm</a></li>
             
-                <li><a href="../classes/UIFormCamera.html">UIFormCamera</a></li>
+                <li><a href="../classes/UIFormCameraSingle.html">UIFormCameraSingle</a></li>
             
                 <li><a href="../classes/UIFormCheckbox.html">UIFormCheckbox</a></li>
             
@@ -145,8 +149,6 @@
             
                 <li><a href="../classes/UIFormPassword.html">UIFormPassword</a></li>
             
-                <li><a href="../classes/UIFormPseudoInput.html">UIFormPseudoInput</a></li>
-            
                 <li><a href="../classes/UIFormSelect.html">UIFormSelect</a></li>
             
                 <li><a href="../classes/UIFormText.html">UIFormText</a></li>
@@ -156,6 +158,8 @@
                 <li><a href="../classes/UIFormTime.html">UIFormTime</a></li>
             
                 <li><a href="../classes/UIFormToggleSwitch.html">UIFormToggleSwitch</a></li>
+            
+                <li><a href="../classes/UIFormVirtualInput.html">UIFormVirtualInput</a></li>
             
                 <li><a href="../classes/UIHeader.html">UIHeader</a></li>
             
@@ -230,10 +234,9 @@
 * The Event class defines and manage events
 *
 * @class Event
-* @private
 * @module Mootor
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
 (function ($, Mootor) {
@@ -259,7 +262,6 @@
         *     Mootor.on(&quot;myCustomEvent&quot;, function(self) {
         *         console.log(&quot;Event fired!&quot;);
         *     });
-        * @private
         */
         on: function(event, callback) {
             if (Event._collection[event] === undefined) {
@@ -273,7 +275,6 @@
         * @method dispatch
         * @param {string} event Name of the event
         * @param {object} instance Instance for scope
-        * @private
         * @example
         *     Mootor.dispatch(&quot;myCustomEvent&quot;, myInstance);
         */
@@ -282,17 +283,19 @@
                 count = 0,
                 callbacks = Event._collection[event],
                 callback;
-                
+                                
             if (callbacks !== undefined) {
                 count = callbacks.length ;
             }
             
+            callback = function(cb) {
+                window.setTimeout(function() {
+                    cb(instance);
+                }, 1);
+            };
+            
             for (i = 0; i &lt; count; i++) {
-                (function(callback) {
-                    window.setTimeout(function() {
-                        callback(instance);
-                    }, 1);
-                }(callbacks[i]));
+                callback(callbacks[i]);
             }
         }, 
 
@@ -301,7 +304,6 @@
         * @method extend
         * @param {object} object Object to extend
         * @param {string} objectName String name of the object
-        * @private
         * @example
         *     Person = function(name) {
         *         this.name = name;

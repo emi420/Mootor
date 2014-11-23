@@ -125,9 +125,13 @@
             
                 <li><a href="../classes/UIApp.html">UIApp</a></li>
             
+                <li><a href="../classes/UIButton.html">UIButton</a></li>
+            
+                <li><a href="../classes/UIFooter.html">UIFooter</a></li>
+            
                 <li><a href="../classes/UIForm.html">UIForm</a></li>
             
-                <li><a href="../classes/UIFormCamera.html">UIFormCamera</a></li>
+                <li><a href="../classes/UIFormCameraSingle.html">UIFormCameraSingle</a></li>
             
                 <li><a href="../classes/UIFormCheckbox.html">UIFormCheckbox</a></li>
             
@@ -145,8 +149,6 @@
             
                 <li><a href="../classes/UIFormPassword.html">UIFormPassword</a></li>
             
-                <li><a href="../classes/UIFormPseudoInput.html">UIFormPseudoInput</a></li>
-            
                 <li><a href="../classes/UIFormSelect.html">UIFormSelect</a></li>
             
                 <li><a href="../classes/UIFormText.html">UIFormText</a></li>
@@ -156,6 +158,8 @@
                 <li><a href="../classes/UIFormTime.html">UIFormTime</a></li>
             
                 <li><a href="../classes/UIFormToggleSwitch.html">UIFormToggleSwitch</a></li>
+            
+                <li><a href="../classes/UIFormVirtualInput.html">UIFormVirtualInput</a></li>
             
                 <li><a href="../classes/UIHeader.html">UIHeader</a></li>
             
@@ -234,10 +238,10 @@
 * @constructor
 * @module UI
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
-(function ($, Mootor) {
+(function ($, Mootor, m) {
 
     &quot;use strict&quot;;
 
@@ -258,9 +262,7 @@
     // Private constructors
 
     UIApp = Mootor.UIApp = function() {
-        var $container,
-            app = m.app,
-            self = this;
+        var $container;
 
         App = Mootor.App;
 
@@ -288,11 +290,17 @@
             };
         });
 
-
         this.$el = $(&quot;&lt;div&gt;&quot;).addClass(&quot;m-views-container&quot;);
+
+        // Disable transitions on Android
+        m.app.settings(&quot;uipanel-transitions&quot;, m.context.os.android !== true);
+
+        if (m.app.settings(&quot;uipanel-transitions&quot;) !== true) {
+            this.$el.addClass(&quot;m-no-transitions&quot;);
+        }
+        
         this.el = this.$el[0];        
         this.$el.appendTo($container);
-
         this.$container = $container;
 
         UIApp.dispatch(&quot;init&quot;, this);
@@ -320,32 +328,56 @@
 
     $.extend(UIApp.prototype, {
     
-    });   
-    
-    App.on(&quot;ready&quot;, function() {
-        var links = $(&quot;a&quot;),
-            i,
-            href;
-        
-        for (i = links.length; i--;) {
-            href = links[i].getAttribute(&quot;href&quot;);
-            if (href !== null) {                
-                if (m.app.route(links[i].getAttribute(&quot;href&quot;)) !== undefined) {
-                    $(links[i]).on(&quot;tap&quot;, function(e) {
-                        m.app.go(e.target.getAttribute(&quot;href&quot;));
-                    })
-                    $(links[i]).on(&quot;click&quot;, function(e) {
-                        e.stopPropagation();
-                        e.preventDefault();
-                    })
-                }
-            }
-        }
-        
     });  
     
+    App.on(&quot;ready&quot;, function() {
+           var links = $(&quot;a&quot;),
+               setEvent,
+               onClick;
+            
+        
+       // Android/iOS fixes
+       setEvent = function(el, href) {
+           $(el).on(&quot;tap&quot;, function(e) {
+               m.app.go(href);
+           });
+           el.addEventListener(&quot;touchend&quot;, function(e) {
+               e.preventDefault();
+           });
+       };
+      if ( &#x27;ontouchstart&#x27; in window ) {
+           onClick = function() {
+               return false;
+           };
+       } else {
+           onClick = function() {
+               m.app.go(href);
+               return false;
+           };
+       }
+    
+       $.extend(UIApp, {
+           _improveLinksForTouch: function(links) {
+               var i,
+                   href;
+               if ( &#x27;ontouchstart&#x27; in window ) {
+                   for (i = links.length; i--;) {
+                       href = links[i].getAttribute(&quot;href&quot;);
+                       links[i].onclick = onClick;
+                       if (href !== null &amp;&amp; m.app.route(links[i].getAttribute(&quot;href&quot;)) !== undefined) {
+                           setEvent(links[i], href);
+                       }
+                   }
+               } 
+           }
+       });
+       
+       UIApp._improveLinksForTouch(links);
+       
+   });
 
-}(window.$, window.Mootor));
+
+}(window.$, window.Mootor, window.m));
 
     </pre>
 </div>

@@ -125,9 +125,13 @@
             
                 <li><a href="../classes/UIApp.html">UIApp</a></li>
             
+                <li><a href="../classes/UIButton.html">UIButton</a></li>
+            
+                <li><a href="../classes/UIFooter.html">UIFooter</a></li>
+            
                 <li><a href="../classes/UIForm.html">UIForm</a></li>
             
-                <li><a href="../classes/UIFormCamera.html">UIFormCamera</a></li>
+                <li><a href="../classes/UIFormCameraSingle.html">UIFormCameraSingle</a></li>
             
                 <li><a href="../classes/UIFormCheckbox.html">UIFormCheckbox</a></li>
             
@@ -145,8 +149,6 @@
             
                 <li><a href="../classes/UIFormPassword.html">UIFormPassword</a></li>
             
-                <li><a href="../classes/UIFormPseudoInput.html">UIFormPseudoInput</a></li>
-            
                 <li><a href="../classes/UIFormSelect.html">UIFormSelect</a></li>
             
                 <li><a href="../classes/UIFormText.html">UIFormText</a></li>
@@ -156,6 +158,8 @@
                 <li><a href="../classes/UIFormTime.html">UIFormTime</a></li>
             
                 <li><a href="../classes/UIFormToggleSwitch.html">UIFormToggleSwitch</a></li>
+            
+                <li><a href="../classes/UIFormVirtualInput.html">UIFormVirtualInput</a></li>
             
                 <li><a href="../classes/UIHeader.html">UIHeader</a></li>
             
@@ -227,14 +231,13 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
-* UIFormGeo is a date pseudo-input of a form
+* UIFormGeo detect geolocation
 *
 * @class UIFormGeo
 * @extends UI
 * @constructor
 * @module UI
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
 */
 
 (function ($, Mootor) {
@@ -243,43 +246,115 @@
 
     var UIFormGeo,
     
-        UI;
+        UI,
+        UIForm;
 
     // Dependences
 
     UI = Mootor.UI;
+    UIForm = Mootor.UIForm;
     
     // Private constructors
 
-    UIFormGeo = function() {
-        // code here
+    UIFormGeo = Mootor.UIFormGeo = function(element) {
+        UIFormGeo.__init(this, element);
     };
 
     // Prototypal inheritance
-    $.extend(UIFormGeo.prototype, UI.prototype);
-    $.extend(UIFormGeo.prototype, UIFormPseudoInput.prototype);
+    if (UI) {
+        $.extend(UIFormGeo.prototype, UI.prototype);
+    }
 
     // Private static methods and properties
 
     $.extend(UIFormGeo, {
+
+        _init: function(uiview) {
+            var elements;
+            elements = uiview.$el.find(&quot;.m-geo&quot;);
+            elements.each(function(index,element) {
+                new UIFormGeo(element);
+            });
+        },
+        
+        __init: function(self, element) {
+            self._$coverHTML = element;
+            self._$input = element;
+            self._$icon = self._$coverHTML.parentElement.getElementsByClassName(&quot;m-icon&quot;)[0];
+            self._$originalHtml = self._$coverHTML.innerHTML;
+            UIFormGeo._addEventListeners(self);
+            $(self._$coverHTML).addClass(&quot;m-geo-input&quot;); 
+            
+        },
+                
+        _addEventListeners: function(self) {
+            self._$input.addEventListener(&quot;click&quot;, function() {
+               UIFormGeo._getCurrentPosition(self); 
+               self._$input.setAttribute(&quot;disabled&quot;, &quot;disabled&quot;);
+            });
+            self._$input.addEventListener(&quot;blur&quot;, function() {
+               window.setTimeout(function() {
+                   self._$input.removeAttribute(&quot;disabled&quot;);
+               }, 200);
+            });
+            
+        },
+        
+        __onSuccess: function(self, position) {
+            var coords,
+                strCoords;
+
+            coords = position.coords;
+            strCoords = (Math.ceil(coords.latitude * 10000) / 10000) + &quot;,&quot; + (Math.ceil(coords.longitude * 10000) / 10000);
+            $(self._$coverHTML).addClass(&quot;m-geo-located&quot;);
+            self._$input.value = strCoords;
+            return strCoords;
+        },
+
+        _onSuccess: function(self, position) {
+            UIFormGeo.__onSuccess(self, position);
+        },
+
+        _onError: function(self) {
+            $(self._$coverHTML).removeClass(&quot;m-geo-located&quot;);
+            self._$coverHTML.innerHTML = self._$originalHtml;
+            self._$input.value = &quot;&quot;;
+        },
+
+        _getCurrentPosition: function(self) {
+            
+            var $icon = $(self._$icon);
+            
+            $icon.addClass(&quot;m-icon-anim-blink&quot;);
+
+            navigator.geolocation.getCurrentPosition(
+                function(position) {
+
+                    UIFormGeo._onSuccess(self, position);
+                    $icon.removeClass(&quot;m-icon-anim-blink&quot;);
+                    
+                },
+                function(e) {
+
+                    UIFormGeo._onError(self);
+                    $icon.removeClass(&quot;m-icon-anim-blink&quot;);
+                },
+                { timeout: 10000, enableHighAccuracy: true }
+            );
+        }
    
     });
 
     // Public methods and properties
 
     $.extend(UIFormGeo.prototype, {
-        
-        /**
-        * Get current position
-        *
-        * @method get
-        * @chainable
-        */
-        get: function() {
-            // code here
-        }   
-        
+        // code here
     });        
+
+    if (UIForm) {
+        UIForm.registerControl(UIFormGeo);  
+    }
+
 
 }(window.$, window.Mootor));
 

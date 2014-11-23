@@ -125,9 +125,13 @@
             
                 <li><a href="../classes/UIApp.html">UIApp</a></li>
             
+                <li><a href="../classes/UIButton.html">UIButton</a></li>
+            
+                <li><a href="../classes/UIFooter.html">UIFooter</a></li>
+            
                 <li><a href="../classes/UIForm.html">UIForm</a></li>
             
-                <li><a href="../classes/UIFormCamera.html">UIFormCamera</a></li>
+                <li><a href="../classes/UIFormCameraSingle.html">UIFormCameraSingle</a></li>
             
                 <li><a href="../classes/UIFormCheckbox.html">UIFormCheckbox</a></li>
             
@@ -145,8 +149,6 @@
             
                 <li><a href="../classes/UIFormPassword.html">UIFormPassword</a></li>
             
-                <li><a href="../classes/UIFormPseudoInput.html">UIFormPseudoInput</a></li>
-            
                 <li><a href="../classes/UIFormSelect.html">UIFormSelect</a></li>
             
                 <li><a href="../classes/UIFormText.html">UIFormText</a></li>
@@ -156,6 +158,8 @@
                 <li><a href="../classes/UIFormTime.html">UIFormTime</a></li>
             
                 <li><a href="../classes/UIFormToggleSwitch.html">UIFormToggleSwitch</a></li>
+            
+                <li><a href="../classes/UIFormVirtualInput.html">UIFormVirtualInput</a></li>
             
                 <li><a href="../classes/UIHeader.html">UIHeader</a></li>
             
@@ -233,10 +237,10 @@
 * @extends UI
 * @module UI
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
-(function ($, Mootor) {
+(function ($, Mootor, m) {
 
     &quot;use strict&quot;;
 
@@ -255,7 +259,7 @@
     View = Mootor.View;
     UIView = Mootor.UIView;
     UIApp = Mootor.UIApp;
-
+    
     // Event handlers
 
     UIView.on(&quot;init&quot;, function(self) {
@@ -263,39 +267,52 @@
         
         self.panel = new UIPanel(view);
         self.panel.el = self.el;
-        self.panel.$el = $(self.el)
+        self.panel.$el = $(self.el);
         self.panel.hide();
         
-        UIPanel.on(&quot;transitionEnd&quot;, function(self) {
+        UIPanel.on(&quot;transitionEnd&quot;, function() {
             if (Mootor.App._currentView !== view) {
                 view.ui.panel.hide();    
             } 
         });
         
-        view.on(&quot;load&quot;, function(view) {
+        view.on(&quot;load&quot;, function() {
 
             self.panel.position(&quot;right&quot;).show();
 
             UIPanel._startTransition();
-
-            window.setTimeout(function() {
-                UIPanel.dispatch(&quot;transitionEnd&quot;, self.panel);
-            }, UIPanel._transitionDuration);
+            
+            if (m.app.settings(&quot;uipanel-transitions&quot;) === true) {
+                window.setTimeout(function() {
+                    UIPanel.dispatch(&quot;transitionEnd&quot;, self.panel);
+                }, UIPanel._transitionDuration);
+            }
 
             UIPanel.on(&quot;transitionEnd&quot;, function() {
                 self.panel.position(&quot;left&quot;);
             });
+            
+
+            if (m.app.settings(&quot;uipanel-transitions&quot;) !== true) {
+                UIPanel.dispatch(&quot;transitionEnd&quot;, self.panel);
+            }
+            
         });
     
-        view.on(&quot;unload&quot;, function(view) {
+        view.on(&quot;unload&quot;, function() {
             self.panel.position(&quot;left&quot;);
         }); 
                 
     });
     
-    UIApp.on(&quot;init&quot;, function(self) {
+    UIApp.on(&quot;init&quot;, function() {
+        
         UIPanel._addTransitionClass();    
-        UIPanel._setTransitionDuration();  
+        UIPanel._setTransitionDuration();
+        if (m.context.os.ipad === true || m.context.os.iphone === true) {
+            m.app.ui.$el.addClass(&quot;m-ios&quot;);
+        }
+          
     });
 
   
@@ -309,6 +326,7 @@
 
     $.extend(UIPanel.prototype, UI.prototype);
     Event.extend(UIPanel, &quot;UIPanel&quot;);
+    
     
     // Private static methods and properties
         
@@ -333,26 +351,31 @@
             $el = $(el);
             
             $el.addClass(&quot;m-panel overthrow&quot;);
-
+            
             self.transition(UIPanel.DEFAULT_TRANSITION);
 
             m.app.ui.$el.append(el);            
             
         },
         
-        _startTransition: function (self) {
-            var uiapp = m.app.ui;
-            uiapp.$el.addClass(&quot;m-transition-hslide&quot;);
-            uiapp.$el.addClass(&quot;m-transition-hslide-left&quot;).removeClass(&quot;m-transition-hslide-right&quot;);
+        _startTransition: function () {
             
+            var uiapp = m.app.ui;
+            
+            if (m.app.settings(&quot;uipanel-transitions&quot;) === true) {
+                uiapp.$el.addClass(&quot;m-transition-hslide&quot;);
+                uiapp.$el.addClass(&quot;m-transition-hslide-left&quot;).removeClass(&quot;m-transition-hslide-right&quot;);
+            }
             
             UIPanel.on(&quot;transitionEnd&quot;, function () {
-                uiapp.$el.removeClass(&quot;m-transition-hslide&quot;);
-                uiapp.$el.addClass(&quot;m-transition-hslide-right&quot;).removeClass(&quot;m-transition-hslide-left&quot;);
+                if (m.app.settings(&quot;uipanel-transitions&quot;) === true) {
+                    uiapp.$el.removeClass(&quot;m-transition-hslide&quot;);
+                    uiapp.$el.addClass(&quot;m-transition-hslide-right&quot;).removeClass(&quot;m-transition-hslide-left&quot;);
+                }
             });
         },
         
-        _addTransitionClass: function (self) {
+        _addTransitionClass: function () {
             var uiapp = m.app.ui;
 
             if (UIPanel.DEFAULT_TRANSITION == &quot;hslide&quot;) {
@@ -365,19 +388,34 @@
         
         _setTransitionDuration: function() {
 
-            var getStyleBySelector = function ( selector ) {
-               var sheetList = document.styleSheets;
-               var ruleList;
-               var i, j;
+            var getStyleBySelector,
+                transitionDurationCSS,
+                transitionDurationMiliseconds,
+                t;
+            
+                getStyleBySelector = function ( selector ) {
+               var sheetList = document.styleSheets,
+                   ruleList,
+                   i, j, ss;
 
                /* look through stylesheets in reverse order that
                   they appear in the document */
                for (i=sheetList.length-1; i &gt;= 0; i--)
                {
+                    if (!sheetList[i].href) {
+                        continue;
+                    }
+                    ss = sheetList[i].href.split(&quot;/&quot;);
+                   
+                   if (ss[ss.length-1] != &quot;mootor.css&quot;) {
+                        continue;
+                   }
+                   
                    ruleList = sheetList[i].cssRules;
+                   
                    for (j=0; j&lt;ruleList.length; j++)
                    {
-                       if (ruleList[j].type == CSSRule.STYLE_RULE &amp;&amp; 
+                       if (ruleList[j].type == window.CSSRule.STYLE_RULE &amp;&amp; 
                            ruleList[j].selectorText == selector)
                        {
                            return ruleList[j].style;
@@ -388,10 +426,15 @@
             };
 
 
-            var t = getStyleBySelector(&quot;.m-app .m-transition-hslide&quot;);
+            t = getStyleBySelector(&quot;.m-app .m-transition-hslide&quot;);
+            
+            if (t !== null) {
+                transitionDurationCSS = t.transitionDuration || t.webkitTransitionDuration || t.operaTransitionDuration || t.mozTransitionDuration;
+                transitionDurationMiliseconds = parseFloat(transitionDurationCSS) * 1000;
+            } else {
+                transitionDurationMiliseconds = 0;
+            }
 
-            var transitionDurationCSS = t.transitionDuration || t.webkitTransitionDuration || t.operaTransitionDuration || t.mozTransitionDuration;
-            var transitionDurationMiliseconds = parseFloat(transitionDurationCSS) * 1000;
             UIPanel._transitionDuration = transitionDurationMiliseconds;
         }        
         
@@ -408,6 +451,7 @@
         * If coordinates are not specified, it returns coordinates object with the current position.
         *
         * @method position
+        * @private
         * @param {object} [coordinates] Object with coordinates. Example: {x: 0, y: 0}
         * @return {object} Object with coordinates. Example: {x: 0, y: 0}
         */
@@ -425,22 +469,10 @@
         },
 
         /**
-        * Block/Unblock or return block status.
-        *
-        * @method blocked
-        * @param {Boolean} [blocked] Whether the panel is blocked
-        * @return {Boolean} Whether the panel is blocked
-        */
-        /*
-        blocked: function(blocked) {
-            
-        },
-        */
-
-        /**
         * Set or get transition type
         *
         * @method transition
+        * @private
         * @param {String} [transition] Transition type. MUST be one of: slide-left, slide-right, none
         * @return {String} Transition type
         */
@@ -471,8 +503,7 @@
 
     });
     
-    
-}(window.$, window.Mootor));
+}(window.$, window.Mootor, window.m));
     </pre>
 </div>
 

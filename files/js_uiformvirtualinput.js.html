@@ -2,7 +2,7 @@
 <html lang="en" class="yui-overrride">
 <head>
     <meta charset="utf-8">
-    <title>js/uiformpseudoinput.js</title>
+    <title>js/uiformvirtualinput.js</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet' type='text/css'>
@@ -125,9 +125,13 @@
             
                 <li><a href="../classes/UIApp.html">UIApp</a></li>
             
+                <li><a href="../classes/UIButton.html">UIButton</a></li>
+            
+                <li><a href="../classes/UIFooter.html">UIFooter</a></li>
+            
                 <li><a href="../classes/UIForm.html">UIForm</a></li>
             
-                <li><a href="../classes/UIFormCamera.html">UIFormCamera</a></li>
+                <li><a href="../classes/UIFormCameraSingle.html">UIFormCameraSingle</a></li>
             
                 <li><a href="../classes/UIFormCheckbox.html">UIFormCheckbox</a></li>
             
@@ -145,8 +149,6 @@
             
                 <li><a href="../classes/UIFormPassword.html">UIFormPassword</a></li>
             
-                <li><a href="../classes/UIFormPseudoInput.html">UIFormPseudoInput</a></li>
-            
                 <li><a href="../classes/UIFormSelect.html">UIFormSelect</a></li>
             
                 <li><a href="../classes/UIFormText.html">UIFormText</a></li>
@@ -156,6 +158,8 @@
                 <li><a href="../classes/UIFormTime.html">UIFormTime</a></li>
             
                 <li><a href="../classes/UIFormToggleSwitch.html">UIFormToggleSwitch</a></li>
+            
+                <li><a href="../classes/UIFormVirtualInput.html">UIFormVirtualInput</a></li>
             
                 <li><a href="../classes/UIHeader.html">UIHeader</a></li>
             
@@ -222,26 +226,25 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: js/uiformpseudoinput.js</h1>
+                        <h1 class="file-heading">File: js/uiformvirtualinput.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
-* UIFormPseudoInput is a pseudo-input item of a form
+* UIFormVirtualInput is a virtual-input item of a form
 *
-* @class UIFormPseudoInput
+* @class UIFormVirtualInput
 * @extends UI
 * @constructor
 * @module UI
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
 */
 
 (function ($, Mootor) {
     
     &quot;use strict&quot;;
 
-    var UIFormPseudoInput,
+    var UIFormVirtualInput,
     
         UI;
 
@@ -251,45 +254,26 @@
     
     // Private constructors
 
-    UIFormPseudoInput = function() {
+    UIFormVirtualInput = function() {
         // code here
     };
 
     // Prototypal inheritance
-    $.extend(UIFormPseudoInput.prototype, UI.prototype);
+    $.extend(UIFormVirtualInput.prototype, UI.prototype);
 
     // Private static methods and properties
 
-    $.extend(UIFormPseudoInput, {
+    $.extend(UIFormVirtualInput, {
    
     });
 
     // Public methods and properties
 
-    $.extend(UIFormPseudoInput.prototype, {
-
-        /**
-        * Value of the input
-        *
-        * @property value
-        */         
-        value: undefined,
-
-        /**
-        * Sets an event handler for the input
-        *
-        * @method on
-        * @param {string} event Defines in which event the handler will be called
-        * @param {function} callback The function to be called when the event is fired.
-        * @return this
-        */ 
-        on: function(event, callback) {
-            // code here
-        }
-
+    $.extend(UIFormVirtualInput.prototype, {
+        // code here
     });        
-
-
+    
+    Mootor.UIFormVirtualInput = UIFormVirtualInput;
 
 }(window.$, window.Mootor));
 

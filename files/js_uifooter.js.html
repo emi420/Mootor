@@ -2,7 +2,7 @@
 <html lang="en" class="yui-overrride">
 <head>
     <meta charset="utf-8">
-    <title>js/uiformcamera.js</title>
+    <title>js/uifooter.js</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet' type='text/css'>
@@ -125,9 +125,13 @@
             
                 <li><a href="../classes/UIApp.html">UIApp</a></li>
             
+                <li><a href="../classes/UIButton.html">UIButton</a></li>
+            
+                <li><a href="../classes/UIFooter.html">UIFooter</a></li>
+            
                 <li><a href="../classes/UIForm.html">UIForm</a></li>
             
-                <li><a href="../classes/UIFormCamera.html">UIFormCamera</a></li>
+                <li><a href="../classes/UIFormCameraSingle.html">UIFormCameraSingle</a></li>
             
                 <li><a href="../classes/UIFormCheckbox.html">UIFormCheckbox</a></li>
             
@@ -145,8 +149,6 @@
             
                 <li><a href="../classes/UIFormPassword.html">UIFormPassword</a></li>
             
-                <li><a href="../classes/UIFormPseudoInput.html">UIFormPseudoInput</a></li>
-            
                 <li><a href="../classes/UIFormSelect.html">UIFormSelect</a></li>
             
                 <li><a href="../classes/UIFormText.html">UIFormText</a></li>
@@ -156,6 +158,8 @@
                 <li><a href="../classes/UIFormTime.html">UIFormTime</a></li>
             
                 <li><a href="../classes/UIFormToggleSwitch.html">UIFormToggleSwitch</a></li>
+            
+                <li><a href="../classes/UIFormVirtualInput.html">UIFormVirtualInput</a></li>
             
                 <li><a href="../classes/UIHeader.html">UIHeader</a></li>
             
@@ -222,118 +226,79 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: js/uiformcamera.js</h1>
+                        <h1 class="file-heading">File: js/uifooter.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
-* UIFormCamera is a camera pseudo-input of a form
+* The UIFooter class is a navigational element at the bottom of the page (footer)
 *
-* @class UIFormCamera
+* @class UIFooter
 * @extends UI
-* @constructor
 * @module UI
+* @constructor
 * @author Emilio Mariscal (emi420 [at] gmail.com)
-* @author Martín Szyszlican (martinsz [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
 (function ($, Mootor) {
-    
+
     &quot;use strict&quot;;
 
-    var UIFormCamera,
-        UIFormCameraPicture,
+    var UIFooter,
     
+        UINavBar,
+        UIView,
+        View,
+        UIApp,
+        UINavItem,
+        App,
         UI;
 
     // Dependences
 
-    UI = Mootor.UI;
+    View = Mootor.View;
+    UINavBar = Mootor.UINavBar;
+    UIView = Mootor.UIView;
+    UIApp = Mootor.UIApp;
+    UINavItem = Mootor.UINavItem;
+    App = Mootor.App;
+    UI = Mootor.UI,
+    
     
     // Private constructors
 
-    UIFormCamera = function() {
-        // code here
+    UIFooter = Mootor.UIFooter = function(options) {
+        this.nav = new UINavBar({
+            container: options.el,
+            type: options.type
+        });
+        this.type = options.type;
+        this.el = this.nav.el;
+        this.$el = $(this.el);
+        if (this.$el.find(&quot;nav&quot;).length &lt; 1) {
+            this.el.appendChild(document.createElement(&quot;nav&quot;));
+        }
     };
 
-    UIFormCameraPicture = functon() {
-        UIFormCameraPicture,
-    }
+    // Event handlers
+    UIView.on(&quot;init&quot;, function(self) {
+        UINavBar.createBar(&quot;footer&quot;,self, UIFooter);
+    });
 
-    // Prototypal inheritance
-    $.extend(UIFormCamera.prototype, UI.prototype);
-    $.extend(UIFormCamera.prototype, UIFormPseudoInput.prototype);
-
+    UIApp.on(&quot;init&quot;, function(self) {
+        UINavBar.initBar(&quot;footer&quot;,self, UIFooter);
+    });
     // Private static methods and properties
 
-    $.extend(UIFormCamera, {
-   
+    $.extend(UIFooter, {
+        
     });
 
-    $.extend(UIFormCameraPicture, {
-   
-    });
+    // Prototypal inheritance
 
-    // Public methods and properties
-
-    $.extend(UIFormCamera.prototype, {
-        
-        /**
-        * Take a picture
-        *
-        * @method take
-        * @chainable
-        */
-        take: function(){
-            // code here
-        },
-
-        /**
-        * Choose a picture
-        *
-        * @method choose
-        * @chainable
-        */
-        choose: function(){
-            // code here
-        },
-        
-        /**
-        * Returns all pictures paths
-        *
-        * @method all
-        * @return {Array} Array of pictures paths
-        * @chainable
-        */
-        all: function() {
-             // code here
-        },
-        
-        /**
-        * Remove picture from input
-        *
-        * @param {UIFormCameraPicture} picture Picture to be removed
-        * @method remove
-        */
-        remove: function(picture) {
-            // code here
-        }
-        
-    }); 
-    
-    $.extend(UIFormCameraPicture.prototype, {
-        /**
-        * Export picture data
-        *
-        * @method export
-        * @return {String} Exported data (ej: base 64 string)
-        * @param {Array} options A list of options
-        * @chainable
-        */
-        export: function(options) {
-             // code here
-        }                
-    });    
+    $.extend(UIFooter.prototype, UINavBar.prototype);
+    $.extend(UIFooter.prototype, UI.prototype);
 
 }(window.$, window.Mootor));
 

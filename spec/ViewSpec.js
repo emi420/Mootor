@@ -79,12 +79,5 @@ describe("View", function() {
             m.app.view("testview").ui.header.el !== m.app.ui.header.el;
 		    done();
 		});
-		it("Should be able to define a view's title", function(done) {
-			view.title("test")
-			expect(view.title()).toBe("test");
-
-		    done();
-		});
-
 	});
 });

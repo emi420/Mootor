@@ -2,7 +2,7 @@
 <html lang="en" class="yui-overrride">
 <head>
     <meta charset="utf-8">
-    <title>js/uiformcheckbox.js</title>
+    <title>js/uibutton.js</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet' type='text/css'>
@@ -226,103 +226,69 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: js/uiformcheckbox.js</h1>
+                        <h1 class="file-heading">File: js/uibutton.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 /**
-* UIFormCheckbox is a checkbox input of a form
+* UIButton is a button element, it uses UIForm to extend elements with aria-roles
 *
-* @class UIFormCheckbox
+* @class UIButton
 * @extends UI
 * @constructor
 * @module UI
 * @author Emilio Mariscal (emi420 [at] gmail.com)
+* @author Martin Szyszlican (martinsz [at] gmail.com)
 */
 
 (function ($, Mootor) {
     
     &quot;use strict&quot;;
 
-    var UIFormCheckbox,
-        UIForm,
-        UI;
+    var UIButton,
+    
+        UI,
+        UIForm;
 
     // Dependences
 
-    UI = Mootor.UI,
+    UI = Mootor.UI;
     UIForm = Mootor.UIForm;
+
+    // Event handelers
     
     // Private constructors
 
-    UIFormCheckbox = function() {
-        // code here
+    UIButton = function() {
+        // Code here
     };
 
     // Prototypal inheritance
-    $.extend(UIFormCheckbox.prototype, UI.prototype);
+    $.extend(UIButton.prototype, UI.prototype);
 
     // Private static methods and properties
 
-    $.extend(UIFormCheckbox, {
+    $.extend(UIButton, {
+
         _init: function(uiview) {
+            var buttons;
+                
+            buttons = uiview.$el.find(&quot;.m-button&quot;);
             
-            var inputs;
-                
-            inputs = uiview.$el.find(&quot;.m-checkbox&quot;);
-            inputs.each(function(index,element) {
-                var $element = $(element),
-                    coverHTML,
-                    $cover,
-                    $label,
-                    $icon,
-                    updateValue;
+            // code here
 
-                updateValue = function() {
-                    var checked = element.getAttribute(&quot;checked&quot;);
-                    if (checked) {
-                        $icon.removeClass(&quot;m-hidden&quot;);
-                    } else {
-                        $icon.addClass(&quot;m-hidden&quot;);
-                    }
-                }
-                
-                /*jshint multistr: true */
-                coverHTML = &#x27;&lt;div class=&quot;m-checkbox m-checkbox-cover&quot;&gt;\
-                    &lt;span class=&quot;m-checkbox-icon m-icon-ok-small m-hidden&quot;&gt;&lt;/span&gt;\
-                &lt;/div&gt;&#x27;;
+            buttons.attr(&quot;aria-role&quot;,&quot;button&quot;);
 
-
-                $cover = element.$cover = $(coverHTML).insertBefore(element);
-                
-                $label = $(&quot;label[for=&quot; + element.id + &quot;]&quot;);
-                $icon = $cover.find(&quot;.m-checkbox-icon&quot;);
-                $cover[0].appendChild($label[0]);
-                
-                $element.removeClass(&quot;m-checkbox&quot;)
-                $element.addClass(&quot;m-checkbox-hidden&quot;);
-
-                updateValue();
-                $element.on(&quot;change&quot;, updateValue);
-                $cover.on(&quot;tap click&quot;, function() {
-                    if (element.getAttribute(&quot;checked&quot;)) {
-                        element.removeAttribute(&quot;checked&quot;);
-                    } else {
-                        element.setAttribute(&quot;checked&quot;, &quot;checked&quot;);                      
-                    }
-                    updateValue();
-                });
-                
-            });
-        }   
+        }
+        
     });
 
     // Public methods and properties
 
-    $.extend(UIFormCheckbox.prototype, {
-    });        
-
-    UIForm.registerControl(UIFormCheckbox);  
+    $.extend(UIButton.prototype, {
+    });      
+    
+    UIForm.registerControl(UIButton);  
 
 }(window.$, window.Mootor));
 
