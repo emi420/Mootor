@@ -145,7 +145,7 @@ A **free collection of 87 icons**, 2 colors, 3 sizes, with media queries for HD 
 
 ## Navigation list
 
-For a simple navigation list, use *m-list-* class
+For a simple navigation list, use *m-list* class
 
     <nav class="m-list">
         <a href="#chat">
