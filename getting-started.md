@@ -45,11 +45,11 @@ http://localhost/mootor-app/#my-view
 
 ### UI Components
 
-https://github.com/emi420/Mootor/doc-ui.md
+https://github.com/emi420/Mootor/blob/master/doc-ui.md
 
 ### JavaScript 
 
-https://github.com/emi420/Mootor/doc-js.md
+https://github.com/emi420/Mootor/blob/master/doc-js.md
 
 ## Angular
 
