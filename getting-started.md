@@ -39,6 +39,8 @@ The scripting of this view will be on *views/my-view/my-view.js* , for example:
 
 Now you can load the view on the browser, for example:
 
+http://localhost/mootor-app/#my-view
+
 ## Read the docs
 
 ### UI Components
