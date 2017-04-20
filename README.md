@@ -4,11 +4,9 @@
 
 Mootor is minimalist HTML5 library for mobile application development.
 
-## Demos
+## Demo
 
 * http://emi420.github.io/Mootor/demo/
-* https://itunes.apple.com/us/app/reclamos/id904615428 (spanish)
-* https://play.google.com/store/apps/details?id=com.voolks.reclamos (spanish)
 
 ## Documentation
 
