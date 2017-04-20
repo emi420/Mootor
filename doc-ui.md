@@ -75,7 +75,6 @@ Color and size:
 
 A **free collection of 87 icons**, 2 colors, 3 sizes, with media queries for HD screens.
 
-* https://mootor.voolks.com/uiicons/
 * https://github.com/emi420/Mootor/tree/master/source/img/icons/black/32x32
 * http://emi420.github.io/Mootor/demo/#icons
 
