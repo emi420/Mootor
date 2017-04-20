@@ -26,7 +26,7 @@ Mootor is minimalist HTML5 library for mobile application development.
 
 ## About
 
-* Mootor was developed in collaboration with Voölks  ([voolks.com](https://voolks.com)).
+* Mootor was developed in collaboration with Voölks ([voolks.com](https://voolks.com)).
 * We received public founding by MinCyT ([mincyt.gob.ar](http://mincyt.gob.ar))
 
 ## License
@@ -35,4 +35,4 @@ You may use any Mootor project under the terms of either the MIT License or the 
 
 (c) 2012 Emilio Mariscal
 
-Want to contribute? or use this software? fork the project, or write us to mootor [at] voolks.com
+Want to contribute? or use this software? fork the project, or write me to emi420 [at] gmail.com
