@@ -24,7 +24,6 @@ Mootor is minimalist HTML5 library for mobile application development.
 
 ## About
 
-* Mootor was developed in collaboration with Voölks ([voolks.com](https://voolks.com)).
 * We received public founding by MinCyT ([mincyt.gob.ar](http://mincyt.gob.ar))
 
 ## License
