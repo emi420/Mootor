@@ -1,7 +1,7 @@
 # Getting Started with Mootor
 
 
-##1. Download
+## 1. Download
 
 **[https://github.com/emi420/Mootor/blob/master/dist/mootor-beta-v0.1.zip?raw=true](https://github.com/emi420/Mootor/blob/master/dist/mootor-beta-v0.1.zip?raw=true)**
 
