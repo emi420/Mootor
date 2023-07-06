@@ -8,6 +8,8 @@ Mootor is minimalist HTML5 library for mobile application development.
 
 * http://emi420.github.io/Mootor/demo/
 
+<img width="457" alt="Screenshot 2023-07-06 at 00 20 40" src="https://github.com/emi420/Mootor/assets/1226194/27b39076-f39c-4fb1-8e77-bd41d011efca">
+
 ## Documentation
 
 ### Getting started
